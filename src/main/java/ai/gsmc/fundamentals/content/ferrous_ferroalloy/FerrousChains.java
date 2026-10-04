@@ -10,20 +10,19 @@ import ai.gsmc.fundamentals.process.ProcessingStage;
  * researched {@code data/ores.json} stage lists as validated {@link ProcessingChain}s, using
  * the materials registered by {@link FerrousMaterials}.
  *
- * <p>Simplified to commodity level for gameplay (one "iron ore" rather than hematite vs
- * magnetite); specific ore minerals become ore-block variants later.
+ * <p>Per §2.4, chains start from an ore <b>mineral</b> (hematite), not from "iron ore", and
+ * iron's first route is the primitive <b>bloomery</b> (T0, no machines).
  */
 public final class FerrousChains {
 
     private FerrousChains() {}
 
     public static void register() {
-        // Iron: ore -> raw -> dust -> ingot (comminution then carbothermic smelt).
+        // Iron, primitive route: raw hematite + charcoal -> bloomery -> wrought iron ingot.
+        // (T0 early-game route; a later blast-furnace chain will give molten pig iron.)
         ProcessingChainRegistry.register(
                 ProcessingChain.builder("iron", "iron", FerrousMaterials.GROUP)
-                        .step(ProcessingStage.CRUSHING, "iron", MaterialForm.ORE, "iron", MaterialForm.RAW)
-                        .step(ProcessingStage.GRINDING, "iron", MaterialForm.RAW, "iron", MaterialForm.DUST)
-                        .step(ProcessingStage.CARBOTHERMIC_REDUCTION, "iron", MaterialForm.DUST, "iron", MaterialForm.INGOT)
+                        .step(ProcessingStage.BLOOMERY, "hematite", MaterialForm.RAW, "iron", MaterialForm.INGOT)
                         .build());
 
         // Steel: iron ingot -> steel ingot (converting / decarburisation; carbon feed is a

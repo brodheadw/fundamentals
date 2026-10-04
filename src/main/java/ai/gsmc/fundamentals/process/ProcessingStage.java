@@ -12,6 +12,11 @@ import java.util.Locale;
  * at the end of their tier grouping via PR, never renumber (PLAN §4).
  */
 public enum ProcessingStage {
+    // --- T0 Hand: primitive, no-machine routes that set the early game (PLAN §2.4) ---
+    BLOOMERY(Tier.T0),   // mineral + charcoal -> solid bloom -> wrought iron; not in the real-world
+                         // 49-stage catalog, it's the historical early-game iron route
+    PANNING(Tier.T0),    // gravity washing of placer/native material (e.g. native gold)
+
     // --- T1 Mechanical: comminution & physical concentration ---
     CRUSHING(Tier.T1),
     GRINDING(Tier.T1),

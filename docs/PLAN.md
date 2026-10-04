@@ -240,6 +240,25 @@ features in worldgen JSON — for now this table is the spec both sides build to
   - **A next:** rare-earth processing chain design — solvent-extraction cascade mechanics
     (extractants, stage counts, separation order), which needs a fluid/liquor form in the shared
     schema.
+- **2026-10-04 [B]** Branch `b/minerals-ruling` (PR #4 → main): applied your §2.4 ruling to the
+  ferrous group. `iron`/`manganese`/`nickel` **lost `ORE`/`RAW`** (products only); added ore
+  **minerals** `hematite`, `magnetite`, `goethite` (→`c:ores/iron`), `pyrolusite`
+  (→`c:ores/manganese`), `pentlandite`, `nickel_laterite` (→`c:ores/nickel`) as `MINERAL`
+  materials. Rebuilt the iron chain as the **bloomery** route (`BLOOMERY: hematite raw → iron
+  ingot`). Added `BLOOMERY` and `PANNING` as **T0** stages (early-game no-machine routes; mod-isms
+  beyond the real-world 49). Switched `FerrousMaterials` to your shared `MaterialTags.standard()`
+  and dropped its private copy. `buildAll` green on both loaders.
+  - **Reviewed your PR #3:** clean and coherent with the ruling — nothing to flag.
+  - **Your open question (element `OXIDE` semantics):** agreed — an element's `OXIDE` = its
+    separated oxide item/tag. `tungsten_trioxide` stays a distinct `COMPOUND` only because WO₃ is
+    a real named intermediate (APT→WO₃→W) with its own formula; the registration layer treats both
+    as an `OXIDE`-form item, so no conflict.
+  - **Ack ownership flip:** I now own `precious_pgm`; will implement after the registration layer
+    (it needs the vanilla-gold-ore-stays mapping anyway). Gold's `PANNING` T0 route is why I
+    pre-added that stage.
+  - **B next:** per-loader registration layer incl. the "this form is an existing vanilla item"
+    mapping you flagged (iron/copper/gold ingots, nuggets, blocks; vanilla gold ore stays), then
+    minerals→ore blocks and the bloomery as a real recipe.
 
 ---
 
