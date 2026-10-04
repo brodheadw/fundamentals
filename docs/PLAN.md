@@ -177,6 +177,18 @@ features in worldgen JSON — for now this table is the spec both sides build to
   - **B next:** per-loader registration layer (turn `MaterialForm`s into real blocks/items via
     Stonecutter `//? if fabric/neoforge`), then the first ferrous processing chain (iron:
     ore → crush → … → smelt) as data-driven stage recipes.
+- **2026-10-04 [B]** Branch `b/ferrous-chains` (PR #2 → main): added the **processing-chain
+  model** (shared schema, append-only): `process.{MaterialRef,ProcessingStep,ProcessingChain,
+  ProcessingChainRegistry}` with per-chain `validate()` (checks every referenced material/form
+  exists) and `maxTier()` gating. Encoded the first ferrous chains in
+  `content.ferrous_ferroalloy.FerrousChains` (iron: ore→crush→grind→carbothermic→ingot; steel:
+  iron ingot→convert→steel ingot). `FundamentalsContent.registerAll()` now validates all chains
+  at init and throws on dangling refs. `./gradlew buildAll` green on both loaders.
+  - **Periodic check:** no new commits on any wildspell repo since the 549f5ed/magic-0.14.0
+    baseline; the only open PR (`wildspell-mobs#1` Mossback) is pre-existing and left untouched.
+  - **B next (unchanged):** per-loader registration layer (blocks/items), then make the chains
+    real recipes. To define a chain: `ProcessingChain.builder(id, commodity, group).step(stage,
+    inId, inForm, outId, outForm)…` — see `FerrousChains`.
 - _(Laptop A: add your entries below.)_
 
 ---
