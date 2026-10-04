@@ -3,6 +3,8 @@ package ai.gsmc.fundamentals.registry;
 import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.content.ferrous_ferroalloy.FerrousChains;
 import ai.gsmc.fundamentals.content.ferrous_ferroalloy.FerrousMaterials;
+import ai.gsmc.fundamentals.content.precious_pgm.PreciousChains;
+import ai.gsmc.fundamentals.content.precious_pgm.PreciousMaterials;
 import ai.gsmc.fundamentals.content.rare_earths.RareEarthMaterials;
 import ai.gsmc.fundamentals.material.MaterialRegistry;
 import ai.gsmc.fundamentals.process.ProcessingChainRegistry;
@@ -25,10 +27,11 @@ public final class FundamentalsContent {
         // --- Laptop B groups ---
         FerrousMaterials.register();
         FerrousChains.register();
+        PreciousMaterials.register();
+        PreciousChains.register();
         // IndustrialMinerals.register();   // TODO (B)
         // LightBatteryTech.register();     // TODO (B)
         // MinorSpecialty.register();       // TODO (B)
-        // PreciousPgmMaterials.register(); // TODO (B)
 
         // --- Laptop A groups ---
         RareEarthMaterials.register();
@@ -38,6 +41,8 @@ public final class FundamentalsContent {
                 MaterialRegistry.size(), ProcessingChainRegistry.size(), ProcessingStage.values().length);
         Fundamentals.LOGGER.info("  ferrous_ferroalloy: {} materials",
                 MaterialRegistry.countInGroup(FerrousMaterials.GROUP));
+        Fundamentals.LOGGER.info("  precious_pgm: {} materials",
+                MaterialRegistry.countInGroup(PreciousMaterials.GROUP));
         Fundamentals.LOGGER.info("  rare_earths: {} materials",
                 MaterialRegistry.countInGroup(RareEarthMaterials.GROUP));
 
