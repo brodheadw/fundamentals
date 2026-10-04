@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#fundamentals:deposit/wetland",
+  "features": [
+    "fundamentals:ore_goethite"
+  ],
+  "step": "underground_ores"
+}

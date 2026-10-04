@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#fundamentals:deposit/alkaline",
+  "features": [
+    "fundamentals:ore_loparite"
+  ],
+  "step": "underground_ores"
+}

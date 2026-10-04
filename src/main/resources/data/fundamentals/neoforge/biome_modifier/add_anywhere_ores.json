@@ -1,0 +1,18 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#fundamentals:deposit/anywhere",
+  "features": [
+    "fundamentals:ore_hematite",
+    "fundamentals:ore_magnetite",
+    "fundamentals:ore_pyrolusite",
+    "fundamentals:ore_pentlandite",
+    "fundamentals:ore_chromite",
+    "fundamentals:ore_galena",
+    "fundamentals:ore_sphalerite",
+    "fundamentals:ore_smithsonite",
+    "fundamentals:ore_sperrylite",
+    "fundamentals:ore_cooperite",
+    "fundamentals:ore_braggite"
+  ],
+  "step": "underground_ores"
+}

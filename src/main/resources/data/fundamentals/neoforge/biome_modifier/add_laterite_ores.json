@@ -1,0 +1,9 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#fundamentals:deposit/laterite",
+  "features": [
+    "fundamentals:ore_nickel_laterite",
+    "fundamentals:ore_bauxite"
+  ],
+  "step": "underground_ores"
+}

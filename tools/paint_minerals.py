@@ -67,6 +67,13 @@ P = {
     "braggite": ((90, 90, 84), (148, 148, 138), (196, 196, 184), (236, 236, 226)),
     "chromite": ((6, 6, 8), (20, 20, 24), (40, 40, 46), (80, 80, 90)),
     "cinnabar": ((110, 12, 18), (184, 26, 28), (228, 58, 46), (255, 142, 120)),
+    "wolframite": ((14, 10, 8), (44, 34, 30), (88, 72, 64), (176, 164, 152)),
+    "scheelite": ((150, 120, 70), (214, 190, 130), (240, 226, 180), (255, 250, 230)),
+    "molybdenite": ((60, 66, 84), (110, 120, 146), (160, 172, 198), (220, 228, 244)),
+    "cobaltite": ((108, 98, 106), (174, 164, 172), (220, 212, 218), (255, 250, 252)),
+    "erythrite": ((150, 30, 90), (214, 60, 130), (240, 120, 170), (255, 190, 220)),
+    "ilmenite": ((10, 10, 12), (30, 30, 36), (60, 60, 70), (120, 122, 136)),
+    "rutile": ((80, 20, 10), (140, 44, 20), (196, 90, 40), (240, 170, 100)),
 }
 
 # Bornite tarnishes iridescent ("peacock ore"): patches of several hues on one mass.
@@ -109,6 +116,19 @@ RECIPES = {
     "pyrolusite": ("limestone", [("smear", 3, 12, 18), ("speck", 6)]),
     # Sudbury/Norilsk: bronze sulfide blebs in dark mafic rock, always with pyrrhotite.
     "pentlandite": ("mafic", [("mass", 10, 14), ("blob", 2, 3, 6), ("companion", "pyrrhotite", 5), ("speck", 3)]),
+    # Bushveld: seams of solid black chromitite through the layered intrusion.
+    "chromite": ("mafic", [("band", "chromite"), ("band", "chromite"), ("blob", 3, 3, 6), ("speck", 5)]),
+    # Black bladed crystals in quartz veins through greisen, alongside tin.
+    "wolframite": ("greisen", [("vein", "wavy", 2, 3, 5), ("crystals", "plate", 2, 2), ("speck", 2)]),
+    # Skarn tungsten: pale waxy grains with red garnet where granite met limestone.
+    "scheelite": ("limestone", [("blob", 4, 4, 8), ("speck", 3), ("companion", "cuprite", 5)]),
+    # Soft blue-grey flakes on quartz veinlets in the same porphyries as copper.
+    "molybdenite": ("porphyry", [("phenocrysts", 5), ("vein", "diag", 2, 2, 4), ("crystals", "plate", 2, 2), ("speck", 3)]),
+    # Tin-white cubes with pink "cobalt bloom" (erythrite) wherever they weather.
+    "cobaltite": ("stone", [("crystals", "cube", 2, 2), ("crystals", "cube", 2, 1), ("companion", "erythrite", 6)]),
+    # Mineral sands: titanium minerals are the black layers in a beach.
+    "ilmenite": ("sand", [("laminae", 6), ("blob", 4, 3, 6), ("speck", 6)]),
+    "rutile": ("sand", [("laminae", 2), ("blob", 4, 3, 5), ("speck", 9)]),
     # --- precious and PGM (Laptop B's minerals) ---
     "native_silver": ("stone", [("vein", "wavy", 0, 0, 0), ("smear", 2, 9, 13), ("speck", 3), ("companion", "argentite", 3)]),
     "argentite": ("stone", [("vein", "diag", 3, 4, 8), ("blob", 2, 3, 5), ("speck", 3)]),
@@ -503,6 +523,7 @@ SHEET_ORDER = [
     "chalcopyrite", "bornite", "chalcocite", "covellite", "malachite", "azurite", "cuprite",
     "bauxite", "galena", "sphalerite", "smithsonite", "hemimorphite", "cassiterite",
     "hematite", "magnetite", "goethite", "pyrolusite", "pentlandite", "nickel_laterite",
+    "chromite", "wolframite", "scheelite", "molybdenite", "cobaltite", "ilmenite", "rutile",
     "native_silver", "argentite", "sperrylite", "cooperite", "braggite", "cinnabar",
 ]
 

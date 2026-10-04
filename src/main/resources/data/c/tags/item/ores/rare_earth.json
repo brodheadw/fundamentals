@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:bastnasite_ore",
+    "fundamentals:euxenite_ore",
+    "fundamentals:ion_adsorption_clay_ore",
+    "fundamentals:loparite_ore",
+    "fundamentals:monazite_ore",
+    "fundamentals:xenotime_ore"
+  ]
+}

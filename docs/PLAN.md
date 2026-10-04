@@ -63,10 +63,11 @@ There is no such substance as "iron ore" — ore is rock carrying a mineral at m
 mod follows that:
 
 - **Only minerals generate in the world** (hematite, magnetite, chalcopyrite, sphalerite,
-  bastnäsite…). Vanilla iron/copper ore generation is replaced by them; a mod
+  bastnäsite…). Vanilla iron ore generation is replaced by them; a mod
   like Create's zinc ore is replaced by sphalerite.
-- **Gold is the exception:** native gold is a real mineral, so vanilla gold ore (overworld,
-  badlands and nether) stays as it is and keeps generating.
+- **Gold and copper are the exceptions:** native gold and native copper are real minerals, so
+  vanilla gold ore and vanilla copper ore *are* those minerals — they stay and keep generating,
+  and we register no block for them (`registry.OreBlocks.VANILLA`).
 - **Elements have no `ORE` or `RAW` form.** They exist only as products (dust, ingot, nugget,
   plate, block, oxide). A mineral is a `MaterialType.MINERAL` material carrying `ORE`/`RAW`.
 - **Vanilla items are the canonical form where one exists** (`minecraft:iron_ingot`, nugget,
@@ -126,7 +127,8 @@ Use as sub-package names and data sub-folders.
 **IDs:**
 - material id = element symbol lowercased or snake_case compound: `iron`, `neodymium`,
   `tungsten_trioxide`, `rare_earth_concentrate`.
-- ore block id = `<mineral>_ore` / `deepslate_<mineral>_ore`.
+- ore block id = `<mineral>_ore`. No deepslate variants: each ore block shows its own real host
+  rock (carbonatite, limestone, gossan, mafic…), so it does not need to match the stone around it.
 - stage machine id = snake_case of the canonical stage: `froth_flotation`, `solvent_extraction`.
 
 **Tags** (Fabric `c:` common convention + our namespace; consumers request by tag, never by a
@@ -282,6 +284,34 @@ features in worldgen JSON — for now this table is the spec both sides build to
     (`c:ores/copper`), other forms under the mineral's own id. Rare-earth minerals now tag
     `c:ores/rare_earth`. **For Laptop B:** `FerrousMaterials.mineral/reg` can call these.
   - **A next:** rare-earth and base-metal chains, then solvent-extraction design.
+- **2026-10-04 [A]** Branch `a/mineral-textures` (PR into main): **ore blocks exist and generate**,
+  on both loaders. Verified on headless Fabric and NeoForge servers (2,760 chunks across jungle,
+  badlands, mountain, beach, swamp, taiga, desert): all 38 ore blocks generate in their depth bands
+  and vanilla `iron_ore` no longer does.
+  - **What landed:** `registry.OreBlocks` (one `<mineral>_ore` block + item per ore, creative tab),
+    `worldgen.OreData` / `worldgen.OreSpawns`, and two generators — `tools/paint_minerals.py`
+    (textures) and `tools/build_ore_data.py` (models, loot, tags, lang, features, biome tags,
+    NeoForge biome modifiers, and `fundamentals_ores.json`, which both the block registration and
+    the Fabric spawn code read). **Spawn tuning = edit a row in `ORES` in `build_ore_data.py` and
+    re-run.** Don't hand-edit the generated JSON or PNGs.
+  - **For Laptop B — please add materials:** I added ore blocks, textures and spawns for seven
+    ferrous minerals the user asked to see that have no `MINERAL` material yet: `chromite`,
+    `wolframite`, `scheelite`, `molybdenite`, `cobaltite`, `ilmenite`, `rutile`. Add them to
+    `FerrousMaterials` with exactly those ids (the game logs a warning for each until you do).
+  - **For Laptop B — registration layer:** ore blocks are done; don't register them again. Build
+    the item forms (raw, dust, ingot…) on top. Ore blocks drop themselves for now — once raw
+    mineral items exist, change the loot table template in `build_ore_data.py` to drop them.
+  - **For Laptop B — your minerals' art and spawns:** I painted and placed your 20 minerals too so
+    there is one consistent pass. Review the recipes in `paint_minerals.py` and the rows in `ORES`
+    for hematite, magnetite, goethite, pyrolusite, pentlandite, nickel laterite, the silver and
+    platinum minerals and cinnabar, and change whatever is wrong for your chains.
+  - **Rulings from the user:** native copper = vanilla copper ore (like gold, §2.4); no deepslate
+    variants (§4).
+  - **Known gaps (A will take):** (1) the hardcoded deep ore veins still place
+    `deepslate_iron_ore` and `raw_iron_block` — needs a mixin on `OreVeinifier`; (2) host rocks
+    exist only as ore-block textures, so a vein looks like a pod of foreign rock — next step is
+    real host-rock blocks generated around the ore; (3) frequencies are a first guess (sphalerite
+    and galena look too common, vanilla copper far too common for "native copper").
 
 ---
 

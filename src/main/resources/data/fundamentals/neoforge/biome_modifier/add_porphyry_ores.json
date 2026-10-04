@@ -1,0 +1,12 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#fundamentals:deposit/porphyry",
+  "features": [
+    "fundamentals:ore_molybdenite",
+    "fundamentals:ore_chalcopyrite",
+    "fundamentals:ore_bornite",
+    "fundamentals:ore_chalcocite",
+    "fundamentals:ore_covellite"
+  ],
+  "step": "underground_ores"
+}

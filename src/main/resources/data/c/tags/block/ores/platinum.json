@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:braggite_ore",
+    "fundamentals:cooperite_ore",
+    "fundamentals:sperrylite_ore"
+  ]
+}

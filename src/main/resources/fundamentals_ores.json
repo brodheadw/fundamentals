@@ -1,0 +1,256 @@
+{
+  "ores": [
+    {
+      "mineral": "hematite",
+      "soft": false
+    },
+    {
+      "mineral": "magnetite",
+      "soft": false
+    },
+    {
+      "mineral": "goethite",
+      "soft": false
+    },
+    {
+      "mineral": "pyrolusite",
+      "soft": false
+    },
+    {
+      "mineral": "pentlandite",
+      "soft": false
+    },
+    {
+      "mineral": "nickel_laterite",
+      "soft": true
+    },
+    {
+      "mineral": "chromite",
+      "soft": false
+    },
+    {
+      "mineral": "wolframite",
+      "soft": false
+    },
+    {
+      "mineral": "scheelite",
+      "soft": false
+    },
+    {
+      "mineral": "molybdenite",
+      "soft": false
+    },
+    {
+      "mineral": "cobaltite",
+      "soft": false
+    },
+    {
+      "mineral": "ilmenite",
+      "soft": true
+    },
+    {
+      "mineral": "rutile",
+      "soft": true
+    },
+    {
+      "mineral": "chalcopyrite",
+      "soft": false
+    },
+    {
+      "mineral": "bornite",
+      "soft": false
+    },
+    {
+      "mineral": "chalcocite",
+      "soft": false
+    },
+    {
+      "mineral": "covellite",
+      "soft": false
+    },
+    {
+      "mineral": "malachite",
+      "soft": false
+    },
+    {
+      "mineral": "azurite",
+      "soft": false
+    },
+    {
+      "mineral": "cuprite",
+      "soft": false
+    },
+    {
+      "mineral": "bauxite",
+      "soft": false
+    },
+    {
+      "mineral": "galena",
+      "soft": false
+    },
+    {
+      "mineral": "sphalerite",
+      "soft": false
+    },
+    {
+      "mineral": "smithsonite",
+      "soft": false
+    },
+    {
+      "mineral": "hemimorphite",
+      "soft": false
+    },
+    {
+      "mineral": "cassiterite",
+      "soft": false
+    },
+    {
+      "mineral": "bastnasite",
+      "soft": false
+    },
+    {
+      "mineral": "monazite",
+      "soft": true
+    },
+    {
+      "mineral": "xenotime",
+      "soft": false
+    },
+    {
+      "mineral": "ion_adsorption_clay",
+      "soft": true
+    },
+    {
+      "mineral": "loparite",
+      "soft": false
+    },
+    {
+      "mineral": "euxenite",
+      "soft": false
+    },
+    {
+      "mineral": "native_silver",
+      "soft": false
+    },
+    {
+      "mineral": "argentite",
+      "soft": false
+    },
+    {
+      "mineral": "sperrylite",
+      "soft": false
+    },
+    {
+      "mineral": "cooperite",
+      "soft": false
+    },
+    {
+      "mineral": "braggite",
+      "soft": false
+    },
+    {
+      "mineral": "cinnabar",
+      "soft": false
+    }
+  ],
+  "add": [
+    {
+      "biomes": "fundamentals:deposit/anywhere",
+      "features": [
+        "fundamentals:ore_hematite",
+        "fundamentals:ore_magnetite",
+        "fundamentals:ore_pyrolusite",
+        "fundamentals:ore_pentlandite",
+        "fundamentals:ore_chromite",
+        "fundamentals:ore_galena",
+        "fundamentals:ore_sphalerite",
+        "fundamentals:ore_smithsonite",
+        "fundamentals:ore_sperrylite",
+        "fundamentals:ore_cooperite",
+        "fundamentals:ore_braggite"
+      ]
+    },
+    {
+      "biomes": "fundamentals:deposit/wetland",
+      "features": [
+        "fundamentals:ore_goethite"
+      ]
+    },
+    {
+      "biomes": "fundamentals:deposit/laterite",
+      "features": [
+        "fundamentals:ore_nickel_laterite",
+        "fundamentals:ore_bauxite"
+      ]
+    },
+    {
+      "biomes": "fundamentals:deposit/pegmatite",
+      "features": [
+        "fundamentals:ore_wolframite",
+        "fundamentals:ore_cassiterite",
+        "fundamentals:ore_xenotime",
+        "fundamentals:ore_euxenite"
+      ]
+    },
+    {
+      "biomes": "fundamentals:deposit/hydrothermal",
+      "features": [
+        "fundamentals:ore_scheelite",
+        "fundamentals:ore_cobaltite",
+        "fundamentals:ore_native_silver",
+        "fundamentals:ore_argentite",
+        "fundamentals:ore_cinnabar"
+      ]
+    },
+    {
+      "biomes": "fundamentals:deposit/porphyry",
+      "features": [
+        "fundamentals:ore_molybdenite",
+        "fundamentals:ore_chalcopyrite",
+        "fundamentals:ore_bornite",
+        "fundamentals:ore_chalcocite",
+        "fundamentals:ore_covellite"
+      ]
+    },
+    {
+      "biomes": "fundamentals:deposit/placer",
+      "features": [
+        "fundamentals:ore_ilmenite",
+        "fundamentals:ore_rutile",
+        "fundamentals:ore_monazite"
+      ]
+    },
+    {
+      "biomes": "fundamentals:deposit/arid_oxide",
+      "features": [
+        "fundamentals:ore_malachite",
+        "fundamentals:ore_azurite",
+        "fundamentals:ore_cuprite",
+        "fundamentals:ore_hemimorphite"
+      ]
+    },
+    {
+      "biomes": "fundamentals:deposit/carbonatite",
+      "features": [
+        "fundamentals:ore_bastnasite"
+      ]
+    },
+    {
+      "biomes": "fundamentals:deposit/ion_clay",
+      "features": [
+        "fundamentals:ore_ion_adsorption_clay"
+      ]
+    },
+    {
+      "biomes": "fundamentals:deposit/alkaline",
+      "features": [
+        "fundamentals:ore_loparite"
+      ]
+    }
+  ],
+  "remove": [
+    "minecraft:ore_iron_upper",
+    "minecraft:ore_iron_middle",
+    "minecraft:ore_iron_small"
+  ]
+}

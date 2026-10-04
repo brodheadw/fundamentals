@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:hemimorphite_ore",
+    "fundamentals:smithsonite_ore",
+    "fundamentals:sphalerite_ore"
+  ]
+}
