@@ -1,0 +1,8 @@
+[versions]
+
+# Architectury Loom — multi-loader build + Mojang mappings
+loom = "1.10.+"
+
+[plugins]
+
+loom = { id = "dev.architectury.loom", version.ref = "loom" }

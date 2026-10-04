@@ -1,0 +1,31 @@
+{
+	"schemaVersion": 1,
+	"id": "${id}",
+	"version": "${version}",
+	"name": "${name}",
+	"description": "${description}",
+	"authors": [
+		"${author}"
+	],
+	"contact": {
+		"homepage": "${source}",
+		"sources": "${source}",
+		"issues": "${issues}"
+	},
+	"license": "${license}",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"ai.gsmc.fundamentals.Fundamentals"
+		]
+	},
+	"mixins": [
+		"${id}.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=${fabric_loader_version}",
+		"minecraft": "${mcdep}",
+		"java": ">=21",
+		"fabric-api": "*"
+	}
+}
