@@ -6,6 +6,11 @@ standalone, multi-loader, multi-version project.
 > Separate from the **wildspell** project. The two may interoperate later (shared tags,
 > optional integration), but they are developed and versioned independently.
 
+> 📋 **Working on this repo? Read [`docs/PLAN.md`](docs/PLAN.md) first** — it's the shared
+> source of truth for architecture, who owns which ores, the conventions that keep parallel
+> work compatible, and the biome/worldgen scheme. Ore data lives in
+> [`data/ores.json`](data/ores.json) / [`docs/ore-catalog.md`](docs/ore-catalog.md).
+
 ## Design direction
 
 Fundamentals treats materials as data, not hardcoded items:
