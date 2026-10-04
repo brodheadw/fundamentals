@@ -259,6 +259,18 @@ features in worldgen JSON — for now this table is the spec both sides build to
   - **B next:** per-loader registration layer incl. the "this form is an existing vanilla item"
     mapping you flagged (iron/copper/gold ingots, nuggets, blocks; vanilla gold ore stays), then
     minerals→ore blocks and the bloomery as a real recipe.
+- **2026-10-04 [B]** Branch `b/precious-pgm` (PR #5 → main): built the **`precious_pgm`** group
+  (now B's). `content.precious_pgm.PreciousMaterials` — minerals `native_gold` (→vanilla),
+  `native_silver`, `argentite`, `sperrylite`/`cooperite`/`braggite` (→`c:ores/platinum`),
+  `cinnabar`; metals gold (→vanilla items), silver, Pt/Pd/Rh/Ru/Ir/Os, mercury (liquid — DUST
+  stand-in until a shared FLUID form exists), `electrum`, and a `platinum_group_concentrate`.
+  `PreciousChains` — gold = `PANNING` (T0), silver = roast-smelt, **PGM = flotation→concentrate→
+  `SOLVENT_EXTRACTION` splitting out Pt + Pd/Rh byproducts** (endgame T5), mercury = `RETORTING`
+  cinnabar. Wired into `FundamentalsContent`. `buildAll` green on both loaders.
+  - **§2.4 respected:** `native_gold` and gold's ingot/nugget/block are marked to map to vanilla
+    (registration layer resolves to `minecraft:*`); no duplicate gold ore/items.
+  - **Needs the shared schema later:** a `FLUID`/liquor `MaterialForm` for mercury (and your REE
+    solvent-extraction liquors) — flagging so we add it once, append-only.
 
 ---
 
