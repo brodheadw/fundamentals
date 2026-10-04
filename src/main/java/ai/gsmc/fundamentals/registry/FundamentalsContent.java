@@ -3,6 +3,7 @@ package ai.gsmc.fundamentals.registry;
 import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.content.ferrous_ferroalloy.FerrousChains;
 import ai.gsmc.fundamentals.content.ferrous_ferroalloy.FerrousMaterials;
+import ai.gsmc.fundamentals.content.rare_earths.RareEarthMaterials;
 import ai.gsmc.fundamentals.material.MaterialRegistry;
 import ai.gsmc.fundamentals.process.ProcessingChainRegistry;
 import ai.gsmc.fundamentals.process.ProcessingStage;
@@ -27,16 +28,18 @@ public final class FundamentalsContent {
         // IndustrialMinerals.register();   // TODO (B)
         // LightBatteryTech.register();     // TODO (B)
         // MinorSpecialty.register();       // TODO (B)
+        // PreciousPgmMaterials.register(); // TODO (B)
 
         // --- Laptop A groups ---
-        // RareEarthMaterials.register();   // TODO (A)
+        RareEarthMaterials.register();
         // BaseMetalMaterials.register();   // TODO (A)
-        // PreciousPgmMaterials.register(); // TODO (A)
 
         Fundamentals.LOGGER.info("Registered {} materials, {} processing chains; {} stages available.",
                 MaterialRegistry.size(), ProcessingChainRegistry.size(), ProcessingStage.values().length);
         Fundamentals.LOGGER.info("  ferrous_ferroalloy: {} materials",
                 MaterialRegistry.countInGroup(FerrousMaterials.GROUP));
+        Fundamentals.LOGGER.info("  rare_earths: {} materials",
+                MaterialRegistry.countInGroup(RareEarthMaterials.GROUP));
 
         // Fail loud in dev if a chain references a material/form that doesn't exist.
         List<String> problems = ProcessingChainRegistry.validateAll();
