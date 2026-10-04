@@ -158,10 +158,25 @@ features in worldgen JSON — for now this table is the spec both sides build to
 > Protocol: on `git pull` before a session, append what you're starting; on push, note what
 > changed. This section is the handshake that keeps the two machines aligned.
 
-- **2026-10-04 [B]** Pushed: scaffold, ore catalog (113 ores), this PLAN. **B next:** create the
-  shared schema (material + stage/recipe JSON schema, tier defs) under `.material`/`.process` —
-  these are the append-only foundation both sides build on — then start the `ferrous_ferroalloy`
-  content (iron first). Will not touch A's groups.
+- **2026-10-04 [B]** Pushed: scaffold, ore catalog (113 ores), this PLAN.
+- **2026-10-04 [B]** Branch `b/foundation-ferrous` (PR into main): built the **append-only shared
+  foundation** both sides build on —
+  `process.Tier` (T0–T5), `process.ProcessingStage` (all 49 canonical stages, each tier-tagged,
+  with `fromCatalog(...)` to map `data/ores.json` tokens), and the material model
+  `material.{MaterialType,MaterialForm,MaterialProperties,Material,MaterialRegistry}`
+  (`MaterialProperties` carries the magnet-strength stat, PLAN §2.1). Seeded the first
+  `ferrous_ferroalloy` materials (`content.ferrous_ferroalloy.FerrousMaterials`: iron, steel,
+  Cr/Mn/Ni/Co/Mo/W/V/Ti, WO3/APT intermediates, the ferroalloys) with auto-derived `c:`/
+  `fundamentals:` tags, wired via `registry.FundamentalsContent.registerAll()` from
+  `Fundamentals.init()`. `./gradlew buildAll` green on both loaders.
+  - **For Laptop A:** foundation is on `main` once this PR merges. Add your group registrars and
+    append **one line each** to `FundamentalsContent.registerAll()` under the "Laptop A groups"
+    comment — that's the only shared edit point. Define materials with `Material.builder(id,
+    type)...` exactly like `FerrousMaterials`; keep ids globally unique (the registry throws on
+    collision).
+  - **B next:** per-loader registration layer (turn `MaterialForm`s into real blocks/items via
+    Stonecutter `//? if fabric/neoforge`), then the first ferrous processing chain (iron:
+    ore → crush → … → smelt) as data-driven stage recipes.
 - _(Laptop A: add your entries below.)_
 
 ---

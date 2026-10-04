@@ -42,6 +42,7 @@ public class Fundamentals /*? if fabric {*/ implements ModInitializer /*?}*/ {
     /** Loader-agnostic setup. Register content, materials, and processing here. */
     public static void init() {
         LOGGER.info("Fundamentals initializing ({} loader)", loaderName());
+        ai.gsmc.fundamentals.registry.FundamentalsContent.registerAll();
     }
 
     private static String loaderName() {
