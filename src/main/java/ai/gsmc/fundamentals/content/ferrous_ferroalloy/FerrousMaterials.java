@@ -4,21 +4,23 @@ import ai.gsmc.fundamentals.material.Material;
 import ai.gsmc.fundamentals.material.MaterialForm;
 import ai.gsmc.fundamentals.material.MaterialProperties;
 import ai.gsmc.fundamentals.material.MaterialRegistry;
+import ai.gsmc.fundamentals.material.MaterialTags;
 import ai.gsmc.fundamentals.material.MaterialType;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Materials for the {@code ferrous_ferroalloy} commodity group (Laptop B, PLAN §3):
- * iron + the ferroalloy metals and their key intermediates/alloys.
+ * iron + the ferroalloy metals, their key intermediates/alloys, and the ore minerals they come
+ * from.
  *
- * <p>Property stats lean into the mod's magnet theme where it's physically real: iron, cobalt
- * and nickel are the three ferromagnetic elements, and cobalt's high Curie point gives it the
- * heat resistance that SmCo magnets rely on — so even B's metals feed A's magnet work through
- * tags.
+ * <p>Follows the §2.4 ruling: <b>only minerals exist in the ground</b> ({@link MaterialType#MINERAL}
+ * carrying {@code ORE}/{@code RAW} and the commodity tag, e.g. hematite → {@code c:ores/iron});
+ * <b>elements have no {@code ORE}/{@code RAW}</b>, only products. Vanilla iron items stay canonical
+ * — the registration layer maps iron's INGOT/NUGGET/BLOCK to {@code minecraft:*} rather than
+ * registering duplicates.
  *
- * <p>Only this group's materials are defined here; never touch another group's content (PLAN §4).
+ * <p>Property stats lean into the magnet theme where it's physically real: iron, cobalt and nickel
+ * are the three ferromagnetic elements, and cobalt's high Curie point gives it the heat resistance
+ * SmCo relies on — so even B's metals feed A's magnet work through tags.
  */
 public final class FerrousMaterials {
 
@@ -27,10 +29,24 @@ public final class FerrousMaterials {
     private FerrousMaterials() {}
 
     public static void register() {
-        // --- Iron & steel ---
+        // --- Ore minerals (the only things generated in-world; carry the commodity tag) ---
+        mineral("hematite", "Hematite", "Fe2O3", "iron",
+                MaterialProperties.builder().density(0.66).magnetStrength(0.05));
+        mineral("magnetite", "Magnetite", "Fe3O4", "iron",
+                MaterialProperties.builder().density(0.66).magnetStrength(0.20)); // lodestone mineral
+        mineral("goethite", "Goethite", "FeO(OH)", "iron",
+                MaterialProperties.builder().density(0.48));
+        mineral("pyrolusite", "Pyrolusite", "MnO2", "manganese",
+                MaterialProperties.builder().density(0.63));
+        mineral("pentlandite", "Pentlandite", "(Fe,Ni)9S8", "nickel",
+                MaterialProperties.builder().density(0.61));
+        mineral("nickel_laterite", "Nickel Laterite", "(Fe,Ni)O(OH)", "nickel",
+                MaterialProperties.builder().density(0.40));
+
+        // --- Metals (products only — no ORE/RAW per §2.4). Vanilla iron is canonical. ---
         reg("iron", MaterialType.ELEMENT, "Fe",
-                forms(MaterialForm.ORE, MaterialForm.RAW, MaterialForm.INGOT, MaterialForm.DUST,
-                        MaterialForm.NUGGET, MaterialForm.PLATE, MaterialForm.BLOCK),
+                forms(MaterialForm.INGOT, MaterialForm.DUST, MaterialForm.NUGGET,
+                        MaterialForm.PLATE, MaterialForm.BLOCK),
                 MaterialProperties.builder().density(1.0).magnetStrength(0.40)
                         .heatResistance(0.45).conductivity(0.17).hardness(0.40));
         reg("steel", MaterialType.ALLOY, "",
@@ -38,17 +54,14 @@ public final class FerrousMaterials {
                         MaterialForm.PLATE, MaterialForm.BLOCK),
                 MaterialProperties.builder().density(1.0).magnetStrength(0.35)
                         .heatResistance(0.60).hardness(0.70));
-
-        // --- Ferroalloy elements ---
         reg("chromium", MaterialType.ELEMENT, "Cr",
                 forms(MaterialForm.INGOT, MaterialForm.DUST),
                 MaterialProperties.builder().density(0.92).hardness(0.90).heatResistance(0.70));
         reg("manganese", MaterialType.ELEMENT, "Mn",
-                forms(MaterialForm.ORE, MaterialForm.RAW, MaterialForm.INGOT, MaterialForm.DUST),
+                forms(MaterialForm.INGOT, MaterialForm.DUST),
                 MaterialProperties.builder().density(0.95).hardness(0.75));
         reg("nickel", MaterialType.ELEMENT, "Ni",
-                forms(MaterialForm.ORE, MaterialForm.RAW, MaterialForm.INGOT, MaterialForm.DUST,
-                        MaterialForm.NUGGET),
+                forms(MaterialForm.INGOT, MaterialForm.DUST, MaterialForm.NUGGET),
                 MaterialProperties.builder().density(1.13).magnetStrength(0.30)
                         .conductivity(0.25).hardness(0.50));
         reg("cobalt", MaterialType.ELEMENT, "Co",
@@ -103,7 +116,20 @@ public final class FerrousMaterials {
         return f;
     }
 
-    /** Registers one material, auto-deriving the standard c:/fundamentals tags from its forms. */
+    /** An ore mineral: MINERAL type, ORE+RAW forms, tagged under its {@code commodity} (§2.4). */
+    private static void mineral(String id, String display, String formula, String commodity,
+                                MaterialProperties.Builder props) {
+        MaterialRegistry.register(Material.builder(id, MaterialType.MINERAL)
+                .display(display)
+                .formula(formula)
+                .group(GROUP)
+                .properties(props)
+                .forms(MaterialForm.ORE, MaterialForm.RAW)
+                .tags("c:ores/" + commodity, "c:raw_materials/" + commodity)
+                .build());
+    }
+
+    /** A product material; standard form-derived tags via the shared {@link MaterialTags}. */
     private static void reg(String id, MaterialType type, String formula, MaterialForm[] forms,
                             MaterialProperties.Builder props) {
         MaterialRegistry.register(Material.builder(id, type)
@@ -111,23 +137,7 @@ public final class FerrousMaterials {
                 .group(GROUP)
                 .properties(props)
                 .forms(forms)
-                .tags(tagsFor(id, forms))
+                .tags(MaterialTags.standard(id, forms))
                 .build());
-    }
-
-    private static String[] tagsFor(String id, MaterialForm[] forms) {
-        List<String> tags = new ArrayList<>();
-        for (MaterialForm form : forms) {
-            switch (form) {
-                case ORE -> tags.add("c:ores/" + id);
-                case RAW -> tags.add("c:raw_materials/" + id);
-                case INGOT -> tags.add("c:ingots/" + id);
-                case DUST -> tags.add("c:dusts/" + id);
-                case OXIDE -> tags.add("fundamentals:oxides/" + id);
-                case CONCENTRATE -> tags.add("fundamentals:concentrates/" + id);
-                default -> { /* nugget/plate/block: item tags added with their recipes later */ }
-            }
-        }
-        return tags.toArray(new String[0]);
     }
 }
