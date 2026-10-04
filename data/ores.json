@@ -1,0 +1,3189 @@
+{
+  "_generated_by": "tools/build_catalog.py",
+  "_source": "docs/research/*.json",
+  "groups": {
+    "ferrous-ferroalloy": "Ferrous & Ferroalloy Metals",
+    "base-metals": "Base Metals",
+    "industrial-minerals": "Industrial & Non-Metal Minerals",
+    "light-battery-tech": "Light, Battery & Tech Metals",
+    "precious-pgm": "Precious Metals & PGMs",
+    "rare-earths": "Rare Earth Elements",
+    "minor-specialty": "Minor, Specialty & Radioactive Metals"
+  },
+  "stageVocabulary": [
+    "Crushing",
+    "Grinding",
+    "Washing",
+    "Screening",
+    "GravitySeparation",
+    "MagneticSeparation",
+    "FrothFlotation",
+    "Decrepitation",
+    "Roasting",
+    "Volatilization",
+    "Calcination",
+    "Sintering",
+    "Chlorination",
+    "Cracking",
+    "Smelting",
+    "Converting",
+    "CarbothermicReduction",
+    "AluminothermicReduction",
+    "SilicothermicReduction",
+    "MetallothermicReduction",
+    "HydrogenReduction",
+    "Reduction",
+    "KrollProcess",
+    "Leaching",
+    "PressureOxidation",
+    "BioOxidation",
+    "Dissolution",
+    "SolventExtraction",
+    "IonExchange",
+    "CarbonAdsorption",
+    "Precipitation",
+    "Evaporation",
+    "Crystallization",
+    "Electrowinning",
+    "Electrolysis",
+    "HallHeroult",
+    "MoltenSaltElectrolysis",
+    "Electrorefining",
+    "BayerProcess",
+    "SolvayProcess",
+    "ContactProcess",
+    "ClausProcess",
+    "FraschProcess",
+    "SiemensProcess",
+    "Cupellation",
+    "Retorting",
+    "Refining",
+    "Purification",
+    "Alloying"
+  ],
+  "oreCount": 113,
+  "ores": [
+    {
+      "mineral": "Hematite",
+      "formula": "Fe2O3",
+      "commodity": "Fe",
+      "byproducts": [
+        "slag",
+        "blast-furnace gas (CO/CO2)"
+      ],
+      "geology": "sedimentary / BIF-derived & supergene; gangue silica, alumina, P",
+      "beneficiation": [
+        "Crushing",
+        "Washing",
+        "GravitySeparation"
+      ],
+      "intermediate": "sinter / pellets",
+      "extraction": "Carbothermic reduction in blast furnace with coke + limestone to pig iron; or gas/H2 direct reduction (DRI) in a shaft furnace.",
+      "final_product": "pig iron / steel",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "Washing",
+        "GravitySeparation",
+        "Sintering",
+        "Smelting (blast furnace)",
+        "CarbothermicReduction",
+        "Refining (BOF steelmaking)"
+      ],
+      "notes": "High-grade 'red ore' is direct-shipping and can skip magnetic beneficiation, going straight to sinter.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Magnetite",
+      "formula": "Fe3O4",
+      "commodity": "Fe",
+      "byproducts": [
+        "slag",
+        "blast-furnace gas",
+        "V/Ti (titanomagnetite variant)"
+      ],
+      "geology": "magmatic / skarn / metamorphic BIF; gangue silica, apatite, Ti/V oxides",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "MagneticSeparation",
+        "FrothFlotation"
+      ],
+      "intermediate": "pellets (oxidize exothermically to hematite on firing)",
+      "extraction": "Pellets reduced in blast furnace (carbothermic) or DRI shaft; strong ferrimagnetism makes concentration cheap.",
+      "final_product": "pig iron / steel; DRI for EAF",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "MagneticSeparation",
+        "FrothFlotation",
+        "Sintering (pelletizing)",
+        "Smelting",
+        "CarbothermicReduction",
+        "Refining"
+      ],
+      "notes": "Its magnetism is the whole game: grind fine, pull iron out with magnets for cheap concentration versus hematite.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Goethite / Limonite",
+      "formula": "FeO(OH) / α-FeOOH (limonite ≈ FeO(OH)·nH2O)",
+      "commodity": "Fe",
+      "byproducts": [
+        "slag",
+        "alumina",
+        "Ni/Co (in laterites)"
+      ],
+      "geology": "supergene / lateritic weathering (gossan); gangue clay, silica, high LOI",
+      "beneficiation": [
+        "Washing",
+        "GravitySeparation",
+        "Roasting (magnetizing)",
+        "MagneticSeparation"
+      ],
+      "intermediate": "sinter / pellets (after dehydration)",
+      "extraction": "Calcine/roast to drive off structural water to a porous oxide, then blast-furnace carbothermic reduction.",
+      "final_product": "pig iron / steel",
+      "stages": [
+        "Crushing",
+        "Washing",
+        "GravitySeparation",
+        "Roasting (magnetizing)",
+        "MagneticSeparation",
+        "Sintering",
+        "Smelting",
+        "CarbothermicReduction"
+      ],
+      "notes": "Loses ~10-12% mass as bound water on heating (high LOI), so a roast/calcine step is nearly mandatory before smelting.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Siderite",
+      "formula": "FeCO3",
+      "commodity": "Fe",
+      "byproducts": [
+        "CO2 (carbonate decomposition)",
+        "slag",
+        "Mn"
+      ],
+      "geology": "sedimentary / hydrothermal vein carbonate; gangue calcite, silica, clay",
+      "beneficiation": [
+        "Washing",
+        "Roasting",
+        "MagneticSeparation"
+      ],
+      "intermediate": "sinter / pellets",
+      "extraction": "Calcination (FeCO3 → FeO + CO2) yields porous iron oxide, then blast-furnace carbothermic reduction.",
+      "final_product": "pig iron / steel",
+      "stages": [
+        "Crushing",
+        "Washing",
+        "Calcination",
+        "Roasting",
+        "MagneticSeparation",
+        "Sintering",
+        "Smelting",
+        "CarbothermicReduction"
+      ],
+      "notes": "Calcining off CO2 both upgrades the ore (48% to 60%+ Fe) and renders it magnetic for separation — two wins from one roast.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Taconite / BIF",
+      "formula": "Fe3O4 / Fe2O3 disseminated in SiO2 (chert)",
+      "commodity": "Fe",
+      "byproducts": [
+        "silica tailings",
+        "bentonite/limestone binder consumed"
+      ],
+      "geology": "Precambrian banded iron formation (BIF); gangue dominantly chert/quartz",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "MagneticSeparation",
+        "FrothFlotation"
+      ],
+      "intermediate": "fired pellets (~65% Fe)",
+      "extraction": "Fine grind to liberate oxide from chert, wet magnetic separation (+ WHIMS/flotation for hematite), pelletize, then blast furnace or DRI shaft.",
+      "final_product": "pig iron / steel; DRI-grade pellets for EAF",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "MagneticSeparation",
+        "FrothFlotation",
+        "Sintering (pelletizing/induration)",
+        "Smelting",
+        "CarbothermicReduction",
+        "Refining"
+      ],
+      "notes": "Below blast-furnace cutoff grade (~25-30% Fe raw) until ground to powder, magnetically separated, and pelletized — backbone of the Mesabi Range.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Pyrolusite",
+      "formula": "MnO2",
+      "commodity": "Mn",
+      "byproducts": [
+        "slag",
+        "Fe (alloy)",
+        "battery-grade MnO2"
+      ],
+      "geology": "sedimentary / supergene oxide deposits and nodules; gangue silica, Fe oxides, clay",
+      "beneficiation": [
+        "Crushing",
+        "GravitySeparation",
+        "Washing"
+      ],
+      "intermediate": "ferromanganese / silicomanganese; or MnSO4 leach liquor",
+      "extraction": "(a) carbothermic reduction in submerged-arc furnace to FeMn/SiMn; (b) reductive acid leach to MnSO4 then electrowinning to EMM (metal) or EMD (battery MnO2).",
+      "final_product": "ferromanganese / silicomanganese; electrolytic Mn metal (EMM); electrolytic MnO2 (EMD)",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "Washing",
+        "Roasting",
+        "CarbothermicReduction",
+        "Leaching",
+        "Precipitation",
+        "Electrowinning"
+      ],
+      "notes": "Dual-fate ore: the same MnO2 feeds either the steel-alloy furnace or, via leach + electrowinning, alkaline-battery EMD.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Rhodochrosite",
+      "formula": "MnCO3",
+      "commodity": "Mn",
+      "byproducts": [
+        "CO2",
+        "slag",
+        "Fe"
+      ],
+      "geology": "hydrothermal vein / metasedimentary carbonate; gangue calcite, silica, Fe carbonate",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Calcination (nodulizing)"
+      ],
+      "intermediate": "calcined Mn-oxide nodules",
+      "extraction": "Calcine (MnCO3 → MnO + CO2) then carbothermic reduction in a submerged-arc furnace; or acid leach to MnSO4 then electrowinning.",
+      "final_product": "ferromanganese / silicomanganese; EMM via leach route",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Calcination",
+        "Sintering (nodulizing)",
+        "Smelting",
+        "CarbothermicReduction",
+        "Leaching",
+        "Electrowinning"
+      ],
+      "notes": "Must be calcined/nodulized to expel CO2 before smelting — Autlán's Molango rotary kiln is the real-world flagship.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Psilomelane (romanechite)",
+      "formula": "(Ba,H2O)2Mn5O10",
+      "commodity": "Mn",
+      "byproducts": [
+        "barium-bearing slag",
+        "Fe"
+      ],
+      "geology": "supergene weathering-zone hard botryoidal oxide ('black hematite'); gangue silica, Fe/Mn oxides",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "Washing"
+      ],
+      "intermediate": "ferromanganese / silicomanganese",
+      "extraction": "Carbothermic reduction in a submerged-arc furnace; bound water and barium report to slag.",
+      "final_product": "ferromanganese / silicomanganese",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "Washing",
+        "Calcination",
+        "Smelting",
+        "CarbothermicReduction"
+      ],
+      "notes": "Hard and dense (Mohs 5-6), so tough grinding, and its barium content loads the slag chemistry.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Chromite",
+      "formula": "FeCr2O4",
+      "commodity": "Cr",
+      "byproducts": [
+        "trace PGMs (UG2-type ores)",
+        "Fe (into the alloy)"
+      ],
+      "geology": "magmatic cumulate layers / podiform bodies in mafic-ultramafic intrusions (Bushveld); gangue serpentine, pyroxene, olivine",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "MagneticSeparation"
+      ],
+      "intermediate": "ferrochrome (sintered/pelletized/pre-reduced feed)",
+      "extraction": "Carbothermic reduction of chromite by coke in a submerged-arc furnace (~1700 °C, silica flux); Cr and Fe oxides reduce together, so the product is an Fe-Cr alloy.",
+      "final_product": "ferrochrome (HC/charge); Cr metal via aluminothermic/electrolytic refining",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "MagneticSeparation",
+        "Sintering",
+        "Smelting",
+        "CarbothermicReduction"
+      ],
+      "notes": "Chromium's only commercial ore — Fe reduces alongside Cr, so you get ferrochrome unless you add an aluminothermic/electrolytic step for pure Cr.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Pentlandite",
+      "formula": "(Fe,Ni)9S8",
+      "commodity": "Ni",
+      "byproducts": [
+        "Cu",
+        "Co",
+        "PGMs (Pt/Pd)",
+        "Au",
+        "Ag",
+        "S (as acid)"
+      ],
+      "geology": "magmatic sulfide deposits in mafic/ultramafic intrusions (Sudbury, Norilsk); gangue pyrrhotite + silicates",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "MagneticSeparation"
+      ],
+      "intermediate": "nickel matte (furnace matte → converter matte)",
+      "extraction": "Roast/partial oxidation + smelt to a furnace matte, convert off Fe/S, then refine by pressure (Sherritt-Gordon) or chloride leach + electrowinning, or Mond carbonyl, to Class 1 metal.",
+      "final_product": "Class 1 nickel metal; nickel sulfate for batteries",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Roasting",
+        "Smelting",
+        "Leaching",
+        "SolventExtraction",
+        "Electrowinning",
+        "Refining"
+      ],
+      "notes": "Co and PGMs ride along as high-value byproducts of the Ni refinery — one of the two main primary cobalt sources alongside Cu-Co ores.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Nickel laterite — limonite",
+      "formula": "(Fe,Ni)O(OH)",
+      "commodity": "Ni",
+      "byproducts": [
+        "Co (significant)",
+        "Mn",
+        "Sc",
+        "Fe (rejected as hematite residue)"
+      ],
+      "geology": "supergene weathering profile over ultramafics, upper iron-rich zone; gangue Fe oxyhydroxides, quartz",
+      "beneficiation": [
+        "Washing"
+      ],
+      "intermediate": "MHP / MSP (mixed hydroxide / sulfide precipitate)",
+      "extraction": "HPAL (high-pressure acid leach, H2SO4 autoclave ~245-270 °C) dissolves Ni+Co and reprecipitates Fe as hematite; recover Ni/Co as MHP/MSP, re-leach, solvent-extract, electrowin.",
+      "final_product": "nickel sulfate / Class 1 nickel; cobalt co-product",
+      "stages": [
+        "Washing",
+        "Leaching (HPAL)",
+        "Precipitation",
+        "Leaching (re-leach of MHP)",
+        "SolventExtraction",
+        "Electrowinning"
+      ],
+      "notes": "Lattice-bound Ni can't be floated; low Ni grade but high Co makes limonite a key laterite source of battery cobalt.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Nickel laterite — saprolite / garnierite",
+      "formula": "(Ni,Mg)3Si2O5(OH)4",
+      "commodity": "Ni",
+      "byproducts": [
+        "Co (low)",
+        "Fe (reports to ferronickel)"
+      ],
+      "geology": "lower silicate-rich saprolite zone of laterite profile over ultramafics; gangue serpentine, Mg silicates, quartz",
+      "beneficiation": [
+        "Washing"
+      ],
+      "intermediate": "crude ferronickel / nickel pig iron (NPI)",
+      "extraction": "Pyrometallurgical RKEF: rotary kiln (drying/calcination + pre-reduction) then electric-furnace smelting with carbothermic reduction to ferronickel; alt Caron process = reduction roast + ammoniacal leach.",
+      "final_product": "ferronickel / nickel pig iron",
+      "stages": [
+        "Washing",
+        "Calcination",
+        "CarbothermicReduction",
+        "Smelting (RKEF)"
+      ],
+      "notes": "High-MgO saprolite is too silica/magnesia-rich for economic acid leaching, so it goes the energy-intensive smelting route — same metal, a different tech tree from limonite by ore depth/chemistry.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Cobaltite",
+      "formula": "CoAsS",
+      "commodity": "Co",
+      "byproducts": [
+        "As (hazard/waste)",
+        "Ni",
+        "Fe",
+        "Cu",
+        "Au",
+        "Ag"
+      ],
+      "geology": "high-temperature hydrothermal veins / contact-metamorphic sulfide deposits; gangue sulfides, arsenides, carbonates",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "GravitySeparation"
+      ],
+      "intermediate": "cobalt-bearing leach liquor (after As removal)",
+      "extraction": "Roast to drive off arsenic (As2O3) and sulfur, then leach, remove As/Fe by precipitation, solvent-extract, and electrowin to metal.",
+      "final_product": "cobalt metal",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Roasting",
+        "Leaching",
+        "Precipitation",
+        "SolventExtraction",
+        "Electrowinning"
+      ],
+      "notes": "A minor, historically important ore — its arsenic (naming it from Kobold, 'goblin') is both a smelting hazard and a flavorful gameplay penalty.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Erythrite",
+      "formula": "Co3(AsO4)2·8H2O",
+      "commodity": "Co",
+      "byproducts": [
+        "As",
+        "Ni (annabergite analogue)"
+      ],
+      "geology": "secondary supergene oxidation crust on Co-As primary ores (cobaltite, skutterudite); gangue gossan/oxidized vein material",
+      "beneficiation": [
+        "Washing",
+        "GravitySeparation"
+      ],
+      "intermediate": "cobalt leach liquor",
+      "extraction": "Acid leach the arsenate, remove As by precipitation, then solvent extraction + electrowinning.",
+      "final_product": "cobalt metal / cobalt salts",
+      "stages": [
+        "Washing",
+        "GravitySeparation",
+        "Leaching",
+        "Precipitation",
+        "SolventExtraction",
+        "Electrowinning"
+      ],
+      "notes": "Not an economic ore itself — its vivid pink 'cobalt bloom' is a prospector's indicator pointing to richer Co-As ore below.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Cu-Co byproduct (carrollite / heterogenite)",
+      "formula": "CuCo2S4 (sulfide) / CoO(OH) (oxide)",
+      "commodity": "Co (byproduct of Cu)",
+      "byproducts": [
+        "Cu (main product)",
+        "Ni",
+        "Fe",
+        "U (trace)"
+      ],
+      "geology": "sediment-hosted stratiform Cu-Co deposits (Central African Copperbelt); gangue dolomite, silicates",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation"
+      ],
+      "intermediate": "Co-loaded raffinate / cobalt hydroxide precipitate downstream of the Cu SX-EW circuit",
+      "extraction": "Sulfuric-acid leach (± reductant for oxide heterogenite); Cu recovered by SX + electrowinning; Co recovered from raffinate by further SX + precipitation as Co(OH)2 and/or electrowinning.",
+      "final_product": "cobalt metal / cobalt hydroxide; copper cathode (main product)",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Leaching",
+        "SolventExtraction",
+        "Electrowinning (Cu)",
+        "Precipitation",
+        "SolventExtraction",
+        "Electrowinning (Co)"
+      ],
+      "notes": "The DRC Copperbelt supplies most world cobalt purely as a copper byproduct — in a tech tree, gate Co behind Cu (or Ni) rather than mining it standalone.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Molybdenite",
+      "formula": "MoS2",
+      "commodity": "Mo",
+      "byproducts": [
+        "Re (rhenium, from roaster flue gas)",
+        "Cu (porphyry co-product)"
+      ],
+      "geology": "porphyry copper/molybdenum deposits; quartz-sericite/potassic alteration gangue",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation"
+      ],
+      "intermediate": "MoO3 technical oxide",
+      "extraction": "Oxidative roast of MoS2 (→ MoO3 + SO2) with Re recovered from flue gas; MoO3 either H2-reduced to Mo metal powder or silico/aluminothermically reduced to ferromolybdenum.",
+      "final_product": "ferromolybdenum / Mo metal powder",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Roasting",
+        "HydrogenReduction",
+        "AluminothermicReduction"
+      ],
+      "notes": "Chiefly a byproduct of porphyry copper flotation, tying Mo to the Cu circuit, and the roaster is the only economic rhenium source.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Wolframite",
+      "formula": "(Fe,Mn)WO4",
+      "commodity": "W",
+      "byproducts": [
+        "Sn (cassiterite)",
+        "Mn/Fe values"
+      ],
+      "geology": "hydrothermal quartz veins / greisen associated with granites; cassiterite-quartz gangue",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "Washing",
+        "GravitySeparation",
+        "MagneticSeparation"
+      ],
+      "intermediate": "APT (ammonium paratungstate) → WO3",
+      "extraction": "Alkaline (NaOH/soda) digestion or salt roast to sodium tungstate; purify by ion exchange / solvent extraction; crystallize APT; calcine to WO3; H2-reduce to W powder, or EAF-smelt to ferrotungsten.",
+      "final_product": "ferrotungsten / W metal powder",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "Washing",
+        "GravitySeparation",
+        "MagneticSeparation",
+        "Roasting",
+        "Leaching",
+        "IonExchange",
+        "SolventExtraction",
+        "Precipitation",
+        "Calcination",
+        "HydrogenReduction",
+        "Smelting"
+      ],
+      "notes": "Dense and weakly paramagnetic, so gravity + magnetic separation cleanly splits it from associated cassiterite (tin).",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Scheelite",
+      "formula": "CaWO4",
+      "commodity": "W",
+      "byproducts": [
+        "Mo (powellite in solid solution)",
+        "Au"
+      ],
+      "geology": "contact-metamorphic skarn deposits; calc-silicate (garnet-pyroxene) gangue",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "GravitySeparation"
+      ],
+      "intermediate": "APT (ammonium paratungstate) → WO3",
+      "extraction": "Acid (HCl) or alkaline (soda autoclave) decomposition to tungstic acid / sodium tungstate; purify by IX / SX; crystallize APT; calcine to WO3; H2-reduce to W powder or EAF-smelt to ferrotungsten.",
+      "final_product": "ferrotungsten / W metal powder",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "GravitySeparation",
+        "Leaching",
+        "IonExchange",
+        "SolventExtraction",
+        "Precipitation",
+        "Calcination",
+        "HydrogenReduction",
+        "Smelting"
+      ],
+      "notes": "Non-magnetic Ca-tungstate so it routes through flotation rather than magnetic separation — both W ores converge on the same APT → WO3 intermediate.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Titanomagnetite (vanadium-bearing)",
+      "formula": "Fe3O4 (V substituting in lattice; Ti as ilmenite exsolution)",
+      "commodity": "V",
+      "byproducts": [
+        "Fe (pig iron, main product)",
+        "Ti (in slag)"
+      ],
+      "geology": "layered mafic/ultramafic intrusions (magmatic); silicate (plagioclase-pyroxene) gangue",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "MagneticSeparation"
+      ],
+      "intermediate": "vanadium slag → V2O5 (via ammonium metavanadate)",
+      "extraction": "Smelt to V-bearing pig iron; oxygen-blow the hot metal to concentrate V into a vanadium slag; salt-roast + water-leach the slag to sodium metavanadate, precipitate ammonium metavanadate, calcine to V2O5, then aluminothermically reduce (Al + Fe + lime) to ferrovanadium.",
+      "final_product": "ferrovanadium; pig iron co-product",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "MagneticSeparation",
+        "Smelting",
+        "Roasting",
+        "Leaching",
+        "Precipitation",
+        "Calcination",
+        "AluminothermicReduction"
+      ],
+      "notes": "Cross-links three commodities — iron is the main product, vanadium rides in the steelmaking slag, titanium reports to the smelting slag; the dominant primary V source globally.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Vanadinite",
+      "formula": "Pb5(VO4)3Cl",
+      "commodity": "V",
+      "byproducts": [
+        "Pb (major associated value)"
+      ],
+      "geology": "secondary oxidation zone of lead deposits (arid regions); limonite/clay gossan gangue",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "FrothFlotation"
+      ],
+      "intermediate": "V2O5 (after lead separation)",
+      "extraction": "Decompose/smelt or leach to separate Pb from V; the vanadium solution is salt-roast/leached, precipitated as ammonium metavanadate, calcined to V2O5, then aluminothermically reduced to ferrovanadium.",
+      "final_product": "ferrovanadium; lead co-product",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "FrothFlotation",
+        "Roasting",
+        "Leaching",
+        "Precipitation",
+        "Calcination",
+        "AluminothermicReduction"
+      ],
+      "notes": "A lead vanadate from oxidized Pb orebodies — vanadium and lead are inseparable here, making it a dual-metal node; minor/historic ore today.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Carnotite",
+      "formula": "K2(UO2)2(VO4)2·3H2O",
+      "commodity": "V and U",
+      "byproducts": [
+        "U (uranium)",
+        "V",
+        "trace Ra"
+      ],
+      "geology": "sandstone-hosted (roll-front) sedimentary U-V deposits; sandstone/clay gangue",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "Washing"
+      ],
+      "intermediate": "V2O5 (red cake) and U3O8 (yellowcake)",
+      "extraction": "Acid (H2SO4) or alkaline (carbonate) leach dissolves both U and V; separate by solvent extraction / ion exchange; precipitate and calcine V to V2O5 (then aluminothermic FeV), precipitate U as yellowcake (U3O8).",
+      "final_product": "V2O5 / ferrovanadium; uranium yellowcake (U3O8)",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "Washing",
+        "Leaching",
+        "SolventExtraction",
+        "IonExchange",
+        "Precipitation",
+        "Calcination",
+        "AluminothermicReduction"
+      ],
+      "notes": "The classic U-V coupling (Colorado Plateau) links the vanadium chain directly to the uranium/nuclear chain, each historically the other's byproduct.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Ilmenite",
+      "formula": "FeTiO3",
+      "commodity": "Ti",
+      "byproducts": [
+        "Fe",
+        "zircon / monazite (REE) from same sand",
+        "Fe2O3 co-product"
+      ],
+      "geology": "heavy-mineral beach/dune sands (placer) and magmatic hard-rock; quartz/silicate sand gangue",
+      "beneficiation": [
+        "Washing",
+        "GravitySeparation",
+        "MagneticSeparation",
+        "ElectrostaticSeparation"
+      ],
+      "intermediate": "TiO2 slag / synthetic rutile → TiCl4",
+      "extraction": "Electric-furnace smelt with carbon to high-TiO2 slag (+ pig iron), or remove Fe to synthetic rutile; then chloride route (carbochlorination to TiCl4, Kroll Mg reduction to sponge) or sulfate route (H2SO4 digest, hydrolysis, calcine to pigment).",
+      "final_product": "titanium sponge / TiO2 pigment",
+      "stages": [
+        "Washing",
+        "GravitySeparation",
+        "MagneticSeparation",
+        "Smelting",
+        "CarbothermicReduction",
+        "Leaching",
+        "Calcination",
+        "Refining (chlorination to TiCl4)",
+        "AluminothermicReduction (Kroll metallothermic, proxy)"
+      ],
+      "notes": "~90% of titanium ends as TiO2 pigment, not metal; ilmenite is the dominant feedstock and the smelter co-produces iron.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Rutile",
+      "formula": "TiO2",
+      "commodity": "Ti",
+      "byproducts": [
+        "zircon",
+        "monazite (REE)"
+      ],
+      "geology": "heavy-mineral beach/placer sands and metamorphic hard-rock; quartz sand gangue",
+      "beneficiation": [
+        "Washing",
+        "GravitySeparation",
+        "MagneticSeparation",
+        "ElectrostaticSeparation"
+      ],
+      "intermediate": "TiCl4 (already ~95% TiO2, no upgrading needed)",
+      "extraction": "Carbochlorination (TiO2 + C + Cl2 → TiCl4 + CO/CO2); distill TiCl4; Kroll magnesium reduction to titanium sponge (MgCl2 byproduct electrolyzed back to Mg + Cl2).",
+      "final_product": "titanium sponge / high-grade TiO2 pigment (chloride process)",
+      "stages": [
+        "Washing",
+        "GravitySeparation",
+        "MagneticSeparation",
+        "Refining (chlorination to TiCl4 + distillation)",
+        "AluminothermicReduction (Kroll Mg reduction, metallothermic proxy)"
+      ],
+      "notes": "Highest-grade natural Ti feed (~95% TiO2), so it skips smelting and feeds the clean chloride/Kroll route directly, with an internal Mg/Cl2 recycle via MgCl2 electrolysis.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Leucoxene",
+      "formula": "TiO2 (altered FeTiO3, ~68-90% TiO2)",
+      "commodity": "Ti",
+      "byproducts": [
+        "residual Fe oxides",
+        "zircon / rutile from same sand"
+      ],
+      "geology": "weathered placer/beach sands (alteration product of ilmenite); quartz sand gangue",
+      "beneficiation": [
+        "Washing",
+        "GravitySeparation",
+        "MagneticSeparation",
+        "ElectrostaticSeparation"
+      ],
+      "intermediate": "TiCl4 (intermediate-grade chloride feed)",
+      "extraction": "Carbochlorination to TiCl4 then Kroll reduction to sponge, or blended into slag/synthetic-rutile and pigment feed; grade sits between ilmenite and rutile.",
+      "final_product": "titanium sponge / TiO2 pigment",
+      "stages": [
+        "Washing",
+        "GravitySeparation",
+        "MagneticSeparation",
+        "Refining (chlorination to TiCl4)",
+        "AluminothermicReduction (Kroll Mg reduction, metallothermic proxy)"
+      ],
+      "notes": "Nature's own 'pre-beneficiated' ilmenite — weathering already stripped much of the iron, giving a free TiO2 upgrade between ilmenite and rutile grades.",
+      "group": "ferrous-ferroalloy"
+    },
+    {
+      "mineral": "Chalcopyrite",
+      "formula": "CuFeS2",
+      "commodity": "Copper",
+      "byproducts": [
+        "Au",
+        "Ag",
+        "Mo",
+        "Se",
+        "Te"
+      ],
+      "geology": "Primary hypogene copper-iron sulfide; the most abundant copper ore mineral, found in porphyry and volcanogenic massive sulfide deposits.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation"
+      ],
+      "intermediate": "copper concentrate (~25-30% Cu)",
+      "extraction": "Pyrometallurgical: concentrate smelted to copper matte, converted to blister copper, fire-refined to anode, then electrorefined to cathode. Se/Te/Au/Ag recovered from anode slimes; S captured as sulfuric acid; Mo recovered as molybdenite from flotation.",
+      "final_product": "cathode copper (99.99%)",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Smelting",
+        "Converting",
+        "Refining",
+        "Electrorefining"
+      ],
+      "notes": "Dominant global copper source. Cross-links: principal industrial source of Se and Te; significant Au/Ag and Mo byproducts.",
+      "group": "base-metals"
+    },
+    {
+      "mineral": "Bornite",
+      "formula": "Cu5FeS4",
+      "commodity": "Copper",
+      "byproducts": [
+        "Au",
+        "Ag",
+        "Mo",
+        "Se",
+        "Te"
+      ],
+      "geology": "Copper-iron sulfide ('peacock ore'); hypogene and supergene enrichment zones of porphyry copper deposits.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation"
+      ],
+      "intermediate": "copper concentrate",
+      "extraction": "Pyrometallurgical smelting-converting-refining route, as for chalcopyrite.",
+      "final_product": "cathode copper",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Smelting",
+        "Converting",
+        "Refining",
+        "Electrorefining"
+      ],
+      "notes": "Higher Cu content than chalcopyrite. Often intergrown with chalcocite in enriched zones.",
+      "group": "base-metals"
+    },
+    {
+      "mineral": "Chalcocite",
+      "formula": "Cu2S",
+      "commodity": "Copper",
+      "byproducts": [
+        "Ag",
+        "Au"
+      ],
+      "geology": "Secondary copper sulfide formed by supergene enrichment above the water table; high-grade copper mineral.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation"
+      ],
+      "intermediate": "copper concentrate",
+      "extraction": "Pyrometallurgical (smelt/convert/refine) for concentrate; supergene/secondary ore also amenable to acid heap leach + SX-EW.",
+      "final_product": "cathode copper",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Smelting",
+        "Converting",
+        "Refining",
+        "Electrorefining"
+      ],
+      "notes": "High theoretical Cu (~80%). Leaches more readily than chalcopyrite, so often feeds SX-EW.",
+      "group": "base-metals"
+    },
+    {
+      "mineral": "Covellite",
+      "formula": "CuS",
+      "commodity": "Copper",
+      "byproducts": [
+        "Ag"
+      ],
+      "geology": "Secondary copper sulfide of supergene enrichment zones; usually subordinate to chalcocite.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation"
+      ],
+      "intermediate": "copper concentrate",
+      "extraction": "Pyrometallurgical route; or acid leach + SX-EW for oxidized/secondary ore.",
+      "final_product": "cathode copper",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Smelting",
+        "Converting",
+        "Refining",
+        "Electrorefining"
+      ],
+      "notes": "Minor relative to chalcopyrite/chalcocite but a recognized supergene copper mineral.",
+      "group": "base-metals"
+    },
+    {
+      "mineral": "Malachite",
+      "formula": "Cu2CO3(OH)2",
+      "commodity": "Copper",
+      "byproducts": [],
+      "geology": "Green copper carbonate hydroxide; supergene oxidized zone of copper deposits, with azurite, cuprite and native copper.",
+      "beneficiation": [
+        "Crushing"
+      ],
+      "intermediate": "pregnant leach solution (PLS)",
+      "extraction": "Hydrometallurgical: dilute sulfuric acid heap/vat leach to PLS, solvent extraction to upgrade/purify, electrowinning to cathode (SX-EW).",
+      "final_product": "cathode copper (SX-EW)",
+      "stages": [
+        "Crushing",
+        "Leaching",
+        "SolventExtraction",
+        "Electrowinning"
+      ],
+      "notes": "Acid-soluble oxide ore; little to no precious-metal byproduct. ~57% Cu theoretical.",
+      "group": "base-metals"
+    },
+    {
+      "mineral": "Azurite",
+      "formula": "Cu3(CO3)2(OH)2",
+      "commodity": "Copper",
+      "byproducts": [],
+      "geology": "Blue basic copper carbonate; supergene oxidized zone, commonly altering to malachite.",
+      "beneficiation": [
+        "Crushing"
+      ],
+      "intermediate": "pregnant leach solution (PLS)",
+      "extraction": "Hydrometallurgical acid leach to PLS, then SX-EW.",
+      "final_product": "cathode copper (SX-EW)",
+      "stages": [
+        "Crushing",
+        "Leaching",
+        "SolventExtraction",
+        "Electrowinning"
+      ],
+      "notes": "Formula also written 2CuCO3.Cu(OH)2. Acid-soluble oxide ore.",
+      "group": "base-metals"
+    },
+    {
+      "mineral": "Cuprite",
+      "formula": "Cu2O",
+      "commodity": "Copper",
+      "byproducts": [],
+      "geology": "Copper(I) oxide; oxidized zone of copper lodes, associated with native copper, malachite, azurite and iron oxides.",
+      "beneficiation": [
+        "Crushing"
+      ],
+      "intermediate": "pregnant leach solution (PLS)",
+      "extraction": "Hydrometallurgical acid leach to PLS, then SX-EW.",
+      "final_product": "cathode copper (SX-EW)",
+      "stages": [
+        "Crushing",
+        "Leaching",
+        "SolventExtraction",
+        "Electrowinning"
+      ],
+      "notes": "Very high Cu (~88%). Minor but readily leachable oxide ore.",
+      "group": "base-metals"
+    },
+    {
+      "mineral": "Native copper",
+      "formula": "Cu",
+      "commodity": "Copper",
+      "byproducts": [
+        "Ag"
+      ],
+      "geology": "Metallic copper in basalt amygdules and oxidized zones; historically a major source (e.g. Michigan Keweenaw).",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "FrothFlotation"
+      ],
+      "intermediate": "copper metal particles / concentrate",
+      "extraction": "Physical concentration then direct melting and fire/electro refining; no chemical reduction needed.",
+      "final_product": "refined/cathode copper",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "Smelting",
+        "Refining",
+        "Electrorefining"
+      ],
+      "notes": "Already metallic; may carry native silver.",
+      "group": "base-metals"
+    },
+    {
+      "mineral": "Bauxite",
+      "formula": "rock: gibbsite Al(OH)3 + boehmite AlO(OH) + diaspore AlO(OH)",
+      "commodity": "Aluminium",
+      "byproducts": [
+        "Ga",
+        "red mud (Fe2O3/TiO2 residue)"
+      ],
+      "geology": "Lateritic/karst weathering residue; not a single mineral but a mix of hydrous aluminium oxides with iron oxides, silica and titania.",
+      "beneficiation": [
+        "Crushing",
+        "Washing",
+        "Grinding"
+      ],
+      "intermediate": "alumina Al2O3",
+      "extraction": "Bayer process: hot caustic NaOH digestion (higher T for boehmite/diaspore), clarification (red mud residue), precipitation and calcination to smelter-grade alumina; then Hall-Heroult electrolysis of alumina dissolved in molten cryolite with carbon anodes to primary aluminium.",
+      "final_product": "primary aluminium metal",
+      "stages": [
+        "Crushing",
+        "Washing",
+        "Grinding",
+        "BayerProcess",
+        "Calcination",
+        "HallHeroult"
+      ],
+      "notes": "Bauxite is a ROCK, not a formula. Energy-intensive. Gibbsite digests easiest; diaspore hardest. Red mud is the major residue; Ga recovered from Bayer liquor.",
+      "group": "base-metals"
+    },
+    {
+      "mineral": "Galena",
+      "formula": "PbS",
+      "commodity": "Lead",
+      "byproducts": [
+        "Ag",
+        "Au",
+        "Sb",
+        "Bi",
+        "As",
+        "Cu"
+      ],
+      "geology": "Lead sulfide; the dominant primary lead ore (86.6% Pb), in hydrothermal veins and Pb-Zn-Ag (e.g. SEDEX, MVT) deposits.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation"
+      ],
+      "intermediate": "lead concentrate -> lead-oxide sinter (PbO)",
+      "extraction": "Sinter-roasting oxidizes PbS to PbO sinter (SO2 to acid); sinter reduced with coke in a lead blast furnace (or Imperial Smelting Furnace, co-producing zinc) to lead bullion; refined (Parkes desilvering, etc.).",
+      "final_product": "refined lead (with Ag recovery)",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Sintering",
+        "Roasting",
+        "Smelting",
+        "Refining"
+      ],
+      "notes": "Silver is the major byproduct and often the economic driver. Cross-links: leading silver source; coupled to zinc via ISP.",
+      "group": "base-metals"
+    },
+    {
+      "mineral": "Sphalerite",
+      "formula": "(Zn,Fe)S",
+      "commodity": "Zinc",
+      "byproducts": [
+        "Cd",
+        "In",
+        "Ge",
+        "Ga"
+      ],
+      "geology": "Zinc sulfide (ZnS with Fe substitution); the primary zinc ore (~95% of primary zinc), in Pb-Zn-Ag hydrothermal, SEDEX and MVT deposits.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation"
+      ],
+      "intermediate": "zinc concentrate -> calcine (ZnO)",
+      "extraction": "RLE (dominant, ~85%+): roast concentrate to ZnO calcine (SO2 to sulfuric acid), leach calcine in spent sulfuric electrolyte, purify (cement out Cu/Cd/Co), electrowin zinc onto aluminium cathodes. Minority pyrometallurgical ISP route.",
+      "final_product": "special-high-grade zinc (cathode / ISP slab)",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Roasting",
+        "Leaching",
+        "Precipitation",
+        "Electrowinning"
+      ],
+      "notes": "Cross-links: THE dominant source of Cd, In and Ge (tech metals), plus Ga. Pb/Ag report to residues in mixed ores.",
+      "group": "base-metals"
+    },
+    {
+      "mineral": "Smithsonite",
+      "formula": "ZnCO3",
+      "commodity": "Zinc",
+      "byproducts": [
+        "Cd"
+      ],
+      "geology": "Zinc carbonate; secondary mineral in oxidized zones of zinc deposits ('dry bone' / calamine).",
+      "beneficiation": [
+        "Crushing",
+        "Grinding"
+      ],
+      "intermediate": "calcine / zinc sulfate leach solution",
+      "extraction": "Calcination to ZnO then acid leach, purification and electrowinning (fed into the hydromet circuit); or pyrometallurgical reduction.",
+      "final_product": "zinc metal / zinc oxide",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "Calcination",
+        "Leaching",
+        "Electrowinning"
+      ],
+      "notes": "Oxidized/secondary zinc ore; historically 'calamine'.",
+      "group": "base-metals"
+    },
+    {
+      "mineral": "Hemimorphite",
+      "formula": "Zn4Si2O7(OH)2·H2O",
+      "commodity": "Zinc",
+      "byproducts": [],
+      "geology": "Zinc silicate; oxidized zone of zinc deposits, also called calamine with smithsonite.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding"
+      ],
+      "intermediate": "zinc sulfate leach solution (ZnSO4)",
+      "extraction": "Acid leach, solution purification, then electrowinning.",
+      "final_product": "zinc metal",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "Leaching",
+        "Precipitation",
+        "Electrowinning"
+      ],
+      "notes": "Silicate oxide ore; requires silica management in the leach circuit.",
+      "group": "base-metals"
+    },
+    {
+      "mineral": "Cassiterite",
+      "formula": "SnO2",
+      "commodity": "Tin",
+      "byproducts": [
+        "Nb",
+        "Ta",
+        "W"
+      ],
+      "geology": "Tin(IV) oxide; the only significant tin ore (78.8% Sn), in granite-associated hard-rock veins/greisens and alluvial (placer) deposits.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "MagneticSeparation"
+      ],
+      "intermediate": "tin concentrate (SnO2 ~70%+)",
+      "extraction": "Gravity concentration exploits high SG (~7); magnetic separation rejects Fe/W minerals. Concentrate reduced by two-stage carbothermic smelting with coal/coke, then thermal/electrolytic refining.",
+      "final_product": "refined tin metal",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "MagneticSeparation",
+        "CarbothermicReduction",
+        "Refining"
+      ],
+      "notes": "Dense and inert, so gravity-concentrated (placers need little grinding). Hard-rock concentrates may carry Nb/Ta/W byproducts.",
+      "group": "base-metals"
+    },
+    {
+      "mineral": "Phosphate rock (fluorapatite)",
+      "formula": "Ca5(PO4)3F (unit cell Ca10(PO4)6F2)",
+      "commodity": "P2O5 / phosphoric acid",
+      "byproducts": [
+        "phosphogypsum (CaSO4)",
+        "fluosilicic acid (H2SiF6)",
+        "rare earth elements (REE)",
+        "uranium",
+        "cadmium"
+      ],
+      "geology": "Sedimentary (marine) and igneous (e.g. Kola) apatite deposits; phosphorite beds. Carries F in the apatite lattice and trace REE/U.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "Washing",
+        "Screening",
+        "FrothFlotation"
+      ],
+      "intermediate": "Wet-process phosphoric acid (WPA) slurry",
+      "extraction": "Wet process: finely ground rock digested with sulfuric acid; filter off calcium sulfate (phosphogypsum) to leave phosphoric acid. F evolves as SiF4/HF, recovered as H2SiF6; REE recoverable from WPA liquor.",
+      "final_product": "Phosphoric acid; MAP/DAP/TSP fertilizers",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "Washing",
+        "Screening",
+        "FrothFlotation",
+        "Leaching(AcidPurification)",
+        "Precipitation",
+        "Refining"
+      ],
+      "notes": "Cross-link hub: sulfuric acid feed ties to ContactProcess; F byproduct (H2SiF6) feeds fluorine chemistry; REE byproduct makes phosphate a secondary rare-earth source. Theoretical F:P2O5 ratio ~0.089.",
+      "group": "industrial-minerals"
+    },
+    {
+      "mineral": "Potash — sylvite / sylvinite",
+      "formula": "KCl (sylvite); sylvinite = KCl + NaCl",
+      "commodity": "KCl (muriate of potash) fertilizer",
+      "byproducts": [
+        "NaCl (halite tailings)",
+        "clay slimes",
+        "waste brine"
+      ],
+      "geology": "Bedded marine evaporite deposits (e.g. Saskatchewan, Urals, Zechstein); sylvinite = intergrown sylvite and halite.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Dissolution"
+      ],
+      "intermediate": "Amine-float KCl concentrate or pregnant hot brine",
+      "extraction": "Froth flotation with amine collectors separates KCl from NaCl (~95-96% KCl); OR dissolution-crystallization (hot leach) exploiting steeper KCl temperature-solubility, crystallizing KCl on cooling.",
+      "final_product": "KCl fertilizer (muriate of potash)",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Dissolution",
+        "Crystallization",
+        "Refining"
+      ],
+      "notes": "Sylvite = 63% K2O. Flotation tails carry 2.5-3% KCl loss. Alternative beneficiation: heavy-media and electrostatic separation.",
+      "group": "industrial-minerals"
+    },
+    {
+      "mineral": "Potash — carnallite",
+      "formula": "KCl·MgCl2·6H2O",
+      "commodity": "KCl fertilizer",
+      "byproducts": [
+        "MgCl2 brine",
+        "NaCl"
+      ],
+      "geology": "Late-stage marine evaporite (most soluble salts); Dead Sea, Qinghai, Zechstein.",
+      "beneficiation": [
+        "Crushing",
+        "Dissolution"
+      ],
+      "intermediate": "Potassium-saturated brine",
+      "extraction": "Hot dissolution of crushed carnallite in wash water (~100 C), evaporation, then cooling crystallization (~25 C, vacuum) to drop KCl; MgCl2 stays in mother liquor.",
+      "final_product": "KCl fertilizer",
+      "stages": [
+        "Crushing",
+        "Dissolution",
+        "Evaporation",
+        "Crystallization",
+        "Refining"
+      ],
+      "notes": "Carnallite = 17% K2O. Energy-intensive dissolution/recrystallization. MgCl2 brine byproduct can feed magnesium chemistry.",
+      "group": "industrial-minerals"
+    },
+    {
+      "mineral": "Halite (rock salt)",
+      "formula": "NaCl",
+      "commodity": "Cl2 + NaOH (+ Na)",
+      "byproducts": [
+        "H2 (cathode)",
+        "HCl (downstream)",
+        "depleted brine"
+      ],
+      "geology": "Bedded evaporite salt and salt domes; also solution-mined brine and seawater.",
+      "beneficiation": [
+        "Crushing",
+        "Dissolution",
+        "brine purification"
+      ],
+      "intermediate": "Purified ~26% NaCl brine (or molten NaCl for metallic Na)",
+      "extraction": "Chlor-alkali membrane-cell electrolysis of purified brine: Cl2 at anode, NaOH in catholyte, H2 at cathode; cation membrane passes only Na+. Molten-salt Downs cell yields metallic Na + Cl2.",
+      "final_product": "Chlorine gas + caustic soda (NaOH) + hydrogen; or metallic sodium",
+      "stages": [
+        "Crushing",
+        "Dissolution",
+        "Purification",
+        "Electrolysis(ChlorAlkali)"
+      ],
+      "notes": "TECH-ENABLING. Cl2 feeds PVC/HCl/chlorination (incl. silicon TCS step); NaOH feeds alumina/pulp/soap; HCl loops back. Salt also feeds the Solvay soda-ash process.",
+      "group": "industrial-minerals"
+    },
+    {
+      "mineral": "Trona",
+      "formula": "Na2CO3·NaHCO3·2H2O",
+      "commodity": "Na2CO3 (soda ash)",
+      "byproducts": [
+        "CO2",
+        "water vapor",
+        "insoluble gangue"
+      ],
+      "geology": "Lacustrine evaporite (e.g. Green River WY, Lake Magadi, Beypazari); ~70% Na2CO3 content.",
+      "beneficiation": [
+        "Crushing",
+        "Screening"
+      ],
+      "intermediate": "Crude soda ash (calcined trona)",
+      "extraction": "Calcine crushed trona to decompose sodium sesquicarbonate, driving off CO2 + H2O; dissolve, filter, recrystallize to purified natural soda ash.",
+      "final_product": "Natural soda ash (Na2CO3)",
+      "stages": [
+        "Crushing",
+        "Screening",
+        "Calcination",
+        "Dissolution",
+        "Crystallization",
+        "Refining"
+      ],
+      "notes": "Natural route ~30% of world soda ash. Synthetic Solvay route (~70%) uses NaCl + CaCO3 (see soda-ash-synthetic entry).",
+      "group": "industrial-minerals"
+    },
+    {
+      "mineral": "Synthetic soda ash (Solvay)",
+      "formula": "from NaCl + CaCO3",
+      "commodity": "Na2CO3 (soda ash)",
+      "byproducts": [
+        "CaCl2 (waste)",
+        "NH3 (recycled)"
+      ],
+      "geology": "No ore of its own; feeds are salt brine and limestone.",
+      "beneficiation": [],
+      "intermediate": "Sodium bicarbonate (NaHCO3) precipitate",
+      "extraction": "Solvay process: brine saturated with ammonia, then CO2 (from limestone calcination) bubbled through to precipitate NaHCO3, which is calcined (~200 C) to Na2CO3; ammonia recovered and recycled.",
+      "final_product": "Soda ash (Na2CO3)",
+      "stages": [
+        "Dissolution",
+        "Precipitation",
+        "SolvayProcess",
+        "Calcination",
+        "Refining"
+      ],
+      "notes": "Dominant (~70%) global route. Cross-links salt (chlor-alkali feedstock) and limestone (CO2 source via calcination).",
+      "group": "industrial-minerals"
+    },
+    {
+      "mineral": "Gypsum",
+      "formula": "CaSO4·2H2O",
+      "commodity": "Plaster / wallboard",
+      "byproducts": [
+        "water vapor"
+      ],
+      "geology": "Evaporite beds; also synthetic phosphogypsum and flue-gas desulfurization (FGD) gypsum.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding"
+      ],
+      "intermediate": "Hemihydrate (CaSO4·½H2O, 'stucco' / plaster of Paris)",
+      "extraction": "Calcination at 150-170 C drives off 1.5 waters: CaSO4·2H2O -> CaSO4·½H2O + 1.5 H2O. Beta form (atmospheric) for board; alpha form (autoclave) for dense high-strength plaster. Harder burn gives anhydrite.",
+      "final_product": "Plaster of Paris / gypsum wallboard",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "Calcination"
+      ],
+      "notes": "Phosphogypsum from phosphate processing is a synthetic gypsum source; rehydration (setting) reverses the dehydration.",
+      "group": "industrial-minerals"
+    },
+    {
+      "mineral": "Limestone / calcite",
+      "formula": "CaCO3",
+      "commodity": "Quicklime (CaO); cement feed",
+      "byproducts": [
+        "CO2"
+      ],
+      "geology": "Sedimentary limestone, chalk, marble; near-ubiquitous.",
+      "beneficiation": [
+        "Crushing",
+        "Screening",
+        "Washing"
+      ],
+      "intermediate": "Quicklime CaO",
+      "extraction": "Calcination ~900 C: CaCO3 -> CaO + CO2. Slaking CaO with water -> Ca(OH)2 (exothermic). With clay in rotary kiln, CaO fuses to Portland cement clinker.",
+      "final_product": "Quicklime -> slaked lime Ca(OH)2; Portland cement clinker",
+      "stages": [
+        "Crushing",
+        "Screening",
+        "Washing",
+        "Calcination",
+        "Refining"
+      ],
+      "notes": "Calcination CO2 is a feed for the Solvay process. Lime is a cross-cutting reagent (pH control, flux, flotation).",
+      "group": "industrial-minerals"
+    },
+    {
+      "mineral": "Silica (quartz)",
+      "formula": "SiO2",
+      "commodity": "Si (silicon)",
+      "byproducts": [
+        "CO/CO2",
+        "SiO2 fume (microsilica)",
+        "HCl (recycled)",
+        "SiCl4"
+      ],
+      "geology": "Quartzite, vein quartz, high-purity quartz sand; selected for low Fe/Al/B/P.",
+      "beneficiation": [
+        "Crushing",
+        "Washing",
+        "GravitySeparation"
+      ],
+      "intermediate": "Metallurgical-grade silicon (MG-Si, 98-99%) -> trichlorosilane (SiHCl3)",
+      "extraction": "(1) Carbothermic reduction: SiO2 + C (coke/coal/charcoal/woodchips) in submerged arc furnace 1500-2000 C -> MG-Si + CO. (2) MG-Si + HCl over Cu catalyst (fluidized bed) -> TCS (SiHCl3), purified by distillation. (3) Siemens process: TCS + H2 CVD onto heated Si seed rods -> ultra-pure polysilicon; HCl recycled.",
+      "final_product": "Metallurgical silicon -> solar/semiconductor polysilicon",
+      "stages": [
+        "Crushing",
+        "Washing",
+        "GravitySeparation",
+        "CarbothermicReduction",
+        "Purification",
+        "SiemensProcess",
+        "Refining"
+      ],
+      "notes": "TECH-ENABLING Si backbone for solar PV and semiconductors. HCl/chlorine step links to the chlor-alkali chain. Highly energy-intensive.",
+      "group": "industrial-minerals"
+    },
+    {
+      "mineral": "Graphite (natural flake)",
+      "formula": "C",
+      "commodity": "Spherical / purified graphite (anode)",
+      "byproducts": [
+        "silicate gangue",
+        "spent acid/alkali liquors",
+        "graphite fines"
+      ],
+      "geology": "Metamorphic flake graphite in gneiss/marble/schist; amorphous (vein) also exists.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "Screening",
+        "FrothFlotation"
+      ],
+      "intermediate": "Flake concentrate (~90-95% C)",
+      "extraction": "Froth flotation to concentrate flake; for anodes spheroidize (round flakes), then chemical purification (acid-alkali-acid: H2SO4/H2O2 -> NaOH -> HCl) and/or thermal purification to >99.9% (ideally >99.98%) C.",
+      "final_product": "Battery-grade spherical graphite anode material",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "Screening",
+        "FrothFlotation",
+        "Purification",
+        "Leaching(AcidPurification)"
+      ],
+      "notes": "Purification raises anode specific capacity (~350 vs ~280 mAh/g). Thermal purification (>2500 C) is the high-purity alternative to acid leach.",
+      "group": "industrial-minerals"
+    },
+    {
+      "mineral": "Kaolinite (china clay)",
+      "formula": "Al2Si2O5(OH)4",
+      "commodity": "Refined kaolin",
+      "byproducts": [
+        "quartz/mica rejects",
+        "iron/titanium minerals"
+      ],
+      "geology": "Weathering/alteration of feldspar and aluminosilicates; primary (residual) and secondary (sedimentary) deposits.",
+      "beneficiation": [
+        "Washing",
+        "GravitySeparation",
+        "FrothFlotation"
+      ],
+      "intermediate": "Kaolin slurry",
+      "extraction": "Wet processing: blunging, hydrocyclone/centrifuge classification, flotation to separate kaolin from feldspar/quartz, acid (bleach) treatment to remove iron staining, dewatering.",
+      "final_product": "Paper-coating / ceramic filler kaolin",
+      "stages": [
+        "Washing",
+        "GravitySeparation",
+        "FrothFlotation",
+        "Leaching(AcidPurification)"
+      ],
+      "notes": "~48% paper, ~52% ceramics/paint/rubber/other. Forms from feldspar weathering (links to feldspar).",
+      "group": "industrial-minerals"
+    },
+    {
+      "mineral": "Feldspar",
+      "formula": "(K,Na,Ca)(Al,Si)4O8",
+      "commodity": "Ceramic / glass flux",
+      "byproducts": [
+        "quartz",
+        "mica",
+        "iron minerals"
+      ],
+      "geology": "Granite, pegmatite, feldspathic sands; most abundant rock-forming mineral group.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation"
+      ],
+      "intermediate": "",
+      "extraction": "Multi-stage froth flotation (HF or HF-free) to remove mica, iron minerals, then separate feldspar from quartz; magnetic separation for iron.",
+      "final_product": "Ceramic and glass-grade feldspar",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Refining"
+      ],
+      "notes": "Acts as a flux (lowers melting point) in ceramics/glass. Can be co-separated with kaolin in fine-particle flotation.",
+      "group": "industrial-minerals"
+    },
+    {
+      "mineral": "Garnet",
+      "formula": "X3Al2(SiO4)3 (e.g. almandine Fe3Al2(SiO4)3)",
+      "commodity": "Abrasive / waterjet media",
+      "byproducts": [
+        "ilmenite",
+        "magnetite",
+        "zircon (in heavy-mineral sands)"
+      ],
+      "geology": "Metamorphic hard-rock garnet and heavy-mineral beach/alluvial sands.",
+      "beneficiation": [
+        "Crushing",
+        "Screening",
+        "GravitySeparation",
+        "magnetic separation"
+      ],
+      "intermediate": "",
+      "extraction": "Crush, size by screening, gravity (spiral/table) and magnetic separation to clean garnet from other heavy minerals; sized into abrasive grades.",
+      "final_product": "Sandblasting and waterjet-cutting abrasive",
+      "stages": [
+        "Crushing",
+        "Screening",
+        "GravitySeparation",
+        "Refining"
+      ],
+      "notes": "Brief abrasive commodity. Hardness ~7-7.5 Mohs; valued over silica sand for low free-silica dust.",
+      "group": "industrial-minerals"
+    },
+    {
+      "mineral": "Diamond",
+      "formula": "C (cubic)",
+      "commodity": "Abrasive / gemstone",
+      "byproducts": [
+        "kimberlite/lamproite gangue"
+      ],
+      "geology": "Kimberlite/lamproite pipes and alluvial placers.",
+      "beneficiation": [
+        "Crushing",
+        "GravitySeparation (dense-media)"
+      ],
+      "intermediate": "",
+      "extraction": "Dense-media separation to concentrate, then X-ray luminescence or grease-table sorting; optical/laser sorting for recovery.",
+      "final_product": "Industrial abrasive grit / cut gemstone",
+      "stages": [
+        "Crushing",
+        "GravitySeparation",
+        "Refining"
+      ],
+      "notes": "Brief abrasive entry. Hardest natural material (10 Mohs); synthetic (HPHT/CVD) diamond dominates abrasive supply.",
+      "group": "industrial-minerals"
+    },
+    {
+      "mineral": "Spodumene",
+      "formula": "LiAl(SiO3)2",
+      "commodity": "Lithium",
+      "byproducts": [
+        "Ta",
+        "Sn",
+        "feldspar",
+        "quartz"
+      ],
+      "geology": "Lithium-cesium-tantalum (LCT) granitic pegmatites; primary hard-rock Li source (Greenbushes, Pilbara).",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "MagneticSeparation"
+      ],
+      "intermediate": "beta-spodumene -> Li2SO4 liquor",
+      "extraction": "Decrepitation (alpha->beta conversion ~1050 C) then acid roast with concentrated H2SO4 ~250 C to form water-soluble Li2SO4, water leach, remove Mg/Ca/Fe, precipitate Li2CO3 with Na2CO3 (or convert to LiOH).",
+      "final_product": "Li2CO3 / LiOH.H2O",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "MagneticSeparation",
+        "Decrepitation",
+        "Roasting(AcidRoast)",
+        "Leaching",
+        "Precipitation"
+      ],
+      "notes": "Formula equivalently LiAlSi2O6. Dominant hard-rock route; beta phase expands ~30% making ore acid-reactive.",
+      "group": "light-battery-tech"
+    },
+    {
+      "mineral": "Petalite",
+      "formula": "LiAlSi4O10",
+      "commodity": "Lithium",
+      "byproducts": [],
+      "geology": "Granitic pegmatites; lower Li grade than spodumene, prized for low-iron glass/ceramics.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation"
+      ],
+      "intermediate": "beta-phase -> Li2SO4",
+      "extraction": "Decrepitation then sulfuric acid roast, water leach and precipitation similar to spodumene.",
+      "final_product": "Li2CO3 / LiOH",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Decrepitation",
+        "Roasting(AcidRoast)",
+        "Leaching",
+        "Precipitation"
+      ],
+      "notes": "Minor hard-rock Li source.",
+      "group": "light-battery-tech"
+    },
+    {
+      "mineral": "Lepidolite",
+      "formula": "K(Li,Al)3(Si,Al)4O10(F,OH)2",
+      "commodity": "Lithium",
+      "byproducts": [
+        "Rb",
+        "Cs",
+        "K"
+      ],
+      "geology": "Li-mica in evolved pegmatites; carries rubidium and cesium credits.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation"
+      ],
+      "intermediate": "Li2SO4 / LiCl liquor",
+      "extraction": "Sulfate or chloride roast, leach, solvent extraction / ion exchange for Rb/Cs separation, precipitate Li2CO3.",
+      "final_product": "Li2CO3 / LiOH",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Roasting(AcidRoast)",
+        "Leaching",
+        "SolventExtraction",
+        "IonExchange",
+        "Precipitation"
+      ],
+      "notes": "Fluorine content complicates processing; Rb/Cs recovered as byproducts.",
+      "group": "light-battery-tech"
+    },
+    {
+      "mineral": "Continental brine",
+      "formula": "Li+ (in Na/K/Mg chloride brine)",
+      "commodity": "Lithium",
+      "byproducts": [
+        "K (KCl)",
+        "B",
+        "Mg"
+      ],
+      "geology": "Closed-basin salars (Atacama, Hombre Muerto, Uyuni); most abundant Li resource.",
+      "beneficiation": [
+        "Evaporation(Brine)"
+      ],
+      "intermediate": "concentrated LiCl brine",
+      "extraction": "Solar evaporation ponds concentrate brine (>90% water lost), remove Mg/Ca by precipitation, then precipitate battery-grade Li2CO3 with Na2CO3. DLE/ion-exchange sorption is an emerging alternative.",
+      "final_product": "Li2CO3 (battery grade)",
+      "stages": [
+        "Evaporation(Brine)",
+        "Precipitation",
+        "IonExchange"
+      ],
+      "notes": "Salar de Atacama supplies >40% of global lithium.",
+      "group": "light-battery-tech"
+    },
+    {
+      "mineral": "Beryl",
+      "formula": "Be3Al2Si6O18",
+      "commodity": "Beryllium",
+      "byproducts": [],
+      "geology": "Granitic pegmatites and some metamorphic rocks; ~4-5% Be in industrial beryl.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding"
+      ],
+      "intermediate": "BeSO4 liquor",
+      "extraction": "Melt and quench (frit) to make ore acid-reactive, grind, react with H2SO4, leach, solvent extraction, precipitate Be(OH)2.",
+      "final_product": "Be(OH)2 -> Be metal / BeO / Cu-Be alloy",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "Roasting(AcidRoast)",
+        "Leaching",
+        "SolventExtraction",
+        "Precipitation"
+      ],
+      "notes": "Beryl must be fritted/quenched before acid attack; inert otherwise.",
+      "group": "light-battery-tech"
+    },
+    {
+      "mineral": "Bertrandite",
+      "formula": "Be4Si2O7(OH)2",
+      "commodity": "Beryllium",
+      "byproducts": [],
+      "geology": "Volcanic tuff deposits (Spor Mountain, Utah); dominant mined Be source despite low grade (<0.5% Be).",
+      "beneficiation": [
+        "Crushing",
+        "FrothFlotation"
+      ],
+      "intermediate": "BeSO4 liquor",
+      "extraction": "Sulfuric acid leach near boiling, solvent extraction (D2EHPA in kerosene), ammonium carbonate complexation, precipitate Be(OH)2 (SX-carbonate process).",
+      "final_product": "Be(OH)2",
+      "stages": [
+        "Crushing",
+        "FrothFlotation",
+        "Leaching",
+        "SolventExtraction",
+        "Precipitation"
+      ],
+      "notes": "Leached directly without fritting, unlike beryl.",
+      "group": "light-battery-tech"
+    },
+    {
+      "mineral": "Columbite-tantalite (coltan)",
+      "formula": "(Fe,Mn)(Ta,Nb)2O6",
+      "commodity": "Tantalum & Niobium",
+      "byproducts": [
+        "Sn",
+        "Fe",
+        "Mn",
+        "Ti"
+      ],
+      "geology": "LCT pegmatites and alluvial placers; also recovered from tin slags.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "MagneticSeparation"
+      ],
+      "intermediate": "H2TaF7 / H2NbF7 fluoride complexes",
+      "extraction": "Digest concentrate in hydrofluoric acid to form soluble heptafluoride complexes, solvent extraction with MIBK separates Ta from Nb, precipitate K2TaF7 / Ta2O5 and Nb2O5, refine to metal.",
+      "final_product": "Ta / Nb metal, Ta2O5, Nb2O5",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "MagneticSeparation",
+        "Leaching",
+        "SolventExtraction",
+        "Precipitation",
+        "Refining"
+      ],
+      "notes": "Columbite is Nb-rich, tantalite Ta-rich; HF + MIBK SX is the standard industrial separation.",
+      "group": "light-battery-tech"
+    },
+    {
+      "mineral": "Pyrochlore",
+      "formula": "NaCaNb2O6F",
+      "commodity": "Niobium",
+      "byproducts": [],
+      "geology": "Carbonatite complexes (Araxa Brazil, Niobec Canada); dominant Nb source.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "MagneticSeparation"
+      ],
+      "intermediate": "Nb2O5 concentrate / ferroniobium",
+      "extraction": "Concentrate reduced aluminothermically or silicothermically with Fe2O3 to ferroniobium for steel; HF route gives purified Nb2O5/Nb metal.",
+      "final_product": "Ferroniobium; Nb2O5 / Nb metal",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "MagneticSeparation",
+        "SilicothermicReduction",
+        "Refining"
+      ],
+      "notes": "Bulk of world Nb is sold as FeNb for HSLA steel; formula approx (Na,Ca)2Nb2O6(OH,F).",
+      "group": "light-battery-tech"
+    },
+    {
+      "mineral": "Magnesite",
+      "formula": "MgCO3",
+      "commodity": "Magnesium",
+      "byproducts": [],
+      "geology": "Sedimentary/hydrothermal carbonate deposits; also refractory MgO source.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "Washing"
+      ],
+      "intermediate": "MgO (calcined magnesia)",
+      "extraction": "Calcine to MgO then silicothermic (Pidgeon) reduction with ferrosilicon under vacuum ~1200 C; Mg vapor condenses as crown metal.",
+      "final_product": "Mg metal",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "Washing",
+        "Calcination",
+        "SilicothermicReduction"
+      ],
+      "notes": "Alternative raw material to dolomite in the Pidgeon process.",
+      "group": "light-battery-tech"
+    },
+    {
+      "mineral": "Dolomite",
+      "formula": "CaMg(CO3)2",
+      "commodity": "Magnesium",
+      "byproducts": [],
+      "geology": "Abundant sedimentary carbonate; main Pidgeon-process feedstock.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding"
+      ],
+      "intermediate": "CaO.MgO (dolime)",
+      "extraction": "Calcine to dolime then silicothermic reduction with ferrosilicon under vacuum (Pidgeon); CaO scavenges silica. Alternatively convert to MgCl2 and electrolyze.",
+      "final_product": "Mg metal",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "Calcination",
+        "SilicothermicReduction",
+        "Refining"
+      ],
+      "notes": ">80% of global primary Mg is Pidgeon silicothermic from dolomite.",
+      "group": "light-battery-tech"
+    },
+    {
+      "mineral": "Seawater / brine (Mg)",
+      "formula": "Mg2+ (in solution)",
+      "commodity": "Magnesium",
+      "byproducts": [
+        "Br",
+        "K"
+      ],
+      "geology": "Seawater, salt-lake and well brines; effectively inexhaustible Mg source.",
+      "beneficiation": [],
+      "intermediate": "Mg(OH)2 -> anhydrous MgCl2",
+      "extraction": "Precipitate Mg(OH)2 with lime/dolime, convert to MgCl2 with HCl, dehydrate, electrolyze molten MgCl2 to Mg metal + Cl2.",
+      "final_product": "Mg metal + Cl2",
+      "stages": [
+        "Precipitation",
+        "Chlorination",
+        "Electrolysis"
+      ],
+      "notes": "Classic electrolytic route (Dow); power-intensive, used where cheap electricity/brine exist.",
+      "group": "light-battery-tech"
+    },
+    {
+      "mineral": "Pollucite",
+      "formula": "CsAlSi2O6",
+      "commodity": "Caesium",
+      "byproducts": [
+        "Rb",
+        "K",
+        "Na"
+      ],
+      "geology": "Rare mineral in zoned LCT pegmatites (Tanco, Manitoba; Bikita, Zimbabwe); primary Cs source.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding"
+      ],
+      "intermediate": "CsCl / Cs alum liquor",
+      "extraction": "Acid digestion (HCl or H2SO4) and leach, remove silica, precipitate/ion-exchange to CsCl or Cs alum; Rb separated by fractional crystallisation or SX.",
+      "final_product": "CsCl, cesium formate; Cs metal",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "Leaching",
+        "IonExchange",
+        "Precipitation"
+      ],
+      "notes": "Hydrated form (Cs,Na)AlSi2O6.H2O; cesium formate drilling fluid is a key product. Rb has no economic primary ore and is recovered here and from lepidolite.",
+      "group": "light-battery-tech"
+    },
+    {
+      "mineral": "Zircon",
+      "formula": "ZrSiO4",
+      "commodity": "Zirconium (and Hafnium)",
+      "byproducts": [
+        "Hf",
+        "SiO2"
+      ],
+      "geology": "Heavy-mineral-sand placers alongside ilmenite/rutile; the primary Zr source.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "MagneticSeparation"
+      ],
+      "intermediate": "ZrCl4 / HfCl4",
+      "extraction": "Carbothermic reduction to ZrC/ZrN then chlorination to ZrCl4 (with ~2% HfCl4); solvent extraction (MIBK-thiocyanate or TBP) separates Hf for nuclear-grade Zr; Kroll (Mg) reduction of tetrachloride to sponge, then refine.",
+      "final_product": "Zr sponge metal; Hf metal; ZrO2",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "MagneticSeparation",
+        "Chlorination",
+        "SolventExtraction",
+        "KrollProcess",
+        "Refining"
+      ],
+      "notes": "Hf (~2% of Zr) must be removed for reactor-grade Zr due to high neutron cross-section; most zircon used as sand/opacifier/ZrO2 rather than reduced.",
+      "group": "light-battery-tech"
+    },
+    {
+      "mineral": "(byproduct of bauxite / zinc refining)",
+      "formula": "Ga (no primary ore)",
+      "commodity": "Gallium",
+      "byproducts": [],
+      "geology": "No primary ore; recovered from Bayer alumina liquor and zinc processing.",
+      "beneficiation": [],
+      "intermediate": "crude Ga from liquor",
+      "extraction": "Recovered by solvent extraction / ion exchange / electrolysis from Bayer liquor or zinc residues.",
+      "final_product": "Ga metal",
+      "stages": [
+        "SolventExtraction",
+        "IonExchange",
+        "Electrowinning"
+      ],
+      "notes": "Cross-link only: model as byproduct of aluminium (bauxite) and zinc chains, not an independent ore.",
+      "group": "light-battery-tech"
+    },
+    {
+      "mineral": "(byproduct of zinc refining)",
+      "formula": "Ge, In (no primary ore)",
+      "commodity": "Germanium & Indium",
+      "byproducts": [],
+      "geology": "No primary ore; recovered from sphalerite (ZnS) refining residues and flue dusts (Ge also from coal fly ash).",
+      "beneficiation": [],
+      "intermediate": "leach/residue concentrates",
+      "extraction": "Recovered from zinc refining residues by leaching, solvent extraction and precipitation.",
+      "final_product": "Ge / In metal",
+      "stages": [
+        "Leaching",
+        "SolventExtraction",
+        "Precipitation"
+      ],
+      "notes": "Cross-link only: byproduct of the zinc chain.",
+      "group": "light-battery-tech"
+    },
+    {
+      "mineral": "(byproduct of copper refining)",
+      "formula": "Se, Te (no primary ore)",
+      "commodity": "Selenium & Tellurium",
+      "byproducts": [],
+      "geology": "No primary ore; recovered from copper electrorefining anode slimes.",
+      "beneficiation": [],
+      "intermediate": "anode slime concentrate",
+      "extraction": "Roast/leach copper anode slimes, precipitate and refine Se and Te.",
+      "final_product": "Se / Te",
+      "stages": [
+        "Roasting(AcidRoast)",
+        "Leaching",
+        "Precipitation",
+        "Refining"
+      ],
+      "notes": "Cross-link only: byproduct of the copper chain.",
+      "group": "light-battery-tech"
+    },
+    {
+      "mineral": "(byproduct of molybdenite roasting)",
+      "formula": "Re (no primary ore)",
+      "commodity": "Rhenium",
+      "byproducts": [],
+      "geology": "No primary ore; recovered from MoS2 roaster flue dust, itself a Cu-porphyry byproduct.",
+      "beneficiation": [],
+      "intermediate": "ammonium perrhenate (NH4ReO4)",
+      "extraction": "Scrub roaster flue gas, recover perrhenate by ion exchange/solvent extraction, reduce to Re metal.",
+      "final_product": "Re metal / NH4ReO4",
+      "stages": [
+        "Roasting(AcidRoast)",
+        "IonExchange",
+        "SolventExtraction",
+        "Refining"
+      ],
+      "notes": "Cross-link only: byproduct of the molybdenum/copper chain.",
+      "group": "light-battery-tech"
+    },
+    {
+      "mineral": "Native gold",
+      "formula": "Au",
+      "commodity": "Gold",
+      "byproducts": [
+        "Silver"
+      ],
+      "geology": "Native metal in hydrothermal quartz veins, placers, and disseminated epithermal/orogenic deposits; often alloyed with silver.",
+      "beneficiation": [
+        "GravitySeparation",
+        "FrothFlotation"
+      ],
+      "intermediate": "gold concentrate (gravity/flotation)",
+      "extraction": "Cyanide leach (CIL/CIP) then carbon adsorption or Merrill-Crowe zinc cementation; smelt to dore; Miller chlorination then Wohlwill electrorefining to fine gold.",
+      "final_product": "Fine gold (99.99%)",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "FrothFlotation",
+        "Leaching(Cyanidation)",
+        "CarbonAdsorption",
+        "Smelting",
+        "Electrorefining",
+        "Refining"
+      ],
+      "notes": "Free-milling gold. Carbon adsorption (CIL/CIP) is the default modern recovery; Merrill-Crowe used when silver is high. Dore is impure Au-Ag bullion.",
+      "group": "precious-pgm"
+    },
+    {
+      "mineral": "Electrum",
+      "formula": "(Au,Ag)",
+      "commodity": "Gold + Silver",
+      "byproducts": [
+        "Silver"
+      ],
+      "geology": "Naturally occurring gold-silver alloy (20-55% Ag) in epithermal vein systems; a primary source of byproduct silver in gold ores.",
+      "beneficiation": [
+        "GravitySeparation",
+        "FrothFlotation"
+      ],
+      "intermediate": "gold-silver concentrate",
+      "extraction": "Cyanidation; Merrill-Crowe favored due to high silver load; smelt to dore; parting / electrorefining splits Au and Ag.",
+      "final_product": "Fine gold + fine silver",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "FrothFlotation",
+        "Leaching(Cyanidation)",
+        "Precipitation(MerrillCrowe)",
+        "Smelting",
+        "Electrorefining",
+        "Refining"
+      ],
+      "notes": "High silver content overloads carbon-stripping circuits, so Merrill-Crowe zinc cementation is preferred over carbon adsorption. Cross-links gold and silver commodities.",
+      "group": "precious-pgm"
+    },
+    {
+      "mineral": "Aurostibite",
+      "formula": "AuSb2",
+      "commodity": "Gold",
+      "byproducts": [
+        "Antimony"
+      ],
+      "geology": "Gold antimonide (pyrite group), ~44.7% Au / 55.3% Sb; forms in post-gold antimony mineralization, e.g. Darasun. Contains no silver.",
+      "beneficiation": [
+        "FrothFlotation"
+      ],
+      "intermediate": "Sb-bearing gold concentrate",
+      "extraction": "Roast to volatilize/oxidize antimony, then cyanidation and carbon adsorption; smelt to dore and refine.",
+      "final_product": "Fine gold",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Roasting",
+        "Leaching(Cyanidation)",
+        "CarbonAdsorption",
+        "Smelting",
+        "Refining"
+      ],
+      "notes": "Antimony must be removed (roasting) before cyanidation; antimony reports as a byproduct off-gas/oxide stream.",
+      "group": "precious-pgm"
+    },
+    {
+      "mineral": "Refractory gold in arsenopyrite",
+      "formula": "Au locked in FeAsS",
+      "commodity": "Gold",
+      "byproducts": [
+        "Arsenic",
+        "Iron",
+        "Sulfur"
+      ],
+      "geology": "Submicroscopic/invisible gold finely disseminated and encapsulated within arsenopyrite; direct cyanidation fails without oxidative pretreatment.",
+      "beneficiation": [
+        "FrothFlotation"
+      ],
+      "intermediate": "refractory sulfide gold concentrate",
+      "extraction": "Oxidative pretreatment (pressure oxidation OR bio-oxidation OR roasting) to destroy the sulfide lattice and liberate gold; then cyanidation, CIL/carbon adsorption, dore, refining.",
+      "final_product": "Fine gold",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "PressureOxidation",
+        "Leaching(Cyanidation)",
+        "CarbonAdsorption",
+        "Smelting",
+        "Refining"
+      ],
+      "notes": "Core refractory-gold gameplay branch. Three competing pretreatments: Roasting (As to As2O3, S to SO2), POX (autoclave 1-3h, up to 99.5% recovery), BioOxidation (bacterial, cheap but slow, ~2% lower recovery). Arsenic is the key hazardous byproduct.",
+      "group": "precious-pgm"
+    },
+    {
+      "mineral": "Refractory gold in pyrite",
+      "formula": "Au locked in FeS2",
+      "commodity": "Gold",
+      "byproducts": [
+        "Sulfur",
+        "Iron"
+      ],
+      "geology": "Fine gold encapsulated in pyrite; refractory to direct cyanidation; common in sulfidic orogenic/Carlin-type ores.",
+      "beneficiation": [
+        "FrothFlotation"
+      ],
+      "intermediate": "refractory pyritic gold concentrate",
+      "extraction": "Pressure oxidation / bio-oxidation / roasting to break down pyrite; then cyanidation, CIL/carbon adsorption, dore, refining.",
+      "final_product": "Fine gold",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "BioOxidation",
+        "Leaching(Cyanidation)",
+        "CarbonAdsorption",
+        "Smelting",
+        "Refining"
+      ],
+      "notes": "Refractory-gold branch. Same POX/BIOX/Roast fork as arsenopyrite; sulfur reports as SO2 (roasting) or sulfuric acid (POX/BIOX). Alternate pretreatment stages are PressureOxidation or Roasting.",
+      "group": "precious-pgm"
+    },
+    {
+      "mineral": "Argentite / Acanthite",
+      "formula": "Ag2S",
+      "commodity": "Silver",
+      "byproducts": [
+        "Lead",
+        "Zinc",
+        "Copper"
+      ],
+      "geology": "Silver sulfide; argentite is the cubic high-temperature form, acanthite the monoclinic form stable below 177C. Chief primary silver ore mineral, but most silver is byproduct of Pb/Zn/Cu ores.",
+      "beneficiation": [
+        "FrothFlotation"
+      ],
+      "intermediate": "silver concentrate / Pb-Ag-Zn-Cu concentrate; or lead-smelter bullion",
+      "extraction": "Primary: cyanidation then Merrill-Crowe to dore. Byproduct route: recovered in lead smelting, Parkes desilvering (zinc added, Ag-Zn crust skimmed), cupellation, then Moebius electrorefining.",
+      "final_product": "Fine silver (99.9%)",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Leaching(Cyanidation)",
+        "Precipitation(MerrillCrowe)",
+        "Smelting",
+        "Cupellation",
+        "Electrorefining"
+      ],
+      "notes": "Silver is overwhelmingly byproduct-driven from Pb/Zn/Cu refining. Parkes process exploits silver's higher solubility in zinc; cupellation oxidizes lead to litharge; Moebius is the silver-nitrate electrorefining analogue of Wohlwill.",
+      "group": "precious-pgm"
+    },
+    {
+      "mineral": "Native silver",
+      "formula": "Ag",
+      "commodity": "Silver",
+      "byproducts": [
+        "Base metals"
+      ],
+      "geology": "Native metal in oxidized zones of hydrothermal deposits; relatively minor compared with byproduct silver from base-metal ores.",
+      "beneficiation": [
+        "GravitySeparation",
+        "FrothFlotation"
+      ],
+      "intermediate": "silver concentrate / dore",
+      "extraction": "Cyanidation then Merrill-Crowe to dore; cupellation and/or Moebius electrorefining to fine silver.",
+      "final_product": "Fine silver",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "FrothFlotation",
+        "Leaching(Cyanidation)",
+        "Precipitation(MerrillCrowe)",
+        "Smelting",
+        "Electrorefining"
+      ],
+      "notes": "Like gold, benefits from gravity recovery of coarse metal. Still frequently co-produced with base metals.",
+      "group": "precious-pgm"
+    },
+    {
+      "mineral": "Sperrylite",
+      "formula": "PtAs2",
+      "commodity": "Platinum (PGMs)",
+      "byproducts": [
+        "Palladium",
+        "Rhodium",
+        "Ruthenium",
+        "Iridium",
+        "Osmium",
+        "Nickel",
+        "Copper",
+        "Cobalt",
+        "Arsenic",
+        "Sulfur"
+      ],
+      "geology": "Platinum arsenide; principal Pt mineral in Bushveld (Merensky/UG2) and Norilsk/Sudbury Ni-Cu sulfide ores. Associated with base-metal sulfides.",
+      "beneficiation": [
+        "GravitySeparation",
+        "FrothFlotation"
+      ],
+      "intermediate": "Ni-Cu-PGM sulfide flotation concentrate; then PGM matte",
+      "extraction": "Flotation (xanthate/dithiophosphate, pH 7.5-9) to Ni-Cu-PGM concentrate; smelt to PGM-rich matte; convert and base-metal leach to strip Ni/Cu/Co; pressure-oxidation leach of residue; solvent extraction + ion exchange + selective precipitation to separate the six PGMs; refine.",
+      "final_product": "Refined platinum + co-PGMs",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "FrothFlotation",
+        "Smelting",
+        "Leaching(Cyanidation)",
+        "PressureOxidation",
+        "SolventExtraction",
+        "IonExchange",
+        "Precipitation(MerrillCrowe)",
+        "Refining"
+      ],
+      "notes": "Deepest refining chain in scope. PGMs are co-products, never recovered alone. Base metals (Ni/Cu/Co) stripped at the matte-leach stage cross-link to the base-metals catalog; arsenic is a sperrylite-specific byproduct.",
+      "group": "precious-pgm"
+    },
+    {
+      "mineral": "Cooperite",
+      "formula": "PtS",
+      "commodity": "Platinum (PGMs)",
+      "byproducts": [
+        "Palladium",
+        "Rhodium",
+        "Ruthenium",
+        "Iridium",
+        "Osmium",
+        "Nickel",
+        "Copper"
+      ],
+      "geology": "Platinum sulfide; abundant PGE sulfide in Bushveld Merensky/UG2 reefs alongside braggite and laurite.",
+      "beneficiation": [
+        "GravitySeparation",
+        "FrothFlotation"
+      ],
+      "intermediate": "PGM-bearing sulfide concentrate; then PGM matte",
+      "extraction": "Flotation with Ni-Cu sulfides; smelt to matte; base-metal removal; PGM refining via dissolution-precipitation, solvent extraction and ion exchange.",
+      "final_product": "Refined platinum + co-PGMs",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "FrothFlotation",
+        "Smelting",
+        "PressureOxidation",
+        "SolventExtraction",
+        "IonExchange",
+        "Precipitation(MerrillCrowe)",
+        "Refining"
+      ],
+      "notes": "Co-produced with all PGMs and base-metal sulfides; shares the Merensky/UG2 flotation-smelt-refine chain with braggite and sperrylite.",
+      "group": "precious-pgm"
+    },
+    {
+      "mineral": "Braggite",
+      "formula": "(Pt,Pd,Ni)S",
+      "commodity": "Platinum + Palladium (PGMs)",
+      "byproducts": [
+        "Rhodium",
+        "Ruthenium",
+        "Iridium",
+        "Osmium",
+        "Nickel",
+        "Copper"
+      ],
+      "geology": "Pt-Pd-Ni sulfide; major PGE sulfide of the Bushveld UG2 reef; carries significant palladium.",
+      "beneficiation": [
+        "GravitySeparation",
+        "FrothFlotation"
+      ],
+      "intermediate": "PGM-bearing sulfide concentrate; then PGM matte",
+      "extraction": "Flotation; smelt to matte; base-metal leach; solvent extraction / ion exchange / precipitation refining chain to separate Pt and Pd.",
+      "final_product": "Refined platinum/palladium + co-PGMs",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "FrothFlotation",
+        "Smelting",
+        "PressureOxidation",
+        "SolventExtraction",
+        "IonExchange",
+        "Precipitation(MerrillCrowe)",
+        "Refining"
+      ],
+      "notes": "Ni in the lattice ties it directly to the nickel base-metal circuit; main palladium-bearing primary PGM in UG2.",
+      "group": "precious-pgm"
+    },
+    {
+      "mineral": "Cinnabar",
+      "formula": "HgS",
+      "commodity": "Mercury",
+      "byproducts": [
+        "Sulfur"
+      ],
+      "geology": "Mercury(II) sulfide, the near-exclusive mercury ore; forms in low-temperature hydrothermal veins and hot-spring deposits, sometimes with stibnite.",
+      "beneficiation": [
+        "Crushing",
+        "GravitySeparation",
+        "FrothFlotation"
+      ],
+      "intermediate": "mercury concentrate / lump ore",
+      "extraction": "Roasting/retorting at 500-600C: HgS + O2 yields Hg vapor + SO2; mercury vapor condensed on cooling and collected; distillation for final purity.",
+      "final_product": "Liquid mercury (90-95% recovery)",
+      "stages": [
+        "Crushing",
+        "GravitySeparation",
+        "FrothFlotation",
+        "Roasting",
+        "Retorting",
+        "Refining"
+      ],
+      "notes": "Distinctive short chain: oxidative roast/retort volatilizes mercury, which is condensed. Rotary kilns/multiple-hearth furnaces for large tonnage, externally heated retorts for small/fine ore. Emits SO2; can co-occur with antimony (stibnite).",
+      "group": "precious-pgm"
+    },
+    {
+      "mineral": "Bastnäsite",
+      "formula": "(Ce,La,Nd)CO3F",
+      "commodity": "Mixed light-REE oxides (Ce, La, Nd, Pr)",
+      "byproducts": [
+        "Fluoride",
+        "Barite/calcite gangue"
+      ],
+      "geology": "Fluorocarbonate; main LREE ore. Mountain Pass (California) carbonatite and Bayan Obo (Inner Mongolia, China) where it occurs with iron ore and monazite (bastnäsite:monazite ~9:1 to 1:1). ~65-75% REO.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "GravitySeparation",
+        "MagneticSeparation"
+      ],
+      "intermediate": "~60% REO flotation concentrate -> roasted/calcined -> acid or alkaline leach -> mixed RE chloride/nitrate liquor",
+      "extraction": "Roasting/Calcination to drive off CO2 and oxidize Ce, then Leaching to solution, then multi-stage SolventExtraction cascade to individual REO, then MoltenSaltElectrolysis to metal",
+      "final_product": "Individual light-REE metals (La, Ce, Pr, Nd); NdPr feed for NdFeB magnets",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Roasting",
+        "Calcination",
+        "Leaching",
+        "SolventExtraction",
+        "Precipitation",
+        "Calcination(toOxide)",
+        "MoltenSaltElectrolysis",
+        "Alloying"
+      ],
+      "notes": "Flagship LREE ore. Comes out as a MIXED concentrate - element separation happens later in the SX cascade, not in beneficiation. Low Th compared to monazite.",
+      "group": "rare-earths"
+    },
+    {
+      "mineral": "Monazite",
+      "formula": "(Ce,La,Nd,Th)PO4",
+      "commodity": "Mixed light-REE oxides + thorium",
+      "byproducts": [
+        "Thorium (radioactive)",
+        "Phosphate (-> phosphoric acid/fertilizer)",
+        "Uranium (minor)"
+      ],
+      "geology": "REE phosphate; dense and paramagnetic, concentrates in heavy-mineral sands and carbonatites. LREE-dominant but notable Nd. ~55-60% REO. Carries 5-10%+ ThO2 -> radioactive handling required.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "MagneticSeparation",
+        "FrothFlotation"
+      ],
+      "intermediate": "RE phosphate cracked by hot NaOH (AlkalineBake, 120-175 C) or H2SO4 (AcidBake, 200-300 C) -> dissolve -> precipitate Th(OH)4 out -> mixed RE liquor",
+      "extraction": "Cracking(AlkalineBake or AcidBake) to destroy phosphate matrix and liberate Th + REEs, dissolution, selective Th removal, then SolventExtraction cascade to individual REO, then electrolysis / Ca reduction",
+      "final_product": "Individual light-REE metals; thorium precipitate sequestered/stored",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "MagneticSeparation",
+        "FrothFlotation",
+        "Cracking(AlkalineBake/AcidBake)",
+        "Leaching",
+        "Precipitation",
+        "SolventExtraction",
+        "Precipitation",
+        "Calcination(toOxide)",
+        "MoltenSaltElectrolysis",
+        "MetallothermicReduction(Ca)",
+        "Alloying"
+      ],
+      "notes": "Also a thorium source. Radioactivity/Th handling is mandatory and gameplay-relevant: Th(OH)4 is selectively precipitated (pH control with NaOH/NH4OH) before REEs proceed. Cross-links to the minor/radioactive group (Th).",
+      "group": "rare-earths"
+    },
+    {
+      "mineral": "Xenotime",
+      "formula": "YPO4",
+      "commodity": "Heavy-REE-enriched oxides (Y, Dy, Yb, Er, Gd)",
+      "byproducts": [
+        "Thorium/Uranium (minor)",
+        "Phosphate"
+      ],
+      "geology": "Yttrium phosphate, isostructural with zircon; heavy-REE enriched (Y plus mid/heavy lanthanides substitute for Y). Found in placers and granitic pegmatites. ~54-65% REO.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "MagneticSeparation",
+        "FrothFlotation"
+      ],
+      "intermediate": "Hot NaOH or H2SO4 bake (more refractory than monazite) -> dissolve -> mixed HRE liquor",
+      "extraction": "Cracking(AlkalineBake/AcidBake), Leaching, then the hardest SolventExtraction separations (adjacent heavy REEs), then MetallothermicReduction(Ca) or electrolysis",
+      "final_product": "Y, Dy, Tb, Er, Gd oxides and metals",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "MagneticSeparation",
+        "Cracking(AlkalineBake/AcidBake)",
+        "Leaching",
+        "SolventExtraction",
+        "IonExchange",
+        "Precipitation",
+        "Calcination(toOxide)",
+        "MetallothermicReduction(Ca)"
+      ],
+      "notes": "Primary hard-rock source of heavy REEs. Heavy-REE separations in the SX cascade are the most difficult of all.",
+      "group": "rare-earths"
+    },
+    {
+      "mineral": "Ion-adsorption clay",
+      "formula": "REE3+ adsorbed on kaolinite/halloysite/illite (no discrete REE mineral)",
+      "commodity": "Heavy REEs incl. Dy, Tb, Y (plus some LREE)",
+      "byproducts": [
+        "Clay",
+        "Aluminium"
+      ],
+      "geology": "Regolith-hosted deposits from weathering of granite, latitudes ~24-26 N in South China. REE3+ ions loosely adsorbed on clay surfaces - NOT a mineral lattice. Accounts for >80% of world medium/heavy REE supply; the dominant Dy/Tb/Y source.",
+      "beneficiation": [
+        "Washing"
+      ],
+      "intermediate": "In-situ / heap IonExchange leach with (NH4)2SO4 or NaCl displaces REE3+ into solution -> RE sulfate/chloride liquor -> Precipitation (oxalate/carbonate)",
+      "extraction": "IonExchange leach (no crushing or flotation needed - ions are simply exchanged off the clay), Precipitation, then SolventExtraction cascade to individual heavy REO",
+      "final_product": "Dy, Tb, Y oxides -> heavy-REE magnet additives and phosphors",
+      "stages": [
+        "Washing",
+        "IonExchange",
+        "Leaching",
+        "Precipitation",
+        "SolventExtraction",
+        "Calcination(toOxide)",
+        "MetallothermicReduction(Ca)"
+      ],
+      "notes": "The cheap, simple-to-mine but strategically vital heavy-REE source. No frothflotation/grinding - highlights that the separation (SX cascade of Dy/Tb) is the hard part, not extraction from the clay.",
+      "group": "rare-earths"
+    },
+    {
+      "mineral": "Loparite",
+      "formula": "(Na,Ca,Ce)(Ti,Nb,Ta)O3",
+      "commodity": "Ti, Nb, Ta (primary); light-REE byproduct",
+      "byproducts": [
+        "Titanium",
+        "Niobium",
+        "Tantalum",
+        "Thorium"
+      ],
+      "geology": "Complex perovskite-type oxide; Kola Peninsula (Russia) alkaline massifs. Mined mainly for Ti/Nb/Ta, with REEs as a by-product.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "MagneticSeparation"
+      ],
+      "intermediate": "Chlorination / acid crack -> separate Ti,Nb,Ta -> RE liquor",
+      "extraction": "Cracking, Leaching, SolventExtraction for the LREE byproduct stream",
+      "final_product": "Light-REE oxides (byproduct of Ti/Nb/Ta production)",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "MagneticSeparation",
+        "Cracking(AcidBake)",
+        "Leaching",
+        "SolventExtraction",
+        "Precipitation",
+        "Calcination(toOxide)"
+      ],
+      "notes": "Brief coverage - REE is a co-product here. Carries Th (radioactive group).",
+      "group": "rare-earths"
+    },
+    {
+      "mineral": "Euxenite",
+      "formula": "(Y,Ca,Ce,U,Th)(Nb,Ta,Ti)2O6",
+      "commodity": "Heavy REEs + Nb/Ta/Ti",
+      "byproducts": [
+        "Uranium",
+        "Thorium",
+        "Niobium",
+        "Tantalum",
+        "Titanium"
+      ],
+      "geology": "Brownish-black complex oxide in granitic pegmatites; Nb/Ta-dominant (vs Ti-dominant polycrase). Radioactive (U, Th).",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation"
+      ],
+      "intermediate": "Acid or alkaline crack -> RE + Nb/Ta liquor",
+      "extraction": "Cracking, Leaching, SolventExtraction",
+      "final_product": "Heavy-REE oxides + Nb/Ta",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "Cracking(AcidBake/AlkalineBake)",
+        "Leaching",
+        "SolventExtraction",
+        "Precipitation",
+        "Calcination(toOxide)"
+      ],
+      "notes": "Brief coverage. Radioactive U/Th present - links to the minor/radioactive group.",
+      "group": "rare-earths"
+    },
+    {
+      "mineral": "(separation product)",
+      "formula": "Nd",
+      "commodity": "Neodymium",
+      "byproducts": [],
+      "geology": "Separated from mixed LREE concentrate (bastnäsite/monazite) by the SX cascade; co-produced with Pr as NdPr.",
+      "beneficiation": [],
+      "intermediate": "Nd2O3",
+      "extraction": "From mixed RE liquor: SolventExtraction to isolate Nd, Precipitation (oxalate), Calcination to Nd2O3, then MoltenSaltElectrolysis in a molten NdF3-LiF fluoride bath (~1050 C); iron cathode can yield Nd-Fe alloy directly",
+      "final_product": "Nd metal / NdFeB magnet alloy",
+      "stages": [
+        "SolventExtraction",
+        "Precipitation",
+        "Calcination(toOxide)",
+        "MoltenSaltElectrolysis",
+        "Alloying"
+      ],
+      "notes": "The flagship magnet metal. NdFeB = Nd + Pr + Fe + B, with Dy/Tb added for high-temperature coercivity. Main demand driver (EV motors, wind turbines).",
+      "group": "rare-earths"
+    },
+    {
+      "mineral": "(separation product)",
+      "formula": "Pr",
+      "commodity": "Praseodymium",
+      "byproducts": [],
+      "geology": "Separated from mixed LREE concentrate; usually co-produced with Nd as 'NdPr' / didymium.",
+      "beneficiation": [],
+      "intermediate": "Pr6O11",
+      "extraction": "SolventExtraction, Precipitation, Calcination to Pr6O11, MoltenSaltElectrolysis",
+      "final_product": "Pr metal / NdPr alloy",
+      "stages": [
+        "SolventExtraction",
+        "Precipitation",
+        "Calcination(toOxide)",
+        "MoltenSaltElectrolysis",
+        "Alloying"
+      ],
+      "notes": "Magnet metal, typically sold/used together with Nd (NdPr) - the two are hard to fully separate and share end use.",
+      "group": "rare-earths"
+    },
+    {
+      "mineral": "(separation product)",
+      "formula": "Dy",
+      "commodity": "Dysprosium",
+      "byproducts": [],
+      "geology": "Heavy REE - mainly from ion-adsorption clays and xenotime. One of the HARDEST and most valuable separations.",
+      "beneficiation": [],
+      "intermediate": "Dy2O3",
+      "extraction": "Many-stage SolventExtraction (hardest heavy separations), Precipitation, Calcination to Dy2O3, MetallothermicReduction(Ca) of the fluoride",
+      "final_product": "Dy metal",
+      "stages": [
+        "SolventExtraction",
+        "IonExchange",
+        "Precipitation",
+        "Calcination(toOxide)",
+        "MetallothermicReduction(Ca)"
+      ],
+      "notes": "Critical NdFeB additive - keeps magnets coercive at high temperature. Its separation difficulty (adjacent heavy REEs) is the economic crux of the whole chain.",
+      "group": "rare-earths"
+    },
+    {
+      "mineral": "(separation product)",
+      "formula": "Sm",
+      "commodity": "Samarium",
+      "byproducts": [],
+      "geology": "Mid/light-heavy boundary REE, separated from mixed LREE concentrate.",
+      "beneficiation": [],
+      "intermediate": "Sm2O3",
+      "extraction": "SolventExtraction, Precipitation, Calcination to Sm2O3, MetallothermicReduction(Ca) (Sm is volatile - reduced with La/Ca, not easily electrowon)",
+      "final_product": "Sm metal / SmCo alloy",
+      "stages": [
+        "SolventExtraction",
+        "Precipitation",
+        "Calcination(toOxide)",
+        "MetallothermicReduction(Ca)",
+        "Alloying"
+      ],
+      "notes": "SmCo magnets (Sm + Co) for very high temperature / aerospace & defence applications.",
+      "group": "rare-earths"
+    },
+    {
+      "mineral": "(separation product)",
+      "formula": "La",
+      "commodity": "Lanthanum",
+      "byproducts": [],
+      "geology": "Lightest REE, abundant in bastnäsite/monazite; comes off early in the SX cascade.",
+      "beneficiation": [],
+      "intermediate": "La2O3",
+      "extraction": "SolventExtraction, Precipitation, Calcination to La2O3, MoltenSaltElectrolysis",
+      "final_product": "La metal / oxide",
+      "stages": [
+        "SolventExtraction",
+        "Precipitation",
+        "Calcination(toOxide)",
+        "MoltenSaltElectrolysis"
+      ],
+      "notes": "FCC petroleum-cracking catalysts and NiMH battery alloys. Cheap, high-volume.",
+      "group": "rare-earths"
+    },
+    {
+      "mineral": "(separation product)",
+      "formula": "Ce",
+      "commodity": "Cerium",
+      "byproducts": [],
+      "geology": "Most abundant REE; easily split off because Ce can be oxidized to Ce(IV) and removed selectively.",
+      "beneficiation": [],
+      "intermediate": "CeO2",
+      "extraction": "Oxidative separation / SolventExtraction, Precipitation, Calcination to CeO2 (often used as oxide directly)",
+      "final_product": "Ce metal / CeO2",
+      "stages": [
+        "SolventExtraction",
+        "Precipitation",
+        "Calcination(toOxide)",
+        "MoltenSaltElectrolysis"
+      ],
+      "notes": "Glass polishing, auto-exhaust catalysts, UV-absorbing glass. The Ce(IV) oxidation trick makes it the easiest REE to pull out of the mix.",
+      "group": "rare-earths"
+    },
+    {
+      "mineral": "(separation product)",
+      "formula": "Eu",
+      "commodity": "Europium",
+      "byproducts": [],
+      "geology": "Scarce mid-REE; separable via its reducible Eu(II) state (reduce to Eu2+, precipitate as sulfate).",
+      "beneficiation": [],
+      "intermediate": "Eu2O3",
+      "extraction": "SolventExtraction / Eu(II) reduction-precipitation, Calcination to Eu2O3",
+      "final_product": "Eu metal / Eu2O3",
+      "stages": [
+        "SolventExtraction",
+        "Precipitation",
+        "Calcination(toOxide)"
+      ],
+      "notes": "Red and blue phosphors (displays, fluorescent lighting). High value, low volume.",
+      "group": "rare-earths"
+    },
+    {
+      "mineral": "(separation product)",
+      "formula": "Y",
+      "commodity": "Yttrium",
+      "byproducts": [],
+      "geology": "Grouped with the heavy REEs; dominant element in xenotime and major component of ion-adsorption clays.",
+      "beneficiation": [],
+      "intermediate": "Y2O3",
+      "extraction": "SolventExtraction / IonExchange, Precipitation, Calcination to Y2O3, MetallothermicReduction(Ca)",
+      "final_product": "Y metal / Y2O3",
+      "stages": [
+        "SolventExtraction",
+        "IonExchange",
+        "Precipitation",
+        "Calcination(toOxide)",
+        "MetallothermicReduction(Ca)"
+      ],
+      "notes": "Phosphor host lattice, YAG, high-temperature ceramics. Behaves as a heavy REE despite low atomic number.",
+      "group": "rare-earths"
+    },
+    {
+      "mineral": "(separation product)",
+      "formula": "Tb",
+      "commodity": "Terbium",
+      "byproducts": [],
+      "geology": "Heavy REE from ion-adsorption clays and xenotime; one of the scarcest and hardest to separate.",
+      "beneficiation": [],
+      "intermediate": "Tb4O7",
+      "extraction": "Many-stage SolventExtraction (very hard heavy separation), Precipitation, Calcination to Tb4O7, MetallothermicReduction(Ca)",
+      "final_product": "Tb metal",
+      "stages": [
+        "SolventExtraction",
+        "IonExchange",
+        "Precipitation",
+        "Calcination(toOxide)",
+        "MetallothermicReduction(Ca)"
+      ],
+      "notes": "Magnet additive (like Dy) plus green phosphor. Extremely scarce and expensive - the difficulty of its separation is a core gameplay hook.",
+      "group": "rare-earths"
+    },
+    {
+      "mineral": "Stibnite",
+      "formula": "Sb2S3",
+      "commodity": "Antimony",
+      "byproducts": [
+        "Gold",
+        "Silver"
+      ],
+      "geology": "Low-temperature hydrothermal veins; principal antimony ore, frequently associated with gold.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation"
+      ],
+      "intermediate": "Sb2O3 (roaster/fumed oxide) or crude antimony oxide",
+      "extraction": "Rich ore liquated; concentrate given a volatilizing/oxidizing roast to Sb2O3 (volatile ~900-950 C in low-O2 gas; high O2 forms non-volatile SbO2), then carbothermic reduction with soda-ash flux to regulus. Sulfur-fixation roast with ZnO/C avoids SO2.",
+      "final_product": "Antimony metal (regulus); Sb2O3 flame retardant",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Roasting",
+        "Volatilization",
+        "CarbothermicReduction",
+        "Refining"
+      ],
+      "notes": "Often co-recovered with gold. Oxygen control critical to fuming.",
+      "group": "minor-specialty"
+    },
+    {
+      "mineral": "Bismuthinite",
+      "formula": "Bi2S3",
+      "commodity": "Bismuth",
+      "byproducts": [
+        "Lead",
+        "Copper",
+        "Tungsten",
+        "Molybdenum",
+        "Silver"
+      ],
+      "geology": "Hydrothermal veins with Pb/Cu/Sn/W deposits; bismuth is overwhelmingly a byproduct of those refining streams.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation"
+      ],
+      "intermediate": "Bi2O3 (roaster oxide) or crude bismuth bullion",
+      "extraction": "Primary sulfide: roast to oxide then coke smelting/carbothermic reduction. Alkaline/molten-salt smelting with Fe2O3 sulfur-fixing agent gives ~96% Bi, co-recovering W/Mo to slag. Mostly recovered as byproduct (debismuthizing of lead, anode slimes).",
+      "final_product": "Refined bismuth metal",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Roasting",
+        "Smelting",
+        "CarbothermicReduction",
+        "Refining"
+      ],
+      "notes": "Supply chain dominated by Pb/Cu/W byproduct recovery rather than primary mining.",
+      "group": "minor-specialty"
+    },
+    {
+      "mineral": "Arsenopyrite",
+      "formula": "FeAsS",
+      "commodity": "Arsenic",
+      "byproducts": [
+        "Gold",
+        "Copper",
+        "Cobalt"
+      ],
+      "geology": "Most abundant arsenic ore; high-temperature hydrothermal veins, pegmatites, contact-metamorphic settings. Common impurity in gold/copper ores.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation"
+      ],
+      "intermediate": "As2O3 (white arsenic) condensed from flue gas",
+      "extraction": "Roast in air to volatilize As2O3, captured in flues/baghouse; metal made by carbothermic reduction of As2O3. Mostly recovered as byproduct from Au/Cu/Pb smelter flue dust.",
+      "final_product": "Arsenic trioxide (As2O3); arsenic metal",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Roasting",
+        "Volatilization",
+        "CarbothermicReduction"
+      ],
+      "notes": "TOXIC. As2O3 acutely poisonous; off-gas, flue dust, and residue stabilization are key hazards. Largely a byproduct commodity.",
+      "group": "minor-specialty"
+    },
+    {
+      "mineral": "Realgar / Orpiment",
+      "formula": "As4S4 / As2S3",
+      "commodity": "Arsenic",
+      "byproducts": [],
+      "geology": "Low-temperature hydrothermal and volcanic/hot-spring deposits; arsenic sulfide minerals.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation"
+      ],
+      "intermediate": "As2O3",
+      "extraction": "Roasting in air: 2 As2S3 + 9 O2 -> 2 As2O3 + 6 SO2; As2O3 volatilized and condensed.",
+      "final_product": "Arsenic trioxide (As2O3)",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "Roasting",
+        "Volatilization"
+      ],
+      "notes": "TOXIC. Historically used in pigments and traditional medicine; roaster gas handling is hazardous.",
+      "group": "minor-specialty"
+    },
+    {
+      "mineral": "Uraninite (pitchblende)",
+      "formula": "UO2",
+      "commodity": "Uranium",
+      "byproducts": [
+        "Radium",
+        "Vanadium",
+        "Rare earths",
+        "Molybdenum"
+      ],
+      "geology": "Primary uranium oxide (UO2, grading toward U3O8); hydrothermal veins, unconformity and sandstone-hosted deposits. Pitchblende is the massive variety.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding"
+      ],
+      "intermediate": "Uranyl sulfate or uranyl tricarbonate pregnant liquor",
+      "extraction": "Acid (H2SO4 -> uranyl sulfate) or alkaline (Na2CO3 -> uranyl tricarbonate) leach; purify/concentrate by ion exchange or solvent extraction; precipitate and calcine to yellowcake.",
+      "final_product": "Yellowcake (U3O8); converted downstream to UF6",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "Leaching",
+        "SolventExtraction",
+        "IonExchange",
+        "Precipitation",
+        "Calcination"
+      ],
+      "notes": "RADIOACTIVE. Radon/radium and tailings are gameplay hazard hooks; yellowcake is a regulated nuclear material.",
+      "group": "minor-specialty"
+    },
+    {
+      "mineral": "Coffinite",
+      "formula": "U(SiO4)*nH2O",
+      "commodity": "Uranium",
+      "byproducts": [
+        "Vanadium",
+        "Selenium",
+        "Molybdenum"
+      ],
+      "geology": "Uranium silicate; common in reduced sandstone-hosted (roll-front) deposits, often intergrown with uraninite.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding"
+      ],
+      "intermediate": "Pregnant leach solution",
+      "extraction": "Leach (acid or alkaline), ion exchange / solvent extraction, precipitation, calcination to U3O8.",
+      "final_product": "Yellowcake (U3O8)",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "Leaching",
+        "IonExchange",
+        "SolventExtraction",
+        "Precipitation",
+        "Calcination"
+      ],
+      "notes": "RADIOACTIVE. Amenable to in-situ recovery (ISR) leaching.",
+      "group": "minor-specialty"
+    },
+    {
+      "mineral": "Carnotite",
+      "formula": "K2(UO2)2(VO4)2*3H2O",
+      "commodity": "Uranium + Vanadium",
+      "byproducts": [
+        "Vanadium (V2O5)"
+      ],
+      "geology": "Secondary uranium-vanadium mineral in sandstone-hosted deposits (e.g., Colorado Plateau).",
+      "beneficiation": [
+        "Crushing",
+        "Grinding"
+      ],
+      "intermediate": "Co-recovered uranium and vanadium liquors",
+      "extraction": "Salt roast then leach; separate U and V by solvent extraction / ion exchange; precipitate both.",
+      "final_product": "U3O8 + V2O5",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "Roasting",
+        "Leaching",
+        "SolventExtraction",
+        "IonExchange",
+        "Precipitation"
+      ],
+      "notes": "RADIOACTIVE. Dual uranium-vanadium ore.",
+      "group": "minor-specialty"
+    },
+    {
+      "mineral": "Thorianite",
+      "formula": "ThO2",
+      "commodity": "Thorium",
+      "byproducts": [
+        "Uranium",
+        "Rare earths"
+      ],
+      "geology": "Thorium oxide in granite pegmatites and metamorphic rocks; very high Th concentration but minor commercial source.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation"
+      ],
+      "intermediate": "Thorium sulfate / thorium nitrate liquor",
+      "extraction": "Acid or alkaline digest/leach; solvent extraction; precipitation; calcination to ThO2.",
+      "final_product": "Thorium oxide (ThO2)",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "Leaching",
+        "SolventExtraction",
+        "Precipitation",
+        "Calcination"
+      ],
+      "notes": "RADIOACTIVE. Not commercially mined at scale; thorium mainly a monazite byproduct.",
+      "group": "minor-specialty"
+    },
+    {
+      "mineral": "Monazite",
+      "formula": "(Ce,La,Th)PO4",
+      "commodity": "Thorium (byproduct of REE)",
+      "byproducts": [
+        "Rare earths (primary)",
+        "Uranium"
+      ],
+      "geology": "RE phosphate in mineral/beach sands; ~3-5% ThO2. Mined primarily for rare earths.",
+      "beneficiation": [
+        "Washing",
+        "GravitySeparation"
+      ],
+      "intermediate": "Mixed RE/Th sulfate or hydroxide cake",
+      "extraction": "Acid (conc. H2SO4) or alkaline (NaOH) digest cracks the phosphate; Th separated from REE by selective precipitation / solvent extraction via temperature and acidity control.",
+      "final_product": "ThO2 (co-product with the rare-earth chain)",
+      "stages": [
+        "Washing",
+        "GravitySeparation",
+        "Leaching",
+        "Precipitation",
+        "SolventExtraction",
+        "Calcination"
+      ],
+      "notes": "RADIOACTIVE. CROSS-LINK: shared feed with the rare-earth catalog; Th is the radioactive co-product of REE recovery.",
+      "group": "minor-specialty"
+    },
+    {
+      "mineral": "Borax",
+      "formula": "Na2B4O7*10H2O",
+      "commodity": "Boron / borates",
+      "byproducts": [],
+      "geology": "Continental evaporite deposits near Pliocene lakes and boron-rich brines in arid basins.",
+      "beneficiation": [
+        "Washing"
+      ],
+      "intermediate": "Borate liquor",
+      "extraction": "Dissolution, purification, evaporation/recrystallization; acidify with H2SO4 to make boric acid.",
+      "final_product": "Refined borax; boric acid (H3BO3)",
+      "stages": [
+        "Crushing",
+        "Washing",
+        "Leaching",
+        "Evaporation",
+        "Precipitation"
+      ],
+      "notes": "Sodium borate purified by dissolution-recrystallization; brine ops use solar evaporation ponds.",
+      "group": "minor-specialty"
+    },
+    {
+      "mineral": "Kernite",
+      "formula": "Na2B4O7*4H2O",
+      "commodity": "Boron / borates",
+      "byproducts": [],
+      "geology": "Evaporite borate associated with borax beds (e.g., Kramer/Boron, California).",
+      "beneficiation": [
+        "Crushing",
+        "Washing"
+      ],
+      "intermediate": "Borate liquor",
+      "extraction": "Dissolution, evaporation and recrystallization to borax/boric acid.",
+      "final_product": "Borax / boric acid",
+      "stages": [
+        "Crushing",
+        "Washing",
+        "Leaching",
+        "Evaporation",
+        "Precipitation"
+      ],
+      "notes": "Lower hydration sodium borate; processed similarly to borax.",
+      "group": "minor-specialty"
+    },
+    {
+      "mineral": "Colemanite",
+      "formula": "Ca2B6O11*5H2O",
+      "commodity": "Boron / borates",
+      "byproducts": [],
+      "geology": "Calcium borate evaporite (major in Turkey and western USA).",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation"
+      ],
+      "intermediate": "Borate liquor",
+      "extraction": "Acid leach with H2SO4, then precipitation/crystallization of boric acid.",
+      "final_product": "Boric acid (H3BO3)",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Leaching",
+        "Precipitation",
+        "Evaporation"
+      ],
+      "notes": "Calcium borate requires acid attack rather than simple recrystallization.",
+      "group": "minor-specialty"
+    },
+    {
+      "mineral": "Fluorite (fluorspar)",
+      "formula": "CaF2",
+      "commodity": "Fluorine / HF",
+      "byproducts": [
+        "Lead",
+        "Zinc",
+        "Barite"
+      ],
+      "geology": "Hydrothermal veins and replacement deposits; gangue often galena/sphalerite/barite.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation"
+      ],
+      "intermediate": "Acid-grade fluorspar (acidspar, >=97% CaF2)",
+      "extraction": "React acidspar with concentrated H2SO4 at ~250 C: CaF2 + H2SO4 -> 2 HF + CaSO4; HF purified/scrubbed. Gypsum/anhydrite byproduct.",
+      "final_product": "Hydrogen fluoride / hydrofluoric acid",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Reduction",
+        "Refining"
+      ],
+      "notes": "TOXIC/corrosive intermediate. Acidspar is ~60-65% of global fluorspar output and feeds all fluorochemicals. (Reduction/Refining stages here denote the acid digestion + HF purification; no metallic reduction.)",
+      "group": "minor-specialty"
+    },
+    {
+      "mineral": "Native sulfur",
+      "formula": "S",
+      "commodity": "Sulfur / sulfuric acid",
+      "byproducts": [],
+      "geology": "Caprock of salt domes and volcanic deposits; elemental sulfur.",
+      "beneficiation": [
+        "FraschProcess"
+      ],
+      "intermediate": "Molten / elemental sulfur",
+      "extraction": "Frasch process melts and lifts sulfur with superheated steam and air. Burn S to SO2, then contact process to sulfuric acid.",
+      "final_product": "Elemental sulfur; sulfuric acid (H2SO4)",
+      "stages": [
+        "FraschProcess",
+        "Roasting",
+        "ContactProcess"
+      ],
+      "notes": "Frasch dominated supply until ~1970; now largely supplanted by recovered sulfur.",
+      "group": "minor-specialty"
+    },
+    {
+      "mineral": "Pyrite",
+      "formula": "FeS2",
+      "commodity": "Sulfur / sulfuric acid",
+      "byproducts": [
+        "Iron oxide cinder",
+        "Gold",
+        "Copper"
+      ],
+      "geology": "Ubiquitous iron sulfide; hydrothermal, sedimentary, and massive-sulfide deposits.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation"
+      ],
+      "intermediate": "SO2 roaster gas",
+      "extraction": "Roast: 4 FeS2 + 11 O2 -> 2 Fe2O3 + 8 SO2, leaving iron-oxide cinder; SO2 fed to contact process.",
+      "final_product": "Sulfuric acid (+ iron oxide cinder)",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "FrothFlotation",
+        "Roasting",
+        "ContactProcess"
+      ],
+      "notes": "Historic principal sulfur source before Frasch; cinder sometimes used for iron.",
+      "group": "minor-specialty"
+    },
+    {
+      "mineral": "Sour gas H2S",
+      "formula": "H2S",
+      "commodity": "Sulfur (recovered)",
+      "byproducts": [],
+      "geology": "Hydrogen sulfide from sour natural gas and refinery streams (not a mineral; gas sweetening feed).",
+      "beneficiation": [],
+      "intermediate": "Elemental sulfur",
+      "extraction": "Claus process: partial oxidation of H2S to SO2, then 2 H2S + SO2 -> 3 S + 2 H2O; tail-gas SO2 can feed contact process.",
+      "final_product": "Elemental sulfur; sulfuric acid",
+      "stages": [
+        "ClausProcess",
+        "ContactProcess"
+      ],
+      "notes": "Dominant modern sulfur source. Included as a feedstock, not a mined mineral.",
+      "group": "minor-specialty"
+    },
+    {
+      "mineral": "Barite (baryte)",
+      "formula": "BaSO4",
+      "commodity": "Barium",
+      "byproducts": [],
+      "geology": "Hydrothermal veins, bedded sedimentary, and residual deposits; barite group sulfate.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "FrothFlotation"
+      ],
+      "intermediate": "BaS (black ash) for chemicals; direct barite for drilling mud",
+      "extraction": "Most used directly as weighting agent/filler after beneficiation. For chemicals: reduction roast with coke -> BaS (black ash), then leach/precipitate to BaCO3 or BaCl2.",
+      "final_product": "Barite (drilling mud); barium chemicals (BaCO3, BaCl2)",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "FrothFlotation",
+        "Roasting",
+        "Leaching",
+        "Precipitation"
+      ],
+      "notes": "Isostructural with celestine (complete BaSO4-SrSO4 solid solution). Bulk demand is drilling mud, used as-is.",
+      "group": "minor-specialty"
+    },
+    {
+      "mineral": "Celestine (celestite)",
+      "formula": "SrSO4",
+      "commodity": "Strontium",
+      "byproducts": [
+        "Barium (solid solution)"
+      ],
+      "geology": "Sedimentary/evaporitic strontium sulfate; barite-group member.",
+      "beneficiation": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "FrothFlotation"
+      ],
+      "intermediate": "SrS (black ash) or crude SrCO3",
+      "extraction": "Black-ash: reduction roast with coke at ~1100-1300 C -> SrS, then carbonation to SrCO3. Or direct conversion: react ground concentrate with Na2CO3 (+ steam) to SrCO3 + Na2SO4.",
+      "final_product": "Strontium carbonate (SrCO3)",
+      "stages": [
+        "Crushing",
+        "Grinding",
+        "GravitySeparation",
+        "FrothFlotation",
+        "Roasting",
+        "Leaching",
+        "Precipitation"
+      ],
+      "notes": "SrCO3 used in glass, magnets, pyrotechnics. Complete solid solution with barite.",
+      "group": "minor-specialty"
+    }
+  ]
+}
