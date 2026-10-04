@@ -29,6 +29,37 @@ public final class MaterialRegistry {
         return material;
     }
 
+    /**
+     * Builds and registers a material for {@code group}, with the standard form-derived tags
+     * ({@link MaterialTags#standard}). A null {@code display} derives the name from the id.
+     */
+    public static Material define(String group, String id, String display, MaterialType type,
+                                  String formula, MaterialForm[] forms,
+                                  MaterialProperties.Builder props) {
+        return register(Material.builder(id, type)
+                .display(display)
+                .formula(formula)
+                .group(group)
+                .properties(props)
+                .forms(forms)
+                .tags(MaterialTags.standard(id, forms))
+                .build());
+    }
+
+    /** As {@link #define}, for an ore mineral tagged under the {@code commodity} it yields. */
+    public static Material defineMineral(String group, String id, String display, String formula,
+                                         String commodity, MaterialForm[] forms,
+                                         MaterialProperties.Builder props) {
+        return register(Material.builder(id, MaterialType.MINERAL)
+                .display(display)
+                .formula(formula)
+                .group(group)
+                .properties(props)
+                .forms(forms)
+                .tags(MaterialTags.mineral(id, commodity, forms))
+                .build());
+    }
+
     public static Material get(String id) {
         return BY_ID.get(id);
     }
