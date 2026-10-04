@@ -1,9 +1,13 @@
 package ai.gsmc.fundamentals.registry;
 
 import ai.gsmc.fundamentals.Fundamentals;
+import ai.gsmc.fundamentals.content.ferrous_ferroalloy.FerrousChains;
 import ai.gsmc.fundamentals.content.ferrous_ferroalloy.FerrousMaterials;
 import ai.gsmc.fundamentals.material.MaterialRegistry;
+import ai.gsmc.fundamentals.process.ProcessingChainRegistry;
 import ai.gsmc.fundamentals.process.ProcessingStage;
+
+import java.util.List;
 
 /**
  * Central content bootstrap. Each commodity group registers through its own registrar so the
@@ -19,6 +23,7 @@ public final class FundamentalsContent {
     public static void registerAll() {
         // --- Laptop B groups ---
         FerrousMaterials.register();
+        FerrousChains.register();
         // IndustrialMinerals.register();   // TODO (B)
         // LightBatteryTech.register();     // TODO (B)
         // MinorSpecialty.register();       // TODO (B)
@@ -28,9 +33,17 @@ public final class FundamentalsContent {
         // BaseMetalMaterials.register();   // TODO (A)
         // PreciousPgmMaterials.register(); // TODO (A)
 
-        Fundamentals.LOGGER.info("Registered {} materials across groups; {} processing stages available.",
-                MaterialRegistry.size(), ProcessingStage.values().length);
+        Fundamentals.LOGGER.info("Registered {} materials, {} processing chains; {} stages available.",
+                MaterialRegistry.size(), ProcessingChainRegistry.size(), ProcessingStage.values().length);
         Fundamentals.LOGGER.info("  ferrous_ferroalloy: {} materials",
                 MaterialRegistry.countInGroup(FerrousMaterials.GROUP));
+
+        // Fail loud in dev if a chain references a material/form that doesn't exist.
+        List<String> problems = ProcessingChainRegistry.validateAll();
+        if (!problems.isEmpty()) {
+            problems.forEach(p -> Fundamentals.LOGGER.error("  invalid chain: {}", p));
+            throw new IllegalStateException("Fundamentals: " + problems.size()
+                    + " processing-chain validation error(s) — see log.");
+        }
     }
 }
