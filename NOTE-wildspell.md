@@ -10,5 +10,8 @@ The **wildspell** repos should be updated to use the same structure as this proj
 This keeps both projects on an identical build/versioning model, which makes any future
 interoperation (shared tags, optional cross-mod integration) much simpler.
 
-> Action item carried in `ROADMAP.md`. The wildspell repos were not found on this machine
-> at project-creation time, so this note lives here until it can be copied over.
+> **Status (2026-10-04):** tracking issues have been filed in each repo:
+> - `wildspell-mobs` → [#13](https://github.com/brodheadw/wildspell-mobs/issues/13)
+> - `wildspell-magic` → [#5](https://github.com/brodheadw/wildspell-magic/issues/5)
+> - `fundamental-magic` → [#2](https://github.com/brodheadw/fundamental-magic/issues/2)
+> - `wildspell-modpack` → [#3](https://github.com/brodheadw/wildspell-modpack/issues/3) (multi-version only; multi-loader N/A for a modpack)

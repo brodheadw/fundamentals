@@ -44,5 +44,5 @@ Planned ladder (confirm exact dependency versions per target as they are added):
 - [ ] Add a mod icon (`src/main/resources/assets/fundamentals/icon.png`) and re-add the
       `icon` / `logoFile` references in `fabric.mod.json` / `neoforge.mods.toml`.
 - [ ] Decide on and wire up a publishing pipeline (Modrinth/CurseForge) if releasing.
-- [ ] Mirror this multi-version + multi-loader setup in the **wildspell** repos
-      (see `NOTE-wildspell.md`).
+- [x] Mirror this multi-version + multi-loader setup in the **wildspell** repos —
+      tracking issues filed (see `NOTE-wildspell.md`).
