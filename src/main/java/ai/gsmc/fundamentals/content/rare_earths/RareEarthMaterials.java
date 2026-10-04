@@ -1,10 +1,8 @@
 package ai.gsmc.fundamentals.content.rare_earths;
 
-import ai.gsmc.fundamentals.material.Material;
 import ai.gsmc.fundamentals.material.MaterialForm;
 import ai.gsmc.fundamentals.material.MaterialProperties;
 import ai.gsmc.fundamentals.material.MaterialRegistry;
-import ai.gsmc.fundamentals.material.MaterialTags;
 import ai.gsmc.fundamentals.material.MaterialType;
 
 /**
@@ -38,19 +36,13 @@ public final class RareEarthMaterials {
 
     public static void register() {
         // --- Ore minerals ---
-        reg("bastnasite", "Bastnäsite", MaterialType.MINERAL, "(Ce,La,Nd)CO3F", MINERAL_FORMS,
-                MaterialProperties.builder().density(0.63));
-        reg("monazite", null, MaterialType.MINERAL, "(Ce,La,Nd,Th)PO4", MINERAL_FORMS,
-                MaterialProperties.builder().density(0.65).radioactivity(0.30));
-        reg("xenotime", null, MaterialType.MINERAL, "YPO4", MINERAL_FORMS,
-                MaterialProperties.builder().density(0.60).radioactivity(0.10));
-        reg("ion_adsorption_clay", "Ion-Adsorption Clay", MaterialType.MINERAL, "",
-                new MaterialForm[] {MaterialForm.ORE, MaterialForm.RAW},
-                MaterialProperties.builder().density(0.33));
-        reg("loparite", null, MaterialType.MINERAL, "(Na,Ca,Ce)(Ti,Nb,Ta)O3", MINERAL_FORMS,
-                MaterialProperties.builder().density(0.61).radioactivity(0.15));
-        reg("euxenite", null, MaterialType.MINERAL, "(Y,Ca,Ce,U,Th)(Nb,Ta,Ti)2O6", MINERAL_FORMS,
-                MaterialProperties.builder().density(0.64).radioactivity(0.35));
+        mineral("bastnasite", "Bastnäsite", "(Ce,La,Nd)CO3F", MINERAL_FORMS, 0.63, 0);
+        mineral("monazite", null, "(Ce,La,Nd,Th)PO4", MINERAL_FORMS, 0.65, 0.30);
+        mineral("xenotime", null, "YPO4", MINERAL_FORMS, 0.60, 0.10);
+        mineral("ion_adsorption_clay", "Ion-Adsorption Clay", "",
+                new MaterialForm[] {MaterialForm.ORE, MaterialForm.RAW}, 0.33, 0);
+        mineral("loparite", null, "(Na,Ca,Ce)(Ti,Nb,Ta)O3", MINERAL_FORMS, 0.61, 0.15);
+        mineral("euxenite", null, "(Y,Ca,Ce,U,Th)(Nb,Ta,Ti)2O6", MINERAL_FORMS, 0.64, 0.35);
 
         // --- Mixed concentrates (pre-separation) ---
         reg("light_rare_earth_concentrate", null, MaterialType.CONCENTRATE, "",
@@ -91,6 +83,12 @@ public final class RareEarthMaterials {
                         .heatResistance(0.80).hardness(0.55));
     }
 
+    private static void mineral(String id, String display, String formula, MaterialForm[] forms,
+                                double density, double radioactivity) {
+        MaterialRegistry.defineMineral(GROUP, id, display, formula, "rare_earth", forms,
+                MaterialProperties.builder().density(density).radioactivity(radioactivity));
+    }
+
     private static void element(String id, String symbol, MaterialForm[] forms, double density) {
         reg(id, null, MaterialType.ELEMENT, symbol, forms,
                 MaterialProperties.builder().density(density));
@@ -98,13 +96,6 @@ public final class RareEarthMaterials {
 
     private static void reg(String id, String display, MaterialType type, String formula,
                             MaterialForm[] forms, MaterialProperties.Builder props) {
-        MaterialRegistry.register(Material.builder(id, type)
-                .display(display)
-                .formula(formula)
-                .group(GROUP)
-                .properties(props)
-                .forms(forms)
-                .tags(MaterialTags.standard(id, forms))
-                .build());
+        MaterialRegistry.define(GROUP, id, display, type, formula, forms, props);
     }
 }

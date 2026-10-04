@@ -271,6 +271,17 @@ features in worldgen JSON — for now this table is the spec both sides build to
     (registration layer resolves to `minecraft:*`); no duplicate gold ore/items.
   - **Needs the shared schema later:** a `FLUID`/liquor `MaterialForm` for mercury (and your REE
     solvent-extraction liquors) — flagging so we add it once, append-only.
+- **2026-10-04 [A]** Branch `a/base-metals-materials` (PR into main): `base_metals` content —
+  `content.base_metals.BaseMetalMaterials`: 14 minerals (8 copper, bauxite, galena, 3 zinc,
+  cassiterite), copper/lead/zinc/tin concentrates, copper matte + blister copper, the five metals
+  (`copper`, `aluminum`, `lead`, `zinc`, `tin`), bronze and brass. Metal id is `aluminum` to match
+  the common `c:ingots/aluminum` tag; display name is "Aluminium".
+  - **Shared additions:** `MaterialRegistry.define(...)` / `defineMineral(...)` and
+    `MaterialTags.mineral(id, commodity, forms)`, so registrars stop hand-building the same
+    `Material.builder` call. Minerals follow B's convention: ore/raw tagged under the commodity
+    (`c:ores/copper`), other forms under the mineral's own id. Rare-earth minerals now tag
+    `c:ores/rare_earth`. **For Laptop B:** `FerrousMaterials.mineral/reg` can call these.
+  - **A next:** rare-earth and base-metal chains, then solvent-extraction design.
 
 ---
 
