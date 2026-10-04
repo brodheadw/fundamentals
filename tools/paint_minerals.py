@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Paints the 16x16 ore-block textures for the rare_earths and base_metals minerals.
+"""Paints the 16x16 ore-block texture for every mineral in the mod.
 
-Each mineral is composed from the way it actually occurs (one dominant mass plus stragglers,
+Each mineral is painted in the rock it really occurs in (carbonatite, granite, limestone,
+gossan, basalt, ...) and composed from its real habit (one dominant mass plus stragglers,
 crystal aggregates, veinlets in quartz, companion minerals) rather than from one shared
 template. Edit the specs here and re-run; don't hand-edit the PNGs.
 
@@ -18,6 +19,21 @@ SIZE = 16
 OUT = Path(__file__).resolve().parent.parent / "src/main/resources/assets/fundamentals/textures/block"
 
 STONE = [(100, 100, 100), (113, 113, 113), (125, 125, 125), (134, 134, 134), (143, 143, 143)]
+# Host rocks: (tones dark->light, blur_x, blur_y, share of each tone).
+HOSTS = {
+    "stone": ([(100, 100, 100), (113, 113, 113), (125, 125, 125), (134, 134, 134), (143, 143, 143)], 2, 0, (1, 3, 4, 3, 1)),
+    "carbonatite": ([(170, 150, 118), (192, 176, 144), (210, 197, 168), (226, 216, 190)], 1, 1, (1, 3, 4, 2)),
+    "granite": ([(150, 110, 96), (184, 138, 120), (204, 164, 146), (216, 206, 196)], 1, 1, (2, 4, 3, 2)),
+    "greisen": ([(138, 138, 134), (160, 160, 154), (180, 180, 172), (198, 198, 190)], 1, 1, (1, 3, 4, 2)),
+    "porphyry": ([(118, 106, 104), (132, 120, 116), (144, 132, 126), (154, 142, 136)], 1, 0, (1, 3, 4, 2)),
+    "gossan": ([(96, 54, 26), (126, 76, 34), (154, 98, 42), (178, 122, 54)], 1, 1, (2, 4, 3, 1)),
+    "limestone": ([(160, 156, 142), (176, 172, 158), (188, 184, 170), (198, 195, 182)], 3, 0, (1, 3, 4, 2)),
+    "basalt": ([(44, 46, 50), (56, 58, 62), (68, 70, 74), (80, 82, 86)], 1, 0, (2, 4, 3, 1)),
+    "mafic": ([(50, 56, 52), (64, 70, 64), (80, 86, 78), (98, 104, 94)], 1, 1, (2, 4, 3, 1)),
+    "syenite": ([(144, 150, 144), (164, 170, 162), (182, 187, 178), (198, 202, 194)], 1, 1, (1, 3, 4, 2)),
+    "sand": ([(184, 164, 120), (200, 182, 138), (214, 198, 154), (226, 212, 170)], 2, 0, (1, 3, 4, 2)),
+}
+
 QUARTZ = [(176, 176, 172), (204, 204, 198), (228, 228, 222)]
 ORTHO = [(1, 0), (-1, 0), (0, 1), (0, -1)]
 DIAG = ORTHO + [(1, 1), (-1, 1), (1, -1), (-1, -1)]
@@ -41,6 +57,16 @@ P = {
     "smithsonite": ((64, 128, 124), (112, 184, 176), (164, 220, 210), (226, 248, 242)),
     "hemimorphite": ((112, 150, 184), (166, 200, 226), (210, 230, 244), (250, 252, 255)),
     "cassiterite": ((22, 14, 10), (58, 38, 26), (104, 74, 50), (190, 164, 130)),
+    "pyrolusite": ((8, 8, 10), (26, 26, 30), (52, 52, 60), (104, 106, 120)),
+    "pentlandite": ((96, 72, 34), (160, 126, 62), (204, 172, 96), (240, 220, 150)),
+    "pyrrhotite": ((70, 50, 36), (116, 86, 62), (150, 116, 86), (190, 160, 124)),
+    "native_silver": ((96, 100, 110), (164, 170, 180), (214, 218, 226), (250, 252, 255)),
+    "argentite": ((16, 18, 22), (44, 48, 56), (84, 90, 102), (150, 158, 172)),
+    "sperrylite": ((120, 126, 134), (186, 192, 200), (228, 232, 238), (255, 255, 255)),
+    "cooperite": ((60, 64, 72), (110, 116, 126), (156, 162, 172), (210, 216, 224)),
+    "braggite": ((90, 90, 84), (148, 148, 138), (196, 196, 184), (236, 236, 226)),
+    "chromite": ((6, 6, 8), (20, 20, 24), (40, 40, 46), (80, 80, 90)),
+    "cinnabar": ((110, 12, 18), (184, 26, 28), (228, 58, 46), (255, 142, 120)),
 }
 
 # Bornite tarnishes iridescent ("peacock ore"): patches of several hues on one mass.
@@ -49,33 +75,48 @@ BORNITE = [((60, 30, 96), (118, 62, 170), (176, 110, 214), (214, 170, 240)),
            ((112, 62, 30), (184, 112, 58), (226, 164, 96), (250, 210, 150)),
            ((20, 96, 104), (40, 150, 150), (104, 208, 196), (180, 240, 230))]
 
-# What each texture is built from, in paint order. See the element painters below.
+# name: (host rock, [elements in paint order]). See the element painters in build().
 RECIPES = {
-    # Tabular honey-brown masses in carbonatite.
-    "bastnasite": [("mass", 14, 19), ("blob", 2, 4, 7), ("speck", 4)],
-    # An accessory mineral: scattered small resinous grains, never a big mass.
-    "monazite": [("blob", 4, 5, 8), ("speck", 4)],
-    "xenotime": [("crystals", "prism", 2, 3), ("crystals", "prism", 1, 1), ("speck", 3)],
-    "loparite": [("crystals", "cube", 2, 3), ("crystals", "cube", 2, 1), ("speck", 3)],
-    "euxenite": [("mass", 16, 20), ("blob", 3, 4, 7), ("speck", 3)],
+    # --- rare earths ---
+    # Tabular honey-brown masses in a carbonatite plug (Mountain Pass, Bayan Obo).
+    "bastnasite": ("carbonatite", [("mass", 14, 19), ("blob", 2, 4, 7), ("speck", 4), ("companion", "pyrolusite", 3)]),
+    # A placer mineral: heavy resinous grains concentrated in black-sand laminae on beaches.
+    "monazite": ("sand", [("laminae", 3), ("blob", 3, 3, 5), ("speck", 8)]),
+    "xenotime": ("granite", [("crystals", "prism", 2, 2), ("crystals", "prism", 1, 1), ("speck", 3)]),
+    "loparite": ("syenite", [("laths", 5), ("crystals", "cube", 2, 3), ("crystals", "cube", 2, 1), ("speck", 3)]),
+    "euxenite": ("granite", [("mass", 14, 18), ("blob", 2, 4, 7), ("speck", 3)]),
+    # --- copper ---
     # Porphyry copper: sulfide riding quartz veinlets, with disseminated grains off the vein.
-    "chalcopyrite": [("vein", "diag", 3, 5, 9), ("blob", 2, 3, 5), ("speck", 5)],
-    "bornite": [("mass", 20, 26), ("blob", 2, 5, 8), ("speck", 3)],
-    # Sooty secondary sulfide: irregular smeared patches.
-    "chalcocite": [("smear", 2, 12, 16), ("blob", 2, 3, 5), ("speck", 4)],
-    "covellite": [("crystals", "plate", 2, 3), ("crystals", "plate", 2, 1), ("speck", 2)],
-    "malachite": [("banded", 2, 18, 24), ("blob", 2, 3, 5)],
-    # Azurite alters to malachite, so the two are found together.
-    "azurite": [("mass", 13, 17), ("blob", 2, 4, 6), ("companion", "malachite", 5)],
+    "chalcopyrite": ("porphyry", [("phenocrysts", 6), ("vein", "diag", 3, 5, 9), ("blob", 2, 3, 5), ("speck", 5)]),
+    "bornite": ("porphyry", [("phenocrysts", 5), ("mass", 20, 26), ("blob", 2, 5, 8), ("speck", 3)]),
+    # Sooty secondary sulfide: irregular smeared patches under the leached cap.
+    "chalcocite": ("porphyry", [("phenocrysts", 4), ("smear", 2, 12, 16), ("blob", 2, 3, 5), ("speck", 4)]),
+    "covellite": ("stone", [("crystals", "plate", 2, 3), ("crystals", "plate", 2, 1), ("speck", 2)]),
+    "malachite": ("gossan", [("voids", 5), ("banded", 2, 18, 24), ("blob", 2, 3, 5)]),
+    # Azurite alters to malachite, so the two are found together; classic in limestone.
+    "azurite": ("limestone", [("mass", 13, 17), ("blob", 2, 4, 6), ("companion", "malachite", 5)]),
     # Cuprite forms on native copper in the oxidised zone.
-    "cuprite": [("blob", 4, 5, 9), ("speck", 3), ("companion", "native_copper", 4)],
-    "native_copper": [("smear", 2, 14, 20), ("speck", 4)],
-    "galena": [("crystals", "cube", 2, 3), ("crystals", "cube", 2, 1), ("speck", 2)],
-    "sphalerite": [("mass", 13, 17), ("blob", 3, 4, 6), ("speck", 3)],
-    "smithsonite": [("crystals", "knob", 2, 3), ("crystals", "knob", 2, 1)],
-    "hemimorphite": [("crystals", "knob", 1, 4), ("crystals", "knob", 2, 1), ("speck", 3)],
+    "cuprite": ("gossan", [("voids", 4), ("blob", 4, 5, 9), ("speck", 3), ("companion", "native_copper", 4)]),
+    # --- lead, zinc, tin ---
+    "galena": ("limestone", [("crystals", "cube", 2, 3), ("crystals", "cube", 2, 1), ("speck", 2)]),
+    "sphalerite": ("limestone", [("mass", 13, 17), ("blob", 3, 4, 6), ("speck", 3), ("companion", "galena", 3)]),
+    "smithsonite": ("limestone", [("crystals", "knob", 2, 3), ("crystals", "knob", 2, 1)]),
+    "hemimorphite": ("gossan", [("voids", 4), ("crystals", "knob", 1, 4), ("crystals", "knob", 2, 1), ("speck", 3)]),
     # Greisen tin: stubby dark prisms along a quartz vein.
-    "cassiterite": [("vein", "wavy", 3, 4, 7), ("crystals", "prism", 1, 1), ("speck", 3)],
+    "cassiterite": ("greisen", [("vein", "wavy", 3, 4, 7), ("crystals", "prism", 1, 1), ("speck", 3)]),
+    # --- ferrous (Laptop B's minerals) ---
+    # Manganese oxide: sooty black dendrites creeping across limestone.
+    "pyrolusite": ("limestone", [("smear", 3, 12, 18), ("speck", 6)]),
+    # Sudbury/Norilsk: bronze sulfide blebs in dark mafic rock, always with pyrrhotite.
+    "pentlandite": ("mafic", [("mass", 10, 14), ("blob", 2, 3, 6), ("companion", "pyrrhotite", 5), ("speck", 3)]),
+    # --- precious and PGM (Laptop B's minerals) ---
+    "native_silver": ("stone", [("vein", "wavy", 0, 0, 0), ("smear", 2, 9, 13), ("speck", 3), ("companion", "argentite", 3)]),
+    "argentite": ("stone", [("vein", "diag", 3, 4, 8), ("blob", 2, 3, 5), ("speck", 3)]),
+    # PGM minerals are tiny bright grains in a dark layered intrusion, not masses.
+    "sperrylite": ("mafic", [("crystals", "cube", 3, 1), ("speck", 6)]),
+    "cooperite": ("mafic", [("band", "chromite"), ("blob", 2, 2, 4), ("speck", 6)]),
+    "braggite": ("mafic", [("companion", "pentlandite", 5), ("blob", 2, 2, 4), ("speck", 5)]),
+    "cinnabar": ("limestone", [("vein", "wavy", 3, 4, 8), ("blob", 2, 4, 7), ("speck", 5)]),
 }
 
 
@@ -83,21 +124,49 @@ def wrap(x, y):
     return x % SIZE, y % SIZE
 
 
-def stone(rng):
+def field(rng, bx, by):
+    """A wrapped random field blurred `bx`/`by` pixels each way, ranked to 0..1."""
     raw = [[rng.random() for _ in range(SIZE)] for _ in range(SIZE)]
+    v = {(x, y): sum(raw[(y + dy) % SIZE][(x + dx) % SIZE] for dx in range(-bx, bx + 1) for dy in range(-by, by + 1))
+         for x in range(SIZE) for y in range(SIZE)}
+    order = sorted(v, key=v.get)
+    return {p: i / len(order) for i, p in enumerate(order)}
+
+
+def host_rock(rng, kind):
+    tones, bx, by, share = HOSTS[kind]
+    cuts, total = [], 0
+    for w in share:
+        total += w
+        cuts.append(total / sum(share))
     img = Image.new("RGB", (SIZE, SIZE))
-    for y in range(SIZE):
-        for x in range(SIZE):
-            # Blur along x only: stone reads as short horizontal streaks.
-            v = (raw[y][x - 1] + 2 * raw[y][x] + raw[y][(x + 1) % SIZE] + raw[y][(x + 2) % SIZE]) / 5
-            img.putpixel((x, y), STONE[min(4, max(0, int((v - 0.22) * 9)))])
+    for p, v in field(rng, bx, by).items():
+        img.putpixel(p, tones[next(i for i, c in enumerate(cuts) if v < c or i == len(cuts) - 1)])
+    if kind == "granite":  # coarse: dark mica books and glassy quartz eyes
+        for _ in range(9):
+            img.putpixel((rng.randrange(SIZE), rng.randrange(SIZE)), (52, 46, 44))
+        for _ in range(5):
+            x, y = rng.randrange(SIZE), rng.randrange(SIZE)
+            for p in rect(x, y, 2, rng.choice((1, 2))):
+                img.putpixel(p, (224, 220, 214))
+    elif kind == "carbonatite":
+        for _ in range(4):
+            img.putpixel((rng.randrange(SIZE), rng.randrange(SIZE)), (132, 96, 62))
+    elif kind == "limestone":  # bedding planes
+        for y in (rng.randrange(0, 5), rng.randrange(6, 11), rng.randrange(12, 16)):
+            for x in range(SIZE):
+                if rng.random() < 0.7:
+                    img.putpixel((x, y), (146, 142, 128))
+    elif kind == "greisen":
+        for _ in range(8):
+            img.putpixel((rng.randrange(SIZE), rng.randrange(SIZE)), (220, 220, 210))
     return img
 
 
 class Canvas:
-    def __init__(self, name):
+    def __init__(self, name, host):
         self.rng = random.Random(name)
-        self.img = stone(self.rng)
+        self.img = host_rock(self.rng, host)
         self.ore = set()
 
     def free(self, cells, margin):
@@ -209,11 +278,36 @@ def vein_path(rng, style):
 
 
 def build(name):
-    c = Canvas(name)
+    host, elements = RECIPES[name]
+    c = Canvas(name, host)
     rng, pal = c.rng, P.get(name)
-    for element in RECIPES[name]:
+    for element in elements:
         kind = element[0]
-        if kind == "mass":
+        if kind == "phenocrysts":  # pale feldspar crystals floating in the porphyry groundmass
+            for _ in range(element[1]):
+                for p in rect(rng.randrange(SIZE), rng.randrange(SIZE), rng.choice((1, 2)), rng.choice((1, 2))):
+                    c.img.putpixel(p, rng.choice(((196, 188, 178), (210, 204, 194))))
+        elif kind == "voids":  # leached pits (gossan boxwork) or gas bubbles (basalt)
+            for _ in range(element[1]):
+                dark = tuple(int(v * 0.55) for v in HOSTS[host][0][0])
+                for p in rect(rng.randrange(SIZE), rng.randrange(SIZE), rng.choice((1, 1, 2)), 1):
+                    c.img.putpixel(p, dark)
+        elif kind == "laths":  # dark aegirine needles in the syenite
+            for _ in range(element[1]):
+                w, h = rng.choice(((1, 3), (3, 1), (1, 2)))
+                for p in rect(rng.randrange(SIZE), rng.randrange(SIZE), w, h):
+                    c.img.putpixel(p, (44, 58, 48))
+        elif kind == "laminae":  # black-sand layers of heavy minerals
+            for y in rng.sample(range(SIZE), element[1]):
+                for x in range(SIZE):
+                    if rng.random() < 0.75:
+                        c.img.putpixel(wrap(x, y + (rng.random() < 0.2)), rng.choice(((58, 52, 48), (84, 74, 64))))
+        elif kind == "band":  # a chromitite seam through the intrusion
+            y0, other = rng.randrange(SIZE), P[element[1]]
+            for x in range(SIZE):
+                for dy in range(rng.choice((1, 2, 2))):
+                    c.img.putpixel(wrap(x, y0 + dy), other[rng.choice((0, 1, 1, 2))])
+        elif kind == "mass":
             size = rng.randint(element[1], element[2])
             cells = c.place(lambda: c.grow(size), 1)
             if name == "bornite":
@@ -335,28 +429,94 @@ def paint_bauxite():
     return img
 
 
+def paint_banded_iron(name, bands):
+    """Banded iron formation: thin wavy layers of iron oxide and chert/jasper, laid on a sea floor."""
+    rng = random.Random(name)
+    rows = [tones for tones, thick in bands for _ in range(thick)]
+    wobble, y = [], 0
+    for x in range(SIZE):
+        wobble.append(y)
+        y += rng.choice((-1, 0, 0, 0, 0, 0, 0, 1))
+    wobble = [w - round(wobble[-1] * x / (SIZE - 1)) for x, w in enumerate(wobble)]  # close the loop
+    img = Image.new("RGB", (SIZE, SIZE))
+    for x in range(SIZE):
+        for y in range(SIZE):
+            tones = rows[(y + wobble[x]) % SIZE]
+            img.putpixel((x, y), tones[min(len(tones) - 1, int(rng.random() ** 0.6 * len(tones)))] if rng.random() < 0.9 else tones[0])
+    return img
+
+
+JASPER = [(112, 30, 26), (140, 38, 30), (160, 52, 36)]
+SPECULAR = [(64, 62, 70), (88, 86, 96), (112, 110, 122), (150, 150, 164)]
+CHERT = [(120, 114, 108), (136, 130, 122), (150, 144, 136)]
+LODESTONE = [(18, 18, 22), (30, 30, 36), (44, 44, 52), (70, 72, 84)]
+
+
+def paint_goethite():
+    """Earthy ochre iron hydroxide with dark glossy botryoidal crusts (bog iron, gossan caps)."""
+    rng = random.Random("goethite")
+    tones = [(110, 74, 22), (146, 102, 30), (178, 132, 44), (204, 162, 64)]
+    img = Image.new("RGB", (SIZE, SIZE))
+    for p, v in field(rng, 1, 1).items():
+        img.putpixel(p, tones[min(3, int(v * 4))])
+    c = Canvas.__new__(Canvas)
+    c.rng, c.img, c.ore = rng, img, set()
+    crust = ((20, 12, 8), (52, 32, 16), (92, 60, 26), (150, 110, 60))
+    for part in aggregate(c, "knob", 4) + aggregate(c, "knob", 2):
+        c.paint(part, crust, grain=0.1)
+    return c.finish()
+
+
+def paint_nickel_laterite():
+    """Tropical weathering profile: rusty limonite cut by apple-green garnierite veinlets."""
+    rng = random.Random("nickel_laterite")
+    tones = [(122, 78, 34), (150, 102, 44), (174, 128, 58), (196, 152, 76)]
+    green = [(74, 124, 62), (106, 160, 82), (144, 192, 106)]
+    img = Image.new("RGB", (SIZE, SIZE))
+    for p, v in field(rng, 2, 1).items():
+        img.putpixel(p, tones[min(3, int(v * 4))])
+    for style in ("wavy", "diag"):
+        for x, y in vein_path(rng, style):
+            img.putpixel((x, y), rng.choice(green))
+            if rng.random() < 0.35:
+                img.putpixel(wrap(x, y + 1), green[0])
+    return img
+
+
 def paint_all():
     out = {name: build(name) for name in RECIPES}
     out["ion_adsorption_clay"] = paint_clay()
     out["bauxite"] = paint_bauxite()
+    out["hematite"] = paint_banded_iron("hematite", [(JASPER, 2), (SPECULAR, 1), (JASPER, 1), (SPECULAR, 2),
+                                                     (JASPER, 3), (SPECULAR, 1), (JASPER, 1), (SPECULAR, 2),
+                                                     (JASPER, 2), (SPECULAR, 1)])
+    out["magnetite"] = paint_banded_iron("magnetite", [(LODESTONE, 3), (CHERT, 1), (LODESTONE, 2), (CHERT, 2),
+                                                       (LODESTONE, 1), (CHERT, 1), (LODESTONE, 3), (CHERT, 1),
+                                                       (LODESTONE, 1), (CHERT, 1)])
+    out["goethite"] = paint_goethite()
+    out["nickel_laterite"] = paint_nickel_laterite()
     return out
 
 
-def contact_sheet(textures, path, cols=5, scale=20):
-    order = ["bastnasite", "monazite", "xenotime", "ion_adsorption_clay", "loparite", "euxenite",
-             "chalcopyrite", "bornite", "chalcocite", "covellite", "malachite", "azurite", "cuprite",
-             "native_copper", "bauxite", "galena", "sphalerite", "smithsonite", "hemimorphite",
-             "cassiterite"]
-    tile, pad, label = SIZE * scale, 24, 30
-    rows = -(-len(order) // cols)
+SHEET_ORDER = [
+    "bastnasite", "monazite", "xenotime", "ion_adsorption_clay", "loparite", "euxenite",
+    "chalcopyrite", "bornite", "chalcocite", "covellite", "malachite", "azurite", "cuprite",
+    "bauxite", "galena", "sphalerite", "smithsonite", "hemimorphite", "cassiterite",
+    "hematite", "magnetite", "goethite", "pyrolusite", "pentlandite", "nickel_laterite",
+    "native_silver", "argentite", "sperrylite", "cooperite", "braggite", "cinnabar",
+]
+
+
+def contact_sheet(textures, path, cols=7, scale=14):
+    tile, pad, label = SIZE * scale, 20, 28
+    rows = -(-len(SHEET_ORDER) // cols)
     sheet = Image.new("RGB", (cols * (tile + pad) + pad, rows * (tile + pad + label) + pad), (32, 34, 38))
     draw = ImageDraw.Draw(sheet)
-    font = ImageFont.load_default(size=20)
-    for i, name in enumerate(order):
+    font = ImageFont.load_default(size=18)
+    for i, name in enumerate(SHEET_ORDER):
         x = pad + (i % cols) * (tile + pad)
         y = pad + (i // cols) * (tile + pad + label)
-        big = textures[name].resize((SIZE * scale, SIZE * scale), Image.NEAREST)
-        sheet.paste(big, (x, y))
+        sheet.paste(textures[name].resize((tile, tile), Image.NEAREST), (x, y))
         draw.text((x, y + tile + 4), name.replace("_", " "), fill=(226, 228, 232), font=font)
     sheet.save(path)
 
