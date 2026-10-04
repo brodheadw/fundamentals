@@ -63,8 +63,10 @@ There is no such substance as "iron ore" — ore is rock carrying a mineral at m
 mod follows that:
 
 - **Only minerals generate in the world** (hematite, magnetite, chalcopyrite, sphalerite,
-  bastnäsite, native gold…). Vanilla iron/copper/gold ore generation is replaced by them; a mod
+  bastnäsite…). Vanilla iron/copper ore generation is replaced by them; a mod
   like Create's zinc ore is replaced by sphalerite.
+- **Gold is the exception:** native gold is a real mineral, so vanilla gold ore (overworld,
+  badlands and nether) stays as it is and keeps generating.
 - **Elements have no `ORE` or `RAW` form.** They exist only as products (dust, ingot, nugget,
   plate, block, oxide). A mineral is a `MaterialType.MINERAL` material carrying `ORE`/`RAW`.
 - **Vanilla items are the canonical form where one exists** (`minecraft:iron_ingot`, nugget,
@@ -95,13 +97,13 @@ Whole commodity groups are assigned so **neither machine edits the other's conte
 |---|---|:---:|---|
 | `rare_earths` | 15 | **A** | The magnet flagship — your original pitch (NdFeB/SmCo, Dy/Tb endgame). |
 | `base_metals` | 14 | **A** | Everyday metals: Cu, Al, Pb, Zn, Sn — the economic backbone. |
-| `precious_pgm` | 11 | **A** | Au, Ag, PGMs, Hg — the "treasure" economy + deep refining. |
+| `precious_pgm` | 11 | **B** | Au, Ag, PGMs, Hg — the "treasure" economy + deep refining. |
 | `ferrous_ferroalloy` | 24 | **B** | Foundation: iron/steel + Cr/Mn/Ni/Co/Mo/W/V/Ti alloys. |
 | `industrial_minerals` | 14 | **B** | Enabling infra: silicon, chlor-alkali, acids, lime, phosphate, graphite. |
 | `light_battery_tech` | 17 | **B** | Li/Be/Ta·Nb/Mg/Zr·Hf + byproduct tech metals. |
 | `minor_specialty` | 18 | **B** | Sb/Bi/As/U/Th/B/F/S + radioactive/toxic hazard mechanics. |
 
-**Totals:** A = 40 ores · B = 73 ores.
+**Totals:** A = 29 ores · B = 84 ores.
 
 **Byproduct cross-group rule:** many ores drop byproducts owned by the *other* side
 (e.g. B's molybdenite ↔ A's copper; A's sphalerite → Cd/In/Ge owned by B; A's monazite → Th
@@ -167,11 +169,11 @@ Deepslate (-64..0) · Deep-anomaly.
 | Carbonatite | rare alkaline intrusions | rare vein in mountains/mesa | Deep-anomaly | VeryRare | bastnäsite (A), pyrochlore-Nb (B) |
 | Ion-adsorption clay | weathered subtropical granite | jungle / forested hills | Surface | Rare | heavy-REE clay, Dy/Tb (A) |
 | Evaporite | arid basins, dry lakes | desert, badlands | Upper (layered) | Uncommon | halite, sylvite/potash, trona, borax, gypsum (B) |
-| Placer / mineral sands | rivers, beaches | river, beach, stony shore | Surface | Uncommon | gold (A), ilmenite·rutile·zircon (B), monazite (A) |
+| Placer / mineral sands | rivers, beaches | river, beach, stony shore | Surface | Uncommon | gold (B), ilmenite·rutile·zircon (B), monazite (A) |
 | VMS / SEDEX Pb-Zn-Ag | marine sulfide basins | underground, caves | Mid+Deepslate | Uncommon | galena, sphalerite (A) |
-| Hydrothermal vein | fault/volcanic | mountains, basalt deltas | Mid | Rare | stibnite·cinnabar (B), native Au·Ag quartz (A) |
+| Hydrothermal vein | fault/volcanic | mountains, basalt deltas | Mid | Rare | stibnite·cinnabar (B), native Au·Ag quartz (B) |
 | Sandstone / unconformity U | redbeds, basins | badlands, desert | Deepslate | VeryRare (radioactive) | carnotite, uraninite (B) |
-| Layered mafic intrusion | rare, deep | deepslate vein | VeryRare | chromite (B) + PGM (A) co-spawn |
+| Layered mafic intrusion | rare, deep | deepslate vein | VeryRare | chromite + PGM (B) co-spawn |
 | Marine phosphate | shelf sediments | beach/ocean-adjacent, swamp | Upper | Uncommon | apatite/phosphate rock (B) |
 
 **Philosophy:** iron/copper/aluminium common; alloy metals uncommon; Li/Sn/W/REE rare and
@@ -233,6 +235,8 @@ features in worldgen JSON — for now this table is the spec both sides build to
     materials (hematite/magnetite, pyrolusite, pentlandite/laterite) and make iron's first chain
     the bloomery route, before the registration layer creates a second iron ore/ingot beside
     vanilla's. The registration layer needs a "this form is an existing item" mapping.
+  - **Ownership flip (§3):** `precious_pgm` moves **A → B** (all 11 entries: Au, Ag, Hg and the
+    PGMs). A now owns `rare_earths` and `base_metals` only. Vanilla gold ore stays (§2.4).
   - **A next:** rare-earth processing chain design — solvent-extraction cascade mechanics
     (extractants, stage counts, separation order), which needs a fluid/liquor form in the shared
     schema.

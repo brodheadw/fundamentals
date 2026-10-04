@@ -28,11 +28,11 @@ public final class FundamentalsContent {
         // IndustrialMinerals.register();   // TODO (B)
         // LightBatteryTech.register();     // TODO (B)
         // MinorSpecialty.register();       // TODO (B)
+        // PreciousPgmMaterials.register(); // TODO (B)
 
         // --- Laptop A groups ---
         RareEarthMaterials.register();
         // BaseMetalMaterials.register();   // TODO (A)
-        // PreciousPgmMaterials.register(); // TODO (A)
 
         Fundamentals.LOGGER.info("Registered {} materials, {} processing chains; {} stages available.",
                 MaterialRegistry.size(), ProcessingChainRegistry.size(), ProcessingStage.values().length);
