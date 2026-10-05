@@ -1,0 +1,14 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#fundamentals:deposit/anywhere",
+  "features": [
+    "fundamentals:hematite_bed",
+    "fundamentals:magnetite_bed",
+    "fundamentals:lead_zinc_bed",
+    "fundamentals:zinc_oxide_bed",
+    "fundamentals:manganese_bed",
+    "fundamentals:layered_intrusion",
+    "fundamentals:nickel_sulfide"
+  ],
+  "step": "underground_ores"
+}

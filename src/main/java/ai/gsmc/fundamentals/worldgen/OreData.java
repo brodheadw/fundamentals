@@ -8,13 +8,16 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
- * The ore list written by {@code tools/build_ore_data.py}: which ore blocks exist and where they
- * generate. One file drives block registration and spawning, so the two cannot drift apart.
+ * The block and spawn list written by {@code tools/build_ore_data.py}: which ore and host-rock
+ * blocks exist and which deposits generate where. One file drives block registration and spawning, so the two cannot drift apart.
  */
-public record OreData(List<Ore> ores, List<Spawn> add, List<String> remove) {
+public record OreData(List<Ore> ores, List<Rock> rocks, List<Spawn> add, List<String> remove) {
 
     /** @param soft dug with a shovel (clays, laterites, mineral sands) rather than a pickaxe */
     public record Ore(String mineral, boolean soft) {}
+
+    /** A host rock that is a block of its own. */
+    public record Rock(String name, boolean soft) {}
 
     /** @param biomes biome tag id; @param features placed-feature ids added to those biomes */
     public record Spawn(String biomes, List<String> features) {}

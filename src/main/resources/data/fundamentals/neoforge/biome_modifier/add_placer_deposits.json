@@ -1,0 +1,10 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#fundamentals:deposit/placer",
+  "features": [
+    "fundamentals:placer_monazite",
+    "fundamentals:placer_ilmenite",
+    "fundamentals:placer_rutile"
+  ],
+  "step": "underground_ores"
+}

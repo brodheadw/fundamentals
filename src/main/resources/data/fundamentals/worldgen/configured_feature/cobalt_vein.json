@@ -1,0 +1,31 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "vein",
+    "host": {
+      "Name": "fundamentals:vein_quartz"
+    },
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:cobaltite_ore"
+        },
+        "fraction": 0.1,
+        "style": "pockets"
+      }
+    ],
+    "radius": {
+      "min": 8,
+      "max": 12
+    },
+    "thickness": {
+      "min": 1,
+      "max": 2
+    },
+    "replaceable": "fundamentals:deposit_replaceable/rock",
+    "height": {
+      "min": 12,
+      "max": 20
+    }
+  }
+}

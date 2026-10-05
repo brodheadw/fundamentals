@@ -1,0 +1,27 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "bed",
+    "host": {
+      "Name": "fundamentals:limestone"
+    },
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:scheelite_ore"
+        },
+        "fraction": 0.08,
+        "style": "pockets"
+      }
+    ],
+    "radius": {
+      "min": 7,
+      "max": 10
+    },
+    "thickness": {
+      "min": 3,
+      "max": 5
+    },
+    "replaceable": "fundamentals:deposit_replaceable/rock"
+  }
+}

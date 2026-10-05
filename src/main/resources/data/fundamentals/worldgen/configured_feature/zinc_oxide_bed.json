@@ -1,0 +1,27 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "bed",
+    "host": {
+      "Name": "fundamentals:limestone"
+    },
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:smithsonite_ore"
+        },
+        "fraction": 0.12,
+        "style": "pockets"
+      }
+    ],
+    "radius": {
+      "min": 8,
+      "max": 12
+    },
+    "thickness": {
+      "min": 3,
+      "max": 5
+    },
+    "replaceable": "fundamentals:deposit_replaceable/rock"
+  }
+}

@@ -22,8 +22,8 @@ import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 /**
- * The in-world ore blocks ({@code <mineral>_ore}), one per entry in {@link OreData}. Each block
- * shows its own host rock, so there are no separate deepslate variants.
+ * The in-world ore blocks ({@code <mineral>_ore}) and the host rocks they sit in, as listed in
+ * {@link OreData}. Each ore is painted in its host rock, so there are no deepslate variants.
  *
  * <p>Loader-agnostic: the loader hands in a registration callback (see {@code Fundamentals}).
  */
@@ -40,17 +40,24 @@ public final class OreBlocks {
     private OreBlocks() {}
 
     public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
+        for (OreData.Rock rock : OreData.get().rocks()) {
+            add(registry, rock.name(), rock.soft(), 1.5F);
+        }
         for (OreData.Ore ore : OreData.get().ores()) {
-            BlockBehaviour.Properties props = ore.soft()
-                    ? BlockBehaviour.Properties.of().mapColor(MapColor.DIRT).strength(0.6F).sound(SoundType.GRAVEL)
-                    : BlockBehaviour.Properties.of().mapColor(MapColor.STONE).requiresCorrectToolForDrops()
-                            .strength(3.0F, 3.0F);
-            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, ore.mineral() + "_ore");
-            Block block = new Block(props);
-            BLOCKS.put(id, block);
-            registry.accept(id, block);
+            add(registry, ore.mineral() + "_ore", ore.soft(), 3.0F);
         }
         reportMismatches();
+    }
+
+    private static void add(BiConsumer<ResourceLocation, Block> registry, String name, boolean soft, float hardness) {
+        BlockBehaviour.Properties props = soft
+                ? BlockBehaviour.Properties.of().mapColor(MapColor.DIRT).strength(0.6F).sound(SoundType.GRAVEL)
+                : BlockBehaviour.Properties.of().mapColor(MapColor.STONE).requiresCorrectToolForDrops()
+                        .strength(hardness, 3.0F);
+        ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, name);
+        Block block = new Block(props);
+        BLOCKS.put(id, block);
+        registry.accept(id, block);
     }
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {

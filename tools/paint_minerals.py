@@ -19,18 +19,19 @@ SIZE = 16
 OUT = Path(__file__).resolve().parent.parent / "src/main/resources/assets/fundamentals/textures/block"
 
 STONE = [(100, 100, 100), (113, 113, 113), (125, 125, 125), (134, 134, 134), (143, 143, 143)]
-# Host rocks: (tones dark->light, blur_x, blur_y, share of each tone).
+# Host rocks: (tones dark->light, blur_x, blur_y, share of each tone). Every one except "sand"
+# (vanilla sand) is also a block of its own, so an ore sits in a body of the rock it is painted in.
 HOSTS = {
-    "stone": ([(100, 100, 100), (113, 113, 113), (125, 125, 125), (134, 134, 134), (143, 143, 143)], 2, 0, (1, 3, 4, 3, 1)),
     "carbonatite": ([(170, 150, 118), (192, 176, 144), (210, 197, 168), (226, 216, 190)], 1, 1, (1, 3, 4, 2)),
-    "granite": ([(150, 110, 96), (184, 138, 120), (204, 164, 146), (216, 206, 196)], 1, 1, (2, 4, 3, 2)),
+    "pegmatite": ([(150, 110, 96), (184, 138, 120), (204, 164, 146), (216, 206, 196)], 1, 1, (2, 4, 3, 2)),
     "greisen": ([(138, 138, 134), (160, 160, 154), (180, 180, 172), (198, 198, 190)], 1, 1, (1, 3, 4, 2)),
     "porphyry": ([(118, 106, 104), (132, 120, 116), (144, 132, 126), (154, 142, 136)], 1, 0, (1, 3, 4, 2)),
     "gossan": ([(96, 54, 26), (126, 76, 34), (154, 98, 42), (178, 122, 54)], 1, 1, (2, 4, 3, 1)),
     "limestone": ([(160, 156, 142), (176, 172, 158), (188, 184, 170), (198, 195, 182)], 3, 0, (1, 3, 4, 2)),
-    "basalt": ([(44, 46, 50), (56, 58, 62), (68, 70, 74), (80, 82, 86)], 1, 0, (2, 4, 3, 1)),
-    "mafic": ([(50, 56, 52), (64, 70, 64), (80, 86, 78), (98, 104, 94)], 1, 1, (2, 4, 3, 1)),
+    "gabbro": ([(50, 56, 52), (64, 70, 64), (80, 86, 78), (98, 104, 94)], 1, 1, (2, 4, 3, 1)),
     "syenite": ([(144, 150, 144), (164, 170, 162), (182, 187, 178), (198, 202, 194)], 1, 1, (1, 3, 4, 2)),
+    "vein_quartz": ([(196, 196, 190), (214, 214, 208), (230, 230, 224), (244, 244, 240)], 1, 1, (1, 3, 4, 2)),
+    "laterite": ([(118, 54, 34), (140, 68, 42), (158, 82, 50), (172, 98, 60)], 1, 1, (2, 4, 3, 1)),
     "sand": ([(184, 164, 120), (200, 182, 138), (214, 198, 154), (226, 212, 170)], 2, 0, (1, 3, 4, 2)),
 }
 
@@ -89,19 +90,19 @@ RECIPES = {
     "bastnasite": ("carbonatite", [("mass", 14, 19), ("blob", 2, 4, 7), ("speck", 4), ("companion", "pyrolusite", 3)]),
     # A placer mineral: heavy resinous grains concentrated in black-sand laminae on beaches.
     "monazite": ("sand", [("laminae", 3), ("blob", 3, 3, 5), ("speck", 8)]),
-    "xenotime": ("granite", [("crystals", "prism", 2, 2), ("crystals", "prism", 1, 1), ("speck", 3)]),
+    "xenotime": ("pegmatite", [("crystals", "prism", 2, 2), ("crystals", "prism", 1, 1), ("speck", 3)]),
     "loparite": ("syenite", [("laths", 5), ("crystals", "cube", 2, 3), ("crystals", "cube", 2, 1), ("speck", 3)]),
-    "euxenite": ("granite", [("mass", 14, 18), ("blob", 2, 4, 7), ("speck", 3)]),
+    "euxenite": ("pegmatite", [("mass", 14, 18), ("blob", 2, 4, 7), ("speck", 3)]),
     # --- copper ---
     # Porphyry copper: sulfide riding quartz veinlets, with disseminated grains off the vein.
     "chalcopyrite": ("porphyry", [("phenocrysts", 6), ("vein", "diag", 3, 5, 9), ("blob", 2, 3, 5), ("speck", 5)]),
     "bornite": ("porphyry", [("phenocrysts", 5), ("mass", 20, 26), ("blob", 2, 5, 8), ("speck", 3)]),
     # Sooty secondary sulfide: irregular smeared patches under the leached cap.
     "chalcocite": ("porphyry", [("phenocrysts", 4), ("smear", 2, 12, 16), ("blob", 2, 3, 5), ("speck", 4)]),
-    "covellite": ("stone", [("crystals", "plate", 2, 3), ("crystals", "plate", 2, 1), ("speck", 2)]),
+    "covellite": ("porphyry", [("crystals", "plate", 2, 3), ("crystals", "plate", 2, 1), ("speck", 2)]),
     "malachite": ("gossan", [("voids", 5), ("banded", 2, 18, 24), ("blob", 2, 3, 5)]),
-    # Azurite alters to malachite, so the two are found together; classic in limestone.
-    "azurite": ("limestone", [("mass", 13, 17), ("blob", 2, 4, 6), ("companion", "malachite", 5)]),
+    # Azurite alters to malachite, so the two are found together in the oxidised cap.
+    "azurite": ("gossan", [("mass", 13, 17), ("blob", 2, 4, 6), ("companion", "malachite", 5)]),
     # Cuprite forms on native copper in the oxidised zone.
     "cuprite": ("gossan", [("voids", 4), ("blob", 4, 5, 9), ("speck", 3), ("companion", "native_copper", 4)]),
     # --- lead, zinc, tin ---
@@ -115,9 +116,9 @@ RECIPES = {
     # Manganese oxide: sooty black dendrites creeping across limestone.
     "pyrolusite": ("limestone", [("smear", 3, 12, 18), ("speck", 6)]),
     # Sudbury/Norilsk: bronze sulfide blebs in dark mafic rock, always with pyrrhotite.
-    "pentlandite": ("mafic", [("mass", 10, 14), ("blob", 2, 3, 6), ("companion", "pyrrhotite", 5), ("speck", 3)]),
+    "pentlandite": ("gabbro", [("mass", 10, 14), ("blob", 2, 3, 6), ("companion", "pyrrhotite", 5), ("speck", 3)]),
     # Bushveld: seams of solid black chromitite through the layered intrusion.
-    "chromite": ("mafic", [("band", "chromite"), ("band", "chromite"), ("blob", 3, 3, 6), ("speck", 5)]),
+    "chromite": ("gabbro", [("band", "chromite"), ("band", "chromite"), ("blob", 3, 3, 6), ("speck", 5)]),
     # Black bladed crystals in quartz veins through greisen, alongside tin.
     "wolframite": ("greisen", [("vein", "wavy", 2, 3, 5), ("crystals", "plate", 2, 2), ("speck", 2)]),
     # Skarn tungsten: pale waxy grains with red garnet where granite met limestone.
@@ -125,17 +126,17 @@ RECIPES = {
     # Soft blue-grey flakes on quartz veinlets in the same porphyries as copper.
     "molybdenite": ("porphyry", [("phenocrysts", 5), ("vein", "diag", 2, 2, 4), ("crystals", "plate", 2, 2), ("speck", 3)]),
     # Tin-white cubes with pink "cobalt bloom" (erythrite) wherever they weather.
-    "cobaltite": ("stone", [("crystals", "cube", 2, 2), ("crystals", "cube", 2, 1), ("companion", "erythrite", 6)]),
+    "cobaltite": ("vein_quartz", [("crystals", "cube", 2, 2), ("crystals", "cube", 2, 1), ("companion", "erythrite", 6)]),
     # Mineral sands: titanium minerals are the black layers in a beach.
     "ilmenite": ("sand", [("laminae", 6), ("blob", 4, 3, 6), ("speck", 6)]),
     "rutile": ("sand", [("laminae", 2), ("blob", 4, 3, 5), ("speck", 9)]),
     # --- precious and PGM (Laptop B's minerals) ---
-    "native_silver": ("stone", [("vein", "wavy", 0, 0, 0), ("smear", 2, 9, 13), ("speck", 3), ("companion", "argentite", 3)]),
-    "argentite": ("stone", [("vein", "diag", 3, 4, 8), ("blob", 2, 3, 5), ("speck", 3)]),
+    "native_silver": ("vein_quartz", [("smear", 2, 9, 13), ("speck", 3), ("companion", "argentite", 3)]),
+    "argentite": ("vein_quartz", [("mass", 8, 12), ("blob", 3, 3, 6), ("speck", 4)]),
     # PGM minerals are tiny bright grains in a dark layered intrusion, not masses.
-    "sperrylite": ("mafic", [("crystals", "cube", 3, 1), ("speck", 6)]),
-    "cooperite": ("mafic", [("band", "chromite"), ("blob", 2, 2, 4), ("speck", 6)]),
-    "braggite": ("mafic", [("companion", "pentlandite", 5), ("blob", 2, 2, 4), ("speck", 5)]),
+    "sperrylite": ("gabbro", [("crystals", "cube", 3, 1), ("speck", 6)]),
+    "cooperite": ("gabbro", [("band", "chromite"), ("blob", 2, 2, 4), ("speck", 6)]),
+    "braggite": ("gabbro", [("companion", "pentlandite", 5), ("blob", 2, 2, 4), ("speck", 5)]),
     "cinnabar": ("limestone", [("vein", "wavy", 3, 4, 8), ("blob", 2, 4, 7), ("speck", 5)]),
 }
 
@@ -162,7 +163,7 @@ def host_rock(rng, kind):
     img = Image.new("RGB", (SIZE, SIZE))
     for p, v in field(rng, bx, by).items():
         img.putpixel(p, tones[next(i for i, c in enumerate(cuts) if v < c or i == len(cuts) - 1)])
-    if kind == "granite":  # coarse: dark mica books and glassy quartz eyes
+    if kind == "pegmatite":  # coarse: dark mica books and glassy quartz eyes
         for _ in range(9):
             img.putpixel((rng.randrange(SIZE), rng.randrange(SIZE)), (52, 46, 44))
         for _ in range(5):
@@ -186,7 +187,8 @@ def host_rock(rng, kind):
 class Canvas:
     def __init__(self, name, host):
         self.rng = random.Random(name)
-        self.img = host_rock(self.rng, host)
+        # Same background as the plain rock block, so an ore blends into the body around it.
+        self.img = host_rock(random.Random("host-" + host), host)
         self.ore = set()
 
     def free(self, cells, margin):
@@ -518,6 +520,10 @@ def paint_all():
     return out
 
 
+def paint_rocks():
+    return {name: host_rock(random.Random("host-" + name), name) for name in HOSTS if name != "sand"}
+
+
 SHEET_ORDER = [
     "bastnasite", "monazite", "xenotime", "ion_adsorption_clay", "loparite", "euxenite",
     "chalcopyrite", "bornite", "chalcocite", "covellite", "malachite", "azurite", "cuprite",
@@ -528,13 +534,15 @@ SHEET_ORDER = [
 ]
 
 
-def contact_sheet(textures, path, cols=7, scale=14):
+def contact_sheet(textures, path, cols=8, scale=12):
+    textures = {**textures, **paint_rocks()}
+    order = [n for n in HOSTS if n != "sand"] + SHEET_ORDER
     tile, pad, label = SIZE * scale, 20, 28
-    rows = -(-len(SHEET_ORDER) // cols)
+    rows = -(-len(order) // cols)
     sheet = Image.new("RGB", (cols * (tile + pad) + pad, rows * (tile + pad + label) + pad), (32, 34, 38))
     draw = ImageDraw.Draw(sheet)
-    font = ImageFont.load_default(size=18)
-    for i, name in enumerate(SHEET_ORDER):
+    font = ImageFont.load_default(size=16)
+    for i, name in enumerate(order):
         x = pad + (i % cols) * (tile + pad)
         y = pad + (i // cols) * (tile + pad + label)
         sheet.paste(textures[name].resize((tile, tile), Image.NEAREST), (x, y))
@@ -547,7 +555,10 @@ if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
     for name, img in textures.items():
         img.save(OUT / f"{name}_ore.png")
-    print(f"wrote {len(textures)} textures to {OUT}")
+    rocks = paint_rocks()
+    for name, img in rocks.items():
+        img.save(OUT / f"{name}.png")
+    print(f"wrote {len(textures)} ore and {len(rocks)} rock textures to {OUT}")
     if len(sys.argv) > 1:
         contact_sheet(textures, sys.argv[1])
         print(f"wrote contact sheet {sys.argv[1]}")

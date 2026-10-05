@@ -1,0 +1,27 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "bed",
+    "host": {
+      "Name": "fundamentals:magnetite_ore"
+    },
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:hematite_ore"
+        },
+        "fraction": 0.1,
+        "style": "seams"
+      }
+    ],
+    "radius": {
+      "min": 8,
+      "max": 12
+    },
+    "thickness": {
+      "min": 3,
+      "max": 5
+    },
+    "replaceable": "fundamentals:deposit_replaceable/rock"
+  }
+}

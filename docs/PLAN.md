@@ -286,14 +286,22 @@ features in worldgen JSON — for now this table is the spec both sides build to
   - **A next:** rare-earth and base-metal chains, then solvent-extraction design.
 - **2026-10-04 [A]** Branch `a/mineral-textures` (PR into main): **ore blocks exist and generate**,
   on both loaders. Verified on headless Fabric and NeoForge servers (2,760 chunks across jungle,
-  badlands, mountain, beach, swamp, taiga, desert): all 38 ore blocks generate in their depth bands
+  badlands, mountain, beach, swamp, taiga, desert): all 38 ore blocks and 10 host rocks generate,
   and vanilla `iron_ore` no longer does.
+  - **Ore generates as deposits, not blobs.** `worldgen.DepositFeature` places a body of host
+    rock with ore inside it, in four real shapes: `bed` (banded iron, limestone lead-zinc,
+    layered intrusions with chromite seams), `plug` (porphyry copper, carbonatite), `vein`
+    (quartz-silver, tin greisen, pegmatite) and `blanket` (bauxite/nickel laterite, gossan caps,
+    REE clay). Ore is spread through the body as pockets, seams, scattered grains or a top
+    enrichment. Host rocks are blocks of their own: carbonatite, limestone, gossan, porphyry,
+    greisen, gabbro, syenite, pegmatite, vein quartz, laterite. Beach placers (monazite,
+    ilmenite, rutile) still use the vanilla ore feature in sand.
   - **What landed:** `registry.OreBlocks` (one `<mineral>_ore` block + item per ore, creative tab),
     `worldgen.OreData` / `worldgen.OreSpawns`, and two generators — `tools/paint_minerals.py`
     (textures) and `tools/build_ore_data.py` (models, loot, tags, lang, features, biome tags,
     NeoForge biome modifiers, and `fundamentals_ores.json`, which both the block registration and
-    the Fabric spawn code read). **Spawn tuning = edit a row in `ORES` in `build_ore_data.py` and
-    re-run.** Don't hand-edit the generated JSON or PNGs.
+    the Fabric spawn code read). **Spawn tuning = edit a row in `DEPOSITS` in
+    `build_ore_data.py` and re-run.** Don't hand-edit the generated JSON or PNGs.
   - **For Laptop B — please add materials:** I added ore blocks, textures and spawns for seven
     ferrous minerals the user asked to see that have no `MINERAL` material yet: `chromite`,
     `wolframite`, `scheelite`, `molybdenite`, `cobaltite`, `ilmenite`, `rutile`. Add them to
@@ -302,16 +310,17 @@ features in worldgen JSON — for now this table is the spec both sides build to
     the item forms (raw, dust, ingot…) on top. Ore blocks drop themselves for now — once raw
     mineral items exist, change the loot table template in `build_ore_data.py` to drop them.
   - **For Laptop B — your minerals' art and spawns:** I painted and placed your 20 minerals too so
-    there is one consistent pass. Review the recipes in `paint_minerals.py` and the rows in `ORES`
+    there is one consistent pass. Review the recipes in `paint_minerals.py` and the `DEPOSITS` rows
     for hematite, magnetite, goethite, pyrolusite, pentlandite, nickel laterite, the silver and
     platinum minerals and cinnabar, and change whatever is wrong for your chains.
   - **Rulings from the user:** native copper = vanilla copper ore (like gold, §2.4); no deepslate
     variants (§4).
   - **Known gaps (A will take):** (1) the hardcoded deep ore veins still place
-    `deepslate_iron_ore` and `raw_iron_block` — needs a mixin on `OreVeinifier`; (2) host rocks
-    exist only as ore-block textures, so a vein looks like a pod of foreign rock — next step is
-    real host-rock blocks generated around the ore; (3) frequencies are a first guess (sphalerite
-    and galena look too common, vanilla copper far too common for "native copper").
+    `deepslate_iron_ore` and `raw_iron_block` — needs a mixin on `OreVeinifier`; (2) a deposit is
+    capped at ~30 blocks across (a feature may only write to the 3x3 chunks around it), so truly
+    large bodies would need a structure; (3) frequencies are a first guess — iron is roughly
+    twice vanilla, limestone beds are everywhere, and vanilla copper is far too common for
+    "native copper"; (4) host rocks have no uses or recipes yet.
 
 ---
 

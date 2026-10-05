@@ -1,0 +1,34 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "bed",
+    "host": {
+      "Name": "fundamentals:limestone"
+    },
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:sphalerite_ore"
+        },
+        "fraction": 0.12,
+        "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:galena_ore"
+        },
+        "fraction": 0.08,
+        "style": "pockets"
+      }
+    ],
+    "radius": {
+      "min": 10,
+      "max": 15
+    },
+    "thickness": {
+      "min": 4,
+      "max": 7
+    },
+    "replaceable": "fundamentals:deposit_replaceable/rock"
+  }
+}

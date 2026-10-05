@@ -153,98 +153,126 @@
       "soft": false
     }
   ],
+  "rocks": [
+    {
+      "name": "carbonatite",
+      "soft": false
+    },
+    {
+      "name": "limestone",
+      "soft": false
+    },
+    {
+      "name": "gossan",
+      "soft": false
+    },
+    {
+      "name": "porphyry",
+      "soft": false
+    },
+    {
+      "name": "greisen",
+      "soft": false
+    },
+    {
+      "name": "gabbro",
+      "soft": false
+    },
+    {
+      "name": "syenite",
+      "soft": false
+    },
+    {
+      "name": "pegmatite",
+      "soft": false
+    },
+    {
+      "name": "vein_quartz",
+      "soft": false
+    },
+    {
+      "name": "laterite",
+      "soft": true
+    }
+  ],
   "add": [
     {
       "biomes": "fundamentals:deposit/anywhere",
       "features": [
-        "fundamentals:ore_hematite",
-        "fundamentals:ore_magnetite",
-        "fundamentals:ore_pyrolusite",
-        "fundamentals:ore_pentlandite",
-        "fundamentals:ore_chromite",
-        "fundamentals:ore_galena",
-        "fundamentals:ore_sphalerite",
-        "fundamentals:ore_smithsonite",
-        "fundamentals:ore_sperrylite",
-        "fundamentals:ore_cooperite",
-        "fundamentals:ore_braggite"
+        "fundamentals:hematite_bed",
+        "fundamentals:magnetite_bed",
+        "fundamentals:lead_zinc_bed",
+        "fundamentals:zinc_oxide_bed",
+        "fundamentals:manganese_bed",
+        "fundamentals:layered_intrusion",
+        "fundamentals:nickel_sulfide"
       ]
     },
     {
       "biomes": "fundamentals:deposit/wetland",
       "features": [
-        "fundamentals:ore_goethite"
-      ]
-    },
-    {
-      "biomes": "fundamentals:deposit/laterite",
-      "features": [
-        "fundamentals:ore_nickel_laterite",
-        "fundamentals:ore_bauxite"
-      ]
-    },
-    {
-      "biomes": "fundamentals:deposit/pegmatite",
-      "features": [
-        "fundamentals:ore_wolframite",
-        "fundamentals:ore_cassiterite",
-        "fundamentals:ore_xenotime",
-        "fundamentals:ore_euxenite"
+        "fundamentals:bog_iron"
       ]
     },
     {
       "biomes": "fundamentals:deposit/hydrothermal",
       "features": [
-        "fundamentals:ore_scheelite",
-        "fundamentals:ore_cobaltite",
-        "fundamentals:ore_native_silver",
-        "fundamentals:ore_argentite",
-        "fundamentals:ore_cinnabar"
+        "fundamentals:tungsten_skarn",
+        "fundamentals:mercury_lens",
+        "fundamentals:silver_vein",
+        "fundamentals:cobalt_vein"
       ]
     },
     {
       "biomes": "fundamentals:deposit/porphyry",
       "features": [
-        "fundamentals:ore_molybdenite",
-        "fundamentals:ore_chalcopyrite",
-        "fundamentals:ore_bornite",
-        "fundamentals:ore_chalcocite",
-        "fundamentals:ore_covellite"
-      ]
-    },
-    {
-      "biomes": "fundamentals:deposit/placer",
-      "features": [
-        "fundamentals:ore_ilmenite",
-        "fundamentals:ore_rutile",
-        "fundamentals:ore_monazite"
+        "fundamentals:porphyry_stock"
       ]
     },
     {
       "biomes": "fundamentals:deposit/arid_oxide",
       "features": [
-        "fundamentals:ore_malachite",
-        "fundamentals:ore_azurite",
-        "fundamentals:ore_cuprite",
-        "fundamentals:ore_hemimorphite"
+        "fundamentals:gossan_cap"
       ]
     },
     {
-      "biomes": "fundamentals:deposit/carbonatite",
+      "biomes": "fundamentals:deposit/laterite",
       "features": [
-        "fundamentals:ore_bastnasite"
+        "fundamentals:bauxite_blanket",
+        "fundamentals:nickel_laterite_blanket"
       ]
     },
     {
       "biomes": "fundamentals:deposit/ion_clay",
       "features": [
-        "fundamentals:ore_ion_adsorption_clay"
+        "fundamentals:ion_clay_blanket"
+      ]
+    },
+    {
+      "biomes": "fundamentals:deposit/carbonatite",
+      "features": [
+        "fundamentals:carbonatite_plug"
       ]
     },
     {
       "biomes": "fundamentals:deposit/alkaline",
       "features": [
-        "fundamentals:ore_loparite"
+        "fundamentals:syenite_massif"
+      ]
+    },
+    {
+      "biomes": "fundamentals:deposit/pegmatite",
+      "features": [
+        "fundamentals:pegmatite_dyke",
+        "fundamentals:tin_greisen"
+      ]
+    },
+    {
+      "biomes": "fundamentals:deposit/placer",
+      "features": [
+        "fundamentals:placer_monazite",
+        "fundamentals:placer_ilmenite",
+        "fundamentals:placer_rutile"
       ]
     }
   ],

@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:deepslate_ore_replaceables",
+    "#minecraft:dirt",
+    "#minecraft:sand",
+    "#minecraft:stone_ore_replaceables",
+    "#minecraft:terracotta",
+    "minecraft:clay",
+    "minecraft:gravel",
+    "minecraft:mud",
+    "minecraft:red_sandstone",
+    "minecraft:sandstone"
+  ]
+}

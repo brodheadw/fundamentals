@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#fundamentals:deposit/porphyry",
+  "features": [
+    "fundamentals:porphyry_stock"
+  ],
+  "step": "underground_ores"
+}

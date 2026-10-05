@@ -1,0 +1,27 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "bed",
+    "host": {
+      "Name": "fundamentals:gabbro"
+    },
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:pentlandite_ore"
+        },
+        "fraction": 0.14,
+        "style": "pockets"
+      }
+    ],
+    "radius": {
+      "min": 7,
+      "max": 10
+    },
+    "thickness": {
+      "min": 4,
+      "max": 6
+    },
+    "replaceable": "fundamentals:deposit_replaceable/rock"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#fundamentals:deposit/alkaline",
+  "features": [
+    "fundamentals:syenite_massif"
+  ],
+  "step": "underground_ores"
+}

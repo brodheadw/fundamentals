@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ai.gsmc.fundamentals.registry.OreBlocks;
+import ai.gsmc.fundamentals.worldgen.DepositFeature;
 import ai.gsmc.fundamentals.worldgen.OreSpawns;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -45,6 +46,7 @@ public class Fundamentals /*? if fabric {*/ implements ModInitializer /*?}*/ {
         init();
         OreBlocks.registerBlocks((id, block) -> Registry.register(BuiltInRegistries.BLOCK, id, block));
         OreBlocks.registerItems((id, item) -> Registry.register(BuiltInRegistries.ITEM, id, item));
+        Registry.register(BuiltInRegistries.FEATURE, DEPOSIT, DepositFeature.INSTANCE);
         Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, MINERALS_TAB, mineralsTab(FabricItemGroup.builder()));
         OreSpawns.apply();
     }
@@ -56,13 +58,15 @@ public class Fundamentals /*? if fabric {*/ implements ModInitializer /*?}*/ {
         modBus.addListener(RegisterEvent.class, event -> {
             event.register(Registries.BLOCK, helper -> OreBlocks.registerBlocks(helper::register));
             event.register(Registries.ITEM, helper -> OreBlocks.registerItems(helper::register));
+            event.register(Registries.FEATURE, helper -> helper.register(DEPOSIT, DepositFeature.INSTANCE));
             event.register(Registries.CREATIVE_MODE_TAB,
                     helper -> helper.register(MINERALS_TAB, mineralsTab(CreativeModeTab.builder())));
         });
     }
     *///?}
 
-    private static final ResourceLocation MINERALS_TAB = ResourceLocation.fromNamespaceAndPath("fundamentals", "minerals");
+    private static final ResourceLocation MINERALS_TAB = ResourceLocation.fromNamespaceAndPath(MOD_ID, "minerals");
+    private static final ResourceLocation DEPOSIT = ResourceLocation.fromNamespaceAndPath(MOD_ID, "deposit");
 
     private static CreativeModeTab mineralsTab(CreativeModeTab.Builder builder) {
         return builder.title(Component.translatable("itemGroup.fundamentals.minerals"))

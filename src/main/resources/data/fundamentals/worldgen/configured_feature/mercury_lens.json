@@ -1,0 +1,27 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "bed",
+    "host": {
+      "Name": "fundamentals:limestone"
+    },
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:cinnabar_ore"
+        },
+        "fraction": 0.08,
+        "style": "pockets"
+      }
+    ],
+    "radius": {
+      "min": 6,
+      "max": 9
+    },
+    "thickness": {
+      "min": 3,
+      "max": 4
+    },
+    "replaceable": "fundamentals:deposit_replaceable/rock"
+  }
+}

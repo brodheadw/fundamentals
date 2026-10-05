@@ -1,0 +1,55 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "bed",
+    "host": {
+      "Name": "fundamentals:gabbro"
+    },
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:chromite_ore"
+        },
+        "fraction": 0.12,
+        "style": "seams"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:pentlandite_ore"
+        },
+        "fraction": 0.05,
+        "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:sperrylite_ore"
+        },
+        "fraction": 0.006,
+        "style": "disseminated"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:cooperite_ore"
+        },
+        "fraction": 0.005,
+        "style": "disseminated"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:braggite_ore"
+        },
+        "fraction": 0.005,
+        "style": "disseminated"
+      }
+    ],
+    "radius": {
+      "min": 12,
+      "max": 15
+    },
+    "thickness": {
+      "min": 8,
+      "max": 12
+    },
+    "replaceable": "fundamentals:deposit_replaceable/rock"
+  }
+}

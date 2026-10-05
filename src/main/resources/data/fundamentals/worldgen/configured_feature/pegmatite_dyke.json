@@ -1,0 +1,38 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "vein",
+    "host": {
+      "Name": "fundamentals:pegmatite"
+    },
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:xenotime_ore"
+        },
+        "fraction": 0.05,
+        "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:euxenite_ore"
+        },
+        "fraction": 0.02,
+        "style": "pockets"
+      }
+    ],
+    "radius": {
+      "min": 10,
+      "max": 15
+    },
+    "thickness": {
+      "min": 2,
+      "max": 4
+    },
+    "replaceable": "fundamentals:deposit_replaceable/rock",
+    "height": {
+      "min": 12,
+      "max": 22
+    }
+  }
+}

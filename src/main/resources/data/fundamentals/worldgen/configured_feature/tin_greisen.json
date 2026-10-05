@@ -1,0 +1,38 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "vein",
+    "host": {
+      "Name": "fundamentals:greisen"
+    },
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:cassiterite_ore"
+        },
+        "fraction": 0.12,
+        "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:wolframite_ore"
+        },
+        "fraction": 0.06,
+        "style": "pockets"
+      }
+    ],
+    "radius": {
+      "min": 10,
+      "max": 15
+    },
+    "thickness": {
+      "min": 2,
+      "max": 3
+    },
+    "replaceable": "fundamentals:deposit_replaceable/rock",
+    "height": {
+      "min": 12,
+      "max": 24
+    }
+  }
+}

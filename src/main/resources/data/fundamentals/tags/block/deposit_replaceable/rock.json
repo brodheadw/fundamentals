@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:deepslate_ore_replaceables",
+    "#minecraft:stone_ore_replaceables"
+  ]
+}

@@ -1,8 +1,0 @@
-{
-  "type": "neoforge:add_features",
-  "biomes": "#fundamentals:deposit/ion_clay",
-  "features": [
-    "fundamentals:ore_ion_adsorption_clay"
-  ],
-  "step": "underground_ores"
-}

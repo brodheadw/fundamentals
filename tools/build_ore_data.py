@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""Generates every data/asset file an ore block needs, from the one table below.
+"""Generates every data/asset file the ore and rock blocks need, from the tables below.
 
-For each mineral: blockstate, block + item model, loot table, mining/commodity tags, lang entry,
-and its world generation (configured + placed feature, the deposit's biome tag, the NeoForge
-biome modifier, and the spawn list the Fabric side reads). Re-run after editing the table.
+Blocks (ORES, ROCKS): blockstate, block + item model, loot table, mining/commodity tags, lang.
+World generation (DEPOSITS, PLACERS): configured + placed features, each deposit type's biome
+tag, the NeoForge biome modifiers, and the list the Fabric side reads. Re-run after any edit.
 
     python3 tools/build_ore_data.py
 
-Spawn tuning lives in ORES: change a row, re-run, commit. PLAN §5 is the spec it follows.
+Ore does not generate as scattered blobs. Each row of DEPOSITS is a body of host rock with ore
+inside it, in a real shape (worldgen.DepositFeature): tune a deposit by editing its row.
 """
 import json
 import shutil
@@ -19,8 +20,8 @@ DATA = ROOT / "data/fundamentals"
 MC_TAGS = ROOT / "data/minecraft/tags/block"
 C_TAGS = ROOT / "data/c/tags"
 
-# Deposit type -> the biomes it occurs in (PLAN §5).
-DEPOSITS = {
+# Where a deposit type occurs (PLAN §5).
+BIOMES = {
     "anywhere": ["#minecraft:is_overworld"],
     "porphyry": ["#minecraft:is_mountain", "#minecraft:is_hill"],
     "arid_oxide": ["#minecraft:is_badlands", "#minecraft:is_savanna", "minecraft:desert"],
@@ -34,58 +35,137 @@ DEPOSITS = {
     "hydrothermal": ["#minecraft:is_mountain", "#minecraft:is_hill", "#minecraft:is_badlands"],
 }
 
-ROCK = ["minecraft:stone_ore_replaceables", "minecraft:deepslate_ore_replaceables"]
-SOIL = ROCK + ["minecraft:dirt"]
-SAND = ["minecraft:sand"]
-
-# mineral: (commodity, deposit, y_min, y_max, spread, per_chunk, vein_size, replaces, tool, tier)
-#   spread     "trapezoid" peaks mid-range, "uniform" is flat
-#   per_chunk  >= 1: that many veins per chunk; < 1: one vein every 1/x chunks
-#   tier       "stone" / "iron" pickaxe needed, or None
+# mineral: (commodity, tool, tier). tier = "stone" / "iron" pickaxe needed, or None.
 ORES = {
-    # --- iron: common everywhere, as in reality ---
-    "hematite": ("iron", "anywhere", -16, 112, "trapezoid", 14, 12, ROCK, "pickaxe", "stone"),
-    "magnetite": ("iron", "anywhere", -64, 16, "uniform", 5, 10, ROCK, "pickaxe", "stone"),
-    "goethite": ("iron", "wetland", 50, 70, "uniform", 6, 14, SOIL, "pickaxe", None),
-    "pyrolusite": ("manganese", "anywhere", 0, 64, "uniform", 3, 8, ROCK, "pickaxe", "stone"),
-    "pentlandite": ("nickel", "anywhere", -64, -8, "uniform", 2, 8, ROCK, "pickaxe", "iron"),
-    "nickel_laterite": ("nickel", "laterite", 56, 84, "uniform", 3, 18, SOIL, "shovel", None),
-    "chromite": ("chromium", "anywhere", -64, -16, "uniform", 1 / 3, 12, ROCK, "pickaxe", "iron"),
-    "wolframite": ("tungsten", "pegmatite", -16, 48, "uniform", 1 / 2, 6, ROCK, "pickaxe", "iron"),
-    "scheelite": ("tungsten", "hydrothermal", -32, 40, "uniform", 1 / 3, 6, ROCK, "pickaxe", "iron"),
-    "molybdenite": ("molybdenum", "porphyry", -32, 48, "uniform", 2, 6, ROCK, "pickaxe", "iron"),
-    "cobaltite": ("cobalt", "hydrothermal", -32, 32, "uniform", 1 / 3, 5, ROCK, "pickaxe", "iron"),
-    "ilmenite": ("titanium", "placer", 54, 66, "uniform", 4, 8, SAND, "shovel", None),
-    "rutile": ("titanium", "placer", 54, 66, "uniform", 2, 6, SAND, "shovel", None),
-    # --- copper: sulfides in mountain porphyries, oxides near the surface in dry country ---
-    "chalcopyrite": ("copper", "porphyry", -16, 96, "trapezoid", 10, 12, ROCK, "pickaxe", "stone"),
-    "bornite": ("copper", "porphyry", -16, 64, "uniform", 3, 8, ROCK, "pickaxe", "stone"),
-    "chalcocite": ("copper", "porphyry", 16, 80, "uniform", 3, 9, ROCK, "pickaxe", "stone"),
-    "covellite": ("copper", "porphyry", 16, 64, "uniform", 1 / 3, 5, ROCK, "pickaxe", "stone"),
-    "malachite": ("copper", "arid_oxide", 48, 96, "uniform", 5, 9, ROCK, "pickaxe", "stone"),
-    "azurite": ("copper", "arid_oxide", 40, 88, "uniform", 3, 7, ROCK, "pickaxe", "stone"),
-    "cuprite": ("copper", "arid_oxide", 40, 80, "uniform", 2, 6, ROCK, "pickaxe", "stone"),
-    # --- aluminium, lead, zinc, tin ---
-    "bauxite": ("aluminum", "laterite", 56, 90, "uniform", 4, 28, SOIL, "pickaxe", None),
-    "galena": ("lead", "anywhere", -48, 40, "trapezoid", 5, 9, ROCK, "pickaxe", "stone"),
-    "sphalerite": ("zinc", "anywhere", -48, 40, "trapezoid", 6, 10, ROCK, "pickaxe", "stone"),
-    "smithsonite": ("zinc", "anywhere", 32, 80, "uniform", 2, 6, ROCK, "pickaxe", "stone"),
-    "hemimorphite": ("zinc", "arid_oxide", 40, 88, "uniform", 2, 6, ROCK, "pickaxe", "stone"),
-    "cassiterite": ("tin", "pegmatite", -16, 56, "uniform", 4, 7, ROCK, "pickaxe", "stone"),
-    # --- rare earths: rare, biome-locked ---
-    "bastnasite": ("rare_earth", "carbonatite", -56, 8, "uniform", 1 / 6, 30, ROCK, "pickaxe", "iron"),
-    "monazite": ("rare_earth", "placer", 54, 66, "uniform", 4, 7, SAND, "shovel", None),
-    "xenotime": ("rare_earth", "pegmatite", -16, 48, "uniform", 1 / 3, 6, ROCK, "pickaxe", "iron"),
-    "ion_adsorption_clay": ("rare_earth", "ion_clay", 60, 96, "uniform", 3, 24, SOIL, "shovel", None),
-    "loparite": ("rare_earth", "alkaline", -32, 32, "uniform", 1 / 5, 10, ROCK, "pickaxe", "iron"),
-    "euxenite": ("rare_earth", "pegmatite", -32, 32, "uniform", 1 / 8, 5, ROCK, "pickaxe", "iron"),
-    # --- precious: veins in the mountains; PGMs very rare at the bottom of the world ---
-    "native_silver": ("silver", "hydrothermal", -16, 64, "uniform", 1 / 2, 5, ROCK, "pickaxe", "iron"),
-    "argentite": ("silver", "hydrothermal", -32, 48, "uniform", 2, 6, ROCK, "pickaxe", "iron"),
-    "sperrylite": ("platinum", "anywhere", -64, -32, "uniform", 1 / 12, 4, ROCK, "pickaxe", "iron"),
-    "cooperite": ("platinum", "anywhere", -64, -32, "uniform", 1 / 14, 4, ROCK, "pickaxe", "iron"),
-    "braggite": ("platinum", "anywhere", -64, -32, "uniform", 1 / 14, 4, ROCK, "pickaxe", "iron"),
-    "cinnabar": ("mercury", "hydrothermal", 0, 72, "uniform", 1 / 2, 7, ROCK, "pickaxe", "iron"),
+    "hematite": ("iron", "pickaxe", "stone"),
+    "magnetite": ("iron", "pickaxe", "stone"),
+    "goethite": ("iron", "pickaxe", None),
+    "pyrolusite": ("manganese", "pickaxe", "stone"),
+    "pentlandite": ("nickel", "pickaxe", "iron"),
+    "nickel_laterite": ("nickel", "shovel", None),
+    "chromite": ("chromium", "pickaxe", "iron"),
+    "wolframite": ("tungsten", "pickaxe", "iron"),
+    "scheelite": ("tungsten", "pickaxe", "iron"),
+    "molybdenite": ("molybdenum", "pickaxe", "iron"),
+    "cobaltite": ("cobalt", "pickaxe", "iron"),
+    "ilmenite": ("titanium", "shovel", None),
+    "rutile": ("titanium", "shovel", None),
+    "chalcopyrite": ("copper", "pickaxe", "stone"),
+    "bornite": ("copper", "pickaxe", "stone"),
+    "chalcocite": ("copper", "pickaxe", "stone"),
+    "covellite": ("copper", "pickaxe", "stone"),
+    "malachite": ("copper", "pickaxe", "stone"),
+    "azurite": ("copper", "pickaxe", "stone"),
+    "cuprite": ("copper", "pickaxe", "stone"),
+    "bauxite": ("aluminum", "pickaxe", None),
+    "galena": ("lead", "pickaxe", "stone"),
+    "sphalerite": ("zinc", "pickaxe", "stone"),
+    "smithsonite": ("zinc", "pickaxe", "stone"),
+    "hemimorphite": ("zinc", "pickaxe", "stone"),
+    "cassiterite": ("tin", "pickaxe", "stone"),
+    "bastnasite": ("rare_earth", "pickaxe", "iron"),
+    "monazite": ("rare_earth", "shovel", None),
+    "xenotime": ("rare_earth", "pickaxe", "iron"),
+    "ion_adsorption_clay": ("rare_earth", "shovel", None),
+    "loparite": ("rare_earth", "pickaxe", "iron"),
+    "euxenite": ("rare_earth", "pickaxe", "iron"),
+    "native_silver": ("silver", "pickaxe", "iron"),
+    "argentite": ("silver", "pickaxe", "iron"),
+    "sperrylite": ("platinum", "pickaxe", "iron"),
+    "cooperite": ("platinum", "pickaxe", "iron"),
+    "braggite": ("platinum", "pickaxe", "iron"),
+    "cinnabar": ("mercury", "pickaxe", "iron"),
+}
+
+# Host rocks that are blocks of their own: (tool, display name or None).
+ROCKS = {
+    "carbonatite": ("pickaxe", None),
+    "limestone": ("pickaxe", None),
+    "gossan": ("pickaxe", None),
+    "porphyry": ("pickaxe", None),
+    "greisen": ("pickaxe", None),
+    "gabbro": ("pickaxe", None),
+    "syenite": ("pickaxe", None),
+    "pegmatite": ("pickaxe", None),
+    "vein_quartz": ("pickaxe", "Vein Quartz"),
+    "laterite": ("shovel", None),
+}
+
+# What a deposit may replace.
+REPLACEABLE = {
+    "rock": ["#minecraft:stone_ore_replaceables", "#minecraft:deepslate_ore_replaceables"],
+    "ground": ["#minecraft:stone_ore_replaceables", "#minecraft:deepslate_ore_replaceables", "#minecraft:dirt",
+               "#minecraft:sand", "#minecraft:terracotta", "minecraft:sandstone", "minecraft:red_sandstone",
+               "minecraft:gravel", "minecraft:clay", "minecraft:mud"],
+}
+
+# name: shape, host block, [(ore, share of the body, style)], radius, thickness, height,
+#       where (DEPOSITS-biome key), y range of the centre, one per N chunks, what it replaces.
+# Styles: disseminated (scattered grains) / pockets (masses) / seams (layers) / top (upper part only).
+# A host ending in _ore means the whole body is that ore (banded iron, bog iron, REE clay).
+DEPOSITS = {
+    # --- iron: whole beds of banded iron formation, common everywhere ---
+    "hematite_bed": ("bed", "hematite_ore", [("magnetite", 0.08, "seams")], (9, 14), (3, 6), None,
+                     "anywhere", (0, 96), 12, "rock"),
+    "magnetite_bed": ("bed", "magnetite_ore", [("hematite", 0.10, "seams")], (8, 12), (3, 5), None,
+                      "anywhere", (-56, 8), 20, "rock"),
+    "bog_iron": ("blanket", "goethite_ore", [], (6, 9), (1, 2), None, "wetland", (60, 64), 3, "ground"),
+    # --- limestone beds: lead-zinc, manganese, and the things hot fluids leave in limestone ---
+    "lead_zinc_bed": ("bed", "limestone", [("sphalerite", 0.12, "pockets"), ("galena", 0.08, "pockets")],
+                      (10, 15), (4, 7), None, "anywhere", (-40, 36), 16, "rock"),
+    "zinc_oxide_bed": ("bed", "limestone", [("smithsonite", 0.12, "pockets")], (8, 12), (3, 5), None,
+                       "anywhere", (36, 72), 24, "rock"),
+    "manganese_bed": ("bed", "limestone", [("pyrolusite", 0.14, "seams")], (9, 13), (3, 5), None,
+                      "anywhere", (0, 60), 20, "rock"),
+    "tungsten_skarn": ("bed", "limestone", [("scheelite", 0.08, "pockets")], (7, 10), (3, 5), None,
+                       "hydrothermal", (-32, 40), 14, "rock"),
+    "mercury_lens": ("bed", "limestone", [("cinnabar", 0.08, "pockets")], (6, 9), (3, 4), None,
+                     "hydrothermal", (0, 72), 14, "rock"),
+    # --- porphyry copper: a big low-grade stock, enriched near the top ---
+    "porphyry_stock": ("plug", "porphyry",
+                       [("chalcopyrite", 0.14, "pockets"), ("molybdenite", 0.03, "pockets"),
+                        ("bornite", 0.03, "disseminated"), ("chalcocite", 0.05, "top"), ("covellite", 0.01, "top")],
+                       (7, 11), None, (24, 40), "porphyry", (0, 70), 8, "rock"),
+    # --- the oxidised cap over copper and zinc, at the surface in dry country ---
+    "gossan_cap": ("blanket", "gossan",
+                   [("malachite", 0.14, "pockets"), ("azurite", 0.07, "pockets"), ("cuprite", 0.05, "disseminated"),
+                    ("hemimorphite", 0.04, "pockets")],
+                   (9, 14), (4, 7), None, "arid_oxide", (60, 64), 6, "ground"),
+    # --- tropical weathering blankets ---
+    "bauxite_blanket": ("blanket", "laterite", [("bauxite", 0.50, "pockets")], (10, 15), (4, 7), None,
+                        "laterite", (60, 64), 5, "ground"),
+    "nickel_laterite_blanket": ("blanket", "laterite", [("nickel_laterite", 0.40, "pockets")], (9, 13), (4, 6),
+                                None, "laterite", (60, 64), 9, "ground"),
+    "ion_clay_blanket": ("blanket", "ion_adsorption_clay_ore", [], (8, 12), (3, 5), None,
+                         "ion_clay", (60, 64), 6, "ground"),
+    # --- rare intrusions ---
+    "carbonatite_plug": ("plug", "carbonatite", [("bastnasite", 0.16, "pockets")], (6, 9), None, (20, 34),
+                         "carbonatite", (-56, 0), 36, "rock"),
+    "syenite_massif": ("plug", "syenite", [("loparite", 0.10, "seams")], (8, 12), None, (16, 26),
+                       "alkaline", (-32, 32), 24, "rock"),
+    "layered_intrusion": ("bed", "gabbro",
+                          [("chromite", 0.12, "seams"), ("pentlandite", 0.05, "pockets"),
+                           ("sperrylite", 0.006, "disseminated"), ("cooperite", 0.005, "disseminated"),
+                           ("braggite", 0.005, "disseminated")],
+                          (12, 15), (8, 12), None, "anywhere", (-60, -28), 40, "rock"),
+    "nickel_sulfide": ("bed", "gabbro", [("pentlandite", 0.14, "pockets")], (7, 10), (4, 6), None,
+                       "anywhere", (-60, -8), 30, "rock"),
+    # --- veins and dykes in mountain country ---
+    "pegmatite_dyke": ("vein", "pegmatite", [("xenotime", 0.05, "pockets"), ("euxenite", 0.02, "pockets")],
+                       (10, 15), (2, 4), (12, 22), "pegmatite", (-16, 48), 16, "rock"),
+    "tin_greisen": ("vein", "greisen", [("cassiterite", 0.12, "pockets"), ("wolframite", 0.06, "pockets")],
+                    (10, 15), (2, 3), (12, 24), "pegmatite", (-16, 56), 9, "rock"),
+    "silver_vein": ("vein", "vein_quartz", [("argentite", 0.10, "pockets"), ("native_silver", 0.04, "pockets")],
+                    (10, 15), (1, 2), (14, 26), "hydrothermal", (-32, 64), 12, "rock"),
+    "cobalt_vein": ("vein", "vein_quartz", [("cobaltite", 0.10, "pockets")], (8, 12), (1, 2), (12, 20),
+                    "hydrothermal", (-32, 32), 20, "rock"),
+}
+
+# Heavy minerals washed into beach and river sand: (y_min, y_max, veins per chunk, vein size).
+PLACERS = {
+    "monazite": (54, 66, 4, 7),
+    "ilmenite": (54, 66, 4, 8),
+    "rutile": (54, 66, 2, 6),
 }
 
 # Vanilla ore features switched off: hematite/magnetite replace vanilla iron (PLAN §2.4).
@@ -104,84 +184,118 @@ def tag(path, values):
     write(path, {"replace": False, "values": sorted(values)})
 
 
-def main():
-    textures = {p.stem[:-4] for p in (ASSETS / "textures/block").glob("*_ore.png")}
-    assert textures == set(ORES), f"textures and ORES disagree: {sorted(textures ^ set(ORES))}"
+def block_files(block, display, lang):
+    name = block.split(":")[1]
+    write(ASSETS / f"blockstates/{name}.json", {"variants": {"": {"model": f"fundamentals:block/{name}"}}})
+    write(ASSETS / f"models/block/{name}.json",
+          {"parent": "minecraft:block/cube_all", "textures": {"all": f"fundamentals:block/{name}"}})
+    write(ASSETS / f"models/item/{name}.json", {"parent": f"fundamentals:block/{name}"})
+    lang[f"block.fundamentals.{name}"] = display
+    write(DATA / f"loot_table/blocks/{name}.json", {
+        "type": "minecraft:block",
+        "pools": [{"rolls": 1, "bonus_rolls": 0,
+                   "entries": [{"type": "minecraft:item", "name": block}],
+                   "conditions": [{"condition": "minecraft:survives_explosion"}]}]})
 
-    for stale in (DATA / "worldgen", DATA / "neoforge", DATA / "loot_table/blocks", DATA / "tags/worldgen"):
+
+def state(block):
+    return {"Name": f"fundamentals:{block}"}
+
+
+def placed(feature, per_chunk, y_min, y_max):
+    frequency = {"type": "minecraft:count", "count": per_chunk} if per_chunk >= 1 \
+        else {"type": "minecraft:rarity_filter", "chance": round(1 / per_chunk)}
+    return {"feature": feature,
+            "placement": [frequency, {"type": "minecraft:in_square"},
+                          {"type": "minecraft:height_range",
+                           "height": {"type": "minecraft:uniform", "min_inclusive": {"absolute": y_min},
+                                      "max_inclusive": {"absolute": y_max}}},
+                          {"type": "minecraft:biome"}]}
+
+
+def main():
+    textures = {p.stem for p in (ASSETS / "textures/block").glob("*.png")}
+    blocks = {f"{name}_ore" for name in ORES} | set(ROCKS)
+    assert textures == blocks, f"textures and block tables disagree: {sorted(textures ^ blocks)}"
+    generated = {ore for _, _, ores, *_ in DEPOSITS.values() for ore, _, _ in ores} | set(PLACERS) \
+        | {row[1][:-4] for row in DEPOSITS.values() if row[1].endswith("_ore")}
+    assert generated == set(ORES), f"ores that never generate, or unknown ores: {sorted(generated ^ set(ORES))}"
+
+    # Only the worldgen folders are wholly ours; everything else is shared and just overwritten.
+    for stale in (DATA / "worldgen", DATA / "neoforge", DATA / "tags/worldgen"):
         shutil.rmtree(stale, ignore_errors=True)
 
     lang_path = ASSETS / "lang/en_us.json"
     lang = {k: v for k, v in json.loads(lang_path.read_text(encoding="utf-8")).items()
-            if not (k.startswith("block.fundamentals.") and k.endswith("_ore"))}
+            if not k.startswith("block.fundamentals.")}
     lang["itemGroup.fundamentals.minerals"] = "Fundamentals: Minerals"
 
-    by_tool, by_tier, by_commodity, by_deposit = {}, {}, {}, {}
-    for name, (commodity, deposit, y_min, y_max, spread, per_chunk, size, replaces, tool, tier) in ORES.items():
+    by_tool, by_tier, by_commodity = {}, {}, {}
+    for name, (commodity, tool, tier) in ORES.items():
         block = f"fundamentals:{name}_ore"
-        write(ASSETS / f"blockstates/{name}_ore.json", {"variants": {"": {"model": f"fundamentals:block/{name}_ore"}}})
-        write(ASSETS / f"models/block/{name}_ore.json",
-              {"parent": "minecraft:block/cube_all", "textures": {"all": f"fundamentals:block/{name}_ore"}})
-        write(ASSETS / f"models/item/{name}_ore.json", {"parent": f"fundamentals:block/{name}_ore"})
-        lang[f"block.fundamentals.{name}_ore"] = DISPLAY.get(name, name.replace("_", " ").title())
-        write(DATA / f"loot_table/blocks/{name}_ore.json", {
-            "type": "minecraft:block",
-            "pools": [{"rolls": 1, "bonus_rolls": 0,
-                       "entries": [{"type": "minecraft:item", "name": block}],
-                       "conditions": [{"condition": "minecraft:survives_explosion"}]}]})
+        block_files(block, DISPLAY.get(name, name.replace("_", " ").title()), lang)
         by_tool.setdefault(tool, []).append(block)
         if tier:
             by_tier.setdefault(tier, []).append(block)
         by_commodity.setdefault(commodity, []).append(block)
-        by_deposit.setdefault(deposit, []).append(f"fundamentals:ore_{name}")
-
-        write(DATA / f"worldgen/configured_feature/ore_{name}.json", {
-            "type": "minecraft:ore",
-            "config": {"discard_chance_on_air_exposure": 0.0, "size": size,
-                       "targets": [{"state": {"Name": block},
-                                    "target": {"predicate_type": "minecraft:tag_match", "tag": t}}
-                                   for t in replaces]}})
-        frequency = {"type": "minecraft:count", "count": per_chunk} if per_chunk >= 1 \
-            else {"type": "minecraft:rarity_filter", "chance": round(1 / per_chunk)}
-        write(DATA / f"worldgen/placed_feature/ore_{name}.json", {
-            "feature": f"fundamentals:ore_{name}",
-            "placement": [frequency, {"type": "minecraft:in_square"},
-                          {"type": "minecraft:height_range",
-                           "height": {"type": f"minecraft:{spread}",
-                                      "min_inclusive": {"absolute": y_min},
-                                      "max_inclusive": {"absolute": y_max}}},
-                          {"type": "minecraft:biome"}]})
-
+    for name, (tool, display) in ROCKS.items():
+        block_files(f"fundamentals:{name}", display or name.replace("_", " ").title(), lang)
+        by_tool.setdefault(tool, []).append(f"fundamentals:{name}")
     write(lang_path, dict(sorted(lang.items())))
 
-    for tool, blocks in by_tool.items():
-        tag(MC_TAGS / f"mineable/{tool}.json", blocks)
-    for tier, blocks in by_tier.items():
-        tag(MC_TAGS / f"needs_{tier}_tool.json", blocks)
+    for tool, names in by_tool.items():
+        tag(MC_TAGS / f"mineable/{tool}.json", names)
+    for tier, names in by_tier.items():
+        tag(MC_TAGS / f"needs_{tier}_tool.json", names)
     for kind in ("block", "item"):
         tag(C_TAGS / f"{kind}/ores.json", [f"#c:ores/{c}" for c in by_commodity])
-        for commodity, blocks in by_commodity.items():
-            tag(C_TAGS / f"{kind}/ores/{commodity}.json", blocks)
+        for commodity, names in by_commodity.items():
+            tag(C_TAGS / f"{kind}/ores/{commodity}.json", names)
+    for key, values in REPLACEABLE.items():
+        tag(DATA / f"tags/block/deposit_replaceable/{key}.json", values)
+
+    by_biomes = {}
+    for name, (shape, host, ores, radius, thickness, height, where, y, chunks, replaces) in DEPOSITS.items():
+        config = {"shape": shape, "host": state(host),
+                  "ores": [{"state": state(f"{ore}_ore"), "fraction": share, "style": style}
+                           for ore, share, style in ores],
+                  "radius": {"min": radius[0], "max": radius[1]},
+                  "thickness": {"min": (thickness or (1, 1))[0], "max": (thickness or (1, 1))[1]},
+                  "replaceable": f"fundamentals:deposit_replaceable/{replaces}"}
+        if height:
+            config["height"] = {"min": height[0], "max": height[1]}
+        write(DATA / f"worldgen/configured_feature/{name}.json", {"type": "fundamentals:deposit", "config": config})
+        write(DATA / f"worldgen/placed_feature/{name}.json", placed(f"fundamentals:{name}", 1 / chunks, *y))
+        by_biomes.setdefault(where, []).append(f"fundamentals:{name}")
+    for name, (y_min, y_max, per_chunk, size) in PLACERS.items():
+        write(DATA / f"worldgen/configured_feature/placer_{name}.json", {
+            "type": "minecraft:ore",
+            "config": {"discard_chance_on_air_exposure": 0.0, "size": size,
+                       "targets": [{"state": state(f"{name}_ore"),
+                                    "target": {"predicate_type": "minecraft:tag_match", "tag": "minecraft:sand"}}]}})
+        write(DATA / f"worldgen/placed_feature/placer_{name}.json",
+              placed(f"fundamentals:placer_{name}", per_chunk, y_min, y_max))
+        by_biomes.setdefault("placer", []).append(f"fundamentals:placer_{name}")
 
     spawns = []
-    for deposit, features in by_deposit.items():
-        tag(DATA / f"tags/worldgen/biome/deposit/{deposit}.json", DEPOSITS[deposit])
-        biomes = f"#fundamentals:deposit/{deposit}"
-        write(DATA / f"neoforge/biome_modifier/add_{deposit}_ores.json", {
-            "type": "neoforge:add_features", "biomes": biomes, "features": features,
+    for where, features in by_biomes.items():
+        tag(DATA / f"tags/worldgen/biome/deposit/{where}.json", BIOMES[where])
+        write(DATA / f"neoforge/biome_modifier/add_{where}_deposits.json", {
+            "type": "neoforge:add_features", "biomes": f"#fundamentals:deposit/{where}", "features": features,
             "step": "underground_ores"})
-        spawns.append({"biomes": f"fundamentals:deposit/{deposit}", "features": features})
+        spawns.append({"biomes": f"fundamentals:deposit/{where}", "features": features})
     write(DATA / "neoforge/biome_modifier/remove_vanilla_iron.json", {
         "type": "neoforge:remove_features", "biomes": "#minecraft:is_overworld", "features": REMOVED,
         "steps": ["underground_ores"]})
     # NeoForge reads the biome modifiers above; Fabric has no data-driven equivalent, so
     # worldgen.OreSpawns applies the same add/remove list through the Fabric biome API.
-    # The same file is the list of ore blocks registry.OreBlocks registers, so a block exists
-    # exactly when its models, loot, tags and spawn rules do.
+    # The same file lists the blocks registry.OreBlocks registers, so a block exists exactly
+    # when its models, loot, tags and spawn rules do.
     write(ROOT / "fundamentals_ores.json", {
-        "ores": [{"mineral": name, "soft": row[8] == "shovel"} for name, row in ORES.items()],
+        "ores": [{"mineral": name, "soft": tool == "shovel"} for name, (_, tool, _) in ORES.items()],
+        "rocks": [{"name": name, "soft": tool == "shovel"} for name, (tool, _) in ROCKS.items()],
         "add": spawns, "remove": REMOVED})
-    print(f"wrote data for {len(ORES)} ores across {len(by_deposit)} deposit types")
+    print(f"wrote {len(ORES)} ores, {len(ROCKS)} rocks, {len(DEPOSITS)} deposit types, {len(PLACERS)} placers")
 
 
 if __name__ == "__main__":
