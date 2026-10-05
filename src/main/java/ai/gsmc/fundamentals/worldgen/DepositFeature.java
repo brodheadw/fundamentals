@@ -1,5 +1,6 @@
 package ai.gsmc.fundamentals.worldgen;
 
+import ai.gsmc.fundamentals.registry.OreBlock;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -268,7 +269,11 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
                     case SEAMS -> Noise.hash(salt, (int) Math.floor(layer), 0, 0) < ore.fraction();
                     case TOP -> vertical > 0.35 && pocket(salt, Math.min(0.9F, ore.fraction() * 3 * richness));
                 };
-                if (here) return inDeepslate ? ore.deepslate().orElse(ore.state()) : ore.state();
+                if (here) {
+                    BlockState state = inDeepslate ? ore.deepslate().orElse(ore.state()) : ore.state();
+                    return state.hasProperty(OreBlock.GRADE)
+                            ? state.setValue(OreBlock.GRADE, OreBlock.Grade.at(edge)) : state;
+                }
             }
             return config.host().orElse(null);
         }

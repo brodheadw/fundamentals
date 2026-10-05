@@ -51,7 +51,7 @@ public final class OreBlocks {
                     : BlockBehaviour.Properties.of().mapColor(MapColor.STONE).requiresCorrectToolForDrops()
                             .strength(def.mineral() == null ? 1.5F : 3.0F, 3.0F);
             ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, def.name());
-            Block block = new Block(props);
+            Block block = def.mineral() == null ? new Block(props) : new OreBlock(props);
             BLOCKS.put(id, block);
             if (def.overlay()) {
                 OVERLAYS.add(block);

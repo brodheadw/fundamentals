@@ -1,9 +1,7 @@
 {
   "variants": {
-    "": [
-      {
-        "model": "fundamentals:block/syenite"
-      }
-    ]
+    "": {
+      "model": "fundamentals:block/syenite"
+    }
   }
 }

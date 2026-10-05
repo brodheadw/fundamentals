@@ -67,11 +67,35 @@ CLEAR = (255, 0, 255)  # painted as transparent in an overlay
 
 # Each ore gets several textures and the game picks one per block position, so a wall of one
 # ore does not repeat the same tile.
-VARIANTS = 4
+VARIANTS = 3
+
+# An ore body is graded: rich at its core, ordinary around that, a trace where it peters out.
+# The value is how much mineral the texture carries relative to the ordinary ("edge") one.
+GRADES = {"core": 1.7, "edge": 1.0, "trace": 0.45}
 
 
-def seed(name, variant):
-    return name if variant == 0 else f"{name}#{variant}"
+def seed(name, variant, grade="edge"):
+    return name + (f"#{variant}" if variant else "") + ("" if grade == "edge" else f"@{grade}")
+
+
+def scaled(element, r):
+    """One recipe element with its amount of mineral scaled by `r` (None drops it)."""
+    count = lambda n: int(n * r + 0.5)
+    size = lambda n: max(2, int(n * min(1.35, max(0.6, r)) + 0.5))
+    kind = element[0]
+    if kind == "mass":
+        return (kind, size(element[1]), size(element[2]))
+    if kind in ("banded", "smear", "blob"):
+        return (kind, count(element[1]), size(element[2]), size(element[3])) if count(element[1]) else None
+    if kind in ("speck", "companion"):
+        n = count(element[-1])
+        return element[:-1] + (n,) if n else None
+    if kind == "crystals":
+        groups = count(element[2])
+        return (kind, element[1], groups, max(1, count(element[3]))) if groups else None
+    if kind == "vein":
+        return (kind, element[1], count(element[2]), element[3], element[4])
+    return element
 
 QUARTZ = [(176, 176, 172), (204, 204, 198), (228, 228, 222)]
 ORTHO = [(1, 0), (-1, 0), (0, 1), (0, -1)]
@@ -222,8 +246,9 @@ def host_rock(rng, kind):
 
 
 class Canvas:
-    def __init__(self, name, host, variant=0):
-        self.rng = random.Random(seed(name, variant))
+    def __init__(self, name, host, variant=0, grade="edge"):
+        self.rng = random.Random(seed(name, variant, grade))
+        r = GRADES[grade]
         self.ore = set()
         self.zone = None  # overlay ores: where the host rock shows, and where ore prefers to sit
         if name not in OVERLAY:
@@ -233,12 +258,14 @@ class Canvas:
         self.img = Image.new("RGB", (SIZE, SIZE), CLEAR)
         accent = OVERLAY[name][1]
         if accent == "patch":
-            self.zone = self.grow(self.rng.randint(52, 64), compact=2.5) | self.grow(self.rng.randint(18, 26), compact=2.5)
+            self.zone = self.grow(int(self.rng.randint(52, 64) * min(r, 1.5)), compact=2.5) \
+                | self.grow(int(self.rng.randint(18, 26) * min(r, 1.5)), compact=2.5)
         elif accent == "bands":
             self.zone, y0, drift = set(), self.rng.randrange(SIZE), 0
             for x in range(SIZE):
                 drift = max(-1, min(1, drift + self.rng.choice((-1, 0, 0, 0, 0, 1))))
-                for start, thick in ((0, 3), (6, 2), (11, 3)):
+                for start, thick in {"core": ((0, 3), (4, 2), (8, 3), (12, 2)), "edge": ((0, 3), (6, 2), (11, 3)),
+                                     "trace": ((2, 2), (10, 1))}[grade]:
                     self.zone |= {wrap(x, y0 + start + k + drift) for k in range(thick)}
         if self.zone:
             rock = host_rock(random.Random("host-" + host), host)
@@ -360,11 +387,17 @@ def vein_path(rng, style):
     return [(x, 8) for x in range(SIZE)]
 
 
-def build(name, variant=0):
+def build(name, variant=0, grade="edge"):
     host, elements = RECIPES[name]
-    c = Canvas(name, host, variant)
+    c = Canvas(name, host, variant, grade)
     rng, pal = c.rng, P.get(name)
-    for element in elements:
+    kept = [scaled(e, GRADES[grade]) for e in elements]
+    if not any(e and e[0] in ("mass", "banded", "smear", "blob", "crystals") or e and e[0] == "vein" and e[2]
+               for e in kept):
+        kept.append(("blob", 1, 2, 3))  # even a trace shows some mineral
+    for element in kept:
+        if element is None:
+            continue
         kind = element[0]
         if kind == "phenocrysts":  # pale feldspar crystals floating in the porphyry groundmass
             for _ in range(element[1]):
@@ -546,11 +579,12 @@ def paint_nickel_laterite(variant=0):
 
 
 def paint_all():
-    """name -> [texture per variant]."""
+    """name -> grade -> [texture per variant]."""
     whole = {"ion_adsorption_clay": paint_clay, "bauxite": paint_bauxite, "goethite": paint_goethite,
              "nickel_laterite": paint_nickel_laterite}
-    out = {name: [build(name, v) for v in range(VARIANTS)] for name in RECIPES}
-    out.update({name: [paint(v) for v in range(VARIANTS)] for name, paint in whole.items()})
+    out = {name: {g: [build(name, v, g) for v in range(VARIANTS)] for g in GRADES} for name in RECIPES}
+    # These are whole rocks, not a mineral in something else; their grades share one look.
+    out.update({name: {g: [paint(v) for v in range(VARIANTS)] for g in GRADES} for name, paint in whole.items()})
     return out
 
 
@@ -578,30 +612,29 @@ def vanilla(block):
         return Image.open(io.BytesIO(z.read(f"assets/minecraft/textures/block/{block}.png"))).convert("RGBA")
 
 
-def contact_sheet(textures, path, cols=10, scale=10):
-    textures = {name: variants[0] for name, variants in textures.items()}
+def contact_sheet(textures, path, cols=12, scale=8):
+    """Every ore as core / edge / trace, over the first vanilla block it is drawn on."""
     tiles = [(name, img.convert("RGBA")) for name, img in paint_rocks().items()]
-    for deep in (False, True):
-        for name in SHEET_ORDER:
-            if name not in OVERLAY:
-                if not deep:
-                    tiles.append((name, textures[name].convert("RGBA")))
-                continue
-            bases = OVERLAY[name][0]
-            if deep and "deepslate" not in bases:
-                continue
-            base = "deepslate" if deep else bases[0]
-            tiles.append((("deepslate " if deep else "") + name, Image.alpha_composite(vanilla(base), textures[name])))
-    tile, pad, label = SIZE * scale, 14, 26
+    while len(tiles) % cols:
+        tiles.append(None)
+    for name in SHEET_ORDER:
+        for grade in GRADES:
+            img = textures[name][grade][0]
+            if name in OVERLAY:
+                img = Image.alpha_composite(vanilla(OVERLAY[name][0][0]), img)
+            tiles.append((f"{name} {grade}" if grade == "core" else grade, img))
+    tile, pad, label = SIZE * scale, 10, 22
     rows = -(-len(tiles) // cols)
     sheet = Image.new("RGB", (cols * (tile + pad) + pad, rows * (tile + pad + label) + pad), (32, 34, 38))
     draw = ImageDraw.Draw(sheet)
-    font = ImageFont.load_default(size=13)
-    for i, (name, img) in enumerate(tiles):
+    font = ImageFont.load_default(size=12)
+    for i, entry in enumerate(tiles):
+        if not entry:
+            continue
         x = pad + (i % cols) * (tile + pad)
         y = pad + (i // cols) * (tile + pad + label)
-        sheet.paste(img.convert("RGB").resize((tile, tile), Image.NEAREST), (x, y))
-        draw.text((x, y + tile + 4), name.replace("_", " "), fill=(226, 228, 232), font=font)
+        sheet.paste(entry[1].convert("RGB").resize((tile, tile), Image.NEAREST), (x, y))
+        draw.text((x, y + tile + 3), entry[0].replace("_", " "), fill=(226, 228, 232), font=font)
     sheet.save(path)
 
 
@@ -610,13 +643,14 @@ if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
     for stale in OUT.glob("*.png"):
         stale.unlink()
-    for name, variants in textures.items():
-        for v, img in enumerate(variants):
-            img.save(OUT / (f"{name}_ore.png" if v == 0 else f"{name}_ore_{v}.png"))
+    for name, grades in textures.items():
+        for grade, variants in grades.items():
+            for v, img in enumerate(variants):
+                img.save(OUT / f"{name}_ore_{grade}_{v}.png")
     rocks = paint_rocks()
     for name, img in rocks.items():
         img.save(OUT / f"{name}.png")
-    print(f"wrote {len(textures)} ores x {VARIANTS} variants and {len(rocks)} rock textures to {OUT}")
+    print(f"wrote {len(textures)} ores x {len(GRADES)} grades x {VARIANTS} variants and {len(rocks)} rocks to {OUT}")
     if len(sys.argv) > 1:
         contact_sheet(textures, sys.argv[1])
         print(f"wrote contact sheet {sys.argv[1]}")

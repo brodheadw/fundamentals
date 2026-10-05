@@ -1,9 +1,7 @@
 {
   "variants": {
-    "": [
-      {
-        "model": "fundamentals:block/gabbro"
-      }
-    ]
+    "": {
+      "model": "fundamentals:block/gabbro"
+    }
   }
 }

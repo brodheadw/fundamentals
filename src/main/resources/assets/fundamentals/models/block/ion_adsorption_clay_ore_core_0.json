@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "fundamentals:block/ion_adsorption_clay_ore_core_0"
+  }
+}

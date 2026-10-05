@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "textures": {
-    "all": "fundamentals:block/braggite_ore_1"
-  }
-}

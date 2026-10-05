@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "fundamentals:block/bastnasite_ore_core_1"
+  }
+}

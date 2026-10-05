@@ -1,9 +1,7 @@
 {
   "variants": {
-    "": [
-      {
-        "model": "fundamentals:block/laterite"
-      }
-    ]
+    "": {
+      "model": "fundamentals:block/laterite"
+    }
   }
 }

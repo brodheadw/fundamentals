@@ -17,7 +17,7 @@ import json
 import shutil
 from pathlib import Path
 
-from paint_minerals import OVERLAY, ROCK_BLOCKS, VARIANTS
+from paint_minerals import GRADES, OVERLAY, ROCK_BLOCKS, VARIANTS
 
 ROOT = Path(__file__).resolve().parent.parent / "src/main/resources"
 ASSETS = ROOT / "assets/fundamentals"
@@ -191,34 +191,59 @@ def ore_blocks(name):
     return [(("deepslate_" if base == "deepslate" else "") + f"{name}_ore", base) for base in OVERLAY[name][0]]
 
 
-def block_files(name, display, lang, texture=None, base=None, variants=1):
-    """One block. With several variants the game picks a texture per position, which stops a
-    large body of one ore from visibly tiling."""
-    texture = texture or name
-    suffixes = [""] + [f"_{v}" for v in range(1, variants)]
-    write(ASSETS / f"blockstates/{name}.json",
-          {"variants": {"": [{"model": f"fundamentals:block/{name}{sfx}"} for sfx in suffixes]}})
-    for sfx in suffixes:
-        if base:
-            # The ore is a transparent layer over the game's own texture for the rock it sits in.
-            def faces(tex):
-                return {side: {"texture": tex, "cullface": side}
-                        for side in ("down", "up", "north", "south", "west", "east")}
-            model = {"parent": "minecraft:block/block", "render_type": "minecraft:cutout",
-                     "textures": {"particle": f"minecraft:block/{base}", "base": f"minecraft:block/{base}",
-                                  "overlay": f"fundamentals:block/{texture}{sfx}"},
-                     "elements": [{"from": [0, 0, 0], "to": [16, 16, 16], "faces": faces("#base")},
-                                  {"from": [0, 0, 0], "to": [16, 16, 16], "faces": faces("#overlay")}]}
-        else:
-            model = {"parent": "minecraft:block/cube_all", "textures": {"all": f"fundamentals:block/{texture}{sfx}"}}
-        write(ASSETS / f"models/block/{name}{sfx}.json", model)
+# What one ore block drops by grade, until raw mineral items exist: (count, chance).
+DROPS = {"core": (2, 1.0), "edge": (1, 1.0), "trace": (1, 0.5)}
+
+
+def drop_self(name, conditions=()):
+    return {"rolls": 1, "bonus_rolls": 0,
+            "entries": [{"type": "minecraft:item", "name": f"fundamentals:{name}"}],
+            "conditions": [{"condition": "minecraft:survives_explosion"}, *conditions]}
+
+
+def model(texture, base):
+    if not base:
+        return {"parent": "minecraft:block/cube_all", "textures": {"all": f"fundamentals:block/{texture}"}}
+
+    # The ore is a transparent layer over the game's own texture for the rock it sits in.
+    def faces(tex):
+        return {side: {"texture": tex, "cullface": side} for side in ("down", "up", "north", "south", "west", "east")}
+    return {"parent": "minecraft:block/block", "render_type": "minecraft:cutout",
+            "textures": {"particle": f"minecraft:block/{base}", "base": f"minecraft:block/{base}",
+                         "overlay": f"fundamentals:block/{texture}"},
+            "elements": [{"from": [0, 0, 0], "to": [16, 16, 16], "faces": faces("#base")},
+                         {"from": [0, 0, 0], "to": [16, 16, 16], "faces": faces("#overlay")}]}
+
+
+def rock_files(name, display, lang):
+    write(ASSETS / f"blockstates/{name}.json", {"variants": {"": {"model": f"fundamentals:block/{name}"}}})
+    write(ASSETS / f"models/block/{name}.json", model(name, None))
     write(ASSETS / f"models/item/{name}.json", {"parent": f"fundamentals:block/{name}"})
     lang[f"block.fundamentals.{name}"] = display
-    write(DATA / f"loot_table/blocks/{name}.json", {
-        "type": "minecraft:block",
-        "pools": [{"rolls": 1, "bonus_rolls": 0,
-                   "entries": [{"type": "minecraft:item", "name": f"fundamentals:{name}"}],
-                   "conditions": [{"condition": "minecraft:survives_explosion"}]}]})
+    write(DATA / f"loot_table/blocks/{name}.json", {"type": "minecraft:block", "pools": [drop_self(name)]})
+
+
+def ore_files(name, display, lang, texture, base):
+    """One ore block: a grade property (core / edge / trace), several textures per grade so a
+    large body does not visibly tile, and richer drops from richer ore."""
+    variants, pools = {}, []
+    for grade in GRADES:
+        variants[f"grade={grade}"] = [{"model": f"fundamentals:block/{name}_{grade}_{v}"} for v in range(VARIANTS)]
+        for v in range(VARIANTS):
+            write(ASSETS / f"models/block/{name}_{grade}_{v}.json", model(f"{texture}_{grade}_{v}", base))
+        count, chance = DROPS[grade]
+        conditions = [{"condition": "minecraft:block_state_property", "block": f"fundamentals:{name}",
+                       "properties": {"grade": grade}}]
+        if chance < 1:
+            conditions.append({"condition": "minecraft:random_chance", "chance": chance})
+        pool = drop_self(name, conditions)
+        if count > 1:
+            pool["entries"][0]["functions"] = [{"function": "minecraft:set_count", "count": count}]
+        pools.append(pool)
+    write(ASSETS / f"blockstates/{name}.json", {"variants": variants})
+    write(ASSETS / f"models/item/{name}.json", {"parent": f"fundamentals:block/{name}_edge_0"})
+    lang[f"block.fundamentals.{name}"] = display
+    write(DATA / f"loot_table/blocks/{name}.json", {"type": "minecraft:block", "pools": pools})
 
 
 def state(block):
@@ -238,7 +263,7 @@ def placed(feature, per_chunk, y_min, y_max):
 
 def main():
     textures = {p.stem for p in (ASSETS / "textures/block").glob("*.png")}
-    expected = {f"{name}_ore" + (f"_{v}" if v else "") for name in ORES for v in range(VARIANTS)} | set(ROCKS)
+    expected = {f"{name}_ore_{g}_{v}" for name in ORES for g in GRADES for v in range(VARIANTS)} | set(ROCKS)
     assert textures == expected, f"textures and block tables disagree: {sorted(textures ^ expected)}"
     generated = {ore for _, _, ores, *_ in DEPOSITS.values() for ore, _, _ in ores} | set(PLACERS) \
         | {row[1][:-4] for row in DEPOSITS.values() if row[1] and row[1].endswith("_ore")}
@@ -250,6 +275,8 @@ def main():
     for folder in (ASSETS / "blockstates", ASSETS / "models/block", ASSETS / "models/item", DATA / "loot_table/blocks"):
         for name in RETIRED:
             (folder / f"{name}.json").unlink(missing_ok=True)
+    for old in (ASSETS / "models/block").glob("*_ore*.json"):  # ore models are all regenerated below
+        old.unlink()
 
     lang_path = ASSETS / "lang/en_us.json"
     lang = {k: v for k, v in json.loads(lang_path.read_text(encoding="utf-8")).items()
@@ -258,14 +285,13 @@ def main():
 
     blocks, by_tool, by_tier, by_commodity = [], {}, {}, {}
     for name, tool in ROCKS.items():
-        block_files(name, name.replace("_", " ").title(), lang)
+        rock_files(name, name.replace("_", " ").title(), lang)
         blocks.append({"name": name, "soft": tool == "shovel", "overlay": False})
         by_tool.setdefault(tool, []).append(f"fundamentals:{name}")
     for name, (commodity, tool, tier) in ORES.items():
         display = DISPLAY.get(name, name.replace("_", " ").title())
         for block, base in ore_blocks(name):
-            block_files(block, ("Deepslate " if base == "deepslate" else "") + display, lang, f"{name}_ore", base,
-                        VARIANTS)
+            ore_files(block, ("Deepslate " if base == "deepslate" else "") + display, lang, f"{name}_ore", base)
             blocks.append({"name": block, "soft": tool == "shovel", "overlay": base is not None, "mineral": name})
             by_tool.setdefault(tool, []).append(f"fundamentals:{block}")
             if tier:

@@ -1,17 +1,36 @@
 {
   "variants": {
-    "": [
+    "grade=core": [
       {
-        "model": "fundamentals:block/bastnasite_ore"
+        "model": "fundamentals:block/bastnasite_ore_core_0"
       },
       {
-        "model": "fundamentals:block/bastnasite_ore_1"
+        "model": "fundamentals:block/bastnasite_ore_core_1"
       },
       {
-        "model": "fundamentals:block/bastnasite_ore_2"
+        "model": "fundamentals:block/bastnasite_ore_core_2"
+      }
+    ],
+    "grade=edge": [
+      {
+        "model": "fundamentals:block/bastnasite_ore_edge_0"
       },
       {
-        "model": "fundamentals:block/bastnasite_ore_3"
+        "model": "fundamentals:block/bastnasite_ore_edge_1"
+      },
+      {
+        "model": "fundamentals:block/bastnasite_ore_edge_2"
+      }
+    ],
+    "grade=trace": [
+      {
+        "model": "fundamentals:block/bastnasite_ore_trace_0"
+      },
+      {
+        "model": "fundamentals:block/bastnasite_ore_trace_1"
+      },
+      {
+        "model": "fundamentals:block/bastnasite_ore_trace_2"
       }
     ]
   }

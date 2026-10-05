@@ -293,13 +293,20 @@ features in worldgen JSON — for now this table is the spec both sides build to
   being rare or deep ones. Vanilla `iron_ore` no longer generates. **Seen in a Fabric client:**
   the overlay models render correctly over stone and deepslate (cutout layer set in
   `FundamentalsClient`). The NeoForge client is untested — it relies on `render_type` in the
-  model JSON. Each ore has four texture variants picked per block position, because a body of
-  one ore visibly tiled with a single texture.
+  model JSON. Each ore has three texture variants per grade, picked per block position, because
+  a body of one ore visibly tiled with a single texture.
   - **Ore generates as deposits, not blobs.** `worldgen.DepositFeature` places ore in four real
     shapes: `bed` (banded iron, lead-zinc, layered intrusions with chromite seams), `plug`
     (porphyry copper, carbonatite), `vein` (silver, tin, pegmatite) and `blanket` (bauxite and
     nickel laterite, the oxidised copper cap, REE clay). Ore is spread through the body as pockets,
     seams, scattered grains or a top enrichment.
+  - **Graded ore bodies (user request).** Every ore block has a `grade` blockstate property —
+    `core` / `edge` / `trace` (`registry.OreBlock`). The deposit sets it from how far the block is
+    from the heart of its body, so ore is rich in the middle and peters out at the rim; ore is
+    also sparser toward the rim. Grade picks the texture (three per grade) and the drops: core
+    drops 2, edge 1, trace 1 half the time. A hand-placed ore is `edge`. All grades are one block,
+    so tags and recipes are unaffected. **For Laptop B:** when raw mineral items and processing
+    exist, grade should feed yield there instead of this placeholder block count.
   - **Look (user ruling): half vanilla, half real.** Everyday ores sit directly in the existing
     stone or deepslate and are drawn as overlays on the vanilla texture, so they read like vanilla
     ores. Only the rare big finds are bodies of their own rock: `carbonatite`, `gabbro`, `syenite`,
@@ -326,8 +333,8 @@ features in worldgen JSON — for now this table is the spec both sides build to
   - **Known gaps (A will take):** (1) the hardcoded deep ore veins still place
     `deepslate_iron_ore` and `raw_iron_block` — needs a mixin on `OreVeinifier`; (2) a deposit is
     capped at ~30 blocks across (a feature may only write to the 3x3 chunks around it), so truly
-    large bodies would need a structure; (3) frequencies are a first guess (about 430 of our blocks
-    per chunk, iron about 135) and vanilla copper is far too common for "native copper"; (4) host
+    large bodies would need a structure; (3) frequencies are a first guess (about 290 of our blocks
+    per chunk, iron about 66) and vanilla copper is far too common for "native copper"; (4) host
     rocks have no uses or recipes yet.
 
 ---
