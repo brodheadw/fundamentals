@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:deepslate_pyrolusite_ore",
     "fundamentals:pyrolusite_ore"
   ]
 }

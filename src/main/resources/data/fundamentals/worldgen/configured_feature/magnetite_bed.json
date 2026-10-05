@@ -2,16 +2,26 @@
   "type": "fundamentals:deposit",
   "config": {
     "shape": "bed",
-    "host": {
-      "Name": "fundamentals:magnetite_ore"
-    },
     "ores": [
       {
         "state": {
           "Name": "fundamentals:hematite_ore"
         },
         "fraction": 0.1,
-        "style": "seams"
+        "style": "seams",
+        "deepslate_state": {
+          "Name": "fundamentals:deepslate_hematite_ore"
+        }
+      },
+      {
+        "state": {
+          "Name": "fundamentals:magnetite_ore"
+        },
+        "fraction": 0.85,
+        "style": "pockets",
+        "deepslate_state": {
+          "Name": "fundamentals:deepslate_magnetite_ore"
+        }
       }
     ],
     "radius": {

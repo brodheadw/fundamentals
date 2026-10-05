@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "fundamentals:cinnabar_ore"
+    "fundamentals:cinnabar_ore",
+    "fundamentals:deepslate_cinnabar_ore"
   ]
 }

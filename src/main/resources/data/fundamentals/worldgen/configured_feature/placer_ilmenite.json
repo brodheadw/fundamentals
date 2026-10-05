@@ -2,15 +2,15 @@
   "type": "minecraft:ore",
   "config": {
     "discard_chance_on_air_exposure": 0.0,
-    "size": 8,
+    "size": 12,
     "targets": [
       {
         "state": {
           "Name": "fundamentals:ilmenite_ore"
         },
         "target": {
-          "predicate_type": "minecraft:tag_match",
-          "tag": "minecraft:sand"
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:sand"
         }
       }
     ]

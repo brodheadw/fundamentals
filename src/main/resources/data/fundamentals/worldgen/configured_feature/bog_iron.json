@@ -2,9 +2,6 @@
   "type": "fundamentals:deposit",
   "config": {
     "shape": "blanket",
-    "host": {
-      "Name": "fundamentals:goethite_ore"
-    },
     "ores": [],
     "radius": {
       "min": 6,
@@ -14,6 +11,9 @@
       "min": 1,
       "max": 2
     },
-    "replaceable": "fundamentals:deposit_replaceable/ground"
+    "replaceable": "fundamentals:deposit_replaceable/ground",
+    "host": {
+      "Name": "fundamentals:goethite_ore"
+    }
   }
 }

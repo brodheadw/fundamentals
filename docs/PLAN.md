@@ -127,8 +127,10 @@ Use as sub-package names and data sub-folders.
 **IDs:**
 - material id = element symbol lowercased or snake_case compound: `iron`, `neodymium`,
   `tungsten_trioxide`, `rare_earth_concentrate`.
-- ore block id = `<mineral>_ore`. No deepslate variants: each ore block shows its own real host
-  rock (carbonatite, limestone, gossan, mafic…), so it does not need to match the stone around it.
+- ore block id = `<mineral>_ore`, plus `deepslate_<mineral>_ore` for ores that occur at depth.
+  Most ores are a transparent texture layered over the game's own stone / deepslate / granite /
+  sand, carrying a hint of their real host rock (a quartz veinlet, a stained patch, bands). A few
+  rare ones are painted whole in a host rock of their own (see `paint_minerals.OVERLAY`).
 - stage machine id = snake_case of the canonical stage: `froth_flotation`, `solvent_extraction`.
 
 **Tags** (Fabric `c:` common convention + our namespace; consumers request by tag, never by a
@@ -286,17 +288,21 @@ features in worldgen JSON — for now this table is the spec both sides build to
   - **A next:** rare-earth and base-metal chains, then solvent-extraction design.
 - **2026-10-04 [A]** Branch `a/mineral-textures` (PR into main): **ore blocks exist and generate**,
   on both loaders. Verified on headless Fabric and NeoForge servers (2,760 chunks across jungle,
-  badlands, mountain, beach, swamp, taiga, desert): all 38 ore blocks and 10 host rocks generate,
-  and vanilla `iron_ore` no longer does.
-  - **Ore generates as deposits, not blobs.** `worldgen.DepositFeature` places a body of host
-    rock with ore inside it, in four real shapes: `bed` (banded iron, limestone lead-zinc,
-    layered intrusions with chromite seams), `plug` (porphyry copper, carbonatite), `vein`
-    (quartz-silver, tin greisen, pegmatite) and `blanket` (bauxite/nickel laterite, gossan caps,
-    REE clay). Ore is spread through the body as pockets, seams, scattered grains or a top
-    enrichment. Host rocks are blocks of their own: carbonatite, limestone, gossan, porphyry,
-    greisen, gabbro, syenite, pegmatite, vein quartz, laterite. Beach placers (monazite,
-    ilmenite, rutile) still use the vanilla ore feature in sand.
-  - **What landed:** `registry.OreBlocks` (one `<mineral>_ore` block + item per ore, creative tab),
+  badlands, mountain, beach, swamp, taiga, desert): all 57 blocks (38 minerals with their deepslate
+  twins, 4 host rocks) generate on Fabric; NeoForge showed 52 in the same sample, the absent five
+  being rare or deep ones. Vanilla `iron_ore` no longer generates. **Not yet seen in a client** —
+  the overlay models need the cutout render layer (`FundamentalsClient` on Fabric, `render_type`
+  in the model JSON on NeoForge) and that is untested.
+  - **Ore generates as deposits, not blobs.** `worldgen.DepositFeature` places ore in four real
+    shapes: `bed` (banded iron, lead-zinc, layered intrusions with chromite seams), `plug`
+    (porphyry copper, carbonatite), `vein` (silver, tin, pegmatite) and `blanket` (bauxite and
+    nickel laterite, the oxidised copper cap, REE clay). Ore is spread through the body as pockets,
+    seams, scattered grains or a top enrichment.
+  - **Look (user ruling): half vanilla, half real.** Everyday ores sit directly in the existing
+    stone or deepslate and are drawn as overlays on the vanilla texture, so they read like vanilla
+    ores. Only the rare big finds are bodies of their own rock: `carbonatite`, `gabbro`, `syenite`,
+    `laterite`. Pegmatite dykes are vanilla granite; beach placers sit in vanilla sand.
+  - **What landed:** `registry.OreBlocks` (ore blocks, rock blocks, items, creative tab),
     `worldgen.OreData` / `worldgen.OreSpawns`, and two generators — `tools/paint_minerals.py`
     (textures) and `tools/build_ore_data.py` (models, loot, tags, lang, features, biome tags,
     NeoForge biome modifiers, and `fundamentals_ores.json`, which both the block registration and
@@ -318,9 +324,9 @@ features in worldgen JSON — for now this table is the spec both sides build to
   - **Known gaps (A will take):** (1) the hardcoded deep ore veins still place
     `deepslate_iron_ore` and `raw_iron_block` — needs a mixin on `OreVeinifier`; (2) a deposit is
     capped at ~30 blocks across (a feature may only write to the 3x3 chunks around it), so truly
-    large bodies would need a structure; (3) frequencies are a first guess — iron is roughly
-    twice vanilla, limestone beds are everywhere, and vanilla copper is far too common for
-    "native copper"; (4) host rocks have no uses or recipes yet.
+    large bodies would need a structure; (3) frequencies are a first guess (about 430 of our blocks
+    per chunk, iron about 135) and vanilla copper is far too common for "native copper"; (4) host
+    rocks have no uses or recipes yet.
 
 ---
 

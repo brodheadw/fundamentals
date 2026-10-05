@@ -1,10 +1,16 @@
 #!/usr/bin/env python3
-"""Paints the 16x16 ore-block texture for every mineral in the mod.
+"""Paints the 16x16 ore texture for every mineral in the mod.
 
-Each mineral is painted in the rock it really occurs in (carbonatite, granite, limestone,
-gossan, basalt, ...) and composed from its real habit (one dominant mass plus stragglers,
-crystal aggregates, veinlets in quartz, companion minerals) rather than from one shared
-template. Edit the specs here and re-run; don't hand-edit the PNGs.
+Two kinds of texture come out of here:
+
+  * Overlays (most ores): transparent except for the mineral and a hint of its real host rock
+    (a quartz veinlet, a stained patch, bands). The block model draws it over the game's own
+    stone, deepslate, granite or sand, so the ore sits in a cave wall the way a vanilla ore does
+    and follows the player's resource pack. See OVERLAY.
+  * Full rocks (rare intrusions and weathering blankets): the whole block is the host rock.
+
+Each mineral is composed from its real habit (one dominant mass plus stragglers, crystal
+aggregates, veinlets, companion minerals) rather than from one shared template. Edit the specs here and re-run; don't hand-edit the PNGs.
 
     python3 tools/paint_minerals.py            # write textures
     python3 tools/paint_minerals.py sheet.png  # also write a labelled contact sheet
@@ -19,14 +25,15 @@ SIZE = 16
 OUT = Path(__file__).resolve().parent.parent / "src/main/resources/assets/fundamentals/textures/block"
 
 STONE = [(100, 100, 100), (113, 113, 113), (125, 125, 125), (134, 134, 134), (143, 143, 143)]
-# Host rocks: (tones dark->light, blur_x, blur_y, share of each tone). Every one except "sand"
-# (vanilla sand) is also a block of its own, so an ore sits in a body of the rock it is painted in.
+# Host rocks: (tones dark->light, blur_x, blur_y, share of each tone). The ones in ROCK_BLOCKS are
+# blocks of their own; the rest only appear as the patch or veinlet an overlay ore carries.
 HOSTS = {
     "carbonatite": ([(170, 150, 118), (192, 176, 144), (210, 197, 168), (226, 216, 190)], 1, 1, (1, 3, 4, 2)),
-    "pegmatite": ([(150, 110, 96), (184, 138, 120), (204, 164, 146), (216, 206, 196)], 1, 1, (2, 4, 3, 2)),
     "greisen": ([(138, 138, 134), (160, 160, 154), (180, 180, 172), (198, 198, 190)], 1, 1, (1, 3, 4, 2)),
     "porphyry": ([(118, 106, 104), (132, 120, 116), (144, 132, 126), (154, 142, 136)], 1, 0, (1, 3, 4, 2)),
     "gossan": ([(96, 54, 26), (126, 76, 34), (154, 98, 42), (178, 122, 54)], 1, 1, (2, 4, 3, 1)),
+    "jasper": ([(112, 30, 26), (140, 38, 30), (160, 52, 36), (176, 70, 50)], 2, 0, (1, 3, 4, 2)),
+    "chert": ([(112, 106, 100), (128, 122, 114), (144, 138, 130), (158, 152, 144)], 2, 0, (1, 3, 4, 2)),
     "limestone": ([(160, 156, 142), (176, 172, 158), (188, 184, 170), (198, 195, 182)], 3, 0, (1, 3, 4, 2)),
     "gabbro": ([(50, 56, 52), (64, 70, 64), (80, 86, 78), (98, 104, 94)], 1, 1, (2, 4, 3, 1)),
     "syenite": ([(144, 150, 144), (164, 170, 162), (182, 187, 178), (198, 202, 194)], 1, 1, (1, 3, 4, 2)),
@@ -34,6 +41,29 @@ HOSTS = {
     "laterite": ([(118, 54, 34), (140, 68, 42), (158, 82, 50), (172, 98, 60)], 1, 1, (2, 4, 3, 1)),
     "sand": ([(184, 164, 120), (200, 182, 138), (214, 198, 154), (226, 212, 170)], 2, 0, (1, 3, 4, 2)),
 }
+
+ROCK_BLOCKS = ["carbonatite", "gabbro", "syenite", "laterite"]
+
+# Overlay ores: mineral -> (vanilla blocks it is drawn over, how its host rock shows).
+#   "patch"  a ragged area of the recipe's host rock, with the ore inside it
+#   "bands"  wavy stripes of the recipe's host
+#   None     nothing but what the recipe paints (e.g. a quartz veinlet)
+STONES = ("stone", "deepslate")
+OVERLAY = {
+    "hematite": (STONES, "bands"), "magnetite": (STONES, "bands"),
+    "pyrolusite": (STONES, "patch"), "galena": (STONES, "patch"), "sphalerite": (STONES, "patch"),
+    "scheelite": (STONES, "patch"), "cinnabar": (STONES, "patch"), "bornite": (STONES, "patch"),
+    # Weathering products: they only form near the surface, so they have no deepslate twin.
+    "smithsonite": (("stone",), "patch"), "chalcocite": (("stone",), "patch"), "covellite": (("stone",), "patch"),
+    "malachite": (("stone",), "patch"), "azurite": (("stone",), "patch"), "cuprite": (("stone",), "patch"),
+    "hemimorphite": (("stone",), "patch"),
+    "chalcopyrite": (STONES, None), "molybdenite": (STONES, None), "cassiterite": (STONES, None),
+    "wolframite": (STONES, None), "native_silver": (STONES, None), "argentite": (STONES, None),
+    "cobaltite": (STONES, None),
+    "xenotime": (("granite",), None), "euxenite": (("granite",), None),
+    "monazite": (("sand",), None), "ilmenite": (("sand",), None), "rutile": (("sand",), None),
+}
+CLEAR = (255, 0, 255)  # painted as transparent in an overlay
 
 QUARTZ = [(176, 176, 172), (204, 204, 198), (228, 228, 222)]
 ORTHO = [(1, 0), (-1, 0), (0, 1), (0, -1)]
@@ -75,6 +105,8 @@ P = {
     "erythrite": ((150, 30, 90), (214, 60, 130), (240, 120, 170), (255, 190, 220)),
     "ilmenite": ((10, 10, 12), (30, 30, 36), (60, 60, 70), (120, 122, 136)),
     "rutile": ((80, 20, 10), (140, 44, 20), (196, 90, 40), (240, 170, 100)),
+    "hematite": ((64, 62, 70), (98, 96, 108), (132, 130, 144), (190, 190, 204)),
+    "magnetite": ((14, 14, 18), (34, 34, 42), (62, 62, 74), (128, 130, 148)),
 }
 
 # Bornite tarnishes iridescent ("peacock ore"): patches of several hues on one mass.
@@ -90,9 +122,9 @@ RECIPES = {
     "bastnasite": ("carbonatite", [("mass", 14, 19), ("blob", 2, 4, 7), ("speck", 4), ("companion", "pyrolusite", 3)]),
     # A placer mineral: heavy resinous grains concentrated in black-sand laminae on beaches.
     "monazite": ("sand", [("laminae", 3), ("blob", 3, 3, 5), ("speck", 8)]),
-    "xenotime": ("pegmatite", [("crystals", "prism", 2, 2), ("crystals", "prism", 1, 1), ("speck", 3)]),
+    "xenotime": ("granite", [("crystals", "prism", 2, 2), ("crystals", "prism", 1, 1), ("speck", 3)]),
     "loparite": ("syenite", [("laths", 5), ("crystals", "cube", 2, 3), ("crystals", "cube", 2, 1), ("speck", 3)]),
-    "euxenite": ("pegmatite", [("mass", 14, 18), ("blob", 2, 4, 7), ("speck", 3)]),
+    "euxenite": ("granite", [("mass", 14, 18), ("blob", 2, 4, 7), ("speck", 3)]),
     # --- copper ---
     # Porphyry copper: sulfide riding quartz veinlets, with disseminated grains off the vein.
     "chalcopyrite": ("porphyry", [("phenocrysts", 6), ("vein", "diag", 3, 5, 9), ("blob", 2, 3, 5), ("speck", 5)]),
@@ -113,6 +145,10 @@ RECIPES = {
     # Greisen tin: stubby dark prisms along a quartz vein.
     "cassiterite": ("greisen", [("vein", "wavy", 3, 4, 7), ("crystals", "prism", 1, 1), ("speck", 3)]),
     # --- ferrous (Laptop B's minerals) ---
+    # Banded iron formation: red jasper bands carrying steel-grey specular hematite.
+    "hematite": ("jasper", [("mass", 9, 12), ("blob", 3, 4, 7), ("speck", 4)]),
+    # The same bands in grey chert, with black magnetite octahedra.
+    "magnetite": ("chert", [("crystals", "cube", 2, 2), ("crystals", "cube", 2, 1), ("speck", 4)]),
     # Manganese oxide: sooty black dendrites creeping across limestone.
     "pyrolusite": ("limestone", [("smear", 3, 12, 18), ("speck", 6)]),
     # Sudbury/Norilsk: bronze sulfide blebs in dark mafic rock, always with pyrrhotite.
@@ -126,13 +162,13 @@ RECIPES = {
     # Soft blue-grey flakes on quartz veinlets in the same porphyries as copper.
     "molybdenite": ("porphyry", [("phenocrysts", 5), ("vein", "diag", 2, 2, 4), ("crystals", "plate", 2, 2), ("speck", 3)]),
     # Tin-white cubes with pink "cobalt bloom" (erythrite) wherever they weather.
-    "cobaltite": ("vein_quartz", [("crystals", "cube", 2, 2), ("crystals", "cube", 2, 1), ("companion", "erythrite", 6)]),
+    "cobaltite": ("vein_quartz", [("vein", "wavy", 0, 0, 0), ("crystals", "cube", 2, 2), ("crystals", "cube", 2, 1), ("companion", "erythrite", 6)]),
     # Mineral sands: titanium minerals are the black layers in a beach.
     "ilmenite": ("sand", [("laminae", 6), ("blob", 4, 3, 6), ("speck", 6)]),
     "rutile": ("sand", [("laminae", 2), ("blob", 4, 3, 5), ("speck", 9)]),
     # --- precious and PGM (Laptop B's minerals) ---
-    "native_silver": ("vein_quartz", [("smear", 2, 9, 13), ("speck", 3), ("companion", "argentite", 3)]),
-    "argentite": ("vein_quartz", [("mass", 8, 12), ("blob", 3, 3, 6), ("speck", 4)]),
+    "native_silver": ("vein_quartz", [("vein", "diag", 2, 3, 5), ("smear", 2, 7, 10), ("speck", 3), ("companion", "argentite", 3)]),
+    "argentite": ("vein_quartz", [("vein", "diag", 3, 4, 8), ("blob", 2, 3, 5), ("speck", 3)]),
     # PGM minerals are tiny bright grains in a dark layered intrusion, not masses.
     "sperrylite": ("gabbro", [("crystals", "cube", 3, 1), ("speck", 6)]),
     "cooperite": ("gabbro", [("band", "chromite"), ("blob", 2, 2, 4), ("speck", 6)]),
@@ -163,14 +199,7 @@ def host_rock(rng, kind):
     img = Image.new("RGB", (SIZE, SIZE))
     for p, v in field(rng, bx, by).items():
         img.putpixel(p, tones[next(i for i, c in enumerate(cuts) if v < c or i == len(cuts) - 1)])
-    if kind == "pegmatite":  # coarse: dark mica books and glassy quartz eyes
-        for _ in range(9):
-            img.putpixel((rng.randrange(SIZE), rng.randrange(SIZE)), (52, 46, 44))
-        for _ in range(5):
-            x, y = rng.randrange(SIZE), rng.randrange(SIZE)
-            for p in rect(x, y, 2, rng.choice((1, 2))):
-                img.putpixel(p, (224, 220, 214))
-    elif kind == "carbonatite":
+    if kind == "carbonatite":
         for _ in range(4):
             img.putpixel((rng.randrange(SIZE), rng.randrange(SIZE)), (132, 96, 62))
     elif kind == "limestone":  # bedding planes
@@ -187,9 +216,26 @@ def host_rock(rng, kind):
 class Canvas:
     def __init__(self, name, host):
         self.rng = random.Random(name)
-        # Same background as the plain rock block, so an ore blends into the body around it.
-        self.img = host_rock(random.Random("host-" + host), host)
         self.ore = set()
+        self.zone = None  # overlay ores: where the host rock shows, and where ore prefers to sit
+        if name not in OVERLAY:
+            # Same background as the plain rock block, so an ore blends into the body around it.
+            self.img = host_rock(random.Random("host-" + host), host)
+            return
+        self.img = Image.new("RGB", (SIZE, SIZE), CLEAR)
+        accent = OVERLAY[name][1]
+        if accent == "patch":
+            self.zone = self.grow(self.rng.randint(52, 64), compact=2.5) | self.grow(self.rng.randint(18, 26), compact=2.5)
+        elif accent == "bands":
+            self.zone, y0, drift = set(), self.rng.randrange(SIZE), 0
+            for x in range(SIZE):
+                drift = max(-1, min(1, drift + self.rng.choice((-1, 0, 0, 0, 0, 1))))
+                for start, thick in ((0, 3), (6, 2), (11, 3)):
+                    self.zone |= {wrap(x, y0 + start + k + drift) for k in range(thick)}
+        if self.zone:
+            rock = host_rock(random.Random("host-" + host), host)
+            for p in self.zone:
+                self.img.putpixel(p, rock.getpixel(p))
 
     def free(self, cells, margin):
         r = range(-margin, margin + 1)
@@ -209,9 +255,11 @@ class Canvas:
         return cells
 
     def place(self, make, margin=1):
-        for _ in range(300):
+        for attempt in range(300):
             cells = make()
-            if self.free(cells, margin):
+            # Ore belongs in its host rock: for the first tries, insist it mostly lands there.
+            inside = not self.zone or attempt > 150 or len(cells & self.zone) >= 0.7 * len(cells)
+            if inside and self.free(cells, margin):
                 return cells
         return set()
 
@@ -231,13 +279,18 @@ class Canvas:
         self.ore |= cells
 
     def finish(self):
-        """Darken the stone just below/right of the ore so it sits in the rock."""
+        """Darken the rock just below/right of the ore so it sits in it; key out an overlay."""
         for x, y in self.ore:
             for dx, dy in ((0, 1), (1, 0)):
                 p = wrap(x + dx, y + dy)
-                if p not in self.ore:
+                if p not in self.ore and self.img.getpixel(p) != CLEAR:
                     self.img.putpixel(p, tuple(max(0, c - 26) for c in self.img.getpixel(p)))
-        return self.img
+        rgba = self.img.convert("RGBA")
+        for x in range(SIZE):
+            for y in range(SIZE):
+                if self.img.getpixel((x, y)) == CLEAR:
+                    rgba.putpixel((x, y), (0, 0, 0, 0))
+        return rgba
 
 
 def shade(cells, x, y):
@@ -308,12 +361,14 @@ def build(name):
         if kind == "phenocrysts":  # pale feldspar crystals floating in the porphyry groundmass
             for _ in range(element[1]):
                 for p in rect(rng.randrange(SIZE), rng.randrange(SIZE), rng.choice((1, 2)), rng.choice((1, 2))):
-                    c.img.putpixel(p, rng.choice(((196, 188, 178), (210, 204, 194))))
+                    if c.img.getpixel(p) != CLEAR:
+                        c.img.putpixel(p, rng.choice(((196, 188, 178), (210, 204, 194))))
         elif kind == "voids":  # leached pits (gossan boxwork) or gas bubbles (basalt)
             for _ in range(element[1]):
                 dark = tuple(int(v * 0.55) for v in HOSTS[host][0][0])
                 for p in rect(rng.randrange(SIZE), rng.randrange(SIZE), rng.choice((1, 1, 2)), 1):
-                    c.img.putpixel(p, dark)
+                    if c.img.getpixel(p) != CLEAR:
+                        c.img.putpixel(p, dark)
         elif kind == "laths":  # dark aegirine needles in the syenite
             for _ in range(element[1]):
                 w, h = rng.choice(((1, 3), (3, 1), (1, 2)))
@@ -451,29 +506,6 @@ def paint_bauxite():
     return img
 
 
-def paint_banded_iron(name, bands):
-    """Banded iron formation: thin wavy layers of iron oxide and chert/jasper, laid on a sea floor."""
-    rng = random.Random(name)
-    rows = [tones for tones, thick in bands for _ in range(thick)]
-    wobble, y = [], 0
-    for x in range(SIZE):
-        wobble.append(y)
-        y += rng.choice((-1, 0, 0, 0, 0, 0, 0, 1))
-    wobble = [w - round(wobble[-1] * x / (SIZE - 1)) for x, w in enumerate(wobble)]  # close the loop
-    img = Image.new("RGB", (SIZE, SIZE))
-    for x in range(SIZE):
-        for y in range(SIZE):
-            tones = rows[(y + wobble[x]) % SIZE]
-            img.putpixel((x, y), tones[min(len(tones) - 1, int(rng.random() ** 0.6 * len(tones)))] if rng.random() < 0.9 else tones[0])
-    return img
-
-
-JASPER = [(112, 30, 26), (140, 38, 30), (160, 52, 36)]
-SPECULAR = [(64, 62, 70), (88, 86, 96), (112, 110, 122), (150, 150, 164)]
-CHERT = [(120, 114, 108), (136, 130, 122), (150, 144, 136)]
-LODESTONE = [(18, 18, 22), (30, 30, 36), (44, 44, 52), (70, 72, 84)]
-
-
 def paint_goethite():
     """Earthy ochre iron hydroxide with dark glossy botryoidal crusts (bog iron, gossan caps)."""
     rng = random.Random("goethite")
@@ -509,19 +541,13 @@ def paint_all():
     out = {name: build(name) for name in RECIPES}
     out["ion_adsorption_clay"] = paint_clay()
     out["bauxite"] = paint_bauxite()
-    out["hematite"] = paint_banded_iron("hematite", [(JASPER, 2), (SPECULAR, 1), (JASPER, 1), (SPECULAR, 2),
-                                                     (JASPER, 3), (SPECULAR, 1), (JASPER, 1), (SPECULAR, 2),
-                                                     (JASPER, 2), (SPECULAR, 1)])
-    out["magnetite"] = paint_banded_iron("magnetite", [(LODESTONE, 3), (CHERT, 1), (LODESTONE, 2), (CHERT, 2),
-                                                       (LODESTONE, 1), (CHERT, 1), (LODESTONE, 3), (CHERT, 1),
-                                                       (LODESTONE, 1), (CHERT, 1)])
     out["goethite"] = paint_goethite()
     out["nickel_laterite"] = paint_nickel_laterite()
     return out
 
 
 def paint_rocks():
-    return {name: host_rock(random.Random("host-" + name), name) for name in HOSTS if name != "sand"}
+    return {name: host_rock(random.Random("host-" + name), name) for name in ROCK_BLOCKS}
 
 
 SHEET_ORDER = [
@@ -534,18 +560,38 @@ SHEET_ORDER = [
 ]
 
 
-def contact_sheet(textures, path, cols=8, scale=12):
-    textures = {**textures, **paint_rocks()}
-    order = [n for n in HOSTS if n != "sand"] + SHEET_ORDER
-    tile, pad, label = SIZE * scale, 20, 28
-    rows = -(-len(order) // cols)
+def vanilla(block):
+    """The game's own texture, for previews only (never written into the mod)."""
+    import glob, io, zipfile
+    jars = glob.glob(str(Path.home() / ".gradle/caches/fabric-loom/*/minecraft-client.jar"))
+    if not jars:
+        return Image.new("RGBA", (SIZE, SIZE), {"deepslate": (72, 72, 76, 255)}.get(block, (126, 126, 126, 255)))
+    with zipfile.ZipFile(jars[0]) as z:
+        return Image.open(io.BytesIO(z.read(f"assets/minecraft/textures/block/{block}.png"))).convert("RGBA")
+
+
+def contact_sheet(textures, path, cols=10, scale=10):
+    tiles = [(name, img.convert("RGBA")) for name, img in paint_rocks().items()]
+    for deep in (False, True):
+        for name in SHEET_ORDER:
+            if name not in OVERLAY:
+                if not deep:
+                    tiles.append((name, textures[name].convert("RGBA")))
+                continue
+            bases = OVERLAY[name][0]
+            if deep and "deepslate" not in bases:
+                continue
+            base = "deepslate" if deep else bases[0]
+            tiles.append((("deepslate " if deep else "") + name, Image.alpha_composite(vanilla(base), textures[name])))
+    tile, pad, label = SIZE * scale, 14, 26
+    rows = -(-len(tiles) // cols)
     sheet = Image.new("RGB", (cols * (tile + pad) + pad, rows * (tile + pad + label) + pad), (32, 34, 38))
     draw = ImageDraw.Draw(sheet)
-    font = ImageFont.load_default(size=16)
-    for i, name in enumerate(order):
+    font = ImageFont.load_default(size=13)
+    for i, (name, img) in enumerate(tiles):
         x = pad + (i % cols) * (tile + pad)
         y = pad + (i // cols) * (tile + pad + label)
-        sheet.paste(textures[name].resize((tile, tile), Image.NEAREST), (x, y))
+        sheet.paste(img.convert("RGB").resize((tile, tile), Image.NEAREST), (x, y))
         draw.text((x, y + tile + 4), name.replace("_", " "), fill=(226, 228, 232), font=font)
     sheet.save(path)
 
@@ -553,6 +599,8 @@ def contact_sheet(textures, path, cols=8, scale=12):
 if __name__ == "__main__":
     textures = paint_all()
     OUT.mkdir(parents=True, exist_ok=True)
+    for stale in OUT.glob("*.png"):
+        stale.unlink()
     for name, img in textures.items():
         img.save(OUT / f"{name}_ore.png")
     rocks = paint_rocks()

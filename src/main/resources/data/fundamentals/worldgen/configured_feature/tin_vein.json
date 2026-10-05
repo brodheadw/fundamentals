@@ -1,0 +1,41 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "vein",
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:cassiterite_ore"
+        },
+        "fraction": 0.5,
+        "style": "pockets",
+        "deepslate_state": {
+          "Name": "fundamentals:deepslate_cassiterite_ore"
+        }
+      },
+      {
+        "state": {
+          "Name": "fundamentals:wolframite_ore"
+        },
+        "fraction": 0.22,
+        "style": "pockets",
+        "deepslate_state": {
+          "Name": "fundamentals:deepslate_wolframite_ore"
+        }
+      }
+    ],
+    "radius": {
+      "min": 10,
+      "max": 15
+    },
+    "thickness": {
+      "min": 2,
+      "max": 3
+    },
+    "replaceable": "fundamentals:deposit_replaceable/rock",
+    "height": {
+      "min": 12,
+      "max": 24
+    }
+  }
+}

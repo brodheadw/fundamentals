@@ -2,9 +2,6 @@
   "type": "fundamentals:deposit",
   "config": {
     "shape": "bed",
-    "host": {
-      "Name": "fundamentals:gabbro"
-    },
     "ores": [
       {
         "state": {
@@ -50,6 +47,9 @@
       "min": 8,
       "max": 12
     },
-    "replaceable": "fundamentals:deposit_replaceable/rock"
+    "replaceable": "fundamentals:deposit_replaceable/rock",
+    "host": {
+      "Name": "fundamentals:gabbro"
+    }
   }
 }

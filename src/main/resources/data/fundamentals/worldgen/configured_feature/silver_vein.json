@@ -2,23 +2,26 @@
   "type": "fundamentals:deposit",
   "config": {
     "shape": "vein",
-    "host": {
-      "Name": "fundamentals:vein_quartz"
-    },
     "ores": [
       {
         "state": {
           "Name": "fundamentals:argentite_ore"
         },
-        "fraction": 0.1,
-        "style": "pockets"
+        "fraction": 0.5,
+        "style": "pockets",
+        "deepslate_state": {
+          "Name": "fundamentals:deepslate_argentite_ore"
+        }
       },
       {
         "state": {
           "Name": "fundamentals:native_silver_ore"
         },
-        "fraction": 0.04,
-        "style": "pockets"
+        "fraction": 0.22,
+        "style": "pockets",
+        "deepslate_state": {
+          "Name": "fundamentals:deepslate_native_silver_ore"
+        }
       }
     ],
     "radius": {

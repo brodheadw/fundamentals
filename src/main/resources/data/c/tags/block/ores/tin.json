@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "fundamentals:cassiterite_ore"
+    "fundamentals:cassiterite_ore",
+    "fundamentals:deepslate_cassiterite_ore"
   ]
 }

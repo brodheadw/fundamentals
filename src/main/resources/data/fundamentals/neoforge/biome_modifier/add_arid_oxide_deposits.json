@@ -2,7 +2,7 @@
   "type": "neoforge:add_features",
   "biomes": "#fundamentals:deposit/arid_oxide",
   "features": [
-    "fundamentals:gossan_cap"
+    "fundamentals:oxide_cap"
   ],
   "step": "underground_ores"
 }

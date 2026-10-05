@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:deepslate_molybdenite_ore",
     "fundamentals:molybdenite_ore"
   ]
 }

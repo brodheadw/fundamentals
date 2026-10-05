@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
-    "fundamentals:cobaltite_ore"
+    "fundamentals:cobaltite_ore",
+    "fundamentals:deepslate_cobaltite_ore"
   ]
 }

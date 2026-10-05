@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "fundamentals:argentite_ore",
+    "fundamentals:deepslate_argentite_ore",
+    "fundamentals:deepslate_native_silver_ore",
     "fundamentals:native_silver_ore"
   ]
 }

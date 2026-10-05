@@ -17,6 +17,9 @@
 	"entrypoints": {
 		"main": [
 			"ai.gsmc.fundamentals.Fundamentals"
+		],
+		"client": [
+			"ai.gsmc.fundamentals.FundamentalsClient"
 		]
 	},
 	"mixins": [

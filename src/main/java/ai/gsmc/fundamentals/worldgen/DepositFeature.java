@@ -4,6 +4,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
@@ -18,10 +19,11 @@ import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfigur
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 
 /**
- * An ore deposit: a body of host rock with ore distributed inside it, in one of the shapes ore
- * really takes. Vanilla's blob-shaped {@code ore} feature can't express any of them.
+ * An ore deposit: ore distributed through a body of rock — either a host rock of its own or the
+ * stone already there — in one of the shapes ore really takes. Vanilla's blob-shaped {@code ore} feature can't express any of them.
  *
  * <ul>
  *   <li>{@code bed} — a gently dipping lens (sedimentary layers, layered intrusions)</li>
@@ -80,25 +82,31 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
         }
     }
 
-    /** @param fraction share of the body's blocks that are this ore */
-    public record Ore(BlockState state, float fraction, Style style) {
+    /**
+     * @param deepslate the block used where the ore replaces deepslate, if it has such a twin
+     * @param fraction  share of the body's blocks that are this ore
+     */
+    public record Ore(BlockState state, Optional<BlockState> deepslate, float fraction, Style style) {
         public static final Codec<Ore> CODEC = RecordCodecBuilder.create(i -> i.group(
                 BlockState.CODEC.fieldOf("state").forGetter(Ore::state),
+                BlockState.CODEC.optionalFieldOf("deepslate_state").forGetter(Ore::deepslate),
                 Codec.FLOAT.fieldOf("fraction").forGetter(Ore::fraction),
                 Style.CODEC.fieldOf("style").forGetter(Ore::style)).apply(i, Ore::new));
     }
 
     /**
+     * @param host        rock the whole body is turned into; empty leaves the existing rock, so
+     *                    the ore sits directly in stone or deepslate
      * @param radius      horizontal half-extent (half the strike length, for a vein)
      * @param thickness   bed/blanket thickness, or vein width
      * @param height      vertical extent of a plug or vein; unused otherwise
      * @param replaceable blocks the deposit may replace
      */
-    public record Config(Shape shape, BlockState host, List<Ore> ores, Range radius, Range thickness,
+    public record Config(Shape shape, Optional<BlockState> host, List<Ore> ores, Range radius, Range thickness,
                          Range height, TagKey<Block> replaceable) implements FeatureConfiguration {
         public static final Codec<Config> CODEC = RecordCodecBuilder.create(i -> i.group(
                 Shape.CODEC.fieldOf("shape").forGetter(Config::shape),
-                BlockState.CODEC.fieldOf("host").forGetter(Config::host),
+                BlockState.CODEC.optionalFieldOf("host").forGetter(Config::host),
                 Ore.CODEC.listOf().fieldOf("ores").forGetter(Config::ores),
                 Range.CODEC.fieldOf("radius").forGetter(Config::radius),
                 Range.CODEC.fieldOf("thickness").forGetter(Config::thickness),
@@ -234,12 +242,18 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
         void put(int dx, int dy, int dz, double layer, double vertical) {
             if (Math.abs(dx) > REACH || Math.abs(dz) > REACH) return;
             pos.set(origin.getX() + dx, origin.getY() + dy, origin.getZ() + dz);
-            if (level.isOutsideBuildHeight(pos) || !level.getBlockState(pos).is(config.replaceable())) return;
-            level.setBlock(pos, stateAt(layer, vertical), Block.UPDATE_CLIENTS);
-            placed++;
+            if (level.isOutsideBuildHeight(pos)) return;
+            BlockState existing = level.getBlockState(pos);
+            if (!existing.is(config.replaceable())) return;
+            BlockState state = stateAt(layer, vertical, existing.is(BlockTags.DEEPSLATE_ORE_REPLACEABLES));
+            if (state != null) {
+                level.setBlock(pos, state, Block.UPDATE_CLIENTS);
+                placed++;
+            }
         }
 
-        private BlockState stateAt(double layer, double vertical) {
+        /** The block for this spot, or null to leave the existing rock alone. */
+        private BlockState stateAt(double layer, double vertical, boolean inDeepslate) {
             for (int i = 0; i < config.ores().size(); i++) {
                 Ore ore = config.ores().get(i);
                 long salt = seed + 1000L * (i + 1);
@@ -249,9 +263,9 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
                     case SEAMS -> Noise.hash(salt, (int) Math.floor(layer), 0, 0) < ore.fraction();
                     case TOP -> vertical > 0.35 && pocket(salt, Math.min(0.9F, ore.fraction() * 3));
                 };
-                if (here) return ore.state();
+                if (here) return inDeepslate ? ore.deepslate().orElse(ore.state()) : ore.state();
             }
-            return config.host();
+            return config.host().orElse(null);
         }
 
         private boolean pocket(long salt, float fraction) {

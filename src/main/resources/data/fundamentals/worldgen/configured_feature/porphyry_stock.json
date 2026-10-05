@@ -2,43 +2,49 @@
   "type": "fundamentals:deposit",
   "config": {
     "shape": "plug",
-    "host": {
-      "Name": "fundamentals:porphyry"
-    },
     "ores": [
       {
         "state": {
           "Name": "fundamentals:chalcopyrite_ore"
         },
-        "fraction": 0.14,
-        "style": "pockets"
+        "fraction": 0.22,
+        "style": "pockets",
+        "deepslate_state": {
+          "Name": "fundamentals:deepslate_chalcopyrite_ore"
+        }
       },
       {
         "state": {
           "Name": "fundamentals:molybdenite_ore"
         },
-        "fraction": 0.03,
-        "style": "pockets"
+        "fraction": 0.05,
+        "style": "pockets",
+        "deepslate_state": {
+          "Name": "fundamentals:deepslate_molybdenite_ore"
+        }
       },
       {
         "state": {
           "Name": "fundamentals:bornite_ore"
         },
-        "fraction": 0.03,
-        "style": "disseminated"
+        "fraction": 0.05,
+        "style": "disseminated",
+        "deepslate_state": {
+          "Name": "fundamentals:deepslate_bornite_ore"
+        }
       },
       {
         "state": {
           "Name": "fundamentals:chalcocite_ore"
         },
-        "fraction": 0.05,
+        "fraction": 0.08,
         "style": "top"
       },
       {
         "state": {
           "Name": "fundamentals:covellite_ore"
         },
-        "fraction": 0.01,
+        "fraction": 0.02,
         "style": "top"
       }
     ],

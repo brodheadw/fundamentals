@@ -2,9 +2,6 @@
   "type": "fundamentals:deposit",
   "config": {
     "shape": "plug",
-    "host": {
-      "Name": "fundamentals:syenite"
-    },
     "ores": [
       {
         "state": {
@@ -23,6 +20,9 @@
       "max": 1
     },
     "replaceable": "fundamentals:deposit_replaceable/rock",
+    "host": {
+      "Name": "fundamentals:syenite"
+    },
     "height": {
       "min": 16,
       "max": 26
