@@ -7,7 +7,7 @@
         "state": {
           "Name": "fundamentals:sphalerite_ore"
         },
-        "fraction": 0.24,
+        "fraction": 0.2,
         "style": "pockets",
         "deepslate_state": {
           "Name": "fundamentals:deepslate_sphalerite_ore"
@@ -17,7 +17,7 @@
         "state": {
           "Name": "fundamentals:galena_ore"
         },
-        "fraction": 0.15,
+        "fraction": 0.13,
         "style": "pockets",
         "deepslate_state": {
           "Name": "fundamentals:deepslate_galena_ore"

@@ -100,17 +100,17 @@ REPLACEABLE = {
 # styles disseminated (scattered grains) / pockets (masses) / seams (layers) / top (upper part).
 DEPOSITS = {
     # --- iron: beds of banded iron formation, common everywhere ---
-    "hematite_bed": ("bed", None, [("magnetite", 0.08, "seams"), ("hematite", 0.65, "pockets")],
-                     (9, 14), (3, 6), None, "anywhere", (0, 96), 12, "rock"),
-    "magnetite_bed": ("bed", None, [("hematite", 0.10, "seams"), ("magnetite", 0.65, "pockets")],
-                      (8, 12), (3, 5), None, "anywhere", (-56, 8), 20, "rock"),
+    "hematite_bed": ("bed", None, [("magnetite", 0.06, "seams"), ("hematite", 0.42, "pockets")],
+                     (9, 14), (3, 6), None, "anywhere", (0, 96), 7, "rock"),
+    "magnetite_bed": ("bed", None, [("hematite", 0.06, "seams"), ("magnetite", 0.42, "pockets")],
+                      (8, 12), (3, 5), None, "anywhere", (-56, 8), 12, "rock"),
     "bog_iron": ("blanket", "goethite_ore", [], (6, 9), (1, 2), None, "wetland", (60, 64), 3, "ground"),
     # --- stratabound beds in ordinary rock ---
-    "lead_zinc_bed": ("bed", None, [("sphalerite", 0.24, "pockets"), ("galena", 0.15, "pockets")],
+    "lead_zinc_bed": ("bed", None, [("sphalerite", 0.20, "pockets"), ("galena", 0.13, "pockets")],
                       (9, 13), (3, 5), None, "anywhere", (-40, 36), 10, "rock"),
-    "zinc_oxide_bed": ("bed", None, [("smithsonite", 0.30, "pockets")], (7, 10), (2, 4), None,
+    "zinc_oxide_bed": ("bed", None, [("smithsonite", 0.24, "pockets")], (7, 10), (2, 4), None,
                        "anywhere", (36, 72), 18, "rock"),
-    "manganese_bed": ("bed", None, [("pyrolusite", 0.35, "seams")], (8, 12), (3, 5), None,
+    "manganese_bed": ("bed", None, [("pyrolusite", 0.28, "pockets")], (8, 12), (3, 5), None,
                       "anywhere", (0, 60), 14, "rock"),
     "tungsten_skarn": ("bed", None, [("scheelite", 0.25, "pockets")], (6, 9), (3, 4), None,
                        "hydrothermal", (-32, 40), 14, "rock"),
@@ -118,13 +118,13 @@ DEPOSITS = {
                      "hydrothermal", (0, 72), 14, "rock"),
     # --- porphyry copper: a big low-grade stock, enriched near the top ---
     "porphyry_stock": ("plug", None,
-                       [("chalcopyrite", 0.22, "pockets"), ("molybdenite", 0.05, "pockets"),
-                        ("bornite", 0.05, "disseminated"), ("chalcocite", 0.08, "top"), ("covellite", 0.02, "top")],
+                       [("chalcopyrite", 0.18, "pockets"), ("molybdenite", 0.04, "pockets"),
+                        ("bornite", 0.04, "disseminated"), ("chalcocite", 0.07, "top"), ("covellite", 0.02, "top")],
                        (7, 11), None, (24, 40), "porphyry", (0, 70), 8, "rock"),
     # --- the oxidised cap over copper and zinc, just under the surface in dry country ---
     "oxide_cap": ("blanket", None,
-                  [("malachite", 0.25, "pockets"), ("azurite", 0.12, "pockets"), ("cuprite", 0.08, "disseminated"),
-                   ("hemimorphite", 0.07, "pockets")],
+                  [("malachite", 0.20, "pockets"), ("azurite", 0.10, "pockets"), ("cuprite", 0.06, "disseminated"),
+                   ("hemimorphite", 0.06, "pockets")],
                   (9, 14), (5, 8), None, "arid_oxide", (60, 64), 6, "rock"),
     # --- tropical weathering blankets: these are rocks of their own ---
     "bauxite_blanket": ("blanket", "laterite", [("bauxite", 0.50, "pockets")], (10, 15), (4, 7), None,
@@ -148,7 +148,7 @@ DEPOSITS = {
     # --- veins and dykes in mountain country ---
     "pegmatite_dyke": ("vein", "minecraft:granite", [("xenotime", 0.08, "pockets"), ("euxenite", 0.04, "pockets")],
                        (11, 15), (3, 5), (14, 24), "pegmatite", (-16, 48), 16, "rock"),
-    "tin_vein": ("vein", None, [("cassiterite", 0.40, "pockets"), ("wolframite", 0.18, "pockets")],
+    "tin_vein": ("vein", None, [("cassiterite", 0.36, "pockets"), ("wolframite", 0.16, "pockets")],
                  (10, 15), (2, 3), (12, 24), "pegmatite", (-16, 56), 9, "rock"),
     "silver_vein": ("vein", None, [("argentite", 0.38, "pockets"), ("native_silver", 0.16, "pockets")],
                     (10, 15), (1, 2), (14, 26), "hydrothermal", (-32, 64), 12, "rock"),

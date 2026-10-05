@@ -7,28 +7,28 @@
         "state": {
           "Name": "fundamentals:malachite_ore"
         },
-        "fraction": 0.25,
+        "fraction": 0.2,
         "style": "pockets"
       },
       {
         "state": {
           "Name": "fundamentals:azurite_ore"
         },
-        "fraction": 0.12,
+        "fraction": 0.1,
         "style": "pockets"
       },
       {
         "state": {
           "Name": "fundamentals:cuprite_ore"
         },
-        "fraction": 0.08,
+        "fraction": 0.06,
         "style": "disseminated"
       },
       {
         "state": {
           "Name": "fundamentals:hemimorphite_ore"
         },
-        "fraction": 0.07,
+        "fraction": 0.06,
         "style": "pockets"
       }
     ],

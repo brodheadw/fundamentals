@@ -7,8 +7,8 @@
         "state": {
           "Name": "fundamentals:pyrolusite_ore"
         },
-        "fraction": 0.35,
-        "style": "seams",
+        "fraction": 0.28,
+        "style": "pockets",
         "deepslate_state": {
           "Name": "fundamentals:deepslate_pyrolusite_ore"
         }

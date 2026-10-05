@@ -146,7 +146,7 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
                 double centre = dipX * dx + dipZ * dz;
                 double half = Math.max(0.6, thickness / 2.0 * Math.sqrt(1 - d * d));  // thins to the edge
                 for (int dy = (int) Math.floor(centre - half); dy <= Math.ceil(centre + half); dy++) {
-                    body.put(dx, dy, dz, dy - centre, (dy - centre) / half);
+                    body.put(dx, dy, dz, dy - centre, (dy - centre) / half, Math.max(d, Math.abs(dy - centre) / half * 0.8));
                 }
             }
         }
@@ -162,8 +162,9 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
             for (int dx = -REACH; dx <= REACH; dx++) {
                 for (int dz = -REACH; dz <= REACH; dz++) {
                     double d = Math.sqrt((dx - cx) * (dx - cx) + (dz - cz) * (dz - cz));
-                    if (d < r * body.edge(dx, dz)) {
-                        body.put(dx, dy - height / 2, dz, dy, t * 2 - 1);
+                    double rim = r * body.edge(dx, dz);
+                    if (d < rim) {
+                        body.put(dx, dy - height / 2, dz, dy, t * 2 - 1, d / rim);
                     }
                 }
             }
@@ -185,7 +186,8 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
                     // Veins pinch and swell along their length.
                     double half = thickness / 2.0 * taper * (0.6 + 0.9 * body.noise(along * 0.2, dy * 0.2, 80));
                     if (half > 0.3 && Math.abs(across) <= Math.max(half, 0.5)) {
-                        body.put(dx, dy, dz, dy, dy / (halfHeight + 1));
+                        body.put(dx, dy, dz, dy, dy / (halfHeight + 1),
+                                Math.max(Math.abs(along) / radius, Math.abs(dy) / (halfHeight + 1)));
                     }
                 }
             }
@@ -204,7 +206,7 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
                 int depth = (int) Math.ceil(thickness * Math.sqrt(1 - d * d));
                 for (int k = 0; k < depth; k++) {
                     // Starts one block down, leaving the topsoil in place.
-                    body.put(dx, surface - 1 - k - body.origin.getY(), dz, -k, 1 - 2.0 * k / depth);
+                    body.put(dx, surface - 1 - k - body.origin.getY(), dz, -k, 1 - 2.0 * k / depth, d);
                 }
             }
         }
@@ -238,14 +240,15 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
         /**
          * @param layer    height within the body in blocks, following its dip (selects seams)
          * @param vertical -1 at the bottom of the body to +1 at the top
+         * @param edge     0 at the heart of the body to 1 at its rim; ore thins out toward the rim
          */
-        void put(int dx, int dy, int dz, double layer, double vertical) {
+        void put(int dx, int dy, int dz, double layer, double vertical, double edge) {
             if (Math.abs(dx) > REACH || Math.abs(dz) > REACH) return;
             pos.set(origin.getX() + dx, origin.getY() + dy, origin.getZ() + dz);
             if (level.isOutsideBuildHeight(pos)) return;
             BlockState existing = level.getBlockState(pos);
             if (!existing.is(config.replaceable())) return;
-            BlockState state = stateAt(layer, vertical, existing.is(BlockTags.DEEPSLATE_ORE_REPLACEABLES));
+            BlockState state = stateAt(layer, vertical, edge, existing.is(BlockTags.DEEPSLATE_ORE_REPLACEABLES));
             if (state != null) {
                 level.setBlock(pos, state, Block.UPDATE_CLIENTS);
                 placed++;
@@ -253,15 +256,17 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
         }
 
         /** The block for this spot, or null to leave the existing rock alone. */
-        private BlockState stateAt(double layer, double vertical, boolean inDeepslate) {
+        private BlockState stateAt(double layer, double vertical, double edge, boolean inDeepslate) {
+            // Rich in the middle, a scatter at the rim: no deposit ends in a clean wall of ore.
+            float richness = (float) (1 - 0.85 * edge * edge);
             for (int i = 0; i < config.ores().size(); i++) {
                 Ore ore = config.ores().get(i);
                 long salt = seed + 1000L * (i + 1);
                 boolean here = switch (ore.style()) {
-                    case DISSEMINATED -> Noise.hash(salt, pos.getX(), pos.getY(), pos.getZ()) < ore.fraction();
-                    case POCKETS -> pocket(salt, ore.fraction());
+                    case DISSEMINATED -> Noise.hash(salt, pos.getX(), pos.getY(), pos.getZ()) < ore.fraction() * richness;
+                    case POCKETS -> pocket(salt, ore.fraction() * richness);
                     case SEAMS -> Noise.hash(salt, (int) Math.floor(layer), 0, 0) < ore.fraction();
-                    case TOP -> vertical > 0.35 && pocket(salt, Math.min(0.9F, ore.fraction() * 3));
+                    case TOP -> vertical > 0.35 && pocket(salt, Math.min(0.9F, ore.fraction() * 3 * richness));
                 };
                 if (here) return inDeepslate ? ore.deepslate().orElse(ore.state()) : ore.state();
             }
