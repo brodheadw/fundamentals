@@ -1,6 +1,7 @@
 package ai.gsmc.fundamentals.ironworking;
 
 import ai.gsmc.fundamentals.Fundamentals;
+import ai.gsmc.fundamentals.registry.HandToolItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -52,7 +53,7 @@ public final class IronWorking {
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
         registry.accept(id("bloomery"), bloomeryItem = new BlockItem(bloomery, new Item.Properties()));
-        registry.accept(id("smithing_hammer"), smithingHammer = new HammerItem(new Item.Properties().durability(96)));
+        registry.accept(id("smithing_hammer"), smithingHammer = new HandToolItem(new Item.Properties().durability(96)));
         registry.accept(id("iron_bloom"), ironBloom = new Item(new Item.Properties()));
         registry.accept(id("slag"), slag = new Item(new Item.Properties()));
     }

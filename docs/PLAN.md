@@ -349,6 +349,13 @@ features in worldgen JSON — for now this table is the spec both sides build to
     **For Laptop B:** this is the playable form of your `BLOOMERY` stage; ferrous is your group, so
     take it over and extend it (roasting, slag uses, the later blast furnace and Create routes) —
     I built it because the user asked and iron was otherwise unobtainable.
+  - **Mortar and pestle (user request 2026-10-05).** `registry.HandTools`: a stone hand tool that
+    stays in the crafting grid and wears, like the smithing hammer (both are `HandToolItem`). It
+    grinds by hand what Create's millstone grinds by power: wheat to Create's wheat flour, bone
+    to bone meal, cane to sugar, and coloured minerals to dye — malachite green, azurite blue,
+    cinnabar and hematite red, goethite yellow, pyrolusite black. Recipes are shapeless JSON in
+    `data/fundamentals/recipe/grinding/`; a game test covers it. **For Laptop B:** when dust
+    items exist, hand-grinding ore to dust belongs here too.
   - **Deep iron veins:** vanilla's hardcoded giant iron vein now places magnetite ore, with core
     grade where vanilla put raw iron blocks (`worldgen.MagnetiteVeins` + two mixins). No vanilla
     iron ore of any kind generates on either loader. The copper vein is unchanged.

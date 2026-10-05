@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Paints the bloomery block and the iron-working items. Edit and re-run; don't hand-edit the PNGs.
+"""Paints the bloomery block, the iron-working items and the hand tools. Edit and re-run; don't
+hand-edit the PNGs.
 
     python3 tools/paint_ironworking.py
 """
@@ -100,6 +101,27 @@ def hammer():
     return img
 
 
+def mortar():
+    img = Image.new("RGBA", (16, 16), CLEAR)
+    stone = [(74, 74, 78), (104, 104, 108), (134, 134, 138), (166, 166, 170)]
+    wood = [(92, 66, 36), (122, 90, 50), (150, 114, 66)]
+    # Bowl: wide at the lip, narrowing to a foot.
+    rows = {8: (2, 13), 9: (2, 13), 10: (3, 12), 11: (3, 12), 12: (4, 11), 13: (5, 10), 14: (4, 11)}
+    for y, (x0, x1) in rows.items():
+        for x in range(x0, x1 + 1):
+            tone = stone[3] if y == 8 else stone[0] if x == x1 or y == 14 else stone[2] if x == x0 else stone[1]
+            img.putpixel((x, y), tone + (255,))
+    for x in range(4, 12):  # the hollow, seen over the lip
+        img.putpixel((x, 8), (52, 52, 56, 255))
+    for i in range(7):  # pestle leaning out of the bowl to the upper right
+        x, y = 7 + i, 8 - i
+        img.putpixel((x, y), wood[1] + (255,))
+        img.putpixel((x + 1, y), wood[0] + (255,))
+    img.putpixel((14, 1), wood[2] + (255,))
+    img.putpixel((13, 1), wood[2] + (255,))
+    return img
+
+
 if __name__ == "__main__":
     rng = random.Random("ironworking")
     block, item = ROOT / "block", ROOT / "item"
@@ -114,4 +136,5 @@ if __name__ == "__main__":
     # Slag is glassy and black, with a dull sheen.
     lump(rng, [(22, 22, 26), (44, 44, 52), (72, 74, 86)], ((120, 124, 140), 3), blob(rng, 44)).save(item / "slag.png")
     hammer().save(item / "smithing_hammer.png")
-    print("wrote bloomery and iron-working textures")
+    mortar().save(item / "mortar_and_pestle.png")
+    print("wrote bloomery, iron-working and hand-tool textures")

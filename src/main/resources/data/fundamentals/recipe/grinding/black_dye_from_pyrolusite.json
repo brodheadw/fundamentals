@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "fundamentals:pyrolusite_ore"
+    },
+    {
+      "item": "fundamentals:mortar_and_pestle"
+    }
+  ],
+  "result": {
+    "id": "minecraft:black_dye",
+    "count": 2
+  }
+}

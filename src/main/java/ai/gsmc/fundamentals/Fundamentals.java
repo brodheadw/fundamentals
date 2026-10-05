@@ -2,6 +2,7 @@ package ai.gsmc.fundamentals;
 
 import ai.gsmc.fundamentals.ironworking.IronWorking;
 import ai.gsmc.fundamentals.registry.FundamentalsContent;
+import ai.gsmc.fundamentals.registry.HandTools;
 import ai.gsmc.fundamentals.registry.OreBlocks;
 import ai.gsmc.fundamentals.worldgen.DepositFeature;
 import net.minecraft.core.registries.Registries;
@@ -37,6 +38,7 @@ public class Fundamentals {
             event.register(Registries.ITEM, helper -> {
                 OreBlocks.registerItems(helper::register);
                 IronWorking.registerItems(helper::register);
+                HandTools.registerItems(helper::register);
             });
             event.register(Registries.FEATURE, helper -> helper.register(DEPOSIT, DepositFeature.INSTANCE));
             event.register(Registries.CREATIVE_MODE_TAB, helper -> helper.register(MINERALS_TAB, mineralsTab()));
@@ -48,6 +50,7 @@ public class Fundamentals {
                 .icon(() -> new ItemStack(OreBlocks.items().iterator().next()))
                 .displayItems((parameters, output) -> {
                     IronWorking.items().forEach(output::accept);
+                    HandTools.items().forEach(output::accept);
                     OreBlocks.items().forEach(output::accept);
                 })
                 .build();

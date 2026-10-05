@@ -1,12 +1,15 @@
-package ai.gsmc.fundamentals.ironworking;
+package ai.gsmc.fundamentals.registry;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
-/** A hammer used in a crafting recipe: it stays in the grid and wears by one use each time. */
-public class HammerItem extends Item {
+/**
+ * A hand tool used as an ingredient (the smithing hammer, the mortar and pestle): it stays in the
+ * crafting grid and wears by one use each time.
+ */
+public class HandToolItem extends Item {
 
-    public HammerItem(Properties properties) {
+    public HandToolItem(Properties properties) {
         super(properties);
     }
 

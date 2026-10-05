@@ -4,6 +4,7 @@ import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.ironworking.BloomeryBlock;
 import ai.gsmc.fundamentals.ironworking.BloomeryBlockEntity;
 import ai.gsmc.fundamentals.ironworking.IronWorking;
+import ai.gsmc.fundamentals.registry.HandTools;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTest;
@@ -84,6 +85,30 @@ public class IronWorkingTests {
         ItemStack hammer = recipe.get().value().getRemainingItems(grid).get(1);
         helper.assertTrue(hammer.is(IronWorking.smithingHammer()) && hammer.getDamageValue() == 1,
                 "the hammer should stay in the grid, one use worn");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void mortarGrindsPigmentAndFlour(GameTestHelper helper) {
+        var recipes = helper.getLevel().getRecipeManager();
+        Item malachite = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "malachite_ore"));
+        Item flour = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("create", "wheat_flour"));
+        helper.assertTrue(flour != Items.AIR, "Create's wheat flour should exist");
+
+        CraftingInput pigment = CraftingInput.of(2, 1, List.of(new ItemStack(malachite), new ItemStack(HandTools.mortarAndPestle())));
+        var grindPigment = recipes.getRecipeFor(RecipeType.CRAFTING, pigment, helper.getLevel());
+        helper.assertTrue(grindPigment.isPresent(), "malachite + mortar should be a recipe");
+        ItemStack dye = grindPigment.get().value().assemble(pigment, helper.getLevel().registryAccess());
+        helper.assertTrue(dye.is(Items.GREEN_DYE) && dye.getCount() == 2, "malachite should grind to 2 green dye, got " + dye);
+        ItemStack mortar = grindPigment.get().value().getRemainingItems(pigment).get(1);
+        helper.assertTrue(mortar.is(HandTools.mortarAndPestle()) && mortar.getDamageValue() == 1,
+                "the mortar should stay in the grid, one use worn");
+
+        CraftingInput grain = CraftingInput.of(2, 1, List.of(new ItemStack(Items.WHEAT), new ItemStack(HandTools.mortarAndPestle())));
+        var grindGrain = recipes.getRecipeFor(RecipeType.CRAFTING, grain, helper.getLevel());
+        helper.assertTrue(grindGrain.isPresent()
+                        && grindGrain.get().value().assemble(grain, helper.getLevel().registryAccess()).is(flour),
+                "wheat + mortar should give Create's wheat flour");
         helper.succeed();
     }
 }
