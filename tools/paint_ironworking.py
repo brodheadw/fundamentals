@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Paints the bloomery block, the iron-working items and the hand tools. Edit and re-run; don't
+"""Paints the bloomery block, the iron-working items and the hand tools, in vanilla's idiom:
+its stick and stone-tool colours, a dark rim, light from the top left. Edit and re-run; don't
 hand-edit the PNGs.
 
     python3 tools/paint_ironworking.py
@@ -9,40 +10,123 @@ from pathlib import Path
 
 from PIL import Image
 
+from paint_minerals import paint_raw
+
 ROOT = Path(__file__).resolve().parent.parent / "src/main/resources/assets/fundamentals/textures"
-CLAY = [(128, 76, 56), (146, 90, 66), (162, 104, 76), (176, 118, 88)]
-SOOT = [(34, 26, 24), (52, 40, 36), (70, 54, 48)]
 CLEAR = (0, 0, 0, 0)
+
+# Colours vanilla uses for a stick and for stone tools, dark to light.
+STICK = [(40, 30, 11), (73, 54, 21), (104, 78, 30), (137, 103, 39)]
+STONE = [(24, 24, 24), (73, 73, 73), (104, 104, 104), (127, 127, 127), (137, 137, 137), (154, 154, 154)]
+CLAY = [(104, 62, 44), (124, 76, 54), (140, 88, 62), (154, 98, 70), (168, 110, 80)]
+SOOT = [(28, 22, 20), (44, 34, 30), (62, 48, 42)]
+FIRE = [(196, 72, 16), (236, 124, 24), (252, 184, 48), (255, 236, 132)]
+
+
+def put(img, x, y, colour):
+    if 0 <= x < 16 and 0 <= y < 16:
+        img.putpixel((x, y), tuple(colour) + (255,))
+
+
+def stick(img, x, y, length):
+    """A vanilla-style stick running up and to the right from its lower-left end at (x, y)."""
+    for i in range(length):
+        put(img, x + i, y - i, STICK[1])
+        put(img, x + i + 1, y - i, STICK[3] if i % 2 == 0 else STICK[2])
+        put(img, x + i + 2, y - i, STICK[0])
+    put(img, x, y + 1, STICK[0])
+    put(img, x + 1, y + 1, STICK[0])
+
+
+def hammer():
+    img = Image.new("RGBA", (16, 16), CLEAR)
+    stick(img, 2, 13, 8)
+    # The head: a squared stone block set across the top of the handle.
+    cx, cy = 10.5, 4.5
+    cells = set()
+    for x in range(16):
+        for y in range(16):
+            along = ((x + 0.5 - cx) - (y + 0.5 - cy)) / 1.4142
+            across = ((x + 0.5 - cx) + (y + 0.5 - cy)) / 1.4142
+            if abs(along) <= 2.2 and abs(across) <= 3.9:
+                cells.add((x, y))
+    for x, y in cells:
+        has = lambda dx, dy: (x + dx, y + dy) in cells
+        if not has(0, 1) or not has(1, 0):
+            tone = 0
+        elif not has(0, -1) or not has(-1, 0):
+            tone = 5
+        else:
+            tone = 4 if (x + y) < 15 else 3 if (x + y) < 17 else 2
+        put(img, x, y, STONE[tone])
+    for x, y in ((8, 7), (9, 6)):  # the lashing that holds the head on
+        put(img, x, y, (92, 66, 40))
+    return img
+
+
+def mortar():
+    img = Image.new("RGBA", (16, 16), CLEAR)
+    rows = {6: (2, 13), 7: (2, 13), 8: (2, 13), 9: (3, 12), 10: (3, 12), 11: (4, 11), 12: (5, 10), 13: (4, 11), 14: (4, 11)}
+    for y, (x0, x1) in rows.items():
+        for x in range(x0, x1 + 1):
+            if x in (x0, x1) or y == 14 or (y == 12 and x in (5, 10)):
+                tone = 0
+            elif y == 6:
+                tone = 5                        # the lip, catching the light
+            elif y == 7 and x0 + 2 <= x <= x1 - 2:
+                tone = 1                        # the hollow
+            elif x <= x0 + 2:
+                tone = 4
+            elif x >= x1 - 2 or y >= 13:
+                tone = 2
+            else:
+                tone = 3
+            put(img, x, y, STONE[tone])
+    put(img, 2, 6, STONE[0])
+    put(img, 13, 6, STONE[0])
+    stick(img, 7, 7, 6)                         # the pestle, standing in the bowl
+    for x, y in ((13, 1), (14, 1), (14, 2)):    # its rounded stone head
+        put(img, x, y, STONE[4])
+    put(img, 15, 1, STONE[0])
+    put(img, 13, 0, STONE[0])
+    put(img, 14, 0, STONE[0])
+    return img
 
 
 def daub(rng, soot_rows=0):
-    """Hand-built clay wall: mottled, with the horizontal seams of the coils it was raised in."""
+    """A clay wall raised in coils: soft mottling, a faint seam every few rows."""
     img = Image.new("RGBA", (16, 16))
     for y in range(16):
-        seam = y % 5 == 4
-        for x in range(16):
-            tone = CLAY[rng.choice((0, 1, 1, 2, 2, 3))]
-            if seam and rng.random() < 0.8:
-                tone = CLAY[0]
-            if y < soot_rows and rng.random() < 0.6 - y * 0.12:
-                tone = SOOT[rng.randrange(3)]  # smoke-blackened lip
-            img.putpixel((x, y), tone + (255,))
+        for x in range(0, 16, 2):
+            tone = rng.choice((1, 2, 2, 3, 3, 4))
+            if y % 5 == 4:
+                tone = max(0, tone - 2)
+            for dx in (0, 1):
+                t = tone if rng.random() < 0.8 else max(0, tone - 1)
+                colour = CLAY[t]
+                if y < soot_rows and rng.random() < 0.55 - y * 0.15:
+                    colour = SOOT[rng.randrange(1, 3)]  # smoke-blackened lip
+                put(img, x + dx, y, colour)
+    for x in range(16):  # a darker course top and bottom, as vanilla's furnace has
+        put(img, x, 15, CLAY[0])
     return img
 
 
 def front(rng, lit):
     img = daub(rng, soot_rows=3)
-    # The arched tapping hole at the base, where air is blown in and the slag runs out.
-    for y in range(9, 16):
-        for x in range(5, 11):
-            if y == 9 and x in (5, 10):
-                continue
+    arch = {y: (5, 10) for y in range(10, 15)}
+    arch[9] = (6, 9)
+    for y, (x0, x1) in arch.items():   # the tapping arch at the foot
+        put(img, x0 - 1, y, CLAY[0])
+        put(img, x1 + 1, y, CLAY[0])
+        for x in range(x0, x1 + 1):
             if lit:
-                heat = (y - 9) / 6
-                colour = (255, int(120 + 110 * heat), int(30 + 90 * heat)) if 6 <= x <= 9 else (214, 86, 24)
+                heat = (y - 9) + (2 - abs(x - 7.5)) * 0.8 + rng.uniform(-0.8, 0.8)
+                put(img, x, y, FIRE[max(0, min(3, int(heat / 1.8)))])
             else:
-                colour = SOOT[0] if 6 <= x <= 9 else SOOT[1]
-            img.putpixel((x, y), colour + (255,))
+                put(img, x, y, SOOT[0] if y > 10 else SOOT[1])
+    for x in range(6, 10):
+        put(img, x, 8, CLAY[0])
     return img
 
 
@@ -50,91 +134,27 @@ def top(rng, lit):
     img = daub(rng)
     for y in range(4, 12):
         for x in range(4, 12):
-            if (x in (4, 11)) and (y in (4, 11)):
+            if x in (4, 11) and y in (4, 11):
                 continue
-            edge = x in (4, 11) or y in (4, 11)
-            colour = (SOOT[2] if edge else SOOT[0]) if not lit else ((190, 70, 20) if edge else (250, 170, 60))
-            img.putpixel((x, y), colour + (255,))
-    return img
-
-
-def lump(rng, tones, glints, cells):
-    """An irregular lump for an item icon: darker toward the bottom right."""
-    img = Image.new("RGBA", (16, 16), CLEAR)
-    for x, y in cells:
-        right = (x + 1, y) not in cells
-        below = (x, y + 1) not in cells
-        above = (x, y - 1) not in cells
-        tone = tones[0] if right or below else tones[2] if above else tones[1]
-        img.putpixel((x, y), tone + (255,))
-    inner = [c for c in cells if all((c[0] + dx, c[1] + dy) in cells for dx, dy in ((1, 0), (-1, 0), (0, 1), (0, -1)))]
-    for x, y in rng.sample(inner, min(len(inner), glints[1])):
-        img.putpixel((x, y), glints[0] + (255,))
-    return img
-
-
-def blob(rng, size):
-    cells = {(8, 8)}
-    while len(cells) < size:
-        x, y = rng.choice(sorted(cells))
-        dx, dy = rng.choice(((1, 0), (-1, 0), (0, 1), (0, -1)))
-        if 2 <= x + dx <= 13 and 3 <= y + dy <= 13:
-            cells.add((x + dx, y + dy))
-    return cells
-
-
-def hammer():
-    img = Image.new("RGBA", (16, 16), CLEAR)
-    wood = [(92, 66, 36), (122, 90, 50), (150, 114, 66)]
-    stone = [(84, 84, 84), (118, 118, 118), (148, 148, 148), (176, 176, 176)]
-    for i in range(9):  # handle, bottom-left to the head
-        x, y = 2 + i, 13 - i
-        img.putpixel((x, y), wood[1] + (255,))
-        img.putpixel((x + 1, y), wood[0] + (255,))
-        img.putpixel((x, y - 1), wood[2] + (255,))
-    for x in range(7, 15):  # head: a squared stone block lashed across the top
-        for y in range(1, 7):
-            if (x, y) in ((7, 1), (14, 6)):
-                continue
-            tone = stone[3] if y == 1 or x == 7 else stone[0] if y == 6 or x == 14 else stone[1 + (x * 7 + y * 3) % 2]
-            img.putpixel((x, y), tone + (255,))
-    return img
-
-
-def mortar():
-    img = Image.new("RGBA", (16, 16), CLEAR)
-    stone = [(74, 74, 78), (104, 104, 108), (134, 134, 138), (166, 166, 170)]
-    wood = [(92, 66, 36), (122, 90, 50), (150, 114, 66)]
-    # Bowl: wide at the lip, narrowing to a foot.
-    rows = {8: (2, 13), 9: (2, 13), 10: (3, 12), 11: (3, 12), 12: (4, 11), 13: (5, 10), 14: (4, 11)}
-    for y, (x0, x1) in rows.items():
-        for x in range(x0, x1 + 1):
-            tone = stone[3] if y == 8 else stone[0] if x == x1 or y == 14 else stone[2] if x == x0 else stone[1]
-            img.putpixel((x, y), tone + (255,))
-    for x in range(4, 12):  # the hollow, seen over the lip
-        img.putpixel((x, 8), (52, 52, 56, 255))
-    for i in range(7):  # pestle leaning out of the bowl to the upper right
-        x, y = 7 + i, 8 - i
-        img.putpixel((x, y), wood[1] + (255,))
-        img.putpixel((x + 1, y), wood[0] + (255,))
-    img.putpixel((14, 1), wood[2] + (255,))
-    img.putpixel((13, 1), wood[2] + (255,))
+            rim = x in (4, 11) or y in (4, 11)
+            if lit:
+                put(img, x, y, FIRE[0] if rim else FIRE[rng.choice((1, 2, 2, 3))])
+            else:
+                put(img, x, y, SOOT[2] if rim else SOOT[rng.choice((0, 0, 1))])
     return img
 
 
 if __name__ == "__main__":
-    rng = random.Random("ironworking")
     block, item = ROOT / "block", ROOT / "item"
     item.mkdir(parents=True, exist_ok=True)
-    daub(rng).save(block / "bloomery_side.png")
+    daub(random.Random("side")).save(block / "bloomery_side.png")
     front(random.Random("front"), False).save(block / "bloomery_front.png")
     front(random.Random("front"), True).save(block / "bloomery_front_lit.png")
     top(random.Random("top"), False).save(block / "bloomery_top.png")
     top(random.Random("top"), True).save(block / "bloomery_top_lit.png")
-    # A bloom is spongy iron shot through with slag: dark and rusty, with a few bright metal spots.
-    lump(rng, [(52, 40, 38), (96, 70, 60), (140, 104, 86)], ((206, 206, 214), 5), blob(rng, 58)).save(item / "iron_bloom.png")
-    # Slag is glassy and black, with a dull sheen.
-    lump(rng, [(22, 22, 26), (44, 44, 52), (72, 74, 86)], ((120, 124, 140), 3), blob(rng, 44)).save(item / "slag.png")
+    # A bloom is spongy iron shot through with slag: dark and rusty. Slag is black and glassy.
+    paint_raw("iron_bloom", ((48, 34, 30), (100, 70, 56), (150, 110, 88), (224, 206, 190))).save(item / "iron_bloom.png")
+    paint_raw("slag", ((18, 18, 22), (40, 40, 48), (70, 72, 86), (150, 156, 176))).save(item / "slag.png")
     hammer().save(item / "smithing_hammer.png")
     mortar().save(item / "mortar_and_pestle.png")
     print("wrote bloomery, iron-working and hand-tool textures")

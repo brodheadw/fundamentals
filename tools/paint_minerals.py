@@ -482,6 +482,53 @@ def paint_all():
     return out
 
 
+# Raw chunk colours for the whole-rock ores, which have no entry in P.
+RAW_WHOLE = {
+    "bauxite": ((96, 44, 28), (150, 78, 48), (196, 132, 88), (236, 208, 168)),
+    "goethite": ((84, 56, 18), (140, 98, 30), (186, 140, 50), (226, 190, 96)),
+    "nickel_laterite": ((92, 62, 28), (150, 108, 46), (136, 176, 92), (190, 222, 140)),
+    "ion_adsorption_clay": ((120, 66, 42), (168, 102, 64), (202, 142, 96), (236, 214, 188)),
+}
+
+
+def ramp(pal):
+    """Eight tones, dark outline to highlight, from a four-tone palette."""
+    shadow, base, light, glint = pal
+    mix = lambda a, b, t: tuple(int(x + (y - x) * t) for x, y in zip(a, b))
+    return [mix((0, 0, 0), shadow, 0.5), mix((0, 0, 0), shadow, 0.78), shadow, mix(shadow, base, 0.5), base,
+            mix(base, light, 0.5), light, mix(light, glint, 0.6)]
+
+
+def paint_raw(name, palette=None):
+    """A raw chunk in the idiom of vanilla's raw ores: one big lump and a smaller one in front,
+    lit from the top left, in broad facets with a dark rim along the bottom."""
+    rng = random.Random("raw-" + name)
+    tones = ramp(palette or RAW_WHOLE.get(name) or (P[name] if name != "bornite" else BORNITE[rng.randrange(4)]))
+    # Two overlapping rounded lumps; the sizes and the overlap vary by mineral.
+    cx, cy, rx, ry = 7.0 + rng.uniform(-0.6, 0.6), 7.0 + rng.uniform(-0.5, 0.5), rng.uniform(5.2, 6.0), rng.uniform(4.2, 5.0)
+    sx, sy, sr = cx + rng.uniform(2.6, 3.6), cy + rng.uniform(2.6, 3.4), rng.uniform(2.6, 3.2)
+    def inside(x, y):
+        return ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 <= 1 or (x - sx) ** 2 + (y - sy) ** 2 <= sr ** 2
+    cells = {(x, y) for x in range(16) for y in range(16) if inside(x + 0.5 + rng.uniform(-0.25, 0.25), y + 0.5)}
+    cells = {c for c in cells if 1 <= c[0] <= 14 and 1 <= c[1] <= 14}
+    facet = {(fx, fy): rng.uniform(-0.9, 0.9) for fx in range(8) for fy in range(8)}  # 2x2 planes
+    img = Image.new("RGBA", (SIZE, SIZE), (0, 0, 0, 0))
+    for x, y in cells:
+        has = lambda dx, dy: (x + dx, y + dy) in cells
+        small = (x - sx) ** 2 + (y - sy) ** 2 <= sr ** 2
+        ox, oy, r = (sx, sy, sr) if small else (cx, cy, max(rx, ry))
+        light = 4.2 - ((x - ox) + (y - oy)) / r * 2.3 + facet[(x // 2, y // 2)]
+        tone = max(2, min(7, int(round(light))))
+        if not has(0, 1) or not has(1, 0):
+            tone = 0 if not has(0, 1) and not has(1, 0) else 1   # rim in shadow
+        elif not has(0, -1) or not has(-1, 0):
+            tone = min(tone, 5) if rng.random() < 0.5 else max(tone - 1, 3)  # lit rim, not blown out
+        elif small and not ((x - 1 - sx) ** 2 + (y - 1 - sy) ** 2 <= sr ** 2):
+            tone = 2  # the crease where the small lump sits in front of the big one
+        img.putpixel((x, y), tones[tone] + (255,))
+    return img
+
+
 def paint_rocks():
     return {name: host_rock(random.Random("host-" + name), name) for name in ROCK_BLOCKS}
 
@@ -544,6 +591,9 @@ if __name__ == "__main__":
     rocks = paint_rocks()
     for name, img in rocks.items():
         img.save(OUT / f"{name}.png")
+    (OUT.parent / "item").mkdir(exist_ok=True)
+    for name in textures:
+        paint_raw(name).save(OUT.parent / "item" / f"raw_{name}.png")
     print(f"wrote {len(textures)} ores x {len(GRADES)} grades x {VARIANTS} variants and {len(rocks)} rocks to {OUT}")
     if len(sys.argv) > 1:
         contact_sheet(textures, sys.argv[1])

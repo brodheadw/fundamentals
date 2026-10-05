@@ -37,6 +37,7 @@ public final class OreBlocks {
 
     private static final Map<ResourceLocation, Block> BLOCKS = new LinkedHashMap<>();
     private static final Map<ResourceLocation, Item> ITEMS = new LinkedHashMap<>();
+    private static final Map<String, Item> RAW = new LinkedHashMap<>();
 
     private OreBlocks() {}
 
@@ -60,10 +61,29 @@ public final class OreBlocks {
             ITEMS.put(id, item);
             registry.accept(id, item);
         });
+        // What an ore block gives up when mined: a raw chunk of the mineral, as vanilla ore
+        // gives raw iron.
+        for (OreData.BlockDef def : OreData.get().blocks()) {
+            if (def.mineral() != null) {
+                ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "raw_" + def.mineral());
+                Item raw = new Item(new Item.Properties());
+                RAW.put(def.mineral(), raw);
+                registry.accept(id, raw);
+            }
+        }
     }
 
     public static Collection<Item> items() {
         return ITEMS.values();
+    }
+
+    /** The raw chunk each mineral's ore drops, in ore order. */
+    public static Collection<Item> rawItems() {
+        return RAW.values();
+    }
+
+    public static Item raw(String mineral) {
+        return RAW.get(mineral);
     }
 
     /** Ore blocks and mineral materials are defined in different places; say so when they disagree. */

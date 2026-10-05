@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:raw_azurite",
+    "fundamentals:raw_bornite",
+    "fundamentals:raw_chalcocite",
+    "fundamentals:raw_chalcopyrite",
+    "fundamentals:raw_covellite",
+    "fundamentals:raw_cuprite",
+    "fundamentals:raw_malachite"
+  ]
+}

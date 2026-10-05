@@ -57,6 +57,7 @@ public class Fundamentals {
                 .displayItems((parameters, output) -> {
                     IronWorking.items().forEach(output::accept);
                     HandTools.items().forEach(output::accept);
+                    OreBlocks.rawItems().forEach(output::accept);
                     OreBlocks.items().forEach(output::accept);
                 })
                 .build();

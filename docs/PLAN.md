@@ -89,6 +89,21 @@ mod follows that:
 
   Everything else (Al, Ti, REEs, PGMs, …) has no primitive route.
 
+### 2.5 What can be processed when  *(direction from the user, 2026-10-05)*
+Every mineral generates and can be mined from the start, but most cannot be turned into metal
+until the player has machines. That is intended: the ore is a reason to build them.
+
+| Era | How | What it unlocks |
+|---|---|---|
+| **By hand** (built) | Bloomery + charcoal, smithing hammer, mortar and pestle | Iron from hematite / magnetite / goethite; mineral pigments. Vanilla copper and gold ore smelt as ever (native copper, native gold). |
+| **By hand** (next) | The same bloomery, taking other oxide and carbonate minerals | Copper from malachite / azurite / cuprite; tin from cassiterite; lead from galena after roasting on a fire. Bronze follows. |
+| **Early Create** | Crushing wheels, millstone, washing, mixing, pressing | Better yield from every hand route; crushed ore and byproducts; brass once zinc exists. |
+| **Mid-game, Create-style multiblocks** | Roaster, blast furnace, flotation cells, retort, leach tanks | The sulfides (chalcopyrite, sphalerite, pentlandite, molybdenite), zinc (it boils before it reduces, so it needs a retort), steel, aluminium from bauxite, nickel, chromium, tungsten, titanium. |
+| **Late game** | Solvent-extraction batteries, electrolysis, precious-metal refinery | The rare earths one element at a time, cobalt, the platinum group, mercury. |
+
+Until an ore's route exists it is still worth finding: several grind to dye, and Fortune and
+core-grade ore mean a deposit marked early pays back later.
+
 ---
 
 ## 3. Work division (NO OVERLAP)
@@ -357,15 +372,21 @@ features in worldgen JSON — for now this table is the spec both sides build to
     `data/fundamentals/recipe/grinding/`; a game test covers it. It also grinds **in the hands**
     (`MortarItem`): mortar in one hand, material in the other, hold use for two seconds. That
     runs the same recipes, so new grinding JSON works both ways. The first-person motion
-    (`client.GrindingAnimation`) has not been seen in a client yet. **For Laptop B:** when dust
+    (`client.GrindingAnimation`) and the 3D in-hand bowl model have not been seen in a client in
+    their current form; an earlier version was, and looked poor. **For Laptop B:** when dust
     items exist, hand-grinding ore to dust belongs here too.
+  - **Ore drops raw chunks (user ruling 2026-10-05).** Mining an ore block gives `raw_<mineral>`
+    — core 2-3, edge 1, trace one half the time; Fortune multiplies, Silk Touch takes the block
+    — as vanilla ore gives raw iron. All 38 chunks are in `c:raw_materials/<commodity>`. The
+    bloomery and the grinding recipes take chunks, not ore blocks. **For Laptop B:** these are the
+    `RAW` form of each mineral; build dusts and concentrates from them.
   - **Deep iron veins:** vanilla's hardcoded giant iron vein now places magnetite ore, with core
     grade where vanilla put raw iron blocks (`worldgen.MagnetiteVeins` + two mixins). No vanilla
     iron ore of any kind generates on either loader. The copper vein is unchanged.
   - **Known gaps (A will take):** (2) a deposit is
     capped at ~30 blocks across (a feature may only write to the 3x3 chunks around it), so truly
-    large bodies would need a structure; (3) frequencies are a first guess (about 290 of our blocks
-    per chunk, iron about 66) and vanilla copper is far too common for "native copper"; (4) host
+    large bodies would need a structure; (3) frequencies were nudged on 2026-10-05 against measured
+    per-chunk counts (iron about 84 against vanilla coal's 85; copper minerals 6, tin 1, silver 1) and vanilla copper is far too common for "native copper"; (4) host
     rocks have no uses or recipes yet; (5) only iron has a route so far — the copper minerals,
     sphalerite and everything else still have no recipe; (6) Create's
     own zinc ore still generates (about 70 blocks per chunk) and should give way to sphalerite

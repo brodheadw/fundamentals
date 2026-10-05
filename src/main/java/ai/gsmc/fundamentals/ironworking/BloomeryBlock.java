@@ -46,9 +46,9 @@ public class BloomeryBlock extends BaseEntityBlock {
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
-    /** Iron ores a bloomery can reduce: the oxides and hydroxides, as an item tag. */
+    /** What a bloomery can reduce: raw chunks of the iron minerals. */
     public static final TagKey<Item> IRON_ORES = ItemTags.create(
-            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("c", "ores/iron"));
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("c", "raw_materials/iron"));
 
     public BloomeryBlock(Properties properties) {
         super(properties);

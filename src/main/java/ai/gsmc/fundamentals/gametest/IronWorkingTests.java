@@ -35,7 +35,7 @@ public class IronWorkingTests {
     }
 
     private static Item hematite() {
-        return BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "hematite_ore"));
+        return BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "raw_hematite"));
     }
 
     @GameTest(template = "empty", timeoutTicks = BloomeryBlockEntity.BURN_TICKS + 100)
@@ -91,7 +91,7 @@ public class IronWorkingTests {
     @GameTest(template = "empty")
     public void grindingInTheHandsUsesTheOtherHandsMaterial(GameTestHelper helper) {
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
-        Item malachite = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "malachite_ore"));
+        Item malachite = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "raw_malachite"));
         ItemStack mortar = new ItemStack(HandTools.mortarAndPestle());
         player.setItemInHand(InteractionHand.MAIN_HAND, mortar);
 
@@ -111,7 +111,7 @@ public class IronWorkingTests {
     @GameTest(template = "empty")
     public void mortarGrindsPigmentAndFlour(GameTestHelper helper) {
         var recipes = helper.getLevel().getRecipeManager();
-        Item malachite = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "malachite_ore"));
+        Item malachite = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "raw_malachite"));
         Item flour = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("create", "wheat_flour"));
         helper.assertTrue(flour != Items.AIR, "Create's wheat flour should exist");
 

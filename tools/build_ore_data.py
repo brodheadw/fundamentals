@@ -130,7 +130,7 @@ DEPOSITS = {
     # asurine zinc, ochrum the rusty oxidised cap, limestone the lead-zinc and manganese beds.
     # --- iron: beds of banded iron formation, common everywhere ---
     "hematite_bed": ("bed", "create:crimsite", [("magnetite", 0.06, "seams"), ("hematite", 0.42, "pockets")],
-                     (9, 14), (3, 6), None, "anywhere", (0, 96), 7, "rock"),
+                     (9, 14), (3, 6), None, "anywhere", (0, 96), 5, "rock"),
     "magnetite_bed": ("bed", None, [("hematite", 0.06, "seams"), ("magnetite", 0.42, "pockets")],
                       (8, 12), (3, 5), None, "anywhere", (-56, 8), 12, "rock"),
     "bog_iron": ("blanket", "goethite_ore", [], (6, 9), (1, 2), None, "wetland", (60, 64), 3, "ground"),
@@ -140,7 +140,7 @@ DEPOSITS = {
     "zinc_oxide_bed": ("bed", "create:asurine", [("smithsonite", 0.24, "pockets")], (7, 10), (2, 4), None,
                        "anywhere", (36, 72), 18, "rock"),
     "manganese_bed": ("bed", "create:limestone", [("pyrolusite", 0.28, "pockets")], (8, 12), (3, 5), None,
-                      "anywhere", (0, 60), 14, "rock"),
+                      "anywhere", (0, 60), 20, "rock"),
     "tungsten_skarn": ("bed", "create:limestone", [("scheelite", 0.25, "pockets")], (6, 9), (3, 4), None,
                        "hydrothermal", (-32, 40), 14, "rock"),
     "mercury_lens": ("bed", None, [("cinnabar", 0.25, "pockets")], (5, 8), (2, 4), None,
@@ -149,12 +149,12 @@ DEPOSITS = {
     "porphyry_stock": ("plug", "minecraft:andesite",
                        [("chalcopyrite", 0.18, "pockets"), ("molybdenite", 0.04, "pockets"),
                         ("bornite", 0.04, "disseminated"), ("chalcocite", 0.07, "top"), ("covellite", 0.02, "top")],
-                       (7, 11), None, (24, 40), "porphyry", (0, 70), 8, "rock"),
+                       (7, 11), None, (24, 40), "porphyry", (0, 70), 5, "rock"),
     # --- the oxidised cap over copper and zinc, just under the surface in dry country ---
     "oxide_cap": ("blanket", "create:ochrum",
                   [("malachite", 0.20, "pockets"), ("azurite", 0.10, "pockets"), ("cuprite", 0.06, "disseminated"),
                    ("hemimorphite", 0.06, "pockets")],
-                  (9, 14), (5, 8), None, "arid_oxide", (60, 64), 6, "rock"),
+                  (9, 14), (5, 8), None, "arid_oxide", (60, 64), 4, "rock"),
     # --- tropical weathering blankets: these are rocks of their own ---
     "bauxite_blanket": ("blanket", "laterite", [("bauxite", 0.50, "pockets")], (10, 15), (4, 7), None,
                         "laterite", (60, 64), 5, "ground"),
@@ -171,16 +171,16 @@ DEPOSITS = {
                           [("chromite", 0.12, "seams"), ("pentlandite", 0.05, "pockets"),
                            ("sperrylite", 0.006, "disseminated"), ("cooperite", 0.005, "disseminated"),
                            ("braggite", 0.005, "disseminated")],
-                          (12, 15), (8, 12), None, "anywhere", (-60, -28), 60, "rock"),
+                          (12, 15), (8, 12), None, "anywhere", (-60, -28), 80, "rock"),
     "nickel_sulfide": ("bed", "gabbro", [("pentlandite", 0.14, "pockets")], (9, 12), (5, 7), None,
                        "anywhere", (-60, -8), 45, "rock"),
     # --- veins and dykes in mountain country ---
     "pegmatite_dyke": ("vein", "minecraft:granite", [("xenotime", 0.08, "pockets"), ("euxenite", 0.04, "pockets")],
                        (11, 15), (3, 5), (14, 24), "pegmatite", (-16, 48), 16, "rock"),
     "tin_vein": ("vein", None, [("cassiterite", 0.36, "pockets"), ("wolframite", 0.16, "pockets")],
-                 (10, 15), (2, 3), (12, 24), "pegmatite", (-16, 56), 9, "rock"),
+                 (10, 15), (2, 3), (12, 24), "pegmatite", (-16, 56), 6, "rock"),
     "silver_vein": ("vein", "minecraft:calcite", [("argentite", 0.38, "pockets"), ("native_silver", 0.16, "pockets")],
-                    (10, 15), (1, 2), (14, 26), "hydrothermal", (-32, 64), 12, "rock"),
+                    (10, 15), (1, 2), (14, 26), "hydrothermal", (-32, 64), 9, "rock"),
     "cobalt_vein": ("vein", "minecraft:calcite", [("cobaltite", 0.45, "pockets")], (8, 12), (1, 2), (12, 20),
                     "hydrothermal", (-32, 32), 20, "rock"),
 }
@@ -210,8 +210,12 @@ def tag(path, values):
     write(path, {"replace": False, "values": sorted(values)})
 
 
-# What one ore block drops by grade, until raw mineral items exist: (count, chance).
-DROPS = {"core": (2, 1.0), "edge": (1, 1.0), "trace": (1, 0.5)}
+# Raw chunks one ore block drops, by grade: (min, max, chance of dropping at all). Fortune
+# multiplies them like vanilla ore; Silk Touch takes the block instead.
+DROPS = {"core": (2, 3, 1.0), "edge": (1, 1, 1.0), "trace": (1, 1, 0.5)}
+
+SILK_TOUCH = {"condition": "minecraft:match_tool", "predicate": {"predicates": {"minecraft:enchantments": [
+    {"enchantments": "minecraft:silk_touch", "levels": {"min": 1}}]}}}
 
 
 def drop_self(name, conditions=()):
@@ -241,9 +245,9 @@ def rock_files(name, display, lang):
 
 
 def ore_files(mineral, display, lang):
-    """One ore block. Its blockstate is assembled from parts: the host rock's cube (by `host`),
-    then the mineral on top (by `grade`, several variants so a large body does not tile).
-    Richer ore drops more."""
+    """One ore block and the raw chunk it drops. The blockstate is assembled from parts: the
+    host rock's cube (by `host`), then the mineral on top (by `grade`, several variants so a
+    large body does not tile). Richer ore drops more."""
     name, whole = f"{mineral}_ore", mineral in WHOLE
     parts, pools = [], []
     if not whole:
@@ -255,15 +259,20 @@ def ore_files(mineral, display, lang):
             write(ASSETS / f"models/block/ore/{name}_{grade}_{v}.json", cube(texture) if whole else overlay(texture))
             models.append({"model": f"fundamentals:block/ore/{name}_{grade}_{v}"})
         parts.append({"when": {"grade": grade}, "apply": models})
-        count, chance = DROPS[grade]
-        conditions = [{"condition": "minecraft:block_state_property", "block": f"fundamentals:{name}",
-                       "properties": {"grade": grade}}]
+        low, high, chance = DROPS[grade]
+        count = low if low == high else {"type": "minecraft:uniform", "min": low, "max": high}
+        raw = {"type": "minecraft:item", "name": f"fundamentals:raw_{mineral}",
+               "functions": [{"function": "minecraft:set_count", "count": count},
+                             {"function": "minecraft:apply_bonus", "enchantment": "minecraft:fortune",
+                              "formula": "minecraft:ore_drops"},
+                             {"function": "minecraft:explosion_decay"}]}
         if chance < 1:
-            conditions.append({"condition": "minecraft:random_chance", "chance": chance})
-        pool = drop_self(name, conditions)
-        if count > 1:
-            pool["entries"][0]["functions"] = [{"function": "minecraft:set_count", "count": count}]
-        pools.append(pool)
+            raw["conditions"] = [{"condition": "minecraft:random_chance", "chance": chance}]
+        pools.append({"rolls": 1, "bonus_rolls": 0,
+                      "conditions": [{"condition": "minecraft:block_state_property", "block": f"fundamentals:{name}",
+                                      "properties": {"grade": grade}}],
+                      "entries": [{"type": "minecraft:alternatives", "children": [
+                          {"type": "minecraft:item", "name": f"fundamentals:{name}", "conditions": [SILK_TOUCH]}, raw]}]})
     write(ASSETS / f"blockstates/{name}.json", {"multipart": parts})
     # In the hand it is shown as it looks in plain stone.
     item = cube(f"fundamentals:block/{name}_edge_0") if whole else {
@@ -274,7 +283,10 @@ def ore_files(mineral, display, lang):
                       "faces": {side: {"texture": tex} for side in ("down", "up", "north", "south", "west", "east")}}
                      for tex in ("#base", "#ore")]}
     write(ASSETS / f"models/item/{name}.json", item)
-    lang[f"block.fundamentals.{name}"] = display
+    write(ASSETS / f"models/item/raw_{mineral}.json",
+          {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/raw_{mineral}"}})
+    lang[f"block.fundamentals.{name}"] = display if whole else f"{display} Ore"
+    lang[f"item.fundamentals.raw_{mineral}"] = f"Raw {display}"
     write(DATA / f"loot_table/blocks/{name}.json", {"type": "minecraft:block", "pools": pools})
 
 
@@ -299,6 +311,9 @@ def placed(feature, per_chunk, y_min, y_max):
 def main():
     textures = {p.stem for p in (ASSETS / "textures/block").glob("*.png")}
     expected = {f"{name}_ore_{g}_{v}" for name in ORES for g in GRADES for v in range(VARIANTS)} | set(ROCKS)
+    raw_textures = {p.stem for p in (ASSETS / "textures/item").glob("raw_*.png")}
+    assert raw_textures == {f"raw_{name}" for name in ORES}, \
+        f"raw item textures and ORES disagree: {sorted(raw_textures ^ {f'raw_{name}' for name in ORES})}"
     stale = {name for name in textures if "_ore_" in name} - expected
     assert not (expected - textures) and not stale, \
         f"textures and block tables disagree: missing {sorted(expected - textures)}, stale {sorted(stale)}"
@@ -318,7 +333,7 @@ def main():
     for host, (_, texture) in HOSTS.items():
         write(ASSETS / f"models/block/host/{host}.json", cube(texture))
 
-    blocks, by_tool, by_tier, by_commodity = [], {}, {}, {}
+    blocks, by_tool, by_tier, by_commodity, raw_by_commodity = [], {}, {}, {}, {}
     for name, tool in ROCKS.items():
         rock_files(name, name.replace("_", " ").title(), lang)
         blocks.append({"name": name, "soft": tool == "shovel"})
@@ -331,6 +346,7 @@ def main():
         if tier:
             by_tier.setdefault(tier, []).append(block)
         by_commodity.setdefault(commodity, []).append(block)
+        raw_by_commodity.setdefault(commodity, []).append(f"fundamentals:raw_{name}")
     write(lang_path, dict(sorted(lang.items())))
 
     for tool, names in by_tool.items():
@@ -341,6 +357,9 @@ def main():
         tag(C_TAGS / f"{kind}/ores.json", [f"#c:ores/{c}" for c in by_commodity])
         for commodity, names in by_commodity.items():
             tag(C_TAGS / f"{kind}/ores/{commodity}.json", names)
+    tag(C_TAGS / "item/raw_materials.json", [f"#c:raw_materials/{c}" for c in raw_by_commodity])
+    for commodity, names in raw_by_commodity.items():
+        tag(C_TAGS / f"item/raw_materials/{commodity}.json", names)
     for key, values in REPLACEABLE.items():
         tag(DATA / f"tags/block/deposit_replaceable/{key}.json", values)
 

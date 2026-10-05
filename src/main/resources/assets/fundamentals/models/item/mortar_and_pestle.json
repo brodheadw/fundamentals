@@ -1,6 +1,20 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "fundamentals:item/mortar_and_pestle"
+  "loader": "neoforge:separate_transforms",
+  "base": {
+    "parent": "fundamentals:item/mortar_and_pestle_held"
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "fundamentals:item/mortar_and_pestle_icon"
+    },
+    "ground": {
+      "parent": "fundamentals:item/mortar_and_pestle_icon"
+    },
+    "fixed": {
+      "parent": "fundamentals:item/mortar_and_pestle_icon"
+    },
+    "head": {
+      "parent": "fundamentals:item/mortar_and_pestle_icon"
+    }
   }
 }

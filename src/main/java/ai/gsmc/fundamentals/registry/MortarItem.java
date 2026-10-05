@@ -65,7 +65,7 @@ public class MortarItem extends HandToolItem {
 
     @Override
     public UseAnim getUseAnimation(ItemStack stack) {
-        return UseAnim.BRUSH;  // the back-and-forth of working a pestle
+        return UseAnim.NONE;  // the hands are posed by client.GrindingAnimation
     }
 
     @Override
@@ -80,11 +80,12 @@ public class MortarItem extends HandToolItem {
             return;
         }
         if (level.isClientSide) {
-            // Bits of whatever is in the bowl jump out in front of the grinder.
+            // Dust of what is being made puffs up from the bowl: green from malachite, white from wheat.
+            ItemStack product = grind(level, stack, material);
             Vec3 look = entity.getLookAngle();
-            Vec3 at = entity.getEyePosition().add(look.scale(0.55)).add(0, -0.35, 0);
-            for (int i = 0; i < 3; i++) {
-                level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, material),
+            Vec3 at = entity.getEyePosition().add(look.scale(0.5)).add(0, -0.3, 0);
+            for (int i = 0; i < 3 && !product.isEmpty(); i++) {
+                level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, product),
                         at.x, at.y, at.z,
                         (level.random.nextDouble() - 0.5) * 0.12, level.random.nextDouble() * 0.12,
                         (level.random.nextDouble() - 0.5) * 0.12);
