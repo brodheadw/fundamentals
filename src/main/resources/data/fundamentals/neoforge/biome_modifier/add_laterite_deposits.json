@@ -5,5 +5,5 @@
     "fundamentals:bauxite_blanket",
     "fundamentals:nickel_laterite_blanket"
   ],
-  "step": "underground_ores"
+  "step": "underground_decoration"
 }

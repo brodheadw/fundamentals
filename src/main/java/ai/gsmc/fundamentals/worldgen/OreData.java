@@ -9,20 +9,17 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The block and spawn list written by {@code tools/build_ore_data.py}: which ore and host-rock
- * blocks exist, which rocks an ore can sit in, and which deposits generate where. One file drives block registration and
- * spawning, so the two cannot drift apart.
+ * The block list written by {@code tools/build_ore_data.py}: which ore and host-rock blocks
+ * exist and which rocks an ore can sit in. The same script writes their models, loot and spawn
+ * rules, so a block exists exactly when those do.
  */
-public record OreData(List<BlockDef> blocks, Map<String, String> hosts, List<Spawn> add, List<String> remove) {
+public record OreData(List<BlockDef> blocks, Map<String, String> hosts) {
 
     /**
      * @param soft    dug with a shovel (clays, laterites, mineral sands) rather than a pickaxe
      * @param mineral the mineral material this is the ore of; null for a plain host rock
      */
     public record BlockDef(String name, boolean soft, String mineral) {}
-
-    /** @param biomes biome tag id; @param features placed-feature ids added to those biomes */
-    public record Spawn(String biomes, List<String> features) {}
 
     private static OreData loaded;
 

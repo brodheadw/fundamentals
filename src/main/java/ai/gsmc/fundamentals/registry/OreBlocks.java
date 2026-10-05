@@ -14,10 +14,8 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -28,7 +26,7 @@ import java.util.stream.Collectors;
  * The in-world ore blocks ({@link OreBlock}) and the few host rocks that are blocks of their own,
  * as listed in {@link OreData}.
  *
- * <p>Loader-agnostic: the loader hands in a registration callback (see {@code Fundamentals}).
+ * <p>Registered from {@code Fundamentals} through the callbacks it passes in.
  */
 public final class OreBlocks {
 
@@ -39,7 +37,6 @@ public final class OreBlocks {
 
     private static final Map<ResourceLocation, Block> BLOCKS = new LinkedHashMap<>();
     private static final Map<ResourceLocation, Item> ITEMS = new LinkedHashMap<>();
-    private static final List<Block> ORES = new ArrayList<>();
 
     private OreBlocks() {}
 
@@ -52,9 +49,6 @@ public final class OreBlocks {
             ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, def.name());
             Block block = def.mineral() == null ? new Block(props) : new OreBlock(props);
             BLOCKS.put(id, block);
-            if (block instanceof OreBlock) {
-                ORES.add(block);
-            }
             registry.accept(id, block);
         }
         reportMismatches();
@@ -70,11 +64,6 @@ public final class OreBlocks {
 
     public static Collection<Item> items() {
         return ITEMS.values();
-    }
-
-    /** The ore blocks: their models layer a transparent mineral texture over a rock, so they need cutout rendering. */
-    public static List<Block> ores() {
-        return ORES;
     }
 
     /** Ore blocks and mineral materials are defined in different places; say so when they disagree. */

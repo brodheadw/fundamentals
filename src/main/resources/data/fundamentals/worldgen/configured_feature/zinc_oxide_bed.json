@@ -19,6 +19,9 @@
       "min": 2,
       "max": 4
     },
-    "replaceable": "fundamentals:deposit_replaceable/rock"
+    "replaceable": "fundamentals:deposit_replaceable/rock",
+    "host": {
+      "Name": "create:asurine"
+    }
   }
 }

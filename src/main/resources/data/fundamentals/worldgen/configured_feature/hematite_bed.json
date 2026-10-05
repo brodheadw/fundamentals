@@ -26,6 +26,9 @@
       "min": 3,
       "max": 6
     },
-    "replaceable": "fundamentals:deposit_replaceable/rock"
+    "replaceable": "fundamentals:deposit_replaceable/rock",
+    "host": {
+      "Name": "create:crimsite"
+    }
   }
 }

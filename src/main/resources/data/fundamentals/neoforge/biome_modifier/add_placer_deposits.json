@@ -6,5 +6,5 @@
     "fundamentals:placer_ilmenite",
     "fundamentals:placer_rutile"
   ],
-  "step": "underground_ores"
+  "step": "underground_decoration"
 }

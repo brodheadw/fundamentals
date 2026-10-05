@@ -22,7 +22,8 @@ A chemistry-driven **materials & processing framework**. Materials are data with
 properties (e.g. magnet strength: NdFeB vs SmCo). Ores follow realistic
 **raw → beneficiation → intermediate → metal/product** chains. Everything is **tag-driven**
 so other mods (and our own groups) consume outputs without caring about the source.
-Optional **Create** integration later. Developed **separately from wildspell** (may interop
+**A Create add-on: Create is required, NeoForge only** (user ruling 2026-10-05; Create has no
+Fabric release for 1.21.1). Developed **separately from wildspell** (may interop
 via shared tags).
 
 Source data: **`data/ores.json`** (113 ores, 74 commodities, 49 processing stages),
@@ -147,8 +148,7 @@ concrete item): `c:ores/<commodity>`, `c:raw_materials/<mineral>`, `c:ingots/<me
 - **Shared schema files** (material schema, stage/recipe schema, tier defs, the
   `data/ores.json` structure, this PLAN) are **defined once and are append-only** — change them
   only via PR + a note in §6. B owns creating these first (see §6).
-- Loader differences: shared `src/main` with Stonecutter `//? if fabric/neoforge`. Don't fork
-  files per loader.
+- NeoForge only. Stonecutter stays for future Minecraft versions; there are no loader branches.
 
 **Branches/PRs:** feature branches `a/<group>-<topic>` or `b/<group>-<topic>`
 (e.g. `b/ferrous-smelting`, `a/ree-separation`). PR into `main`; keep each PR within your own
@@ -290,11 +290,10 @@ features in worldgen JSON — for now this table is the spec both sides build to
 - **2026-10-04 [A]** Branch `a/mineral-textures` (PR into main): **ore blocks exist and generate**,
   on both loaders. Verified on headless Fabric and NeoForge servers (2,760 chunks across jungle,
   badlands, mountain, beach, swamp, taiga, desert): all 42 blocks (38 ores, 4 host rocks) generate
-  on Fabric; NeoForge showed 40 in the same sample, missing only the rare carbonatite plug and
-  its bastnäsite. Vanilla `iron_ore` no longer generates. **Seen in a Fabric client:**
+  on NeoForge with Create installed. Vanilla `iron_ore` no longer generates. **Seen in a Fabric client:**
   ores render correctly over ten different host rocks (cutout layer set in `FundamentalsClient`).
-  The NeoForge client is untested — it relies on `render_type` in the model JSON — and so are the
-  Create-stone hosts, which need Create installed. Each ore has three texture variants per grade,
+  That shot was on the old Fabric build; the NeoForge client, which relies on `render_type` in the
+  model JSON, has not been looked at. Create-stone hosts are verified on a headless server only. Each ore has three texture variants per grade,
   picked per block position, because a body of one ore visibly tiled with a single texture.
   - **Ore generates as deposits, not blobs.** `worldgen.DepositFeature` places ore in four real
     shapes: `bed` (banded iron, lead-zinc, layered intrusions with chromite seams), `plug`
@@ -308,6 +307,13 @@ features in worldgen JSON — for now this table is the spec both sides build to
     drops 2, edge 1, trace 1 half the time. A hand-placed ore is `edge` in `stone`. All states are
     one block, so tags and recipes are unaffected. **For Laptop B:** when raw mineral items and processing
     exist, grade should feed yield there instead of this placeholder block count.
+  - **Create add-on, NeoForge only (user ruling 2026-10-05).** The Fabric target and all
+    `//? if fabric` code are gone; Create 6.0.10 is a required dependency and is in the dev
+    runtime (NeoForge bumped to 21.1.219 for it). **For Laptop B:** build only for NeoForge, and
+    you can now use Create's machines and items in chains. Several deposits deliberately sit in
+    Create's stones: banded iron in crimsite, lead-zinc, manganese and tungsten skarn in limestone,
+    zinc oxide in asurine, the oxidised copper cap in ochrum. Deposits generate in
+    `underground_decoration`, after Create's own stone layers.
   - **Look (user ruling, after comparing with TerraFirmaCraft, Geolosys, Mekanism, Thermal,
     Create and GregTech):** mineral only, spread evenly over the tile in muted colours, no host
     rock painted into the texture. The host rock is real blocks instead: an ore adopts whatever it
@@ -340,8 +346,11 @@ features in worldgen JSON — for now this table is the spec both sides build to
     capped at ~30 blocks across (a feature may only write to the 3x3 chunks around it), so truly
     large bodies would need a structure; (3) frequencies are a first guess (about 290 of our blocks
     per chunk, iron about 66) and vanilla copper is far too common for "native copper"; (4) host
-    rocks have no uses or recipes yet; (5) Create's own stone layers may generate after our
-    deposits, in which case ore inside them keeps its stone look instead of the Create stone's.
+    rocks have no uses or recipes yet; (5) **no ore has a recipe yet** — with vanilla iron ore
+    gone there is currently no way to make iron, so smelting or Create crushing recipes for at
+    least hematite, the copper minerals and sphalerite are the next thing needed; (6) Create's
+    own zinc ore still generates (about 70 blocks per chunk) and should give way to sphalerite
+    once sphalerite yields zinc.
 
 ---
 

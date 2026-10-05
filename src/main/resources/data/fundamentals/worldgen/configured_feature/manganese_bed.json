@@ -19,6 +19,9 @@
       "min": 3,
       "max": 5
     },
-    "replaceable": "fundamentals:deposit_replaceable/rock"
+    "replaceable": "fundamentals:deposit_replaceable/rock",
+    "host": {
+      "Name": "create:limestone"
+    }
   }
 }

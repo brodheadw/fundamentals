@@ -3,7 +3,7 @@
 
 Blocks (ORES, ROCKS): blockstate, block + item model, loot table, mining/commodity tags, lang.
 World generation (DEPOSITS, PLACERS): configured + placed features, each deposit type's biome
-tag, the NeoForge biome modifiers, and the list the Fabric side reads. Re-run after any edit.
+tag and the NeoForge biome modifiers. Re-run after any edit.
 
     python3 tools/paint_minerals.py && python3 tools/build_ore_data.py
 
@@ -87,8 +87,7 @@ ORES = {
 ROCKS = {name: "shovel" if name == "laterite" else "pickaxe" for name in ROCK_BLOCKS}
 
 # Rocks an ore can sit in: host name -> (block it stands for, texture drawn under the mineral).
-# Must list the same names, in the same order, as registry.OreBlock.Host. The Create stones only
-# exist when Create is installed; without it those states are simply never generated.
+# Must list the same names, in the same order, as registry.OreBlock.Host.
 HOSTS = {
     "stone": ("minecraft:stone", "minecraft:block/stone"),
     "deepslate": ("minecraft:deepslate", "minecraft:block/deepslate"),
@@ -127,20 +126,22 @@ REPLACEABLE = {
 #        A host ending in _ore means the whole body is that ore (bog iron, REE clay).
 # styles disseminated (scattered grains) / pockets (masses) / seams (layers) / top (upper part).
 DEPOSITS = {
+    # Create's stones are themed on metals, and we use them that way: crimsite carries iron,
+    # asurine zinc, ochrum the rusty oxidised cap, limestone the lead-zinc and manganese beds.
     # --- iron: beds of banded iron formation, common everywhere ---
-    "hematite_bed": ("bed", None, [("magnetite", 0.06, "seams"), ("hematite", 0.42, "pockets")],
+    "hematite_bed": ("bed", "create:crimsite", [("magnetite", 0.06, "seams"), ("hematite", 0.42, "pockets")],
                      (9, 14), (3, 6), None, "anywhere", (0, 96), 7, "rock"),
     "magnetite_bed": ("bed", None, [("hematite", 0.06, "seams"), ("magnetite", 0.42, "pockets")],
                       (8, 12), (3, 5), None, "anywhere", (-56, 8), 12, "rock"),
     "bog_iron": ("blanket", "goethite_ore", [], (6, 9), (1, 2), None, "wetland", (60, 64), 3, "ground"),
     # --- stratabound beds in ordinary rock ---
-    "lead_zinc_bed": ("bed", None, [("sphalerite", 0.20, "pockets"), ("galena", 0.13, "pockets")],
+    "lead_zinc_bed": ("bed", "create:limestone", [("sphalerite", 0.20, "pockets"), ("galena", 0.13, "pockets")],
                       (9, 13), (3, 5), None, "anywhere", (-40, 36), 10, "rock"),
-    "zinc_oxide_bed": ("bed", None, [("smithsonite", 0.24, "pockets")], (7, 10), (2, 4), None,
+    "zinc_oxide_bed": ("bed", "create:asurine", [("smithsonite", 0.24, "pockets")], (7, 10), (2, 4), None,
                        "anywhere", (36, 72), 18, "rock"),
-    "manganese_bed": ("bed", None, [("pyrolusite", 0.28, "pockets")], (8, 12), (3, 5), None,
+    "manganese_bed": ("bed", "create:limestone", [("pyrolusite", 0.28, "pockets")], (8, 12), (3, 5), None,
                       "anywhere", (0, 60), 14, "rock"),
-    "tungsten_skarn": ("bed", None, [("scheelite", 0.25, "pockets")], (6, 9), (3, 4), None,
+    "tungsten_skarn": ("bed", "create:limestone", [("scheelite", 0.25, "pockets")], (6, 9), (3, 4), None,
                        "hydrothermal", (-32, 40), 14, "rock"),
     "mercury_lens": ("bed", None, [("cinnabar", 0.25, "pockets")], (5, 8), (2, 4), None,
                      "hydrothermal", (0, 72), 14, "rock"),
@@ -150,7 +151,7 @@ DEPOSITS = {
                         ("bornite", 0.04, "disseminated"), ("chalcocite", 0.07, "top"), ("covellite", 0.02, "top")],
                        (7, 11), None, (24, 40), "porphyry", (0, 70), 8, "rock"),
     # --- the oxidised cap over copper and zinc, just under the surface in dry country ---
-    "oxide_cap": ("blanket", None,
+    "oxide_cap": ("blanket", "create:ochrum",
                   [("malachite", 0.20, "pockets"), ("azurite", 0.10, "pockets"), ("cuprite", 0.06, "disseminated"),
                    ("hemimorphite", 0.06, "pockets")],
                   (9, 14), (5, 8), None, "arid_oxide", (60, 64), 6, "rock"),
@@ -203,10 +204,7 @@ def write(path, obj):
 
 
 def tag(path, values):
-    # Blocks from another mod are optional entries, so the tag still loads without that mod.
-    write(path, {"replace": False,
-                 "values": [v if v.split(":")[0].lstrip("#") in ("minecraft", "fundamentals", "c")
-                            else {"id": v, "required": False} for v in sorted(values)]})
+    write(path, {"replace": False, "values": sorted(values)})
 
 
 # What one ore block drops by grade, until raw mineral items exist: (count, chance).
@@ -371,23 +369,20 @@ def main():
               placed(f"fundamentals:placer_{name}", per_chunk, y_min, y_max))
         by_biomes.setdefault("placer", []).append(f"fundamentals:placer_{name}")
 
-    spawns = []
     for where, features in by_biomes.items():
         tag(DATA / f"tags/worldgen/biome/deposit/{where}.json", BIOMES[where])
+        # After underground_ores, so a deposit lands on top of the stone layers Create generates
+        # there and its ore takes on whichever Create stone it sits in.
         write(DATA / f"neoforge/biome_modifier/add_{where}_deposits.json", {
             "type": "neoforge:add_features", "biomes": f"#fundamentals:deposit/{where}", "features": features,
-            "step": "underground_ores"})
-        spawns.append({"biomes": f"fundamentals:deposit/{where}", "features": features})
+            "step": "underground_decoration"})
     write(DATA / "neoforge/biome_modifier/remove_vanilla_iron.json", {
         "type": "neoforge:remove_features", "biomes": "#minecraft:is_overworld", "features": REMOVED,
         "steps": ["underground_ores"]})
-    # NeoForge reads the biome modifiers above; Fabric has no data-driven equivalent, so
-    # worldgen.OreSpawns applies the same add/remove list through the Fabric biome API.
-    # The same file lists the blocks registry.OreBlocks registers, so a block exists exactly
-    # when its models, loot, tags and spawn rules do.
+    # registry.OreBlocks registers exactly these blocks, so a block exists when its models, loot,
+    # tags and spawn rules do.
     write(ROOT / "fundamentals_ores.json", {
-        "blocks": blocks, "hosts": {host: block for host, (block, _) in HOSTS.items()},
-        "add": spawns, "remove": REMOVED})
+        "blocks": blocks, "hosts": {host: block for host, (block, _) in HOSTS.items()}})
     print(f"wrote {len(blocks)} blocks ({len(ORES)} minerals, {len(ROCKS)} rocks), "
           f"{len(DEPOSITS)} deposit types, {len(PLACERS)} placers")
 

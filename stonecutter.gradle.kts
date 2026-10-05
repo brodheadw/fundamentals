@@ -2,7 +2,7 @@ plugins {
     id("dev.kikugie.stonecutter")
 }
 
-stonecutter active "1.21.1-fabric" /* [SC] DO NOT EDIT */
+stonecutter active "1.21.1-neoforge" /* [SC] DO NOT EDIT */
 
 // Aggregate task that builds every registered (version × loader) target.
 //   ./gradlew buildAll

@@ -12,8 +12,8 @@ import net.minecraft.world.level.block.state.BlockState;
  * through the vein, rich "core" ore where vanilla put raw blocks. The copper vein is left alone:
  * vanilla copper ore is native copper.
  *
- * <p>The swap happens on first use rather than when the vein type is created, because on
- * NeoForge that is before any mod block is registered.
+ * <p>The swap happens on first use rather than when the vein type is created, because that is
+ * before any mod block is registered.
  */
 public final class MagnetiteVeins {
 

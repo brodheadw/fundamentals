@@ -17,15 +17,9 @@ class ModData {
 }
 
 class Dependencies {
-    val neoforgeVersion = findProperty("deps.neoforge_version")
-    val fabricLoaderVersion = property("deps.fabric_loader_version")
-    val fabricApiVersion = findProperty("deps.fabric_api_version")
-}
-
-class LoaderData {
-    val loader = loom.platform.get().name.lowercase()
-    val isFabric = loader == "fabric"
-    val isNeoforge = loader == "neoforge"
+    val neoforgeVersion = property("deps.neoforge_version").toString()
+    val createVersion = property("deps.create_version").toString()
+    val createMin = property("deps.create_min").toString()
 }
 
 class McData {
@@ -36,18 +30,10 @@ class McData {
 val mc = McData()
 val mod = ModData()
 val deps = Dependencies()
-val loader = LoaderData()
 
-version = "${mod.version}+${mc.version}-${loader.loader}"
+version = "${mod.version}+${mc.version}"
 group = mod.group
 base { archivesName.set(mod.id) }
-
-// --- Stonecutter preprocessor constants ----------------------------------
-// Use in sources as:  //? if fabric { ... //?}  or  //? if neoforge { ... //?}
-stonecutter {
-    constants["fabric"] = loader.isFabric
-    constants["neoforge"] = loader.isNeoforge
-}
 
 loom {
     silentMojangMappingsLicense()
@@ -62,8 +48,9 @@ loom {
 repositories {
     maven("https://maven.parchmentmc.org")
     maven("https://maven.neoforged.net/releases")
-    maven("https://maven.fabricmc.net")
-    maven("https://api.modrinth.com/maven") // Create & other mod deps (added later)
+    maven("https://api.modrinth.com/maven") // Create
+    maven("https://maven.createmod.net")         // the libraries Create bundles: Ponder, Flywheel
+    maven("https://maven.ithundxr.dev/snapshots") // ...and Registrate
 }
 
 dependencies {
@@ -78,12 +65,13 @@ dependencies {
         }
     })
 
-    if (loader.isFabric) {
-        modImplementation("net.fabricmc:fabric-loader:${deps.fabricLoaderVersion}")
-        modImplementation("net.fabricmc.fabric-api:fabric-api:${deps.fabricApiVersion}+${mc.version}")
-    } else if (loader.isNeoforge) {
-        "neoForge"("net.neoforged:neoforge:${deps.neoforgeVersion}")
-    }
+    "neoForge"("net.neoforged:neoforge:${deps.neoforgeVersion}")
+    // Fundamentals is a Create add-on: Create is required at runtime.
+    modLocalRuntime("maven.modrinth:create:${deps.createVersion}")
+    // Create ships these inside its jar, but a dev run does not unpack them.
+    modLocalRuntime("net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1")
+    modLocalRuntime("dev.engine-room.flywheel:flywheel-neoforge-1.21.1:1.0.6")
+    modLocalRuntime("com.tterrag.registrate:Registrate:MC1.21-1.3.0+67")
 }
 
 java {
@@ -108,19 +96,13 @@ tasks.processResources {
         "license" to mod.license,
         "source" to mod.source,
         "issues" to mod.issues,
-        "fabric_loader_version" to deps.fabricLoaderVersion,
-        "neoforge_version" to (deps.neoforgeVersion ?: "")
+        "neoforge_version" to deps.neoforgeVersion,
+        "create_min" to deps.createMin
     )
 
     props.forEach { (k, v) -> inputs.property(k, v) }
 
-    if (loader.isFabric) {
-        filesMatching("fabric.mod.json") { expand(props) }
-        exclude("META-INF/neoforge.mods.toml")
-    } else if (loader.isNeoforge) {
-        filesMatching("META-INF/neoforge.mods.toml") { expand(props) }
-        exclude("fabric.mod.json")
-    }
+    filesMatching("META-INF/neoforge.mods.toml") { expand(props) }
 }
 
 // Convenience alias: build only the currently active target.
