@@ -1,10 +1,8 @@
 package ai.gsmc.fundamentals.content.ferrous_ferroalloy;
 
-import ai.gsmc.fundamentals.material.Material;
 import ai.gsmc.fundamentals.material.MaterialForm;
 import ai.gsmc.fundamentals.material.MaterialProperties;
 import ai.gsmc.fundamentals.material.MaterialRegistry;
-import ai.gsmc.fundamentals.material.MaterialTags;
 import ai.gsmc.fundamentals.material.MaterialType;
 
 /**
@@ -26,6 +24,8 @@ public final class FerrousMaterials {
 
     public static final String GROUP = "ferrous_ferroalloy";
 
+    private static final MaterialForm[] MINERAL_FORMS = {MaterialForm.ORE, MaterialForm.RAW};
+
     private FerrousMaterials() {}
 
     public static void register() {
@@ -42,6 +42,21 @@ public final class FerrousMaterials {
                 MaterialProperties.builder().density(0.61));
         mineral("nickel_laterite", "Nickel Laterite", "(Fe,Ni)O(OH)", "nickel",
                 MaterialProperties.builder().density(0.40));
+        // Added to back the ore blocks from PR #7 (A's request, PLAN §6) — exact ids required.
+        mineral("chromite", "Chromite", "FeCr2O4", "chromium",
+                MaterialProperties.builder().density(0.61).magnetStrength(0.05));
+        mineral("wolframite", "Wolframite", "(Fe,Mn)WO4", "tungsten",
+                MaterialProperties.builder().density(0.93));
+        mineral("scheelite", "Scheelite", "CaWO4", "tungsten",
+                MaterialProperties.builder().density(0.76));
+        mineral("molybdenite", "Molybdenite", "MoS2", "molybdenum",
+                MaterialProperties.builder().density(0.60));
+        mineral("cobaltite", "Cobaltite", "CoAsS", "cobalt",
+                MaterialProperties.builder().density(0.80).toxicity(0.20)); // As-bearing
+        mineral("ilmenite", "Ilmenite", "FeTiO3", "titanium",
+                MaterialProperties.builder().density(0.60));
+        mineral("rutile", "Rutile", "TiO2", "titanium",
+                MaterialProperties.builder().density(0.53));
 
         // --- Metals (products only — no ORE/RAW per §2.4). Vanilla iron is canonical. ---
         reg("iron", MaterialType.ELEMENT, "Fe",
@@ -116,28 +131,15 @@ public final class FerrousMaterials {
         return f;
     }
 
-    /** An ore mineral: MINERAL type, ORE+RAW forms, tagged under its {@code commodity} (§2.4). */
+    /** An ore mineral (MINERAL, ORE+RAW, tagged under its {@code commodity}); via shared helper. */
     private static void mineral(String id, String display, String formula, String commodity,
                                 MaterialProperties.Builder props) {
-        MaterialRegistry.register(Material.builder(id, MaterialType.MINERAL)
-                .display(display)
-                .formula(formula)
-                .group(GROUP)
-                .properties(props)
-                .forms(MaterialForm.ORE, MaterialForm.RAW)
-                .tags("c:ores/" + commodity, "c:raw_materials/" + commodity)
-                .build());
+        MaterialRegistry.defineMineral(GROUP, id, display, formula, commodity, MINERAL_FORMS, props);
     }
 
-    /** A product material; standard form-derived tags via the shared {@link MaterialTags}. */
+    /** A product material with standard form-derived tags; via shared helper. */
     private static void reg(String id, MaterialType type, String formula, MaterialForm[] forms,
                             MaterialProperties.Builder props) {
-        MaterialRegistry.register(Material.builder(id, type)
-                .formula(formula)
-                .group(GROUP)
-                .properties(props)
-                .forms(forms)
-                .tags(MaterialTags.standard(id, forms))
-                .build());
+        MaterialRegistry.define(GROUP, id, null, type, formula, forms, props);
     }
 }
