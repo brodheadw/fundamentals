@@ -37,8 +37,8 @@ import net.minecraft.world.phys.BlockHitResult;
  * never gets hot enough to melt iron, so it does not smelt — charcoal reduces the ore to a solid,
  * spongy <em>bloom</em> of iron tangled with slag, which then has to be hammered into wrought iron.
  *
- * <p>Worked by hand, with no GUI: put in iron ore and at least as much charcoal, light it with
- * flint and steel, wait, then take out the blooms and slag with an empty hand.
+ * <p>Worked by hand, with no GUI: put in iron ore and at least as much charcoal, light it with a
+ * torch (or flint and steel), wait, then take out the blooms and slag with an empty hand.
  */
 public class BloomeryBlock extends BaseEntityBlock {
 
@@ -98,11 +98,16 @@ public class BloomeryBlock extends BaseEntityBlock {
         } else if (stack.is(Items.CHARCOAL)) {
             // Charcoal only: mineral coal's sulfur makes iron brittle, which is why smiths avoided it.
             used = bloomery.addCharcoal();
-        } else if (stack.is(Items.FLINT_AND_STEEL)) {
+        } else if (stack.is(Items.TORCH) || stack.is(Items.FLINT_AND_STEEL) || stack.is(Items.FIRE_CHARGE)) {
+            // A torch has to work: flint and steel needs iron, and this is how you get your first.
             used = bloomery.ignite();
             if (used && !level.isClientSide) {
                 level.playSound(null, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
-                stack.hurtAndBreak(1, player, net.minecraft.world.entity.LivingEntity.getSlotForHand(hand));
+                if (stack.is(Items.FLINT_AND_STEEL)) {
+                    stack.hurtAndBreak(1, player, net.minecraft.world.entity.LivingEntity.getSlotForHand(hand));
+                } else {
+                    stack.consume(1, player);
+                }
             }
             return used ? ItemInteractionResult.sidedSuccess(level.isClientSide)
                     : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;

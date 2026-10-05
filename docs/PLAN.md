@@ -341,7 +341,7 @@ features in worldgen JSON — for now this table is the spec both sides build to
     variants (§4).
   - **Iron is makeable again, the medieval way (user ruling 2026-10-05).** `ironworking.*`:
     a clay **bloomery** block (7 clay balls) takes up to 4 iron ore and as much charcoal — charcoal
-    only, mineral coal is refused — is lit with flint and steel, burns for a minute, and gives one
+    only, mineral coal is refused — is lit with a torch (or flint and steel), burns for a minute, and gives one
     **iron bloom** and one **slag** per ore. Bloom + **smithing hammer** (stone and sticks, wears
     with use) in a crafting grid gives a vanilla iron ingot. No GUI; it is worked by hand. Any item
     in `c:ores/iron` works, so hematite, magnetite and goethite all do. Covered by three game

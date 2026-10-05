@@ -47,7 +47,7 @@ public class IronWorkingTests {
         use(helper, player, new ItemStack(Items.CHARCOAL, 1));
         BloomeryBlockEntity bloomery = helper.getBlockEntity(POS);
         helper.assertTrue(bloomery.oreCount() == 2 && bloomery.charcoalCount() == 2, "ore and charcoal should load one at a time");
-        use(helper, player, new ItemStack(Items.FLINT_AND_STEEL));
+        use(helper, player, new ItemStack(Items.TORCH));  // no iron needed to light your first firing
         helper.assertBlockProperty(POS, BloomeryBlock.LIT, true);
         helper.runAfterDelay(BloomeryBlockEntity.BURN_TICKS + 5, () -> {
             helper.assertBlockProperty(POS, BloomeryBlock.LIT, false);
