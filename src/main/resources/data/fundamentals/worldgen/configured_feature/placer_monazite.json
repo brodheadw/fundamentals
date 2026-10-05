@@ -6,7 +6,11 @@
     "targets": [
       {
         "state": {
-          "Name": "fundamentals:monazite_ore"
+          "Name": "fundamentals:monazite_ore",
+          "Properties": {
+            "grade": "edge",
+            "host": "sand"
+          }
         },
         "target": {
           "predicate_type": "minecraft:block_match",

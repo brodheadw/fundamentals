@@ -127,10 +127,11 @@ Use as sub-package names and data sub-folders.
 **IDs:**
 - material id = element symbol lowercased or snake_case compound: `iron`, `neodymium`,
   `tungsten_trioxide`, `rare_earth_concentrate`.
-- ore block id = `<mineral>_ore`, plus `deepslate_<mineral>_ore` for ores that occur at depth.
-  Most ores are a transparent texture layered over the game's own stone / deepslate / granite /
-  sand, carrying a hint of their real host rock (a quartz veinlet, a stained patch, bands). A few
-  rare ones are painted whole in a host rock of their own (see `paint_minerals.OVERLAY`).
+- ore block id = `<mineral>_ore`, one block per mineral. It carries two blockstate properties:
+  `grade` (`core` / `edge` / `trace`) and `host` (the rock it formed in: stone, deepslate, granite,
+  diorite, andesite, tuff, calcite, dripstone, sand, our four rocks, and Create's seven stones).
+  The mineral is a transparent texture drawn over the host rock's own texture, so there are no
+  `deepslate_` twins. Bauxite, the laterites, REE clay and bog iron are whole rocks instead.
 - stage machine id = snake_case of the canonical stage: `froth_flotation`, `solvent_extraction`.
 
 **Tags** (Fabric `c:` common convention + our namespace; consumers request by tag, never by a
@@ -288,13 +289,13 @@ features in worldgen JSON — for now this table is the spec both sides build to
   - **A next:** rare-earth and base-metal chains, then solvent-extraction design.
 - **2026-10-04 [A]** Branch `a/mineral-textures` (PR into main): **ore blocks exist and generate**,
   on both loaders. Verified on headless Fabric and NeoForge servers (2,760 chunks across jungle,
-  badlands, mountain, beach, swamp, taiga, desert): all 57 blocks (38 minerals with their deepslate
-  twins, 4 host rocks) generate on Fabric; NeoForge showed 52 in the same sample, the absent five
-  being rare or deep ones. Vanilla `iron_ore` no longer generates. **Seen in a Fabric client:**
-  the overlay models render correctly over stone and deepslate (cutout layer set in
-  `FundamentalsClient`). The NeoForge client is untested — it relies on `render_type` in the
-  model JSON. Each ore has three texture variants per grade, picked per block position, because
-  a body of one ore visibly tiled with a single texture.
+  badlands, mountain, beach, swamp, taiga, desert): all 42 blocks (38 ores, 4 host rocks) generate
+  on Fabric; NeoForge showed 40 in the same sample, missing only the rare carbonatite plug and
+  its bastnäsite. Vanilla `iron_ore` no longer generates. **Seen in a Fabric client:**
+  ores render correctly over ten different host rocks (cutout layer set in `FundamentalsClient`).
+  The NeoForge client is untested — it relies on `render_type` in the model JSON — and so are the
+  Create-stone hosts, which need Create installed. Each ore has three texture variants per grade,
+  picked per block position, because a body of one ore visibly tiled with a single texture.
   - **Ore generates as deposits, not blobs.** `worldgen.DepositFeature` places ore in four real
     shapes: `bed` (banded iron, lead-zinc, layered intrusions with chromite seams), `plug`
     (porphyry copper, carbonatite), `vein` (silver, tin, pegmatite) and `blanket` (bauxite and
@@ -304,13 +305,15 @@ features in worldgen JSON — for now this table is the spec both sides build to
     `core` / `edge` / `trace` (`registry.OreBlock`). The deposit sets it from how far the block is
     from the heart of its body, so ore is rich in the middle and peters out at the rim; ore is
     also sparser toward the rim. Grade picks the texture (three per grade) and the drops: core
-    drops 2, edge 1, trace 1 half the time. A hand-placed ore is `edge`. All grades are one block,
-    so tags and recipes are unaffected. **For Laptop B:** when raw mineral items and processing
+    drops 2, edge 1, trace 1 half the time. A hand-placed ore is `edge` in `stone`. All states are
+    one block, so tags and recipes are unaffected. **For Laptop B:** when raw mineral items and processing
     exist, grade should feed yield there instead of this placeholder block count.
-  - **Look (user ruling): half vanilla, half real.** Everyday ores sit directly in the existing
-    stone or deepslate and are drawn as overlays on the vanilla texture, so they read like vanilla
-    ores. Only the rare big finds are bodies of their own rock: `carbonatite`, `gabbro`, `syenite`,
-    `laterite`. Pegmatite dykes are vanilla granite; beach placers sit in vanilla sand.
+  - **Look (user ruling, after comparing with TerraFirmaCraft, Geolosys, Mekanism, Thermal,
+    Create and GregTech):** mineral only, spread evenly over the tile in muted colours, no host
+    rock painted into the texture. The host rock is real blocks instead: an ore adopts whatever it
+    lands in, and a few deposits bring a vanilla rock body (calcite for silver and cobalt veins,
+    andesite for the porphyry stock, granite for pegmatite). Our own rocks are only `carbonatite`,
+    `gabbro`, `syenite`, `laterite`. Beach placers sit in vanilla sand.
   - **What landed:** `registry.OreBlocks` (ore blocks, rock blocks, items, creative tab),
     `worldgen.OreData` / `worldgen.OreSpawns`, and two generators — `tools/paint_minerals.py`
     (textures) and `tools/build_ore_data.py` (models, loot, tags, lang, features, biome tags,
@@ -335,7 +338,8 @@ features in worldgen JSON — for now this table is the spec both sides build to
     capped at ~30 blocks across (a feature may only write to the 3x3 chunks around it), so truly
     large bodies would need a structure; (3) frequencies are a first guess (about 290 of our blocks
     per chunk, iron about 66) and vanilla copper is far too common for "native copper"; (4) host
-    rocks have no uses or recipes yet.
+    rocks have no uses or recipes yet; (5) Create's own stone layers may generate after our
+    deposits, in which case ore inside them keeps its stone look instead of the Create stone's.
 
 ---
 

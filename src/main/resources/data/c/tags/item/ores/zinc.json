@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "fundamentals:deepslate_sphalerite_ore",
     "fundamentals:hemimorphite_ore",
     "fundamentals:smithsonite_ore",
     "fundamentals:sphalerite_ore"

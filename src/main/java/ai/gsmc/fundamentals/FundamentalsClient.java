@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.RenderType;
 //?}
 
 /**
- * Fabric client setup. Overlay ores draw a transparent texture over a vanilla one, which needs
+ * Fabric client setup. Ores draw a transparent mineral texture over their host rock, which needs
  * the cutout render layer; NeoForge reads that from {@code render_type} in the model JSON.
  */
 public class FundamentalsClient /*? if fabric {*/ implements ClientModInitializer /*?}*/ {
@@ -16,7 +16,7 @@ public class FundamentalsClient /*? if fabric {*/ implements ClientModInitialize
     //? if fabric {
     @Override
     public void onInitializeClient() {
-        OreBlocks.overlays().forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderType.cutout()));
+        OreBlocks.ores().forEach(block -> BlockRenderLayerMap.INSTANCE.putBlock(block, RenderType.cutout()));
     }
     //?}
 }

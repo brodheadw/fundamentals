@@ -8,30 +8,21 @@
           "Name": "fundamentals:chalcopyrite_ore"
         },
         "fraction": 0.18,
-        "style": "pockets",
-        "deepslate_state": {
-          "Name": "fundamentals:deepslate_chalcopyrite_ore"
-        }
+        "style": "pockets"
       },
       {
         "state": {
           "Name": "fundamentals:molybdenite_ore"
         },
         "fraction": 0.04,
-        "style": "pockets",
-        "deepslate_state": {
-          "Name": "fundamentals:deepslate_molybdenite_ore"
-        }
+        "style": "pockets"
       },
       {
         "state": {
           "Name": "fundamentals:bornite_ore"
         },
         "fraction": 0.04,
-        "style": "disseminated",
-        "deepslate_state": {
-          "Name": "fundamentals:deepslate_bornite_ore"
-        }
+        "style": "disseminated"
       },
       {
         "state": {
@@ -57,6 +48,9 @@
       "max": 1
     },
     "replaceable": "fundamentals:deposit_replaceable/rock",
+    "host": {
+      "Name": "minecraft:andesite"
+    },
     "height": {
       "min": 24,
       "max": 40

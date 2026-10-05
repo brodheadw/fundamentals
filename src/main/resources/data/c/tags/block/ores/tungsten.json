@@ -1,8 +1,6 @@
 {
   "replace": false,
   "values": [
-    "fundamentals:deepslate_scheelite_ore",
-    "fundamentals:deepslate_wolframite_ore",
     "fundamentals:scheelite_ore",
     "fundamentals:wolframite_ore"
   ]

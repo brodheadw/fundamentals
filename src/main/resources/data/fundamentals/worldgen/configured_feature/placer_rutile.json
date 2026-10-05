@@ -6,7 +6,11 @@
     "targets": [
       {
         "state": {
-          "Name": "fundamentals:rutile_ore"
+          "Name": "fundamentals:rutile_ore",
+          "Properties": {
+            "grade": "edge",
+            "host": "sand"
+          }
         },
         "target": {
           "predicate_type": "minecraft:block_match",

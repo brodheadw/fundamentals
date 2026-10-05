@@ -5,7 +5,6 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
@@ -83,14 +82,10 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
         }
     }
 
-    /**
-     * @param deepslate the block used where the ore replaces deepslate, if it has such a twin
-     * @param fraction  share of the body's blocks that are this ore
-     */
-    public record Ore(BlockState state, Optional<BlockState> deepslate, float fraction, Style style) {
+    /** @param fraction share of the body's blocks that are this ore */
+    public record Ore(BlockState state, float fraction, Style style) {
         public static final Codec<Ore> CODEC = RecordCodecBuilder.create(i -> i.group(
                 BlockState.CODEC.fieldOf("state").forGetter(Ore::state),
-                BlockState.CODEC.optionalFieldOf("deepslate_state").forGetter(Ore::deepslate),
                 Codec.FLOAT.fieldOf("fraction").forGetter(Ore::fraction),
                 Style.CODEC.fieldOf("style").forGetter(Ore::style)).apply(i, Ore::new));
     }
@@ -249,7 +244,7 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
             if (level.isOutsideBuildHeight(pos)) return;
             BlockState existing = level.getBlockState(pos);
             if (!existing.is(config.replaceable())) return;
-            BlockState state = stateAt(layer, vertical, edge, existing.is(BlockTags.DEEPSLATE_ORE_REPLACEABLES));
+            BlockState state = stateAt(layer, vertical, edge, existing);
             if (state != null) {
                 level.setBlock(pos, state, Block.UPDATE_CLIENTS);
                 placed++;
@@ -257,7 +252,7 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
         }
 
         /** The block for this spot, or null to leave the existing rock alone. */
-        private BlockState stateAt(double layer, double vertical, double edge, boolean inDeepslate) {
+        private BlockState stateAt(double layer, double vertical, double edge, BlockState existing) {
             // Rich in the middle, a scatter at the rim: no deposit ends in a clean wall of ore.
             float richness = (float) (1 - 0.85 * edge * edge);
             for (int i = 0; i < config.ores().size(); i++) {
@@ -270,9 +265,12 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
                     case TOP -> vertical > 0.35 && pocket(salt, Math.min(0.9F, ore.fraction() * 3 * richness));
                 };
                 if (here) {
-                    BlockState state = inDeepslate ? ore.deepslate().orElse(ore.state()) : ore.state();
-                    return state.hasProperty(OreBlock.GRADE)
-                            ? state.setValue(OreBlock.GRADE, OreBlock.Grade.at(edge)) : state;
+                    // The ore takes its grade from where it sits in the body, and its look from
+                    // the rock it sits in: the deposit's own host, or whatever was already there.
+                    return ore.state().hasProperty(OreBlock.GRADE)
+                            ? ore.state().setValue(OreBlock.GRADE, OreBlock.Grade.at(edge))
+                                    .setValue(OreBlock.HOST, OreBlock.Host.of(config.host().orElse(existing)))
+                            : ore.state();
                 }
             }
             return config.host().orElse(null);

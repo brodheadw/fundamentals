@@ -6,20 +6,20 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Map;
 
 /**
  * The block and spawn list written by {@code tools/build_ore_data.py}: which ore and host-rock
- * blocks exist and which deposits generate where. One file drives block registration and
+ * blocks exist, which rocks an ore can sit in, and which deposits generate where. One file drives block registration and
  * spawning, so the two cannot drift apart.
  */
-public record OreData(List<BlockDef> blocks, List<Spawn> add, List<String> remove) {
+public record OreData(List<BlockDef> blocks, Map<String, String> hosts, List<Spawn> add, List<String> remove) {
 
     /**
      * @param soft    dug with a shovel (clays, laterites, mineral sands) rather than a pickaxe
-     * @param overlay drawn as a transparent layer over a vanilla block's texture
      * @param mineral the mineral material this is the ore of; null for a plain host rock
      */
-    public record BlockDef(String name, boolean soft, boolean overlay, String mineral) {}
+    public record BlockDef(String name, boolean soft, String mineral) {}
 
     /** @param biomes biome tag id; @param features placed-feature ids added to those biomes */
     public record Spawn(String biomes, List<String> features) {}

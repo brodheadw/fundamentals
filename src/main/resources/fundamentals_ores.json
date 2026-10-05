@@ -2,343 +2,233 @@
   "blocks": [
     {
       "name": "carbonatite",
-      "soft": false,
-      "overlay": false
+      "soft": false
     },
     {
       "name": "gabbro",
-      "soft": false,
-      "overlay": false
+      "soft": false
     },
     {
       "name": "syenite",
-      "soft": false,
-      "overlay": false
+      "soft": false
     },
     {
       "name": "laterite",
-      "soft": true,
-      "overlay": false
+      "soft": true
     },
     {
       "name": "hematite_ore",
       "soft": false,
-      "overlay": true,
-      "mineral": "hematite"
-    },
-    {
-      "name": "deepslate_hematite_ore",
-      "soft": false,
-      "overlay": true,
       "mineral": "hematite"
     },
     {
       "name": "magnetite_ore",
       "soft": false,
-      "overlay": true,
-      "mineral": "magnetite"
-    },
-    {
-      "name": "deepslate_magnetite_ore",
-      "soft": false,
-      "overlay": true,
       "mineral": "magnetite"
     },
     {
       "name": "goethite_ore",
       "soft": false,
-      "overlay": false,
       "mineral": "goethite"
     },
     {
       "name": "pyrolusite_ore",
       "soft": false,
-      "overlay": true,
-      "mineral": "pyrolusite"
-    },
-    {
-      "name": "deepslate_pyrolusite_ore",
-      "soft": false,
-      "overlay": true,
       "mineral": "pyrolusite"
     },
     {
       "name": "pentlandite_ore",
       "soft": false,
-      "overlay": false,
       "mineral": "pentlandite"
     },
     {
       "name": "nickel_laterite_ore",
       "soft": true,
-      "overlay": false,
       "mineral": "nickel_laterite"
     },
     {
       "name": "chromite_ore",
       "soft": false,
-      "overlay": false,
       "mineral": "chromite"
     },
     {
       "name": "wolframite_ore",
       "soft": false,
-      "overlay": true,
-      "mineral": "wolframite"
-    },
-    {
-      "name": "deepslate_wolframite_ore",
-      "soft": false,
-      "overlay": true,
       "mineral": "wolframite"
     },
     {
       "name": "scheelite_ore",
       "soft": false,
-      "overlay": true,
-      "mineral": "scheelite"
-    },
-    {
-      "name": "deepslate_scheelite_ore",
-      "soft": false,
-      "overlay": true,
       "mineral": "scheelite"
     },
     {
       "name": "molybdenite_ore",
       "soft": false,
-      "overlay": true,
-      "mineral": "molybdenite"
-    },
-    {
-      "name": "deepslate_molybdenite_ore",
-      "soft": false,
-      "overlay": true,
       "mineral": "molybdenite"
     },
     {
       "name": "cobaltite_ore",
       "soft": false,
-      "overlay": true,
-      "mineral": "cobaltite"
-    },
-    {
-      "name": "deepslate_cobaltite_ore",
-      "soft": false,
-      "overlay": true,
       "mineral": "cobaltite"
     },
     {
       "name": "ilmenite_ore",
       "soft": true,
-      "overlay": true,
       "mineral": "ilmenite"
     },
     {
       "name": "rutile_ore",
       "soft": true,
-      "overlay": true,
       "mineral": "rutile"
     },
     {
       "name": "chalcopyrite_ore",
       "soft": false,
-      "overlay": true,
-      "mineral": "chalcopyrite"
-    },
-    {
-      "name": "deepslate_chalcopyrite_ore",
-      "soft": false,
-      "overlay": true,
       "mineral": "chalcopyrite"
     },
     {
       "name": "bornite_ore",
       "soft": false,
-      "overlay": true,
-      "mineral": "bornite"
-    },
-    {
-      "name": "deepslate_bornite_ore",
-      "soft": false,
-      "overlay": true,
       "mineral": "bornite"
     },
     {
       "name": "chalcocite_ore",
       "soft": false,
-      "overlay": true,
       "mineral": "chalcocite"
     },
     {
       "name": "covellite_ore",
       "soft": false,
-      "overlay": true,
       "mineral": "covellite"
     },
     {
       "name": "malachite_ore",
       "soft": false,
-      "overlay": true,
       "mineral": "malachite"
     },
     {
       "name": "azurite_ore",
       "soft": false,
-      "overlay": true,
       "mineral": "azurite"
     },
     {
       "name": "cuprite_ore",
       "soft": false,
-      "overlay": true,
       "mineral": "cuprite"
     },
     {
       "name": "bauxite_ore",
       "soft": false,
-      "overlay": false,
       "mineral": "bauxite"
     },
     {
       "name": "galena_ore",
       "soft": false,
-      "overlay": true,
-      "mineral": "galena"
-    },
-    {
-      "name": "deepslate_galena_ore",
-      "soft": false,
-      "overlay": true,
       "mineral": "galena"
     },
     {
       "name": "sphalerite_ore",
       "soft": false,
-      "overlay": true,
-      "mineral": "sphalerite"
-    },
-    {
-      "name": "deepslate_sphalerite_ore",
-      "soft": false,
-      "overlay": true,
       "mineral": "sphalerite"
     },
     {
       "name": "smithsonite_ore",
       "soft": false,
-      "overlay": true,
       "mineral": "smithsonite"
     },
     {
       "name": "hemimorphite_ore",
       "soft": false,
-      "overlay": true,
       "mineral": "hemimorphite"
     },
     {
       "name": "cassiterite_ore",
       "soft": false,
-      "overlay": true,
-      "mineral": "cassiterite"
-    },
-    {
-      "name": "deepslate_cassiterite_ore",
-      "soft": false,
-      "overlay": true,
       "mineral": "cassiterite"
     },
     {
       "name": "bastnasite_ore",
       "soft": false,
-      "overlay": false,
       "mineral": "bastnasite"
     },
     {
       "name": "monazite_ore",
       "soft": true,
-      "overlay": true,
       "mineral": "monazite"
     },
     {
       "name": "xenotime_ore",
       "soft": false,
-      "overlay": true,
       "mineral": "xenotime"
     },
     {
       "name": "ion_adsorption_clay_ore",
       "soft": true,
-      "overlay": false,
       "mineral": "ion_adsorption_clay"
     },
     {
       "name": "loparite_ore",
       "soft": false,
-      "overlay": false,
       "mineral": "loparite"
     },
     {
       "name": "euxenite_ore",
       "soft": false,
-      "overlay": true,
       "mineral": "euxenite"
     },
     {
       "name": "native_silver_ore",
       "soft": false,
-      "overlay": true,
-      "mineral": "native_silver"
-    },
-    {
-      "name": "deepslate_native_silver_ore",
-      "soft": false,
-      "overlay": true,
       "mineral": "native_silver"
     },
     {
       "name": "argentite_ore",
       "soft": false,
-      "overlay": true,
-      "mineral": "argentite"
-    },
-    {
-      "name": "deepslate_argentite_ore",
-      "soft": false,
-      "overlay": true,
       "mineral": "argentite"
     },
     {
       "name": "sperrylite_ore",
       "soft": false,
-      "overlay": false,
       "mineral": "sperrylite"
     },
     {
       "name": "cooperite_ore",
       "soft": false,
-      "overlay": false,
       "mineral": "cooperite"
     },
     {
       "name": "braggite_ore",
       "soft": false,
-      "overlay": false,
       "mineral": "braggite"
     },
     {
       "name": "cinnabar_ore",
       "soft": false,
-      "overlay": true,
-      "mineral": "cinnabar"
-    },
-    {
-      "name": "deepslate_cinnabar_ore",
-      "soft": false,
-      "overlay": true,
       "mineral": "cinnabar"
     }
   ],
+  "hosts": {
+    "stone": "minecraft:stone",
+    "deepslate": "minecraft:deepslate",
+    "granite": "minecraft:granite",
+    "diorite": "minecraft:diorite",
+    "andesite": "minecraft:andesite",
+    "tuff": "minecraft:tuff",
+    "calcite": "minecraft:calcite",
+    "dripstone": "minecraft:dripstone_block",
+    "sand": "minecraft:sand",
+    "carbonatite": "fundamentals:carbonatite",
+    "gabbro": "fundamentals:gabbro",
+    "syenite": "fundamentals:syenite",
+    "laterite": "fundamentals:laterite",
+    "asurine": "create:asurine",
+    "crimsite": "create:crimsite",
+    "ochrum": "create:ochrum",
+    "veridium": "create:veridium",
+    "limestone": "create:limestone",
+    "scoria": "create:scoria",
+    "scorchia": "create:scorchia"
+  },
   "add": [
     {
       "biomes": "fundamentals:deposit/anywhere",

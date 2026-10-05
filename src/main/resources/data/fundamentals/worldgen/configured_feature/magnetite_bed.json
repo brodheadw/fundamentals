@@ -8,20 +8,14 @@
           "Name": "fundamentals:hematite_ore"
         },
         "fraction": 0.06,
-        "style": "seams",
-        "deepslate_state": {
-          "Name": "fundamentals:deepslate_hematite_ore"
-        }
+        "style": "seams"
       },
       {
         "state": {
           "Name": "fundamentals:magnetite_ore"
         },
         "fraction": 0.42,
-        "style": "pockets",
-        "deepslate_state": {
-          "Name": "fundamentals:deepslate_magnetite_ore"
-        }
+        "style": "pockets"
       }
     ],
     "radius": {

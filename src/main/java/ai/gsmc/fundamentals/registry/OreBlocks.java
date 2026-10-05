@@ -25,9 +25,8 @@ import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 /**
- * The in-world ore blocks and the few host rocks that are blocks of their own, as listed in
- * {@link OreData}. Most ores are a transparent layer over vanilla stone, with a
- * {@code deepslate_} twin; a few rare ones are painted whole in their own rock.
+ * The in-world ore blocks ({@link OreBlock}) and the few host rocks that are blocks of their own,
+ * as listed in {@link OreData}.
  *
  * <p>Loader-agnostic: the loader hands in a registration callback (see {@code Fundamentals}).
  */
@@ -40,7 +39,7 @@ public final class OreBlocks {
 
     private static final Map<ResourceLocation, Block> BLOCKS = new LinkedHashMap<>();
     private static final Map<ResourceLocation, Item> ITEMS = new LinkedHashMap<>();
-    private static final List<Block> OVERLAYS = new ArrayList<>();
+    private static final List<Block> ORES = new ArrayList<>();
 
     private OreBlocks() {}
 
@@ -53,8 +52,8 @@ public final class OreBlocks {
             ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, def.name());
             Block block = def.mineral() == null ? new Block(props) : new OreBlock(props);
             BLOCKS.put(id, block);
-            if (def.overlay()) {
-                OVERLAYS.add(block);
+            if (block instanceof OreBlock) {
+                ORES.add(block);
             }
             registry.accept(id, block);
         }
@@ -73,9 +72,9 @@ public final class OreBlocks {
         return ITEMS.values();
     }
 
-    /** Blocks whose model layers a transparent ore texture over a vanilla one (need cutout rendering). */
-    public static List<Block> overlays() {
-        return OVERLAYS;
+    /** The ore blocks: their models layer a transparent mineral texture over a rock, so they need cutout rendering. */
+    public static List<Block> ores() {
+        return ORES;
     }
 
     /** Ore blocks and mineral materials are defined in different places; say so when they disagree. */
@@ -94,6 +93,16 @@ public final class OreBlocks {
             if (!minerals.contains(block)) {
                 Fundamentals.LOGGER.warn("Ore block '{}_ore' has no mineral material yet", block);
             }
+        }
+        Map<String, String> hosts = OreData.get().hosts();
+        for (OreBlock.Host host : OreBlock.Host.values()) {
+            if (!host.block().equals(hosts.get(host.getSerializedName()))) {
+                Fundamentals.LOGGER.error("Ore host '{}' differs between OreBlock.Host and tools/build_ore_data.py",
+                        host.getSerializedName());
+            }
+        }
+        if (hosts.size() != OreBlock.Host.values().length) {
+            Fundamentals.LOGGER.error("Ore host lists differ between OreBlock.Host and tools/build_ore_data.py");
         }
     }
 }

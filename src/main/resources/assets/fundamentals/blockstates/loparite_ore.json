@@ -1,37 +1,212 @@
 {
-  "variants": {
-    "grade=core": [
-      {
-        "model": "fundamentals:block/loparite_ore_core_0"
+  "multipart": [
+    {
+      "when": {
+        "host": "stone"
       },
-      {
-        "model": "fundamentals:block/loparite_ore_core_1"
-      },
-      {
-        "model": "fundamentals:block/loparite_ore_core_2"
+      "apply": {
+        "model": "fundamentals:block/host/stone"
       }
-    ],
-    "grade=edge": [
-      {
-        "model": "fundamentals:block/loparite_ore_edge_0"
+    },
+    {
+      "when": {
+        "host": "deepslate"
       },
-      {
-        "model": "fundamentals:block/loparite_ore_edge_1"
-      },
-      {
-        "model": "fundamentals:block/loparite_ore_edge_2"
+      "apply": {
+        "model": "fundamentals:block/host/deepslate"
       }
-    ],
-    "grade=trace": [
-      {
-        "model": "fundamentals:block/loparite_ore_trace_0"
+    },
+    {
+      "when": {
+        "host": "granite"
       },
-      {
-        "model": "fundamentals:block/loparite_ore_trace_1"
-      },
-      {
-        "model": "fundamentals:block/loparite_ore_trace_2"
+      "apply": {
+        "model": "fundamentals:block/host/granite"
       }
-    ]
-  }
+    },
+    {
+      "when": {
+        "host": "diorite"
+      },
+      "apply": {
+        "model": "fundamentals:block/host/diorite"
+      }
+    },
+    {
+      "when": {
+        "host": "andesite"
+      },
+      "apply": {
+        "model": "fundamentals:block/host/andesite"
+      }
+    },
+    {
+      "when": {
+        "host": "tuff"
+      },
+      "apply": {
+        "model": "fundamentals:block/host/tuff"
+      }
+    },
+    {
+      "when": {
+        "host": "calcite"
+      },
+      "apply": {
+        "model": "fundamentals:block/host/calcite"
+      }
+    },
+    {
+      "when": {
+        "host": "dripstone"
+      },
+      "apply": {
+        "model": "fundamentals:block/host/dripstone"
+      }
+    },
+    {
+      "when": {
+        "host": "sand"
+      },
+      "apply": {
+        "model": "fundamentals:block/host/sand"
+      }
+    },
+    {
+      "when": {
+        "host": "carbonatite"
+      },
+      "apply": {
+        "model": "fundamentals:block/host/carbonatite"
+      }
+    },
+    {
+      "when": {
+        "host": "gabbro"
+      },
+      "apply": {
+        "model": "fundamentals:block/host/gabbro"
+      }
+    },
+    {
+      "when": {
+        "host": "syenite"
+      },
+      "apply": {
+        "model": "fundamentals:block/host/syenite"
+      }
+    },
+    {
+      "when": {
+        "host": "laterite"
+      },
+      "apply": {
+        "model": "fundamentals:block/host/laterite"
+      }
+    },
+    {
+      "when": {
+        "host": "asurine"
+      },
+      "apply": {
+        "model": "fundamentals:block/host/asurine"
+      }
+    },
+    {
+      "when": {
+        "host": "crimsite"
+      },
+      "apply": {
+        "model": "fundamentals:block/host/crimsite"
+      }
+    },
+    {
+      "when": {
+        "host": "ochrum"
+      },
+      "apply": {
+        "model": "fundamentals:block/host/ochrum"
+      }
+    },
+    {
+      "when": {
+        "host": "veridium"
+      },
+      "apply": {
+        "model": "fundamentals:block/host/veridium"
+      }
+    },
+    {
+      "when": {
+        "host": "limestone"
+      },
+      "apply": {
+        "model": "fundamentals:block/host/limestone"
+      }
+    },
+    {
+      "when": {
+        "host": "scoria"
+      },
+      "apply": {
+        "model": "fundamentals:block/host/scoria"
+      }
+    },
+    {
+      "when": {
+        "host": "scorchia"
+      },
+      "apply": {
+        "model": "fundamentals:block/host/scorchia"
+      }
+    },
+    {
+      "when": {
+        "grade": "core"
+      },
+      "apply": [
+        {
+          "model": "fundamentals:block/ore/loparite_ore_core_0"
+        },
+        {
+          "model": "fundamentals:block/ore/loparite_ore_core_1"
+        },
+        {
+          "model": "fundamentals:block/ore/loparite_ore_core_2"
+        }
+      ]
+    },
+    {
+      "when": {
+        "grade": "edge"
+      },
+      "apply": [
+        {
+          "model": "fundamentals:block/ore/loparite_ore_edge_0"
+        },
+        {
+          "model": "fundamentals:block/ore/loparite_ore_edge_1"
+        },
+        {
+          "model": "fundamentals:block/ore/loparite_ore_edge_2"
+        }
+      ]
+    },
+    {
+      "when": {
+        "grade": "trace"
+      },
+      "apply": [
+        {
+          "model": "fundamentals:block/ore/loparite_ore_trace_0"
+        },
+        {
+          "model": "fundamentals:block/ore/loparite_ore_trace_1"
+        },
+        {
+          "model": "fundamentals:block/ore/loparite_ore_trace_2"
+        }
+      ]
+    }
+  ]
 }

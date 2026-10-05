@@ -10,14 +10,15 @@ tag, the NeoForge biome modifiers, and the list the Fabric side reads. Re-run af
 Ore does not generate as scattered blobs. Each row of DEPOSITS is a body in a real shape
 (worldgen.DepositFeature): tune a deposit by editing its row.
 
-Which ores are drawn over vanilla stone/deepslate/granite/sand and which are a full rock of
-their own is decided in paint_minerals.OVERLAY; this script follows it.
+An ore block takes on the rock it formed in: its `host` blockstate property picks the texture
+drawn under the mineral (HOSTS below), so one ore block serves stone, deepslate, granite, the
+Create stones and our own rocks. A few ores are whole rocks instead (paint_minerals.WHOLE).
 """
 import json
 import shutil
 from pathlib import Path
 
-from paint_minerals import GRADES, OVERLAY, ROCK_BLOCKS, VARIANTS
+from paint_minerals import GRADES, ROCK_BLOCKS, VARIANTS, WHOLE
 
 ROOT = Path(__file__).resolve().parent.parent / "src/main/resources"
 ASSETS = ROOT / "assets/fundamentals"
@@ -85,17 +86,44 @@ ORES = {
 # Host rocks that are blocks of their own -> tool.
 ROCKS = {name: "shovel" if name == "laterite" else "pickaxe" for name in ROCK_BLOCKS}
 
-# What a deposit may replace.
+# Rocks an ore can sit in: host name -> (block it stands for, texture drawn under the mineral).
+# Must list the same names, in the same order, as registry.OreBlock.Host. The Create stones only
+# exist when Create is installed; without it those states are simply never generated.
+HOSTS = {
+    "stone": ("minecraft:stone", "minecraft:block/stone"),
+    "deepslate": ("minecraft:deepslate", "minecraft:block/deepslate"),
+    "granite": ("minecraft:granite", "minecraft:block/granite"),
+    "diorite": ("minecraft:diorite", "minecraft:block/diorite"),
+    "andesite": ("minecraft:andesite", "minecraft:block/andesite"),
+    "tuff": ("minecraft:tuff", "minecraft:block/tuff"),
+    "calcite": ("minecraft:calcite", "minecraft:block/calcite"),
+    "dripstone": ("minecraft:dripstone_block", "minecraft:block/dripstone_block"),
+    "sand": ("minecraft:sand", "minecraft:block/sand"),
+    "carbonatite": ("fundamentals:carbonatite", "fundamentals:block/carbonatite"),
+    "gabbro": ("fundamentals:gabbro", "fundamentals:block/gabbro"),
+    "syenite": ("fundamentals:syenite", "fundamentals:block/syenite"),
+    "laterite": ("fundamentals:laterite", "fundamentals:block/laterite"),
+    "asurine": ("create:asurine", "create:block/palettes/stone_types/natural/asurine_0"),
+    "crimsite": ("create:crimsite", "create:block/palettes/stone_types/natural/crimsite_0"),
+    "ochrum": ("create:ochrum", "create:block/palettes/stone_types/natural/ochrum_0"),
+    "veridium": ("create:veridium", "create:block/palettes/stone_types/natural/veridium_0"),
+    "limestone": ("create:limestone", "create:block/palettes/stone_types/limestone"),
+    "scoria": ("create:scoria", "create:block/palettes/stone_types/scoria"),
+    "scorchia": ("create:scorchia", "create:block/palettes/stone_types/scorchia"),
+}
+
+# What a deposit may replace. Ore adopts whichever of these it lands in.
+ROCK = ["#minecraft:stone_ore_replaceables", "#minecraft:deepslate_ore_replaceables", "minecraft:calcite",
+        "minecraft:dripstone_block"] + [block for block, _ in HOSTS.values() if block.startswith("create:")]
 REPLACEABLE = {
-    "rock": ["#minecraft:stone_ore_replaceables", "#minecraft:deepslate_ore_replaceables"],
-    "ground": ["#minecraft:stone_ore_replaceables", "#minecraft:deepslate_ore_replaceables", "#minecraft:dirt",
-               "minecraft:gravel", "minecraft:clay", "minecraft:mud"],
+    "rock": ROCK,
+    "ground": ROCK + ["#minecraft:dirt", "minecraft:gravel", "minecraft:clay", "minecraft:mud"],
 }
 
 # name: shape, host, [(ore, share of the body, style)], radius, thickness, height,
 #       where (BIOMES key), y range of the centre, one per N chunks, what it replaces.
 # host   a block the whole body is turned into, or None to leave the existing rock in place so
-#        the ore sits directly in stone / deepslate (using each ore's deepslate version there).
+#        the ore sits directly in whatever is there (stone, deepslate, granite, a Create stone...).
 #        A host ending in _ore means the whole body is that ore (bog iron, REE clay).
 # styles disseminated (scattered grains) / pockets (masses) / seams (layers) / top (upper part).
 DEPOSITS = {
@@ -116,8 +144,8 @@ DEPOSITS = {
                        "hydrothermal", (-32, 40), 14, "rock"),
     "mercury_lens": ("bed", None, [("cinnabar", 0.25, "pockets")], (5, 8), (2, 4), None,
                      "hydrothermal", (0, 72), 14, "rock"),
-    # --- porphyry copper: a big low-grade stock, enriched near the top ---
-    "porphyry_stock": ("plug", None,
+    # --- porphyry copper: a big low-grade stock of andesite, enriched near the top ---
+    "porphyry_stock": ("plug", "minecraft:andesite",
                        [("chalcopyrite", 0.18, "pockets"), ("molybdenite", 0.04, "pockets"),
                         ("bornite", 0.04, "disseminated"), ("chalcocite", 0.07, "top"), ("covellite", 0.02, "top")],
                        (7, 11), None, (24, 40), "porphyry", (0, 70), 8, "rock"),
@@ -150,9 +178,9 @@ DEPOSITS = {
                        (11, 15), (3, 5), (14, 24), "pegmatite", (-16, 48), 16, "rock"),
     "tin_vein": ("vein", None, [("cassiterite", 0.36, "pockets"), ("wolframite", 0.16, "pockets")],
                  (10, 15), (2, 3), (12, 24), "pegmatite", (-16, 56), 9, "rock"),
-    "silver_vein": ("vein", None, [("argentite", 0.38, "pockets"), ("native_silver", 0.16, "pockets")],
+    "silver_vein": ("vein", "minecraft:calcite", [("argentite", 0.38, "pockets"), ("native_silver", 0.16, "pockets")],
                     (10, 15), (1, 2), (14, 26), "hydrothermal", (-32, 64), 12, "rock"),
-    "cobalt_vein": ("vein", None, [("cobaltite", 0.45, "pockets")], (8, 12), (1, 2), (12, 20),
+    "cobalt_vein": ("vein", "minecraft:calcite", [("cobaltite", 0.45, "pockets")], (8, 12), (1, 2), (12, 20),
                     "hydrothermal", (-32, 32), 20, "rock"),
 }
 
@@ -169,26 +197,16 @@ REMOVED = ["minecraft:ore_iron_upper", "minecraft:ore_iron_middle", "minecraft:o
 
 DISPLAY = {"bastnasite": "Bastnäsite", "ion_adsorption_clay": "Ion-Adsorption Clay"}
 
-# Rock blocks earlier versions generated; their files are removed if still lying around.
-RETIRED = ["limestone", "gossan", "porphyry", "greisen", "pegmatite", "vein_quartz"] + [
-    f"deepslate_{name}_ore" for name in ("smithsonite", "chalcocite", "covellite", "malachite", "azurite",
-                                         "cuprite", "hemimorphite")]
-
-
 def write(path, obj):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(obj, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
 def tag(path, values):
-    write(path, {"replace": False, "values": sorted(values)})
-
-
-def ore_blocks(name):
-    """[(block name, vanilla block it is drawn over or None)] for one mineral."""
-    if name not in OVERLAY:
-        return [(f"{name}_ore", None)]
-    return [(("deepslate_" if base == "deepslate" else "") + f"{name}_ore", base) for base in OVERLAY[name][0]]
+    # Blocks from another mod are optional entries, so the tag still loads without that mod.
+    write(path, {"replace": False,
+                 "values": [v if v.split(":")[0].lstrip("#") in ("minecraft", "fundamentals", "c")
+                            else {"id": v, "required": False} for v in sorted(values)]})
 
 
 # What one ore block drops by grade, until raw mineral items exist: (count, chance).
@@ -201,36 +219,41 @@ def drop_self(name, conditions=()):
             "conditions": [{"condition": "minecraft:survives_explosion"}, *conditions]}
 
 
-def model(texture, base):
-    if not base:
-        return {"parent": "minecraft:block/cube_all", "textures": {"all": f"fundamentals:block/{texture}"}}
+def cube(texture):
+    return {"parent": "minecraft:block/cube_all", "textures": {"all": texture}}
 
-    # The ore is a transparent layer over the game's own texture for the rock it sits in.
-    def faces(tex):
-        return {side: {"texture": tex, "cullface": side} for side in ("down", "up", "north", "south", "west", "east")}
+
+def overlay(texture):
+    """A cube showing only the mineral; the host rock's model is drawn underneath it."""
+    faces = {side: {"texture": "#ore", "cullface": side} for side in ("down", "up", "north", "south", "west", "east")}
     return {"parent": "minecraft:block/block", "render_type": "minecraft:cutout",
-            "textures": {"particle": f"minecraft:block/{base}", "base": f"minecraft:block/{base}",
-                         "overlay": f"fundamentals:block/{texture}"},
-            "elements": [{"from": [0, 0, 0], "to": [16, 16, 16], "faces": faces("#base")},
-                         {"from": [0, 0, 0], "to": [16, 16, 16], "faces": faces("#overlay")}]}
+            "textures": {"particle": texture, "ore": texture},
+            "elements": [{"from": [0, 0, 0], "to": [16, 16, 16], "faces": faces}]}
 
 
 def rock_files(name, display, lang):
     write(ASSETS / f"blockstates/{name}.json", {"variants": {"": {"model": f"fundamentals:block/{name}"}}})
-    write(ASSETS / f"models/block/{name}.json", model(name, None))
+    write(ASSETS / f"models/block/{name}.json", cube(f"fundamentals:block/{name}"))
     write(ASSETS / f"models/item/{name}.json", {"parent": f"fundamentals:block/{name}"})
     lang[f"block.fundamentals.{name}"] = display
     write(DATA / f"loot_table/blocks/{name}.json", {"type": "minecraft:block", "pools": [drop_self(name)]})
 
 
-def ore_files(name, display, lang, texture, base):
-    """One ore block: a grade property (core / edge / trace), several textures per grade so a
-    large body does not visibly tile, and richer drops from richer ore."""
-    variants, pools = {}, []
+def ore_files(mineral, display, lang):
+    """One ore block. Its blockstate is assembled from parts: the host rock's cube (by `host`),
+    then the mineral on top (by `grade`, several variants so a large body does not tile).
+    Richer ore drops more."""
+    name, whole = f"{mineral}_ore", mineral in WHOLE
+    parts, pools = [], []
+    if not whole:
+        parts += [{"when": {"host": host}, "apply": {"model": f"fundamentals:block/host/{host}"}} for host in HOSTS]
     for grade in GRADES:
-        variants[f"grade={grade}"] = [{"model": f"fundamentals:block/{name}_{grade}_{v}"} for v in range(VARIANTS)]
+        models = []
         for v in range(VARIANTS):
-            write(ASSETS / f"models/block/{name}_{grade}_{v}.json", model(f"{texture}_{grade}_{v}", base))
+            texture = f"fundamentals:block/{name}_{grade}_{v}"
+            write(ASSETS / f"models/block/ore/{name}_{grade}_{v}.json", cube(texture) if whole else overlay(texture))
+            models.append({"model": f"fundamentals:block/ore/{name}_{grade}_{v}"})
+        parts.append({"when": {"grade": grade}, "apply": models})
         count, chance = DROPS[grade]
         conditions = [{"condition": "minecraft:block_state_property", "block": f"fundamentals:{name}",
                        "properties": {"grade": grade}}]
@@ -240,14 +263,25 @@ def ore_files(name, display, lang, texture, base):
         if count > 1:
             pool["entries"][0]["functions"] = [{"function": "minecraft:set_count", "count": count}]
         pools.append(pool)
-    write(ASSETS / f"blockstates/{name}.json", {"variants": variants})
-    write(ASSETS / f"models/item/{name}.json", {"parent": f"fundamentals:block/{name}_edge_0"})
+    write(ASSETS / f"blockstates/{name}.json", {"multipart": parts})
+    # In the hand it is shown as it looks in plain stone.
+    item = cube(f"fundamentals:block/{name}_edge_0") if whole else {
+        "parent": "minecraft:block/block",
+        "textures": {"particle": "minecraft:block/stone", "base": "minecraft:block/stone",
+                     "ore": f"fundamentals:block/{name}_edge_0"},
+        "elements": [{"from": [0, 0, 0], "to": [16, 16, 16],
+                      "faces": {side: {"texture": tex} for side in ("down", "up", "north", "south", "west", "east")}}
+                     for tex in ("#base", "#ore")]}
+    write(ASSETS / f"models/item/{name}.json", item)
     lang[f"block.fundamentals.{name}"] = display
     write(DATA / f"loot_table/blocks/{name}.json", {"type": "minecraft:block", "pools": pools})
 
 
-def state(block):
-    return {"Name": block if ":" in block else f"fundamentals:{block}"}
+def state(block, **properties):
+    out = {"Name": block if ":" in block else f"fundamentals:{block}"}
+    if properties:
+        out["Properties"] = properties
+    return out
 
 
 def placed(feature, per_chunk, y_min, y_max):
@@ -272,31 +306,34 @@ def main():
     # Only the worldgen folders are wholly ours; everything else is shared and just overwritten.
     for stale in (DATA / "worldgen", DATA / "neoforge", DATA / "tags/worldgen"):
         shutil.rmtree(stale, ignore_errors=True)
+    # Blocks and models from earlier layouts; everything current is rewritten below.
     for folder in (ASSETS / "blockstates", ASSETS / "models/block", ASSETS / "models/item", DATA / "loot_table/blocks"):
-        for name in RETIRED:
-            (folder / f"{name}.json").unlink(missing_ok=True)
-    for old in (ASSETS / "models/block").glob("*_ore*.json"):  # ore models are all regenerated below
-        old.unlink()
+        for old in folder.glob("*.json"):
+            if old.stem not in ROCKS and not (old.stem.endswith("_ore") and old.stem[:-4] in ORES):
+                old.unlink()
+    shutil.rmtree(ASSETS / "models/block/ore", ignore_errors=True)
 
     lang_path = ASSETS / "lang/en_us.json"
     lang = {k: v for k, v in json.loads(lang_path.read_text(encoding="utf-8")).items()
             if not k.startswith("block.fundamentals.")}
     lang["itemGroup.fundamentals.minerals"] = "Fundamentals: Minerals"
 
+    for host, (_, texture) in HOSTS.items():
+        write(ASSETS / f"models/block/host/{host}.json", cube(texture))
+
     blocks, by_tool, by_tier, by_commodity = [], {}, {}, {}
     for name, tool in ROCKS.items():
         rock_files(name, name.replace("_", " ").title(), lang)
-        blocks.append({"name": name, "soft": tool == "shovel", "overlay": False})
+        blocks.append({"name": name, "soft": tool == "shovel"})
         by_tool.setdefault(tool, []).append(f"fundamentals:{name}")
     for name, (commodity, tool, tier) in ORES.items():
-        display = DISPLAY.get(name, name.replace("_", " ").title())
-        for block, base in ore_blocks(name):
-            ore_files(block, ("Deepslate " if base == "deepslate" else "") + display, lang, f"{name}_ore", base)
-            blocks.append({"name": block, "soft": tool == "shovel", "overlay": base is not None, "mineral": name})
-            by_tool.setdefault(tool, []).append(f"fundamentals:{block}")
-            if tier:
-                by_tier.setdefault(tier, []).append(f"fundamentals:{block}")
-            by_commodity.setdefault(commodity, []).append(f"fundamentals:{block}")
+        block = f"fundamentals:{name}_ore"
+        ore_files(name, DISPLAY.get(name, name.replace("_", " ").title()), lang)
+        blocks.append({"name": f"{name}_ore", "soft": tool == "shovel", "mineral": name})
+        by_tool.setdefault(tool, []).append(block)
+        if tier:
+            by_tier.setdefault(tier, []).append(block)
+        by_commodity.setdefault(commodity, []).append(block)
     write(lang_path, dict(sorted(lang.items())))
 
     for tool, names in by_tool.items():
@@ -312,12 +349,7 @@ def main():
 
     by_biomes = {}
     for name, (shape, host, ores, radius, thickness, height, where, y, chunks, replaces) in DEPOSITS.items():
-        entries = []
-        for ore, share, style in ores:
-            entry = {"state": state(f"{ore}_ore"), "fraction": share, "style": style}
-            if "deepslate" in OVERLAY.get(ore, ((),))[0]:
-                entry["deepslate_state"] = state(f"deepslate_{ore}_ore")
-            entries.append(entry)
+        entries = [{"state": state(f"{ore}_ore"), "fraction": share, "style": style} for ore, share, style in ores]
         config = {"shape": shape, "ores": entries,
                   "radius": {"min": radius[0], "max": radius[1]},
                   "thickness": {"min": (thickness or (1, 1))[0], "max": (thickness or (1, 1))[1]},
@@ -333,7 +365,7 @@ def main():
         write(DATA / f"worldgen/configured_feature/placer_{name}.json", {
             "type": "minecraft:ore",
             "config": {"discard_chance_on_air_exposure": 0.0, "size": size,
-                       "targets": [{"state": state(f"{name}_ore"),
+                       "targets": [{"state": state(f"{name}_ore", grade="edge", host="sand"),
                                     "target": {"predicate_type": "minecraft:block_match", "block": "minecraft:sand"}}]}})
         write(DATA / f"worldgen/placed_feature/placer_{name}.json",
               placed(f"fundamentals:placer_{name}", per_chunk, y_min, y_max))
@@ -353,7 +385,9 @@ def main():
     # worldgen.OreSpawns applies the same add/remove list through the Fabric biome API.
     # The same file lists the blocks registry.OreBlocks registers, so a block exists exactly
     # when its models, loot, tags and spawn rules do.
-    write(ROOT / "fundamentals_ores.json", {"blocks": blocks, "add": spawns, "remove": REMOVED})
+    write(ROOT / "fundamentals_ores.json", {
+        "blocks": blocks, "hosts": {host: block for host, (block, _) in HOSTS.items()},
+        "add": spawns, "remove": REMOVED})
     print(f"wrote {len(blocks)} blocks ({len(ORES)} minerals, {len(ROCKS)} rocks), "
           f"{len(DEPOSITS)} deposit types, {len(PLACERS)} placers")
 

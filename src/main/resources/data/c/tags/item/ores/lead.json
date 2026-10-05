@@ -1,7 +1,6 @@
 {
   "replace": false,
   "values": [
-    "fundamentals:deepslate_galena_ore",
     "fundamentals:galena_ore"
   ]
 }
