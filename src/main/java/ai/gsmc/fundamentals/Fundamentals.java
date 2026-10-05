@@ -1,5 +1,6 @@
 package ai.gsmc.fundamentals;
 
+import ai.gsmc.fundamentals.client.GrindingAnimation;
 import ai.gsmc.fundamentals.ironworking.IronWorking;
 import ai.gsmc.fundamentals.registry.FundamentalsContent;
 import ai.gsmc.fundamentals.registry.HandTools;
@@ -10,7 +11,9 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import org.slf4j.Logger;
@@ -43,6 +46,9 @@ public class Fundamentals {
             event.register(Registries.FEATURE, helper -> helper.register(DEPOSIT, DepositFeature.INSTANCE));
             event.register(Registries.CREATIVE_MODE_TAB, helper -> helper.register(MINERALS_TAB, mineralsTab()));
         });
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            GrindingAnimation.register();
+        }
     }
 
     private static CreativeModeTab mineralsTab() {

@@ -12,7 +12,8 @@ import java.util.function.BiConsumer;
  * hand what Create's millstone grinds by power: grain to flour, and coloured minerals to
  * pigment, the way painters' workshops did (malachite green, azurite blue, vermilion from
  * cinnabar, the ochres from iron minerals). Its recipes are plain shapeless ones in
- * {@code data/fundamentals/recipe/grinding/}.
+ * {@code data/fundamentals/recipe/grinding/}, and {@link MortarItem} also performs them in the
+ * hands.
  */
 public final class HandTools {
 
@@ -28,6 +29,6 @@ public final class HandTools {
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
         registry.accept(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "mortar_and_pestle"),
-                mortarAndPestle = new HandToolItem(new Item.Properties().durability(128)));
+                mortarAndPestle = new MortarItem(new Item.Properties().durability(128)));
     }
 }

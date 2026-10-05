@@ -354,7 +354,10 @@ features in worldgen JSON — for now this table is the spec both sides build to
     grinds by hand what Create's millstone grinds by power: wheat to Create's wheat flour, bone
     to bone meal, cane to sugar, and coloured minerals to dye — malachite green, azurite blue,
     cinnabar and hematite red, goethite yellow, pyrolusite black. Recipes are shapeless JSON in
-    `data/fundamentals/recipe/grinding/`; a game test covers it. **For Laptop B:** when dust
+    `data/fundamentals/recipe/grinding/`; a game test covers it. It also grinds **in the hands**
+    (`MortarItem`): mortar in one hand, material in the other, hold use for two seconds. That
+    runs the same recipes, so new grinding JSON works both ways. The first-person motion
+    (`client.GrindingAnimation`) has not been seen in a client yet. **For Laptop B:** when dust
     items exist, hand-grinding ore to dust belongs here too.
   - **Deep iron veins:** vanilla's hardcoded giant iron vein now places magnetite ore, with core
     grade where vanilla put raw iron blocks (`worldgen.MagnetiteVeins` + two mixins). No vanilla

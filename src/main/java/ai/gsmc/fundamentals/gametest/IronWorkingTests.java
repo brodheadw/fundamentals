@@ -89,6 +89,26 @@ public class IronWorkingTests {
     }
 
     @GameTest(template = "empty")
+    public void grindingInTheHandsUsesTheOtherHandsMaterial(GameTestHelper helper) {
+        Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+        Item malachite = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "malachite_ore"));
+        ItemStack mortar = new ItemStack(HandTools.mortarAndPestle());
+        player.setItemInHand(InteractionHand.MAIN_HAND, mortar);
+
+        helper.assertTrue(!mortar.use(helper.getLevel(), player, InteractionHand.MAIN_HAND).getResult().consumesAction(),
+                "with nothing to grind the mortar should do nothing");
+        player.setItemInHand(InteractionHand.OFF_HAND, new ItemStack(malachite, 3));
+        helper.assertTrue(mortar.use(helper.getLevel(), player, InteractionHand.MAIN_HAND).getResult().consumesAction()
+                        && player.isUsingItem(), "with malachite in the other hand it should start grinding");
+
+        mortar.finishUsingItem(helper.getLevel(), player);
+        helper.assertTrue(player.getOffhandItem().getCount() == 2, "one malachite should be used up");
+        helper.assertTrue(player.getInventory().countItem(Items.GREEN_DYE) == 2, "two green dye should land in the inventory");
+        helper.assertTrue(mortar.getDamageValue() == 1, "the mortar should wear by one use");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
     public void mortarGrindsPigmentAndFlour(GameTestHelper helper) {
         var recipes = helper.getLevel().getRecipeManager();
         Item malachite = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "malachite_ore"));
