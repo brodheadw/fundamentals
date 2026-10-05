@@ -1,0 +1,156 @@
+package ai.gsmc.fundamentals.ironworking;
+
+import com.mojang.serialization.MapCodec;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.RenderShape;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.phys.BlockHitResult;
+
+/**
+ * A bloomery: the clay shaft furnace that made iron from antiquity through the Middle Ages. It
+ * never gets hot enough to melt iron, so it does not smelt — charcoal reduces the ore to a solid,
+ * spongy <em>bloom</em> of iron tangled with slag, which then has to be hammered into wrought iron.
+ *
+ * <p>Worked by hand, with no GUI: put in iron ore and at least as much charcoal, light it with
+ * flint and steel, wait, then take out the blooms and slag with an empty hand.
+ */
+public class BloomeryBlock extends BaseEntityBlock {
+
+    public static final MapCodec<BloomeryBlock> CODEC = simpleCodec(BloomeryBlock::new);
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final BooleanProperty LIT = BlockStateProperties.LIT;
+
+    /** Iron ores a bloomery can reduce: the oxides and hydroxides, as an item tag. */
+    public static final TagKey<Item> IRON_ORES = ItemTags.create(
+            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("c", "ores/iron"));
+
+    public BloomeryBlock(Properties properties) {
+        super(properties);
+        registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(LIT, false));
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return CODEC;
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING, LIT);
+    }
+
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
+    }
+
+    @Override
+    protected RenderShape getRenderShape(BlockState state) {
+        return RenderShape.MODEL;
+    }
+
+    @Override
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new BloomeryBlockEntity(pos, state);
+    }
+
+    @Override
+    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        return level.isClientSide || !state.getValue(LIT) ? null
+                : createTickerHelper(type, IronWorking.bloomeryEntity(), BloomeryBlockEntity::tick);
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos,
+                                              Player player, InteractionHand hand, BlockHitResult hit) {
+        if (!(level.getBlockEntity(pos) instanceof BloomeryBlockEntity bloomery)) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+        boolean used;
+        if (stack.is(IRON_ORES)) {
+            used = bloomery.addOre(stack);
+        } else if (stack.is(Items.CHARCOAL)) {
+            // Charcoal only: mineral coal's sulfur makes iron brittle, which is why smiths avoided it.
+            used = bloomery.addCharcoal();
+        } else if (stack.is(Items.FLINT_AND_STEEL)) {
+            used = bloomery.ignite();
+            if (used && !level.isClientSide) {
+                level.playSound(null, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
+                stack.hurtAndBreak(1, player, net.minecraft.world.entity.LivingEntity.getSlotForHand(hand));
+            }
+            return used ? ItemInteractionResult.sidedSuccess(level.isClientSide)
+                    : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        } else {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+        if (!used) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
+        if (!level.isClientSide) {
+            stack.consume(1, player);
+            level.playSound(null, pos, SoundEvents.GRAVEL_PLACE, SoundSource.BLOCKS, 0.8F, 0.9F);
+        }
+        return ItemInteractionResult.sidedSuccess(level.isClientSide);
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player,
+                                               BlockHitResult hit) {
+        if (level.getBlockEntity(pos) instanceof BloomeryBlockEntity bloomery && bloomery.hasProducts()) {
+            if (!level.isClientSide) {
+                bloomery.takeProducts(pos.relative(state.getValue(FACING)));
+            }
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
+        return InteractionResult.PASS;
+    }
+
+    @Override
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean moved) {
+        if (!state.is(newState.getBlock()) && level.getBlockEntity(pos) instanceof BloomeryBlockEntity bloomery) {
+            bloomery.dropContents();
+        }
+        super.onRemove(state, level, pos, newState, moved);
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (!state.getValue(LIT)) {
+            return;
+        }
+        double x = pos.getX() + 0.5, y = pos.getY() + 1.0, z = pos.getZ() + 0.5;
+        level.addParticle(ParticleTypes.LARGE_SMOKE, x + (random.nextDouble() - 0.5) * 0.3, y, z + (random.nextDouble() - 0.5) * 0.3, 0, 0.04, 0);
+        if (random.nextInt(3) == 0) {
+            level.addParticle(ParticleTypes.FLAME, x, y - 0.1, z, 0, 0.02, 0);
+        }
+        if (random.nextInt(12) == 0) {
+            level.playLocalSound(x, y, z, SoundEvents.BLASTFURNACE_FIRE_CRACKLE, SoundSource.BLOCKS, 0.8F, 1.0F, false);
+        }
+    }
+}

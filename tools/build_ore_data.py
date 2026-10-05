@@ -196,6 +196,9 @@ PLACERS = {
 # Vanilla gold and copper ore stay — they are native gold and native copper.
 REMOVED = ["minecraft:ore_iron_upper", "minecraft:ore_iron_middle", "minecraft:ore_iron_small"]
 
+# Blocks from elsewhere in the mod that share the mining-tool tags this script writes.
+OTHER_MINEABLE = {"pickaxe": ["fundamentals:bloomery"]}
+
 DISPLAY = {"bastnasite": "Bastnäsite", "ion_adsorption_clay": "Ion-Adsorption Clay"}
 
 def write(path, obj):
@@ -296,7 +299,9 @@ def placed(feature, per_chunk, y_min, y_max):
 def main():
     textures = {p.stem for p in (ASSETS / "textures/block").glob("*.png")}
     expected = {f"{name}_ore_{g}_{v}" for name in ORES for g in GRADES for v in range(VARIANTS)} | set(ROCKS)
-    assert textures == expected, f"textures and block tables disagree: {sorted(textures ^ expected)}"
+    stale = {name for name in textures if "_ore_" in name} - expected
+    assert not (expected - textures) and not stale, \
+        f"textures and block tables disagree: missing {sorted(expected - textures)}, stale {sorted(stale)}"
     generated = {ore for _, _, ores, *_ in DEPOSITS.values() for ore, _, _ in ores} | set(PLACERS) \
         | {row[1][:-4] for row in DEPOSITS.values() if row[1] and row[1].endswith("_ore")}
     assert generated == set(ORES), f"ores that never generate, or unknown ores: {sorted(generated ^ set(ORES))}"
@@ -304,17 +309,11 @@ def main():
     # Only the worldgen folders are wholly ours; everything else is shared and just overwritten.
     for stale in (DATA / "worldgen", DATA / "neoforge", DATA / "tags/worldgen"):
         shutil.rmtree(stale, ignore_errors=True)
-    # Blocks and models from earlier layouts; everything current is rewritten below.
-    for folder in (ASSETS / "blockstates", ASSETS / "models/block", ASSETS / "models/item", DATA / "loot_table/blocks"):
-        for old in folder.glob("*.json"):
-            if old.stem not in ROCKS and not (old.stem.endswith("_ore") and old.stem[:-4] in ORES):
-                old.unlink()
     shutil.rmtree(ASSETS / "models/block/ore", ignore_errors=True)
 
     lang_path = ASSETS / "lang/en_us.json"
-    lang = {k: v for k, v in json.loads(lang_path.read_text(encoding="utf-8")).items()
-            if not k.startswith("block.fundamentals.")}
-    lang["itemGroup.fundamentals.minerals"] = "Fundamentals: Minerals"
+    lang = json.loads(lang_path.read_text(encoding="utf-8"))  # other entries are kept as they are
+    lang["itemGroup.fundamentals.minerals"] = "Fundamentals"
 
     for host, (_, texture) in HOSTS.items():
         write(ASSETS / f"models/block/host/{host}.json", cube(texture))
@@ -335,7 +334,7 @@ def main():
     write(lang_path, dict(sorted(lang.items())))
 
     for tool, names in by_tool.items():
-        tag(MC_TAGS / f"mineable/{tool}.json", names)
+        tag(MC_TAGS / f"mineable/{tool}.json", names + OTHER_MINEABLE.get(tool, []))
     for tier, names in by_tier.items():
         tag(MC_TAGS / f"needs_{tier}_tool.json", names)
     for kind in ("block", "item"):

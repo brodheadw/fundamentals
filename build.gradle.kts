@@ -42,6 +42,8 @@ loom {
     runConfigs.all {
         ideConfigGenerated(stonecutter.current.isActive)
         runDir = "../../run"
+        // Makes `/test runall` available in dev runs, for the game tests in .gametest.
+        vmArg("-Dneoforge.enabledGameTestNamespaces=${mod.id}")
     }
 }
 

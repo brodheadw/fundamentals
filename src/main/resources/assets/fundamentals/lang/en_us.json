@@ -3,6 +3,7 @@
   "block.fundamentals.azurite_ore": "Azurite",
   "block.fundamentals.bastnasite_ore": "Bastnäsite",
   "block.fundamentals.bauxite_ore": "Bauxite",
+  "block.fundamentals.bloomery": "Bloomery",
   "block.fundamentals.bornite_ore": "Bornite",
   "block.fundamentals.braggite_ore": "Braggite",
   "block.fundamentals.carbonatite": "Carbonatite",
@@ -42,5 +43,8 @@
   "block.fundamentals.wolframite_ore": "Wolframite",
   "block.fundamentals.xenotime_ore": "Xenotime",
   "fundamentals.title": "Fundamentals",
-  "itemGroup.fundamentals.minerals": "Fundamentals: Minerals"
+  "item.fundamentals.iron_bloom": "Iron Bloom",
+  "item.fundamentals.slag": "Slag",
+  "item.fundamentals.smithing_hammer": "Smithing Hammer",
+  "itemGroup.fundamentals.minerals": "Fundamentals"
 }

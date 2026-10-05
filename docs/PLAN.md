@@ -339,6 +339,16 @@ features in worldgen JSON — for now this table is the spec both sides build to
     platinum minerals and cinnabar, and change whatever is wrong for your chains.
   - **Rulings from the user:** native copper = vanilla copper ore (like gold, §2.4); no deepslate
     variants (§4).
+  - **Iron is makeable again, the medieval way (user ruling 2026-10-05).** `ironworking.*`:
+    a clay **bloomery** block (7 clay balls) takes up to 4 iron ore and as much charcoal — charcoal
+    only, mineral coal is refused — is lit with flint and steel, burns for a minute, and gives one
+    **iron bloom** and one **slag** per ore. Bloom + **smithing hammer** (stone and sticks, wears
+    with use) in a crafting grid gives a vanilla iron ingot. No GUI; it is worked by hand. Any item
+    in `c:ores/iron` works, so hematite, magnetite and goethite all do. Covered by three game
+    tests (`gametest.IronWorkingTests`, run with `/test runall` on a dev server).
+    **For Laptop B:** this is the playable form of your `BLOOMERY` stage; ferrous is your group, so
+    take it over and extend it (roasting, slag uses, the later blast furnace and Create routes) —
+    I built it because the user asked and iron was otherwise unobtainable.
   - **Deep iron veins:** vanilla's hardcoded giant iron vein now places magnetite ore, with core
     grade where vanilla put raw iron blocks (`worldgen.MagnetiteVeins` + two mixins). No vanilla
     iron ore of any kind generates on either loader. The copper vein is unchanged.
@@ -346,9 +356,8 @@ features in worldgen JSON — for now this table is the spec both sides build to
     capped at ~30 blocks across (a feature may only write to the 3x3 chunks around it), so truly
     large bodies would need a structure; (3) frequencies are a first guess (about 290 of our blocks
     per chunk, iron about 66) and vanilla copper is far too common for "native copper"; (4) host
-    rocks have no uses or recipes yet; (5) **no ore has a recipe yet** — with vanilla iron ore
-    gone there is currently no way to make iron, so smelting or Create crushing recipes for at
-    least hematite, the copper minerals and sphalerite are the next thing needed; (6) Create's
+    rocks have no uses or recipes yet; (5) only iron has a route so far — the copper minerals,
+    sphalerite and everything else still have no recipe; (6) Create's
     own zinc ore still generates (about 70 blocks per chunk) and should give way to sphalerite
     once sphalerite yields zinc.
 

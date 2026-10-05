@@ -1,5 +1,6 @@
 package ai.gsmc.fundamentals;
 
+import ai.gsmc.fundamentals.ironworking.IronWorking;
 import ai.gsmc.fundamentals.registry.FundamentalsContent;
 import ai.gsmc.fundamentals.registry.OreBlocks;
 import ai.gsmc.fundamentals.worldgen.DepositFeature;
@@ -28,8 +29,15 @@ public class Fundamentals {
         LOGGER.info("Fundamentals initializing");
         FundamentalsContent.registerAll();
         modBus.addListener(RegisterEvent.class, event -> {
-            event.register(Registries.BLOCK, helper -> OreBlocks.registerBlocks(helper::register));
-            event.register(Registries.ITEM, helper -> OreBlocks.registerItems(helper::register));
+            event.register(Registries.BLOCK, helper -> {
+                OreBlocks.registerBlocks(helper::register);
+                IronWorking.registerBlocks(helper::register);
+            });
+            event.register(Registries.BLOCK_ENTITY_TYPE, helper -> IronWorking.registerBlockEntities(helper::register));
+            event.register(Registries.ITEM, helper -> {
+                OreBlocks.registerItems(helper::register);
+                IronWorking.registerItems(helper::register);
+            });
             event.register(Registries.FEATURE, helper -> helper.register(DEPOSIT, DepositFeature.INSTANCE));
             event.register(Registries.CREATIVE_MODE_TAB, helper -> helper.register(MINERALS_TAB, mineralsTab()));
         });
@@ -38,7 +46,10 @@ public class Fundamentals {
     private static CreativeModeTab mineralsTab() {
         return CreativeModeTab.builder().title(Component.translatable("itemGroup.fundamentals.minerals"))
                 .icon(() -> new ItemStack(OreBlocks.items().iterator().next()))
-                .displayItems((parameters, output) -> OreBlocks.items().forEach(output::accept))
+                .displayItems((parameters, output) -> {
+                    IronWorking.items().forEach(output::accept);
+                    OreBlocks.items().forEach(output::accept);
+                })
                 .build();
     }
 }
