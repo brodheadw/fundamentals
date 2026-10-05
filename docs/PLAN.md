@@ -333,8 +333,10 @@ features in worldgen JSON — for now this table is the spec both sides build to
     platinum minerals and cinnabar, and change whatever is wrong for your chains.
   - **Rulings from the user:** native copper = vanilla copper ore (like gold, §2.4); no deepslate
     variants (§4).
-  - **Known gaps (A will take):** (1) the hardcoded deep ore veins still place
-    `deepslate_iron_ore` and `raw_iron_block` — needs a mixin on `OreVeinifier`; (2) a deposit is
+  - **Deep iron veins:** vanilla's hardcoded giant iron vein now places magnetite ore, with core
+    grade where vanilla put raw iron blocks (`worldgen.MagnetiteVeins` + two mixins). No vanilla
+    iron ore of any kind generates on either loader. The copper vein is unchanged.
+  - **Known gaps (A will take):** (2) a deposit is
     capped at ~30 blocks across (a feature may only write to the 3x3 chunks around it), so truly
     large bodies would need a structure; (3) frequencies are a first guess (about 290 of our blocks
     per chunk, iron about 66) and vanilla copper is far too common for "native copper"; (4) host

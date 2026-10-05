@@ -3,7 +3,10 @@
 	"minVersion": "0.8",
 	"package": "ai.gsmc.fundamentals.mixin",
 	"compatibilityLevel": "JAVA_21",
-	"mixins": [],
+	"mixins": [
+		"OreVeinTypeMixin",
+		"OreVeinifierMixin"
+	],
 	"client": [],
 	"injectors": {
 		"defaultRequire": 1
