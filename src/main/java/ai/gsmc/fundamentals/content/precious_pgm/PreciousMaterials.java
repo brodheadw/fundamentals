@@ -1,10 +1,8 @@
 package ai.gsmc.fundamentals.content.precious_pgm;
 
-import ai.gsmc.fundamentals.material.Material;
 import ai.gsmc.fundamentals.material.MaterialForm;
 import ai.gsmc.fundamentals.material.MaterialProperties;
 import ai.gsmc.fundamentals.material.MaterialRegistry;
-import ai.gsmc.fundamentals.material.MaterialTags;
 import ai.gsmc.fundamentals.material.MaterialType;
 
 /**
@@ -23,6 +21,8 @@ import ai.gsmc.fundamentals.material.MaterialType;
 public final class PreciousMaterials {
 
     public static final String GROUP = "precious_pgm";
+
+    private static final MaterialForm[] MINERAL_FORMS = {MaterialForm.ORE, MaterialForm.RAW};
 
     private PreciousMaterials() {}
 
@@ -100,27 +100,15 @@ public final class PreciousMaterials {
         return f;
     }
 
-    /** An ore mineral: MINERAL type, ORE+RAW forms, tagged under its {@code commodity} (§2.4). */
+    /** An ore mineral (MINERAL, ORE+RAW, tagged under its {@code commodity}); via shared helper. */
     private static void mineral(String id, String display, String formula, String commodity,
                                 MaterialProperties.Builder props) {
-        MaterialRegistry.register(Material.builder(id, MaterialType.MINERAL)
-                .display(display)
-                .formula(formula)
-                .group(GROUP)
-                .properties(props)
-                .forms(MaterialForm.ORE, MaterialForm.RAW)
-                .tags("c:ores/" + commodity, "c:raw_materials/" + commodity)
-                .build());
+        MaterialRegistry.defineMineral(GROUP, id, display, formula, commodity, MINERAL_FORMS, props);
     }
 
+    /** A product material with standard form-derived tags; via shared helper. */
     private static void reg(String id, MaterialType type, String formula, MaterialForm[] forms,
                             MaterialProperties.Builder props) {
-        MaterialRegistry.register(Material.builder(id, type)
-                .formula(formula)
-                .group(GROUP)
-                .properties(props)
-                .forms(forms)
-                .tags(MaterialTags.standard(id, forms))
-                .build());
+        MaterialRegistry.define(GROUP, id, null, type, formula, forms, props);
     }
 }
