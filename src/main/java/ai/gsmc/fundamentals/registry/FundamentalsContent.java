@@ -4,6 +4,7 @@ import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.content.base_metals.BaseMetalMaterials;
 import ai.gsmc.fundamentals.content.ferrous_ferroalloy.FerrousChains;
 import ai.gsmc.fundamentals.content.ferrous_ferroalloy.FerrousMaterials;
+import ai.gsmc.fundamentals.content.industrial_minerals.IndustrialChains;
 import ai.gsmc.fundamentals.content.industrial_minerals.IndustrialMaterials;
 import ai.gsmc.fundamentals.content.precious_pgm.PreciousChains;
 import ai.gsmc.fundamentals.content.precious_pgm.PreciousMaterials;
@@ -32,6 +33,7 @@ public final class FundamentalsContent {
         PreciousMaterials.register();
         PreciousChains.register();
         IndustrialMaterials.register();
+        IndustrialChains.register();
         // LightBatteryTech.register();     // TODO (B)
         // MinorSpecialty.register();       // TODO (B)
 
