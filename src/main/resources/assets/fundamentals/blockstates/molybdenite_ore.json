@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/molybdenite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/molybdenite_ore"
+      },
+      {
+        "model": "fundamentals:block/molybdenite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/molybdenite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/molybdenite_ore_3"
+      }
+    ]
   }
 }

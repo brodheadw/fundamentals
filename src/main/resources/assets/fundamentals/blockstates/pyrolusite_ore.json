@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/pyrolusite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/pyrolusite_ore"
+      },
+      {
+        "model": "fundamentals:block/pyrolusite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/pyrolusite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/pyrolusite_ore_3"
+      }
+    ]
   }
 }

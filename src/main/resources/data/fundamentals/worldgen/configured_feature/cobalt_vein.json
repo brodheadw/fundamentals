@@ -7,7 +7,7 @@
         "state": {
           "Name": "fundamentals:cobaltite_ore"
         },
-        "fraction": 0.6,
+        "fraction": 0.45,
         "style": "pockets",
         "deepslate_state": {
           "Name": "fundamentals:deepslate_cobaltite_ore"

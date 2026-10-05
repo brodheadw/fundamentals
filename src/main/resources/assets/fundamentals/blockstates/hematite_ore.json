@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/hematite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/hematite_ore"
+      },
+      {
+        "model": "fundamentals:block/hematite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/hematite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/hematite_ore_3"
+      }
+    ]
   }
 }

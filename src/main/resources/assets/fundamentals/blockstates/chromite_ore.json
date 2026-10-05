@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/chromite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/chromite_ore"
+      },
+      {
+        "model": "fundamentals:block/chromite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/chromite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/chromite_ore_3"
+      }
+    ]
   }
 }

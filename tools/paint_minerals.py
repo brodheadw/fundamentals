@@ -65,6 +65,14 @@ OVERLAY = {
 }
 CLEAR = (255, 0, 255)  # painted as transparent in an overlay
 
+# Each ore gets several textures and the game picks one per block position, so a wall of one
+# ore does not repeat the same tile.
+VARIANTS = 4
+
+
+def seed(name, variant):
+    return name if variant == 0 else f"{name}#{variant}"
+
 QUARTZ = [(176, 176, 172), (204, 204, 198), (228, 228, 222)]
 ORTHO = [(1, 0), (-1, 0), (0, 1), (0, -1)]
 DIAG = ORTHO + [(1, 1), (-1, 1), (1, -1), (-1, -1)]
@@ -214,8 +222,8 @@ def host_rock(rng, kind):
 
 
 class Canvas:
-    def __init__(self, name, host):
-        self.rng = random.Random(name)
+    def __init__(self, name, host, variant=0):
+        self.rng = random.Random(seed(name, variant))
         self.ore = set()
         self.zone = None  # overlay ores: where the host rock shows, and where ore prefers to sit
         if name not in OVERLAY:
@@ -352,9 +360,9 @@ def vein_path(rng, style):
     return [(x, 8) for x in range(SIZE)]
 
 
-def build(name):
+def build(name, variant=0):
     host, elements = RECIPES[name]
-    c = Canvas(name, host)
+    c = Canvas(name, host, variant)
     rng, pal = c.rng, P.get(name)
     for element in elements:
         kind = element[0]
@@ -456,9 +464,9 @@ def paint_banded(c, cells, pal):
     c.ore |= cells
 
 
-def paint_clay():
+def paint_clay(variant=0):
     """Ion-adsorption clay: weathered granite regolith — no ore grains, the REEs sit on the clay."""
-    rng = random.Random("ion_adsorption_clay")
+    rng = random.Random(seed("ion_adsorption_clay", variant))
     tones = [(150, 84, 52), (172, 102, 62), (190, 122, 76), (204, 142, 92)]
     kaolin = [(222, 196, 164), (236, 220, 196)]
     raw = [[rng.random() for _ in range(SIZE)] for _ in range(SIZE)]
@@ -478,9 +486,9 @@ def paint_clay():
     return img
 
 
-def paint_bauxite():
+def paint_bauxite(variant=0):
     """Bauxite is a rock, not a grain in stone: red-brown laterite studded with pisoliths."""
-    rng = random.Random("bauxite")
+    rng = random.Random(seed("bauxite", variant))
     matrix = [(118, 54, 34), (140, 68, 42), (158, 82, 50), (172, 98, 60)]
     img = Image.new("RGB", (SIZE, SIZE))
     for y in range(SIZE):
@@ -506,9 +514,9 @@ def paint_bauxite():
     return img
 
 
-def paint_goethite():
+def paint_goethite(variant=0):
     """Earthy ochre iron hydroxide with dark glossy botryoidal crusts (bog iron, gossan caps)."""
-    rng = random.Random("goethite")
+    rng = random.Random(seed("goethite", variant))
     tones = [(110, 74, 22), (146, 102, 30), (178, 132, 44), (204, 162, 64)]
     img = Image.new("RGB", (SIZE, SIZE))
     for p, v in field(rng, 1, 1).items():
@@ -521,9 +529,9 @@ def paint_goethite():
     return c.finish()
 
 
-def paint_nickel_laterite():
+def paint_nickel_laterite(variant=0):
     """Tropical weathering profile: rusty limonite cut by apple-green garnierite veinlets."""
-    rng = random.Random("nickel_laterite")
+    rng = random.Random(seed("nickel_laterite", variant))
     tones = [(122, 78, 34), (150, 102, 44), (174, 128, 58), (196, 152, 76)]
     green = [(74, 124, 62), (106, 160, 82), (144, 192, 106)]
     img = Image.new("RGB", (SIZE, SIZE))
@@ -538,11 +546,11 @@ def paint_nickel_laterite():
 
 
 def paint_all():
-    out = {name: build(name) for name in RECIPES}
-    out["ion_adsorption_clay"] = paint_clay()
-    out["bauxite"] = paint_bauxite()
-    out["goethite"] = paint_goethite()
-    out["nickel_laterite"] = paint_nickel_laterite()
+    """name -> [texture per variant]."""
+    whole = {"ion_adsorption_clay": paint_clay, "bauxite": paint_bauxite, "goethite": paint_goethite,
+             "nickel_laterite": paint_nickel_laterite}
+    out = {name: [build(name, v) for v in range(VARIANTS)] for name in RECIPES}
+    out.update({name: [paint(v) for v in range(VARIANTS)] for name, paint in whole.items()})
     return out
 
 
@@ -571,6 +579,7 @@ def vanilla(block):
 
 
 def contact_sheet(textures, path, cols=10, scale=10):
+    textures = {name: variants[0] for name, variants in textures.items()}
     tiles = [(name, img.convert("RGBA")) for name, img in paint_rocks().items()]
     for deep in (False, True):
         for name in SHEET_ORDER:
@@ -601,12 +610,13 @@ if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
     for stale in OUT.glob("*.png"):
         stale.unlink()
-    for name, img in textures.items():
-        img.save(OUT / f"{name}_ore.png")
+    for name, variants in textures.items():
+        for v, img in enumerate(variants):
+            img.save(OUT / (f"{name}_ore.png" if v == 0 else f"{name}_ore_{v}.png"))
     rocks = paint_rocks()
     for name, img in rocks.items():
         img.save(OUT / f"{name}.png")
-    print(f"wrote {len(textures)} ore and {len(rocks)} rock textures to {OUT}")
+    print(f"wrote {len(textures)} ores x {VARIANTS} variants and {len(rocks)} rock textures to {OUT}")
     if len(sys.argv) > 1:
         contact_sheet(textures, sys.argv[1])
         print(f"wrote contact sheet {sys.argv[1]}")

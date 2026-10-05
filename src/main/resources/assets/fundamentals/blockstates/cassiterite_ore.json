@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/cassiterite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/cassiterite_ore"
+      },
+      {
+        "model": "fundamentals:block/cassiterite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/cassiterite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/cassiterite_ore_3"
+      }
+    ]
   }
 }

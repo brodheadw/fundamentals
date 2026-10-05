@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/rutile_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/rutile_ore"
+      },
+      {
+        "model": "fundamentals:block/rutile_ore_1"
+      },
+      {
+        "model": "fundamentals:block/rutile_ore_2"
+      },
+      {
+        "model": "fundamentals:block/rutile_ore_3"
+      }
+    ]
   }
 }

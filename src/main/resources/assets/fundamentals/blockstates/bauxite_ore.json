@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/bauxite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/bauxite_ore"
+      },
+      {
+        "model": "fundamentals:block/bauxite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/bauxite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/bauxite_ore_3"
+      }
+    ]
   }
 }

@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/galena_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/galena_ore"
+      },
+      {
+        "model": "fundamentals:block/galena_ore_1"
+      },
+      {
+        "model": "fundamentals:block/galena_ore_2"
+      },
+      {
+        "model": "fundamentals:block/galena_ore_3"
+      }
+    ]
   }
 }

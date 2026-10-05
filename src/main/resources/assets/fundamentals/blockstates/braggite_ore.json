@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/braggite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/braggite_ore"
+      },
+      {
+        "model": "fundamentals:block/braggite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/braggite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/braggite_ore_3"
+      }
+    ]
   }
 }

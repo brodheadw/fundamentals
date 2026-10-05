@@ -290,9 +290,11 @@ features in worldgen JSON — for now this table is the spec both sides build to
   on both loaders. Verified on headless Fabric and NeoForge servers (2,760 chunks across jungle,
   badlands, mountain, beach, swamp, taiga, desert): all 57 blocks (38 minerals with their deepslate
   twins, 4 host rocks) generate on Fabric; NeoForge showed 52 in the same sample, the absent five
-  being rare or deep ones. Vanilla `iron_ore` no longer generates. **Not yet seen in a client** —
-  the overlay models need the cutout render layer (`FundamentalsClient` on Fabric, `render_type`
-  in the model JSON on NeoForge) and that is untested.
+  being rare or deep ones. Vanilla `iron_ore` no longer generates. **Seen in a Fabric client:**
+  the overlay models render correctly over stone and deepslate (cutout layer set in
+  `FundamentalsClient`). The NeoForge client is untested — it relies on `render_type` in the
+  model JSON. Each ore has four texture variants picked per block position, because a body of
+  one ore visibly tiled with a single texture.
   - **Ore generates as deposits, not blobs.** `worldgen.DepositFeature` places ore in four real
     shapes: `bed` (banded iron, lead-zinc, layered intrusions with chromite seams), `plug`
     (porphyry copper, carbonatite), `vein` (silver, tin, pegmatite) and `blanket` (bauxite and

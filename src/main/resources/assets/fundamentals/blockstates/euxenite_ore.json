@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/euxenite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/euxenite_ore"
+      },
+      {
+        "model": "fundamentals:block/euxenite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/euxenite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/euxenite_ore_3"
+      }
+    ]
   }
 }

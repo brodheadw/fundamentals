@@ -1,7 +1,9 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/carbonatite"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/carbonatite"
+      }
+    ]
   }
 }

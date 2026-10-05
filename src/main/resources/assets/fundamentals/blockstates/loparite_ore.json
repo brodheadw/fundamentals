@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/loparite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/loparite_ore"
+      },
+      {
+        "model": "fundamentals:block/loparite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/loparite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/loparite_ore_3"
+      }
+    ]
   }
 }

@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/xenotime_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/xenotime_ore"
+      },
+      {
+        "model": "fundamentals:block/xenotime_ore_1"
+      },
+      {
+        "model": "fundamentals:block/xenotime_ore_2"
+      },
+      {
+        "model": "fundamentals:block/xenotime_ore_3"
+      }
+    ]
   }
 }

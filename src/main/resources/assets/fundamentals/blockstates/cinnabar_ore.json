@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/cinnabar_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/cinnabar_ore"
+      },
+      {
+        "model": "fundamentals:block/cinnabar_ore_1"
+      },
+      {
+        "model": "fundamentals:block/cinnabar_ore_2"
+      },
+      {
+        "model": "fundamentals:block/cinnabar_ore_3"
+      }
+    ]
   }
 }

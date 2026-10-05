@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/deepslate_magnetite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/deepslate_magnetite_ore"
+      },
+      {
+        "model": "fundamentals:block/deepslate_magnetite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/deepslate_magnetite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/deepslate_magnetite_ore_3"
+      }
+    ]
   }
 }

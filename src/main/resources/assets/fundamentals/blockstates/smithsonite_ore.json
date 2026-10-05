@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/smithsonite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/smithsonite_ore"
+      },
+      {
+        "model": "fundamentals:block/smithsonite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/smithsonite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/smithsonite_ore_3"
+      }
+    ]
   }
 }

@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/bornite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/bornite_ore"
+      },
+      {
+        "model": "fundamentals:block/bornite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/bornite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/bornite_ore_3"
+      }
+    ]
   }
 }

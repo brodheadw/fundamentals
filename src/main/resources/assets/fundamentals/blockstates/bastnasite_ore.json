@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/bastnasite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/bastnasite_ore"
+      },
+      {
+        "model": "fundamentals:block/bastnasite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/bastnasite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/bastnasite_ore_3"
+      }
+    ]
   }
 }

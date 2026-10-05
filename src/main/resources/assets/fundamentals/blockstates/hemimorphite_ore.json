@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/hemimorphite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/hemimorphite_ore"
+      },
+      {
+        "model": "fundamentals:block/hemimorphite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/hemimorphite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/hemimorphite_ore_3"
+      }
+    ]
   }
 }

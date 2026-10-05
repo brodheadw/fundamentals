@@ -17,7 +17,7 @@
         "state": {
           "Name": "fundamentals:hematite_ore"
         },
-        "fraction": 0.85,
+        "fraction": 0.65,
         "style": "pockets",
         "deepslate_state": {
           "Name": "fundamentals:deepslate_hematite_ore"

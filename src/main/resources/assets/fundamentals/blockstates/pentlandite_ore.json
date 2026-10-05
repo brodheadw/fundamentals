@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/pentlandite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/pentlandite_ore"
+      },
+      {
+        "model": "fundamentals:block/pentlandite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/pentlandite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/pentlandite_ore_3"
+      }
+    ]
   }
 }

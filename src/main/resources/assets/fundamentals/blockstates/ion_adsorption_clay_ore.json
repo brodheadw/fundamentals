@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/ion_adsorption_clay_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/ion_adsorption_clay_ore"
+      },
+      {
+        "model": "fundamentals:block/ion_adsorption_clay_ore_1"
+      },
+      {
+        "model": "fundamentals:block/ion_adsorption_clay_ore_2"
+      },
+      {
+        "model": "fundamentals:block/ion_adsorption_clay_ore_3"
+      }
+    ]
   }
 }

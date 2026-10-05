@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/chalcocite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/chalcocite_ore"
+      },
+      {
+        "model": "fundamentals:block/chalcocite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/chalcocite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/chalcocite_ore_3"
+      }
+    ]
   }
 }

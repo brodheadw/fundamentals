@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/scheelite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/scheelite_ore"
+      },
+      {
+        "model": "fundamentals:block/scheelite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/scheelite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/scheelite_ore_3"
+      }
+    ]
   }
 }

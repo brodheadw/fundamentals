@@ -7,7 +7,7 @@
         "state": {
           "Name": "fundamentals:cassiterite_ore"
         },
-        "fraction": 0.5,
+        "fraction": 0.4,
         "style": "pockets",
         "deepslate_state": {
           "Name": "fundamentals:deepslate_cassiterite_ore"
@@ -17,7 +17,7 @@
         "state": {
           "Name": "fundamentals:wolframite_ore"
         },
-        "fraction": 0.22,
+        "fraction": 0.18,
         "style": "pockets",
         "deepslate_state": {
           "Name": "fundamentals:deepslate_wolframite_ore"

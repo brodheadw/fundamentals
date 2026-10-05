@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/malachite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/malachite_ore"
+      },
+      {
+        "model": "fundamentals:block/malachite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/malachite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/malachite_ore_3"
+      }
+    ]
   }
 }

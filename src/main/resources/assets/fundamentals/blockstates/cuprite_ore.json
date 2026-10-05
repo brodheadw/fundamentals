@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/cuprite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/cuprite_ore"
+      },
+      {
+        "model": "fundamentals:block/cuprite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/cuprite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/cuprite_ore_3"
+      }
+    ]
   }
 }

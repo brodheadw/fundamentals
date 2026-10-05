@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/cooperite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/cooperite_ore"
+      },
+      {
+        "model": "fundamentals:block/cooperite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/cooperite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/cooperite_ore_3"
+      }
+    ]
   }
 }

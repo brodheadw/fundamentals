@@ -7,7 +7,7 @@
         "state": {
           "Name": "fundamentals:argentite_ore"
         },
-        "fraction": 0.5,
+        "fraction": 0.38,
         "style": "pockets",
         "deepslate_state": {
           "Name": "fundamentals:deepslate_argentite_ore"
@@ -17,7 +17,7 @@
         "state": {
           "Name": "fundamentals:native_silver_ore"
         },
-        "fraction": 0.22,
+        "fraction": 0.16,
         "style": "pockets",
         "deepslate_state": {
           "Name": "fundamentals:deepslate_native_silver_ore"

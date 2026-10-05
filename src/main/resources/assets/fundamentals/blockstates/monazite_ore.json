@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/monazite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/monazite_ore"
+      },
+      {
+        "model": "fundamentals:block/monazite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/monazite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/monazite_ore_3"
+      }
+    ]
   }
 }

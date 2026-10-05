@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/nickel_laterite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/nickel_laterite_ore"
+      },
+      {
+        "model": "fundamentals:block/nickel_laterite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/nickel_laterite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/nickel_laterite_ore_3"
+      }
+    ]
   }
 }

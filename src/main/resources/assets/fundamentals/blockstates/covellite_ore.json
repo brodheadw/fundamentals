@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/covellite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/covellite_ore"
+      },
+      {
+        "model": "fundamentals:block/covellite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/covellite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/covellite_ore_3"
+      }
+    ]
   }
 }

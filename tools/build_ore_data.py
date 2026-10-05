@@ -17,7 +17,7 @@ import json
 import shutil
 from pathlib import Path
 
-from paint_minerals import OVERLAY, ROCK_BLOCKS
+from paint_minerals import OVERLAY, ROCK_BLOCKS, VARIANTS
 
 ROOT = Path(__file__).resolve().parent.parent / "src/main/resources"
 ASSETS = ROOT / "assets/fundamentals"
@@ -100,9 +100,9 @@ REPLACEABLE = {
 # styles disseminated (scattered grains) / pockets (masses) / seams (layers) / top (upper part).
 DEPOSITS = {
     # --- iron: beds of banded iron formation, common everywhere ---
-    "hematite_bed": ("bed", None, [("magnetite", 0.08, "seams"), ("hematite", 0.85, "pockets")],
+    "hematite_bed": ("bed", None, [("magnetite", 0.08, "seams"), ("hematite", 0.65, "pockets")],
                      (9, 14), (3, 6), None, "anywhere", (0, 96), 12, "rock"),
-    "magnetite_bed": ("bed", None, [("hematite", 0.10, "seams"), ("magnetite", 0.85, "pockets")],
+    "magnetite_bed": ("bed", None, [("hematite", 0.10, "seams"), ("magnetite", 0.65, "pockets")],
                       (8, 12), (3, 5), None, "anywhere", (-56, 8), 20, "rock"),
     "bog_iron": ("blanket", "goethite_ore", [], (6, 9), (1, 2), None, "wetland", (60, 64), 3, "ground"),
     # --- stratabound beds in ordinary rock ---
@@ -148,11 +148,11 @@ DEPOSITS = {
     # --- veins and dykes in mountain country ---
     "pegmatite_dyke": ("vein", "minecraft:granite", [("xenotime", 0.08, "pockets"), ("euxenite", 0.04, "pockets")],
                        (11, 15), (3, 5), (14, 24), "pegmatite", (-16, 48), 16, "rock"),
-    "tin_vein": ("vein", None, [("cassiterite", 0.50, "pockets"), ("wolframite", 0.22, "pockets")],
+    "tin_vein": ("vein", None, [("cassiterite", 0.40, "pockets"), ("wolframite", 0.18, "pockets")],
                  (10, 15), (2, 3), (12, 24), "pegmatite", (-16, 56), 9, "rock"),
-    "silver_vein": ("vein", None, [("argentite", 0.50, "pockets"), ("native_silver", 0.22, "pockets")],
+    "silver_vein": ("vein", None, [("argentite", 0.38, "pockets"), ("native_silver", 0.16, "pockets")],
                     (10, 15), (1, 2), (14, 26), "hydrothermal", (-32, 64), 12, "rock"),
-    "cobalt_vein": ("vein", None, [("cobaltite", 0.60, "pockets")], (8, 12), (1, 2), (12, 20),
+    "cobalt_vein": ("vein", None, [("cobaltite", 0.45, "pockets")], (8, 12), (1, 2), (12, 20),
                     "hydrothermal", (-32, 32), 20, "rock"),
 }
 
@@ -191,22 +191,27 @@ def ore_blocks(name):
     return [(("deepslate_" if base == "deepslate" else "") + f"{name}_ore", base) for base in OVERLAY[name][0]]
 
 
-def block_files(name, display, lang, texture=None, base=None):
+def block_files(name, display, lang, texture=None, base=None, variants=1):
+    """One block. With several variants the game picks a texture per position, which stops a
+    large body of one ore from visibly tiling."""
     texture = texture or name
-    write(ASSETS / f"blockstates/{name}.json", {"variants": {"": {"model": f"fundamentals:block/{name}"}}})
-    if base:
-        # The ore is a transparent layer over the game's own texture for the rock it sits in.
-        def faces(tex):
-            return {side: {"texture": tex, "cullface": side}
-                    for side in ("down", "up", "north", "south", "west", "east")}
-        model = {"parent": "minecraft:block/block", "render_type": "minecraft:cutout",
-                 "textures": {"particle": f"minecraft:block/{base}", "base": f"minecraft:block/{base}",
-                              "overlay": f"fundamentals:block/{texture}"},
-                 "elements": [{"from": [0, 0, 0], "to": [16, 16, 16], "faces": faces("#base")},
-                              {"from": [0, 0, 0], "to": [16, 16, 16], "faces": faces("#overlay")}]}
-    else:
-        model = {"parent": "minecraft:block/cube_all", "textures": {"all": f"fundamentals:block/{texture}"}}
-    write(ASSETS / f"models/block/{name}.json", model)
+    suffixes = [""] + [f"_{v}" for v in range(1, variants)]
+    write(ASSETS / f"blockstates/{name}.json",
+          {"variants": {"": [{"model": f"fundamentals:block/{name}{sfx}"} for sfx in suffixes]}})
+    for sfx in suffixes:
+        if base:
+            # The ore is a transparent layer over the game's own texture for the rock it sits in.
+            def faces(tex):
+                return {side: {"texture": tex, "cullface": side}
+                        for side in ("down", "up", "north", "south", "west", "east")}
+            model = {"parent": "minecraft:block/block", "render_type": "minecraft:cutout",
+                     "textures": {"particle": f"minecraft:block/{base}", "base": f"minecraft:block/{base}",
+                                  "overlay": f"fundamentals:block/{texture}{sfx}"},
+                     "elements": [{"from": [0, 0, 0], "to": [16, 16, 16], "faces": faces("#base")},
+                                  {"from": [0, 0, 0], "to": [16, 16, 16], "faces": faces("#overlay")}]}
+        else:
+            model = {"parent": "minecraft:block/cube_all", "textures": {"all": f"fundamentals:block/{texture}{sfx}"}}
+        write(ASSETS / f"models/block/{name}{sfx}.json", model)
     write(ASSETS / f"models/item/{name}.json", {"parent": f"fundamentals:block/{name}"})
     lang[f"block.fundamentals.{name}"] = display
     write(DATA / f"loot_table/blocks/{name}.json", {
@@ -233,7 +238,7 @@ def placed(feature, per_chunk, y_min, y_max):
 
 def main():
     textures = {p.stem for p in (ASSETS / "textures/block").glob("*.png")}
-    expected = {f"{name}_ore" for name in ORES} | set(ROCKS)
+    expected = {f"{name}_ore" + (f"_{v}" if v else "") for name in ORES for v in range(VARIANTS)} | set(ROCKS)
     assert textures == expected, f"textures and block tables disagree: {sorted(textures ^ expected)}"
     generated = {ore for _, _, ores, *_ in DEPOSITS.values() for ore, _, _ in ores} | set(PLACERS) \
         | {row[1][:-4] for row in DEPOSITS.values() if row[1] and row[1].endswith("_ore")}
@@ -259,7 +264,8 @@ def main():
     for name, (commodity, tool, tier) in ORES.items():
         display = DISPLAY.get(name, name.replace("_", " ").title())
         for block, base in ore_blocks(name):
-            block_files(block, ("Deepslate " if base == "deepslate" else "") + display, lang, f"{name}_ore", base)
+            block_files(block, ("Deepslate " if base == "deepslate" else "") + display, lang, f"{name}_ore", base,
+                        VARIANTS)
             blocks.append({"name": block, "soft": tool == "shovel", "overlay": base is not None, "mineral": name})
             by_tool.setdefault(tool, []).append(f"fundamentals:{block}")
             if tier:

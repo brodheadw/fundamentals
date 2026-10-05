@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/wolframite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/wolframite_ore"
+      },
+      {
+        "model": "fundamentals:block/wolframite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/wolframite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/wolframite_ore_3"
+      }
+    ]
   }
 }

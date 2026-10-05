@@ -1,7 +1,18 @@
 {
   "variants": {
-    "": {
-      "model": "fundamentals:block/argentite_ore"
-    }
+    "": [
+      {
+        "model": "fundamentals:block/argentite_ore"
+      },
+      {
+        "model": "fundamentals:block/argentite_ore_1"
+      },
+      {
+        "model": "fundamentals:block/argentite_ore_2"
+      },
+      {
+        "model": "fundamentals:block/argentite_ore_3"
+      }
+    ]
   }
 }
