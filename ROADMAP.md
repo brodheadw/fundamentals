@@ -39,8 +39,7 @@ Revisit Fabric if Create ships a Fabric build for a version we target.
 
 ## Housekeeping
 
-- [ ] Add a mod icon (`src/main/resources/assets/fundamentals/icon.png`) and re-add the
-      `logoFile` reference in `neoforge.mods.toml`.
+- [x] Add a mod icon (`src/main/resources/assets/fundamentals/icon.png`) and the `logoFile` reference.
 - [ ] Decide on and wire up a publishing pipeline (Modrinth/CurseForge) if releasing.
 - [x] Mirror this multi-version + multi-loader setup in the **wildspell** repos —
       tracking issues filed (see `NOTE-wildspell.md`).

@@ -83,12 +83,12 @@ public class MortarItem extends HandToolItem {
             // Dust of what is being made puffs up from the bowl: green from malachite, white from wheat.
             ItemStack product = grind(level, stack, material);
             Vec3 look = entity.getLookAngle();
-            Vec3 at = entity.getEyePosition().add(look.scale(0.5)).add(0, -0.3, 0);
+            Vec3 at = entity.getEyePosition().add(look.scale(1.1)).add(0, -0.55, 0);
             for (int i = 0; i < 3 && !product.isEmpty(); i++) {
                 level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, product),
                         at.x, at.y, at.z,
-                        (level.random.nextDouble() - 0.5) * 0.12, level.random.nextDouble() * 0.12,
-                        (level.random.nextDouble() - 0.5) * 0.12);
+                        (level.random.nextDouble() - 0.5) * 0.06, level.random.nextDouble() * 0.08,
+                        (level.random.nextDouble() - 0.5) * 0.06);
             }
         } else if (elapsed % 8 == 0) {
             level.playSound(null, entity.blockPosition(), SoundEvents.GRINDSTONE_USE, SoundSource.PLAYERS,

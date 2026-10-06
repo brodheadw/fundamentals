@@ -49,7 +49,7 @@ public class Fundamentals {
             event.register(Registries.CREATIVE_MODE_TAB, helper -> helper.register(MINERALS_TAB, mineralsTab()));
         });
         if (FMLEnvironment.dist == Dist.CLIENT) {
-            GrindingAnimation.register();
+            GrindingAnimation.register(modBus);
         }
     }
 
