@@ -445,6 +445,14 @@ features in worldgen JSON — for now this table is the spec both sides build to
   semiconductors, glass, copper wire and aluminium plates. **Build:** Create, TFMG and the three
   libraries Create bundles are now on the compile classpath (`modCompileOnly`), not just the
   dev runtime. `tools/paint_power.py` paints it.
+- **2026-10-06 [A]** Branch `a/solar-panel` (PR into main): **solar panel**, the first block of ours on
+  TFMG's electrical network. Two parts by user ruling: a steel **Panel Rack** block, and a
+  **Photovoltaic Panel** item (TFMG's P and N semiconductors, glass, copper wire, aluminium plates)
+  that is mounted on a placed rack to make the **Solar Panel** block; breaking it gives both back.
+  `SolarPanelBlockEntity` extends TFMG's `ElectricBlockEntity` and reports 120 V and up to 200 W by
+  sky light (guesses against TFMG's generator: 200 V, 8 kW). The panel sits tilted 22.5° and faces
+  the way the rack was placed; facing does not change output yet. **Build:** Create, TFMG and the
+  three libraries Create bundles are on the compile classpath (`modCompileOnly`). `tools/paint_power.py`.
 
 ---
 

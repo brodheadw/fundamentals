@@ -1,10 +1,8 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "particle": "fundamentals:block/solar_panel_frame",
-    "rack": "fundamentals:block/panel_rack",
-    "top": "fundamentals:block/solar_panel_top",
-    "frame": "fundamentals:block/solar_panel_frame"
+    "particle": "fundamentals:block/panel_rack",
+    "rack": "fundamentals:block/panel_rack"
   },
   "elements": [
     {
@@ -269,83 +267,6 @@
         },
         "down": {
           "texture": "#rack"
-        }
-      },
-      "rotation": {
-        "angle": 22.5,
-        "axis": "x",
-        "origin": [
-          8,
-          6,
-          8
-        ]
-      }
-    },
-    {
-      "from": [
-        0,
-        5.5,
-        -0.5
-      ],
-      "to": [
-        16,
-        6.5,
-        16.5
-      ],
-      "faces": {
-        "up": {
-          "uv": [
-            0,
-            0,
-            16,
-            16
-          ],
-          "texture": "#top"
-        },
-        "down": {
-          "uv": [
-            0,
-            0,
-            16,
-            16
-          ],
-          "texture": "#frame"
-        },
-        "north": {
-          "uv": [
-            0,
-            0,
-            16,
-            1
-          ],
-          "texture": "#frame"
-        },
-        "south": {
-          "uv": [
-            0,
-            0,
-            16,
-            1
-          ],
-          "texture": "#frame"
-        },
-        "west": {
-          "uv": [
-            0,
-            0,
-            16,
-            1
-          ],
-          "texture": "#frame"
-        },
-        "east": {
-          "uv": [
-            0,
-            0,
-            16,
-            1
-          ],
-          "texture": "#frame"
         }
       },
       "rotation": {
