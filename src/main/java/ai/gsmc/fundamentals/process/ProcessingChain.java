@@ -6,54 +6,27 @@ import ai.gsmc.fundamentals.material.MaterialRegistry;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
-/**
- * An ordered sequence of {@link ProcessingStep}s taking a commodity from its ore to a final
- * product — the in-code form of a chain's {@code stages[]} in {@code data/ores.json}.
- *
- * <p>Build with {@link #builder}. Call {@link #validate} after registration to catch references
- * to materials/forms that don't exist (the chain model is only as correct as the materials it
- * points at).
- */
-public final class ProcessingChain {
+public record ProcessingChain(String id, String commodity, String group, List<ProcessingStep> steps) {
 
-    private final String id;          // e.g. "iron", "steel"
-    private final String commodity;   // material id of the final product
-    private final String group;       // owning commodity group slug (PLAN §3)
-    private final List<ProcessingStep> steps;
-
-    private ProcessingChain(Builder b) {
-        this.id = b.id;
-        this.commodity = b.commodity;
-        this.group = b.group;
-        this.steps = List.copyOf(b.steps);
+    public ProcessingChain {
+        steps = List.copyOf(steps);
     }
 
-    public String id() { return id; }
-    public String commodity() { return commodity; }
-    public String group() { return group; }
-    public List<ProcessingStep> steps() { return steps; }
-
-    /** Highest tier any step in this chain requires (its gating tier). */
     public Tier maxTier() {
-        Tier max = Tier.T0;
-        for (ProcessingStep s : steps) {
-            if (s.tier().ordinal() > max.ordinal()) max = s.tier();
-        }
-        return max;
+        return steps.stream().map(ProcessingStep::tier).max(Comparator.naturalOrder()).orElse(Tier.T0);
     }
 
-    /** Returns a list of human-readable problems; empty = valid. */
     public List<String> validate() {
-        List<String> errors = new ArrayList<>();
         List<MaterialRef> refs = new ArrayList<>();
         for (ProcessingStep step : steps) {
-            if (step.stage() == null) errors.add(id + ": step has null stage");
             refs.add(step.input());
             refs.add(step.output());
             refs.addAll(step.byproducts());
         }
+        List<String> errors = new ArrayList<>();
         for (MaterialRef ref : refs) {
             Material m = MaterialRegistry.get(ref.material());
             if (m == null) {
@@ -87,14 +60,13 @@ public final class ProcessingChain {
             return this;
         }
 
-        /** Convenience: a step whose input/output are forms of materials by id. */
         public Builder step(ProcessingStage stage, String inId, MaterialForm inForm,
                             String outId, MaterialForm outForm) {
             return step(stage, MaterialRef.of(inId, inForm), MaterialRef.of(outId, outForm));
         }
 
         public ProcessingChain build() {
-            return new ProcessingChain(this);
+            return new ProcessingChain(id, commodity, group, steps);
         }
     }
 }

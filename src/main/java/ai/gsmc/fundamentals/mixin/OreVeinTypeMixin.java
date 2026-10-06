@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/** Lets {@link MagnetiteVeins} change what the hardcoded iron vein is made of. */
 @Mixin(targets = "net.minecraft.world.level.levelgen.OreVeinifier$VeinType")
 public abstract class OreVeinTypeMixin implements MagnetiteVeins.Vein {
 

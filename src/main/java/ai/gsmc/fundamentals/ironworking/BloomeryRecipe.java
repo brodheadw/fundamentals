@@ -6,6 +6,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -14,15 +15,10 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 
-/**
- * What one lump of something becomes in a {@link BloomeryBlock}, and what runs off it. Data:
- * {@code data/fundamentals/recipe/bloomery/*.json} with {@code ingredient}, {@code result} and an
- * optional {@code byproduct}.
- */
 public record BloomeryRecipe(Ingredient ingredient, ItemStack result, ItemStack byproduct) implements Recipe<SingleRecipeInput> {
 
     public static final RecipeType<BloomeryRecipe> TYPE = RecipeType.simple(
-            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("fundamentals", "bloomery"));
+            ResourceLocation.fromNamespaceAndPath("fundamentals", "bloomery"));
     public static final RecipeSerializer<BloomeryRecipe> SERIALIZER = new Serializer();
 
     @Override

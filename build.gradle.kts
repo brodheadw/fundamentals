@@ -2,8 +2,6 @@ plugins {
     alias(libs.plugins.loom)
 }
 
-// --- Property accessors --------------------------------------------------
-
 class ModData {
     val id = property("mod.id").toString()
     val name = property("mod.name").toString()
@@ -40,11 +38,10 @@ base { archivesName.set(mod.id) }
 loom {
     silentMojangMappingsLicense()
 
-    // Keep all run configs pointed at one shared run folder across versions.
     runConfigs.all {
         ideConfigGenerated(stonecutter.current.isActive)
         runDir = "../../run"
-        // Makes `/test runall` available in dev runs, for the game tests in .gametest.
+        // Makes `/test runall` available in dev runs.
         vmArg("-Dneoforge.enabledGameTestNamespaces=${mod.id}")
     }
 }
@@ -63,14 +60,12 @@ dependencies {
     @Suppress("UnstableApiUsage")
     mappings(loom.layered {
         officialMojangMappings()
-        // Parchment adds parameter names + javadoc on top of Mojmap.
         optionalProp("deps.parchment_version") {
             parchment("org.parchmentmc.data:parchment-${mc.version}:$it@zip")
         }
     })
 
     "neoForge"("net.neoforged:neoforge:${deps.neoforgeVersion}")
-    // Fundamentals is a Create add-on: Create is required at runtime.
     modLocalRuntime("maven.modrinth:create:${deps.createVersion}")
     modLocalRuntime("maven.modrinth:create-tfmg:${deps.tfmgVersion}")
     // Create ships these inside its jar, but a dev run does not unpack them.
@@ -87,8 +82,6 @@ java {
 tasks.withType<JavaCompile>().configureEach {
     options.release.set(21)
 }
-
-// --- Metadata templating -------------------------------------------------
 
 tasks.processResources {
     val props = mapOf(
@@ -111,7 +104,6 @@ tasks.processResources {
     filesMatching("META-INF/neoforge.mods.toml") { expand(props) }
 }
 
-// Convenience alias: build only the currently active target.
 if (stonecutter.current.isActive) {
     rootProject.tasks.register("buildActive") {
         group = "project"

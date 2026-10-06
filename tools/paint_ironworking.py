@@ -151,8 +151,8 @@ def daub(rng, soot_rows=0):
 
 def front(rng, lit):
     img = daub(rng, soot_rows=3)
-    arch = {y: (5, 10) for y in range(9, 15)}
-    arch[8] = (6, 9)
+    arch = {y: (5, 10) for y in range(10, 15)}
+    arch[9] = (6, 9)
     for y, (x0, x1) in arch.items():   # the tapping arch at the foot
         put(img, x0 - 1, y, CLAY[0])
         put(img, x1 + 1, y, CLAY[0])
@@ -163,7 +163,7 @@ def front(rng, lit):
             else:
                 put(img, x, y, SOOT[0] if y > 10 else SOOT[1])
     for x in range(6, 10):
-        put(img, x, 7, CLAY[0])
+        put(img, x, 8, CLAY[0])
     return img
 
 

@@ -16,11 +16,6 @@ import net.minecraft.world.level.material.MapColor;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-/**
- * The hand-worked routes to metal (PLAN §2.4, §2.5): ore and charcoal in a {@link BloomeryBlock}.
- * Iron comes out as a bloom to be hammered into wrought iron (the vanilla ingot); copper comes
- * straight from its oxide minerals; lead comes from galena once it has been roasted on a fire.
- */
 public final class IronWorking {
 
     private static Block bloomery;
@@ -46,7 +41,7 @@ public final class IronWorking {
 
     public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
         bloomery = new BloomeryBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE)
-                .requiresCorrectToolForDrops().strength(2.0F, 4.0F).sound(SoundType.STONE).noOcclusion()
+                .requiresCorrectToolForDrops().strength(2.0F, 4.0F).sound(SoundType.STONE)
                 .lightLevel(state -> state.getValue(BloomeryBlock.LIT) ? 13 : 0));
         registry.accept(id("bloomery"), bloomery);
     }

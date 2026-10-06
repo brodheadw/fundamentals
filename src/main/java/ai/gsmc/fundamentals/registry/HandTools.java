@@ -7,14 +7,6 @@ import net.minecraft.world.item.Item;
 import java.util.List;
 import java.util.function.BiConsumer;
 
-/**
- * Hand tools for working materials before any machine exists. The mortar and pestle grinds by
- * hand what Create's millstone grinds by power: grain to flour, and coloured minerals to
- * pigment, the way painters' workshops did (malachite green, azurite blue, vermilion from
- * cinnabar, the ochres from iron minerals). Its recipes are plain shapeless ones in
- * {@code data/fundamentals/recipe/grinding/}, and {@link MortarItem} also performs them in the
- * hands.
- */
 public final class HandTools {
 
     private static Item mortarAndPestle;
