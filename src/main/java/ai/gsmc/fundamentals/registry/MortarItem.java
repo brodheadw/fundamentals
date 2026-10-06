@@ -20,14 +20,8 @@ import net.minecraft.world.phys.Vec3;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * The mortar and pestle. Besides working in a crafting grid, it grinds in the hands: hold it in
- * one hand and the material in the other, and hold use. Whatever the two would make on a
- * crafting grid is what comes out, so every grinding recipe works both ways.
- */
 public class MortarItem extends HandToolItem {
 
-    /** Ticks of grinding for one item. */
     public static final int GRIND_TICKS = 40;
 
     public MortarItem(Properties properties) {
@@ -38,7 +32,6 @@ public class MortarItem extends HandToolItem {
         return hand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
     }
 
-    /** What grinding {@code material} with this mortar makes, if anything. */
     public static ItemStack grind(Level level, ItemStack mortar, ItemStack material) {
         if (material.isEmpty()) {
             return ItemStack.EMPTY;
@@ -80,7 +73,6 @@ public class MortarItem extends HandToolItem {
             return;
         }
         if (level.isClientSide) {
-            // Dust of what is being made puffs up from the bowl: green from malachite, white from wheat.
             ItemStack product = grind(level, stack, material);
             Vec3 look = entity.getLookAngle();
             Vec3 at = entity.getEyePosition().add(look.scale(1.1)).add(0, -0.55, 0);

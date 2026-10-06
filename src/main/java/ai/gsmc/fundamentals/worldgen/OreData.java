@@ -8,17 +8,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
-/**
- * The block list written by {@code tools/build_ore_data.py}: which ore and host-rock blocks
- * exist and which rocks an ore can sit in. The same script writes their models, loot and spawn
- * rules, so a block exists exactly when those do.
- */
 public record OreData(List<BlockDef> blocks, Map<String, String> hosts) {
 
-    /**
-     * @param soft    dug with a shovel (clays, laterites, mineral sands) rather than a pickaxe
-     * @param mineral the mineral material this is the ore of; null for a plain host rock
-     */
     public record BlockDef(String name, boolean soft, String mineral) {}
 
     private static OreData loaded;

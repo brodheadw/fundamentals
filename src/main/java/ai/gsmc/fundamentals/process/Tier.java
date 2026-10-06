@@ -1,11 +1,5 @@
 package ai.gsmc.fundamentals.process;
 
-/**
- * Progression tiers for processing machines. A {@link ProcessingStage} is unlocked at its
- * tier. See {@code docs/PLAN.md} §2.3.
- *
- * <p>This is append-only shared schema — coordinate changes via PR (PLAN §4).
- */
 public enum Tier {
     T0("Hand"),
     T1("Mechanical"),

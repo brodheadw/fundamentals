@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(OreVeinifier.class)
 public abstract class OreVeinifierMixin {
 
-    /** Veins are set up as terrain starts generating, by which time our blocks exist. */
     @Inject(method = "create", at = @At("HEAD"))
     private static void fundamentals$magnetiteVeins(CallbackInfoReturnable<?> cir) {
         MagnetiteVeins.apply();

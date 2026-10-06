@@ -22,15 +22,8 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
-/**
- * The in-world ore blocks ({@link OreBlock}) and the few host rocks that are blocks of their own,
- * as listed in {@link OreData}.
- *
- * <p>Registered from {@code Fundamentals} through the callbacks it passes in.
- */
 public final class OreBlocks {
 
-    /** Minerals whose ore is an existing vanilla block (PLAN §2.4); nothing of ours is registered. */
     public static final Map<String, String> VANILLA = Map.of(
             "native_gold", "minecraft:gold_ore",
             "native_copper", "minecraft:copper_ore");
@@ -61,8 +54,6 @@ public final class OreBlocks {
             ITEMS.put(id, item);
             registry.accept(id, item);
         });
-        // What an ore block gives up when mined: a raw chunk of the mineral, as vanilla ore
-        // gives raw iron.
         for (OreData.BlockDef def : OreData.get().blocks()) {
             if (def.mineral() != null) {
                 ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "raw_" + def.mineral());
@@ -77,7 +68,6 @@ public final class OreBlocks {
         return ITEMS.values();
     }
 
-    /** The raw chunk each mineral's ore drops, in ore order. */
     public static Collection<Item> rawItems() {
         return RAW.values();
     }
@@ -86,7 +76,6 @@ public final class OreBlocks {
         return RAW.get(mineral);
     }
 
-    /** Ore blocks and mineral materials are defined in different places; say so when they disagree. */
     private static void reportMismatches() {
         Set<String> blocks = OreData.get().blocks().stream().map(OreData.BlockDef::mineral)
                 .filter(Objects::nonNull).collect(Collectors.toSet());

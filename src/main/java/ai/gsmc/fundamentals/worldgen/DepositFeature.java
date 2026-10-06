@@ -6,6 +6,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
+import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.WorldGenLevel;
@@ -21,24 +22,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
 
-/**
- * An ore deposit: ore distributed through a body of rock — either a host rock of its own or the
- * stone already there — in one of the shapes ore really takes. Vanilla's blob-shaped {@code ore} feature can't express any of them.
- *
- * <ul>
- *   <li>{@code bed} — a gently dipping lens (sedimentary layers, layered intrusions)</li>
- *   <li>{@code plug} — a steep pipe or stock (porphyries, carbonatites)</li>
- *   <li>{@code vein} — a thin steep sheet along a fracture (hydrothermal veins, dykes)</li>
- *   <li>{@code blanket} — a layer following the land surface (laterites, gossan caps)</li>
- * </ul>
- *
- * <p>Everything stays within 15 blocks of the origin horizontally, so a deposit never writes
- * outside the 3x3 chunks a feature is allowed to touch.
- */
 public class DepositFeature extends Feature<DepositFeature.Config> {
 
     public static final DepositFeature INSTANCE = new DepositFeature();
 
+    // A feature may only write to the 3x3 chunks around its origin.
     private static final int REACH = 15;
 
     public enum Shape implements StringRepresentable {
@@ -52,15 +40,10 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
         }
     }
 
-    /** How an ore is spread through the host rock. */
     public enum Style implements StringRepresentable {
-        /** Isolated grains scattered evenly. */
         DISSEMINATED,
-        /** Irregular masses a few blocks across. */
         POCKETS,
-        /** Continuous thin layers following the body's dip. */
         SEAMS,
-        /** Pockets confined to the upper part of the body (supergene enrichment). */
         TOP;
 
         public static final Codec<Style> CODEC = StringRepresentable.fromEnum(Style::values);
@@ -82,7 +65,6 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
         }
     }
 
-    /** @param fraction share of the body's blocks that are this ore */
     public record Ore(BlockState state, float fraction, Style style) {
         public static final Codec<Ore> CODEC = RecordCodecBuilder.create(i -> i.group(
                 BlockState.CODEC.fieldOf("state").forGetter(Ore::state),
@@ -90,14 +72,6 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
                 Style.CODEC.fieldOf("style").forGetter(Ore::style)).apply(i, Ore::new));
     }
 
-    /**
-     * @param host        rock the whole body is turned into; empty leaves the existing rock, so
-     *                    the ore sits directly in stone or deepslate
-     * @param radius      horizontal half-extent (half the strike length, for a vein)
-     * @param thickness   bed/blanket thickness, or vein width
-     * @param height      vertical extent of a plug or vein; unused otherwise
-     * @param replaceable blocks the deposit may replace
-     */
     public record Config(Shape shape, Optional<BlockState> host, List<Ore> ores, Range radius, Range thickness,
                          Range height, TagKey<Block> replaceable) implements FeatureConfiguration {
         public static final Codec<Config> CODEC = RecordCodecBuilder.create(i -> i.group(
@@ -198,7 +172,7 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
                 if (d >= 1) continue;
                 int x = body.origin.getX() + dx, z = body.origin.getZ() + dz;
                 int surface = body.level.getHeight(Heightmap.Types.OCEAN_FLOOR_WG, x, z) - 1;
-                if (!body.level.getFluidState(pos.set(x, surface + 1, z)).isEmpty()) continue;  // not under water
+                if (!body.level.getFluidState(pos.set(x, surface + 1, z)).isEmpty()) continue;
                 int depth = (int) Math.ceil(thickness * Math.sqrt(1 - d * d));
                 for (int k = 0; k < depth; k++) {
                     // Starts one block down, leaving the topsoil in place.
@@ -208,7 +182,6 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
         }
     }
 
-    /** One deposit being placed: knows which block goes at each position inside the body. */
     private static final class Body {
         final WorldGenLevel level;
         final Config config;
@@ -224,7 +197,6 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
             this.seed = seed;
         }
 
-        /** Wobble for the body's outline, 0.8..1.2, so no deposit is a clean circle. */
         double edge(int dx, int dz) {
             return 0.8 + 0.4 * noise(dx * 0.22, dz * 0.22, 0);
         }
@@ -233,11 +205,7 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
             return Noise.value(seed + salt, a, b, 0);
         }
 
-        /**
-         * @param layer    height within the body in blocks, following its dip (selects seams)
-         * @param vertical -1 at the bottom of the body to +1 at the top
-         * @param edge     0 at the heart of the body to 1 at its rim; ore thins out toward the rim
-         */
+        // layer counts blocks up the dip, vertical runs -1 at the bottom to +1 at the top, edge 0 at the heart to 1 at the rim.
         void put(int dx, int dy, int dz, double layer, double vertical, double edge) {
             if (Math.abs(dx) > REACH || Math.abs(dz) > REACH) return;
             pos.set(origin.getX() + dx, origin.getY() + dy, origin.getZ() + dz);
@@ -251,7 +219,6 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
             }
         }
 
-        /** The block for this spot, or null to leave the existing rock alone. */
         private BlockState stateAt(double layer, double vertical, double edge, BlockState existing) {
             // Rich in the middle, a scatter at the rim: no deposit ends in a clean wall of ore.
             float richness = (float) (1 - 0.85 * edge * edge);
@@ -265,8 +232,6 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
                     case TOP -> vertical > 0.35 && pocket(salt, Math.min(0.9F, ore.fraction() * 3 * richness));
                 };
                 if (here) {
-                    // The ore takes its grade from where it sits in the body, and its look from
-                    // the rock it sits in: the deposit's own host, or whatever was already there.
                     return ore.state().hasProperty(OreBlock.GRADE)
                             ? ore.state().setValue(OreBlock.GRADE, OreBlock.Grade.at(edge))
                                     .setValue(OreBlock.HOST, OreBlock.Host.of(config.host().orElse(existing)))
@@ -281,7 +246,6 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
         }
     }
 
-    /** Small deterministic value noise; worldgen must give the same answer for the same seed. */
     private static final class Noise {
         private static final double[] SORTED = new double[8192];
 
@@ -292,10 +256,10 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
             Arrays.sort(SORTED);
         }
 
-        /** The noise level that a {@code fraction} share of space exceeds. */
+        // The noise level that a fraction of space exceeds.
         static double threshold(float fraction) {
             int index = (int) ((1 - fraction) * (SORTED.length - 1));
-            return SORTED[Math.max(0, Math.min(SORTED.length - 1, index))];
+            return SORTED[Mth.clamp(index, 0, SORTED.length - 1)];
         }
 
         static double hash(long seed, int x, int y, int z) {

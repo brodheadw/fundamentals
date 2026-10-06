@@ -19,7 +19,6 @@ import net.neoforged.neoforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** Entrypoint for Fundamentals, a Create add-on for NeoForge. */
 @Mod(Fundamentals.MOD_ID)
 public class Fundamentals {
 

@@ -1,42 +1,29 @@
 #!/usr/bin/env python3
-"""Merge the per-commodity research JSON files in docs/research/ into a single
-structured data/ores.json and a human-readable docs/ore-catalog.md.
-
-This is a dev-time generator, not part of the Gradle build. Re-run after editing
-any docs/research/*.json:
+"""Merges the per-group research files in docs/research/ into data/ores.json and
+docs/ore-catalog.md. Re-run after editing any docs/research/*.json:
 
     python3 tools/build_catalog.py
-
-Each source entry has the schema:
-    mineral, formula, commodity, byproducts[], geology, beneficiation[],
-    intermediate, extraction, final_product, stages[], notes
 """
-from __future__ import annotations
-
 import json
-import glob
-import os
-from collections import OrderedDict, defaultdict
+from collections import defaultdict
+from pathlib import Path
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-RESEARCH_DIR = os.path.join(ROOT, "docs", "research")
-DATA_OUT = os.path.join(ROOT, "data", "ores.json")
-CATALOG_OUT = os.path.join(ROOT, "docs", "ore-catalog.md")
+ROOT = Path(__file__).resolve().parent.parent
+RESEARCH = ROOT / "docs/research"
+DATA_OUT = ROOT / "data/ores.json"
+CATALOG_OUT = ROOT / "docs/ore-catalog.md"
 
-# Human-facing group titles, in intended tech-progression-ish order.
-GROUPS = OrderedDict([
-    ("ferrous-ferroalloy", "Ferrous & Ferroalloy Metals"),
-    ("base-metals", "Base Metals"),
-    ("industrial-minerals", "Industrial & Non-Metal Minerals"),
-    ("light-battery-tech", "Light, Battery & Tech Metals"),
-    ("precious-pgm", "Precious Metals & PGMs"),
-    ("rare-earths", "Rare Earth Elements"),
-    ("minor-specialty", "Minor, Specialty & Radioactive Metals"),
-])
+GROUPS = {
+    "ferrous-ferroalloy": "Ferrous & Ferroalloy Metals",
+    "base-metals": "Base Metals",
+    "industrial-minerals": "Industrial & Non-Metal Minerals",
+    "light-battery-tech": "Light, Battery & Tech Metals",
+    "precious-pgm": "Precious Metals & PGMs",
+    "rare-earths": "Rare Earth Elements",
+    "minor-specialty": "Minor, Specialty & Radioactive Metals",
+}
 
-# Canonical processing-stage vocabulary, ordered roughly by where it sits in a
-# real flowsheet. Used to render the vocabulary reference and to sort it.
-# (MetallothermicReduction and ElectrostaticSeparation added per research feedback.)
+# Ordered roughly by position in a real flowsheet.
 STAGE_ORDER = [
     # Comminution & physical concentration
     "Crushing", "Grinding", "Washing", "Screening",
@@ -63,62 +50,31 @@ STAGE_ORDER = [
 ]
 
 
-def stage_base(stage: str) -> str:
-    """Strip a trailing '(parenthetical)' qualifier for vocab matching."""
-    return stage.split("(", 1)[0].strip()
-
-
-def load_groups():
-    ores = []
-    for slug in GROUPS:
-        path = os.path.join(RESEARCH_DIR, slug + ".json")
-        if not os.path.exists(path):
-            print(f"  WARN: missing {path}")
-            continue
-        entries = json.load(open(path, encoding="utf-8"))
-        for e in entries:
-            e = dict(e)
-            e["group"] = slug
-            ores.append(e)
-    return ores
-
-
 def main():
-    ores = load_groups()
+    ores = [{**entry, "group": slug} for slug in GROUPS
+            for entry in json.loads((RESEARCH / f"{slug}.json").read_text(encoding="utf-8"))]
 
-    # --- derived indices ---
-    commodities = defaultdict(list)
+    used, qualified = set(), set()
+    byproduct_sources = defaultdict(set)
     for e in ores:
-        commodities[e.get("commodity", "?")].append(e["mineral"])
-
-    used_stage_bases = set()
-    unknown_stages = set()
-    for e in ores:
-        for s in e.get("stages", []):
-            b = stage_base(s)
-            used_stage_bases.add(b)
-            if b not in STAGE_ORDER:
-                unknown_stages.add(s)
-
-    # byproduct web: element -> minerals that yield it as a byproduct
-    byproduct_sources = defaultdict(list)
-    for e in ores:
+        for stage in e.get("stages", []):
+            base = stage.split("(", 1)[0].strip()
+            used.add(base)
+            if base not in STAGE_ORDER:
+                qualified.add(stage)
         for bp in e.get("byproducts", []):
-            byproduct_sources[bp].append(e["mineral"])
+            byproduct_sources[bp].add(e["mineral"])
+    vocab = [s for s in STAGE_ORDER if s in used]
 
-    ordered_vocab = [s for s in STAGE_ORDER if s in used_stage_bases]
+    DATA_OUT.write_text(json.dumps({
+        "_generated_by": "tools/build_catalog.py",
+        "_source": "docs/research/*.json",
+        "groups": GROUPS,
+        "stageVocabulary": vocab,
+        "oreCount": len(ores),
+        "ores": ores,
+    }, indent=2, ensure_ascii=False), encoding="utf-8")
 
-    data = OrderedDict()
-    data["_generated_by"] = "tools/build_catalog.py"
-    data["_source"] = "docs/research/*.json"
-    data["groups"] = OrderedDict((slug, title) for slug, title in GROUPS.items())
-    data["stageVocabulary"] = ordered_vocab
-    data["oreCount"] = len(ores)
-    data["ores"] = ores
-    os.makedirs(os.path.dirname(DATA_OUT), exist_ok=True)
-    json.dump(data, open(DATA_OUT, "w", encoding="utf-8"), indent=2, ensure_ascii=False)
-
-    # --- markdown ---
     md = []
     md.append("# Ore & Material Catalog\n")
     md.append("> Generated by `tools/build_catalog.py` from `docs/research/*.json`. "
@@ -128,15 +84,13 @@ def main():
               "metal/product, using the canonical processing-stage vocabulary below so every "
               "chain maps cleanly onto in-game machines.\n")
 
-    # stage vocabulary
     md.append("## Processing-stage vocabulary\n")
     md.append("Ordered roughly by position in a real flowsheet:\n")
-    md.append(" · ".join(f"`{s}`" for s in ordered_vocab) + "\n")
-    if unknown_stages:
+    md.append(" · ".join(f"`{s}`" for s in vocab) + "\n")
+    if qualified:
         md.append("_Stages used with qualifiers not in the base vocabulary: "
-                  + ", ".join(f"`{s}`" for s in sorted(unknown_stages)) + "._\n")
+                  + ", ".join(f"`{s}`" for s in sorted(qualified)) + "._\n")
 
-    # per-group master tables
     for slug, title in GROUPS.items():
         rows = [e for e in ores if e["group"] == slug]
         if not rows:
@@ -155,30 +109,26 @@ def main():
             )
         md.append("")
 
-    # byproduct cross-link web
     md.append("## Byproduct cross-links\n")
     md.append("Elements recovered as byproducts (→ the minerals that yield them). "
               "This is the realistic web that makes certain elements gated behind others:\n")
     md.append("| Byproduct | Recovered from |")
     md.append("|---|---|")
     for bp in sorted(byproduct_sources):
-        srcs = ", ".join(sorted(set(byproduct_sources[bp])))
-        md.append(f"| {bp} | {srcs} |")
+        md.append(f"| {bp} | {', '.join(sorted(byproduct_sources[bp]))} |")
     md.append("")
 
-    open(CATALOG_OUT, "w", encoding="utf-8").write("\n".join(md))
+    CATALOG_OUT.write_text("\n".join(md), encoding="utf-8")
 
-    # --- report ---
     print(f"ores: {len(ores)}")
     for slug in GROUPS:
-        n = len([e for e in ores if e['group'] == slug])
-        print(f"  {slug}: {n}")
-    print(f"commodities: {len(commodities)}")
-    print(f"stages used: {len(used_stage_bases)} ({len(ordered_vocab)} in vocab)")
-    if unknown_stages:
-        print(f"  qualified/extra stages: {sorted(unknown_stages)}")
+        print(f"  {slug}: {sum(e['group'] == slug for e in ores)}")
+    print(f"commodities: {len({e.get('commodity', '?') for e in ores})}")
+    print(f"stages used: {len(used)} ({len(vocab)} in vocab)")
+    if qualified:
+        print(f"  qualified/extra stages: {sorted(qualified)}")
     print(f"byproduct elements tracked: {len(byproduct_sources)}")
-    print(f"wrote {os.path.relpath(DATA_OUT, ROOT)} and {os.path.relpath(CATALOG_OUT, ROOT)}")
+    print(f"wrote {DATA_OUT.relative_to(ROOT)} and {CATALOG_OUT.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":
