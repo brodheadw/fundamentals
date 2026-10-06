@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:goethite_ore",
+    "fundamentals:hematite_ore",
+    "fundamentals:magnetite_ore"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "#minecraft:deepslate_ore_replaceables",
+    "#minecraft:dirt",
+    "#minecraft:stone_ore_replaceables",
+    "create:asurine",
+    "create:crimsite",
+    "create:limestone",
+    "create:ochrum",
+    "create:scorchia",
+    "create:scoria",
+    "create:veridium",
+    "minecraft:calcite",
+    "minecraft:clay",
+    "minecraft:dripstone_block",
+    "minecraft:gravel",
+    "minecraft:mud"
+  ]
+}

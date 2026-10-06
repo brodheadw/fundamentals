@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#fundamentals:deposit/carbonatite",
+  "features": [
+    "fundamentals:carbonatite_plug"
+  ],
+  "step": "underground_decoration"
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_hematite"
+    },
+    {
+      "item": "fundamentals:mortar_and_pestle"
+    }
+  ],
+  "result": {
+    "id": "minecraft:red_dye",
+    "count": 2
+  }
+}

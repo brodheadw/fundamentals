@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:raw_bastnasite",
+    "fundamentals:raw_euxenite",
+    "fundamentals:raw_ion_adsorption_clay",
+    "fundamentals:raw_loparite",
+    "fundamentals:raw_monazite",
+    "fundamentals:raw_xenotime"
+  ]
+}

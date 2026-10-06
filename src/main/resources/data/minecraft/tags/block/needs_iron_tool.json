@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:argentite_ore",
+    "fundamentals:bastnasite_ore",
+    "fundamentals:braggite_ore",
+    "fundamentals:chromite_ore",
+    "fundamentals:cinnabar_ore",
+    "fundamentals:cobaltite_ore",
+    "fundamentals:cooperite_ore",
+    "fundamentals:euxenite_ore",
+    "fundamentals:loparite_ore",
+    "fundamentals:molybdenite_ore",
+    "fundamentals:native_silver_ore",
+    "fundamentals:pentlandite_ore",
+    "fundamentals:scheelite_ore",
+    "fundamentals:sperrylite_ore",
+    "fundamentals:wolframite_ore",
+    "fundamentals:xenotime_ore"
+  ]
+}

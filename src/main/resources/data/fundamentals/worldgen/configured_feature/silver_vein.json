@@ -1,0 +1,38 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "vein",
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:argentite_ore"
+        },
+        "fraction": 0.38,
+        "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:native_silver_ore"
+        },
+        "fraction": 0.16,
+        "style": "pockets"
+      }
+    ],
+    "radius": {
+      "min": 10,
+      "max": 15
+    },
+    "thickness": {
+      "min": 1,
+      "max": 2
+    },
+    "replaceable": "fundamentals:deposit_replaceable/rock",
+    "host": {
+      "Name": "minecraft:calcite"
+    },
+    "height": {
+      "min": 14,
+      "max": 26
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#fundamentals:deposit/laterite",
+  "features": [
+    "fundamentals:bauxite_blanket",
+    "fundamentals:nickel_laterite_blanket"
+  ],
+  "step": "underground_decoration"
+}

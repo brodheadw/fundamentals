@@ -28,3 +28,17 @@ type = "required"
 versionRange = "${mcdep}"
 ordering = "NONE"
 side = "BOTH"
+
+[[dependencies.${id}]]
+modId = "create"
+type = "required"
+versionRange = "[${create_min},)"
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.${id}]]
+modId = "tfmg"
+type = "required"
+versionRange = "[${tfmg_min},)"
+ordering = "AFTER"
+side = "BOTH"

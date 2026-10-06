@@ -10,13 +10,12 @@ version differences are handled with `//? if >=1.21.3 {` style comments.
 
 1. In `settings.gradle.kts`, add the version to the `mc(...)` calls:
    ```kotlin
-   mc("1.21.1", listOf("fabric", "neoforge"))
-   mc("1.21.3", listOf("fabric", "neoforge"))   // new
+   mc("1.21.1", listOf("neoforge"))
+   mc("1.21.3", listOf("neoforge"))   // new
    ```
-2. Create `versions/1.21.3-fabric/gradle.properties` and
-   `versions/1.21.3-neoforge/gradle.properties` with that version's
-   `mod.mc_version`, `mod.mc_dep`, `deps.fabric_api_version` / `deps.neoforge_version`,
-   and `deps.parchment_version`.
+2. Create `versions/1.21.3-neoforge/gradle.properties` with that version's
+   `mod.mc_version`, `mod.mc_dep`, `deps.neoforge_version`, `deps.create_version` and
+   `deps.parchment_version`. A version can only be added once Create supports it.
 3. `./gradlew "Reset active project"` then build/test the new node.
 
 Planned ladder (confirm exact dependency versions per target as they are added):
@@ -24,9 +23,8 @@ Planned ladder (confirm exact dependency versions per target as they are added):
 
 ## Loaders
 
-- **Fabric** and **NeoForge** are first-class.
-- **Forge** is intentionally *not* targeted for 1.21+: it was effectively superseded by
-  NeoForge after 1.20.1. Revisit only if a concrete need appears.
+**NeoForge only.** Fundamentals is a Create add-on, and Create's 1.21.1 release is NeoForge-only.
+Revisit Fabric if Create ships a Fabric build for a version we target.
 
 ## Feature direction (content)
 
@@ -34,15 +32,15 @@ Planned ladder (confirm exact dependency versions per target as they are added):
 2. **Processing framework** — multi-stage chains (ore → concentrate → element → product), tag-driven.
 3. **Tag interop** — expose `c:ingots/tungsten`, `c:rare_earths/*`, etc. so other mods consume outputs
    without knowing the source.
-4. **Create integration** (optional dependency) — express chains as Create processing
-   (crushing, mixing, pressing, mechanical crafting) when Create is present.
+4. **Create integration** (required) — chains are built from Create processing (crushing, mixing,
+   pressing, mechanical crafting) plus our own machines where Create has none.
 5. **Material-property machines** — e.g. magnet strength read from material stats; leave an API seam
    for a future field simulation.
 
 ## Housekeeping
 
 - [ ] Add a mod icon (`src/main/resources/assets/fundamentals/icon.png`) and re-add the
-      `icon` / `logoFile` references in `fabric.mod.json` / `neoforge.mods.toml`.
+      `logoFile` reference in `neoforge.mods.toml`.
 - [ ] Decide on and wire up a publishing pipeline (Modrinth/CurseForge) if releasing.
 - [x] Mirror this multi-version + multi-loader setup in the **wildspell** repos —
       tracking issues filed (see `NOTE-wildspell.md`).

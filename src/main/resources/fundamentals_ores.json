@@ -1,0 +1,232 @@
+{
+  "blocks": [
+    {
+      "name": "carbonatite",
+      "soft": false
+    },
+    {
+      "name": "gabbro",
+      "soft": false
+    },
+    {
+      "name": "syenite",
+      "soft": false
+    },
+    {
+      "name": "laterite",
+      "soft": true
+    },
+    {
+      "name": "hematite_ore",
+      "soft": false,
+      "mineral": "hematite"
+    },
+    {
+      "name": "magnetite_ore",
+      "soft": false,
+      "mineral": "magnetite"
+    },
+    {
+      "name": "goethite_ore",
+      "soft": false,
+      "mineral": "goethite"
+    },
+    {
+      "name": "pyrolusite_ore",
+      "soft": false,
+      "mineral": "pyrolusite"
+    },
+    {
+      "name": "pentlandite_ore",
+      "soft": false,
+      "mineral": "pentlandite"
+    },
+    {
+      "name": "nickel_laterite_ore",
+      "soft": true,
+      "mineral": "nickel_laterite"
+    },
+    {
+      "name": "chromite_ore",
+      "soft": false,
+      "mineral": "chromite"
+    },
+    {
+      "name": "wolframite_ore",
+      "soft": false,
+      "mineral": "wolframite"
+    },
+    {
+      "name": "scheelite_ore",
+      "soft": false,
+      "mineral": "scheelite"
+    },
+    {
+      "name": "molybdenite_ore",
+      "soft": false,
+      "mineral": "molybdenite"
+    },
+    {
+      "name": "cobaltite_ore",
+      "soft": false,
+      "mineral": "cobaltite"
+    },
+    {
+      "name": "ilmenite_ore",
+      "soft": true,
+      "mineral": "ilmenite"
+    },
+    {
+      "name": "rutile_ore",
+      "soft": true,
+      "mineral": "rutile"
+    },
+    {
+      "name": "chalcopyrite_ore",
+      "soft": false,
+      "mineral": "chalcopyrite"
+    },
+    {
+      "name": "bornite_ore",
+      "soft": false,
+      "mineral": "bornite"
+    },
+    {
+      "name": "chalcocite_ore",
+      "soft": false,
+      "mineral": "chalcocite"
+    },
+    {
+      "name": "covellite_ore",
+      "soft": false,
+      "mineral": "covellite"
+    },
+    {
+      "name": "malachite_ore",
+      "soft": false,
+      "mineral": "malachite"
+    },
+    {
+      "name": "azurite_ore",
+      "soft": false,
+      "mineral": "azurite"
+    },
+    {
+      "name": "cuprite_ore",
+      "soft": false,
+      "mineral": "cuprite"
+    },
+    {
+      "name": "bauxite_ore",
+      "soft": false,
+      "mineral": "bauxite"
+    },
+    {
+      "name": "galena_ore",
+      "soft": false,
+      "mineral": "galena"
+    },
+    {
+      "name": "sphalerite_ore",
+      "soft": false,
+      "mineral": "sphalerite"
+    },
+    {
+      "name": "smithsonite_ore",
+      "soft": false,
+      "mineral": "smithsonite"
+    },
+    {
+      "name": "hemimorphite_ore",
+      "soft": false,
+      "mineral": "hemimorphite"
+    },
+    {
+      "name": "cassiterite_ore",
+      "soft": false,
+      "mineral": "cassiterite"
+    },
+    {
+      "name": "bastnasite_ore",
+      "soft": false,
+      "mineral": "bastnasite"
+    },
+    {
+      "name": "monazite_ore",
+      "soft": true,
+      "mineral": "monazite"
+    },
+    {
+      "name": "xenotime_ore",
+      "soft": false,
+      "mineral": "xenotime"
+    },
+    {
+      "name": "ion_adsorption_clay_ore",
+      "soft": true,
+      "mineral": "ion_adsorption_clay"
+    },
+    {
+      "name": "loparite_ore",
+      "soft": false,
+      "mineral": "loparite"
+    },
+    {
+      "name": "euxenite_ore",
+      "soft": false,
+      "mineral": "euxenite"
+    },
+    {
+      "name": "native_silver_ore",
+      "soft": false,
+      "mineral": "native_silver"
+    },
+    {
+      "name": "argentite_ore",
+      "soft": false,
+      "mineral": "argentite"
+    },
+    {
+      "name": "sperrylite_ore",
+      "soft": false,
+      "mineral": "sperrylite"
+    },
+    {
+      "name": "cooperite_ore",
+      "soft": false,
+      "mineral": "cooperite"
+    },
+    {
+      "name": "braggite_ore",
+      "soft": false,
+      "mineral": "braggite"
+    },
+    {
+      "name": "cinnabar_ore",
+      "soft": false,
+      "mineral": "cinnabar"
+    }
+  ],
+  "hosts": {
+    "stone": "minecraft:stone",
+    "deepslate": "minecraft:deepslate",
+    "granite": "minecraft:granite",
+    "diorite": "minecraft:diorite",
+    "andesite": "minecraft:andesite",
+    "tuff": "minecraft:tuff",
+    "calcite": "minecraft:calcite",
+    "dripstone": "minecraft:dripstone_block",
+    "sand": "minecraft:sand",
+    "carbonatite": "fundamentals:carbonatite",
+    "gabbro": "fundamentals:gabbro",
+    "syenite": "fundamentals:syenite",
+    "laterite": "fundamentals:laterite",
+    "asurine": "create:asurine",
+    "crimsite": "create:crimsite",
+    "ochrum": "create:ochrum",
+    "veridium": "create:veridium",
+    "limestone": "create:limestone",
+    "scoria": "create:scoria",
+    "scorchia": "create:scorchia"
+  }
+}

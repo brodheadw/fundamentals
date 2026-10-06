@@ -1,0 +1,52 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "grade": "core"
+      },
+      "apply": [
+        {
+          "model": "fundamentals:block/ore/goethite_ore_core_0"
+        },
+        {
+          "model": "fundamentals:block/ore/goethite_ore_core_1"
+        },
+        {
+          "model": "fundamentals:block/ore/goethite_ore_core_2"
+        }
+      ]
+    },
+    {
+      "when": {
+        "grade": "edge"
+      },
+      "apply": [
+        {
+          "model": "fundamentals:block/ore/goethite_ore_edge_0"
+        },
+        {
+          "model": "fundamentals:block/ore/goethite_ore_edge_1"
+        },
+        {
+          "model": "fundamentals:block/ore/goethite_ore_edge_2"
+        }
+      ]
+    },
+    {
+      "when": {
+        "grade": "trace"
+      },
+      "apply": [
+        {
+          "model": "fundamentals:block/ore/goethite_ore_trace_0"
+        },
+        {
+          "model": "fundamentals:block/ore/goethite_ore_trace_1"
+        },
+        {
+          "model": "fundamentals:block/ore/goethite_ore_trace_2"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "fundamentals:bloomery",
+  "ingredient": {
+    "item": "fundamentals:raw_cuprite"
+  },
+  "result": {
+    "id": "minecraft:copper_ingot",
+    "count": 1
+  },
+  "byproduct": {
+    "id": "fundamentals:slag",
+    "count": 1
+  }
+}

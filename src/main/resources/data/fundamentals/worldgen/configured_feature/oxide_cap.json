@@ -1,0 +1,48 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "blanket",
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:malachite_ore"
+        },
+        "fraction": 0.2,
+        "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:azurite_ore"
+        },
+        "fraction": 0.1,
+        "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:cuprite_ore"
+        },
+        "fraction": 0.06,
+        "style": "disseminated"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:hemimorphite_ore"
+        },
+        "fraction": 0.06,
+        "style": "pockets"
+      }
+    ],
+    "radius": {
+      "min": 9,
+      "max": 14
+    },
+    "thickness": {
+      "min": 5,
+      "max": 8
+    },
+    "replaceable": "fundamentals:deposit_replaceable/rock",
+    "host": {
+      "Name": "create:ochrum"
+    }
+  }
+}

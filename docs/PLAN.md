@@ -22,7 +22,8 @@ A chemistry-driven **materials & processing framework**. Materials are data with
 properties (e.g. magnet strength: NdFeB vs SmCo). Ores follow realistic
 **raw → beneficiation → intermediate → metal/product** chains. Everything is **tag-driven**
 so other mods (and our own groups) consume outputs without caring about the source.
-Optional **Create** integration later. Developed **separately from wildspell** (may interop
+**A Create add-on: Create is required, NeoForge only** (user ruling 2026-10-05; Create has no
+Fabric release for 1.21.1). Developed **separately from wildspell** (may interop
 via shared tags).
 
 Source data: **`data/ores.json`** (113 ores, 74 commodities, 49 processing stages),
@@ -63,10 +64,11 @@ There is no such substance as "iron ore" — ore is rock carrying a mineral at m
 mod follows that:
 
 - **Only minerals generate in the world** (hematite, magnetite, chalcopyrite, sphalerite,
-  bastnäsite…). Vanilla iron/copper ore generation is replaced by them; a mod
+  bastnäsite…). Vanilla iron ore generation is replaced by them; a mod
   like Create's zinc ore is replaced by sphalerite.
-- **Gold is the exception:** native gold is a real mineral, so vanilla gold ore (overworld,
-  badlands and nether) stays as it is and keeps generating.
+- **Gold and copper are the exceptions:** native gold and native copper are real minerals, so
+  vanilla gold ore and vanilla copper ore *are* those minerals — they stay and keep generating,
+  and we register no block for them (`registry.OreBlocks.VANILLA`).
 - **Elements have no `ORE` or `RAW` form.** They exist only as products (dust, ingot, nugget,
   plate, block, oxide). A mineral is a `MaterialType.MINERAL` material carrying `ORE`/`RAW`.
 - **Vanilla items are the canonical form where one exists** (`minecraft:iron_ingot`, nugget,
@@ -86,6 +88,21 @@ mod follows that:
   | Zinc | sphalerite, smithsonite | **None** — zinc boils (907 °C) below its reduction temperature, so the metal escapes as vapour | Ancient brass was made by cementation (calamine + copper); zinc metal needs retort distillation (T2+) |
 
   Everything else (Al, Ti, REEs, PGMs, …) has no primitive route.
+
+### 2.5 What can be processed when  *(direction from the user, 2026-10-05)*
+Every mineral generates and can be mined from the start, but most cannot be turned into metal
+until the player has machines. That is intended: the ore is a reason to build them.
+
+| Era | How | What it unlocks |
+|---|---|---|
+| **By hand** (built) | Bloomery + charcoal, smithing hammer, mortar and pestle | Iron from hematite / magnetite / goethite; mineral pigments. Vanilla copper and gold ore smelt as ever (native copper, native gold). |
+| **By hand** (next) | The same bloomery, taking other oxide and carbonate minerals | Copper from malachite / azurite / cuprite; tin from cassiterite; lead from galena after roasting on a fire. Bronze follows. |
+| **Early Create** | Crushing wheels, millstone, washing, mixing, pressing | Better yield from every hand route; crushed ore and byproducts; brass once zinc exists. |
+| **Mid-game, Create-style multiblocks** | Roaster, blast furnace, flotation cells, retort, leach tanks | The sulfides (chalcopyrite, sphalerite, pentlandite, molybdenite), zinc (it boils before it reduces, so it needs a retort), steel, aluminium from bauxite, nickel, chromium, tungsten, titanium. |
+| **Late game** | Solvent-extraction batteries, electrolysis, precious-metal refinery | The rare earths one element at a time, cobalt, the platinum group, mercury. |
+
+Until an ore's route exists it is still worth finding: several grind to dye, and Fortune and
+core-grade ore mean a deposit marked early pays back later.
 
 ---
 
@@ -126,7 +143,11 @@ Use as sub-package names and data sub-folders.
 **IDs:**
 - material id = element symbol lowercased or snake_case compound: `iron`, `neodymium`,
   `tungsten_trioxide`, `rare_earth_concentrate`.
-- ore block id = `<mineral>_ore` / `deepslate_<mineral>_ore`.
+- ore block id = `<mineral>_ore`, one block per mineral. It carries two blockstate properties:
+  `grade` (`core` / `edge` / `trace`) and `host` (the rock it formed in: stone, deepslate, granite,
+  diorite, andesite, tuff, calcite, dripstone, sand, our four rocks, and Create's seven stones).
+  The mineral is a transparent texture drawn over the host rock's own texture, so there are no
+  `deepslate_` twins. Bauxite, the laterites, REE clay and bog iron are whole rocks instead.
 - stage machine id = snake_case of the canonical stage: `froth_flotation`, `solvent_extraction`.
 
 **Tags** (Fabric `c:` common convention + our namespace; consumers request by tag, never by a
@@ -142,8 +163,7 @@ concrete item): `c:ores/<commodity>`, `c:raw_materials/<mineral>`, `c:ingots/<me
 - **Shared schema files** (material schema, stage/recipe schema, tier defs, the
   `data/ores.json` structure, this PLAN) are **defined once and are append-only** — change them
   only via PR + a note in §6. B owns creating these first (see §6).
-- Loader differences: shared `src/main` with Stonecutter `//? if fabric/neoforge`. Don't fork
-  files per loader.
+- NeoForge only. Stonecutter stays for future Minecraft versions; there are no loader branches.
 
 **Branches/PRs:** feature branches `a/<group>-<topic>` or `b/<group>-<topic>`
 (e.g. `b/ferrous-smelting`, `a/ree-separation`). PR into `main`; keep each PR within your own
@@ -282,6 +302,109 @@ features in worldgen JSON — for now this table is the spec both sides build to
     (`c:ores/copper`), other forms under the mineral's own id. Rare-earth minerals now tag
     `c:ores/rare_earth`. **For Laptop B:** `FerrousMaterials.mineral/reg` can call these.
   - **A next:** rare-earth and base-metal chains, then solvent-extraction design.
+- **2026-10-04 [A]** Branch `a/mineral-textures` (PR into main): **ore blocks exist and generate**,
+  on both loaders. Verified on headless Fabric and NeoForge servers (2,760 chunks across jungle,
+  badlands, mountain, beach, swamp, taiga, desert): all 42 blocks (38 ores, 4 host rocks) generate
+  on NeoForge with Create installed. Vanilla `iron_ore` no longer generates. **Seen in a Fabric client:**
+  ores render correctly over ten different host rocks (cutout layer set in `FundamentalsClient`).
+  That shot was on the old Fabric build; the NeoForge client, which relies on `render_type` in the
+  model JSON, has not been looked at. Create-stone hosts are verified on a headless server only. Each ore has three texture variants per grade,
+  picked per block position, because a body of one ore visibly tiled with a single texture.
+  - **Ore generates as deposits, not blobs.** `worldgen.DepositFeature` places ore in four real
+    shapes: `bed` (banded iron, lead-zinc, layered intrusions with chromite seams), `plug`
+    (porphyry copper, carbonatite), `vein` (silver, tin, pegmatite) and `blanket` (bauxite and
+    nickel laterite, the oxidised copper cap, REE clay). Ore is spread through the body as pockets,
+    seams, scattered grains or a top enrichment.
+  - **Graded ore bodies (user request).** Every ore block has a `grade` blockstate property —
+    `core` / `edge` / `trace` (`registry.OreBlock`). The deposit sets it from how far the block is
+    from the heart of its body, so ore is rich in the middle and peters out at the rim; ore is
+    also sparser toward the rim. Grade picks the texture (three per grade) and the drops: core
+    drops 2, edge 1, trace 1 half the time. A hand-placed ore is `edge` in `stone`. All states are
+    one block, so tags and recipes are unaffected. **For Laptop B:** when raw mineral items and processing
+    exist, grade should feed yield there instead of this placeholder block count.
+  - **Create add-on, NeoForge only (user ruling 2026-10-05).** The Fabric target and all
+    `//? if fabric` code are gone; Create 6.0.10 is a required dependency and is in the dev
+    runtime (NeoForge bumped to 21.1.219 for it). **For Laptop B:** build only for NeoForge, and
+    you can now use Create's machines and items in chains. Several deposits deliberately sit in
+    Create's stones: banded iron in crimsite, lead-zinc, manganese and tungsten skarn in limestone,
+    zinc oxide in asurine, the oxidised copper cap in ochrum. Deposits generate in
+    `underground_decoration`, after Create's own stone layers.
+  - **Look (user ruling, after comparing with TerraFirmaCraft, Geolosys, Mekanism, Thermal,
+    Create and GregTech):** mineral only, spread evenly over the tile in muted colours, no host
+    rock painted into the texture. The host rock is real blocks instead: an ore adopts whatever it
+    lands in, and a few deposits bring a vanilla rock body (calcite for silver and cobalt veins,
+    andesite for the porphyry stock, granite for pegmatite). Our own rocks are only `carbonatite`,
+    `gabbro`, `syenite`, `laterite`. Beach placers sit in vanilla sand.
+  - **What landed:** `registry.OreBlocks` (ore blocks, rock blocks, items, creative tab),
+    `worldgen.OreData` / `worldgen.OreSpawns`, and two generators — `tools/paint_minerals.py`
+    (textures) and `tools/build_ore_data.py` (models, loot, tags, lang, features, biome tags,
+    NeoForge biome modifiers, and `fundamentals_ores.json`, which both the block registration and
+    the Fabric spawn code read). **Spawn tuning = edit a row in `DEPOSITS` in
+    `build_ore_data.py` and re-run.** Don't hand-edit the generated JSON or PNGs.
+  - **For Laptop B — please add materials:** I added ore blocks, textures and spawns for seven
+    ferrous minerals the user asked to see that have no `MINERAL` material yet: `chromite`,
+    `wolframite`, `scheelite`, `molybdenite`, `cobaltite`, `ilmenite`, `rutile`. Add them to
+    `FerrousMaterials` with exactly those ids (the game logs a warning for each until you do).
+  - **For Laptop B — registration layer:** ore blocks are done; don't register them again. Build
+    the item forms (raw, dust, ingot…) on top. Ore blocks drop themselves for now — once raw
+    mineral items exist, change the loot table template in `build_ore_data.py` to drop them.
+  - **For Laptop B — your minerals' art and spawns:** I painted and placed your 20 minerals too so
+    there is one consistent pass. Review the recipes in `paint_minerals.py` and the `DEPOSITS` rows
+    for hematite, magnetite, goethite, pyrolusite, pentlandite, nickel laterite, the silver and
+    platinum minerals and cinnabar, and change whatever is wrong for your chains.
+  - **Rulings from the user:** native copper = vanilla copper ore (like gold, §2.4); no deepslate
+    variants (§4).
+  - **Iron is makeable again, the medieval way (user ruling 2026-10-05).** `ironworking.*`:
+    a clay **bloomery** block (7 clay balls) takes up to 4 iron ore and as much charcoal — charcoal
+    only, mineral coal is refused — is lit with a torch (or flint and steel), burns for a minute, and gives one
+    **iron bloom** and one **slag** per ore. Bloom + **smithing hammer** (stone and sticks, wears
+    with use) in a crafting grid gives a vanilla iron ingot. No GUI; it is worked by hand. Any item
+    in `c:ores/iron` works, so hematite, magnetite and goethite all do. Covered by three game
+    tests (`gametest.IronWorkingTests`, run with `/test runall` on a dev server).
+    **For Laptop B:** this is the playable form of your `BLOOMERY` stage; ferrous is your group, so
+    take it over and extend it (roasting, slag uses, the later blast furnace and Create routes) —
+    I built it because the user asked and iron was otherwise unobtainable.
+  - **Mortar and pestle (user request 2026-10-05).** `registry.HandTools`: a stone hand tool that
+    stays in the crafting grid and wears, like the smithing hammer (both are `HandToolItem`). It
+    grinds by hand what Create's millstone grinds by power: wheat to Create's wheat flour, bone
+    to bone meal, cane to sugar, and coloured minerals to dye — malachite green, azurite blue,
+    cinnabar and hematite red, goethite yellow, pyrolusite black. Recipes are shapeless JSON in
+    `data/fundamentals/recipe/grinding/`; a game test covers it. It also grinds **in the hands**
+    (`MortarItem`): mortar in one hand, material in the other, hold use for two seconds. That
+    runs the same recipes, so new grinding JSON works both ways. The first-person motion
+    (`client.GrindingAnimation`) and the 3D in-hand bowl model have not been seen in a client in
+    their current form; an earlier version was, and looked poor. **For Laptop B:** when dust
+    items exist, hand-grinding ore to dust belongs here too.
+  - **Ore drops raw chunks (user ruling 2026-10-05).** Mining an ore block gives `raw_<mineral>`
+    — core 2-3, edge 1, trace one half the time; Fortune multiplies, Silk Touch takes the block
+    — as vanilla ore gives raw iron. All 38 chunks are in `c:raw_materials/<commodity>`. The
+    bloomery and the grinding recipes take chunks, not ore blocks. **For Laptop B:** these are the
+    `RAW` form of each mineral; build dusts and concentrates from them.
+  - **TFMG required; the bloomery is recipe-driven (2026-10-05).** Create: The Factory Must Grow
+    1.2.0 is now a required dependency alongside Create (it supplies oil, distillation, steel,
+    aluminium, lead, nickel, lithium and electricity, so we don't build them). The bloomery now
+    runs on a `fundamentals:bloomery` recipe type (`data/fundamentals/recipe/bloomery/`): raw
+    iron minerals → iron bloom; raw malachite / azurite / cuprite → copper ingot; roasted galena
+    → TFMG lead ingot. Galena is a sulfide, so it is roasted first on a campfire or in a smoker
+    (`recipe/roasting/`). TFMG's generic lead ore no longer generates (galena replaces it, as
+    hematite replaced vanilla iron); its nickel and lithium ores stay until pentlandite / laterite
+    and the pegmatite lithium minerals have routes. Chemica (an optional TFMG add-on) overlaps on
+    tin, silver, cobalt, molybdenum, platinum and phosphorus ores; the user is talking to its
+    authors about consolidating or fitting together.
+    Noticed in the sample: TFMG generates a rock it calls `tfmg:galena` (about 17 blocks per
+    chunk) in its striated layers, plus `tfmg:crude_oil` at the surface (its "oil well" feature).
+    Both need a look when oil and the TFMG overlap are handled.
+  - **Deep iron veins:** vanilla's hardcoded giant iron vein now places magnetite ore, with core
+    grade where vanilla put raw iron blocks (`worldgen.MagnetiteVeins` + two mixins). No vanilla
+    iron ore of any kind generates on either loader. The copper vein is unchanged.
+  - **Known gaps (A will take):** (2) a deposit is
+    capped at ~30 blocks across (a feature may only write to the 3x3 chunks around it), so truly
+    large bodies would need a structure; (3) frequencies were nudged on 2026-10-05 against measured
+    per-chunk counts (iron about 84 against vanilla coal's 85; copper minerals 6, tin 1, silver 1) and vanilla copper is far too common for "native copper"; (4) host
+    rocks have no uses or recipes yet; (5) only iron has a route so far — the copper minerals,
+    sphalerite and everything else still have no recipe; (6) Create's
+    own zinc ore still generates (about 70 blocks per chunk) and should give way to sphalerite
+    once sphalerite yields zinc.
 
 ---
 

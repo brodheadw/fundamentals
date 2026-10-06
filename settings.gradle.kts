@@ -35,9 +35,9 @@ stonecutter {
         // create a matching `versions/<mc>-<loader>/gradle.properties`.
         // See ROADMAP.md.
         // ---------------------------------------------------------------
-        mc("1.21.1", listOf("fabric", "neoforge"))
+        mc("1.21.1", listOf("neoforge"))
 
-        vcsVersion = "1.21.1-fabric"
+        vcsVersion = "1.21.1-neoforge"
     }
 }
 

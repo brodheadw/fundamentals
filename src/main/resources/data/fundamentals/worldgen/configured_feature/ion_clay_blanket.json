@@ -1,0 +1,19 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "blanket",
+    "ores": [],
+    "radius": {
+      "min": 8,
+      "max": 12
+    },
+    "thickness": {
+      "min": 3,
+      "max": 5
+    },
+    "replaceable": "fundamentals:deposit_replaceable/ground",
+    "host": {
+      "Name": "fundamentals:ion_adsorption_clay_ore"
+    }
+  }
+}

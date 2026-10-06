@@ -1,0 +1,27 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "blanket",
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:nickel_laterite_ore"
+        },
+        "fraction": 0.4,
+        "style": "pockets"
+      }
+    ],
+    "radius": {
+      "min": 9,
+      "max": 13
+    },
+    "thickness": {
+      "min": 4,
+      "max": 6
+    },
+    "replaceable": "fundamentals:deposit_replaceable/ground",
+    "host": {
+      "Name": "fundamentals:laterite"
+    }
+  }
+}
