@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:ingots/terbium"
+    }
+  },
+  "result": {
+    "id": "fundamentals:terbium_block",
+    "count": 1
+  }
+}

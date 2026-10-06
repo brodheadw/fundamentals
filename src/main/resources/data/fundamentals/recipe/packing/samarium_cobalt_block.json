@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:ingots/samarium_cobalt"
+    }
+  },
+  "result": {
+    "id": "fundamentals:samarium_cobalt_block",
+    "count": 1
+  }
+}

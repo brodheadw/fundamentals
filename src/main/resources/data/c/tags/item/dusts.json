@@ -1,0 +1,29 @@
+{
+  "replace": false,
+  "values": [
+    "#c:dusts/bastnasite",
+    "#c:dusts/cerium",
+    "#c:dusts/didymium",
+    "#c:dusts/dysprosium",
+    "#c:dusts/erbium",
+    "#c:dusts/europium",
+    "#c:dusts/euxenite",
+    "#c:dusts/gadolinium",
+    "#c:dusts/holmium",
+    "#c:dusts/lanthanum",
+    "#c:dusts/loparite",
+    "#c:dusts/lutetium",
+    "#c:dusts/monazite",
+    "#c:dusts/neodymium",
+    "#c:dusts/neodymium_iron_boron",
+    "#c:dusts/praseodymium",
+    "#c:dusts/samarium",
+    "#c:dusts/samarium_cobalt",
+    "#c:dusts/scandium",
+    "#c:dusts/terbium",
+    "#c:dusts/thulium",
+    "#c:dusts/xenotime",
+    "#c:dusts/ytterbium",
+    "#c:dusts/yttrium"
+  ]
+}

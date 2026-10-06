@@ -8,13 +8,20 @@
     "fundamentals:chalcopyrite_ore",
     "fundamentals:covellite_ore",
     "fundamentals:cuprite_ore",
+    "fundamentals:dysprosium_block",
     "fundamentals:galena_ore",
     "fundamentals:hematite_ore",
     "fundamentals:hemimorphite_ore",
     "fundamentals:magnetite_ore",
     "fundamentals:malachite_ore",
+    "fundamentals:neodymium_block",
+    "fundamentals:neodymium_iron_boron_block",
+    "fundamentals:praseodymium_block",
     "fundamentals:pyrolusite_ore",
+    "fundamentals:samarium_block",
+    "fundamentals:samarium_cobalt_block",
     "fundamentals:smithsonite_ore",
-    "fundamentals:sphalerite_ore"
+    "fundamentals:sphalerite_ore",
+    "fundamentals:terbium_block"
   ]
 }

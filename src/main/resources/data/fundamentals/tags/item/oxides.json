@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "#fundamentals:oxides/cerium",
+    "#fundamentals:oxides/didymium",
+    "#fundamentals:oxides/dysprosium",
+    "#fundamentals:oxides/erbium",
+    "#fundamentals:oxides/europium",
+    "#fundamentals:oxides/gadolinium",
+    "#fundamentals:oxides/holmium",
+    "#fundamentals:oxides/lanthanum",
+    "#fundamentals:oxides/lutetium",
+    "#fundamentals:oxides/neodymium",
+    "#fundamentals:oxides/praseodymium",
+    "#fundamentals:oxides/samarium",
+    "#fundamentals:oxides/scandium",
+    "#fundamentals:oxides/terbium",
+    "#fundamentals:oxides/thulium",
+    "#fundamentals:oxides/ytterbium",
+    "#fundamentals:oxides/yttrium"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/samarium_cobalt"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:samarium_cobalt_plate"
+    }
+  ]
+}

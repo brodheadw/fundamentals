@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:ingots/terbium"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:terbium_nugget",
+    "count": 9
+  }
+}

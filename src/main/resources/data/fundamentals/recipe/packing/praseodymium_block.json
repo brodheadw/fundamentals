@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:ingots/praseodymium"
+    }
+  },
+  "result": {
+    "id": "fundamentals:praseodymium_block",
+    "count": 1
+  }
+}

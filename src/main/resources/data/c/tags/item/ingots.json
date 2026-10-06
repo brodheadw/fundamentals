@@ -1,0 +1,24 @@
+{
+  "replace": false,
+  "values": [
+    "#c:ingots/cerium",
+    "#c:ingots/didymium",
+    "#c:ingots/dysprosium",
+    "#c:ingots/erbium",
+    "#c:ingots/europium",
+    "#c:ingots/gadolinium",
+    "#c:ingots/holmium",
+    "#c:ingots/lanthanum",
+    "#c:ingots/lutetium",
+    "#c:ingots/neodymium",
+    "#c:ingots/neodymium_iron_boron",
+    "#c:ingots/praseodymium",
+    "#c:ingots/samarium",
+    "#c:ingots/samarium_cobalt",
+    "#c:ingots/scandium",
+    "#c:ingots/terbium",
+    "#c:ingots/thulium",
+    "#c:ingots/ytterbium",
+    "#c:ingots/yttrium"
+  ]
+}

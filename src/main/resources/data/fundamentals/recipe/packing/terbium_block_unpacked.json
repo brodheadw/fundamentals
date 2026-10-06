@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:storage_blocks/terbium"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:terbium_ingot",
+    "count": 9
+  }
+}

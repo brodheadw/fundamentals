@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:nuggets/terbium"
+    }
+  },
+  "result": {
+    "id": "fundamentals:terbium_ingot",
+    "count": 1
+  }
+}
