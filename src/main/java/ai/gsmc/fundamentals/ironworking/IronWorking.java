@@ -46,7 +46,7 @@ public final class IronWorking {
 
     public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
         bloomery = new BloomeryBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE)
-                .requiresCorrectToolForDrops().strength(2.0F, 4.0F).sound(SoundType.STONE)
+                .requiresCorrectToolForDrops().strength(2.0F, 4.0F).sound(SoundType.STONE).noOcclusion()
                 .lightLevel(state -> state.getValue(BloomeryBlock.LIT) ? 13 : 0));
         registry.accept(id("bloomery"), bloomery);
     }
