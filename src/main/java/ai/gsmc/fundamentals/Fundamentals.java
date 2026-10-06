@@ -38,6 +38,8 @@ public class Fundamentals {
                 IronWorking.registerBlocks(helper::register);
             });
             event.register(Registries.BLOCK_ENTITY_TYPE, helper -> IronWorking.registerBlockEntities(helper::register));
+            event.register(Registries.RECIPE_TYPE, helper -> IronWorking.registerRecipeTypes(helper::register));
+            event.register(Registries.RECIPE_SERIALIZER, helper -> IronWorking.registerRecipeSerializers(helper::register));
             event.register(Registries.ITEM, helper -> {
                 OreBlocks.registerItems(helper::register);
                 IronWorking.registerItems(helper::register);

@@ -35,3 +35,10 @@ type = "required"
 versionRange = "[${create_min},)"
 ordering = "AFTER"
 side = "BOTH"
+
+[[dependencies.${id}]]
+modId = "tfmg"
+type = "required"
+versionRange = "[${tfmg_min},)"
+ordering = "AFTER"
+side = "BOTH"

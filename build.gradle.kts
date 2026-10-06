@@ -20,6 +20,8 @@ class Dependencies {
     val neoforgeVersion = property("deps.neoforge_version").toString()
     val createVersion = property("deps.create_version").toString()
     val createMin = property("deps.create_min").toString()
+    val tfmgVersion = property("deps.tfmg_version").toString()
+    val tfmgMin = property("deps.tfmg_min").toString()
 }
 
 class McData {
@@ -70,6 +72,7 @@ dependencies {
     "neoForge"("net.neoforged:neoforge:${deps.neoforgeVersion}")
     // Fundamentals is a Create add-on: Create is required at runtime.
     modLocalRuntime("maven.modrinth:create:${deps.createVersion}")
+    modLocalRuntime("maven.modrinth:create-tfmg:${deps.tfmgVersion}")
     // Create ships these inside its jar, but a dev run does not unpack them.
     modLocalRuntime("net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1")
     modLocalRuntime("dev.engine-room.flywheel:flywheel-neoforge-1.21.1:1.0.6")
@@ -99,7 +102,8 @@ tasks.processResources {
         "source" to mod.source,
         "issues" to mod.issues,
         "neoforge_version" to deps.neoforgeVersion,
-        "create_min" to deps.createMin
+        "create_min" to deps.createMin,
+        "tfmg_min" to deps.tfmgMin
     )
 
     props.forEach { (k, v) -> inputs.property(k, v) }

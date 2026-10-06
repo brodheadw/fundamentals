@@ -6,14 +6,11 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -33,9 +30,10 @@ import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
 
 /**
- * A bloomery: the clay shaft furnace that made iron from antiquity through the Middle Ages. It
- * never gets hot enough to melt iron, so it does not smelt — charcoal reduces the ore to a solid,
- * spongy <em>bloom</em> of iron tangled with slag, which then has to be hammered into wrought iron.
+ * A bloomery: the clay shaft furnace of antiquity and the Middle Ages, where charcoal reduces an
+ * oxide ore by hand. For iron it never gets hot enough to melt the metal, so out comes a solid,
+ * spongy <em>bloom</em> to be hammered into wrought iron; copper and lead do melt and come out as
+ * metal. What goes in and what comes out is data: see {@link BloomeryRecipe}.
  *
  * <p>Worked by hand, with no GUI: put in iron ore and at least as much charcoal, light it with a
  * torch (or flint and steel), wait, then take out the blooms and slag with an empty hand.
@@ -45,10 +43,6 @@ public class BloomeryBlock extends BaseEntityBlock {
     public static final MapCodec<BloomeryBlock> CODEC = simpleCodec(BloomeryBlock::new);
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
-
-    /** What a bloomery can reduce: raw chunks of the iron minerals. */
-    public static final TagKey<Item> IRON_ORES = ItemTags.create(
-            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("c", "raw_materials/iron"));
 
     public BloomeryBlock(Properties properties) {
         super(properties);
@@ -93,7 +87,7 @@ public class BloomeryBlock extends BaseEntityBlock {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
         boolean used;
-        if (stack.is(IRON_ORES)) {
+        if (BloomeryBlockEntity.recipeFor(level, stack).isPresent()) {
             used = bloomery.addOre(stack);
         } else if (stack.is(Items.CHARCOAL)) {
             // Charcoal only: mineral coal's sulfur makes iron brittle, which is why smiths avoided it.

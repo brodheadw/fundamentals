@@ -380,6 +380,20 @@ features in worldgen JSON — for now this table is the spec both sides build to
     — as vanilla ore gives raw iron. All 38 chunks are in `c:raw_materials/<commodity>`. The
     bloomery and the grinding recipes take chunks, not ore blocks. **For Laptop B:** these are the
     `RAW` form of each mineral; build dusts and concentrates from them.
+  - **TFMG required; the bloomery is recipe-driven (2026-10-05).** Create: The Factory Must Grow
+    1.2.0 is now a required dependency alongside Create (it supplies oil, distillation, steel,
+    aluminium, lead, nickel, lithium and electricity, so we don't build them). The bloomery now
+    runs on a `fundamentals:bloomery` recipe type (`data/fundamentals/recipe/bloomery/`): raw
+    iron minerals → iron bloom; raw malachite / azurite / cuprite → copper ingot; roasted galena
+    → TFMG lead ingot. Galena is a sulfide, so it is roasted first on a campfire or in a smoker
+    (`recipe/roasting/`). TFMG's generic lead ore no longer generates (galena replaces it, as
+    hematite replaced vanilla iron); its nickel and lithium ores stay until pentlandite / laterite
+    and the pegmatite lithium minerals have routes. Chemica (an optional TFMG add-on) overlaps on
+    tin, silver, cobalt, molybdenum, platinum and phosphorus ores; the user is talking to its
+    authors about consolidating or fitting together.
+    Noticed in the sample: TFMG generates a rock it calls `tfmg:galena` (about 17 blocks per
+    chunk) in its striated layers, plus `tfmg:crude_oil` at the surface (its "oil well" feature).
+    Both need a look when oil and the TFMG overlap are handled.
   - **Deep iron veins:** vanilla's hardcoded giant iron vein now places magnetite ore, with core
     grade where vanilla put raw iron blocks (`worldgen.MagnetiteVeins` + two mixins). No vanilla
     iron ore of any kind generates on either loader. The copper vein is unchanged.

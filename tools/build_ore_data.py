@@ -193,7 +193,8 @@ PLACERS = {
 }
 
 # Vanilla ore features switched off: hematite/magnetite replace vanilla iron (PLAN §2.4).
-# Vanilla gold and copper ore stay — they are native gold and native copper.
+# Vanilla gold and copper ore stay — they are native gold and native copper. TFMG's lead ore is
+# switched off the same way in data/fundamentals/neoforge/biome_modifier/remove_tfmg_lead_ore.json.
 REMOVED = ["minecraft:ore_iron_upper", "minecraft:ore_iron_middle", "minecraft:ore_iron_small"]
 
 # Blocks from elsewhere in the mod that share the mining-tool tags this script writes.

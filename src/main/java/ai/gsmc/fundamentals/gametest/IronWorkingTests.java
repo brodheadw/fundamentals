@@ -17,6 +17,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.CraftingInput;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.GameType;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
@@ -105,6 +106,26 @@ public class IronWorkingTests {
         helper.assertTrue(player.getOffhandItem().getCount() == 2, "one malachite should be used up");
         helper.assertTrue(player.getInventory().countItem(Items.GREEN_DYE) == 2, "two green dye should land in the inventory");
         helper.assertTrue(mortar.getDamageValue() == 1, "the mortar should wear by one use");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void leadComesFromRoastedGalenaAndCopperFromMalachite(GameTestHelper helper) {
+        var recipes = helper.getLevel().getRecipeManager();
+        Item rawGalena = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "raw_galena"));
+        Item rawMalachite = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "raw_malachite"));
+        Item lead = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("tfmg", "lead_ingot"));
+        helper.assertTrue(lead != Items.AIR, "TFMG's lead ingot should exist");
+
+        var roast = recipes.getRecipeFor(RecipeType.CAMPFIRE_COOKING, new SingleRecipeInput(new ItemStack(rawGalena)), helper.getLevel());
+        helper.assertTrue(roast.isPresent() && roast.get().value().getResultItem(helper.getLevel().registryAccess()).is(IronWorking.roastedGalena()),
+                "raw galena should roast to roasted galena on a campfire");
+        helper.assertTrue(BloomeryBlockEntity.recipeFor(helper.getLevel(), new ItemStack(rawGalena)).isEmpty(),
+                "unroasted galena should not go in the bloomery");
+        var smelt = BloomeryBlockEntity.recipeFor(helper.getLevel(), new ItemStack(IronWorking.roastedGalena()));
+        helper.assertTrue(smelt.isPresent() && smelt.get().value().result().is(lead), "roasted galena should give TFMG's lead ingot");
+        var copper = BloomeryBlockEntity.recipeFor(helper.getLevel(), new ItemStack(rawMalachite));
+        helper.assertTrue(copper.isPresent() && copper.get().value().result().is(Items.COPPER_INGOT), "malachite should give a copper ingot");
         helper.succeed();
     }
 
