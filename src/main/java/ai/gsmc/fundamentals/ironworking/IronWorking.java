@@ -24,6 +24,7 @@ public final class IronWorking {
     private static Item ironBloom;
     private static Item slag;
     private static Item roastedGalena;
+    private static Item calcinedSpodumene;
     private static Item smithingHammer;
 
     private IronWorking() {}
@@ -36,7 +37,7 @@ public final class IronWorking {
     public static Item smithingHammer() { return smithingHammer; }
 
     public static List<Item> items() {
-        return List.of(bloomeryItem, smithingHammer, ironBloom, slag, roastedGalena);
+        return List.of(bloomeryItem, smithingHammer, ironBloom, slag, roastedGalena, calcinedSpodumene);
     }
 
     public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
@@ -64,6 +65,7 @@ public final class IronWorking {
         registry.accept(id("smithing_hammer"), smithingHammer = new HandToolItem(new Item.Properties().durability(96)));
         registry.accept(id("iron_bloom"), ironBloom = new Item(new Item.Properties()));
         registry.accept(id("roasted_galena"), roastedGalena = new Item(new Item.Properties()));
+        registry.accept(id("calcined_spodumene"), calcinedSpodumene = new Item(new Item.Properties()));
         registry.accept(id("slag"), slag = new Item(new Item.Properties()));
     }
 

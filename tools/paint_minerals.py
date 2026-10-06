@@ -112,6 +112,7 @@ P = {
     "cooperite": ((62, 66, 74), (104, 110, 120), (146, 152, 162), (204, 210, 218)),
     "braggite": ((88, 88, 82), (138, 138, 128), (182, 182, 170), (228, 228, 218)),
     "cinnabar": ((104, 16, 20), (160, 30, 30), (202, 58, 46), (240, 132, 112)),
+    "spodumene": ((112, 88, 118), (176, 146, 180), (214, 192, 216), (246, 232, 246)),
 }
 
 # Bornite tarnishes iridescent ("peacock ore"): patches of several hues on one lump.
@@ -174,6 +175,9 @@ RECIPES = {
     "cooperite": [("blob", 2, 2, 4), ("speck", 7)],
     "braggite": [("blob", 2, 2, 4), ("companion", "pentlandite", 3), ("speck", 5)],
     "cinnabar": [("blob", 6, 4, 7), ("speck", 5)],
+    # --- lithium ---
+    # Pale laths, sometimes a foot long, in the coarse granite of a pegmatite.
+    "spodumene": [("crystals", "prism", 5, 1), ("speck", 3)],
 }
 
 
@@ -539,7 +543,7 @@ SHEET_ORDER = [
     "bauxite", "galena", "sphalerite", "smithsonite", "hemimorphite", "cassiterite",
     "hematite", "magnetite", "goethite", "pyrolusite", "pentlandite", "nickel_laterite",
     "chromite", "wolframite", "scheelite", "molybdenite", "cobaltite", "ilmenite", "rutile",
-    "native_silver", "argentite", "sperrylite", "cooperite", "braggite", "cinnabar",
+    "native_silver", "argentite", "sperrylite", "cooperite", "braggite", "cinnabar", "spodumene",
 ]
 
 
@@ -582,7 +586,7 @@ def contact_sheet(textures, path, cols=12, scale=8):
 if __name__ == "__main__":
     textures = paint_all()
     OUT.mkdir(parents=True, exist_ok=True)
-    for stale in OUT.glob("*.png"):
+    for stale in OUT.glob("*_ore_*.png"):  # only our own: other painters write here too
         stale.unlink()
     for name, grades in textures.items():
         for grade, variants in grades.items():

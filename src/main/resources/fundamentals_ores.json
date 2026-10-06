@@ -205,6 +205,11 @@
       "name": "cinnabar_ore",
       "soft": false,
       "mineral": "cinnabar"
+    },
+    {
+      "name": "spodumene_ore",
+      "soft": false,
+      "mineral": "spodumene"
     }
   ],
   "hosts": {

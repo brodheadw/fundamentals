@@ -82,6 +82,7 @@ ORES = {
     "cooperite": ("platinum", "pickaxe", "iron"),
     "braggite": ("platinum", "pickaxe", "iron"),
     "cinnabar": ("mercury", "pickaxe", "iron"),
+    "spodumene": ("lithium", "pickaxe", "iron"),
 }
 
 # Host rocks that are blocks of their own -> tool.
@@ -178,6 +179,8 @@ DEPOSITS = {
     # --- veins and dykes in mountain country ---
     "pegmatite_dyke": ("vein", "minecraft:granite", [("xenotime", 0.08, "pockets"), ("euxenite", 0.04, "pockets")],
                        (11, 15), (3, 5), (14, 24), "pegmatite", (-16, 48), 16, "rock"),
+    "spodumene_pegmatite": ("vein", "minecraft:granite", [("spodumene", 0.30, "pockets")], (10, 14), (3, 5), (12, 20),
+                            "pegmatite", (0, 64), 14, "rock"),
     "tin_vein": ("vein", None, [("cassiterite", 0.36, "pockets"), ("wolframite", 0.16, "pockets")],
                  (10, 15), (2, 3), (12, 24), "pegmatite", (-16, 56), 6, "rock"),
     "silver_vein": ("vein", "minecraft:calcite", [("argentite", 0.38, "pockets"), ("native_silver", 0.16, "pockets")],
@@ -194,11 +197,13 @@ PLACERS = {
 }
 
 # Ore features of other mods switched off: hematite/magnetite replace vanilla iron (PLAN §2.4),
-# and galena replaces TFMG's lead ore. Vanilla gold and copper ore stay — they are native gold
+# and galena, spodumene and pentlandite replace TFMG's lead, lithium and nickel ores. Vanilla gold and copper ore stay — they are native gold
 # and native copper.
 REMOVED = {
     "vanilla_iron": ["minecraft:ore_iron_upper", "minecraft:ore_iron_middle", "minecraft:ore_iron_small"],
     "tfmg_lead_ore": ["tfmg:lead_ore"],
+    "tfmg_lithium_ore": ["tfmg:lithium_ore"],
+    "tfmg_nickel_ore": ["tfmg:nickel_ore"],
 }
 
 # Blocks from elsewhere in the mod that share the mining-tool tags this script writes.
