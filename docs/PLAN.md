@@ -415,6 +415,17 @@ features in worldgen JSON — for now this table is the spec both sides build to
   `defineMineral`, as every group already did), and the content tables import `MaterialForm` and
   `ProcessingStage` statically. **Bloomery:** it is a full cube again, as in the Modrinth
   gallery; the stepped shaft from earlier in the day is reverted (the mortar's dark opening stays).
+- **2026-10-06 [A]** Branch `a/ree-items` (PR into main): **material forms are items**, for
+  `rare_earths` so far (78 items: mineral dusts, the two mixed concentrates, oxide / dust / ingot
+  for the sixteen elements and didymium, nuggets and storage blocks for the magnet elements, and
+  the full set for NdFeB and SmCo). `registry.MaterialItems` registers every form of a
+  material in its group list; `tools/paint_materials.py` paints them and
+  `tools/build_material_data.py` writes models, names, tags, loot and the packing and pressing
+  recipes. No purity grades (user ruling). Nothing makes these from ore yet.
+  **For the other groups:** add your group to `MaterialItems.GROUPS` and your materials to
+  `paint_materials.MATERIALS`, but first we need the mapping from a form to an item that
+  vanilla, Create or TFMG already has (iron, copper, zinc, lead, steel), or they register twice.
+  `build_ore_data.py` now also writes `remove_tfmg_lead_ore.json`; it used to delete it.
 
 ---
 

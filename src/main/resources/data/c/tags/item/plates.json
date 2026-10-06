@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#c:plates/neodymium_iron_boron",
+    "#c:plates/samarium_cobalt"
+  ]
+}

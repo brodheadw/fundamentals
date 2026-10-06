@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#c:nuggets/dysprosium",
+    "#c:nuggets/neodymium",
+    "#c:nuggets/neodymium_iron_boron",
+    "#c:nuggets/praseodymium",
+    "#c:nuggets/samarium",
+    "#c:nuggets/samarium_cobalt",
+    "#c:nuggets/terbium"
+  ]
+}

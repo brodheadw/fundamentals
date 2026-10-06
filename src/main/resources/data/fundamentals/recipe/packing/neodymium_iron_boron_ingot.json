@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:nuggets/neodymium_iron_boron"
+    }
+  },
+  "result": {
+    "id": "fundamentals:neodymium_iron_boron_ingot",
+    "count": 1
+  }
+}
