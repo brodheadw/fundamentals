@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "#fundamentals:concentrates/heavy_rare_earth_concentrate",
+    "#fundamentals:concentrates/light_rare_earth_concentrate"
+  ]
+}

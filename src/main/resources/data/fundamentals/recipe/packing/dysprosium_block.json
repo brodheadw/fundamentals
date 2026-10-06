@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:ingots/dysprosium"
+    }
+  },
+  "result": {
+    "id": "fundamentals:dysprosium_block",
+    "count": 1
+  }
+}

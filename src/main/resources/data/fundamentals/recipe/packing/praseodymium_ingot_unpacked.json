@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:ingots/praseodymium"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:praseodymium_nugget",
+    "count": 9
+  }
+}

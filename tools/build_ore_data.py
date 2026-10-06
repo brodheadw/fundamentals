@@ -18,6 +18,7 @@ import json
 import shutil
 from pathlib import Path
 
+from paint_materials import items
 from paint_minerals import GRADES, ROCK_BLOCKS, VARIANTS, WHOLE
 
 ROOT = Path(__file__).resolve().parent.parent / "src/main/resources"
@@ -192,13 +193,18 @@ PLACERS = {
     "rutile": (54, 66, 3, 9),
 }
 
-# Vanilla ore features switched off: hematite/magnetite replace vanilla iron (PLAN §2.4).
-# Vanilla gold and copper ore stay — they are native gold and native copper. TFMG's lead ore is
-# switched off the same way in data/fundamentals/neoforge/biome_modifier/remove_tfmg_lead_ore.json.
-REMOVED = ["minecraft:ore_iron_upper", "minecraft:ore_iron_middle", "minecraft:ore_iron_small"]
+# Ore features of other mods switched off: hematite/magnetite replace vanilla iron (PLAN §2.4),
+# and galena replaces TFMG's lead ore. Vanilla gold and copper ore stay — they are native gold
+# and native copper.
+REMOVED = {
+    "vanilla_iron": ["minecraft:ore_iron_upper", "minecraft:ore_iron_middle", "minecraft:ore_iron_small"],
+    "tfmg_lead_ore": ["tfmg:lead_ore"],
+}
 
 # Blocks from elsewhere in the mod that share the mining-tool tags this script writes.
-OTHER_MINEABLE = {"pickaxe": ["fundamentals:bloomery"]}
+STORAGE_BLOCKS = [f"fundamentals:{name}" for _, form, name in items() if form == "block"]
+OTHER_MINEABLE = {"pickaxe": ["fundamentals:bloomery"] + STORAGE_BLOCKS}
+OTHER_TIERED = {"stone": STORAGE_BLOCKS}
 
 DISPLAY = {"bastnasite": "Bastnäsite", "ion_adsorption_clay": "Ion-Adsorption Clay"}
 
@@ -353,7 +359,7 @@ def main():
     for tool, names in by_tool.items():
         tag(MC_TAGS / f"mineable/{tool}.json", names + OTHER_MINEABLE.get(tool, []))
     for tier, names in by_tier.items():
-        tag(MC_TAGS / f"needs_{tier}_tool.json", names)
+        tag(MC_TAGS / f"needs_{tier}_tool.json", names + OTHER_TIERED.get(tier, []))
     for kind in ("block", "item"):
         tag(C_TAGS / f"{kind}/ores.json", [f"#c:ores/{c}" for c in by_commodity])
         for commodity, names in by_commodity.items():
@@ -395,9 +401,10 @@ def main():
         write(DATA / f"neoforge/biome_modifier/add_{where}_deposits.json", {
             "type": "neoforge:add_features", "biomes": f"#fundamentals:deposit/{where}", "features": features,
             "step": "underground_decoration"})
-    write(DATA / "neoforge/biome_modifier/remove_vanilla_iron.json", {
-        "type": "neoforge:remove_features", "biomes": "#minecraft:is_overworld", "features": REMOVED,
-        "steps": ["underground_ores"]})
+    for name, features in REMOVED.items():
+        write(DATA / f"neoforge/biome_modifier/remove_{name}.json", {
+            "type": "neoforge:remove_features", "biomes": "#minecraft:is_overworld", "features": features,
+            "steps": ["underground_ores"]})
     # registry.OreBlocks registers exactly these blocks, so a block exists when its models, loot,
     # tags and spawn rules do.
     write(ROOT / "fundamentals_ores.json", {

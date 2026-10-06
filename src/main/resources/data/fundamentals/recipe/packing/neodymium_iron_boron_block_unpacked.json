@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:storage_blocks/neodymium_iron_boron"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:neodymium_iron_boron_ingot",
+    "count": 9
+  }
+}

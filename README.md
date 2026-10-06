@@ -43,6 +43,10 @@ A mortar and pestle grinds by hand what Create's millstone grinds by power: grai
 
 Everything else is still just ore. The sulfides, zinc, aluminium, nickel, tungsten, the rare earths and the platinum metals wait for Create machinery and the multiblock plant that comes after it. That is the plan, not a gap: the ore is the reason to build the machines.
 
+What that plant will make from the rare earths already exists as items: the ground minerals, the light and heavy mixed concentrates, each of the sixteen elements as oxide, powder and ingot, and the magnet alloys NdFeB and SmCo. The oxides are the colours they really are, and each metal leans toward the colour its salts are known by.
+
+![The rare earth materials](docs/images/rare-earth-materials.png)
+
 ## Status
 
 Alpha. Expect ore amounts and recipes to change. Not yet in any pack. Issues and ideas welcome.

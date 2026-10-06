@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/neodymium_iron_boron"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:neodymium_iron_boron_plate"
+    }
+  ]
+}

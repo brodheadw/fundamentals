@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:storage_blocks/dysprosium"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:dysprosium_ingot",
+    "count": 9
+  }
+}

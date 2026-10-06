@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:nuggets/samarium_cobalt"
+    }
+  },
+  "result": {
+    "id": "fundamentals:samarium_cobalt_ingot",
+    "count": 1
+  }
+}

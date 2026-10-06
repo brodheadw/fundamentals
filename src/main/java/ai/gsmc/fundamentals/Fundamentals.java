@@ -4,6 +4,7 @@ import ai.gsmc.fundamentals.client.GrindingAnimation;
 import ai.gsmc.fundamentals.ironworking.IronWorking;
 import ai.gsmc.fundamentals.registry.FundamentalsContent;
 import ai.gsmc.fundamentals.registry.HandTools;
+import ai.gsmc.fundamentals.registry.MaterialItems;
 import ai.gsmc.fundamentals.registry.OreBlocks;
 import ai.gsmc.fundamentals.worldgen.DepositFeature;
 import net.minecraft.core.registries.Registries;
@@ -26,6 +27,7 @@ public class Fundamentals {
     public static final Logger LOGGER = LoggerFactory.getLogger("Fundamentals");
 
     private static final ResourceLocation MINERALS_TAB = ResourceLocation.fromNamespaceAndPath(MOD_ID, "minerals");
+    private static final ResourceLocation MATERIALS_TAB = ResourceLocation.fromNamespaceAndPath(MOD_ID, "materials");
     private static final ResourceLocation DEPOSIT = ResourceLocation.fromNamespaceAndPath(MOD_ID, "deposit");
 
     public Fundamentals(IEventBus modBus) {
@@ -35,6 +37,7 @@ public class Fundamentals {
             event.register(Registries.BLOCK, helper -> {
                 OreBlocks.registerBlocks(helper::register);
                 IronWorking.registerBlocks(helper::register);
+                MaterialItems.registerBlocks(helper::register);
             });
             event.register(Registries.BLOCK_ENTITY_TYPE, helper -> IronWorking.registerBlockEntities(helper::register));
             event.register(Registries.RECIPE_TYPE, helper -> IronWorking.registerRecipeTypes(helper::register));
@@ -43,9 +46,13 @@ public class Fundamentals {
                 OreBlocks.registerItems(helper::register);
                 IronWorking.registerItems(helper::register);
                 HandTools.registerItems(helper::register);
+                MaterialItems.registerItems(helper::register);
             });
             event.register(Registries.FEATURE, helper -> helper.register(DEPOSIT, DepositFeature.INSTANCE));
-            event.register(Registries.CREATIVE_MODE_TAB, helper -> helper.register(MINERALS_TAB, mineralsTab()));
+            event.register(Registries.CREATIVE_MODE_TAB, helper -> {
+                helper.register(MINERALS_TAB, mineralsTab());
+                helper.register(MATERIALS_TAB, materialsTab());
+            });
         });
         if (FMLEnvironment.dist == Dist.CLIENT) {
             GrindingAnimation.register(modBus);
@@ -61,6 +68,13 @@ public class Fundamentals {
                     OreBlocks.rawItems().forEach(output::accept);
                     OreBlocks.items().forEach(output::accept);
                 })
+                .build();
+    }
+
+    private static CreativeModeTab materialsTab() {
+        return CreativeModeTab.builder().title(Component.translatable("itemGroup.fundamentals.materials"))
+                .icon(() -> new ItemStack(MaterialItems.items().get(ResourceLocation.fromNamespaceAndPath(MOD_ID, "neodymium_ingot"))))
+                .displayItems((parameters, output) -> MaterialItems.items().values().forEach(output::accept))
                 .build();
     }
 }

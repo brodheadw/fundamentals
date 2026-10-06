@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#c:storage_blocks/dysprosium",
+    "#c:storage_blocks/neodymium",
+    "#c:storage_blocks/neodymium_iron_boron",
+    "#c:storage_blocks/praseodymium",
+    "#c:storage_blocks/samarium",
+    "#c:storage_blocks/samarium_cobalt",
+    "#c:storage_blocks/terbium"
+  ]
+}

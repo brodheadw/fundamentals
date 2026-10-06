@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:ingots/samarium"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:samarium_nugget",
+    "count": 9
+  }
+}
