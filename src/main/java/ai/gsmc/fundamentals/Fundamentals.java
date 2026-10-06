@@ -1,56 +1,67 @@
 package ai.gsmc.fundamentals;
 
+import ai.gsmc.fundamentals.client.GrindingAnimation;
+import ai.gsmc.fundamentals.ironworking.IronWorking;
+import ai.gsmc.fundamentals.registry.FundamentalsContent;
+import ai.gsmc.fundamentals.registry.HandTools;
+import ai.gsmc.fundamentals.registry.OreBlocks;
+import ai.gsmc.fundamentals.worldgen.DepositFeature;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//? if fabric {
-import net.fabricmc.api.ModInitializer;
-//?}
-
-//? if neoforge {
-/*import net.neoforged.fml.common.Mod;
-*///?}
-
-/**
- * Common entrypoint for Fundamentals.
- *
- * Loader-specific wiring is selected at build time by Stonecutter comments
- * ({@code //? if fabric} / {@code //? if neoforge}). Shared logic lives in
- * {@link #init()} so every loader runs the same code path.
- */
-//? if neoforge {
-/*@Mod(Fundamentals.MOD_ID)
-*///?}
-public class Fundamentals /*? if fabric {*/ implements ModInitializer /*?}*/ {
+/** Entrypoint for Fundamentals, a Create add-on for NeoForge. */
+@Mod(Fundamentals.MOD_ID)
+public class Fundamentals {
 
     public static final String MOD_ID = "fundamentals";
     public static final Logger LOGGER = LoggerFactory.getLogger("Fundamentals");
 
-    //? if fabric {
-    @Override
-    public void onInitialize() {
-        init();
-    }
-    //?}
+    private static final ResourceLocation MINERALS_TAB = ResourceLocation.fromNamespaceAndPath(MOD_ID, "minerals");
+    private static final ResourceLocation DEPOSIT = ResourceLocation.fromNamespaceAndPath(MOD_ID, "deposit");
 
-    //? if neoforge {
-    /*public Fundamentals() {
-        init();
+    public Fundamentals(IEventBus modBus) {
+        LOGGER.info("Fundamentals initializing");
+        FundamentalsContent.registerAll();
+        modBus.addListener(RegisterEvent.class, event -> {
+            event.register(Registries.BLOCK, helper -> {
+                OreBlocks.registerBlocks(helper::register);
+                IronWorking.registerBlocks(helper::register);
+            });
+            event.register(Registries.BLOCK_ENTITY_TYPE, helper -> IronWorking.registerBlockEntities(helper::register));
+            event.register(Registries.RECIPE_TYPE, helper -> IronWorking.registerRecipeTypes(helper::register));
+            event.register(Registries.RECIPE_SERIALIZER, helper -> IronWorking.registerRecipeSerializers(helper::register));
+            event.register(Registries.ITEM, helper -> {
+                OreBlocks.registerItems(helper::register);
+                IronWorking.registerItems(helper::register);
+                HandTools.registerItems(helper::register);
+            });
+            event.register(Registries.FEATURE, helper -> helper.register(DEPOSIT, DepositFeature.INSTANCE));
+            event.register(Registries.CREATIVE_MODE_TAB, helper -> helper.register(MINERALS_TAB, mineralsTab()));
+        });
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            GrindingAnimation.register();
+        }
     }
-    *///?}
 
-    /** Loader-agnostic setup. Register content, materials, and processing here. */
-    public static void init() {
-        LOGGER.info("Fundamentals initializing ({} loader)", loaderName());
-        ai.gsmc.fundamentals.registry.FundamentalsContent.registerAll();
-    }
-
-    private static String loaderName() {
-        //? if fabric {
-        return "Fabric";
-        //?}
-        //? if neoforge {
-        /*return "NeoForge";
-        *///?}
+    private static CreativeModeTab mineralsTab() {
+        return CreativeModeTab.builder().title(Component.translatable("itemGroup.fundamentals.minerals"))
+                .icon(() -> new ItemStack(OreBlocks.items().iterator().next()))
+                .displayItems((parameters, output) -> {
+                    IronWorking.items().forEach(output::accept);
+                    HandTools.items().forEach(output::accept);
+                    OreBlocks.rawItems().forEach(output::accept);
+                    OreBlocks.items().forEach(output::accept);
+                })
+                .build();
     }
 }

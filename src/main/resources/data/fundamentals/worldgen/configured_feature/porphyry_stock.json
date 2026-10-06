@@ -1,0 +1,59 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "plug",
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:chalcopyrite_ore"
+        },
+        "fraction": 0.18,
+        "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:molybdenite_ore"
+        },
+        "fraction": 0.04,
+        "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:bornite_ore"
+        },
+        "fraction": 0.04,
+        "style": "disseminated"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:chalcocite_ore"
+        },
+        "fraction": 0.07,
+        "style": "top"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:covellite_ore"
+        },
+        "fraction": 0.02,
+        "style": "top"
+      }
+    ],
+    "radius": {
+      "min": 7,
+      "max": 11
+    },
+    "thickness": {
+      "min": 1,
+      "max": 1
+    },
+    "replaceable": "fundamentals:deposit_replaceable/rock",
+    "host": {
+      "Name": "minecraft:andesite"
+    },
+    "height": {
+      "min": 24,
+      "max": 40
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "bed",
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:pyrolusite_ore"
+        },
+        "fraction": 0.28,
+        "style": "pockets"
+      }
+    ],
+    "radius": {
+      "min": 8,
+      "max": 12
+    },
+    "thickness": {
+      "min": 3,
+      "max": 5
+    },
+    "replaceable": "fundamentals:deposit_replaceable/rock",
+    "host": {
+      "Name": "create:limestone"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "SS",
+    "ST",
+    " T"
+  ],
+  "key": {
+    "S": {
+      "tag": "minecraft:stone_tool_materials"
+    },
+    "T": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "id": "fundamentals:smithing_hammer",
+    "count": 1
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "#c:raw_materials/aluminum",
+    "#c:raw_materials/chromium",
+    "#c:raw_materials/cobalt",
+    "#c:raw_materials/copper",
+    "#c:raw_materials/iron",
+    "#c:raw_materials/lead",
+    "#c:raw_materials/manganese",
+    "#c:raw_materials/mercury",
+    "#c:raw_materials/molybdenum",
+    "#c:raw_materials/nickel",
+    "#c:raw_materials/platinum",
+    "#c:raw_materials/rare_earth",
+    "#c:raw_materials/silver",
+    "#c:raw_materials/tin",
+    "#c:raw_materials/titanium",
+    "#c:raw_materials/tungsten",
+    "#c:raw_materials/zinc"
+  ]
+}

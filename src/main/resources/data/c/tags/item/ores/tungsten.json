@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:scheelite_ore",
+    "fundamentals:wolframite_ore"
+  ]
+}

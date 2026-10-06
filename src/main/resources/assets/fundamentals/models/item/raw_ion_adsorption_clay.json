@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "fundamentals:item/raw_ion_adsorption_clay"
+  }
+}

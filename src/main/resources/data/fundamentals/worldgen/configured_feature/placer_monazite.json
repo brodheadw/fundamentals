@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:ore",
+  "config": {
+    "discard_chance_on_air_exposure": 0.0,
+    "size": 9,
+    "targets": [
+      {
+        "state": {
+          "Name": "fundamentals:monazite_ore",
+          "Properties": {
+            "grade": "edge",
+            "host": "sand"
+          }
+        },
+        "target": {
+          "predicate_type": "minecraft:block_match",
+          "block": "minecraft:sand"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "blanket",
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:bauxite_ore"
+        },
+        "fraction": 0.5,
+        "style": "pockets"
+      }
+    ],
+    "radius": {
+      "min": 10,
+      "max": 15
+    },
+    "thickness": {
+      "min": 4,
+      "max": 7
+    },
+    "replaceable": "fundamentals:deposit_replaceable/ground",
+    "host": {
+      "Name": "fundamentals:laterite"
+    }
+  }
+}

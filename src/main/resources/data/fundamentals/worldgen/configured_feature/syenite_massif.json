@@ -1,0 +1,31 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "plug",
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:loparite_ore"
+        },
+        "fraction": 0.1,
+        "style": "seams"
+      }
+    ],
+    "radius": {
+      "min": 8,
+      "max": 12
+    },
+    "thickness": {
+      "min": 1,
+      "max": 1
+    },
+    "replaceable": "fundamentals:deposit_replaceable/rock",
+    "host": {
+      "Name": "fundamentals:syenite"
+    },
+    "height": {
+      "min": 16,
+      "max": 26
+    }
+  }
+}

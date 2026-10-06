@@ -1,0 +1,27 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "bed",
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:smithsonite_ore"
+        },
+        "fraction": 0.24,
+        "style": "pockets"
+      }
+    ],
+    "radius": {
+      "min": 7,
+      "max": 10
+    },
+    "thickness": {
+      "min": 2,
+      "max": 4
+    },
+    "replaceable": "fundamentals:deposit_replaceable/rock",
+    "host": {
+      "Name": "create:asurine"
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:argentite_ore",
+    "fundamentals:native_silver_ore"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "type": "fundamentals:bloomery",
+  "ingredient": {
+    "item": "fundamentals:roasted_galena"
+  },
+  "result": {
+    "id": "tfmg:lead_ingot",
+    "count": 1
+  },
+  "byproduct": {
+    "id": "fundamentals:slag",
+    "count": 1
+  }
+}

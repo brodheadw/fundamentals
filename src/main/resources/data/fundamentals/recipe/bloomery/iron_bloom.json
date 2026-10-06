@@ -1,0 +1,14 @@
+{
+  "type": "fundamentals:bloomery",
+  "ingredient": {
+    "tag": "c:raw_materials/iron"
+  },
+  "result": {
+    "id": "fundamentals:iron_bloom",
+    "count": 1
+  },
+  "byproduct": {
+    "id": "fundamentals:slag",
+    "count": 1
+  }
+}

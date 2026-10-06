@@ -1,0 +1,48 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "fundamentals:block/galena_ore_core_0",
+    "ore": "fundamentals:block/galena_ore_core_0"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "down": {
+          "texture": "#ore",
+          "cullface": "down"
+        },
+        "up": {
+          "texture": "#ore",
+          "cullface": "up"
+        },
+        "north": {
+          "texture": "#ore",
+          "cullface": "north"
+        },
+        "south": {
+          "texture": "#ore",
+          "cullface": "south"
+        },
+        "west": {
+          "texture": "#ore",
+          "cullface": "west"
+        },
+        "east": {
+          "texture": "#ore",
+          "cullface": "east"
+        }
+      }
+    }
+  ]
+}
