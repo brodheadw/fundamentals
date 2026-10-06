@@ -1,63 +1,54 @@
 # Fundamentals
 
-A chemistry-driven **materials and processing** add-on for [Create](https://github.com/Creators-of-Create/Create),
-on NeoForge.
+Real ore minerals, real deposits, and the real road from rock to metal. A Create add-on for NeoForge 1.21.1.
 
-> Separate from the **wildspell** project. The two may interoperate later (shared tags,
-> optional integration), but they are developed and versioned independently.
+![Every ore in the mod](docs/images/all-ores.png)
 
-## Design direction
+Vanilla gives you "iron ore". The ground doesn't. Iron is in hematite and magnetite, lead is in galena, zinc is in sphalerite, the rare earths are in bastnäsite and monazite and a clay that doesn't even have a mineral name. Fundamentals replaces the generic ores with the minerals that actually carry each metal, puts them in the ground the way geology does, and makes you win the metal out of them the way smiths and smelters did, by hand at first and with Create's machines later.
 
-Fundamentals treats materials as data, not hardcoded items:
+Requires [Create](https://modrinth.com/mod/create) and [Create: The Factory Must Grow](https://modrinth.com/mod/create-tfmg). Early alpha: the geology is in, the processing is just beginning.
 
-- **Processing chains**, not one-step magic — e.g. ore → concentrate → element → product
-  (bastnäsite → flotation → mixed rare-earth concentrate → solvent extraction → oxides → metal;
-  wolframite → APT → WO₃ → tungsten metal).
-- **Tag-driven interop** — other mods ask for `tungsten` and don't care what item provided it.
-- **Material properties as stats** — e.g. magnet strength is a material property (NdFeB vs SmCo),
-  so recipes output magnets with different stats and machines can read them. Leaves room for a
-  real field simulation later without blocking on it.
+## Deposits, not blobs
 
-Start small (materials + processing), layer the richer simulation on top.
+Ore generates as the kind of body it really forms: banded iron beds, lead-zinc beds in limestone, silver and cobalt veins in calcite, porphyry copper stocks, bauxite and nickel laterite under tropical soil, carbonatite plugs for the rare earths, a dark layered intrusion at the bottom of the world for chromite and the platinum metals. Each body is rich at its core and peters out at the edges, and the grade of an ore block decides what it drops.
 
-## Supported targets
+![A banded iron bed in crimsite](docs/images/banded-iron-in-crimsite.jpg)
+![A silver vein in calcite](docs/images/silver-vein-in-calcite.jpg)
+![A lead-zinc bed in limestone](docs/images/lead-zinc-bed-in-limestone.jpg)
 
-| Minecraft | Loader | Requires |
-|-----------|--------|----------|
-| 1.21.1    | NeoForge 21.1.219+ | Create 6.0.10+ |
+An ore takes on whatever rock it formed in. The same hematite sits in stone, deepslate, granite, tuff, calcite, Create's crimsite, limestone, asurine and ochrum, or our own carbonatite and gabbro, and looks like it belongs there.
 
-Fabric is not supported: Create has no Fabric release for 1.21.1.
+![Ores in Create's stones](docs/images/ores-in-create-stones.jpg)
 
-## Project layout
+## The minerals
 
-```
-build.gradle.kts            # Shared build logic, applied to every version node
-settings.gradle.kts         # Stonecutter target registration + plugin repos
-stonecutter.gradle.kts      # Stonecutter controller (active version)
-gradle.properties           # Mod identity
-versions/<mc>-neoforge/     # Per-version dependency versions (NeoForge, Create, Parchment)
-src/main/java/              # Source; version differences via Stonecutter //? comments
-src/main/resources/         # META-INF/neoforge.mods.toml, mixins, assets, data
-tools/                      # Generators for ore textures and ore data (see PLAN §6)
-```
+Thirty-eight of them, each dropping a raw chunk of itself:
+
+- **Iron and ferroalloys:** Hematite, Magnetite, Goethite, Pyrolusite, Pentlandite, Nickel Laterite, Chromite, Wolframite, Scheelite, Molybdenite, Cobaltite, Ilmenite, Rutile
+- **Copper:** Chalcopyrite, Bornite, Chalcocite, Covellite, Malachite, Azurite, Cuprite
+- **Aluminium, lead, zinc, tin:** Bauxite, Galena, Sphalerite, Smithsonite, Hemimorphite, Cassiterite
+- **Rare earths:** Bastnäsite, Monazite, Xenotime, Ion-Adsorption Clay, Loparite, Euxenite
+- **Precious:** Native Silver, Argentite, Sperrylite, Cooperite, Braggite, Cinnabar
+
+Vanilla gold and copper ore stay: they are native gold and native copper, which are real minerals. Vanilla iron ore is gone, including the big deep veins, which are magnetite now.
+
+## From rock to metal
+
+Iron is made the way it was made for three thousand years before the blast furnace. Build a bloomery out of clay, load it with iron ore and charcoal (and only charcoal; the sulfur in coal ruins iron), light it with a torch, and wait. What comes out is not an ingot but a bloom, a spongy lump of iron and slag, which you hammer into wrought iron. Copper comes straight out of the bloomery from malachite, azurite and cuprite. Galena has to be roasted on a fire first, then gives lead.
+
+![Bloomeries and a campfire](docs/images/bloomery.jpg)
+![Raw chunks, a bloom, slag, the hammer, the mortar and pestle](docs/images/items.jpg)
+
+A mortar and pestle grinds by hand what Create's millstone grinds by power: grain to flour, and coloured minerals to the pigments painters have ground since antiquity. Hold the mortar in one hand and the material in the other.
+
+Everything else is still just ore. The sulfides, zinc, aluminium, nickel, tungsten, the rare earths and the platinum metals wait for Create machinery and the multiblock plant that comes after it. That is the plan, not a gap: the ore is the reason to build the machines.
+
+## Status
+
+Alpha. Expect ore amounts and recipes to change. Not yet in any pack. Issues and ideas welcome.
 
 ## Building
 
-Requires JDK 21 (auto-provisioned by Gradle's toolchain resolver).
+JDK 21 is provisioned by Gradle. `./gradlew buildAll` builds every target; jars land in `versions/<target>/build/libs/`. Textures and ore data are generated by the scripts in `tools/`, not edited by hand. The working plan lives in `docs/PLAN.md`.
 
-```bash
-# Build every registered target
-./gradlew buildAll
-```
-
-Output jars land in each node's `versions/<target>/build/libs/`.
-
-## Stack
-
-- [Architectury Loom](https://github.com/architectury/architectury-loom) — NeoForge build, Mojang mappings
-- [Stonecutter](https://stonecutter.kikugie.dev) — multi-version preprocessing from one source tree
-- [Parchment](https://parchmentmc.org) — parameter names + javadoc on top of Mojmap
-
-## License
-
-MIT — see [LICENSE](LICENSE).
+MIT licensed.

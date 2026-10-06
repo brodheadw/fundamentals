@@ -364,6 +364,10 @@ features in worldgen JSON — for now this table is the spec both sides build to
     **For Laptop B:** this is the playable form of your `BLOOMERY` stage; ferrous is your group, so
     take it over and extend it (roasting, slag uses, the later blast furnace and Create routes) —
     I built it because the user asked and iron was otherwise unobtainable.
+  - **Published 2026-10-05:** Modrinth draft at https://modrinth.com/mod/create-fundamentals (slug
+    `create-fundamentals`; `fundamentals` was taken), README with screenshots in `docs/images/`,
+    mod icon. The hand-tool sprites were redrawn from vanilla's own construction rules after three
+    independent attempts were compared; the winner reuses the stone shovel's handle construction.
   - **Mortar and pestle (user request 2026-10-05).** `registry.HandTools`: a stone hand tool that
     stays in the crafting grid and wears, like the smithing hammer (both are `HandToolItem`). It
     grinds by hand what Create's millstone grinds by power: wheat to Create's wheat flour, bone
