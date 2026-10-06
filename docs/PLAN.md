@@ -438,6 +438,13 @@ features in worldgen JSON — for now this table is the spec both sides build to
   Same branch: **seven advancements** (`tools/build_advancements.py`), deliberately few: a root,
   the bloom, the mortar, all 38 raw minerals, a concentrate, every rare earth ingot, a magnet
   alloy. The last two cannot be earned until reduction and alloying exist.
+- **2026-10-06 [A]** Branch `a/solar-panel` (PR into main): **solar panel** (`power.Electricity`,
+  `SolarPanelBlock`, `SolarPanelBlockEntity`), the first block of ours on TFMG's electrical network.
+  It extends TFMG's `ElectricBlockEntity` and reports 120 V and up to 200 W by sky light; the
+  numbers are guesses against TFMG's generator (200 V, 8 kW). Crafted from TFMG's P and N
+  semiconductors, glass, copper wire and aluminium plates. **Build:** Create, TFMG and the three
+  libraries Create bundles are now on the compile classpath (`modCompileOnly`), not just the
+  dev runtime. `tools/paint_power.py` paints it.
 
 ---
 

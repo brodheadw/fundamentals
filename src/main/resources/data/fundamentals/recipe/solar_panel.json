@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "GGG",
+    "PWN",
+    "AAA"
+  ],
+  "key": {
+    "G": {
+      "tag": "c:glass_blocks/colorless"
+    },
+    "P": {
+      "item": "tfmg:p_semiconductor"
+    },
+    "N": {
+      "item": "tfmg:n_semiconductor"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    },
+    "A": {
+      "tag": "c:plates/aluminum"
+    }
+  },
+  "result": {
+    "id": "fundamentals:solar_panel",
+    "count": 1
+  }
+}

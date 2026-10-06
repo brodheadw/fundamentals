@@ -203,7 +203,7 @@ REMOVED = {
 
 # Blocks from elsewhere in the mod that share the mining-tool tags this script writes.
 STORAGE_BLOCKS = [f"fundamentals:{name}" for _, form, name in items() if form == "block"]
-OTHER_MINEABLE = {"pickaxe": ["fundamentals:bloomery"] + STORAGE_BLOCKS}
+OTHER_MINEABLE = {"pickaxe": ["fundamentals:bloomery", "fundamentals:solar_panel"] + STORAGE_BLOCKS}
 OTHER_TIERED = {"stone": STORAGE_BLOCKS}
 
 DISPLAY = {"bastnasite": "Bastnäsite", "ion_adsorption_clay": "Ion-Adsorption Clay"}
