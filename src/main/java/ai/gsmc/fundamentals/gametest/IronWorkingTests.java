@@ -35,8 +35,12 @@ public class IronWorkingTests {
         helper.useBlock(POS, player);
     }
 
+    private static Item item(String id) {
+        return BuiltInRegistries.ITEM.get(ResourceLocation.parse(id));
+    }
+
     private static Item hematite() {
-        return BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "raw_hematite"));
+        return item("fundamentals:raw_hematite");
     }
 
     @GameTest(template = "empty", timeoutTicks = BloomeryBlockEntity.BURN_TICKS + 100)
@@ -92,7 +96,7 @@ public class IronWorkingTests {
     @GameTest(template = "empty")
     public void grindingInTheHandsUsesTheOtherHandsMaterial(GameTestHelper helper) {
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
-        Item malachite = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "raw_malachite"));
+        Item malachite = item("fundamentals:raw_malachite");
         ItemStack mortar = new ItemStack(HandTools.mortarAndPestle());
         player.setItemInHand(InteractionHand.MAIN_HAND, mortar);
 
@@ -112,9 +116,9 @@ public class IronWorkingTests {
     @GameTest(template = "empty")
     public void leadComesFromRoastedGalenaAndCopperFromMalachite(GameTestHelper helper) {
         var recipes = helper.getLevel().getRecipeManager();
-        Item rawGalena = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "raw_galena"));
-        Item rawMalachite = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "raw_malachite"));
-        Item lead = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("tfmg", "lead_ingot"));
+        Item rawGalena = item("fundamentals:raw_galena");
+        Item rawMalachite = item("fundamentals:raw_malachite");
+        Item lead = item("tfmg:lead_ingot");
         helper.assertTrue(lead != Items.AIR, "TFMG's lead ingot should exist");
 
         var roast = recipes.getRecipeFor(RecipeType.CAMPFIRE_COOKING, new SingleRecipeInput(new ItemStack(rawGalena)), helper.getLevel());
@@ -132,8 +136,8 @@ public class IronWorkingTests {
     @GameTest(template = "empty")
     public void mortarGrindsPigmentAndFlour(GameTestHelper helper) {
         var recipes = helper.getLevel().getRecipeManager();
-        Item malachite = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "raw_malachite"));
-        Item flour = BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath("create", "wheat_flour"));
+        Item malachite = item("fundamentals:raw_malachite");
+        Item flour = item("create:wheat_flour");
         helper.assertTrue(flour != Items.AIR, "Create's wheat flour should exist");
 
         CraftingInput pigment = CraftingInput.of(2, 1, List.of(new ItemStack(malachite), new ItemStack(HandTools.mortarAndPestle())));

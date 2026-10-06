@@ -5,52 +5,33 @@ import ai.gsmc.fundamentals.material.MaterialProperties;
 import ai.gsmc.fundamentals.material.MaterialRegistry;
 import ai.gsmc.fundamentals.material.MaterialType;
 
-/**
- * Materials for the {@code rare_earths} commodity group (Laptop A, PLAN §3): the REE ore
- * minerals, the mixed concentrates they beneficiate to, the sixteen separable elements, and the
- * magnet alloys.
- *
- * <p>Every ore yields a <em>mixed</em> concentrate; individual elements only exist after the
- * solvent-extraction cascade. An element's {@link MaterialForm#OXIDE} form is its separated
- * oxide (Nd2O3, Pr6O11, Tb4O7, CeO2, …), the product the cascade delivers before reduction.
- *
- * <p>Thorium, uranium, boron, cobalt, iron and Ti/Nb/Ta belong to Laptop B's groups — the ores
- * here only emit those as byproduct tags, never define them (PLAN §3 byproduct rule).
- */
+import static ai.gsmc.fundamentals.material.MaterialForm.*;
+
 public final class RareEarthMaterials {
 
     public static final String GROUP = "rare_earths";
 
-    private static final MaterialForm[] MINERAL_FORMS =
-            {MaterialForm.ORE, MaterialForm.RAW, MaterialForm.DUST};
-    private static final MaterialForm[] ELEMENT_FORMS =
-            {MaterialForm.OXIDE, MaterialForm.INGOT, MaterialForm.DUST};
-    private static final MaterialForm[] MAGNET_ELEMENT_FORMS =
-            {MaterialForm.OXIDE, MaterialForm.INGOT, MaterialForm.DUST, MaterialForm.NUGGET,
-                    MaterialForm.BLOCK};
-    private static final MaterialForm[] ALLOY_FORMS =
-            {MaterialForm.INGOT, MaterialForm.DUST, MaterialForm.NUGGET, MaterialForm.PLATE,
-                    MaterialForm.BLOCK};
+    private static final MaterialForm[] MINERAL_FORMS = {ORE, RAW, DUST};
+    private static final MaterialForm[] ELEMENT_FORMS = {OXIDE, INGOT, DUST};
+    private static final MaterialForm[] MAGNET_ELEMENT_FORMS = {OXIDE, INGOT, DUST, NUGGET, BLOCK};
+    private static final MaterialForm[] ALLOY_FORMS = {INGOT, DUST, NUGGET, PLATE, BLOCK};
 
     private RareEarthMaterials() {}
 
     public static void register() {
-        // --- Ore minerals ---
         mineral("bastnasite", "Bastnäsite", "(Ce,La,Nd)CO3F", MINERAL_FORMS, 0.63, 0);
         mineral("monazite", null, "(Ce,La,Nd,Th)PO4", MINERAL_FORMS, 0.65, 0.30);
         mineral("xenotime", null, "YPO4", MINERAL_FORMS, 0.60, 0.10);
-        mineral("ion_adsorption_clay", "Ion-Adsorption Clay", "",
-                new MaterialForm[] {MaterialForm.ORE, MaterialForm.RAW}, 0.33, 0);
+        mineral("ion_adsorption_clay", "Ion-Adsorption Clay", "", new MaterialForm[] {ORE, RAW}, 0.33, 0);
         mineral("loparite", null, "(Na,Ca,Ce)(Ti,Nb,Ta)O3", MINERAL_FORMS, 0.61, 0.15);
         mineral("euxenite", null, "(Y,Ca,Ce,U,Th)(Nb,Ta,Ti)2O6", MINERAL_FORMS, 0.64, 0.35);
 
-        // --- Mixed concentrates (pre-separation) ---
         reg("light_rare_earth_concentrate", null, MaterialType.CONCENTRATE, "",
-                new MaterialForm[] {MaterialForm.CONCENTRATE}, MaterialProperties.builder());
+                new MaterialForm[] {CONCENTRATE}, MaterialProperties.builder());
         reg("heavy_rare_earth_concentrate", null, MaterialType.CONCENTRATE, "",
-                new MaterialForm[] {MaterialForm.CONCENTRATE}, MaterialProperties.builder());
+                new MaterialForm[] {CONCENTRATE}, MaterialProperties.builder());
 
-        // --- Light REEs ---
+        // light
         element("lanthanum", "La", ELEMENT_FORMS, 0.78);
         element("cerium", "Ce", ELEMENT_FORMS, 0.86);
         element("praseodymium", "Pr", MAGNET_ELEMENT_FORMS, 0.86);
@@ -58,7 +39,7 @@ public final class RareEarthMaterials {
         element("samarium", "Sm", MAGNET_ELEMENT_FORMS, 0.96);
         element("europium", "Eu", ELEMENT_FORMS, 0.67);
 
-        // --- Heavy REEs (plus Y and Sc, which separate with them) ---
+        // heavy, plus Y and Sc, which separate with them
         element("gadolinium", "Gd", ELEMENT_FORMS, 1.00);
         element("terbium", "Tb", MAGNET_ELEMENT_FORMS, 1.05);
         element("dysprosium", "Dy", MAGNET_ELEMENT_FORMS, 1.09);
@@ -70,17 +51,13 @@ public final class RareEarthMaterials {
         element("yttrium", "Y", ELEMENT_FORMS, 0.57);
         element("scandium", "Sc", ELEMENT_FORMS, 0.38);
 
-        // --- Alloys ---
-        reg("didymium", null, MaterialType.ALLOY, "", new MaterialForm[] {MaterialForm.OXIDE,
-                        MaterialForm.INGOT, MaterialForm.DUST},
+        reg("didymium", null, MaterialType.ALLOY, "", new MaterialForm[] {OXIDE, INGOT, DUST},
                 MaterialProperties.builder().density(0.88));
         // Strongest magnet, but loses coercivity when hot; SmCo trades strength for heat.
         reg("neodymium_iron_boron", "NdFeB", MaterialType.ALLOY, "Nd2Fe14B", ALLOY_FORMS,
-                MaterialProperties.builder().density(0.95).magnetStrength(1.00)
-                        .heatResistance(0.30).hardness(0.60));
+                MaterialProperties.builder().density(0.95).magnetStrength(1.00).heatResistance(0.30).hardness(0.60));
         reg("samarium_cobalt", "SmCo", MaterialType.ALLOY, "SmCo5", ALLOY_FORMS,
-                MaterialProperties.builder().density(1.06).magnetStrength(0.70)
-                        .heatResistance(0.80).hardness(0.55));
+                MaterialProperties.builder().density(1.06).magnetStrength(0.70).heatResistance(0.80).hardness(0.55));
     }
 
     private static void mineral(String id, String display, String formula, MaterialForm[] forms,
@@ -90,8 +67,7 @@ public final class RareEarthMaterials {
     }
 
     private static void element(String id, String symbol, MaterialForm[] forms, double density) {
-        reg(id, null, MaterialType.ELEMENT, symbol, forms,
-                MaterialProperties.builder().density(density));
+        reg(id, null, MaterialType.ELEMENT, symbol, forms, MaterialProperties.builder().density(density));
     }
 
     private static void reg(String id, String display, MaterialType type, String formula,

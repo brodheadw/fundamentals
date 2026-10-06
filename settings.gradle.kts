@@ -11,10 +11,7 @@ pluginManagement {
 }
 
 plugins {
-    // Multi-version preprocessor/controller (https://stonecutter.kikugie.dev)
     id("dev.kikugie.stonecutter") version "0.7.5"
-    // Auto-provisions the JDK 21 toolchain that Minecraft 1.21.x requires,
-    // regardless of the JDK running Gradle.
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
 
@@ -29,12 +26,7 @@ stonecutter {
             }
         }
 
-        // ---------------------------------------------------------------
-        // Supported (Minecraft version × loader) targets.
-        // To add a new Minecraft version: add an `mc(...)` line here and
-        // create a matching `versions/<mc>-<loader>/gradle.properties`.
-        // See ROADMAP.md.
-        // ---------------------------------------------------------------
+        // A new target needs a line here and a versions/<mc>-<loader>/gradle.properties.
         mc("1.21.1", listOf("neoforge"))
 
         vcsVersion = "1.21.1-neoforge"

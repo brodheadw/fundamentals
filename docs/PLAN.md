@@ -409,6 +409,12 @@ features in worldgen JSON — for now this table is the spec both sides build to
     sphalerite and everything else still have no recipe; (6) Create's
     own zinc ore still generates (about 70 blocks per chunk) and should give way to sphalerite
     once sphalerite yields zinc.
+- **2026-10-06** Branch `chore/cleanup` (PR into main): code tidy across every group, no behaviour
+  change apart from two things. **Shared schema:** `Material` and `ProcessingChain` are records;
+  `Material.builder` is gone (define materials through `MaterialRegistry.define` /
+  `defineMineral`, as every group already did), and the content tables import `MaterialForm` and
+  `ProcessingStage` statically. **Bloomery:** it is a full cube again, as in the Modrinth
+  gallery; the stepped shaft from earlier in the day is reverted (the mortar's dark opening stays).
 
 ---
 

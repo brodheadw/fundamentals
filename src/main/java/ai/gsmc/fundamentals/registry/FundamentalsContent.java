@@ -9,57 +9,36 @@ import ai.gsmc.fundamentals.content.industrial_minerals.IndustrialMaterials;
 import ai.gsmc.fundamentals.content.precious_pgm.PreciousChains;
 import ai.gsmc.fundamentals.content.precious_pgm.PreciousMaterials;
 import ai.gsmc.fundamentals.content.rare_earths.RareEarthMaterials;
+import ai.gsmc.fundamentals.material.Material;
 import ai.gsmc.fundamentals.material.MaterialRegistry;
 import ai.gsmc.fundamentals.process.ProcessingChainRegistry;
-import ai.gsmc.fundamentals.process.ProcessingStage;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
-/**
- * Central content bootstrap. Each commodity group registers through its own registrar so the
- * two machines edit different files (PLAN §4); this class only lists the registrars to call.
- *
- * <p>When Laptop A adds a group, append one line here (e.g. {@code RareEarthMaterials.register()})
- * and note it in PLAN §6 — the only shared edit point, and only ever one line per group.
- */
 public final class FundamentalsContent {
 
     private FundamentalsContent() {}
 
     public static void registerAll() {
-        // --- Laptop B groups ---
         FerrousMaterials.register();
         FerrousChains.register();
         PreciousMaterials.register();
         PreciousChains.register();
         IndustrialMaterials.register();
         IndustrialChains.register();
-        // LightBatteryTech.register();     // TODO (B)
-        // MinorSpecialty.register();       // TODO (B)
-
-        // --- Laptop A groups ---
         RareEarthMaterials.register();
         BaseMetalMaterials.register();
 
-        Fundamentals.LOGGER.info("Registered {} materials, {} processing chains; {} stages available.",
-                MaterialRegistry.size(), ProcessingChainRegistry.size(), ProcessingStage.values().length);
-        Fundamentals.LOGGER.info("  ferrous_ferroalloy: {} materials",
-                MaterialRegistry.countInGroup(FerrousMaterials.GROUP));
-        Fundamentals.LOGGER.info("  precious_pgm: {} materials",
-                MaterialRegistry.countInGroup(PreciousMaterials.GROUP));
-        Fundamentals.LOGGER.info("  rare_earths: {} materials",
-                MaterialRegistry.countInGroup(RareEarthMaterials.GROUP));
-        Fundamentals.LOGGER.info("  base_metals: {} materials",
-                MaterialRegistry.countInGroup(BaseMetalMaterials.GROUP));
-        Fundamentals.LOGGER.info("  industrial_minerals: {} materials",
-                MaterialRegistry.countInGroup(IndustrialMaterials.GROUP));
+        Fundamentals.LOGGER.info("Registered materials {} and {} processing chains",
+                MaterialRegistry.all().stream().collect(
+                        Collectors.groupingBy(Material::group, LinkedHashMap::new, Collectors.counting())),
+                ProcessingChainRegistry.size());
 
-        // Fail loud in dev if a chain references a material/form that doesn't exist.
         List<String> problems = ProcessingChainRegistry.validateAll();
         if (!problems.isEmpty()) {
-            problems.forEach(p -> Fundamentals.LOGGER.error("  invalid chain: {}", p));
-            throw new IllegalStateException("Fundamentals: " + problems.size()
-                    + " processing-chain validation error(s) — see log.");
+            throw new IllegalStateException("Invalid processing chains: " + String.join("; ", problems));
         }
     }
 }

@@ -6,29 +6,19 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.BlockState;
 
-/**
- * Vanilla's giant deep ore veins are hardcoded, not data: the iron one places deepslate iron ore
- * and raw iron blocks. With vanilla iron ore gone (PLAN §2.4) that vein becomes magnetite — ore
- * through the vein, rich "core" ore where vanilla put raw blocks. The copper vein is left alone:
- * vanilla copper ore is native copper.
- *
- * <p>The swap happens on first use rather than when the vein type is created, because that is
- * before any mod block is registered.
- */
 public final class MagnetiteVeins {
 
-    /** Implemented by the mixin on vanilla's vein type. */
     public interface Vein {
         void fundamentals$setBlocks(BlockState ore, BlockState rich);
     }
 
-    /** Vanilla's iron vein type, captured by the mixin. */
     public static volatile Vein iron;
 
     private static volatile boolean applied;
 
     private MagnetiteVeins() {}
 
+    // Called as terrain starts generating: the vein type itself is created before any mod block is registered.
     public static void apply() {
         if (applied || iron == null) {
             return;

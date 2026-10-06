@@ -3,6 +3,8 @@ package ai.gsmc.fundamentals.ironworking;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -16,12 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/** What is inside a {@link BloomeryBlock}, how far the burn has got, and what it has made. */
 public class BloomeryBlockEntity extends BlockEntity {
 
-    /** Ore lumps one firing can take. */
     public static final int CAPACITY = 4;
-    /** One firing, in ticks. A real one took hours; this is a minute. */
     public static final int BURN_TICKS = 1200;
 
     private final List<ItemStack> ore = new ArrayList<>();
@@ -49,13 +48,12 @@ public class BloomeryBlockEntity extends BlockEntity {
         return !products.isEmpty();
     }
 
-    /** The bloomery recipe for a lump, if there is one. */
     public static Optional<RecipeHolder<BloomeryRecipe>> recipeFor(Level level, ItemStack stack) {
         return level.getRecipeManager().getRecipeFor(BloomeryRecipe.TYPE, new SingleRecipeInput(stack), level);
     }
 
     boolean addOre(ItemStack stack) {
-        if (lit() || hasProducts() || ore.size() >= CAPACITY || level == null || recipeFor(level, stack).isEmpty()) {
+        if (lit() || hasProducts() || ore.size() >= CAPACITY || recipeFor(level, stack).isEmpty()) {
             return false;
         }
         ore.add(stack.copyWithCount(1));
@@ -72,9 +70,8 @@ public class BloomeryBlockEntity extends BlockEntity {
         return true;
     }
 
-    /** Needs ore, and a lump of charcoal for each lump of ore. */
     boolean ignite() {
-        if (lit() || hasProducts() || ore.isEmpty() || charcoal < ore.size() || level == null) {
+        if (lit() || hasProducts() || ore.isEmpty() || charcoal < ore.size()) {
             return false;
         }
         burned = 0;
@@ -87,7 +84,6 @@ public class BloomeryBlockEntity extends BlockEntity {
         if (++bloomery.burned < BURN_TICKS) {
             return;
         }
-        // Each lump becomes what its recipe says, uses up one lump of charcoal, and leaves its slag.
         for (ItemStack lump : bloomery.ore) {
             recipeFor(level, lump).ifPresent(recipe -> {
                 bloomery.products.add(recipe.value().result().copy());
@@ -103,20 +99,13 @@ public class BloomeryBlockEntity extends BlockEntity {
         bloomery.setChanged();
     }
 
-    /** Rakes everything out of the front. */
     void takeProducts(BlockPos front) {
-        if (level == null) {
-            return;
-        }
         products.forEach(stack -> Block.popResource(level, front, stack));
         products.clear();
         setChanged();
     }
 
     void dropContents() {
-        if (level == null) {
-            return;
-        }
         ore.forEach(stack -> Block.popResource(level, worldPosition, stack));
         if (charcoal > 0) {
             Block.popResource(level, worldPosition, new ItemStack(Items.CHARCOAL, charcoal));
@@ -127,12 +116,8 @@ public class BloomeryBlockEntity extends BlockEntity {
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
-        net.minecraft.nbt.ListTag list = new net.minecraft.nbt.ListTag();
-        ore.forEach(stack -> list.add(stack.save(registries)));
-        tag.put("ore", list);
-        net.minecraft.nbt.ListTag made = new net.minecraft.nbt.ListTag();
-        products.forEach(stack -> made.add(stack.save(registries)));
-        tag.put("products", made);
+        tag.put("ore", save(ore, registries));
+        tag.put("products", save(products, registries));
         tag.putInt("charcoal", charcoal);
         tag.putInt("burned", burned);
     }
@@ -140,15 +125,20 @@ public class BloomeryBlockEntity extends BlockEntity {
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
-        ore.clear();
-        for (net.minecraft.nbt.Tag entry : tag.getList("ore", net.minecraft.nbt.Tag.TAG_COMPOUND)) {
-            ItemStack.parse(registries, entry).ifPresent(ore::add);
-        }
-        products.clear();
-        for (net.minecraft.nbt.Tag entry : tag.getList("products", net.minecraft.nbt.Tag.TAG_COMPOUND)) {
-            ItemStack.parse(registries, entry).ifPresent(products::add);
-        }
+        load(ore, tag.getList("ore", Tag.TAG_COMPOUND), registries);
+        load(products, tag.getList("products", Tag.TAG_COMPOUND), registries);
         charcoal = tag.getInt("charcoal");
         burned = tag.getInt("burned");
+    }
+
+    private static ListTag save(List<ItemStack> stacks, HolderLookup.Provider registries) {
+        ListTag list = new ListTag();
+        stacks.forEach(stack -> list.add(stack.save(registries)));
+        return list;
+    }
+
+    private static void load(List<ItemStack> stacks, ListTag list, HolderLookup.Provider registries) {
+        stacks.clear();
+        list.forEach(entry -> ItemStack.parse(registries, entry).ifPresent(stacks::add));
     }
 }

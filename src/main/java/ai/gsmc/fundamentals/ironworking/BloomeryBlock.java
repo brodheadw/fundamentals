@@ -10,6 +10,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -27,21 +28,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.shapes.CollisionContext;
-import net.minecraft.world.phys.shapes.Shapes;
-import net.minecraft.world.phys.shapes.VoxelShape;
 
-/**
- * A bloomery: the clay shaft furnace of antiquity and the Middle Ages, where charcoal reduces an
- * oxide ore by hand. For iron it never gets hot enough to melt the metal, so out comes a solid,
- * spongy <em>bloom</em> to be hammered into wrought iron; copper and lead do melt and come out as
- * metal. What goes in and what comes out is data: see {@link BloomeryRecipe}.
- *
- * <p>Worked by hand, with no GUI: put in iron ore and at least as much charcoal, light it with a
- * torch (or flint and steel), wait, then take out the blooms and slag with an empty hand.
- */
 public class BloomeryBlock extends BaseEntityBlock {
 
     public static final MapCodec<BloomeryBlock> CODEC = simpleCodec(BloomeryBlock::new);
@@ -73,15 +61,6 @@ public class BloomeryBlock extends BaseEntityBlock {
         return RenderShape.MODEL;
     }
 
-    /** A footing, a tapering shaft, a throat: the shape of the model. */
-    private static final VoxelShape SHAPE = Shapes.or(
-            Block.box(1, 0, 1, 15, 2, 15), Block.box(2, 2, 2, 14, 10, 14), Block.box(3, 10, 3, 13, 16, 13));
-
-    @Override
-    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE;
-    }
-
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return new BloomeryBlockEntity(pos, state);
@@ -99,36 +78,31 @@ public class BloomeryBlock extends BaseEntityBlock {
         if (!(level.getBlockEntity(pos) instanceof BloomeryBlockEntity bloomery)) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
-        boolean used;
-        if (BloomeryBlockEntity.recipeFor(level, stack).isPresent()) {
-            used = bloomery.addOre(stack);
-        } else if (stack.is(Items.CHARCOAL)) {
-            // Charcoal only: mineral coal's sulfur makes iron brittle, which is why smiths avoided it.
-            used = bloomery.addCharcoal();
-        } else if (stack.is(Items.TORCH) || stack.is(Items.FLINT_AND_STEEL) || stack.is(Items.FIRE_CHARGE)) {
-            // A torch has to work: flint and steel needs iron, and this is how you get your first.
-            used = bloomery.ignite();
-            if (used && !level.isClientSide) {
+        boolean ore = BloomeryBlockEntity.recipeFor(level, stack).isPresent();
+        // Charcoal only: mineral coal's sulfur makes iron brittle, which is why smiths avoided it.
+        if (ore || stack.is(Items.CHARCOAL)) {
+            if (!(ore ? bloomery.addOre(stack) : bloomery.addCharcoal())) {
+                return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            }
+            if (!level.isClientSide) {
+                stack.consume(1, player);
+                level.playSound(null, pos, SoundEvents.GRAVEL_PLACE, SoundSource.BLOCKS, 0.8F, 0.9F);
+            }
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
+        }
+        // A torch has to work: flint and steel needs iron, and this is how you get your first.
+        if ((stack.is(Items.TORCH) || stack.is(Items.FLINT_AND_STEEL) || stack.is(Items.FIRE_CHARGE)) && bloomery.ignite()) {
+            if (!level.isClientSide) {
                 level.playSound(null, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);
                 if (stack.is(Items.FLINT_AND_STEEL)) {
-                    stack.hurtAndBreak(1, player, net.minecraft.world.entity.LivingEntity.getSlotForHand(hand));
+                    stack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
                 } else {
                     stack.consume(1, player);
                 }
             }
-            return used ? ItemInteractionResult.sidedSuccess(level.isClientSide)
-                    : ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        } else {
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+            return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
-        if (!used) {
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        }
-        if (!level.isClientSide) {
-            stack.consume(1, player);
-            level.playSound(null, pos, SoundEvents.GRAVEL_PLACE, SoundSource.BLOCKS, 0.8F, 0.9F);
-        }
-        return ItemInteractionResult.sidedSuccess(level.isClientSide);
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     @Override
