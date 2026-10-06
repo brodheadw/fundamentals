@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "id": "fundamentals:iron_bloom"
+    },
+    "title": {
+      "translate": "advancement.fundamentals.bloom.title"
+    },
+    "description": {
+      "translate": "advancement.fundamentals.bloom.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "bloom": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:iron_bloom"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "fundamentals:root"
+}

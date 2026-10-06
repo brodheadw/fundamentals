@@ -435,6 +435,9 @@ features in worldgen JSON — for now this table is the spec both sides build to
   solution (ammonium sulfate in practice, sodium chloride at first), for which the mod has no
   salt yet. **User direction:** separation is to be a real counter-current battery of
   mixer-settler vats, two liquids flowing past each other through dozens of stages.
+  Same branch: **seven advancements** (`tools/build_advancements.py`), deliberately few: a root,
+  the bloom, the mortar, all 38 raw minerals, a concentrate, every rare earth ingot, a magnet
+  alloy. The last two cannot be earned until reduction and alloying exist.
 
 ---
 

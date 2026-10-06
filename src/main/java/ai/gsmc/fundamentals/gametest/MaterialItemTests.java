@@ -74,6 +74,15 @@ public class MaterialItemTests {
     }
 
     @GameTest(template = "empty")
+    public void theAdvancementsLoad(GameTestHelper helper) {
+        for (String name : new String[] {"root", "bloom", "mortar", "collection", "concentrate", "rare_earths", "magnet"}) {
+            helper.assertTrue(helper.getLevel().getServer().getAdvancements().get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, name)) != null,
+                    "advancement " + name + " did not load");
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
     public void nuggetsPackIntoIngotsAndIngotsIntoBlocks(GameTestHelper helper) {
         var recipes = helper.getLevel().getRecipeManager();
         CraftingInput nuggets = CraftingInput.of(3, 3, Collections.nCopies(9, new ItemStack(item("fundamentals:neodymium_nugget"))));
