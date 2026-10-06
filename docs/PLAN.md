@@ -426,6 +426,15 @@ features in worldgen JSON — for now this table is the spec both sides build to
   `paint_materials.MATERIALS`, but first we need the mapping from a form to an item that
   vanilla, Create or TFMG already has (iron, copper, zinc, lead, steel), or they register twice.
   `build_ore_data.py` now also writes `remove_tfmg_lead_ore.json`; it used to delete it.
+- **2026-10-06 [A]** Branch `a/ree-beneficiation` (PR into main): the rare earth minerals' first
+  steps, as recipes on Create's own machines (written by `tools/build_material_data.py`).
+  Milling and crushing grind bastnäsite, xenotime, loparite and euxenite to dust; fan washing
+  stands in for gravity concentration and leaves mixed concentrate half the time (light from raw
+  monazite sand and loparite, heavy from xenotime and euxenite). **Not built:** bastnäsite
+  needs a flotation cell, and the ion-adsorption clay an ion-exchange leach with a salt
+  solution (ammonium sulfate in practice, sodium chloride at first), for which the mod has no
+  salt yet. **User direction:** separation is to be a real counter-current battery of
+  mixer-settler vats, two liquids flowing past each other through dozens of stages.
 
 ---
 

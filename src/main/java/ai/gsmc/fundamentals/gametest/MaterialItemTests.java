@@ -61,6 +61,19 @@ public class MaterialItemTests {
     }
 
     @GameTest(template = "empty")
+    public void rareEarthMineralsGrindAndWashOnCreatesMachines(GameTestHelper helper) {
+        var recipes = helper.getLevel().getRecipeManager();
+        for (String id : new String[] {"milling/bastnasite_dust", "crushing/xenotime_dust", "washing/raw_monazite", "washing/euxenite_dust"}) {
+            var recipe = recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, id));
+            helper.assertTrue(recipe.isPresent(), id + " did not load");
+            String machine = BuiltInRegistries.RECIPE_TYPE.getKey(recipe.get().value().getType()).toString();
+            helper.assertTrue(machine.equals("create:" + (id.startsWith("washing") ? "splashing" : id.substring(0, id.indexOf('/')))),
+                    id + " is a " + machine + " recipe");
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
     public void nuggetsPackIntoIngotsAndIngotsIntoBlocks(GameTestHelper helper) {
         var recipes = helper.getLevel().getRecipeManager();
         CraftingInput nuggets = CraftingInput.of(3, 3, Collections.nCopies(9, new ItemStack(item("fundamentals:neodymium_nugget"))));

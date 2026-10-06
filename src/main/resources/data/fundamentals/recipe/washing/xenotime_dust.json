@@ -1,0 +1,14 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "fundamentals:xenotime_dust"
+    }
+  ],
+  "results": [
+    {
+      "chance": 0.5,
+      "id": "fundamentals:heavy_rare_earth_concentrate"
+    }
+  ]
+}

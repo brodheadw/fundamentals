@@ -1,0 +1,18 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_xenotime"
+    }
+  ],
+  "processing_time": 400,
+  "results": [
+    {
+      "id": "fundamentals:xenotime_dust"
+    },
+    {
+      "chance": 0.25,
+      "id": "fundamentals:xenotime_dust"
+    }
+  ]
+}
