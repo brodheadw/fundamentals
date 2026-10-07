@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": {
+    "item": "fundamentals:neodymium_oxalate"
+  },
+  "result": {
+    "id": "fundamentals:neodymium_oxide"
+  },
+  "experience": 0.3,
+  "cookingtime": 200
+}

@@ -1,0 +1,9 @@
+{
+  "type": "fundamentals:separation",
+  "liquor": "fundamentals:heavy_rare_earth_liquor",
+  "organic": "fundamentals:p204",
+  "strip": "fundamentals:hydrochloric_acid",
+  "stages": 10,
+  "light": "fundamentals:samarium_europium_gadolinium_liquor",
+  "heavy": "fundamentals:terbium_to_lutetium_liquor"
+}

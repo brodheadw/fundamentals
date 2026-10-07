@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": {
+    "item": "fundamentals:thulium_oxalate"
+  },
+  "result": {
+    "id": "fundamentals:thulium_oxide"
+  },
+  "experience": 0.3,
+  "cookingtime": 200
+}

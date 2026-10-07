@@ -21,8 +21,10 @@ OUT = Path(__file__).resolve().parent.parent / "src/main/resources/assets/fundam
 # These mirror the form lists in content/rare_earths/RareEarthMaterials.java.
 MINERAL = ("dust",)
 CONCENTRATE = ("concentrate",)
-ELEMENT = ("oxide", "dust", "ingot")
-MAGNET_ELEMENT = ("oxide", "dust", "ingot", "nugget", "block")
+ELEMENT = ("oxalate", "oxide", "dust", "ingot")
+MAGNET_ELEMENT = ("oxalate", "oxide", "dust", "ingot", "nugget", "block")
+# Scandium and didymium are not in the chloride liquors, so they have no oxalate.
+NO_LIQUOR = ("oxide", "dust", "ingot")
 ALLOY = ("dust", "ingot", "nugget", "plate", "block")
 
 WHITE = ((150, 150, 148), (206, 206, 204), (236, 236, 234), (255, 255, 255))
@@ -100,8 +102,8 @@ MATERIALS = {
     "samarium": MAGNET_ELEMENT, "europium": ELEMENT,
     "gadolinium": ELEMENT, "terbium": MAGNET_ELEMENT, "dysprosium": MAGNET_ELEMENT, "holmium": ELEMENT,
     "erbium": ELEMENT, "thulium": ELEMENT, "ytterbium": ELEMENT, "lutetium": ELEMENT, "yttrium": ELEMENT,
-    "scandium": ELEMENT,
-    "didymium": ELEMENT, "neodymium_iron_boron": ALLOY, "samarium_cobalt": ALLOY,
+    "scandium": NO_LIQUOR,
+    "didymium": NO_LIQUOR, "neodymium_iron_boron": ALLOY, "samarium_cobalt": ALLOY,
 }
 
 DISPLAY = {"bastnasite": "Bastnäsite", "neodymium_iron_boron": "NdFeB", "samarium_cobalt": "SmCo"}
@@ -119,6 +121,9 @@ def items():
 def palette(material, form):
     if form == "oxide":
         return OXIDE[material]
+    if form == "oxalate":
+        # Oxalates are near-white; a trace of the oxide's colour is all that shows.
+        return mix(WHITE, OXIDE[material], 0.55)
     if material in P:
         return P[material]
     if material in OTHER:
@@ -216,6 +221,24 @@ SHAPES = {
         ".012334454433210",
         "..0012233322100.",
         "....000000000...",
+        "................",
+        "................",
+    ],
+    "oxalate": [
+        "................",
+        "................",
+        "................",
+        "................",
+        "................",
+        ".......7........",
+        "......676.6.....",
+        ".....56765765...",
+        "....4566545654..",
+        "...345654565432.",
+        "..23456545654321",
+        ".12345654543321.",
+        ".01233443322100.",
+        "..00000000000...",
         "................",
         "................",
     ],

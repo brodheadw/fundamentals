@@ -1,0 +1,9 @@
+{
+  "type": "fundamentals:separation",
+  "liquor": "fundamentals:ytterbium_lutetium_liquor",
+  "organic": "fundamentals:p507",
+  "strip": "fundamentals:hydrochloric_acid",
+  "stages": 20,
+  "light": "fundamentals:ytterbium_liquor",
+  "heavy": "fundamentals:lutetium_liquor"
+}

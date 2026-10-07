@@ -1,0 +1,46 @@
+{
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "side": "fundamentals:block/mixer_settler_side",
+    "inside": "fundamentals:block/mixer_settler_inside",
+    "rim": "fundamentals:block/mixer_settler_rim",
+    "window": "fundamentals:block/mixer_settler_window",
+    "motor": "fundamentals:block/mixer_settler_motor",
+    "particle": "fundamentals:block/mixer_settler_side"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        1,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        1
+      ],
+      "faces": {
+        "north": {
+          "texture": "#inside",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#inside",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        }
+      }
+    }
+  ]
+}

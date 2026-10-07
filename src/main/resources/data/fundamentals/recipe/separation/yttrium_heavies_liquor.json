@@ -1,0 +1,9 @@
+{
+  "type": "fundamentals:separation",
+  "liquor": "fundamentals:yttrium_heavies_liquor",
+  "organic": "fundamentals:naphthenic_acid",
+  "strip": "fundamentals:hydrochloric_acid",
+  "stages": 14,
+  "light": "fundamentals:yttrium_liquor",
+  "heavy": "fundamentals:holmium_to_lutetium_liquor"
+}
