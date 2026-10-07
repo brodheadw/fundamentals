@@ -101,6 +101,8 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     public int capacity() { return CAPACITY_PER_CASING * volume(); }
     public int batch() { return BATCH_PER_CASING * volume(); }
     public boolean isController() { return controller == null || worldPosition.equals(controller); }
+    /** A stage is three across and three along, one or two tall; anything less is just casing. */
+    public boolean isStage() { MixerSettlerBlockEntity s = stage(); return s.across >= 3 && s.along >= 3; }
     public BlockPos controllerPos() { return controller == null ? worldPosition : controller; }
 
     public Direction facing() {
@@ -291,7 +293,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     private MixerSettlerBlockEntity nextStage(boolean ahead) {
         MixerSettlerBlockEntity me = stage();
         MixerSettlerBlockEntity other = casingAt(ahead ? me.worldPosition.relative(facing(), me.along) : me.worldPosition.relative(facing(), -1));
-        if (other == null) {
+        if (other == null || !other.isStage()) {
             return null;
         }
         MixerSettlerBlockEntity next = other.stage();
@@ -351,7 +353,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
      */
     @Nullable
     public IFluidHandler handler(@Nullable Direction side) {
-        if (side == null) {
+        if (side == null || !isStage()) {
             return null;
         }
         MixerSettlerBlockEntity stage = stage();
@@ -368,14 +370,17 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
             return new Port(stage.aqueous, false);
         }
         if ((head || tail) && side.getAxis().isHorizontal() && side.getAxis() != facing().getAxis()) {
-            return stage.out;
+            return new Port(stage.out, null);
         }
         return null;
     }
 
-    /** A tank seen through a pipe: the top takes only organics, the ends only liquors and acids. */
-    private record Port(Tank tank, boolean organic) implements IFluidHandler {
+    /** A tank seen through a pipe: the top takes only organics, the ends only liquors and acids, the sides only give. */
+    private record Port(Tank tank, @Nullable Boolean organic) implements IFluidHandler {
         private boolean accepts(FluidStack stack) {
+            if (organic == null) {
+                return false;
+            }
             Reagents.Kind kind = Separation.kind(stack.getFluid());
             return organic ? kind == Reagents.Kind.ORGANIC : kind == Reagents.Kind.LIQUOR || kind == Reagents.Kind.ACID;
         }
@@ -421,7 +426,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     }
 
     static void serverTick(Level level, BlockPos pos, BlockState state, MixerSettlerBlockEntity casing) {
-        if (!casing.isController()) {
+        if (!casing.isController() || !casing.isStage()) {
             return;
         }
         if (casing.stirring > 0) {
@@ -577,6 +582,10 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+        if (!isStage()) {
+            tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler.casing")));
+            return true;
+        }
         List<MixerSettlerBlockEntity> stages = battery();
         MixerSettlerBlockEntity head = stages.getFirst();
         tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler.stages", stages.size(), head.batch())));

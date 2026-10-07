@@ -130,29 +130,35 @@ public class SeparationTests {
         });
     }
 
-    /** A lab line: single-wide casings merge three at a time along the axis, so a row of 24 is eight small stages. */
+    /** A pilot line: three wide, three long, one tall; and anything smaller is not a stage at all. */
     @GameTest(template = "battery", timeoutTicks = 800)
-    public void aRowOfSingleCasingsIsABatteryOfSmallStages(GameTestHelper helper) {
+    public void aPilotLineOfSingleLayerStagesCutsSmallBatches(GameTestHelper helper) {
         for (int i = 0; i < 24; i++) {
-            helper.setBlock(new BlockPos(1 + i, 2, 1), CASING);
+            for (int dz = 1; dz <= 3; dz++) {
+                helper.setBlock(new BlockPos(1 + i, 2, dz), CASING);
+            }
         }
+        helper.setBlock(new BlockPos(1, 4, 4), CASING);
+        helper.setBlock(new BlockPos(2, 4, 4), CASING);
         for (int i = 0; i < 8; i++) {
-            mixer(helper, 1 + 3 * i, 3, 1);
+            mixer(helper, 1 + 3 * i, 3, 2);
         }
         helper.setBlock(new BlockPos(1, 2, 0), Blocks.REDSTONE_BLOCK);
         helper.runAfterDelay(SPIN_UP, () -> {
             MixerSettlerBlockEntity head = casing(helper, 1, 2, 1);
-            helper.assertTrue(head.isController() && head.along() == 3 && head.volume() == 3, "casings along the axis merge three at a time, got " + head.volume());
-            helper.assertTrue(head.battery().size() == 8, "twenty-four casings should be eight stages, got " + head.battery().size());
+            helper.assertTrue(head.isController() && head.across() == 3 && head.along() == 3 && head.tall() == 1, "casings merge into 3x3x1 stages, got " + head.across() + "x" + head.along() + "x" + head.tall());
+            helper.assertTrue(head.battery().size() == 8, "seventy-two casings should be eight stages, got " + head.battery().size());
+            helper.assertTrue(!casing(helper, 1, 4, 4).isStage() && helper.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, helper.absolutePos(new BlockPos(1, 4, 4)), Direction.UP) == null,
+                    "two casings are not a stage and have no ports");
             for (int i = 0; i < 8; i++) {
-                port(helper, 1 + 3 * i, Direction.UP).fill(new FluidStack(Separation.fluid("p507"), 750), IFluidHandler.FluidAction.EXECUTE);
+                port(helper, 1 + 3 * i, Direction.UP).fill(new FluidStack(Separation.fluid("p507"), 2250), IFluidHandler.FluidAction.EXECUTE);
             }
-            helper.assertTrue(fill(helper, 1, Direction.WEST, "rare_earth_liquor", 1000) == 3 * MixerSettlerBlockEntity.CAPACITY_PER_CASING,
-                    "a three-casing stage holds three casings' worth");
-            fill(helper, 24, Direction.EAST, "hydrochloric_acid", 750);
+            helper.assertTrue(fill(helper, 1, Direction.WEST, "rare_earth_liquor", 3000) == 9 * MixerSettlerBlockEntity.CAPACITY_PER_CASING,
+                    "a nine-casing stage holds nine casings' worth");
+            fill(helper, 24, Direction.EAST, "hydrochloric_acid", 2250);
             helper.runAfterDelay(settle(8), () -> {
                 FluidStack raffinate = held(helper, 1, Direction.NORTH);
-                int small = 3 * MixerSettlerBlockEntity.BATCH_PER_CASING;
+                int small = 9 * MixerSettlerBlockEntity.BATCH_PER_CASING;
                 helper.assertTrue(raffinate.is(Separation.fluid("light_rare_earth_liquor")) && raffinate.getAmount() >= small && raffinate.getAmount() % small == 0,
                         "the head should hold small batches of raffinate, got " + raffinate);
                 helper.succeed();
@@ -166,7 +172,7 @@ public class SeparationTests {
         helper.setBlock(new BlockPos(1, 1, 2), CASING);
         helper.runAfterDelay(SPIN_UP, () -> {
             MixerSettlerBlockEntity pair = casing(helper, 1, 1, 1);
-            helper.assertTrue(pair.isController() && pair.across() == 2 && pair.along() == 1 && pair.tall() == 1, "two casings side by side should be one 2x1x1 stage");
+            helper.assertTrue(pair.isController() && pair.across() == 2 && pair.along() == 1 && pair.tall() == 1 && !pair.isStage(), "two casings side by side merge but are not yet a stage");
             helper.assertBlockProperty(new BlockPos(1, 1, 1), MixerSettlerBlock.RIGHT, true);
             helper.assertBlockProperty(new BlockPos(1, 1, 2), MixerSettlerBlock.LEFT, true);
             helper.setBlock(new BlockPos(2, 1, 1), CASING);
@@ -234,8 +240,13 @@ public class SeparationTests {
 
     @GameTest(template = "battery", timeoutTicks = 100)
     public void thePortsOnlyTakeWhatBelongsInThem(GameTestHelper helper) {
-        helper.setBlock(new BlockPos(1, 2, 1), CASING);
+        for (int dx = 0; dx < 3; dx++) {
+            for (int dz = 1; dz <= 3; dz++) {
+                helper.setBlock(new BlockPos(1 + dx, 2, dz), CASING);
+            }
+        }
         helper.runAfterDelay(SPIN_UP, () -> {
+            helper.assertTrue(port(helper, 1, Direction.NORTH).fill(new FluidStack(Separation.fluid("rare_earth_liquor"), 100), IFluidHandler.FluidAction.EXECUTE) == 0, "the sides only give");
             helper.assertTrue(fill(helper, 1, Direction.UP, "rare_earth_liquor", 100) == 0, "the top is for organics");
             helper.assertTrue(fill(helper, 1, Direction.WEST, "p507", 100) == 0, "the back is for liquor");
             helper.assertTrue(port(helper, 1, Direction.WEST).fill(new FluidStack(Fluids.WATER, 100), IFluidHandler.FluidAction.EXECUTE) == 0, "water is not a reagent");
@@ -247,13 +258,15 @@ public class SeparationTests {
     @GameTest(template = "battery", timeoutTicks = 800)
     public void organicChargedAtTheHeadRunsDownTheBattery(GameTestHelper helper) {
         for (int i = 0; i < 9; i++) {
-            helper.setBlock(new BlockPos(1 + i, 2, 1), CASING);
+            for (int dz = 1; dz <= 3; dz++) {
+                helper.setBlock(new BlockPos(1 + i, 2, dz), CASING);
+            }
         }
         helper.runAfterDelay(SPIN_UP, () -> {
-            fill(helper, 1, Direction.UP, "p507", 750);
+            fill(helper, 1, Direction.UP, "p507", 2250);
             helper.runAfterDelay(400, () -> {
                 int head = held(helper, 1, Direction.UP).getAmount(), tail = held(helper, 7, Direction.UP).getAmount();
-                helper.assertTrue(tail > 0 && head + held(helper, 4, Direction.UP).getAmount() + tail == 750,
+                helper.assertTrue(tail > 0 && head + held(helper, 4, Direction.UP).getAmount() + tail == 2250,
                         "the organic should spread forward and be conserved, got " + head + " / " + tail);
                 helper.succeed();
             });

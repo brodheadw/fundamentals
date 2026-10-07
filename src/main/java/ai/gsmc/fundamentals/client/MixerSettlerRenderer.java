@@ -39,7 +39,7 @@ public class MixerSettlerRenderer implements BlockEntityRenderer<MixerSettlerBlo
 
     @Override
     public void render(MixerSettlerBlockEntity stage, float partialTick, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-        if (!stage.isController()) {
+        if (!stage.isController() || !stage.isStage()) {
             return;
         }
         ms.pushPose();

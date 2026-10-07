@@ -107,6 +107,7 @@
   "fluid_type.fundamentals.yttrium_liquor": "Yttrium Liquor",
   "fundamentals.title": "Fundamentals",
   "goggles.fundamentals.mixer_settler.bench": "Bench battery of %s, %s mB a batch",
+  "goggles.fundamentals.mixer_settler.casing": "Casing: a stage is three across and three along",
   "goggles.fundamentals.mixer_settler.idle": "Nothing in the feed",
   "goggles.fundamentals.mixer_settler.lever": "Waiting for the lever",
   "goggles.fundamentals.mixer_settler.loose": "Not part of a stage: three across, three along, two tall",
