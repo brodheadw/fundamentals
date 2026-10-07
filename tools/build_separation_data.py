@@ -234,9 +234,18 @@ def mixer_settler():
               {"ambientocclusion": False, "render_type": "minecraft:cutout", "textures": tex, "elements": elements})
         return f"fundamentals:block/mixer_settler/{name}"
 
-    def wall(side):
-        """Create's tank window: two four-pixel posts of our panel and, between them, a flat pane of Create's
-        glass set just inside the wall, drawn as its fluid tank model draws it."""
+    def panel(side):
+        """A plain wall: one panel, our dark sheet outside, the lid colour inside, capped."""
+        inner = {"west": "east", "east": "west", "north": "south", "south": "north"}[side]
+        lo, hi = {"west": ((0, 0, 0), (1, 16, 16)), "east": ((15, 0, 0), (16, 16, 16)),
+                  "north": ((0, 0, 0), (16, 16, 1)), "south": ((0, 0, 15), (16, 16, 16))}[side]
+        along_x = side in ("north", "south")
+        cap = ("#top", [0, 0, 16, 1] if along_x else [0, 0, 1, 16], False)
+        return [box(lo, hi, {side: ("#side", full, True), inner: ("#top", full, False), "up": cap})]
+
+    def window_wall(side, part):
+        """Create's tank window: four-pixel posts and a flat pane of its glass just inside the wall, the pane
+        rounded at the ends; `part` is single, bottom or top of a two-tall window."""
         inner = {"west": "east", "east": "west", "north": "south", "south": "north"}[side]
         lo, hi = {"west": ((0, 0, 0), (1, 16, 16)), "east": ((15, 0, 0), (16, 16, 16)),
                   "north": ((0, 0, 0), (16, 16, 1)), "south": ((0, 0, 15), (16, 16, 16))}[side]
@@ -247,20 +256,17 @@ def mixer_settler():
             f, t = list(lo), list(hi)
             f[0 if along_x else 2], t[0 if along_x else 2] = p0, p1
             out.append(box(f, t, {side: ("#side", uv, True), inner: ("#top", uv, False), "up": cap}))
-        # the pane: zero thickness, 0.05 in from the inner face of the wall, both faces glass
+        uv = {"single": [0, 0, 8, 16], "bottom": [0, 4, 8, 16], "top": [0, 0, 8, 12]}[part]
         depth = {"west": 0.95, "east": 15.05, "north": 0.95, "south": 15.05}[side]
         f, t = list(lo), list(hi)
         f[0 if along_x else 2], t[0 if along_x else 2] = 4, 12
         f[2 if along_x else 0] = t[2 if along_x else 0] = depth
-        out.append(box(f, t, {side: ("#window", [8, 0, 16, 16], False), inner: ("#window", [8, 0, 16, 16], False)}))
-        # the lintel over the glass so the wall reads closed from above
-        f, t = list(lo), list(hi)
-        f[0 if along_x else 2], t[0 if along_x else 2] = 4, 12
-        f[1], t[1] = 15, 16
-        out.append(box(f, t, {side: ("#side", [4, 0, 12, 1], True), inner: ("#top", [4, 0, 12, 1], False), "up": cap}))
+        out.append(box(f, t, {side: ("#window", uv, False), inner: ("#window", uv, False)}))
         return out
 
-    walls = {prop: model(f"wall_{prop}", wall(side)) for side, prop in (("west", "left"), ("east", "right"), ("north", "front"), ("south", "back"))}
+    sides = (("west", "left"), ("east", "right"), ("north", "front"), ("south", "back"))
+    walls = {prop: model(f"wall_{prop}", panel(side)) for side, prop in sides}
+    windows = {(prop, part): model(f"wall_{prop}_{part}", window_wall(side, part)) for side, prop in sides for part in ("single", "bottom", "top")}
     floor = model("floor", [box((0, 0, 0), (16, 1, 16), {"down": ("#top", full, True), "up": ("#top", full, False)})])
     weir = model("weir", [box((0, 1, 0), (16, 16, 1), {"north": ("#top", full, False), "south": ("#top", full, False), "up": ("#top", [0, 0, 16, 1], False)})])
     weir_lip = model("weir_lip", [box((0, 0, 0), (16, 3, 1), {"north": ("#top", [0, 13, 16, 16], False), "south": ("#top", [0, 13, 16, 16], False),
@@ -277,7 +283,10 @@ def mixer_settler():
     for facing, y in (("north", 0), ("east", 90), ("south", 180), ("west", 270)):
         rot = {"y": y} if y else {}
         for prop, mdl in walls.items():
-            parts.append({"when": {"facing": facing, prop: "false"}, "apply": {"model": mdl, **rot}})
+            parts.append({"when": {"facing": facing, prop: "false", "window": "false"}, "apply": {"model": mdl, **rot}})
+            parts.append({"when": {"facing": facing, prop: "false", "window": "true", "above": "false", "below": "false"}, "apply": {"model": windows[(prop, "single")], **rot}})
+            parts.append({"when": {"facing": facing, prop: "false", "window": "true", "above": "true", "below": "false"}, "apply": {"model": windows[(prop, "bottom")], **rot}})
+            parts.append({"when": {"facing": facing, prop: "false", "window": "true", "above": "false", "below": "true"}, "apply": {"model": windows[(prop, "top")], **rot}})
         parts.append({"when": {"facing": facing, "front": "false", "link_ahead": "true", "above": "false"}, "apply": {"model": port_ahead, **rot}})
         parts.append({"when": {"facing": facing, "back": "false", "link_behind": "true", "below": "false"}, "apply": {"model": port_behind, **rot}})
         parts.append({"when": {"facing": facing, "rows": "well", "below": "false"}, "apply": {"model": weir, **rot}})
@@ -286,7 +295,7 @@ def mixer_settler():
     parts.append({"when": {"below": "false"}, "apply": {"model": floor}})
     write(ASSETS / "blockstates/mixer_settler.json", {"multipart": parts})
     write(ASSETS / "models/item/mixer_settler.json", {"ambientocclusion": False, "textures": tex, "elements":
-          wall("west") + wall("east") + wall("north") + wall("south")
+          panel("west") + panel("east") + panel("north") + panel("south")
           + [box((0, 0, 0), (16, 1, 16), {"down": ("#top", full, False), "up": ("#top", full, False)}),
              box((0, 1, 10), (16, 13, 11), {"north": ("#top", [0, 3, 16, 15], False), "south": ("#top", [0, 3, 16, 15], False), "up": ("#top", [0, 10, 16, 11], False)})],
           "display": {"gui": {"rotation": [30, 225, 0], "scale": [0.625, 0.625, 0.625]}, "ground": {"scale": [0.25, 0.25, 0.25]},

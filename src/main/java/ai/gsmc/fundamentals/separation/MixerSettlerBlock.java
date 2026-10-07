@@ -57,6 +57,8 @@ public class MixerSettlerBlock extends BaseEntityBlock {
     /** The hatch: the trough's top-centre casing has no lid, and the Mechanical Mixer stands over it. */
     public static final BooleanProperty OPEN = BooleanProperty.create("open");
     /** Ports in the shared wall to the stage ahead (organic overflows forward) and behind (aqueous drains back). */
+    /** The middle casing of an outside wall carries the stage's window, as Create's tanks do. */
+    public static final BooleanProperty WINDOW = BooleanProperty.create("window");
     public static final BooleanProperty LINK_AHEAD = BooleanProperty.create("link_ahead");
     public static final BooleanProperty LINK_BEHIND = BooleanProperty.create("link_behind");
     public static final int MAX_ACROSS = 3;
@@ -78,7 +80,7 @@ public class MixerSettlerBlock extends BaseEntityBlock {
         registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH)
                 .setValue(LEFT, false).setValue(RIGHT, false).setValue(FRONT, false).setValue(BACK, false)
                 .setValue(ABOVE, false).setValue(BELOW, false).setValue(ROWS, Rows.SINGLE).setValue(OPEN, true)
-                .setValue(LINK_AHEAD, false).setValue(LINK_BEHIND, false));
+                .setValue(LINK_AHEAD, false).setValue(LINK_BEHIND, false).setValue(WINDOW, false));
     }
 
     @Override
@@ -88,7 +90,7 @@ public class MixerSettlerBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, LEFT, RIGHT, FRONT, BACK, ABOVE, BELOW, ROWS, OPEN, LINK_AHEAD, LINK_BEHIND);
+        builder.add(FACING, LEFT, RIGHT, FRONT, BACK, ABOVE, BELOW, ROWS, OPEN, LINK_AHEAD, LINK_BEHIND, WINDOW);
     }
 
     @Override

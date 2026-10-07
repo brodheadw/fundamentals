@@ -253,7 +253,8 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
                             .setValue(MixerSettlerBlock.BACK, l0 > 0).setValue(MixerSettlerBlock.FRONT, l0 < l - 1)
                             .setValue(MixerSettlerBlock.BELOW, u > 0).setValue(MixerSettlerBlock.ABOVE, u < h - 1)
                             .setValue(MixerSettlerBlock.ROWS, l == 1 ? Rows.SINGLE : l0 == 0 ? Rows.WELL : Rows.BAY)
-                            .setValue(MixerSettlerBlock.OPEN, l0 == 0 && u == h - 1 && a == w / 2);
+                            .setValue(MixerSettlerBlock.OPEN, l0 == 0 && u == h - 1 && a == w / 2)
+                            .setValue(MixerSettlerBlock.WINDOW, a == w / 2 || l0 == l / 2);
                     level.setBlock(casing.worldPosition, state, Block.UPDATE_ALL);
                 }
             }
