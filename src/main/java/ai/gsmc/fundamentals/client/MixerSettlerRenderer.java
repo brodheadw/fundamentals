@@ -31,6 +31,13 @@ public class MixerSettlerRenderer implements BlockEntityRenderer<MixerSettlerBlo
 
     @Override
     public void render(MixerSettlerBlockEntity stage, float partialTick, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+        if (stage.pouring()) {
+            // organic arriving from a pipe above: a stream down into the vat
+            FluidStack organic = stage.stage().organic();
+            if (!organic.isEmpty()) {
+                FLUIDS.renderFluidBox(organic, 6 * PX, 2 * PX, 6 * PX, 10 * PX, 1 + 2 * PX, 10 * PX, buffer, ms, light, false, false);
+            }
+        }
         if (!stage.isController()) {
             return;
         }
@@ -61,10 +68,23 @@ public class MixerSettlerRenderer implements BlockEntityRenderer<MixerSettlerBlo
         if (!organic.isEmpty()) {
             FLUIDS.renderFluidBox(organic, PX, aqueousTop, bayFront, right, organicTop, bayBack, buffer, ms, light, false, false);
         }
-        FluidStack churn = aqueous.isEmpty() ? organic : aqueous;
-        if (!churn.isEmpty()) {
-            float churnTop = Math.min(weir - PX, stage.stirring() ? organicTop + PX : organicTop);
-            FLUIDS.renderFluidBox(churn, PX, FLOOR, wellFront, right, churnTop, wellBack, buffer, ms, light, false, false);
+        // The trough: while the mixer turns the two phases are beaten into an emulsion, drawn as the aqueous
+        // column with bands of organic through it; at rest they settle into the same layers as the bay.
+        float churnTop = Math.min(weir - PX, organicTop);
+        if (stage.stirring() && !aqueous.isEmpty() && !organic.isEmpty()) {
+            FLUIDS.renderFluidBox(aqueous, PX, FLOOR, wellFront, right, churnTop, wellBack, buffer, ms, light, false, false);
+            float band = (churnTop - FLOOR) / 6;
+            for (int i = 0; i < 3; i++) {
+                float y0 = FLOOR + band * (2 * i + 1) + (stage.getLevel().getGameTime() % 10 < 5 ? band * 0.3F : 0);
+                FLUIDS.renderFluidBox(organic, 2 * PX, y0, wellFront + PX, right - PX, Math.min(churnTop, y0 + band * 0.5F), wellBack - PX, buffer, ms, light, false, false);
+            }
+        } else {
+            if (!aqueous.isEmpty()) {
+                FLUIDS.renderFluidBox(aqueous, PX, FLOOR, wellFront, right, Math.min(churnTop, aqueousTop), wellBack, buffer, ms, light, false, false);
+            }
+            if (!organic.isEmpty() && churnTop > aqueousTop) {
+                FLUIDS.renderFluidBox(organic, PX, Math.min(churnTop, aqueousTop), wellFront, right, churnTop, wellBack, buffer, ms, light, false, false);
+            }
         }
         ms.popPose();
     }

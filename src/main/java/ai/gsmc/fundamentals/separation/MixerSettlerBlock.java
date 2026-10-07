@@ -7,6 +7,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
@@ -20,8 +21,13 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * Casing for a solvent-extraction stage. Casings facing the same way merge into one stage as they are
@@ -87,6 +93,37 @@ public class MixerSettlerBlock extends BaseEntityBlock {
     @Override
     protected RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
+    }
+
+    /** The vat is open: its floor and whatever walls it has, so a player can climb in and stand in the liquor. */
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return SHAPES.computeIfAbsent(state, MixerSettlerBlock::shapeOf);
+    }
+
+    private static final Map<BlockState, VoxelShape> SHAPES = new HashMap<>();
+
+    private static VoxelShape shapeOf(BlockState state) {
+        Direction facing = state.getValue(FACING);
+        Direction right = facing.getClockWise();
+        VoxelShape shape = state.getValue(BELOW) ? Shapes.empty() : Block.box(0, 0, 1, 16, 1, 16).move(0, 0, -1 / 16.0);
+        shape = Shapes.or(shape, state.getValue(BELOW) ? Shapes.empty() : Block.box(0, 0, 0, 16, 1, 16));
+        if (!state.getValue(LEFT)) shape = Shapes.or(shape, wall(right.getOpposite()));
+        if (!state.getValue(RIGHT)) shape = Shapes.or(shape, wall(right));
+        if (!state.getValue(FRONT)) shape = Shapes.or(shape, wall(facing));
+        if (!state.getValue(BACK)) shape = Shapes.or(shape, wall(facing.getOpposite()));
+        if (state.getValue(ROWS) == Rows.WELL && !state.getValue(BELOW)) shape = Shapes.or(shape, wall(facing));
+        return shape;
+    }
+
+    private static VoxelShape wall(Direction side) {
+        return switch (side) {
+            case NORTH -> Block.box(0, 0, 0, 16, 16, 1);
+            case SOUTH -> Block.box(0, 0, 15, 16, 16, 16);
+            case WEST -> Block.box(0, 0, 0, 1, 16, 16);
+            case EAST -> Block.box(15, 0, 0, 16, 16, 16);
+            default -> Shapes.empty();
+        };
     }
 
     // Merging during placement would re-enter setBlock on the block being placed, so it waits a tick.

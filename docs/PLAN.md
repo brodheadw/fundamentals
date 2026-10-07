@@ -129,7 +129,9 @@ rides in the lead-zinc beds, HF from fluorspar and sulfuric acid, fluorides by m
 TFMG air in a centrifuge vat, calcium from limesand and HCl on electrodes; electrolysis (fluoride + 2 oxide →
 2 ingots, electrodes), calciothermic (2 fluoride + 2 calcium + argon → 2 ingots + 2 fluorspar), lanthanothermic
 (2 oxide + 2 La ingots + argon → 2 ingots + 2 La oxide). Storage under argon is NOT built; what follows is the open
-direction. The shape to build toward: the **oxide is the shelf-stable form** of every rare earth
+direction. Also open (Will, 2026-10-07: "part of this is gonna be getting rid of hazardous byproducts"): the
+raffinate and the spent strip are acidic and carry ammonium, and monazite liquor carries thorium; a waste leg
+(neutralising with lime to gypsum, a thorium residue to store) is the next piece after storage. The shape to build toward: the **oxide is the shelf-stable form** of every rare earth
 (and lithium, calcium, the alkaline earths), so it is what the separation line makes and what trades.
 The **metal tarnishes**: rare earth and alkali metal left in ordinary storage drifts back toward its oxide
 (Eu, La, Ce and Nd fastest; Y, Gd and the heavies slowest), and keeping it as metal takes a sealed vessel

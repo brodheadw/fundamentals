@@ -33,8 +33,12 @@ import java.util.stream.Stream;
 @PrefixGameTestTemplate(false)
 public class SeparationTests {
 
-    private static final int SETTLE = 2 * MixerSettlerBlockEntity.PERIOD + 15;
     private static final int SPIN_UP = 10;
+
+    /** Ticks for a battery of {@code stages} to come to equilibrium and deliver a batch or two. */
+    private static int settle(int stages) {
+        return stages * MixerSettlerBlockEntity.EQUILIBRATION_PER_STAGE + 2 * MixerSettlerBlockEntity.PERIOD + 20;
+    }
     private static final int PLANT = 18 * MixerSettlerBlockEntity.CAPACITY_PER_CASING;
     private static final BlockState CASING = Separation.mixerSettler().defaultBlockState().setValue(MixerSettlerBlock.FACING, Direction.EAST);
 
@@ -46,6 +50,11 @@ public class SeparationTests {
         helper.setBlock(new BlockPos(x, y, z), mixer.defaultBlockState());
         helper.setBlock(new BlockPos(x, y, z + 1), cog.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y));
         helper.setBlock(new BlockPos(x, y + 1, z + 1), motor.defaultBlockState().setValue(BlockStateProperties.FACING, Direction.DOWN));
+        // a mixer wants more than the motor's default 16 rpm
+        var motorEntity = helper.getBlockEntity(new BlockPos(x, y + 1, z + 1));
+        var tag = motorEntity.saveWithoutMetadata(helper.getLevel().registryAccess());
+        tag.putInt("ScrollValue", 64);
+        motorEntity.loadWithComponents(tag, helper.getLevel().registryAccess());
     }
 
     /**
@@ -66,6 +75,7 @@ public class SeparationTests {
         for (int i = 0; i < stages; i++) {
             mixer(helper, 1 + 3 * i, 3, 2);
         }
+        helper.setBlock(new BlockPos(1, 1, 0), Blocks.REDSTONE_BLOCK);
         helper.runAfterDelay(SPIN_UP, () -> {
             for (int i = 0; i < stages; i++) {
                 MixerSettlerBlockEntity corner = casing(helper, 1 + 3 * i, 1, 1);
@@ -98,13 +108,13 @@ public class SeparationTests {
         return port(helper, x, side).getFluidInTank(0);
     }
 
-    @GameTest(template = "battery", timeoutTicks = 200)
+    @GameTest(template = "battery", timeoutTicks = 800)
     public void anEightStagePlantBatteryPartsTheLiquor(GameTestHelper helper) {
         int batch = 18 * MixerSettlerBlockEntity.BATCH_PER_CASING;
         plantBattery(helper, 8, "p507", () -> {
             helper.assertTrue(fill(helper, 1, Direction.WEST, "rare_earth_liquor", 1000) == 1000, "the head's back face should take the feed");
             helper.assertTrue(fill(helper, 24, Direction.EAST, "hydrochloric_acid", 1000) == 1000, "the tail's front face should take the acid");
-            helper.runAfterDelay(SETTLE, () -> {
+            helper.runAfterDelay(settle(8), () -> {
                 FluidStack raffinate = held(helper, 1, Direction.NORTH);
                 FluidStack strip = held(helper, 24, Direction.NORTH);
                 int cuts = raffinate.getAmount() / batch;
@@ -121,7 +131,7 @@ public class SeparationTests {
     }
 
     /** A lab line: single-wide casings merge three at a time along the axis, so a row of 24 is eight small stages. */
-    @GameTest(template = "battery", timeoutTicks = 200)
+    @GameTest(template = "battery", timeoutTicks = 800)
     public void aRowOfSingleCasingsIsABatteryOfSmallStages(GameTestHelper helper) {
         for (int i = 0; i < 24; i++) {
             helper.setBlock(new BlockPos(1 + i, 2, 1), CASING);
@@ -129,6 +139,7 @@ public class SeparationTests {
         for (int i = 0; i < 8; i++) {
             mixer(helper, 1 + 3 * i, 3, 1);
         }
+        helper.setBlock(new BlockPos(1, 2, 0), Blocks.REDSTONE_BLOCK);
         helper.runAfterDelay(SPIN_UP, () -> {
             MixerSettlerBlockEntity head = casing(helper, 1, 2, 1);
             helper.assertTrue(head.isController() && head.along() == 3 && head.volume() == 3, "casings along the axis merge three at a time, got " + head.volume());
@@ -139,7 +150,7 @@ public class SeparationTests {
             helper.assertTrue(fill(helper, 1, Direction.WEST, "rare_earth_liquor", 1000) == 3 * MixerSettlerBlockEntity.CAPACITY_PER_CASING,
                     "a three-casing stage holds three casings' worth");
             fill(helper, 24, Direction.EAST, "hydrochloric_acid", 750);
-            helper.runAfterDelay(SETTLE, () -> {
+            helper.runAfterDelay(settle(8), () -> {
                 FluidStack raffinate = held(helper, 1, Direction.NORTH);
                 int small = 3 * MixerSettlerBlockEntity.BATCH_PER_CASING;
                 helper.assertTrue(raffinate.is(Separation.fluid("light_rare_earth_liquor")) && raffinate.getAmount() >= small && raffinate.getAmount() % small == 0,
@@ -149,7 +160,7 @@ public class SeparationTests {
         });
     }
 
-    @GameTest(template = "battery", timeoutTicks = 200)
+    @GameTest(template = "battery", timeoutTicks = 800)
     public void casingsMergeAsTheyArePlacedAndBreakApartWhenOneGoes(GameTestHelper helper) {
         helper.setBlock(new BlockPos(1, 1, 1), CASING);
         helper.setBlock(new BlockPos(1, 1, 2), CASING);
@@ -178,12 +189,12 @@ public class SeparationTests {
         });
     }
 
-    @GameTest(template = "battery", timeoutTicks = 200)
+    @GameTest(template = "battery", timeoutTicks = 800)
     public void aBatteryTooShortForItsCutDoesNothing(GameTestHelper helper) {
         plantBattery(helper, 7, "p507", () -> {
             fill(helper, 1, Direction.WEST, "rare_earth_liquor", 1000);
             fill(helper, 21, Direction.EAST, "hydrochloric_acid", 1000);
-            helper.runAfterDelay(SETTLE, () -> {
+            helper.runAfterDelay(settle(8), () -> {
                 helper.assertTrue(held(helper, 1, Direction.NORTH).isEmpty() && held(helper, 1, Direction.WEST).getAmount() == 1000,
                         "seven stages cannot make an eight-stage cut");
                 helper.assertTrue(helper.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, helper.absolutePos(new BlockPos(11, 2, 1)), Direction.NORTH) == null,
@@ -193,15 +204,29 @@ public class SeparationTests {
         });
     }
 
-    @GameTest(template = "battery", timeoutTicks = 200)
+    @GameTest(template = "battery", timeoutTicks = 800)
     public void aStageWithNoMixerTurningStallsTheBattery(GameTestHelper helper) {
         plantBattery(helper, 8, "p507", () -> {
             fill(helper, 1, Direction.WEST, "rare_earth_liquor", 1000);
             fill(helper, 24, Direction.EAST, "hydrochloric_acid", 1000);
             helper.setBlock(new BlockPos(10, 4, 3), Blocks.AIR);
-            helper.runAfterDelay(SETTLE, () -> {
+            helper.runAfterDelay(settle(8), () -> {
                 helper.assertTrue(held(helper, 1, Direction.NORTH).isEmpty(), "with one motor gone the battery should stall");
                 helper.assertTrue(casing(helper, 1, 1, 1).stall().map(s -> s[0]).orElse("").equals("mixer"), "the goggles should blame the mixer");
+                helper.succeed();
+            });
+        });
+    }
+
+    @GameTest(template = "battery", timeoutTicks = 800)
+    public void theBatteryWaitsForItsLever(GameTestHelper helper) {
+        plantBattery(helper, 8, "p507", () -> {
+            helper.setBlock(new BlockPos(1, 1, 0), Blocks.AIR);
+            fill(helper, 1, Direction.WEST, "rare_earth_liquor", 1000);
+            fill(helper, 24, Direction.EAST, "hydrochloric_acid", 1000);
+            helper.runAfterDelay(settle(8), () -> {
+                helper.assertTrue(held(helper, 1, Direction.NORTH).isEmpty(), "no lever, no cut");
+                helper.assertTrue(casing(helper, 1, 1, 1).stall().map(s -> s[0]).orElse("").equals("lever"), "the goggles should ask for the lever");
                 helper.succeed();
             });
         });
@@ -219,7 +244,7 @@ public class SeparationTests {
         });
     }
 
-    @GameTest(template = "battery", timeoutTicks = 200)
+    @GameTest(template = "battery", timeoutTicks = 800)
     public void organicChargedAtTheHeadRunsDownTheBattery(GameTestHelper helper) {
         for (int i = 0; i < 9; i++) {
             helper.setBlock(new BlockPos(1 + i, 2, 1), CASING);
@@ -235,12 +260,12 @@ public class SeparationTests {
         });
     }
 
-    @GameTest(template = "battery", timeoutTicks = 200)
+    @GameTest(template = "battery", timeoutTicks = 800)
     public void theWrongOrganicStallsTheCut(GameTestHelper helper) {
         plantBattery(helper, 8, "p204", () -> {
             fill(helper, 1, Direction.WEST, "rare_earth_liquor", 1000);
             fill(helper, 24, Direction.EAST, "hydrochloric_acid", 1000);
-            helper.runAfterDelay(SETTLE, () -> {
+            helper.runAfterDelay(settle(8), () -> {
                 helper.assertTrue(held(helper, 1, Direction.NORTH).isEmpty(), "the first cut wants P507, not P204");
                 helper.succeed();
             });

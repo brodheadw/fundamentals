@@ -304,6 +304,8 @@ def names():
     lang["goggles.fundamentals.mixer_settler.short"] = "%s parts in %s stages; this battery has %s"
     lang["goggles.fundamentals.mixer_settler.organic"] = "Every stage wants %s on top"
     lang["goggles.fundamentals.mixer_settler.mixer"] = "Every trough wants a Mechanical Mixer turning over it"
+    lang["goggles.fundamentals.mixer_settler.lever"] = "Waiting for the lever"
+    lang["goggles.fundamentals.mixer_settler.settling"] = "Coming to equilibrium: %s s"
     lang["goggles.fundamentals.mixer_settler.strip"] = "The far end wants %s"
     lang["goggles.fundamentals.mixer_settler.ready"] = "Parting %s into %s and %s"
     write(path, lang)
