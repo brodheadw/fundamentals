@@ -4,7 +4,6 @@
   "textures": {
     "side": "fundamentals:block/mixer_settler_side",
     "top": "fundamentals:block/mixer_settler_top",
-    "window": "fundamentals:block/mixer_settler_window",
     "particle": "fundamentals:block/mixer_settler_side"
   },
   "elements": [

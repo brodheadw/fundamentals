@@ -2,9 +2,9 @@
 """Paints the mixer-settler casing, the one fluid texture every reagent is tinted from, and the salt and
 oxalic acid. Edit and re-run; don't hand-edit the PNGs.
 
-The casing is Create's fluid tank in dark steel: its riveted panels, connected-texture sheet, inner wall
-and window are Create's own (MIT) textures recoloured by luminance, so the vat reads exactly like a
-Create tank and its connected textures line up with Create's sheet layout.
+The casing is a welded polypropylene tank, as the real ones are: Create's fluid-tank panel and connected-texture
+sheet (MIT) recoloured by luminance onto a dark flat PP grey, so the frame ribs land on the exterior edges of a stage
+the way Create's connected textures place them.
 
     python3 tools/paint_separation.py
 """
@@ -18,7 +18,8 @@ TEXTURES = Path(__file__).resolve().parent.parent / "src/main/resources/assets/f
 CREATE_JAR = next(Path.home().glob(".gradle/caches/modules-2/files-2.1/maven.modrinth/create/*/*/create-*.jar"))
 
 # Dark steel, from the shadow in a seam to the glint on a rivet.
-STEEL = [(22, 24, 30), (34, 37, 44), (46, 50, 58), (58, 63, 72), (74, 80, 90), (96, 103, 114), (126, 134, 146), (160, 168, 180)]
+# Welded polypropylene sheet, as the real tanks are: dark, flat, a little blue, the frame ribs a shade lighter.
+STEEL = [(30, 33, 38), (40, 44, 50), (48, 52, 59), (56, 61, 68), (66, 72, 80), (84, 91, 100), (104, 112, 122), (128, 136, 146)]
 COPPER = [(120, 62, 44), (172, 96, 66), (212, 136, 98), (244, 190, 156)]
 
 

@@ -214,13 +214,13 @@ def oxalates():
 
 
 def mixer_settler():
-    """The casing is a closed tank cell in Create's fluid-tank idiom: a lid, a floor, and on every face not
-    shared with the rest of its stage a wall of two posts and a window pane, so a lone casing is a small tank
-    and a stage is those cells grown into one. The trough's top-centre casing is the hatch, open for the
-    Mechanical Mixer that stands over it, as a mixer stands over a basin. Create's connected textures tie the walls and lids together.
-    The trough and bay are logic, seen through the windows as the fluids the renderer draws inside."""
+    """The casing: a cell of an open-topped welded tank, as a Chinese separation hall is built. A floor under
+    the bottom layer, a full panel on every face not shared with the rest of its stage, no lid, and a weir on
+    the seam between the mixing trough (the back row) and the settling bay, full height on the bottom layer
+    and a lip on the one above. A one-row stage keeps a small well at the back of the row. Create's connected
+    textures put the frame ribs on the exterior edges; the fluids inside are drawn by the renderer."""
     tex = {"side": "fundamentals:block/mixer_settler_side", "top": "fundamentals:block/mixer_settler_top",
-           "window": "fundamentals:block/mixer_settler_window", "particle": "fundamentals:block/mixer_settler_side"}
+           "particle": "fundamentals:block/mixer_settler_side"}
     full = [0, 0, 16, 16]
 
     def box(f, t, faces):
@@ -233,51 +233,41 @@ def mixer_settler():
         return f"fundamentals:block/mixer_settler/{name}"
 
     def wall(side):
-        """Two posts and the pane between them, as Create's windowed tank draws a side."""
-        if side == "west":
-            lo, hi = (0, 0, 0), (1, 16, 16)
-        elif side == "east":
-            lo, hi = (15, 0, 0), (16, 16, 16)
-        elif side == "north":
-            lo, hi = (0, 0, 0), (16, 16, 1)
-        else:
-            lo, hi = (0, 0, 15), (16, 16, 16)
-        along_x = side in ("north", "south")
-        out = []
         inner = {"west": "east", "east": "west", "north": "south", "south": "north"}[side]
-        # posts are plain steel on the inside, so a window never looks straight through the far wall
-        for p0, p1, uv in ((0, 4, [0, 0, 4, 16]), (12, 16, [12, 0, 16, 16])):
-            f, t = list(lo), list(hi)
-            f[0 if along_x else 2], t[0 if along_x else 2] = p0, p1
-            out.append(box(f, t, {side: ("#side", uv, True), inner: ("#top", uv, False)}))
-        f, t = list(lo), list(hi)
-        f[0 if along_x else 2], t[0 if along_x else 2] = 4, 12
-        out.append(box(f, t, {side: ("#window", [4, 0, 12, 16], True), inner: ("#window", [4, 0, 12, 16], False)}))
-        return out
+        lo, hi = {"west": ((0, 0, 0), (1, 16, 16)), "east": ((15, 0, 0), (16, 16, 16)),
+                  "north": ((0, 0, 0), (16, 16, 1)), "south": ((0, 0, 15), (16, 16, 16))}[side]
+        return [box(lo, hi, {side: ("#side", full, True), inner: ("#top", full, False),
+                             "up": ("#top", [0, 0, 16, 1] if side in ("north", "south") else [0, 0, 1, 16], False)})]
 
     walls = {prop: model(f"wall_{prop}", wall(side)) for side, prop in (("west", "left"), ("east", "right"), ("north", "front"), ("south", "back"))}
-    lid = model("lid", [box((0, 15, 0), (16, 16, 16), {"up": ("#top", full, True), "down": ("#top", full, False)})])
     floor = model("floor", [box((0, 0, 0), (16, 1, 16), {"down": ("#top", full, True), "up": ("#top", full, False)})])
+    weir = model("weir", [box((0, 1, 0), (16, 16, 1), {"north": ("#top", full, False), "south": ("#top", full, False), "up": ("#top", [0, 0, 16, 1], False)})])
+    weir_lip = model("weir_lip", [box((0, 0, 0), (16, 3, 1), {"north": ("#top", [0, 13, 16, 16], False), "south": ("#top", [0, 13, 16, 16], False),
+                                                           "up": ("#top", [0, 0, 16, 1], False)})])
+    well = model("well", [box((0, 1, 10), (16, 13, 11), {"north": ("#top", [0, 3, 16, 15], False), "south": ("#top", [0, 3, 16, 15], False),
+                                                      "up": ("#top", [0, 10, 16, 11], False)})])
 
     parts = []
     for facing, y in (("north", 0), ("east", 90), ("south", 180), ("west", 270)):
         rot = {"y": y} if y else {}
         for prop, mdl in walls.items():
             parts.append({"when": {"facing": facing, prop: "false"}, "apply": {"model": mdl, **rot}})
-    parts.append({"when": {"above": "false", "open": "false"}, "apply": {"model": lid}})
+        parts.append({"when": {"facing": facing, "rows": "well", "below": "false"}, "apply": {"model": weir, **rot}})
+        parts.append({"when": {"facing": facing, "rows": "well", "below": "true"}, "apply": {"model": weir_lip, **rot}})
+        parts.append({"when": {"facing": facing, "rows": "single", "below": "false"}, "apply": {"model": well, **rot}})
     parts.append({"when": {"below": "false"}, "apply": {"model": floor}})
     write(ASSETS / "blockstates/mixer_settler.json", {"multipart": parts})
     write(ASSETS / "models/item/mixer_settler.json", {"ambientocclusion": False, "textures": tex, "elements":
           wall("west") + wall("east") + wall("north") + wall("south")
-          + [box((0, 15, 0), (16, 16, 16), {"up": ("#top", full, False), "down": ("#top", full, False)}),
-             box((0, 0, 0), (16, 1, 16), {"down": ("#top", full, False), "up": ("#top", full, False)})],
+          + [box((0, 0, 0), (16, 1, 16), {"down": ("#top", full, False), "up": ("#top", full, False)}),
+             box((0, 1, 10), (16, 13, 11), {"north": ("#top", [0, 3, 16, 15], False), "south": ("#top", [0, 3, 16, 15], False), "up": ("#top", [0, 10, 16, 11], False)})],
           "display": {"gui": {"rotation": [30, 225, 0], "scale": [0.625, 0.625, 0.625]}, "ground": {"scale": [0.25, 0.25, 0.25]},
                       "fixed": {"scale": [0.5, 0.5, 0.5]}, "thirdperson_righthand": {"rotation": [75, 45, 0], "scale": [0.375, 0.375, 0.375], "translation": [0, 2.5, 0]},
                       "firstperson_righthand": {"rotation": [0, 45, 0], "scale": [0.4, 0.4, 0.4]}}})
     write(DATA / "loot_table/blocks/mixer_settler.json", {"type": "minecraft:block", "pools": [drop_self("mixer_settler")]})
     write(RECIPES / "mixer_settler.json", {
-        "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["C C", "SSS", "SPS"],
-        "key": {"C": {"tag": "c:ingots/copper"}, "S": {"tag": "c:plates/steel"}, "P": {"item": "create:fluid_pipe"}},
+        "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["P P", "PPP", "PFP"],
+        "key": {"P": {"item": "tfmg:plastic_sheet"}, "F": {"item": "create:fluid_pipe"}},
         "result": {"id": "fundamentals:mixer_settler", "count": 6}})
     for name in ("salt", "oxalic_acid", "calcium_ingot"):
         write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})

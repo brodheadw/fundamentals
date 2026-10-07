@@ -4,39 +4,46 @@
   "textures": {
     "side": "fundamentals:block/mixer_settler_side",
     "top": "fundamentals:block/mixer_settler_top",
-    "window": "fundamentals:block/mixer_settler_window",
     "particle": "fundamentals:block/mixer_settler_side"
   },
   "elements": [
     {
       "from": [
         0,
-        15,
+        0,
         0
       ],
       "to": [
         16,
-        16,
-        16
+        3,
+        1
       ],
       "faces": {
+        "north": {
+          "texture": "#top",
+          "uv": [
+            0,
+            13,
+            16,
+            16
+          ]
+        },
+        "south": {
+          "texture": "#top",
+          "uv": [
+            0,
+            13,
+            16,
+            16
+          ]
+        },
         "up": {
           "texture": "#top",
           "uv": [
             0,
             0,
             16,
-            16
-          ],
-          "cullface": "up"
-        },
-        "down": {
-          "texture": "#top",
-          "uv": [
-            0,
-            0,
-            16,
-            16
+            1
           ]
         }
       }
