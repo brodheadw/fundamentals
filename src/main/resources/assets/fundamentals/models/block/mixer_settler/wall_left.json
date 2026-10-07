@@ -3,8 +3,7 @@
   "render_type": "minecraft:cutout",
   "textures": {
     "side": "fundamentals:block/mixer_settler_side",
-    "inside": "fundamentals:block/mixer_settler_inside",
-    "rim": "fundamentals:block/mixer_settler_rim",
+    "top": "fundamentals:block/mixer_settler_top",
     "window": "fundamentals:block/mixer_settler_window",
     "particle": "fundamentals:block/mixer_settler_side"
   },
@@ -18,7 +17,7 @@
       "to": [
         1,
         16,
-        16
+        4
       ],
       "faces": {
         "west": {
@@ -26,17 +25,65 @@
           "uv": [
             0,
             0,
+            4,
+            16
+          ],
+          "cullface": "west"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        0,
+        12
+      ],
+      "to": [
+        1,
+        16,
+        16
+      ],
+      "faces": {
+        "west": {
+          "texture": "#side",
+          "uv": [
+            12,
+            0,
             16,
+            16
+          ],
+          "cullface": "west"
+        }
+      }
+    },
+    {
+      "from": [
+        0,
+        0,
+        4
+      ],
+      "to": [
+        1,
+        16,
+        12
+      ],
+      "faces": {
+        "west": {
+          "texture": "#window",
+          "uv": [
+            4,
+            0,
+            12,
             16
           ],
           "cullface": "west"
         },
         "east": {
-          "texture": "#inside",
+          "texture": "#window",
           "uv": [
+            4,
             0,
-            0,
-            16,
+            12,
             16
           ]
         }

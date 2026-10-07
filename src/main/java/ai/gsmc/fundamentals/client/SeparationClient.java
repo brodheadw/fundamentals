@@ -59,10 +59,11 @@ public final class SeparationClient {
         });
     }
 
-    /** The side walls connect only within one stage: two stages end to end stay two tanks. */
+    /** Walls and lids connect only within one stage: two stages end to end stay two tanks. */
     private static class StageWalls extends HorizontalCTBehaviour {
         StageWalls() {
-            super(CTSpriteShifter.getCT(AllCTTypes.RECTANGLE, id("block/mixer_settler_side"), id("block/mixer_settler_side_connected")));
+            super(CTSpriteShifter.getCT(AllCTTypes.RECTANGLE, id("block/mixer_settler_side"), id("block/mixer_settler_side_connected")),
+                    CTSpriteShifter.getCT(AllCTTypes.RECTANGLE, id("block/mixer_settler_top"), id("block/mixer_settler_top_connected")));
         }
 
         @Override

@@ -47,15 +47,6 @@ def steel(img):
     return out
 
 
-def rim():
-    img = Image.new("RGBA", (16, 16))
-    rng = random.Random("rim")
-    for y in range(16):
-        for x in range(16):
-            img.putpixel((x, y), STEEL[5 if rng.random() < 0.7 else 4] + (255,))
-    return img
-
-
 def liquor(seed, flow=False):
     """A still liquid: pale ripples on white, tinted per fluid by the game. The flow texture is the same
     at twice the height so pipes can scroll it."""
@@ -67,6 +58,18 @@ def liquor(seed, flow=False):
             ripple = (x + y * 2 + rng.randint(0, 1)) % 7 in (0, 1)
             v = 196 if ripple else 232 if rng.random() < 0.8 else 214
             img.putpixel((x, y), (v, v, v, 230))
+    return img
+
+
+def ingot(pal):
+    """The calcium ingot, drawn with the materials painter's ingot shape in a dull grey."""
+    from paint_materials import SHAPES, ramp
+    tones = ramp(pal)
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    for y, row in enumerate(SHAPES["ingot"]):
+        for x, tone in enumerate(row):
+            if tone != ".":
+                img.putpixel((x, y), tones[int(tone)] + (255,))
     return img
 
 
@@ -103,9 +106,9 @@ def main():
     (TEXTURES / "item").mkdir(parents=True, exist_ok=True)
     steel(create_texture("fluid_tank")).save(TEXTURES / "block/mixer_settler_side.png")
     steel(create_texture("fluid_tank_connected")).save(TEXTURES / "block/mixer_settler_side_connected.png")
-    steel(create_texture("fluid_tank_inner")).save(TEXTURES / "block/mixer_settler_inside.png")
     steel(create_texture("fluid_tank_window")).save(TEXTURES / "block/mixer_settler_window.png")
-    rim().save(TEXTURES / "block/mixer_settler_rim.png")
+    steel(create_texture("fluid_tank_top")).save(TEXTURES / "block/mixer_settler_top.png")
+    steel(create_texture("fluid_tank_top_connected")).save(TEXTURES / "block/mixer_settler_top_connected.png")
     liquor("still").save(TEXTURES / "block/fluid/liquor_still.png")
     liquor("flow", flow=True).save(TEXTURES / "block/fluid/liquor_flow.png")
     heap("salt", (255, 255, 255), (232, 234, 236), (176, 180, 186)).save(TEXTURES / "item/salt.png")

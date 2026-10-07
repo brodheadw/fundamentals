@@ -214,15 +214,12 @@ def oxalates():
 
 
 def mixer_settler():
-    """The casing. Casings facing the same way merge into one stage as they are placed, any box up to three
-    across, three along and two tall, so the model is a multipart: a wall wherever a face is not shared with
-    the same stage (with a rim on the top layer and a window strip on the bay's upper walls), a floor under
-    the bottom layer, the weir between the mixing trough (the back row) and the settling bay, and the mixer
-    drive on the trough's top centre casing. A one-row stage carries its well at the back of the row. Create's
-    connected textures tie the exterior walls into one tank; the fluids inside are drawn by the renderer."""
-    tex = {"side": "fundamentals:block/mixer_settler_side", "inside": "fundamentals:block/mixer_settler_inside",
-           "rim": "fundamentals:block/mixer_settler_rim", "window": "fundamentals:block/mixer_settler_window",
-           "particle": "fundamentals:block/mixer_settler_side"}
+    """The casing is a closed tank cell in Create's fluid-tank idiom: a lid, a floor, and on every face not
+    shared with the rest of its stage a wall of two posts and a window pane, so a lone casing is a small tank
+    and a stage is those cells grown into one. Create's connected textures tie the walls and lids together.
+    The trough and bay are logic, seen through the windows as the fluids the renderer draws inside."""
+    tex = {"side": "fundamentals:block/mixer_settler_side", "top": "fundamentals:block/mixer_settler_top",
+           "window": "fundamentals:block/mixer_settler_window", "particle": "fundamentals:block/mixer_settler_side"}
     full = [0, 0, 16, 16]
 
     def box(f, t, faces):
@@ -234,12 +231,8 @@ def mixer_settler():
               {"ambientocclusion": False, "render_type": "minecraft:cutout", "textures": tex, "elements": elements})
         return f"fundamentals:block/mixer_settler/{name}"
 
-    # Walls are drawn for facing=north: left is west, back is south. Each comes plain, capped (top layer), and
-    # windowed-and-capped (the bay's top layer). Walls run the full block; neighbouring walls overlap at the
-    # corner by a pixel, which the cull faces hide.
-    def wall(side, cap, window):
-        outer = side
-        inner = {"west": "east", "east": "west", "north": "south", "south": "north"}[side]
+    def wall(side):
+        """Two posts and the pane between them, as Create's windowed tank draws a side."""
         if side == "west":
             lo, hi = (0, 0, 0), (1, 16, 16)
         elif side == "east":
@@ -248,55 +241,36 @@ def mixer_settler():
             lo, hi = (0, 0, 0), (16, 16, 1)
         else:
             lo, hi = (0, 0, 15), (16, 16, 16)
-        capf = {"up": ("#rim", [0, 0, 16, 1], False)} if cap else {}
-        if not window:
-            return [box(lo, hi, {outer: ("#side", full, True), inner: ("#inside", full, False), **capf})]
-        out = []
         along_x = side in ("north", "south")
+        out = []
         for p0, p1, uv in ((0, 4, [0, 0, 4, 16]), (12, 16, [12, 0, 16, 16])):
             f, t = list(lo), list(hi)
             f[0 if along_x else 2], t[0 if along_x else 2] = p0, p1
-            out.append(box(f, t, {outer: ("#side", uv, True), inner: ("#inside", uv, False), **capf}))
+            out.append(box(f, t, {side: ("#side", uv, True)}))
         f, t = list(lo), list(hi)
         f[0 if along_x else 2], t[0 if along_x else 2] = 4, 12
-        out.append(box(f, t, {outer: ("#window", [4, 0, 12, 16], True), inner: ("#window", [4, 0, 12, 16], False),
-                              **({"up": ("#rim", [4, 0, 12, 1], False)} if cap else {})}))
+        inner = {"west": "east", "east": "west", "north": "south", "south": "north"}[side]
+        out.append(box(f, t, {side: ("#window", [4, 0, 12, 16], True), inner: ("#window", [4, 0, 12, 16], False)}))
         return out
 
-    pieces = {}
-    for side, prop in (("west", "left"), ("east", "right"), ("north", "front"), ("south", "back")):
-        pieces[(prop, "plain")] = model(f"wall_{prop}", wall(side, False, False))
-        pieces[(prop, "cap")] = model(f"wall_{prop}_top", wall(side, True, False))
-        pieces[(prop, "window")] = model(f"wall_{prop}_window", wall(side, True, True))
-    floor = model("floor", [box((0, 0, 0), (16, 1, 16), {"down": ("#side", full, True), "up": ("#inside", full, False)})])
-    # the weir: a trough cell's whole forward face on the bottom layer, a lip on the layer above
-    weir = model("weir", [box((0, 1, 0), (16, 16, 1), {"north": ("#inside", full, False), "south": ("#inside", full, False)})])
-    weir_lip = model("weir_lip", [box((0, 0, 0), (16, 2, 1), {"north": ("#inside", [0, 14, 16, 16], False), "south": ("#inside", [0, 14, 16, 16], False),
-                                                           "up": ("#rim", [0, 0, 16, 1], False)})])
-    # a one-row stage keeps a small well at the back of the row, behind a low weir
-    well = model("well", [box((0, 1, 10), (16, 12, 11), {"north": ("#inside", [0, 4, 16, 15], False), "south": ("#inside", [0, 4, 16, 15], False),
-                                                      "up": ("#rim", [0, 10, 16, 11], False)})])
+    walls = {prop: model(f"wall_{prop}", wall(side)) for side, prop in (("west", "left"), ("east", "right"), ("north", "front"), ("south", "back"))}
+    lid = model("lid", [box((0, 15, 0), (16, 16, 16), {"up": ("#top", full, True), "down": ("#top", full, False)})])
+    floor = model("floor", [box((0, 0, 0), (16, 1, 16), {"down": ("#top", full, True), "up": ("#top", full, False)})])
+
     parts = []
     for facing, y in (("north", 0), ("east", 90), ("south", 180), ("west", 270)):
-        def case(when, mdl):
-            parts.append({"when": {"facing": facing, **when}, "apply": {"model": mdl, **({"y": y} if y else {})}})
-        case({"below": "false"}, floor)
-        for prop in ("left", "right", "front", "back"):
-            case({prop: "false", "above": "true"}, pieces[(prop, "plain")])
-            case({prop: "false", "above": "false", "rows": "well"}, pieces[(prop, "cap")])
-            case({prop: "false", "above": "false", "rows": "bay|single"}, pieces[(prop, "window")])
-        case({"rows": "well", "below": "false"}, weir)
-        case({"rows": "well", "below": "true"}, weir_lip)
-        case({"rows": "single", "below": "false"}, well)
+        rot = {"y": y} if y else {}
+        for prop, mdl in walls.items():
+            parts.append({"when": {"facing": facing, prop: "false"}, "apply": {"model": mdl, **rot}})
+    parts.append({"when": {"above": "false"}, "apply": {"model": lid}})
+    parts.append({"when": {"below": "false"}, "apply": {"model": floor}})
     write(ASSETS / "blockstates/mixer_settler.json", {"multipart": parts})
-    # the item shows a lone casing: every wall, the floor and the small well
     write(ASSETS / "models/item/mixer_settler.json", {"ambientocclusion": False, "textures": tex, "elements":
-          [box((0, 0, 0), (16, 1, 16), {"down": ("#side", full, True), "up": ("#inside", full, False)})]
-          + wall("west", True, True) + wall("east", True, True) + wall("north", True, True) + wall("south", True, False)
-          + [box((0, 1, 10), (16, 12, 11), {"north": ("#inside", [0, 4, 16, 15], False), "south": ("#inside", [0, 4, 16, 15], False), "up": ("#rim", [0, 10, 16, 11], False)})],
-          "display": {"gui": {"rotation": [30, 225, 0], "scale": [0.55, 0.55, 0.55], "translation": [0, -1, 0]},
-                      "ground": {"scale": [0.25, 0.25, 0.25]}, "fixed": {"scale": [0.5, 0.5, 0.5]},
-                      "thirdperson_righthand": {"rotation": [75, 45, 0], "scale": [0.375, 0.375, 0.375], "translation": [0, 2.5, 0]},
+          wall("west") + wall("east") + wall("north") + wall("south")
+          + [box((0, 15, 0), (16, 16, 16), {"up": ("#top", full, False), "down": ("#top", full, False)}),
+             box((0, 0, 0), (16, 1, 16), {"down": ("#top", full, False), "up": ("#top", full, False)})],
+          "display": {"gui": {"rotation": [30, 225, 0], "scale": [0.625, 0.625, 0.625]}, "ground": {"scale": [0.25, 0.25, 0.25]},
+                      "fixed": {"scale": [0.5, 0.5, 0.5]}, "thirdperson_righthand": {"rotation": [75, 45, 0], "scale": [0.375, 0.375, 0.375], "translation": [0, 2.5, 0]},
                       "firstperson_righthand": {"rotation": [0, 45, 0], "scale": [0.4, 0.4, 0.4]}}})
     write(DATA / "loot_table/blocks/mixer_settler.json", {"type": "minecraft:block", "pools": [drop_self("mixer_settler")]})
     write(RECIPES / "mixer_settler.json", {
