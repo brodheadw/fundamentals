@@ -1,0 +1,14 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_monazite"
+    }
+  ],
+  "results": [
+    {
+      "chance": 0.5,
+      "id": "fundamentals:light_rare_earth_concentrate"
+    }
+  ]
+}

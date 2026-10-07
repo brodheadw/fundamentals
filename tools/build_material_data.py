@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Writes what the material items painted by paint_materials.py need besides their textures:
-models, names, tags, the storage blocks' blockstates and loot, and the recipes that pack nuggets
-into ingots into blocks and press plates. Re-run after any edit.
+models, names, tags, the storage blocks' blockstates and loot, the recipes that pack nuggets
+into ingots into blocks and press plates, and the rare earth minerals' first steps on Create's
+machines. Re-run after any edit.
 
     python3 tools/paint_materials.py && python3 tools/build_material_data.py && python3 tools/build_ore_data.py
 
@@ -26,6 +27,19 @@ FORMS = {
     "block": (C_TAGS / "item/storage_blocks", "Block of {}"),
 }
 
+# Rare earth minerals ground in a millstone or crushing wheels. Monazite is a sand already.
+GROUND = ("bastnasite", "xenotime", "loparite", "euxenite")
+
+# Gravity concentration, done as a wash under an encased fan: what goes in, and which mixed
+# concentrate the heavy grains left behind are. Bastnäsite needs flotation and the clay a leach;
+# neither has a machine yet.
+WASHED = {
+    "raw_monazite": "light_rare_earth_concentrate",
+    "loparite_dust": "light_rare_earth_concentrate",
+    "xenotime_dust": "heavy_rare_earth_concentrate",
+    "euxenite_dust": "heavy_rare_earth_concentrate",
+}
+
 
 def packed(small, big, name):
     """Nine of `small` make one `big`, and back."""
@@ -40,7 +54,8 @@ def packed(small, big, name):
 def main():
     for folder, _ in FORMS.values():
         shutil.rmtree(folder, ignore_errors=True)
-    for stale in (C_TAGS / "block/storage_blocks", RECIPES / "packing", RECIPES / "pressing"):
+    for stale in (C_TAGS / "block/storage_blocks", RECIPES / "packing", RECIPES / "pressing", RECIPES / "milling",
+                  RECIPES / "crushing", RECIPES / "washing"):
         shutil.rmtree(stale, ignore_errors=True)
 
     lang_path = ASSETS / "lang/en_us.json"
@@ -76,6 +91,18 @@ def main():
             write(RECIPES / f"pressing/{material}_plate.json", {
                 "type": "create:pressing", "ingredients": [{"tag": made["ingot"]["tag"]}],
                 "results": [{"id": made["plate"]["id"]}]})
+
+    for mineral in GROUND:
+        raw, dust = [{"item": f"fundamentals:raw_{mineral}"}], {"id": f"fundamentals:{mineral}_dust"}
+        write(RECIPES / f"milling/{mineral}_dust.json", {
+            "type": "create:milling", "ingredients": raw, "processing_time": 250, "results": [dust]})
+        write(RECIPES / f"crushing/{mineral}_dust.json", {
+            "type": "create:crushing", "ingredients": raw, "processing_time": 400,
+            "results": [dust, {"chance": 0.25, **dust}]})
+    for feed, concentrate in WASHED.items():
+        write(RECIPES / f"washing/{feed}.json", {
+            "type": "create:splashing", "ingredients": [{"item": f"fundamentals:{feed}"}],
+            "results": [{"chance": 0.5, "id": f"fundamentals:{concentrate}"}]})
 
     for form, (folder, _) in FORMS.items():
         tag(folder.with_suffix(".json"), tagged[form])

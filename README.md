@@ -47,6 +47,8 @@ What that plant will make from the rare earths already exists as items: the grou
 
 ![The rare earth materials](docs/images/rare-earth-materials.png)
 
+The first step toward them works on Create's own machines. A millstone or crushing wheels grind bastnäsite, xenotime, loparite and euxenite. Monazite is a beach sand and needs no grinding. A wash under an encased fan then does what a miner's shaking table does: the light grains wash away and about half of what you feed it stays behind as mixed concentrate, light from monazite and loparite, heavy from xenotime and euxenite. Bastnäsite has to be floated and the clay leached, and those machines are not built yet.
+
 ## Status
 
 Alpha. Expect ore amounts and recipes to change. Not yet in any pack. Issues and ideas welcome.

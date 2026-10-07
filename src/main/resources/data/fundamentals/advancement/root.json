@@ -1,0 +1,68 @@
+{
+  "display": {
+    "icon": {
+      "id": "fundamentals:raw_hematite"
+    },
+    "title": {
+      "translate": "advancement.fundamentals.root.title"
+    },
+    "description": {
+      "translate": "advancement.fundamentals.root.description"
+    },
+    "frame": "task",
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "raw": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_hematite",
+              "fundamentals:raw_magnetite",
+              "fundamentals:raw_goethite",
+              "fundamentals:raw_pyrolusite",
+              "fundamentals:raw_pentlandite",
+              "fundamentals:raw_nickel_laterite",
+              "fundamentals:raw_chromite",
+              "fundamentals:raw_wolframite",
+              "fundamentals:raw_scheelite",
+              "fundamentals:raw_molybdenite",
+              "fundamentals:raw_cobaltite",
+              "fundamentals:raw_ilmenite",
+              "fundamentals:raw_rutile",
+              "fundamentals:raw_chalcopyrite",
+              "fundamentals:raw_bornite",
+              "fundamentals:raw_chalcocite",
+              "fundamentals:raw_covellite",
+              "fundamentals:raw_malachite",
+              "fundamentals:raw_azurite",
+              "fundamentals:raw_cuprite",
+              "fundamentals:raw_bauxite",
+              "fundamentals:raw_galena",
+              "fundamentals:raw_sphalerite",
+              "fundamentals:raw_smithsonite",
+              "fundamentals:raw_hemimorphite",
+              "fundamentals:raw_cassiterite",
+              "fundamentals:raw_bastnasite",
+              "fundamentals:raw_monazite",
+              "fundamentals:raw_xenotime",
+              "fundamentals:raw_ion_adsorption_clay",
+              "fundamentals:raw_loparite",
+              "fundamentals:raw_euxenite",
+              "fundamentals:raw_native_silver",
+              "fundamentals:raw_argentite",
+              "fundamentals:raw_sperrylite",
+              "fundamentals:raw_cooperite",
+              "fundamentals:raw_braggite",
+              "fundamentals:raw_cinnabar"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
