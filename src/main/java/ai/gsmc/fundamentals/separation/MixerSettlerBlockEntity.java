@@ -455,6 +455,12 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
                 casing.settled = Math.max(0, casing.settled - 2);
             }
             boolean ready = stall.isEmpty();
+            if (level.getGameTime() % 20 == 0) {
+                // the countdown the goggles show lives on the client; keep it current while it runs
+                casing.dirty = true;
+                ai.gsmc.fundamentals.Fundamentals.LOGGER.info("battery head {} settled {}/{} stall {} cooldown {}", pos, casing.settled, casing.equilibration(),
+                        stall.map(a -> java.util.Arrays.toString(a)).orElse("none"), casing.cooldown);
+            }
             if (ready && casing.settled >= casing.equilibration() && ++casing.cooldown >= PERIOD) {
                 casing.cooldown = 0;
                 casing.runCut();
@@ -546,6 +552,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         MixerSettlerBlockEntity tail = stages.getLast();
         SeparationRecipe cut = SeparationRecipe.forLiquor(level, aqueous.getFluid().getFluid()).orElseThrow();
         int batch = batch();
+        ai.gsmc.fundamentals.Fundamentals.LOGGER.info("cut at {}: {} mB {} -> {} + {}", worldPosition, batch, cut.liquor(), cut.light(), cut.heavy());
         aqueous.drain(batch, IFluidHandler.FluidAction.EXECUTE);
         tail.aqueous.drain(batch, IFluidHandler.FluidAction.EXECUTE);
         out.fill(new FluidStack(cut.light(), batch), IFluidHandler.FluidAction.EXECUTE);

@@ -61,10 +61,11 @@ public class MixerSettlerRenderer implements BlockEntityRenderer<MixerSettlerBlo
         if (!organic.isEmpty()) {
             FLUIDS.renderFluidBox(organic, PX, aqueousTop, bayFront, right, organicTop, bayBack, buffer, ms, light, false, false);
         }
-        // The trough: while the mixer turns the two phases are beaten into an emulsion, drawn as the aqueous
-        // column with bands of organic through it; at rest they settle into the same layers as the bay.
+        // The trough: while the plant runs the mixer keeps the two phases beaten into an emulsion, drawn as the
+        // aqueous column with bands of organic through it; with the lever off they settle into layers like the bay.
         float churnTop = Math.min(weir - PX, organicTop);
-        if (stage.stirring() && !aqueous.isEmpty() && !organic.isEmpty()) {
+        boolean mixing = stage.isStirred() && stage.isSwitchedOn();
+        if (mixing && !aqueous.isEmpty() && !organic.isEmpty()) {
             FLUIDS.renderFluidBox(aqueous, PX, FLOOR, wellFront, right, churnTop, wellBack, buffer, ms, light, false, false);
             float band = (churnTop - FLOOR) / 6;
             for (int i = 0; i < 3; i++) {
