@@ -37,10 +37,11 @@ import java.util.Map;
 
 /**
  * Casing for a solvent-extraction stage. Casings facing the same way merge into one stage as they are
- * placed, any box up to three across, three along and two tall: one is a lab box, eighteen a plant vat.
- * The back row is the mixing trough, stirred by a Mechanical Mixer standing over it; the rows ahead are the
- * settling bay. Stages standing end to end are one battery; the liquor goes in at the back of the first and leaves it as raffinate, the strip acid goes
- * in at the front of the last and leaves loaded with what the organic carried forward.
+ * placed, any box from three by three up to three across, three along and two tall: nine are a lab vat,
+ * eighteen a plant vat. The back row is the mixing trough, stirred by a Mechanical Mixer standing over it;
+ * the rows ahead are the settling bay. Stages standing end to end are one battery; the liquor goes in at the
+ * back of the first and leaves it as raffinate, the strip acid goes in at the front of the last and leaves
+ * loaded with what the organic carried forward.
  */
 public class MixerSettlerBlock extends BaseEntityBlock {
 
@@ -112,24 +113,29 @@ public class MixerSettlerBlock extends BaseEntityBlock {
     private static final Map<BlockState, VoxelShape> SHAPES = new HashMap<>();
 
     private static VoxelShape shapeOf(BlockState state) {
+        VatGeometry vat = VatGeometry.get();
         Direction facing = state.getValue(FACING);
         Direction right = facing.getClockWise();
-        VoxelShape shape = state.getValue(BELOW) ? Shapes.empty() : Block.box(0, 0, 1, 16, 1, 16).move(0, 0, -1 / 16.0);
-        shape = Shapes.or(shape, state.getValue(BELOW) ? Shapes.empty() : Block.box(0, 0, 0, 16, 1, 16));
-        if (!state.getValue(LEFT)) shape = Shapes.or(shape, wall(right.getOpposite()));
-        if (!state.getValue(RIGHT)) shape = Shapes.or(shape, wall(right));
-        if (!state.getValue(FRONT)) shape = Shapes.or(shape, wall(facing));
-        if (!state.getValue(BACK)) shape = Shapes.or(shape, wall(facing.getOpposite()));
-        if (state.getValue(ROWS) == Rows.WELL && !state.getValue(BELOW)) shape = Shapes.or(shape, wall(facing));
+        VoxelShape shape = state.getValue(BELOW) ? Shapes.empty() : Block.box(0, 0, 0, 16, vat.floor(), 16);
+        if (!state.getValue(LEFT)) shape = Shapes.or(shape, wall(right.getOpposite(), 16));
+        if (!state.getValue(RIGHT)) shape = Shapes.or(shape, wall(right, 16));
+        if (!state.getValue(FRONT)) shape = Shapes.or(shape, wall(facing, 16));
+        if (!state.getValue(BACK)) shape = Shapes.or(shape, wall(facing.getOpposite(), 16));
+        if (state.getValue(ROWS) == Rows.WELL) {
+            // the weir: full height where the stage continues above, its lip where it does not
+            shape = Shapes.or(shape, wall(facing, state.getValue(ABOVE) ? 16 : 16 - vat.weirBelowRim()));
+        }
         return shape;
     }
 
-    private static VoxelShape wall(Direction side) {
+    /** A wall {@code height} pixels tall and the geometry's thickness, on {@code side} of the casing. */
+    private static VoxelShape wall(Direction side, int height) {
+        int w = VatGeometry.get().wall();
         return switch (side) {
-            case NORTH -> Block.box(0, 0, 0, 16, 16, 1);
-            case SOUTH -> Block.box(0, 0, 15, 16, 16, 16);
-            case WEST -> Block.box(0, 0, 0, 1, 16, 16);
-            case EAST -> Block.box(15, 0, 0, 16, 16, 16);
+            case NORTH -> Block.box(0, 0, 0, 16, height, w);
+            case SOUTH -> Block.box(0, 0, 16 - w, 16, height, 16);
+            case WEST -> Block.box(0, 0, 0, w, height, 16);
+            case EAST -> Block.box(16 - w, 0, 0, 16, height, 16);
             default -> Shapes.empty();
         };
     }
@@ -145,14 +151,14 @@ public class MixerSettlerBlock extends BaseEntityBlock {
     @Override
     protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (level.getBlockEntity(pos) instanceof MixerSettlerBlockEntity casing) {
-            casing.merge();
+            StageFormation.merge(casing);
         }
     }
 
     @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean movedByPiston) {
         if (!level.isClientSide && !newState.is(this) && level.getBlockEntity(pos) instanceof MixerSettlerBlockEntity casing) {
-            casing.dissolve();
+            StageFormation.dissolve(casing);
         }
         super.onRemove(state, level, pos, newState, movedByPiston);
     }

@@ -1,10 +1,15 @@
 package ai.gsmc.fundamentals.gametest;
 
 import ai.gsmc.fundamentals.Fundamentals;
+import ai.gsmc.fundamentals.separation.Battery;
 import ai.gsmc.fundamentals.separation.MixerSettlerBlock;
 import ai.gsmc.fundamentals.separation.MixerSettlerBlockEntity;
 import ai.gsmc.fundamentals.separation.Separation;
 import ai.gsmc.fundamentals.separation.SeparationRecipe;
+import ai.gsmc.fundamentals.separation.VatGeometry;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -24,6 +29,9 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -218,7 +226,7 @@ public class SeparationTests {
             helper.setBlock(new BlockPos(10, 4, 3), Blocks.AIR);
             helper.runAfterDelay(settle(8), () -> {
                 helper.assertTrue(held(helper, 1, Direction.NORTH).isEmpty(), "with one motor gone the battery should stall");
-                helper.assertTrue(casing(helper, 1, 1, 1).stall().map(s -> s[0]).orElse("").equals("mixer"), "the goggles should blame the mixer");
+                helper.assertTrue(casing(helper, 1, 1, 1).battery().stall().map(Battery.Stall::key).orElse("").equals("mixer"), "the goggles should blame the mixer");
                 helper.succeed();
             });
         });
@@ -232,7 +240,7 @@ public class SeparationTests {
             fill(helper, 24, Direction.EAST, "hydrochloric_acid", 1000);
             helper.runAfterDelay(settle(8), () -> {
                 helper.assertTrue(held(helper, 1, Direction.NORTH).isEmpty(), "no lever, no cut");
-                helper.assertTrue(casing(helper, 1, 1, 1).stall().map(s -> s[0]).orElse("").equals("lever"), "the goggles should ask for the lever");
+                helper.assertTrue(casing(helper, 1, 1, 1).battery().stall().map(Battery.Stall::key).orElse("").equals("lever"), "the goggles should ask for the lever");
                 helper.succeed();
             });
         });
@@ -306,6 +314,35 @@ public class SeparationTests {
             helper.assertTrue(organic.is(Separation.fluid("p507")) && organic.getAmount() == corner.phaseCapacity(), "the corner's organic should survive the merges up to the phase's half of the vat, got " + organic);
             helper.succeed();
         });
+    }
+
+    /** The models the generator cut and the geometry the code reads come from the same numbers; this catches either moving alone. */
+    @GameTest(template = "empty")
+    public void theModelsAreCutToTheVatGeometry(GameTestHelper helper) {
+        VatGeometry vat = VatGeometry.get();
+        helper.assertTrue(vat.brim(1) < vat.weir(1) && vat.weir(1) < 1 && vat.brim(2) < vat.weir(2) && vat.weir(2) < 2,
+                "the settled phases stop under the weir and the weir under the rim at every height");
+        helper.assertTrue(box(element("floor", 0), "to")[1] == vat.floor(), "the floor model is the geometry's floor");
+        helper.assertTrue(box(element("weir_low", 0), "to")[1] == 16 - vat.weirBelowRim() && box(element("weir_lip", 0), "to")[1] == 16 - vat.weirBelowRim(),
+                "the weir models stop where the geometry's weir does");
+        helper.assertTrue(box(element("weir_low", 0), "to")[2] == vat.wall() && box(element("wall_front", 0), "to")[2] == vat.wall(),
+                "the weir and the walls are the geometry's thickness");
+        JsonObject glass = element("wall_left_single", 2);
+        helper.assertTrue(box(glass, "from")[2] == vat.window()[0] && box(glass, "to")[2] == vat.window()[1], "the window glass spans the geometry's window");
+        helper.succeed();
+    }
+
+    private static JsonObject element(String model, int index) {
+        try (Reader in = new InputStreamReader(SeparationTests.class.getResourceAsStream("/assets/fundamentals/models/block/mixer_settler/" + model + ".json"), StandardCharsets.UTF_8)) {
+            return JsonParser.parseReader(in).getAsJsonObject().getAsJsonArray("elements").get(index).getAsJsonObject();
+        } catch (Exception e) {
+            throw new IllegalStateException(model, e);
+        }
+    }
+
+    private static int[] box(JsonObject element, String corner) {
+        JsonArray a = element.getAsJsonArray(corner);
+        return new int[] {a.get(0).getAsInt(), a.get(1).getAsInt(), a.get(2).getAsInt()};
     }
 
     @GameTest(template = "empty")

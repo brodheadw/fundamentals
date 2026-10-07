@@ -1,0 +1,10 @@
+{
+  "wall": 1,
+  "floor": 1,
+  "rim_clearance": 5,
+  "weir_below_rim": 3,
+  "window": [
+    4,
+    12
+  ]
+}

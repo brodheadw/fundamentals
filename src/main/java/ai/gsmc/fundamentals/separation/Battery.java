@@ -1,0 +1,112 @@
+package ai.gsmc.fundamentals.separation;
+
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * The stages standing end to end, from the head forward. The head's controller runs the cut for the whole
+ * battery: it takes a batch from its own aqueous tank, the feed, and from the tail's, the strip acid, and
+ * puts the raffinate in its own out-tank and the loaded strip in the tail's. The stages between carry the
+ * organic forward and show the liquor working its way down the line.
+ */
+public record Battery(List<MixerSettlerBlockEntity> stages) {
+
+    /** Why the head is not cutting: a lang key under goggles.fundamentals.mixer_settler and its arguments. */
+    public record Stall(String key, Object... args) {}
+
+    public static Battery of(MixerSettlerBlockEntity casing) {
+        MixerSettlerBlockEntity head = casing.stage();
+        for (MixerSettlerBlockEntity back; (back = head.nextStage(false)) != null; ) {
+            head = back;
+        }
+        List<MixerSettlerBlockEntity> stages = new ArrayList<>();
+        for (MixerSettlerBlockEntity stage = head; stage != null; stage = stage.nextStage(true)) {
+            stages.add(stage);
+        }
+        return new Battery(stages);
+    }
+
+    public MixerSettlerBlockEntity head() { return stages.getFirst(); }
+    public MixerSettlerBlockEntity tail() { return stages.getLast(); }
+    public int size() { return stages.size(); }
+
+    /** The battery runs while the head stage has a redstone signal: the lever on its wall. */
+    public boolean isSwitchedOn() { return head().hasSignal(); }
+
+    /** Ticks of running before the first batch: each stage adds as much. */
+    public int equilibration() { return MixerSettlerBlockEntity.EQUILIBRATION_PER_STAGE * size(); }
+
+    public Optional<Stall> stall() {
+        MixerSettlerBlockEntity head = head(), tail = tail();
+        FluidStack feed = head.aqueous.getFluid();
+        int batch = head.batch();
+        if (feed.getAmount() < batch) {
+            return Optional.of(new Stall("idle"));
+        }
+        Optional<SeparationRecipe> found = SeparationRecipe.forLiquor(head.getLevel(), feed.getFluid());
+        if (found.isEmpty()) {
+            return Optional.of(new Stall("no_cut", feed.getHoverName()));
+        }
+        SeparationRecipe cut = found.get();
+        if (size() < cut.stages()) {
+            return Optional.of(new Stall("short", feed.getHoverName(), cut.stages(), size()));
+        }
+        if (!stages.stream().allMatch(MixerSettlerBlockEntity::isStirred)) {
+            return Optional.of(new Stall("mixer"));
+        }
+        if (!isSwitchedOn()) {
+            return Optional.of(new Stall("lever"));
+        }
+        if (!stages.stream().allMatch(s -> s.organic.getFluid().is(cut.organic()) && s.organic.getFluidAmount() >= batch)) {
+            return Optional.of(new Stall("organic", name(cut.organic())));
+        }
+        if (!tail.aqueous.getFluid().is(cut.strip()) || tail.aqueous.getFluidAmount() < batch) {
+            return Optional.of(new Stall("strip", name(cut.strip())));
+        }
+        if (head.out.fill(new FluidStack(cut.light(), batch), IFluidHandler.FluidAction.SIMULATE) < batch
+                || tail.out.fill(new FluidStack(cut.heavy(), batch), IFluidHandler.FluidAction.SIMULATE) < batch) {
+            return Optional.of(new Stall("full"));
+        }
+        return Optional.empty();
+    }
+
+    /** One batch through the whole battery; only called when {@link #stall()} is empty. */
+    void runCut() {
+        MixerSettlerBlockEntity head = head(), tail = tail();
+        SeparationRecipe cut = SeparationRecipe.forLiquor(head.getLevel(), head.aqueous.getFluid().getFluid()).orElseThrow();
+        int batch = head.batch();
+        head.aqueous.drain(batch, IFluidHandler.FluidAction.EXECUTE);
+        tail.aqueous.drain(batch, IFluidHandler.FluidAction.EXECUTE);
+        head.out.fill(new FluidStack(cut.light(), batch), IFluidHandler.FluidAction.EXECUTE);
+        tail.out.fill(new FluidStack(cut.heavy(), batch), IFluidHandler.FluidAction.EXECUTE);
+        // The aqueous phase is the depleting feed through the extraction stages and the acid loading up
+        // through the strip stages; the stages between the ends fill with one or the other a tenth of a
+        // stage at a time, so the liquor is seen to work its way down the line.
+        int strip = size() * 2 / 5;
+        for (int i = 0; i < size(); i++) {
+            MixerSettlerBlockEntity stage = stages.get(i);
+            if (i > 0 && i < size() - 1) {
+                Fluid shown = i < size() - strip ? cut.light() : cut.heavy();
+                if (!stage.aqueous.getFluid().is(shown)) {
+                    stage.aqueous.setFluid(FluidStack.EMPTY);
+                }
+                int room = stage.phaseCapacity() - stage.aqueous.getFluidAmount();
+                if (room > 0) {
+                    stage.aqueous.fill(new FluidStack(shown, Math.min(stage.capacity() / 10, room)), IFluidHandler.FluidAction.EXECUTE);
+                }
+            }
+            stage.stirring = MixerSettlerBlockEntity.STIR_TICKS;
+            stage.dirty = true;
+        }
+    }
+
+    static Component name(Fluid fluid) {
+        return new FluidStack(fluid, 1).getHoverName();
+    }
+}
