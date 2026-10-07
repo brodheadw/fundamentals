@@ -11,8 +11,8 @@ import net.minecraft.world.phys.AABB;
 import net.neoforged.neoforge.fluids.FluidStack;
 
 /**
- * Draws a stage's fluids from its controller: the two phases in the settling bay, the organic floating on
- * the aqueous, and the churn in the mixing trough behind the weir. Coordinates are
+ * Draws a stage's fluids from its controller: the aqueous phase with the organic floating on it, filling
+ * the stage's cells so the windows show the two layers. Coordinates are
  * the stage's own, with the controller's block at the origin and the stage running right (+x) and
  * forward (-z) from it. A stage one row long keeps its trough at the back of that row.
  */
@@ -40,33 +40,23 @@ public class MixerSettlerRenderer implements BlockEntityRenderer<MixerSettlerBlo
         ms.translate(-0.5, 0, -0.5);
 
         int w = stage.across(), l = stage.along(), h = stage.tall();
-        boolean oneRow = l == 1;
         float right = w - PX;
+        float back = 1 - PX;
+        float front = -(l - 1) + PX;
         float brim = h - 2 * PX;
-        // the trough: the back row, or the back five pixels of the only row, behind a weir
-        float wellBack = 1 - PX, wellFront = oneRow ? 11 * PX : PX;
-        float bayBack = oneRow ? 10 * PX : 0, bayFront = -(l - 1) + PX;
-        float weir = oneRow ? 12 * PX : h == 1 ? brim : 1 + 2 * PX;
 
+        // Seen through the windows: the aqueous phase under the organic across the whole cell, each phase
+        // given half the depth, the organic heaving a little while the mixer turns.
         FluidStack aqueous = stage.aqueous();
         FluidStack organic = stage.organic();
-        // Each phase gets half the depth of the bay; the organic sits on whatever aqueous there is.
         float depth = brim - FLOOR;
         float aqueousTop = Math.min(brim, FLOOR + depth * 0.5F * aqueous.getAmount() / stage.capacity());
-        float organicTop = Math.min(brim, aqueousTop + depth * 0.5F * organic.getAmount() / stage.capacity());
+        float organicTop = Math.min(brim, aqueousTop + depth * 0.5F * organic.getAmount() / stage.capacity() + (stage.stirring() ? PX : 0));
         if (!aqueous.isEmpty()) {
-            FLUIDS.renderFluidBox(aqueous, PX, FLOOR, bayFront, right, aqueousTop, bayBack, buffer, ms, light, false, false);
+            FLUIDS.renderFluidBox(aqueous, PX, FLOOR, front, right, aqueousTop, back, buffer, ms, light, false, false);
         }
         if (!organic.isEmpty()) {
-            FLUIDS.renderFluidBox(organic, PX, aqueousTop, bayFront, right, organicTop, bayBack, buffer, ms, light, false, false);
-        }
-        // The trough holds the emulsion: the aqueous colour, as high as both phases together, heaving a
-        // little while it is stirred; it cannot show above the weir until the bay is that full.
-        FluidStack churn = aqueous.isEmpty() ? organic : aqueous;
-        if (!churn.isEmpty()) {
-            float churnTop = stage.stirring() ? organicTop + PX : organicTop;
-            churnTop = organicTop > weir ? churnTop : Math.min(churnTop, weir - PX);
-            FLUIDS.renderFluidBox(churn, PX, FLOOR, wellFront, right, churnTop, wellBack, buffer, ms, light, false, false);
+            FLUIDS.renderFluidBox(organic, PX, aqueousTop, front, right, organicTop, back, buffer, ms, light, false, false);
         }
         ms.popPose();
     }

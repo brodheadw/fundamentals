@@ -158,7 +158,8 @@
     },
     {
       "when": {
-        "above": "false"
+        "above": "false",
+        "open": "false"
       },
       "apply": {
         "model": "fundamentals:block/mixer_settler/lid"

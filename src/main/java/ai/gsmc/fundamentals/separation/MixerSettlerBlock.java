@@ -42,6 +42,8 @@ public class MixerSettlerBlock extends BaseEntityBlock {
     public static final BooleanProperty ABOVE = BooleanProperty.create("above");
     public static final BooleanProperty BELOW = BooleanProperty.create("below");
     public static final EnumProperty<Rows> ROWS = EnumProperty.create("rows", Rows.class);
+    /** The hatch: the trough's top-centre casing has no lid, and the Mechanical Mixer stands over it. */
+    public static final BooleanProperty OPEN = BooleanProperty.create("open");
     public static final int MAX_ACROSS = 3;
     public static final int MAX_ALONG = 3;
     public static final int MAX_TALL = 2;
@@ -60,7 +62,7 @@ public class MixerSettlerBlock extends BaseEntityBlock {
         super(properties);
         registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH)
                 .setValue(LEFT, false).setValue(RIGHT, false).setValue(FRONT, false).setValue(BACK, false)
-                .setValue(ABOVE, false).setValue(BELOW, false).setValue(ROWS, Rows.SINGLE));
+                .setValue(ABOVE, false).setValue(BELOW, false).setValue(ROWS, Rows.SINGLE).setValue(OPEN, true));
     }
 
     @Override
@@ -70,7 +72,7 @@ public class MixerSettlerBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, LEFT, RIGHT, FRONT, BACK, ABOVE, BELOW, ROWS);
+        builder.add(FACING, LEFT, RIGHT, FRONT, BACK, ABOVE, BELOW, ROWS, OPEN);
     }
 
     @Override

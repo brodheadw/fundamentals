@@ -216,7 +216,8 @@ def oxalates():
 def mixer_settler():
     """The casing is a closed tank cell in Create's fluid-tank idiom: a lid, a floor, and on every face not
     shared with the rest of its stage a wall of two posts and a window pane, so a lone casing is a small tank
-    and a stage is those cells grown into one. Create's connected textures tie the walls and lids together.
+    and a stage is those cells grown into one. The trough's top-centre casing is the hatch, open for the
+    Mechanical Mixer that stands over it, as a mixer stands over a basin. Create's connected textures tie the walls and lids together.
     The trough and bay are logic, seen through the windows as the fluids the renderer draws inside."""
     tex = {"side": "fundamentals:block/mixer_settler_side", "top": "fundamentals:block/mixer_settler_top",
            "window": "fundamentals:block/mixer_settler_window", "particle": "fundamentals:block/mixer_settler_side"}
@@ -262,7 +263,7 @@ def mixer_settler():
         rot = {"y": y} if y else {}
         for prop, mdl in walls.items():
             parts.append({"when": {"facing": facing, prop: "false"}, "apply": {"model": mdl, **rot}})
-    parts.append({"when": {"above": "false"}, "apply": {"model": lid}})
+    parts.append({"when": {"above": "false", "open": "false"}, "apply": {"model": lid}})
     parts.append({"when": {"below": "false"}, "apply": {"model": floor}})
     write(ASSETS / "blockstates/mixer_settler.json", {"multipart": parts})
     write(ASSETS / "models/item/mixer_settler.json", {"ambientocclusion": False, "textures": tex, "elements":
