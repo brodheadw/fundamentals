@@ -3,7 +3,7 @@
   "textures": {
     "side": "fundamentals:block/mixer_settler_side",
     "top": "fundamentals:block/mixer_settler_top",
-    "window": "fundamentals:block/mixer_settler_window",
+    "window": "minecraft:block/glass",
     "nozzle": "fundamentals:block/mixer_settler_nozzle",
     "particle": "fundamentals:block/mixer_settler_side"
   },
@@ -17,7 +17,7 @@
       "to": [
         1,
         16,
-        4
+        2
       ],
       "faces": {
         "west": {
@@ -25,7 +25,7 @@
           "uv": [
             0,
             0,
-            4,
+            2,
             16
           ],
           "cullface": "west"
@@ -35,7 +35,7 @@
           "uv": [
             0,
             0,
-            4,
+            2,
             16
           ]
         },
@@ -54,7 +54,7 @@
       "from": [
         0,
         0,
-        12
+        14
       ],
       "to": [
         1,
@@ -65,7 +65,7 @@
         "west": {
           "texture": "#side",
           "uv": [
-            12,
+            14,
             0,
             16,
             16
@@ -75,7 +75,7 @@
         "east": {
           "texture": "#top",
           "uv": [
-            12,
+            14,
             0,
             16,
             16
@@ -96,20 +96,20 @@
       "from": [
         0,
         0,
-        4
+        2
       ],
       "to": [
         1,
         16,
-        12
+        14
       ],
       "faces": {
         "west": {
           "texture": "#window",
           "uv": [
-            4,
+            2,
             0,
-            12,
+            14,
             16
           ],
           "cullface": "west"
@@ -117,9 +117,9 @@
         "east": {
           "texture": "#window",
           "uv": [
-            4,
+            2,
             0,
-            12,
+            14,
             16
           ]
         },
@@ -143,7 +143,7 @@
       "to": [
         16,
         16,
-        4
+        2
       ],
       "faces": {
         "east": {
@@ -151,7 +151,7 @@
           "uv": [
             0,
             0,
-            4,
+            2,
             16
           ],
           "cullface": "east"
@@ -161,7 +161,7 @@
           "uv": [
             0,
             0,
-            4,
+            2,
             16
           ]
         },
@@ -180,7 +180,7 @@
       "from": [
         15,
         0,
-        12
+        14
       ],
       "to": [
         16,
@@ -191,7 +191,7 @@
         "east": {
           "texture": "#side",
           "uv": [
-            12,
+            14,
             0,
             16,
             16
@@ -201,7 +201,7 @@
         "west": {
           "texture": "#top",
           "uv": [
-            12,
+            14,
             0,
             16,
             16
@@ -222,20 +222,20 @@
       "from": [
         15,
         0,
-        4
+        2
       ],
       "to": [
         16,
         16,
-        12
+        14
       ],
       "faces": {
         "east": {
           "texture": "#window",
           "uv": [
-            4,
+            2,
             0,
-            12,
+            14,
             16
           ],
           "cullface": "east"
@@ -243,9 +243,9 @@
         "west": {
           "texture": "#window",
           "uv": [
-            4,
+            2,
             0,
-            12,
+            14,
             16
           ]
         },
@@ -267,7 +267,7 @@
         0
       ],
       "to": [
-        4,
+        2,
         16,
         1
       ],
@@ -277,7 +277,7 @@
           "uv": [
             0,
             0,
-            4,
+            2,
             16
           ],
           "cullface": "north"
@@ -287,7 +287,7 @@
           "uv": [
             0,
             0,
-            4,
+            2,
             16
           ]
         },
@@ -304,7 +304,7 @@
     },
     {
       "from": [
-        12,
+        14,
         0,
         0
       ],
@@ -317,7 +317,7 @@
         "north": {
           "texture": "#side",
           "uv": [
-            12,
+            14,
             0,
             16,
             16
@@ -327,7 +327,7 @@
         "south": {
           "texture": "#top",
           "uv": [
-            12,
+            14,
             0,
             16,
             16
@@ -346,12 +346,12 @@
     },
     {
       "from": [
-        4,
+        2,
         0,
         0
       ],
       "to": [
-        12,
+        14,
         16,
         1
       ],
@@ -359,9 +359,9 @@
         "north": {
           "texture": "#window",
           "uv": [
-            4,
+            2,
             0,
-            12,
+            14,
             16
           ],
           "cullface": "north"
@@ -369,9 +369,9 @@
         "south": {
           "texture": "#window",
           "uv": [
-            4,
+            2,
             0,
-            12,
+            14,
             16
           ]
         },
@@ -393,7 +393,7 @@
         15
       ],
       "to": [
-        4,
+        2,
         16,
         16
       ],
@@ -403,7 +403,7 @@
           "uv": [
             0,
             0,
-            4,
+            2,
             16
           ],
           "cullface": "south"
@@ -413,7 +413,7 @@
           "uv": [
             0,
             0,
-            4,
+            2,
             16
           ]
         },
@@ -430,7 +430,7 @@
     },
     {
       "from": [
-        12,
+        14,
         0,
         15
       ],
@@ -443,7 +443,7 @@
         "south": {
           "texture": "#side",
           "uv": [
-            12,
+            14,
             0,
             16,
             16
@@ -453,7 +453,7 @@
         "north": {
           "texture": "#top",
           "uv": [
-            12,
+            14,
             0,
             16,
             16
@@ -472,12 +472,12 @@
     },
     {
       "from": [
-        4,
+        2,
         0,
         15
       ],
       "to": [
-        12,
+        14,
         16,
         16
       ],
@@ -485,9 +485,9 @@
         "south": {
           "texture": "#window",
           "uv": [
-            4,
+            2,
             0,
-            12,
+            14,
             16
           ],
           "cullface": "south"
@@ -495,9 +495,9 @@
         "north": {
           "texture": "#window",
           "uv": [
-            4,
+            2,
             0,
-            12,
+            14,
             16
           ]
         },

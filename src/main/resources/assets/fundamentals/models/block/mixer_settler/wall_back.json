@@ -4,7 +4,7 @@
   "textures": {
     "side": "fundamentals:block/mixer_settler_side",
     "top": "fundamentals:block/mixer_settler_top",
-    "window": "fundamentals:block/mixer_settler_window",
+    "window": "minecraft:block/glass",
     "nozzle": "fundamentals:block/mixer_settler_nozzle",
     "particle": "fundamentals:block/mixer_settler_side"
   },
@@ -16,7 +16,7 @@
         15
       ],
       "to": [
-        4,
+        2,
         16,
         16
       ],
@@ -26,7 +26,7 @@
           "uv": [
             0,
             0,
-            4,
+            2,
             16
           ],
           "cullface": "south"
@@ -36,7 +36,7 @@
           "uv": [
             0,
             0,
-            4,
+            2,
             16
           ]
         },
@@ -53,7 +53,7 @@
     },
     {
       "from": [
-        12,
+        14,
         0,
         15
       ],
@@ -66,7 +66,7 @@
         "south": {
           "texture": "#side",
           "uv": [
-            12,
+            14,
             0,
             16,
             16
@@ -76,7 +76,7 @@
         "north": {
           "texture": "#top",
           "uv": [
-            12,
+            14,
             0,
             16,
             16
@@ -95,12 +95,12 @@
     },
     {
       "from": [
-        4,
+        2,
         0,
         15
       ],
       "to": [
-        12,
+        14,
         16,
         16
       ],
@@ -108,9 +108,9 @@
         "south": {
           "texture": "#window",
           "uv": [
-            4,
+            2,
             0,
-            12,
+            14,
             16
           ],
           "cullface": "south"
@@ -118,9 +118,9 @@
         "north": {
           "texture": "#window",
           "uv": [
-            4,
+            2,
             0,
-            12,
+            14,
             16
           ]
         },

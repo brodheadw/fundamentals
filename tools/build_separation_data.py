@@ -221,7 +221,7 @@ def mixer_settler():
     and a lip on the one above. A one-row stage keeps a small well at the back of the row. Create's connected
     textures put the frame ribs on the exterior edges; the fluids inside are drawn by the renderer."""
     tex = {"side": "fundamentals:block/mixer_settler_side", "top": "fundamentals:block/mixer_settler_top",
-           "window": "fundamentals:block/mixer_settler_window", "nozzle": "fundamentals:block/mixer_settler_nozzle",
+           "window": "minecraft:block/glass", "nozzle": "fundamentals:block/mixer_settler_nozzle",
            "particle": "fundamentals:block/mixer_settler_side"}
     full = [0, 0, 16, 16]
 
@@ -242,13 +242,13 @@ def mixer_settler():
         along_x = side in ("north", "south")
         cap = ("#top", [0, 0, 16, 1] if along_x else [0, 0, 1, 16], False)
         out = []
-        for p0, p1, uv in ((0, 4, [0, 0, 4, 16]), (12, 16, [12, 0, 16, 16])):
+        for p0, p1, uv in ((0, 2, [0, 0, 2, 16]), (14, 16, [14, 0, 16, 16])):
             f, t = list(lo), list(hi)
             f[0 if along_x else 2], t[0 if along_x else 2] = p0, p1
             out.append(box(f, t, {side: ("#side", uv, True), inner: ("#top", uv, False), "up": cap}))
         f, t = list(lo), list(hi)
-        f[0 if along_x else 2], t[0 if along_x else 2] = 4, 12
-        out.append(box(f, t, {side: ("#window", [4, 0, 12, 16], True), inner: ("#window", [4, 0, 12, 16], False), "up": cap}))
+        f[0 if along_x else 2], t[0 if along_x else 2] = 2, 14
+        out.append(box(f, t, {side: ("#window", [2, 0, 14, 16], True), inner: ("#window", [2, 0, 14, 16], False), "up": cap}))
         return out
 
     walls = {prop: model(f"wall_{prop}", wall(side)) for side, prop in (("west", "left"), ("east", "right"), ("north", "front"), ("south", "back"))}
