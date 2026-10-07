@@ -221,7 +221,8 @@ def mixer_settler():
     and a lip on the one above. A one-row stage keeps a small well at the back of the row. Create's connected
     textures put the frame ribs on the exterior edges; the fluids inside are drawn by the renderer."""
     tex = {"side": "fundamentals:block/mixer_settler_side", "top": "fundamentals:block/mixer_settler_top",
-           "nozzle": "fundamentals:block/mixer_settler_nozzle", "particle": "fundamentals:block/mixer_settler_side"}
+           "window": "fundamentals:block/mixer_settler_window", "nozzle": "fundamentals:block/mixer_settler_nozzle",
+           "particle": "fundamentals:block/mixer_settler_side"}
     full = [0, 0, 16, 16]
 
     def box(f, t, faces):
@@ -234,11 +235,21 @@ def mixer_settler():
         return f"fundamentals:block/mixer_settler/{name}"
 
     def wall(side):
+        """A panel with a glass strip down its middle between two posts, so the layers show from outside."""
         inner = {"west": "east", "east": "west", "north": "south", "south": "north"}[side]
         lo, hi = {"west": ((0, 0, 0), (1, 16, 16)), "east": ((15, 0, 0), (16, 16, 16)),
                   "north": ((0, 0, 0), (16, 16, 1)), "south": ((0, 0, 15), (16, 16, 16))}[side]
-        return [box(lo, hi, {side: ("#side", full, True), inner: ("#top", full, False),
-                             "up": ("#top", [0, 0, 16, 1] if side in ("north", "south") else [0, 0, 1, 16], False)})]
+        along_x = side in ("north", "south")
+        cap = ("#top", [0, 0, 16, 1] if along_x else [0, 0, 1, 16], False)
+        out = []
+        for p0, p1, uv in ((0, 4, [0, 0, 4, 16]), (12, 16, [12, 0, 16, 16])):
+            f, t = list(lo), list(hi)
+            f[0 if along_x else 2], t[0 if along_x else 2] = p0, p1
+            out.append(box(f, t, {side: ("#side", uv, True), inner: ("#top", uv, False), "up": cap}))
+        f, t = list(lo), list(hi)
+        f[0 if along_x else 2], t[0 if along_x else 2] = 4, 12
+        out.append(box(f, t, {side: ("#window", [4, 0, 12, 16], True), inner: ("#window", [4, 0, 12, 16], False), "up": cap}))
+        return out
 
     walls = {prop: model(f"wall_{prop}", wall(side)) for side, prop in (("west", "left"), ("east", "right"), ("north", "front"), ("south", "back"))}
     floor = model("floor", [box((0, 0, 0), (16, 1, 16), {"down": ("#top", full, True), "up": ("#top", full, False)})])

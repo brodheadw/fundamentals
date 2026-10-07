@@ -111,6 +111,7 @@ def main():
     steel(create_texture("fluid_tank")).save(TEXTURES / "block/mixer_settler_side.png")
     steel(create_texture("fluid_tank_connected")).save(TEXTURES / "block/mixer_settler_side_connected.png")
     steel(create_texture("fluid_tank_window")).save(TEXTURES / "block/mixer_settler_window.png")
+    steel(create_texture("fluid_tank_window")).save(TEXTURES / "block/mixer_settler_window.png")
     steel(create_texture("fluid_tank_top")).save(TEXTURES / "block/mixer_settler_top.png")
     steel(create_texture("fluid_tank_top_connected")).save(TEXTURES / "block/mixer_settler_top_connected.png")
     liquor("still").save(TEXTURES / "block/fluid/liquor_still.png")

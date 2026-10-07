@@ -4,6 +4,7 @@
   "textures": {
     "side": "fundamentals:block/mixer_settler_side",
     "top": "fundamentals:block/mixer_settler_top",
+    "window": "fundamentals:block/mixer_settler_window",
     "nozzle": "fundamentals:block/mixer_settler_nozzle",
     "particle": "fundamentals:block/mixer_settler_side"
   },
@@ -11,6 +12,48 @@
     {
       "from": [
         0,
+        0,
+        0
+      ],
+      "to": [
+        4,
+        16,
+        1
+      ],
+      "faces": {
+        "north": {
+          "texture": "#side",
+          "uv": [
+            0,
+            0,
+            4,
+            16
+          ],
+          "cullface": "north"
+        },
+        "south": {
+          "texture": "#top",
+          "uv": [
+            0,
+            0,
+            4,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#top",
+          "uv": [
+            0,
+            0,
+            16,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        12,
         0,
         0
       ],
@@ -23,7 +66,7 @@
         "north": {
           "texture": "#side",
           "uv": [
-            0,
+            12,
             0,
             16,
             16
@@ -33,9 +76,51 @@
         "south": {
           "texture": "#top",
           "uv": [
+            12,
+            0,
+            16,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#top",
+          "uv": [
             0,
             0,
             16,
+            1
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        0,
+        0
+      ],
+      "to": [
+        12,
+        16,
+        1
+      ],
+      "faces": {
+        "north": {
+          "texture": "#window",
+          "uv": [
+            4,
+            0,
+            12,
+            16
+          ],
+          "cullface": "north"
+        },
+        "south": {
+          "texture": "#window",
+          "uv": [
+            4,
+            0,
+            12,
             16
           ]
         },
