@@ -221,7 +221,7 @@ def mixer_settler():
     and a lip on the one above. A one-row stage keeps a small well at the back of the row. Create's connected
     textures put the frame ribs on the exterior edges; the fluids inside are drawn by the renderer."""
     tex = {"side": "fundamentals:block/mixer_settler_side", "top": "fundamentals:block/mixer_settler_top",
-           "window": "minecraft:block/glass", "nozzle": "fundamentals:block/mixer_settler_nozzle",
+           "window": "create:block/fluid_tank_window", "nozzle": "fundamentals:block/mixer_settler_nozzle",
            "particle": "fundamentals:block/mixer_settler_side"}
     full = [0, 0, 16, 16]
 
@@ -235,20 +235,29 @@ def mixer_settler():
         return f"fundamentals:block/mixer_settler/{name}"
 
     def wall(side):
-        """A panel with a glass strip down its middle between two posts, so the layers show from outside."""
+        """Create's tank window: two four-pixel posts of our panel and, between them, a flat pane of Create's
+        glass set just inside the wall, drawn as its fluid tank model draws it."""
         inner = {"west": "east", "east": "west", "north": "south", "south": "north"}[side]
         lo, hi = {"west": ((0, 0, 0), (1, 16, 16)), "east": ((15, 0, 0), (16, 16, 16)),
                   "north": ((0, 0, 0), (16, 16, 1)), "south": ((0, 0, 15), (16, 16, 16))}[side]
         along_x = side in ("north", "south")
         cap = ("#top", [0, 0, 16, 1] if along_x else [0, 0, 1, 16], False)
         out = []
-        for p0, p1, uv in ((0, 2, [0, 0, 2, 16]), (14, 16, [14, 0, 16, 16])):
+        for p0, p1, uv in ((0, 4, [0, 0, 4, 16]), (12, 16, [12, 0, 16, 16])):
             f, t = list(lo), list(hi)
             f[0 if along_x else 2], t[0 if along_x else 2] = p0, p1
             out.append(box(f, t, {side: ("#side", uv, True), inner: ("#top", uv, False), "up": cap}))
+        # the pane: zero thickness, 0.05 in from the inner face of the wall, both faces glass
+        depth = {"west": 0.95, "east": 15.05, "north": 0.95, "south": 15.05}[side]
         f, t = list(lo), list(hi)
-        f[0 if along_x else 2], t[0 if along_x else 2] = 2, 14
-        out.append(box(f, t, {side: ("#window", [2, 0, 14, 16], True), inner: ("#window", [2, 0, 14, 16], False), "up": cap}))
+        f[0 if along_x else 2], t[0 if along_x else 2] = 4, 12
+        f[2 if along_x else 0] = t[2 if along_x else 0] = depth
+        out.append(box(f, t, {side: ("#window", [8, 0, 16, 16], False), inner: ("#window", [8, 0, 16, 16], False)}))
+        # the lintel over the glass so the wall reads closed from above
+        f, t = list(lo), list(hi)
+        f[0 if along_x else 2], t[0 if along_x else 2] = 4, 12
+        f[1], t[1] = 15, 16
+        out.append(box(f, t, {side: ("#side", [4, 0, 12, 1], True), inner: ("#top", [4, 0, 12, 1], False), "up": cap}))
         return out
 
     walls = {prop: model(f"wall_{prop}", wall(side)) for side, prop in (("west", "left"), ("east", "right"), ("north", "front"), ("south", "back"))}
