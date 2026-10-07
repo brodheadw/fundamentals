@@ -9,6 +9,8 @@ import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.BlockGetter;
@@ -153,7 +155,10 @@ public class MixerSettlerBlock extends BaseEntityBlock {
         super.onRemove(state, level, pos, newState, movedByPiston);
     }
 
-    /** Anything in the vat below the liquid's surface is buoyed up to it and slowed, as in water. */
+    /**
+     * Anything in the vat below the liquid's surface is buoyed up to it and slowed, as in water, and anything
+     * alive is poisoned by the acid liquor and sickened by the kerosene the extractant rides in.
+     */
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (!(level.getBlockEntity(pos) instanceof MixerSettlerBlockEntity casing)) {
@@ -168,8 +173,16 @@ public class MixerSettlerBlock extends BaseEntityBlock {
         double depthBelow = surface - entity.getY();
         double lift = Math.min(0.08, 0.02 + depthBelow * 0.06);
         entity.setDeltaMovement(v.x * 0.8, Math.min(v.y + lift, 0.12), v.z * 0.8);
-        if (entity instanceof LivingEntity living && level.random.nextInt(20) == 0 && level instanceof ServerLevel server) {
-            server.sendParticles(ParticleTypes.BUBBLE_POP, living.getX(), surface, living.getZ(), 2, 0.2, 0.0, 0.2, 0.0);
+        if (entity instanceof LivingEntity living && !level.isClientSide) {
+            if (!casing.stage().aqueous().isEmpty()) {
+                living.addEffect(new MobEffectInstance(MobEffects.POISON, 60, 0));
+            }
+            if (!casing.stage().organic().isEmpty()) {
+                living.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0));
+            }
+            if (level.random.nextInt(20) == 0 && level instanceof ServerLevel server) {
+                server.sendParticles(ParticleTypes.BUBBLE_POP, living.getX(), surface, living.getZ(), 2, 0.2, 0.0, 0.2, 0.0);
+            }
         }
     }
 
