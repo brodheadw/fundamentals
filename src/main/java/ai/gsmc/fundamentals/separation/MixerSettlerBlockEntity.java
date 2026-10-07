@@ -85,10 +85,10 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     /** The fluid surface, in blocks above the stage's floor, as the renderer draws it. */
     public double surface() {
         MixerSettlerBlockEntity stage = stage();
-        double depth = stage.tall - 3 / 16.0;
-        double aqueous = depth * 0.5 * stage.aqueous.getFluidAmount() / stage.capacity();
-        double organic = depth * 0.5 * stage.organic.getFluidAmount() / stage.capacity();
-        return Math.min(stage.tall - 2 / 16.0, 1 / 16.0 + aqueous + organic);
+        double depth = stage.tall - 6 / 16.0;
+        double aqueous = depth * 0.5 * stage.aqueous.getFluidAmount() / stage.phaseCapacity();
+        double organic = depth * 0.5 * stage.organic.getFluidAmount() / stage.phaseCapacity();
+        return Math.min(stage.tall - 5 / 16.0, 1 / 16.0 + aqueous + organic);
     }
 
     public double floorY() {
@@ -99,6 +99,8 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     public int tall() { return tall; }
     public int volume() { return across * along * tall; }
     public int capacity() { return CAPACITY_PER_CASING * volume(); }
+    /** The two phases share the vat, so each tank holds half of it; the out-tank is a separate buffer. */
+    public int phaseCapacity() { return capacity() / 2; }
     public int batch() { return BATCH_PER_CASING * volume(); }
     public boolean isController() { return controller == null || worldPosition.equals(controller); }
     /** A stage is three across and three along, one or two tall; anything less is just casing. */
@@ -149,10 +151,9 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     }
 
     private void resize() {
-        int capacity = capacity();
-        organic.setCapacity(capacity);
-        aqueous.setCapacity(capacity);
-        out.setCapacity(capacity);
+        organic.setCapacity(phaseCapacity());
+        aqueous.setCapacity(phaseCapacity());
+        out.setCapacity(capacity());
     }
 
     /** A tick after placement: join the largest box of casings this one completes. */
@@ -594,8 +595,8 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
                 if (!stage.aqueous.getFluid().is(shown)) {
                     stage.aqueous.setFluid(FluidStack.EMPTY);
                 }
-                if (stage.aqueous.getFluidAmount() < stage.capacity() / 2) {
-                    stage.aqueous.fill(new FluidStack(shown, Math.min(stage.capacity() / 10, stage.capacity() / 2 - stage.aqueous.getFluidAmount())), IFluidHandler.FluidAction.EXECUTE);
+                if (stage.aqueous.getFluidAmount() < stage.phaseCapacity()) {
+                    stage.aqueous.fill(new FluidStack(shown, Math.min(stage.capacity() / 10, stage.phaseCapacity() - stage.aqueous.getFluidAmount())), IFluidHandler.FluidAction.EXECUTE);
                 }
             }
             stage.stirring = STIR_TICKS;

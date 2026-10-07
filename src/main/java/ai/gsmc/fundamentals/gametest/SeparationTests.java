@@ -39,7 +39,7 @@ public class SeparationTests {
     private static int settle(int stages) {
         return stages * MixerSettlerBlockEntity.EQUILIBRATION_PER_STAGE + 2 * MixerSettlerBlockEntity.PERIOD + 20;
     }
-    private static final int PLANT = 18 * MixerSettlerBlockEntity.CAPACITY_PER_CASING;
+    private static final int PLANT = 18 * MixerSettlerBlockEntity.CAPACITY_PER_CASING / 2;
     private static final BlockState CASING = Separation.mixerSettler().defaultBlockState().setValue(MixerSettlerBlock.FACING, Direction.EAST);
 
     /** Create's Mechanical Mixer over the trough at (x, z), driven by a cogwheel beside it under a Creative Motor. */
@@ -151,11 +151,11 @@ public class SeparationTests {
             helper.assertTrue(!casing(helper, 1, 4, 4).isStage() && helper.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, helper.absolutePos(new BlockPos(1, 4, 4)), Direction.UP) == null,
                     "two casings are not a stage and have no ports");
             for (int i = 0; i < 8; i++) {
-                port(helper, 1 + 3 * i, Direction.UP).fill(new FluidStack(Separation.fluid("p507"), 2250), IFluidHandler.FluidAction.EXECUTE);
+                port(helper, 1 + 3 * i, Direction.UP).fill(new FluidStack(Separation.fluid("p507"), 1125), IFluidHandler.FluidAction.EXECUTE);
             }
-            helper.assertTrue(fill(helper, 1, Direction.WEST, "rare_earth_liquor", 3000) == 9 * MixerSettlerBlockEntity.CAPACITY_PER_CASING,
-                    "a nine-casing stage holds nine casings' worth");
-            fill(helper, 24, Direction.EAST, "hydrochloric_acid", 2250);
+            helper.assertTrue(fill(helper, 1, Direction.WEST, "rare_earth_liquor", 3000) == 9 * MixerSettlerBlockEntity.CAPACITY_PER_CASING / 2,
+                    "a nine-casing stage holds half its volume of each phase");
+            fill(helper, 24, Direction.EAST, "hydrochloric_acid", 1125);
             helper.runAfterDelay(settle(8), () -> {
                 FluidStack raffinate = held(helper, 1, Direction.NORTH);
                 int small = 9 * MixerSettlerBlockEntity.BATCH_PER_CASING;
@@ -263,10 +263,10 @@ public class SeparationTests {
             }
         }
         helper.runAfterDelay(SPIN_UP, () -> {
-            fill(helper, 1, Direction.UP, "p507", 2250);
+            fill(helper, 1, Direction.UP, "p507", 1125);
             helper.runAfterDelay(400, () -> {
                 int head = held(helper, 1, Direction.UP).getAmount(), tail = held(helper, 7, Direction.UP).getAmount();
-                helper.assertTrue(tail > 0 && head + held(helper, 4, Direction.UP).getAmount() + tail == 2250,
+                helper.assertTrue(tail > 0 && head + held(helper, 4, Direction.UP).getAmount() + tail == 1125,
                         "the organic should spread forward and be conserved, got " + head + " / " + tail);
                 helper.succeed();
             });

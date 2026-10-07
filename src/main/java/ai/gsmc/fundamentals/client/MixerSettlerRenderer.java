@@ -42,7 +42,7 @@ public class MixerSettlerRenderer implements BlockEntityRenderer<MixerSettlerBlo
         int w = stage.across(), l = stage.along(), h = stage.tall();
         boolean oneRow = l == 1;
         float right = w - PX;
-        float brim = h - 2 * PX;
+        float brim = h - 5 * PX;
         // the trough: the back row, or the back five pixels of the only row, behind the weir
         float wellBack = 1 - PX, wellFront = oneRow ? 11 * PX : PX;
         float bayBack = oneRow ? 10 * PX : 0, bayFront = -(l - 1) + PX;
@@ -53,8 +53,8 @@ public class MixerSettlerRenderer implements BlockEntityRenderer<MixerSettlerBlo
         FluidStack aqueous = stage.aqueous();
         FluidStack organic = stage.organic();
         float depth = brim - FLOOR;
-        float aqueousTop = Math.min(brim, FLOOR + depth * 0.5F * aqueous.getAmount() / stage.capacity());
-        float organicTop = Math.min(brim, aqueousTop + depth * 0.5F * organic.getAmount() / stage.capacity());
+        float aqueousTop = Math.min(brim, FLOOR + depth * 0.5F * aqueous.getAmount() / stage.phaseCapacity());
+        float organicTop = Math.min(brim, aqueousTop + depth * 0.5F * organic.getAmount() / stage.phaseCapacity());
         if (!aqueous.isEmpty()) {
             FLUIDS.renderFluidBox(aqueous, PX, FLOOR, bayFront, right, aqueousTop, bayBack, buffer, ms, light, false, false);
         }
