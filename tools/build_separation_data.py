@@ -258,12 +258,14 @@ def mixer_settler():
             f, t = list(lo), list(hi)
             f[0 if along_x else 2], t[0 if along_x else 2] = p0, p1
             out.append(box(f, t, {side: ("#side", uv, True), inner: ("#top", uv, False), "up": cap, end: ("#top", [0, 0, 1, 16], False)}))
+        # the glass fills the wall's thickness between the posts, so the rim stays whole seen from above
         uv = {"single": [0, 0, 8, 16], "bottom": [0, 4, 8, 16], "top": [0, 0, 8, 12]}[part]
-        depth = {"west": 0.95, "east": 15.05, "north": 0.95, "south": 15.05}[side]
         f, t = list(lo), list(hi)
         f[0 if along_x else 2], t[0 if along_x else 2] = 4, 12
-        f[2 if along_x else 0] = t[2 if along_x else 0] = depth
-        out.append(box(f, t, {side: ("#window", uv, False), inner: ("#window", uv, False)}))
+        faces = {side: ("#window", uv, True), inner: ("#window", uv, False)}
+        if part != "bottom":
+            faces["up"] = ("#window", [0, 0, 8, 1] if along_x else [0, 0, 1, 8], False)
+        out.append(box(f, t, faces))
         return out
 
     sides = (("west", "left"), ("east", "right"), ("north", "front"), ("south", "back"))
