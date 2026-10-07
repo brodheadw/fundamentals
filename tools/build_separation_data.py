@@ -141,6 +141,10 @@ def chemistry():
     # Leaching the concentrates into chloride liquor.
     mixing("rare_earth_liquor", [item("light_rare_earth_concentrate"), fluid(STRIP, 500)], [result_fluid("rare_earth_liquor", 500)], heated=True)
     mixing("heavy_rare_earth_liquor", [item("heavy_rare_earth_concentrate"), fluid(STRIP, 500)], [result_fluid("heavy_rare_earth_liquor", 500)], heated=True)
+    # The clay is not ground or roasted: its rare earths sit on the clay as ions and a salt solution lifts
+    # them off, which is why the Chinese heaps are leached in place.
+    mixing("heavy_rare_earth_liquor_from_clay", item("raw_ion_adsorption_clay", 4) + [item("salt"), fluid("minecraft:water", 500)],
+           [result_fluid("heavy_rare_earth_liquor", 250)])
 
 
 def cuts():
