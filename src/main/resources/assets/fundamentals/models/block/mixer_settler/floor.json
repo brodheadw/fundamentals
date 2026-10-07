@@ -3,10 +3,9 @@
   "render_type": "minecraft:cutout",
   "textures": {
     "side": "fundamentals:block/mixer_settler_side",
-    "inside": "fundamentals:block/mixer_settler_inside",
-    "rim": "fundamentals:block/mixer_settler_rim",
-    "window": "fundamentals:block/mixer_settler_window",
-    "motor": "fundamentals:block/mixer_settler_motor",
+    "top": "fundamentals:block/mixer_settler_top",
+    "window": "create:block/fluid_tank_window",
+    "nozzle": "fundamentals:block/mixer_settler_nozzle",
     "particle": "fundamentals:block/mixer_settler_side"
   },
   "elements": [
@@ -23,7 +22,7 @@
       ],
       "faces": {
         "down": {
-          "texture": "#side",
+          "texture": "#top",
           "uv": [
             0,
             0,
@@ -33,7 +32,7 @@
           "cullface": "down"
         },
         "up": {
-          "texture": "#inside",
+          "texture": "#top",
           "uv": [
             0,
             0,

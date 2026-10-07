@@ -1,0 +1,18 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:dysprosium_oxide"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "fundamentals:hydrofluoric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:dysprosium_fluoride"
+    }
+  ]
+}

@@ -20,6 +20,7 @@ RECIPES = DATA / "recipe"
 FORMS = {
     "concentrate": (DATA / "tags/item/concentrates", "{}"),
     "oxalate": (DATA / "tags/item/oxalates", "{} Oxalate"),
+    "fluoride": (DATA / "tags/item/fluorides", "{} Fluoride"),
     "oxide": (DATA / "tags/item/oxides", "{} Oxide"),
     "dust": (C_TAGS / "item/dusts", "{} Dust"),
     "ingot": (C_TAGS / "item/ingots", "{} Ingot"),

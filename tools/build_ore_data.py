@@ -83,6 +83,7 @@ ORES = {
     "braggite": ("platinum", "pickaxe", "iron"),
     "cinnabar": ("mercury", "pickaxe", "iron"),
     "spodumene": ("lithium", "pickaxe", "iron"),
+    "fluorite": ("fluorspar", "pickaxe", "stone"),
 }
 
 # Host rocks that are blocks of their own -> tool.
@@ -137,7 +138,8 @@ DEPOSITS = {
                       (8, 12), (3, 5), None, "anywhere", (-56, 8), 12, "rock"),
     "bog_iron": ("blanket", "goethite_ore", [], (6, 9), (1, 2), None, "wetland", (60, 64), 3, "ground"),
     # --- stratabound beds in ordinary rock ---
-    "lead_zinc_bed": ("bed", "create:limestone", [("sphalerite", 0.20, "pockets"), ("galena", 0.13, "pockets")],
+    # fluorspar rides with the lead and zinc, as it does in every Mississippi Valley deposit
+    "lead_zinc_bed": ("bed", "create:limestone", [("sphalerite", 0.20, "pockets"), ("galena", 0.13, "pockets"), ("fluorite", 0.10, "pockets")],
                       (9, 13), (3, 5), None, "anywhere", (-40, 36), 10, "rock"),
     "zinc_oxide_bed": ("bed", "create:asurine", [("smithsonite", 0.24, "pockets")], (7, 10), (2, 4), None,
                        "anywhere", (36, 72), 18, "rock"),

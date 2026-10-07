@@ -3,16 +3,66 @@
   "render_type": "minecraft:cutout",
   "textures": {
     "side": "fundamentals:block/mixer_settler_side",
-    "inside": "fundamentals:block/mixer_settler_inside",
-    "rim": "fundamentals:block/mixer_settler_rim",
-    "window": "fundamentals:block/mixer_settler_window",
-    "motor": "fundamentals:block/mixer_settler_motor",
+    "top": "fundamentals:block/mixer_settler_top",
+    "window": "create:block/fluid_tank_window",
+    "nozzle": "fundamentals:block/mixer_settler_nozzle",
     "particle": "fundamentals:block/mixer_settler_side"
   },
   "elements": [
     {
       "from": [
         0,
+        0,
+        15
+      ],
+      "to": [
+        4,
+        16,
+        16
+      ],
+      "faces": {
+        "south": {
+          "texture": "#side",
+          "uv": [
+            0,
+            0,
+            4,
+            16
+          ],
+          "cullface": "south"
+        },
+        "north": {
+          "texture": "#top",
+          "uv": [
+            0,
+            0,
+            4,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#top",
+          "uv": [
+            0,
+            0,
+            16,
+            1
+          ]
+        },
+        "east": {
+          "texture": "#top",
+          "uv": [
+            0,
+            0,
+            1,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        12,
         0,
         15
       ],
@@ -25,7 +75,7 @@
         "south": {
           "texture": "#side",
           "uv": [
-            0,
+            12,
             0,
             16,
             16
@@ -33,18 +83,69 @@
           "cullface": "south"
         },
         "north": {
-          "texture": "#inside",
+          "texture": "#top",
           "uv": [
-            0,
+            12,
             0,
             16,
             16
           ]
         },
         "up": {
-          "texture": "#rim",
+          "texture": "#top",
           "uv": [
             0,
+            0,
+            16,
+            1
+          ]
+        },
+        "west": {
+          "texture": "#top",
+          "uv": [
+            0,
+            0,
+            1,
+            16
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        4,
+        0,
+        15
+      ],
+      "to": [
+        12,
+        16,
+        16
+      ],
+      "faces": {
+        "south": {
+          "texture": "#window",
+          "uv": [
+            0,
+            0,
+            8,
+            14
+          ],
+          "cullface": "south"
+        },
+        "north": {
+          "texture": "#window",
+          "uv": [
+            0,
+            0,
+            8,
+            14
+          ]
+        },
+        "up": {
+          "texture": "#window",
+          "uv": [
+            8,
             0,
             16,
             1

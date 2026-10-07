@@ -1,0 +1,31 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_ion_adsorption_clay"
+    },
+    {
+      "item": "fundamentals:raw_ion_adsorption_clay"
+    },
+    {
+      "item": "fundamentals:raw_ion_adsorption_clay"
+    },
+    {
+      "item": "fundamentals:raw_ion_adsorption_clay"
+    },
+    {
+      "item": "fundamentals:salt"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "minecraft:water"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:heavy_rare_earth_liquor",
+      "amount": 250
+    }
+  ]
+}

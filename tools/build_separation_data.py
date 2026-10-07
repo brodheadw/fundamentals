@@ -52,18 +52,33 @@ LIQUORS = {
     "lutetium_liquor": ("Lutetium Liquor", CLEAR),
     "yttrium_liquor": ("Yttrium Liquor", CLEAR),
 }
+# P507 and P204 are colourless to pale yellow and ride in kerosene, so they are straw; naphthenic acid is the dark one.
 ORGANICS = {
-    "p204": ("P204", 0xD8B060),
-    "p507": ("P507", 0xC89440),
-    "naphthenic_acid": ("Naphthenic Acid", 0x8A6A2E),
+    "p204": ("P204", 0xEAD88C),
+    "p507": ("P507", 0xECE0A8),
+    "naphthenic_acid": ("Naphthenic Acid", 0xA8843C),
 }
 ACIDS = {
     "hydrochloric_acid": ("Hydrochloric Acid", 0xE4EEF2),
     "nitric_acid": ("Nitric Acid", 0xF0EDC8),
     "phosphoric_acid": ("Phosphoric Acid", 0xE8ECE4),
+    "hydrofluoric_acid": ("Hydrofluoric Acid", 0xE6F0EA),
+}
+GASES = {
+    "argon": ("Argon", 0xC8D8F0),
 }
 FLUIDS = {**{k: (*v, "LIQUOR") for k, v in LIQUORS.items()}, **{k: (*v, "ORGANIC") for k, v in ORGANICS.items()},
-          **{k: (*v, "ACID") for k, v in ACIDS.items()}}
+          **{k: (*v, "ACID") for k, v in ACIDS.items()}, **{k: (*v, "GAS") for k, v in GASES.items()}}
+
+# Oxide to metal. The lights and the heavies go through their fluoride: the lights by molten-salt
+# electrolysis on TFMG's electrodes, the heavies by calciothermic reduction under argon, which gives the
+# fluorite back as slag. The volatile four are reduced straight from the oxide by lanthanum metal under
+# argon and distil off, leaving lanthanum oxide to go round again.
+ELECTROLYSIS = ("lanthanum", "cerium", "praseodymium", "neodymium", "didymium")
+CALCIOTHERMIC = ("gadolinium", "terbium", "dysprosium", "holmium", "erbium", "lutetium", "yttrium")
+LANTHANOTHERMIC = ("samarium", "europium", "thulium", "ytterbium")
+# which liquor precipitates each element's oxalate; everything else is its own name
+OXALATE_FROM = {"didymium": "praseodymium_neodymium_liquor"}
 
 # One cut per mixer-settler battery: (liquor in, organic, stages, light out, heavy out). The stage count
 # follows the separation factor of the pair being parted: Sm/Nd is about 10 and parts in a few stages,
@@ -121,6 +136,8 @@ def java_table():
              "    public static final List<Reagent> ALL = List.of("]
     entries = [f'            new Reagent("{id}", 0x{tint:06X}, Kind.{kind})' for id, (_, tint, kind) in FLUIDS.items()]
     lines += [",\n".join(entries) + ");", "", "    private Reagents() {}", "}", ""]
+    kinds = sorted({kind for _, _, kind in FLUIDS.values()}, key=["LIQUOR", "ORGANIC", "ACID", "GAS"].index)
+    lines[7] = "    public enum Kind { " + ", ".join(kinds) + " }"
     JAVA.write_text("\n".join(lines), encoding="utf-8")
 
 
@@ -141,6 +158,39 @@ def chemistry():
     # Leaching the concentrates into chloride liquor.
     mixing("rare_earth_liquor", [item("light_rare_earth_concentrate"), fluid(STRIP, 500)], [result_fluid("rare_earth_liquor", 500)], heated=True)
     mixing("heavy_rare_earth_liquor", [item("heavy_rare_earth_concentrate"), fluid(STRIP, 500)], [result_fluid("heavy_rare_earth_liquor", 500)], heated=True)
+    # The clay is not ground or roasted: its rare earths sit on the clay as ions and a salt solution lifts
+    # them off, which is why the Chinese heaps are leached in place.
+    mixing("heavy_rare_earth_liquor_from_clay", item("raw_ion_adsorption_clay", 4) + [item("salt"), fluid("minecraft:water", 500)],
+           [result_fluid("heavy_rare_earth_liquor", 250)])
+
+
+def vat(name, ingredients, results, machines, heated=True, time=100):
+    recipe = {"type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:steel_vat", "tfmg:firebrick_lined_vat"],
+              "ingredients": ingredients, "machines": machines, "min_size": 1, "processing_time": time, "results": results}
+    if heated:
+        recipe["heat_requirement"] = "heated"
+    write(RECIPES / f"reduction/{name}.json", recipe)
+
+
+def metals():
+    # Hydrofluoric acid from fluorspar and sulfuric acid; argon spun out of air as TFMG spins out neon;
+    # calcium by electrolysing the chloride that lime and hydrochloric acid make.
+    mixing("hydrofluoric_acid", item("raw_fluorite", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("hydrofluoric_acid", 500)], heated=True)
+    vat("argon", [fluid("tfmg:air", 1000)], [{"id": "fundamentals:argon", "amount": 9}], ["tfmg:centrifuge"], heated=False, time=10)
+    vat("calcium_ingot", item("tfmg:limesand", 2) + [fluid(STRIP, 500)], [result_item("calcium_ingot")], ["tfmg:electrode", "tfmg:electrode"])
+    for element in ELECTROLYSIS + CALCIOTHERMIC:
+        mixing(f"{element}_fluoride", [item(f"{element}_oxide"), fluid("hydrofluoric_acid", 500)], [result_item(f"{element}_fluoride")])
+    for element in ELECTROLYSIS:
+        vat(f"{element}_ingot", [item(f"{element}_fluoride")] + item(f"{element}_oxide", 2), [result_item(f"{element}_ingot", 2)],
+            ["tfmg:electrode", "tfmg:electrode"])
+    for element in CALCIOTHERMIC:
+        # TFMG vats take four item inputs at most
+        vat(f"{element}_ingot", item(f"{element}_fluoride", 2) + item("calcium_ingot", 2) + [fluid("argon", 250)],
+            [result_item(f"{element}_ingot", 2), result_item("raw_fluorite", 2)], ["tfmg:mixing"])
+    for element in LANTHANOTHERMIC:
+        vat(f"{element}_ingot", item(f"{element}_oxide", 2) + item("lanthanum_ingot", 2) + [fluid("argon", 250)],
+            [result_item(f"{element}_ingot", 2), result_item("lanthanum_oxide", 2)], ["tfmg:mixing"])
+    write(DATA.parent / "c/tags/item/ingots/calcium.json", {"replace": False, "values": ["fundamentals:calcium_ingot"]})
 
 
 def cuts():
@@ -156,23 +206,23 @@ def oxalates():
     for element, forms in MATERIALS.items():
         if "oxalate" not in forms:
             continue
-        assert f"{element}_liquor" in LIQUORS, element
-        mixing(f"{element}_oxalate", [item("oxalic_acid"), fluid(f"{element}_liquor", 250)], [result_item(f"{element}_oxalate")])
+        liquor = OXALATE_FROM.get(element, f"{element}_liquor")
+        assert liquor in LIQUORS, element
+        mixing(f"{element}_oxalate", [item("oxalic_acid"), fluid(liquor, 250)], [result_item(f"{element}_oxalate")])
         write(RECIPES / f"calcining/{element}_oxide.json", {
             "type": "minecraft:smelting", "category": "misc", "ingredient": item(f"{element}_oxalate"),
             "result": {"id": f"fundamentals:{element}_oxide"}, "experience": 0.3, "cookingtime": 200})
 
 
 def mixer_settler():
-    """The casing. Casings facing the same way merge into one stage as they are placed, any box up to three
-    across, three along and two tall, so the model is a multipart: a wall wherever a face is not shared with
-    the same stage (with a rim on the top layer and a window strip on the bay's upper walls), a floor under
-    the bottom layer, the weir between the mixing trough (the back row) and the settling bay, and the mixer
-    drive on the trough's top centre casing. A one-row stage carries its well at the back of the row. Create's
-    connected textures tie the exterior walls into one tank; the fluids inside are drawn by the renderer."""
-    tex = {"side": "fundamentals:block/mixer_settler_side", "inside": "fundamentals:block/mixer_settler_inside",
-           "rim": "fundamentals:block/mixer_settler_rim", "window": "fundamentals:block/mixer_settler_window",
-           "motor": "fundamentals:block/mixer_settler_motor", "particle": "fundamentals:block/mixer_settler_side"}
+    """The casing: a cell of an open-topped welded tank, as a Chinese separation hall is built. A floor under
+    the bottom layer, a full panel on every face not shared with the rest of its stage, no lid, and a weir on
+    the seam between the mixing trough (the back row) and the settling bay, full height on the bottom layer
+    and a lip on the one above. A one-row stage keeps a small well at the back of the row. Create's connected
+    textures put the frame ribs on the exterior edges; the fluids inside are drawn by the renderer."""
+    tex = {"side": "fundamentals:block/mixer_settler_side", "top": "fundamentals:block/mixer_settler_top",
+           "window": "create:block/fluid_tank_window", "nozzle": "fundamentals:block/mixer_settler_nozzle",
+           "particle": "fundamentals:block/mixer_settler_side"}
     full = [0, 0, 16, 16]
 
     def box(f, t, faces):
@@ -184,99 +234,101 @@ def mixer_settler():
               {"ambientocclusion": False, "render_type": "minecraft:cutout", "textures": tex, "elements": elements})
         return f"fundamentals:block/mixer_settler/{name}"
 
-    # Walls are drawn for facing=north: left is west, back is south. Each comes plain, capped (top layer), and
-    # windowed-and-capped (the bay's top layer). Walls run the full block; neighbouring walls overlap at the
-    # corner by a pixel, which the cull faces hide.
-    def wall(side, cap, window):
-        outer = side
+    def panel(side):
+        """A plain wall: one panel, our dark sheet outside, the lid colour inside, capped."""
         inner = {"west": "east", "east": "west", "north": "south", "south": "north"}[side]
-        if side == "west":
-            lo, hi = (0, 0, 0), (1, 16, 16)
-        elif side == "east":
-            lo, hi = (15, 0, 0), (16, 16, 16)
-        elif side == "north":
-            lo, hi = (0, 0, 0), (16, 16, 1)
-        else:
-            lo, hi = (0, 0, 15), (16, 16, 16)
-        capf = {"up": ("#rim", [0, 0, 16, 1], False)} if cap else {}
-        if not window:
-            return [box(lo, hi, {outer: ("#side", full, True), inner: ("#inside", full, False), **capf})]
-        out = []
+        lo, hi = {"west": ((0, 0, 0), (1, 16, 16)), "east": ((15, 0, 0), (16, 16, 16)),
+                  "north": ((0, 0, 0), (16, 16, 1)), "south": ((0, 0, 15), (16, 16, 16))}[side]
         along_x = side in ("north", "south")
-        for p0, p1, uv in ((0, 4, [0, 0, 4, 16]), (12, 16, [12, 0, 16, 16])):
+        cap = ("#top", [0, 0, 16, 1] if along_x else [0, 0, 1, 16], False)
+        return [box(lo, hi, {side: ("#side", full, True), inner: ("#top", full, False), "up": cap})]
+
+    def window_wall(side, part):
+        """Create's tank window: four-pixel posts and a flat pane of its glass just inside the wall, the pane
+        rounded at the ends; `part` is single, bottom or top of a two-tall window."""
+        inner = {"west": "east", "east": "west", "north": "south", "south": "north"}[side]
+        lo, hi = {"west": ((0, 0, 0), (1, 16, 16)), "east": ((15, 0, 0), (16, 16, 16)),
+                  "north": ((0, 0, 0), (16, 16, 1)), "south": ((0, 0, 15), (16, 16, 16))}[side]
+        along_x = side in ("north", "south")
+        cap = ("#top", [0, 0, 16, 1] if along_x else [0, 0, 1, 16], False)
+        out = []
+        # each post also closes its end toward the glass, or the fluid shows through it from an angle
+        ends = ("east", "west") if along_x else ("south", "north")
+        for (p0, p1, uv), end in zip(((0, 4, [0, 0, 4, 16]), (12, 16, [12, 0, 16, 16])), ends):
             f, t = list(lo), list(hi)
             f[0 if along_x else 2], t[0 if along_x else 2] = p0, p1
-            out.append(box(f, t, {outer: ("#side", uv, True), inner: ("#inside", uv, False), **capf}))
+            out.append(box(f, t, {side: ("#side", uv, True), inner: ("#top", uv, False), "up": cap, end: ("#top", [0, 0, 1, 16], False)}))
+        # the glass fills the wall's thickness between the posts, so the rim stays whole seen from above.
+        # Create's cuts of its window strip: bolts only at the window's outer ends, the plain strip between
+        uv = {"single": [0, 0, 8, 16], "bottom": [0, 2, 8, 16], "top": [0, 0, 8, 14]}[part]
         f, t = list(lo), list(hi)
         f[0 if along_x else 2], t[0 if along_x else 2] = 4, 12
-        out.append(box(f, t, {outer: ("#window", [4, 0, 12, 16], True), inner: ("#window", [4, 0, 12, 16], False),
-                              **({"up": ("#rim", [4, 0, 12, 1], False)} if cap else {})}))
+        faces = {side: ("#window", uv, True), inner: ("#window", uv, False)}
+        if part != "bottom":
+            faces["up"] = ("#window", [8, 0, 16, 1] if along_x else [8, 0, 9, 8], False)
+        out.append(box(f, t, faces))
         return out
 
-    pieces = {}
-    for side, prop in (("west", "left"), ("east", "right"), ("north", "front"), ("south", "back")):
-        pieces[(prop, "plain")] = model(f"wall_{prop}", wall(side, False, False))
-        pieces[(prop, "cap")] = model(f"wall_{prop}_top", wall(side, True, False))
-        pieces[(prop, "window")] = model(f"wall_{prop}_window", wall(side, True, True))
-    floor = model("floor", [box((0, 0, 0), (16, 1, 16), {"down": ("#side", full, True), "up": ("#inside", full, False)})])
-    # the weir: a trough cell's whole forward face on the bottom layer, a lip on the layer above
-    weir = model("weir", [box((0, 1, 0), (16, 16, 1), {"north": ("#inside", full, False), "south": ("#inside", full, False)})])
-    weir_lip = model("weir_lip", [box((0, 0, 0), (16, 2, 1), {"north": ("#inside", [0, 14, 16, 16], False), "south": ("#inside", [0, 14, 16, 16], False),
-                                                           "up": ("#rim", [0, 0, 16, 1], False)})])
-    # a one-row stage keeps a small well at the back of the row, behind a low weir
-    well = model("well", [box((0, 1, 10), (16, 12, 11), {"north": ("#inside", [0, 4, 16, 15], False), "south": ("#inside", [0, 4, 16, 15], False),
-                                                      "up": ("#rim", [0, 10, 16, 11], False)})])
-    motor = model("motor", [
-        box((0, 14, 6), (16, 16, 10), {d: ("#motor", [0, 8, 16, 10], False) for d in ("north", "south", "up")}),
-        box((5, 16, 5), (11, 26, 11), {**{d: ("#motor", [5, 0, 11, 10], False) for d in ("north", "south", "east", "west")},
-                                        "up": ("#motor", [5, 0, 11, 6], False)}),
-    ])
-    motor_single = model("motor_single", [
-        box((0, 12, 11), (16, 14, 15), {d: ("#motor", [0, 8, 16, 10], False) for d in ("north", "south", "up")}),
-        box((6, 14, 11), (10, 22, 15), {**{d: ("#motor", [6, 0, 10, 8], False) for d in ("north", "south", "east", "west")},
-                                         "up": ("#motor", [6, 0, 10, 4], False)}),
-    ])
+    sides = (("west", "left"), ("east", "right"), ("north", "front"), ("south", "back"))
+    walls = {prop: model(f"wall_{prop}", panel(side)) for side, prop in sides}
+    windows = {(prop, part): model(f"wall_{prop}_{part}", window_wall(side, part)) for side, prop in sides for part in ("single", "bottom", "top")}
+    floor = model("floor", [box((0, 0, 0), (16, 1, 16), {"down": ("#top", full, True), "up": ("#top", full, False)})])
+    weir = model("weir", [box((0, 1, 0), (16, 16, 1), {"north": ("#top", full, False), "south": ("#top", full, False), "up": ("#top", [0, 0, 16, 1], False)})])
+    weir_low = model("weir_low", [box((0, 1, 0), (16, 13, 1), {"north": ("#top", [0, 3, 16, 15], False), "south": ("#top", [0, 3, 16, 15], False), "up": ("#top", [0, 0, 16, 1], False)})])
+    weir_lip = model("weir_lip", [box((0, 0, 0), (16, 13, 1), {"north": ("#top", [0, 3, 16, 16], False), "south": ("#top", [0, 3, 16, 16], False),
+                                                           "up": ("#top", [0, 0, 16, 1], False)})])
+    well = model("well", [box((0, 1, 10), (16, 13, 11), {"north": ("#top", [0, 3, 16, 15], False), "south": ("#top", [0, 3, 16, 15], False),
+                                                      "up": ("#top", [0, 10, 16, 11], False)})])
 
+    # the ports in the shared end walls: the organic overflow high on the front wall, the aqueous drain low on the back
+    port_ahead = model("port_ahead", [box((4, 10, 1), (12, 14, 2), {"south": ("#nozzle", [0, 0, 16, 16], False), "up": ("#nozzle", [0, 6, 16, 10], False),
+                                                                   "east": ("#nozzle", [6, 4, 10, 12], False), "west": ("#nozzle", [6, 4, 10, 12], False)})])
+    port_behind = model("port_behind", [box((4, 2, 14), (12, 6, 15), {"north": ("#nozzle", [0, 0, 16, 16], False), "up": ("#nozzle", [0, 6, 16, 10], False),
+                                                                     "east": ("#nozzle", [6, 4, 10, 12], False), "west": ("#nozzle", [6, 4, 10, 12], False)})])
     parts = []
     for facing, y in (("north", 0), ("east", 90), ("south", 180), ("west", 270)):
-        def case(when, mdl):
-            parts.append({"when": {"facing": facing, **when}, "apply": {"model": mdl, **({"y": y} if y else {})}})
-        case({"below": "false"}, floor)
-        for prop in ("left", "right", "front", "back"):
-            case({prop: "false", "above": "true"}, pieces[(prop, "plain")])
-            case({prop: "false", "above": "false", "rows": "well"}, pieces[(prop, "cap")])
-            case({prop: "false", "above": "false", "rows": "bay|single"}, pieces[(prop, "window")])
-        case({"rows": "well", "below": "false"}, weir)
-        case({"rows": "well", "below": "true"}, weir_lip)
-        case({"rows": "single", "below": "false"}, well)
-        case({"motor": "true", "rows": "well"}, motor)
-        case({"motor": "true", "rows": "single"}, motor_single)
+        rot = {"y": y} if y else {}
+        # a wall shared with the next stage carries a port, not a window
+        linked = {"front": "link_ahead", "back": "link_behind"}
+        for prop, mdl in walls.items():
+            plain = {"facing": facing, prop: "false", "window": "false"}
+            glazed = {"facing": facing, prop: "false", "window": "true"}
+            if prop in linked:
+                parts.append({"when": {"facing": facing, prop: "false", "window": "true", linked[prop]: "true"}, "apply": {"model": mdl, **rot}})
+                glazed[linked[prop]] = "false"
+            parts.append({"when": plain, "apply": {"model": mdl, **rot}})
+            parts.append({"when": {**glazed, "above": "false", "below": "false"}, "apply": {"model": windows[(prop, "single")], **rot}})
+            parts.append({"when": {**glazed, "above": "true", "below": "false"}, "apply": {"model": windows[(prop, "bottom")], **rot}})
+            parts.append({"when": {**glazed, "above": "false", "below": "true"}, "apply": {"model": windows[(prop, "top")], **rot}})
+        parts.append({"when": {"facing": facing, "front": "false", "link_ahead": "true", "above": "false"}, "apply": {"model": port_ahead, **rot}})
+        parts.append({"when": {"facing": facing, "back": "false", "link_behind": "true", "below": "false"}, "apply": {"model": port_behind, **rot}})
+        parts.append({"when": {"facing": facing, "rows": "well", "below": "false", "above": "true"}, "apply": {"model": weir, **rot}})
+        parts.append({"when": {"facing": facing, "rows": "well", "below": "false", "above": "false"}, "apply": {"model": weir_low, **rot}})
+        parts.append({"when": {"facing": facing, "rows": "well", "below": "true"}, "apply": {"model": weir_lip, **rot}})
+        parts.append({"when": {"facing": facing, "rows": "single", "below": "false"}, "apply": {"model": well, **rot}})
+    parts.append({"when": {"below": "false"}, "apply": {"model": floor}})
     write(ASSETS / "blockstates/mixer_settler.json", {"multipart": parts})
-    # the item shows a lone casing: every wall, the floor, the small well and its motor
     write(ASSETS / "models/item/mixer_settler.json", {"ambientocclusion": False, "textures": tex, "elements":
-          [box((0, 0, 0), (16, 1, 16), {"down": ("#side", full, True), "up": ("#inside", full, False)})]
-          + wall("west", True, True) + wall("east", True, True) + wall("north", True, True) + wall("south", True, False)
-          + [box((0, 1, 10), (16, 12, 11), {"north": ("#inside", [0, 4, 16, 15], False), "south": ("#inside", [0, 4, 16, 15], False), "up": ("#rim", [0, 10, 16, 11], False)}),
-             box((0, 12, 11), (16, 14, 15), {d: ("#motor", [0, 8, 16, 10], False) for d in ("north", "south", "up")}),
-             box((6, 14, 11), (10, 22, 15), {**{d: ("#motor", [6, 0, 10, 8], False) for d in ("north", "south", "east", "west")}, "up": ("#motor", [6, 0, 10, 4], False)})],
-          "display": {"gui": {"rotation": [30, 225, 0], "scale": [0.55, 0.55, 0.55], "translation": [0, -1, 0]},
-                      "ground": {"scale": [0.25, 0.25, 0.25]}, "fixed": {"scale": [0.5, 0.5, 0.5]},
-                      "thirdperson_righthand": {"rotation": [75, 45, 0], "scale": [0.375, 0.375, 0.375], "translation": [0, 2.5, 0]},
+          panel("west") + panel("east") + panel("north") + panel("south")
+          + [box((0, 0, 0), (16, 1, 16), {"down": ("#top", full, False), "up": ("#top", full, False)}),
+             box((0, 1, 10), (16, 13, 11), {"north": ("#top", [0, 3, 16, 15], False), "south": ("#top", [0, 3, 16, 15], False), "up": ("#top", [0, 10, 16, 11], False)})],
+          "display": {"gui": {"rotation": [30, 225, 0], "scale": [0.625, 0.625, 0.625]}, "ground": {"scale": [0.25, 0.25, 0.25]},
+                      "fixed": {"scale": [0.5, 0.5, 0.5]}, "thirdperson_righthand": {"rotation": [75, 45, 0], "scale": [0.375, 0.375, 0.375], "translation": [0, 2.5, 0]},
                       "firstperson_righthand": {"rotation": [0, 45, 0], "scale": [0.4, 0.4, 0.4]}}})
     write(DATA / "loot_table/blocks/mixer_settler.json", {"type": "minecraft:block", "pools": [drop_self("mixer_settler")]})
     write(RECIPES / "mixer_settler.json", {
-        "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["C C", "SSS", "SPS"],
-        "key": {"C": {"tag": "c:ingots/copper"}, "S": {"tag": "c:plates/steel"}, "P": {"item": "create:fluid_pipe"}},
+        "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["P P", "PPP", "PFP"],
+        "key": {"P": {"item": "tfmg:plastic_sheet"}, "F": {"item": "create:fluid_pipe"}},
         "result": {"id": "fundamentals:mixer_settler", "count": 6}})
-    for name in ("salt", "oxalic_acid"):
+    for name in ("salt", "oxalic_acid", "calcium_ingot"):
         write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})
 
 
 def template():
-    """A 27x3x5 gametest floor, patched from the 3x3x3 empty one: room for eight stages end to end."""
+    """A 27x5x5 gametest floor, patched from the 3x3x3 empty one: room for eight stages end to end with mixers over them."""
     empty = gzip.decompress((DATA / "structure/empty.nbt").read_bytes())
     i = empty.index(b"size") + len(b"size") + 1 + 4
-    patched = empty[:i] + (27).to_bytes(4, "big") + (3).to_bytes(4, "big") + (5).to_bytes(4, "big") + empty[i + 12:]
+    patched = empty[:i] + (27).to_bytes(4, "big") + (5).to_bytes(4, "big") + (5).to_bytes(4, "big") + empty[i + 12:]
     (DATA / "structure/battery.nbt").write_bytes(gzip.compress(patched, mtime=0))
 
 
@@ -288,19 +340,24 @@ def names():
     lang["block.fundamentals.mixer_settler"] = "Mixer-Settler Casing"
     lang["item.fundamentals.salt"] = "Salt"
     lang["item.fundamentals.oxalic_acid"] = "Oxalic Acid"
+    lang["item.fundamentals.calcium_ingot"] = "Calcium Ingot"
     lang["goggles.fundamentals.mixer_settler.stages"] = "Battery of %s stages, %s mB a batch"
     lang["goggles.fundamentals.mixer_settler.stage"] = "Stage %s across, %s along, %s tall"
     lang["goggles.fundamentals.mixer_settler.idle"] = "Nothing in the feed"
     lang["goggles.fundamentals.mixer_settler.no_cut"] = "%s does not part"
     lang["goggles.fundamentals.mixer_settler.short"] = "%s parts in %s stages; this battery has %s"
     lang["goggles.fundamentals.mixer_settler.organic"] = "Every stage wants %s on top"
+    lang["goggles.fundamentals.mixer_settler.mixer"] = "Every trough wants a Mechanical Mixer turning over it"
+    lang["goggles.fundamentals.mixer_settler.lever"] = "Waiting for the lever"
+    lang["goggles.fundamentals.mixer_settler.casing"] = "Casing: a stage is three across and three along"
+    lang["goggles.fundamentals.mixer_settler.settling"] = "Coming to equilibrium: %s s"
     lang["goggles.fundamentals.mixer_settler.strip"] = "The far end wants %s"
     lang["goggles.fundamentals.mixer_settler.ready"] = "Parting %s into %s and %s"
     write(path, lang)
 
 
 def main():
-    for folder in ("mixing", "separation", "calcining"):
+    for folder in ("mixing", "separation", "calcining", "reduction"):
         shutil.rmtree(RECIPES / folder, ignore_errors=True)
     shutil.rmtree(ASSETS / "models/block/mixer_settler", ignore_errors=True)
     for stale in (ASSETS / "models/block").glob("mixer_settler*.json"):
@@ -309,6 +366,7 @@ def main():
     chemistry()
     cuts()
     oxalates()
+    metals()
     mixer_settler()
     template()
     names()
