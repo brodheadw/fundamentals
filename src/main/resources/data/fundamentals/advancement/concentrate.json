@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "id": "fundamentals:heavy_rare_earth_concentrate"
+    },
+    "title": {
+      "translate": "advancement.fundamentals.concentrate.title"
+    },
+    "description": {
+      "translate": "advancement.fundamentals.concentrate.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "concentrate": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:light_rare_earth_concentrate",
+              "fundamentals:heavy_rare_earth_concentrate"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "fundamentals:root"
+}

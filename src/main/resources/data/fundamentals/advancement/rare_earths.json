@@ -1,0 +1,209 @@
+{
+  "display": {
+    "icon": {
+      "id": "fundamentals:neodymium_ingot"
+    },
+    "title": {
+      "translate": "advancement.fundamentals.rare_earths.title"
+    },
+    "description": {
+      "translate": "advancement.fundamentals.rare_earths.description"
+    },
+    "frame": "challenge"
+  },
+  "criteria": {
+    "lanthanum": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:lanthanum_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "cerium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:cerium_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "praseodymium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:praseodymium_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "neodymium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:neodymium_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "samarium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:samarium_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "europium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:europium_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "gadolinium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:gadolinium_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "terbium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:terbium_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "dysprosium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:dysprosium_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "holmium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:holmium_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "erbium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:erbium_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "thulium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:thulium_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "ytterbium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:ytterbium_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "lutetium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:lutetium_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "yttrium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:yttrium_ingot"
+            ]
+          }
+        ]
+      }
+    },
+    "scandium": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:scandium_ingot"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "fundamentals:concentrate"
+}

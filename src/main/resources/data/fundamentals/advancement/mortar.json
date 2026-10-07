@@ -1,0 +1,84 @@
+{
+  "display": {
+    "icon": {
+      "id": "fundamentals:mortar_and_pestle"
+    },
+    "title": {
+      "translate": "advancement.fundamentals.mortar.title"
+    },
+    "description": {
+      "translate": "advancement.fundamentals.mortar.description"
+    },
+    "frame": "task"
+  },
+  "criteria": {
+    "fundamentals:grinding/black_dye_from_pyrolusite": {
+      "trigger": "minecraft:recipe_crafted",
+      "conditions": {
+        "recipe_id": "fundamentals:grinding/black_dye_from_pyrolusite"
+      }
+    },
+    "fundamentals:grinding/blue_dye_from_azurite": {
+      "trigger": "minecraft:recipe_crafted",
+      "conditions": {
+        "recipe_id": "fundamentals:grinding/blue_dye_from_azurite"
+      }
+    },
+    "fundamentals:grinding/bone_meal": {
+      "trigger": "minecraft:recipe_crafted",
+      "conditions": {
+        "recipe_id": "fundamentals:grinding/bone_meal"
+      }
+    },
+    "fundamentals:grinding/green_dye_from_malachite": {
+      "trigger": "minecraft:recipe_crafted",
+      "conditions": {
+        "recipe_id": "fundamentals:grinding/green_dye_from_malachite"
+      }
+    },
+    "fundamentals:grinding/red_dye_from_cinnabar": {
+      "trigger": "minecraft:recipe_crafted",
+      "conditions": {
+        "recipe_id": "fundamentals:grinding/red_dye_from_cinnabar"
+      }
+    },
+    "fundamentals:grinding/red_dye_from_hematite": {
+      "trigger": "minecraft:recipe_crafted",
+      "conditions": {
+        "recipe_id": "fundamentals:grinding/red_dye_from_hematite"
+      }
+    },
+    "fundamentals:grinding/sugar": {
+      "trigger": "minecraft:recipe_crafted",
+      "conditions": {
+        "recipe_id": "fundamentals:grinding/sugar"
+      }
+    },
+    "fundamentals:grinding/wheat_flour": {
+      "trigger": "minecraft:recipe_crafted",
+      "conditions": {
+        "recipe_id": "fundamentals:grinding/wheat_flour"
+      }
+    },
+    "fundamentals:grinding/yellow_dye_from_goethite": {
+      "trigger": "minecraft:recipe_crafted",
+      "conditions": {
+        "recipe_id": "fundamentals:grinding/yellow_dye_from_goethite"
+      }
+    }
+  },
+  "parent": "fundamentals:root",
+  "requirements": [
+    [
+      "fundamentals:grinding/black_dye_from_pyrolusite",
+      "fundamentals:grinding/blue_dye_from_azurite",
+      "fundamentals:grinding/bone_meal",
+      "fundamentals:grinding/green_dye_from_malachite",
+      "fundamentals:grinding/red_dye_from_cinnabar",
+      "fundamentals:grinding/red_dye_from_hematite",
+      "fundamentals:grinding/sugar",
+      "fundamentals:grinding/wheat_flour",
+      "fundamentals:grinding/yellow_dye_from_goethite"
+    ]
+  ]
+}

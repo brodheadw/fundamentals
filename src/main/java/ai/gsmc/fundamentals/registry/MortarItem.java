@@ -2,6 +2,7 @@ package ai.gsmc.fundamentals.registry;
 
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -32,13 +33,17 @@ public class MortarItem extends HandToolItem {
         return hand == InteractionHand.MAIN_HAND ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND;
     }
 
+    private static CraftingInput grid(ItemStack mortar, ItemStack material) {
+        return CraftingInput.of(2, 1, List.of(material.copyWithCount(1), mortar.copyWithCount(1)));
+    }
+
+    private static Optional<RecipeHolder<CraftingRecipe>> recipe(Level level, ItemStack mortar, ItemStack material) {
+        return material.isEmpty() ? Optional.empty()
+                : level.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, grid(mortar, material), level);
+    }
+
     public static ItemStack grind(Level level, ItemStack mortar, ItemStack material) {
-        if (material.isEmpty()) {
-            return ItemStack.EMPTY;
-        }
-        CraftingInput grid = CraftingInput.of(2, 1, List.of(material.copyWithCount(1), mortar.copyWithCount(1)));
-        Optional<RecipeHolder<CraftingRecipe>> recipe = level.getRecipeManager().getRecipeFor(RecipeType.CRAFTING, grid, level);
-        return recipe.map(r -> r.value().assemble(grid, level.registryAccess())).orElse(ItemStack.EMPTY);
+        return recipe(level, mortar, material).map(r -> r.value().assemble(grid(mortar, material), level.registryAccess())).orElse(ItemStack.EMPTY);
     }
 
     @Override
@@ -95,6 +100,9 @@ public class MortarItem extends HandToolItem {
         ItemStack product = grind(level, mortar, material);
         if (level.isClientSide || product.isEmpty() || !(entity instanceof Player player)) {
             return mortar;
+        }
+        if (player instanceof ServerPlayer grinder) {
+            recipe(level, mortar, material).ifPresent(ground -> grinder.triggerRecipeCrafted(ground, List.of(product)));
         }
         material.consume(1, player);
         if (!player.getInventory().add(product)) {

@@ -1,0 +1,30 @@
+{
+  "display": {
+    "icon": {
+      "id": "fundamentals:neodymium_iron_boron_ingot"
+    },
+    "title": {
+      "translate": "advancement.fundamentals.magnet.title"
+    },
+    "description": {
+      "translate": "advancement.fundamentals.magnet.description"
+    },
+    "frame": "goal"
+  },
+  "criteria": {
+    "magnet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:neodymium_iron_boron_ingot",
+              "fundamentals:samarium_cobalt_ingot"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "fundamentals:concentrate"
+}

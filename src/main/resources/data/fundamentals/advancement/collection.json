@@ -1,0 +1,473 @@
+{
+  "display": {
+    "icon": {
+      "id": "fundamentals:raw_malachite"
+    },
+    "title": {
+      "translate": "advancement.fundamentals.collection.title"
+    },
+    "description": {
+      "translate": "advancement.fundamentals.collection.description"
+    },
+    "frame": "challenge"
+  },
+  "criteria": {
+    "fundamentals:raw_hematite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_hematite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_magnetite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_magnetite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_goethite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_goethite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_pyrolusite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_pyrolusite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_pentlandite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_pentlandite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_nickel_laterite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_nickel_laterite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_chromite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_chromite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_wolframite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_wolframite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_scheelite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_scheelite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_molybdenite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_molybdenite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_cobaltite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_cobaltite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_ilmenite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_ilmenite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_rutile": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_rutile"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_chalcopyrite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_chalcopyrite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_bornite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_bornite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_chalcocite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_chalcocite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_covellite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_covellite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_malachite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_malachite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_azurite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_azurite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_cuprite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_cuprite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_bauxite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_bauxite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_galena": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_galena"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_sphalerite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_sphalerite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_smithsonite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_smithsonite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_hemimorphite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_hemimorphite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_cassiterite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_cassiterite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_bastnasite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_bastnasite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_monazite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_monazite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_xenotime": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_xenotime"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_ion_adsorption_clay": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_ion_adsorption_clay"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_loparite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_loparite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_euxenite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_euxenite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_native_silver": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_native_silver"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_argentite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_argentite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_sperrylite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_sperrylite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_cooperite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_cooperite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_braggite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_braggite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_cinnabar": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_cinnabar"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "parent": "fundamentals:root"
+}

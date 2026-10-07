@@ -1,0 +1,18 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_euxenite"
+    }
+  ],
+  "processing_time": 400,
+  "results": [
+    {
+      "id": "fundamentals:euxenite_dust"
+    },
+    {
+      "chance": 0.25,
+      "id": "fundamentals:euxenite_dust"
+    }
+  ]
+}
