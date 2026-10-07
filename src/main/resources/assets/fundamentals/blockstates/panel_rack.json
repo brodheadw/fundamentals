@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=south": {
+      "model": "fundamentals:block/panel_rack"
+    },
+    "facing=west": {
+      "model": "fundamentals:block/panel_rack",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "fundamentals:block/panel_rack",
+      "y": 180
+    },
+    "facing=east": {
+      "model": "fundamentals:block/panel_rack",
+      "y": 270
+    }
+  }
+}
