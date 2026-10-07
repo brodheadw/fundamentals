@@ -70,6 +70,18 @@ def liquor(seed, flow=False):
     return img
 
 
+def ingot(pal):
+    """The calcium ingot, drawn with the materials painter's ingot shape in a dull grey."""
+    from paint_materials import SHAPES, ramp
+    tones = ramp(pal)
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    for y, row in enumerate(SHAPES["ingot"]):
+        for x, tone in enumerate(row):
+            if tone != ".":
+                img.putpixel((x, y), tones[int(tone)] + (255,))
+    return img
+
+
 def heap(seed, highlight, body, shadow):
     """A small heap of crystals, as salt and oxalic acid both are."""
     rng = random.Random(seed)
@@ -98,6 +110,7 @@ def main():
     liquor("flow", flow=True).save(TEXTURES / "block/fluid/liquor_flow.png")
     heap("salt", (255, 255, 255), (232, 234, 236), (176, 180, 186)).save(TEXTURES / "item/salt.png")
     heap("oxalic", (255, 255, 252), (238, 236, 224), (184, 180, 160)).save(TEXTURES / "item/oxalic_acid.png")
+    ingot(((88, 90, 94), (138, 141, 146), (180, 184, 190), (222, 226, 232))).save(TEXTURES / "item/calcium_ingot.png")
     print("separation textures written")
 
 

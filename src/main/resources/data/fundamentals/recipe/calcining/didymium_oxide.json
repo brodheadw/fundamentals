@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": {
+    "item": "fundamentals:didymium_oxalate"
+  },
+  "result": {
+    "id": "fundamentals:didymium_oxide"
+  },
+  "experience": 0.3,
+  "cookingtime": 200
+}

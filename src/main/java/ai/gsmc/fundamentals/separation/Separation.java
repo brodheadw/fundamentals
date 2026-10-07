@@ -31,6 +31,7 @@ public final class Separation {
     private static BlockEntityType<MixerSettlerBlockEntity> mixerSettlerEntity;
     private static Item mixerSettlerItem;
     private static Item salt;
+    private static Item calciumIngot;
     private static Item oxalicAcid;
 
     private Separation() {}
@@ -54,7 +55,7 @@ public final class Separation {
     }
 
     public static List<Item> items() {
-        return List.of(mixerSettlerItem, salt, oxalicAcid);
+        return List.of(mixerSettlerItem, salt, oxalicAcid, calciumIngot);
     }
 
     public static void registerFluidTypes(BiConsumer<ResourceLocation, FluidType> registry) {
@@ -103,6 +104,7 @@ public final class Separation {
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
         registry.accept(id("mixer_settler"), mixerSettlerItem = new BlockItem(mixerSettler, new Item.Properties()));
         registry.accept(id("salt"), salt = new Item(new Item.Properties()));
+        registry.accept(id("calcium_ingot"), calciumIngot = new Item(new Item.Properties()));
         registry.accept(id("oxalic_acid"), oxalicAcid = new Item(new Item.Properties()));
     }
 

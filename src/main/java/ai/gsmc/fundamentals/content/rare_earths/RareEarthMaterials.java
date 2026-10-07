@@ -12,8 +12,12 @@ public final class RareEarthMaterials {
     public static final String GROUP = "rare_earths";
 
     private static final MaterialForm[] MINERAL_FORMS = {ORE, RAW, DUST};
-    private static final MaterialForm[] ELEMENT_FORMS = {OXALATE, OXIDE, INGOT, DUST};
-    private static final MaterialForm[] MAGNET_ELEMENT_FORMS = {OXALATE, OXIDE, INGOT, DUST, NUGGET, BLOCK};
+    // Oxide to metal goes three ways: the lights and the heavies through their fluoride (molten-salt
+    // electrolysis and calciothermic reduction), the volatile four straight from the oxide by lanthanum.
+    private static final MaterialForm[] ELEMENT_FORMS = {OXALATE, FLUORIDE, OXIDE, INGOT, DUST};
+    private static final MaterialForm[] MAGNET_ELEMENT_FORMS = {OXALATE, FLUORIDE, OXIDE, INGOT, DUST, NUGGET, BLOCK};
+    private static final MaterialForm[] VOLATILE_FORMS = {OXALATE, OXIDE, INGOT, DUST};
+    private static final MaterialForm[] VOLATILE_MAGNET_FORMS = {OXALATE, OXIDE, INGOT, DUST, NUGGET, BLOCK};
     // Scandium is not in the chloride liquors, so it has no oxalate.
     private static final MaterialForm[] SCANDIUM_FORMS = {OXIDE, INGOT, DUST};
     private static final MaterialForm[] ALLOY_FORMS = {INGOT, DUST, NUGGET, PLATE, BLOCK};
@@ -38,8 +42,8 @@ public final class RareEarthMaterials {
         element("cerium", "Ce", ELEMENT_FORMS, 0.86);
         element("praseodymium", "Pr", MAGNET_ELEMENT_FORMS, 0.86);
         element("neodymium", "Nd", MAGNET_ELEMENT_FORMS, 0.89);
-        element("samarium", "Sm", MAGNET_ELEMENT_FORMS, 0.96);
-        element("europium", "Eu", ELEMENT_FORMS, 0.67);
+        element("samarium", "Sm", VOLATILE_MAGNET_FORMS, 0.96);
+        element("europium", "Eu", VOLATILE_FORMS, 0.67);
 
         // heavy, plus Y and Sc, which separate with them
         element("gadolinium", "Gd", ELEMENT_FORMS, 1.00);
@@ -47,13 +51,13 @@ public final class RareEarthMaterials {
         element("dysprosium", "Dy", MAGNET_ELEMENT_FORMS, 1.09);
         element("holmium", "Ho", ELEMENT_FORMS, 1.12);
         element("erbium", "Er", ELEMENT_FORMS, 1.15);
-        element("thulium", "Tm", ELEMENT_FORMS, 1.18);
-        element("ytterbium", "Yb", ELEMENT_FORMS, 0.88);
+        element("thulium", "Tm", VOLATILE_FORMS, 1.18);
+        element("ytterbium", "Yb", VOLATILE_FORMS, 0.88);
         element("lutetium", "Lu", ELEMENT_FORMS, 1.25);
         element("yttrium", "Y", ELEMENT_FORMS, 0.57);
         element("scandium", "Sc", SCANDIUM_FORMS, 0.38);
 
-        reg("didymium", null, MaterialType.ALLOY, "", new MaterialForm[] {OXIDE, INGOT, DUST},
+        reg("didymium", null, MaterialType.ALLOY, "", new MaterialForm[] {OXALATE, FLUORIDE, OXIDE, INGOT, DUST},
                 MaterialProperties.builder().density(0.88));
         // Strongest magnet, but loses coercivity when hot; SmCo trades strength for heat.
         reg("neodymium_iron_boron", "NdFeB", MaterialType.ALLOY, "Nd2Fe14B", ALLOY_FORMS,

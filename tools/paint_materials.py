@@ -21,8 +21,12 @@ OUT = Path(__file__).resolve().parent.parent / "src/main/resources/assets/fundam
 # These mirror the form lists in content/rare_earths/RareEarthMaterials.java.
 MINERAL = ("dust",)
 CONCENTRATE = ("concentrate",)
-ELEMENT = ("oxalate", "oxide", "dust", "ingot")
-MAGNET_ELEMENT = ("oxalate", "oxide", "dust", "ingot", "nugget", "block")
+ELEMENT = ("oxalate", "fluoride", "oxide", "dust", "ingot")
+MAGNET_ELEMENT = ("oxalate", "fluoride", "oxide", "dust", "ingot", "nugget", "block")
+# Sm, Eu, Tm and Yb are reduced from the oxide by lanthanum, so they never pass through a fluoride.
+VOLATILE = ("oxalate", "oxide", "dust", "ingot")
+VOLATILE_MAGNET = ("oxalate", "oxide", "dust", "ingot", "nugget", "block")
+DIDYMIUM = ("oxalate", "fluoride", "oxide", "dust", "ingot")
 # Scandium and didymium are not in the chloride liquors, so they have no oxalate.
 NO_LIQUOR = ("oxide", "dust", "ingot")
 ALLOY = ("dust", "ingot", "nugget", "plate", "block")
@@ -99,11 +103,11 @@ MATERIALS = {
     "bastnasite": MINERAL, "monazite": MINERAL, "xenotime": MINERAL, "loparite": MINERAL, "euxenite": MINERAL,
     "light_rare_earth_concentrate": CONCENTRATE, "heavy_rare_earth_concentrate": CONCENTRATE,
     "lanthanum": ELEMENT, "cerium": ELEMENT, "praseodymium": MAGNET_ELEMENT, "neodymium": MAGNET_ELEMENT,
-    "samarium": MAGNET_ELEMENT, "europium": ELEMENT,
+    "samarium": VOLATILE_MAGNET, "europium": VOLATILE,
     "gadolinium": ELEMENT, "terbium": MAGNET_ELEMENT, "dysprosium": MAGNET_ELEMENT, "holmium": ELEMENT,
-    "erbium": ELEMENT, "thulium": ELEMENT, "ytterbium": ELEMENT, "lutetium": ELEMENT, "yttrium": ELEMENT,
+    "erbium": ELEMENT, "thulium": VOLATILE, "ytterbium": VOLATILE, "lutetium": ELEMENT, "yttrium": ELEMENT,
     "scandium": NO_LIQUOR,
-    "didymium": NO_LIQUOR, "neodymium_iron_boron": ALLOY, "samarium_cobalt": ALLOY,
+    "didymium": DIDYMIUM, "neodymium_iron_boron": ALLOY, "samarium_cobalt": ALLOY,
 }
 
 DISPLAY = {"bastnasite": "Bastnäsite", "neodymium_iron_boron": "NdFeB", "samarium_cobalt": "SmCo"}
@@ -124,6 +128,8 @@ def palette(material, form):
     if form == "oxalate":
         # Oxalates are near-white; a trace of the oxide's colour is all that shows.
         return mix(WHITE, OXIDE[material], 0.55)
+    if form == "fluoride":
+        return mix(WHITE, OXIDE[material], 0.35)
     if material in P:
         return P[material]
     if material in OTHER:
@@ -221,6 +227,24 @@ SHAPES = {
         ".012334454433210",
         "..0012233322100.",
         "....000000000...",
+        "................",
+        "................",
+    ],
+    "fluoride": [
+        "................",
+        "................",
+        "................",
+        "................",
+        "........7.......",
+        ".......676......",
+        "......56765.....",
+        ".....4567654....",
+        "....345676543...",
+        "...34566665432..",
+        "..2345565654321.",
+        "..1234454433210.",
+        "..01123332211000",
+        "...000000000000.",
         "................",
         "................",
     ],

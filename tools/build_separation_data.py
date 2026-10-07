@@ -61,9 +61,23 @@ ACIDS = {
     "hydrochloric_acid": ("Hydrochloric Acid", 0xE4EEF2),
     "nitric_acid": ("Nitric Acid", 0xF0EDC8),
     "phosphoric_acid": ("Phosphoric Acid", 0xE8ECE4),
+    "hydrofluoric_acid": ("Hydrofluoric Acid", 0xE6F0EA),
+}
+GASES = {
+    "argon": ("Argon", 0xC8D8F0),
 }
 FLUIDS = {**{k: (*v, "LIQUOR") for k, v in LIQUORS.items()}, **{k: (*v, "ORGANIC") for k, v in ORGANICS.items()},
-          **{k: (*v, "ACID") for k, v in ACIDS.items()}}
+          **{k: (*v, "ACID") for k, v in ACIDS.items()}, **{k: (*v, "GAS") for k, v in GASES.items()}}
+
+# Oxide to metal. The lights and the heavies go through their fluoride: the lights by molten-salt
+# electrolysis on TFMG's electrodes, the heavies by calciothermic reduction under argon, which gives the
+# fluorite back as slag. The volatile four are reduced straight from the oxide by lanthanum metal under
+# argon and distil off, leaving lanthanum oxide to go round again.
+ELECTROLYSIS = ("lanthanum", "cerium", "praseodymium", "neodymium", "didymium")
+CALCIOTHERMIC = ("gadolinium", "terbium", "dysprosium", "holmium", "erbium", "lutetium", "yttrium")
+LANTHANOTHERMIC = ("samarium", "europium", "thulium", "ytterbium")
+# which liquor precipitates each element's oxalate; everything else is its own name
+OXALATE_FROM = {"didymium": "praseodymium_neodymium_liquor"}
 
 # One cut per mixer-settler battery: (liquor in, organic, stages, light out, heavy out). The stage count
 # follows the separation factor of the pair being parted: Sm/Nd is about 10 and parts in a few stages,
@@ -121,6 +135,8 @@ def java_table():
              "    public static final List<Reagent> ALL = List.of("]
     entries = [f'            new Reagent("{id}", 0x{tint:06X}, Kind.{kind})' for id, (_, tint, kind) in FLUIDS.items()]
     lines += [",\n".join(entries) + ");", "", "    private Reagents() {}", "}", ""]
+    kinds = sorted({kind for _, _, kind in FLUIDS.values()}, key=["LIQUOR", "ORGANIC", "ACID", "GAS"].index)
+    lines[7] = "    public enum Kind { " + ", ".join(kinds) + " }"
     JAVA.write_text("\n".join(lines), encoding="utf-8")
 
 
@@ -147,6 +163,35 @@ def chemistry():
            [result_fluid("heavy_rare_earth_liquor", 250)])
 
 
+def vat(name, ingredients, results, machines, heated=True, time=100):
+    recipe = {"type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:steel_vat", "tfmg:firebrick_lined_vat"],
+              "ingredients": ingredients, "machines": machines, "min_size": 1, "processing_time": time, "results": results}
+    if heated:
+        recipe["heat_requirement"] = "heated"
+    write(RECIPES / f"reduction/{name}.json", recipe)
+
+
+def metals():
+    # Hydrofluoric acid from fluorspar and sulfuric acid; argon spun out of air as TFMG spins out neon;
+    # calcium by electrolysing the chloride that lime and hydrochloric acid make.
+    mixing("hydrofluoric_acid", item("raw_fluorite", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("hydrofluoric_acid", 500)], heated=True)
+    vat("argon", [fluid("tfmg:air", 1000)], [{"id": "fundamentals:argon", "amount": 9}], ["tfmg:centrifuge"], heated=False, time=10)
+    vat("calcium_ingot", item("tfmg:limesand", 2) + [fluid(STRIP, 500)], [result_item("calcium_ingot")], ["tfmg:electrode", "tfmg:electrode"])
+    for element in ELECTROLYSIS + CALCIOTHERMIC:
+        mixing(f"{element}_fluoride", [item(f"{element}_oxide"), fluid("hydrofluoric_acid", 500)], [result_item(f"{element}_fluoride")])
+    for element in ELECTROLYSIS:
+        vat(f"{element}_ingot", [item(f"{element}_fluoride")] + item(f"{element}_oxide", 2), [result_item(f"{element}_ingot", 2)],
+            ["tfmg:electrode", "tfmg:electrode"])
+    for element in CALCIOTHERMIC:
+        # TFMG vats take four item inputs at most
+        vat(f"{element}_ingot", item(f"{element}_fluoride", 2) + item("calcium_ingot", 2) + [fluid("argon", 250)],
+            [result_item(f"{element}_ingot", 2), result_item("raw_fluorite", 2)], ["tfmg:mixing"])
+    for element in LANTHANOTHERMIC:
+        vat(f"{element}_ingot", item(f"{element}_oxide", 2) + item("lanthanum_ingot", 2) + [fluid("argon", 250)],
+            [result_item(f"{element}_ingot", 2), result_item("lanthanum_oxide", 2)], ["tfmg:mixing"])
+    write(DATA.parent / "c/tags/item/ingots/calcium.json", {"replace": False, "values": ["fundamentals:calcium_ingot"]})
+
+
 def cuts():
     for liquor, organic, stages, light, heavy in CUTS:
         write(RECIPES / f"separation/{liquor}.json", {
@@ -160,8 +205,9 @@ def oxalates():
     for element, forms in MATERIALS.items():
         if "oxalate" not in forms:
             continue
-        assert f"{element}_liquor" in LIQUORS, element
-        mixing(f"{element}_oxalate", [item("oxalic_acid"), fluid(f"{element}_liquor", 250)], [result_item(f"{element}_oxalate")])
+        liquor = OXALATE_FROM.get(element, f"{element}_liquor")
+        assert liquor in LIQUORS, element
+        mixing(f"{element}_oxalate", [item("oxalic_acid"), fluid(liquor, 250)], [result_item(f"{element}_oxalate")])
         write(RECIPES / f"calcining/{element}_oxide.json", {
             "type": "minecraft:smelting", "category": "misc", "ingredient": item(f"{element}_oxalate"),
             "result": {"id": f"fundamentals:{element}_oxide"}, "experience": 0.3, "cookingtime": 200})
@@ -257,7 +303,7 @@ def mixer_settler():
         "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["C C", "SSS", "SPS"],
         "key": {"C": {"tag": "c:ingots/copper"}, "S": {"tag": "c:plates/steel"}, "P": {"item": "create:fluid_pipe"}},
         "result": {"id": "fundamentals:mixer_settler", "count": 6}})
-    for name in ("salt", "oxalic_acid"):
+    for name in ("salt", "oxalic_acid", "calcium_ingot"):
         write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})
 
 
@@ -277,6 +323,7 @@ def names():
     lang["block.fundamentals.mixer_settler"] = "Mixer-Settler Casing"
     lang["item.fundamentals.salt"] = "Salt"
     lang["item.fundamentals.oxalic_acid"] = "Oxalic Acid"
+    lang["item.fundamentals.calcium_ingot"] = "Calcium Ingot"
     lang["goggles.fundamentals.mixer_settler.stages"] = "Battery of %s stages, %s mB a batch"
     lang["goggles.fundamentals.mixer_settler.stage"] = "Stage %s across, %s along, %s tall"
     lang["goggles.fundamentals.mixer_settler.idle"] = "Nothing in the feed"
@@ -290,7 +337,7 @@ def names():
 
 
 def main():
-    for folder in ("mixing", "separation", "calcining"):
+    for folder in ("mixing", "separation", "calcining", "reduction"):
         shutil.rmtree(RECIPES / folder, ignore_errors=True)
     shutil.rmtree(ASSETS / "models/block/mixer_settler", ignore_errors=True)
     for stale in (ASSETS / "models/block").glob("mixer_settler*.json"):
@@ -299,6 +346,7 @@ def main():
     chemistry()
     cuts()
     oxalates()
+    metals()
     mixer_settler()
     template()
     names()

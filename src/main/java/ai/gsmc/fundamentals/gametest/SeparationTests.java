@@ -255,6 +255,22 @@ public class SeparationTests {
     }
 
     @GameTest(template = "empty")
+    public void everyRareEarthMetalHasARouteFromItsOxide(GameTestHelper helper) {
+        var recipes = helper.getLevel().getRecipeManager();
+        for (String element : List.of("lanthanum", "cerium", "praseodymium", "neodymium", "didymium", "gadolinium", "terbium", "dysprosium",
+                "holmium", "erbium", "lutetium", "yttrium", "samarium", "europium", "thulium", "ytterbium")) {
+            helper.assertTrue(recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "reduction/" + element + "_ingot")).isPresent(),
+                    element + " has no reduction to metal");
+            helper.assertTrue(recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "calcining/" + element + "_oxide")).isPresent(),
+                    element + " has no calcining to oxide");
+        }
+        for (String reagent : List.of("mixing/hydrofluoric_acid", "reduction/argon", "reduction/calcium_ingot", "mixing/neodymium_fluoride")) {
+            helper.assertTrue(recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, reagent)).isPresent(), reagent + " is missing");
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
     public void everyLiquorIsCutDownToSingleElements(GameTestHelper helper) {
         List<SeparationRecipe> cuts = helper.getLevel().getRecipeManager().getAllRecipesFor(SeparationRecipe.TYPE)
                 .stream().map(RecipeHolder::value).toList();

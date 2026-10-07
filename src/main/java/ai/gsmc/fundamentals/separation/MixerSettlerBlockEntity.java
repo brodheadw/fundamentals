@@ -343,11 +343,11 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         return null;
     }
 
-    /** A tank seen through a pipe: the top takes only organics, the ends only what is aqueous. */
+    /** A tank seen through a pipe: the top takes only organics, the ends only liquors and acids. */
     private record Port(Tank tank, boolean organic) implements IFluidHandler {
         private boolean accepts(FluidStack stack) {
             Reagents.Kind kind = Separation.kind(stack.getFluid());
-            return kind != null && (kind == Reagents.Kind.ORGANIC) == organic;
+            return organic ? kind == Reagents.Kind.ORGANIC : kind == Reagents.Kind.LIQUOR || kind == Reagents.Kind.ACID;
         }
 
         @Override
