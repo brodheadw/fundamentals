@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": {
+    "item": "fundamentals:praseodymium_oxalate"
+  },
+  "result": {
+    "id": "fundamentals:praseodymium_oxide"
+  },
+  "experience": 0.3,
+  "cookingtime": 200
+}

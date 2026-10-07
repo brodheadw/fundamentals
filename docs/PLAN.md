@@ -104,6 +104,38 @@ until the player has machines. That is intended: the ore is a reason to build th
 Until an ore's route exists it is still worth finding: several grind to dye, and Fortune and
 core-grade ore mean a deposit marked early pays back later.
 
+### 2.6 Solvent extraction  *(built 2026-10-06, direction from the user: "32 vats ... solution flowing on top and underneath")*
+The rare earths part in **mixer-settler batteries** at two scales (direction from the user, 2026-10-06, from
+plant and lab photographs; a separate lab-box block was built and then dropped at Will's call, "keep the Create
+fluid pipes"): Mixer-Settler Casings merge as placed, Create-tank style, into any box up to 3×3×2 (250 mB and
+10 mB per casing, so a full vat is 4500/180; back row the mixing trough under a motor, the rows ahead the bay,
+a weir between, windows on the bay's top layer). Stages of one size end to end are one battery; the chemistry
+needs the same stage count at either scale. Merging waits a tick after placement (forming inside onPlace
+re-enters setBlock); losing a casing dissolves its stage into singles that re-merge on their own. The casing wears Create's fluid-tank textures recoloured to dark steel with
+Create's connected textures (one tank per stage), via `CreateClient.MODEL_SWAPPER` and a `CTModel`. The organic
+(P204 / P507 / naphthenic acid, from phosphoric acid and TFMG kerosene) is charged on top of every stage
+and never consumed; the chloride liquor goes in at the back of the first stage and leaves it as raffinate,
+hydrochloric acid goes in at the front of the last and leaves as the loaded strip. Each cut is a
+`fundamentals:separation` recipe (liquor → light + heavy, an organic, a stage count set by the pair's
+separation factor: Sm/Nd parts in 8, Nd/Pr takes 32), so a battery too short for its cut just stalls, and
+the goggles say why. The cut tree is the industrial one (`tools/build_separation_data.py`, 14 cuts, 29
+liquors); single-element liquors precipitate with oxalic acid and the oxalate calcines to the oxide.
+Stage size is realistic for a rare earth plant (the giant settlers are copper SX); the scale is the count.
+
+### 2.7 Reactive metals and storage atmospheres  *(direction from the user, 2026-10-06)*
+"We must consider the oxides and stuff as well as atmospheres needed to store certain metals i.e. argon
+gas." Not built yet. The shape to build toward: the **oxide is the shelf-stable form** of every rare earth
+(and lithium, calcium, the alkaline earths), so it is what the separation line makes and what trades.
+The **metal tarnishes**: rare earth and alkali metal left in ordinary storage drifts back toward its oxide
+(Eu, La, Ce and Nd fastest; Y, Gd and the heavies slowest), and keeping it as metal takes a sealed vessel
+under **argon**, which comes from air separation (TFMG has the air side). Reduction to metal happens under the same inert atmosphere, by
+three routes the user named (2026-10-06, "let's not forget lanthanothermic distillation and molten salt
+electrolysis"): **molten-salt electrolysis** of the oxide in a fluoride melt for La, Ce, Pr, Nd and didymium;
+**lanthanothermic reduction with vacuum distillation** for the volatile four, Sm, Eu, Tm and Yb, whose oxide
+lanthanum metal reduces and whose metal distils off (the La is spent as oxide); **calciothermic reduction** of
+the fluoride for Gd, Tb, Dy, Ho, Er, Lu and Y. Open: the mechanic for tarnish (a timed container check, or
+metal items that oxidise in open inventories).
+
 ---
 
 ## 3. Work division (NO OVERLAP)
@@ -208,6 +240,9 @@ features in worldgen JSON — for now this table is the spec both sides build to
 > changed. This section is the handshake that keeps the two machines aligned.
 
 - **2026-10-04 [B]** Pushed: scaffold, ore catalog (113 ores), this PLAN.
+- **2026-10-06 [A]** Branch `a/solvent-extraction` (PR): the mixer-settler battery (§2.6), 35 reagent
+  fluids, 14 cuts, the acid and extractant chemistry on Create mixing, oxalates as a material form, a
+  `runShowcase` client run config (`run/saves/showcase`, local only), 4 gametests. §2.7 recorded.
 - **2026-10-04 [B]** Branch `b/foundation-ferrous` (PR into main): built the **append-only shared
   foundation** both sides build on —
   `process.Tier` (T0–T5), `process.ProcessingStage` (all 49 canonical stages, each tier-tagged,

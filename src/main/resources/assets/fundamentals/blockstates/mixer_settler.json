@@ -1,0 +1,806 @@
+{
+  "multipart": [
+    {
+      "when": {
+        "facing": "north",
+        "below": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/floor"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "left": "false",
+        "above": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_left"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "left": "false",
+        "above": "false",
+        "rows": "well"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_left_top"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "left": "false",
+        "above": "false",
+        "rows": "bay|single"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_left_window"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "right": "false",
+        "above": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_right"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "right": "false",
+        "above": "false",
+        "rows": "well"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_right_top"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "right": "false",
+        "above": "false",
+        "rows": "bay|single"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_right_window"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "front": "false",
+        "above": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_front"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "front": "false",
+        "above": "false",
+        "rows": "well"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_front_top"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "front": "false",
+        "above": "false",
+        "rows": "bay|single"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_front_window"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "back": "false",
+        "above": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_back"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "back": "false",
+        "above": "false",
+        "rows": "well"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_back_top"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "back": "false",
+        "above": "false",
+        "rows": "bay|single"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_back_window"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "rows": "well",
+        "below": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/weir"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "rows": "well",
+        "below": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/weir_lip"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "rows": "single",
+        "below": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/well"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "motor": "true",
+        "rows": "well"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/motor"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "motor": "true",
+        "rows": "single"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/motor_single"
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "below": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/floor",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "left": "false",
+        "above": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_left",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "left": "false",
+        "above": "false",
+        "rows": "well"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_left_top",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "left": "false",
+        "above": "false",
+        "rows": "bay|single"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_left_window",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "right": "false",
+        "above": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_right",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "right": "false",
+        "above": "false",
+        "rows": "well"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_right_top",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "right": "false",
+        "above": "false",
+        "rows": "bay|single"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_right_window",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "front": "false",
+        "above": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_front",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "front": "false",
+        "above": "false",
+        "rows": "well"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_front_top",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "front": "false",
+        "above": "false",
+        "rows": "bay|single"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_front_window",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "back": "false",
+        "above": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_back",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "back": "false",
+        "above": "false",
+        "rows": "well"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_back_top",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "back": "false",
+        "above": "false",
+        "rows": "bay|single"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_back_window",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "rows": "well",
+        "below": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/weir",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "rows": "well",
+        "below": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/weir_lip",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "rows": "single",
+        "below": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/well",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "motor": "true",
+        "rows": "well"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/motor",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "motor": "true",
+        "rows": "single"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/motor_single",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "below": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/floor",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "left": "false",
+        "above": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_left",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "left": "false",
+        "above": "false",
+        "rows": "well"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_left_top",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "left": "false",
+        "above": "false",
+        "rows": "bay|single"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_left_window",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "right": "false",
+        "above": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_right",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "right": "false",
+        "above": "false",
+        "rows": "well"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_right_top",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "right": "false",
+        "above": "false",
+        "rows": "bay|single"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_right_window",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "front": "false",
+        "above": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_front",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "front": "false",
+        "above": "false",
+        "rows": "well"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_front_top",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "front": "false",
+        "above": "false",
+        "rows": "bay|single"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_front_window",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "back": "false",
+        "above": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_back",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "back": "false",
+        "above": "false",
+        "rows": "well"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_back_top",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "back": "false",
+        "above": "false",
+        "rows": "bay|single"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_back_window",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "rows": "well",
+        "below": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/weir",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "rows": "well",
+        "below": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/weir_lip",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "rows": "single",
+        "below": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/well",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "motor": "true",
+        "rows": "well"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/motor",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "motor": "true",
+        "rows": "single"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/motor_single",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "below": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/floor",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "left": "false",
+        "above": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_left",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "left": "false",
+        "above": "false",
+        "rows": "well"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_left_top",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "left": "false",
+        "above": "false",
+        "rows": "bay|single"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_left_window",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "right": "false",
+        "above": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_right",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "right": "false",
+        "above": "false",
+        "rows": "well"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_right_top",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "right": "false",
+        "above": "false",
+        "rows": "bay|single"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_right_window",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "front": "false",
+        "above": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_front",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "front": "false",
+        "above": "false",
+        "rows": "well"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_front_top",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "front": "false",
+        "above": "false",
+        "rows": "bay|single"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_front_window",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "back": "false",
+        "above": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_back",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "back": "false",
+        "above": "false",
+        "rows": "well"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_back_top",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "back": "false",
+        "above": "false",
+        "rows": "bay|single"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_back_window",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "rows": "well",
+        "below": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/weir",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "rows": "well",
+        "below": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/weir_lip",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "rows": "single",
+        "below": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/well",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "motor": "true",
+        "rows": "well"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/motor",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "motor": "true",
+        "rows": "single"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/motor_single",
+        "y": 270
+      }
+    }
+  ]
+}

@@ -44,6 +44,11 @@ loom {
         // Makes `/test runall` available in dev runs.
         vmArg("-Dneoforge.enabledGameTestNamespaces=${mod.id}")
     }
+    // Opens the dev client straight into run/saves/showcase, a staged world for looking at the blocks.
+    runs.create("showcase") {
+        client()
+        programArgs("--quickPlaySingleplayer", "showcase")
+    }
 }
 
 repositories {
@@ -70,6 +75,8 @@ dependencies {
     modCompileOnly("maven.modrinth:create-tfmg:${deps.tfmgVersion}")
     modLocalRuntime("maven.modrinth:create:${deps.createVersion}")
     modLocalRuntime("maven.modrinth:create-tfmg:${deps.tfmgVersion}")
+    modCompileOnly("maven.modrinth:create:${deps.createVersion}")
+    modCompileOnly("maven.modrinth:create-tfmg:${deps.tfmgVersion}")
     // Create ships these inside its jar, but a dev run does not unpack them.
     for (bundled in listOf("net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1",
             "dev.engine-room.flywheel:flywheel-neoforge-1.21.1:1.0.6", "com.tterrag.registrate:Registrate:MC1.21-1.3.0+67")) {

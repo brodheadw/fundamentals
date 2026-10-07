@@ -1,0 +1,9 @@
+{
+  "type": "fundamentals:separation",
+  "liquor": "fundamentals:rare_earth_liquor",
+  "organic": "fundamentals:p507",
+  "strip": "fundamentals:hydrochloric_acid",
+  "stages": 8,
+  "light": "fundamentals:light_rare_earth_liquor",
+  "heavy": "fundamentals:heavy_rare_earth_liquor"
+}
