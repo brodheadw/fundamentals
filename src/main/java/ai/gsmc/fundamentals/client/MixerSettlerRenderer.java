@@ -31,13 +31,6 @@ public class MixerSettlerRenderer implements BlockEntityRenderer<MixerSettlerBlo
 
     @Override
     public void render(MixerSettlerBlockEntity stage, float partialTick, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
-        if (stage.pouring()) {
-            // organic arriving from a pipe above: a stream down into the vat
-            FluidStack organic = stage.stage().organic();
-            if (!organic.isEmpty()) {
-                FLUIDS.renderFluidBox(organic, 6 * PX, 2 * PX, 6 * PX, 10 * PX, 1 + 2 * PX, 10 * PX, buffer, ms, light, false, false);
-            }
-        }
         if (!stage.isController()) {
             return;
         }

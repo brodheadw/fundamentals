@@ -7,6 +7,10 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
@@ -147,6 +151,26 @@ public class MixerSettlerBlock extends BaseEntityBlock {
             casing.dissolve();
         }
         super.onRemove(state, level, pos, newState, movedByPiston);
+    }
+
+    /** Anything in the vat below the liquid's surface is buoyed up to it and slowed, as in water. */
+    @Override
+    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+        if (!(level.getBlockEntity(pos) instanceof MixerSettlerBlockEntity casing)) {
+            return;
+        }
+        double surface = casing.floorY() + casing.surface();
+        if (entity.getY() >= surface) {
+            return;
+        }
+        entity.resetFallDistance();
+        Vec3 v = entity.getDeltaMovement();
+        double depthBelow = surface - entity.getY();
+        double lift = Math.min(0.08, 0.02 + depthBelow * 0.06);
+        entity.setDeltaMovement(v.x * 0.8, Math.min(v.y + lift, 0.12), v.z * 0.8);
+        if (entity instanceof LivingEntity living && level.random.nextInt(20) == 0 && level instanceof ServerLevel server) {
+            server.sendParticles(ParticleTypes.BUBBLE_POP, living.getX(), surface, living.getZ(), 2, 0.2, 0.0, 0.2, 0.0);
+        }
     }
 
     @Override

@@ -49,7 +49,6 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     /** Ticks of running before a battery of one stage first delivers; each further stage adds as much. */
     public static final int EQUILIBRATION_PER_STAGE = 40;
     private static final int STIR_TICKS = 30;
-    private static final int POUR_TICKS = 12;
 
     final Tank organic = new Tank();
     final Tank aqueous = new Tank();
@@ -62,7 +61,6 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     private int stirring;
     private int cooldown;
     private int settled;
-    private int pouring;
     private boolean dirty;
 
     public MixerSettlerBlockEntity(BlockPos pos, BlockState state) {
@@ -84,7 +82,18 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     public FluidStack organic() { return organic.getFluid(); }
     public FluidStack aqueous() { return aqueous.getFluid(); }
     public boolean stirring() { return stirring > 0; }
-    public boolean pouring() { return pouring > 0; }
+    /** The fluid surface, in blocks above the stage's floor, as the renderer draws it. */
+    public double surface() {
+        MixerSettlerBlockEntity stage = stage();
+        double depth = stage.tall - 3 / 16.0;
+        double aqueous = depth * 0.5 * stage.aqueous.getFluidAmount() / stage.capacity();
+        double organic = depth * 0.5 * stage.organic.getFluidAmount() / stage.capacity();
+        return Math.min(stage.tall - 2 / 16.0, 1 / 16.0 + aqueous + organic);
+    }
+
+    public double floorY() {
+        return stage().worldPosition.getY();
+    }
     public int across() { return across; }
     public int along() { return along; }
     public int tall() { return tall; }
@@ -351,12 +360,12 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
             return null;
         }
         if (side == Direction.UP) {
-            return new Port(stage.organic, true, this);
+            return new Port(stage.organic, true);
         }
         boolean head = stage.isHead();
         boolean tail = stage.isTail();
         if (head && side == facing().getOpposite() || tail && side == facing()) {
-            return new Port(stage.aqueous, false, this);
+            return new Port(stage.aqueous, false);
         }
         if ((head || tail) && side.getAxis().isHorizontal() && side.getAxis() != facing().getAxis()) {
             return stage.out;
@@ -365,7 +374,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     }
 
     /** A tank seen through a pipe: the top takes only organics, the ends only liquors and acids. */
-    private record Port(Tank tank, boolean organic, MixerSettlerBlockEntity pourer) implements IFluidHandler {
+    private record Port(Tank tank, boolean organic) implements IFluidHandler {
         private boolean accepts(FluidStack stack) {
             Reagents.Kind kind = Separation.kind(stack.getFluid());
             return organic ? kind == Reagents.Kind.ORGANIC : kind == Reagents.Kind.LIQUOR || kind == Reagents.Kind.ACID;
@@ -397,10 +406,6 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
                 return 0;
             }
             int filled = tank.fill(resource, action);
-            if (filled > 0 && action.execute() && organic) {
-                pourer.pouring = POUR_TICKS;
-                pourer.dirty = true;
-            }
             return filled;
         }
 
@@ -416,14 +421,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     }
 
     static void serverTick(Level level, BlockPos pos, BlockState state, MixerSettlerBlockEntity casing) {
-        if (casing.pouring > 0 && --casing.pouring == 0) {
-            casing.dirty = true;
-        }
         if (!casing.isController()) {
-            if (casing.dirty && level.getGameTime() % 5 == 0) {
-                casing.dirty = false;
-                level.sendBlockUpdated(pos, state, state, 3);
-            }
             return;
         }
         if (casing.stirring > 0) {
@@ -615,7 +613,6 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         tag.put("out", out.getFluid().saveOptional(registries));
         tag.putInt("stirring", stirring);
         tag.putInt("settled", settled);
-        tag.putInt("pouring", pouring);
     }
 
     @Override
@@ -634,7 +631,6 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         out.setFluid(FluidStack.parseOptional(registries, tag.getCompound("out")));
         stirring = tag.getInt("stirring");
         settled = tag.getInt("settled");
-        pouring = tag.getInt("pouring");
     }
 
     @Override
