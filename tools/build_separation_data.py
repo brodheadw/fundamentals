@@ -17,6 +17,16 @@ from paint_materials import MATERIALS
 JAVA = Path(__file__).resolve().parent.parent / "src/main/java/ai/gsmc/fundamentals/separation/Reagents.java"
 RECIPES = DATA / "recipe"
 
+# The vat's proportions in sixteenths of a block. Written to fundamentals_vat.json for VatGeometry.java, so the
+# models here, the fluid renderer and the buoyancy agree on where the floor, the walls, the weir and the window are.
+VAT = {
+    "wall": 1,             # thickness of every wall and the weir
+    "floor": 1,            # thickness of the floor under the bottom layer
+    "rim_clearance": 5,    # the settled phases stop this far under the rim
+    "weir_below_rim": 3,   # the weir's lip, between the trough and the bay, stands this far under the rim
+    "window": [4, 12],     # the glass spans these pixels of a window casing's wall, between two posts
+}
+
 # id: (name, tint, kind). Tints are what the chloride solutions look like: Nd lilac, Pr green, Er pink,
 # Sm and Dy straw, Ho and Tm faintly yellow and green, the rest colourless, so a mixed liquor takes the
 # colour of whatever in it is coloured.
@@ -216,10 +226,11 @@ def oxalates():
 
 def mixer_settler():
     """The casing: a cell of an open-topped welded tank, as a Chinese separation hall is built. A floor under
-    the bottom layer, a full panel on every face not shared with the rest of its stage, no lid, and a weir on
-    the seam between the mixing trough (the back row) and the settling bay, full height on the bottom layer
-    and a lip on the one above. A one-row stage keeps a small well at the back of the row. Create's connected
-    textures put the frame ribs on the exterior edges; the fluids inside are drawn by the renderer."""
+    the bottom layer, a full panel on every face not shared with the rest of its stage, no lid, a window in
+    the middle casing of each outside wall, and a weir on the seam between the mixing trough (the back row)
+    and the settling bay, full height on the bottom layer of a two-tall stage and a lip on the one above.
+    Every size comes from VAT. Create's connected textures put the frame ribs on the exterior edges; the
+    fluids inside are drawn by the renderer."""
     tex = {"side": "fundamentals:block/mixer_settler_side", "top": "fundamentals:block/mixer_settler_top",
            "window": "create:block/fluid_tank_window", "nozzle": "fundamentals:block/mixer_settler_nozzle",
            "particle": "fundamentals:block/mixer_settler_side"}
@@ -234,51 +245,57 @@ def mixer_settler():
               {"ambientocclusion": False, "render_type": "minecraft:cutout", "textures": tex, "elements": elements})
         return f"fundamentals:block/mixer_settler/{name}"
 
+    W, F = VAT["wall"], VAT["floor"]
+    WEIR_TOP = 16 - VAT["weir_below_rim"]
+    WIN0, WIN1 = VAT["window"]
+    SLAB = {"west": ((0, 0, 0), (W, 16, 16)), "east": ((16 - W, 0, 0), (16, 16, 16)),
+            "north": ((0, 0, 0), (16, 16, W)), "south": ((0, 0, 16 - W), (16, 16, 16))}
+    INNER = {"west": "east", "east": "west", "north": "south", "south": "north"}
+
     def panel(side):
         """A plain wall: one panel, our dark sheet outside, the lid colour inside, capped."""
-        inner = {"west": "east", "east": "west", "north": "south", "south": "north"}[side]
-        lo, hi = {"west": ((0, 0, 0), (1, 16, 16)), "east": ((15, 0, 0), (16, 16, 16)),
-                  "north": ((0, 0, 0), (16, 16, 1)), "south": ((0, 0, 15), (16, 16, 16))}[side]
+        lo, hi = SLAB[side]
         along_x = side in ("north", "south")
-        cap = ("#top", [0, 0, 16, 1] if along_x else [0, 0, 1, 16], False)
-        return [box(lo, hi, {side: ("#side", full, True), inner: ("#top", full, False), "up": cap})]
+        cap = ("#top", [0, 0, 16, W] if along_x else [0, 0, W, 16], False)
+        return [box(lo, hi, {side: ("#side", full, True), INNER[side]: ("#top", full, False), "up": cap})]
 
     def window_wall(side, part):
-        """Create's tank window: four-pixel posts and a flat pane of its glass just inside the wall, the pane
-        rounded at the ends; `part` is single, bottom or top of a two-tall window."""
-        inner = {"west": "east", "east": "west", "north": "south", "south": "north"}[side]
-        lo, hi = {"west": ((0, 0, 0), (1, 16, 16)), "east": ((15, 0, 0), (16, 16, 16)),
-                  "north": ((0, 0, 0), (16, 16, 1)), "south": ((0, 0, 15), (16, 16, 16))}[side]
+        """Create's tank window: two posts and, between them, glass filling the wall's thickness so the rim
+        stays whole from above. Create cuts its window strip so the bolts sit only at the window's outer ends;
+        `part` is single, bottom or top of a two-tall window."""
+        lo, hi = SLAB[side]
         along_x = side in ("north", "south")
-        cap = ("#top", [0, 0, 16, 1] if along_x else [0, 0, 1, 16], False)
+        axis = 0 if along_x else 2
+        cap = ("#top", [0, 0, 16, W] if along_x else [0, 0, W, 16], False)
         out = []
         # each post also closes its end toward the glass, or the fluid shows through it from an angle
         ends = ("east", "west") if along_x else ("south", "north")
-        for (p0, p1, uv), end in zip(((0, 4, [0, 0, 4, 16]), (12, 16, [12, 0, 16, 16])), ends):
+        for (p0, p1, uv), end in zip(((0, WIN0, [0, 0, WIN0, 16]), (WIN1, 16, [WIN1, 0, 16, 16])), ends):
             f, t = list(lo), list(hi)
-            f[0 if along_x else 2], t[0 if along_x else 2] = p0, p1
-            out.append(box(f, t, {side: ("#side", uv, True), inner: ("#top", uv, False), "up": cap, end: ("#top", [0, 0, 1, 16], False)}))
-        # the glass fills the wall's thickness between the posts, so the rim stays whole seen from above.
-        # Create's cuts of its window strip: bolts only at the window's outer ends, the plain strip between
+            f[axis], t[axis] = p0, p1
+            out.append(box(f, t, {side: ("#side", uv, True), INNER[side]: ("#top", uv, False), "up": cap, end: ("#top", [0, 0, W, 16], False)}))
         uv = {"single": [0, 0, 8, 16], "bottom": [0, 2, 8, 16], "top": [0, 0, 8, 14]}[part]
         f, t = list(lo), list(hi)
-        f[0 if along_x else 2], t[0 if along_x else 2] = 4, 12
-        faces = {side: ("#window", uv, True), inner: ("#window", uv, False)}
+        f[axis], t[axis] = WIN0, WIN1
+        faces = {side: ("#window", uv, True), INNER[side]: ("#window", uv, False)}
         if part != "bottom":
-            faces["up"] = ("#window", [8, 0, 16, 1] if along_x else [8, 0, 9, 8], False)
+            faces["up"] = ("#window", [8, 0, 16, W] if along_x else [8, 0, 8 + W, 8], False)
         out.append(box(f, t, faces))
         return out
+
+    def weir_model(name, y0, y1):
+        """The weir on the trough's front seam, from y0 to y1 of the casing, both faces the lid colour."""
+        return model(name, [box((0, y0, 0), (16, y1, W), {"north": ("#top", [0, 16 - y1, 16, 16 - y0], False),
+                                                          "south": ("#top", [0, 16 - y1, 16, 16 - y0], False),
+                                                          "up": ("#top", [0, 0, 16, W], False)})])
 
     sides = (("west", "left"), ("east", "right"), ("north", "front"), ("south", "back"))
     walls = {prop: model(f"wall_{prop}", panel(side)) for side, prop in sides}
     windows = {(prop, part): model(f"wall_{prop}_{part}", window_wall(side, part)) for side, prop in sides for part in ("single", "bottom", "top")}
-    floor = model("floor", [box((0, 0, 0), (16, 1, 16), {"down": ("#top", full, True), "up": ("#top", full, False)})])
-    weir = model("weir", [box((0, 1, 0), (16, 16, 1), {"north": ("#top", full, False), "south": ("#top", full, False), "up": ("#top", [0, 0, 16, 1], False)})])
-    weir_low = model("weir_low", [box((0, 1, 0), (16, 13, 1), {"north": ("#top", [0, 3, 16, 15], False), "south": ("#top", [0, 3, 16, 15], False), "up": ("#top", [0, 0, 16, 1], False)})])
-    weir_lip = model("weir_lip", [box((0, 0, 0), (16, 13, 1), {"north": ("#top", [0, 3, 16, 16], False), "south": ("#top", [0, 3, 16, 16], False),
-                                                           "up": ("#top", [0, 0, 16, 1], False)})])
-    well = model("well", [box((0, 1, 10), (16, 13, 11), {"north": ("#top", [0, 3, 16, 15], False), "south": ("#top", [0, 3, 16, 15], False),
-                                                      "up": ("#top", [0, 10, 16, 11], False)})])
+    floor = model("floor", [box((0, 0, 0), (16, F, 16), {"down": ("#top", full, True), "up": ("#top", full, False)})])
+    weir = weir_model("weir", F, 16)                 # bottom layer of a two-tall stage: runs on into the lip above
+    weir_low = weir_model("weir_low", F, WEIR_TOP)   # the only layer of a one-tall stage
+    weir_lip = weir_model("weir_lip", 0, WEIR_TOP)   # top layer of a two-tall stage
 
     # the ports in the shared end walls: the organic overflow high on the front wall, the aqueous drain low on the back
     port_ahead = model("port_ahead", [box((4, 10, 1), (12, 14, 2), {"south": ("#nozzle", [0, 0, 16, 16], False), "up": ("#nozzle", [0, 6, 16, 10], False),
@@ -305,16 +322,16 @@ def mixer_settler():
         parts.append({"when": {"facing": facing, "rows": "well", "below": "false", "above": "true"}, "apply": {"model": weir, **rot}})
         parts.append({"when": {"facing": facing, "rows": "well", "below": "false", "above": "false"}, "apply": {"model": weir_low, **rot}})
         parts.append({"when": {"facing": facing, "rows": "well", "below": "true"}, "apply": {"model": weir_lip, **rot}})
-        parts.append({"when": {"facing": facing, "rows": "single", "below": "false"}, "apply": {"model": well, **rot}})
     parts.append({"when": {"below": "false"}, "apply": {"model": floor}})
     write(ASSETS / "blockstates/mixer_settler.json", {"multipart": parts})
     write(ASSETS / "models/item/mixer_settler.json", {"ambientocclusion": False, "textures": tex, "elements":
           panel("west") + panel("east") + panel("north") + panel("south")
-          + [box((0, 0, 0), (16, 1, 16), {"down": ("#top", full, False), "up": ("#top", full, False)}),
-             box((0, 1, 10), (16, 13, 11), {"north": ("#top", [0, 3, 16, 15], False), "south": ("#top", [0, 3, 16, 15], False), "up": ("#top", [0, 10, 16, 11], False)})],
+          + [box((0, 0, 0), (16, F, 16), {"down": ("#top", full, False), "up": ("#top", full, False)}),
+             box((0, F, 10), (16, WEIR_TOP, 10 + W), {"north": ("#top", [0, 16 - WEIR_TOP, 16, 16 - F], False), "south": ("#top", [0, 16 - WEIR_TOP, 16, 16 - F], False), "up": ("#top", [0, 10, 16, 10 + W], False)})],
           "display": {"gui": {"rotation": [30, 225, 0], "scale": [0.625, 0.625, 0.625]}, "ground": {"scale": [0.25, 0.25, 0.25]},
                       "fixed": {"scale": [0.5, 0.5, 0.5]}, "thirdperson_righthand": {"rotation": [75, 45, 0], "scale": [0.375, 0.375, 0.375], "translation": [0, 2.5, 0]},
                       "firstperson_righthand": {"rotation": [0, 45, 0], "scale": [0.4, 0.4, 0.4]}}})
+    write(ROOT / "fundamentals_vat.json", VAT)
     write(DATA / "loot_table/blocks/mixer_settler.json", {"type": "minecraft:block", "pools": [drop_self("mixer_settler")]})
     write(RECIPES / "mixer_settler.json", {
         "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["P P", "PPP", "PFP"],
