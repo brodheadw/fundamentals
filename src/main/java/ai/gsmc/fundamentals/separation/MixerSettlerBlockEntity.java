@@ -440,8 +440,8 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         }
         if (level.getGameTime() % 20 == 0) {
             casing.flowOrganicForward();
-            casing.driveMixer();
         }
+        casing.driveMixer();
         if (level.getGameTime() % 20 == 0) {
             casing.showLinks();
         }
@@ -481,20 +481,26 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         return Math.max(0, equilibration() - settled) / 20;
     }
 
-    /** Create's mixer lowers its head when it believes it is working; over a running battery, it is. */
+    /**
+     * Create's mixer lowers its head when it believes it is working. Its cycle is head down by tick 20, a
+     * basin's processing, head up by 40; over a running battery we start it and then hold it at the bottom of
+     * the cycle every tick, so the head stays in the hatch until the battery stops.
+     */
     private void driveMixer() {
         if (!(level.getBlockEntity(mixerPos()) instanceof MechanicalMixerBlockEntity mixer)) {
             return;
         }
         boolean working = isStirred() && battery().getFirst().isSwitchedOn();
-        if (working && !mixer.running) {
+        if (!working) {
+            return;
+        }
+        if (!mixer.running) {
             mixer.running = true;
             mixer.runningTicks = 0;
             mixer.sendData();
-        } else if (working && mixer.runningTicks >= 20) {
-            // hold it down: Create would raise the head again after a basin cycle
+        } else if (mixer.runningTicks >= 20) {
             mixer.runningTicks = 20;
-            mixer.processingTicks = 10;
+            mixer.processingTicks = 100;
         }
     }
 
@@ -589,7 +595,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
                     stage.aqueous.setFluid(FluidStack.EMPTY);
                 }
                 if (stage.aqueous.getFluidAmount() < stage.capacity() / 2) {
-                    stage.aqueous.fill(new FluidStack(shown, Math.min(batch, stage.capacity() / 2 - stage.aqueous.getFluidAmount())), IFluidHandler.FluidAction.EXECUTE);
+                    stage.aqueous.fill(new FluidStack(shown, Math.min(stage.capacity() / 10, stage.capacity() / 2 - stage.aqueous.getFluidAmount())), IFluidHandler.FluidAction.EXECUTE);
                 }
             }
             stage.stirring = STIR_TICKS;
