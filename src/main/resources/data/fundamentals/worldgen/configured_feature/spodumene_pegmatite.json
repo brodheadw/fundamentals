@@ -1,0 +1,31 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "vein",
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:spodumene_ore"
+        },
+        "fraction": 0.3,
+        "style": "pockets"
+      }
+    ],
+    "radius": {
+      "min": 10,
+      "max": 14
+    },
+    "thickness": {
+      "min": 3,
+      "max": 5
+    },
+    "replaceable": "fundamentals:deposit_replaceable/rock",
+    "host": {
+      "Name": "minecraft:granite"
+    },
+    "height": {
+      "min": 12,
+      "max": 20
+    }
+  }
+}
