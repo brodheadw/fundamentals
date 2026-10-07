@@ -244,13 +244,14 @@ def mixer_settler():
             lo, hi = (0, 0, 15), (16, 16, 16)
         along_x = side in ("north", "south")
         out = []
+        inner = {"west": "east", "east": "west", "north": "south", "south": "north"}[side]
+        # posts are plain steel on the inside, so a window never looks straight through the far wall
         for p0, p1, uv in ((0, 4, [0, 0, 4, 16]), (12, 16, [12, 0, 16, 16])):
             f, t = list(lo), list(hi)
             f[0 if along_x else 2], t[0 if along_x else 2] = p0, p1
-            out.append(box(f, t, {side: ("#side", uv, True)}))
+            out.append(box(f, t, {side: ("#side", uv, True), inner: ("#top", uv, False)}))
         f, t = list(lo), list(hi)
         f[0 if along_x else 2], t[0 if along_x else 2] = 4, 12
-        inner = {"west": "east", "east": "west", "north": "south", "south": "north"}[side]
         out.append(box(f, t, {side: ("#window", [4, 0, 12, 16], True), inner: ("#window", [4, 0, 12, 16], False)}))
         return out
 

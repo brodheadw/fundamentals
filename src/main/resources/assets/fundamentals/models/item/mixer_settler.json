@@ -28,6 +28,15 @@
             16
           ],
           "cullface": "west"
+        },
+        "east": {
+          "texture": "#top",
+          "uv": [
+            0,
+            0,
+            4,
+            16
+          ]
         }
       }
     },
@@ -52,6 +61,15 @@
             16
           ],
           "cullface": "west"
+        },
+        "east": {
+          "texture": "#top",
+          "uv": [
+            12,
+            0,
+            16,
+            16
+          ]
         }
       }
     },
@@ -109,6 +127,15 @@
             16
           ],
           "cullface": "east"
+        },
+        "west": {
+          "texture": "#top",
+          "uv": [
+            0,
+            0,
+            4,
+            16
+          ]
         }
       }
     },
@@ -133,6 +160,15 @@
             16
           ],
           "cullface": "east"
+        },
+        "west": {
+          "texture": "#top",
+          "uv": [
+            12,
+            0,
+            16,
+            16
+          ]
         }
       }
     },
@@ -190,6 +226,15 @@
             16
           ],
           "cullface": "north"
+        },
+        "south": {
+          "texture": "#top",
+          "uv": [
+            0,
+            0,
+            4,
+            16
+          ]
         }
       }
     },
@@ -214,6 +259,15 @@
             16
           ],
           "cullface": "north"
+        },
+        "south": {
+          "texture": "#top",
+          "uv": [
+            12,
+            0,
+            16,
+            16
+          ]
         }
       }
     },
@@ -271,6 +325,15 @@
             16
           ],
           "cullface": "south"
+        },
+        "north": {
+          "texture": "#top",
+          "uv": [
+            0,
+            0,
+            4,
+            16
+          ]
         }
       }
     },
@@ -295,6 +358,15 @@
             16
           ],
           "cullface": "south"
+        },
+        "north": {
+          "texture": "#top",
+          "uv": [
+            12,
+            0,
+            16,
+            16
+          ]
         }
       }
     },

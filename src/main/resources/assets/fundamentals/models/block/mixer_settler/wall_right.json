@@ -29,6 +29,15 @@
             16
           ],
           "cullface": "east"
+        },
+        "west": {
+          "texture": "#top",
+          "uv": [
+            0,
+            0,
+            4,
+            16
+          ]
         }
       }
     },
@@ -53,6 +62,15 @@
             16
           ],
           "cullface": "east"
+        },
+        "west": {
+          "texture": "#top",
+          "uv": [
+            12,
+            0,
+            16,
+            16
+          ]
         }
       }
     },
