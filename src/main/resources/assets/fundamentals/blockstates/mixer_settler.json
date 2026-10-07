@@ -238,10 +238,22 @@
       "when": {
         "facing": "north",
         "rows": "well",
-        "below": "false"
+        "below": "false",
+        "above": "true"
       },
       "apply": {
         "model": "fundamentals:block/mixer_settler/weir"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "rows": "well",
+        "below": "false",
+        "above": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/weir_low"
       }
     },
     {
@@ -522,10 +534,23 @@
       "when": {
         "facing": "east",
         "rows": "well",
-        "below": "false"
+        "below": "false",
+        "above": "true"
       },
       "apply": {
         "model": "fundamentals:block/mixer_settler/weir",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "rows": "well",
+        "below": "false",
+        "above": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/weir_low",
         "y": 90
       }
     },
@@ -809,10 +834,23 @@
       "when": {
         "facing": "south",
         "rows": "well",
-        "below": "false"
+        "below": "false",
+        "above": "true"
       },
       "apply": {
         "model": "fundamentals:block/mixer_settler/weir",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "rows": "well",
+        "below": "false",
+        "above": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/weir_low",
         "y": 180
       }
     },
@@ -1096,10 +1134,23 @@
       "when": {
         "facing": "west",
         "rows": "well",
-        "below": "false"
+        "below": "false",
+        "above": "true"
       },
       "apply": {
         "model": "fundamentals:block/mixer_settler/weir",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "rows": "well",
+        "below": "false",
+        "above": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/weir_low",
         "y": 270
       }
     },

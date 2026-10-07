@@ -48,7 +48,8 @@ public class MixerSettlerRenderer implements BlockEntityRenderer<MixerSettlerBlo
         // the trough: the back row, or the back five pixels of the only row, behind the weir
         float wellBack = 1 - in, wellFront = oneRow ? 11 * PX + 0.004F : in;
         float bayBack = oneRow ? 10 * PX - 0.004F : -0.004F, bayFront = -(l - 1) + in;
-        float weir = oneRow ? 13 * PX : h == 1 ? brim : 1 + 3 * PX;
+        // the weir stands 3 px under the rim, above the settled phases; only the churn in the trough tops it
+        float weir = h - 3 * PX;
 
         // Seen from above: the two settled phases in the bay, the organic floating on the aqueous, and in the
         // trough the emulsion, the aqueous colour as high as both together, heaving while the mixer turns.

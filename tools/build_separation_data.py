@@ -274,7 +274,8 @@ def mixer_settler():
     windows = {(prop, part): model(f"wall_{prop}_{part}", window_wall(side, part)) for side, prop in sides for part in ("single", "bottom", "top")}
     floor = model("floor", [box((0, 0, 0), (16, 1, 16), {"down": ("#top", full, True), "up": ("#top", full, False)})])
     weir = model("weir", [box((0, 1, 0), (16, 16, 1), {"north": ("#top", full, False), "south": ("#top", full, False), "up": ("#top", [0, 0, 16, 1], False)})])
-    weir_lip = model("weir_lip", [box((0, 0, 0), (16, 3, 1), {"north": ("#top", [0, 13, 16, 16], False), "south": ("#top", [0, 13, 16, 16], False),
+    weir_low = model("weir_low", [box((0, 1, 0), (16, 13, 1), {"north": ("#top", [0, 3, 16, 15], False), "south": ("#top", [0, 3, 16, 15], False), "up": ("#top", [0, 0, 16, 1], False)})])
+    weir_lip = model("weir_lip", [box((0, 0, 0), (16, 13, 1), {"north": ("#top", [0, 3, 16, 16], False), "south": ("#top", [0, 3, 16, 16], False),
                                                            "up": ("#top", [0, 0, 16, 1], False)})])
     well = model("well", [box((0, 1, 10), (16, 13, 11), {"north": ("#top", [0, 3, 16, 15], False), "south": ("#top", [0, 3, 16, 15], False),
                                                       "up": ("#top", [0, 10, 16, 11], False)})])
@@ -301,7 +302,8 @@ def mixer_settler():
             parts.append({"when": {**glazed, "above": "false", "below": "true"}, "apply": {"model": windows[(prop, "top")], **rot}})
         parts.append({"when": {"facing": facing, "front": "false", "link_ahead": "true", "above": "false"}, "apply": {"model": port_ahead, **rot}})
         parts.append({"when": {"facing": facing, "back": "false", "link_behind": "true", "below": "false"}, "apply": {"model": port_behind, **rot}})
-        parts.append({"when": {"facing": facing, "rows": "well", "below": "false"}, "apply": {"model": weir, **rot}})
+        parts.append({"when": {"facing": facing, "rows": "well", "below": "false", "above": "true"}, "apply": {"model": weir, **rot}})
+        parts.append({"when": {"facing": facing, "rows": "well", "below": "false", "above": "false"}, "apply": {"model": weir_low, **rot}})
         parts.append({"when": {"facing": facing, "rows": "well", "below": "true"}, "apply": {"model": weir_lip, **rot}})
         parts.append({"when": {"facing": facing, "rows": "single", "below": "false"}, "apply": {"model": well, **rot}})
     parts.append({"when": {"below": "false"}, "apply": {"model": floor}})
