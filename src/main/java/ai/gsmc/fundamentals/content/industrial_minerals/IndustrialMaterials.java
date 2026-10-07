@@ -19,6 +19,7 @@ public final class IndustrialMaterials {
         mineral("quartz", "Quartz", "SiO2", "silica", MaterialProperties.builder().density(0.34).hardness(0.60));
         mineral("apatite", "Apatite", "Ca5(PO4)3F", "phosphate", MaterialProperties.builder().density(0.41));
         mineral("halite", "Halite", "NaCl", "salt", MaterialProperties.builder().density(0.28));
+        mineral("fluorite", "Fluorite", "CaF2", "fluorspar", MaterialProperties.builder().density(0.32));
         mineral("sylvite", "Sylvite", "KCl", "potash", MaterialProperties.builder().density(0.25));
         mineral("gypsum", "Gypsum", "CaSO4·2H2O", "gypsum", MaterialProperties.builder().density(0.29));
         mineral("trona", "Trona", "Na3H(CO3)2·2H2O", "soda_ash", MaterialProperties.builder().density(0.27));

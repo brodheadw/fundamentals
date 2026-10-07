@@ -15,6 +15,7 @@ import net.minecraft.world.level.material.MapColor;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 import net.neoforged.neoforge.fluids.FluidType;
 
+import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,10 +26,12 @@ public final class Separation {
 
     private static final Map<String, FluidType> FLUID_TYPES = new LinkedHashMap<>();
     private static final Map<String, Fluid> FLUIDS = new LinkedHashMap<>();
+    private static final Map<Fluid, Reagents.Kind> KINDS = new LinkedHashMap<>();
     private static Block mixerSettler;
     private static BlockEntityType<MixerSettlerBlockEntity> mixerSettlerEntity;
     private static Item mixerSettlerItem;
     private static Item salt;
+    private static Item calciumIngot;
     private static Item oxalicAcid;
 
     private Separation() {}
@@ -45,8 +48,14 @@ public final class Separation {
         return fluid;
     }
 
+    /** What a fluid is to the separation line, or null for anything that is not a reagent. */
+    @Nullable
+    public static Reagents.Kind kind(Fluid fluid) {
+        return KINDS.get(fluid);
+    }
+
     public static List<Item> items() {
-        return List.of(mixerSettlerItem, salt, oxalicAcid);
+        return List.of(mixerSettlerItem, salt, oxalicAcid, calciumIngot);
     }
 
     public static void registerFluidTypes(BiConsumer<ResourceLocation, FluidType> registry) {
@@ -68,6 +77,7 @@ public final class Separation {
             self[0] = new BaseFlowingFluid.Source(new BaseFlowingFluid.Properties(
                     () -> FLUID_TYPES.get(reagent.id()), () -> self[0], () -> self[0]));
             FLUIDS.put(reagent.id(), self[0]);
+            KINDS.put(self[0], reagent.kind());
             registry.accept(id(reagent.id()), self[0]);
         }
     }
@@ -94,6 +104,7 @@ public final class Separation {
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
         registry.accept(id("mixer_settler"), mixerSettlerItem = new BlockItem(mixerSettler, new Item.Properties()));
         registry.accept(id("salt"), salt = new Item(new Item.Properties()));
+        registry.accept(id("calcium_ingot"), calciumIngot = new Item(new Item.Properties()));
         registry.accept(id("oxalic_acid"), oxalicAcid = new Item(new Item.Properties()));
     }
 

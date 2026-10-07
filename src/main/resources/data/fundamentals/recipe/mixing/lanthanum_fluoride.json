@@ -1,0 +1,18 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:lanthanum_oxide"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "fundamentals:hydrofluoric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:lanthanum_fluoride"
+    }
+  ]
+}

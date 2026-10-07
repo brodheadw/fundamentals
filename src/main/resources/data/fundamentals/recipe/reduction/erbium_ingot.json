@@ -1,0 +1,42 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "ingredients": [
+    {
+      "item": "fundamentals:erbium_fluoride"
+    },
+    {
+      "item": "fundamentals:erbium_fluoride"
+    },
+    {
+      "item": "fundamentals:calcium_ingot"
+    },
+    {
+      "item": "fundamentals:calcium_ingot"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:argon"
+    }
+  ],
+  "machines": [
+    "tfmg:mixing"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
+  "results": [
+    {
+      "id": "fundamentals:erbium_ingot",
+      "count": 2
+    },
+    {
+      "id": "fundamentals:raw_fluorite",
+      "count": 2
+    }
+  ],
+  "heat_requirement": "heated"
+}

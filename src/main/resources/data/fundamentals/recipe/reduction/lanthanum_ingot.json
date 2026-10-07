@@ -1,0 +1,31 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "ingredients": [
+    {
+      "item": "fundamentals:lanthanum_fluoride"
+    },
+    {
+      "item": "fundamentals:lanthanum_oxide"
+    },
+    {
+      "item": "fundamentals:lanthanum_oxide"
+    }
+  ],
+  "machines": [
+    "tfmg:electrode",
+    "tfmg:electrode"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
+  "results": [
+    {
+      "id": "fundamentals:lanthanum_ingot",
+      "count": 2
+    }
+  ],
+  "heat_requirement": "heated"
+}

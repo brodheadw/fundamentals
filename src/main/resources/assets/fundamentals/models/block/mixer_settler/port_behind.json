@@ -1,0 +1,63 @@
+{
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "side": "fundamentals:block/mixer_settler_side",
+    "top": "fundamentals:block/mixer_settler_top",
+    "window": "create:block/fluid_tank_window",
+    "nozzle": "fundamentals:block/mixer_settler_nozzle",
+    "particle": "fundamentals:block/mixer_settler_side"
+  },
+  "elements": [
+    {
+      "from": [
+        4,
+        2,
+        14
+      ],
+      "to": [
+        12,
+        6,
+        15
+      ],
+      "faces": {
+        "north": {
+          "texture": "#nozzle",
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ]
+        },
+        "up": {
+          "texture": "#nozzle",
+          "uv": [
+            0,
+            6,
+            16,
+            10
+          ]
+        },
+        "east": {
+          "texture": "#nozzle",
+          "uv": [
+            6,
+            4,
+            10,
+            12
+          ]
+        },
+        "west": {
+          "texture": "#nozzle",
+          "uv": [
+            6,
+            4,
+            10,
+            12
+          ]
+        }
+      }
+    }
+  ]
+}

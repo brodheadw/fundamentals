@@ -210,6 +210,11 @@
       "name": "spodumene_ore",
       "soft": false,
       "mineral": "spodumene"
+    },
+    {
+      "name": "fluorite_ore",
+      "soft": false,
+      "mineral": "fluorite"
     }
   ],
   "hosts": {

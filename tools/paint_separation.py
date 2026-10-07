@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Paints the mixer-settler casing, the one fluid texture every reagent is tinted from, the mixer's whisk,
-and the salt and oxalic acid. Edit and re-run; don't hand-edit the PNGs.
+"""Paints the mixer-settler casing, the one fluid texture every reagent is tinted from, and the salt and
+oxalic acid. Edit and re-run; don't hand-edit the PNGs.
 
-The casing is Create's fluid tank in dark steel: its riveted panels, connected-texture sheet, inner wall
-and window are Create's own (MIT) textures recoloured by luminance, so the vat reads exactly like a
-Create tank and its connected textures line up with Create's sheet layout.
+The casing is a welded polypropylene tank, as the real ones are: Create's fluid-tank panel and connected-texture
+sheet (MIT) recoloured by luminance onto a dark flat PP grey, so the frame ribs land on the exterior edges of a stage
+the way Create's connected textures place them.
 
     python3 tools/paint_separation.py
 """
@@ -18,7 +18,8 @@ TEXTURES = Path(__file__).resolve().parent.parent / "src/main/resources/assets/f
 CREATE_JAR = next(Path.home().glob(".gradle/caches/modules-2/files-2.1/maven.modrinth/create/*/*/create-*.jar"))
 
 # Dark steel, from the shadow in a seam to the glint on a rivet.
-STEEL = [(22, 24, 30), (34, 37, 44), (46, 50, 58), (58, 63, 72), (74, 80, 90), (96, 103, 114), (126, 134, 146), (160, 168, 180)]
+# Welded polypropylene sheet, as the real tanks are: dark, flat, a little blue, the frame ribs a shade lighter.
+STEEL = [(30, 33, 38), (40, 44, 50), (48, 52, 59), (56, 61, 68), (66, 72, 80), (84, 91, 100), (104, 112, 122), (128, 136, 146)]
 COPPER = [(120, 62, 44), (172, 96, 66), (212, 136, 98), (244, 190, 156)]
 
 
@@ -47,46 +48,6 @@ def steel(img):
     return out
 
 
-def rim():
-    img = Image.new("RGBA", (16, 16))
-    rng = random.Random("rim")
-    for y in range(16):
-        for x in range(16):
-            img.putpixel((x, y), STEEL[5 if rng.random() < 0.7 else 4] + (255,))
-    return img
-
-
-def motor():
-    """The drive on the mixer box: a dark housing with a copper band and a lighter cap."""
-    img = Image.new("RGBA", (16, 16))
-    rng = random.Random("motor")
-    for y in range(16):
-        for x in range(16):
-            tone = STEEL[3 if rng.random() < 0.75 else 2]
-            if y < 2:
-                tone = STEEL[6]
-            elif 6 <= y <= 7:
-                tone = COPPER[2 if y == 6 else 1]
-            elif y == 15 or x in (0, 15):
-                tone = STEEL[1]
-            img.putpixel((x, y), tone + (255,))
-    return img
-
-
-def whisk():
-    """A cross of flat blades on a shaft, drawn as the game's mixer head is: a 16x16 with the blade at left."""
-    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-    for y in range(16):
-        for x in range(11):
-            if y >= 2 and (x in (0, 10) or y in (2, 15) or (x + y) % 4 == 0):
-                img.putpixel((x, y), STEEL[6 if (x + y) % 4 == 0 else 4] + (255,))
-            elif y >= 2:
-                img.putpixel((x, y), STEEL[3] + (255,))
-        for x in range(12, 14):
-            img.putpixel((x, y), STEEL[5 if x == 12 else 3] + (255,))
-    return img
-
-
 def liquor(seed, flow=False):
     """A still liquid: pale ripples on white, tinted per fluid by the game. The flow texture is the same
     at twice the height so pipes can scroll it."""
@@ -98,6 +59,33 @@ def liquor(seed, flow=False):
             ripple = (x + y * 2 + rng.randint(0, 1)) % 7 in (0, 1)
             v = 196 if ripple else 232 if rng.random() < 0.8 else 214
             img.putpixel((x, y), (v, v, v, 230))
+    return img
+
+
+def ingot(pal):
+    """The calcium ingot, drawn with the materials painter's ingot shape in a dull grey."""
+    from paint_materials import SHAPES, ramp
+    tones = ramp(pal)
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    for y, row in enumerate(SHAPES["ingot"]):
+        for x, tone in enumerate(row):
+            if tone != ".":
+                img.putpixel((x, y), tones[int(tone)] + (255,))
+    return img
+
+
+def nozzle():
+    """A copper port flange: a ring with a dark bore, on a transparent ground."""
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    for y in range(16):
+        for x in range(16):
+            r = ((x - 7.5) ** 2 + (y - 7.5) ** 2) ** 0.5
+            if r < 2.2:
+                img.putpixel((x, y), (24, 20, 18, 255))
+            elif r < 4.5:
+                img.putpixel((x, y), COPPER[2 if y < 8 else 1] + (255,))
+            elif r < 5.5:
+                img.putpixel((x, y), COPPER[0] + (255,))
     return img
 
 
@@ -122,15 +110,16 @@ def main():
     (TEXTURES / "item").mkdir(parents=True, exist_ok=True)
     steel(create_texture("fluid_tank")).save(TEXTURES / "block/mixer_settler_side.png")
     steel(create_texture("fluid_tank_connected")).save(TEXTURES / "block/mixer_settler_side_connected.png")
-    steel(create_texture("fluid_tank_inner")).save(TEXTURES / "block/mixer_settler_inside.png")
     steel(create_texture("fluid_tank_window")).save(TEXTURES / "block/mixer_settler_window.png")
-    rim().save(TEXTURES / "block/mixer_settler_rim.png")
-    motor().save(TEXTURES / "block/mixer_settler_motor.png")
-    whisk().save(TEXTURES / "block/mixer_settler_whisk.png")
+    steel(create_texture("fluid_tank_window")).save(TEXTURES / "block/mixer_settler_window.png")
+    steel(create_texture("fluid_tank_top")).save(TEXTURES / "block/mixer_settler_top.png")
+    steel(create_texture("fluid_tank_top_connected")).save(TEXTURES / "block/mixer_settler_top_connected.png")
     liquor("still").save(TEXTURES / "block/fluid/liquor_still.png")
     liquor("flow", flow=True).save(TEXTURES / "block/fluid/liquor_flow.png")
     heap("salt", (255, 255, 255), (232, 234, 236), (176, 180, 186)).save(TEXTURES / "item/salt.png")
     heap("oxalic", (255, 255, 252), (238, 236, 224), (184, 180, 160)).save(TEXTURES / "item/oxalic_acid.png")
+    ingot(((88, 90, 94), (138, 141, 146), (180, 184, 190), (222, 226, 232))).save(TEXTURES / "item/calcium_ingot.png")
+    nozzle().save(TEXTURES / "block/mixer_settler_nozzle.png")
     print("separation textures written")
 
 

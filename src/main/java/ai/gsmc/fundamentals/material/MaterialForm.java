@@ -7,6 +7,7 @@ public enum MaterialForm {
     RAW,
     CONCENTRATE,
     OXALATE,
+    FLUORIDE,
     OXIDE,
     DUST,
     INGOT,

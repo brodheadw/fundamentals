@@ -16,6 +16,13 @@
         },
         "fraction": 0.13,
         "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:fluorite_ore"
+        },
+        "fraction": 0.1,
+        "style": "pockets"
       }
     ],
     "radius": {

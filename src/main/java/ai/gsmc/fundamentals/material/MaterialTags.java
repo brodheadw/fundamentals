@@ -20,6 +20,7 @@ public final class MaterialTags {
                 case INGOT -> tags.add("c:ingots/" + id);
                 case DUST -> tags.add("c:dusts/" + id);
                 case OXALATE -> tags.add("fundamentals:oxalates/" + id);
+                case FLUORIDE -> tags.add("fundamentals:fluorides/" + id);
                 case OXIDE -> tags.add("fundamentals:oxides/" + id);
                 case CONCENTRATE -> tags.add("fundamentals:concentrates/" + id);
                 default -> {}

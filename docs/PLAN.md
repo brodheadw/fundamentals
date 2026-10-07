@@ -108,7 +108,7 @@ core-grade ore mean a deposit marked early pays back later.
 The rare earths part in **mixer-settler batteries** at two scales (direction from the user, 2026-10-06, from
 plant and lab photographs; a separate lab-box block was built and then dropped at Will's call, "keep the Create
 fluid pipes"): Mixer-Settler Casings merge as placed, Create-tank style, into any box up to 3×3×2 (250 mB and
-10 mB per casing, so a full vat is 4500/180; back row the mixing trough under a motor, the rows ahead the bay,
+10 mB per casing, so a full vat is 4500/180; back row the mixing trough, stirred by a Create Mechanical Mixer over it, the rows ahead the bay,
 a weir between, windows on the bay's top layer). Stages of one size end to end are one battery; the chemistry
 needs the same stage count at either scale. Merging waits a tick after placement (forming inside onPlace
 re-enters setBlock); losing a casing dissolves its stage into singles that re-merge on their own. The casing wears Create's fluid-tank textures recoloured to dark steel with
@@ -124,7 +124,14 @@ Stage size is realistic for a rare earth plant (the giant settlers are copper SX
 
 ### 2.7 Reactive metals and storage atmospheres  *(direction from the user, 2026-10-06)*
 "We must consider the oxides and stuff as well as atmospheres needed to store certain metals i.e. argon
-gas." Not built yet. The shape to build toward: the **oxide is the shelf-stable form** of every rare earth
+gas." The reduction routes are built (2026-10-07, PR #19, `tools/build_separation_data.py` `metals()`): fluorite
+rides in the lead-zinc beds, HF from fluorspar and sulfuric acid, fluorides by mixing oxide and HF, argon from
+TFMG air in a centrifuge vat, calcium from limesand and HCl on electrodes; electrolysis (fluoride + 2 oxide →
+2 ingots, electrodes), calciothermic (2 fluoride + 2 calcium + argon → 2 ingots + 2 fluorspar), lanthanothermic
+(2 oxide + 2 La ingots + argon → 2 ingots + 2 La oxide). Storage under argon is NOT built; what follows is the open
+direction. Also open (Will, 2026-10-07: "part of this is gonna be getting rid of hazardous byproducts"): the
+raffinate and the spent strip are acidic and carry ammonium, and monazite liquor carries thorium; a waste leg
+(neutralising with lime to gypsum, a thorium residue to store) is the next piece after storage. The shape to build toward: the **oxide is the shelf-stable form** of every rare earth
 (and lithium, calcium, the alkaline earths), so it is what the separation line makes and what trades.
 The **metal tarnishes**: rare earth and alkali metal left in ordinary storage drifts back toward its oxide
 (Eu, La, Ce and Nd fastest; Y, Gd and the heavies slowest), and keeping it as metal takes a sealed vessel

@@ -113,6 +113,7 @@ P = {
     "braggite": ((88, 88, 82), (138, 138, 128), (182, 182, 170), (228, 228, 218)),
     "cinnabar": ((104, 16, 20), (160, 30, 30), (202, 58, 46), (240, 132, 112)),
     "spodumene": ((112, 88, 118), (176, 146, 180), (214, 192, 216), (246, 232, 246)),
+    "fluorite": ((58, 32, 104), (112, 72, 168), (164, 128, 212), (224, 204, 244)),
 }
 
 # Bornite tarnishes iridescent ("peacock ore"): patches of several hues on one lump.
@@ -178,6 +179,7 @@ RECIPES = {
     # --- lithium ---
     # Pale laths, sometimes a foot long, in the coarse granite of a pegmatite.
     "spodumene": [("crystals", "prism", 5, 1), ("speck", 3)],
+    "fluorite": [("crystals", "prism", 4, 1), ("speck", 2)],
 }
 
 
@@ -543,7 +545,7 @@ SHEET_ORDER = [
     "bauxite", "galena", "sphalerite", "smithsonite", "hemimorphite", "cassiterite",
     "hematite", "magnetite", "goethite", "pyrolusite", "pentlandite", "nickel_laterite",
     "chromite", "wolframite", "scheelite", "molybdenite", "cobaltite", "ilmenite", "rutile",
-    "native_silver", "argentite", "sperrylite", "cooperite", "braggite", "cinnabar", "spodumene",
+    "native_silver", "argentite", "sperrylite", "cooperite", "braggite", "cinnabar", "spodumene", "fluorite",
 ]
 
 
