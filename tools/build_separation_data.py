@@ -220,7 +220,7 @@ def mixer_settler():
     and a lip on the one above. A one-row stage keeps a small well at the back of the row. Create's connected
     textures put the frame ribs on the exterior edges; the fluids inside are drawn by the renderer."""
     tex = {"side": "fundamentals:block/mixer_settler_side", "top": "fundamentals:block/mixer_settler_top",
-           "particle": "fundamentals:block/mixer_settler_side"}
+           "nozzle": "fundamentals:block/mixer_settler_nozzle", "particle": "fundamentals:block/mixer_settler_side"}
     full = [0, 0, 16, 16]
 
     def box(f, t, faces):
@@ -247,11 +247,18 @@ def mixer_settler():
     well = model("well", [box((0, 1, 10), (16, 13, 11), {"north": ("#top", [0, 3, 16, 15], False), "south": ("#top", [0, 3, 16, 15], False),
                                                       "up": ("#top", [0, 10, 16, 11], False)})])
 
+    # the ports in the shared end walls: the organic overflow high on the front wall, the aqueous drain low on the back
+    port_ahead = model("port_ahead", [box((4, 10, 1), (12, 14, 2), {"south": ("#nozzle", [0, 0, 16, 16], False), "up": ("#nozzle", [0, 6, 16, 10], False),
+                                                                   "east": ("#nozzle", [6, 4, 10, 12], False), "west": ("#nozzle", [6, 4, 10, 12], False)})])
+    port_behind = model("port_behind", [box((4, 2, 14), (12, 6, 15), {"north": ("#nozzle", [0, 0, 16, 16], False), "up": ("#nozzle", [0, 6, 16, 10], False),
+                                                                     "east": ("#nozzle", [6, 4, 10, 12], False), "west": ("#nozzle", [6, 4, 10, 12], False)})])
     parts = []
     for facing, y in (("north", 0), ("east", 90), ("south", 180), ("west", 270)):
         rot = {"y": y} if y else {}
         for prop, mdl in walls.items():
             parts.append({"when": {"facing": facing, prop: "false"}, "apply": {"model": mdl, **rot}})
+        parts.append({"when": {"facing": facing, "front": "false", "link_ahead": "true", "above": "false"}, "apply": {"model": port_ahead, **rot}})
+        parts.append({"when": {"facing": facing, "back": "false", "link_behind": "true", "below": "false"}, "apply": {"model": port_behind, **rot}})
         parts.append({"when": {"facing": facing, "rows": "well", "below": "false"}, "apply": {"model": weir, **rot}})
         parts.append({"when": {"facing": facing, "rows": "well", "below": "true"}, "apply": {"model": weir_lip, **rot}})
         parts.append({"when": {"facing": facing, "rows": "single", "below": "false"}, "apply": {"model": well, **rot}})

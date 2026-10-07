@@ -74,15 +74,18 @@ def ingot(pal):
     return img
 
 
-def ingot(pal):
-    """The calcium ingot, drawn with the materials painter's ingot shape in a dull grey."""
-    from paint_materials import SHAPES, ramp
-    tones = ramp(pal)
+def nozzle():
+    """A copper port flange: a ring with a dark bore, on a transparent ground."""
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-    for y, row in enumerate(SHAPES["ingot"]):
-        for x, tone in enumerate(row):
-            if tone != ".":
-                img.putpixel((x, y), tones[int(tone)] + (255,))
+    for y in range(16):
+        for x in range(16):
+            r = ((x - 7.5) ** 2 + (y - 7.5) ** 2) ** 0.5
+            if r < 2.2:
+                img.putpixel((x, y), (24, 20, 18, 255))
+            elif r < 4.5:
+                img.putpixel((x, y), COPPER[2 if y < 8 else 1] + (255,))
+            elif r < 5.5:
+                img.putpixel((x, y), COPPER[0] + (255,))
     return img
 
 
@@ -115,6 +118,7 @@ def main():
     heap("salt", (255, 255, 255), (232, 234, 236), (176, 180, 186)).save(TEXTURES / "item/salt.png")
     heap("oxalic", (255, 255, 252), (238, 236, 224), (184, 180, 160)).save(TEXTURES / "item/oxalic_acid.png")
     ingot(((88, 90, 94), (138, 141, 146), (180, 184, 190), (222, 226, 232))).save(TEXTURES / "item/calcium_ingot.png")
+    nozzle().save(TEXTURES / "block/mixer_settler_nozzle.png")
     print("separation textures written")
 
 

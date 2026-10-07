@@ -44,6 +44,9 @@ public class MixerSettlerBlock extends BaseEntityBlock {
     public static final EnumProperty<Rows> ROWS = EnumProperty.create("rows", Rows.class);
     /** The hatch: the trough's top-centre casing has no lid, and the Mechanical Mixer stands over it. */
     public static final BooleanProperty OPEN = BooleanProperty.create("open");
+    /** Ports in the shared wall to the stage ahead (organic overflows forward) and behind (aqueous drains back). */
+    public static final BooleanProperty LINK_AHEAD = BooleanProperty.create("link_ahead");
+    public static final BooleanProperty LINK_BEHIND = BooleanProperty.create("link_behind");
     public static final int MAX_ACROSS = 3;
     public static final int MAX_ALONG = 3;
     public static final int MAX_TALL = 2;
@@ -62,7 +65,8 @@ public class MixerSettlerBlock extends BaseEntityBlock {
         super(properties);
         registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH)
                 .setValue(LEFT, false).setValue(RIGHT, false).setValue(FRONT, false).setValue(BACK, false)
-                .setValue(ABOVE, false).setValue(BELOW, false).setValue(ROWS, Rows.SINGLE).setValue(OPEN, true));
+                .setValue(ABOVE, false).setValue(BELOW, false).setValue(ROWS, Rows.SINGLE).setValue(OPEN, true)
+                .setValue(LINK_AHEAD, false).setValue(LINK_BEHIND, false));
     }
 
     @Override
@@ -72,7 +76,7 @@ public class MixerSettlerBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, LEFT, RIGHT, FRONT, BACK, ABOVE, BELOW, ROWS, OPEN);
+        builder.add(FACING, LEFT, RIGHT, FRONT, BACK, ABOVE, BELOW, ROWS, OPEN, LINK_AHEAD, LINK_BEHIND);
     }
 
     @Override

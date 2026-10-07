@@ -403,6 +403,9 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         if (level.getGameTime() % 5 == 0) {
             casing.flowOrganicForward();
         }
+        if (level.getGameTime() % 20 == 0) {
+            casing.showLinks();
+        }
         if (casing.dirty && level.getGameTime() % 10 == 0) {
             casing.dirty = false;
             level.sendBlockUpdated(pos, state, state, 3);
@@ -410,6 +413,25 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         if (casing.isHead() && ++casing.cooldown >= PERIOD) {
             casing.cooldown = 0;
             casing.runCut();
+        }
+    }
+
+    /** The ports in the end walls appear when a stage stands end to end with another. */
+    private void showLinks() {
+        boolean ahead = nextStage(true) != null;
+        boolean behind = nextStage(false) != null;
+        for (int a = 0; a < across; a++) {
+            for (int u = 0; u < tall; u++) {
+                link(cell(worldPosition, a, along - 1, u), MixerSettlerBlock.LINK_AHEAD, ahead);
+                link(cell(worldPosition, a, 0, u), MixerSettlerBlock.LINK_BEHIND, behind);
+            }
+        }
+    }
+
+    private void link(BlockPos at, net.minecraft.world.level.block.state.properties.BooleanProperty property, boolean value) {
+        BlockState state = level.getBlockState(at);
+        if (state.is(Separation.mixerSettler()) && state.getValue(property) != value) {
+            level.setBlock(at, state.setValue(property, value), Block.UPDATE_CLIENTS);
         }
     }
 

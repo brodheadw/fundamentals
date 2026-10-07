@@ -39,6 +39,28 @@
     {
       "when": {
         "facing": "north",
+        "front": "false",
+        "link_ahead": "true",
+        "above": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/port_ahead"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "back": "false",
+        "link_behind": "true",
+        "below": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/port_behind"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
         "rows": "well",
         "below": "false"
       },
@@ -109,6 +131,30 @@
     {
       "when": {
         "facing": "east",
+        "front": "false",
+        "link_ahead": "true",
+        "above": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/port_ahead",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "back": "false",
+        "link_behind": "true",
+        "below": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/port_behind",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
         "rows": "well",
         "below": "false"
       },
@@ -182,6 +228,30 @@
     {
       "when": {
         "facing": "south",
+        "front": "false",
+        "link_ahead": "true",
+        "above": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/port_ahead",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "back": "false",
+        "link_behind": "true",
+        "below": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/port_behind",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
         "rows": "well",
         "below": "false"
       },
@@ -249,6 +319,30 @@
       },
       "apply": {
         "model": "fundamentals:block/mixer_settler/wall_back",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "front": "false",
+        "link_ahead": "true",
+        "above": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/port_ahead",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "back": "false",
+        "link_behind": "true",
+        "below": "false"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/port_behind",
         "y": 270
       }
     },
