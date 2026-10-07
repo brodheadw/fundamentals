@@ -258,13 +258,14 @@ def mixer_settler():
             f, t = list(lo), list(hi)
             f[0 if along_x else 2], t[0 if along_x else 2] = p0, p1
             out.append(box(f, t, {side: ("#side", uv, True), inner: ("#top", uv, False), "up": cap, end: ("#top", [0, 0, 1, 16], False)}))
-        # the glass fills the wall's thickness between the posts, so the rim stays whole seen from above
-        uv = {"single": [0, 0, 8, 16], "bottom": [0, 4, 8, 16], "top": [0, 0, 8, 12]}[part]
+        # the glass fills the wall's thickness between the posts, so the rim stays whole seen from above.
+        # Create's cuts of its window strip: bolts only at the window's outer ends, the plain strip between
+        uv = {"single": [0, 0, 8, 16], "bottom": [0, 2, 8, 16], "top": [0, 0, 8, 14]}[part]
         f, t = list(lo), list(hi)
         f[0 if along_x else 2], t[0 if along_x else 2] = 4, 12
         faces = {side: ("#window", uv, True), inner: ("#window", uv, False)}
         if part != "bottom":
-            faces["up"] = ("#window", [0, 0, 8, 1] if along_x else [0, 0, 1, 8], False)
+            faces["up"] = ("#window", [8, 0, 16, 1] if along_x else [8, 0, 9, 8], False)
         out.append(box(f, t, faces))
         return out
 
@@ -286,11 +287,18 @@ def mixer_settler():
     parts = []
     for facing, y in (("north", 0), ("east", 90), ("south", 180), ("west", 270)):
         rot = {"y": y} if y else {}
+        # a wall shared with the next stage carries a port, not a window
+        linked = {"front": "link_ahead", "back": "link_behind"}
         for prop, mdl in walls.items():
-            parts.append({"when": {"facing": facing, prop: "false", "window": "false"}, "apply": {"model": mdl, **rot}})
-            parts.append({"when": {"facing": facing, prop: "false", "window": "true", "above": "false", "below": "false"}, "apply": {"model": windows[(prop, "single")], **rot}})
-            parts.append({"when": {"facing": facing, prop: "false", "window": "true", "above": "true", "below": "false"}, "apply": {"model": windows[(prop, "bottom")], **rot}})
-            parts.append({"when": {"facing": facing, prop: "false", "window": "true", "above": "false", "below": "true"}, "apply": {"model": windows[(prop, "top")], **rot}})
+            plain = {"facing": facing, prop: "false", "window": "false"}
+            glazed = {"facing": facing, prop: "false", "window": "true"}
+            if prop in linked:
+                parts.append({"when": {"facing": facing, prop: "false", "window": "true", linked[prop]: "true"}, "apply": {"model": mdl, **rot}})
+                glazed[linked[prop]] = "false"
+            parts.append({"when": plain, "apply": {"model": mdl, **rot}})
+            parts.append({"when": {**glazed, "above": "false", "below": "false"}, "apply": {"model": windows[(prop, "single")], **rot}})
+            parts.append({"when": {**glazed, "above": "true", "below": "false"}, "apply": {"model": windows[(prop, "bottom")], **rot}})
+            parts.append({"when": {**glazed, "above": "false", "below": "true"}, "apply": {"model": windows[(prop, "top")], **rot}})
         parts.append({"when": {"facing": facing, "front": "false", "link_ahead": "true", "above": "false"}, "apply": {"model": port_ahead, **rot}})
         parts.append({"when": {"facing": facing, "back": "false", "link_behind": "true", "below": "false"}, "apply": {"model": port_behind, **rot}})
         parts.append({"when": {"facing": facing, "rows": "well", "below": "false"}, "apply": {"model": weir, **rot}})

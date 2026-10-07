@@ -96,6 +96,17 @@
       "when": {
         "facing": "north",
         "front": "false",
+        "window": "true",
+        "link_ahead": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_front"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "front": "false",
         "window": "false"
       },
       "apply": {
@@ -107,6 +118,7 @@
         "facing": "north",
         "front": "false",
         "window": "true",
+        "link_ahead": "false",
         "above": "false",
         "below": "false"
       },
@@ -119,6 +131,7 @@
         "facing": "north",
         "front": "false",
         "window": "true",
+        "link_ahead": "false",
         "above": "true",
         "below": "false"
       },
@@ -131,11 +144,23 @@
         "facing": "north",
         "front": "false",
         "window": "true",
+        "link_ahead": "false",
         "above": "false",
         "below": "true"
       },
       "apply": {
         "model": "fundamentals:block/mixer_settler/wall_front_top"
+      }
+    },
+    {
+      "when": {
+        "facing": "north",
+        "back": "false",
+        "window": "true",
+        "link_behind": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_back"
       }
     },
     {
@@ -153,6 +178,7 @@
         "facing": "north",
         "back": "false",
         "window": "true",
+        "link_behind": "false",
         "above": "false",
         "below": "false"
       },
@@ -165,6 +191,7 @@
         "facing": "north",
         "back": "false",
         "window": "true",
+        "link_behind": "false",
         "above": "true",
         "below": "false"
       },
@@ -177,6 +204,7 @@
         "facing": "north",
         "back": "false",
         "window": "true",
+        "link_behind": "false",
         "above": "false",
         "below": "true"
       },
@@ -340,6 +368,18 @@
       "when": {
         "facing": "east",
         "front": "false",
+        "window": "true",
+        "link_ahead": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_front",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "front": "false",
         "window": "false"
       },
       "apply": {
@@ -352,6 +392,7 @@
         "facing": "east",
         "front": "false",
         "window": "true",
+        "link_ahead": "false",
         "above": "false",
         "below": "false"
       },
@@ -365,6 +406,7 @@
         "facing": "east",
         "front": "false",
         "window": "true",
+        "link_ahead": "false",
         "above": "true",
         "below": "false"
       },
@@ -378,11 +420,24 @@
         "facing": "east",
         "front": "false",
         "window": "true",
+        "link_ahead": "false",
         "above": "false",
         "below": "true"
       },
       "apply": {
         "model": "fundamentals:block/mixer_settler/wall_front_top",
+        "y": 90
+      }
+    },
+    {
+      "when": {
+        "facing": "east",
+        "back": "false",
+        "window": "true",
+        "link_behind": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_back",
         "y": 90
       }
     },
@@ -402,6 +457,7 @@
         "facing": "east",
         "back": "false",
         "window": "true",
+        "link_behind": "false",
         "above": "false",
         "below": "false"
       },
@@ -415,6 +471,7 @@
         "facing": "east",
         "back": "false",
         "window": "true",
+        "link_behind": "false",
         "above": "true",
         "below": "false"
       },
@@ -428,6 +485,7 @@
         "facing": "east",
         "back": "false",
         "window": "true",
+        "link_behind": "false",
         "above": "false",
         "below": "true"
       },
@@ -597,6 +655,18 @@
       "when": {
         "facing": "south",
         "front": "false",
+        "window": "true",
+        "link_ahead": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_front",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "front": "false",
         "window": "false"
       },
       "apply": {
@@ -609,6 +679,7 @@
         "facing": "south",
         "front": "false",
         "window": "true",
+        "link_ahead": "false",
         "above": "false",
         "below": "false"
       },
@@ -622,6 +693,7 @@
         "facing": "south",
         "front": "false",
         "window": "true",
+        "link_ahead": "false",
         "above": "true",
         "below": "false"
       },
@@ -635,11 +707,24 @@
         "facing": "south",
         "front": "false",
         "window": "true",
+        "link_ahead": "false",
         "above": "false",
         "below": "true"
       },
       "apply": {
         "model": "fundamentals:block/mixer_settler/wall_front_top",
+        "y": 180
+      }
+    },
+    {
+      "when": {
+        "facing": "south",
+        "back": "false",
+        "window": "true",
+        "link_behind": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_back",
         "y": 180
       }
     },
@@ -659,6 +744,7 @@
         "facing": "south",
         "back": "false",
         "window": "true",
+        "link_behind": "false",
         "above": "false",
         "below": "false"
       },
@@ -672,6 +758,7 @@
         "facing": "south",
         "back": "false",
         "window": "true",
+        "link_behind": "false",
         "above": "true",
         "below": "false"
       },
@@ -685,6 +772,7 @@
         "facing": "south",
         "back": "false",
         "window": "true",
+        "link_behind": "false",
         "above": "false",
         "below": "true"
       },
@@ -854,6 +942,18 @@
       "when": {
         "facing": "west",
         "front": "false",
+        "window": "true",
+        "link_ahead": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_front",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "front": "false",
         "window": "false"
       },
       "apply": {
@@ -866,6 +966,7 @@
         "facing": "west",
         "front": "false",
         "window": "true",
+        "link_ahead": "false",
         "above": "false",
         "below": "false"
       },
@@ -879,6 +980,7 @@
         "facing": "west",
         "front": "false",
         "window": "true",
+        "link_ahead": "false",
         "above": "true",
         "below": "false"
       },
@@ -892,11 +994,24 @@
         "facing": "west",
         "front": "false",
         "window": "true",
+        "link_ahead": "false",
         "above": "false",
         "below": "true"
       },
       "apply": {
         "model": "fundamentals:block/mixer_settler/wall_front_top",
+        "y": 270
+      }
+    },
+    {
+      "when": {
+        "facing": "west",
+        "back": "false",
+        "window": "true",
+        "link_behind": "true"
+      },
+      "apply": {
+        "model": "fundamentals:block/mixer_settler/wall_back",
         "y": 270
       }
     },
@@ -916,6 +1031,7 @@
         "facing": "west",
         "back": "false",
         "window": "true",
+        "link_behind": "false",
         "above": "false",
         "below": "false"
       },
@@ -929,6 +1045,7 @@
         "facing": "west",
         "back": "false",
         "window": "true",
+        "link_behind": "false",
         "above": "true",
         "below": "false"
       },
@@ -942,6 +1059,7 @@
         "facing": "west",
         "back": "false",
         "window": "true",
+        "link_behind": "false",
         "above": "false",
         "below": "true"
       },
