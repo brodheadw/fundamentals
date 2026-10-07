@@ -303,7 +303,7 @@ public class SeparationTests {
             MixerSettlerBlockEntity corner = casing(helper, 1, 1, 1);
             helper.assertTrue(corner.isController() && corner.volume() == 18, "the commands should leave one 3x3x2 vat, got " + corner.volume());
             FluidStack organic = held(helper, 1, Direction.UP);
-            helper.assertTrue(organic.is(Separation.fluid("p507")) && organic.getAmount() == 4000, "the corner's organic should survive the merges, got " + organic);
+            helper.assertTrue(organic.is(Separation.fluid("p507")) && organic.getAmount() == corner.phaseCapacity(), "the corner's organic should survive the merges up to the phase's half of the vat, got " + organic);
             helper.succeed();
         });
     }
