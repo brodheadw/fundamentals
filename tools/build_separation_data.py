@@ -252,10 +252,12 @@ def mixer_settler():
         along_x = side in ("north", "south")
         cap = ("#top", [0, 0, 16, 1] if along_x else [0, 0, 1, 16], False)
         out = []
-        for p0, p1, uv in ((0, 4, [0, 0, 4, 16]), (12, 16, [12, 0, 16, 16])):
+        # each post also closes its end toward the glass, or the fluid shows through it from an angle
+        ends = ("east", "west") if along_x else ("south", "north")
+        for (p0, p1, uv), end in zip(((0, 4, [0, 0, 4, 16]), (12, 16, [12, 0, 16, 16])), ends):
             f, t = list(lo), list(hi)
             f[0 if along_x else 2], t[0 if along_x else 2] = p0, p1
-            out.append(box(f, t, {side: ("#side", uv, True), inner: ("#top", uv, False), "up": cap}))
+            out.append(box(f, t, {side: ("#side", uv, True), inner: ("#top", uv, False), "up": cap, end: ("#top", [0, 0, 1, 16], False)}))
         uv = {"single": [0, 0, 8, 16], "bottom": [0, 4, 8, 16], "top": [0, 0, 8, 12]}[part]
         depth = {"west": 0.95, "east": 15.05, "north": 0.95, "south": 15.05}[side]
         f, t = list(lo), list(hi)
