@@ -430,14 +430,12 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         if (!casing.isController() || !casing.isStage()) {
             return;
         }
-        if (casing.stirring > 0) {
-            casing.stirring--;
-            if (casing.stirring % 5 == 0) {
-                casing.bubble((ServerLevel) level);
-            }
-            if (casing.stirring == 0) {
-                casing.dirty = true;
-            }
+        if (casing.stirring > 0 && --casing.stirring == 0) {
+            casing.dirty = true;
+        }
+        // the mixer at work: bubbles at the shaft the whole time the battery runs
+        if (level.getGameTime() % 5 == 0 && casing.isStirred() && casing.battery().getFirst().isSwitchedOn()) {
+            casing.bubble((ServerLevel) level);
         }
         if (level.getGameTime() % 20 == 0) {
             casing.flowOrganicForward();
@@ -608,8 +606,9 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         // A few bubbles at the shaft, where the mixer beats the two phases together.
         BlockPos at = mixerPos().below();
         double back = along == 1 ? 0.3 : 0.0;
-        level.sendParticles(ParticleTypes.BUBBLE_POP, at.getX() + 0.5 - facing().getStepX() * back, worldPosition.getY() + surface(),
-                at.getZ() + 0.5 - facing().getStepZ() * back, 1, 0.15, 0.02, 0.15, 0.0);
+        double x = at.getX() + 0.5 - facing().getStepX() * back, y = worldPosition.getY() + surface(), z = at.getZ() + 0.5 - facing().getStepZ() * back;
+        level.sendParticles(ParticleTypes.BUBBLE_POP, x, y, z, 3, 0.2, 0.03, 0.2, 0.0);
+        level.sendParticles(ParticleTypes.SPLASH, x, y + 0.05, z, 2, 0.15, 0.0, 0.15, 0.0);
     }
 
     @Override
