@@ -22,11 +22,12 @@ An ore takes on whatever rock it formed in. The same hematite sits in stone, dee
 
 ## The minerals
 
-Thirty-eight of them, each dropping a raw chunk of itself:
+Thirty-nine of them, each dropping a raw chunk of itself:
 
 - **Iron and ferroalloys:** Hematite, Magnetite, Goethite, Pyrolusite, Pentlandite, Nickel Laterite, Chromite, Wolframite, Scheelite, Molybdenite, Cobaltite, Ilmenite, Rutile
 - **Copper:** Chalcopyrite, Bornite, Chalcocite, Covellite, Malachite, Azurite, Cuprite
 - **Aluminium, lead, zinc, tin:** Bauxite, Galena, Sphalerite, Smithsonite, Hemimorphite, Cassiterite
+- **Lithium:** Spodumene
 - **Rare earths:** Bastnäsite, Monazite, Xenotime, Ion-Adsorption Clay, Loparite, Euxenite
 - **Precious:** Native Silver, Argentite, Sperrylite, Cooperite, Braggite, Cinnabar
 
@@ -51,6 +52,7 @@ The first step toward them works on Create's own machines. A millstone or crushi
 ## Power
 
 A solar panel goes on a rack. Build the rack from steel and set it down facing the way you want, then mount a photovoltaic panel on it: a P and an N semiconductor from The Factory Must Grow under glass, in an aluminium frame. Under open sky it feeds TFMG's electrical network, 120 volts while the sun is up and up to 200 watts at noon, nothing at night or in shade. Break it and you get the rack and the panel back.
+Where The Factory Must Grow has its own ore for a metal, ours takes its place and ends in the same ingot. Lead comes from galena, nickel from pentlandite and nickel laterite, and lithium from spodumene: roast the spodumene white in a blast furnace, then run it through an electrode vat with sulfuric acid. Bauxite grinds to the powder TFMG's vat turns into aluminium. Silicon still comes from Nether quartz.
 
 ## Status
 

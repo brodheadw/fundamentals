@@ -194,6 +194,8 @@ if __name__ == "__main__":
     paint_raw("slag", ((18, 18, 22), (40, 40, 48), (70, 72, 86), (150, 156, 176))).save(item / "slag.png")
     # Roasted galena: the sulfide driven off, leaving dull yellow-grey lead oxide.
     paint_raw("roasted_galena", ((82, 76, 56), (134, 126, 92), (178, 170, 128), (226, 220, 184))).save(item / "roasted_galena.png")
+    # Calcined spodumene: the roast cracks the crystal open and leaves it chalk-white and crumbly.
+    paint_raw("calcined_spodumene", ((134, 130, 128), (190, 186, 182), (224, 222, 218), (250, 249, 246))).save(item / "calcined_spodumene.png")
     smithing_hammer().save(item / "smithing_hammer.png")
     mortar_and_pestle().save(item / "mortar_and_pestle.png")
     pestle_sprite().save(item / "pestle.png")

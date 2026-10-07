@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "ingredient": {
+    "item": "fundamentals:raw_spodumene"
+  },
+  "result": {
+    "id": "fundamentals:calcined_spodumene"
+  },
+  "experience": 0.2,
+  "cookingtime": 100
+}

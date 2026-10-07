@@ -453,6 +453,21 @@ features in worldgen JSON — for now this table is the spec both sides build to
   sky light (guesses against TFMG's generator: 200 V, 8 kW). The panel sits tilted 22.5° and faces
   the way the rack was placed; facing does not change output yet. **Build:** Create, TFMG and the
   three libraries Create bundles are on the compile classpath (`modCompileOnly`). `tools/paint_power.py`.
+- **2026-10-06 [A]** Branch `a/tfmg-takeover` (PR into main): our minerals take over where TFMG has
+  its own ore, ending in TFMG's ingot as lead already did.
+  - **Lithium:** new mineral **spodumene** (`light_battery_tech`, registered minimally with
+    lithium), in `spodumene_pegmatite` dykes. Blast furnace → calcined spodumene → TFMG electrode
+    vat with sulfuric acid → `tfmg:lithium_ingot`. `tfmg:lithium_ore` switched off.
+  - **Nickel:** `tfmg:nickel_ore` switched off. Pentlandite and nickel laterite already reach
+    `tfmg:nickel_ingot` through Create's crushing wheels and a furnace (see below).
+  - **Aluminium:** raw bauxite, or Create's crushed raw aluminium, mills to `tfmg:bauxite_powder`
+    for TFMG's vat. TFMG's bauxite rock still generates: it shares a feature with its fireclay.
+  - **Silicon:** stays on Nether quartz (user ruling); no quartz deposit.
+  - **Found, not changed:** because raw chunks carry `c:raw_materials/<commodity>`, Create's
+    compat recipes already crush and furnace-smelt iron, copper (sulfides too), lead, zinc and
+    nickel minerals to ingots, and smelt the zinc minerals directly. Silver, platinum, tin and
+    aluminium crush to a Create item nothing consumes. That bypasses roasting and every planned
+    plant; whether to keep it as the early route is the user's call.
 
 ---
 

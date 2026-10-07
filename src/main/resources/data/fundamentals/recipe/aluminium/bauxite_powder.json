@@ -1,0 +1,14 @@
+{
+  "type": "create:milling",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_bauxite"
+    }
+  ],
+  "processing_time": 250,
+  "results": [
+    {
+      "id": "tfmg:bauxite_powder"
+    }
+  ]
+}
