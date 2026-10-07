@@ -445,8 +445,16 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         }
         if (casing.isHead()) {
             // the battery comes to equilibrium before its first batch and keeps time after
-            boolean ready = casing.stall().isEmpty();
-            casing.settled = ready ? casing.settled + 1 : 0;
+            // a momentary hiccup costs a little; the lever off or the feed gone costs everything
+            Optional<Object[]> stall = casing.stall();
+            if (stall.isEmpty()) {
+                casing.settled++;
+            } else if (stall.get()[0].equals("lever") || stall.get()[0].equals("idle")) {
+                casing.settled = 0;
+            } else {
+                casing.settled = Math.max(0, casing.settled - 2);
+            }
+            boolean ready = stall.isEmpty();
             if (ready && casing.settled >= casing.equilibration() && ++casing.cooldown >= PERIOD) {
                 casing.cooldown = 0;
                 casing.runCut();
