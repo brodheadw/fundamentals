@@ -433,7 +433,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
                 casing.dirty = true;
             }
         }
-        if (level.getGameTime() % 5 == 0) {
+        if (level.getGameTime() % 10 == 0) {
             casing.flowOrganicForward();
         }
         if (level.getGameTime() % 20 == 0) {
@@ -458,8 +458,6 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
             if (level.getGameTime() % 20 == 0) {
                 // the countdown the goggles show lives on the client; keep it current while it runs
                 casing.dirty = true;
-                ai.gsmc.fundamentals.Fundamentals.LOGGER.info("battery head {} settled {}/{} stall {} cooldown {}", pos, casing.settled, casing.equilibration(),
-                        stall.map(a -> java.util.Arrays.toString(a)).orElse("none"), casing.cooldown);
             }
             if (ready && casing.settled >= casing.equilibration() && ++casing.cooldown >= PERIOD) {
                 casing.cooldown = 0;
@@ -506,7 +504,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         if (excess <= 0) {
             return;
         }
-        FluidStack moved = organic.drain(Math.min(excess / 2, batch()), IFluidHandler.FluidAction.SIMULATE);
+        FluidStack moved = organic.drain(Math.max(1, Math.min(excess / 4, batch() / 4)), IFluidHandler.FluidAction.SIMULATE);
         int taken = next.organic.fill(moved, IFluidHandler.FluidAction.EXECUTE);
         organic.drain(taken, IFluidHandler.FluidAction.EXECUTE);
     }
@@ -552,7 +550,6 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         MixerSettlerBlockEntity tail = stages.getLast();
         SeparationRecipe cut = SeparationRecipe.forLiquor(level, aqueous.getFluid().getFluid()).orElseThrow();
         int batch = batch();
-        ai.gsmc.fundamentals.Fundamentals.LOGGER.info("cut at {}: {} mB {} -> {} + {}", worldPosition, batch, cut.liquor(), cut.light(), cut.heavy());
         aqueous.drain(batch, IFluidHandler.FluidAction.EXECUTE);
         tail.aqueous.drain(batch, IFluidHandler.FluidAction.EXECUTE);
         out.fill(new FluidStack(cut.light(), batch), IFluidHandler.FluidAction.EXECUTE);
@@ -571,15 +568,11 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     }
 
     private void bubble(ServerLevel level) {
-        // Along the mixing trough at the surface: the back row, or the back of the only row.
-        Direction right = right();
+        // A few bubbles at the shaft, where the mixer beats the two phases together.
+        BlockPos at = mixerPos().below();
         double back = along == 1 ? 0.3 : 0.0;
-        for (int a = 0; a < across; a++) {
-            BlockPos at = worldPosition.relative(right, a).above(tall - 1);
-            double x = at.getX() + 0.5 - facing().getStepX() * back;
-            double z = at.getZ() + 0.5 - facing().getStepZ() * back;
-            level.sendParticles(ParticleTypes.BUBBLE_POP, x, at.getY() + (along == 1 ? 0.6 : 0.25), z, 2, 0.3, 0.05, along == 1 ? 0.1 : 0.3, 0.0);
-        }
+        level.sendParticles(ParticleTypes.BUBBLE_POP, at.getX() + 0.5 - facing().getStepX() * back, worldPosition.getY() + surface(),
+                at.getZ() + 0.5 - facing().getStepZ() * back, 1, 0.15, 0.02, 0.15, 0.0);
     }
 
     @Override

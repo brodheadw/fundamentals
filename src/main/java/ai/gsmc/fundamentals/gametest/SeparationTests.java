@@ -251,7 +251,7 @@ public class SeparationTests {
         }
         helper.runAfterDelay(SPIN_UP, () -> {
             fill(helper, 1, Direction.UP, "p507", 750);
-            helper.runAfterDelay(60, () -> {
+            helper.runAfterDelay(400, () -> {
                 int head = held(helper, 1, Direction.UP).getAmount(), tail = held(helper, 7, Direction.UP).getAmount();
                 helper.assertTrue(tail > 0 && head + held(helper, 4, Direction.UP).getAmount() + tail == 750,
                         "the organic should spread forward and be conserved, got " + head + " / " + tail);

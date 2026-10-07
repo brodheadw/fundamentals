@@ -52,10 +52,11 @@ LIQUORS = {
     "lutetium_liquor": ("Lutetium Liquor", CLEAR),
     "yttrium_liquor": ("Yttrium Liquor", CLEAR),
 }
+# P507 and P204 are colourless to pale yellow and ride in kerosene, so they are straw; naphthenic acid is the dark one.
 ORGANICS = {
-    "p204": ("P204", 0xD8B060),
-    "p507": ("P507", 0xC89440),
-    "naphthenic_acid": ("Naphthenic Acid", 0x8A6A2E),
+    "p204": ("P204", 0xEAD88C),
+    "p507": ("P507", 0xECE0A8),
+    "naphthenic_acid": ("Naphthenic Acid", 0xA8843C),
 }
 ACIDS = {
     "hydrochloric_acid": ("Hydrochloric Acid", 0xE4EEF2),
