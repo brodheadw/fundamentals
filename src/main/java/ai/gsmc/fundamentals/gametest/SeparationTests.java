@@ -16,6 +16,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -343,6 +344,31 @@ public class SeparationTests {
     private static int[] box(JsonObject element, String corner) {
         JsonArray a = element.getAsJsonArray(corner);
         return new int[] {a.get(0).getAsInt(), a.get(1).getAsInt(), a.get(2).getAsInt()};
+    }
+
+    /** The route out of the battery: a single-element liquor and oxalic acid in a basin under a Mechanical Mixer give the oxalate. */
+    @GameTest(template = "battery", timeoutTicks = 400)
+    public void oxalicAcidPrecipitatesNeodymiumFromItsLiquor(GameTestHelper helper) {
+        Block basin = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:basin"));
+        helper.setBlock(new BlockPos(2, 1, 2), basin.defaultBlockState());
+        // the mixer stands two above the basin, its whisk in the block between
+        mixer(helper, 2, 3, 2);
+        helper.runAfterDelay(SPIN_UP, () -> {
+            BlockPos at = helper.absolutePos(new BlockPos(2, 1, 2));
+            IFluidHandler tank = helper.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, at, Direction.NORTH);
+            var items = helper.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, at, Direction.NORTH);
+            tank.fill(new FluidStack(Separation.fluid("neodymium_liquor"), 250), IFluidHandler.FluidAction.EXECUTE);
+            items.insertItem(0, new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("fundamentals:oxalic_acid")), 1), false);
+            helper.runAfterDelay(200, () -> {
+                var oxalate = BuiltInRegistries.ITEM.get(ResourceLocation.parse("fundamentals:neodymium_oxalate"));
+                boolean made = false;
+                for (int slot = 0; slot < items.getSlots(); slot++) {
+                    made |= items.getStackInSlot(slot).is(oxalate);
+                }
+                helper.assertTrue(made && tank.getFluidInTank(0).isEmpty(), "the mixer should have turned the liquor and acid into neodymium oxalate");
+                helper.succeed();
+            });
+        });
     }
 
     @GameTest(template = "empty")
