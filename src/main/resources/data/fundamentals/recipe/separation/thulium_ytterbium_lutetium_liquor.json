@@ -1,0 +1,9 @@
+{
+  "type": "fundamentals:separation",
+  "liquor": "fundamentals:thulium_ytterbium_lutetium_liquor",
+  "organic": "fundamentals:p204",
+  "strip": "fundamentals:hydrochloric_acid",
+  "stages": 12,
+  "light": "fundamentals:thulium_liquor",
+  "heavy": "fundamentals:ytterbium_lutetium_liquor"
+}

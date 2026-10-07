@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "tfmg:heavy_oil"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "tfmg:sulfuric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:naphthenic_acid",
+      "amount": 500
+    }
+  ],
+  "heat_requirement": "heated"
+}

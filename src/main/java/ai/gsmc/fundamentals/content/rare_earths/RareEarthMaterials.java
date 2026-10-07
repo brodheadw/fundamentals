@@ -12,8 +12,10 @@ public final class RareEarthMaterials {
     public static final String GROUP = "rare_earths";
 
     private static final MaterialForm[] MINERAL_FORMS = {ORE, RAW, DUST};
-    private static final MaterialForm[] ELEMENT_FORMS = {OXIDE, INGOT, DUST};
-    private static final MaterialForm[] MAGNET_ELEMENT_FORMS = {OXIDE, INGOT, DUST, NUGGET, BLOCK};
+    private static final MaterialForm[] ELEMENT_FORMS = {OXALATE, OXIDE, INGOT, DUST};
+    private static final MaterialForm[] MAGNET_ELEMENT_FORMS = {OXALATE, OXIDE, INGOT, DUST, NUGGET, BLOCK};
+    // Scandium is not in the chloride liquors, so it has no oxalate.
+    private static final MaterialForm[] SCANDIUM_FORMS = {OXIDE, INGOT, DUST};
     private static final MaterialForm[] ALLOY_FORMS = {INGOT, DUST, NUGGET, PLATE, BLOCK};
 
     private RareEarthMaterials() {}
@@ -49,7 +51,7 @@ public final class RareEarthMaterials {
         element("ytterbium", "Yb", ELEMENT_FORMS, 0.88);
         element("lutetium", "Lu", ELEMENT_FORMS, 1.25);
         element("yttrium", "Y", ELEMENT_FORMS, 0.57);
-        element("scandium", "Sc", ELEMENT_FORMS, 0.38);
+        element("scandium", "Sc", SCANDIUM_FORMS, 0.38);
 
         reg("didymium", null, MaterialType.ALLOY, "", new MaterialForm[] {OXIDE, INGOT, DUST},
                 MaterialProperties.builder().density(0.88));

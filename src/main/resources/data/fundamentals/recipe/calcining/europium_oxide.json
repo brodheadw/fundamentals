@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": {
+    "item": "fundamentals:europium_oxalate"
+  },
+  "result": {
+    "id": "fundamentals:europium_oxide"
+  },
+  "experience": 0.3,
+  "cookingtime": 200
+}

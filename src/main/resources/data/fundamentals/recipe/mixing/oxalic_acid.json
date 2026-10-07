@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:nitric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:oxalic_acid",
+      "count": 2
+    }
+  ],
+  "heat_requirement": "heated"
+}

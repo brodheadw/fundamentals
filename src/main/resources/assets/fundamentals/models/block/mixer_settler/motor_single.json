@@ -1,0 +1,114 @@
+{
+  "ambientocclusion": false,
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "side": "fundamentals:block/mixer_settler_side",
+    "inside": "fundamentals:block/mixer_settler_inside",
+    "rim": "fundamentals:block/mixer_settler_rim",
+    "window": "fundamentals:block/mixer_settler_window",
+    "motor": "fundamentals:block/mixer_settler_motor",
+    "particle": "fundamentals:block/mixer_settler_side"
+  },
+  "elements": [
+    {
+      "from": [
+        0,
+        12,
+        11
+      ],
+      "to": [
+        16,
+        14,
+        15
+      ],
+      "faces": {
+        "north": {
+          "texture": "#motor",
+          "uv": [
+            0,
+            8,
+            16,
+            10
+          ]
+        },
+        "south": {
+          "texture": "#motor",
+          "uv": [
+            0,
+            8,
+            16,
+            10
+          ]
+        },
+        "up": {
+          "texture": "#motor",
+          "uv": [
+            0,
+            8,
+            16,
+            10
+          ]
+        }
+      }
+    },
+    {
+      "from": [
+        6,
+        14,
+        11
+      ],
+      "to": [
+        10,
+        22,
+        15
+      ],
+      "faces": {
+        "north": {
+          "texture": "#motor",
+          "uv": [
+            6,
+            0,
+            10,
+            8
+          ]
+        },
+        "south": {
+          "texture": "#motor",
+          "uv": [
+            6,
+            0,
+            10,
+            8
+          ]
+        },
+        "east": {
+          "texture": "#motor",
+          "uv": [
+            6,
+            0,
+            10,
+            8
+          ]
+        },
+        "west": {
+          "texture": "#motor",
+          "uv": [
+            6,
+            0,
+            10,
+            8
+          ]
+        },
+        "up": {
+          "texture": "#motor",
+          "uv": [
+            6,
+            0,
+            10,
+            4
+          ]
+        }
+      }
+    }
+  ]
+}

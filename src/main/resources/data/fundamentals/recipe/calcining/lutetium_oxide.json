@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": {
+    "item": "fundamentals:lutetium_oxalate"
+  },
+  "result": {
+    "id": "fundamentals:lutetium_oxide"
+  },
+  "experience": 0.3,
+  "cookingtime": 200
+}

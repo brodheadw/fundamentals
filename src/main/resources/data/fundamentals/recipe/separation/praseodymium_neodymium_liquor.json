@@ -1,0 +1,9 @@
+{
+  "type": "fundamentals:separation",
+  "liquor": "fundamentals:praseodymium_neodymium_liquor",
+  "organic": "fundamentals:p507",
+  "strip": "fundamentals:hydrochloric_acid",
+  "stages": 32,
+  "light": "fundamentals:praseodymium_liquor",
+  "heavy": "fundamentals:neodymium_liquor"
+}

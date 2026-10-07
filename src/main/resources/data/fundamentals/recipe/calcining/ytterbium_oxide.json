@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": {
+    "item": "fundamentals:ytterbium_oxalate"
+  },
+  "result": {
+    "id": "fundamentals:ytterbium_oxide"
+  },
+  "experience": 0.3,
+  "cookingtime": 200
+}

@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:phosphoric_acid"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 750,
+      "fluid": "tfmg:kerosene"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:p204",
+      "amount": 1000
+    }
+  ]
+}

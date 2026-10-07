@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "#fundamentals:oxalates/cerium",
+    "#fundamentals:oxalates/dysprosium",
+    "#fundamentals:oxalates/erbium",
+    "#fundamentals:oxalates/europium",
+    "#fundamentals:oxalates/gadolinium",
+    "#fundamentals:oxalates/holmium",
+    "#fundamentals:oxalates/lanthanum",
+    "#fundamentals:oxalates/lutetium",
+    "#fundamentals:oxalates/neodymium",
+    "#fundamentals:oxalates/praseodymium",
+    "#fundamentals:oxalates/samarium",
+    "#fundamentals:oxalates/terbium",
+    "#fundamentals:oxalates/thulium",
+    "#fundamentals:oxalates/ytterbium",
+    "#fundamentals:oxalates/yttrium"
+  ]
+}

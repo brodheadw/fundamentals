@@ -6,6 +6,7 @@ public enum MaterialForm {
     ORE,
     RAW,
     CONCENTRATE,
+    OXALATE,
     OXIDE,
     DUST,
     INGOT,

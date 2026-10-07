@@ -1,0 +1,9 @@
+{
+  "type": "fundamentals:separation",
+  "liquor": "fundamentals:holmium_to_lutetium_liquor",
+  "organic": "fundamentals:p204",
+  "strip": "fundamentals:hydrochloric_acid",
+  "stages": 10,
+  "light": "fundamentals:holmium_erbium_liquor",
+  "heavy": "fundamentals:thulium_ytterbium_lutetium_liquor"
+}

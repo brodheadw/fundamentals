@@ -1,0 +1,9 @@
+{
+  "type": "fundamentals:separation",
+  "liquor": "fundamentals:light_rare_earth_liquor",
+  "organic": "fundamentals:p507",
+  "strip": "fundamentals:hydrochloric_acid",
+  "stages": 14,
+  "light": "fundamentals:lanthanum_cerium_liquor",
+  "heavy": "fundamentals:praseodymium_neodymium_liquor"
+}
