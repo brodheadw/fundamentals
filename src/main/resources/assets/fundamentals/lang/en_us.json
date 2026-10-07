@@ -106,6 +106,7 @@
   "goggles.fundamentals.mixer_settler.bench": "Bench battery of %s, %s mB a batch",
   "goggles.fundamentals.mixer_settler.idle": "Nothing in the feed",
   "goggles.fundamentals.mixer_settler.loose": "Not part of a stage: three across, three along, two tall",
+  "goggles.fundamentals.mixer_settler.mixer": "Every trough wants a Mechanical Mixer turning over it",
   "goggles.fundamentals.mixer_settler.no_cut": "%s does not part",
   "goggles.fundamentals.mixer_settler.organic": "Every stage wants %s on top",
   "goggles.fundamentals.mixer_settler.plant": "Plant battery of %s, %s mB a batch",

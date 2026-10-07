@@ -2,6 +2,7 @@ package ai.gsmc.fundamentals.separation;
 
 import ai.gsmc.fundamentals.separation.MixerSettlerBlock.Rows;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
+import com.simibubi.create.content.kinetics.mixer.MechanicalMixerBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -32,7 +33,8 @@ import java.util.Set;
 
 /**
  * One casing of a stage. A casing alone is a stage of one; casings merge as they are placed into the largest
- * box they complete, up to three across, three along and two tall. The casing at a stage's back-left-bottom
+ * box they complete, up to three across, three along and two tall. A stage is stirred by Create's Mechanical
+ * Mixer standing over the middle of its trough, and runs only while that turns. The casing at a stage's back-left-bottom
  * corner is its controller: it holds the tanks, which grow with the stage, runs the cut and draws the fluids;
  * the others point at it. The controller of the first stage in a battery (the one with no stage behind it)
  * runs the cut for the whole battery: it takes a batch from its own aqueous tank, the feed, and from the
@@ -232,8 +234,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
                             .setValue(MixerSettlerBlock.LEFT, a > 0).setValue(MixerSettlerBlock.RIGHT, a < w - 1)
                             .setValue(MixerSettlerBlock.BACK, l0 > 0).setValue(MixerSettlerBlock.FRONT, l0 < l - 1)
                             .setValue(MixerSettlerBlock.BELOW, u > 0).setValue(MixerSettlerBlock.ABOVE, u < h - 1)
-                            .setValue(MixerSettlerBlock.ROWS, l == 1 ? Rows.SINGLE : l0 == 0 ? Rows.WELL : Rows.BAY)
-                            .setValue(MixerSettlerBlock.MOTOR, l0 == 0 && u == h - 1 && a == w / 2);
+                            .setValue(MixerSettlerBlock.ROWS, l == 1 ? Rows.SINGLE : l0 == 0 ? Rows.WELL : Rows.BAY);
                     level.setBlock(casing.worldPosition, state, Block.UPDATE_ALL);
                 }
             }
@@ -283,6 +284,15 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         return aligned ? next : null;
     }
 
+    /** Where the stage's Mechanical Mixer stands: over the middle casing of the trough's top layer. */
+    public BlockPos mixerPos() {
+        return cell(worldPosition, across / 2, 0, tall - 1).above();
+    }
+
+    public boolean isStirred() {
+        return level.getBlockEntity(mixerPos()) instanceof MechanicalMixerBlockEntity mixer && mixer.getSpeed() != 0;
+    }
+
     public boolean isHead() {
         return nextStage(false) == null;
     }
@@ -320,17 +330,60 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
             return null;
         }
         if (side == Direction.UP) {
-            return stage.organic;
+            return new Port(stage.organic, true);
         }
         boolean head = stage.isHead();
         boolean tail = stage.isTail();
         if (head && side == facing().getOpposite() || tail && side == facing()) {
-            return stage.aqueous;
+            return new Port(stage.aqueous, false);
         }
         if ((head || tail) && side.getAxis().isHorizontal() && side.getAxis() != facing().getAxis()) {
             return stage.out;
         }
         return null;
+    }
+
+    /** A tank seen through a pipe: the top takes only organics, the ends only what is aqueous. */
+    private record Port(Tank tank, boolean organic) implements IFluidHandler {
+        private boolean accepts(FluidStack stack) {
+            Reagents.Kind kind = Separation.kind(stack.getFluid());
+            return kind != null && (kind == Reagents.Kind.ORGANIC) == organic;
+        }
+
+        @Override
+        public int getTanks() {
+            return 1;
+        }
+
+        @Override
+        public FluidStack getFluidInTank(int index) {
+            return tank.getFluid();
+        }
+
+        @Override
+        public int getTankCapacity(int index) {
+            return tank.getCapacity();
+        }
+
+        @Override
+        public boolean isFluidValid(int index, FluidStack stack) {
+            return accepts(stack);
+        }
+
+        @Override
+        public int fill(FluidStack resource, FluidAction action) {
+            return accepts(resource) ? tank.fill(resource, action) : 0;
+        }
+
+        @Override
+        public FluidStack drain(FluidStack resource, FluidAction action) {
+            return tank.drain(resource, action);
+        }
+
+        @Override
+        public FluidStack drain(int maxDrain, FluidAction action) {
+            return tank.drain(maxDrain, action);
+        }
     }
 
     static void serverTick(Level level, BlockPos pos, BlockState state, MixerSettlerBlockEntity casing) {
@@ -372,6 +425,9 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         SeparationRecipe cut = found.get();
         if (stages.size() < cut.stages()) {
             return Optional.of(new Object[] {"short", feed.getHoverName(), cut.stages(), stages.size()});
+        }
+        if (!stages.stream().allMatch(MixerSettlerBlockEntity::isStirred)) {
+            return Optional.of(new Object[] {"mixer"});
         }
         if (!stages.stream().allMatch(s -> s.organic.getFluid().is(cut.organic()) && s.organic.getFluidAmount() >= batch)) {
             return Optional.of(new Object[] {"organic", name(cut.organic())});

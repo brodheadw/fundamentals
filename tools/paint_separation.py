@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Paints the mixer-settler casing, the one fluid texture every reagent is tinted from, the mixer's whisk,
-and the salt and oxalic acid. Edit and re-run; don't hand-edit the PNGs.
+"""Paints the mixer-settler casing, the one fluid texture every reagent is tinted from, and the salt and
+oxalic acid. Edit and re-run; don't hand-edit the PNGs.
 
 The casing is Create's fluid tank in dark steel: its riveted panels, connected-texture sheet, inner wall
 and window are Create's own (MIT) textures recoloured by luminance, so the vat reads exactly like a
@@ -56,37 +56,6 @@ def rim():
     return img
 
 
-def motor():
-    """The drive on the mixer box: a dark housing with a copper band and a lighter cap."""
-    img = Image.new("RGBA", (16, 16))
-    rng = random.Random("motor")
-    for y in range(16):
-        for x in range(16):
-            tone = STEEL[3 if rng.random() < 0.75 else 2]
-            if y < 2:
-                tone = STEEL[6]
-            elif 6 <= y <= 7:
-                tone = COPPER[2 if y == 6 else 1]
-            elif y == 15 or x in (0, 15):
-                tone = STEEL[1]
-            img.putpixel((x, y), tone + (255,))
-    return img
-
-
-def whisk():
-    """A cross of flat blades on a shaft, drawn as the game's mixer head is: a 16x16 with the blade at left."""
-    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-    for y in range(16):
-        for x in range(11):
-            if y >= 2 and (x in (0, 10) or y in (2, 15) or (x + y) % 4 == 0):
-                img.putpixel((x, y), STEEL[6 if (x + y) % 4 == 0 else 4] + (255,))
-            elif y >= 2:
-                img.putpixel((x, y), STEEL[3] + (255,))
-        for x in range(12, 14):
-            img.putpixel((x, y), STEEL[5 if x == 12 else 3] + (255,))
-    return img
-
-
 def liquor(seed, flow=False):
     """A still liquid: pale ripples on white, tinted per fluid by the game. The flow texture is the same
     at twice the height so pipes can scroll it."""
@@ -125,8 +94,6 @@ def main():
     steel(create_texture("fluid_tank_inner")).save(TEXTURES / "block/mixer_settler_inside.png")
     steel(create_texture("fluid_tank_window")).save(TEXTURES / "block/mixer_settler_window.png")
     rim().save(TEXTURES / "block/mixer_settler_rim.png")
-    motor().save(TEXTURES / "block/mixer_settler_motor.png")
-    whisk().save(TEXTURES / "block/mixer_settler_whisk.png")
     liquor("still").save(TEXTURES / "block/fluid/liquor_still.png")
     liquor("flow", flow=True).save(TEXTURES / "block/fluid/liquor_flow.png")
     heap("salt", (255, 255, 255), (232, 234, 236), (176, 180, 186)).save(TEXTURES / "item/salt.png")

@@ -6,7 +6,6 @@
     "inside": "fundamentals:block/mixer_settler_inside",
     "rim": "fundamentals:block/mixer_settler_rim",
     "window": "fundamentals:block/mixer_settler_window",
-    "motor": "fundamentals:block/mixer_settler_motor",
     "particle": "fundamentals:block/mixer_settler_side"
   },
   "elements": [

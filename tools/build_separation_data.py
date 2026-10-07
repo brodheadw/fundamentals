@@ -172,7 +172,7 @@ def mixer_settler():
     connected textures tie the exterior walls into one tank; the fluids inside are drawn by the renderer."""
     tex = {"side": "fundamentals:block/mixer_settler_side", "inside": "fundamentals:block/mixer_settler_inside",
            "rim": "fundamentals:block/mixer_settler_rim", "window": "fundamentals:block/mixer_settler_window",
-           "motor": "fundamentals:block/mixer_settler_motor", "particle": "fundamentals:block/mixer_settler_side"}
+           "particle": "fundamentals:block/mixer_settler_side"}
     full = [0, 0, 16, 16]
 
     def box(f, t, faces):
@@ -226,17 +226,6 @@ def mixer_settler():
     # a one-row stage keeps a small well at the back of the row, behind a low weir
     well = model("well", [box((0, 1, 10), (16, 12, 11), {"north": ("#inside", [0, 4, 16, 15], False), "south": ("#inside", [0, 4, 16, 15], False),
                                                       "up": ("#rim", [0, 10, 16, 11], False)})])
-    motor = model("motor", [
-        box((0, 14, 6), (16, 16, 10), {d: ("#motor", [0, 8, 16, 10], False) for d in ("north", "south", "up")}),
-        box((5, 16, 5), (11, 26, 11), {**{d: ("#motor", [5, 0, 11, 10], False) for d in ("north", "south", "east", "west")},
-                                        "up": ("#motor", [5, 0, 11, 6], False)}),
-    ])
-    motor_single = model("motor_single", [
-        box((0, 12, 11), (16, 14, 15), {d: ("#motor", [0, 8, 16, 10], False) for d in ("north", "south", "up")}),
-        box((6, 14, 11), (10, 22, 15), {**{d: ("#motor", [6, 0, 10, 8], False) for d in ("north", "south", "east", "west")},
-                                         "up": ("#motor", [6, 0, 10, 4], False)}),
-    ])
-
     parts = []
     for facing, y in (("north", 0), ("east", 90), ("south", 180), ("west", 270)):
         def case(when, mdl):
@@ -249,16 +238,12 @@ def mixer_settler():
         case({"rows": "well", "below": "false"}, weir)
         case({"rows": "well", "below": "true"}, weir_lip)
         case({"rows": "single", "below": "false"}, well)
-        case({"motor": "true", "rows": "well"}, motor)
-        case({"motor": "true", "rows": "single"}, motor_single)
     write(ASSETS / "blockstates/mixer_settler.json", {"multipart": parts})
-    # the item shows a lone casing: every wall, the floor, the small well and its motor
+    # the item shows a lone casing: every wall, the floor and the small well
     write(ASSETS / "models/item/mixer_settler.json", {"ambientocclusion": False, "textures": tex, "elements":
           [box((0, 0, 0), (16, 1, 16), {"down": ("#side", full, True), "up": ("#inside", full, False)})]
           + wall("west", True, True) + wall("east", True, True) + wall("north", True, True) + wall("south", True, False)
-          + [box((0, 1, 10), (16, 12, 11), {"north": ("#inside", [0, 4, 16, 15], False), "south": ("#inside", [0, 4, 16, 15], False), "up": ("#rim", [0, 10, 16, 11], False)}),
-             box((0, 12, 11), (16, 14, 15), {d: ("#motor", [0, 8, 16, 10], False) for d in ("north", "south", "up")}),
-             box((6, 14, 11), (10, 22, 15), {**{d: ("#motor", [6, 0, 10, 8], False) for d in ("north", "south", "east", "west")}, "up": ("#motor", [6, 0, 10, 4], False)})],
+          + [box((0, 1, 10), (16, 12, 11), {"north": ("#inside", [0, 4, 16, 15], False), "south": ("#inside", [0, 4, 16, 15], False), "up": ("#rim", [0, 10, 16, 11], False)})],
           "display": {"gui": {"rotation": [30, 225, 0], "scale": [0.55, 0.55, 0.55], "translation": [0, -1, 0]},
                       "ground": {"scale": [0.25, 0.25, 0.25]}, "fixed": {"scale": [0.5, 0.5, 0.5]},
                       "thirdperson_righthand": {"rotation": [75, 45, 0], "scale": [0.375, 0.375, 0.375], "translation": [0, 2.5, 0]},
@@ -273,10 +258,10 @@ def mixer_settler():
 
 
 def template():
-    """A 27x3x5 gametest floor, patched from the 3x3x3 empty one: room for eight stages end to end."""
+    """A 27x5x5 gametest floor, patched from the 3x3x3 empty one: room for eight stages end to end with mixers over them."""
     empty = gzip.decompress((DATA / "structure/empty.nbt").read_bytes())
     i = empty.index(b"size") + len(b"size") + 1 + 4
-    patched = empty[:i] + (27).to_bytes(4, "big") + (3).to_bytes(4, "big") + (5).to_bytes(4, "big") + empty[i + 12:]
+    patched = empty[:i] + (27).to_bytes(4, "big") + (5).to_bytes(4, "big") + (5).to_bytes(4, "big") + empty[i + 12:]
     (DATA / "structure/battery.nbt").write_bytes(gzip.compress(patched, mtime=0))
 
 
@@ -294,6 +279,7 @@ def names():
     lang["goggles.fundamentals.mixer_settler.no_cut"] = "%s does not part"
     lang["goggles.fundamentals.mixer_settler.short"] = "%s parts in %s stages; this battery has %s"
     lang["goggles.fundamentals.mixer_settler.organic"] = "Every stage wants %s on top"
+    lang["goggles.fundamentals.mixer_settler.mixer"] = "Every trough wants a Mechanical Mixer turning over it"
     lang["goggles.fundamentals.mixer_settler.strip"] = "The far end wants %s"
     lang["goggles.fundamentals.mixer_settler.ready"] = "Parting %s into %s and %s"
     write(path, lang)

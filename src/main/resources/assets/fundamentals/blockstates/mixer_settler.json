@@ -169,26 +169,6 @@
     },
     {
       "when": {
-        "facing": "north",
-        "motor": "true",
-        "rows": "well"
-      },
-      "apply": {
-        "model": "fundamentals:block/mixer_settler/motor"
-      }
-    },
-    {
-      "when": {
-        "facing": "north",
-        "motor": "true",
-        "rows": "single"
-      },
-      "apply": {
-        "model": "fundamentals:block/mixer_settler/motor_single"
-      }
-    },
-    {
-      "when": {
         "facing": "east",
         "below": "false"
       },
@@ -367,28 +347,6 @@
       },
       "apply": {
         "model": "fundamentals:block/mixer_settler/well",
-        "y": 90
-      }
-    },
-    {
-      "when": {
-        "facing": "east",
-        "motor": "true",
-        "rows": "well"
-      },
-      "apply": {
-        "model": "fundamentals:block/mixer_settler/motor",
-        "y": 90
-      }
-    },
-    {
-      "when": {
-        "facing": "east",
-        "motor": "true",
-        "rows": "single"
-      },
-      "apply": {
-        "model": "fundamentals:block/mixer_settler/motor_single",
         "y": 90
       }
     },
@@ -577,28 +535,6 @@
     },
     {
       "when": {
-        "facing": "south",
-        "motor": "true",
-        "rows": "well"
-      },
-      "apply": {
-        "model": "fundamentals:block/mixer_settler/motor",
-        "y": 180
-      }
-    },
-    {
-      "when": {
-        "facing": "south",
-        "motor": "true",
-        "rows": "single"
-      },
-      "apply": {
-        "model": "fundamentals:block/mixer_settler/motor_single",
-        "y": 180
-      }
-    },
-    {
-      "when": {
         "facing": "west",
         "below": "false"
       },
@@ -777,28 +713,6 @@
       },
       "apply": {
         "model": "fundamentals:block/mixer_settler/well",
-        "y": 270
-      }
-    },
-    {
-      "when": {
-        "facing": "west",
-        "motor": "true",
-        "rows": "well"
-      },
-      "apply": {
-        "model": "fundamentals:block/mixer_settler/motor",
-        "y": 270
-      }
-    },
-    {
-      "when": {
-        "facing": "west",
-        "motor": "true",
-        "rows": "single"
-      },
-      "apply": {
-        "model": "fundamentals:block/mixer_settler/motor_single",
         "y": 270
       }
     }

@@ -108,7 +108,7 @@ core-grade ore mean a deposit marked early pays back later.
 The rare earths part in **mixer-settler batteries** at two scales (direction from the user, 2026-10-06, from
 plant and lab photographs; a separate lab-box block was built and then dropped at Will's call, "keep the Create
 fluid pipes"): Mixer-Settler Casings merge as placed, Create-tank style, into any box up to 3×3×2 (250 mB and
-10 mB per casing, so a full vat is 4500/180; back row the mixing trough under a motor, the rows ahead the bay,
+10 mB per casing, so a full vat is 4500/180; back row the mixing trough, stirred by a Create Mechanical Mixer over it, the rows ahead the bay,
 a weir between, windows on the bay's top layer). Stages of one size end to end are one battery; the chemistry
 needs the same stage count at either scale. Merging waits a tick after placement (forming inside onPlace
 re-enters setBlock); losing a casing dissolves its stage into singles that re-merge on their own. The casing wears Create's fluid-tank textures recoloured to dark steel with

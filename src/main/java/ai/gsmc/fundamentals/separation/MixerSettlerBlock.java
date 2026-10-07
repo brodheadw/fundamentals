@@ -25,8 +25,9 @@ import java.util.Locale;
 
 /**
  * Casing for a solvent-extraction stage. Casings facing the same way merge into one stage as they are
- * placed, any box up to three across, three along and two tall: one is a lab box, eighteen a plant vat. The back row is the mixing trough, the rows ahead the settling bay. Stages standing end to end are
- * one battery; the liquor goes in at the back of the first and leaves it as raffinate, the strip acid goes
+ * placed, any box up to three across, three along and two tall: one is a lab box, eighteen a plant vat.
+ * The back row is the mixing trough, stirred by a Mechanical Mixer standing over it; the rows ahead are the
+ * settling bay. Stages standing end to end are one battery; the liquor goes in at the back of the first and leaves it as raffinate, the strip acid goes
  * in at the front of the last and leaves loaded with what the organic carried forward.
  */
 public class MixerSettlerBlock extends BaseEntityBlock {
@@ -41,7 +42,6 @@ public class MixerSettlerBlock extends BaseEntityBlock {
     public static final BooleanProperty ABOVE = BooleanProperty.create("above");
     public static final BooleanProperty BELOW = BooleanProperty.create("below");
     public static final EnumProperty<Rows> ROWS = EnumProperty.create("rows", Rows.class);
-    public static final BooleanProperty MOTOR = BooleanProperty.create("motor");
     public static final int MAX_ACROSS = 3;
     public static final int MAX_ALONG = 3;
     public static final int MAX_TALL = 2;
@@ -60,7 +60,7 @@ public class MixerSettlerBlock extends BaseEntityBlock {
         super(properties);
         registerDefaultState(stateDefinition.any().setValue(FACING, Direction.NORTH)
                 .setValue(LEFT, false).setValue(RIGHT, false).setValue(FRONT, false).setValue(BACK, false)
-                .setValue(ABOVE, false).setValue(BELOW, false).setValue(ROWS, Rows.SINGLE).setValue(MOTOR, true));
+                .setValue(ABOVE, false).setValue(BELOW, false).setValue(ROWS, Rows.SINGLE));
     }
 
     @Override
@@ -70,7 +70,7 @@ public class MixerSettlerBlock extends BaseEntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, LEFT, RIGHT, FRONT, BACK, ABOVE, BELOW, ROWS, MOTOR);
+        builder.add(FACING, LEFT, RIGHT, FRONT, BACK, ABOVE, BELOW, ROWS);
     }
 
     @Override

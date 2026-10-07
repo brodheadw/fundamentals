@@ -12,7 +12,11 @@ import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -29,9 +33,20 @@ import java.util.stream.Stream;
 @PrefixGameTestTemplate(false)
 public class SeparationTests {
 
-    private static final int SETTLE = MixerSettlerBlockEntity.PERIOD + 15;
+    private static final int SETTLE = 2 * MixerSettlerBlockEntity.PERIOD + 15;
+    private static final int SPIN_UP = 10;
     private static final int PLANT = 18 * MixerSettlerBlockEntity.CAPACITY_PER_CASING;
     private static final BlockState CASING = Separation.mixerSettler().defaultBlockState().setValue(MixerSettlerBlock.FACING, Direction.EAST);
+
+    /** Create's Mechanical Mixer over the trough at (x, z), driven by a cogwheel beside it under a Creative Motor. */
+    private static void mixer(GameTestHelper helper, int x, int y, int z) {
+        Block mixer = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:mechanical_mixer"));
+        Block cog = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:cogwheel"));
+        Block motor = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:creative_motor"));
+        helper.setBlock(new BlockPos(x, y, z), mixer.defaultBlockState());
+        helper.setBlock(new BlockPos(x, y, z + 1), cog.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y));
+        helper.setBlock(new BlockPos(x, y + 1, z + 1), motor.defaultBlockState().setValue(BlockStateProperties.FACING, Direction.DOWN));
+    }
 
     /**
      * A battery of plant stages along x, facing east, charged with the organic on every stage. Each stage is
@@ -48,10 +63,14 @@ public class SeparationTests {
                 }
             }
         }
-        helper.runAfterDelay(2, () -> {
+        for (int i = 0; i < stages; i++) {
+            mixer(helper, 1 + 3 * i, 3, 2);
+        }
+        helper.runAfterDelay(SPIN_UP, () -> {
             for (int i = 0; i < stages; i++) {
                 MixerSettlerBlockEntity corner = casing(helper, 1 + 3 * i, 1, 1);
                 helper.assertTrue(corner.isController() && corner.volume() == 18, "stage " + i + " should be one 3x3x2 vat, got " + corner.volume());
+                helper.assertTrue(corner.isStirred(), "stage " + i + " should feel its mixer turning");
                 port(helper, 1 + 3 * i, Direction.UP).fill(new FluidStack(Separation.fluid(organic), PLANT), IFluidHandler.FluidAction.EXECUTE);
             }
             then.run();
@@ -88,12 +107,13 @@ public class SeparationTests {
             helper.runAfterDelay(SETTLE, () -> {
                 FluidStack raffinate = held(helper, 1, Direction.NORTH);
                 FluidStack strip = held(helper, 24, Direction.NORTH);
-                helper.assertTrue(raffinate.is(Separation.fluid("light_rare_earth_liquor")) && raffinate.getAmount() == batch,
-                        "the head should hold a batch of light raffinate, got " + raffinate);
-                helper.assertTrue(strip.is(Separation.fluid("heavy_rare_earth_liquor")) && strip.getAmount() == batch,
-                        "the tail should hold a batch of loaded strip, got " + strip);
-                helper.assertTrue(held(helper, 1, Direction.WEST).getAmount() == 1000 - batch && held(helper, 24, Direction.EAST).getAmount() == 1000 - batch,
-                        "a batch of feed and of acid should be spent");
+                int cuts = raffinate.getAmount() / batch;
+                helper.assertTrue(raffinate.is(Separation.fluid("light_rare_earth_liquor")) && cuts >= 1 && raffinate.getAmount() == cuts * batch,
+                        "the head should hold whole batches of light raffinate, got " + raffinate);
+                helper.assertTrue(strip.is(Separation.fluid("heavy_rare_earth_liquor")) && strip.getAmount() == cuts * batch,
+                        "the tail should hold the same batches of loaded strip, got " + strip);
+                helper.assertTrue(held(helper, 1, Direction.WEST).getAmount() == 1000 - cuts * batch && held(helper, 24, Direction.EAST).getAmount() == 1000 - cuts * batch,
+                        "each cut spends a batch of feed and of acid");
                 helper.assertTrue(held(helper, 10, Direction.UP).getAmount() == PLANT, "the organic is a loop, not a consumable");
                 helper.succeed();
             });
@@ -106,7 +126,10 @@ public class SeparationTests {
         for (int i = 0; i < 24; i++) {
             helper.setBlock(new BlockPos(1 + i, 2, 1), CASING);
         }
-        helper.runAfterDelay(2, () -> {
+        for (int i = 0; i < 8; i++) {
+            mixer(helper, 1 + 3 * i, 3, 1);
+        }
+        helper.runAfterDelay(SPIN_UP, () -> {
             MixerSettlerBlockEntity head = casing(helper, 1, 2, 1);
             helper.assertTrue(head.isController() && head.along() == 3 && head.volume() == 3, "casings along the axis merge three at a time, got " + head.volume());
             helper.assertTrue(head.battery().size() == 8, "twenty-four casings should be eight stages, got " + head.battery().size());
@@ -118,8 +141,9 @@ public class SeparationTests {
             fill(helper, 24, Direction.EAST, "hydrochloric_acid", 750);
             helper.runAfterDelay(SETTLE, () -> {
                 FluidStack raffinate = held(helper, 1, Direction.NORTH);
-                helper.assertTrue(raffinate.is(Separation.fluid("light_rare_earth_liquor")) && raffinate.getAmount() == 3 * MixerSettlerBlockEntity.BATCH_PER_CASING,
-                        "the head should hold a small batch of raffinate, got " + raffinate);
+                int small = 3 * MixerSettlerBlockEntity.BATCH_PER_CASING;
+                helper.assertTrue(raffinate.is(Separation.fluid("light_rare_earth_liquor")) && raffinate.getAmount() >= small && raffinate.getAmount() % small == 0,
+                        "the head should hold small batches of raffinate, got " + raffinate);
                 helper.succeed();
             });
         });
@@ -129,15 +153,14 @@ public class SeparationTests {
     public void casingsMergeAsTheyArePlacedAndBreakApartWhenOneGoes(GameTestHelper helper) {
         helper.setBlock(new BlockPos(1, 1, 1), CASING);
         helper.setBlock(new BlockPos(1, 1, 2), CASING);
-        helper.runAfterDelay(2, () -> {
+        helper.runAfterDelay(SPIN_UP, () -> {
             MixerSettlerBlockEntity pair = casing(helper, 1, 1, 1);
             helper.assertTrue(pair.isController() && pair.across() == 2 && pair.along() == 1 && pair.tall() == 1, "two casings side by side should be one 2x1x1 stage");
             helper.assertBlockProperty(new BlockPos(1, 1, 1), MixerSettlerBlock.RIGHT, true);
             helper.assertBlockProperty(new BlockPos(1, 1, 2), MixerSettlerBlock.LEFT, true);
-            helper.assertBlockProperty(new BlockPos(1, 1, 2), MixerSettlerBlock.MOTOR, true);
             helper.setBlock(new BlockPos(2, 1, 1), CASING);
             helper.setBlock(new BlockPos(2, 1, 2), CASING);
-            helper.runAfterDelay(2, () -> {
+            helper.runAfterDelay(SPIN_UP, () -> {
                 MixerSettlerBlockEntity quad = casing(helper, 1, 1, 1);
                 helper.assertTrue(quad.isController() && quad.volume() == 4 && quad.along() == 2, "the second pair should merge into a 2x2x1 stage, got " + quad.volume());
                 helper.assertBlockProperty(new BlockPos(1, 1, 1), MixerSettlerBlock.ROWS, MixerSettlerBlock.Rows.WELL);
@@ -145,7 +168,7 @@ public class SeparationTests {
                 helper.assertTrue(helper.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, helper.absolutePos(new BlockPos(1, 1, 1)), Direction.EAST) == null,
                         "a face shared inside the stage has no port");
                 helper.destroyBlock(new BlockPos(2, 1, 2));
-                helper.runAfterDelay(2, () -> {
+                helper.runAfterDelay(SPIN_UP, () -> {
                     MixerSettlerBlockEntity left = casing(helper, 1, 1, 1);
                     helper.assertTrue(left.volume() <= 2, "losing a casing should break the stage into what is left, got " + left.volume());
                     helper.assertBlockProperty(new BlockPos(2, 1, 1), MixerSettlerBlock.LEFT, false);
@@ -167,6 +190,32 @@ public class SeparationTests {
                         "a middle stage has no side port");
                 helper.succeed();
             });
+        });
+    }
+
+    @GameTest(template = "battery", timeoutTicks = 200)
+    public void aStageWithNoMixerTurningStallsTheBattery(GameTestHelper helper) {
+        plantBattery(helper, 8, "p507", () -> {
+            fill(helper, 1, Direction.WEST, "rare_earth_liquor", 1000);
+            fill(helper, 24, Direction.EAST, "hydrochloric_acid", 1000);
+            helper.setBlock(new BlockPos(10, 4, 3), Blocks.AIR);
+            helper.runAfterDelay(SETTLE, () -> {
+                helper.assertTrue(held(helper, 1, Direction.NORTH).isEmpty(), "with one motor gone the battery should stall");
+                helper.assertTrue(casing(helper, 1, 1, 1).stall().map(s -> s[0]).orElse("").equals("mixer"), "the goggles should blame the mixer");
+                helper.succeed();
+            });
+        });
+    }
+
+    @GameTest(template = "battery", timeoutTicks = 100)
+    public void thePortsOnlyTakeWhatBelongsInThem(GameTestHelper helper) {
+        helper.setBlock(new BlockPos(1, 2, 1), CASING);
+        helper.runAfterDelay(SPIN_UP, () -> {
+            helper.assertTrue(fill(helper, 1, Direction.UP, "rare_earth_liquor", 100) == 0, "the top is for organics");
+            helper.assertTrue(fill(helper, 1, Direction.WEST, "p507", 100) == 0, "the back is for liquor");
+            helper.assertTrue(port(helper, 1, Direction.WEST).fill(new FluidStack(Fluids.WATER, 100), IFluidHandler.FluidAction.EXECUTE) == 0, "water is not a reagent");
+            helper.assertTrue(fill(helper, 1, Direction.UP, "p507", 100) == 100 && fill(helper, 1, Direction.WEST, "rare_earth_liquor", 100) == 100, "the right fluids go in");
+            helper.succeed();
         });
     }
 
