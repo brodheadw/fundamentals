@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": {
+    "item": "fundamentals:samarium_oxalate"
+  },
+  "result": {
+    "id": "fundamentals:samarium_oxide"
+  },
+  "experience": 0.3,
+  "cookingtime": 200
+}

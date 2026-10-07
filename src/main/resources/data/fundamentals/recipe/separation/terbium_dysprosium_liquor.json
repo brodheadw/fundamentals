@@ -1,0 +1,9 @@
+{
+  "type": "fundamentals:separation",
+  "liquor": "fundamentals:terbium_dysprosium_liquor",
+  "organic": "fundamentals:p507",
+  "strip": "fundamentals:hydrochloric_acid",
+  "stages": 20,
+  "light": "fundamentals:terbium_liquor",
+  "heavy": "fundamentals:dysprosium_liquor"
+}

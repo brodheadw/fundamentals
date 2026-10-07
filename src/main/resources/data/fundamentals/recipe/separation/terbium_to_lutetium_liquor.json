@@ -1,0 +1,9 @@
+{
+  "type": "fundamentals:separation",
+  "liquor": "fundamentals:terbium_to_lutetium_liquor",
+  "organic": "fundamentals:p204",
+  "strip": "fundamentals:hydrochloric_acid",
+  "stages": 12,
+  "light": "fundamentals:terbium_dysprosium_liquor",
+  "heavy": "fundamentals:yttrium_heavies_liquor"
+}

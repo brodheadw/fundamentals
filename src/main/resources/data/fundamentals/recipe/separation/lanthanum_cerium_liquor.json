@@ -1,0 +1,9 @@
+{
+  "type": "fundamentals:separation",
+  "liquor": "fundamentals:lanthanum_cerium_liquor",
+  "organic": "fundamentals:p507",
+  "strip": "fundamentals:hydrochloric_acid",
+  "stages": 12,
+  "light": "fundamentals:lanthanum_liquor",
+  "heavy": "fundamentals:cerium_liquor"
+}

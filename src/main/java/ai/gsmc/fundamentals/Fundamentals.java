@@ -1,12 +1,15 @@
 package ai.gsmc.fundamentals;
 
 import ai.gsmc.fundamentals.client.GrindingAnimation;
+import ai.gsmc.fundamentals.client.SeparationClient;
 import ai.gsmc.fundamentals.ironworking.IronWorking;
 import ai.gsmc.fundamentals.power.Electricity;
 import ai.gsmc.fundamentals.registry.FundamentalsContent;
 import ai.gsmc.fundamentals.registry.HandTools;
 import ai.gsmc.fundamentals.registry.MaterialItems;
 import ai.gsmc.fundamentals.registry.OreBlocks;
+import ai.gsmc.fundamentals.separation.MixerSettlerBlockEntity;
+import ai.gsmc.fundamentals.separation.Separation;
 import ai.gsmc.fundamentals.worldgen.DepositFeature;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -17,6 +20,9 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 import net.neoforged.neoforge.registries.RegisterEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,19 +46,30 @@ public class Fundamentals {
                 IronWorking.registerBlocks(helper::register);
                 MaterialItems.registerBlocks(helper::register);
                 Electricity.registerBlocks(helper::register);
+                Separation.registerBlocks(helper::register);
             });
             event.register(Registries.BLOCK_ENTITY_TYPE, helper -> {
                 IronWorking.registerBlockEntities(helper::register);
                 Electricity.registerBlockEntities(helper::register);
+                Separation.registerBlockEntities(helper::register);
             });
-            event.register(Registries.RECIPE_TYPE, helper -> IronWorking.registerRecipeTypes(helper::register));
-            event.register(Registries.RECIPE_SERIALIZER, helper -> IronWorking.registerRecipeSerializers(helper::register));
+            event.register(Registries.RECIPE_TYPE, helper -> {
+                IronWorking.registerRecipeTypes(helper::register);
+                Separation.registerRecipeTypes(helper::register);
+            });
+            event.register(Registries.RECIPE_SERIALIZER, helper -> {
+                IronWorking.registerRecipeSerializers(helper::register);
+                Separation.registerRecipeSerializers(helper::register);
+            });
+            event.register(NeoForgeRegistries.Keys.FLUID_TYPES, helper -> Separation.registerFluidTypes(helper::register));
+            event.register(Registries.FLUID, helper -> Separation.registerFluids(helper::register));
             event.register(Registries.ITEM, helper -> {
                 OreBlocks.registerItems(helper::register);
                 IronWorking.registerItems(helper::register);
                 HandTools.registerItems(helper::register);
                 MaterialItems.registerItems(helper::register);
                 Electricity.registerItems(helper::register);
+                Separation.registerItems(helper::register);
             });
             event.register(Registries.FEATURE, helper -> helper.register(DEPOSIT, DepositFeature.INSTANCE));
             event.register(Registries.CREATIVE_MODE_TAB, helper -> {
@@ -60,8 +77,11 @@ public class Fundamentals {
                 helper.register(MATERIALS_TAB, materialsTab());
             });
         });
+        modBus.addListener(RegisterCapabilitiesEvent.class, event -> event.registerBlockEntity(
+                Capabilities.FluidHandler.BLOCK, Separation.mixerSettlerEntity(), MixerSettlerBlockEntity::handler));
         if (FMLEnvironment.dist == Dist.CLIENT) {
             GrindingAnimation.register(modBus);
+            SeparationClient.register(modBus);
         }
     }
 
@@ -70,6 +90,7 @@ public class Fundamentals {
                 .icon(() -> new ItemStack(OreBlocks.items().iterator().next()))
                 .displayItems((parameters, output) -> {
                     IronWorking.items().forEach(output::accept);
+                    Separation.items().forEach(output::accept);
                     HandTools.items().forEach(output::accept);
                     Electricity.items().forEach(output::accept);
                     OreBlocks.rawItems().forEach(output::accept);

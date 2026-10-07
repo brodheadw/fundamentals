@@ -19,6 +19,7 @@ RECIPES = DATA / "recipe"
 # form: (common tag folder, name of the item for a material called X)
 FORMS = {
     "concentrate": (DATA / "tags/item/concentrates", "{}"),
+    "oxalate": (DATA / "tags/item/oxalates", "{} Oxalate"),
     "oxide": (DATA / "tags/item/oxides", "{} Oxide"),
     "dust": (C_TAGS / "item/dusts", "{} Dust"),
     "ingot": (C_TAGS / "item/ingots", "{} Ingot"),

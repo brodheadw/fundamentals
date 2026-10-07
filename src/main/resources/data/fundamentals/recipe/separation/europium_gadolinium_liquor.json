@@ -1,0 +1,9 @@
+{
+  "type": "fundamentals:separation",
+  "liquor": "fundamentals:europium_gadolinium_liquor",
+  "organic": "fundamentals:p507",
+  "strip": "fundamentals:hydrochloric_acid",
+  "stages": 18,
+  "light": "fundamentals:europium_liquor",
+  "heavy": "fundamentals:gadolinium_liquor"
+}

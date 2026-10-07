@@ -1,0 +1,9 @@
+{
+  "type": "fundamentals:separation",
+  "liquor": "fundamentals:holmium_erbium_liquor",
+  "organic": "fundamentals:p507",
+  "strip": "fundamentals:hydrochloric_acid",
+  "stages": 20,
+  "light": "fundamentals:holmium_liquor",
+  "heavy": "fundamentals:erbium_liquor"
+}

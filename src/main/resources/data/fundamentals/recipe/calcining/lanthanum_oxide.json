@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": {
+    "item": "fundamentals:lanthanum_oxalate"
+  },
+  "result": {
+    "id": "fundamentals:lanthanum_oxide"
+  },
+  "experience": 0.3,
+  "cookingtime": 200
+}

@@ -1,0 +1,18 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:oxalic_acid"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:terbium_liquor"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:terbium_oxalate"
+    }
+  ]
+}
