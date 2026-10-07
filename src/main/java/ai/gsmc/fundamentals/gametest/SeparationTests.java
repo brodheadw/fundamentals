@@ -220,6 +220,22 @@ public class SeparationTests {
     }
 
     @GameTest(template = "battery", timeoutTicks = 200)
+    public void organicChargedAtTheHeadRunsDownTheBattery(GameTestHelper helper) {
+        for (int i = 0; i < 9; i++) {
+            helper.setBlock(new BlockPos(1 + i, 2, 1), CASING);
+        }
+        helper.runAfterDelay(SPIN_UP, () -> {
+            fill(helper, 1, Direction.UP, "p507", 750);
+            helper.runAfterDelay(60, () -> {
+                int head = held(helper, 1, Direction.UP).getAmount(), tail = held(helper, 7, Direction.UP).getAmount();
+                helper.assertTrue(tail > 0 && head + held(helper, 4, Direction.UP).getAmount() + tail == 750,
+                        "the organic should spread forward and be conserved, got " + head + " / " + tail);
+                helper.succeed();
+            });
+        });
+    }
+
+    @GameTest(template = "battery", timeoutTicks = 200)
     public void theWrongOrganicStallsTheCut(GameTestHelper helper) {
         plantBattery(helper, 8, "p204", () -> {
             fill(helper, 1, Direction.WEST, "rare_earth_liquor", 1000);

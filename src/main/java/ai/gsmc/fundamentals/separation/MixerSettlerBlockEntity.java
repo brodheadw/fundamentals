@@ -400,6 +400,9 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
                 casing.dirty = true;
             }
         }
+        if (level.getGameTime() % 5 == 0) {
+            casing.flowOrganicForward();
+        }
         if (casing.dirty && level.getGameTime() % 10 == 0) {
             casing.dirty = false;
             level.sendBlockUpdated(pos, state, state, 3);
@@ -408,6 +411,21 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
             casing.cooldown = 0;
             casing.runCut();
         }
+    }
+
+    /** The organic runs forward along the battery: a stage with more than the one ahead sends some on. */
+    private void flowOrganicForward() {
+        MixerSettlerBlockEntity next = nextStage(true);
+        if (next == null || organic.isEmpty()) {
+            return;
+        }
+        int excess = organic.getFluidAmount() - next.organic.getFluidAmount();
+        if (excess <= 0) {
+            return;
+        }
+        FluidStack moved = organic.drain(Math.min(excess / 2, batch()), IFluidHandler.FluidAction.SIMULATE);
+        int taken = next.organic.fill(moved, IFluidHandler.FluidAction.EXECUTE);
+        organic.drain(taken, IFluidHandler.FluidAction.EXECUTE);
     }
 
     /** Why the head is not cutting, as a lang key and its arguments; empty when it is. */
