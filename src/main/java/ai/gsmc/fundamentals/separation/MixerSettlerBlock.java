@@ -171,8 +171,13 @@ public class MixerSettlerBlock extends BaseEntityBlock {
         entity.resetFallDistance();
         Vec3 v = entity.getDeltaMovement();
         double depthBelow = surface - entity.getY();
-        double lift = Math.min(0.08, 0.02 + depthBelow * 0.06);
-        entity.setDeltaMovement(v.x * 0.8, Math.min(v.y + lift, 0.12), v.z * 0.8);
+        // ankle-deep only drags; past the knee the liquid carries you up
+        if (depthBelow < 0.5) {
+            entity.setDeltaMovement(v.x * 0.85, v.y, v.z * 0.85);
+        } else {
+            double lift = Math.min(0.08, (depthBelow - 0.5) * 0.08);
+            entity.setDeltaMovement(v.x * 0.8, Math.min(v.y + lift, 0.1), v.z * 0.8);
+        }
         if (entity instanceof LivingEntity living && !level.isClientSide) {
             if (!casing.stage().aqueous().isEmpty()) {
                 living.addEffect(new MobEffectInstance(MobEffects.POISON, 60, 0));
