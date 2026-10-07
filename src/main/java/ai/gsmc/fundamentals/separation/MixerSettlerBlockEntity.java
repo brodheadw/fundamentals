@@ -438,8 +438,9 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
                 casing.dirty = true;
             }
         }
-        if (level.getGameTime() % 10 == 0) {
+        if (level.getGameTime() % 20 == 0) {
             casing.flowOrganicForward();
+            casing.driveMixer();
         }
         if (level.getGameTime() % 20 == 0) {
             casing.showLinks();
@@ -480,6 +481,23 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         return Math.max(0, equilibration() - settled) / 20;
     }
 
+    /** Create's mixer lowers its head when it believes it is working; over a running battery, it is. */
+    private void driveMixer() {
+        if (!(level.getBlockEntity(mixerPos()) instanceof MechanicalMixerBlockEntity mixer)) {
+            return;
+        }
+        boolean working = isStirred() && battery().getFirst().isSwitchedOn();
+        if (working && !mixer.running) {
+            mixer.running = true;
+            mixer.runningTicks = 0;
+            mixer.sendData();
+        } else if (working && mixer.runningTicks >= 20) {
+            // hold it down: Create would raise the head again after a basin cycle
+            mixer.runningTicks = 20;
+            mixer.processingTicks = 10;
+        }
+    }
+
     /** The ports in the end walls appear when a stage stands end to end with another. */
     private void showLinks() {
         boolean ahead = nextStage(true) != null;
@@ -509,7 +527,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         if (excess <= 0) {
             return;
         }
-        FluidStack moved = organic.drain(Math.max(1, Math.min(excess / 4, batch() / 4)), IFluidHandler.FluidAction.SIMULATE);
+        FluidStack moved = organic.drain(Math.max(1, Math.min(excess / 8, batch() / 8)), IFluidHandler.FluidAction.SIMULATE);
         int taken = next.organic.fill(moved, IFluidHandler.FluidAction.EXECUTE);
         organic.drain(taken, IFluidHandler.FluidAction.EXECUTE);
     }
@@ -560,12 +578,19 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         out.fill(new FluidStack(cut.light(), batch), IFluidHandler.FluidAction.EXECUTE);
         tail.out.fill(new FluidStack(cut.heavy(), batch), IFluidHandler.FluidAction.EXECUTE);
         // The aqueous phase is the depleting feed through the extraction stages and the acid loading up
-        // through the strip stages; the stages between the ends show one or the other going past.
+        // through the strip stages; the stages between the ends fill with one or the other a batch at a time,
+        // so the liquor is seen to work its way down the line.
         int strip = stages.size() * 2 / 5;
         for (int i = 0; i < stages.size(); i++) {
             MixerSettlerBlockEntity stage = stages.get(i);
             if (i > 0 && i < stages.size() - 1) {
-                stage.aqueous.setFluid(new FluidStack(i < stages.size() - strip ? cut.light() : cut.heavy(), stage.capacity() / 2));
+                Fluid shown = i < stages.size() - strip ? cut.light() : cut.heavy();
+                if (!stage.aqueous.getFluid().is(shown)) {
+                    stage.aqueous.setFluid(FluidStack.EMPTY);
+                }
+                if (stage.aqueous.getFluidAmount() < stage.capacity() / 2) {
+                    stage.aqueous.fill(new FluidStack(shown, Math.min(batch, stage.capacity() / 2 - stage.aqueous.getFluidAmount())), IFluidHandler.FluidAction.EXECUTE);
+                }
             }
             stage.stirring = STIR_TICKS;
             stage.dirty = true;
