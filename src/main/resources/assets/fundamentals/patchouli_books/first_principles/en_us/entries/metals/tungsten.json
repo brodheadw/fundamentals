@@ -1,0 +1,17 @@
+{
+  "name": "Tungsten",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:tungsten_ingot",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Scheelite from the limestone skarns and wolframite from the tin veins both decompose in hot hydrochloric acid: two raw ore and 500 mB in a heated basin give two tungsten oxide, the canary-yellow trioxide powder, and hydrogen in a heated chemical vat reduces two oxide to two ingots.",
+      "title": "Tungsten"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "One ingot draws to four filaments, and the Factory's light bulb now burns one. One ingot and two coals, superheated, carburise to two tungsten carbide, and Create's mechanical drill now bites with it."
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "BPB",
+    "EPE",
+    "CPC"
+  ],
+  "key": {
+    "B": {
+      "item": "minecraft:iron_bars"
+    },
+    "C": {
+      "tag": "c:ingots/cast_iron"
+    },
+    "P": {
+      "item": "tfmg:cast_iron_pipe"
+    },
+    "E": {
+      "item": "fundamentals:cerium_oxide"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "tfmg:exhaust"
+  }
+}

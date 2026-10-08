@@ -57,7 +57,7 @@ public final class FerrousMaterials {
                 MaterialProperties.builder().density(0.85).heatResistance(0.98).hardness(0.80));
         reg("molybdenum_steel", MaterialType.ALLOY, "Fe-Mo", forms(INGOT, PLATE),
                 MaterialProperties.builder().density(0.80).heatResistance(0.70).hardness(0.85));
-        reg("tungsten", MaterialType.ELEMENT, "W", forms(INGOT, DUST, PLATE),
+        reg("tungsten", MaterialType.ELEMENT, "W", forms(OXIDE, INGOT, DUST, PLATE),
                 MaterialProperties.builder().density(1.90).heatResistance(1.00).hardness(0.95).conductivity(0.30));
         reg("vanadium", MaterialType.ELEMENT, "V", forms(INGOT, DUST),
                 MaterialProperties.builder().density(0.77).hardness(0.80).heatResistance(0.65));

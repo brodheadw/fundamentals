@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:tungsten_ingot"
+    },
+    {
+      "tag": "minecraft:coals"
+    },
+    {
+      "tag": "minecraft:coals"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:tungsten_carbide",
+      "count": 2
+    }
+  ],
+  "heat_requirement": "superheated"
+}

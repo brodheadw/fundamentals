@@ -20,6 +20,10 @@
     {
       "type": "patchouli:text",
       "text": "Didymium glass is the welder's lens the goggles are made of. Erbium turns glass pink. Scandium in aluminium is the airframe alloy, and makes a panel rack go twice as far. Gadolinium waits for a reactor."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Cerium oxide stores and releases oxygen, which is what a catalytic converter does: the Factory's exhaust takes two. Neodymium oxide turns glass purple and holmium oxide yellow, the way erbium turns it pink. A cobalt in the lithium charge is the lithium cobalt oxide cathode the first lithium cells ran on."
     }
   ]
 }

@@ -26,7 +26,7 @@ public final class MaterialItems {
     // Groups whose forms are items so far. The others wait on mapping forms to the items vanilla, Create and TFMG already have.
     private static final Set<String> GROUPS = Set.of(RareEarthMaterials.GROUP);
     // Materials outside those groups whose forms are items anyway, because a chain here makes them.
-    private static final Set<String> ITEM_IDS = Set.of("cobalt", "molybdenum", "rhenium", "superalloy", "molybdenum_steel");
+    private static final Set<String> ITEM_IDS = Set.of("cobalt", "molybdenum", "rhenium", "superalloy", "molybdenum_steel", "tungsten");
 
     private static final Map<ResourceLocation, Block> BLOCKS = new LinkedHashMap<>();
     private static final Map<ResourceLocation, Item> ITEMS = new LinkedHashMap<>();

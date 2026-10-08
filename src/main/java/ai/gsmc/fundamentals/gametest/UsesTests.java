@@ -86,4 +86,20 @@ public class UsesTests {
         helper.assertTrue(takes(recipe(helper, "fundamentals:uses/superalloy"), "fundamentals:rhenium_ingot"), "the superalloy wants rhenium");
         helper.succeed();
     }
+
+    @GameTest(template = "empty")
+    public void tungstenAndTheLastSinks(GameTestHelper helper) {
+        for (String item : new String[] {"tungsten_oxide", "tungsten_ingot", "tungsten_plate", "tungsten_carbide", "tungsten_filament"}) {
+            helper.assertTrue(BuiltInRegistries.ITEM.containsKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, item)), item + " is not an item");
+        }
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/tungsten_oxide_from_scheelite"), "fundamentals:raw_scheelite"), "scheelite should give the trioxide");
+        helper.assertTrue(BuiltInRegistries.RECIPE_TYPE.getKey(recipe(helper, "fundamentals:uses/tungsten_ingot").getType()).toString().equals("tfmg:vat_machine_recipe"), "tungsten is reduced in a vat");
+        helper.assertTrue(takes(recipe(helper, "tfmg:crafting/materials/light_bulb"), "fundamentals:tungsten_filament"), "the light bulb should burn a tungsten filament");
+        helper.assertTrue(takes(recipe(helper, "create:crafting/kinetics/mechanical_drill"), "fundamentals:tungsten_carbide"), "the drill should bite with carbide");
+        helper.assertTrue(takes(recipe(helper, "tfmg:crafting/materials/exhaust"), "fundamentals:cerium_oxide"), "the exhaust should take ceria");
+        helper.assertTrue(takes(recipe(helper, "tfmg:crafting/materials/lithium_charge"), "fundamentals:cobalt_ingot"), "the lithium charge should take cobalt");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/neodymium_glass"), "fundamentals:neodymium_oxide") && takes(recipe(helper, "fundamentals:uses/holmium_glass"), "fundamentals:holmium_oxide"),
+                "neodymium and holmium should colour glass");
+        helper.succeed();
+    }
 }

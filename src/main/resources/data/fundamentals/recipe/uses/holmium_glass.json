@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "GGG",
+    "GEG",
+    "GGG"
+  ],
+  "key": {
+    "G": {
+      "tag": "c:glass_blocks/colorless"
+    },
+    "E": {
+      "item": "fundamentals:holmium_oxide"
+    }
+  },
+  "result": {
+    "count": 8,
+    "id": "minecraft:yellow_stained_glass"
+  }
+}
