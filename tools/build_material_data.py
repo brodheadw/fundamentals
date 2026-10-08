@@ -2,7 +2,7 @@
 """Writes what the material items painted by paint_materials.py need besides their textures:
 models, names, tags, the storage blocks' blockstates and loot, the recipes that pack nuggets
 into ingots into blocks and press plates, and the rare earth minerals' first steps on Create's
-machines. Re-run after any edit.
+machines, and chromite's. Re-run after any edit.
 
     python3 tools/paint_materials.py && python3 tools/build_material_data.py && python3 tools/build_ore_data.py
 
@@ -29,10 +29,10 @@ FORMS = {
     "block": (C_TAGS / "item/storage_blocks", "Block of {}"),
 }
 
-# Rare earth minerals ground in a millstone or crushing wheels. Monazite is a sand already.
-GROUND = ("bastnasite", "xenotime", "loparite", "euxenite")
+# Minerals ground in a millstone or crushing wheels. Monazite is a sand already.
+GROUND = ("bastnasite", "xenotime", "loparite", "euxenite", "chromite")
 
-# Gravity concentration, done as a wash under an encased fan: what goes in, and which mixed
+# Gravity concentration, done as a wash under an encased fan: what goes in, and which
 # concentrate the heavy grains left behind are. Bastnäsite needs flotation and the clay a leach;
 # neither has a machine yet.
 WASHED = {
@@ -40,6 +40,7 @@ WASHED = {
     "loparite_dust": "light_rare_earth_concentrate",
     "xenotime_dust": "heavy_rare_earth_concentrate",
     "euxenite_dust": "heavy_rare_earth_concentrate",
+    "chromite_dust": "chromite_concentrate",
 }
 
 
@@ -71,6 +72,8 @@ def main():
         for form in forms:
             name = item_name(material, form)
             folder, title = FORMS[form]
+            if form == "concentrate" and name != material:
+                title = "{} Concentrate"
             made[form] = {"id": f"fundamentals:{name}", "tag": f"{'c' if folder.is_relative_to(C_TAGS) else 'fundamentals'}:{folder.name}/{material}"}
             tag(folder / f"{material}.json", [made[form]["id"]])
             tagged[form].append("#" + made[form]["tag"])

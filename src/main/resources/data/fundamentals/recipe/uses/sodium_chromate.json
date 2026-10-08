@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:chromite_concentrate"
+    },
+    {
+      "item": "fundamentals:soda_ash"
+    },
+    {
+      "item": "fundamentals:soda_ash"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:sodium_chromate",
+      "count": 2
+    }
+  ],
+  "heat_requirement": "heated"
+}

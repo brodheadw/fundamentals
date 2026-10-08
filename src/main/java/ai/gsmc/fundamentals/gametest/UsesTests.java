@@ -106,4 +106,20 @@ public class UsesTests {
                 "neodymium and holmium should colour glass");
         helper.succeed();
     }
+
+    @GameTest(template = "empty")
+    public void chromiteGivesFerrochromeAndTheLongWayChromium(GameTestHelper helper) {
+        var registries = helper.getLevel().registryAccess();
+        Map.of("fundamentals:washing/chromite_dust", "chromite_concentrate", "fundamentals:uses/ferrochrome", "ferrochrome_ingot",
+                "fundamentals:uses/stainless_steel", "stainless_steel_ingot", "fundamentals:uses/soda_ash", "soda_ash",
+                "fundamentals:uses/sodium_chromate", "sodium_chromate", "fundamentals:uses/sodium_dichromate", "sodium_dichromate",
+                "fundamentals:uses/chromium_oxide", "chromium_oxide", "fundamentals:uses/chromium_ingot", "chromium_ingot")
+                .forEach((id, out) -> helper.assertTrue(recipe(helper, id).getResultItem(registries).is(stack("fundamentals:" + out).getItem()), id + " should make " + out));
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/sodium_chromate"), "fundamentals:chromite_concentrate"), "the soda roast wants chromite");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/chromium_ingot"), "fundamentals:aluminium_powder"), "chromium is reduced by aluminium");
+        helper.assertTrue(takes(recipe(helper, "tfmg:crafting/materials/flarestack"), "fundamentals:stainless_steel_ingot"), "the flarestack should be stainless");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/superalloy"), "fundamentals:chromium_ingot"), "the superalloy wants chromium");
+        helper.assertTrue(BuiltInRegistries.BLOCK.containsKey(ResourceLocation.parse("fundamentals:trona_ore")), "trona should be an ore");
+        helper.succeed();
+    }
 }

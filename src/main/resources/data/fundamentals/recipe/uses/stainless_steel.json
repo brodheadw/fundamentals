@@ -1,0 +1,42 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:ferrochrome_ingot"
+    },
+    {
+      "item": "fundamentals:ferrochrome_ingot"
+    },
+    {
+      "item": "fundamentals:ferrochrome_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:stainless_steel_ingot",
+      "count": 10
+    }
+  ],
+  "heat_requirement": "superheated"
+}

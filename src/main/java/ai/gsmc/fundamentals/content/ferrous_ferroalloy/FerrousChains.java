@@ -21,7 +21,16 @@ public final class FerrousChains {
                 .build());
 
         ProcessingChainRegistry.register(ProcessingChain.builder("ferrochrome", "ferrochrome", FerrousMaterials.GROUP)
-                .step(SMELTING, "chromite", RAW, "ferrochrome", INGOT)
+                .step(GRINDING, "chromite", RAW, "chromite", DUST)
+                .step(GRAVITY_SEPARATION, "chromite", DUST, "chromite", CONCENTRATE)
+                .step(CARBOTHERMIC_REDUCTION, "chromite", CONCENTRATE, "ferrochrome", INGOT)
+                .step(CONVERTING, "ferrochrome", INGOT, "stainless_steel", INGOT)
+                .build());
+
+        // The soda roast, leach, acidification and carbon reduction to Cr2O3 run through sodium salts that are not materials.
+        ProcessingChainRegistry.register(ProcessingChain.builder("chromium", "chromium", FerrousMaterials.GROUP)
+                .step(ROASTING, "chromite", CONCENTRATE, "chromium", OXIDE)
+                .step(ALUMINOTHERMIC_REDUCTION, "chromium", OXIDE, "chromium", INGOT)
                 .build());
 
         ProcessingChainRegistry.register(ProcessingChain.builder("ferromanganese", "ferromanganese", FerrousMaterials.GROUP)

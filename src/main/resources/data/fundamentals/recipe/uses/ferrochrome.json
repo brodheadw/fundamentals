@@ -1,0 +1,26 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:chromite_concentrate"
+    },
+    {
+      "item": "fundamentals:chromite_concentrate"
+    },
+    {
+      "item": "tfmg:coal_coke"
+    },
+    {
+      "tag": "tfmg:flux"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:ferrochrome_ingot"
+    },
+    {
+      "id": "fundamentals:slag"
+    }
+  ],
+  "heat_requirement": "superheated"
+}

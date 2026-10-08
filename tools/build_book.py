@@ -260,11 +260,11 @@ def rare_earths():
 
 
 def metals():
-    category("metals", "The other metals", "Cobalt, zinc and nickel, and the porphyry chain: copper, molybdenum and the rhenium hiding in it.", "fundamentals:cobalt_ingot", 3)
+    category("metals", "The other metals", "Cobalt, zinc and nickel, the porphyry chain (copper, molybdenum and the rhenium hiding in it), and chromium.", "fundamentals:cobalt_ingot", 3)
     entry("metals", "cobalt", "Cobalt", "fundamentals:cobalt_ingot", pages_of(
         "Cobaltite is a cobalt arsenide-sulfide from the silver-cobalt veins in calcite. Roast it on a campfire or in a smoker to drive off the arsenic and sulfur and leave the oxide. "
         "Cobalt melts at 1,495 °C and was never smelted from its ore: the oxide is reduced under hydrogen, as molybdenum is: two roasted cobaltite and 500 mB of hydrogen in a heated chemical vat give two ingots. "
-        "Four cobalt and a samarium make SmCo; two cobalt, four nickel and a rhenium make the superalloy. "
+        "Four cobalt and a samarium make SmCo; two cobalt, four nickel, a chromium and a rhenium make the superalloy. "
         "Roasted cobaltite calcined with two bauxite powder is cobalt blue, four blue dye.", "Cobalt"), 0)
     entry("metals", "porphyry", "Copper, molybdenum, rhenium", "fundamentals:raw_molybdenite", pages_of(
         "A porphyry copper stock carries chalcopyrite with a little molybdenite, and the molybdenite carries rhenium at parts per million. "
@@ -275,7 +275,7 @@ def metals():
         "Both oxides are reduced under hydrogen in a heated chemical vat with an industrial mixer, as the industry does: two trioxide and 500 mB of hydrogen give two molybdenum ingots, "
         "two flue dust and 250 mB give one rhenium ingot. Hydrogen is The Factory Must Grow's."), 1)
     entry("metals", "superalloy", "Superalloy and molybdenum steel", "fundamentals:superalloy_ingot", pages_of(
-        "Four nickel, two cobalt and one rhenium, superheated under 100 mB of argon, make four ingots of the nickel superalloy that turbine blades are cast from; "
+        "Four nickel, a chromium, two cobalt and a rhenium, superheated under 100 mB of argon, make four ingots of the nickel superalloy that turbine blades are cast from, the chromium what keeps it from scaling in the hot gas; "
         "The Factory Must Grow's turbine blade now takes its plates. One molybdenum in four steel makes molybdenum steel, and its plates now make the heavy machinery casing.",
         "Superalloy and molybdenum steel"), 2)
     entry("metals", "tungsten", "Tungsten", "fundamentals:tungsten_ingot", pages_of(
@@ -289,6 +289,17 @@ def metals():
         "a zinc oxide and a charcoal in a basin over a blaze burner fed a blaze cake give a zinc ingot. Asurine, the zinc stone, crushes to smithsonite.", "Zinc") + pages_of(
         "Pentlandite roasts on a fire to a nickel oxide; with a charcoal, superheated, it gives a nickel ingot and the iron goes to slag. "
         "Nickel laterite is too lean to roast: four of it with two charcoal, superheated, give one ingot and two slag, as the electric furnaces of Indonesia smelt it whole.", "Nickel"), 4)
+    entry("metals", "chromium", "Ferrochrome and chromium", "fundamentals:ferrochrome_ingot", pages_of(
+        "Chromite is chromium's only ore, black seams in the gabbro of the deep layered intrusion. A millstone or crushing wheels grind it to a brown powder, and a wash under an encased fan "
+        "leaves the heavy chromite behind as concentrate, half of what goes in. Iron in chromite reduces along with the chromium, so smelting gives not chromium but ferrochrome: "
+        "two concentrate, a coal coke and a limesand flux, superheated, as a submerged-arc furnace smelts it at 1,600 to 1,700 °C, give a ferrochrome ingot and slag.", "Ferrochrome") + pages_of(
+        "Ferrochrome is what stainless steel is made from: three ferrochrome, a nickel and six steel, superheated, make ten stainless steel, eighteen per cent chromium and ten nickel. "
+        "A flare burns in its own flame, so the Factory's flarestack is now built on stainless.") + pages_of(
+        "Chromium metal goes the long way, through its salts. Trona, a soda mineral that lies in the desert evaporite beds beside the borax, calcines in a furnace to soda ash. "
+        "A chromite concentrate and two soda ash roasted in a heated basin give two sodium chromate, yellow: the roast oxidises the chromium in air at about 1,100 °C and the iron stays behind as oxide.", "Chromium") + pages_of(
+        "Two chromate and 250 mB of sulfuric acid in a basin make the orange sodium dichromate. Heated with a coal it is reduced to the green chromium oxide and gives one soda ash back. "
+        "Last, the thermite: a chromium oxide and an aluminium powder (an aluminium ingot milled to two), lit by a burner fed a blaze cake, burn on by themselves past 2,000 °C to a chromium ingot and a slag of alumina. "
+        "The superalloy takes the metal, and one oxide makes two green dye, the chrome oxide green of the paint box."), 5)
 
 
 def power():
