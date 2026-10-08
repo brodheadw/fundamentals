@@ -9,7 +9,9 @@ import ai.gsmc.fundamentals.registry.HandTools;
 import ai.gsmc.fundamentals.registry.MaterialItems;
 import ai.gsmc.fundamentals.registry.OreBlocks;
 import ai.gsmc.fundamentals.separation.MixerSettlerBlockEntity;
+import ai.gsmc.fundamentals.separation.Hazards;
 import ai.gsmc.fundamentals.uses.Uses;
+import net.neoforged.neoforge.common.NeoForge;
 import ai.gsmc.fundamentals.separation.Separation;
 import ai.gsmc.fundamentals.worldgen.DepositFeature;
 import net.minecraft.core.registries.Registries;
@@ -79,6 +81,7 @@ public class Fundamentals {
                 helper.register(MATERIALS_TAB, materialsTab());
             });
         });
+        NeoForge.EVENT_BUS.addListener(Hazards::onPlayerTick);
         modBus.addListener(RegisterCapabilitiesEvent.class, event -> event.registerBlockEntity(
                 Capabilities.FluidHandler.BLOCK, Separation.mixerSettlerEntity(), MixerSettlerBlockEntity::handler));
         if (FMLEnvironment.dist == Dist.CLIENT) {

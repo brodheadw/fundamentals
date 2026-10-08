@@ -5,7 +5,8 @@
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
 		"OreVeinTypeMixin",
-		"OreVeinifierMixin"
+		"OreVeinifierMixin",
+		"PipeCorrosionMixin"
 	],
 	"client": [],
 	"injectors": {

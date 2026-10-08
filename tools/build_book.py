@@ -240,7 +240,10 @@ def rare_earths():
         "Stand in any of them and it burns; hydrofluoric acid also poisons. Pour one against a block it attacks and the block cracks as if being mined, "
         "fizzes for five seconds, and is gone, and the acid that ate it is spent.", "The acids") + pages_of(
         "Hydrochloric acid eats carbonates: calcite, limestone, dripstone, bone, tuff. Hydrofluoric acid eats glass and silica: glass, sand, sandstone, quartz; "
-        "it is the one acid glass cannot hold. Nitric acid eats copper and iron. Phosphoric acid only stings, which is why it is in your cola. Stone, deepslate and the vats shrug all of them off."), 9)
+        "it is the one acid glass cannot hold. Nitric acid eats copper and iron. Phosphoric acid only stings, which is why it is in your cola. Stone, deepslate and the vats shrug all of them off.") + pages_of(
+        "Hydrofluoric and nitric acid fume. Within two blocks of either in the open, as a block or in a basin it is being used in, you take a hit a second and the world swims, and hydrofluoric poisons. "
+        "The gas mask is Create's: a diving helmet over a filled copper backtank, which breathes its air instead. "
+        "And acid eats copper: a Create pipe carrying any acid corrodes and, after a couple of minutes on average, bursts and spills it. Run acid in The Factory Must Grow's plastic or glass pipes, which it cannot touch; its metal pipes fare no better than copper."), 9)
 
 
 def metals():

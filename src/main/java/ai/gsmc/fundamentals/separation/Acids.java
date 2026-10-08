@@ -48,16 +48,19 @@ public final class Acids {
         public final String id;
         public final float damage;
         public final boolean poisons;
+        /** Hydrofluoric and nitric acid fume in the open: standing near them bare hurts. */
+        public final boolean fumes;
         public final TagKey<Block> dissolves;
         public final FlowingFluid source;
         public final FlowingFluid flowing;
         public final AcidBlock block;
         public final Item bucket;
 
-        private Acid(String id, float damage, boolean poisons) {
+        private Acid(String id, float damage, boolean poisons, boolean fumes) {
             this.id = id;
             this.damage = damage;
             this.poisons = poisons;
+            this.fumes = fumes;
             this.dissolves = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "dissolves/" + id));
             FlowingFluid[] pair = new FlowingFluid[2];
             Block[] block = new Block[1];
@@ -83,7 +86,7 @@ public final class Acids {
                 if (reagent.kind() == Reagents.Kind.ACID) {
                     boolean hf = reagent.id().equals("hydrofluoric_acid");
                     float damage = hf ? 2.0F : reagent.id().equals("phosphoric_acid") ? 0.5F : 1.0F;
-                    all.put(reagent.id(), new Acid(reagent.id(), damage, hf));
+                    all.put(reagent.id(), new Acid(reagent.id(), damage, hf, hf || reagent.id().equals("nitric_acid")));
                 }
             }
         }
@@ -116,6 +119,9 @@ public final class Acids {
         protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
             if (!level.getBlockState(pos).is(this)) {
                 return;
+            }
+            if (acid.fumes) {
+                Hazards.fume(level, pos, acid);
             }
             for (Direction side : new Direction[] {Direction.DOWN, Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST}) {
                 BlockPos at = pos.relative(side);

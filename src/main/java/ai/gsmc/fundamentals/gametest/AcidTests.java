@@ -2,6 +2,9 @@ package ai.gsmc.fundamentals.gametest;
 
 import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.separation.Acids;
+import ai.gsmc.fundamentals.separation.Hazards;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTest;
@@ -59,5 +62,43 @@ public class AcidTests {
             helper.assertTrue(BuiltInRegistries.FLUID.containsKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, acid + "_flowing")), acid + " has no flowing form");
         }
         helper.succeed();
+    }
+
+    @GameTest(template = "battery", timeoutTicks = 200)
+    public void hydrofluoricFumesHurtAtADistance(GameTestHelper helper) {
+        var pig = helper.spawnWithNoFreeWill(net.minecraft.world.entity.EntityType.PIG, new BlockPos(5, 1, 2));
+        pour(helper, "hydrofluoric_acid", new BlockPos(2, 1, 2));
+        helper.setBlock(new BlockPos(3, 1, 2), Blocks.STONE);
+        float health = pig.getHealth();
+        helper.runAfterDelay(80, () -> {
+            helper.assertTrue(pig.getHealth() < health, "a pig two blocks from hydrofluoric acid, not touching it, should be hurt by the fumes");
+            helper.succeed();
+        });
+    }
+
+    @GameTest(template = "battery", timeoutTicks = 300)
+    public void copperPipesCorrodeUnderAcid(GameTestHelper helper) {
+        Block tank = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:fluid_tank"));
+        Block pump = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:mechanical_pump"));
+        Block pipe = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:fluid_pipe"));
+        Block cog = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:cogwheel"));
+        Block motor = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:creative_motor"));
+        helper.setBlock(new BlockPos(2, 1, 2), tank.defaultBlockState());
+        helper.setBlock(new BlockPos(3, 1, 2), pump.defaultBlockState().setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING, Direction.EAST));
+        helper.setBlock(new BlockPos(4, 1, 2), pipe.defaultBlockState());
+        helper.setBlock(new BlockPos(5, 1, 2), pipe.defaultBlockState());
+        helper.setBlock(new BlockPos(6, 1, 2), tank.defaultBlockState());
+        helper.setBlock(new BlockPos(3, 2, 2), cog.defaultBlockState().setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.AXIS, Direction.Axis.X));
+        helper.setBlock(new BlockPos(2, 2, 2), motor.defaultBlockState().setValue(net.minecraft.world.level.block.state.properties.BlockStateProperties.FACING, Direction.EAST));
+        var acid = helper.getLevel().getCapability(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK, helper.absolutePos(new BlockPos(2, 1, 2)), Direction.UP);
+        acid.fill(new net.neoforged.neoforge.fluids.FluidStack(Acids.all().get("hydrochloric_acid").source, 4000), net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
+        double was = Hazards.corrosionChance;
+        Hazards.corrosionChance = 1.0;
+        helper.runAfterDelay(120, () -> {
+            Hazards.corrosionChance = was;
+            boolean burst = !helper.getBlockState(new BlockPos(4, 1, 2)).is(pipe) || !helper.getBlockState(new BlockPos(5, 1, 2)).is(pipe);
+            helper.assertTrue(burst, "a copper pipe carrying hydrochloric acid should have burst, got " + helper.getBlockState(new BlockPos(4, 1, 2)) + " / " + helper.getBlockState(new BlockPos(5, 1, 2)));
+            helper.succeed();
+        });
     }
 }
