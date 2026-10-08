@@ -35,7 +35,7 @@ import java.util.Map;
 /**
  * The acids exist in the world, not only in pipes: each has a flowing form, a block and a bucket, hurts whatever
  * stands in it, and eats the blocks it really attacks, listed in the block tag {@code fundamentals:dissolves/<acid>}
- * (hydrochloric acid takes carbonates, hydrofluoric glass and silica, nitric copper and iron; phosphoric acid only
+ * (hydrochloric acid takes carbonates, hydrofluoric glass and silica, nitric copper and iron, aqua regia gold as well; phosphoric acid only
  * stings). A block being eaten cracks like one being mined, over five seconds, then fizzes away, and the acid
  * that ate it is spent.
  */
@@ -53,7 +53,7 @@ public final class Acids {
         public final String id;
         public final float damage;
         public final boolean poisons;
-        /** Hydrofluoric and nitric acid fume in the open: standing near them bare hurts. */
+        /** Hydrofluoric and nitric acid and aqua regia fume in the open: standing near them bare hurts. */
         public final boolean fumes;
         public final TagKey<Block> dissolves;
         public final FlowingFluid source;
@@ -91,7 +91,7 @@ public final class Acids {
                 if (reagent.kind() == Reagents.Kind.ACID) {
                     boolean hf = reagent.id().equals("hydrofluoric_acid");
                     float damage = hf ? 2.0F : reagent.id().equals("phosphoric_acid") ? 0.5F : 1.0F;
-                    all.put(reagent.id(), new Acid(reagent.id(), damage, hf, hf || reagent.id().equals("nitric_acid")));
+                    all.put(reagent.id(), new Acid(reagent.id(), damage, hf, hf || reagent.id().equals("nitric_acid") || reagent.id().equals("aqua_regia")));
                 }
             }
         }

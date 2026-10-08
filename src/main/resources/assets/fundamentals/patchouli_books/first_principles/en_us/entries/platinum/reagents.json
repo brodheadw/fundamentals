@@ -1,0 +1,21 @@
+{
+  "name": "Aqua regia and ammonia",
+  "category": "fundamentals:platinum",
+  "icon": "fundamentals:aqua_regia_bucket",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Aqua regia is 375 mB of hydrochloric acid and 125 mB of nitric, mixed cold: the royal water that dissolves gold, and the only common acid that takes platinum. It fumes like nitric acid; wear the mask.",
+      "title": "Aqua regia and ammonia"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ammonia is made as Haber and Bosch made it: 750 mB of hydrogen and 250 mB of air over a raw magnetite, the iron catalyst, in a heated basin, give 500 mB and the magnetite back nine times in ten."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "250 mB of ammonia and 250 mB of hydrochloric acid meet as white smoke and settle as two ammonium chloride, sal ammoniac, which the refinery precipitates with."
+    }
+  ]
+}

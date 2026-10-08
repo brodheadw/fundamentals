@@ -1,0 +1,27 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:converter_matte_dust"
+    },
+    {
+      "item": "fundamentals:converter_matte_dust"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "tfmg:sulfuric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:nickel_copper_sulfate",
+      "amount": 500
+    },
+    {
+      "id": "fundamentals:platinum_group_concentrate",
+      "chance": 0.1
+    }
+  ],
+  "heat_requirement": "heated"
+}

@@ -1,0 +1,29 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:ammonia"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "tfmg:air"
+    },
+    {
+      "item": "fundamentals:platinum_rhodium_gauze"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:nitric_acid",
+      "amount": 250
+    },
+    {
+      "id": "fundamentals:platinum_rhodium_gauze",
+      "chance": 0.98
+    }
+  ],
+  "heat_requirement": "heated"
+}

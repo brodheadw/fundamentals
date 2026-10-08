@@ -57,7 +57,7 @@ public class AcidTests {
 
     @GameTest(template = "empty")
     public void everyAcidHasABucketAndABlock(GameTestHelper helper) {
-        for (String acid : new String[] {"hydrochloric_acid", "hydrofluoric_acid", "nitric_acid", "phosphoric_acid"}) {
+        for (String acid : new String[] {"hydrochloric_acid", "hydrofluoric_acid", "nitric_acid", "phosphoric_acid", "aqua_regia"}) {
             helper.assertTrue(BuiltInRegistries.ITEM.containsKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, acid + "_bucket")), acid + " has no bucket");
             helper.assertTrue(BuiltInRegistries.BLOCK.containsKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, acid)), acid + " has no block");
             helper.assertTrue(BuiltInRegistries.FLUID.containsKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, acid + "_flowing")), acid + " has no flowing form");

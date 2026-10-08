@@ -24,6 +24,14 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "copper_calcine": "Copper Calcine", "zinc_oxide": "Zinc Oxide", "roasted_pentlandite": "Roasted Pentlandite",
          "lithium_chloride": "Lithium Chloride", "ferroboron": "Ferroboron",
          "soda_ash": "Soda Ash", "sodium_chromate": "Sodium Chromate", "sodium_dichromate": "Sodium Dichromate", "aluminium_powder": "Aluminium Powder"}
+# The platinum refinery's items, registered by uses.PlatinumMetals in this order.
+PGM_ITEMS = {"ammonium_chloride": "Ammonium Chloride", "insoluble_residue": "Insoluble Residue", "iridium_rhodium_residue": "Iridium-Rhodium Residue",
+             "ammonium_chloroplatinate": "Ammonium Chloroplatinate", "dichlorodiammine_palladium": "Dichlorodiammine Palladium",
+             "ammonium_chlororuthenate": "Ammonium Chlororuthenate", "ammonium_chloroiridate": "Ammonium Chloroiridate",
+             "ammonium_chlororhodate": "Ammonium Chlororhodate", "reforming_catalyst": "Platinum-Rhenium Catalyst",
+             "platinum_rhodium_gauze": "Platinum-Rhodium Gauze", "osmium_filament": "Osmium Filament"}
+PLATINUM = DATA / "recipe/platinum"
+PGMS = ("platinum", "palladium", "rhodium", "ruthenium", "iridium", "osmium")
 ROASTING = DATA / "recipe/roasting"
 LITHIUM = DATA / "recipe/lithium"
 
@@ -296,10 +304,11 @@ def tungsten():
 
 
 def more_sinks():
-    """Cerium oxide is the oxygen store of every catalytic converter: the Factory's exhaust takes two. Lithium cobalt oxide is the cathode
+    """Cerium oxide is the oxygen store of every catalytic converter, and palladium on it burns what the engine left: the Factory's exhaust
+    takes two of each, ceria and palladium nuggets. Lithium cobalt oxide is the cathode
     the first lithium batteries ran on: the lithium charge takes a cobalt. Neodymium and holmium colour glass, as erbium does."""
-    shaped(TFMG / "crafting/materials/exhaust.json", ["BPB", "EPE", "CPC"],
-           {"B": {"item": "minecraft:iron_bars"}, "C": {"tag": "c:ingots/cast_iron"}, "P": {"item": "tfmg:cast_iron_pipe"}, "E": {"item": "fundamentals:cerium_oxide"}},
+    shaped(TFMG / "crafting/materials/exhaust.json", ["KPK", "EPE", "CPC"],
+           {"K": {"tag": "c:nuggets/palladium"}, "C": {"tag": "c:ingots/cast_iron"}, "P": {"item": "tfmg:cast_iron_pipe"}, "E": {"item": "fundamentals:cerium_oxide"}},
            {"count": 1, "id": "tfmg:exhaust"})
     shaped(TFMG / "crafting/materials/lithium_charge.json", [" P ", "LKL", " A "],
            {"A": {"tag": "c:plates/aluminum"}, "L": {"tag": "c:ingots/lithium"}, "P": {"item": "tfmg:plastic_sheet"}, "K": {"item": "fundamentals:cobalt_ingot"}},
@@ -332,10 +341,122 @@ def chromium():
                                              "result": result("minecraft:green_dye", 2)})
 
 
+def fluid(id, amount):
+    return {"type": "neoforge:single", "amount": amount, "fluid": id if ":" in id else f"fundamentals:{id}"}
+
+
+def out_fluid(id, amount):
+    return {"id": id if ":" in id else f"fundamentals:{id}", "amount": amount}
+
+
+def pgm_mixing(name, ingredients, results, heat=None):
+    recipe = {"type": "create:mixing", "ingredients": ingredients, "results": results}
+    if heat:
+        recipe["heat_requirement"] = heat
+    write(PLATINUM / f"{name}.json", recipe)
+
+
+def pgm_vat(name, ingredients, results, machines=("tfmg:mixing",), heat="heated", folder=PLATINUM):
+    recipe = {"type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:steel_vat", "tfmg:firebrick_lined_vat"],
+              "machines": list(machines), "min_size": 1, "processing_time": 100, "ingredients": ingredients, "results": results}
+    if heat:
+        recipe["heat_requirement"] = heat
+    write(folder / f"{name}.json", recipe)
+
+
+def platinum_feeds():
+    """The platinum metals ride in nickel-copper sulfide and are never won alone. Pentlandite smelts unroasted in the bloomery to
+    nickel matte, as flash furnaces smelt Norilsk and Sudbury concentrate, and the matte collects the platinum metals. The converter
+    (two matte and a sand, superheated) blows out the iron to converter matte; copper matte from the porphyry chain goes in alongside.
+    The base-metal refinery leaches converter matte in hot sulfuric acid: nickel and copper go into solution, and what does not
+    dissolve is the platinum group concentrate, one time in ten from a plain nickel matte. The layered intrusion's platinum minerals
+    (sperrylite, cooperite, braggite) go into the same leach with the matte and come out as concentrate every time: they are what makes
+    a platinum reef worth more than a nickel mine. The leach liquor electrowins to nickel, a little copper, and its acid back."""
+    write(DATA / "recipe/bloomery/nickel_matte_from_pentlandite.json", {"type": "fundamentals:bloomery", "ingredient": {"item": "fundamentals:raw_pentlandite"},
+                                                                       "result": {"id": "fundamentals:nickel_matte_dust", "count": 1}, "byproduct": {"id": "fundamentals:slag", "count": 1}})
+    write(DATA / "tags/item/platinum_minerals.json", {"replace": False, "values": [f"fundamentals:raw_{m}" for m in ("sperrylite", "cooperite", "braggite")]})
+    sand = tag("c:sands/colorless")
+    pgm_mixing("converter_matte", item("nickel_matte_dust", 2) + sand, [result("converter_matte_dust", 2), result("slag")], "superheated")
+    pgm_mixing("converter_matte_with_copper", item("nickel_matte_dust") + item("copper_matte_dust") + sand, [result("converter_matte_dust", 2), result("slag")], "superheated")
+    acid = fluid("tfmg:sulfuric_acid", 500)
+    pgm_mixing("matte_leach", item("converter_matte_dust", 2) + [acid],
+               [out_fluid("nickel_copper_sulfate", 500), {"id": "fundamentals:platinum_group_concentrate", "chance": 0.1}], "heated")
+    pgm_mixing("matte_leach_with_platinum_minerals", item("converter_matte_dust", 2) + tag("fundamentals:platinum_minerals") + [acid],
+               [out_fluid("nickel_copper_sulfate", 500), result("platinum_group_concentrate")], "heated")
+    pgm_vat("nickel_electrowinning", [fluid("nickel_copper_sulfate", 500)],
+            [result("tfmg:nickel_ingot"), {"id": "minecraft:copper_ingot", "chance": 0.5}, out_fluid("tfmg:sulfuric_acid", 250)],
+            machines=("tfmg:electrode", "tfmg:electrode"), heat=None)
+
+
+def platinum_refinery():
+    """The classical precious-metal refinery, every step a batch in a basin under a mixer or a vat. Aqua regia (or hydrochloric acid
+    with chlorine bubbled through it, as newer refineries leach) takes platinum and palladium and leaves rhodium, iridium, ruthenium and
+    osmium undissolved. Ammonium chloride drops platinum as the yellow chloroplatinate; ammonia then acid drop palladium as yellow
+    dichlorodiammine palladium. The insolubles are slurried with lime and chlorinated, the hypochlorite oxidising osmium and ruthenium to
+    their tetroxides, which boil off; hydrochloric acid catches the ruthenium, the osmium passes on and hydrogen reduces it. What stays
+    is iridium and rhodium: chlorinated hot with salt they turn to soluble chloro salts, ammonium chloride drops iridium as the black
+    chloroiridate, and rhodium comes last. The chloroplatinate ignites straight to sponge; the other
+    salts are reduced under hydrogen. None of the six melts at 1,600 C but palladium, so each sponge is pressed and sintered, as Wollaston
+    made platinum malleable."""
+    pgm_mixing("ammonia", [fluid("tfmg:hydrogen", 750), fluid("tfmg:air", 250)] + item("raw_magnetite"),
+               [out_fluid("ammonia", 500), {"id": "fundamentals:raw_magnetite", "chance": 0.9}], "heated")
+    pgm_mixing("ammonium_chloride", [fluid("ammonia", 250), fluid("hydrochloric_acid", 250)], [result("ammonium_chloride", 2)])
+    pgm_mixing("aqua_regia", [fluid("hydrochloric_acid", 375), fluid("nitric_acid", 125)], [out_fluid("aqua_regia", 500)])
+    pgm_mixing("platinum_palladium_liquor", item("platinum_group_concentrate") + [fluid("aqua_regia", 500)],
+               [out_fluid("platinum_palladium_liquor", 500), {"id": "fundamentals:insoluble_residue", "chance": 0.5}], "heated")
+    pgm_mixing("platinum_palladium_liquor_from_chlorine", item("platinum_group_concentrate") + [fluid("hydrochloric_acid", 500), fluid("chlorine", 250)],
+               [out_fluid("platinum_palladium_liquor", 500), {"id": "fundamentals:insoluble_residue", "chance": 0.5}], "heated")
+    pgm_mixing("ammonium_chloroplatinate", [fluid("platinum_palladium_liquor", 500)] + item("ammonium_chloride", 2),
+               [result("ammonium_chloroplatinate"), out_fluid("palladium_liquor", 250)])
+    pgm_mixing("palladium_tetrammine_liquor", [fluid("palladium_liquor", 250), fluid("ammonia", 250)], [out_fluid("palladium_tetrammine_liquor", 250)])
+    pgm_mixing("dichlorodiammine_palladium", [fluid("palladium_tetrammine_liquor", 250), fluid("hydrochloric_acid", 250)],
+               [result("dichlorodiammine_palladium"), out_fluid("spent_liquor", 250)])
+    pgm_vat("tetroxides", item("insoluble_residue") + item("tfmg:limesand") + [fluid("chlorine", 250), fluid("minecraft:water", 500)],
+            [out_fluid("osmium_tetroxide", 50), out_fluid("ruthenium_tetroxide", 100), {"id": "fundamentals:iridium_rhodium_residue", "chance": 0.5}])
+    pgm_mixing("ammonium_chlororuthenate", [fluid("ruthenium_tetroxide", 100), fluid("hydrochloric_acid", 250)] + item("ammonium_chloride"),
+               [result("ammonium_chlororuthenate")])
+    pgm_mixing("iridium_rhodium_liquor", item("iridium_rhodium_residue") + item("salt", 2) + [fluid("chlorine", 250), fluid("hydrochloric_acid", 250)],
+               [out_fluid("iridium_rhodium_liquor", 250)], "heated")
+    pgm_mixing("ammonium_chloroiridate", [fluid("iridium_rhodium_liquor", 250)] + item("ammonium_chloride", 2),
+               [result("ammonium_chloroiridate"), out_fluid("rhodium_liquor", 250)])
+    pgm_mixing("ammonium_chlororhodate", [fluid("rhodium_liquor", 250)] + item("ammonium_chloride", 2), [result("ammonium_chlororhodate")], "heated")
+    write(PLATINUM / "platinum_sponge.json", {"type": "minecraft:blasting", "category": "misc", "ingredient": {"item": "fundamentals:ammonium_chloroplatinate"},
+                                              "result": {"id": "fundamentals:platinum_sponge"}, "experience": 0.5, "cookingtime": 100})
+    for salt, metal in (("dichlorodiammine_palladium", "palladium"), ("ammonium_chlororuthenate", "ruthenium"),
+                        ("ammonium_chloroiridate", "iridium"), ("ammonium_chlororhodate", "rhodium")):
+        pgm_vat(f"{metal}_sponge", item(salt, 2) + [fluid("tfmg:hydrogen", 250)], [result(f"{metal}_sponge", 2)])
+    pgm_vat("osmium_sponge", [fluid("osmium_tetroxide", 100), fluid("tfmg:hydrogen", 250)], [result("osmium_sponge")])
+    for metal in PGMS:
+        write(PLATINUM / f"{metal}_ingot.json", {"type": "create:compacting", "heat_requirement": "superheated",
+                                                 "ingredients": item(f"{metal}_sponge"), "results": [result(f"{metal}_ingot")]})
+
+
+def platinum_sinks():
+    """Platinum and rhenium on alumina reform naphtha to gasoline, giving off hydrogen; platinum with a tenth of rhodium, woven to gauze,
+    burns ammonia to the nitric oxide nitric acid is made from (Ostwald). Palladium's place is the exhaust (more_sinks).
+    Ruthenium lets a single-crystal superalloy carry more of everything else. An iridium-tipped spark plug outlasts four, and osmium,
+    pasted and sintered, was the filament of the first metal-filament lamp."""
+    mixing("reforming_catalyst", item("platinum_nugget", 2) + item("rhenium_ingot") + item("tfmg:bauxite_powder", 4), [result("reforming_catalyst", 4)], "heated")
+    pgm_vat("reforming", item("reforming_catalyst") + [fluid("tfmg:naphtha", 500)],
+            [out_fluid("tfmg:gasoline", 400), out_fluid("tfmg:hydrogen", 100), {"id": "fundamentals:reforming_catalyst", "chance": 0.95}], folder=USES)
+    shaped(USES / "platinum_rhodium_gauze.json", ["PPP", "PRP", "PPP"], {"P": {"tag": "c:nuggets/platinum"}, "R": {"tag": "c:nuggets/rhodium"}},
+           {"count": 1, "id": "fundamentals:platinum_rhodium_gauze"})
+    mixing("nitric_acid_from_ammonia", [fluid("ammonia", 250), fluid("tfmg:air", 1000)] + item("platinum_rhodium_gauze"),
+           [out_fluid("nitric_acid", 250), {"id": "fundamentals:platinum_rhodium_gauze", "chance": 0.98}], "heated")
+    mixing("superalloy_with_ruthenium", item("tfmg:nickel_ingot", 4) + item("chromium_ingot") + item("cobalt_ingot", 2) + item("rhenium_ingot")
+           + item("ruthenium_nugget") + argon(), [result("superalloy_ingot", 6)], "superheated")
+    shaped(USES / "iridium_spark_plug.json", ["I", "F", "A"], {"I": {"tag": "c:nuggets/iridium"}, "F": {"item": "minecraft:flint"}, "A": {"tag": "c:ingots/aluminum"}},
+           {"count": 4, "id": "tfmg:spark_plug"})
+    write(USES / "osmium_filament.json", {"type": "minecraft:crafting_shapeless", "category": "misc", "ingredients": item("osmium_sponge"), "result": result("osmium_filament", 4)})
+    shaped(USES / "light_bulb_from_osmium.json", ["CWC", "CGC", "NNN"],
+           {"C": {"tag": "c:nuggets/copper"}, "G": {"item": "create:framed_glass"}, "N": {"tag": "c:nuggets/steel"}, "W": {"item": "fundamentals:osmium_filament"}},
+           {"count": 2, "id": "tfmg:light_bulb"})
+
+
 def names():
     path = ASSETS / "lang/en_us.json"
     lang = json.loads(path.read_text(encoding="utf-8"))
-    for name, display in ITEMS.items():
+    for name, display in {**ITEMS, **PGM_ITEMS}.items():
         lang[f"item.fundamentals.{name}"] = display
         write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})
     write(path, lang)
@@ -346,6 +467,7 @@ def main():
     shutil.rmtree(TFMG, ignore_errors=True)
     shutil.rmtree(CREATE, ignore_errors=True)
     shutil.rmtree(LITHIUM, ignore_errors=True)
+    shutil.rmtree(PLATINUM, ignore_errors=True)
     for pattern in ("roasted_c*", "roasted_pentlandite_*", "copper_calcine_*", "zinc_oxide_*"):
         for stale in ROASTING.glob(pattern):
             stale.unlink()
@@ -369,6 +491,9 @@ def main():
     tungsten()
     more_sinks()
     chromium()
+    platinum_feeds()
+    platinum_refinery()
+    platinum_sinks()
     names()
     print("uses written")
 

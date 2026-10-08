@@ -1,0 +1,51 @@
+{
+  "name": "The refinery",
+  "category": "fundamentals:platinum",
+  "icon": "fundamentals:ammonium_chloroplatinate",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A platinum group concentrate in 500 mB of hot aqua regia, or of hydrochloric acid with 250 mB of chlorine bubbled through it as newer refineries leach, gives 500 mB of orange platinum-palladium liquor, and half the time an insoluble residue: rhodium, iridium, ruthenium and osmium, which no acid takes.",
+      "title": "The refinery"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:ammonium_chloroplatinate",
+      "text": "Platinum first: two ammonium chloride in the liquor drop the bright yellow ammonium chloroplatinate and leave 250 mB of red-brown palladium liquor. A blast furnace or a fan over lava ignites the salt straight to platinum sponge.",
+      "title": "Platinum"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:dichlorodiammine_palladium",
+      "text": "Palladium next: 250 mB of ammonia turns the liquor colourless, the tetrammine, and 250 mB of hydrochloric acid then drops yellow dichlorodiammine palladium and leaves spent liquor for the lime. Two salts and 250 mB of hydrogen in a heated vat give two sponge.",
+      "title": "Palladium"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:insoluble_residue",
+      "text": "Osmium and ruthenium boil. The residue with a limesand, 250 mB of chlorine and 500 mB of water in a heated vat is oxidised by the hypochlorite to the tetroxides, 50 mB of pale yellow osmium tetroxide and 100 mB of orange ruthenium tetroxide, and half the time leaves an iridium-rhodium residue.",
+      "title": "The tetroxides"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:ammonium_chlororuthenate",
+      "text": "Hydrochloric acid catches ruthenium tetroxide: 100 mB, 250 mB of acid and an ammonium chloride give the dark red chlororuthenate, reduced like palladium's salt. Osmium tetroxide passes on, and 100 mB with 250 mB of hydrogen in a heated vat is osmium sponge.",
+      "title": "Ruthenium and osmium"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:ammonium_chloroiridate",
+      "text": "The last residue, heated with two salt, 250 mB of chlorine and 250 mB of hydrochloric acid, goes into a dark red-brown iridium-rhodium liquor. Two ammonium chloride drop iridium as the near-black chloroiridate and leave a rose rhodium liquor; rhodium comes last, two more ammonium chloride in a heated basin dropping the rose chlororhodate. Both are reduced under hydrogen.",
+      "title": "Iridium, then rhodium"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "None of the six melts at 1,600 °C but palladium; platinum melts at 1,768, rhodium at 1,964, ruthenium at 2,334, iridium at 2,446 and osmium past 3,000."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "So the sponge is not cast but pressed, as Wollaston first made platinum malleable: Create's press over a basin on a burner fed a blaze cake sinters each sponge to an ingot, and nine nuggets pack to one."
+    }
+  ]
+}

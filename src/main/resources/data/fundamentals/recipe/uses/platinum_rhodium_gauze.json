@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PPP",
+    "PRP",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "tag": "c:nuggets/platinum"
+    },
+    "R": {
+      "tag": "c:nuggets/rhodium"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "fundamentals:platinum_rhodium_gauze"
+  }
+}

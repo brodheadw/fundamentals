@@ -1,0 +1,31 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:iridium_rhodium_residue"
+    },
+    {
+      "item": "fundamentals:salt"
+    },
+    {
+      "item": "fundamentals:salt"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:chlorine"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:hydrochloric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:iridium_rhodium_liquor",
+      "amount": 250
+    }
+  ],
+  "heat_requirement": "heated"
+}

@@ -1,0 +1,14 @@
+{
+  "type": "create:compacting",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "item": "fundamentals:rhodium_sponge"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:rhodium_ingot"
+    }
+  ]
+}

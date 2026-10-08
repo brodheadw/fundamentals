@@ -1,0 +1,14 @@
+{
+  "type": "create:compacting",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "item": "fundamentals:osmium_sponge"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:osmium_ingot"
+    }
+  ]
+}

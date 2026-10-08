@@ -1,0 +1,25 @@
+{
+  "name": "What they are for",
+  "category": "fundamentals:platinum",
+  "icon": "fundamentals:platinum_rhodium_gauze",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Platinum is a catalyst. Two platinum nuggets, a rhenium ingot and four bauxite powder, heated, make four platinum-rhenium catalyst, and over one 500 mB of naphtha in a heated vat reforms to 400 mB of gasoline and gives off 100 mB of hydrogen, the catalyst surviving nineteen times in twenty.",
+      "title": "What they are for"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Eight platinum nuggets round a rhodium nugget weave the gauze ammonia is burnt over: 250 mB of ammonia and 1,000 mB of air, heated, give 250 mB of nitric acid, Ostwald's process, and the gauze is all but never used up."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Palladium on ceria burns what an engine leaves: the Factory's exhaust now takes two palladium nuggets with its cerium oxide. Ruthenium lets a superalloy carry more: a ruthenium nugget in the superalloy melt makes six ingots instead of four."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "An iridium-tipped spark plug outlasts four plain ones, so an iridium nugget, a flint and an aluminium ingot make four. And osmium was the first metal filament: an osmium sponge pastes and draws to four filaments, and a light bulb burns one as well as tungsten."
+    }
+  ]
+}
