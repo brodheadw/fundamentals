@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "#c:ores/aluminum",
+    "#c:ores/boron",
     "#c:ores/chromium",
     "#c:ores/cobalt",
     "#c:ores/copper",

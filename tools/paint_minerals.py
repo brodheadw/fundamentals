@@ -114,6 +114,7 @@ P = {
     "cinnabar": ((104, 16, 20), (160, 30, 30), (202, 58, 46), (240, 132, 112)),
     "spodumene": ((112, 88, 118), (176, 146, 180), (214, 192, 216), (246, 232, 246)),
     "fluorite": ((58, 32, 104), (112, 72, 168), (164, 128, 212), (224, 204, 244)),
+    "borax": ((146, 142, 134), (198, 196, 190), (232, 232, 228), (252, 252, 250)),
 }
 
 # Bornite tarnishes iridescent ("peacock ore"): patches of several hues on one lump.
@@ -180,6 +181,7 @@ RECIPES = {
     # Pale laths, sometimes a foot long, in the coarse granite of a pegmatite.
     "spodumene": [("crystals", "prism", 5, 1), ("speck", 3)],
     "fluorite": [("crystals", "prism", 4, 1), ("speck", 2)],
+    "borax": [("crystals", "prism", 3, 1), ("speck", 3)],
 }
 
 
@@ -545,7 +547,7 @@ SHEET_ORDER = [
     "bauxite", "galena", "sphalerite", "smithsonite", "hemimorphite", "cassiterite",
     "hematite", "magnetite", "goethite", "pyrolusite", "pentlandite", "nickel_laterite",
     "chromite", "wolframite", "scheelite", "molybdenite", "cobaltite", "ilmenite", "rutile",
-    "native_silver", "argentite", "sperrylite", "cooperite", "braggite", "cinnabar", "spodumene", "fluorite",
+    "native_silver", "argentite", "sperrylite", "cooperite", "braggite", "cinnabar", "spodumene", "fluorite", "borax",
 ]
 
 
