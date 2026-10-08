@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "fundamentals:tungsten_ingot"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:tungsten_filament",
+    "count": 4
+  }
+}

@@ -18,7 +18,8 @@ CREATE = DATA.parent / "create/recipe"
 
 # the items of ours that are not a form of a material: name -> display
 ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_cobaltite": "Roasted Cobaltite",
-         "roasted_chalcopyrite": "Roasted Chalcopyrite", "rhenium_flue_dust": "Rhenium Flue Dust"}
+         "roasted_chalcopyrite": "Roasted Chalcopyrite", "rhenium_flue_dust": "Rhenium Flue Dust",
+         "tungsten_carbide": "Tungsten Carbide", "tungsten_filament": "Tungsten Filament"}
 ROASTING = DATA / "recipe/roasting"
 
 
@@ -165,6 +166,38 @@ def alloys():
           "ingredients": [{"item": "tfmg:steel_casing"}, {"tag": "c:plates/molybdenum_steel"}], "results": [{"id": "tfmg:heavy_machinery_casing"}]})
 
 
+def tungsten():
+    """Scheelite and wolframite decompose in hot hydrochloric acid to tungstic acid, which the heat takes to the trioxide; hydrogen
+    reduces the trioxide to the metal. The metal is drawn to the filament every light bulb burns, and carburised to the carbide
+    every drill bites with."""
+    for ore in ("scheelite", "wolframite"):
+        mixing(f"tungsten_oxide_from_{ore}", item(f"raw_{ore}", 2) + [{"type": "neoforge:single", "amount": 500, "fluid": "fundamentals:hydrochloric_acid"}],
+               [result("tungsten_oxide", 2)], "heated")
+    vat("tungsten_ingot", item("tungsten_oxide", 2), "tfmg:hydrogen", 500, [result("tungsten_ingot", 2)])
+    mixing("tungsten_carbide", item("tungsten_ingot") + tag("minecraft:coals", 2), [result("tungsten_carbide", 2)], "superheated")
+    write(USES / "tungsten_filament.json", {"type": "minecraft:crafting_shapeless", "category": "misc", "ingredients": item("tungsten_ingot"), "result": result("tungsten_filament", 4)})
+    shaped(TFMG / "crafting/materials/light_bulb.json", ["CWC", "CGC", "NNN"],
+           {"C": {"tag": "c:nuggets/copper"}, "G": {"item": "create:framed_glass"}, "N": {"tag": "c:nuggets/steel"}, "W": {"item": "fundamentals:tungsten_filament"}},
+           {"count": 2, "id": "tfmg:light_bulb"})
+    shaped(CREATE / "crafting/kinetics/mechanical_drill.json", [" A ", "AIA", " C "],
+           {"A": {"item": "create:andesite_alloy"}, "C": {"item": "create:andesite_casing"}, "I": {"item": "fundamentals:tungsten_carbide"}},
+           {"count": 1, "id": "create:mechanical_drill"})
+
+
+def more_sinks():
+    """Cerium oxide is the oxygen store of every catalytic converter: the Factory's exhaust takes two. Lithium cobalt oxide is the cathode
+    the first lithium batteries ran on: the lithium charge takes a cobalt. Neodymium and holmium colour glass, as erbium does."""
+    shaped(TFMG / "crafting/materials/exhaust.json", ["BPB", "EPE", "CPC"],
+           {"B": {"item": "minecraft:iron_bars"}, "C": {"tag": "c:ingots/cast_iron"}, "P": {"item": "tfmg:cast_iron_pipe"}, "E": {"item": "fundamentals:cerium_oxide"}},
+           {"count": 1, "id": "tfmg:exhaust"})
+    shaped(TFMG / "crafting/materials/lithium_charge.json", [" P ", "LKL", " A "],
+           {"A": {"tag": "c:plates/aluminum"}, "L": {"tag": "c:ingots/lithium"}, "P": {"item": "tfmg:plastic_sheet"}, "K": {"item": "fundamentals:cobalt_ingot"}},
+           {"count": 1, "id": "tfmg:lithium_charge"})
+    for oxide, glass in (("neodymium", "purple"), ("holmium", "yellow")):
+        shaped(USES / f"{oxide}_glass.json", ["GGG", "GEG", "GGG"], {"G": {"tag": "c:glass_blocks/colorless"}, "E": {"item": f"fundamentals:{oxide}_oxide"}},
+               {"count": 8, "id": f"minecraft:{glass}_stained_glass"})
+
+
 def names():
     path = ASSETS / "lang/en_us.json"
     lang = json.loads(path.read_text(encoding="utf-8"))
@@ -190,6 +223,8 @@ def main():
     cobalt()
     copper_molybdenum_rhenium()
     alloys()
+    tungsten()
+    more_sinks()
     names()
     print("uses written")
 

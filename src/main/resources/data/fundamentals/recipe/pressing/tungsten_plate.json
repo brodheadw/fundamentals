@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/tungsten"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:tungsten_plate"
+    }
+  ]
+}
