@@ -15,11 +15,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Electrolysis, for the lights: a steel vat heated by a blaze burner beneath it, two electrode holders with copper electrodes wired to the grid. One fluoride and two oxide give two ingots in five seconds; the fluoride is the molten salt bath, the oxide is what is reduced."
+      "text": "Electrolysis, for the lights: a steel vat superheated by a blaze burner beneath it, two electrode holders with copper electrodes wired to the grid. One fluoride and two oxide give two ingots in five seconds; the fluoride is the molten salt bath, the oxide is what is reduced."
     },
     {
       "type": "patchouli:text",
-      "text": "Calciothermic reduction, for the heavies and yttrium: two fluoride and two calcium ingots under 250 mB of argon in a heated vat give two ingots and the fluorspar back as slag."
+      "text": "Calciothermic reduction, for the heavies and yttrium: two fluoride and two calcium ingots under 250 mB of argon in a superheated vat give two ingots and the fluorspar back as slag."
     },
     {
       "type": "patchouli:text",
@@ -27,11 +27,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Argon is spun out of 1,000 mB of air in a centrifuge vat, nine millibuckets at a time. Calcium is two limesand and 500 mB of hydrochloric acid on electrodes."
+      "text": "Argon is spun out of 1,000 mB of air in a centrifuge vat, nine millibuckets at a time. Calcium is two limesand and 500 mB of hydrochloric acid on electrodes. A kindled blaze burner is 1,000 °C and one fed a blaze cake 1,600."
     },
     {
       "type": "patchouli:text",
-      "text": "Heat is the one number Minecraft has: electrolysis runs at a blaze burner's heat, and the two metallothermic reductions, near 1,500 °C in life, want the burner fed a blaze cake."
+      "text": "The fluoride bath electrolyses at 1,000 to 1,100 °C, and the two metallothermic reductions run near 1,500, past where the fluorspar slag melts, so all three want the cake."
     }
   ]
 }

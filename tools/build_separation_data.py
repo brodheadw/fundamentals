@@ -253,9 +253,10 @@ def metals():
         mixing(f"{element}_fluoride", [item(f"{element}_oxide"), fluid("hydrofluoric_acid", 500)], [result_item(f"{element}_fluoride")])
     for element in ELECTROLYSIS:
         vat(f"{element}_ingot", [item(f"{element}_fluoride")] + item(f"{element}_oxide", 2), [result_item(f"{element}_ingot", 2)],
-            ["tfmg:electrode", "tfmg:electrode"])
-    # Electrolysis runs at the fluoride melt, a blaze burner's heat; the two metallothermic reductions run near
-    # 1500 C, which is the burner fed a blaze cake. TFMG vats take four item inputs at most.
+            ["tfmg:electrode", "tfmg:electrode"], heated="superheated")
+    # Electrolysis runs in the fluoride melt at 1,000 to 1,100 C, past a kindled burner's 1,000; the two
+    # metallothermic reductions run near 1,500 C, past calcium fluoride's 1,418 melt. Both want the burner fed a
+    # blaze cake, 1,600. TFMG vats take four item inputs at most.
     for element in CALCIOTHERMIC:
         vat(f"{element}_ingot", item(f"{element}_fluoride", 2) + item("calcium_ingot", 2) + [fluid("argon", 250)],
             [result_item(f"{element}_ingot", 2), result_item("raw_fluorite", 2)], ["tfmg:mixing"], heated="superheated")
@@ -274,7 +275,8 @@ def cuts():
 
 
 def oxalates():
-    """A single-element liquor precipitates with oxalic acid, and the oxalate calcines to the oxide."""
+    """A single-element liquor precipitates with oxalic acid, and the oxalate calcines to the oxide at 800 to
+    1,000 °C, past what a plain furnace reaches: a blast furnace, or Create's fan over lava."""
     for element, forms in MATERIALS.items():
         if "oxalate" not in forms:
             continue
@@ -282,8 +284,8 @@ def oxalates():
         assert liquor in LIQUORS, element
         mixing(f"{element}_oxalate", [item("oxalic_acid"), fluid(liquor, 250)], [result_item(f"{element}_oxalate")])
         write(RECIPES / f"calcining/{element}_oxide.json", {
-            "type": "minecraft:smelting", "category": "misc", "ingredient": item(f"{element}_oxalate"),
-            "result": {"id": f"fundamentals:{element}_oxide"}, "experience": 0.3, "cookingtime": 200})
+            "type": "minecraft:blasting", "category": "misc", "ingredient": item(f"{element}_oxalate"),
+            "result": {"id": f"fundamentals:{element}_oxide"}, "experience": 0.3, "cookingtime": 100})
 
 
 def mixer_settler():
