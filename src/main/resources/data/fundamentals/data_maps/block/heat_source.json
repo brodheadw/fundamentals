@@ -1,0 +1,81 @@
+{
+  "replace": false,
+  "values": {
+    "minecraft:lava": {
+      "celsius": 1100,
+      "reach": 4
+    },
+    "minecraft:lava_cauldron": {
+      "celsius": 600,
+      "reach": 3
+    },
+    "minecraft:magma_block": {
+      "celsius": 200,
+      "reach": 2
+    },
+    "minecraft:fire": {
+      "celsius": 600,
+      "reach": 3
+    },
+    "minecraft:soul_fire": {
+      "celsius": 500,
+      "reach": 3
+    },
+    "minecraft:campfire": {
+      "celsius": 300,
+      "reach": 3
+    },
+    "minecraft:soul_campfire": {
+      "celsius": 250,
+      "reach": 3
+    },
+    "minecraft:furnace": {
+      "celsius": 400,
+      "reach": 3
+    },
+    "minecraft:blast_furnace": {
+      "celsius": 600,
+      "reach": 3
+    },
+    "minecraft:smoker": {
+      "celsius": 300,
+      "reach": 3
+    },
+    "minecraft:torch": {
+      "celsius": 40,
+      "reach": 1
+    },
+    "minecraft:wall_torch": {
+      "celsius": 40,
+      "reach": 1
+    },
+    "minecraft:ice": {
+      "celsius": -10,
+      "reach": 2
+    },
+    "minecraft:packed_ice": {
+      "celsius": -15,
+      "reach": 2
+    },
+    "minecraft:blue_ice": {
+      "celsius": -20,
+      "reach": 3
+    },
+    "minecraft:powder_snow": {
+      "celsius": -15,
+      "reach": 2
+    },
+    "minecraft:snow_block": {
+      "celsius": -5,
+      "reach": 1
+    },
+    "create:blaze_burner": {
+      "celsius": 600,
+      "reach": 4
+    },
+    "fundamentals:bloomery": {
+      "celsius": 500,
+      "reach": 3
+    }
+  }
+}
