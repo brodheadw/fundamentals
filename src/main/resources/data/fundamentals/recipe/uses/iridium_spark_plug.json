@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "I",
+    "F",
+    "A"
+  ],
+  "key": {
+    "I": {
+      "tag": "c:nuggets/iridium"
+    },
+    "F": {
+      "item": "minecraft:flint"
+    },
+    "A": {
+      "tag": "c:ingots/aluminum"
+    }
+  },
+  "result": {
+    "count": 4,
+    "id": "tfmg:spark_plug"
+  }
+}

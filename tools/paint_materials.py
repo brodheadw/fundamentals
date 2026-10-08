@@ -41,6 +41,8 @@ BLISTER = ("ingot",)
 GROUND_MINERAL = ("dust", "concentrate")
 CHROMIUM = ("oxide", "ingot")
 INGOT = ("ingot",)
+# The platinum metals come out of the refinery as a grey sponge, pressed and sintered to the ingot.
+PGM = ("sponge", "ingot", "nugget")
 
 WHITE = ((150, 150, 148), (206, 206, 204), (236, 236, 234), (255, 255, 255))
 
@@ -97,6 +99,13 @@ METAL = {
     "chromium": ((90, 100, 118), (158, 172, 194), (210, 222, 240), (248, 252, 255)),
     "ferrochrome": ((56, 58, 62), (104, 106, 112), (146, 148, 154), (192, 194, 200)),
     "stainless_steel": ((96, 100, 104), (164, 168, 172), (212, 216, 220), (250, 251, 252)),
+    # platinum, palladium and rhodium are white metals, rhodium the brightest; ruthenium greyer; iridium and osmium lean blue
+    "platinum": ((96, 98, 104), (166, 170, 178), (214, 218, 224), (250, 251, 253)),
+    "palladium": ((102, 100, 96), (172, 170, 164), (218, 216, 210), (252, 251, 248)),
+    "rhodium": ((112, 114, 120), (184, 188, 194), (228, 230, 236), (255, 255, 255)),
+    "ruthenium": ((78, 80, 84), (138, 142, 148), (186, 190, 196), (232, 234, 238)),
+    "iridium": ((86, 92, 106), (154, 164, 182), (204, 212, 228), (244, 248, 255)),
+    "osmium": ((58, 68, 90), (110, 124, 150), (158, 172, 198), (210, 220, 240)),
 }
 
 # The oxides are painted the colours they really are; the white ones borrow a little of their
@@ -147,6 +156,11 @@ OTHER = {
     "bastnasite_concentrate": ((110, 76, 34), (168, 126, 66), (204, 168, 104), (236, 210, 156)),
     # matte, the molten Cu2S-FeS tapped from the smelter and granulated: dark grey-black with a bronze sheen
     "copper_matte": ((20, 18, 18), (44, 40, 38), (78, 70, 62), (136, 116, 92)),
+    # nickel matte is the dark bronze-grey of pentlandite melted with its iron sulfide; converter matte, blown free of the iron, the paler bronze of heazlewoodite
+    "nickel_matte": ((26, 24, 20), (54, 50, 42), (92, 84, 66), (146, 132, 98)),
+    "converter_matte": ((50, 44, 32), (98, 88, 62), (148, 134, 94), (204, 188, 138)),
+    # the base-metal refinery's residue, the platinum metals as a fine black-grey powder
+    "platinum_group_concentrate": ((22, 22, 24), (48, 48, 52), (80, 80, 86), (124, 124, 132)),
     "light_rare_earth_concentrate": ((96, 62, 34), (150, 104, 58), (190, 146, 90), (228, 196, 140)),
     "heavy_rare_earth_concentrate": ((84, 76, 48), (132, 122, 78), (172, 162, 110), (216, 208, 160)),
 }
@@ -164,6 +178,8 @@ MATERIALS = {
     "cobalt": COBALT, "molybdenum": MOLYBDENUM, "rhenium": RHENIUM, "superalloy": STRUCTURAL, "molybdenum_steel": STRUCTURAL,
     "tungsten": TUNGSTEN, "copper_matte": MATTE, "blister_copper": BLISTER,
     "chromite": GROUND_MINERAL, "chromium": CHROMIUM, "ferrochrome": INGOT, "stainless_steel": INGOT,
+    "nickel_matte": MATTE, "converter_matte": MATTE, "platinum_group_concentrate": CONCENTRATE,
+    "platinum": PGM, "palladium": PGM, "rhodium": PGM, "ruthenium": PGM, "iridium": PGM, "osmium": PGM,
 }
 
 DISPLAY = {"bastnasite": "Bastnäsite", "bastnasite_concentrate": "Bastnäsite Concentrate", "neodymium_iron_boron": "NdFeB", "samarium_cobalt": "SmCo", "aluminium_scandium": "Al-Sc"}
@@ -187,6 +203,9 @@ def palette(material, form):
     if form == "fluoride":
         # the anhydrous fluoride shows the ion more strongly
         return mix(WHITE, ION[material], 0.8)
+    if form == "sponge":
+        # a sponge is the metal unmelted, a dull grey whatever the metal
+        return mix(METAL[material], ((120, 120, 122),) * 4, 0.55)
     if material in STREAK:
         return STREAK[material]
     if material in P:
@@ -343,6 +362,25 @@ SHAPES = {
         "................",
         "................",
     ],
+    # a porous lump, pitted where the salt's gases left it
+    "sponge": [
+        "................",
+        "................",
+        "................",
+        "................",
+        "......1111......",
+        "....11566511....",
+        "...1567167651...",
+        "..156761576651..",
+        "..157665167541..",
+        "..145167654140..",
+        "..134561445310..",
+        "...0345143200...",
+        "....00122100....",
+        "......0000......",
+        "................",
+        "................",
+    ],
 }
 assert all(len(rows) == 16 and all(len(row) == 16 for row in rows) for rows in SHAPES.values())
 
@@ -397,7 +435,7 @@ def paint(material, form):
 
 def contact_sheet(path, scale=6):
     """Every item, one material to a row, on an inventory slot's grey."""
-    forms = ["concentrate", "oxide", "dust", "ingot", "nugget", "plate", "block"]
+    forms = ["concentrate", "oxide", "sponge", "dust", "ingot", "nugget", "plate", "block"]
     tile, pad, label = 16 * scale, 8, 170
     sheet = Image.new("RGB", (label + len(forms) * (tile + pad) + pad, len(MATERIALS) * (tile + pad) + pad + 20), (40, 42, 46))
     draw, font = ImageDraw.Draw(sheet), ImageFont.load_default(size=12)

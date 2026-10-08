@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CWC",
+    "CGC",
+    "NNN"
+  ],
+  "key": {
+    "C": {
+      "tag": "c:nuggets/copper"
+    },
+    "G": {
+      "item": "create:framed_glass"
+    },
+    "N": {
+      "tag": "c:nuggets/steel"
+    },
+    "W": {
+      "item": "fundamentals:osmium_filament"
+    }
+  },
+  "result": {
+    "count": 2,
+    "id": "tfmg:light_bulb"
+  }
+}

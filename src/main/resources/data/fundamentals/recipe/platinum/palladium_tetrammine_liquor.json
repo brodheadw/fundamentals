@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:palladium_liquor"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:ammonia"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:palladium_tetrammine_liquor",
+      "amount": 250
+    }
+  ]
+}

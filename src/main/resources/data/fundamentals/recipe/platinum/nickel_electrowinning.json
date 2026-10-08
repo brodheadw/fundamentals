@@ -1,0 +1,33 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "machines": [
+    "tfmg:electrode",
+    "tfmg:electrode"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "fundamentals:nickel_copper_sulfate"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:nickel_ingot"
+    },
+    {
+      "id": "minecraft:copper_ingot",
+      "chance": 0.5
+    },
+    {
+      "id": "tfmg:sulfuric_acid",
+      "amount": 250
+    }
+  ]
+}

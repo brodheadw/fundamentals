@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:nuggets/palladium"
+    }
+  },
+  "result": {
+    "id": "fundamentals:palladium_ingot",
+    "count": 1
+  }
+}

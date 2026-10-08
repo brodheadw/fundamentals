@@ -12,6 +12,7 @@ public final class PreciousMaterials {
     public static final String GROUP = "precious_pgm";
 
     private static final MaterialForm[] MINERAL_FORMS = {ORE, RAW};
+    private static final MaterialForm[] PGM_FORMS = {SPONGE, INGOT, NUGGET};
 
     private PreciousMaterials() {}
 
@@ -34,17 +35,17 @@ public final class PreciousMaterials {
         reg("silver", MaterialType.ELEMENT, "Ag", forms(INGOT, NUGGET, BLOCK, DUST, PLATE),
                 MaterialProperties.builder().density(1.33).conductivity(1.05).hardness(0.25));
 
-        reg("platinum", MaterialType.ELEMENT, "Pt", forms(INGOT, NUGGET, DUST),
+        reg("platinum", MaterialType.ELEMENT, "Pt", PGM_FORMS,
                 MaterialProperties.builder().density(2.73).hardness(0.35).heatResistance(0.80).conductivity(0.16));
-        reg("palladium", MaterialType.ELEMENT, "Pd", forms(INGOT, DUST),
+        reg("palladium", MaterialType.ELEMENT, "Pd", PGM_FORMS,
                 MaterialProperties.builder().density(1.52).hardness(0.40).heatResistance(0.60));
-        reg("rhodium", MaterialType.ELEMENT, "Rh", forms(INGOT, DUST),
+        reg("rhodium", MaterialType.ELEMENT, "Rh", PGM_FORMS,
                 MaterialProperties.builder().density(1.58).hardness(0.60).heatResistance(0.85).conductivity(0.38));
-        reg("ruthenium", MaterialType.ELEMENT, "Ru", forms(INGOT, DUST),
+        reg("ruthenium", MaterialType.ELEMENT, "Ru", PGM_FORMS,
                 MaterialProperties.builder().density(1.56).hardness(0.70).heatResistance(0.80));
-        reg("iridium", MaterialType.ELEMENT, "Ir", forms(INGOT, DUST),
+        reg("iridium", MaterialType.ELEMENT, "Ir", PGM_FORMS,
                 MaterialProperties.builder().density(2.86).hardness(0.70).heatResistance(0.90));
-        reg("osmium", MaterialType.ELEMENT, "Os", forms(INGOT, DUST),
+        reg("osmium", MaterialType.ELEMENT, "Os", PGM_FORMS,
                 MaterialProperties.builder().density(2.87).hardness(0.80).heatResistance(0.88)
                         .toxicity(0.30)); // OsO4 is toxic
 

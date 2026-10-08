@@ -1,0 +1,14 @@
+{
+  "type": "create:compacting",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "item": "fundamentals:ruthenium_sponge"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:ruthenium_ingot"
+    }
+  ]
+}

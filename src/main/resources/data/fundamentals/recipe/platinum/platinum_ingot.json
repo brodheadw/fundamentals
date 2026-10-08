@@ -1,0 +1,14 @@
+{
+  "type": "create:compacting",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "item": "fundamentals:platinum_sponge"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:platinum_ingot"
+    }
+  ]
+}

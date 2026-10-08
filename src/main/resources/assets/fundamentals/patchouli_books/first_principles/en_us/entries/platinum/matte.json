@@ -1,0 +1,25 @@
+{
+  "name": "Matte",
+  "category": "fundamentals:platinum",
+  "icon": "fundamentals:converter_matte_dust",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The platinum metals are never mined alone. They ride in nickel-copper sulfide, and the smelter's matte is what collects them. Raw pentlandite smelts unroasted in the bloomery to nickel matte and slag, as flash furnaces smelt it at Norilsk and Sudbury.",
+      "title": "Matte"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two nickel matte and a sand, superheated, are the converter: air burns out the iron, which the sand fluxes to slag, and leaves two converter matte. A nickel matte and a copper matte from the porphyry chain convert together the same way."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The base-metal refinery leaches two converter matte in 500 mB of hot sulfuric acid. The nickel and copper dissolve to a green sulfate liquor; what will not dissolve is the platinum group concentrate, one time in ten from a plain nickel matte."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The deep layered intrusion's platinum minerals, sperrylite, cooperite and braggite, are what make it a reef and not a nickel mine: one in the leach with the matte gives a concentrate every time. The liquor electrowins on two electrodes in a vat, 500 mB to a nickel ingot, a copper ingot half the time, and 250 mB of its acid back."
+    }
+  ]
+}

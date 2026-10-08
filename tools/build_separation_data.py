@@ -73,6 +73,8 @@ ACIDS = {
     "nitric_acid": ("Nitric Acid", 0xF0EDC8),
     "phosphoric_acid": ("Phosphoric Acid", 0xE8ECE4),
     "hydrofluoric_acid": ("Hydrofluoric Acid", 0xE6F0EA),
+    # three of hydrochloric to one of nitric, fuming orange-red with the nitrosyl chloride and chlorine it gives off
+    "aqua_regia": ("Aqua Regia", 0xE0662A),
 }
 # What the plant cannot use: the spent chloride liquor every cut leaves behind, and the calcium chloride brine it
 # becomes once lime has neutralised it. The brine boils down to calcium chloride, which is where calcium metal comes from.
@@ -104,8 +106,23 @@ GASES = {
     "argon": ("Argon", 0xC8D8F0),
     "chlorine": ("Chlorine", 0xD2E496),
     "water_gas": ("Water Gas", 0xD8DCE0),
+    "ammonia": ("Ammonia", 0xE4ECF0),
+    # the two volatile tetroxides of the platinum refinery: osmium's pale yellow, ruthenium's yellow-orange
+    "osmium_tetroxide": ("Osmium Tetroxide", 0xF2E8A0),
+    "ruthenium_tetroxide": ("Ruthenium Tetroxide", 0xF0A830),
 }
-FLUIDS = {**{k: (*v, "LIQUOR") for k, v in LIQUORS.items()}, **{k: (*v, "ORGANIC") for k, v in ORGANICS.items()},
+# The base-metal refinery's sulfate leach, green with nickel, and the precious-metal refinery's chloride liquors, the colours of
+# their complexes: chloroplatinic acid orange, tetrachloropalladate red-brown, palladium's tetrammine colourless, hexachloroiridate
+# dark red-brown, rhodium's chloro complexes rose.
+PLATINUM_LIQUORS = {
+    "nickel_copper_sulfate": ("Nickel-Copper Sulfate Liquor", 0x58A890),
+    "platinum_palladium_liquor": ("Platinum-Palladium Liquor", 0xC8701E),
+    "palladium_liquor": ("Palladium Liquor", 0xA8542A),
+    "palladium_tetrammine_liquor": ("Palladium Tetrammine Liquor", 0xE6E8E0),
+    "iridium_rhodium_liquor": ("Iridium-Rhodium Liquor", 0x6A2A1E),
+    "rhodium_liquor": ("Rhodium Liquor", 0xC85A6A),
+}
+FLUIDS = {**{k: (*v, "LIQUOR") for k, v in {**LIQUORS, **PLATINUM_LIQUORS}.items()}, **{k: (*v, "ORGANIC") for k, v in ORGANICS.items()},
           **{k: (*v, "ACID") for k, v in ACIDS.items()}, **{k: (*v, "GAS") for k, v in GASES.items()},
           **{k: (*v, "WASTE") for k, v in WASTES.items()}, **{k: (*v, "CRUDE") for k, v in CRUDES.items()},
           **{k: (*v, "FOULED") for k, v in FOULED.items()}, **{k: (*v, "PRECURSOR") for k, v in PRECURSORS.items()}}
@@ -192,6 +209,8 @@ DISSOLVES = {
     "hydrofluoric_acid": ["#c:glass_blocks", "#c:glass_panes", "#minecraft:sand", "minecraft:sandstone", "minecraft:red_sandstone", "minecraft:quartz_block", "minecraft:smooth_quartz"],
     "nitric_acid": ["#c:storage_blocks/copper", "#c:storage_blocks/iron", "minecraft:copper_block", "minecraft:iron_block", "minecraft:cut_copper"],
     "phosphoric_acid": [],
+    "aqua_regia": ["#c:storage_blocks/gold", "minecraft:gold_block", "minecraft:raw_gold_block", "#c:storage_blocks/copper", "#c:storage_blocks/iron",
+                   "minecraft:copper_block", "minecraft:iron_block", "minecraft:cut_copper"],
 }
 
 

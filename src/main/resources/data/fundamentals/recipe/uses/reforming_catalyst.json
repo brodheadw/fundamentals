@@ -1,0 +1,33 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:platinum_nugget"
+    },
+    {
+      "item": "fundamentals:platinum_nugget"
+    },
+    {
+      "item": "fundamentals:rhenium_ingot"
+    },
+    {
+      "item": "tfmg:bauxite_powder"
+    },
+    {
+      "item": "tfmg:bauxite_powder"
+    },
+    {
+      "item": "tfmg:bauxite_powder"
+    },
+    {
+      "item": "tfmg:bauxite_powder"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:reforming_catalyst",
+      "count": 4
+    }
+  ],
+  "heat_requirement": "heated"
+}

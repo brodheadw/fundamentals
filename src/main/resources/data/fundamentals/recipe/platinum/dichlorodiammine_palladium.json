@@ -1,0 +1,24 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:palladium_tetrammine_liquor"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:hydrochloric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:dichlorodiammine_palladium"
+    },
+    {
+      "id": "fundamentals:spent_liquor",
+      "amount": 250
+    }
+  ]
+}

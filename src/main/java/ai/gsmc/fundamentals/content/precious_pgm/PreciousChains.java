@@ -20,10 +20,15 @@ public final class PreciousChains {
                 .step(SMELTING, "argentite", RAW, "silver", INGOT)
                 .build());
 
+        // The precious-metal refinery's salts, tetroxides and liquors are not materials; the chain names its ends.
         ProcessingChainRegistry.register(ProcessingChain.builder("platinum", "platinum", PreciousMaterials.GROUP)
-                .step(FROTH_FLOTATION, "sperrylite", RAW, "platinum_group_concentrate", CONCENTRATE)
-                .step(SOLVENT_EXTRACTION, MaterialRef.of("platinum_group_concentrate", CONCENTRATE),
-                        MaterialRef.of("platinum", INGOT), MaterialRef.of("palladium", INGOT), MaterialRef.of("rhodium", INGOT))
+                .step(SMELTING, "pentlandite", RAW, "nickel_matte", DUST)
+                .step(CONVERTING, "nickel_matte", DUST, "converter_matte", DUST)
+                .step(LEACHING, "converter_matte", DUST, "platinum_group_concentrate", CONCENTRATE)
+                .step(DISSOLUTION, MaterialRef.of("platinum_group_concentrate", CONCENTRATE), MaterialRef.of("platinum", SPONGE),
+                        MaterialRef.of("palladium", SPONGE), MaterialRef.of("rhodium", SPONGE), MaterialRef.of("ruthenium", SPONGE),
+                        MaterialRef.of("iridium", SPONGE), MaterialRef.of("osmium", SPONGE))
+                .step(SINTERING, "platinum", SPONGE, "platinum", INGOT)
                 .build());
 
         ProcessingChainRegistry.register(ProcessingChain.builder("mercury", "mercury", PreciousMaterials.GROUP)

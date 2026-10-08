@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "#c:storage_blocks/gold",
+    "minecraft:gold_block",
+    "minecraft:raw_gold_block",
+    "#c:storage_blocks/copper",
+    "#c:storage_blocks/iron",
+    "minecraft:copper_block",
+    "minecraft:iron_block",
+    "minecraft:cut_copper"
+  ]
+}

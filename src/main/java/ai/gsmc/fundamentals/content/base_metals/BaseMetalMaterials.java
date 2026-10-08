@@ -46,6 +46,10 @@ public final class BaseMetalMaterials {
 
         reg("copper_matte", null, MaterialType.COMPOUND, "Cu2S·FeS",
                 new MaterialForm[] {DUST}, MaterialProperties.builder());
+        reg("nickel_matte", null, MaterialType.COMPOUND, "Ni3S2·Cu2S·FeS",
+                new MaterialForm[] {DUST}, MaterialProperties.builder());
+        reg("converter_matte", null, MaterialType.COMPOUND, "Ni3S2·Cu2S",
+                new MaterialForm[] {DUST}, MaterialProperties.builder());
         reg("blister_copper", null, MaterialType.ALLOY, "", new MaterialForm[] {INGOT},
                 MaterialProperties.builder().density(1.12).conductivity(0.60));
 

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "fundamentals:osmium_sponge"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:osmium_filament",
+    "count": 4
+  }
+}

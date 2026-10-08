@@ -23,14 +23,26 @@ def lens():
     return img
 
 
-def filament():
-    """A coil of tungsten wire: a zigzag of bright grey across the sprite."""
+def filament(wire=(150, 154, 162, 255), light=(214, 218, 226, 255)):
+    """A coil of wire: a zigzag of bright metal across the sprite."""
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-    wire, light = (150, 154, 162, 255), (214, 218, 226, 255)
     for x in range(2, 14):
         y = 8 + (2 if (x // 2) % 2 == 0 else -2)
         img.putpixel((x, y), light if x % 4 == 0 else wire)
         img.putpixel((x, y + 1), wire)
+    return img
+
+
+def gauze():
+    """A square of woven platinum-rhodium wire, the catalyst pad of an ammonia burner: a fine silver mesh."""
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    wire, light, rim = (200, 202, 208, 255), (246, 247, 250, 255), (120, 122, 130, 255)
+    for x in range(2, 14):
+        for y in range(2, 14):
+            if x in (2, 13) or y in (2, 13):
+                img.putpixel((x, y), rim)
+            elif x % 2 == 0 or y % 2 == 0:
+                img.putpixel((x, y), light if (x + y) % 4 == 0 else wire)
     return img
 
 
@@ -55,6 +67,20 @@ def main():
     heap("sodium_chromate", (252, 240, 110), (234, 206, 34), (168, 138, 18)).save(TEXTURES / "item/sodium_chromate.png")
     heap("sodium_dichromate", (255, 160, 80), (226, 98, 28), (150, 52, 16)).save(TEXTURES / "item/sodium_dichromate.png")
     heap("aluminium_powder", (224, 226, 230), (172, 176, 184), (110, 114, 122)).save(TEXTURES / "item/aluminium_powder.png")
+    # The platinum refinery: sal ammoniac white; the insolubles black; each metal's salt the colour chemists know it by, the
+    # chloroplatinate bright yellow, dichlorodiammine palladium a duller yellow, the chlororuthenate red-brown, the chloroiridate
+    # near black, the chlororhodate rose. The reforming catalyst is grey-white alumina beads.
+    heap("ammonium_chloride", (255, 255, 255), (238, 240, 240), (186, 190, 192)).save(TEXTURES / "item/ammonium_chloride.png")
+    heap("insoluble_residue", (88, 88, 92), (52, 52, 56), (24, 24, 28)).save(TEXTURES / "item/insoluble_residue.png")
+    heap("iridium_rhodium_residue", (104, 92, 90), (66, 56, 54), (34, 28, 28)).save(TEXTURES / "item/iridium_rhodium_residue.png")
+    heap("ammonium_chloroplatinate", (255, 244, 120), (246, 214, 40), (190, 150, 16)).save(TEXTURES / "item/ammonium_chloroplatinate.png")
+    heap("dichlorodiammine_palladium", (250, 230, 140), (226, 192, 78), (162, 128, 40)).save(TEXTURES / "item/dichlorodiammine_palladium.png")
+    heap("ammonium_chlororuthenate", (156, 72, 52), (112, 40, 28), (64, 20, 14)).save(TEXTURES / "item/ammonium_chlororuthenate.png")
+    heap("ammonium_chloroiridate", (96, 40, 32), (58, 24, 20), (28, 12, 10)).save(TEXTURES / "item/ammonium_chloroiridate.png")
+    heap("ammonium_chlororhodate", (236, 132, 150), (204, 80, 104), (140, 42, 64)).save(TEXTURES / "item/ammonium_chlororhodate.png")
+    heap("reforming_catalyst", (246, 246, 242), (206, 206, 204), (136, 138, 142)).save(TEXTURES / "item/reforming_catalyst.png")
+    gauze().save(TEXTURES / "item/platinum_rhodium_gauze.png")
+    filament((112, 126, 150, 255), (178, 192, 216, 255)).save(TEXTURES / "item/osmium_filament.png")
     print("uses textures written")
 
 
