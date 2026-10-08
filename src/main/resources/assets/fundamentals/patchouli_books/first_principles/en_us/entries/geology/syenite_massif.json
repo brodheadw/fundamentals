@@ -1,0 +1,13 @@
+{
+  "name": "Syenite Massif",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_loparite",
+  "sortnum": 25,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A plug of syenite, under taiga and snowy country, between y -32 and 32. Carries loparite in layers. Dig at the core: the edges are lean.",
+      "title": "Syenite Massif"
+    }
+  ]
+}

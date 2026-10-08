@@ -1,0 +1,20 @@
+{
+  "name": "Liquor",
+  "category": "fundamentals:rare_earths",
+  "icon": "fundamentals:salt",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:light_rare_earth_concentrate",
+      "text": "A concentrate dissolved in 500 mB of hydrochloric acid in a heated basin under a mixer gives 500 mB of chloride liquor: every rare earth in it together, lilac from the neodymium. The heavy concentrate gives the heavy liquor.",
+      "title": "Dissolving"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:raw_ion_adsorption_clay",
+      "text": "The clay needs no acid and no heat: four clay, a salt and 500 mB of water in a basin under a mixer leach straight to 250 mB of heavy liquor. That is the whole reason Chinese clays supply the world's heavy rare earths.",
+      "title": "Leaching"
+    }
+  ]
+}

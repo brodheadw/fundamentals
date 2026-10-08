@@ -1,0 +1,23 @@
+{
+  "name": "The minerals",
+  "category": "fundamentals:rare_earths",
+  "icon": "fundamentals:raw_bastnasite",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The rare earths are not rare, only mixed. Bastnäsite in carbonatite plugs and monazite in beach sand carry the light ones, lanthanum to samarium. Xenotime and euxenite in pegmatite veins carry the heavy ones and yttrium. Loparite under cold country carries the lights too.",
+      "title": "The minerals"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ion-adsorption clay under jungle is the odd one: a clay with the heavy rare earths merely stuck to it, which is why it is leached and never roasted."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:light_rare_earth_concentrate",
+      "text": "A millstone or crushing wheels grind bastnäsite, xenotime, loparite and euxenite; monazite is a sand already. Washed under an encased fan, the light grains wash away and about half of what you fed it stays as a mixed concentrate: light from monazite and loparite, heavy from xenotime and euxenite.",
+      "title": "Concentrate"
+    }
+  ]
+}

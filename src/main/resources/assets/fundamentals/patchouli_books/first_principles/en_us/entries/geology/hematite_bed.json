@@ -1,0 +1,13 @@
+{
+  "name": "Hematite Bed",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_magnetite",
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A bed of crimsite, anywhere in the overworld, between y 0 and 96. Carries magnetite in layers, hematite in masses. Dig at the core: the edges are lean.",
+      "title": "Hematite Bed"
+    }
+  ]
+}

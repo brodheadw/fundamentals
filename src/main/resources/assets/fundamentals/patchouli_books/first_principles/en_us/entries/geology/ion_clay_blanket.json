@@ -1,0 +1,13 @@
+{
+  "name": "Ion Clay Blanket",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:ion_adsorption_clay_ore",
+  "sortnum": 23,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A blanket just under the surface, the whole body ion-adsorption clay, under jungle, between y 60 and 64. Dig at the core: the edges are lean.",
+      "title": "Ion Clay Blanket"
+    }
+  ]
+}

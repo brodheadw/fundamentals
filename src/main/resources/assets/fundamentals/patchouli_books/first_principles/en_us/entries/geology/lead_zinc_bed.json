@@ -1,0 +1,13 @@
+{
+  "name": "Lead Zinc Bed",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_sphalerite",
+  "sortnum": 13,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A bed of limestone, anywhere in the overworld, between y -40 and 36. Carries sphalerite in masses, galena in masses, fluorite in masses. Dig at the core: the edges are lean.",
+      "title": "Lead Zinc Bed"
+    }
+  ]
+}

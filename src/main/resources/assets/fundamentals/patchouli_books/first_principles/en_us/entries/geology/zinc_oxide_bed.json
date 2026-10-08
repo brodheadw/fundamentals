@@ -1,0 +1,13 @@
+{
+  "name": "Zinc Oxide Bed",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_smithsonite",
+  "sortnum": 15,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A bed of asurine, anywhere in the overworld, between y 36 and 72. Carries smithsonite in masses. Dig at the core: the edges are lean.",
+      "title": "Zinc Oxide Bed"
+    }
+  ]
+}

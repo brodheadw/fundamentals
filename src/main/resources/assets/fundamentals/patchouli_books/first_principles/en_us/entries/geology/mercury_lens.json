@@ -1,0 +1,13 @@
+{
+  "name": "Mercury Lens",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_cinnabar",
+  "sortnum": 18,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A bed, in mountain and hill country, between y 0 and 72. Carries cinnabar in masses. Dig at the core: the edges are lean.",
+      "title": "Mercury Lens"
+    }
+  ]
+}

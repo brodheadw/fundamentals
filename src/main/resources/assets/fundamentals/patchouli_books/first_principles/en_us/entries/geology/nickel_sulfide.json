@@ -1,0 +1,13 @@
+{
+  "name": "Nickel Sulfide",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_pentlandite",
+  "sortnum": 27,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A bed of gabbro, anywhere in the overworld, between y -60 and -8. Carries pentlandite in masses. Dig at the core: the edges are lean.",
+      "title": "Nickel Sulfide"
+    }
+  ]
+}

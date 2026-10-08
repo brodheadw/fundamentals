@@ -1,0 +1,13 @@
+{
+  "name": "Silver Vein",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_argentite",
+  "sortnum": 31,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A vein of calcite, in mountain and hill country, between y -32 and 64. Carries argentite in masses, native silver in masses. Dig at the core: the edges are lean.",
+      "title": "Silver Vein"
+    }
+  ]
+}

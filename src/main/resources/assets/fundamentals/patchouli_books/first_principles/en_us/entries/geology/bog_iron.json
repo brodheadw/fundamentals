@@ -1,0 +1,13 @@
+{
+  "name": "Bog Iron",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:goethite_ore",
+  "sortnum": 12,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A blanket just under the surface, the whole body goethite, in swamps and bogs, between y 60 and 64. Dig at the core: the edges are lean.",
+      "title": "Bog Iron"
+    }
+  ]
+}

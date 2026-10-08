@@ -1,0 +1,13 @@
+{
+  "name": "Spodumene Pegmatite",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_spodumene",
+  "sortnum": 29,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A vein of granite, in mountains, hills and badlands, between y 0 and 64. Carries spodumene in masses. Dig at the core: the edges are lean.",
+      "title": "Spodumene Pegmatite"
+    }
+  ]
+}

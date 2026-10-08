@@ -1,0 +1,13 @@
+{
+  "name": "Magnetite Bed",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_hematite",
+  "sortnum": 11,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A bed, anywhere in the overworld, between y -56 and 8. Carries hematite in layers, magnetite in masses. Dig at the core: the edges are lean.",
+      "title": "Magnetite Bed"
+    }
+  ]
+}

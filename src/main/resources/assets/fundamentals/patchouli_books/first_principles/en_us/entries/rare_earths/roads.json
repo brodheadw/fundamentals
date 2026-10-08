@@ -1,0 +1,73 @@
+{
+  "name": "The road to each metal",
+  "category": "fundamentals:rare_earths",
+  "icon": "fundamentals:dysprosium_ingot",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "From the mixed liquor to one element is a chain of batteries, each fed by the one before. These are the roads, shortest first. The heavy liquor can also be leached straight from the clay, which skips the first eight stages for everything on the heavy side.",
+      "title": "The road to each metal"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Lanthanum: 3 batteries, 34 stages in all. 8 stages with P507, then 14 stages with P507, then 12 stages with P507."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Cerium: 3 batteries, 34 stages in all. 8 stages with P507, then 14 stages with P507, then 12 stages with P507."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Samarium: 3 batteries, 34 stages in all. 8 stages with P507, then 10 stages with P204, then 16 stages with P507."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Yttrium: 4 batteries, 44 stages in all. 8 stages with P507, then 10 stages with P204, then 12 stages with P204, then 14 stages with naphthenic acid."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Terbium: 4 batteries, 50 stages in all. 8 stages with P507, then 10 stages with P204, then 12 stages with P204, then 20 stages with P507."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Dysprosium: 4 batteries, 50 stages in all. 8 stages with P507, then 10 stages with P204, then 12 stages with P204, then 20 stages with P507."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Europium: 4 batteries, 52 stages in all. 8 stages with P507, then 10 stages with P204, then 16 stages with P507, then 18 stages with P507."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Gadolinium: 4 batteries, 52 stages in all. 8 stages with P507, then 10 stages with P204, then 16 stages with P507, then 18 stages with P507."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Praseodymium: 3 batteries, 54 stages in all. 8 stages with P507, then 14 stages with P507, then 32 stages with P507."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Neodymium: 3 batteries, 54 stages in all. 8 stages with P507, then 14 stages with P507, then 32 stages with P507."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Thulium: 6 batteries, 66 stages in all. 8 stages with P507, then 10 stages with P204, then 12 stages with P204, then 14 stages with naphthenic acid, then 10 stages with P204, then 12 stages with P204."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Holmium: 6 batteries, 74 stages in all. 8 stages with P507, then 10 stages with P204, then 12 stages with P204, then 14 stages with naphthenic acid, then 10 stages with P204, then 20 stages with P507."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Erbium: 6 batteries, 74 stages in all. 8 stages with P507, then 10 stages with P204, then 12 stages with P204, then 14 stages with naphthenic acid, then 10 stages with P204, then 20 stages with P507."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ytterbium: 7 batteries, 86 stages in all. 8 stages with P507, then 10 stages with P204, then 12 stages with P204, then 14 stages with naphthenic acid, then 10 stages with P204, then 12 stages with P204, then 20 stages with P507."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Lutetium: 7 batteries, 86 stages in all. 8 stages with P507, then 10 stages with P204, then 12 stages with P204, then 14 stages with naphthenic acid, then 10 stages with P204, then 12 stages with P204, then 20 stages with P507."
+    }
+  ]
+}

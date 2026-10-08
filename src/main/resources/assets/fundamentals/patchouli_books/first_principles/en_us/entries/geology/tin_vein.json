@@ -1,0 +1,13 @@
+{
+  "name": "Tin Vein",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_cassiterite",
+  "sortnum": 30,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A vein, in mountains, hills and badlands, between y -16 and 56. Carries cassiterite in masses, wolframite in masses. Dig at the core: the edges are lean.",
+      "title": "Tin Vein"
+    }
+  ]
+}
