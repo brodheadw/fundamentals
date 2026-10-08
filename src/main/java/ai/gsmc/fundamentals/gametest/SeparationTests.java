@@ -390,7 +390,11 @@ public class SeparationTests {
             helper.assertTrue(recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "calcining/" + element + "_oxide")).isPresent(),
                     element + " has no calcining to oxide");
         }
-        for (String reagent : List.of("mixing/hydrofluoric_acid", "reduction/argon", "reduction/calcium_ingot", "mixing/neodymium_fluoride",
+        var dysprosium = (com.simibubi.create.content.processing.recipe.ProcessingRecipe<?, ?>) recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "reduction/dysprosium_ingot")).orElseThrow().value();
+        helper.assertTrue(dysprosium.getRequiredHeat() == com.simibubi.create.content.processing.recipe.HeatCondition.SUPERHEATED, "calciothermic reduction should want a superheated vat");
+        var neodymium = (com.simibubi.create.content.processing.recipe.ProcessingRecipe<?, ?>) recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "reduction/neodymium_ingot")).orElseThrow().value();
+        helper.assertTrue(neodymium.getRequiredHeat() == com.simibubi.create.content.processing.recipe.HeatCondition.HEATED, "electrolysis should want a heated vat");
+        for (String reagent : List.of("mixing/hydrofluoric_acid", "reduction/argon", "reduction/calcium_ingot", "mixing/neodymium_fluoride", "mixing/light_rare_earth_concentrate_from_bastnasite",
                 "mixing/brine", "mixing/salt_from_brine", "packing/monazite_residue_block")) {
             helper.assertTrue(recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, reagent)).isPresent(), reagent + " is missing");
         }
