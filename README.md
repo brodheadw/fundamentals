@@ -6,7 +6,7 @@ Real ore minerals, real deposits, and the real road from rock to metal. A Create
 
 Vanilla gives you "iron ore". The ground doesn't. Iron is in hematite and magnetite, lead is in galena, zinc is in sphalerite, the rare earths are in bastnäsite and monazite and a clay that doesn't even have a mineral name. Fundamentals replaces the generic ores with the minerals that actually carry each metal, puts them in the ground the way geology does, and makes you win the metal out of them the way smiths and smelters did, by hand at first and with Create's machines later.
 
-Requires [Create](https://modrinth.com/mod/create) and [Create: The Factory Must Grow](https://modrinth.com/mod/create-tfmg). Early alpha: the geology is in, the processing is just beginning.
+Requires [Create](https://modrinth.com/mod/create) and [Create: The Factory Must Grow](https://modrinth.com/mod/create-tfmg). Alpha: the geology is in, and the rare earth chain runs from ore to magnet.
 
 ## Deposits, not blobs
 
@@ -55,6 +55,24 @@ The rare earths are parted the way the industry parts them, by solvent extractio
 Charge every stage with an organic extractant (P507, P204 or naphthenic acid, made from phosphoric acid and kerosene) and it floats on top and is never used up. Pump the chloride liquor in at the back of the first stage and hydrochloric acid in at the front of the last: the raffinate comes out of the sides of the first stage, the loaded strip out of the last. How many stages a cut needs depends on how alike the pair is: samarium leaves neodymium in eight stages, but neodymium from praseodymium takes a battery thirty-two stages long. A battery too short for its cut just stalls, and Create's goggles tell you why. Fourteen cuts take the mixed liquor down to single elements; each of those precipitates with oxalic acid and calcines to the oxide. The oxide is the stable form, and the metal comes out of it three ways, all on The Factory Must Grow's chemical vats: the lights (lanthanum to neodymium, and didymium) go through their fluoride, made with hydrofluoric acid from fluorspar, and are electrolysed from the molten salt on electrodes; the heavies (gadolinium to lutetium, and yttrium) are reduced from the fluoride by calcium metal under argon, which gives the fluorspar back as slag; and the four that boil, samarium, europium, thulium and ytterbium, are reduced straight from the oxide by lanthanum metal under argon and distil off, leaving lanthanum oxide to go round again. Argon is spun out of air in a centrifuge vat, and calcium is electrolysed from lime and hydrochloric acid.
 
 ![A mixer-settler battery](docs/images/mixer-settlers.jpg)
+
+Goggles on any casing tell you what the battery is waiting for, how far the organic and the liquor have got down the line, and what the ends and the product tanks hold; hold W over a casing for the Ponder scene of a working stage.
+
+### What they are for
+
+Nothing in the chain is for its own sake. Neodymium (or didymium, as the industry sinters it) with iron, a borax from the desert evaporites and a little dysprosium, superheated, makes NdFeB, the strongest magnet; samarium with cobaltite makes SmCo, which keeps its field hot. Polarized, either is the magnet The Factory Must Grow's motors, generators and electric pumps are built from, so a rare earth plant is what a motor needs. Lanthanum metal reduces the four that boil and lanthanum oxide is the catalyst its naphtha cracking spends. Cerium with iron is ferrocerium: a flint and steel that never wears out. Europium's red and terbium's green on a yttria host are the phosphor its lamps take; yttria lines its fireproof vat. Didymium glass is the welder's lens Create's goggles are made of, erbium turns glass pink, and scandium in aluminium is the airframe alloy that makes a panel rack go twice as far. Gadolinium waits for a reactor.
+
+### Waste
+
+A separation plant makes waste. Every cut leaves a fifth of a batch of spent chloride liquor in a sump under the head stage; when the sump is full the battery stops, and the goggles say so. Pump it out from below: limesand neutralises it to brine, and brine boiled down leaves salt for the clay leach, so the plant's water closes its own loop. Monazite carries thorium, and when the light concentrate dissolves the thorium stays behind as a mildly radioactive residue that packs into blocks to bury.
+
+### Acids
+
+The acids exist outside pipes. Hydrochloric, hydrofluoric, nitric and phosphoric acid can be bucketed and poured, burn whatever stands in them (hydrofluoric also poisons), and eat what they really eat: pour one against such a block and it cracks as if being mined, fizzes for five seconds and is gone, and the acid that ate it is spent. Hydrochloric acid takes carbonates, calcite, limestone, dripstone and bone; hydrofluoric takes glass, sand and quartz; nitric takes copper and iron. Stone shrugs them all off.
+
+### The book
+
+With Patchouli installed, a book and a raw hematite craft *Fundamentals: First Principles*: every deposit and where to find it, the hand-working, the whole rare earth chain with the stage count of every cut and the road to every metal, the uses, the waste and the acids. It is generated from the same data the game runs on, so its numbers are the game's.
 
 ## Power
 
