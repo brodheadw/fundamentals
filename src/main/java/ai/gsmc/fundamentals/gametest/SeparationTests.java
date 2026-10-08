@@ -448,6 +448,33 @@ public class SeparationTests {
     }
 
     @GameTest(template = "empty")
+    public void theExtractantsAreSynthesisedFromPropyleneAndPhosphorus(GameTestHelper helper) {
+        var recipes = helper.getLevel().getRecipeManager();
+        java.util.function.Function<String, com.simibubi.create.content.processing.recipe.ProcessingRecipe<?, ?>> recipe = id ->
+                (com.simibubi.create.content.processing.recipe.ProcessingRecipe<?, ?>) recipes.byKey(ResourceLocation.parse(id)).orElseThrow(() -> new AssertionError(id + " is missing")).value();
+        java.util.function.BiPredicate<String, String> takes = (id, fluid) -> recipe.apply(id).getFluidIngredients().stream()
+                .anyMatch(i -> i.ingredient().test(new FluidStack(BuiltInRegistries.FLUID.get(ResourceLocation.parse(fluid)), 1)));
+        java.util.function.BiPredicate<String, String> gives = (id, fluid) -> recipe.apply(id).getFluidResults().stream()
+                .anyMatch(s -> BuiltInRegistries.FLUID.getKey(s.getFluid()).toString().equals(fluid));
+        for (String[] organic : new String[][] {{"p204", "d2ehpa"}, {"p507", "ehehpa"}}) {
+            String made = "fundamentals:mixing/" + organic[0];
+            helper.assertTrue(takes.test(made, "fundamentals:" + organic[1]) && takes.test(made, "tfmg:kerosene") && !takes.test(made, "fundamentals:phosphoric_acid"),
+                    organic[0] + " should be its neat extractant cut with kerosene, not phosphoric acid");
+            String neat = "fundamentals:solvents/" + organic[1];
+            helper.assertTrue(takes.test(neat, "fundamentals:ethylhexanol") && takes.test(neat, "fundamentals:phosphorus_trichloride"),
+                    organic[1] + " should be 2-ethylhexanol on phosphorus trichloride");
+        }
+        helper.assertTrue(takes.test("fundamentals:solvents/ethylhexanol", "tfmg:propylene") && takes.test("fundamentals:mixing/phosphorus_trichloride", "fundamentals:chlorine"),
+                "2-ethylhexanol should come from propylene and the trichloride from chlorine");
+        helper.assertTrue(gives.test("fundamentals:solvents/hydrogen", "tfmg:hydrogen"), "something should make hydrogen");
+        helper.assertTrue(gives.test("fundamentals:reduction/calcium_ingot", "fundamentals:chlorine") && gives.test("fundamentals:lithium/lithium_ingot", "fundamentals:chlorine"),
+                "the molten-chloride electrolyses should give off chlorine");
+        helper.assertTrue(recipe.apply("fundamentals:mixing/nitric_acid").getRequiredHeat() != com.simibubi.create.content.processing.recipe.HeatCondition.NONE,
+                "nitric acid is distilled off saltpetre: it wants heat");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
     public void everyLiquorIsCutDownToSingleElements(GameTestHelper helper) {
         List<SeparationRecipe> cuts = helper.getLevel().getRecipeManager().getAllRecipesFor(SeparationRecipe.TYPE)
                 .stream().map(RecipeHolder::value).toList();

@@ -1,0 +1,37 @@
+{
+  "name": "The extractants",
+  "category": "fundamentals:rare_earths",
+  "icon": "fundamentals:white_phosphorus",
+  "sortnum": 11,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "P204 and P507 are both 2-ethylhexyl esters on one phosphorus atom, and the industry makes them from propylene and phosphate rock. So do you, in The Factory Must Grow's chemical vats with an industrial mixer unless a step says otherwise.",
+      "title": "The extractants"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "First water gas: a coal coke and 500 mB of water, heated, give 1,000 mB of carbon monoxide and hydrogen. Shifted with another 500 mB of water, heated, 1,000 mB of water gas gives 1,000 mB of hydrogen and 500 of carbon dioxide; that is also the hydrogen cobalt, molybdenum and tungsten are reduced under."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The oxo process: 500 mB each of propylene, from cracked naphtha, water gas and hydrogen on a cobalt ingot, heated, give 250 mB of 2-ethylhexanol. The cobalt is the catalyst and comes back nineteen times in twenty."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Phosphorus: two bone meal, a coal coke and a sand in a vat with two electrodes, superheated, give a white phosphorus and a slag, as the electric furnace does at 1,500 °C. A white phosphorus and 750 mB of chlorine in a heated basin give 500 mB of phosphorus trichloride."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "P204 is D2EHPA: 500 mB of 2-ethylhexanol, 250 of phosphorus trichloride, 500 of air and 250 of water, cold, give 250 mB of it, the air taking the phosphorus to phosphate. P507 is EHEHPA: the same without the air, heated, which rearranges the phosphite to a phosphonate, carbon bonded to phosphorus."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Both give 500 mB of hydrochloric acid back. Neat, they are too thick to use: 250 mB with 750 mB of kerosene and a limesand under a mixer make 1,000 mB of P204 or P507."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Naphthenic acid is petroleum's own, washed out of the oil as sodium soaps and freed with acid: 1,000 mB of heavy oil with a soda ash and 250 mB of sulfuric acid, heated, gives 500 mB."
+    }
+  ]
+}

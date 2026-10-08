@@ -6,26 +6,23 @@
   ],
   "ingredients": [
     {
-      "item": "fundamentals:calcium_chloride"
+      "item": "tfmg:coal_coke"
     },
     {
-      "item": "fundamentals:calcium_chloride"
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "minecraft:water"
     }
   ],
   "machines": [
-    "tfmg:electrode",
-    "tfmg:electrode"
+    "tfmg:mixing"
   ],
   "min_size": 1,
   "processing_time": 100,
   "results": [
     {
-      "id": "fundamentals:calcium_ingot",
-      "count": 2
-    },
-    {
-      "id": "fundamentals:chlorine",
-      "amount": 500
+      "id": "fundamentals:water_gas",
+      "amount": 1000
     }
   ],
   "heat_requirement": "heated"

@@ -1,0 +1,20 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_pyrolusite"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "fundamentals:hydrochloric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:chlorine",
+      "amount": 250
+    }
+  ],
+  "heat_requirement": "heated"
+}

@@ -6,10 +6,16 @@
   ],
   "ingredients": [
     {
-      "item": "fundamentals:calcium_chloride"
+      "item": "minecraft:bone_meal"
     },
     {
-      "item": "fundamentals:calcium_chloride"
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "item": "tfmg:coal_coke"
+    },
+    {
+      "tag": "c:sands/colorless"
     }
   ],
   "machines": [
@@ -20,13 +26,11 @@
   "processing_time": 100,
   "results": [
     {
-      "id": "fundamentals:calcium_ingot",
-      "count": 2
+      "id": "fundamentals:white_phosphorus"
     },
     {
-      "id": "fundamentals:chlorine",
-      "amount": 500
+      "id": "fundamentals:slag"
     }
   ],
-  "heat_requirement": "heated"
+  "heat_requirement": "superheated"
 }
