@@ -92,13 +92,23 @@ FOULED = {
     "fouled_p507": ("Fouled P507", 0x72603E),
     "fouled_naphthenic_acid": ("Fouled Naphthenic Acid", 0x5A4424),
 }
+# The extractants' road from propylene and bone: the alcohol both are esters of, the phosphorus chloride both are built on,
+# and the two neat extractants before kerosene cuts them. All four are colourless to pale yellow.
+PRECURSORS = {
+    "ethylhexanol": ("2-Ethylhexanol", 0xEEEEE6),
+    "phosphorus_trichloride": ("Phosphorus Trichloride", 0xECF0EC),
+    "d2ehpa": ("D2EHPA", 0xF0E4B0),
+    "ehehpa": ("EHEHPA", 0xF2EAC4),
+}
 GASES = {
     "argon": ("Argon", 0xC8D8F0),
+    "chlorine": ("Chlorine", 0xD2E496),
+    "water_gas": ("Water Gas", 0xD8DCE0),
 }
 FLUIDS = {**{k: (*v, "LIQUOR") for k, v in LIQUORS.items()}, **{k: (*v, "ORGANIC") for k, v in ORGANICS.items()},
           **{k: (*v, "ACID") for k, v in ACIDS.items()}, **{k: (*v, "GAS") for k, v in GASES.items()},
           **{k: (*v, "WASTE") for k, v in WASTES.items()}, **{k: (*v, "CRUDE") for k, v in CRUDES.items()},
-          **{k: (*v, "FOULED") for k, v in FOULED.items()}}
+          **{k: (*v, "FOULED") for k, v in FOULED.items()}, **{k: (*v, "PRECURSOR") for k, v in PRECURSORS.items()}}
 
 # Oxide to metal. The lights and the heavies go through their fluoride: the lights by molten-salt
 # electrolysis on TFMG's electrodes, the heavies by calciothermic reduction under argon, which gives the
@@ -132,7 +142,8 @@ CUTS = [
 STRIP = "hydrochloric_acid"
 # the plant's items that are not a form of a material
 PLANT_ITEMS = {"salt": "Salt", "oxalic_acid": "Oxalic Acid", "roasted_bastnasite": "Roasted Bastnäsite", "light_rare_earth_sulfate": "Light Rare Earth Sulfate",
-               "heavy_rare_earth_sulfate": "Heavy Rare Earth Sulfate", "calcium_chloride": "Calcium Chloride", "calcium_ingot": "Calcium Ingot"}
+               "heavy_rare_earth_sulfate": "Heavy Rare Earth Sulfate", "calcium_chloride": "Calcium Chloride", "calcium_ingot": "Calcium Ingot",
+               "white_phosphorus": "White Phosphorus"}
 
 
 def fluid(id, amount):
@@ -169,7 +180,7 @@ def java_table():
              "    public static final List<Reagent> ALL = List.of("]
     entries = [f'            new Reagent("{id}", 0x{tint:06X}, Kind.{kind})' for id, (_, tint, kind) in FLUIDS.items()]
     lines += [",\n".join(entries) + ");", "", "    private Reagents() {}", "}", ""]
-    kinds = sorted({kind for _, _, kind in FLUIDS.values()}, key=["LIQUOR", "ORGANIC", "ACID", "GAS", "WASTE", "CRUDE", "FOULED"].index)
+    kinds = sorted({kind for _, _, kind in FLUIDS.values()}, key=["LIQUOR", "ORGANIC", "ACID", "GAS", "WASTE", "CRUDE", "FOULED", "PRECURSOR"].index)
     lines[7] = "    public enum Kind { " + ", ".join(kinds) + " }"
     JAVA.write_text("\n".join(lines), encoding="utf-8")
 
@@ -198,18 +209,19 @@ def chemistry():
     # Salt by boiling off water; the Mannheim process for the acid.
     mixing("salt", [fluid("minecraft:water", 1000)], [result_item("salt", 2)], heated=True)
     mixing("hydrochloric_acid", item("salt", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("hydrochloric_acid", 500)], heated=True)
-    mixing("nitric_acid", item("tfmg:nitrate_dust", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("nitric_acid", 500)])
+    # Saltpetre heated in sulfuric acid gives up nitric acid, which boils off at 83 C into the receiver: Glauber's retort.
+    mixing("nitric_acid", item("tfmg:nitrate_dust", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("nitric_acid", 500)], heated=True)
     # Carbohydrate oxidised by nitric acid: the classical oxalic acid route.
     mixing("oxalic_acid", item("minecraft:sugar", 2) + [fluid("nitric_acid", 250)], [result_item("oxalic_acid", 2)], heated=True)
     # Wet-process phosphoric acid from a phosphate rock, which bone meal stands in for.
     mixing("phosphoric_acid", item("minecraft:bone_meal", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("phosphoric_acid", 500)])
-    # The organophosphorus extractants: P204 and P507 are the same family of 2-ethylhexyl esters, so one
-    # recipe cold and one hot stands for the two syntheses. Naphthenic acid is petroleum's own.
-    # Each extractant is saponified as it is made up, with lime rather than ammonia (calcium saponification, which
+    # The organophosphorus extractants are made neat (solvents() below) and cut with kerosene, a quarter extractant, only
+    # as the organic is made up. Each is saponified then too, with lime rather than ammonia (calcium saponification, which
     # Chinese plants moved to so that the raffinate carries no ammonia): that is what sets the pH the cuts work at.
-    mixing("p204", [fluid("phosphoric_acid", 250), fluid("tfmg:kerosene", 750), item("tfmg:limesand")], [result_fluid("p204", 1000)])
-    mixing("p507", [fluid("phosphoric_acid", 250), fluid("tfmg:kerosene", 750), item("tfmg:limesand")], [result_fluid("p507", 1000)], heated=True)
-    mixing("naphthenic_acid", [fluid("tfmg:heavy_oil", 1000), fluid("tfmg:sulfuric_acid", 250), item("tfmg:limesand")], [result_fluid("naphthenic_acid", 500)], heated=True)
+    # Naphthenic acid is petroleum's own: washed out of the oil as soluble sodium soaps with soda ash and freed again with acid.
+    mixing("p204", [fluid("d2ehpa", 250), fluid("tfmg:kerosene", 750), item("tfmg:limesand")], [result_fluid("p204", 1000)])
+    mixing("p507", [fluid("ehehpa", 250), fluid("tfmg:kerosene", 750), item("tfmg:limesand")], [result_fluid("p507", 1000)])
+    mixing("naphthenic_acid", [fluid("tfmg:heavy_oil", 1000), fluid("tfmg:sulfuric_acid", 250), item("soda_ash")], [result_fluid("naphthenic_acid", 500)], heated=True)
     # Froth flotation for bastnasite: the ground mineral beaten with water and a fatty-acid collector, naphthenic acid,
     # floats the rare earth carbonate off the gangue. About half of what goes in comes out as concentrate.
     mixing("bastnasite_concentrate", item("bastnasite_dust", 2) + [fluid("minecraft:water", 250), fluid("naphthenic_acid", 100)],
@@ -246,13 +258,13 @@ def chemistry():
            [result_fluid("crude_heavy_rare_earth_liquor", 250), {"id": "minecraft:clay_ball", "count": 4}])
 
 
-def vat(name, ingredients, results, machines, heated=True, time=100):
+def vat(name, ingredients, results, machines, heated=True, time=100, folder="reduction"):
     """heated: False, True (a blaze burner) or "superheated" (a blaze burner fed a blaze cake)."""
     recipe = {"type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:steel_vat", "tfmg:firebrick_lined_vat"],
               "ingredients": ingredients, "machines": machines, "min_size": 1, "processing_time": time, "results": results}
     if heated:
         recipe["heat_requirement"] = "superheated" if heated == "superheated" else "heated"
-    write(RECIPES / f"reduction/{name}.json", recipe)
+    write(RECIPES / f"{folder}/{name}.json", recipe)
 
 
 def metals():
@@ -260,7 +272,7 @@ def metals():
     # calcium by electrolysing the plant's own calcium chloride, molten at about 800 C.
     mixing("hydrofluoric_acid", item("raw_fluorite", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("hydrofluoric_acid", 500)], heated=True)
     vat("argon", [fluid("tfmg:air", 1000)], [{"id": "fundamentals:argon", "amount": 9}], ["tfmg:centrifuge"], heated=False, time=10)
-    vat("calcium_ingot", item("calcium_chloride", 2), [result_item("calcium_ingot", 2)], ["tfmg:electrode", "tfmg:electrode"])
+    vat("calcium_ingot", item("calcium_chloride", 2), [result_item("calcium_ingot", 2), result_fluid("chlorine", 500)], ["tfmg:electrode", "tfmg:electrode"])
     for element in ELECTROLYSIS + CALCIOTHERMIC:
         mixing(f"{element}_fluoride", [item(f"{element}_oxide"), fluid("hydrofluoric_acid", 500)], [result_item(f"{element}_fluoride")])
     # the fluoride is the bath the oxide dissolves in, not the feed: it comes back but for what the tapping loses
@@ -278,6 +290,40 @@ def metals():
         vat(f"{element}_ingot", item(f"{element}_oxide", 2) + item("lanthanum_ingot", 2) + [fluid("argon", 250)],
             [result_item(f"{element}_ingot", 2), result_item("lanthanum_oxide", 2)], ["tfmg:mixing"], heated="superheated")
     write(DATA.parent / "c/tags/item/ingots/calcium.json", {"replace": False, "values": ["fundamentals:calcium_ingot"]})
+
+
+def solvents():
+    """P204 and P507 from propylene and bone, as they are made: both are 2-ethylhexyl esters on one phosphorus, so they share
+    the alcohol and the phosphorus trichloride and part only at the last step."""
+    def chem(name, ingredients, results, machines=("tfmg:mixing",), heated=True):
+        vat(name, ingredients, results, list(machines), heated=heated, folder="solvents")
+
+    # Water gas: steam over white-hot coke gives carbon monoxide and hydrogen, half and half. Shifted with more steam, the
+    # monoxide takes the water's oxygen and leaves its hydrogen: how hydrogen was made before natural gas.
+    chem("water_gas", [item("tfmg:coal_coke"), fluid("minecraft:water", 500)], [result_fluid("water_gas", 1000)])
+    chem("hydrogen", [fluid("water_gas", 1000), fluid("minecraft:water", 500)], [{"id": "tfmg:hydrogen", "amount": 1000}, {"id": "tfmg:carbon_dioxide", "amount": 500}])
+    # The oxo process on a cobalt catalyst, which comes back but for what is lost: propylene with the water gas's monoxide
+    # and hydrogen gives butyraldehyde, two of which condense to the C8 aldehyde, and more hydrogen saturates that to
+    # 2-ethylhexanol.
+    chem("ethylhexanol", [item("cobalt_ingot"), fluid("tfmg:propylene", 500), fluid("water_gas", 500), fluid("tfmg:hydrogen", 500)],
+         [result_fluid("ethylhexanol", 250), {"id": "fundamentals:cobalt_ingot", "chance": 0.95}])
+    # White phosphorus from the electric furnace: phosphate (bone, as for the acid), coke and silica at 1,500 C on electrodes,
+    # the phosphorus distilling off and the lime running out as slag.
+    chem("white_phosphorus", item("minecraft:bone_meal", 2) + [item("tfmg:coal_coke"), {"tag": "c:sands/colorless"}],
+         [result_item("white_phosphorus"), result_item("slag")], machines=("tfmg:electrode", "tfmg:electrode"), heated="superheated")
+    # Chlorine as Scheele found it, hydrochloric acid on pyrolusite, the manganese staying behind as its chloride. The
+    # molten-chloride electrolyses give it off too.
+    mixing("chlorine", [item("raw_pyrolusite"), fluid(STRIP, 1000)], [result_fluid("chlorine", 250)], heated=True)
+    # Chlorine over melted phosphorus, P4 + 6 Cl2 -> 4 PCl3, which boils off at 76 C.
+    mixing("phosphorus_trichloride", [item("white_phosphorus"), fluid("chlorine", 750)], [result_fluid("phosphorus_trichloride", 500)], heated=True)
+    # P204, di(2-ethylhexyl) phosphoric acid: the trichloride oxidised by air to the oxychloride, two of the alcohol on it
+    # and water for the last chlorine, cold. Every chlorine leaves as hydrogen chloride, taken up as hydrochloric acid.
+    chem("d2ehpa", [fluid("ethylhexanol", 500), fluid("phosphorus_trichloride", 250), fluid("tfmg:air", 500), fluid("minecraft:water", 250)],
+         [result_fluid("d2ehpa", 250), result_fluid(STRIP, 500)], heated=False)
+    # P507, 2-ethylhexyl phosphonic acid mono-2-ethylhexyl ester: the alcohol on the trichloride gives the phosphite, which
+    # heat rearranges (Arbuzov) to the phosphonate, carbon on phosphorus; water then takes one ester off.
+    chem("ehehpa", [fluid("ethylhexanol", 500), fluid("phosphorus_trichloride", 250), fluid("minecraft:water", 250)],
+         [result_fluid("ehehpa", 250), result_fluid(STRIP, 500)])
 
 
 def cuts():
@@ -462,7 +508,7 @@ def names():
 
 
 def main():
-    for folder in ("mixing", "separation", "calcining", "reduction"):
+    for folder in ("mixing", "separation", "calcining", "reduction", "solvents"):
         shutil.rmtree(RECIPES / folder, ignore_errors=True)
     shutil.rmtree(ASSETS / "models/block/mixer_settler", ignore_errors=True)
     for stale in (ASSETS / "models/block").glob("mixer_settler*.json"):
@@ -473,6 +519,7 @@ def main():
     oxalates()
     acids()
     metals()
+    solvents()
     mixer_settler()
     template()
     names()

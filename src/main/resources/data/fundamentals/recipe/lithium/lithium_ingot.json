@@ -27,6 +27,10 @@
       "chance": 0.5,
       "count": 3,
       "id": "tfmg:lithium_nugget"
+    },
+    {
+      "amount": 250,
+      "id": "fundamentals:chlorine"
     }
   ]
 }

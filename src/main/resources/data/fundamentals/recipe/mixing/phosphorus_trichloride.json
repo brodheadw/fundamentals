@@ -2,20 +2,17 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "tfmg:nitrate_dust"
-    },
-    {
-      "item": "tfmg:nitrate_dust"
+      "item": "fundamentals:white_phosphorus"
     },
     {
       "type": "neoforge:single",
-      "amount": 500,
-      "fluid": "tfmg:sulfuric_acid"
+      "amount": 750,
+      "fluid": "fundamentals:chlorine"
     }
   ],
   "results": [
     {
-      "id": "fundamentals:nitric_acid",
+      "id": "fundamentals:phosphorus_trichloride",
       "amount": 500
     }
   ],
