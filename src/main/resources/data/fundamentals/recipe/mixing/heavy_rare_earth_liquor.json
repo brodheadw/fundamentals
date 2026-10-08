@@ -2,7 +2,7 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "fundamentals:heavy_rare_earth_concentrate"
+      "item": "fundamentals:heavy_rare_earth_sulfate"
     },
     {
       "type": "neoforge:single",
@@ -19,6 +19,5 @@
       "id": "fundamentals:monazite_residue_dust",
       "chance": 0.5
     }
-  ],
-  "heat_requirement": "heated"
+  ]
 }

@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:light_rare_earth_concentrate"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "tfmg:sulfuric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:light_rare_earth_sulfate"
+    },
+    {
+      "id": "fundamentals:phosphoric_acid",
+      "amount": 125
+    }
+  ],
+  "heat_requirement": "heated"
+}

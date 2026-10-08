@@ -5,25 +5,20 @@
     "tfmg:firebrick_lined_vat"
   ],
   "heat_requirement": "heated",
-  "ingredients": [
-    {
-      "item": "fundamentals:calcined_spodumene"
-    },
-    {
-      "item": "fundamentals:calcined_spodumene"
-    },
-    {
-      "type": "neoforge:single",
-      "amount": 250,
-      "fluid": "tfmg:sulfuric_acid"
-    }
-  ],
   "machines": [
     "tfmg:electrode",
     "tfmg:electrode"
   ],
   "min_size": 1,
   "processing_time": 100,
+  "ingredients": [
+    {
+      "item": "fundamentals:lithium_chloride"
+    },
+    {
+      "item": "fundamentals:lithium_chloride"
+    }
+  ],
   "results": [
     {
       "id": "tfmg:lithium_ingot"

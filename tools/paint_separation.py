@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-"""Paints the mixer-settler casing, the one fluid texture every reagent is tinted from, and the salt and
-oxalic acid. Edit and re-run; don't hand-edit the PNGs.
+"""Paints the mixer-settler casing, the one fluid texture every reagent is tinted from, and the plant's
+salts. Edit and re-run; don't hand-edit the PNGs.
 
 The casing is a welded polypropylene tank, as the real ones are: Create's fluid-tank panel and connected-texture
 sheet (MIT) recoloured by luminance onto a dark flat PP grey, so the frame ribs land on the exterior edges of a stage
@@ -118,6 +118,12 @@ def main():
     liquor("flow", flow=True).save(TEXTURES / "block/fluid/liquor_flow.png")
     heap("salt", (255, 255, 255), (232, 234, 236), (176, 180, 186)).save(TEXTURES / "item/salt.png")
     heap("oxalic", (255, 255, 252), (238, 236, 224), (184, 180, 160)).save(TEXTURES / "item/oxalic_acid.png")
+    # roasting oxidises the cerium to CeO2, which turns the concentrate buff; the sulfates are white, the light one pinked by
+    # its neodymium; calcium chloride is white
+    heap("roasted_bastnasite", (240, 222, 178), (210, 184, 132), (150, 124, 82)).save(TEXTURES / "item/roasted_bastnasite.png")
+    heap("light_sulfate", (250, 242, 242), (226, 214, 216), (170, 158, 162)).save(TEXTURES / "item/light_rare_earth_sulfate.png")
+    heap("heavy_sulfate", (250, 248, 238), (228, 224, 208), (172, 168, 150)).save(TEXTURES / "item/heavy_rare_earth_sulfate.png")
+    heap("calcium_chloride", (255, 255, 255), (240, 240, 236), (190, 190, 184)).save(TEXTURES / "item/calcium_chloride.png")
     ingot(((88, 90, 94), (138, 141, 146), (180, 184, 190), (222, 226, 232))).save(TEXTURES / "item/calcium_ingot.png")
     nozzle().save(TEXTURES / "block/mixer_settler_nozzle.png")
     print("separation textures written")

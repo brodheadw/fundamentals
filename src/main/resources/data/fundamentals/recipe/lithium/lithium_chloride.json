@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "item": "fundamentals:calcined_spodumene"
+    },
+    {
+      "item": "fundamentals:calcined_spodumene"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "fundamentals:hydrochloric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:lithium_chloride",
+      "count": 2
+    }
+  ]
+}

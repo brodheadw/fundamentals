@@ -165,10 +165,14 @@ def rare_earths():
         spotlight("fundamentals:light_rare_earth_concentrate", "A millstone or crushing wheels grind bastnäsite, xenotime, loparite and euxenite; monazite is a sand already. "
                   "Washed under an encased fan, the light grains wash away and about half of what you fed it stays as a mixed concentrate: light from monazite and loparite, heavy from xenotime and euxenite.", "Concentrate"),
         spotlight("fundamentals:bastnasite_dust", "Bastnäsite will not wash: it is floated, as in every carbonatite mill. Two bastnäsite dust beaten with 250 mB of water and 100 mB of naphthenic acid, the fatty-acid collector, "
-                  "in a basin under a mixer, and the rare earth carbonate comes off the top as light concentrate, one and sometimes two.", "Flotation")], 0)
+                  "in a basin under a mixer, and the rare earth carbonate comes off the top as bastnäsite concentrate, one and sometimes two.", "Flotation")], 0)
     entry("rare_earths", "liquor", "Liquor", "fundamentals:salt", [
-        spotlight("fundamentals:light_rare_earth_concentrate", "A concentrate dissolved in 500 mB of hydrochloric acid in a heated basin under a mixer gives 500 mB of crude liquor, "
-                  "and what the ore leaves behind: monazite its thorium residue and its phosphate (bone meal), xenotime and euxenite a residue half the time.", "Dissolving"),
+        spotlight("fundamentals:light_rare_earth_sulfate", "Monazite, xenotime and the rest are phosphates hydrochloric acid barely touches, so they are cracked first: a concentrate baked with 250 mB of sulfuric acid in a heated basin "
+                  "gives a rare earth sulfate and frees 125 mB of phosphoric acid.", "Cracking"),
+        spotlight("fundamentals:roasted_bastnasite", "Bastnäsite is a carbonate and needs no acid bake: roast its concentrate on a campfire or in a smoker, and the roasted ore dissolves in 500 mB of hot hydrochloric acid "
+                  "straight to 500 mB of crude liquor, leaving nothing behind.", "Roasting"),
+        spotlight("fundamentals:monazite_residue_dust", "A sulfate leaches in 500 mB of hydrochloric acid under a mixer, cold, since rare earth sulfates dissolve worse hot, to 500 mB of crude liquor. "
+                  "Monazite's thorium stays behind as a residue; xenotime and euxenite leave one half the time.", "Leaching"),
         spotlight("fundamentals:clarifier_sludge", "Crude liquor still carries iron, aluminium and fines, and a battery fed it will run three cuts and then foul: crud at the interface, the organic turned brown and useless. "
                   "So clarify first: 1,000 mB of crude liquor and two limesand under a mixer drop the impurities as a sludge and leave 1,000 mB of liquor a battery wants. "
                   "A fouled organic is not lost: drained and scrubbed with one limesand, 1,000 mB gives back 900.", "Clarifying"),
@@ -217,13 +221,14 @@ def rare_earths():
         "The metal comes out of the oxide three ways, all in The Factory Must Grow's chemical vats. The lights (lanthanum to neodymium, and didymium) and the heavies both go through their fluoride first: "
         "one oxide and 500 mB of hydrofluoric acid in a basin under a mixer. The acid itself is two raw fluorite and 500 mB of sulfuric acid, heated; fluorite rides with the lead and zinc.",
         "Oxide to metal") + pages_of(
-        "Electrolysis, for the lights: a steel vat superheated by a blaze burner beneath it, two electrode holders with copper electrodes wired to the grid. One fluoride and two oxide give two ingots in five seconds; the fluoride is the molten salt bath, the oxide is what is reduced. "
+        "Electrolysis, for the lights: a steel vat superheated by a blaze burner beneath it, two electrode holders with copper electrodes wired to the grid. One fluoride and two oxide give two ingots in five seconds; the fluoride is the molten salt bath and comes back nine times in ten, the oxide is what is reduced. "
         "Calciothermic reduction, for the heavies and yttrium: two fluoride and two calcium ingots under 250 mB of argon in a superheated vat give two ingots and the fluorspar back as slag. "
         "Lanthanothermic distillation, for samarium, europium, thulium and ytterbium, which boil: two oxide and two lanthanum ingots under argon give two ingots and lanthanum oxide to go round again.") + pages_of(
-        "Argon is spun out of 1,000 mB of air in a centrifuge vat, nine millibuckets at a time. Calcium is two limesand and 500 mB of hydrochloric acid on electrodes. "
+        "Argon is spun out of 1,000 mB of air in a centrifuge vat, nine millibuckets at a time. Calcium is the plant's own calcium chloride, two of it electrolysed molten on electrodes in a heated vat to two ingots. "
         "A kindled blaze burner is 1,000 °C and one fed a blaze cake 1,600. The fluoride bath electrolyses at 1,000 to 1,100 °C, and the two metallothermic reductions run near 1,500, past where the fluorspar slag melts, so all three want the cake."), 6)
     entry("rare_earths", "uses", "What they are for", "fundamentals:neodymium_iron_boron_ingot", pages_of(
-        "Nothing in the chain is for its own sake. Neodymium (or didymium) with iron, borax and a little dysprosium, superheated, sinters into NdFeB, the strongest magnet; samarium with cobaltite into SmCo, which keeps its field hot. "
+        "Nothing in the chain is for its own sake. Neodymium (or didymium) with iron, ferroboron and a little dysprosium, superheated under 100 mB of argon, melts into NdFeB, the strongest magnet; samarium with cobalt into SmCo, which keeps its field hot. "
+        "Ferroboron is a borax, an iron and two charcoal, superheated. "
         "Polarized, either is the magnet The Factory Must Grow's motors, generators and electric pumps are built from.", "What they are for") + pages_of(
         "Lanthanum metal reduces the four that boil, and lanthanum oxide is the catalyst that cracks naphtha. Cerium with iron is ferrocerium, the lighter flint, a flint and steel that never wears out. "
         "Europium's red and terbium's green on a yttria host are the phosphor every lamp takes. Yttria lines the fireproof vat. Didymium glass is the welder's lens the goggles are made of. Erbium turns glass pink. "
@@ -234,8 +239,8 @@ def rare_earths():
         "A separation plant makes two kinds of waste, and both have to go somewhere. Every cut leaves a fifth of a batch of spent chloride liquor, "
         "acid with everything the organic did not want dissolved in it. It collects in a sump under the head stage; when the sump is full the battery stops, "
         "and the goggles say so. Pump it out through the head stage's underside.", "Waste") + [
-        spotlight("fundamentals:salt", "Two limesand in 1,000 mB of spent liquor in a basin under a mixer neutralise it to brine, which is harmless, and 1,000 mB of brine boiled in a heated basin leaves three salt. "
-                  "The salt goes back into the clay leach: the plant's waste water closes its own loop, as the real ones are made to.", "Lime and brine"),
+        spotlight("fundamentals:calcium_chloride", "Two limesand in 1,000 mB of spent liquor in a basin under a mixer neutralise it to calcium chloride brine, and 1,000 mB of brine boiled in a heated basin leaves three calcium chloride. "
+                  "That is what calcium metal is electrolysed from: the plant's waste closes its own loop.", "Lime and brine"),
         spotlight("fundamentals:monazite_residue_dust", "Monazite carries thorium. When the light concentrate dissolves, the thorium stays behind as a residue, mildly radioactive and good for nothing here. "
                   "Nine pack into a block; cast it and bury it deep, away from where you live. Bastnäsite and the clay leave none.", "Residue")], 8)
     entry("rare_earths", "acids", "The acids", "fundamentals:hydrochloric_acid_bucket", pages_of(
@@ -257,18 +262,20 @@ def rare_earths():
 def metals():
     category("metals", "The other metals", "Cobalt, zinc and nickel, and the porphyry chain: copper, molybdenum and the rhenium hiding in it.", "fundamentals:cobalt_ingot", 3)
     entry("metals", "cobalt", "Cobalt", "fundamentals:cobalt_ingot", pages_of(
-        "Cobaltite is a cobalt arsenide-sulfide from the silver-cobalt veins in calcite. Roast it on a campfire or in a smoker to drive off the arsenic and sulfur, "
-        "then blast the roasted ore to the metal. Four cobalt and a samarium make SmCo; two cobalt, four nickel and a rhenium make the superalloy. "
+        "Cobaltite is a cobalt arsenide-sulfide from the silver-cobalt veins in calcite. Roast it on a campfire or in a smoker to drive off the arsenic and sulfur and leave the oxide. "
+        "Cobalt melts at 1,495 °C and was never smelted from its ore: the oxide is reduced under hydrogen, as molybdenum is: two roasted cobaltite and 500 mB of hydrogen in a heated chemical vat give two ingots. "
+        "Four cobalt and a samarium make SmCo; two cobalt, four nickel and a rhenium make the superalloy. "
         "Roasted cobaltite calcined with two bauxite powder is cobalt blue, four blue dye.", "Cobalt"), 0)
     entry("metals", "porphyry", "Copper, molybdenum, rhenium", "fundamentals:raw_molybdenite", pages_of(
         "A porphyry copper stock carries chalcopyrite with a little molybdenite, and the molybdenite carries rhenium at parts per million. "
-        "Chalcopyrite roasted on a fire becomes a copper oxide the bloomery smelts to copper, the iron going to slag; bornite, chalcocite and covellite roast to a black copper calcine that does the same. "
+        "A copper sulfide smelts not to copper but to matte. Chalcopyrite roasted on a fire, or the calcine bornite, chalcocite and covellite roast to, melts in the bloomery to copper matte and slag. "
+        "Two matte and a sand, superheated, are the converter: the air burns off the sulfur and the iron, which the sand fluxes to slag, and leaves two blister copper. The blast furnace fire-refines blister to copper. "
         "Two raw molybdenite roasted in a heated basin give two molybdenum trioxide, and half the time a rhenium flue dust: "
         "the roaster's flue is where every gram of the world's rhenium comes from.", "The porphyry chain") + pages_of(
         "Both oxides are reduced under hydrogen in a heated chemical vat with an industrial mixer, as the industry does: two trioxide and 500 mB of hydrogen give two molybdenum ingots, "
         "two flue dust and 250 mB give one rhenium ingot. Hydrogen is The Factory Must Grow's."), 1)
     entry("metals", "superalloy", "Superalloy and molybdenum steel", "fundamentals:superalloy_ingot", pages_of(
-        "Four nickel, two cobalt and one rhenium, superheated, make four ingots of the nickel superalloy that turbine blades are cast from; "
+        "Four nickel, two cobalt and one rhenium, superheated under 100 mB of argon, make four ingots of the nickel superalloy that turbine blades are cast from; "
         "The Factory Must Grow's turbine blade now takes its plates. One molybdenum in four steel makes molybdenum steel, and its plates now make the heavy machinery casing.",
         "Superalloy and molybdenum steel"), 2)
     entry("metals", "tungsten", "Tungsten", "fundamentals:tungsten_ingot", pages_of(

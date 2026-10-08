@@ -34,6 +34,10 @@ public final class Separation {
     private static Item salt;
     private static Item calciumIngot;
     private static Item oxalicAcid;
+    private static Item roastedBastnasite;
+    private static Item lightRareEarthSulfate;
+    private static Item heavyRareEarthSulfate;
+    private static Item calciumChloride;
 
     private Separation() {}
 
@@ -73,7 +77,8 @@ public final class Separation {
     }
 
     public static List<Item> items() {
-        List<Item> items = new java.util.ArrayList<>(List.of(mixerSettlerItem, salt, oxalicAcid, calciumIngot));
+        List<Item> items = new java.util.ArrayList<>(List.of(mixerSettlerItem, salt, oxalicAcid, roastedBastnasite,
+                lightRareEarthSulfate, heavyRareEarthSulfate, calciumChloride, calciumIngot));
         Acids.all().values().forEach(acid -> items.add(acid.bucket));
         return items;
     }
@@ -142,6 +147,10 @@ public final class Separation {
         registry.accept(id("salt"), salt = new Item(new Item.Properties()));
         registry.accept(id("calcium_ingot"), calciumIngot = new Item(new Item.Properties()));
         registry.accept(id("oxalic_acid"), oxalicAcid = new Item(new Item.Properties()));
+        registry.accept(id("roasted_bastnasite"), roastedBastnasite = new Item(new Item.Properties()));
+        registry.accept(id("light_rare_earth_sulfate"), lightRareEarthSulfate = new Item(new Item.Properties()));
+        registry.accept(id("heavy_rare_earth_sulfate"), heavyRareEarthSulfate = new Item(new Item.Properties()));
+        registry.accept(id("calcium_chloride"), calciumChloride = new Item(new Item.Properties()));
         for (Acids.Acid acid : Acids.all().values()) {
             registry.accept(id(acid.id + "_bucket"), acid.bucket);
         }

@@ -20,10 +20,12 @@
       "tag": "c:ingots/iron"
     },
     {
-      "tag": "c:ingots/iron"
+      "item": "fundamentals:ferroboron"
     },
     {
-      "item": "fundamentals:raw_borax"
+      "type": "neoforge:single",
+      "amount": 100,
+      "fluid": "fundamentals:argon"
     }
   ],
   "results": [

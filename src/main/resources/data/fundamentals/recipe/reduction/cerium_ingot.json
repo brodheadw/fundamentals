@@ -25,6 +25,10 @@
     {
       "id": "fundamentals:cerium_ingot",
       "count": 2
+    },
+    {
+      "id": "fundamentals:cerium_fluoride",
+      "chance": 0.9
     }
   ],
   "heat_requirement": "superheated"
