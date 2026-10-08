@@ -370,6 +370,11 @@ def names():
     lang["goggles.fundamentals.mixer_settler.settling"] = "Coming to equilibrium: %s s"
     lang["goggles.fundamentals.mixer_settler.strip"] = "The far end wants %s"
     lang["goggles.fundamentals.mixer_settler.ready"] = "Parting %s into %s and %s"
+    lang["goggles.fundamentals.mixer_settler.organic_bar"] = "Organic  %s  %s/%s stages charged"
+    lang["goggles.fundamentals.mixer_settler.aqueous_bar"] = "Aqueous  %s  %s/%s stages wet"
+    lang["goggles.fundamentals.mixer_settler.ends"] = "Feed %s, strip %s"
+    lang["goggles.fundamentals.mixer_settler.products"] = "Out: %s at the head, %s at the tail"
+    lang["goggles.fundamentals.mixer_settler.nothing"] = "nothing"
     write(path, lang)
 
 

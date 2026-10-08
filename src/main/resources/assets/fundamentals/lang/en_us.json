@@ -271,5 +271,10 @@
   "item.fundamentals.yttrium_oxalate": "Yttrium Oxalate",
   "item.fundamentals.yttrium_oxide": "Yttrium Oxide",
   "itemGroup.fundamentals.materials": "Fundamentals Materials",
-  "itemGroup.fundamentals.minerals": "Fundamentals"
+  "itemGroup.fundamentals.minerals": "Fundamentals",
+  "goggles.fundamentals.mixer_settler.organic_bar": "Organic  %s  %s/%s stages charged",
+  "goggles.fundamentals.mixer_settler.aqueous_bar": "Aqueous  %s  %s/%s stages wet",
+  "goggles.fundamentals.mixer_settler.ends": "Feed %s, strip %s",
+  "goggles.fundamentals.mixer_settler.products": "Out: %s at the head, %s at the tail",
+  "goggles.fundamentals.mixer_settler.nothing": "nothing"
 }

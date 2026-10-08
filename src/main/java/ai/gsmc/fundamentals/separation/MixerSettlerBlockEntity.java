@@ -9,6 +9,8 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.network.chat.Style;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -370,7 +372,34 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         } else if (!stall.get().key().equals("full")) {
             tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler." + stall.get().key(), stall.get().args())));
         }
+        // The whole line, head to tail: one cell a stage, coloured by what it holds, hollow where there is less than a batch.
+        tooltip.add(indent(bar("organic_bar", battery, s -> s.organic)));
+        tooltip.add(indent(bar("aqueous_bar", battery, s -> s.aqueous)));
+        tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler.ends", held(head.aqueous), held(battery.tail().aqueous))));
+        tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler.products", held(head.out), held(battery.tail().out))));
         return true;
+    }
+
+    private static Component bar(String key, Battery battery, java.util.function.Function<MixerSettlerBlockEntity, Tank> tank) {
+        MutableComponent cells = Component.empty();
+        int charged = 0;
+        for (MixerSettlerBlockEntity stage : battery.stages()) {
+            Tank t = tank.apply(stage);
+            boolean full = t.getFluidAmount() >= stage.batch();
+            charged += full ? 1 : 0;
+            cells.append(Component.literal(full ? "\u2588" : "\u2591")
+                    .withStyle(Style.EMPTY.withColor(full ? Separation.tint(t.getFluid().getFluid()) : 0x555555)));
+        }
+        return Component.translatable("goggles.fundamentals.mixer_settler." + key, cells, charged, battery.size());
+    }
+
+    private static Component held(Tank tank) {
+        FluidStack stack = tank.getFluid();
+        if (stack.isEmpty()) {
+            return Component.translatable("goggles.fundamentals.mixer_settler.nothing");
+        }
+        return Component.literal(String.format("%,d mB ", stack.getAmount())).append(stack.getHoverName())
+                .withStyle(Style.EMPTY.withColor(Separation.tint(stack.getFluid())));
     }
 
     private static Component indent(Component text) {
