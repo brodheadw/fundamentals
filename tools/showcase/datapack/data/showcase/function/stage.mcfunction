@@ -6,89 +6,89 @@ gamerule doDaylightCycle false
 gamerule doWeatherCycle false
 gamerule doMobSpawning false
 kill @e[type=item]
-fill -12 -61 -85 549 -61 -78 minecraft:smooth_stone
-fill -12 -60 -85 549 -59 -78 minecraft:air
-fill -12 -58 -85 549 -57 -78 minecraft:air
-fill -12 -56 -85 549 -55 -78 minecraft:air
-fill -12 -54 -85 549 -53 -78 minecraft:air
-fill -12 -52 -85 549 -51 -78 minecraft:air
-fill -12 -61 -77 549 -61 -70 minecraft:smooth_stone
-fill -12 -60 -77 549 -59 -70 minecraft:air
-fill -12 -58 -77 549 -57 -70 minecraft:air
-fill -12 -56 -77 549 -55 -70 minecraft:air
-fill -12 -54 -77 549 -53 -70 minecraft:air
-fill -12 -52 -77 549 -51 -70 minecraft:air
-fill -12 -61 -69 549 -61 -62 minecraft:smooth_stone
-fill -12 -60 -69 549 -59 -62 minecraft:air
-fill -12 -58 -69 549 -57 -62 minecraft:air
-fill -12 -56 -69 549 -55 -62 minecraft:air
-fill -12 -54 -69 549 -53 -62 minecraft:air
-fill -12 -52 -69 549 -51 -62 minecraft:air
-fill -12 -61 -61 549 -61 -54 minecraft:smooth_stone
-fill -12 -60 -61 549 -59 -54 minecraft:air
-fill -12 -58 -61 549 -57 -54 minecraft:air
-fill -12 -56 -61 549 -55 -54 minecraft:air
-fill -12 -54 -61 549 -53 -54 minecraft:air
-fill -12 -52 -61 549 -51 -54 minecraft:air
-fill -12 -61 -53 549 -61 -46 minecraft:smooth_stone
-fill -12 -60 -53 549 -59 -46 minecraft:air
-fill -12 -58 -53 549 -57 -46 minecraft:air
-fill -12 -56 -53 549 -55 -46 minecraft:air
-fill -12 -54 -53 549 -53 -46 minecraft:air
-fill -12 -52 -53 549 -51 -46 minecraft:air
-fill -12 -61 -45 549 -61 -38 minecraft:smooth_stone
-fill -12 -60 -45 549 -59 -38 minecraft:air
-fill -12 -58 -45 549 -57 -38 minecraft:air
-fill -12 -56 -45 549 -55 -38 minecraft:air
-fill -12 -54 -45 549 -53 -38 minecraft:air
-fill -12 -52 -45 549 -51 -38 minecraft:air
-fill -12 -61 -37 549 -61 -30 minecraft:smooth_stone
-fill -12 -60 -37 549 -59 -30 minecraft:air
-fill -12 -58 -37 549 -57 -30 minecraft:air
-fill -12 -56 -37 549 -55 -30 minecraft:air
-fill -12 -54 -37 549 -53 -30 minecraft:air
-fill -12 -52 -37 549 -51 -30 minecraft:air
-fill -12 -61 -29 549 -61 -22 minecraft:smooth_stone
-fill -12 -60 -29 549 -59 -22 minecraft:air
-fill -12 -58 -29 549 -57 -22 minecraft:air
-fill -12 -56 -29 549 -55 -22 minecraft:air
-fill -12 -54 -29 549 -53 -22 minecraft:air
-fill -12 -52 -29 549 -51 -22 minecraft:air
-fill -12 -61 -21 549 -61 -14 minecraft:smooth_stone
-fill -12 -60 -21 549 -59 -14 minecraft:air
-fill -12 -58 -21 549 -57 -14 minecraft:air
-fill -12 -56 -21 549 -55 -14 minecraft:air
-fill -12 -54 -21 549 -53 -14 minecraft:air
-fill -12 -52 -21 549 -51 -14 minecraft:air
-fill -12 -61 -13 549 -61 -6 minecraft:smooth_stone
-fill -12 -60 -13 549 -59 -6 minecraft:air
-fill -12 -58 -13 549 -57 -6 minecraft:air
-fill -12 -56 -13 549 -55 -6 minecraft:air
-fill -12 -54 -13 549 -53 -6 minecraft:air
-fill -12 -52 -13 549 -51 -6 minecraft:air
-fill -12 -61 -5 549 -61 2 minecraft:smooth_stone
-fill -12 -60 -5 549 -59 2 minecraft:air
-fill -12 -58 -5 549 -57 2 minecraft:air
-fill -12 -56 -5 549 -55 2 minecraft:air
-fill -12 -54 -5 549 -53 2 minecraft:air
-fill -12 -52 -5 549 -51 2 minecraft:air
-fill -12 -61 3 549 -61 10 minecraft:smooth_stone
-fill -12 -60 3 549 -59 10 minecraft:air
-fill -12 -58 3 549 -57 10 minecraft:air
-fill -12 -56 3 549 -55 10 minecraft:air
-fill -12 -54 3 549 -53 10 minecraft:air
-fill -12 -52 3 549 -51 10 minecraft:air
-fill -12 -61 11 549 -61 13 minecraft:smooth_stone
-fill -12 -60 11 549 -59 13 minecraft:air
-fill -12 -58 11 549 -57 13 minecraft:air
-fill -12 -56 11 549 -55 13 minecraft:air
-fill -12 -54 11 549 -53 13 minecraft:air
-fill -12 -52 11 549 -51 13 minecraft:air
-forceload add -12 -85 115 13
-forceload add 116 -85 243 13
-forceload add 244 -85 371 13
-forceload add 372 -85 499 13
-forceload add 500 -85 549 13
+fill -15 -61 -84 549 -61 -77 minecraft:smooth_stone
+fill -15 -60 -84 549 -59 -77 minecraft:air
+fill -15 -58 -84 549 -57 -77 minecraft:air
+fill -15 -56 -84 549 -55 -77 minecraft:air
+fill -15 -54 -84 549 -53 -77 minecraft:air
+fill -15 -52 -84 549 -51 -77 minecraft:air
+fill -15 -61 -76 549 -61 -69 minecraft:smooth_stone
+fill -15 -60 -76 549 -59 -69 minecraft:air
+fill -15 -58 -76 549 -57 -69 minecraft:air
+fill -15 -56 -76 549 -55 -69 minecraft:air
+fill -15 -54 -76 549 -53 -69 minecraft:air
+fill -15 -52 -76 549 -51 -69 minecraft:air
+fill -15 -61 -68 549 -61 -61 minecraft:smooth_stone
+fill -15 -60 -68 549 -59 -61 minecraft:air
+fill -15 -58 -68 549 -57 -61 minecraft:air
+fill -15 -56 -68 549 -55 -61 minecraft:air
+fill -15 -54 -68 549 -53 -61 minecraft:air
+fill -15 -52 -68 549 -51 -61 minecraft:air
+fill -15 -61 -60 549 -61 -53 minecraft:smooth_stone
+fill -15 -60 -60 549 -59 -53 minecraft:air
+fill -15 -58 -60 549 -57 -53 minecraft:air
+fill -15 -56 -60 549 -55 -53 minecraft:air
+fill -15 -54 -60 549 -53 -53 minecraft:air
+fill -15 -52 -60 549 -51 -53 minecraft:air
+fill -15 -61 -52 549 -61 -45 minecraft:smooth_stone
+fill -15 -60 -52 549 -59 -45 minecraft:air
+fill -15 -58 -52 549 -57 -45 minecraft:air
+fill -15 -56 -52 549 -55 -45 minecraft:air
+fill -15 -54 -52 549 -53 -45 minecraft:air
+fill -15 -52 -52 549 -51 -45 minecraft:air
+fill -15 -61 -44 549 -61 -37 minecraft:smooth_stone
+fill -15 -60 -44 549 -59 -37 minecraft:air
+fill -15 -58 -44 549 -57 -37 minecraft:air
+fill -15 -56 -44 549 -55 -37 minecraft:air
+fill -15 -54 -44 549 -53 -37 minecraft:air
+fill -15 -52 -44 549 -51 -37 minecraft:air
+fill -15 -61 -36 549 -61 -29 minecraft:smooth_stone
+fill -15 -60 -36 549 -59 -29 minecraft:air
+fill -15 -58 -36 549 -57 -29 minecraft:air
+fill -15 -56 -36 549 -55 -29 minecraft:air
+fill -15 -54 -36 549 -53 -29 minecraft:air
+fill -15 -52 -36 549 -51 -29 minecraft:air
+fill -15 -61 -28 549 -61 -21 minecraft:smooth_stone
+fill -15 -60 -28 549 -59 -21 minecraft:air
+fill -15 -58 -28 549 -57 -21 minecraft:air
+fill -15 -56 -28 549 -55 -21 minecraft:air
+fill -15 -54 -28 549 -53 -21 minecraft:air
+fill -15 -52 -28 549 -51 -21 minecraft:air
+fill -15 -61 -20 549 -61 -13 minecraft:smooth_stone
+fill -15 -60 -20 549 -59 -13 minecraft:air
+fill -15 -58 -20 549 -57 -13 minecraft:air
+fill -15 -56 -20 549 -55 -13 minecraft:air
+fill -15 -54 -20 549 -53 -13 minecraft:air
+fill -15 -52 -20 549 -51 -13 minecraft:air
+fill -15 -61 -12 549 -61 -5 minecraft:smooth_stone
+fill -15 -60 -12 549 -59 -5 minecraft:air
+fill -15 -58 -12 549 -57 -5 minecraft:air
+fill -15 -56 -12 549 -55 -5 minecraft:air
+fill -15 -54 -12 549 -53 -5 minecraft:air
+fill -15 -52 -12 549 -51 -5 minecraft:air
+fill -15 -61 -4 549 -61 3 minecraft:smooth_stone
+fill -15 -60 -4 549 -59 3 minecraft:air
+fill -15 -58 -4 549 -57 3 minecraft:air
+fill -15 -56 -4 549 -55 3 minecraft:air
+fill -15 -54 -4 549 -53 3 minecraft:air
+fill -15 -52 -4 549 -51 3 minecraft:air
+fill -15 -61 4 549 -61 11 minecraft:smooth_stone
+fill -15 -60 4 549 -59 11 minecraft:air
+fill -15 -58 4 549 -57 11 minecraft:air
+fill -15 -56 4 549 -55 11 minecraft:air
+fill -15 -54 4 549 -53 11 minecraft:air
+fill -15 -52 4 549 -51 11 minecraft:air
+fill -15 -61 12 549 -61 13 minecraft:smooth_stone
+fill -15 -60 12 549 -59 13 minecraft:air
+fill -15 -58 12 549 -57 13 minecraft:air
+fill -15 -56 12 549 -55 13 minecraft:air
+fill -15 -54 12 549 -53 13 minecraft:air
+fill -15 -52 12 549 -51 13 minecraft:air
+forceload add -15 -84 112 13
+forceload add 113 -84 240 13
+forceload add 241 -84 368 13
+forceload add 369 -84 496 13
+forceload add 497 -84 549 13
 setblock 0 -60 0 fundamentals:mixer_settler[facing=east]
 setblock 0 -59 0 fundamentals:mixer_settler[facing=east]
 setblock 0 -60 1 fundamentals:mixer_settler[facing=east]
@@ -1028,28 +1028,32 @@ setblock 7 -62 -24 create:creative_motor[facing=up]{ScrollValue:64}
 setblock 6 -62 -24 create:fluid_tank
 setblock 7 -60 -26 create:fluid_pipe[north=true,south=true]
 setblock 7 -60 -27 create:fluid_pipe[south=true,up=true]
-setblock 7 -59 -27 create:fluid_pipe[down=true,north=true]
-setblock 7 -59 -28 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
-setblock 7 -57 -28 create:mechanical_mixer
-setblock 8 -57 -28 create:cogwheel[axis=y]
-setblock 8 -56 -28 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 7 -59 -27 create:fluid_pipe[down=true,up=true]
+setblock 7 -58 -27 create:fluid_pipe[down=true,up=true]
+setblock 7 -57 -27 create:fluid_pipe[down=true,north=true]
+setblock 7 -57 -28 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 7 -55 -28 create:mechanical_mixer
+setblock 8 -55 -28 create:cogwheel[axis=y]
+setblock 8 -54 -28 create:creative_motor[facing=down]{ScrollValue:64}
 setblock 6 -60 -28 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
-setblock 7 -59 -29 minecraft:hopper[facing=down]
-setblock 7 -60 -29 minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
-setblock 7 -60 -30 create:andesite_funnel[facing=north]
-setblock 7 -60 -31 create:depot
+setblock 7 -58 -29 create:chute
+setblock 7 -59 -29 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 7 -60 -29 minecraft:hopper[facing=north]
+setblock 7 -60 -30 create:depot
 setblock 40 -60 -26 create:fluid_pipe[north=true,south=true]
 setblock 40 -60 -27 create:fluid_pipe[south=true,up=true]
-setblock 40 -59 -27 create:fluid_pipe[down=true,north=true]
-setblock 40 -59 -28 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
-setblock 40 -57 -28 create:mechanical_mixer
-setblock 41 -57 -28 create:cogwheel[axis=y]
-setblock 41 -56 -28 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 40 -59 -27 create:fluid_pipe[down=true,up=true]
+setblock 40 -58 -27 create:fluid_pipe[down=true,up=true]
+setblock 40 -57 -27 create:fluid_pipe[down=true,north=true]
+setblock 40 -57 -28 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 40 -55 -28 create:mechanical_mixer
+setblock 41 -55 -28 create:cogwheel[axis=y]
+setblock 41 -54 -28 create:creative_motor[facing=down]{ScrollValue:64}
 setblock 39 -60 -28 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
-setblock 40 -59 -29 minecraft:hopper[facing=down]
-setblock 40 -60 -29 minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
-setblock 40 -60 -30 create:andesite_funnel[facing=north]
-setblock 40 -60 -31 create:depot
+setblock 40 -58 -29 create:chute
+setblock 40 -59 -29 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 40 -60 -29 minecraft:hopper[facing=north]
+setblock 40 -60 -30 create:depot
 setblock 43 -60 -14 create:fluid_pipe[north=true,south=true]
 setblock 43 -60 -15 create:fluid_pipe[north=true,south=true]
 setblock 43 -60 -16 create:fluid_pipe[north=true,south=true]
@@ -1886,30 +1890,51 @@ setblock 49 -61 -24 create:mechanical_pump[facing=down]
 setblock 50 -61 -24 create:cogwheel[axis=y]
 setblock 50 -62 -24 create:creative_motor[facing=up]{ScrollValue:64}
 setblock 49 -62 -24 create:fluid_tank
+setblock 47 -60 -24 create:mechanical_pump[facing=north]
+setblock 47 -59 -24 create:cogwheel[axis=z]
+setblock 47 -59 -25 create:creative_motor[facing=south]{ScrollValue:64}
+setblock 47 -60 -25 create:fluid_pipe[north=true,south=true]
+setblock 47 -60 -26 create:fluid_pipe[south=true,up=true]
+setblock 47 -59 -26 create:fluid_pipe[down=true,up=true]
+setblock 47 -58 -26 create:fluid_pipe[down=true,up=true]
+setblock 47 -57 -26 create:fluid_pipe[down=true,north=true]
+setblock 47 -57 -27 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 47 -55 -27 create:mechanical_mixer
+setblock 48 -55 -27 create:cogwheel[axis=y]
+setblock 48 -54 -27 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 46 -60 -27 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
+setblock 47 -58 -28 create:chute
+setblock 47 -59 -28 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 47 -60 -28 minecraft:hopper[facing=north]
+setblock 47 -60 -29 create:depot
 setblock 50 -60 -26 create:fluid_pipe[north=true,south=true]
 setblock 50 -60 -27 create:fluid_pipe[south=true,up=true]
-setblock 50 -59 -27 create:fluid_pipe[down=true,north=true]
-setblock 50 -59 -28 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
-setblock 50 -57 -28 create:mechanical_mixer
-setblock 51 -57 -28 create:cogwheel[axis=y]
-setblock 51 -56 -28 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 50 -59 -27 create:fluid_pipe[down=true,up=true]
+setblock 50 -58 -27 create:fluid_pipe[down=true,up=true]
+setblock 50 -57 -27 create:fluid_pipe[down=true,north=true]
+setblock 50 -57 -28 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 50 -55 -28 create:mechanical_mixer
+setblock 51 -55 -28 create:cogwheel[axis=y]
+setblock 51 -54 -28 create:creative_motor[facing=down]{ScrollValue:64}
 setblock 49 -60 -28 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
-setblock 50 -59 -29 minecraft:hopper[facing=down]
-setblock 50 -60 -29 minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
-setblock 50 -60 -30 create:andesite_funnel[facing=north]
-setblock 50 -60 -31 create:depot
+setblock 50 -58 -29 create:chute
+setblock 50 -59 -29 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 50 -60 -29 minecraft:hopper[facing=north]
+setblock 50 -60 -30 create:depot
 setblock 143 -60 -26 create:fluid_pipe[north=true,south=true]
 setblock 143 -60 -27 create:fluid_pipe[south=true,up=true]
-setblock 143 -59 -27 create:fluid_pipe[down=true,north=true]
-setblock 143 -59 -28 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
-setblock 143 -57 -28 create:mechanical_mixer
-setblock 144 -57 -28 create:cogwheel[axis=y]
-setblock 144 -56 -28 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 143 -59 -27 create:fluid_pipe[down=true,up=true]
+setblock 143 -58 -27 create:fluid_pipe[down=true,up=true]
+setblock 143 -57 -27 create:fluid_pipe[down=true,north=true]
+setblock 143 -57 -28 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 143 -55 -28 create:mechanical_mixer
+setblock 144 -55 -28 create:cogwheel[axis=y]
+setblock 144 -54 -28 create:creative_motor[facing=down]{ScrollValue:64}
 setblock 142 -60 -28 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
-setblock 143 -59 -29 minecraft:hopper[facing=down]
-setblock 143 -60 -29 minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
-setblock 143 -60 -30 create:andesite_funnel[facing=north]
-setblock 143 -60 -31 create:depot
+setblock 143 -58 -29 create:chute
+setblock 143 -59 -29 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 143 -60 -29 minecraft:hopper[facing=north]
+setblock 143 -60 -30 create:depot
 setblock 22 -60 -2 create:fluid_pipe[north=true,south=true]
 setblock 22 -60 -3 create:fluid_pipe[north=true,south=true]
 setblock 22 -60 -4 create:fluid_pipe[north=true,south=true]
@@ -2776,16 +2801,18 @@ setblock 156 -62 -24 create:creative_motor[facing=up]{ScrollValue:64}
 setblock 155 -62 -24 create:fluid_tank
 setblock 156 -60 -26 create:fluid_pipe[north=true,south=true]
 setblock 156 -60 -27 create:fluid_pipe[south=true,up=true]
-setblock 156 -59 -27 create:fluid_pipe[down=true,north=true]
-setblock 156 -59 -28 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
-setblock 156 -57 -28 create:mechanical_mixer
-setblock 157 -57 -28 create:cogwheel[axis=y]
-setblock 157 -56 -28 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 156 -59 -27 create:fluid_pipe[down=true,up=true]
+setblock 156 -58 -27 create:fluid_pipe[down=true,up=true]
+setblock 156 -57 -27 create:fluid_pipe[down=true,north=true]
+setblock 156 -57 -28 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 156 -55 -28 create:mechanical_mixer
+setblock 157 -55 -28 create:cogwheel[axis=y]
+setblock 157 -54 -28 create:creative_motor[facing=down]{ScrollValue:64}
 setblock 155 -60 -28 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
-setblock 156 -59 -29 minecraft:hopper[facing=down]
-setblock 156 -60 -29 minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
-setblock 156 -60 -30 create:andesite_funnel[facing=north]
-setblock 156 -60 -31 create:depot
+setblock 156 -58 -29 create:chute
+setblock 156 -59 -29 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 156 -60 -29 minecraft:hopper[facing=north]
+setblock 156 -60 -30 create:depot
 setblock 201 -60 -26 create:fluid_pipe[north=true,south=true]
 setblock 201 -60 -27 create:fluid_pipe[north=true,south=true]
 setblock 201 -60 -28 create:fluid_pipe[north=true,south=true]
@@ -3270,28 +3297,32 @@ setblock 204 -62 -36 create:creative_motor[facing=up]{ScrollValue:64}
 setblock 203 -62 -36 create:fluid_tank
 setblock 204 -60 -38 create:fluid_pipe[north=true,south=true]
 setblock 204 -60 -39 create:fluid_pipe[south=true,up=true]
-setblock 204 -59 -39 create:fluid_pipe[down=true,north=true]
-setblock 204 -59 -40 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
-setblock 204 -57 -40 create:mechanical_mixer
-setblock 205 -57 -40 create:cogwheel[axis=y]
-setblock 205 -56 -40 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 204 -59 -39 create:fluid_pipe[down=true,up=true]
+setblock 204 -58 -39 create:fluid_pipe[down=true,up=true]
+setblock 204 -57 -39 create:fluid_pipe[down=true,north=true]
+setblock 204 -57 -40 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 204 -55 -40 create:mechanical_mixer
+setblock 205 -55 -40 create:cogwheel[axis=y]
+setblock 205 -54 -40 create:creative_motor[facing=down]{ScrollValue:64}
 setblock 203 -60 -40 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
-setblock 204 -59 -41 minecraft:hopper[facing=down]
-setblock 204 -60 -41 minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
-setblock 204 -60 -42 create:andesite_funnel[facing=north]
-setblock 204 -60 -43 create:depot
+setblock 204 -58 -41 create:chute
+setblock 204 -59 -41 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 204 -60 -41 minecraft:hopper[facing=north]
+setblock 204 -60 -42 create:depot
 setblock 255 -60 -38 create:fluid_pipe[north=true,south=true]
 setblock 255 -60 -39 create:fluid_pipe[south=true,up=true]
-setblock 255 -59 -39 create:fluid_pipe[down=true,north=true]
-setblock 255 -59 -40 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
-setblock 255 -57 -40 create:mechanical_mixer
-setblock 256 -57 -40 create:cogwheel[axis=y]
-setblock 256 -56 -40 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 255 -59 -39 create:fluid_pipe[down=true,up=true]
+setblock 255 -58 -39 create:fluid_pipe[down=true,up=true]
+setblock 255 -57 -39 create:fluid_pipe[down=true,north=true]
+setblock 255 -57 -40 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 255 -55 -40 create:mechanical_mixer
+setblock 256 -55 -40 create:cogwheel[axis=y]
+setblock 256 -54 -40 create:creative_motor[facing=down]{ScrollValue:64}
 setblock 254 -60 -40 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
-setblock 255 -59 -41 minecraft:hopper[facing=down]
-setblock 255 -60 -41 minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
-setblock 255 -60 -42 create:andesite_funnel[facing=north]
-setblock 255 -60 -43 create:depot
+setblock 255 -58 -41 create:chute
+setblock 255 -59 -41 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 255 -60 -41 minecraft:hopper[facing=north]
+setblock 255 -60 -42 create:depot
 setblock 180 -60 -14 create:fluid_pipe[north=true,south=true]
 setblock 180 -60 -15 create:fluid_pipe[north=true,south=true]
 setblock 180 -60 -16 create:fluid_pipe[north=true,south=true]
@@ -4254,28 +4285,32 @@ setblock 268 -62 -36 create:creative_motor[facing=up]{ScrollValue:64}
 setblock 267 -62 -36 create:fluid_tank
 setblock 268 -60 -38 create:fluid_pipe[north=true,south=true]
 setblock 268 -60 -39 create:fluid_pipe[south=true,up=true]
-setblock 268 -59 -39 create:fluid_pipe[down=true,north=true]
-setblock 268 -59 -40 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
-setblock 268 -57 -40 create:mechanical_mixer
-setblock 269 -57 -40 create:cogwheel[axis=y]
-setblock 269 -56 -40 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 268 -59 -39 create:fluid_pipe[down=true,up=true]
+setblock 268 -58 -39 create:fluid_pipe[down=true,up=true]
+setblock 268 -57 -39 create:fluid_pipe[down=true,north=true]
+setblock 268 -57 -40 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 268 -55 -40 create:mechanical_mixer
+setblock 269 -55 -40 create:cogwheel[axis=y]
+setblock 269 -54 -40 create:creative_motor[facing=down]{ScrollValue:64}
 setblock 267 -60 -40 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
-setblock 268 -59 -41 minecraft:hopper[facing=down]
-setblock 268 -60 -41 minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
-setblock 268 -60 -42 create:andesite_funnel[facing=north]
-setblock 268 -60 -43 create:depot
+setblock 268 -58 -41 create:chute
+setblock 268 -59 -41 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 268 -60 -41 minecraft:hopper[facing=north]
+setblock 268 -60 -42 create:depot
 setblock 325 -60 -38 create:fluid_pipe[north=true,south=true]
 setblock 325 -60 -39 create:fluid_pipe[south=true,up=true]
-setblock 325 -59 -39 create:fluid_pipe[down=true,north=true]
-setblock 325 -59 -40 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
-setblock 325 -57 -40 create:mechanical_mixer
-setblock 326 -57 -40 create:cogwheel[axis=y]
-setblock 326 -56 -40 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 325 -59 -39 create:fluid_pipe[down=true,up=true]
+setblock 325 -58 -39 create:fluid_pipe[down=true,up=true]
+setblock 325 -57 -39 create:fluid_pipe[down=true,north=true]
+setblock 325 -57 -40 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 325 -55 -40 create:mechanical_mixer
+setblock 326 -55 -40 create:cogwheel[axis=y]
+setblock 326 -54 -40 create:creative_motor[facing=down]{ScrollValue:64}
 setblock 324 -60 -40 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
-setblock 325 -59 -41 minecraft:hopper[facing=down]
-setblock 325 -60 -41 minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
-setblock 325 -60 -42 create:andesite_funnel[facing=north]
-setblock 325 -60 -43 create:depot
+setblock 325 -58 -41 create:chute
+setblock 325 -59 -41 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 325 -60 -41 minecraft:hopper[facing=north]
+setblock 325 -60 -42 create:depot
 setblock 298 -60 -26 create:fluid_pipe[north=true,south=true]
 setblock 298 -60 -27 create:fluid_pipe[north=true,south=true]
 setblock 298 -60 -28 create:fluid_pipe[north=true,south=true]
@@ -4700,16 +4735,18 @@ setblock 335 -62 -36 create:creative_motor[facing=up]{ScrollValue:64}
 setblock 334 -62 -36 create:fluid_tank
 setblock 335 -60 -38 create:fluid_pipe[north=true,south=true]
 setblock 335 -60 -39 create:fluid_pipe[south=true,up=true]
-setblock 335 -59 -39 create:fluid_pipe[down=true,north=true]
-setblock 335 -59 -40 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
-setblock 335 -57 -40 create:mechanical_mixer
-setblock 336 -57 -40 create:cogwheel[axis=y]
-setblock 336 -56 -40 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 335 -59 -39 create:fluid_pipe[down=true,up=true]
+setblock 335 -58 -39 create:fluid_pipe[down=true,up=true]
+setblock 335 -57 -39 create:fluid_pipe[down=true,north=true]
+setblock 335 -57 -40 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 335 -55 -40 create:mechanical_mixer
+setblock 336 -55 -40 create:cogwheel[axis=y]
+setblock 336 -54 -40 create:creative_motor[facing=down]{ScrollValue:64}
 setblock 334 -60 -40 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
-setblock 335 -59 -41 minecraft:hopper[facing=down]
-setblock 335 -60 -41 minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
-setblock 335 -60 -42 create:andesite_funnel[facing=north]
-setblock 335 -60 -43 create:depot
+setblock 335 -58 -41 create:chute
+setblock 335 -59 -41 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 335 -60 -41 minecraft:hopper[facing=north]
+setblock 335 -60 -42 create:depot
 setblock 374 -60 -38 create:fluid_pipe[north=true,south=true]
 setblock 374 -60 -39 create:fluid_pipe[north=true,south=true]
 setblock 374 -60 -40 create:fluid_pipe[north=true,south=true]
@@ -5526,28 +5563,32 @@ setblock 380 -62 -60 create:creative_motor[facing=up]{ScrollValue:64}
 setblock 379 -62 -60 create:fluid_tank
 setblock 380 -60 -62 create:fluid_pipe[north=true,south=true]
 setblock 380 -60 -63 create:fluid_pipe[south=true,up=true]
-setblock 380 -59 -63 create:fluid_pipe[down=true,north=true]
-setblock 380 -59 -64 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
-setblock 380 -57 -64 create:mechanical_mixer
-setblock 381 -57 -64 create:cogwheel[axis=y]
-setblock 381 -56 -64 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 380 -59 -63 create:fluid_pipe[down=true,up=true]
+setblock 380 -58 -63 create:fluid_pipe[down=true,up=true]
+setblock 380 -57 -63 create:fluid_pipe[down=true,north=true]
+setblock 380 -57 -64 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 380 -55 -64 create:mechanical_mixer
+setblock 381 -55 -64 create:cogwheel[axis=y]
+setblock 381 -54 -64 create:creative_motor[facing=down]{ScrollValue:64}
 setblock 379 -60 -64 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
-setblock 380 -59 -65 minecraft:hopper[facing=down]
-setblock 380 -60 -65 minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
-setblock 380 -60 -66 create:andesite_funnel[facing=north]
-setblock 380 -60 -67 create:depot
+setblock 380 -58 -65 create:chute
+setblock 380 -59 -65 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 380 -60 -65 minecraft:hopper[facing=north]
+setblock 380 -60 -66 create:depot
 setblock 437 -60 -62 create:fluid_pipe[north=true,south=true]
 setblock 437 -60 -63 create:fluid_pipe[south=true,up=true]
-setblock 437 -59 -63 create:fluid_pipe[down=true,north=true]
-setblock 437 -59 -64 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
-setblock 437 -57 -64 create:mechanical_mixer
-setblock 438 -57 -64 create:cogwheel[axis=y]
-setblock 438 -56 -64 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 437 -59 -63 create:fluid_pipe[down=true,up=true]
+setblock 437 -58 -63 create:fluid_pipe[down=true,up=true]
+setblock 437 -57 -63 create:fluid_pipe[down=true,north=true]
+setblock 437 -57 -64 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 437 -55 -64 create:mechanical_mixer
+setblock 438 -55 -64 create:cogwheel[axis=y]
+setblock 438 -54 -64 create:creative_motor[facing=down]{ScrollValue:64}
 setblock 436 -60 -64 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
-setblock 437 -59 -65 minecraft:hopper[facing=down]
-setblock 437 -60 -65 minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
-setblock 437 -60 -66 create:andesite_funnel[facing=north]
-setblock 437 -60 -67 create:depot
+setblock 437 -58 -65 create:chute
+setblock 437 -59 -65 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 437 -60 -65 minecraft:hopper[facing=north]
+setblock 437 -60 -66 create:depot
 setblock 404 -60 -50 create:fluid_pipe[north=true,south=true]
 setblock 404 -60 -51 create:fluid_pipe[north=true,south=true]
 setblock 404 -60 -52 create:fluid_pipe[north=true,south=true]
@@ -5928,16 +5969,18 @@ setblock 447 -62 -60 create:creative_motor[facing=up]{ScrollValue:64}
 setblock 446 -62 -60 create:fluid_tank
 setblock 447 -60 -62 create:fluid_pipe[north=true,south=true]
 setblock 447 -60 -63 create:fluid_pipe[south=true,up=true]
-setblock 447 -59 -63 create:fluid_pipe[down=true,north=true]
-setblock 447 -59 -64 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
-setblock 447 -57 -64 create:mechanical_mixer
-setblock 448 -57 -64 create:cogwheel[axis=y]
-setblock 448 -56 -64 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 447 -59 -63 create:fluid_pipe[down=true,up=true]
+setblock 447 -58 -63 create:fluid_pipe[down=true,up=true]
+setblock 447 -57 -63 create:fluid_pipe[down=true,north=true]
+setblock 447 -57 -64 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 447 -55 -64 create:mechanical_mixer
+setblock 448 -55 -64 create:cogwheel[axis=y]
+setblock 448 -54 -64 create:creative_motor[facing=down]{ScrollValue:64}
 setblock 446 -60 -64 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
-setblock 447 -59 -65 minecraft:hopper[facing=down]
-setblock 447 -60 -65 minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
-setblock 447 -60 -66 create:andesite_funnel[facing=north]
-setblock 447 -60 -67 create:depot
+setblock 447 -58 -65 create:chute
+setblock 447 -59 -65 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 447 -60 -65 minecraft:hopper[facing=north]
+setblock 447 -60 -66 create:depot
 setblock 480 -60 -62 create:fluid_pipe[north=true,south=true]
 setblock 480 -60 -63 create:fluid_pipe[north=true,south=true]
 setblock 480 -60 -64 create:fluid_pipe[north=true,south=true]
@@ -6472,39 +6515,50 @@ setblock 483 -62 -72 create:creative_motor[facing=up]{ScrollValue:64}
 setblock 482 -62 -72 create:fluid_tank
 setblock 483 -60 -74 create:fluid_pipe[north=true,south=true]
 setblock 483 -60 -75 create:fluid_pipe[south=true,up=true]
-setblock 483 -59 -75 create:fluid_pipe[down=true,north=true]
-setblock 483 -59 -76 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
-setblock 483 -57 -76 create:mechanical_mixer
-setblock 484 -57 -76 create:cogwheel[axis=y]
-setblock 484 -56 -76 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 483 -59 -75 create:fluid_pipe[down=true,up=true]
+setblock 483 -58 -75 create:fluid_pipe[down=true,up=true]
+setblock 483 -57 -75 create:fluid_pipe[down=true,north=true]
+setblock 483 -57 -76 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 483 -55 -76 create:mechanical_mixer
+setblock 484 -55 -76 create:cogwheel[axis=y]
+setblock 484 -54 -76 create:creative_motor[facing=down]{ScrollValue:64}
 setblock 482 -60 -76 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
-setblock 483 -59 -77 minecraft:hopper[facing=down]
-setblock 483 -60 -77 minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
-setblock 483 -60 -78 create:andesite_funnel[facing=north]
-setblock 483 -60 -79 create:depot
+setblock 483 -58 -77 create:chute
+setblock 483 -59 -77 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 483 -60 -77 minecraft:hopper[facing=north]
+setblock 483 -60 -78 create:depot
 setblock 540 -60 -74 create:fluid_pipe[north=true,south=true]
 setblock 540 -60 -75 create:fluid_pipe[south=true,up=true]
-setblock 540 -59 -75 create:fluid_pipe[down=true,north=true]
-setblock 540 -59 -76 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
-setblock 540 -57 -76 create:mechanical_mixer
-setblock 541 -57 -76 create:cogwheel[axis=y]
-setblock 541 -56 -76 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 540 -59 -75 create:fluid_pipe[down=true,up=true]
+setblock 540 -58 -75 create:fluid_pipe[down=true,up=true]
+setblock 540 -57 -75 create:fluid_pipe[down=true,north=true]
+setblock 540 -57 -76 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 540 -55 -76 create:mechanical_mixer
+setblock 541 -55 -76 create:cogwheel[axis=y]
+setblock 541 -54 -76 create:creative_motor[facing=down]{ScrollValue:64}
 setblock 539 -60 -76 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
-setblock 540 -59 -77 minecraft:hopper[facing=down]
-setblock 540 -60 -77 minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
-setblock 540 -60 -78 create:andesite_funnel[facing=north]
-setblock 540 -60 -79 create:depot
-setblock -6 -60 1 create:fluid_tank
-setblock -5 -60 1 create:mechanical_pump[facing=east]
-setblock -5 -59 1 create:cogwheel[axis=x]
-setblock -6 -59 1 create:creative_motor[facing=east]{ScrollValue:64}
-setblock -4 -60 1 create:fluid_pipe[east=true,west=true]
-setblock -3 -60 1 create:basin[facing=east]{InputItems:{Size:9,Items:[{Slot:0b,id:"tfmg:limesand",count:64}]}}
-setblock -3 -58 1 create:mechanical_mixer
-setblock -3 -58 2 create:cogwheel[axis=y]
-setblock -3 -57 2 create:creative_motor[facing=down]{ScrollValue:64}
-setblock -3 -60 2 minecraft:chest[facing=south]{Items:[{Slot:0b,id:"tfmg:limesand",count:64}]}
-setblock 6 -60 6 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:mixer_settler",count:64},{Slot:1b,id:"create:mechanical_mixer",count:16},{Slot:2b,id:"create:cogwheel",count:32},{Slot:3b,id:"create:creative_motor",count:16},{Slot:4b,id:"create:mechanical_pump",count:16},{Slot:5b,id:"create:fluid_pipe",count:64},{Slot:6b,id:"create:fluid_tank",count:16},{Slot:7b,id:"create:wrench",count:1},{Slot:8b,id:"fundamentals:oxalic_acid",count:64},{Slot:9b,id:"create:basin",count:4},{Slot:10b,id:"minecraft:hopper",count:4},{Slot:11b,id:"minecraft:furnace",count:4},{Slot:12b,id:"create:andesite_funnel",count:8},{Slot:13b,id:"create:depot",count:4},{Slot:14b,id:"minecraft:coal",count:64},{Slot:15b,id:"minecraft:lever",count:4}]}
+setblock 540 -58 -77 create:chute
+setblock 540 -59 -77 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 540 -60 -77 minecraft:hopper[facing=north]
+setblock 540 -60 -78 create:depot
+setblock -9 -59 1 create:fluid_tank
+setblock -8 -59 1 create:mechanical_pump[facing=east]
+setblock -8 -58 1 create:cogwheel[axis=x]
+setblock -9 -58 1 create:creative_motor[facing=east]{ScrollValue:64}
+setblock -7 -59 1 create:fluid_pipe[east=true,west=true]
+setblock -6 -59 1 create:basin[facing=east]{InputItems:{Size:9,Items:[{Slot:0b,id:"tfmg:limesand",count:64}]}}
+setblock -6 -57 1 create:mechanical_mixer
+setblock -6 -57 2 create:cogwheel[axis=y]
+setblock -6 -56 2 create:creative_motor[facing=down]{ScrollValue:64}
+setblock -6 -60 2 minecraft:chest[facing=south]{Items:[{Slot:0b,id:"tfmg:limesand",count:64}]}
+setblock -5 -60 1 create:basin[facing=down]
+setblock -5 -61 1 minecraft:hopper[facing=down]
+setblock -5 -62 1 minecraft:chest
+setblock -4 -60 1 create:mechanical_pump[facing=east]
+setblock -4 -59 1 create:cogwheel[axis=x]
+setblock -3 -59 1 create:creative_motor[facing=west]{ScrollValue:64}
+setblock -3 -60 1 create:fluid_pipe[east=true,west=true]
+setblock 6 -60 6 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:mixer_settler",count:64},{Slot:1b,id:"create:mechanical_mixer",count:16},{Slot:2b,id:"create:cogwheel",count:32},{Slot:3b,id:"create:creative_motor",count:16},{Slot:4b,id:"create:mechanical_pump",count:16},{Slot:5b,id:"create:fluid_pipe",count:64},{Slot:6b,id:"create:fluid_tank",count:16},{Slot:7b,id:"create:wrench",count:1},{Slot:8b,id:"fundamentals:oxalic_acid",count:64},{Slot:9b,id:"create:basin",count:4},{Slot:10b,id:"create:chute",count:4},{Slot:11b,id:"minecraft:blast_furnace",count:4},{Slot:12b,id:"create:depot",count:4},{Slot:13b,id:"minecraft:coal",count:64},{Slot:14b,id:"minecraft:lever",count:4}]}
 setblock 6 -60 7 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:cobalt_ingot",count:64},{Slot:1b,id:"fundamentals:molybdenum_ingot",count:64},{Slot:2b,id:"fundamentals:rhenium_ingot",count:32},{Slot:3b,id:"fundamentals:tungsten_ingot",count:64},{Slot:4b,id:"fundamentals:superalloy_plate",count:32},{Slot:5b,id:"fundamentals:molybdenum_steel_plate",count:32},{Slot:6b,id:"fundamentals:tungsten_carbide",count:32},{Slot:7b,id:"fundamentals:tungsten_filament",count:32},{Slot:8b,id:"fundamentals:neodymium_iron_boron_ingot",count:32},{Slot:9b,id:"fundamentals:samarium_cobalt_ingot",count:32},{Slot:10b,id:"fundamentals:phosphor",count:32},{Slot:11b,id:"fundamentals:didymium_glass",count:32},{Slot:12b,id:"fundamentals:hydrochloric_acid_bucket",count:1},{Slot:13b,id:"fundamentals:hydrofluoric_acid_bucket",count:1},{Slot:14b,id:"fundamentals:nitric_acid_bucket",count:1},{Slot:15b,id:"fundamentals:raw_borax",count:32},{Slot:16b,id:"fundamentals:cerium_oxide",count:32},{Slot:17b,id:"fundamentals:neodymium_oxide",count:32},{Slot:18b,id:"fundamentals:lanthanum_ingot",count:32},{Slot:19b,id:"fundamentals:neodymium_ingot",count:32},{Slot:20b,id:"fundamentals:dysprosium_ingot",count:32},{Slot:21b,id:"fundamentals:aluminium_scandium_plate",count:32}]}
 schedule function showcase:fill 10t
 schedule function showcase:refill 60t

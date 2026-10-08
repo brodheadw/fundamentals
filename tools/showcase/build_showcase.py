@@ -57,6 +57,9 @@ def cuts():
 
 
 CUTS = cuts()
+# mixed liquors precipitated as they are, before their own cut parts them (didymium is praseodymium and neodymium together)
+TAPS = {i["fluid"].split(":")[1] for p in (ROOT / "src/main/resources/data/fundamentals/recipe/mixing").glob("*_oxalate.json")
+        for i in json.loads(p.read_text())["ingredients"] if "fluid" in i and i["fluid"].split(":")[1] in CUTS}
 
 
 def width(liquor):
@@ -142,25 +145,31 @@ def pipe_jog(x_from, x_to, z_pipe, z_lane, z_to):
 
 
 def station(x, z):
-    """From the side pump's outlet at (x, z): pipe north and up into a raised basin under a mixer, oxalic acid in it
-    and a chest of it beside, the oxalate spouted into a hopper that drops it into the furnace below (a furnace
-    takes input only from above; its sides are the fuel slot), the oxide drawn out by a funnel onto a depot."""
+    """From the side pump's outlet at (x, z): pipe north and up into a raised basin under a mixer, oxalic acid in it and a chest
+    of it beside. A basin pours out only onto something a belt could feed (a chute, a depot, another basin) with clear air
+    beside it, so the oxalate goes into a chute that drops it into the top of a blast furnace; a furnace gives up what it
+    made only from below, so a hopper under it sets the oxide on a depot."""
     put(x, Y, z, "create:fluid_pipe[north=true,south=true]")
     put(x, Y, z - 1, "create:fluid_pipe[south=true,up=true]")
-    put(x, Y + 1, z - 1, "create:fluid_pipe[down=true,north=true]")
-    put(x, Y + 1, z - 2, 'create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}')
-    put(x, Y + 3, z - 2, "create:mechanical_mixer")
-    put(x + 1, Y + 3, z - 2, "create:cogwheel[axis=y]")
-    put(x + 1, Y + 4, z - 2, f"create:creative_motor[facing=down]{MOTOR}")
+    put(x, Y + 1, z - 1, "create:fluid_pipe[down=true,up=true]")
+    put(x, Y + 2, z - 1, "create:fluid_pipe[down=true,up=true]")
+    put(x, Y + 3, z - 1, "create:fluid_pipe[down=true,north=true]")
+    put(x, Y + 3, z - 2, 'create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}')
+    put(x, Y + 5, z - 2, "create:mechanical_mixer")
+    put(x + 1, Y + 5, z - 2, "create:cogwheel[axis=y]")
+    put(x + 1, Y + 6, z - 2, f"create:creative_motor[facing=down]{MOTOR}")
     put(x - 1, Y, z - 2, 'minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}')
-    put(x, Y + 1, z - 3, "minecraft:hopper[facing=down]")
-    put(x, Y, z - 3, 'minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}')
-    put(x, Y, z - 4, "create:andesite_funnel[facing=north]")
-    put(x, Y, z - 5, "create:depot")
+    put(x, Y + 2, z - 3, "create:chute")
+    put(x, Y + 1, z - 3, 'minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}')
+    put(x, Y, z - 3, "minecraft:hopper[facing=north]")
+    put(x, Y, z - 4, "create:depot")
 
 
 def place(liquor, x0, z0):
     light_x, heavy_px = battery(liquor, x0, z0)
+    if liquor in TAPS:
+        pump(x0 - 2, Y, z0, "north", "z", (x0 - 2, Y + 1, z0 - 1), "south")
+        station(x0 - 2, z0 - 1)
     cut = CUTS[liquor]
     for product, px in ((cut["light"], light_x), (cut["heavy"], heavy_px)):
         if product in CUTS:
@@ -176,21 +185,27 @@ def main():
                   "gamerule doDaylightCycle false", "gamerule doWeatherCycle false", "gamerule doMobSpawning false", "kill @e[type=item]"])
     head = len(lines)
     place("rare_earth_liquor", 0, 0)
-    # the clarifier before the root: crude liquor pumped into a basin of lime under a mixer, which spouts the clarified
-    # liquor into the root's feed tank
-    tank(-6, Y, 1, "crude_rare_earth_liquor")
-    pump(-5, Y, 1, "east", "x", (-6, Y + 1, 1), "east")
-    put(-4, Y, 1, "create:fluid_pipe[east=true,west=true]")
-    put(-3, Y, 1, 'create:basin[facing=east]{InputItems:{Size:9,Items:[{Slot:0b,id:"tfmg:limesand",count:64}]}}')
-    put(-3, Y + 2, 1, "create:mechanical_mixer")
-    put(-3, Y + 2, 2, "create:cogwheel[axis=y]")
-    put(-3, Y + 3, 2, f"create:creative_motor[facing=down]{MOTOR}")
-    put(-3, Y, 2, 'minecraft:chest[facing=south]{Items:[{Slot:0b,id:"tfmg:limesand",count:64}]}')
+    # the clarifier before the root: crude liquor pumped into a raised basin of lime under a mixer. A basin hands what it makes to
+    # the block below and beside it on its facing side (the block beside it must stay clear), all at once or not at all, so it spouts into a second basin, which takes
+    # both the liquor and the sludge; that one is emptied by a pump into the root's feed tank and by a hopper into a chest
+    tank(-9, Y + 1, 1, "crude_rare_earth_liquor")
+    pump(-8, Y + 1, 1, "east", "x", (-9, Y + 2, 1), "east")
+    put(-7, Y + 1, 1, "create:fluid_pipe[east=true,west=true]")
+    put(-6, Y + 1, 1, 'create:basin[facing=east]{InputItems:{Size:9,Items:[{Slot:0b,id:"tfmg:limesand",count:64}]}}')
+    put(-6, Y + 3, 1, "create:mechanical_mixer")
+    put(-6, Y + 3, 2, "create:cogwheel[axis=y]")
+    put(-6, Y + 4, 2, f"create:creative_motor[facing=down]{MOTOR}")
+    put(-6, Y, 2, 'minecraft:chest[facing=south]{Items:[{Slot:0b,id:"tfmg:limesand",count:64}]}')
+    put(-5, Y, 1, "create:basin[facing=down]")
+    put(-5, Y - 1, 1, "minecraft:hopper[facing=down]")
+    put(-5, Y - 2, 1, "minecraft:chest")
+    pump(-4, Y, 1, "east", "x", (-3, Y + 1, 1), "west")
+    put(-3, Y, 1, "create:fluid_pipe[east=true,west=true]")
     # the chests at spawn: the components to build a stage, and the metals to build with
     chest = lambda x, z, items: put(x, Y, z, "minecraft:chest[facing=north]{Items:[" + ",".join(f'{{Slot:{i}b,id:"{it}",count:{n}}}' for i, (it, n) in enumerate(items)) + "]}")
     chest(6, 6, [("fundamentals:mixer_settler", 64), ("create:mechanical_mixer", 16), ("create:cogwheel", 32), ("create:creative_motor", 16), ("create:mechanical_pump", 16),
-                 ("create:fluid_pipe", 64), ("create:fluid_tank", 16), ("create:wrench", 1), ("fundamentals:oxalic_acid", 64), ("create:basin", 4), ("minecraft:hopper", 4),
-                 ("minecraft:furnace", 4), ("create:andesite_funnel", 8), ("create:depot", 4), ("minecraft:coal", 64), ("minecraft:lever", 4)])
+                 ("create:fluid_pipe", 64), ("create:fluid_tank", 16), ("create:wrench", 1), ("fundamentals:oxalic_acid", 64), ("create:basin", 4), ("create:chute", 4),
+                 ("minecraft:blast_furnace", 4), ("create:depot", 4), ("minecraft:coal", 64), ("minecraft:lever", 4)])
     chest(6, 7, [("fundamentals:cobalt_ingot", 64), ("fundamentals:molybdenum_ingot", 64), ("fundamentals:rhenium_ingot", 32), ("fundamentals:tungsten_ingot", 64),
                  ("fundamentals:superalloy_plate", 32), ("fundamentals:molybdenum_steel_plate", 32), ("fundamentals:tungsten_carbide", 32), ("fundamentals:tungsten_filament", 32),
                  ("fundamentals:neodymium_iron_boron_ingot", 32), ("fundamentals:samarium_cobalt_ingot", 32), ("fundamentals:phosphor", 32), ("fundamentals:didymium_glass", 32),
