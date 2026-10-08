@@ -9,7 +9,7 @@ import java.util.function.BiConsumer;
 
 /**
  * The few items of the chains that are not a form of a material: the phosphor the lamps take, the didymium
- * glass that welders' goggles are made of, the roasted sulfide ores on their way to cobalt and copper, and the
+ * glass that welders' goggles are made of, the roasted ores on their way to cobalt, copper, zinc and nickel, and the
  * flue dust the molybdenite roaster gives up its rhenium in. The recipes are written by tools/build_uses_data.py.
  */
 public final class Uses {
@@ -22,11 +22,15 @@ public final class Uses {
     private static Item tungstenCarbide;
     private static Item tungstenFilament;
     private static Item clarifierSludge;
+    private static Item copperCalcine;
+    private static Item zincOxide;
+    private static Item roastedPentlandite;
 
     private Uses() {}
 
     public static List<Item> items() {
-        return List.of(phosphor, didymiumGlass, roastedCobaltite, roastedChalcopyrite, rheniumFlueDust, tungstenCarbide, tungstenFilament, clarifierSludge);
+        return List.of(phosphor, didymiumGlass, roastedCobaltite, roastedChalcopyrite, rheniumFlueDust, tungstenCarbide, tungstenFilament, clarifierSludge,
+                copperCalcine, zincOxide, roastedPentlandite);
     }
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
@@ -38,6 +42,9 @@ public final class Uses {
         registry.accept(id("tungsten_carbide"), tungstenCarbide = new Item(new Item.Properties()));
         registry.accept(id("tungsten_filament"), tungstenFilament = new Item(new Item.Properties()));
         registry.accept(id("clarifier_sludge"), clarifierSludge = new Item(new Item.Properties()));
+        registry.accept(id("copper_calcine"), copperCalcine = new Item(new Item.Properties()));
+        registry.accept(id("zinc_oxide"), zincOxide = new Item(new Item.Properties()));
+        registry.accept(id("roasted_pentlandite"), roastedPentlandite = new Item(new Item.Properties()));
     }
 
     private static ResourceLocation id(String path) {

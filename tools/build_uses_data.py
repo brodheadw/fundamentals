@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """What the rare earths are for: the recipes that spend the metals and oxides, and the recipes of
-Create and The Factory Must Grow we take over so that they need them. Re-run after any edit.
+Create and The Factory Must Grow we take over so that they need them; and the roads the base metals take
+instead of Create's crushing-and-furnace shortcuts. Re-run after any edit.
 
     python3 tools/paint_uses.py && python3 tools/build_uses_data.py
 
@@ -19,7 +20,8 @@ CREATE = DATA.parent / "create/recipe"
 # the items of ours that are not a form of a material: name -> display
 ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_cobaltite": "Roasted Cobaltite",
          "roasted_chalcopyrite": "Roasted Chalcopyrite", "rhenium_flue_dust": "Rhenium Flue Dust",
-         "tungsten_carbide": "Tungsten Carbide", "tungsten_filament": "Tungsten Filament", "clarifier_sludge": "Clarifier Sludge"}
+         "tungsten_carbide": "Tungsten Carbide", "tungsten_filament": "Tungsten Filament", "clarifier_sludge": "Clarifier Sludge",
+         "copper_calcine": "Copper Calcine", "zinc_oxide": "Zinc Oxide", "roasted_pentlandite": "Roasted Pentlandite"}
 ROASTING = DATA / "recipe/roasting"
 
 
@@ -123,10 +125,10 @@ def scandium():
            {"count": 2, "id": "fundamentals:panel_rack"})
 
 
-def roast(ore, roasted):
+def roast(ore, roasted, name=None):
     """A sulfide ore roasted on a campfire or in a smoker, as galena is, to drive off its sulfur (and arsenic)."""
     for kind, time in (("campfire_cooking", 400), ("smoking", 200)):
-        write(ROASTING / f"{roasted}_{kind}.json", {"type": f"minecraft:{kind}", "category": "misc", "ingredient": {"item": f"fundamentals:raw_{ore}"},
+        write(ROASTING / f"{name or roasted}_{kind}.json", {"type": f"minecraft:{kind}", "category": "misc", "ingredient": {"item": f"fundamentals:raw_{ore}"},
                                                    "result": {"id": f"fundamentals:{roasted}"}, "experience": 0.1, "cookingtime": time})
 
 
@@ -154,6 +156,84 @@ def copper_molybdenum_rhenium():
     mixing("molybdenum_oxide", item("raw_molybdenite", 2), [result("molybdenum_oxide", 2), {"id": "fundamentals:rhenium_flue_dust", "chance": 0.5}], "heated")
     vat("molybdenum_ingot", item("molybdenum_oxide", 2), "tfmg:hydrogen", 500, [result("molybdenum_ingot", 2)])
     vat("rhenium_ingot", item("rhenium_flue_dust", 2), "tfmg:hydrogen", 250, [result("rhenium_ingot")])
+
+
+def copper_sulfides():
+    """Bornite, chalcocite and covellite roast, as chalcopyrite does, to a black copper oxide the bloomery smelts."""
+    for ore in ("bornite", "chalcocite", "covellite"):
+        roast(ore, "copper_calcine", f"copper_calcine_from_{ore}")
+    write(DATA / "recipe/bloomery/copper_from_copper_calcine.json", {"type": "fundamentals:bloomery", "ingredient": {"item": "fundamentals:copper_calcine"},
+                                                                    "result": {"id": "minecraft:copper_ingot", "count": 1}, "byproduct": {"id": "fundamentals:slag", "count": 1}})
+
+
+def disabled(path):
+    write(path, {"neoforge:conditions": [{"type": "neoforge:false"}]})
+
+
+def crushing(name, ingredient, results, time=250):
+    write(CREATE / f"crushing/{name}.json", {"type": "create:crushing", "ingredients": [ingredient], "processing_time": time, "results": results})
+
+
+def iron():
+    """Hematite, magnetite and goethite crush to Create's crushed iron ore, and crushed iron ore goes only to The Factory's
+    blast furnace: iron oxide wants coke and some 1,500 °C, which neither a furnace nor a water fan has. Before the blast
+    furnace, iron is the bloomery's."""
+    for ore in ("hematite", "magnetite", "goethite"):
+        write(USES / f"crushed_iron_from_{ore}.json", {"type": "create:crushing", "ingredients": item(f"raw_{ore}"), "processing_time": 400,
+                                                       "results": [{"id": "create:crushed_raw_iron"}, {"id": "create:experience_nugget", "chance": 0.75}]})
+    for path in ("smelting/iron_ingot_from_crushed", "blasting/iron_ingot_from_crushed", "splashing/crushed_raw_iron"):
+        disabled(CREATE / f"{path}.json")
+
+
+def zinc():
+    """Sphalerite roasts to zinc oxide; smithsonite and hemimorphite, the old calamine, calcine to it. Zinc boils at 907 °C, below
+    the heat that reduces it, so it was distilled out of a sealed retort packed with charcoal: a superheated basin stands in."""
+    for ore in ("sphalerite", "smithsonite", "hemimorphite"):
+        roast(ore, "zinc_oxide", f"zinc_oxide_from_{ore}")
+    mixing("zinc_ingot", item("zinc_oxide") + item("minecraft:charcoal"), [result("create:zinc_ingot")], "superheated")
+
+
+def nickel():
+    """Pentlandite roasts to a nickel oxide that charcoal reduces at a blaze cake's heat, its iron going to slag. Laterite is
+    too lean to roast and is smelted whole with charcoal, as it is in the electric furnaces of Indonesia."""
+    roast("pentlandite", "roasted_pentlandite")
+    mixing("nickel_ingot", item("roasted_pentlandite") + item("minecraft:charcoal"), [result("tfmg:nickel_ingot"), result("slag")], "superheated")
+    mixing("nickel_ingot_from_laterite", item("raw_nickel_laterite", 4) + item("minecraft:charcoal", 2),
+           [result("tfmg:nickel_ingot"), result("slag", 2)], "superheated")
+
+
+def rocks():
+    """Create's stones give their metal up when crushed. Here crimsite, the iron stone, gives hematite and asurine, the zinc stone,
+    smithsonite, which then go the long way; tuff gives only flint, and The Factory's galena rock gives galena. Washed gravel
+    leaves a little magnetite black sand rather than iron nuggets."""
+    for rock, ore, chance in (("crimsite", "hematite", 0.4), ("asurine", "smithsonite", 0.3)):
+        crushing(rock, {"item": f"create:{rock}"}, [{"id": f"fundamentals:raw_{ore}", "chance": chance}])
+        crushing(f"{rock}_recycling", {"tag": f"create:stone_types/{rock}"}, [{"id": f"fundamentals:raw_{ore}", "chance": chance}])
+    for name, ingredient in (("tuff", {"item": "minecraft:tuff"}), ("tuff_recycling", {"tag": "create:stone_types/tuff"})):
+        crushing(name, ingredient, [{"id": "minecraft:flint", "chance": 0.25}], 350)
+    write(CREATE / "crushing/galena.json", {"type": "create:crushing", "ingredients": [{"item": "tfmg:galena"}],
+                                            "results": [{"id": "fundamentals:raw_galena", "chance": 0.4}]})
+    write(CREATE / "splashing/gravel.json", {"type": "create:splashing", "ingredients": [{"item": "minecraft:gravel"}],
+                                             "results": [{"id": "minecraft:flint", "chance": 0.25}, {"id": "fundamentals:raw_magnetite", "chance": 0.02}]})
+
+
+def loot():
+    """Iron is won from ore, so chests (every mod's) keep one iron ingot, nugget, block or armour piece in four; iron golems
+    drop nuggets, scrap rather than bar; and a drowned's copper ingot has gone green to malachite. Tools are the modpack's call."""
+    modifiers = DATA / "loot_modifiers"
+    shutil.rmtree(modifiers, ignore_errors=True)
+    common = [{"id": f"#c:{name}", "required": False} for name in ("ingots/iron", "nuggets/iron", "storage_blocks/iron", "raw_materials/iron", "storage_blocks/raw_iron")]
+    write(DATA / "tags/item/scarce_in_chests.json", {"replace": False, "values": common + [
+        "minecraft:iron_helmet", "minecraft:iron_chestplate", "minecraft:iron_leggings", "minecraft:iron_boots", "minecraft:iron_horse_armor"]})
+    write(modifiers / "scarce_iron_in_chests.json", {"type": "fundamentals:scarce_in_chests", "conditions": [],
+                                                    "items": "#fundamentals:scarce_in_chests", "keep": 0.25})
+    swaps = {"iron_golem_scrap": ("minecraft:entities/iron_golem", "minecraft:iron_ingot", "minecraft:iron_nugget"),
+             "drowned_malachite": ("minecraft:entities/drowned", "minecraft:copper_ingot", "fundamentals:raw_malachite")}
+    for name, (table, old, new) in swaps.items():
+        write(modifiers / f"{name}.json", {"type": "fundamentals:swap_drop", "from": old, "to": new,
+                                           "conditions": [{"condition": "neoforge:loot_table_id", "loot_table_id": table}]})
+    write(DATA.parent / "neoforge/loot_modifiers/global_loot_modifiers.json", {
+        "replace": False, "entries": [f"fundamentals:{path.stem}" for path in sorted(modifiers.glob("*.json"))]})
 
 
 def alloys():
@@ -211,8 +291,9 @@ def main():
     shutil.rmtree(USES, ignore_errors=True)
     shutil.rmtree(TFMG, ignore_errors=True)
     shutil.rmtree(CREATE, ignore_errors=True)
-    for stale in ROASTING.glob("roasted_c*"):
-        stale.unlink()
+    for pattern in ("roasted_c*", "roasted_pentlandite_*", "copper_calcine_*", "zinc_oxide_*"):
+        for stale in ROASTING.glob(pattern):
+            stale.unlink()
     magnets()
     cerium()
     lanthanum()
@@ -222,6 +303,12 @@ def main():
     scandium()
     cobalt()
     copper_molybdenum_rhenium()
+    copper_sulfides()
+    iron()
+    zinc()
+    nickel()
+    rocks()
+    loot()
     alloys()
     tungsten()
     more_sinks()

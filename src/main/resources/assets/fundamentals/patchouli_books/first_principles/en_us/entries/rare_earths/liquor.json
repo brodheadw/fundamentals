@@ -7,7 +7,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "fundamentals:light_rare_earth_concentrate",
-      "text": "A concentrate dissolved in 500 mB of hydrochloric acid in a heated basin under a mixer gives 500 mB of crude liquor, and what the ore leaves behind: monazite its thorium residue and its phosphate (bone meal), xenotime and euxenite a residue half the time, the clay its aluminium as bauxite powder.",
+      "text": "A concentrate dissolved in 500 mB of hydrochloric acid in a heated basin under a mixer gives 500 mB of crude liquor, and what the ore leaves behind: monazite its thorium residue and its phosphate (bone meal), xenotime and euxenite a residue half the time.",
       "title": "Dissolving"
     },
     {
@@ -19,7 +19,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "fundamentals:raw_ion_adsorption_clay",
-      "text": "The clay needs no acid and no heat: four clay, a salt and 500 mB of water in a basin under a mixer leach straight to 250 mB of heavy liquor. That is the whole reason Chinese clays supply the world's heavy rare earths.",
+      "text": "The clay needs no acid and no heat: four clay, a salt and 500 mB of water in a basin under a mixer leach straight to 250 mB of heavy liquor, and the clay comes back as clay. That is the whole reason Chinese clays supply the world's heavy rare earths.",
       "title": "Leaching"
     }
   ]

@@ -1,0 +1,20 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:roasted_pentlandite"
+    },
+    {
+      "item": "minecraft:charcoal"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:nickel_ingot"
+    },
+    {
+      "id": "fundamentals:slag"
+    }
+  ],
+  "heat_requirement": "superheated"
+}
