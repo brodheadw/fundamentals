@@ -1,0 +1,25 @@
+{
+  "name": "Making the acids",
+  "category": "fundamentals:rare_earths",
+  "icon": "fundamentals:nitric_acid_bucket",
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Sulfuric acid is The Factory Must Grow's, from sulfur and saltpetre in a vat, and every other acid starts from it. Two salt and 500 mB of sulfuric acid in a heated basin give 500 mB of hydrochloric acid, the salt-cake process; salt is water boiled dry in a heated basin.",
+      "title": "Making the acids"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two raw fluorite and 500 mB, heated, give hydrofluoric acid. Two nitrate dust and 500 mB, heated, give nitric acid, which boils off the saltpetre as it did from Glauber's retort. Two bone meal and 500 mB, cold, give phosphoric acid, the wet process with bone for phosphate rock; cracking monazite frees more."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Oxalic acid is sugar oxidised by nitric acid, Scheele's route: two sugar and 250 mB of nitric acid, heated, give two oxalic acid. Chlorine is Scheele's too: a raw pyrolusite in 1,000 mB of hot hydrochloric acid gives 250 mB, the manganese staying behind as its chloride."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The molten-chloride electrolyses give it off as well, 500 mB with every two calcium and 250 with every lithium."
+    }
+  ]
+}

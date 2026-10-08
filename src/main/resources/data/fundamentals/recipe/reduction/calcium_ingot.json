@@ -22,6 +22,10 @@
     {
       "id": "fundamentals:calcium_ingot",
       "count": 2
+    },
+    {
+      "id": "fundamentals:chlorine",
+      "amount": 500
     }
   ],
   "heat_requirement": "heated"

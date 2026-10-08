@@ -105,6 +105,19 @@ def heap(seed, highlight, body, shadow):
     return img
 
 
+def sticks(highlight, body, shadow):
+    """Two cast sticks lying across each other, as white phosphorus is sold (and kept under water)."""
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    for x0, y0, length in ((1, 11, 11), (5, 14, 10)):
+        for i in range(length):
+            for w, colour in ((-1, highlight), (0, body), (1, shadow)):
+                x, y = x0 + i, y0 - i + w
+                if 0 <= x < 16 and 0 <= y < 16:
+                    img.putpixel((x, y), colour + (255,))
+        img.putpixel((x0, y0 + 1), shadow + (255,))
+    return img
+
+
 def main():
     (TEXTURES / "block/fluid").mkdir(parents=True, exist_ok=True)
     (TEXTURES / "item").mkdir(parents=True, exist_ok=True)
@@ -124,6 +137,7 @@ def main():
     heap("light_sulfate", (250, 242, 242), (226, 214, 216), (170, 158, 162)).save(TEXTURES / "item/light_rare_earth_sulfate.png")
     heap("heavy_sulfate", (250, 248, 238), (228, 224, 208), (172, 168, 150)).save(TEXTURES / "item/heavy_rare_earth_sulfate.png")
     heap("calcium_chloride", (255, 255, 255), (240, 240, 236), (190, 190, 184)).save(TEXTURES / "item/calcium_chloride.png")
+    sticks((252, 250, 232), (238, 232, 196), (196, 186, 136)).save(TEXTURES / "item/white_phosphorus.png")
     ingot(((88, 90, 94), (138, 141, 146), (180, 184, 190), (222, 226, 232))).save(TEXTURES / "item/calcium_ingot.png")
     nozzle().save(TEXTURES / "block/mixer_settler_nozzle.png")
     print("separation textures written")

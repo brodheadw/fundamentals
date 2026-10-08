@@ -18,5 +18,6 @@
       "id": "fundamentals:nitric_acid",
       "amount": 500
     }
-  ]
+  ],
+  "heat_requirement": "heated"
 }

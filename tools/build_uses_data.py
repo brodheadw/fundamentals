@@ -183,7 +183,7 @@ def copper_sulfides():
 def lithium():
     """Spodumene calcined white in the blast furnace opens to hot hydrochloric acid, which takes its lithium as the
     chloride; boiled dry, that is the salt lithium is won from. Lithium cannot be won from water, so the dry chloride
-    is electrolysed molten, at about 450 C."""
+    is electrolysed molten, at about 450 C, and gives off its chlorine at the anode."""
     write(LITHIUM / "calcined_spodumene.json", {"type": "minecraft:blasting", "category": "misc", "ingredient": {"item": "fundamentals:raw_spodumene"},
                                                 "result": {"id": "fundamentals:calcined_spodumene"}, "experience": 0.2, "cookingtime": 100})
     write(LITHIUM / "lithium_chloride.json", {"type": "create:mixing", "heat_requirement": "heated", "ingredients": item("calcined_spodumene", 2)
@@ -192,7 +192,8 @@ def lithium():
     write(LITHIUM / "lithium_ingot.json", {"type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:steel_vat", "tfmg:firebrick_lined_vat"],
                                            "heat_requirement": "heated", "machines": ["tfmg:electrode", "tfmg:electrode"], "min_size": 1, "processing_time": 100,
                                            "ingredients": item("lithium_chloride", 2),
-                                           "results": [{"id": "tfmg:lithium_ingot"}, {"chance": 0.5, "count": 3, "id": "tfmg:lithium_nugget"}]})
+                                           "results": [{"id": "tfmg:lithium_ingot"}, {"chance": 0.5, "count": 3, "id": "tfmg:lithium_nugget"},
+                                                       {"amount": 250, "id": "fundamentals:chlorine"}]})
 
 
 def disabled(path):

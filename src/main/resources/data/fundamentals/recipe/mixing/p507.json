@@ -4,7 +4,7 @@
     {
       "type": "neoforge:single",
       "amount": 250,
-      "fluid": "fundamentals:phosphoric_acid"
+      "fluid": "fundamentals:ehehpa"
     },
     {
       "type": "neoforge:single",
@@ -20,6 +20,5 @@
       "id": "fundamentals:p507",
       "amount": 1000
     }
-  ],
-  "heat_requirement": "heated"
+  ]
 }

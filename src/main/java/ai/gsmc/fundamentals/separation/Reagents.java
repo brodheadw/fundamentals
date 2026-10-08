@@ -5,7 +5,7 @@ import java.util.List;
 // Written by tools/build_separation_data.py; edit the table there.
 public final class Reagents {
 
-    public enum Kind { LIQUOR, ORGANIC, ACID, GAS, WASTE, CRUDE, FOULED }
+    public enum Kind { LIQUOR, ORGANIC, ACID, GAS, WASTE, CRUDE, FOULED, PRECURSOR }
 
     public record Reagent(String id, int tint, Kind kind) {}
 
@@ -47,13 +47,19 @@ public final class Reagents {
             new Reagent("phosphoric_acid", 0xE8ECE4, Kind.ACID),
             new Reagent("hydrofluoric_acid", 0xE6F0EA, Kind.ACID),
             new Reagent("argon", 0xC8D8F0, Kind.GAS),
+            new Reagent("chlorine", 0xD2E496, Kind.GAS),
+            new Reagent("water_gas", 0xD8DCE0, Kind.GAS),
             new Reagent("spent_liquor", 0x8E9A86, Kind.WASTE),
             new Reagent("brine", 0xDCE6E4, Kind.WASTE),
             new Reagent("crude_rare_earth_liquor", 0x8E7F86, Kind.CRUDE),
             new Reagent("crude_heavy_rare_earth_liquor", 0x9E9A80, Kind.CRUDE),
             new Reagent("fouled_p204", 0x6E5A38, Kind.FOULED),
             new Reagent("fouled_p507", 0x72603E, Kind.FOULED),
-            new Reagent("fouled_naphthenic_acid", 0x5A4424, Kind.FOULED));
+            new Reagent("fouled_naphthenic_acid", 0x5A4424, Kind.FOULED),
+            new Reagent("ethylhexanol", 0xEEEEE6, Kind.PRECURSOR),
+            new Reagent("phosphorus_trichloride", 0xECF0EC, Kind.PRECURSOR),
+            new Reagent("d2ehpa", 0xF0E4B0, Kind.PRECURSOR),
+            new Reagent("ehehpa", 0xF2EAC4, Kind.PRECURSOR));
 
     private Reagents() {}
 }

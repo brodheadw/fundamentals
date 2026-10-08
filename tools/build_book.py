@@ -40,7 +40,7 @@ def pretty(id):
     name = LANG.get(f"fluid_type.fundamentals.{key}") or LANG.get(f"item.fundamentals.{key}") or LANG.get(f"block.fundamentals.{key}")
     if name is None:
         return key.replace("_", " ")
-    return name if name[:1].isupper() and name[1:2].isdigit() else name.lower()
+    return name if name.isupper() else name.lower()
 
 
 def pages_of(text, title=None):
@@ -180,7 +180,7 @@ def rare_earths():
                   "That is the whole reason Chinese clays supply the world's heavy rare earths.", "Leaching")], 1)
     entry("rare_earths", "mixer_settler", "Solvent extraction", "fundamentals:mixer_settler", pages_of(
         "Chlorides of neighbouring rare earths are almost identical, so no one step parts them. Instead the liquor is shaken with an "
-        "organic extractant (P507, P204 or naphthenic acid, each made from phosphoric acid and kerosene and saponified with lime as it is made up, which sets the pH the cut works at) that prefers the heavier ions "
+        "organic extractant (P507, P204 or naphthenic acid, cut with kerosene and saponified with lime as it is made up, which sets the pH the cut works at) that prefers the heavier ions "
         "by a hair, left to settle into two layers, and the two layers sent opposite ways through a long line of identical stages. "
         "Each stage enriches a little; thirty of them compound a hair into a clean split. The stages are mixer-settlers, and a line of them is a battery.",
         "Solvent extraction") + pages_of(
@@ -252,11 +252,30 @@ def rare_earths():
         "Hydrofluoric and nitric acid fume. Within two blocks of either in the open, as a block or in a basin it is being used in, you take a hit a second and the world swims, and hydrofluoric poisons. "
         "The gas mask is Create's: a diving helmet over a filled copper backtank, which breathes its air instead. "
         "And acid eats copper: a Create pipe carrying any acid corrodes and, after a couple of minutes on average, bursts and spills it. Run acid in The Factory Must Grow's plastic or glass pipes, which it cannot touch; its metal pipes fare no better than copper."), 9)
+    entry("rare_earths", "making_acids", "Making the acids", "fundamentals:nitric_acid_bucket", pages_of(
+        "Sulfuric acid is The Factory Must Grow's, from sulfur and saltpetre in a vat, and every other acid starts from it. "
+        "Two salt and 500 mB of sulfuric acid in a heated basin give 500 mB of hydrochloric acid, the salt-cake process; salt is water boiled dry in a heated basin. "
+        "Two raw fluorite and 500 mB, heated, give hydrofluoric acid. Two nitrate dust and 500 mB, heated, give nitric acid, which boils off the saltpetre as it did from Glauber's retort. "
+        "Two bone meal and 500 mB, cold, give phosphoric acid, the wet process with bone for phosphate rock; cracking monazite frees more.", "Making the acids") + pages_of(
+        "Oxalic acid is sugar oxidised by nitric acid, Scheele's route: two sugar and 250 mB of nitric acid, heated, give two oxalic acid. "
+        "Chlorine is Scheele's too: a raw pyrolusite in 1,000 mB of hot hydrochloric acid gives 250 mB, the manganese staying behind as its chloride. "
+        "The molten-chloride electrolyses give it off as well, 500 mB with every two calcium and 250 with every lithium."), 10)
+    entry("rare_earths", "extractants", "The extractants", "fundamentals:white_phosphorus", pages_of(
+        "P204 and P507 are both 2-ethylhexyl esters on one phosphorus atom, and the industry makes them from propylene and phosphate rock. So do you, in The Factory Must Grow's chemical vats with an industrial mixer unless a step says otherwise. "
+        "First water gas: a coal coke and 500 mB of water, heated, give 1,000 mB of carbon monoxide and hydrogen. Shifted with another 500 mB of water, heated, 1,000 mB of water gas gives 1,000 mB of hydrogen and 500 of carbon dioxide; "
+        "that is also the hydrogen cobalt, molybdenum and tungsten are reduced under.", "The extractants") + pages_of(
+        "The oxo process: 500 mB each of propylene, from cracked naphtha, water gas and hydrogen on a cobalt ingot, heated, give 250 mB of 2-ethylhexanol. The cobalt is the catalyst and comes back nineteen times in twenty. "
+        "Phosphorus: two bone meal, a coal coke and a sand in a vat with two electrodes, superheated, give a white phosphorus and a slag, as the electric furnace does at 1,500 °C. "
+        "A white phosphorus and 750 mB of chlorine in a heated basin give 500 mB of phosphorus trichloride.") + pages_of(
+        "P204 is D2EHPA: 500 mB of 2-ethylhexanol, 250 of phosphorus trichloride, 500 of air and 250 of water, cold, give 250 mB of it, the air taking the phosphorus to phosphate. "
+        "P507 is EHEHPA: the same without the air, heated, which rearranges the phosphite to a phosphonate, carbon bonded to phosphorus. Both give 500 mB of hydrochloric acid back. "
+        "Neat, they are too thick to use: 250 mB with 750 mB of kerosene and a limesand under a mixer make 1,000 mB of P204 or P507.") + pages_of(
+        "Naphthenic acid is petroleum's own, washed out of the oil as sodium soaps and freed with acid: 1,000 mB of heavy oil with a soda ash and 250 mB of sulfuric acid, heated, gives 500 mB."), 11)
     entry("rare_earths", "temperature", "Temperature", "minecraft:campfire", pages_of(
         "Every block has a temperature. The biome gives the climate: tundra about -5 °C, taiga 1, plains 15, jungle 19, desert 45, cooler with altitude the way vanilla decides where snow lies. "
         "Under open sky the day swings it five degrees either way and rain and thunder take a few off. Then everything hot or cold within reach adds its share with distance: lava at 1,150 °C, fire and a campfire at 800, a lit furnace 750, "
         "a blast furnace 1,500, a bloomery 1,200, a blaze burner at whatever level it burns, and ice and snow the other way. That is inside; walls hold most of it in, so a step from a furnace is hot, not a kiln.", "Temperature") + pages_of(
-        "Type /heat to read it where you stand; goggles on a stage read it there. Acid eats twice as fast for every ten degrees warmer. The three heats the recipes ask for, none, a burner (1,000 °C) and a burner fed a blaze cake (1,600 °C), are the coarse version of the same number."), 10)
+        "Type /heat to read it where you stand; goggles on a stage read it there. Acid eats twice as fast for every ten degrees warmer. The three heats the recipes ask for, none, a burner (1,000 °C) and a burner fed a blaze cake (1,600 °C), are the coarse version of the same number."), 12)
 
 
 def metals():
@@ -273,7 +292,7 @@ def metals():
         "Two raw molybdenite roasted in a heated basin give two molybdenum trioxide, and half the time a rhenium flue dust: "
         "the roaster's flue is where every gram of the world's rhenium comes from.", "The porphyry chain") + pages_of(
         "Both oxides are reduced under hydrogen in a heated chemical vat with an industrial mixer, as the industry does: two trioxide and 500 mB of hydrogen give two molybdenum ingots, "
-        "two flue dust and 250 mB give one rhenium ingot. Hydrogen is The Factory Must Grow's."), 1)
+        "two flue dust and 250 mB give one rhenium ingot. The hydrogen is shifted from water gas; the extractants entry under the rare earths says how."), 1)
     entry("metals", "superalloy", "Superalloy and molybdenum steel", "fundamentals:superalloy_ingot", pages_of(
         "Four nickel, a chromium, two cobalt and a rhenium, superheated under 100 mB of argon, make four ingots of the nickel superalloy that turbine blades are cast from, the chromium what keeps it from scaling in the hot gas; "
         "The Factory Must Grow's turbine blade now takes its plates. One molybdenum in four steel makes molybdenum steel, and its plates now make the heavy machinery casing.",

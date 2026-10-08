@@ -25,12 +25,22 @@ What's agreed but not built, in the order it's likely to go. The working plan be
 - **Platinum group.** The layered intrusion carries sperrylite, cooperite and braggite; the materials are declared
   (`PreciousMaterials`) but not items. Catalysts (reforming, the catalytic converter alongside ceria) are the sinks.
 - **Cobalt blue** uses roasted cobaltite directly; a cobalt oxide form would be cleaner.
-- **Arsenic and chlorine.** Roasting cobaltite really gives off arsenic trioxide, and the molten-chloride electrolyses
-  (calcium, lithium) chlorine. Neither is an item or a fluid yet, and a campfire roast has only one output.
+- **Arsenic.** Roasting cobaltite really gives off arsenic trioxide. It is not an item yet, and a campfire roast has only
+  one output. (Chlorine, the other missing by-product, now comes off the molten-chloride electrolyses.)
 - **Chromium loose ends.** Ferrochrome smelts in a superheated basin; The Factory Must Grow's arc furnace (a firebrick vat on
   three graphite electrodes) is the truer submerged-arc furnace but its vat needs yttria here, so it waits. The chromate
   leach folds into the roast, the dichromate step makes no sodium sulfate, and electrolytic chromium is not modelled.
   UG2 chromite carries the platinum metals, which should come off the wash once they are items.
+
+## Reagents
+
+- **Nitric acid by Ostwald.** Ammonia burnt over platinum gauze is how nitric acid has been made since 1910; it waits on
+  the platinum group being items. The saltpetre retort stays as the early route.
+- **Phosphoric acid has no sink** now that the extractants are made from phosphorus trichloride. Its real ones are
+  fertiliser and phosphating steel; the old route to phosphorus, phosphoric acid distilled with charcoal, is another.
+- **White phosphorus** ignites in air at about 30 °C and is kept under water. It is an inert item for now.
+- **Chlorine and phosphorus trichloride** are pipe-only fluids, so they neither fume nor poison. If they ever stand in
+  the world they belong with hydrofluoric and nitric acid in the fume handling.
 
 ## Pack and tooling
 
