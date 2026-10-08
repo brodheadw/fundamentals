@@ -275,6 +275,7 @@
   "goggles.fundamentals.mixer_settler.organic_bar": "Organic  %s  %s/%s stages charged",
   "goggles.fundamentals.mixer_settler.aqueous_bar": "Aqueous  %s  %s/%s stages wet",
   "goggles.fundamentals.mixer_settler.ends": "Feed %s, strip %s",
-  "goggles.fundamentals.mixer_settler.products": "Out: %s at the head, %s at the tail",
-  "goggles.fundamentals.mixer_settler.nothing": "nothing"
+  "goggles.fundamentals.mixer_settler.products": "Out %s at the head, %s at the tail",
+  "goggles.fundamentals.mixer_settler.nothing": "nothing",
+  "goggles.fundamentals.mixer_settler.progress": "Organic on %s of %s stages, liquor in %s"
 }
