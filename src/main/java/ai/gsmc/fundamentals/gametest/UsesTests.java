@@ -41,7 +41,8 @@ public class UsesTests {
         Recipe<?> magnet = recipe(helper, "tfmg:polarizing/magnet");
         helper.assertTrue(takes(magnet, "fundamentals:neodymium_iron_boron_ingot"), "the Factory's magnet should be polarized from NdFeB");
         helper.assertTrue(!takes(magnet, "tfmg:magnetic_alloy_ingot"), "the Factory's magnetic alloy should no longer make a magnet on its own");
-        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/neodymium_iron_boron"), "fundamentals:raw_borax"), "NdFeB wants boron, from borax");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/neodymium_iron_boron"), "fundamentals:ferroboron")
+                && takes(recipe(helper, "fundamentals:uses/ferroboron"), "fundamentals:raw_borax"), "NdFeB wants boron as ferroboron, from borax");
         helper.assertTrue(takes(recipe(helper, "fundamentals:uses/samarium_cobalt"), "fundamentals:cobalt_ingot"), "SmCo wants cobalt metal");
         helper.assertTrue(BuiltInRegistries.BLOCK.containsKey(ResourceLocation.parse("fundamentals:borax_ore")), "borax should be an ore");
         helper.succeed();
@@ -72,15 +73,18 @@ public class UsesTests {
     @GameTest(template = "empty")
     public void cobaltCopperMolybdenumAndRheniumHaveTheirChains(GameTestHelper helper) {
         var registries = helper.getLevel().registryAccess();
-        for (String item : new String[] {"cobalt_ingot", "molybdenum_oxide", "molybdenum_ingot", "rhenium_ingot", "superalloy_plate", "molybdenum_steel_plate", "roasted_cobaltite", "roasted_chalcopyrite", "rhenium_flue_dust"}) {
+        for (String item : new String[] {"cobalt_ingot", "molybdenum_oxide", "molybdenum_ingot", "rhenium_ingot", "superalloy_plate", "molybdenum_steel_plate", "roasted_cobaltite", "roasted_chalcopyrite", "rhenium_flue_dust",
+                "copper_matte_dust", "blister_copper_ingot"}) {
             helper.assertTrue(BuiltInRegistries.ITEM.containsKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, item)), item + " is not an item");
         }
-        Map.of("fundamentals:roasting/roasted_cobaltite_campfire_cooking", "minecraft:campfire_cooking", "fundamentals:uses/cobalt_ingot", "minecraft:blasting",
-                "fundamentals:bloomery/copper_from_roasted_chalcopyrite", "fundamentals:bloomery", "fundamentals:uses/molybdenum_oxide", "create:mixing",
+        Map.of("fundamentals:roasting/roasted_cobaltite_campfire_cooking", "minecraft:campfire_cooking", "fundamentals:uses/cobalt_ingot", "tfmg:vat_machine_recipe",
+                "fundamentals:bloomery/copper_matte_from_roasted_chalcopyrite", "fundamentals:bloomery", "fundamentals:uses/blister_copper", "create:mixing",
+                "fundamentals:uses/copper_ingot_from_blister_copper", "minecraft:blasting", "fundamentals:uses/molybdenum_oxide", "create:mixing",
                 "fundamentals:uses/molybdenum_ingot", "tfmg:vat_machine_recipe", "fundamentals:uses/rhenium_ingot", "tfmg:vat_machine_recipe",
                 "fundamentals:uses/superalloy", "create:mixing", "fundamentals:uses/molybdenum_steel", "create:mixing")
                 .forEach((id, type) -> helper.assertTrue(BuiltInRegistries.RECIPE_TYPE.getKey(recipe(helper, id).getType()).toString().equals(type), id + " should be a " + type));
-        helper.assertTrue(recipe(helper, "fundamentals:bloomery/copper_from_roasted_chalcopyrite").getResultItem(registries).is(net.minecraft.world.item.Items.COPPER_INGOT), "roasted chalcopyrite should bloom to copper");
+        helper.assertTrue(recipe(helper, "fundamentals:bloomery/copper_matte_from_roasted_chalcopyrite").getResultItem(registries).is(stack("fundamentals:copper_matte_dust").getItem()),
+                "roasted chalcopyrite should smelt to matte, not copper");
         helper.assertTrue(takes(recipe(helper, "tfmg:turbine_blade"), "fundamentals:superalloy_plate"), "the turbine blade should take superalloy plates");
         helper.assertTrue(takes(recipe(helper, "tfmg:item_application/heavy_machinery_casing"), "fundamentals:molybdenum_steel_plate"), "the heavy casing should take molybdenum steel");
         helper.assertTrue(takes(recipe(helper, "fundamentals:uses/superalloy"), "fundamentals:rhenium_ingot"), "the superalloy wants rhenium");

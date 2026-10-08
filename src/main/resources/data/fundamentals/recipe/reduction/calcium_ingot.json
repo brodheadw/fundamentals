@@ -6,15 +6,10 @@
   ],
   "ingredients": [
     {
-      "item": "tfmg:limesand"
+      "item": "fundamentals:calcium_chloride"
     },
     {
-      "item": "tfmg:limesand"
-    },
-    {
-      "type": "neoforge:single",
-      "amount": 500,
-      "fluid": "fundamentals:hydrochloric_acid"
+      "item": "fundamentals:calcium_chloride"
     }
   ],
   "machines": [
@@ -25,7 +20,8 @@
   "processing_time": 100,
   "results": [
     {
-      "id": "fundamentals:calcium_ingot"
+      "id": "fundamentals:calcium_ingot",
+      "count": 2
     }
   ],
   "heat_requirement": "heated"

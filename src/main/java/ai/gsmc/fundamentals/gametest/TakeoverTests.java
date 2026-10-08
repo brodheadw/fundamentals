@@ -33,13 +33,16 @@ public class TakeoverTests {
     public void spodumeneAndBauxiteFeedTheFactorysMachines(GameTestHelper helper) {
         helper.assertTrue(BuiltInRegistries.BLOCK.containsKey(ResourceLocation.parse("fundamentals:spodumene_ore"))
                 && BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse("fundamentals:raw_spodumene")), "spodumene should be an ore with a raw chunk");
-        Map<String, String> machines = Map.of("lithium/calcined_spodumene", "minecraft:blasting", "lithium/lithium_ingot", "tfmg:vat_machine_recipe",
+        Map<String, String> machines = Map.of("lithium/calcined_spodumene", "minecraft:blasting", "lithium/lithium_chloride", "create:mixing", "lithium/lithium_ingot", "tfmg:vat_machine_recipe",
                 "aluminium/bauxite_powder", "create:milling", "aluminium/bauxite_powder_from_crushed", "create:milling");
         machines.forEach((id, machine) -> {
             var recipe = helper.getLevel().getRecipeManager().byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, id));
             helper.assertTrue(recipe.isPresent(), id + " did not load");
             helper.assertTrue(BuiltInRegistries.RECIPE_TYPE.getKey(recipe.get().value().getType()).toString().equals(machine), id + " should be a " + machine + " recipe");
         });
+        var lithium = (com.simibubi.create.content.processing.recipe.ProcessingRecipe<?, ?>) helper.getLevel().getRecipeManager()
+                .byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "lithium/lithium_ingot")).orElseThrow().value();
+        helper.assertTrue(lithium.getFluidIngredients().isEmpty(), "lithium cannot be won from water: the vat should electrolyse the dry chloride");
         helper.succeed();
     }
 

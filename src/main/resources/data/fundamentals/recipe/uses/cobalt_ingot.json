@@ -1,12 +1,32 @@
 {
-  "type": "minecraft:blasting",
-  "category": "misc",
-  "ingredient": {
-    "item": "fundamentals:roasted_cobaltite"
-  },
-  "result": {
-    "id": "fundamentals:cobalt_ingot"
-  },
-  "experience": 0.7,
-  "cookingtime": 200
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "heat_requirement": "heated",
+  "machines": [
+    "tfmg:mixing"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
+  "ingredients": [
+    {
+      "item": "fundamentals:roasted_cobaltite"
+    },
+    {
+      "item": "fundamentals:roasted_cobaltite"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "tfmg:hydrogen"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:cobalt_ingot",
+      "count": 2
+    }
+  ]
 }

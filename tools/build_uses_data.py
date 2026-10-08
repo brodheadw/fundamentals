@@ -21,8 +21,14 @@ CREATE = DATA.parent / "create/recipe"
 ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_cobaltite": "Roasted Cobaltite",
          "roasted_chalcopyrite": "Roasted Chalcopyrite", "rhenium_flue_dust": "Rhenium Flue Dust",
          "tungsten_carbide": "Tungsten Carbide", "tungsten_filament": "Tungsten Filament", "clarifier_sludge": "Clarifier Sludge",
-         "copper_calcine": "Copper Calcine", "zinc_oxide": "Zinc Oxide", "roasted_pentlandite": "Roasted Pentlandite"}
+         "copper_calcine": "Copper Calcine", "zinc_oxide": "Zinc Oxide", "roasted_pentlandite": "Roasted Pentlandite",
+         "lithium_chloride": "Lithium Chloride", "ferroboron": "Ferroboron"}
 ROASTING = DATA / "recipe/roasting"
+LITHIUM = DATA / "recipe/lithium"
+
+
+def argon(amount=100):
+    return [{"type": "neoforge:single", "amount": amount, "fluid": "fundamentals:argon"}]
 
 
 def item(id, count=1):
@@ -49,14 +55,16 @@ def shaped(path, pattern, key, result):
 
 
 def magnets():
-    """Nd2Fe14B is sintered from neodymium (or didymium, as the industry does), iron and boron, with
-    dysprosium to hold its field when hot; SmCo5 from samarium and cobalt. Both are then polarized into
-    The Factory Must Grow's magnet, which its motors and generators are already built from, so a
-    rare earth plant is what a motor needs."""
+    """Nd2Fe14B is melted from neodymium (or didymium, as the industry does), iron and boron, with
+    dysprosium to hold its field when hot; SmCo5 from samarium and cobalt. Rare earth metal burns in air when
+    molten, so both are melted under argon. The boron goes in as ferroboron, which borax, iron and charcoal give
+    in the heat of an arc. Both are then polarized into The Factory Must Grow's magnet, which its motors and
+    generators are already built from, so a rare earth plant is what a motor needs."""
+    mixing("ferroboron", item("raw_borax") + tag("c:ingots/iron") + item("minecraft:charcoal", 2), [result("ferroboron")], "superheated")
     for name, rare in (("neodymium_iron_boron", "neodymium_ingot"), ("neodymium_iron_boron_from_didymium", "didymium_ingot")):
-        mixing(name, item(rare, 2) + item("dysprosium_ingot") + tag("c:ingots/iron", 4) + item("raw_borax"),
+        mixing(name, item(rare, 2) + item("dysprosium_ingot") + tag("c:ingots/iron", 3) + item("ferroboron") + argon(),
                [result("neodymium_iron_boron_ingot", 4)], "superheated")
-    mixing("samarium_cobalt", item("samarium_ingot") + item("cobalt_ingot", 4), [result("samarium_cobalt_ingot", 2)], "superheated")
+    mixing("samarium_cobalt", item("samarium_ingot") + item("cobalt_ingot", 4) + argon(), [result("samarium_cobalt_ingot", 2)], "superheated")
     write(TFMG / "polarizing/magnet.json", {"type": "tfmg:polarizing", "ingredients": tag("c:ingots/neodymium_iron_boron"),
                                             "results": [{"id": "tfmg:magnet"}]})
     write(USES / "magnet_from_samarium_cobalt.json", {"type": "tfmg:polarizing", "ingredients": tag("c:ingots/samarium_cobalt"),
@@ -139,31 +147,51 @@ def vat(name, items, fluid_id, amount, results, machines=("tfmg:mixing",), heat=
 
 
 def cobalt():
-    """Cobaltite roasted of its arsenic and sulfur, then blasted to the metal. Cobalt blue is the oxide calcined with alumina."""
+    """Cobaltite roasted of its arsenic and sulfur to the oxide, which hydrogen reduces in a heated vat: cobalt melts at
+    1,495 C, past any furnace of the day. Cobalt blue is the oxide calcined with alumina."""
     roast("cobaltite", "roasted_cobaltite")
-    write(USES / "cobalt_ingot.json", {"type": "minecraft:blasting", "category": "misc", "ingredient": {"item": "fundamentals:roasted_cobaltite"},
-                                       "result": {"id": "fundamentals:cobalt_ingot"}, "experience": 0.7, "cookingtime": 200})
+    vat("cobalt_ingot", item("roasted_cobaltite", 2), "tfmg:hydrogen", 500, [result("cobalt_ingot", 2)])
     mixing("cobalt_blue", item("roasted_cobaltite") + item("tfmg:bauxite_powder", 2), [result("minecraft:blue_dye", 4)], "superheated")
 
 
 def copper_molybdenum_rhenium():
-    """The porphyry chain. Chalcopyrite roasts to a copper oxide the bloomery smelts, its iron going to slag. Molybdenite
+    """The porphyry chain. Chalcopyrite is roasted of part of its sulfur and smelted to matte. Molybdenite
     roasts to molybdenum trioxide, and the rhenium in it leaves up the flue: the roaster's dust is where every gram of
     rhenium on earth comes from. Both oxides are reduced under hydrogen, as the industry does, in a heated vat."""
     roast("chalcopyrite", "roasted_chalcopyrite")
-    write(DATA / "recipe/bloomery/copper_from_roasted_chalcopyrite.json", {"type": "fundamentals:bloomery", "ingredient": {"item": "fundamentals:roasted_chalcopyrite"},
-                                                                          "result": {"id": "minecraft:copper_ingot", "count": 1}, "byproduct": {"id": "fundamentals:slag", "count": 1}})
     mixing("molybdenum_oxide", item("raw_molybdenite", 2), [result("molybdenum_oxide", 2), {"id": "fundamentals:rhenium_flue_dust", "chance": 0.5}], "heated")
     vat("molybdenum_ingot", item("molybdenum_oxide", 2), "tfmg:hydrogen", 500, [result("molybdenum_ingot", 2)])
     vat("rhenium_ingot", item("rhenium_flue_dust", 2), "tfmg:hydrogen", 250, [result("rhenium_ingot")])
 
 
 def copper_sulfides():
-    """Bornite, chalcocite and covellite roast, as chalcopyrite does, to a black copper oxide the bloomery smelts."""
+    """A copper sulfide is not smelted to copper but to matte. Roasted chalcopyrite, and the calcine bornite, chalcocite and
+    covellite roast to, melt in the bloomery to matte, the copper and iron sulfides, the rest going to slag. Air blown
+    through the molten matte burns the iron to an oxide that sand fluxes off and the sulfur to SO2, leaving blister copper,
+    pocked where the gas broke out; the blast furnace fire-refines it to copper."""
     for ore in ("bornite", "chalcocite", "covellite"):
         roast(ore, "copper_calcine", f"copper_calcine_from_{ore}")
-    write(DATA / "recipe/bloomery/copper_from_copper_calcine.json", {"type": "fundamentals:bloomery", "ingredient": {"item": "fundamentals:copper_calcine"},
-                                                                    "result": {"id": "minecraft:copper_ingot", "count": 1}, "byproduct": {"id": "fundamentals:slag", "count": 1}})
+    for feed in ("roasted_chalcopyrite", "copper_calcine"):
+        write(DATA / f"recipe/bloomery/copper_matte_from_{feed}.json", {"type": "fundamentals:bloomery", "ingredient": {"item": f"fundamentals:{feed}"},
+                                                                       "result": {"id": "fundamentals:copper_matte_dust", "count": 1}, "byproduct": {"id": "fundamentals:slag", "count": 1}})
+    mixing("blister_copper", item("copper_matte_dust", 2) + tag("c:sands/colorless"), [result("blister_copper_ingot", 2), result("slag")], "superheated")
+    write(USES / "copper_ingot_from_blister_copper.json", {"type": "minecraft:blasting", "category": "misc", "ingredient": {"item": "fundamentals:blister_copper_ingot"},
+                                                           "result": {"id": "minecraft:copper_ingot"}, "experience": 0.3, "cookingtime": 100})
+
+
+def lithium():
+    """Spodumene calcined white in the blast furnace opens to hot hydrochloric acid, which takes its lithium as the
+    chloride; boiled dry, that is the salt lithium is won from. Lithium cannot be won from water, so the dry chloride
+    is electrolysed molten, at about 450 C."""
+    write(LITHIUM / "calcined_spodumene.json", {"type": "minecraft:blasting", "category": "misc", "ingredient": {"item": "fundamentals:raw_spodumene"},
+                                                "result": {"id": "fundamentals:calcined_spodumene"}, "experience": 0.2, "cookingtime": 100})
+    write(LITHIUM / "lithium_chloride.json", {"type": "create:mixing", "heat_requirement": "heated", "ingredients": item("calcined_spodumene", 2)
+                                              + [{"type": "neoforge:single", "amount": 500, "fluid": "fundamentals:hydrochloric_acid"}],
+                                              "results": [result("lithium_chloride", 2)]})
+    write(LITHIUM / "lithium_ingot.json", {"type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:steel_vat", "tfmg:firebrick_lined_vat"],
+                                           "heat_requirement": "heated", "machines": ["tfmg:electrode", "tfmg:electrode"], "min_size": 1, "processing_time": 100,
+                                           "ingredients": item("lithium_chloride", 2),
+                                           "results": [{"id": "tfmg:lithium_ingot"}, {"chance": 0.5, "count": 3, "id": "tfmg:lithium_nugget"}]})
 
 
 def disabled(path):
@@ -237,8 +265,9 @@ def loot():
 
 
 def alloys():
-    """Where cobalt, molybdenum and rhenium go: the nickel superalloy of turbine blades, and molybdenum steel for the heavy casings."""
-    mixing("superalloy", item("tfmg:nickel_ingot", 4) + item("cobalt_ingot", 2) + item("rhenium_ingot"), [result("superalloy_ingot", 4)], "superheated")
+    """Where cobalt, molybdenum and rhenium go: the nickel superalloy of turbine blades, melted under argon as the
+    rare earth magnets are, and molybdenum steel for the heavy casings."""
+    mixing("superalloy", item("tfmg:nickel_ingot", 4) + item("cobalt_ingot", 2) + item("rhenium_ingot") + argon(), [result("superalloy_ingot", 4)], "superheated")
     mixing("molybdenum_steel", item("molybdenum_ingot") + tag("c:ingots/steel", 4), [result("molybdenum_steel_ingot", 4)], "superheated")
     shaped(TFMG / "turbine_blade.json", ["III", "ISI", "III"], {"S": {"item": "create:shaft"}, "I": {"tag": "c:plates/superalloy"}},
            {"count": 1, "id": "tfmg:turbine_blade", "components": {"tfmg:fuel_tags": {"kerosene": "c:kerosene"}, "tfmg:fuels": {"kerosene": "Kerosene"}}})
@@ -291,6 +320,7 @@ def main():
     shutil.rmtree(USES, ignore_errors=True)
     shutil.rmtree(TFMG, ignore_errors=True)
     shutil.rmtree(CREATE, ignore_errors=True)
+    shutil.rmtree(LITHIUM, ignore_errors=True)
     for pattern in ("roasted_c*", "roasted_pentlandite_*", "copper_calcine_*", "zinc_oxide_*"):
         for stale in ROASTING.glob(pattern):
             stale.unlink()
@@ -304,6 +334,7 @@ def main():
     cobalt()
     copper_molybdenum_rhenium()
     copper_sulfides()
+    lithium()
     iron()
     zinc()
     nickel()

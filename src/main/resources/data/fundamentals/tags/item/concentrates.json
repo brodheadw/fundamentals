@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "#fundamentals:concentrates/bastnasite_concentrate",
     "#fundamentals:concentrates/heavy_rare_earth_concentrate",
     "#fundamentals:concentrates/light_rare_earth_concentrate"
   ]

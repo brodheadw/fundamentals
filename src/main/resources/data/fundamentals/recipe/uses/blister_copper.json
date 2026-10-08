@@ -1,0 +1,24 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:copper_matte_dust"
+    },
+    {
+      "item": "fundamentals:copper_matte_dust"
+    },
+    {
+      "tag": "c:sands/colorless"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:blister_copper_ingot",
+      "count": 2
+    },
+    {
+      "id": "fundamentals:slag"
+    }
+  ],
+  "heat_requirement": "superheated"
+}
