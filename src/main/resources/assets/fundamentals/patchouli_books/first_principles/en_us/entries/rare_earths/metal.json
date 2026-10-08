@@ -28,6 +28,10 @@
     {
       "type": "patchouli:text",
       "text": "Argon is spun out of 1,000 mB of air in a centrifuge vat, nine millibuckets at a time. Calcium is two limesand and 500 mB of hydrochloric acid on electrodes."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Heat is the one number Minecraft has: electrolysis runs at a blaze burner's heat, and the two metallothermic reductions, near 1,500 °C in life, want the burner fed a blaze cake."
     }
   ]
 }

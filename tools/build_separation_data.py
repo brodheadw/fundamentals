@@ -189,9 +189,15 @@ def chemistry():
     mixing("phosphoric_acid", item("minecraft:bone_meal", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("phosphoric_acid", 500)])
     # The organophosphorus extractants: P204 and P507 are the same family of 2-ethylhexyl esters, so one
     # recipe cold and one hot stands for the two syntheses. Naphthenic acid is petroleum's own.
-    mixing("p204", [fluid("phosphoric_acid", 250), fluid("tfmg:kerosene", 750)], [result_fluid("p204", 1000)])
-    mixing("p507", [fluid("phosphoric_acid", 250), fluid("tfmg:kerosene", 750)], [result_fluid("p507", 1000)], heated=True)
-    mixing("naphthenic_acid", [fluid("tfmg:heavy_oil", 1000), fluid("tfmg:sulfuric_acid", 250)], [result_fluid("naphthenic_acid", 500)], heated=True)
+    # Each extractant is saponified as it is made up, with lime rather than ammonia (calcium saponification, which
+    # Chinese plants moved to so that the raffinate carries no ammonia): that is what sets the pH the cuts work at.
+    mixing("p204", [fluid("phosphoric_acid", 250), fluid("tfmg:kerosene", 750), item("tfmg:limesand")], [result_fluid("p204", 1000)])
+    mixing("p507", [fluid("phosphoric_acid", 250), fluid("tfmg:kerosene", 750), item("tfmg:limesand")], [result_fluid("p507", 1000)], heated=True)
+    mixing("naphthenic_acid", [fluid("tfmg:heavy_oil", 1000), fluid("tfmg:sulfuric_acid", 250), item("tfmg:limesand")], [result_fluid("naphthenic_acid", 500)], heated=True)
+    # Froth flotation for bastnasite: the ground mineral beaten with water and a fatty-acid collector, naphthenic acid,
+    # floats the rare earth carbonate off the gangue. About half of what goes in comes out as concentrate.
+    mixing("light_rare_earth_concentrate_from_bastnasite", item("bastnasite_dust", 2) + [fluid("minecraft:water", 250), fluid("naphthenic_acid", 100)],
+           [result_item("light_rare_earth_concentrate"), {"id": "fundamentals:light_rare_earth_concentrate", "chance": 0.5}])
     # Leaching the concentrates into chloride liquor.
     # the thorium in the monazite stays behind when the light concentrate dissolves: a residue that has to be put somewhere
     mixing("rare_earth_liquor", [item("light_rare_earth_concentrate"), fluid(STRIP, 500)],
@@ -207,10 +213,11 @@ def chemistry():
 
 
 def vat(name, ingredients, results, machines, heated=True, time=100):
+    """heated: False, True (a blaze burner) or "superheated" (a blaze burner fed a blaze cake)."""
     recipe = {"type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:steel_vat", "tfmg:firebrick_lined_vat"],
               "ingredients": ingredients, "machines": machines, "min_size": 1, "processing_time": time, "results": results}
     if heated:
-        recipe["heat_requirement"] = "heated"
+        recipe["heat_requirement"] = "superheated" if heated == "superheated" else "heated"
     write(RECIPES / f"reduction/{name}.json", recipe)
 
 
@@ -225,13 +232,14 @@ def metals():
     for element in ELECTROLYSIS:
         vat(f"{element}_ingot", [item(f"{element}_fluoride")] + item(f"{element}_oxide", 2), [result_item(f"{element}_ingot", 2)],
             ["tfmg:electrode", "tfmg:electrode"])
+    # Electrolysis runs at the fluoride melt, a blaze burner's heat; the two metallothermic reductions run near
+    # 1500 C, which is the burner fed a blaze cake. TFMG vats take four item inputs at most.
     for element in CALCIOTHERMIC:
-        # TFMG vats take four item inputs at most
         vat(f"{element}_ingot", item(f"{element}_fluoride", 2) + item("calcium_ingot", 2) + [fluid("argon", 250)],
-            [result_item(f"{element}_ingot", 2), result_item("raw_fluorite", 2)], ["tfmg:mixing"])
+            [result_item(f"{element}_ingot", 2), result_item("raw_fluorite", 2)], ["tfmg:mixing"], heated="superheated")
     for element in LANTHANOTHERMIC:
         vat(f"{element}_ingot", item(f"{element}_oxide", 2) + item("lanthanum_ingot", 2) + [fluid("argon", 250)],
-            [result_item(f"{element}_ingot", 2), result_item("lanthanum_oxide", 2)], ["tfmg:mixing"])
+            [result_item(f"{element}_ingot", 2), result_item("lanthanum_oxide", 2)], ["tfmg:mixing"], heated="superheated")
     write(DATA.parent / "c/tags/item/ingots/calcium.json", {"replace": False, "values": ["fundamentals:calcium_ingot"]})
 
 

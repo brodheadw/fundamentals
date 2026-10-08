@@ -10,6 +10,9 @@
       "type": "neoforge:single",
       "amount": 250,
       "fluid": "tfmg:sulfuric_acid"
+    },
+    {
+      "item": "tfmg:limesand"
     }
   ],
   "results": [
