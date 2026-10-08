@@ -70,6 +70,10 @@ A separation plant makes waste. Every cut leaves a fifth of a batch of spent chl
 
 The acids exist outside pipes. Hydrochloric, hydrofluoric, nitric and phosphoric acid can be bucketed and poured, burn whatever stands in them (hydrofluoric also poisons), and eat what they really eat: pour one against such a block and it cracks as if being mined, fizzes for five seconds and is gone, and the acid that ate it is spent. Hydrochloric acid takes carbonates, calcite, limestone, dripstone and bone; hydrofluoric takes glass, sand and quartz; nitric takes copper and iron. Stone shrugs them all off.
 
+### The other metals
+
+Cobaltite from the silver-cobalt veins roasts on a fire and blasts to cobalt; four of it with a samarium make SmCo, two with four nickel and a rhenium make the nickel superalloy that The Factory Must Grow's turbine blades are now cast from, and one goes into its lithium charge as the cathode. Chalcopyrite from a porphyry stock roasts to an oxide the bloomery smelts to copper. Molybdenite roasted in a heated basin gives molybdenum trioxide and, up the flue, the rhenium dust that is the only source of rhenium there is; hydrogen in a heated vat reduces both to metal, and molybdenum in steel makes the plate the heavy machinery casing now takes. Scheelite and wolframite decompose in hot hydrochloric acid to tungsten oxide, hydrogen reduces it, and the metal draws to the filament every light bulb burns and carburises to the carbide every mechanical drill bites with.
+
 ### The book
 
 With Patchouli installed, a book and a raw hematite craft *Fundamentals: First Principles*: every deposit and where to find it, the hand-working, the whole rare earth chain with the stage count of every cut and the road to every metal, the uses, the waste and the acids. It is generated from the same data the game runs on, so its numbers are the game's.
