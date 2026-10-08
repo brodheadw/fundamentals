@@ -1,0 +1,25 @@
+{
+  "name": "The acids",
+  "category": "fundamentals:rare_earths",
+  "icon": "fundamentals:hydrochloric_acid_bucket",
+  "sortnum": 9,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The plant runs on acid, and acid is not a texture. Each one can be bucketed and poured, and does in the world what it does in the bottle. Stand in any of them and it burns; hydrofluoric acid also poisons.",
+      "title": "The acids"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Pour one against a block it attacks and the block cracks as if being mined, fizzes for five seconds, and is gone, and the acid that ate it is spent."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Hydrochloric acid eats carbonates: calcite, limestone, dripstone, bone, tuff. Hydrofluoric acid eats glass and silica: glass, sand, sandstone, quartz; it is the one acid glass cannot hold. Nitric acid eats copper and iron. Phosphoric acid only stings, which is why it is in your cola."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Stone, deepslate and the vats shrug all of them off."
+    }
+  ]
+}
