@@ -68,7 +68,7 @@ A separation plant makes waste. Every cut leaves a fifth of a batch of spent chl
 
 ### Acids
 
-The acids exist outside pipes. Hydrochloric, hydrofluoric, nitric and phosphoric acid can be bucketed and poured, burn whatever stands in them (hydrofluoric also poisons), and eat what they really eat: pour one against such a block and it cracks as if being mined, fizzes for five seconds and is gone, and the acid that ate it is spent. Hydrochloric acid takes carbonates, calcite, limestone, dripstone and bone; hydrofluoric takes glass, sand and quartz; nitric takes copper and iron. Stone shrugs them all off.
+The acids exist outside pipes. Hydrochloric, hydrofluoric, nitric and phosphoric acid can be bucketed and poured, burn whatever stands in them (hydrofluoric also poisons), and eat what they really eat: pour one against such a block and it cracks as if being mined, fizzes for five seconds and is gone, and the acid that ate it is spent. Hydrochloric acid takes carbonates, calcite, limestone, dripstone and bone; hydrofluoric takes glass, sand and quartz; nitric takes copper and iron. Stone shrugs them all off. Hydrofluoric and nitric acid fume: within two blocks of either in the open, as a block or in a basin, you take a hit a second unless you wear Create's diving helmet on a filled backtank, the gas mask. And acid eats copper: a Create pipe carrying any acid corrodes and bursts within a couple of minutes, spilling it; run acid in The Factory Must Grow's plastic or glass pipes.
 
 ### The other metals
 

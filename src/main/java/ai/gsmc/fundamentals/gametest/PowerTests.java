@@ -22,7 +22,7 @@ public class PowerTests {
 
     private static final BlockPos POS = new BlockPos(1, 1, 1);
 
-    @GameTest(template = "empty", timeoutTicks = 200)
+    @GameTest(template = "empty", timeoutTicks = 400)
     public void aPanelMountedOnARackMakesPowerUnderTheSunAndNoneInShade(GameTestHelper helper) {
         helper.setDayTime(6000);
         helper.setBlock(POS, Electricity.panelRack().defaultBlockState().setValue(PanelRackBlock.FACING, Direction.EAST));
@@ -33,7 +33,8 @@ public class PowerTests {
                 () -> "a panel put on a rack should make a solar panel facing the way the rack did");
         helper.assertTrue(player.getMainHandItem().isEmpty(), "mounting should use up the panel");
         SolarPanelBlockEntity panel = helper.getBlockEntity(POS);
-        helper.runAfterDelay(40, () -> {
+        // the sky light of a freshly placed test structure settles a few dozen ticks after placement; read it late
+        helper.runAfterDelay(120, () -> {
             helper.assertTrue(panel.voltageGeneration() == SolarPanelBlockEntity.VOLTS && panel.powerGeneration() > 0,
                     "at noon under open sky the panel should generate, got " + panel.voltageGeneration() + " V, " + panel.powerGeneration() + " W");
             helper.assertTrue(panel.getNetworkPowerGeneration() >= panel.powerGeneration(),
