@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:smelting",
+  "type": "minecraft:blasting",
   "category": "misc",
   "ingredient": {
     "item": "fundamentals:praseodymium_oxalate"
@@ -8,5 +8,5 @@
     "id": "fundamentals:praseodymium_oxide"
   },
   "experience": 0.3,
-  "cookingtime": 200
+  "cookingtime": 100
 }
