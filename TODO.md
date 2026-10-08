@@ -12,10 +12,9 @@ What's agreed but not built, in the order it's likely to go. The working plan be
 - **Storage under argon / tarnish.** Lanthanum, cerium, europium and neodymium oxidise in air. Chests don't tick their
   contents, so this only works as a sealed canister item (argon-flushed) plus tarnish in the player's inventory and on
   the ground. Design open since the oxide-to-metal work.
-- **Temperature field.** A small internal API, `Heat.at(level, pos)`: biome base temperature, altitude and time of day,
-  plus nearby heat sources (blaze burners, furnaces, lava, fire, our vats) with falloff, computed on demand and cached,
-  no diffusion. First consumers: tarnish rate, acid reaction speed, kerosene and extractant igniting near heat, a
-  goggles readout. Will liked the idea; build after the above.
+- **Temperature consumers.** `Heat.at` exists (the `heat` package). Still to hang on it: the tiers Create's recipes use
+  as thresholds on the number, tarnish rate, kerosene and the extractants igniting near heat, and the fundamental-magic
+  bridge (scorch and Freezing Grasp pushing on it with `Heat.boost`, a Hearth provider reading it).
 - **Gadolinium** has no sink: its real uses are neutron absorption and MRI contrast and the pack has neither. Holmium,
   thulium, ytterbium and lutetium likewise beyond the glass colours.
 

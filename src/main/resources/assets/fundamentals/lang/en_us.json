@@ -339,5 +339,7 @@
   "item.fundamentals.yttrium_oxalate": "Yttrium Oxalate",
   "item.fundamentals.yttrium_oxide": "Yttrium Oxide",
   "itemGroup.fundamentals.materials": "Fundamentals Materials",
-  "itemGroup.fundamentals.minerals": "Fundamentals"
+  "itemGroup.fundamentals.minerals": "Fundamentals",
+  "heat.fundamentals.readout": "%s °C (%s °F)",
+  "goggles.fundamentals.heat": "Here %s °C"
 }

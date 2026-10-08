@@ -244,6 +244,11 @@ def rare_earths():
         "Hydrofluoric and nitric acid fume. Within two blocks of either in the open, as a block or in a basin it is being used in, you take a hit a second and the world swims, and hydrofluoric poisons. "
         "The gas mask is Create's: a diving helmet over a filled copper backtank, which breathes its air instead. "
         "And acid eats copper: a Create pipe carrying any acid corrodes and, after a couple of minutes on average, bursts and spills it. Run acid in The Factory Must Grow's plastic or glass pipes, which it cannot touch; its metal pipes fare no better than copper."), 9)
+    entry("rare_earths", "temperature", "Temperature", "minecraft:campfire", pages_of(
+        "Every block has a temperature. The biome gives the climate: tundra about -5 °C, taiga 1, plains 15, jungle 19, desert 45, cooler with altitude the way vanilla decides where snow lies. "
+        "Under open sky the day swings it five degrees either way and rain and thunder take a few off. Then everything hot or cold within reach adds its share with distance: lava, fire, a campfire, a lit furnace, "
+        "a bloomery, a blaze burner at whatever level it burns, and ice and snow the other way.", "Temperature") + pages_of(
+        "Type /heat to read it where you stand; goggles on a stage read it there. Acid eats twice as fast for every ten degrees warmer. The three heats the recipes ask for, a burner, a burner fed a blaze cake, and none, are the coarse version of the same number."), 10)
 
 
 def metals():
