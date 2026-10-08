@@ -1,0 +1,36 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:neodymium_ingot"
+    },
+    {
+      "item": "fundamentals:neodymium_ingot"
+    },
+    {
+      "item": "fundamentals:dysprosium_ingot"
+    },
+    {
+      "tag": "c:ingots/iron"
+    },
+    {
+      "tag": "c:ingots/iron"
+    },
+    {
+      "tag": "c:ingots/iron"
+    },
+    {
+      "tag": "c:ingots/iron"
+    },
+    {
+      "item": "fundamentals:raw_borax"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:neodymium_iron_boron_ingot",
+      "count": 4
+    }
+  ],
+  "heat_requirement": "superheated"
+}

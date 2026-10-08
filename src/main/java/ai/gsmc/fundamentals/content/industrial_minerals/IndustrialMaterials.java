@@ -20,6 +20,7 @@ public final class IndustrialMaterials {
         mineral("apatite", "Apatite", "Ca5(PO4)3F", "phosphate", MaterialProperties.builder().density(0.41));
         mineral("halite", "Halite", "NaCl", "salt", MaterialProperties.builder().density(0.28));
         mineral("fluorite", "Fluorite", "CaF2", "fluorspar", MaterialProperties.builder().density(0.32));
+        mineral("borax", "Borax", "Na2B4O7·10H2O", "boron", MaterialProperties.builder().density(0.17));
         mineral("sylvite", "Sylvite", "KCl", "potash", MaterialProperties.builder().density(0.25));
         mineral("gypsum", "Gypsum", "CaSO4·2H2O", "gypsum", MaterialProperties.builder().density(0.29));
         mineral("trona", "Trona", "Na3H(CO3)2·2H2O", "soda_ash", MaterialProperties.builder().density(0.27));

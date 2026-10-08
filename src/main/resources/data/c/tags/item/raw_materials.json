@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "#c:raw_materials/aluminum",
+    "#c:raw_materials/boron",
     "#c:raw_materials/chromium",
     "#c:raw_materials/cobalt",
     "#c:raw_materials/copper",
