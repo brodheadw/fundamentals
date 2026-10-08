@@ -31,6 +31,10 @@ DIDYMIUM = ("oxalate", "fluoride", "oxide", "dust", "ingot")
 NO_LIQUOR = ("oxide", "dust", "ingot")
 ALLOY = ("dust", "ingot", "nugget", "plate", "block")
 RESIDUE = ("dust", "block")
+COBALT = ("dust", "ingot", "nugget")
+MOLYBDENUM = ("oxide", "dust", "ingot")
+RHENIUM = ("dust", "ingot")
+STRUCTURAL = ("ingot", "plate")
 
 WHITE = ((150, 150, 148), (206, 206, 204), (236, 236, 234), (255, 255, 255))
 
@@ -76,6 +80,11 @@ METAL = {
     "samarium_cobalt": ((70, 64, 60), (124, 116, 108), (170, 162, 152), (222, 214, 204)),
     "aluminium_scandium": ((98, 104, 114), (164, 172, 184), (214, 220, 230), (247, 249, 253)),
     "monazite_residue": ((54, 46, 40), (96, 84, 72), (138, 124, 108), (186, 172, 154)),
+    "cobalt": tinted((110, 130, 190)),
+    "molybdenum": ((78, 82, 90), (138, 144, 154), (190, 196, 206), (236, 238, 244)),
+    "rhenium": ((92, 94, 100), (156, 160, 168), (206, 210, 218), (246, 248, 252)),
+    "superalloy": ((64, 70, 78), (118, 126, 138), (170, 178, 190), (222, 228, 238)),
+    "molybdenum_steel": ((56, 60, 70), (104, 110, 124), (152, 160, 176), (206, 212, 226)),
 }
 
 # The oxides are painted the colours they really are; the white ones borrow a little of their
@@ -95,6 +104,8 @@ OXIDE = {
 }
 for name in ("lanthanum", "gadolinium", "ytterbium", "lutetium", "yttrium", "scandium"):
     OXIDE[name] = mix(WHITE, METAL[name], 0.3)
+# molybdenum trioxide, off the roaster: a pale yellow-white powder
+OXIDE["molybdenum"] = ((160, 156, 118), (218, 214, 170), (240, 238, 204), (254, 253, 234))
 
 # The oxalates and fluorides are salts of the trivalent ion, so they take the ion's colour, not the
 # oxide's: praseodymium's are green although Pr6O11 is black, terbium's white although Tb4O7 is brown.
@@ -128,6 +139,7 @@ MATERIALS = {
     "erbium": ELEMENT, "thulium": VOLATILE, "ytterbium": VOLATILE, "lutetium": ELEMENT, "yttrium": ELEMENT,
     "scandium": NO_LIQUOR,
     "didymium": DIDYMIUM, "neodymium_iron_boron": ALLOY, "samarium_cobalt": ALLOY, "aluminium_scandium": ALLOY, "monazite_residue": RESIDUE,
+    "cobalt": COBALT, "molybdenum": MOLYBDENUM, "rhenium": RHENIUM, "superalloy": STRUCTURAL, "molybdenum_steel": STRUCTURAL,
 }
 
 DISPLAY = {"bastnasite": "Bastnäsite", "neodymium_iron_boron": "NdFeB", "samarium_cobalt": "SmCo", "aluminium_scandium": "Al-Sc"}

@@ -17,7 +17,9 @@ TFMG = DATA.parent / "tfmg/recipe"
 CREATE = DATA.parent / "create/recipe"
 
 # the items of ours that are not a form of a material: name -> display
-ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass"}
+ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_cobaltite": "Roasted Cobaltite",
+         "roasted_chalcopyrite": "Roasted Chalcopyrite", "rhenium_flue_dust": "Rhenium Flue Dust"}
+ROASTING = DATA / "recipe/roasting"
 
 
 def item(id, count=1):
@@ -51,8 +53,7 @@ def magnets():
     for name, rare in (("neodymium_iron_boron", "neodymium_ingot"), ("neodymium_iron_boron_from_didymium", "didymium_ingot")):
         mixing(name, item(rare, 2) + item("dysprosium_ingot") + tag("c:ingots/iron", 4) + item("raw_borax"),
                [result("neodymium_iron_boron_ingot", 4)], "superheated")
-    # there is no cobalt metal yet: cobaltite goes straight in, roasted of its arsenic and sulfur by the heat
-    mixing("samarium_cobalt", item("samarium_ingot") + item("raw_cobaltite", 4), [result("samarium_cobalt_ingot", 2)], "superheated")
+    mixing("samarium_cobalt", item("samarium_ingot") + item("cobalt_ingot", 4), [result("samarium_cobalt_ingot", 2)], "superheated")
     write(TFMG / "polarizing/magnet.json", {"type": "tfmg:polarizing", "ingredients": tag("c:ingots/neodymium_iron_boron"),
                                             "results": [{"id": "tfmg:magnet"}]})
     write(USES / "magnet_from_samarium_cobalt.json", {"type": "tfmg:polarizing", "ingredients": tag("c:ingots/samarium_cobalt"),
@@ -121,6 +122,49 @@ def scandium():
            {"count": 2, "id": "fundamentals:panel_rack"})
 
 
+def roast(ore, roasted):
+    """A sulfide ore roasted on a campfire or in a smoker, as galena is, to drive off its sulfur (and arsenic)."""
+    for kind, time in (("campfire_cooking", 400), ("smoking", 200)):
+        write(ROASTING / f"{roasted}_{kind}.json", {"type": f"minecraft:{kind}", "category": "misc", "ingredient": {"item": f"fundamentals:raw_{ore}"},
+                                                   "result": {"id": f"fundamentals:{roasted}"}, "experience": 0.1, "cookingtime": time})
+
+
+def vat(name, items, fluid_id, amount, results, machines=("tfmg:mixing",), heat="heated"):
+    write(USES / f"{name}.json", {"type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:steel_vat", "tfmg:firebrick_lined_vat"],
+                                  "heat_requirement": heat, "machines": list(machines), "min_size": 1, "processing_time": 100,
+                                  "ingredients": items + [{"type": "neoforge:single", "amount": amount, "fluid": fluid_id}], "results": results})
+
+
+def cobalt():
+    """Cobaltite roasted of its arsenic and sulfur, then blasted to the metal. Cobalt blue is the oxide calcined with alumina."""
+    roast("cobaltite", "roasted_cobaltite")
+    write(USES / "cobalt_ingot.json", {"type": "minecraft:blasting", "category": "misc", "ingredient": {"item": "fundamentals:roasted_cobaltite"},
+                                       "result": {"id": "fundamentals:cobalt_ingot"}, "experience": 0.7, "cookingtime": 200})
+    mixing("cobalt_blue", item("roasted_cobaltite") + item("tfmg:bauxite_powder", 2), [result("minecraft:blue_dye", 4)], "heated")
+
+
+def copper_molybdenum_rhenium():
+    """The porphyry chain. Chalcopyrite roasts to a copper oxide the bloomery smelts, its iron going to slag. Molybdenite
+    roasts to molybdenum trioxide, and the rhenium in it leaves up the flue: the roaster's dust is where every gram of
+    rhenium on earth comes from. Both oxides are reduced under hydrogen, as the industry does, in a heated vat."""
+    roast("chalcopyrite", "roasted_chalcopyrite")
+    write(DATA / "recipe/bloomery/copper_from_roasted_chalcopyrite.json", {"type": "fundamentals:bloomery", "ingredient": {"item": "fundamentals:roasted_chalcopyrite"},
+                                                                          "result": {"id": "minecraft:copper_ingot", "count": 1}, "byproduct": {"id": "fundamentals:slag", "count": 1}})
+    mixing("molybdenum_oxide", item("raw_molybdenite", 2), [result("molybdenum_oxide", 2), {"id": "fundamentals:rhenium_flue_dust", "chance": 0.5}], "heated")
+    vat("molybdenum_ingot", item("molybdenum_oxide", 2), "tfmg:hydrogen", 500, [result("molybdenum_ingot", 2)])
+    vat("rhenium_ingot", item("rhenium_flue_dust", 2), "tfmg:hydrogen", 250, [result("rhenium_ingot")])
+
+
+def alloys():
+    """Where cobalt, molybdenum and rhenium go: the nickel superalloy of turbine blades, and molybdenum steel for the heavy casings."""
+    mixing("superalloy", item("tfmg:nickel_ingot", 4) + item("cobalt_ingot", 2) + item("rhenium_ingot"), [result("superalloy_ingot", 4)], "superheated")
+    mixing("molybdenum_steel", item("molybdenum_ingot") + tag("c:ingots/steel", 4), [result("molybdenum_steel_ingot", 4)], "superheated")
+    shaped(TFMG / "turbine_blade.json", ["III", "ISI", "III"], {"S": {"item": "create:shaft"}, "I": {"tag": "c:plates/superalloy"}},
+           {"count": 1, "id": "tfmg:turbine_blade", "components": {"tfmg:fuel_tags": {"kerosene": "c:kerosene"}, "tfmg:fuels": {"kerosene": "Kerosene"}}})
+    write(TFMG / "item_application/heavy_machinery_casing.json", {"type": "create:item_application",
+          "ingredients": [{"item": "tfmg:steel_casing"}, {"tag": "c:plates/molybdenum_steel"}], "results": [{"id": "tfmg:heavy_machinery_casing"}]})
+
+
 def names():
     path = ASSETS / "lang/en_us.json"
     lang = json.loads(path.read_text(encoding="utf-8"))
@@ -134,6 +178,8 @@ def main():
     shutil.rmtree(USES, ignore_errors=True)
     shutil.rmtree(TFMG, ignore_errors=True)
     shutil.rmtree(CREATE, ignore_errors=True)
+    for stale in ROASTING.glob("roasted_c*"):
+        stale.unlink()
     magnets()
     cerium()
     lanthanum()
@@ -141,6 +187,9 @@ def main():
     yttrium()
     glass()
     scandium()
+    cobalt()
+    copper_molybdenum_rhenium()
+    alloys()
     names()
     print("uses written")
 

@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/superalloy"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:superalloy_plate"
+    }
+  ]
+}
