@@ -1,6 +1,7 @@
 package ai.gsmc.fundamentals.separation;
 
 import ai.gsmc.fundamentals.Fundamentals;
+import ai.gsmc.fundamentals.heat.Heat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
@@ -40,9 +41,13 @@ import java.util.Map;
  */
 public final class Acids {
 
-    /** Ticks between bites, and bites to eat a block through. */
+    /** Ticks between bites, and bites to eat a block through at 20 °C: reactions go twice as fast for every ten degrees. */
     private static final int BITE = 20;
     private static final int BITES = 5;
+
+    static int bitesAt(Level level, BlockPos pos) {
+        return (int) Math.round(Math.max(2, Math.min(10, BITES * Math.pow(2, (20 - Heat.at(level, pos)) / 10))));
+    }
 
     public static final class Acid {
         public final String id;
@@ -130,13 +135,14 @@ public final class Acids {
                     continue;
                 }
                 int bites = EATEN.merge(at.immutable(), 1, Integer::sum);
-                level.destroyBlockProgress(at.hashCode(), at, Math.min(9, bites * 10 / BITES - 1));
+                int needed = bitesAt(level, at);
+                level.destroyBlockProgress(at.hashCode(), at, Math.min(9, bites * 10 / needed - 1));
                 level.sendParticles(ParticleTypes.BUBBLE_POP, at.getX() + 0.5 - side.getStepX() * 0.6, at.getY() + 0.5 - side.getStepY() * 0.6 + 0.3,
                         at.getZ() + 0.5 - side.getStepZ() * 0.6, 4, 0.3, 0.1, 0.3, 0.0);
                 if (bites == 1) {
                     level.playSound(null, at, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 0.4F, 1.6F);
                 }
-                if (bites >= BITES) {
+                if (bites >= needed) {
                     EATEN.remove(at);
                     level.destroyBlockProgress(at.hashCode(), at, -1);
                     level.destroyBlock(at, false);

@@ -1,0 +1,21 @@
+{
+  "name": "Temperature",
+  "category": "fundamentals:rare_earths",
+  "icon": "minecraft:campfire",
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Every block has a temperature. The biome gives the climate: tundra about -5 °C, taiga 1, plains 15, jungle 19, desert 45, cooler with altitude the way vanilla decides where snow lies. Under open sky the day swings it five degrees either way and rain and thunder take a few off.",
+      "title": "Temperature"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Then everything hot or cold within reach adds its share with distance: lava, fire, a campfire, a lit furnace, a bloomery, a blaze burner at whatever level it burns, and ice and snow the other way."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Type /heat to read it where you stand; goggles on a stage read it there. Acid eats twice as fast for every ten degrees warmer. The three heats the recipes ask for, a burner, a burner fed a blaze cake, and none, are the coarse version of the same number."
+    }
+  ]
+}

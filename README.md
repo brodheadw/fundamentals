@@ -78,6 +78,10 @@ Cobaltite from the silver-cobalt veins roasts on a fire and blasts to cobalt; fo
 
 With Patchouli installed, a book and a raw hematite craft *Fundamentals: First Principles*: every deposit and where to find it, the hand-working, the whole rare earth chain with the stage count of every cut and the road to every metal, the uses, the waste and the acids. It is generated from the same data the game runs on, so its numbers are the game's.
 
+## Temperature
+
+Minecraft has no thermometer, so the mod carries one. Every block has a temperature in °C, read on demand and never simulated: the biome's climate mapped to degrees (tundra −5, taiga 1, plains 15, jungle 19, desert 45), cooled by altitude the way vanilla decides where snow lies, swinging five degrees either way through the day and dropping in rain and thunder, under open sky only; plus every heat source within reach, lava, fire, campfires, lit furnaces, a bloomery, Create's blaze burner at its level, and ice and snow the other way, summed with falloff. `/heat` says what it is where you stand, and goggles on a stage show it there. Acid eats faster the warmer it is, twice as fast for every ten degrees, within limits. Other mods add sources with a data file (`fundamentals:heat_source`), read the field with `Heat.at`, and push on it with `Heat.boost`.
+
 ## Power
 
 A solar panel goes on a rack. Build the rack from steel and set it down facing the way you want, then mount a photovoltaic panel on it: a P and an N semiconductor from The Factory Must Grow under glass, in an aluminium frame. Under open sky it feeds TFMG's electrical network, 120 volts while the sun is up and up to 200 watts at noon, nothing at night or in shade. Break it and you get the rack and the panel back.
