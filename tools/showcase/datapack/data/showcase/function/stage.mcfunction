@@ -6,89 +6,89 @@ gamerule doDaylightCycle false
 gamerule doWeatherCycle false
 gamerule doMobSpawning false
 kill @e[type=item]
-fill -8 -61 -85 549 -61 -78 minecraft:smooth_stone
-fill -8 -60 -85 549 -59 -78 minecraft:air
-fill -8 -58 -85 549 -57 -78 minecraft:air
-fill -8 -56 -85 549 -55 -78 minecraft:air
-fill -8 -54 -85 549 -53 -78 minecraft:air
-fill -8 -52 -85 549 -51 -78 minecraft:air
-fill -8 -61 -77 549 -61 -70 minecraft:smooth_stone
-fill -8 -60 -77 549 -59 -70 minecraft:air
-fill -8 -58 -77 549 -57 -70 minecraft:air
-fill -8 -56 -77 549 -55 -70 minecraft:air
-fill -8 -54 -77 549 -53 -70 minecraft:air
-fill -8 -52 -77 549 -51 -70 minecraft:air
-fill -8 -61 -69 549 -61 -62 minecraft:smooth_stone
-fill -8 -60 -69 549 -59 -62 minecraft:air
-fill -8 -58 -69 549 -57 -62 minecraft:air
-fill -8 -56 -69 549 -55 -62 minecraft:air
-fill -8 -54 -69 549 -53 -62 minecraft:air
-fill -8 -52 -69 549 -51 -62 minecraft:air
-fill -8 -61 -61 549 -61 -54 minecraft:smooth_stone
-fill -8 -60 -61 549 -59 -54 minecraft:air
-fill -8 -58 -61 549 -57 -54 minecraft:air
-fill -8 -56 -61 549 -55 -54 minecraft:air
-fill -8 -54 -61 549 -53 -54 minecraft:air
-fill -8 -52 -61 549 -51 -54 minecraft:air
-fill -8 -61 -53 549 -61 -46 minecraft:smooth_stone
-fill -8 -60 -53 549 -59 -46 minecraft:air
-fill -8 -58 -53 549 -57 -46 minecraft:air
-fill -8 -56 -53 549 -55 -46 minecraft:air
-fill -8 -54 -53 549 -53 -46 minecraft:air
-fill -8 -52 -53 549 -51 -46 minecraft:air
-fill -8 -61 -45 549 -61 -38 minecraft:smooth_stone
-fill -8 -60 -45 549 -59 -38 minecraft:air
-fill -8 -58 -45 549 -57 -38 minecraft:air
-fill -8 -56 -45 549 -55 -38 minecraft:air
-fill -8 -54 -45 549 -53 -38 minecraft:air
-fill -8 -52 -45 549 -51 -38 minecraft:air
-fill -8 -61 -37 549 -61 -30 minecraft:smooth_stone
-fill -8 -60 -37 549 -59 -30 minecraft:air
-fill -8 -58 -37 549 -57 -30 minecraft:air
-fill -8 -56 -37 549 -55 -30 minecraft:air
-fill -8 -54 -37 549 -53 -30 minecraft:air
-fill -8 -52 -37 549 -51 -30 minecraft:air
-fill -8 -61 -29 549 -61 -22 minecraft:smooth_stone
-fill -8 -60 -29 549 -59 -22 minecraft:air
-fill -8 -58 -29 549 -57 -22 minecraft:air
-fill -8 -56 -29 549 -55 -22 minecraft:air
-fill -8 -54 -29 549 -53 -22 minecraft:air
-fill -8 -52 -29 549 -51 -22 minecraft:air
-fill -8 -61 -21 549 -61 -14 minecraft:smooth_stone
-fill -8 -60 -21 549 -59 -14 minecraft:air
-fill -8 -58 -21 549 -57 -14 minecraft:air
-fill -8 -56 -21 549 -55 -14 minecraft:air
-fill -8 -54 -21 549 -53 -14 minecraft:air
-fill -8 -52 -21 549 -51 -14 minecraft:air
-fill -8 -61 -13 549 -61 -6 minecraft:smooth_stone
-fill -8 -60 -13 549 -59 -6 minecraft:air
-fill -8 -58 -13 549 -57 -6 minecraft:air
-fill -8 -56 -13 549 -55 -6 minecraft:air
-fill -8 -54 -13 549 -53 -6 minecraft:air
-fill -8 -52 -13 549 -51 -6 minecraft:air
-fill -8 -61 -5 549 -61 2 minecraft:smooth_stone
-fill -8 -60 -5 549 -59 2 minecraft:air
-fill -8 -58 -5 549 -57 2 minecraft:air
-fill -8 -56 -5 549 -55 2 minecraft:air
-fill -8 -54 -5 549 -53 2 minecraft:air
-fill -8 -52 -5 549 -51 2 minecraft:air
-fill -8 -61 3 549 -61 10 minecraft:smooth_stone
-fill -8 -60 3 549 -59 10 minecraft:air
-fill -8 -58 3 549 -57 10 minecraft:air
-fill -8 -56 3 549 -55 10 minecraft:air
-fill -8 -54 3 549 -53 10 minecraft:air
-fill -8 -52 3 549 -51 10 minecraft:air
-fill -8 -61 11 549 -61 13 minecraft:smooth_stone
-fill -8 -60 11 549 -59 13 minecraft:air
-fill -8 -58 11 549 -57 13 minecraft:air
-fill -8 -56 11 549 -55 13 minecraft:air
-fill -8 -54 11 549 -53 13 minecraft:air
-fill -8 -52 11 549 -51 13 minecraft:air
-forceload add -8 -85 119 13
-forceload add 120 -85 247 13
-forceload add 248 -85 375 13
-forceload add 376 -85 503 13
-forceload add 504 -85 549 13
+fill -12 -61 -85 549 -61 -78 minecraft:smooth_stone
+fill -12 -60 -85 549 -59 -78 minecraft:air
+fill -12 -58 -85 549 -57 -78 minecraft:air
+fill -12 -56 -85 549 -55 -78 minecraft:air
+fill -12 -54 -85 549 -53 -78 minecraft:air
+fill -12 -52 -85 549 -51 -78 minecraft:air
+fill -12 -61 -77 549 -61 -70 minecraft:smooth_stone
+fill -12 -60 -77 549 -59 -70 minecraft:air
+fill -12 -58 -77 549 -57 -70 minecraft:air
+fill -12 -56 -77 549 -55 -70 minecraft:air
+fill -12 -54 -77 549 -53 -70 minecraft:air
+fill -12 -52 -77 549 -51 -70 minecraft:air
+fill -12 -61 -69 549 -61 -62 minecraft:smooth_stone
+fill -12 -60 -69 549 -59 -62 minecraft:air
+fill -12 -58 -69 549 -57 -62 minecraft:air
+fill -12 -56 -69 549 -55 -62 minecraft:air
+fill -12 -54 -69 549 -53 -62 minecraft:air
+fill -12 -52 -69 549 -51 -62 minecraft:air
+fill -12 -61 -61 549 -61 -54 minecraft:smooth_stone
+fill -12 -60 -61 549 -59 -54 minecraft:air
+fill -12 -58 -61 549 -57 -54 minecraft:air
+fill -12 -56 -61 549 -55 -54 minecraft:air
+fill -12 -54 -61 549 -53 -54 minecraft:air
+fill -12 -52 -61 549 -51 -54 minecraft:air
+fill -12 -61 -53 549 -61 -46 minecraft:smooth_stone
+fill -12 -60 -53 549 -59 -46 minecraft:air
+fill -12 -58 -53 549 -57 -46 minecraft:air
+fill -12 -56 -53 549 -55 -46 minecraft:air
+fill -12 -54 -53 549 -53 -46 minecraft:air
+fill -12 -52 -53 549 -51 -46 minecraft:air
+fill -12 -61 -45 549 -61 -38 minecraft:smooth_stone
+fill -12 -60 -45 549 -59 -38 minecraft:air
+fill -12 -58 -45 549 -57 -38 minecraft:air
+fill -12 -56 -45 549 -55 -38 minecraft:air
+fill -12 -54 -45 549 -53 -38 minecraft:air
+fill -12 -52 -45 549 -51 -38 minecraft:air
+fill -12 -61 -37 549 -61 -30 minecraft:smooth_stone
+fill -12 -60 -37 549 -59 -30 minecraft:air
+fill -12 -58 -37 549 -57 -30 minecraft:air
+fill -12 -56 -37 549 -55 -30 minecraft:air
+fill -12 -54 -37 549 -53 -30 minecraft:air
+fill -12 -52 -37 549 -51 -30 minecraft:air
+fill -12 -61 -29 549 -61 -22 minecraft:smooth_stone
+fill -12 -60 -29 549 -59 -22 minecraft:air
+fill -12 -58 -29 549 -57 -22 minecraft:air
+fill -12 -56 -29 549 -55 -22 minecraft:air
+fill -12 -54 -29 549 -53 -22 minecraft:air
+fill -12 -52 -29 549 -51 -22 minecraft:air
+fill -12 -61 -21 549 -61 -14 minecraft:smooth_stone
+fill -12 -60 -21 549 -59 -14 minecraft:air
+fill -12 -58 -21 549 -57 -14 minecraft:air
+fill -12 -56 -21 549 -55 -14 minecraft:air
+fill -12 -54 -21 549 -53 -14 minecraft:air
+fill -12 -52 -21 549 -51 -14 minecraft:air
+fill -12 -61 -13 549 -61 -6 minecraft:smooth_stone
+fill -12 -60 -13 549 -59 -6 minecraft:air
+fill -12 -58 -13 549 -57 -6 minecraft:air
+fill -12 -56 -13 549 -55 -6 minecraft:air
+fill -12 -54 -13 549 -53 -6 minecraft:air
+fill -12 -52 -13 549 -51 -6 minecraft:air
+fill -12 -61 -5 549 -61 2 minecraft:smooth_stone
+fill -12 -60 -5 549 -59 2 minecraft:air
+fill -12 -58 -5 549 -57 2 minecraft:air
+fill -12 -56 -5 549 -55 2 minecraft:air
+fill -12 -54 -5 549 -53 2 minecraft:air
+fill -12 -52 -5 549 -51 2 minecraft:air
+fill -12 -61 3 549 -61 10 minecraft:smooth_stone
+fill -12 -60 3 549 -59 10 minecraft:air
+fill -12 -58 3 549 -57 10 minecraft:air
+fill -12 -56 3 549 -55 10 minecraft:air
+fill -12 -54 3 549 -53 10 minecraft:air
+fill -12 -52 3 549 -51 10 minecraft:air
+fill -12 -61 11 549 -61 13 minecraft:smooth_stone
+fill -12 -60 11 549 -59 13 minecraft:air
+fill -12 -58 11 549 -57 13 minecraft:air
+fill -12 -56 11 549 -55 13 minecraft:air
+fill -12 -54 11 549 -53 13 minecraft:air
+fill -12 -52 11 549 -51 13 minecraft:air
+forceload add -12 -85 115 13
+forceload add 116 -85 243 13
+forceload add 244 -85 371 13
+forceload add 372 -85 499 13
+forceload add 500 -85 549 13
 setblock 0 -60 0 fundamentals:mixer_settler[facing=east]
 setblock 0 -59 0 fundamentals:mixer_settler[facing=east]
 setblock 0 -60 1 fundamentals:mixer_settler[facing=east]
@@ -6494,6 +6494,16 @@ setblock 540 -59 -77 minecraft:hopper[facing=down]
 setblock 540 -60 -77 minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
 setblock 540 -60 -78 create:andesite_funnel[facing=north]
 setblock 540 -60 -79 create:depot
+setblock -6 -60 1 create:fluid_tank
+setblock -5 -60 1 create:mechanical_pump[facing=east]
+setblock -5 -59 1 create:cogwheel[axis=x]
+setblock -6 -59 1 create:creative_motor[facing=east]{ScrollValue:64}
+setblock -4 -60 1 create:fluid_pipe[east=true,west=true]
+setblock -3 -60 1 create:basin[facing=east]{InputItems:{Size:9,Items:[{Slot:0b,id:"tfmg:limesand",count:64}]}}
+setblock -3 -58 1 create:mechanical_mixer
+setblock -3 -58 2 create:cogwheel[axis=y]
+setblock -3 -57 2 create:creative_motor[facing=down]{ScrollValue:64}
+setblock -3 -60 2 minecraft:chest[facing=south]{Items:[{Slot:0b,id:"tfmg:limesand",count:64}]}
 setblock 6 -60 6 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:mixer_settler",count:64},{Slot:1b,id:"create:mechanical_mixer",count:16},{Slot:2b,id:"create:cogwheel",count:32},{Slot:3b,id:"create:creative_motor",count:16},{Slot:4b,id:"create:mechanical_pump",count:16},{Slot:5b,id:"create:fluid_pipe",count:64},{Slot:6b,id:"create:fluid_tank",count:16},{Slot:7b,id:"create:wrench",count:1},{Slot:8b,id:"fundamentals:oxalic_acid",count:64},{Slot:9b,id:"create:basin",count:4},{Slot:10b,id:"minecraft:hopper",count:4},{Slot:11b,id:"minecraft:furnace",count:4},{Slot:12b,id:"create:andesite_funnel",count:8},{Slot:13b,id:"create:depot",count:4},{Slot:14b,id:"minecraft:coal",count:64},{Slot:15b,id:"minecraft:lever",count:4}]}
 setblock 6 -60 7 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:cobalt_ingot",count:64},{Slot:1b,id:"fundamentals:molybdenum_ingot",count:64},{Slot:2b,id:"fundamentals:rhenium_ingot",count:32},{Slot:3b,id:"fundamentals:tungsten_ingot",count:64},{Slot:4b,id:"fundamentals:superalloy_plate",count:32},{Slot:5b,id:"fundamentals:molybdenum_steel_plate",count:32},{Slot:6b,id:"fundamentals:tungsten_carbide",count:32},{Slot:7b,id:"fundamentals:tungsten_filament",count:32},{Slot:8b,id:"fundamentals:neodymium_iron_boron_ingot",count:32},{Slot:9b,id:"fundamentals:samarium_cobalt_ingot",count:32},{Slot:10b,id:"fundamentals:phosphor",count:32},{Slot:11b,id:"fundamentals:didymium_glass",count:32},{Slot:12b,id:"fundamentals:hydrochloric_acid_bucket",count:1},{Slot:13b,id:"fundamentals:hydrofluoric_acid_bucket",count:1},{Slot:14b,id:"fundamentals:nitric_acid_bucket",count:1},{Slot:15b,id:"fundamentals:raw_borax",count:32},{Slot:16b,id:"fundamentals:cerium_oxide",count:32},{Slot:17b,id:"fundamentals:neodymium_oxide",count:32},{Slot:18b,id:"fundamentals:lanthanum_ingot",count:32},{Slot:19b,id:"fundamentals:neodymium_ingot",count:32},{Slot:20b,id:"fundamentals:dysprosium_ingot",count:32},{Slot:21b,id:"fundamentals:aluminium_scandium_plate",count:32}]}
 schedule function showcase:fill 10t

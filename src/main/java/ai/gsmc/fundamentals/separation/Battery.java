@@ -52,7 +52,7 @@ public record Battery(List<MixerSettlerBlockEntity> stages) {
         if (feed.getAmount() < batch) {
             return Optional.of(new Stall("idle"));
         }
-        Optional<SeparationRecipe> found = SeparationRecipe.forLiquor(head.getLevel(), feed.getFluid());
+        Optional<SeparationRecipe> found = SeparationRecipe.forLiquor(head.getLevel(), Separation.clarified(feed.getFluid()));
         if (found.isEmpty()) {
             return Optional.of(new Stall("no_cut", feed.getHoverName()));
         }
@@ -63,8 +63,14 @@ public record Battery(List<MixerSettlerBlockEntity> stages) {
         if (!stages.stream().allMatch(MixerSettlerBlockEntity::isStirred)) {
             return Optional.of(new Stall("mixer"));
         }
+        if (stages.stream().anyMatch(MixerSettlerBlockEntity::isOverStirred)) {
+            return Optional.of(new Stall("emulsion"));
+        }
         if (!isSwitchedOn()) {
             return Optional.of(new Stall("lever"));
+        }
+        if (stages.stream().anyMatch(s -> Separation.kind(s.organic.getFluid().getFluid()) == Reagents.Kind.FOULED)) {
+            return Optional.of(new Stall("crud"));
         }
         if (!stages.stream().allMatch(s -> s.organic.getFluid().is(cut.organic()) && s.organic.getFluidAmount() >= batch)) {
             return Optional.of(new Stall("organic", name(cut.organic())));
@@ -85,8 +91,17 @@ public record Battery(List<MixerSettlerBlockEntity> stages) {
     /** One batch through the whole battery; only called when {@link #stall()} is empty. */
     void runCut() {
         MixerSettlerBlockEntity head = head(), tail = tail();
-        SeparationRecipe cut = SeparationRecipe.forLiquor(head.getLevel(), head.aqueous.getFluid().getFluid()).orElseThrow();
+        FluidStack feed = head.aqueous.getFluid();
+        SeparationRecipe cut = SeparationRecipe.forLiquor(head.getLevel(), Separation.clarified(feed.getFluid())).orElseThrow();
         int batch = head.batch();
+        // a little organic leaves entrained in the raffinate every cut; a dirty feed leaves crud, and three cuts of it foul the organic
+        head.organic.drain(Math.max(1, batch / 50), IFluidHandler.FluidAction.EXECUTE);
+        if (Separation.kind(feed.getFluid()) == Reagents.Kind.CRUDE && ++head.crud >= 3) {
+            head.crud = 0;
+            for (MixerSettlerBlockEntity stage : stages) {
+                stage.organic.setFluid(new FluidStack(Separation.fouled(stage.organic.getFluid().getFluid()), stage.organic.getFluidAmount()));
+            }
+        }
         head.aqueous.drain(batch, IFluidHandler.FluidAction.EXECUTE);
         tail.aqueous.drain(batch, IFluidHandler.FluidAction.EXECUTE);
         head.out.fill(new FluidStack(cut.light(), batch), IFluidHandler.FluidAction.EXECUTE);

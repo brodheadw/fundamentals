@@ -53,6 +53,10 @@ public class SeparationTests {
 
     /** Create's Mechanical Mixer over the trough at (x, z), driven by a cogwheel beside it under a Creative Motor. */
     private static void mixer(GameTestHelper helper, int x, int y, int z) {
+        mixer(helper, x, y, z, 64);
+    }
+
+    private static void mixer(GameTestHelper helper, int x, int y, int z, int rpm) {
         Block mixer = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:mechanical_mixer"));
         Block cog = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:cogwheel"));
         Block motor = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:creative_motor"));
@@ -62,7 +66,7 @@ public class SeparationTests {
         // a mixer wants more than the motor's default 16 rpm
         var motorEntity = helper.getBlockEntity(new BlockPos(x, y + 1, z + 1));
         var tag = motorEntity.saveWithoutMetadata(helper.getLevel().registryAccess());
-        tag.putInt("ScrollValue", 64);
+        tag.putInt("ScrollValue", rpm);
         motorEntity.loadWithComponents(tag, helper.getLevel().registryAccess());
     }
 
@@ -137,7 +141,11 @@ public class SeparationTests {
                         "the tail should hold the same batches of loaded strip, got " + strip);
                 helper.assertTrue(held(helper, 1, Direction.WEST).getAmount() == 1000 - cuts * batch && held(helper, 24, Direction.EAST).getAmount() == 1000 - cuts * batch,
                         "each cut spends a batch of feed and of acid");
-                helper.assertTrue(held(helper, 10, Direction.UP).getAmount() == PLANT, "the organic is a loop, not a consumable");
+                int organic = 0;
+                for (int i = 0; i < 8; i++) {
+                    organic += held(helper, 1 + 3 * i, Direction.UP).getAmount();
+                }
+                helper.assertTrue(8 * PLANT - organic == cuts * (batch / 50), "the organic is a loop, down only by what each cut entrains, got " + organic);
                 FluidStack sump = port(helper, 1, 1, Direction.DOWN).getFluidInTank(0);
                 helper.assertTrue(sump.is(Separation.fluid("spent_liquor")) && sump.getAmount() == cuts * (batch / 5),
                         "every cut should leave a fifth of a batch of spent liquor in the sump under the head, got " + sump);
@@ -353,6 +361,40 @@ public class SeparationTests {
     private static int[] box(JsonObject element, String corner) {
         JsonArray a = element.getAsJsonArray(corner);
         return new int[] {a.get(0).getAsInt(), a.get(1).getAsInt(), a.get(2).getAsInt()};
+    }
+
+    @GameTest(template = "battery", timeoutTicks = 1200)
+    public void aCrudeFeedFoulsTheOrganicAndLimeScrubsIt(GameTestHelper helper) {
+        plantBattery(helper, 8, "p507", () -> {
+            helper.assertTrue(fill(helper, 1, Direction.WEST, "crude_rare_earth_liquor", 2000) == 2000, "the head should take a crude feed");
+            fill(helper, 24, Direction.EAST, "hydrochloric_acid", 1000);
+            helper.runAfterDelay(settle(8) + 2 * MixerSettlerBlockEntity.PERIOD, () -> {
+                helper.assertTrue(held(helper, 1, Direction.NORTH).getAmount() >= 3 * 18 * MixerSettlerBlockEntity.BATCH_PER_CASING, "three cuts should run on crude feed first");
+                helper.assertTrue(held(helper, 4, Direction.UP).is(Separation.fluid("fouled_p507")), "the organic should be fouled after three crude cuts");
+                helper.assertTrue(casing(helper, 1, 1, 1).battery().stall().map(Battery.Stall::key).orElse("").equals("crud"), "the goggles should blame the crud");
+                var recipes = helper.getLevel().getRecipeManager();
+                for (String id : List.of("mixing/scrub_p507", "mixing/clarify_rare_earth_liquor", "mixing/clarify_heavy_rare_earth_liquor")) {
+                    helper.assertTrue(recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, id)).isPresent(), id + " is missing");
+                }
+                helper.succeed();
+            });
+        });
+    }
+
+    @GameTest(template = "battery", timeoutTicks = 200)
+    public void aMixerTooFastEmulsifiesTheStage(GameTestHelper helper) {
+        plantBattery(helper, 8, "p507", () -> {
+            // the same motor block again would be a no-op setBlock, and its old speed would stand: clear it first
+            helper.setBlock(new BlockPos(4, 4, 3), Blocks.AIR);
+            mixer(helper, 4, 3, 2, 256);
+            fill(helper, 1, Direction.WEST, "rare_earth_liquor", 1000);
+            fill(helper, 24, Direction.EAST, "hydrochloric_acid", 1000);
+            helper.runAfterDelay(SPIN_UP * 2, () -> {
+                String stall = casing(helper, 1, 1, 1).battery().stall().map(Battery.Stall::key).orElse("");
+                helper.assertTrue(stall.equals("emulsion"), "the goggles should blame the over-fast mixer, said " + stall + " at " + casing(helper, 4, 1, 1).isOverStirred());
+                helper.succeed();
+            });
+        });
     }
 
     /** The route out of the battery: a single-element liquor and oxalic acid in a basin under a Mechanical Mixer give the oxalate. */

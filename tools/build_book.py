@@ -164,8 +164,11 @@ def rare_earths():
         spotlight("fundamentals:bastnasite_dust", "Bastnäsite will not wash: it is floated, as in every carbonatite mill. Two bastnäsite dust beaten with 250 mB of water and 100 mB of naphthenic acid, the fatty-acid collector, "
                   "in a basin under a mixer, and the rare earth carbonate comes off the top as light concentrate, one and sometimes two.", "Flotation")], 0)
     entry("rare_earths", "liquor", "Liquor", "fundamentals:salt", [
-        spotlight("fundamentals:light_rare_earth_concentrate", "A concentrate dissolved in 500 mB of hydrochloric acid in a heated basin under a mixer gives 500 mB of chloride liquor: "
-                  "every rare earth in it together, lilac from the neodymium. The heavy concentrate gives the heavy liquor.", "Dissolving"),
+        spotlight("fundamentals:light_rare_earth_concentrate", "A concentrate dissolved in 500 mB of hydrochloric acid in a heated basin under a mixer gives 500 mB of crude liquor, "
+                  "and what the ore leaves behind: monazite its thorium residue and its phosphate (bone meal), xenotime and euxenite a residue half the time, the clay its aluminium as bauxite powder.", "Dissolving"),
+        spotlight("fundamentals:clarifier_sludge", "Crude liquor still carries iron, aluminium and fines, and a battery fed it will run three cuts and then foul: crud at the interface, the organic turned brown and useless. "
+                  "So clarify first: 1,000 mB of crude liquor and two limesand under a mixer drop the impurities as a sludge and leave 1,000 mB of liquor a battery wants. "
+                  "A fouled organic is not lost: drained and scrubbed with one limesand, 1,000 mB gives back 900.", "Clarifying"),
         spotlight("fundamentals:raw_ion_adsorption_clay", "The clay needs no acid and no heat: four clay, a salt and 500 mB of water in a basin under a mixer leach straight to 250 mB of heavy liquor. "
                   "That is the whole reason Chinese clays supply the world's heavy rare earths.", "Leaching")], 1)
     entry("rare_earths", "mixer_settler", "Solvent extraction", "fundamentals:mixer_settler", pages_of(
@@ -179,7 +182,10 @@ def rare_earths():
         "the rows ahead are the settling bay, parted from the box by a weir that only the churn tops. "
         "Charge every stage with the extractant from a pipe into its top: it floats and is never used up. Pump the liquor into the back of "
         "the first stage and hydrochloric acid into the front of the last, take the raffinate from the first stage's sides and the loaded strip "
-        "from the last stage's, and throw the lever. Goggles on any stage tell you what the battery is waiting for.") + [crafting("fundamentals:mixer_settler")], 2)
+        "from the last stage's, and throw the lever. Goggles on any stage tell you what the battery is waiting for.") + pages_of(
+        "Two things the plant will not forgive. A mixer over 128 rpm beats the phases into an emulsion that never settles, and the battery stops until it is slowed. "
+        "And the organic is not quite immortal: every cut carries a little of it out entrained in the raffinate, two per cent of a batch, so a plant wants a trickle of fresh extractant forever.")
+        + [crafting("fundamentals:mixer_settler")], 2)
     # the cuts, as the data has them
     cut_pages = []
     for liquor, cut in sorted(tree.items(), key=lambda kv: kv[1]["stages"]):

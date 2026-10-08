@@ -17,7 +17,8 @@ record Port(FluidTank tank, @Nullable Boolean organic) implements IFluidHandler 
             return false;
         }
         Reagents.Kind kind = Separation.kind(stack.getFluid());
-        return organic ? kind == Reagents.Kind.ORGANIC : kind == Reagents.Kind.LIQUOR || kind == Reagents.Kind.ACID;
+        // the ends take a crude liquor too: the plant will run on it, and foul
+        return organic ? kind == Reagents.Kind.ORGANIC : kind == Reagents.Kind.LIQUOR || kind == Reagents.Kind.ACID || kind == Reagents.Kind.CRUDE;
     }
 
     @Override

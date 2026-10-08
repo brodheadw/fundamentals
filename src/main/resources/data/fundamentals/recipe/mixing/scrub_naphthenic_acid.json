@@ -1,0 +1,19 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "tfmg:limesand"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "fundamentals:fouled_naphthenic_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:naphthenic_acid",
+      "amount": 900
+    }
+  ]
+}
