@@ -1,0 +1,33 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_nickel_laterite"
+    },
+    {
+      "item": "fundamentals:raw_nickel_laterite"
+    },
+    {
+      "item": "fundamentals:raw_nickel_laterite"
+    },
+    {
+      "item": "fundamentals:raw_nickel_laterite"
+    },
+    {
+      "item": "minecraft:charcoal"
+    },
+    {
+      "item": "minecraft:charcoal"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:nickel_ingot"
+    },
+    {
+      "id": "fundamentals:slag",
+      "count": 2
+    }
+  ],
+  "heat_requirement": "superheated"
+}

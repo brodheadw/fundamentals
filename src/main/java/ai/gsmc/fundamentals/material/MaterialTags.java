@@ -15,8 +15,8 @@ public final class MaterialTags {
         List<String> tags = new ArrayList<>();
         for (MaterialForm form : forms) {
             switch (form) {
-                case ORE -> tags.add("c:ores/" + commodity);
-                case RAW -> tags.add("c:raw_materials/" + commodity);
+                case ORE -> tags.add("fundamentals:ores/" + commodity);
+                case RAW -> tags.add("fundamentals:raw_materials/" + commodity);
                 case INGOT -> tags.add("c:ingots/" + id);
                 case DUST -> tags.add("c:dusts/" + id);
                 case OXALATE -> tags.add("fundamentals:oxalates/" + id);

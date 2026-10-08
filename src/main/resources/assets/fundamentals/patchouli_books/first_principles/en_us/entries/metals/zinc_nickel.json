@@ -1,0 +1,22 @@
+{
+  "name": "Zinc and nickel",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:zinc_oxide",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Neither melts out of its ore in a furnace. Sphalerite roasts on a fire to zinc oxide, and smithsonite and hemimorphite, the old calamine, calcine to it.",
+      "title": "Zinc"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Zinc boils at 907 °C, below the heat that reduces it, so it was distilled from a sealed retort packed with charcoal: a zinc oxide and a charcoal in a basin over a blaze burner fed a blaze cake give a zinc ingot. Asurine, the zinc stone, crushes to smithsonite."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Pentlandite roasts on a fire to a nickel oxide; with a charcoal, superheated, it gives a nickel ingot and the iron goes to slag. Nickel laterite is too lean to roast: four of it with two charcoal, superheated, give one ingot and two slag, as the electric furnaces of Indonesia smelt it whole.",
+      "title": "Nickel"
+    }
+  ]
+}

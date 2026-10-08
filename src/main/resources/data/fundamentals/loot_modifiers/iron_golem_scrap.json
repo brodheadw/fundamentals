@@ -1,0 +1,11 @@
+{
+  "type": "fundamentals:swap_drop",
+  "from": "minecraft:iron_ingot",
+  "to": "minecraft:iron_nugget",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:entities/iron_golem"
+    }
+  ]
+}

@@ -171,6 +171,7 @@
   "item.fundamentals.cobalt_dust": "Cobalt Dust",
   "item.fundamentals.cobalt_ingot": "Cobalt Ingot",
   "item.fundamentals.cobalt_nugget": "Cobalt Nugget",
+  "item.fundamentals.copper_calcine": "Copper Calcine",
   "item.fundamentals.didymium_dust": "Didymium Dust",
   "item.fundamentals.didymium_fluoride": "Didymium Fluoride",
   "item.fundamentals.didymium_glass": "Didymium Glass",
@@ -295,6 +296,7 @@
   "item.fundamentals.roasted_chalcopyrite": "Roasted Chalcopyrite",
   "item.fundamentals.roasted_cobaltite": "Roasted Cobaltite",
   "item.fundamentals.roasted_galena": "Roasted Galena",
+  "item.fundamentals.roasted_pentlandite": "Roasted Pentlandite",
   "item.fundamentals.salt": "Salt",
   "item.fundamentals.samarium_cobalt_dust": "SmCo Dust",
   "item.fundamentals.samarium_cobalt_ingot": "SmCo Ingot",
@@ -340,6 +342,7 @@
   "item.fundamentals.yttrium_ingot": "Yttrium Ingot",
   "item.fundamentals.yttrium_oxalate": "Yttrium Oxalate",
   "item.fundamentals.yttrium_oxide": "Yttrium Oxide",
+  "item.fundamentals.zinc_oxide": "Zinc Oxide",
   "itemGroup.fundamentals.materials": "Fundamentals Materials",
   "itemGroup.fundamentals.minerals": "Fundamentals"
 }

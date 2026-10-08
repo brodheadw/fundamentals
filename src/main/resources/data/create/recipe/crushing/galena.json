@@ -1,0 +1,14 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "tfmg:galena"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:raw_galena",
+      "chance": 0.4
+    }
+  ]
+}
