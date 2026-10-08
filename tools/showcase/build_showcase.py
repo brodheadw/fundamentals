@@ -176,9 +176,16 @@ def main():
                   "gamerule doDaylightCycle false", "gamerule doWeatherCycle false", "gamerule doMobSpawning false", "kill @e[type=item]"])
     head = len(lines)
     place("rare_earth_liquor", 0, 0)
-    # the mixed liquor into the root's feed tank
-    fills.insert(0, 'data merge block -2 -60 1 {TankContent:{Fluid:{id:"fundamentals:rare_earth_liquor",amount:8000}}}')
-    refills.insert(0, 'execute unless data block -2 -60 1 TankContent.Fluid run data merge block -2 -60 1 {TankContent:{Fluid:{id:"fundamentals:rare_earth_liquor",amount:8000}}}')
+    # the clarifier before the root: crude liquor pumped into a basin of lime under a mixer, which spouts the clarified
+    # liquor into the root's feed tank
+    tank(-6, Y, 1, "crude_rare_earth_liquor")
+    pump(-5, Y, 1, "east", "x", (-6, Y + 1, 1), "east")
+    put(-4, Y, 1, "create:fluid_pipe[east=true,west=true]")
+    put(-3, Y, 1, 'create:basin[facing=east]{InputItems:{Size:9,Items:[{Slot:0b,id:"tfmg:limesand",count:64}]}}')
+    put(-3, Y + 2, 1, "create:mechanical_mixer")
+    put(-3, Y + 2, 2, "create:cogwheel[axis=y]")
+    put(-3, Y + 3, 2, f"create:creative_motor[facing=down]{MOTOR}")
+    put(-3, Y, 2, 'minecraft:chest[facing=south]{Items:[{Slot:0b,id:"tfmg:limesand",count:64}]}')
     # the chests at spawn: the components to build a stage, and the metals to build with
     chest = lambda x, z, items: put(x, Y, z, "minecraft:chest[facing=north]{Items:[" + ",".join(f'{{Slot:{i}b,id:"{it}",count:{n}}}' for i, (it, n) in enumerate(items)) + "]}")
     chest(6, 6, [("fundamentals:mixer_settler", 64), ("create:mechanical_mixer", 16), ("create:cogwheel", 32), ("create:creative_motor", 16), ("create:mechanical_pump", 16),

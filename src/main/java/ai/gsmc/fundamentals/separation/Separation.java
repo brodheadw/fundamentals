@@ -55,6 +55,18 @@ public final class Separation {
         return KINDS.get(fluid);
     }
 
+    /** The clean liquor a crude one clarifies to, or the fluid itself if it is not crude. */
+    public static Fluid clarified(Fluid fluid) {
+        String id = FLUIDS.entrySet().stream().filter(e -> e.getValue() == fluid).map(Map.Entry::getKey).findFirst().orElse("");
+        return id.startsWith("crude_") ? FLUIDS.getOrDefault(id.substring(6), fluid) : fluid;
+    }
+
+    /** The fouled form of an organic. */
+    public static Fluid fouled(Fluid organic) {
+        String id = FLUIDS.entrySet().stream().filter(e -> e.getValue() == organic).map(Map.Entry::getKey).findFirst().orElse("");
+        return FLUIDS.getOrDefault("fouled_" + id, organic);
+    }
+
     /** The reagent's colour as the table gives it, or Create's white for anything else. */
     public static int tint(Fluid fluid) {
         return TINTS.getOrDefault(fluid, 0xFFFFFF);

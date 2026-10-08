@@ -12,8 +12,12 @@
   ],
   "results": [
     {
-      "id": "fundamentals:heavy_rare_earth_liquor",
+      "id": "fundamentals:crude_heavy_rare_earth_liquor",
       "amount": 500
+    },
+    {
+      "id": "fundamentals:monazite_residue_dust",
+      "chance": 0.5
     }
   ],
   "heat_requirement": "heated"

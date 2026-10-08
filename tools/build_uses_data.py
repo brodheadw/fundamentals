@@ -19,7 +19,7 @@ CREATE = DATA.parent / "create/recipe"
 # the items of ours that are not a form of a material: name -> display
 ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_cobaltite": "Roasted Cobaltite",
          "roasted_chalcopyrite": "Roasted Chalcopyrite", "rhenium_flue_dust": "Rhenium Flue Dust",
-         "tungsten_carbide": "Tungsten Carbide", "tungsten_filament": "Tungsten Filament"}
+         "tungsten_carbide": "Tungsten Carbide", "tungsten_filament": "Tungsten Filament", "clarifier_sludge": "Clarifier Sludge"}
 ROASTING = DATA / "recipe/roasting"
 
 

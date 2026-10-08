@@ -24,8 +24,11 @@
   ],
   "results": [
     {
-      "id": "fundamentals:heavy_rare_earth_liquor",
+      "id": "fundamentals:crude_heavy_rare_earth_liquor",
       "amount": 250
+    },
+    {
+      "id": "tfmg:bauxite_powder"
     }
   ]
 }

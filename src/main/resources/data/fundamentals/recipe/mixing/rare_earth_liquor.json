@@ -12,11 +12,14 @@
   ],
   "results": [
     {
-      "id": "fundamentals:rare_earth_liquor",
+      "id": "fundamentals:crude_rare_earth_liquor",
       "amount": 500
     },
     {
       "id": "fundamentals:monazite_residue_dust"
+    },
+    {
+      "id": "minecraft:bone_meal"
     }
   ],
   "heat_requirement": "heated"
