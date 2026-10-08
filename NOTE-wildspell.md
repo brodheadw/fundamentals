@@ -4,8 +4,9 @@ The **wildspell** repos should be updated to use the same structure as this proj
 
 - **Stonecutter** for multi-version support (one shared source tree, `//? if` preprocessing).
 - **Architectury Loom** for multi-loader builds.
-- Target **Fabric + NeoForge**, starting at **Minecraft 1.21.1**, then forward to every
-  later version — the same ladder Fundamentals follows.
+- Target **Forge + NeoForge**, not Fabric (Will, 2026-10-08: "All of these mods should be forge/neoforge
+  enabled"). Create and TFMG ship NeoForge only on 1.21.1 and Forge only up to 1.20.1, so Forge means
+  adding 1.20.1 to the version ladder.
 
 This keeps both projects on an identical build/versioning model, which makes any future
 interoperation (shared tags, optional cross-mod integration) much simpler.

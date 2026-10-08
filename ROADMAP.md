@@ -23,8 +23,8 @@ Planned ladder (confirm exact dependency versions per target as they are added):
 
 ## Loaders
 
-**NeoForge only.** Fundamentals is a Create add-on, and Create's 1.21.1 release is NeoForge-only.
-Revisit Fabric if Create ships a Fabric build for a version we target.
+**Forge and NeoForge, not Fabric** (Will, 2026-10-08). Fundamentals is a Create add-on: Create and TFMG
+ship NeoForge only on 1.21.1 and Forge only up to 1.20.1, so a Forge build means a 1.20.1 target.
 
 ## Feature direction (content)
 
