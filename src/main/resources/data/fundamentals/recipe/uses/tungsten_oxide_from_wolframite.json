@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_wolframite"
+    },
+    {
+      "item": "fundamentals:raw_wolframite"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "fundamentals:hydrochloric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:tungsten_oxide",
+      "count": 2
+    }
+  ],
+  "heat_requirement": "heated"
+}

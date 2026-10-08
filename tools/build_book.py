@@ -215,7 +215,9 @@ def rare_earths():
         "Polarized, either is the magnet The Factory Must Grow's motors, generators and electric pumps are built from.", "What they are for") + pages_of(
         "Lanthanum metal reduces the four that boil, and lanthanum oxide is the catalyst that cracks naphtha. Cerium with iron is ferrocerium, the lighter flint, a flint and steel that never wears out. "
         "Europium's red and terbium's green on a yttria host are the phosphor every lamp takes. Yttria lines the fireproof vat. Didymium glass is the welder's lens the goggles are made of. Erbium turns glass pink. "
-        "Scandium in aluminium is the airframe alloy, and makes a panel rack go twice as far. Gadolinium waits for a reactor."), 7)
+        "Scandium in aluminium is the airframe alloy, and makes a panel rack go twice as far. Gadolinium waits for a reactor.") + pages_of(
+        "Cerium oxide stores and releases oxygen, which is what a catalytic converter does: the Factory's exhaust takes two. Neodymium oxide turns glass purple and holmium oxide yellow, "
+        "the way erbium turns it pink. A cobalt in the lithium charge is the lithium cobalt oxide cathode the first lithium cells ran on."), 7)
     entry("rare_earths", "waste", "Waste", "fundamentals:monazite_residue_dust", pages_of(
         "A separation plant makes two kinds of waste, and both have to go somewhere. Every cut leaves a fifth of a batch of spent chloride liquor, "
         "acid with everything the organic did not want dissolved in it. It collects in a sump under the head stage; when the sump is full the battery stops, "
@@ -249,6 +251,11 @@ def metals():
         "Four nickel, two cobalt and one rhenium, superheated, make four ingots of the nickel superalloy that turbine blades are cast from; "
         "The Factory Must Grow's turbine blade now takes its plates. One molybdenum in four steel makes molybdenum steel, and its plates now make the heavy machinery casing.",
         "Superalloy and molybdenum steel"), 2)
+    entry("metals", "tungsten", "Tungsten", "fundamentals:tungsten_ingot", pages_of(
+        "Scheelite from the limestone skarns and wolframite from the tin veins both decompose in hot hydrochloric acid: two raw ore and 500 mB in a heated basin give two tungsten oxide, "
+        "the canary-yellow trioxide powder, and hydrogen in a heated chemical vat reduces two oxide to two ingots. "
+        "One ingot draws to four filaments, and the Factory's light bulb now burns one. One ingot and two coals, superheated, carburise to two tungsten carbide, "
+        "and Create's mechanical drill now bites with it.", "Tungsten"), 3)
 
 
 def power():

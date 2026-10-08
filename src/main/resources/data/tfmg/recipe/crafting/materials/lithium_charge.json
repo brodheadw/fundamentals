@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " P ",
+    "LKL",
+    " A "
+  ],
+  "key": {
+    "A": {
+      "tag": "c:plates/aluminum"
+    },
+    "L": {
+      "tag": "c:ingots/lithium"
+    },
+    "P": {
+      "item": "tfmg:plastic_sheet"
+    },
+    "K": {
+      "item": "fundamentals:cobalt_ingot"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "tfmg:lithium_charge"
+  }
+}

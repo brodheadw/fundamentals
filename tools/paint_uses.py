@@ -23,12 +23,25 @@ def lens():
     return img
 
 
+def filament():
+    """A coil of tungsten wire: a zigzag of bright grey across the sprite."""
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    wire, light = (150, 154, 162, 255), (214, 218, 226, 255)
+    for x in range(2, 14):
+        y = 8 + (2 if (x // 2) % 2 == 0 else -2)
+        img.putpixel((x, y), light if x % 4 == 0 else wire)
+        img.putpixel((x, y + 1), wire)
+    return img
+
+
 def main():
     heap("phosphor", (255, 250, 252), (240, 226, 236), (196, 170, 190)).save(TEXTURES / "item/phosphor.png")
     lens().save(TEXTURES / "item/didymium_glass.png")
     paint_raw("roasted_cobaltite", ((70, 60, 66), (120, 108, 112), (166, 154, 156), (214, 206, 206))).save(TEXTURES / "item/roasted_cobaltite.png")
     paint_raw("roasted_chalcopyrite", ((80, 50, 36), (138, 90, 62), (184, 132, 96), (230, 190, 150))).save(TEXTURES / "item/roasted_chalcopyrite.png")
     heap("rhenium_flue_dust", (250, 250, 246), (214, 214, 208), (150, 150, 146)).save(TEXTURES / "item/rhenium_flue_dust.png")
+    heap("tungsten_carbide", (120, 122, 128), (74, 76, 82), (40, 42, 46)).save(TEXTURES / "item/tungsten_carbide.png")
+    filament().save(TEXTURES / "item/tungsten_filament.png")
     print("uses textures written")
 
 
