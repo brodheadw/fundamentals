@@ -64,6 +64,9 @@ public final class RareEarthMaterials {
                 MaterialProperties.builder().density(0.95).magnetStrength(1.00).heatResistance(0.30).hardness(0.60));
         reg("samarium_cobalt", "SmCo", MaterialType.ALLOY, "SmCo5", ALLOY_FORMS,
                 MaterialProperties.builder().density(1.06).magnetStrength(0.70).heatResistance(0.80).hardness(0.55));
+        // A little scandium in aluminium: the light, weldable alloy of aircraft frames.
+        reg("aluminium_scandium", "Al-Sc", MaterialType.ALLOY, "Al3Sc", ALLOY_FORMS,
+                MaterialProperties.builder().density(0.28).hardness(0.55));
     }
 
     private static void mineral(String id, String display, String formula, MaterialForm[] forms,

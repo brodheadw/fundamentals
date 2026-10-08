@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    {
+      "item": "fundamentals:cerium_ingot"
+    },
+    {
+      "tag": "c:ingots/iron"
+    }
+  ],
+  "result": {
+    "id": "minecraft:flint_and_steel",
+    "components": {
+      "minecraft:unbreakable": {},
+      "minecraft:custom_name": "{\"text\": \"Ferrocerium Striker\", \"italic\": false}"
+    }
+  }
+}

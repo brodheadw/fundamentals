@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:ingots/aluminium_scandium"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:aluminium_scandium_nugget",
+    "count": 9
+  }
+}
