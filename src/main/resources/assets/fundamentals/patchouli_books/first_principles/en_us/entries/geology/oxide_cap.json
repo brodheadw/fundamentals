@@ -1,0 +1,13 @@
+{
+  "name": "Oxide Cap",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_malachite",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A blanket just under the surface of ochrum, in badlands, savanna and desert, between y 60 and 64. Carries malachite in masses, azurite in masses, cuprite in scattered grains, hemimorphite in masses. Dig at the core: the edges are lean.",
+      "title": "Oxide Cap"
+    }
+  ]
+}

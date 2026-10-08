@@ -1,0 +1,69 @@
+{
+  "name": "The fourteen cuts",
+  "category": "fundamentals:rare_earths",
+  "icon": "fundamentals:neodymium_oxalate",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Fourteen cuts take the mixed liquor down to single elements. A battery too short for its cut does nothing; the goggles say how many stages it wants. The number is set by how alike the pair is: samarium leaves neodymium in eight, but neodymium from praseodymium takes thirty-two.",
+      "title": "The fourteen cuts"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Rare earth liquor parts into light rare earth liquor (raffinate, head end) and heavy rare earth liquor (strip, tail end) in a battery of 8 stages charged with P507, stripped by hydrochloric acid."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Heavy rare earth liquor parts into samarium-europium-gadolinium liquor (raffinate, head end) and terbium-to-lutetium liquor (strip, tail end) in a battery of 10 stages charged with P204, stripped by hydrochloric acid."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Holmium-to-lutetium liquor parts into holmium-erbium liquor (raffinate, head end) and thulium-ytterbium-lutetium liquor (strip, tail end) in a battery of 10 stages charged with P204, stripped by hydrochloric acid."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Lanthanum-cerium liquor parts into lanthanum liquor (raffinate, head end) and cerium liquor (strip, tail end) in a battery of 12 stages charged with P507, stripped by hydrochloric acid."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Terbium-to-lutetium liquor parts into terbium-dysprosium liquor (raffinate, head end) and yttrium and late heavies liquor (strip, tail end) in a battery of 12 stages charged with P204, stripped by hydrochloric acid."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Thulium-ytterbium-lutetium liquor parts into thulium liquor (raffinate, head end) and ytterbium-lutetium liquor (strip, tail end) in a battery of 12 stages charged with P204, stripped by hydrochloric acid."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Light rare earth liquor parts into lanthanum-cerium liquor (raffinate, head end) and didymium liquor (strip, tail end) in a battery of 14 stages charged with P507, stripped by hydrochloric acid."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Yttrium and late heavies liquor parts into yttrium liquor (raffinate, head end) and holmium-to-lutetium liquor (strip, tail end) in a battery of 14 stages charged with naphthenic acid, stripped by hydrochloric acid."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Samarium-europium-gadolinium liquor parts into samarium liquor (raffinate, head end) and europium-gadolinium liquor (strip, tail end) in a battery of 16 stages charged with P507, stripped by hydrochloric acid."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Europium-gadolinium liquor parts into europium liquor (raffinate, head end) and gadolinium liquor (strip, tail end) in a battery of 18 stages charged with P507, stripped by hydrochloric acid."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Holmium-erbium liquor parts into holmium liquor (raffinate, head end) and erbium liquor (strip, tail end) in a battery of 20 stages charged with P507, stripped by hydrochloric acid."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Terbium-dysprosium liquor parts into terbium liquor (raffinate, head end) and dysprosium liquor (strip, tail end) in a battery of 20 stages charged with P507, stripped by hydrochloric acid."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ytterbium-lutetium liquor parts into ytterbium liquor (raffinate, head end) and lutetium liquor (strip, tail end) in a battery of 20 stages charged with P507, stripped by hydrochloric acid."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Didymium liquor parts into praseodymium liquor (raffinate, head end) and neodymium liquor (strip, tail end) in a battery of 32 stages charged with P507, stripped by hydrochloric acid."
+    }
+  ]
+}

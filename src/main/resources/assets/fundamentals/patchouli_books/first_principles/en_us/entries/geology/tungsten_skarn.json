@@ -1,0 +1,13 @@
+{
+  "name": "Tungsten Skarn",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_scheelite",
+  "sortnum": 17,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A bed of limestone, in mountain and hill country, between y -32 and 40. Carries scheelite in masses. Dig at the core: the edges are lean.",
+      "title": "Tungsten Skarn"
+    }
+  ]
+}

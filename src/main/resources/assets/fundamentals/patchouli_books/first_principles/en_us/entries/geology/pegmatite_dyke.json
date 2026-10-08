@@ -1,0 +1,13 @@
+{
+  "name": "Pegmatite Dyke",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_xenotime",
+  "sortnum": 28,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A vein of granite, in mountains, hills and badlands, between y -16 and 48. Carries xenotime in masses, euxenite in masses. Dig at the core: the edges are lean.",
+      "title": "Pegmatite Dyke"
+    }
+  ]
+}

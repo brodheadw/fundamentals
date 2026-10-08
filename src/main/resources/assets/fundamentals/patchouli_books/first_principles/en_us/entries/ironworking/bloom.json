@@ -1,0 +1,17 @@
+{
+  "name": "Bloom and hammer",
+  "category": "fundamentals:ironworking",
+  "icon": "fundamentals:iron_bloom",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A bloom is hammered, not cast. Beat it with the smithing hammer to drive the slag out and weld the iron together into wrought iron. Copper comes straight out of the bloomery from malachite, azurite and cuprite. Galena has to be roasted on a fire first, which drives off its sulfur; the roasted ore then gives lead.",
+      "title": "Bloom and hammer"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:smithing_hammer"
+    }
+  ]
+}

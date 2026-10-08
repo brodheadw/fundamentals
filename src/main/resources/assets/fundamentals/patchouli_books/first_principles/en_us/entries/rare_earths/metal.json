@@ -1,0 +1,33 @@
+{
+  "name": "Oxide to metal",
+  "category": "fundamentals:rare_earths",
+  "icon": "fundamentals:neodymium_ingot",
+  "sortnum": 6,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The metal comes out of the oxide three ways, all in The Factory Must Grow's chemical vats. The lights (lanthanum to neodymium, and didymium) and the heavies both go through their fluoride first: one oxide and 500 mB of hydrofluoric acid in a basin under a mixer.",
+      "title": "Oxide to metal"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The acid itself is two raw fluorite and 500 mB of sulfuric acid, heated; fluorite rides with the lead and zinc."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Electrolysis, for the lights: a steel vat heated by a blaze burner beneath it, two electrode holders with copper electrodes wired to the grid. One fluoride and two oxide give two ingots in five seconds; the fluoride is the molten salt bath, the oxide is what is reduced."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Calciothermic reduction, for the heavies and yttrium: two fluoride and two calcium ingots under 250 mB of argon in a heated vat give two ingots and the fluorspar back as slag."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Lanthanothermic distillation, for samarium, europium, thulium and ytterbium, which boil: two oxide and two lanthanum ingots under argon give two ingots and lanthanum oxide to go round again."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Argon is spun out of 1,000 mB of air in a centrifuge vat, nine millibuckets at a time. Calcium is two limesand and 500 mB of hydrochloric acid on electrodes."
+    }
+  ]
+}

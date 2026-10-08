@@ -1,0 +1,13 @@
+{
+  "name": "Placer sands",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_monazite",
+  "sortnum": 90,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Heavy minerals weather out of the rock and settle where water slows. Monazite washes into beach and river sand between y 54 and 66. Ilmenite washes into beach and river sand between y 54 and 66. Rutile washes into beach and river sand between y 54 and 66. No digging: pan the sand.",
+      "title": "Placer sands"
+    }
+  ]
+}

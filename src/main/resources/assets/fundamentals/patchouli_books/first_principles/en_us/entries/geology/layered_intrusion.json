@@ -1,0 +1,13 @@
+{
+  "name": "Layered Intrusion",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_chromite",
+  "sortnum": 26,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A bed of gabbro, anywhere in the overworld, between y -60 and -28. Carries chromite in layers, pentlandite in masses, sperrylite in scattered grains, cooperite in scattered grains, braggite in scattered grains. Dig at the core: the edges are lean.",
+      "title": "Layered Intrusion"
+    }
+  ]
+}

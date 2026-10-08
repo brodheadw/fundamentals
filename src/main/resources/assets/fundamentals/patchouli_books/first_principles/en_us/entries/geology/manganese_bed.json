@@ -1,0 +1,13 @@
+{
+  "name": "Manganese Bed",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_pyrolusite",
+  "sortnum": 16,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A bed of limestone, anywhere in the overworld, between y 0 and 60. Carries pyrolusite in masses. Dig at the core: the edges are lean.",
+      "title": "Manganese Bed"
+    }
+  ]
+}
