@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:ingots/aluminium_scandium"
+    }
+  },
+  "result": {
+    "id": "fundamentals:aluminium_scandium_block",
+    "count": 1
+  }
+}

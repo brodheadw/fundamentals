@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/aluminium_scandium"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:aluminium_scandium_plate"
+    }
+  ]
+}

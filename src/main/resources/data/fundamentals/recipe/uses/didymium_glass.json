@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "fundamentals:didymium_oxide"
+    },
+    {
+      "tag": "c:glass_blocks/colorless"
+    },
+    {
+      "tag": "c:glass_blocks/colorless"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:didymium_glass",
+    "count": 2
+  }
+}

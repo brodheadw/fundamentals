@@ -1,0 +1,24 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:yttrium_oxide"
+    },
+    {
+      "item": "fundamentals:yttrium_oxide"
+    },
+    {
+      "item": "fundamentals:europium_oxide"
+    },
+    {
+      "item": "fundamentals:terbium_oxide"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:phosphor",
+      "count": 4
+    }
+  ],
+  "heat_requirement": "heated"
+}

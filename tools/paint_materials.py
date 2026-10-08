@@ -73,6 +73,7 @@ METAL = {
     "didymium": tinted((140, 164, 176)),
     "neodymium_iron_boron": ((40, 42, 50), (82, 86, 98), (130, 134, 148), (196, 200, 214)),
     "samarium_cobalt": ((70, 64, 60), (124, 116, 108), (170, 162, 152), (222, 214, 204)),
+    "aluminium_scandium": ((98, 104, 114), (164, 172, 184), (214, 220, 230), (247, 249, 253)),
 }
 
 # The oxides are painted the colours they really are; the white ones borrow a little of their
@@ -124,10 +125,10 @@ MATERIALS = {
     "gadolinium": ELEMENT, "terbium": MAGNET_ELEMENT, "dysprosium": MAGNET_ELEMENT, "holmium": ELEMENT,
     "erbium": ELEMENT, "thulium": VOLATILE, "ytterbium": VOLATILE, "lutetium": ELEMENT, "yttrium": ELEMENT,
     "scandium": NO_LIQUOR,
-    "didymium": DIDYMIUM, "neodymium_iron_boron": ALLOY, "samarium_cobalt": ALLOY,
+    "didymium": DIDYMIUM, "neodymium_iron_boron": ALLOY, "samarium_cobalt": ALLOY, "aluminium_scandium": ALLOY,
 }
 
-DISPLAY = {"bastnasite": "Bastnäsite", "neodymium_iron_boron": "NdFeB", "samarium_cobalt": "SmCo"}
+DISPLAY = {"bastnasite": "Bastnäsite", "neodymium_iron_boron": "NdFeB", "samarium_cobalt": "SmCo", "aluminium_scandium": "Al-Sc"}
 
 
 def item_name(material, form):

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:aluminium_scandium_block",
     "fundamentals:azurite_ore",
     "fundamentals:borax_ore",
     "fundamentals:bornite_ore",

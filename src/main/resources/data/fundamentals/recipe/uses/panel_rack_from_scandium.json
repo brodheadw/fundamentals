@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "S S",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "tag": "c:plates/aluminium_scandium"
+    }
+  },
+  "result": {
+    "count": 2,
+    "id": "fundamentals:panel_rack"
+  }
+}

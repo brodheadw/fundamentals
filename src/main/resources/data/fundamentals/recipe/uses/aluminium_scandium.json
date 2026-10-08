@@ -1,0 +1,36 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:scandium_ingot"
+    },
+    {
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "tag": "c:ingots/aluminum"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:aluminium_scandium_ingot",
+      "count": 8
+    }
+  ],
+  "heat_requirement": "superheated"
+}

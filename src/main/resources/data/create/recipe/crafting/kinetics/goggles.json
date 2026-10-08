@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " S ",
+    "GPG"
+  ],
+  "key": {
+    "G": {
+      "item": "fundamentals:didymium_glass"
+    },
+    "P": {
+      "tag": "c:plates/gold"
+    },
+    "S": {
+      "tag": "c:strings"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "create:goggles"
+  }
+}

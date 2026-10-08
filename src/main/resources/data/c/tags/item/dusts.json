@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "#c:dusts/aluminium_scandium",
     "#c:dusts/bastnasite",
     "#c:dusts/cerium",
     "#c:dusts/didymium",

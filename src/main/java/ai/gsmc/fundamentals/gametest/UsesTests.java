@@ -1,6 +1,7 @@
 package ai.gsmc.fundamentals.gametest;
 
 import ai.gsmc.fundamentals.Fundamentals;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -27,6 +28,10 @@ public class UsesTests {
         return new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse(id)));
     }
 
+    private static boolean takes(Recipe<?> recipe, String id) {
+        return recipe.getIngredients().stream().anyMatch(i -> i.test(stack(id)));
+    }
+
     @GameTest(template = "empty")
     public void theMagnetAlloysAreSinteredAndPolarizedIntoTheFactorysMagnet(GameTestHelper helper) {
         Map.of("fundamentals:uses/neodymium_iron_boron", "create:mixing", "fundamentals:uses/neodymium_iron_boron_from_didymium", "create:mixing",
@@ -34,13 +39,33 @@ public class UsesTests {
                 .forEach((id, type) -> helper.assertTrue(BuiltInRegistries.RECIPE_TYPE.getKey(recipe(helper, id).getType()).toString().equals(type),
                         id + " should be a " + type + " recipe"));
         Recipe<?> magnet = recipe(helper, "tfmg:polarizing/magnet");
-        helper.assertTrue(magnet.getIngredients().get(0).test(stack("fundamentals:neodymium_iron_boron_ingot")),
-                "the Factory's magnet should be polarized from NdFeB");
-        helper.assertTrue(!magnet.getIngredients().get(0).test(stack("tfmg:magnetic_alloy_ingot")),
-                "the Factory's magnetic alloy should no longer make a magnet on its own");
-        helper.assertTrue(recipe(helper, "fundamentals:uses/neodymium_iron_boron").getIngredients().stream().anyMatch(i -> i.test(stack("fundamentals:raw_borax"))),
-                "NdFeB wants boron, from borax");
+        helper.assertTrue(takes(magnet, "fundamentals:neodymium_iron_boron_ingot"), "the Factory's magnet should be polarized from NdFeB");
+        helper.assertTrue(!takes(magnet, "tfmg:magnetic_alloy_ingot"), "the Factory's magnetic alloy should no longer make a magnet on its own");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/neodymium_iron_boron"), "fundamentals:raw_borax"), "NdFeB wants boron, from borax");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/samarium_cobalt"), "fundamentals:raw_cobaltite"), "SmCo wants cobalt, as cobaltite");
         helper.assertTrue(BuiltInRegistries.BLOCK.containsKey(ResourceLocation.parse("fundamentals:borax_ore")), "borax should be an ore");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void theOtherRareEarthsAreSpentWhereTheyReallyAre(GameTestHelper helper) {
+        var registries = helper.getLevel().registryAccess();
+        ItemStack striker = recipe(helper, "fundamentals:uses/ferrocerium_striker").getResultItem(registries);
+        helper.assertTrue(striker.is(net.minecraft.world.item.Items.FLINT_AND_STEEL) && striker.has(DataComponents.UNBREAKABLE),
+                "cerium and iron should make an unbreakable flint and steel");
+        helper.assertTrue(takes(recipe(helper, "tfmg:vat_machine_recipe/naphtha"), "fundamentals:lanthanum_oxide"), "cracking naphtha should spend lanthanum oxide");
+        helper.assertTrue(recipe(helper, "fundamentals:uses/phosphor").getResultItem(registries).is(BuiltInRegistries.ITEM.get(ResourceLocation.parse("fundamentals:phosphor")))
+                && takes(recipe(helper, "fundamentals:uses/phosphor"), "fundamentals:europium_oxide"), "europium, terbium and yttria should make phosphor");
+        for (String lamp : new String[] {"tfmg:crafting/materials/aluminum_lamp", "tfmg:crafting/materials/circular_light"}) {
+            helper.assertTrue(takes(recipe(helper, lamp), "fundamentals:phosphor"), lamp + " should take phosphor");
+        }
+        helper.assertTrue(takes(recipe(helper, "tfmg:crafting/materials/fireproof_chemical_vat"), "fundamentals:yttrium_oxide"), "the fireproof vat should take yttria");
+        helper.assertTrue(takes(recipe(helper, "create:crafting/kinetics/goggles"), "fundamentals:didymium_glass"), "goggles should be didymium glass");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/didymium_glass"), "fundamentals:didymium_oxide"), "didymium glass wants didymium oxide");
+        helper.assertTrue(recipe(helper, "fundamentals:uses/rose_glass").getResultItem(registries).is(net.minecraft.world.item.Items.PINK_STAINED_GLASS)
+                && takes(recipe(helper, "fundamentals:uses/rose_glass"), "fundamentals:erbium_oxide"), "erbium should make pink glass");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/aluminium_scandium"), "fundamentals:scandium_ingot")
+                && recipe(helper, "fundamentals:uses/panel_rack_from_scandium").getResultItem(registries).getCount() == 2, "scandium should lighten the rack");
         helper.succeed();
     }
 }

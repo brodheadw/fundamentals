@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "#c:nuggets/aluminium_scandium",
     "#c:nuggets/dysprosium",
     "#c:nuggets/neodymium",
     "#c:nuggets/neodymium_iron_boron",
