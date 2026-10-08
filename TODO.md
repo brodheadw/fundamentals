@@ -13,8 +13,8 @@ What's agreed but not built, in the order it's likely to go. The working plan be
   contents, so this only works as a sealed canister item (argon-flushed) plus tarnish in the player's inventory and on
   the ground. Design open since the oxide-to-metal work.
 - **Temperature consumers.** `Heat.at` exists (the `heat` package). Still to hang on it: the tiers Create's recipes use
-  as thresholds on the number, tarnish rate, kerosene and the extractants igniting near heat, and the fundamental-magic
-  bridge (scorch and Freezing Grasp pushing on it with `Heat.boost`, a Hearth provider reading it).
+  as thresholds on the number, tarnish rate, and kerosene and the extractants igniting near heat. The Wildspell Magic
+  side is wildspell-magic#7 (Freezing Grasp and Noon push on it, and spells read it back).
 - **Gadolinium** has no sink: its real uses are neutron absorption and MRI contrast and the pack has neither. Holmium,
   thulium, ytterbium and lutetium likewise beyond the glass colours.
 
