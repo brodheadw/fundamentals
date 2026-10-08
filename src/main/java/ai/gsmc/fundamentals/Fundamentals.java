@@ -9,6 +9,7 @@ import ai.gsmc.fundamentals.registry.HandTools;
 import ai.gsmc.fundamentals.registry.MaterialItems;
 import ai.gsmc.fundamentals.registry.OreBlocks;
 import ai.gsmc.fundamentals.separation.MixerSettlerBlockEntity;
+import ai.gsmc.fundamentals.uses.Uses;
 import ai.gsmc.fundamentals.separation.Separation;
 import ai.gsmc.fundamentals.worldgen.DepositFeature;
 import net.minecraft.core.registries.Registries;
@@ -70,6 +71,7 @@ public class Fundamentals {
                 MaterialItems.registerItems(helper::register);
                 Electricity.registerItems(helper::register);
                 Separation.registerItems(helper::register);
+                Uses.registerItems(helper::register);
             });
             event.register(Registries.FEATURE, helper -> helper.register(DEPOSIT, DepositFeature.INSTANCE));
             event.register(Registries.CREATIVE_MODE_TAB, helper -> {
@@ -91,6 +93,7 @@ public class Fundamentals {
                 .displayItems((parameters, output) -> {
                     IronWorking.items().forEach(output::accept);
                     Separation.items().forEach(output::accept);
+                    Uses.items().forEach(output::accept);
                     HandTools.items().forEach(output::accept);
                     Electricity.items().forEach(output::accept);
                     OreBlocks.rawItems().forEach(output::accept);

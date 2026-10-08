@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "#c:ingots/aluminium_scandium",
     "#c:ingots/cerium",
     "#c:ingots/didymium",
     "#c:ingots/dysprosium",

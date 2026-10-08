@@ -13,6 +13,7 @@
   "advancement.fundamentals.rare_earths.title": "Sixteen of Seventeen",
   "advancement.fundamentals.root.description": "Dig a mineral out of the ground",
   "advancement.fundamentals.root.title": "Fundamentals",
+  "block.fundamentals.aluminium_scandium_block": "Block of Al-Sc",
   "block.fundamentals.argentite_ore": "Argentite Ore",
   "block.fundamentals.azurite_ore": "Azurite Ore",
   "block.fundamentals.bastnasite_ore": "Bastnäsite Ore",
@@ -128,6 +129,10 @@
   "goggles.fundamentals.mixer_settler.stage": "Stage %s across, %s along, %s tall",
   "goggles.fundamentals.mixer_settler.stages": "Battery of %s stages, %s mB a batch",
   "goggles.fundamentals.mixer_settler.strip": "The far end wants %s",
+  "item.fundamentals.aluminium_scandium_dust": "Al-Sc Dust",
+  "item.fundamentals.aluminium_scandium_ingot": "Al-Sc Ingot",
+  "item.fundamentals.aluminium_scandium_nugget": "Al-Sc Nugget",
+  "item.fundamentals.aluminium_scandium_plate": "Al-Sc Plate",
   "item.fundamentals.bastnasite_dust": "Bastnäsite Dust",
   "item.fundamentals.calcined_spodumene": "Calcined Spodumene",
   "item.fundamentals.calcium_ingot": "Calcium Ingot",
@@ -279,5 +284,7 @@
   "item.fundamentals.yttrium_oxalate": "Yttrium Oxalate",
   "item.fundamentals.yttrium_oxide": "Yttrium Oxide",
   "itemGroup.fundamentals.materials": "Fundamentals Materials",
-  "itemGroup.fundamentals.minerals": "Fundamentals"
+  "itemGroup.fundamentals.minerals": "Fundamentals",
+  "item.fundamentals.phosphor": "Phosphor",
+  "item.fundamentals.didymium_glass": "Didymium Glass"
 }
