@@ -115,6 +115,7 @@ P = {
     "spodumene": ((112, 88, 118), (176, 146, 180), (214, 192, 216), (246, 232, 246)),
     "fluorite": ((58, 32, 104), (112, 72, 168), (164, 128, 212), (224, 204, 244)),
     "borax": ((146, 142, 134), (198, 196, 190), (232, 232, 228), (252, 252, 250)),
+    "trona": ((150, 140, 116), (204, 196, 174), (230, 224, 206), (250, 246, 234)),
 }
 
 # Bornite tarnishes iridescent ("peacock ore"): patches of several hues on one lump.
@@ -182,6 +183,8 @@ RECIPES = {
     "spodumene": [("crystals", "prism", 5, 1), ("speck", 3)],
     "fluorite": [("crystals", "prism", 4, 1), ("speck", 2)],
     "borax": [("crystals", "prism", 3, 1), ("speck", 3)],
+    # Fibrous, columnar beds a few feet thick under the Green River basin.
+    "trona": [("crystals", "prism", 4, 1), ("speck", 2)],
 }
 
 
@@ -547,7 +550,7 @@ SHEET_ORDER = [
     "bauxite", "galena", "sphalerite", "smithsonite", "hemimorphite", "cassiterite",
     "hematite", "magnetite", "goethite", "pyrolusite", "pentlandite", "nickel_laterite",
     "chromite", "wolframite", "scheelite", "molybdenite", "cobaltite", "ilmenite", "rutile",
-    "native_silver", "argentite", "sperrylite", "cooperite", "braggite", "cinnabar", "spodumene", "fluorite", "borax",
+    "native_silver", "argentite", "sperrylite", "cooperite", "braggite", "cinnabar", "spodumene", "fluorite", "borax", "trona",
 ]
 
 
