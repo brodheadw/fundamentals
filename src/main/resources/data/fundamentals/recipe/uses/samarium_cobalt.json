@@ -1,0 +1,27 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:samarium_ingot"
+    },
+    {
+      "tag": "c:ingots/cobalt"
+    },
+    {
+      "tag": "c:ingots/cobalt"
+    },
+    {
+      "tag": "c:ingots/cobalt"
+    },
+    {
+      "tag": "c:ingots/cobalt"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:samarium_cobalt_ingot",
+      "count": 2
+    }
+  ],
+  "heat_requirement": "superheated"
+}

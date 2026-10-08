@@ -215,6 +215,11 @@
       "name": "fluorite_ore",
       "soft": false,
       "mineral": "fluorite"
+    },
+    {
+      "name": "borax_ore",
+      "soft": false,
+      "mineral": "borax"
     }
   ],
   "hosts": {
