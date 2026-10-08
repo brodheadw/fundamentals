@@ -39,6 +39,9 @@ public record Battery(List<MixerSettlerBlockEntity> stages) {
     /** The battery runs while the head stage has a redstone signal: the lever on its wall. */
     public boolean isSwitchedOn() { return head().hasSignal(); }
 
+    /** What every cut leaves in the sump: a fifth of a batch of spent liquor. */
+    static int wastePerCut(MixerSettlerBlockEntity head) { return Math.max(1, head.batch() / 5); }
+
     /** Ticks of running before the first batch: each stage adds as much. */
     public int equilibration() { return MixerSettlerBlockEntity.EQUILIBRATION_PER_STAGE * size(); }
 
@@ -73,6 +76,9 @@ public record Battery(List<MixerSettlerBlockEntity> stages) {
                 || tail.out.fill(new FluidStack(cut.heavy(), batch), IFluidHandler.FluidAction.SIMULATE) < batch) {
             return Optional.of(new Stall("full"));
         }
+        if (head.waste.fill(new FluidStack(Separation.fluid("spent_liquor"), wastePerCut(head)), IFluidHandler.FluidAction.SIMULATE) < wastePerCut(head)) {
+            return Optional.of(new Stall("waste"));
+        }
         return Optional.empty();
     }
 
@@ -85,6 +91,7 @@ public record Battery(List<MixerSettlerBlockEntity> stages) {
         tail.aqueous.drain(batch, IFluidHandler.FluidAction.EXECUTE);
         head.out.fill(new FluidStack(cut.light(), batch), IFluidHandler.FluidAction.EXECUTE);
         tail.out.fill(new FluidStack(cut.heavy(), batch), IFluidHandler.FluidAction.EXECUTE);
+        head.waste.fill(new FluidStack(Separation.fluid("spent_liquor"), wastePerCut(head)), IFluidHandler.FluidAction.EXECUTE);
         // The aqueous phase is the depleting feed through the extraction stages and the acid loading up
         // through the strip stages; the stages between the ends fill with one or the other a tenth of a
         // stage at a time, so the liquor is seen to work its way down the line.

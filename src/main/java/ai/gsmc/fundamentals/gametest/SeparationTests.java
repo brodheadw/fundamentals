@@ -102,7 +102,11 @@ public class SeparationTests {
 
     /** The port on {@code side} of the casing at x on the top-left edge (y 2, z 1), where every end face is exterior. */
     private static IFluidHandler port(GameTestHelper helper, int x, Direction side) {
-        IFluidHandler handler = helper.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, helper.absolutePos(new BlockPos(x, 2, 1)), side);
+        return port(helper, x, 2, side);
+    }
+
+    private static IFluidHandler port(GameTestHelper helper, int x, int y, Direction side) {
+        IFluidHandler handler = helper.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, helper.absolutePos(new BlockPos(x, y, 1)), side);
         if (handler == null) {
             helper.fail("casing " + x + " has no port on its " + side + " face: " + helper.getBlockState(new BlockPos(x, 2, 1)));
         }
@@ -134,6 +138,11 @@ public class SeparationTests {
                 helper.assertTrue(held(helper, 1, Direction.WEST).getAmount() == 1000 - cuts * batch && held(helper, 24, Direction.EAST).getAmount() == 1000 - cuts * batch,
                         "each cut spends a batch of feed and of acid");
                 helper.assertTrue(held(helper, 10, Direction.UP).getAmount() == PLANT, "the organic is a loop, not a consumable");
+                FluidStack sump = port(helper, 1, 1, Direction.DOWN).getFluidInTank(0);
+                helper.assertTrue(sump.is(Separation.fluid("spent_liquor")) && sump.getAmount() == cuts * (batch / 5),
+                        "every cut should leave a fifth of a batch of spent liquor in the sump under the head, got " + sump);
+                helper.assertTrue(helper.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, helper.absolutePos(new BlockPos(10, 1, 1)), Direction.DOWN) == null,
+                        "only the head has a sump");
                 helper.succeed();
             });
         });
@@ -381,7 +390,8 @@ public class SeparationTests {
             helper.assertTrue(recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "calcining/" + element + "_oxide")).isPresent(),
                     element + " has no calcining to oxide");
         }
-        for (String reagent : List.of("mixing/hydrofluoric_acid", "reduction/argon", "reduction/calcium_ingot", "mixing/neodymium_fluoride")) {
+        for (String reagent : List.of("mixing/hydrofluoric_acid", "reduction/argon", "reduction/calcium_ingot", "mixing/neodymium_fluoride",
+                "mixing/brine", "mixing/salt_from_brine", "packing/monazite_residue_block")) {
             helper.assertTrue(recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, reagent)).isPresent(), reagent + " is missing");
         }
         helper.succeed();

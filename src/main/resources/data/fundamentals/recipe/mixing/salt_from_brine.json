@@ -1,0 +1,17 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "fundamentals:brine"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:salt",
+      "count": 3
+    }
+  ],
+  "heat_requirement": "heated"
+}
