@@ -28,7 +28,8 @@
       "amount": 250
     },
     {
-      "id": "tfmg:bauxite_powder"
+      "id": "minecraft:clay_ball",
+      "count": 4
     }
   ]
 }

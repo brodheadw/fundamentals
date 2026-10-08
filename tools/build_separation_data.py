@@ -213,8 +213,8 @@ def chemistry():
            [result_item("light_rare_earth_concentrate"), {"id": "fundamentals:light_rare_earth_concentrate", "chance": 0.5}])
     # Leaching the concentrates into chloride liquor.
     # Dissolving gives a crude liquor and what each ore leaves behind: monazite its thorium residue and its phosphate
-    # (trisodium phosphate, which bone meal stands in for), xenotime and euxenite their uranium-thorium residue, the clay
-    # its aluminium, as the hydroxide bauxite is made of. Lime then drops the iron, aluminium and the rest as a sludge
+    # (trisodium phosphate, which bone meal stands in for), xenotime and euxenite their uranium-thorium residue.
+    # Lime then drops the iron, aluminium and the rest as a sludge
     # and the clarified liquor is what a battery wants.
     mixing("rare_earth_liquor", [item("light_rare_earth_concentrate"), fluid(STRIP, 500)],
            [result_fluid("crude_rare_earth_liquor", 500), result_item("monazite_residue_dust"), {"id": "minecraft:bone_meal"}], heated=True)
@@ -229,9 +229,9 @@ def chemistry():
     mixing("heavy_rare_earth_liquor", [item("heavy_rare_earth_concentrate"), fluid(STRIP, 500)],
            [result_fluid("crude_heavy_rare_earth_liquor", 500), {"id": "fundamentals:monazite_residue_dust", "chance": 0.5}], heated=True)
     # The clay is not ground or roasted: its rare earths sit on the clay as ions and a salt solution lifts
-    # them off, which is why the Chinese heaps are leached in place.
+    # them off, which is why the Chinese heaps are leached in place. What is left is the clay, kaolinite, as before.
     mixing("heavy_rare_earth_liquor_from_clay", item("raw_ion_adsorption_clay", 4) + [item("salt"), fluid("minecraft:water", 500)],
-           [result_fluid("crude_heavy_rare_earth_liquor", 250), {"id": "tfmg:bauxite_powder"}])
+           [result_fluid("crude_heavy_rare_earth_liquor", 250), {"id": "minecraft:clay_ball", "count": 4}])
 
 
 def vat(name, ingredients, results, machines, heated=True, time=100):
