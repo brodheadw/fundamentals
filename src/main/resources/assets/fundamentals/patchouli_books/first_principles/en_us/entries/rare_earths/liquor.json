@@ -7,8 +7,14 @@
     {
       "type": "patchouli:spotlight",
       "item": "fundamentals:light_rare_earth_concentrate",
-      "text": "A concentrate dissolved in 500 mB of hydrochloric acid in a heated basin under a mixer gives 500 mB of chloride liquor: every rare earth in it together, lilac from the neodymium. The heavy concentrate gives the heavy liquor.",
+      "text": "A concentrate dissolved in 500 mB of hydrochloric acid in a heated basin under a mixer gives 500 mB of crude liquor, and what the ore leaves behind: monazite its thorium residue and its phosphate (bone meal), xenotime and euxenite a residue half the time, the clay its aluminium as bauxite powder.",
       "title": "Dissolving"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:clarifier_sludge",
+      "text": "Crude liquor still carries iron, aluminium and fines, and a battery fed it will run three cuts and then foul: crud at the interface, the organic turned brown and useless. So clarify first: 1,000 mB of crude liquor and two limesand under a mixer drop the impurities as a sludge and leave 1,000 mB of liquor a battery wants. A fouled organic is not lost: drained and scrubbed with one limesand, 1,000 mB gives back 900.",
+      "title": "Clarifying"
     },
     {
       "type": "patchouli:spotlight",

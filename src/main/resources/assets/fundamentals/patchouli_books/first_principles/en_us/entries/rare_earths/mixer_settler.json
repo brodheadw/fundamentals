@@ -30,6 +30,14 @@
       "text": "Pump the liquor into the back of the first stage and hydrochloric acid into the front of the last, take the raffinate from the first stage's sides and the loaded strip from the last stage's, and throw the lever. Goggles on any stage tell you what the battery is waiting for."
     },
     {
+      "type": "patchouli:text",
+      "text": "Two things the plant will not forgive. A mixer over 128 rpm beats the phases into an emulsion that never settles, and the battery stops until it is slowed."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "And the organic is not quite immortal: every cut carries a little of it out entrained in the raffinate, two per cent of a batch, so a plant wants a trickle of fresh extractant forever."
+    },
+    {
       "type": "patchouli:crafting",
       "recipe": "fundamentals:mixer_settler"
     }

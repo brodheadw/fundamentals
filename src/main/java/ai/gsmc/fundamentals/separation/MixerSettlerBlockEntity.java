@@ -58,6 +58,8 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     int stirring;
     int cooldown;
     int settled;
+    /** Cuts run on a crude feed since the organic was last clean; at three the crud fouls it. */
+    int crud;
     boolean dirty;
 
     public MixerSettlerBlockEntity(BlockPos pos, BlockState state) {
@@ -197,8 +199,15 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         return cell(worldPosition, across / 2, 0, tall - 1).above();
     }
 
+    /** Over this speed the mixer beats the phases into an emulsion that will not settle. */
+    public static final float MAX_MIXER_SPEED = 128;
+
     public boolean isStirred() {
         return level.getBlockEntity(mixerPos()) instanceof MechanicalMixerBlockEntity mixer && mixer.getSpeed() != 0 && mixer.isSpeedRequirementFulfilled();
+    }
+
+    public boolean isOverStirred() {
+        return level.getBlockEntity(mixerPos()) instanceof MechanicalMixerBlockEntity mixer && Math.abs(mixer.getSpeed()) > MAX_MIXER_SPEED;
     }
 
     /** Whether any casing of this stage has a redstone signal: the lever on the head stage's wall. */
@@ -417,6 +426,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         tag.put("waste", waste.getFluid().saveOptional(registries));
         tag.putInt("stirring", stirring);
         tag.putInt("settled", settled);
+        tag.putInt("crud", crud);
     }
 
     @Override
@@ -436,6 +446,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         waste.setFluid(FluidStack.parseOptional(registries, tag.getCompound("waste")));
         stirring = tag.getInt("stirring");
         settled = tag.getInt("settled");
+        crud = tag.getInt("crud");
     }
 
     @Override

@@ -80,12 +80,25 @@ WASTES = {
     "spent_liquor": ("Spent Liquor", 0x8E9A86),
     "brine": ("Brine", 0xDCE6E4),
 }
+# What comes out of the dissolver before anyone has cleaned it: iron, aluminium, thorium and fines still in it. A
+# battery will take it, and it will foul the organic. Lime drops the impurities and clarifies it.
+CRUDES = {
+    "crude_rare_earth_liquor": ("Crude Rare Earth Liquor", 0x8E7F86),
+    "crude_heavy_rare_earth_liquor": ("Crude Heavy Rare Earth Liquor", 0x9E9A80),
+}
+# An organic with crud at its interface: fines and hydroxides from a dirty feed. Lime scrubs it back.
+FOULED = {
+    "fouled_p204": ("Fouled P204", 0x6E5A38),
+    "fouled_p507": ("Fouled P507", 0x72603E),
+    "fouled_naphthenic_acid": ("Fouled Naphthenic Acid", 0x5A4424),
+}
 GASES = {
     "argon": ("Argon", 0xC8D8F0),
 }
 FLUIDS = {**{k: (*v, "LIQUOR") for k, v in LIQUORS.items()}, **{k: (*v, "ORGANIC") for k, v in ORGANICS.items()},
           **{k: (*v, "ACID") for k, v in ACIDS.items()}, **{k: (*v, "GAS") for k, v in GASES.items()},
-          **{k: (*v, "WASTE") for k, v in WASTES.items()}}
+          **{k: (*v, "WASTE") for k, v in WASTES.items()}, **{k: (*v, "CRUDE") for k, v in CRUDES.items()},
+          **{k: (*v, "FOULED") for k, v in FOULED.items()}}
 
 # Oxide to metal. The lights and the heavies go through their fluoride: the lights by molten-salt
 # electrolysis on TFMG's electrodes, the heavies by calciothermic reduction under argon, which gives the
@@ -153,7 +166,7 @@ def java_table():
              "    public static final List<Reagent> ALL = List.of("]
     entries = [f'            new Reagent("{id}", 0x{tint:06X}, Kind.{kind})' for id, (_, tint, kind) in FLUIDS.items()]
     lines += [",\n".join(entries) + ");", "", "    private Reagents() {}", "}", ""]
-    kinds = sorted({kind for _, _, kind in FLUIDS.values()}, key=["LIQUOR", "ORGANIC", "ACID", "GAS", "WASTE"].index)
+    kinds = sorted({kind for _, _, kind in FLUIDS.values()}, key=["LIQUOR", "ORGANIC", "ACID", "GAS", "WASTE", "CRUDE", "FOULED"].index)
     lines[7] = "    public enum Kind { " + ", ".join(kinds) + " }"
     JAVA.write_text("\n".join(lines), encoding="utf-8")
 
@@ -199,17 +212,26 @@ def chemistry():
     mixing("light_rare_earth_concentrate_from_bastnasite", item("bastnasite_dust", 2) + [fluid("minecraft:water", 250), fluid("naphthenic_acid", 100)],
            [result_item("light_rare_earth_concentrate"), {"id": "fundamentals:light_rare_earth_concentrate", "chance": 0.5}])
     # Leaching the concentrates into chloride liquor.
-    # the thorium in the monazite stays behind when the light concentrate dissolves: a residue that has to be put somewhere
+    # Dissolving gives a crude liquor and what each ore leaves behind: monazite its thorium residue and its phosphate
+    # (trisodium phosphate, which bone meal stands in for), xenotime and euxenite their uranium-thorium residue, the clay
+    # its aluminium, as the hydroxide bauxite is made of. Lime then drops the iron, aluminium and the rest as a sludge
+    # and the clarified liquor is what a battery wants.
     mixing("rare_earth_liquor", [item("light_rare_earth_concentrate"), fluid(STRIP, 500)],
-           [result_fluid("rare_earth_liquor", 500), result_item("monazite_residue_dust")], heated=True)
+           [result_fluid("crude_rare_earth_liquor", 500), result_item("monazite_residue_dust"), {"id": "minecraft:bone_meal"}], heated=True)
+    for crude, clean in (("crude_rare_earth_liquor", "rare_earth_liquor"), ("crude_heavy_rare_earth_liquor", "heavy_rare_earth_liquor")):
+        mixing(f"clarify_{clean}", item("tfmg:limesand", 2) + [fluid(crude, 1000)], [result_fluid(clean, 1000), result_item("clarifier_sludge")])
+    # a fouled organic scrubbed clean with lime, a tenth lost with the crud
+    for organic in ORGANICS:
+        mixing(f"scrub_{organic}", [item("tfmg:limesand"), fluid(f"fouled_{organic}", 1000)], [result_fluid(organic, 900)])
     # Waste: lime neutralises the spent liquor to brine, and brine boils down to salt for the clay leach.
     mixing("brine", item("tfmg:limesand", 2) + [fluid("spent_liquor", 1000)], [result_fluid("brine", 1000)])
     mixing("salt_from_brine", [fluid("brine", 1000)], [result_item("salt", 3)], heated=True)
-    mixing("heavy_rare_earth_liquor", [item("heavy_rare_earth_concentrate"), fluid(STRIP, 500)], [result_fluid("heavy_rare_earth_liquor", 500)], heated=True)
+    mixing("heavy_rare_earth_liquor", [item("heavy_rare_earth_concentrate"), fluid(STRIP, 500)],
+           [result_fluid("crude_heavy_rare_earth_liquor", 500), {"id": "fundamentals:monazite_residue_dust", "chance": 0.5}], heated=True)
     # The clay is not ground or roasted: its rare earths sit on the clay as ions and a salt solution lifts
     # them off, which is why the Chinese heaps are leached in place.
     mixing("heavy_rare_earth_liquor_from_clay", item("raw_ion_adsorption_clay", 4) + [item("salt"), fluid("minecraft:water", 500)],
-           [result_fluid("heavy_rare_earth_liquor", 250)])
+           [result_fluid("crude_heavy_rare_earth_liquor", 250), {"id": "tfmg:bauxite_powder"}])
 
 
 def vat(name, ingredients, results, machines, heated=True, time=100):
@@ -418,6 +440,8 @@ def names():
     lang["goggles.fundamentals.mixer_settler.products"] = "Out %s at the head, %s at the tail"
     lang["goggles.fundamentals.mixer_settler.sump"] = "Sump %s"
     lang["goggles.fundamentals.mixer_settler.waste"] = "The sump is full: pump the spent liquor out from below"
+    lang["goggles.fundamentals.mixer_settler.crud"] = "Crud at the interface: a dirty feed has fouled the organic; drain it and scrub it with lime"
+    lang["goggles.fundamentals.mixer_settler.emulsion"] = "The mixer is too fast: the phases emulsify and will not settle"
     lang["goggles.fundamentals.mixer_settler.nothing"] = "nothing"
     write(path, lang)
 

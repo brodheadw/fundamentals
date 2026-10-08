@@ -21,11 +21,12 @@ public final class Uses {
     private static Item rheniumFlueDust;
     private static Item tungstenCarbide;
     private static Item tungstenFilament;
+    private static Item clarifierSludge;
 
     private Uses() {}
 
     public static List<Item> items() {
-        return List.of(phosphor, didymiumGlass, roastedCobaltite, roastedChalcopyrite, rheniumFlueDust, tungstenCarbide, tungstenFilament);
+        return List.of(phosphor, didymiumGlass, roastedCobaltite, roastedChalcopyrite, rheniumFlueDust, tungstenCarbide, tungstenFilament, clarifierSludge);
     }
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
@@ -36,6 +37,7 @@ public final class Uses {
         registry.accept(id("rhenium_flue_dust"), rheniumFlueDust = new Item(new Item.Properties()));
         registry.accept(id("tungsten_carbide"), tungstenCarbide = new Item(new Item.Properties()));
         registry.accept(id("tungsten_filament"), tungstenFilament = new Item(new Item.Properties()));
+        registry.accept(id("clarifier_sludge"), clarifierSludge = new Item(new Item.Properties()));
     }
 
     private static ResourceLocation id(String path) {
