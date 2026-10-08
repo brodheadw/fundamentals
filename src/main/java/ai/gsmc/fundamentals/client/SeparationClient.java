@@ -1,7 +1,9 @@
 package ai.gsmc.fundamentals.client;
 
 import ai.gsmc.fundamentals.Fundamentals;
+import ai.gsmc.fundamentals.client.ponder.FundamentalsPonderPlugin;
 import ai.gsmc.fundamentals.separation.Acids;
+import net.createmod.ponder.foundation.PonderIndex;
 import ai.gsmc.fundamentals.separation.MixerSettlerBlockEntity;
 import ai.gsmc.fundamentals.separation.Reagents;
 import ai.gsmc.fundamentals.separation.Separation;
@@ -31,6 +33,8 @@ public final class SeparationClient {
     private SeparationClient() {}
 
     public static void register(IEventBus modBus) {
+        // hold W over a casing
+        PonderIndex.addPlugin(new FundamentalsPonderPlugin());
         modBus.addListener(EntityRenderersEvent.RegisterRenderers.class, event ->
                 event.registerBlockEntityRenderer(Separation.mixerSettlerEntity(), context -> new MixerSettlerRenderer()));
         // Create's connected textures, so the casings of a stage read as one riveted tank; Create swaps the
