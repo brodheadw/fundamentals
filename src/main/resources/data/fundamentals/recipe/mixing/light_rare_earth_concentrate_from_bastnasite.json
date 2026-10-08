@@ -1,0 +1,30 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:bastnasite_dust"
+    },
+    {
+      "item": "fundamentals:bastnasite_dust"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "minecraft:water"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 100,
+      "fluid": "fundamentals:naphthenic_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:light_rare_earth_concentrate"
+    },
+    {
+      "id": "fundamentals:light_rare_earth_concentrate",
+      "chance": 0.5
+    }
+  ]
+}

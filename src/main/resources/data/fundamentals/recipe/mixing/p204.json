@@ -10,6 +10,9 @@
       "type": "neoforge:single",
       "amount": 750,
       "fluid": "tfmg:kerosene"
+    },
+    {
+      "item": "tfmg:limesand"
     }
   ],
   "results": [

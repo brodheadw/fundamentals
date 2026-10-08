@@ -160,7 +160,9 @@ def rare_earths():
         "carries the lights too. Ion-adsorption clay under jungle is the odd one: a clay with the heavy rare earths merely stuck to it, "
         "which is why it is leached and never roasted.", "The minerals") + [
         spotlight("fundamentals:light_rare_earth_concentrate", "A millstone or crushing wheels grind bastnäsite, xenotime, loparite and euxenite; monazite is a sand already. "
-                  "Washed under an encased fan, the light grains wash away and about half of what you fed it stays as a mixed concentrate: light from monazite and loparite, heavy from xenotime and euxenite.", "Concentrate")], 0)
+                  "Washed under an encased fan, the light grains wash away and about half of what you fed it stays as a mixed concentrate: light from monazite and loparite, heavy from xenotime and euxenite.", "Concentrate"),
+        spotlight("fundamentals:bastnasite_dust", "Bastnäsite will not wash: it is floated, as in every carbonatite mill. Two bastnäsite dust beaten with 250 mB of water and 100 mB of naphthenic acid, the fatty-acid collector, "
+                  "in a basin under a mixer, and the rare earth carbonate comes off the top as light concentrate, one and sometimes two.", "Flotation")], 0)
     entry("rare_earths", "liquor", "Liquor", "fundamentals:salt", [
         spotlight("fundamentals:light_rare_earth_concentrate", "A concentrate dissolved in 500 mB of hydrochloric acid in a heated basin under a mixer gives 500 mB of chloride liquor: "
                   "every rare earth in it together, lilac from the neodymium. The heavy concentrate gives the heavy liquor.", "Dissolving"),
@@ -168,7 +170,7 @@ def rare_earths():
                   "That is the whole reason Chinese clays supply the world's heavy rare earths.", "Leaching")], 1)
     entry("rare_earths", "mixer_settler", "Solvent extraction", "fundamentals:mixer_settler", pages_of(
         "Chlorides of neighbouring rare earths are almost identical, so no one step parts them. Instead the liquor is shaken with an "
-        "organic extractant (P507, P204 or naphthenic acid, each made from phosphoric acid and kerosene) that prefers the heavier ions "
+        "organic extractant (P507, P204 or naphthenic acid, each made from phosphoric acid and kerosene and saponified with lime as it is made up, which sets the pH the cut works at) that prefers the heavier ions "
         "by a hair, left to settle into two layers, and the two layers sent opposite ways through a long line of identical stages. "
         "Each stage enriches a little; thirty of them compound a hair into a clean split. The stages are mixer-settlers, and a line of them is a battery.",
         "Solvent extraction") + pages_of(
@@ -209,7 +211,8 @@ def rare_earths():
         "Electrolysis, for the lights: a steel vat heated by a blaze burner beneath it, two electrode holders with copper electrodes wired to the grid. One fluoride and two oxide give two ingots in five seconds; the fluoride is the molten salt bath, the oxide is what is reduced. "
         "Calciothermic reduction, for the heavies and yttrium: two fluoride and two calcium ingots under 250 mB of argon in a heated vat give two ingots and the fluorspar back as slag. "
         "Lanthanothermic distillation, for samarium, europium, thulium and ytterbium, which boil: two oxide and two lanthanum ingots under argon give two ingots and lanthanum oxide to go round again.") + pages_of(
-        "Argon is spun out of 1,000 mB of air in a centrifuge vat, nine millibuckets at a time. Calcium is two limesand and 500 mB of hydrochloric acid on electrodes."), 6)
+        "Argon is spun out of 1,000 mB of air in a centrifuge vat, nine millibuckets at a time. Calcium is two limesand and 500 mB of hydrochloric acid on electrodes. "
+        "Heat is the one number Minecraft has: electrolysis runs at a blaze burner's heat, and the two metallothermic reductions, near 1,500 °C in life, want the burner fed a blaze cake."), 6)
     entry("rare_earths", "uses", "What they are for", "fundamentals:neodymium_iron_boron_ingot", pages_of(
         "Nothing in the chain is for its own sake. Neodymium (or didymium) with iron, borax and a little dysprosium, superheated, sinters into NdFeB, the strongest magnet; samarium with cobaltite into SmCo, which keeps its field hot. "
         "Polarized, either is the magnet The Factory Must Grow's motors, generators and electric pumps are built from.", "What they are for") + pages_of(
