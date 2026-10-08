@@ -83,7 +83,7 @@ def lanthanum():
 def phosphors():
     """Europium gives the red and terbium the green, both on a yttria host: the phosphor of every
     fluorescent tube and screen. The Factory's lamps take it."""
-    mixing("phosphor", item("yttrium_oxide", 2) + item("europium_oxide") + item("terbium_oxide"), [result("phosphor", 4)], "heated")
+    mixing("phosphor", item("yttrium_oxide", 2) + item("europium_oxide") + item("terbium_oxide"), [result("phosphor", 4)], "superheated")
     shaped(TFMG / "crafting/materials/aluminum_lamp.json", ["P ", "BF", "S "],
            {"B": {"item": "tfmg:light_bulb"}, "P": {"item": "create:framed_glass_pane"}, "S": {"tag": "c:plates/aluminum"}, "F": {"item": "fundamentals:phosphor"}},
            {"count": 1, "id": "tfmg:aluminum_lamp"})
@@ -141,7 +141,7 @@ def cobalt():
     roast("cobaltite", "roasted_cobaltite")
     write(USES / "cobalt_ingot.json", {"type": "minecraft:blasting", "category": "misc", "ingredient": {"item": "fundamentals:roasted_cobaltite"},
                                        "result": {"id": "fundamentals:cobalt_ingot"}, "experience": 0.7, "cookingtime": 200})
-    mixing("cobalt_blue", item("roasted_cobaltite") + item("tfmg:bauxite_powder", 2), [result("minecraft:blue_dye", 4)], "heated")
+    mixing("cobalt_blue", item("roasted_cobaltite") + item("tfmg:bauxite_powder", 2), [result("minecraft:blue_dye", 4)], "superheated")
 
 
 def copper_molybdenum_rhenium():

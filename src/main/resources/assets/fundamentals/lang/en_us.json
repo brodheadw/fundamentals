@@ -128,6 +128,7 @@
   "fundamentals.ponder.mixer_settler.text_6": "Every cut leaves a fifth of a batch of spent liquor in a sump under the head stage. Pump it out from below and neutralise it with lime, or the battery stops when the sump is full.",
   "fundamentals.ponder.mixer_settler.text_7": "Goggles on any casing tell you what the battery holds, what it is waiting for, and how far the organic and the liquor have got down the line.",
   "fundamentals.title": "Fundamentals",
+  "goggles.fundamentals.heat": "Here %s °C",
   "goggles.fundamentals.mixer_settler.aqueous_bar": "Aqueous  %s  %s/%s stages wet",
   "goggles.fundamentals.mixer_settler.bench": "Bench battery of %s, %s mB a batch",
   "goggles.fundamentals.mixer_settler.casing": "Casing: a stage is three across and three along",
@@ -153,6 +154,7 @@
   "goggles.fundamentals.mixer_settler.strip": "The far end wants %s",
   "goggles.fundamentals.mixer_settler.sump": "Sump %s",
   "goggles.fundamentals.mixer_settler.waste": "The sump is full: pump the spent liquor out from below",
+  "heat.fundamentals.readout": "%s °C (%s °F)",
   "item.fundamentals.aluminium_scandium_dust": "Al-Sc Dust",
   "item.fundamentals.aluminium_scandium_ingot": "Al-Sc Ingot",
   "item.fundamentals.aluminium_scandium_nugget": "Al-Sc Nugget",
@@ -339,7 +341,5 @@
   "item.fundamentals.yttrium_oxalate": "Yttrium Oxalate",
   "item.fundamentals.yttrium_oxide": "Yttrium Oxide",
   "itemGroup.fundamentals.materials": "Fundamentals Materials",
-  "itemGroup.fundamentals.minerals": "Fundamentals",
-  "heat.fundamentals.readout": "%s °C (%s °F)",
-  "goggles.fundamentals.heat": "Here %s °C"
+  "itemGroup.fundamentals.minerals": "Fundamentals"
 }

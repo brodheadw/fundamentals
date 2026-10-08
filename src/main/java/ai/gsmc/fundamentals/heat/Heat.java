@@ -63,9 +63,9 @@ public final class Heat {
 
     public static void registerDataMaps(RegisterDataMapTypesEvent event) {
         event.register(SOURCES);
-        // the burner's level and a furnace's fire are blockstate, which a data map cannot see
+        // the burner's level and a furnace's fire are blockstate, which a data map cannot see; kindled is 1,000 °C, seething 1,600
         registerScaler(com.simibubi.create.AllBlocks.BLAZE_BURNER.get(), state -> switch (BlazeBurnerBlock.getHeatLevelOf(state)) {
-            case NONE -> 0.0; case SMOULDERING -> 0.25; case FADING -> 0.5; case KINDLED -> 1.0; case SEETHING -> 2.0; });
+            case NONE -> 0.0; case SMOULDERING -> 0.25; case FADING -> 0.5; case KINDLED -> 1.0; case SEETHING -> 1.6; });
     }
 
     public static void registerScaler(Block block, Scaler scaler) { SCALERS.put(block, scaler); }
@@ -114,7 +114,7 @@ public final class Heat {
         return celsius;
     }
 
-    /** Every source within reach, each falling off linearly to nothing at its reach, plus boosts and providers. */
+    /** Every source within reach, its own heat at its block and its outside heat falling off linearly to nothing at its reach, plus boosts and providers. */
     public static double sources(Level level, BlockPos at) {
         double sum = 0;
         for (BlockPos pos : BlockPos.betweenClosed(at.offset(-MAX_REACH, -MAX_REACH, -MAX_REACH), at.offset(MAX_REACH, MAX_REACH, MAX_REACH))) {
@@ -131,7 +131,8 @@ public final class Heat {
             if (scale == 0) {
                 continue;
             }
-            sum += contribution(source.celsius() * scale, source.reach(), Math.sqrt(pos.distSqr(at)));
+            double distance = Math.sqrt(pos.distSqr(at));
+            sum += contribution((distance == 0 ? source.celsius() : source.outside()) * scale, source.reach(), distance);
         }
         List<Boost> boosts = BOOSTS.get(level);
         if (boosts != null) {

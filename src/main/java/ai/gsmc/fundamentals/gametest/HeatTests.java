@@ -22,10 +22,12 @@ public class HeatTests {
         helper.setBlock(new BlockPos(2, 1, 2), Blocks.LAVA);
         helper.setBlock(new BlockPos(24, 1, 2), Blocks.BLUE_ICE);
         helper.runAfterDelay(25, () -> {
+            double inLava = Heat.at(helper.getLevel(), helper.absolutePos(new BlockPos(2, 1, 2)));
             double byLava = Heat.at(helper.getLevel(), helper.absolutePos(new BlockPos(3, 1, 2)));
             double byIce = Heat.at(helper.getLevel(), helper.absolutePos(new BlockPos(23, 1, 2)));
             double far = Heat.at(helper.getLevel(), here);
-            helper.assertTrue(byLava > far + 500, "next to lava should be hundreds of degrees hotter, got " + byLava + " vs " + far);
+            helper.assertTrue(inLava > far + 1100, "lava itself should be past 1,100 degrees, got " + inLava + " vs " + far);
+            helper.assertTrue(byLava > far + 200 && byLava < far + 300, "a block from lava should be a couple of hundred degrees hotter, got " + byLava + " vs " + far);
             helper.assertTrue(byIce < far, "next to blue ice should be colder, got " + byIce + " vs " + far);
             helper.assertTrue(Math.abs(far - ambient) < 1, "thirteen blocks from both, the climate should stand, got " + far + " vs " + ambient);
             helper.succeed();

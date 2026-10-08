@@ -11,11 +11,15 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Then everything hot or cold within reach adds its share with distance: lava, fire, a campfire, a lit furnace, a bloomery, a blaze burner at whatever level it burns, and ice and snow the other way."
+      "text": "Then everything hot or cold within reach adds its share with distance: lava at 1,150 °C, fire and a campfire at 800, a lit furnace 750, a blast furnace 1,500, a bloomery 1,200, a blaze burner at whatever level it burns, and ice and snow the other way."
     },
     {
       "type": "patchouli:text",
-      "text": "Type /heat to read it where you stand; goggles on a stage read it there. Acid eats twice as fast for every ten degrees warmer. The three heats the recipes ask for, a burner, a burner fed a blaze cake, and none, are the coarse version of the same number."
+      "text": "That is inside; walls hold most of it in, so a step from a furnace is hot, not a kiln."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Type /heat to read it where you stand; goggles on a stage read it there. Acid eats twice as fast for every ten degrees warmer. The three heats the recipes ask for, none, a burner (1,000 °C) and a burner fed a blaze cake (1,600 °C), are the coarse version of the same number."
     }
   ]
 }
