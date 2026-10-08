@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Nothing in the chain is for its own sake. Neodymium (or didymium) with iron, borax and a little dysprosium, superheated, sinters into NdFeB, the strongest magnet; samarium with cobaltite into SmCo, which keeps its field hot.",
+      "text": "Nothing in the chain is for its own sake. Neodymium (or didymium) with iron, ferroboron and a little dysprosium, superheated under 100 mB of argon, melts into NdFeB, the strongest magnet; samarium with cobalt into SmCo, which keeps its field hot. Ferroboron is a borax, an iron and two charcoal, superheated.",
       "title": "What they are for"
     },
     {

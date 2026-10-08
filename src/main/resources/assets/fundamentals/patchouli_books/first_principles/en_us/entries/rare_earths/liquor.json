@@ -6,9 +6,21 @@
   "pages": [
     {
       "type": "patchouli:spotlight",
-      "item": "fundamentals:light_rare_earth_concentrate",
-      "text": "A concentrate dissolved in 500 mB of hydrochloric acid in a heated basin under a mixer gives 500 mB of crude liquor, and what the ore leaves behind: monazite its thorium residue and its phosphate (bone meal), xenotime and euxenite a residue half the time.",
-      "title": "Dissolving"
+      "item": "fundamentals:light_rare_earth_sulfate",
+      "text": "Monazite, xenotime and the rest are phosphates hydrochloric acid barely touches, so they are cracked first: a concentrate baked with 250 mB of sulfuric acid in a heated basin gives a rare earth sulfate and frees 125 mB of phosphoric acid.",
+      "title": "Cracking"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:roasted_bastnasite",
+      "text": "Bastnäsite is a carbonate and needs no acid bake: roast its concentrate on a campfire or in a smoker, and the roasted ore dissolves in 500 mB of hot hydrochloric acid straight to 500 mB of crude liquor, leaving nothing behind.",
+      "title": "Roasting"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:monazite_residue_dust",
+      "text": "A sulfate leaches in 500 mB of hydrochloric acid under a mixer, cold, since rare earth sulfates dissolve worse hot, to 500 mB of crude liquor. Monazite's thorium stays behind as a residue; xenotime and euxenite leave one half the time.",
+      "title": "Leaching"
     },
     {
       "type": "patchouli:spotlight",

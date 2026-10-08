@@ -436,8 +436,12 @@ public class SeparationTests {
         helper.assertTrue(dysprosium.getRequiredHeat() == com.simibubi.create.content.processing.recipe.HeatCondition.SUPERHEATED, "calciothermic reduction should want a superheated vat");
         var neodymium = (com.simibubi.create.content.processing.recipe.ProcessingRecipe<?, ?>) recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "reduction/neodymium_ingot")).orElseThrow().value();
         helper.assertTrue(neodymium.getRequiredHeat() == com.simibubi.create.content.processing.recipe.HeatCondition.SUPERHEATED, "the fluoride bath runs past a kindled burner, so electrolysis should want a superheated vat");
-        for (String reagent : List.of("mixing/hydrofluoric_acid", "reduction/argon", "reduction/calcium_ingot", "mixing/neodymium_fluoride", "mixing/light_rare_earth_concentrate_from_bastnasite",
-                "mixing/brine", "mixing/salt_from_brine", "packing/monazite_residue_block")) {
+        helper.assertTrue(!recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "mixing/rare_earth_liquor")).orElseThrow().value().getIngredients().get(0)
+                .test(new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("fundamentals:light_rare_earth_concentrate")))),
+                "hydrochloric acid barely touches a phosphate: the concentrate should be cracked in sulfuric acid before the leach");
+        for (String reagent : List.of("mixing/hydrofluoric_acid", "reduction/argon", "reduction/calcium_ingot", "mixing/neodymium_fluoride", "mixing/bastnasite_concentrate",
+                "mixing/light_rare_earth_sulfate", "mixing/heavy_rare_earth_sulfate", "mixing/rare_earth_liquor_from_bastnasite", "mixing/brine", "mixing/calcium_chloride",
+                "packing/monazite_residue_block")) {
             helper.assertTrue(recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, reagent)).isPresent(), reagent + " is missing");
         }
         helper.succeed();

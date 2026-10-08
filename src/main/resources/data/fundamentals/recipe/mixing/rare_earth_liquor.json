@@ -2,7 +2,7 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "fundamentals:light_rare_earth_concentrate"
+      "item": "fundamentals:light_rare_earth_sulfate"
     },
     {
       "type": "neoforge:single",
@@ -17,10 +17,6 @@
     },
     {
       "id": "fundamentals:monazite_residue_dust"
-    },
-    {
-      "id": "minecraft:bone_meal"
     }
-  ],
-  "heat_requirement": "heated"
+  ]
 }

@@ -25,6 +25,8 @@ What's agreed but not built, in the order it's likely to go. The working plan be
 - **Platinum group.** The layered intrusion carries sperrylite, cooperite and braggite; the materials are declared
   (`PreciousMaterials`) but not items. Catalysts (reforming, the catalytic converter alongside ceria) are the sinks.
 - **Cobalt blue** uses roasted cobaltite directly; a cobalt oxide form would be cleaner.
+- **Arsenic and chlorine.** Roasting cobaltite really gives off arsenic trioxide, and the molten-chloride electrolyses
+  (calcium, lithium) chlorine. Neither is an item or a fluid yet, and a campfire roast has only one output.
 
 ## Pack and tooling
 

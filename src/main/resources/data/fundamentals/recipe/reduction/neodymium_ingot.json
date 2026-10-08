@@ -25,6 +25,10 @@
     {
       "id": "fundamentals:neodymium_ingot",
       "count": 2
+    },
+    {
+      "id": "fundamentals:neodymium_fluoride",
+      "chance": 0.9
     }
   ],
   "heat_requirement": "superheated"

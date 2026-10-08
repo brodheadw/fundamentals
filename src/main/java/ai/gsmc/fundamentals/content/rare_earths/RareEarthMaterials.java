@@ -32,6 +32,8 @@ public final class RareEarthMaterials {
         mineral("loparite", null, "(Na,Ca,Ce)(Ti,Nb,Ta)O3", MINERAL_FORMS, 0.61, 0.15);
         mineral("euxenite", null, "(Y,Ca,Ce,U,Th)(Nb,Ta,Ti)2O6", MINERAL_FORMS, 0.64, 0.35);
 
+        reg("bastnasite_concentrate", "Bastnäsite Concentrate", MaterialType.CONCENTRATE, "",
+                new MaterialForm[] {CONCENTRATE}, MaterialProperties.builder());
         reg("light_rare_earth_concentrate", null, MaterialType.CONCENTRATE, "",
                 new MaterialForm[] {CONCENTRATE}, MaterialProperties.builder());
         reg("heavy_rare_earth_concentrate", null, MaterialType.CONCENTRATE, "",
