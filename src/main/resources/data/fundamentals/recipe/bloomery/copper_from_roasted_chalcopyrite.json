@@ -1,0 +1,14 @@
+{
+  "type": "fundamentals:bloomery",
+  "ingredient": {
+    "item": "fundamentals:roasted_chalcopyrite"
+  },
+  "result": {
+    "id": "minecraft:copper_ingot",
+    "count": 1
+  },
+  "byproduct": {
+    "id": "fundamentals:slag",
+    "count": 1
+  }
+}

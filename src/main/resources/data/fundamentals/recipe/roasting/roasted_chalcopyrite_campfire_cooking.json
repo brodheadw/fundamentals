@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "misc",
+  "ingredient": {
+    "item": "fundamentals:raw_chalcopyrite"
+  },
+  "result": {
+    "id": "fundamentals:roasted_chalcopyrite"
+  },
+  "experience": 0.1,
+  "cookingtime": 400
+}

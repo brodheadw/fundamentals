@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "III",
+    "ISI",
+    "III"
+  ],
+  "key": {
+    "S": {
+      "item": "create:shaft"
+    },
+    "I": {
+      "tag": "c:plates/superalloy"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "tfmg:turbine_blade",
+    "components": {
+      "tfmg:fuel_tags": {
+        "kerosene": "c:kerosene"
+      },
+      "tfmg:fuels": {
+        "kerosene": "Kerosene"
+      }
+    }
+  }
+}

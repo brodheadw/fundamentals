@@ -1,0 +1,13 @@
+{
+  "name": "Superalloy and molybdenum steel",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:superalloy_ingot",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Four nickel, two cobalt and one rhenium, superheated, make four ingots of the nickel superalloy that turbine blades are cast from; The Factory Must Grow's turbine blade now takes its plates. One molybdenum in four steel makes molybdenum steel, and its plates now make the heavy machinery casing.",
+      "title": "Superalloy and molybdenum steel"
+    }
+  ]
+}

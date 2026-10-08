@@ -1,0 +1,17 @@
+{
+  "name": "Cobalt",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:cobalt_ingot",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Cobaltite is a cobalt arsenide-sulfide from the silver-cobalt veins in calcite. Roast it on a campfire or in a smoker to drive off the arsenic and sulfur, then blast the roasted ore to the metal. Four cobalt and a samarium make SmCo; two cobalt, four nickel and a rhenium make the superalloy.",
+      "title": "Cobalt"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Roasted cobaltite calcined with two bauxite powder is cobalt blue, four blue dye."
+    }
+  ]
+}

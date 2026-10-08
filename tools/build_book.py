@@ -232,8 +232,27 @@ def rare_earths():
         "it is the one acid glass cannot hold. Nitric acid eats copper and iron. Phosphoric acid only stings, which is why it is in your cola. Stone, deepslate and the vats shrug all of them off."), 9)
 
 
+def metals():
+    category("metals", "The other metals", "Cobalt, and the porphyry chain: copper, molybdenum and the rhenium hiding in it.", "fundamentals:cobalt_ingot", 3)
+    entry("metals", "cobalt", "Cobalt", "fundamentals:cobalt_ingot", pages_of(
+        "Cobaltite is a cobalt arsenide-sulfide from the silver-cobalt veins in calcite. Roast it on a campfire or in a smoker to drive off the arsenic and sulfur, "
+        "then blast the roasted ore to the metal. Four cobalt and a samarium make SmCo; two cobalt, four nickel and a rhenium make the superalloy. "
+        "Roasted cobaltite calcined with two bauxite powder is cobalt blue, four blue dye.", "Cobalt"), 0)
+    entry("metals", "porphyry", "Copper, molybdenum, rhenium", "fundamentals:raw_molybdenite", pages_of(
+        "A porphyry copper stock carries chalcopyrite with a little molybdenite, and the molybdenite carries rhenium at parts per million. "
+        "Chalcopyrite roasted on a fire becomes a copper oxide the bloomery smelts to copper, the iron going to slag. "
+        "Two raw molybdenite roasted in a heated basin give two molybdenum trioxide, and half the time a rhenium flue dust: "
+        "the roaster's flue is where every gram of the world's rhenium comes from.", "The porphyry chain") + pages_of(
+        "Both oxides are reduced under hydrogen in a heated chemical vat with an industrial mixer, as the industry does: two trioxide and 500 mB of hydrogen give two molybdenum ingots, "
+        "two flue dust and 250 mB give one rhenium ingot. Hydrogen is The Factory Must Grow's."), 1)
+    entry("metals", "superalloy", "Superalloy and molybdenum steel", "fundamentals:superalloy_ingot", pages_of(
+        "Four nickel, two cobalt and one rhenium, superheated, make four ingots of the nickel superalloy that turbine blades are cast from; "
+        "The Factory Must Grow's turbine blade now takes its plates. One molybdenum in four steel makes molybdenum steel, and its plates now make the heavy machinery casing.",
+        "Superalloy and molybdenum steel"), 2)
+
+
 def power():
-    category("power", "Power", "Sunlight into The Factory Must Grow's grid.", "fundamentals:photovoltaic_panel", 3)
+    category("power", "Power", "Sunlight into The Factory Must Grow's grid.", "fundamentals:photovoltaic_panel", 4)
     entry("power", "solar", "Solar panels", "fundamentals:photovoltaic_panel", pages_of(
         "A solar panel goes on a rack. Build the rack from steel and set it down facing the way you want, then mount a photovoltaic panel on it: a P and an N semiconductor from The Factory Must Grow under glass, in an aluminium frame. "
         "Under open sky it feeds the electrical network, 120 volts while the sun is up and up to 200 watts at noon, nothing at night or in shade. Break it and you get the rack and the panel back.", "Solar panels")
@@ -274,6 +293,7 @@ def main():
     geology()
     ironworking()
     rare_earths()
+    metals()
     power()
     check()
     n = len(list(BOOK_ASSETS.glob("entries/*/*.json")))

@@ -6,6 +6,7 @@ re-run; don't hand-edit the PNGs.
 """
 from PIL import Image
 
+from paint_minerals import paint_raw
 from paint_separation import TEXTURES, heap
 
 
@@ -25,6 +26,9 @@ def lens():
 def main():
     heap("phosphor", (255, 250, 252), (240, 226, 236), (196, 170, 190)).save(TEXTURES / "item/phosphor.png")
     lens().save(TEXTURES / "item/didymium_glass.png")
+    paint_raw("roasted_cobaltite", ((70, 60, 66), (120, 108, 112), (166, 154, 156), (214, 206, 206))).save(TEXTURES / "item/roasted_cobaltite.png")
+    paint_raw("roasted_chalcopyrite", ((80, 50, 36), (138, 90, 62), (184, 132, 96), (230, 190, 150))).save(TEXTURES / "item/roasted_chalcopyrite.png")
+    heap("rhenium_flue_dust", (250, 250, 246), (214, 214, 208), (150, 150, 146)).save(TEXTURES / "item/rhenium_flue_dust.png")
     print("uses textures written")
 
 

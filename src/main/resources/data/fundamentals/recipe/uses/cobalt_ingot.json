@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "ingredient": {
+    "item": "fundamentals:roasted_cobaltite"
+  },
+  "result": {
+    "id": "fundamentals:cobalt_ingot"
+  },
+  "experience": 0.7,
+  "cookingtime": 200
+}

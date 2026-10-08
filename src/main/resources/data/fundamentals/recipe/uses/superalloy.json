@@ -1,0 +1,33 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "fundamentals:cobalt_ingot"
+    },
+    {
+      "item": "fundamentals:cobalt_ingot"
+    },
+    {
+      "item": "fundamentals:rhenium_ingot"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:superalloy_ingot",
+      "count": 4
+    }
+  ],
+  "heat_requirement": "superheated"
+}

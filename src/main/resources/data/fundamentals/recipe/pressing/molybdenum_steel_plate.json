@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/molybdenum_steel"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:molybdenum_steel_plate"
+    }
+  ]
+}

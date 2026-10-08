@@ -1,0 +1,21 @@
+{
+  "name": "Copper, molybdenum, rhenium",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:raw_molybdenite",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A porphyry copper stock carries chalcopyrite with a little molybdenite, and the molybdenite carries rhenium at parts per million. Chalcopyrite roasted on a fire becomes a copper oxide the bloomery smelts to copper, the iron going to slag.",
+      "title": "The porphyry chain"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two raw molybdenite roasted in a heated basin give two molybdenum trioxide, and half the time a rhenium flue dust: the roaster's flue is where every gram of the world's rhenium comes from."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Both oxides are reduced under hydrogen in a heated chemical vat with an industrial mixer, as the industry does: two trioxide and 500 mB of hydrogen give two molybdenum ingots, two flue dust and 250 mB give one rhenium ingot. Hydrogen is The Factory Must Grow's."
+    }
+  ]
+}
