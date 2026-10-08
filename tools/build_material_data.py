@@ -88,7 +88,8 @@ def main():
         if "nugget" in made:
             packed(made["nugget"], made["ingot"], f"{material}_ingot")
         if "block" in made:
-            packed(made["ingot"], made["block"], f"{material}_block")
+            # a metal's block packs from its ingot; a residue's from its dust
+            packed(made.get("ingot") or made["dust"], made["block"], f"{material}_block")
         if "plate" in made:
             write(RECIPES / f"pressing/{material}_plate.json", {
                 "type": "create:pressing", "ingredients": [{"tag": made["ingot"]["tag"]}],

@@ -64,6 +64,9 @@ public final class RareEarthMaterials {
                 MaterialProperties.builder().density(0.95).magnetStrength(1.00).heatResistance(0.30).hardness(0.60));
         reg("samarium_cobalt", "SmCo", MaterialType.ALLOY, "SmCo5", ALLOY_FORMS,
                 MaterialProperties.builder().density(1.06).magnetStrength(0.70).heatResistance(0.80).hardness(0.55));
+        // What monazite leaves behind when it dissolves: thorium and its daughters, mildly radioactive, to be cast into blocks and buried.
+        reg("monazite_residue", "Monazite Residue", MaterialType.COMPOUND, "ThO2", new MaterialForm[] {DUST, BLOCK},
+                MaterialProperties.builder().density(0.90).radioactivity(0.60));
         // A little scandium in aluminium: the light, weldable alloy of aircraft frames.
         reg("aluminium_scandium", "Al-Sc", MaterialType.ALLOY, "Al3Sc", ALLOY_FORMS,
                 MaterialProperties.builder().density(0.28).hardness(0.55));

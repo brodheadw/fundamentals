@@ -1,0 +1,29 @@
+{
+  "name": "Waste",
+  "category": "fundamentals:rare_earths",
+  "icon": "fundamentals:monazite_residue_dust",
+  "sortnum": 8,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A separation plant makes two kinds of waste, and both have to go somewhere. Every cut leaves a fifth of a batch of spent chloride liquor, acid with everything the organic did not want dissolved in it. It collects in a sump under the head stage; when the sump is full the battery stops, and the goggles say so.",
+      "title": "Waste"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Pump it out through the head stage's underside."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:salt",
+      "text": "Two limesand in 1,000 mB of spent liquor in a basin under a mixer neutralise it to brine, which is harmless, and 1,000 mB of brine boiled in a heated basin leaves three salt. The salt goes back into the clay leach: the plant's waste water closes its own loop, as the real ones are made to.",
+      "title": "Lime and brine"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:monazite_residue_dust",
+      "text": "Monazite carries thorium. When the light concentrate dissolves, the thorium stays behind as a residue, mildly radioactive and good for nothing here. Nine pack into a block; cast it and bury it deep, away from where you live. Bastnäsite and the clay leave none.",
+      "title": "Residue"
+    }
+  ]
+}

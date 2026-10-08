@@ -90,6 +90,7 @@ final class StageFormation {
         List<FluidStack> organics = new ArrayList<>();
         List<FluidStack> aqueouses = new ArrayList<>();
         List<FluidStack> outs = new ArrayList<>();
+        List<FluidStack> wastes = new ArrayList<>();
         for (int a = 0; a < w; a++) {
             for (int l0 = 0; l0 < l; l0++) {
                 for (int u = 0; u < h; u++) {
@@ -98,6 +99,7 @@ final class StageFormation {
                         organics.add(stage.organic.getFluid().copy());
                         aqueouses.add(stage.aqueous.getFluid().copy());
                         outs.add(stage.out.getFluid().copy());
+                        wastes.add(stage.waste.getFluid().copy());
                     }
                 }
             }
@@ -128,6 +130,7 @@ final class StageFormation {
         for (FluidStack stack : organics) head.organic.fill(stack, IFluidHandler.FluidAction.EXECUTE);
         for (FluidStack stack : aqueouses) head.aqueous.fill(stack, IFluidHandler.FluidAction.EXECUTE);
         for (FluidStack stack : outs) head.out.fill(stack, IFluidHandler.FluidAction.EXECUTE);
+        for (FluidStack stack : wastes) head.waste.fill(stack, IFluidHandler.FluidAction.EXECUTE);
         head.dirty = true;
     }
 

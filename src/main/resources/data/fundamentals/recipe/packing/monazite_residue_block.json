@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:dusts/monazite_residue"
+    }
+  },
+  "result": {
+    "id": "fundamentals:monazite_residue_block",
+    "count": 1
+  }
+}
