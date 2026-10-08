@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:roasted_cobaltite"
+    },
+    {
+      "item": "tfmg:bauxite_powder"
+    },
+    {
+      "item": "tfmg:bauxite_powder"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:blue_dye",
+      "count": 4
+    }
+  ],
+  "heat_requirement": "heated"
+}
