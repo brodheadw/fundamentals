@@ -220,6 +220,11 @@
       "name": "borax_ore",
       "soft": false,
       "mineral": "borax"
+    },
+    {
+      "name": "trona_ore",
+      "soft": false,
+      "mineral": "trona"
     }
   ],
   "hosts": {

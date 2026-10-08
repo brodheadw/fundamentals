@@ -27,6 +27,10 @@ What's agreed but not built, in the order it's likely to go. The working plan be
 - **Cobalt blue** uses roasted cobaltite directly; a cobalt oxide form would be cleaner.
 - **Arsenic and chlorine.** Roasting cobaltite really gives off arsenic trioxide, and the molten-chloride electrolyses
   (calcium, lithium) chlorine. Neither is an item or a fluid yet, and a campfire roast has only one output.
+- **Chromium loose ends.** Ferrochrome smelts in a superheated basin; The Factory Must Grow's arc furnace (a firebrick vat on
+  three graphite electrodes) is the truer submerged-arc furnace but its vat needs yttria here, so it waits. The chromate
+  leach folds into the roast, the dichromate step makes no sodium sulfate, and electrolytic chromium is not modelled.
+  UG2 chromite carries the platinum metals, which should come off the wash once they are items.
 
 ## Pack and tooling
 

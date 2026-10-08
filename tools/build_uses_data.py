@@ -22,7 +22,8 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "roasted_chalcopyrite": "Roasted Chalcopyrite", "rhenium_flue_dust": "Rhenium Flue Dust",
          "tungsten_carbide": "Tungsten Carbide", "tungsten_filament": "Tungsten Filament", "clarifier_sludge": "Clarifier Sludge",
          "copper_calcine": "Copper Calcine", "zinc_oxide": "Zinc Oxide", "roasted_pentlandite": "Roasted Pentlandite",
-         "lithium_chloride": "Lithium Chloride", "ferroboron": "Ferroboron"}
+         "lithium_chloride": "Lithium Chloride", "ferroboron": "Ferroboron",
+         "soda_ash": "Soda Ash", "sodium_chromate": "Sodium Chromate", "sodium_dichromate": "Sodium Dichromate", "aluminium_powder": "Aluminium Powder"}
 ROASTING = DATA / "recipe/roasting"
 LITHIUM = DATA / "recipe/lithium"
 
@@ -265,9 +266,9 @@ def loot():
 
 
 def alloys():
-    """Where cobalt, molybdenum and rhenium go: the nickel superalloy of turbine blades, melted under argon as the
-    rare earth magnets are, and molybdenum steel for the heavy casings."""
-    mixing("superalloy", item("tfmg:nickel_ingot", 4) + item("cobalt_ingot", 2) + item("rhenium_ingot") + argon(), [result("superalloy_ingot", 4)], "superheated")
+    """Where cobalt, chromium, molybdenum and rhenium go: the nickel superalloy of turbine blades, melted under argon as the
+    rare earth magnets are, its chromium what keeps it from scaling in the hot gas, and molybdenum steel for the heavy casings."""
+    mixing("superalloy", item("tfmg:nickel_ingot", 4) + item("chromium_ingot") + item("cobalt_ingot", 2) + item("rhenium_ingot") + argon(), [result("superalloy_ingot", 4)], "superheated")
     mixing("molybdenum_steel", item("molybdenum_ingot") + tag("c:ingots/steel", 4), [result("molybdenum_steel_ingot", 4)], "superheated")
     shaped(TFMG / "turbine_blade.json", ["III", "ISI", "III"], {"S": {"item": "create:shaft"}, "I": {"tag": "c:plates/superalloy"}},
            {"count": 1, "id": "tfmg:turbine_blade", "components": {"tfmg:fuel_tags": {"kerosene": "c:kerosene"}, "tfmg:fuels": {"kerosene": "Kerosene"}}})
@@ -307,6 +308,29 @@ def more_sinks():
                {"count": 8, "id": f"minecraft:{glass}_stained_glass"})
 
 
+def chromium():
+    """Chromite ground and washed to a concentrate, then smelted with coke and a flux, as a submerged-arc furnace does at 1,600 to 1,700 °C:
+    the iron in chromite reduces with the chromium, so what comes out is ferrochrome, and ferrochrome with steel and nickel is stainless.
+    Chromium metal goes the long way: soda roasted in air at about 1,100 °C to sodium chromate, leached and acidified to the dichromate,
+    reduced by carbon to the green oxide (giving the soda ash back), and the oxide reduced by aluminium powder, which once lit burns on by itself.
+    Soda ash is calcined trona, from the dry lakes where borax lies."""
+    write(USES / "soda_ash.json", {"type": "minecraft:smelting", "category": "misc", "ingredient": {"item": "fundamentals:raw_trona"},
+                                   "result": {"id": "fundamentals:soda_ash"}, "experience": 0.1, "cookingtime": 200})
+    mixing("ferrochrome", item("chromite_concentrate", 2) + item("tfmg:coal_coke") + tag("tfmg:flux"), [result("ferrochrome_ingot"), result("slag")], "superheated")
+    mixing("stainless_steel", item("ferrochrome_ingot", 3) + item("tfmg:nickel_ingot") + tag("c:ingots/steel", 6), [result("stainless_steel_ingot", 10)], "superheated")
+    shaped(TFMG / "crafting/materials/flarestack.json", ["SPS", "BPB", "CPC"],
+           {"B": {"item": "minecraft:iron_bars"}, "C": {"tag": "c:ingots/stainless_steel"}, "P": {"item": "tfmg:cast_iron_pipe"}, "S": {"item": "minecraft:flint_and_steel"}},
+           {"count": 1, "id": "tfmg:flarestack"})
+    mixing("sodium_chromate", item("chromite_concentrate") + item("soda_ash", 2), [result("sodium_chromate", 2)], "heated")
+    mixing("sodium_dichromate", item("sodium_chromate", 2) + [{"type": "neoforge:single", "amount": 250, "fluid": "tfmg:sulfuric_acid"}], [result("sodium_dichromate")])
+    mixing("chromium_oxide", item("sodium_dichromate") + tag("minecraft:coals"), [result("chromium_oxide"), result("soda_ash")], "heated")
+    write(USES / "aluminium_powder.json", {"type": "create:milling", "ingredients": tag("c:ingots/aluminum"), "processing_time": 200,
+                                           "results": [result("aluminium_powder", 2)]})
+    mixing("chromium_ingot", item("chromium_oxide") + item("aluminium_powder"), [result("chromium_ingot"), result("slag")], "superheated")
+    write(USES / "chrome_oxide_green.json", {"type": "minecraft:crafting_shapeless", "category": "misc", "ingredients": item("chromium_oxide"),
+                                             "result": result("minecraft:green_dye", 2)})
+
+
 def names():
     path = ASSETS / "lang/en_us.json"
     lang = json.loads(path.read_text(encoding="utf-8"))
@@ -343,6 +367,7 @@ def main():
     alloys()
     tungsten()
     more_sinks()
+    chromium()
     names()
     print("uses written")
 

@@ -1,0 +1,38 @@
+{
+  "name": "Ferrochrome and chromium",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:ferrochrome_ingot",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Chromite is chromium's only ore, black seams in the gabbro of the deep layered intrusion. A millstone or crushing wheels grind it to a brown powder, and a wash under an encased fan leaves the heavy chromite behind as concentrate, half of what goes in.",
+      "title": "Ferrochrome"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Iron in chromite reduces along with the chromium, so smelting gives not chromium but ferrochrome: two concentrate, a coal coke and a limesand flux, superheated, as a submerged-arc furnace smelts it at 1,600 to 1,700 °C, give a ferrochrome ingot and slag."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ferrochrome is what stainless steel is made from: three ferrochrome, a nickel and six steel, superheated, make ten stainless steel, eighteen per cent chromium and ten nickel. A flare burns in its own flame, so the Factory's flarestack is now built on stainless."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Chromium metal goes the long way, through its salts. Trona, a soda mineral that lies in the desert evaporite beds beside the borax, calcines in a furnace to soda ash.",
+      "title": "Chromium"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A chromite concentrate and two soda ash roasted in a heated basin give two sodium chromate, yellow: the roast oxidises the chromium in air at about 1,100 °C and the iron stays behind as oxide."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two chromate and 250 mB of sulfuric acid in a basin make the orange sodium dichromate. Heated with a coal it is reduced to the green chromium oxide and gives one soda ash back."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Last, the thermite: a chromium oxide and an aluminium powder (an aluminium ingot milled to two), lit by a burner fed a blaze cake, burn on by themselves past 2,000 °C to a chromium ingot and a slag of alumina. The superalloy takes the metal, and one oxide makes two green dye, the chrome oxide green of the paint box."
+    }
+  ]
+}

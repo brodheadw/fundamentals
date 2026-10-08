@@ -50,6 +50,11 @@ def main():
     # lithium chloride is white; ferroboron a grey metal lump
     heap("lithium_chloride", (255, 255, 255), (236, 238, 238), (182, 186, 188)).save(TEXTURES / "item/lithium_chloride.png")
     paint_raw("ferroboron", ((58, 60, 64), (104, 108, 114), (150, 154, 160), (200, 204, 210))).save(TEXTURES / "item/ferroboron.png")
+    # soda ash is white; sodium chromate lemon yellow and the dichromate orange-red, as chromate salts are; aluminium powder dull silver
+    heap("soda_ash", (254, 254, 252), (232, 232, 228), (178, 178, 172)).save(TEXTURES / "item/soda_ash.png")
+    heap("sodium_chromate", (252, 240, 110), (234, 206, 34), (168, 138, 18)).save(TEXTURES / "item/sodium_chromate.png")
+    heap("sodium_dichromate", (255, 160, 80), (226, 98, 28), (150, 52, 16)).save(TEXTURES / "item/sodium_dichromate.png")
+    heap("aluminium_powder", (224, 226, 230), (172, 176, 184), (110, 114, 122)).save(TEXTURES / "item/aluminium_powder.png")
     print("uses textures written")
 
 

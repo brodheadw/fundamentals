@@ -9,6 +9,13 @@
         },
         "fraction": 0.18,
         "style": "seams"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:trona_ore"
+        },
+        "fraction": 0.14,
+        "style": "seams"
       }
     ],
     "radius": {

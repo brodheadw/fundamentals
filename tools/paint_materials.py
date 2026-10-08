@@ -38,6 +38,9 @@ STRUCTURAL = ("ingot", "plate")
 TUNGSTEN = ("oxide", "dust", "ingot", "plate")
 MATTE = ("dust",)
 BLISTER = ("ingot",)
+GROUND_MINERAL = ("dust", "concentrate")
+CHROMIUM = ("oxide", "ingot")
+INGOT = ("ingot",)
 
 WHITE = ((150, 150, 148), (206, 206, 204), (236, 236, 234), (255, 255, 255))
 
@@ -91,6 +94,9 @@ METAL = {
     "tungsten": ((60, 62, 68), (112, 116, 124), (160, 164, 174), (212, 216, 226)),
     # blister copper is copper still holding its oxygen and sulfur, duller than refined and pocked where the SO2 broke out
     "blister_copper": ((84, 40, 28), (142, 74, 50), (186, 106, 74), (222, 150, 112)),
+    "chromium": ((90, 100, 118), (158, 172, 194), (210, 222, 240), (248, 252, 255)),
+    "ferrochrome": ((56, 58, 62), (104, 106, 112), (146, 148, 154), (192, 194, 200)),
+    "stainless_steel": ((96, 100, 104), (164, 168, 172), (212, 216, 220), (250, 251, 252)),
 }
 
 # The oxides are painted the colours they really are; the white ones borrow a little of their
@@ -114,6 +120,11 @@ for name in ("lanthanum", "gadolinium", "ytterbium", "lutetium", "yttrium", "sca
 OXIDE["molybdenum"] = ((160, 156, 118), (218, 214, 170), (240, 238, 204), (254, 253, 234))
 # tungsten trioxide is canary yellow
 OXIDE["tungsten"] = ((150, 140, 60), (208, 196, 96), (236, 226, 140), (252, 246, 196))
+# chromium(III) oxide is the green of chrome oxide green
+OXIDE["chromium"] = ((34, 66, 32), (66, 108, 54), (102, 144, 80), (150, 184, 120))
+
+# Ground, a mineral shows its streak: chromite is black in the rock and brown as powder.
+STREAK = {"chromite": ((34, 24, 18), (64, 48, 36), (94, 72, 54), (132, 106, 82))}
 
 # The oxalates and fluorides are salts of the trivalent ion, so they take the ion's colour, not the
 # oxide's: praseodymium's are green although Pr6O11 is black, terbium's white although Tb4O7 is brown.
@@ -152,13 +163,14 @@ MATERIALS = {
     "didymium": DIDYMIUM, "neodymium_iron_boron": ALLOY, "samarium_cobalt": ALLOY, "aluminium_scandium": ALLOY, "monazite_residue": RESIDUE,
     "cobalt": COBALT, "molybdenum": MOLYBDENUM, "rhenium": RHENIUM, "superalloy": STRUCTURAL, "molybdenum_steel": STRUCTURAL,
     "tungsten": TUNGSTEN, "copper_matte": MATTE, "blister_copper": BLISTER,
+    "chromite": GROUND_MINERAL, "chromium": CHROMIUM, "ferrochrome": INGOT, "stainless_steel": INGOT,
 }
 
 DISPLAY = {"bastnasite": "Bastnäsite", "bastnasite_concentrate": "Bastnäsite Concentrate", "neodymium_iron_boron": "NdFeB", "samarium_cobalt": "SmCo", "aluminium_scandium": "Al-Sc"}
 
 
 def item_name(material, form):
-    return material if form == "concentrate" else f"{material}_{form}"
+    return material if form == "concentrate" and material.endswith("_concentrate") else f"{material}_{form}"
 
 
 def items():
@@ -175,6 +187,8 @@ def palette(material, form):
     if form == "fluoride":
         # the anhydrous fluoride shows the ion more strongly
         return mix(WHITE, ION[material], 0.8)
+    if material in STREAK:
+        return STREAK[material]
     if material in P:
         return P[material]
     if material in OTHER:
