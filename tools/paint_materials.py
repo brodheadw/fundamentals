@@ -79,19 +79,36 @@ METAL = {
 # metal's tint.
 OXIDE = {
     "cerium": ((156, 144, 96), (214, 202, 146), (238, 230, 186), (254, 250, 226)),
-    "praseodymium": ((24, 20, 18), (52, 44, 38), (84, 72, 62), (140, 124, 108)),
+    "praseodymium": ((30, 24, 20), (62, 50, 42), (98, 82, 70), (150, 132, 116)),
     "neodymium": ((112, 120, 160), (166, 176, 214), (204, 212, 238), (236, 240, 252)),
     "samarium": ((158, 148, 108), (216, 206, 160), (240, 232, 196), (255, 250, 230)),
     "europium": ((164, 132, 138), (222, 190, 196), (242, 218, 222), (255, 242, 244)),
     "terbium": ((44, 28, 18), (84, 56, 36), (124, 88, 60), (178, 140, 104)),
-    "dysprosium": ((140, 150, 104), (198, 208, 154), (228, 236, 192), (250, 254, 228)),
+    "dysprosium": ((176, 180, 160), (222, 226, 206), (242, 244, 230), (254, 255, 246)),
     "holmium": ((160, 150, 100), (220, 210, 150), (242, 234, 190), (255, 252, 228)),
     "erbium": ((160, 96, 124), (214, 146, 174), (238, 188, 208), (254, 228, 238)),
     "thulium": ((126, 152, 128), (182, 208, 184), (216, 234, 216), (244, 252, 244)),
-    "didymium": ((70, 66, 82), (112, 108, 130), (152, 148, 170), (200, 196, 214)),
+    "didymium": ((62, 54, 56), (104, 92, 94), (146, 132, 134), (196, 184, 186)),
 }
 for name in ("lanthanum", "gadolinium", "ytterbium", "lutetium", "yttrium", "scandium"):
     OXIDE[name] = mix(WHITE, METAL[name], 0.3)
+
+# The oxalates and fluorides are salts of the trivalent ion, so they take the ion's colour, not the
+# oxide's: praseodymium's are green although Pr6O11 is black, terbium's white although Tb4O7 is brown.
+# Each entry is the ion's colour at full strength; the salts are mixed toward white from it.
+ION = {
+    "praseodymium": ((88, 150, 96), (136, 196, 140), (180, 226, 180), (222, 246, 220)),
+    "neodymium": ((120, 104, 168), (168, 152, 212), (206, 194, 238), (236, 230, 252)),
+    "didymium": ((108, 102, 136), (152, 146, 180), (194, 190, 216), (230, 228, 242)),
+    "samarium": ((170, 158, 100), (222, 210, 150), (242, 234, 192), (255, 250, 228)),
+    "europium": ((176, 150, 154), (226, 204, 208), (244, 230, 232), (255, 246, 247)),
+    "dysprosium": ((160, 166, 112), (212, 218, 160), (236, 240, 198), (252, 254, 232)),
+    "holmium": ((176, 156, 104), (228, 210, 150), (246, 234, 190), (255, 250, 228)),
+    "erbium": ((176, 104, 134), (224, 156, 184), (242, 196, 214), (254, 232, 240)),
+    "thulium": ((128, 162, 132), (184, 214, 186), (218, 238, 218), (244, 252, 244)),
+}
+for name in ("lanthanum", "cerium", "gadolinium", "terbium", "ytterbium", "lutetium", "yttrium"):
+    ION[name] = mix(WHITE, METAL[name], 0.2)
 
 OTHER = {
     "light_rare_earth_concentrate": ((96, 62, 34), (150, 104, 58), (190, 146, 90), (228, 196, 140)),
@@ -126,10 +143,11 @@ def palette(material, form):
     if form == "oxide":
         return OXIDE[material]
     if form == "oxalate":
-        # Oxalates are near-white; a trace of the oxide's colour is all that shows.
-        return mix(WHITE, OXIDE[material], 0.55)
+        # the hydrated oxalate is a pale powder with the ion's cast
+        return mix(WHITE, ION[material], 0.5)
     if form == "fluoride":
-        return mix(WHITE, OXIDE[material], 0.35)
+        # the anhydrous fluoride shows the ion more strongly
+        return mix(WHITE, ION[material], 0.8)
     if material in P:
         return P[material]
     if material in OTHER:
