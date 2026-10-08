@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:rhodium_liquor"
+    },
+    {
+      "item": "fundamentals:ammonium_chloride"
+    },
+    {
+      "item": "fundamentals:ammonium_chloride"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:ammonium_chlororhodate"
+    }
+  ],
+  "heat_requirement": "heated"
+}

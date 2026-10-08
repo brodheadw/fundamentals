@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "#fundamentals:sponges/iridium",
+    "#fundamentals:sponges/osmium",
+    "#fundamentals:sponges/palladium",
+    "#fundamentals:sponges/platinum",
+    "#fundamentals:sponges/rhodium",
+    "#fundamentals:sponges/ruthenium"
+  ]
+}

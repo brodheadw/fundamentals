@@ -34,7 +34,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import java.util.List;
 
 /**
- * What the plant does to people and pipes. The fuming acids (hydrofluoric, nitric) hurt anyone within reach of them
+ * What the plant does to people and pipes. The fuming acids (hydrofluoric, nitric, aqua regia) hurt anyone within reach of them
  * in the open: as blocks in the world, or in a basin they are being used in. Create's diving helmet on a filled
  * backtank is the gas mask, and breathes its air. And the acids eat copper: Create's pipes carrying one corrode
  * and eventually burst, spilling it; TFMG's plastic and glass pipes do not.

@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 100,
+      "fluid": "fundamentals:ruthenium_tetroxide"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:hydrochloric_acid"
+    },
+    {
+      "item": "fundamentals:ammonium_chloride"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:ammonium_chlororuthenate"
+    }
+  ]
+}

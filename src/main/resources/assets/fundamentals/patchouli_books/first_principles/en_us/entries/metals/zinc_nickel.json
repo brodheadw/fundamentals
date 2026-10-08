@@ -15,8 +15,12 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Pentlandite roasts on a fire to a nickel oxide; with a charcoal, superheated, it gives a nickel ingot and the iron goes to slag. Nickel laterite is too lean to roast: four of it with two charcoal, superheated, give one ingot and two slag, as the electric furnaces of Indonesia smelt it whole.",
+      "text": "Pentlandite roasts on a fire to a nickel oxide; with a charcoal, superheated, it gives a nickel ingot and the iron goes to slag, and whatever platinum it carried with it. Smelted raw in the bloomery instead, it gives the nickel matte the platinum metals are won from.",
       "title": "Nickel"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Nickel laterite is too lean to roast: four of it with two charcoal, superheated, give one ingot and two slag, as the electric furnaces of Indonesia smelt it whole."
     }
   ]
 }

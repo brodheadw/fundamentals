@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 375,
+      "fluid": "fundamentals:hydrochloric_acid"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 125,
+      "fluid": "fundamentals:nitric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:aqua_regia",
+      "amount": 500
+    }
+  ]
+}

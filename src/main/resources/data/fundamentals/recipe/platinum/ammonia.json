@@ -1,0 +1,29 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 750,
+      "fluid": "tfmg:hydrogen"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "tfmg:air"
+    },
+    {
+      "item": "fundamentals:raw_magnetite"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:ammonia",
+      "amount": 500
+    },
+    {
+      "id": "fundamentals:raw_magnetite",
+      "chance": 0.9
+    }
+  ],
+  "heat_requirement": "heated"
+}

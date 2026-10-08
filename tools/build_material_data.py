@@ -23,6 +23,7 @@ FORMS = {
     "fluoride": (DATA / "tags/item/fluorides", "{} Fluoride"),
     "oxide": (DATA / "tags/item/oxides", "{} Oxide"),
     "dust": (C_TAGS / "item/dusts", "{} Dust"),
+    "sponge": (DATA / "tags/item/sponges", "{} Sponge"),
     "ingot": (C_TAGS / "item/ingots", "{} Ingot"),
     "nugget": (C_TAGS / "item/nuggets", "{} Nugget"),
     "plate": (C_TAGS / "item/plates", "{} Plate"),

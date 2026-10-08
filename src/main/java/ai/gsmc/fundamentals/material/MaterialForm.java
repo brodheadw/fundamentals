@@ -10,6 +10,7 @@ public enum MaterialForm {
     FLUORIDE,
     OXIDE,
     DUST,
+    SPONGE,
     INGOT,
     NUGGET,
     PLATE,

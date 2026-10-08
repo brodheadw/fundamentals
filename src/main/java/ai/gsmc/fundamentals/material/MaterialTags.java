@@ -22,6 +22,7 @@ public final class MaterialTags {
                 case OXALATE -> tags.add("fundamentals:oxalates/" + id);
                 case FLUORIDE -> tags.add("fundamentals:fluorides/" + id);
                 case OXIDE -> tags.add("fundamentals:oxides/" + id);
+                case SPONGE -> tags.add("fundamentals:sponges/" + id);
                 case CONCENTRATE -> tags.add("fundamentals:concentrates/" + id);
                 default -> {}
             }

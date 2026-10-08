@@ -22,20 +22,20 @@ What's agreed but not built, in the order it's likely to go. The working plan be
 
 - **Tin.** Cassiterite generates but ends as ore; bronze is the natural sink. Zinc now reaches Create's zinc ingot (and so
   its brass), but Create's own zinc ore still generates and smelts in a furnace.
-- **Platinum group.** The layered intrusion carries sperrylite, cooperite and braggite; the materials are declared
-  (`PreciousMaterials`) but not items. Catalysts (reforming, the catalytic converter alongside ceria) are the sinks.
+- **Platinum group loose ends.** The reef's minerals join the matte at the leach rather than being floated and smelted with
+  it, and the converter matte leach and nickel electrowinning each fold two refinery steps into one. The gold, silver,
+  selenium and tellurium a real concentrate carries, sperrylite's arsenic, and copper's own anode slimes (the other
+  by-product source) are not modelled. Osmium tetroxide is a pipe-only fluid: it neither fumes nor blinds.
 - **Cobalt blue** uses roasted cobaltite directly; a cobalt oxide form would be cleaner.
 - **Arsenic.** Roasting cobaltite really gives off arsenic trioxide. It is not an item yet, and a campfire roast has only
   one output. (Chlorine, the other missing by-product, now comes off the molten-chloride electrolyses.)
 - **Chromium loose ends.** Ferrochrome smelts in a superheated basin; The Factory Must Grow's arc furnace (a firebrick vat on
   three graphite electrodes) is the truer submerged-arc furnace but its vat needs yttria here, so it waits. The chromate
   leach folds into the roast, the dichromate step makes no sodium sulfate, and electrolytic chromium is not modelled.
-  UG2 chromite carries the platinum metals, which should come off the wash once they are items.
+  UG2 chromite carries the platinum metals, which should come off the wash into the platinum group concentrate.
 
 ## Reagents
 
-- **Nitric acid by Ostwald.** Ammonia burnt over platinum gauze is how nitric acid has been made since 1910; it waits on
-  the platinum group being items. The saltpetre retort stays as the early route.
 - **Phosphoric acid has no sink** now that the extractants are made from phosphorus trichloride. Its real ones are
   fertiliser and phosphating steel; the old route to phosphorus, phosphoric acid distilled with charcoal, is another.
 - **White phosphorus** ignites in air at about 30 °C and is kept under water. It is an inert item for now.
