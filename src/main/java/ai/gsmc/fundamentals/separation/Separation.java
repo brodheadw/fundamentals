@@ -61,7 +61,9 @@ public final class Separation {
     }
 
     public static List<Item> items() {
-        return List.of(mixerSettlerItem, salt, oxalicAcid, calciumIngot);
+        List<Item> items = new java.util.ArrayList<>(List.of(mixerSettlerItem, salt, oxalicAcid, calciumIngot));
+        Acids.all().values().forEach(acid -> items.add(acid.bucket));
+        return items;
     }
 
     public static void registerFluidTypes(BiConsumer<ResourceLocation, FluidType> registry) {
@@ -78,6 +80,18 @@ public final class Separation {
 
     public static void registerFluids(BiConsumer<ResourceLocation, Fluid> registry) {
         for (Reagents.Reagent reagent : Reagents.ALL) {
+            if (reagent.kind() == Reagents.Kind.ACID) {
+                // the acids live in the world too: source, flowing form, block and bucket, built in Acids
+                Acids.Acid acid = Acids.all().get(reagent.id());
+                FLUIDS.put(reagent.id(), acid.source);
+                for (Fluid fluid : new Fluid[] {acid.source, acid.flowing}) {
+                    KINDS.put(fluid, reagent.kind());
+                    TINTS.put(fluid, reagent.tint());
+                }
+                registry.accept(id(reagent.id()), acid.source);
+                registry.accept(id(reagent.id() + "_flowing"), acid.flowing);
+                continue;
+            }
             // Never placed in the world, so the source stands in for its own flowing form.
             Fluid[] self = new Fluid[1];
             self[0] = new BaseFlowingFluid.Source(new BaseFlowingFluid.Properties(
@@ -93,6 +107,9 @@ public final class Separation {
         mixerSettler = new MixerSettlerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY)
                 .requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.COPPER).noOcclusion());
         registry.accept(id("mixer_settler"), mixerSettler);
+        for (Acids.Acid acid : Acids.all().values()) {
+            registry.accept(id(acid.id), acid.block);
+        }
     }
 
     public static void registerBlockEntities(BiConsumer<ResourceLocation, BlockEntityType<?>> registry) {
@@ -113,6 +130,9 @@ public final class Separation {
         registry.accept(id("salt"), salt = new Item(new Item.Properties()));
         registry.accept(id("calcium_ingot"), calciumIngot = new Item(new Item.Properties()));
         registry.accept(id("oxalic_acid"), oxalicAcid = new Item(new Item.Properties()));
+        for (Acids.Acid acid : Acids.all().values()) {
+            registry.accept(id(acid.id + "_bucket"), acid.bucket);
+        }
     }
 
     private static ResourceLocation id(String path) {

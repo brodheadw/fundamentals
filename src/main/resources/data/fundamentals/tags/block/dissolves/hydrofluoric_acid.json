@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#c:glass_blocks",
+    "#c:glass_panes",
+    "#minecraft:sand",
+    "minecraft:sandstone",
+    "minecraft:red_sandstone",
+    "minecraft:quartz_block",
+    "minecraft:smooth_quartz"
+  ]
+}

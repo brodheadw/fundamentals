@@ -1,6 +1,7 @@
 package ai.gsmc.fundamentals.client;
 
 import ai.gsmc.fundamentals.Fundamentals;
+import ai.gsmc.fundamentals.separation.Acids;
 import ai.gsmc.fundamentals.separation.MixerSettlerBlockEntity;
 import ai.gsmc.fundamentals.separation.Reagents;
 import ai.gsmc.fundamentals.separation.Separation;
@@ -17,6 +18,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
@@ -32,6 +35,11 @@ public final class SeparationClient {
                 event.registerBlockEntityRenderer(Separation.mixerSettlerEntity(), context -> new MixerSettlerRenderer()));
         // Create's connected textures, so the casings of a stage read as one riveted tank; Create swaps the
         // wrapped model in when models bake.
+        // the acids stand in the world as liquid blocks, drawn like water
+        modBus.addListener(FMLClientSetupEvent.class, event -> Acids.all().values().forEach(acid -> {
+            ItemBlockRenderTypes.setRenderLayer(acid.source, RenderType.translucent());
+            ItemBlockRenderTypes.setRenderLayer(acid.flowing, RenderType.translucent());
+        }));
         modBus.addListener(FMLClientSetupEvent.class, event -> CreateClient.MODEL_SWAPPER.getCustomBlockModels()
                 .register(id("mixer_settler"), model -> new CTModel(model, new StageWalls())));
         modBus.addListener(RegisterClientExtensionsEvent.class, event -> {
