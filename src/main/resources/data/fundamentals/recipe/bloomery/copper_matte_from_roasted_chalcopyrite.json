@@ -1,10 +1,10 @@
 {
   "type": "fundamentals:bloomery",
   "ingredient": {
-    "item": "fundamentals:copper_calcine"
+    "item": "fundamentals:roasted_chalcopyrite"
   },
   "result": {
-    "id": "minecraft:copper_ingot",
+    "id": "fundamentals:copper_matte_dust",
     "count": 1
   },
   "byproduct": {

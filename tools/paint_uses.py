@@ -47,6 +47,9 @@ def main():
     paint_raw("copper_calcine", ((22, 20, 20), (48, 44, 42), (78, 72, 68), (122, 114, 108))).save(TEXTURES / "item/copper_calcine.png")
     heap("zinc_oxide", (252, 252, 248), (222, 222, 214), (160, 160, 152)).save(TEXTURES / "item/zinc_oxide.png")
     paint_raw("roasted_pentlandite", ((40, 46, 34), (72, 84, 60), (108, 122, 90), (156, 168, 132))).save(TEXTURES / "item/roasted_pentlandite.png")
+    # lithium chloride is white; ferroboron a grey metal lump
+    heap("lithium_chloride", (255, 255, 255), (236, 238, 238), (182, 186, 188)).save(TEXTURES / "item/lithium_chloride.png")
+    paint_raw("ferroboron", ((58, 60, 64), (104, 108, 114), (150, 154, 160), (200, 204, 210))).save(TEXTURES / "item/ferroboron.png")
     print("uses textures written")
 
 

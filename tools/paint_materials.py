@@ -36,6 +36,8 @@ MOLYBDENUM = ("oxide", "dust", "ingot")
 RHENIUM = ("dust", "ingot")
 STRUCTURAL = ("ingot", "plate")
 TUNGSTEN = ("oxide", "dust", "ingot", "plate")
+MATTE = ("dust",)
+BLISTER = ("ingot",)
 
 WHITE = ((150, 150, 148), (206, 206, 204), (236, 236, 234), (255, 255, 255))
 
@@ -87,6 +89,8 @@ METAL = {
     "superalloy": ((64, 70, 78), (118, 126, 138), (170, 178, 190), (222, 228, 238)),
     "molybdenum_steel": ((56, 60, 70), (104, 110, 124), (152, 160, 176), (206, 212, 226)),
     "tungsten": ((60, 62, 68), (112, 116, 124), (160, 164, 174), (212, 216, 226)),
+    # blister copper is copper still holding its oxygen and sulfur, duller than refined and pocked where the SO2 broke out
+    "blister_copper": ((84, 40, 28), (142, 74, 50), (186, 106, 74), (222, 150, 112)),
 }
 
 # The oxides are painted the colours they really are; the white ones borrow a little of their
@@ -129,6 +133,9 @@ for name in ("lanthanum", "cerium", "gadolinium", "terbium", "ytterbium", "lutet
     ION[name] = mix(WHITE, METAL[name], 0.2)
 
 OTHER = {
+    "bastnasite_concentrate": ((110, 76, 34), (168, 126, 66), (204, 168, 104), (236, 210, 156)),
+    # matte, the molten Cu2S-FeS tapped from the smelter and granulated: dark grey-black with a bronze sheen
+    "copper_matte": ((20, 18, 18), (44, 40, 38), (78, 70, 62), (136, 116, 92)),
     "light_rare_earth_concentrate": ((96, 62, 34), (150, 104, 58), (190, 146, 90), (228, 196, 140)),
     "heavy_rare_earth_concentrate": ((84, 76, 48), (132, 122, 78), (172, 162, 110), (216, 208, 160)),
 }
@@ -136,7 +143,7 @@ OTHER = {
 # material: forms. Same order as the Java registry, which is the order of the creative tab.
 MATERIALS = {
     "bastnasite": MINERAL, "monazite": MINERAL, "xenotime": MINERAL, "loparite": MINERAL, "euxenite": MINERAL,
-    "light_rare_earth_concentrate": CONCENTRATE, "heavy_rare_earth_concentrate": CONCENTRATE,
+    "bastnasite_concentrate": CONCENTRATE, "light_rare_earth_concentrate": CONCENTRATE, "heavy_rare_earth_concentrate": CONCENTRATE,
     "lanthanum": ELEMENT, "cerium": ELEMENT, "praseodymium": MAGNET_ELEMENT, "neodymium": MAGNET_ELEMENT,
     "samarium": VOLATILE_MAGNET, "europium": VOLATILE,
     "gadolinium": ELEMENT, "terbium": MAGNET_ELEMENT, "dysprosium": MAGNET_ELEMENT, "holmium": ELEMENT,
@@ -144,10 +151,10 @@ MATERIALS = {
     "scandium": NO_LIQUOR,
     "didymium": DIDYMIUM, "neodymium_iron_boron": ALLOY, "samarium_cobalt": ALLOY, "aluminium_scandium": ALLOY, "monazite_residue": RESIDUE,
     "cobalt": COBALT, "molybdenum": MOLYBDENUM, "rhenium": RHENIUM, "superalloy": STRUCTURAL, "molybdenum_steel": STRUCTURAL,
-    "tungsten": TUNGSTEN,
+    "tungsten": TUNGSTEN, "copper_matte": MATTE, "blister_copper": BLISTER,
 }
 
-DISPLAY = {"bastnasite": "Bastnäsite", "neodymium_iron_boron": "NdFeB", "samarium_cobalt": "SmCo", "aluminium_scandium": "Al-Sc"}
+DISPLAY = {"bastnasite": "Bastnäsite", "bastnasite_concentrate": "Bastnäsite Concentrate", "neodymium_iron_boron": "NdFeB", "samarium_cobalt": "SmCo", "aluminium_scandium": "Al-Sc"}
 
 
 def item_name(material, form):
@@ -355,9 +362,23 @@ def paint_block(name, pal):
     return img
 
 
+def blistered(img, pal):
+    """Pock the ingot's top with the craters the gas left as the blister copper set: a dark pit under a lit lip."""
+    tones, rng = ramp(pal), random.Random("blister")
+    body = [(x, y) for y, row in enumerate(SHAPES["ingot"]) for x, t in enumerate(row) if t in "67" and 0 < y < 15]
+    for x, y in rng.sample(body, 6):
+        img.putpixel((x, y), tones[1] + (255,))
+        if (x - 1, y - 1) in body:
+            img.putpixel((x - 1, y - 1), tones[7] + (255,))
+    return img
+
+
 def paint(material, form):
     pal = palette(material, form)
-    return paint_block(material, pal) if form == "block" else paint_item(form, pal)
+    if form == "block":
+        return paint_block(material, pal)
+    img = paint_item(form, pal)
+    return blistered(img, pal) if material == "blister_copper" else img
 
 
 def contact_sheet(path, scale=6):

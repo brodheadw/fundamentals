@@ -9,8 +9,9 @@ import java.util.function.BiConsumer;
 
 /**
  * The few items of the chains that are not a form of a material: the phosphor the lamps take, the didymium
- * glass that welders' goggles are made of, the roasted ores on their way to cobalt, copper, zinc and nickel, and the
- * flue dust the molybdenite roaster gives up its rhenium in. The recipes are written by tools/build_uses_data.py.
+ * glass that welders' goggles are made of, the roasted ores on their way to cobalt, copper, zinc and nickel, the
+ * flue dust the molybdenite roaster gives up its rhenium in, the lithium chloride lithium is won from, and the ferroboron
+ * the magnets take their boron as. The recipes are written by tools/build_uses_data.py.
  */
 public final class Uses {
 
@@ -25,12 +26,14 @@ public final class Uses {
     private static Item copperCalcine;
     private static Item zincOxide;
     private static Item roastedPentlandite;
+    private static Item lithiumChloride;
+    private static Item ferroboron;
 
     private Uses() {}
 
     public static List<Item> items() {
         return List.of(phosphor, didymiumGlass, roastedCobaltite, roastedChalcopyrite, rheniumFlueDust, tungstenCarbide, tungstenFilament, clarifierSludge,
-                copperCalcine, zincOxide, roastedPentlandite);
+                copperCalcine, zincOxide, roastedPentlandite, lithiumChloride, ferroboron);
     }
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
@@ -45,6 +48,8 @@ public final class Uses {
         registry.accept(id("copper_calcine"), copperCalcine = new Item(new Item.Properties()));
         registry.accept(id("zinc_oxide"), zincOxide = new Item(new Item.Properties()));
         registry.accept(id("roasted_pentlandite"), roastedPentlandite = new Item(new Item.Properties()));
+        registry.accept(id("lithium_chloride"), lithiumChloride = new Item(new Item.Properties()));
+        registry.accept(id("ferroboron"), ferroboron = new Item(new Item.Properties()));
     }
 
     private static ResourceLocation id(String path) {

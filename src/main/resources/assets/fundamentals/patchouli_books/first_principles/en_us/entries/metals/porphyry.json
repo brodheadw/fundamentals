@@ -6,8 +6,12 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "A porphyry copper stock carries chalcopyrite with a little molybdenite, and the molybdenite carries rhenium at parts per million. Chalcopyrite roasted on a fire becomes a copper oxide the bloomery smelts to copper, the iron going to slag; bornite, chalcocite and covellite roast to a black copper calcine that does the same.",
+      "text": "A porphyry copper stock carries chalcopyrite with a little molybdenite, and the molybdenite carries rhenium at parts per million. A copper sulfide smelts not to copper but to matte. Chalcopyrite roasted on a fire, or the calcine bornite, chalcocite and covellite roast to, melts in the bloomery to copper matte and slag.",
       "title": "The porphyry chain"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two matte and a sand, superheated, are the converter: the air burns off the sulfur and the iron, which the sand fluxes to slag, and leaves two blister copper. The blast furnace fire-refines blister to copper."
     },
     {
       "type": "patchouli:text",

@@ -74,11 +74,11 @@ ACIDS = {
     "phosphoric_acid": ("Phosphoric Acid", 0xE8ECE4),
     "hydrofluoric_acid": ("Hydrofluoric Acid", 0xE6F0EA),
 }
-# What the plant cannot use: the spent chloride liquor every cut leaves behind, and the brine it becomes
-# once lime has neutralised it. The brine boils down to salt, which the clay leach takes back.
+# What the plant cannot use: the spent chloride liquor every cut leaves behind, and the calcium chloride brine it
+# becomes once lime has neutralised it. The brine boils down to calcium chloride, which is where calcium metal comes from.
 WASTES = {
     "spent_liquor": ("Spent Liquor", 0x8E9A86),
-    "brine": ("Brine", 0xDCE6E4),
+    "brine": ("Calcium Chloride Brine", 0xDCE6E4),
 }
 # What comes out of the dissolver before anyone has cleaned it: iron, aluminium, thorium and fines still in it. A
 # battery will take it, and it will foul the organic. Lime drops the impurities and clarifies it.
@@ -130,6 +130,9 @@ CUTS = [
     ("ytterbium_lutetium_liquor", "p507", 20, "ytterbium_liquor", "lutetium_liquor"),
 ]
 STRIP = "hydrochloric_acid"
+# the plant's items that are not a form of a material
+PLANT_ITEMS = {"salt": "Salt", "oxalic_acid": "Oxalic Acid", "roasted_bastnasite": "Roasted Bastnäsite", "light_rare_earth_sulfate": "Light Rare Earth Sulfate",
+               "heavy_rare_earth_sulfate": "Heavy Rare Earth Sulfate", "calcium_chloride": "Calcium Chloride", "calcium_ingot": "Calcium Ingot"}
 
 
 def fluid(id, amount):
@@ -209,25 +212,34 @@ def chemistry():
     mixing("naphthenic_acid", [fluid("tfmg:heavy_oil", 1000), fluid("tfmg:sulfuric_acid", 250), item("tfmg:limesand")], [result_fluid("naphthenic_acid", 500)], heated=True)
     # Froth flotation for bastnasite: the ground mineral beaten with water and a fatty-acid collector, naphthenic acid,
     # floats the rare earth carbonate off the gangue. About half of what goes in comes out as concentrate.
-    mixing("light_rare_earth_concentrate_from_bastnasite", item("bastnasite_dust", 2) + [fluid("minecraft:water", 250), fluid("naphthenic_acid", 100)],
-           [result_item("light_rare_earth_concentrate"), {"id": "fundamentals:light_rare_earth_concentrate", "chance": 0.5}])
-    # Leaching the concentrates into chloride liquor.
-    # Dissolving gives a crude liquor and what each ore leaves behind: monazite its thorium residue and its phosphate
-    # (trisodium phosphate, which bone meal stands in for), xenotime and euxenite their uranium-thorium residue.
-    # Lime then drops the iron, aluminium and the rest as a sludge
-    # and the clarified liquor is what a battery wants.
-    mixing("rare_earth_liquor", [item("light_rare_earth_concentrate"), fluid(STRIP, 500)],
-           [result_fluid("crude_rare_earth_liquor", 500), result_item("monazite_residue_dust"), {"id": "minecraft:bone_meal"}], heated=True)
+    mixing("bastnasite_concentrate", item("bastnasite_dust", 2) + [fluid("minecraft:water", 250), fluid("naphthenic_acid", 100)],
+           [result_item("bastnasite_concentrate"), {"id": "fundamentals:bastnasite_concentrate", "chance": 0.5}])
+    # Bastnäsite is roasted in air at about 600 C, which drives off the carbon dioxide and leaves oxides hot hydrochloric
+    # acid takes; it carries next to no thorium, so it leaves no residue.
+    for kind, time in (("campfire_cooking", 400), ("smoking", 200)):
+        write(RECIPES / f"roasting/roasted_bastnasite_{kind}.json", {"type": f"minecraft:{kind}", "category": "misc", "ingredient": item("bastnasite_concentrate"),
+                                                                    "result": {"id": "fundamentals:roasted_bastnasite"}, "experience": 0.1, "cookingtime": time})
+    mixing("rare_earth_liquor_from_bastnasite", [item("roasted_bastnasite"), fluid(STRIP, 500)], [result_fluid("crude_rare_earth_liquor", 500)], heated=True)
+    # Monazite, xenotime and the rest are phosphates and niobates hydrochloric acid barely touches. They are baked in
+    # concentrated sulfuric acid at 200 to 300 C, which turns the rare earths to sulfates and frees the phosphate as
+    # phosphoric acid. The cake is leached cold (rare earth sulfates dissolve worse when hot) and turned to chloride;
+    # monazite's thorium stays behind as a residue, as does the uranium and thorium of xenotime and euxenite.
+    # Lime then drops the iron, aluminium and the rest as a sludge, and the clarified liquor is what a battery wants.
+    for grade in ("light", "heavy"):
+        mixing(f"{grade}_rare_earth_sulfate", [item(f"{grade}_rare_earth_concentrate"), fluid("tfmg:sulfuric_acid", 250)],
+               [result_item(f"{grade}_rare_earth_sulfate"), result_fluid("phosphoric_acid", 125)], heated=True)
+    mixing("rare_earth_liquor", [item("light_rare_earth_sulfate"), fluid(STRIP, 500)],
+           [result_fluid("crude_rare_earth_liquor", 500), result_item("monazite_residue_dust")])
     for crude, clean in (("crude_rare_earth_liquor", "rare_earth_liquor"), ("crude_heavy_rare_earth_liquor", "heavy_rare_earth_liquor")):
         mixing(f"clarify_{clean}", item("tfmg:limesand", 2) + [fluid(crude, 1000)], [result_fluid(clean, 1000), result_item("clarifier_sludge")])
     # a fouled organic scrubbed clean with lime, a tenth lost with the crud
     for organic in ORGANICS:
         mixing(f"scrub_{organic}", [item("tfmg:limesand"), fluid(f"fouled_{organic}", 1000)], [result_fluid(organic, 900)])
-    # Waste: lime neutralises the spent liquor to brine, and brine boils down to salt for the clay leach.
+    # Waste: lime neutralises the spent chloride liquor to calcium chloride brine, which boils down to the dry salt.
     mixing("brine", item("tfmg:limesand", 2) + [fluid("spent_liquor", 1000)], [result_fluid("brine", 1000)])
-    mixing("salt_from_brine", [fluid("brine", 1000)], [result_item("salt", 3)], heated=True)
-    mixing("heavy_rare_earth_liquor", [item("heavy_rare_earth_concentrate"), fluid(STRIP, 500)],
-           [result_fluid("crude_heavy_rare_earth_liquor", 500), {"id": "fundamentals:monazite_residue_dust", "chance": 0.5}], heated=True)
+    mixing("calcium_chloride", [fluid("brine", 1000)], [result_item("calcium_chloride", 3)], heated=True)
+    mixing("heavy_rare_earth_liquor", [item("heavy_rare_earth_sulfate"), fluid(STRIP, 500)],
+           [result_fluid("crude_heavy_rare_earth_liquor", 500), {"id": "fundamentals:monazite_residue_dust", "chance": 0.5}])
     # The clay is not ground or roasted: its rare earths sit on the clay as ions and a salt solution lifts
     # them off, which is why the Chinese heaps are leached in place. What is left is the clay, kaolinite, as before.
     mixing("heavy_rare_earth_liquor_from_clay", item("raw_ion_adsorption_clay", 4) + [item("salt"), fluid("minecraft:water", 500)],
@@ -245,14 +257,16 @@ def vat(name, ingredients, results, machines, heated=True, time=100):
 
 def metals():
     # Hydrofluoric acid from fluorspar and sulfuric acid; argon spun out of air as TFMG spins out neon;
-    # calcium by electrolysing the chloride that lime and hydrochloric acid make.
+    # calcium by electrolysing the plant's own calcium chloride, molten at about 800 C.
     mixing("hydrofluoric_acid", item("raw_fluorite", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("hydrofluoric_acid", 500)], heated=True)
     vat("argon", [fluid("tfmg:air", 1000)], [{"id": "fundamentals:argon", "amount": 9}], ["tfmg:centrifuge"], heated=False, time=10)
-    vat("calcium_ingot", item("tfmg:limesand", 2) + [fluid(STRIP, 500)], [result_item("calcium_ingot")], ["tfmg:electrode", "tfmg:electrode"])
+    vat("calcium_ingot", item("calcium_chloride", 2), [result_item("calcium_ingot", 2)], ["tfmg:electrode", "tfmg:electrode"])
     for element in ELECTROLYSIS + CALCIOTHERMIC:
         mixing(f"{element}_fluoride", [item(f"{element}_oxide"), fluid("hydrofluoric_acid", 500)], [result_item(f"{element}_fluoride")])
+    # the fluoride is the bath the oxide dissolves in, not the feed: it comes back but for what the tapping loses
     for element in ELECTROLYSIS:
-        vat(f"{element}_ingot", [item(f"{element}_fluoride")] + item(f"{element}_oxide", 2), [result_item(f"{element}_ingot", 2)],
+        vat(f"{element}_ingot", [item(f"{element}_fluoride")] + item(f"{element}_oxide", 2),
+            [result_item(f"{element}_ingot", 2), {"id": f"fundamentals:{element}_fluoride", "chance": 0.9}],
             ["tfmg:electrode", "tfmg:electrode"], heated="superheated")
     # Electrolysis runs in the fluoride melt at 1,000 to 1,100 C, past a kindled burner's 1,000; the two
     # metallothermic reductions run near 1,500 C, past calcium fluoride's 1,418 melt. Both want the burner fed a
@@ -401,7 +415,7 @@ def mixer_settler():
         "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["P P", "PPP", "PFP"],
         "key": {"P": {"item": "tfmg:plastic_sheet"}, "F": {"item": "create:fluid_pipe"}},
         "result": {"id": "fundamentals:mixer_settler", "count": 6}})
-    for name in ("salt", "oxalic_acid", "calcium_ingot"):
+    for name in PLANT_ITEMS:
         write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})
 
 
@@ -422,9 +436,8 @@ def names():
     for acid in DISSOLVES:
         lang[f"block.fundamentals.{acid}"] = FLUIDS[acid][0]
         lang[f"item.fundamentals.{acid}_bucket"] = f"{FLUIDS[acid][0]} Bucket"
-    lang["item.fundamentals.salt"] = "Salt"
-    lang["item.fundamentals.oxalic_acid"] = "Oxalic Acid"
-    lang["item.fundamentals.calcium_ingot"] = "Calcium Ingot"
+    for name, display in PLANT_ITEMS.items():
+        lang[f"item.fundamentals.{name}"] = display
     lang["goggles.fundamentals.mixer_settler.stages"] = "Battery of %s stages, %s mB a batch"
     lang["goggles.fundamentals.mixer_settler.stage"] = "Stage %s across, %s along, %s tall"
     lang["goggles.fundamentals.mixer_settler.idle"] = "Nothing in the feed"

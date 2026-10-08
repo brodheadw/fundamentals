@@ -21,6 +21,11 @@
     },
     {
       "item": "fundamentals:rhenium_ingot"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 100,
+      "fluid": "fundamentals:argon"
     }
   ],
   "results": [
