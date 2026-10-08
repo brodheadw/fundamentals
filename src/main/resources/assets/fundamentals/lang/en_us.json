@@ -292,5 +292,13 @@
   "item.fundamentals.yttrium_oxalate": "Yttrium Oxalate",
   "item.fundamentals.yttrium_oxide": "Yttrium Oxide",
   "itemGroup.fundamentals.materials": "Fundamentals Materials",
-  "itemGroup.fundamentals.minerals": "Fundamentals"
+  "itemGroup.fundamentals.minerals": "Fundamentals",
+  "block.fundamentals.hydrochloric_acid": "Hydrochloric Acid",
+  "item.fundamentals.hydrochloric_acid_bucket": "Hydrochloric Acid Bucket",
+  "block.fundamentals.hydrofluoric_acid": "Hydrofluoric Acid",
+  "item.fundamentals.hydrofluoric_acid_bucket": "Hydrofluoric Acid Bucket",
+  "block.fundamentals.nitric_acid": "Nitric Acid",
+  "item.fundamentals.nitric_acid_bucket": "Nitric Acid Bucket",
+  "block.fundamentals.phosphoric_acid": "Phosphoric Acid",
+  "item.fundamentals.phosphoric_acid_bucket": "Phosphoric Acid Bucket"
 }

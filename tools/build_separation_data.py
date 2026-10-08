@@ -158,6 +158,26 @@ def java_table():
     JAVA.write_text("\n".join(lines), encoding="utf-8")
 
 
+# What each acid eats when it stands against it in the world; hashed entries are tags, and the modded
+# blocks are optional so the tags load without their mods.
+DISSOLVES = {
+    "hydrochloric_acid": ["minecraft:calcite", "minecraft:dripstone_block", "minecraft:pointed_dripstone", "minecraft:bone_block", "minecraft:tuff", "create:limestone"],
+    "hydrofluoric_acid": ["#c:glass_blocks", "#c:glass_panes", "#minecraft:sand", "minecraft:sandstone", "minecraft:red_sandstone", "minecraft:quartz_block", "minecraft:smooth_quartz"],
+    "nitric_acid": ["#c:storage_blocks/copper", "#c:storage_blocks/iron", "minecraft:copper_block", "minecraft:iron_block", "minecraft:cut_copper"],
+    "phosphoric_acid": [],
+}
+
+
+def acids():
+    """The acids' blocks, buckets and appetites."""
+    for acid, eats in DISSOLVES.items():
+        write(ASSETS / f"blockstates/{acid}.json", {"variants": {"": {"model": f"fundamentals:block/{acid}"}}})
+        write(ASSETS / f"models/block/{acid}.json", {"textures": {"particle": "fundamentals:block/fluid/liquor_still"}})
+        write(ASSETS / f"models/item/{acid}_bucket.json", {"parent": "neoforge:item/bucket", "loader": "neoforge:fluid_container", "fluid": f"fundamentals:{acid}"})
+        values = [{"id": v, "required": False} if ":" in v and not v.startswith("#") and not v.startswith("minecraft:") else v for v in eats]
+        write(DATA / f"tags/block/dissolves/{acid}.json", {"replace": False, "values": values})
+
+
 def chemistry():
     # Salt by boiling off water; the Mannheim process for the acid.
     mixing("salt", [fluid("minecraft:water", 1000)], [result_item("salt", 2)], heated=True)
@@ -367,6 +387,9 @@ def names():
     for id, (name, _, _) in FLUIDS.items():
         lang[f"fluid_type.fundamentals.{id}"] = name
     lang["block.fundamentals.mixer_settler"] = "Mixer-Settler Casing"
+    for acid in DISSOLVES:
+        lang[f"block.fundamentals.{acid}"] = FLUIDS[acid][0]
+        lang[f"item.fundamentals.{acid}_bucket"] = f"{FLUIDS[acid][0]} Bucket"
     lang["item.fundamentals.salt"] = "Salt"
     lang["item.fundamentals.oxalic_acid"] = "Oxalic Acid"
     lang["item.fundamentals.calcium_ingot"] = "Calcium Ingot"
@@ -401,6 +424,7 @@ def main():
     chemistry()
     cuts()
     oxalates()
+    acids()
     metals()
     mixer_settler()
     template()

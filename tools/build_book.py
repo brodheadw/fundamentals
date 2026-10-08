@@ -224,6 +224,12 @@ def rare_earths():
                   "The salt goes back into the clay leach: the plant's waste water closes its own loop, as the real ones are made to.", "Lime and brine"),
         spotlight("fundamentals:monazite_residue_dust", "Monazite carries thorium. When the light concentrate dissolves, the thorium stays behind as a residue, mildly radioactive and good for nothing here. "
                   "Nine pack into a block; cast it and bury it deep, away from where you live. Bastnäsite and the clay leave none.", "Residue")], 8)
+    entry("rare_earths", "acids", "The acids", "fundamentals:hydrochloric_acid_bucket", pages_of(
+        "The plant runs on acid, and acid is not a texture. Each one can be bucketed and poured, and does in the world what it does in the bottle. "
+        "Stand in any of them and it burns; hydrofluoric acid also poisons. Pour one against a block it attacks and the block cracks as if being mined, "
+        "fizzes for five seconds, and is gone, and the acid that ate it is spent.", "The acids") + pages_of(
+        "Hydrochloric acid eats carbonates: calcite, limestone, dripstone, bone, tuff. Hydrofluoric acid eats glass and silica: glass, sand, sandstone, quartz; "
+        "it is the one acid glass cannot hold. Nitric acid eats copper and iron. Phosphoric acid only stings, which is why it is in your cola. Stone, deepslate and the vats shrug all of them off."), 9)
 
 
 def power():
