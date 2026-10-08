@@ -1,0 +1,20 @@
+{
+  "name": "Oxalate and oxide",
+  "category": "fundamentals:rare_earths",
+  "icon": "fundamentals:neodymium_oxide",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:oxalic_acid",
+      "text": "A single-element liquor and oxalic acid in a basin under a mixer, two blocks below it with the whisk between, drop the oxalate: 250 mB of liquor and one oxalic acid to one oxalate. The oxalates are pale powders with the ion's cast: praseodymium green, neodymium lilac, erbium pink, most of them white.",
+      "title": "Oxalate"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:neodymium_oxide",
+      "text": "Any furnace calcines the oxalate to the oxide, the stable form every rare earth is traded in. The oxides are the colours they really are: lanthanum white, cerium pale yellow, praseodymium brown-black, neodymium blue-grey, terbium brown, erbium pink.",
+      "title": "Oxide"
+    }
+  ]
+}

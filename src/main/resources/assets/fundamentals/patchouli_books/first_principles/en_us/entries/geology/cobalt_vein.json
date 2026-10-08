@@ -1,0 +1,13 @@
+{
+  "name": "Cobalt Vein",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_cobaltite",
+  "sortnum": 32,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A vein of calcite, in mountain and hill country, between y -32 and 32. Carries cobaltite in masses. Dig at the core: the edges are lean.",
+      "title": "Cobalt Vein"
+    }
+  ]
+}

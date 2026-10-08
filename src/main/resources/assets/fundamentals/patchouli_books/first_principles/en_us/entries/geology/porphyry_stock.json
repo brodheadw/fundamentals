@@ -1,0 +1,13 @@
+{
+  "name": "Porphyry Stock",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_chalcopyrite",
+  "sortnum": 19,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A plug of andesite, under mountains and hills, between y 0 and 70. Carries chalcopyrite in masses, molybdenite in masses, bornite in scattered grains, chalcocite in an enriched top, covellite in an enriched top. Dig at the core: the edges are lean.",
+      "title": "Porphyry Stock"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "name": "Solvent extraction",
+  "category": "fundamentals:rare_earths",
+  "icon": "fundamentals:mixer_settler",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Chlorides of neighbouring rare earths are almost identical, so no one step parts them.",
+      "title": "Solvent extraction"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Instead the liquor is shaken with an organic extractant (P507, P204 or naphthenic acid, each made from phosphoric acid and kerosene) that prefers the heavier ions by a hair, left to settle into two layers, and the two layers sent opposite ways through a long line of identical stages."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Each stage enriches a little; thirty of them compound a hair into a clean split. The stages are mixer-settlers, and a line of them is a battery."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Place casings facing the same way and they merge into a vat, three by three up to three across, three along and two tall; nine casings is a lab vat, eighteen a plant vat."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The back row is the mixing box, with Create's Mechanical Mixer standing over its hatch; the rows ahead are the settling bay, parted from the box by a weir that only the churn tops. Charge every stage with the extractant from a pipe into its top: it floats and is never used up."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Pump the liquor into the back of the first stage and hydrochloric acid into the front of the last, take the raffinate from the first stage's sides and the loaded strip from the last stage's, and throw the lever. Goggles on any stage tell you what the battery is waiting for."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:mixer_settler"
+    }
+  ]
+}

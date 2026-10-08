@@ -1,0 +1,21 @@
+{
+  "name": "Mortar and pestle",
+  "category": "fundamentals:ironworking",
+  "icon": "fundamentals:mortar_and_pestle",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A mortar and pestle grinds by hand what Create's millstone grinds by power: grain to flour, bone to meal, and coloured minerals to the pigments painters have ground since antiquity: hematite red, goethite yellow, malachite green, azurite blue, pyrolusite black, cinnabar vermilion.",
+      "title": "Mortar and pestle"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Hold the mortar in one hand and the material in the other."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:mortar_and_pestle"
+    }
+  ]
+}
