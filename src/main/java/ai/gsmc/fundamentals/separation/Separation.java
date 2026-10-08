@@ -27,6 +27,7 @@ public final class Separation {
     private static final Map<String, FluidType> FLUID_TYPES = new LinkedHashMap<>();
     private static final Map<String, Fluid> FLUIDS = new LinkedHashMap<>();
     private static final Map<Fluid, Reagents.Kind> KINDS = new LinkedHashMap<>();
+    private static final Map<Fluid, Integer> TINTS = new LinkedHashMap<>();
     private static Block mixerSettler;
     private static BlockEntityType<MixerSettlerBlockEntity> mixerSettlerEntity;
     private static Item mixerSettlerItem;
@@ -54,6 +55,11 @@ public final class Separation {
         return KINDS.get(fluid);
     }
 
+    /** The reagent's colour as the table gives it, or Create's white for anything else. */
+    public static int tint(Fluid fluid) {
+        return TINTS.getOrDefault(fluid, 0xFFFFFF);
+    }
+
     public static List<Item> items() {
         return List.of(mixerSettlerItem, salt, oxalicAcid, calciumIngot);
     }
@@ -78,6 +84,7 @@ public final class Separation {
                     () -> FLUID_TYPES.get(reagent.id()), () -> self[0], () -> self[0]));
             FLUIDS.put(reagent.id(), self[0]);
             KINDS.put(self[0], reagent.kind());
+            TINTS.put(self[0], reagent.tint());
             registry.accept(id(reagent.id()), self[0]);
         }
     }
