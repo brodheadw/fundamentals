@@ -342,7 +342,8 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         if (excess <= 0) {
             return;
         }
-        FluidStack moved = organic.drain(Math.max(1, Math.min(excess / 8, batch() / 8)), IFluidHandler.FluidAction.SIMULATE);
+        // a quarter of the difference a second, capped at a quarter batch: a 32-stage line charges in minutes, not a quarter hour
+        FluidStack moved = organic.drain(Math.max(1, Math.min(excess / 4, batch() / 4)), IFluidHandler.FluidAction.SIMULATE);
         int taken = next.organic.fill(moved, IFluidHandler.FluidAction.EXECUTE);
         organic.drain(taken, IFluidHandler.FluidAction.EXECUTE);
     }
