@@ -1,0 +1,18 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "minecraft:gravel"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:flint",
+      "chance": 0.25
+    },
+    {
+      "id": "fundamentals:raw_magnetite",
+      "chance": 0.02
+    }
+  ]
+}

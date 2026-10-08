@@ -1,0 +1,17 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:zinc_oxide"
+    },
+    {
+      "item": "minecraft:charcoal"
+    }
+  ],
+  "results": [
+    {
+      "id": "create:zinc_ingot"
+    }
+  ],
+  "heat_requirement": "superheated"
+}

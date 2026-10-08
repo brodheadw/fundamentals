@@ -217,6 +217,11 @@ STORAGE_BLOCKS = [f"fundamentals:{name}" for _, form, name in items() if form ==
 OTHER_MINEABLE = {"pickaxe": ["fundamentals:bloomery", "fundamentals:panel_rack", "fundamentals:solar_panel", "fundamentals:mixer_settler"] + STORAGE_BLOCKS}
 OTHER_TIERED = {"stone": STORAGE_BLOCKS}
 
+# Our ores and raw chunks are tagged by commodity in our own namespace, not in c:ores/<metal> and
+# c:raw_materials/<metal>: Create crushes and smelts whatever is in those straight to the metal, which would
+# skip every roast and plant. Bauxite alone is shared, since its road runs through Create's crushed aluminium.
+SHARED = ("aluminum",)
+
 DISPLAY = {"bastnasite": "Bastnäsite", "ion_adsorption_clay": "Ion-Adsorption Clay"}
 
 def write(path, obj):
@@ -339,8 +344,9 @@ def main():
         | {row[1][:-4] for row in DEPOSITS.values() if row[1] and row[1].endswith("_ore")}
     assert generated == set(ORES), f"ores that never generate, or unknown ores: {sorted(generated ^ set(ORES))}"
 
-    # Only the worldgen folders are wholly ours; everything else is shared and just overwritten.
-    for stale in (DATA / "worldgen", DATA / "neoforge", DATA / "tags/worldgen"):
+    # Only the worldgen and commodity-tag folders are wholly ours; everything else is shared and just overwritten.
+    for stale in (DATA / "worldgen", DATA / "neoforge", DATA / "tags/worldgen", DATA / "tags/block/ores", DATA / "tags/item/ores",
+                  DATA / "tags/item/raw_materials", C_TAGS / "block/ores", C_TAGS / "item/ores", C_TAGS / "item/raw_materials"):
         shutil.rmtree(stale, ignore_errors=True)
     shutil.rmtree(ASSETS / "models/block/ore", ignore_errors=True)
 
@@ -372,12 +378,16 @@ def main():
     for tier, names in by_tier.items():
         tag(MC_TAGS / f"needs_{tier}_tool.json", names + OTHER_TIERED.get(tier, []))
     for kind in ("block", "item"):
-        tag(C_TAGS / f"{kind}/ores.json", [f"#c:ores/{c}" for c in by_commodity])
+        tag(C_TAGS / f"{kind}/ores.json", [f"#fundamentals:ores/{c}" for c in by_commodity])
         for commodity, names in by_commodity.items():
-            tag(C_TAGS / f"{kind}/ores/{commodity}.json", names)
-    tag(C_TAGS / "item/raw_materials.json", [f"#c:raw_materials/{c}" for c in raw_by_commodity])
+            tag(DATA / f"tags/{kind}/ores/{commodity}.json", names)
+        for commodity in SHARED:
+            tag(C_TAGS / f"{kind}/ores/{commodity}.json", [f"#fundamentals:ores/{commodity}"])
+    tag(C_TAGS / "item/raw_materials.json", [f"#fundamentals:raw_materials/{c}" for c in raw_by_commodity])
     for commodity, names in raw_by_commodity.items():
-        tag(C_TAGS / f"item/raw_materials/{commodity}.json", names)
+        tag(DATA / f"tags/item/raw_materials/{commodity}.json", names)
+    for commodity in SHARED:
+        tag(C_TAGS / f"item/raw_materials/{commodity}.json", [f"#fundamentals:raw_materials/{commodity}"])
     for key, values in REPLACEABLE.items():
         tag(DATA / f"tags/block/deposit_replaceable/{key}.json", values)
 

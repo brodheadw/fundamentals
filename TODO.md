@@ -20,8 +20,8 @@ What's agreed but not built, in the order it's likely to go. The working plan be
 
 ## Other metals
 
-- **Tin and zinc.** Cassiterite, sphalerite and smithsonite generate but end as ore. Bronze, brass and galvanising are
-  the natural sinks (Create's brass is the obvious takeover).
+- **Tin.** Cassiterite generates but ends as ore; bronze is the natural sink. Zinc now reaches Create's zinc ingot (and so
+  its brass), but Create's own zinc ore still generates and smelts in a furnace.
 - **Platinum group.** The layered intrusion carries sperrylite, cooperite and braggite; the materials are declared
   (`PreciousMaterials`) but not items. Catalysts (reforming, the catalytic converter alongside ceria) are the sinks.
 - **Cobalt blue** uses roasted cobaltite directly; a cobalt oxide form would be cleaner.

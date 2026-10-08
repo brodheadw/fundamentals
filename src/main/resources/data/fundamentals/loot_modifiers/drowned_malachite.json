@@ -1,0 +1,11 @@
+{
+  "type": "fundamentals:swap_drop",
+  "from": "minecraft:copper_ingot",
+  "to": "fundamentals:raw_malachite",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:entities/drowned"
+    }
+  ]
+}

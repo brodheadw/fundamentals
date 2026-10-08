@@ -142,7 +142,10 @@ def ironworking():
     entry("ironworking", "bloom", "Bloom and hammer", "fundamentals:iron_bloom", pages_of(
         "A bloom is hammered, not cast. Beat it with the smithing hammer to drive the slag out and weld the iron together into wrought iron. "
         "Copper comes straight out of the bloomery from malachite, azurite and cuprite. Galena has to be roasted on a fire first, which "
-        "drives off its sulfur; the roasted ore then gives lead.", "Bloom and hammer") + [crafting("fundamentals:smithing_hammer")], 1)
+        "drives off its sulfur; the roasted ore then gives lead.", "Bloom and hammer") + pages_of(
+        "A furnace never reduces iron ore, and neither does a fan. Create's crushing wheels grind hematite, magnetite and goethite to crushed iron ore, "
+        "and that goes to The Factory Must Grow's blast furnace, which has the coke and the heat. Crimsite is the iron stone and crushes to hematite; "
+        "washed gravel leaves a little magnetite black sand.") + [crafting("fundamentals:smithing_hammer")], 1)
     entry("ironworking", "mortar", "Mortar and pestle", "fundamentals:mortar_and_pestle", pages_of(
         "A mortar and pestle grinds by hand what Create's millstone grinds by power: grain to flour, bone to meal, and coloured minerals "
         "to the pigments painters have ground since antiquity: hematite red, goethite yellow, malachite green, azurite blue, pyrolusite black, "
@@ -165,11 +168,11 @@ def rare_earths():
                   "in a basin under a mixer, and the rare earth carbonate comes off the top as light concentrate, one and sometimes two.", "Flotation")], 0)
     entry("rare_earths", "liquor", "Liquor", "fundamentals:salt", [
         spotlight("fundamentals:light_rare_earth_concentrate", "A concentrate dissolved in 500 mB of hydrochloric acid in a heated basin under a mixer gives 500 mB of crude liquor, "
-                  "and what the ore leaves behind: monazite its thorium residue and its phosphate (bone meal), xenotime and euxenite a residue half the time, the clay its aluminium as bauxite powder.", "Dissolving"),
+                  "and what the ore leaves behind: monazite its thorium residue and its phosphate (bone meal), xenotime and euxenite a residue half the time.", "Dissolving"),
         spotlight("fundamentals:clarifier_sludge", "Crude liquor still carries iron, aluminium and fines, and a battery fed it will run three cuts and then foul: crud at the interface, the organic turned brown and useless. "
                   "So clarify first: 1,000 mB of crude liquor and two limesand under a mixer drop the impurities as a sludge and leave 1,000 mB of liquor a battery wants. "
                   "A fouled organic is not lost: drained and scrubbed with one limesand, 1,000 mB gives back 900.", "Clarifying"),
-        spotlight("fundamentals:raw_ion_adsorption_clay", "The clay needs no acid and no heat: four clay, a salt and 500 mB of water in a basin under a mixer leach straight to 250 mB of heavy liquor. "
+        spotlight("fundamentals:raw_ion_adsorption_clay", "The clay needs no acid and no heat: four clay, a salt and 500 mB of water in a basin under a mixer leach straight to 250 mB of heavy liquor, and the clay comes back as clay. "
                   "That is the whole reason Chinese clays supply the world's heavy rare earths.", "Leaching")], 1)
     entry("rare_earths", "mixer_settler", "Solvent extraction", "fundamentals:mixer_settler", pages_of(
         "Chlorides of neighbouring rare earths are almost identical, so no one step parts them. Instead the liquor is shaken with an "
@@ -252,14 +255,14 @@ def rare_earths():
 
 
 def metals():
-    category("metals", "The other metals", "Cobalt, and the porphyry chain: copper, molybdenum and the rhenium hiding in it.", "fundamentals:cobalt_ingot", 3)
+    category("metals", "The other metals", "Cobalt, zinc and nickel, and the porphyry chain: copper, molybdenum and the rhenium hiding in it.", "fundamentals:cobalt_ingot", 3)
     entry("metals", "cobalt", "Cobalt", "fundamentals:cobalt_ingot", pages_of(
         "Cobaltite is a cobalt arsenide-sulfide from the silver-cobalt veins in calcite. Roast it on a campfire or in a smoker to drive off the arsenic and sulfur, "
         "then blast the roasted ore to the metal. Four cobalt and a samarium make SmCo; two cobalt, four nickel and a rhenium make the superalloy. "
         "Roasted cobaltite calcined with two bauxite powder is cobalt blue, four blue dye.", "Cobalt"), 0)
     entry("metals", "porphyry", "Copper, molybdenum, rhenium", "fundamentals:raw_molybdenite", pages_of(
         "A porphyry copper stock carries chalcopyrite with a little molybdenite, and the molybdenite carries rhenium at parts per million. "
-        "Chalcopyrite roasted on a fire becomes a copper oxide the bloomery smelts to copper, the iron going to slag. "
+        "Chalcopyrite roasted on a fire becomes a copper oxide the bloomery smelts to copper, the iron going to slag; bornite, chalcocite and covellite roast to a black copper calcine that does the same. "
         "Two raw molybdenite roasted in a heated basin give two molybdenum trioxide, and half the time a rhenium flue dust: "
         "the roaster's flue is where every gram of the world's rhenium comes from.", "The porphyry chain") + pages_of(
         "Both oxides are reduced under hydrogen in a heated chemical vat with an industrial mixer, as the industry does: two trioxide and 500 mB of hydrogen give two molybdenum ingots, "
@@ -273,6 +276,12 @@ def metals():
         "the canary-yellow trioxide powder, and hydrogen in a heated chemical vat reduces two oxide to two ingots. "
         "One ingot draws to four filaments, and the Factory's light bulb now burns one. One ingot and two coals, superheated, carburise to two tungsten carbide, "
         "and Create's mechanical drill now bites with it.", "Tungsten"), 3)
+    entry("metals", "zinc_nickel", "Zinc and nickel", "fundamentals:zinc_oxide", pages_of(
+        "Neither melts out of its ore in a furnace. Sphalerite roasts on a fire to zinc oxide, and smithsonite and hemimorphite, the old calamine, calcine to it. "
+        "Zinc boils at 907 °C, below the heat that reduces it, so it was distilled from a sealed retort packed with charcoal: "
+        "a zinc oxide and a charcoal in a basin over a blaze burner fed a blaze cake give a zinc ingot. Asurine, the zinc stone, crushes to smithsonite.", "Zinc") + pages_of(
+        "Pentlandite roasts on a fire to a nickel oxide; with a charcoal, superheated, it gives a nickel ingot and the iron goes to slag. "
+        "Nickel laterite is too lean to roast: four of it with two charcoal, superheated, give one ingot and two slag, as the electric furnaces of Indonesia smelt it whole.", "Nickel"), 4)
 
 
 def power():

@@ -1,0 +1,6 @@
+{
+  "type": "fundamentals:scarce_in_chests",
+  "conditions": [],
+  "items": "#fundamentals:scarce_in_chests",
+  "keep": 0.25
+}
