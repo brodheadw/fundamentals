@@ -1571,21 +1571,59 @@ setblock 40 -60 -19 create:fluid_pipe[north=true,south=true]
 setblock 40 -60 -20 create:fluid_pipe[north=true,south=true]
 setblock 40 -60 -21 create:fluid_pipe[north=true,south=true]
 setblock 40 -60 -22 create:fluid_pipe[north=true,south=true]
+setblock 6 -60 6 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:mixer_settler",count:64},{Slot:1b,id:"create:mechanical_mixer",count:16},{Slot:2b,id:"create:cogwheel",count:32},{Slot:3b,id:"create:creative_motor",count:16},{Slot:4b,id:"create:mechanical_pump",count:16},{Slot:5b,id:"create:fluid_pipe",count:64},{Slot:6b,id:"create:fluid_tank",count:16},{Slot:7b,id:"create:wrench",count:1},{Slot:8b,id:"fundamentals:oxalic_acid",count:64}]}
+tp @s 20 -50 10 facing 40 -60 -12
+# an oxalate station on every single-element liquor: basin under a mixer, into a fuelled furnace, out by funnel onto a depot
+setblock 4 -60 -15 create:mechanical_pump[facing=north]
+setblock 4 -59 -15 create:cogwheel[axis=z]
+setblock 4 -59 -16 create:creative_motor[facing=south]{ScrollValue:64}
+setblock 4 -60 -16 create:fluid_pipe[south=true,north=true]
+setblock 4 -60 -17 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 4 -58 -17 create:mechanical_mixer
+setblock 5 -58 -17 create:cogwheel[axis=y]
+setblock 5 -57 -17 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 3 -60 -17 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
+setblock 4 -60 -18 minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 4 -60 -19 create:andesite_funnel[facing=north]
+setblock 4 -60 -20 create:depot
+setblock 37 -60 -15 create:mechanical_pump[facing=north]
+setblock 37 -59 -15 create:cogwheel[axis=z]
+setblock 37 -59 -16 create:creative_motor[facing=south]{ScrollValue:64}
+setblock 37 -60 -16 create:fluid_pipe[south=true,north=true]
+setblock 37 -60 -17 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 37 -58 -17 create:mechanical_mixer
+setblock 38 -58 -17 create:cogwheel[axis=y]
+setblock 38 -57 -17 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 36 -60 -17 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
+setblock 37 -60 -18 minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 37 -60 -19 create:andesite_funnel[facing=north]
+setblock 37 -60 -20 create:depot
+setblock 43 -60 -27 create:mechanical_pump[facing=north]
+setblock 43 -59 -27 create:cogwheel[axis=z]
+setblock 43 -59 -28 create:creative_motor[facing=south]{ScrollValue:64}
+setblock 43 -60 -28 create:fluid_pipe[south=true,north=true]
+setblock 43 -60 -29 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 43 -58 -29 create:mechanical_mixer
+setblock 44 -58 -29 create:cogwheel[axis=y]
+setblock 44 -57 -29 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 42 -60 -29 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
+setblock 43 -60 -30 minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 43 -60 -31 create:andesite_funnel[facing=north]
+setblock 43 -60 -32 create:depot
 setblock 136 -60 -27 create:mechanical_pump[facing=north]
 setblock 136 -59 -27 create:cogwheel[axis=z]
 setblock 136 -59 -28 create:creative_motor[facing=south]{ScrollValue:64}
 setblock 136 -60 -28 create:fluid_pipe[south=true,north=true]
-setblock 136 -61 -29 create:blaze_burner{fuelLevel:"KINDLED",burnTimeRemaining:72000}
 setblock 136 -60 -29 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
 setblock 136 -58 -29 create:mechanical_mixer
 setblock 137 -58 -29 create:cogwheel[axis=y]
 setblock 137 -57 -29 create:creative_motor[facing=down]{ScrollValue:64}
-setblock 134 -60 -29 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
-setblock 136 -60 -30 create:depot
-setblock 136 -60 -31 minecraft:furnace[facing=south]
-setblock 136 -59 -31 minecraft:chest
-setblock 6 -60 6 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:mixer_settler",count:64},{Slot:1b,id:"create:mechanical_mixer",count:16},{Slot:2b,id:"create:cogwheel",count:32},{Slot:3b,id:"create:creative_motor",count:16},{Slot:4b,id:"create:mechanical_pump",count:16},{Slot:5b,id:"create:fluid_pipe",count:64},{Slot:6b,id:"create:fluid_tank",count:16},{Slot:7b,id:"create:wrench",count:1},{Slot:8b,id:"fundamentals:oxalic_acid",count:64}]}
-tp @s 20 -50 10 facing 40 -60 -12
+setblock 135 -60 -29 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
+setblock 136 -60 -30 minecraft:furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 136 -60 -31 create:andesite_funnel[facing=north]
+setblock 136 -60 -32 create:depot
+# the new metals to build with
+setblock 6 -60 7 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:cobalt_ingot",count:64},{Slot:1b,id:"fundamentals:molybdenum_ingot",count:64},{Slot:2b,id:"fundamentals:rhenium_ingot",count:32},{Slot:3b,id:"fundamentals:tungsten_ingot",count:64},{Slot:4b,id:"fundamentals:superalloy_plate",count:32},{Slot:5b,id:"fundamentals:molybdenum_steel_plate",count:32},{Slot:6b,id:"fundamentals:tungsten_carbide",count:32},{Slot:7b,id:"fundamentals:tungsten_filament",count:32},{Slot:8b,id:"fundamentals:neodymium_iron_boron_ingot",count:32},{Slot:9b,id:"fundamentals:samarium_cobalt_ingot",count:32},{Slot:10b,id:"fundamentals:phosphor",count:32},{Slot:11b,id:"fundamentals:didymium_glass",count:32},{Slot:12b,id:"fundamentals:hydrochloric_acid_bucket",count:1},{Slot:13b,id:"fundamentals:hydrofluoric_acid_bucket",count:1},{Slot:14b,id:"fundamentals:nitric_acid_bucket",count:1},{Slot:15b,id:"fundamentals:raw_borax",count:32},{Slot:16b,id:"fundamentals:cerium_oxide",count:32},{Slot:17b,id:"fundamentals:neodymium_oxide",count:32},{Slot:18b,id:"fundamentals:lanthanum_ingot",count:32},{Slot:19b,id:"fundamentals:neodymium_ingot",count:32},{Slot:20b,id:"fundamentals:dysprosium_ingot",count:32},{Slot:21b,id:"fundamentals:aluminium_scandium_plate",count:32}]}
 # the sumps: a pump under each head stage drains the spent liquor into a tank below the floor
 setblock 0 -61 0 create:mechanical_pump[facing=down]
 setblock 1 -61 0 create:cogwheel[axis=y]
