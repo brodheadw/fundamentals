@@ -48,6 +48,8 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     final Tank organic = new Tank();
     final Tank aqueous = new Tank();
     final Tank out = new Tank();
+    /** The sump: the spent liquor every cut leaves, drained from under the head stage. */
+    final Tank waste = new Tank();
     @Nullable
     BlockPos controller;
     int across = 1;
@@ -154,12 +156,14 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         organic.setCapacity(phaseCapacity());
         aqueous.setCapacity(phaseCapacity());
         out.setCapacity(capacity());
+        waste.setCapacity(phaseCapacity());
     }
 
     void empty() {
         organic.setFluid(FluidStack.EMPTY);
         aqueous.setFluid(FluidStack.EMPTY);
         out.setFluid(FluidStack.EMPTY);
+        waste.setFluid(FluidStack.EMPTY);
         stirring = 0;
     }
 
@@ -214,7 +218,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     /**
      * Which tank a pipe on {@code side} of this casing reaches, if any: the organic from above anywhere; the
      * feed and the raffinate at the back and sides of the first stage; the acid and the loaded strip at the
-     * front and sides of the last.
+     * front and sides of the last; the spent liquor from under the first.
      */
     @Nullable
     public IFluidHandler handler(@Nullable Direction side) {
@@ -231,6 +235,9 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         }
         boolean head = stage.isHead();
         boolean tail = stage.isTail();
+        if (side == Direction.DOWN) {
+            return head ? new Port(stage.waste, null) : null;
+        }
         if (head && side == facing().getOpposite() || tail && side == facing()) {
             return new Port(stage.aqueous, false);
         }
@@ -377,6 +384,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler.progress", charged, battery.size(), wet)));
         tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler.ends", held(head.aqueous), held(battery.tail().aqueous))));
         tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler.products", held(head.out), held(battery.tail().out))));
+        tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler.sump", held(head.waste))));
         return true;
     }
 
@@ -405,6 +413,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         tag.put("organic", organic.getFluid().saveOptional(registries));
         tag.put("aqueous", aqueous.getFluid().saveOptional(registries));
         tag.put("out", out.getFluid().saveOptional(registries));
+        tag.put("waste", waste.getFluid().saveOptional(registries));
         tag.putInt("stirring", stirring);
         tag.putInt("settled", settled);
     }
@@ -423,6 +432,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         organic.setFluid(FluidStack.parseOptional(registries, tag.getCompound("organic")));
         aqueous.setFluid(FluidStack.parseOptional(registries, tag.getCompound("aqueous")));
         out.setFluid(FluidStack.parseOptional(registries, tag.getCompound("out")));
+        waste.setFluid(FluidStack.parseOptional(registries, tag.getCompound("waste")));
         stirring = tag.getInt("stirring");
         settled = tag.getInt("settled");
     }

@@ -216,6 +216,14 @@ def rare_earths():
         "Lanthanum metal reduces the four that boil, and lanthanum oxide is the catalyst that cracks naphtha. Cerium with iron is ferrocerium, the lighter flint, a flint and steel that never wears out. "
         "Europium's red and terbium's green on a yttria host are the phosphor every lamp takes. Yttria lines the fireproof vat. Didymium glass is the welder's lens the goggles are made of. Erbium turns glass pink. "
         "Scandium in aluminium is the airframe alloy, and makes a panel rack go twice as far. Gadolinium waits for a reactor."), 7)
+    entry("rare_earths", "waste", "Waste", "fundamentals:monazite_residue_dust", pages_of(
+        "A separation plant makes two kinds of waste, and both have to go somewhere. Every cut leaves a fifth of a batch of spent chloride liquor, "
+        "acid with everything the organic did not want dissolved in it. It collects in a sump under the head stage; when the sump is full the battery stops, "
+        "and the goggles say so. Pump it out through the head stage's underside.", "Waste") + [
+        spotlight("fundamentals:salt", "Two limesand in 1,000 mB of spent liquor in a basin under a mixer neutralise it to brine, which is harmless, and 1,000 mB of brine boiled in a heated basin leaves three salt. "
+                  "The salt goes back into the clay leach: the plant's waste water closes its own loop, as the real ones are made to.", "Lime and brine"),
+        spotlight("fundamentals:monazite_residue_dust", "Monazite carries thorium. When the light concentrate dissolves, the thorium stays behind as a residue, mildly radioactive and good for nothing here. "
+                  "Nine pack into a block; cast it and bury it deep, away from where you live. Bastnäsite and the clay leave none.", "Residue")], 8)
 
 
 def power():

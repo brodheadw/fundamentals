@@ -74,11 +74,18 @@ ACIDS = {
     "phosphoric_acid": ("Phosphoric Acid", 0xE8ECE4),
     "hydrofluoric_acid": ("Hydrofluoric Acid", 0xE6F0EA),
 }
+# What the plant cannot use: the spent chloride liquor every cut leaves behind, and the brine it becomes
+# once lime has neutralised it. The brine boils down to salt, which the clay leach takes back.
+WASTES = {
+    "spent_liquor": ("Spent Liquor", 0x8E9A86),
+    "brine": ("Brine", 0xDCE6E4),
+}
 GASES = {
     "argon": ("Argon", 0xC8D8F0),
 }
 FLUIDS = {**{k: (*v, "LIQUOR") for k, v in LIQUORS.items()}, **{k: (*v, "ORGANIC") for k, v in ORGANICS.items()},
-          **{k: (*v, "ACID") for k, v in ACIDS.items()}, **{k: (*v, "GAS") for k, v in GASES.items()}}
+          **{k: (*v, "ACID") for k, v in ACIDS.items()}, **{k: (*v, "GAS") for k, v in GASES.items()},
+          **{k: (*v, "WASTE") for k, v in WASTES.items()}}
 
 # Oxide to metal. The lights and the heavies go through their fluoride: the lights by molten-salt
 # electrolysis on TFMG's electrodes, the heavies by calciothermic reduction under argon, which gives the
@@ -146,7 +153,7 @@ def java_table():
              "    public static final List<Reagent> ALL = List.of("]
     entries = [f'            new Reagent("{id}", 0x{tint:06X}, Kind.{kind})' for id, (_, tint, kind) in FLUIDS.items()]
     lines += [",\n".join(entries) + ");", "", "    private Reagents() {}", "}", ""]
-    kinds = sorted({kind for _, _, kind in FLUIDS.values()}, key=["LIQUOR", "ORGANIC", "ACID", "GAS"].index)
+    kinds = sorted({kind for _, _, kind in FLUIDS.values()}, key=["LIQUOR", "ORGANIC", "ACID", "GAS", "WASTE"].index)
     lines[7] = "    public enum Kind { " + ", ".join(kinds) + " }"
     JAVA.write_text("\n".join(lines), encoding="utf-8")
 
@@ -166,7 +173,12 @@ def chemistry():
     mixing("p507", [fluid("phosphoric_acid", 250), fluid("tfmg:kerosene", 750)], [result_fluid("p507", 1000)], heated=True)
     mixing("naphthenic_acid", [fluid("tfmg:heavy_oil", 1000), fluid("tfmg:sulfuric_acid", 250)], [result_fluid("naphthenic_acid", 500)], heated=True)
     # Leaching the concentrates into chloride liquor.
-    mixing("rare_earth_liquor", [item("light_rare_earth_concentrate"), fluid(STRIP, 500)], [result_fluid("rare_earth_liquor", 500)], heated=True)
+    # the thorium in the monazite stays behind when the light concentrate dissolves: a residue that has to be put somewhere
+    mixing("rare_earth_liquor", [item("light_rare_earth_concentrate"), fluid(STRIP, 500)],
+           [result_fluid("rare_earth_liquor", 500), result_item("monazite_residue_dust")], heated=True)
+    # Waste: lime neutralises the spent liquor to brine, and brine boils down to salt for the clay leach.
+    mixing("brine", item("tfmg:limesand", 2) + [fluid("spent_liquor", 1000)], [result_fluid("brine", 1000)])
+    mixing("salt_from_brine", [fluid("brine", 1000)], [result_item("salt", 3)], heated=True)
     mixing("heavy_rare_earth_liquor", [item("heavy_rare_earth_concentrate"), fluid(STRIP, 500)], [result_fluid("heavy_rare_earth_liquor", 500)], heated=True)
     # The clay is not ground or roasted: its rare earths sit on the clay as ions and a salt solution lifts
     # them off, which is why the Chinese heaps are leached in place.
@@ -373,6 +385,8 @@ def names():
     lang["goggles.fundamentals.mixer_settler.progress"] = "Organic on %s of %s stages, liquor in %s"
     lang["goggles.fundamentals.mixer_settler.ends"] = "Feed %s, strip %s"
     lang["goggles.fundamentals.mixer_settler.products"] = "Out %s at the head, %s at the tail"
+    lang["goggles.fundamentals.mixer_settler.sump"] = "Sump %s"
+    lang["goggles.fundamentals.mixer_settler.waste"] = "The sump is full: pump the spent liquor out from below"
     lang["goggles.fundamentals.mixer_settler.nothing"] = "nothing"
     write(path, lang)
 

@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "tfmg:limesand"
+    },
+    {
+      "item": "tfmg:limesand"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "fundamentals:spent_liquor"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:brine",
+      "amount": 1000
+    }
+  ]
+}
