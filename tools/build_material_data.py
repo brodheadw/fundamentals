@@ -31,7 +31,7 @@ FORMS = {
 }
 
 # Minerals ground in a millstone or crushing wheels. Monazite is a sand already.
-GROUND = ("bastnasite", "xenotime", "loparite", "euxenite", "chromite")
+GROUND = ("bastnasite", "xenotime", "loparite", "euxenite", "thortveitite", "chromite")
 
 # Gravity concentration, done as a wash under an encased fan: what goes in, and which
 # concentrate the heavy grains left behind are. Bastnäsite needs flotation and the clay a leach;

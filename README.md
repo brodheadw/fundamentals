@@ -28,7 +28,7 @@ Thirty-nine of them, each dropping a raw chunk of itself:
 - **Copper:** Chalcopyrite, Bornite, Chalcocite, Covellite, Malachite, Azurite, Cuprite
 - **Aluminium, lead, zinc, tin:** Bauxite, Galena, Sphalerite, Smithsonite, Hemimorphite, Cassiterite
 - **Lithium:** Spodumene
-- **Rare earths:** Bastnäsite, Monazite, Xenotime, Ion-Adsorption Clay, Loparite, Euxenite
+- **Rare earths:** Bastnäsite, Monazite, Xenotime, Ion-Adsorption Clay, Loparite, Euxenite, Thortveitite (scandium)
 - **Precious:** Native Silver, Argentite, Sperrylite, Cooperite, Braggite, Cinnabar
 
 Vanilla gold and copper ore stay: they are native gold and native copper, which are real minerals. Vanilla iron ore is gone, including the big deep veins, which are magnetite now.
@@ -59,6 +59,8 @@ What comes out of the dissolver is crude: iron, aluminium, thorium and fines sti
 ![A mixer-settler battery](docs/images/mixer-settlers.jpg)
 
 Goggles on any casing tell you what the battery is waiting for, how far the organic and the liquor have got down the line, and what the ends and the product tanks hold; hold W over a casing for the Ponder scene of a working stage.
+
+Scandium never enters the liquors. Its own mineral, thortveitite, is a rare greenish-black prism in the pegmatites that carry xenotime and euxenite; ground and chlorinated with coke (a heated basin, two dust, a coke, 500 mB each of chlorine and water) it gives scandium liquor, which takes the heavies' road: oxalate, scandia, fluoride, and calcium under argon to the metal. Or the fluoride goes straight into seven molten aluminium for Al-Sc, as the master alloy is made.
 
 ### What they are for
 
