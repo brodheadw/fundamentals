@@ -1,5 +1,6 @@
 package ai.gsmc.fundamentals.separation;
 
+import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.content.equipment.armor.DivingHelmetItem;
 import com.simibubi.create.content.fluids.pipes.AxisPipeBlock;
@@ -9,6 +10,8 @@ import com.simibubi.create.content.fluids.pipes.GlassFluidPipeBlock;
 import com.simibubi.create.content.fluids.pipes.SmartFluidPipeBlock;
 import com.simibubi.create.content.fluids.pipes.valve.FluidValveBlock;
 import com.simibubi.create.content.fluids.pump.PumpBlock;
+import com.simibubi.create.content.fluids.tank.FluidTankBlock;
+import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -40,7 +43,8 @@ import java.util.List;
  * in the open: as blocks in the world, or in a basin they are being used in. Create's diving helmet on a filled
  * backtank is the gas mask, and breathes its air. And the acids eat copper: Create's pipes, pumps and valves carrying one
  * corrode and eventually burst, spilling it. The liquors are rare earth chlorides in dilute acid and the spent liquor and brine
- * are chloride too, so they eat it as well, more slowly. Plastic pipes, pumps and valves, and glass pipes, do not corrode.
+ * are chloride too, so they eat it as well, more slowly. Metal tanks go the same way, ten times slower for the thicker wall.
+ * Plastic pipes, pumps, valves and tanks, and glass pipes, do not corrode.
  */
 public final class Hazards {
 
@@ -50,6 +54,8 @@ public final class Hazards {
     public static double corrosionChance = 1.0 / 2400;
     /** Per tick, for a pipe carrying a liquor, crude liquor, spent liquor or brine: on average eight minutes. */
     public static double liquorCorrosionChance = 1.0 / 9600;
+    /** How many times longer a tank's wall lasts than a pipe's, for the same fluid: twenty minutes under acid, eighty under a liquor. */
+    private static final int TANK_WALL = 10;
 
     private Hazards() {}
 
@@ -143,6 +149,34 @@ public final class Hazards {
         }
     }
 
+    /** Called every tick for every Create fluid tank by its mixin, and acts once per tank on the controller: when the wall goes,
+     * one wetted block of it fails, the tank loses that block's share of what it holds, and an acid spills where it stood. */
+    public static void corrodeTank(FluidTankBlockEntity tank) {
+        Level level = tank.getLevel();
+        if (level == null || level.isClientSide || !tank.isController()) {
+            return;
+        }
+        FluidStack held = tank.getTankInventory().getFluid();
+        if (held.isEmpty() || !corrodes(Separation.kind(held.getFluid())) || !corrodible(tank.getBlockState())
+                || level.random.nextDouble() >= chance(held) / TANK_WALL) {
+            return;
+        }
+        int width = tank.getWidth();
+        int wetted = Math.max(1, (int) Math.ceil(tank.getFillState() * tank.getHeight()));
+        BlockPos pos = tank.getBlockPos().offset(level.random.nextInt(width), level.random.nextInt(wetted), level.random.nextInt(width));
+        Fluid fluid = held.getFluid();
+        tank.getTankInventory().drain(held.getAmount() / (width * width * tank.getHeight()), IFluidHandler.FluidAction.EXECUTE);
+        Acids.Acid acid = Acids.all().values().stream().filter(a -> a.source == fluid || a.flowing == fluid).findFirst().orElse(null);
+        level.destroyBlock(pos, false);
+        if (acid != null) {
+            level.setBlock(pos, acid.block.defaultBlockState().setValue(LiquidBlock.LEVEL, 6), Block.UPDATE_ALL);
+        }
+        level.playSound(null, pos, SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.8F, 0.9F);
+        if (level instanceof ServerLevel server) {
+            server.sendParticles(ParticleTypes.CLOUD, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 12, 0.3, 0.3, 0.3, 0.02);
+        }
+    }
+
     public static boolean corrodes(Reagents.Kind kind) {
         return kind == Reagents.Kind.ACID || kind == Reagents.Kind.LIQUOR || kind == Reagents.Kind.CRUDE || kind == Reagents.Kind.WASTE;
     }
@@ -152,13 +186,17 @@ public final class Hazards {
         return kind == Reagents.Kind.ACID ? corrosionChance : corrodes(kind) ? liquorCorrosionChance : 0;
     }
 
-    /** Create's pipes are copper and TFMG's metal pipes are metal; only plastic and glass stand up to acid. TFMG's pipes are
-     * Create's pipe classes underneath, so plastic is told apart by name. */
+    /** Create's pipes and tanks are copper and TFMG's metal pipes and tanks are metal; only plastic and glass stand up to acid,
+     * and a creative tank to anything. TFMG's pipes are Create's pipe classes underneath, so plastic is told apart by name. */
     public static boolean corrodible(BlockState state) {
         Block block = state.getBlock();
         ResourceLocation id = BuiltInRegistries.BLOCK.getKey(block);
-        if (id.getNamespace().equals("tfmg") && id.getPath().contains("plastic") || block instanceof GlassFluidPipeBlock) {
+        if (id.getNamespace().equals("tfmg") && id.getPath().contains("plastic") || block instanceof GlassFluidPipeBlock || block instanceof PlasticTankBlock
+                || AllBlocks.CREATIVE_FLUID_TANK.has(state)) {
             return false;
+        }
+        if (block instanceof FluidTankBlock || id.getNamespace().equals("tfmg") && id.getPath().endsWith("fluid_tank")) {
+            return true;
         }
         if (block instanceof FluidPipeBlock || block instanceof AxisPipeBlock || block instanceof EncasedPipeBlock || block instanceof SmartFluidPipeBlock
                 || block instanceof PumpBlock || block instanceof FluidValveBlock) {

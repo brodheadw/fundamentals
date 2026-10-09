@@ -1,6 +1,7 @@
 package ai.gsmc.fundamentals.separation;
 
 import ai.gsmc.fundamentals.Fundamentals;
+import com.simibubi.create.content.fluids.tank.FluidTankItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -31,6 +32,9 @@ public final class Separation {
     private static Block mixerSettler;
     private static BlockEntityType<MixerSettlerBlockEntity> mixerSettlerEntity;
     private static Item mixerSettlerItem;
+    private static Block plasticTank;
+    private static BlockEntityType<PlasticTankBlockEntity> plasticTankEntity;
+    private static Item plasticTankItem;
     private static Item salt;
     private static Item calciumIngot;
     private static Item oxalicAcid;
@@ -44,6 +48,8 @@ public final class Separation {
 
     public static Block mixerSettler() { return mixerSettler; }
     public static BlockEntityType<MixerSettlerBlockEntity> mixerSettlerEntity() { return mixerSettlerEntity; }
+    public static Block plasticTank() { return plasticTank; }
+    public static BlockEntityType<PlasticTankBlockEntity> plasticTankEntity() { return plasticTankEntity; }
     public static Map<String, FluidType> fluidTypes() { return FLUID_TYPES; }
 
     public static Fluid fluid(String id) {
@@ -78,7 +84,7 @@ public final class Separation {
     }
 
     public static List<Item> items() {
-        List<Item> items = new java.util.ArrayList<>(List.of(mixerSettlerItem, salt, oxalicAcid, roastedBastnasite,
+        List<Item> items = new java.util.ArrayList<>(List.of(mixerSettlerItem, plasticTankItem, salt, oxalicAcid, roastedBastnasite,
                 lightRareEarthSulfate, heavyRareEarthSulfate, calciumChloride, calciumIngot, whitePhosphorus));
         Acids.all().values().forEach(acid -> items.add(acid.bucket));
         return items;
@@ -125,6 +131,10 @@ public final class Separation {
         mixerSettler = new MixerSettlerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY)
                 .requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.COPPER).noOcclusion());
         registry.accept(id("mixer_settler"), mixerSettler);
+        plasticTank = new PlasticTankBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SNOW)
+                .requiresCorrectToolForDrops().strength(0.8F).sound(SoundType.STONE).noOcclusion()
+                .isRedstoneConductor((state, level, pos) -> true));
+        registry.accept(id("plastic_fluid_tank"), plasticTank);
         for (Acids.Acid acid : Acids.all().values()) {
             registry.accept(id(acid.id), acid.block);
         }
@@ -133,6 +143,8 @@ public final class Separation {
     public static void registerBlockEntities(BiConsumer<ResourceLocation, BlockEntityType<?>> registry) {
         mixerSettlerEntity = BlockEntityType.Builder.of(MixerSettlerBlockEntity::new, mixerSettler).build(null);
         registry.accept(id("mixer_settler"), mixerSettlerEntity);
+        plasticTankEntity = BlockEntityType.Builder.of(PlasticTankBlockEntity::new, plasticTank).build(null);
+        registry.accept(id("plastic_fluid_tank"), plasticTankEntity);
     }
 
     public static void registerRecipeTypes(BiConsumer<ResourceLocation, RecipeType<?>> registry) {
@@ -145,6 +157,7 @@ public final class Separation {
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
         registry.accept(id("mixer_settler"), mixerSettlerItem = new BlockItem(mixerSettler, new Item.Properties()));
+        registry.accept(id("plastic_fluid_tank"), plasticTankItem = new FluidTankItem(plasticTank, new Item.Properties()));
         registry.accept(id("salt"), salt = new Item(new Item.Properties()));
         registry.accept(id("calcium_ingot"), calciumIngot = new Item(new Item.Properties()));
         registry.accept(id("oxalic_acid"), oxalicAcid = new Item(new Item.Properties()));
