@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "U ",
+    "LB",
+    "A "
+  ],
+  "key": {
+    "U": {
+      "item": "minecraft:glass_pane"
+    },
+    "L": {
+      "tag": "c:buckets/kerosene"
+    },
+    "B": {
+      "tag": "c:dyes/red"
+    },
+    "A": {
+      "item": "create:andesite_casing"
+    }
+  },
+  "result": {
+    "id": "fundamentals:spirit_thermometer",
+    "count": 1
+  }
+}

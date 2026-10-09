@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Paints the dial thermometers: the andesite casing they share, the needle, and a dial face for each, a cream face with
 a 240-degree scale from bottom left to bottom right, a band in the gauge's colour round the outside and a mark at the
-bottom saying what it reads with. Thermocouples wear their IEC 60584-3 colours: type K green, type S orange. Edit and
+bottom saying what it reads with. The spirit thermometer's column is the classic red line. Thermocouples wear their IEC 60584-3 colours: type K green, type S orange. Edit and
 re-run; don't hand-edit the PNGs.
 
     python3 tools/paint_thermometers.py && python3 tools/build_heat_data.py
@@ -25,10 +25,12 @@ INK = (40, 38, 36)
 ANDESITE = [(62, 66, 60), (98, 104, 96), (140, 146, 134), (178, 184, 170), (206, 210, 198)]
 WHITE_LEG = (250, 250, 248)
 BURST = (200, 40, 32)
+SPIRIT = (232, 24, 24)
 
 # gauge: (band colour, mark)
 GAUGES = {
     "mercury_thermometer": ((150, 158, 174), "column"),
+    "spirit_thermometer": ((180, 200, 206), "spirit"),
     "bimetallic_thermometer": ((214, 168, 70), "coil"),
     "type_k_thermocouple": ((40, 150, 70), "legs"),
     "type_s_thermocouple": ((236, 122, 26), "legs"),
@@ -56,8 +58,8 @@ def dial(name):
             elif r > 9.3:
                 colour = shade(FACE, 0.72)
             elif r > 7.3 and abs(a) <= SWEEP / 2 + 2:
-                # mercury's scale ends in red where it boils
-                colour = BURST if mark == "column" and a > SWEEP / 2 - 22 else shade(band, 1.1 if r > 8.3 else 0.9)
+                # mercury's scale and the spirit's end in red where they boil
+                colour = BURST if mark in ("column", "spirit") and a > SWEEP / 2 - 22 else shade(band, 1.1 if r > 8.3 else 0.9)
             else:
                 colour = FACE
             img.putpixel((x, y), colour + (255,))
@@ -66,20 +68,30 @@ def dial(name):
         a = math.radians(-SWEEP / 2 + SWEEP * step / 8)
         for r in ((5.0, 5.8, 6.6) if step % 2 == 0 else (6.6,)):
             img.putpixel((int(CENTRE + r * math.sin(a)), int(CENTRE - r * math.cos(a))), INK + (255,))
-    {"column": column, "coil": coil, "legs": legs}[mark](img, band)
+    {"column": column, "spirit": spirit, "coil": coil, "legs": legs}[mark](img, band)
     return img
 
 
-def column(img, colour):
-    """A little mercury thermometer: a glass tube with its silver column and bulb, at the foot of the dial."""
+def tube(img, dark, light, bulb):
+    """A little glass thermometer at the foot of the dial: the tube, its column filled two-thirds up, and the bulb."""
     glass = (96, 116, 128)
     for y in range(18, 24):
         img.putpixel((14, y), glass + (255,))
         img.putpixel((17, y), glass + (255,))
-        img.putpixel((15, y), (shade(colour, 0.55) if y > 19 else (214, 230, 236)) + (255,))
-        img.putpixel((16, y), (shade(colour, 0.85) if y > 19 else (214, 230, 236)) + (255,))
+        img.putpixel((15, y), (dark if y > 19 else (214, 230, 236)) + (255,))
+        img.putpixel((16, y), (light if y > 19 else (214, 230, 236)) + (255,))
     for x in (14, 15, 16, 17):
-        img.putpixel((x, 24), (shade(colour, 0.6) if x in (15, 16) else glass) + (255,))
+        img.putpixel((x, 24), (bulb if x in (15, 16) else glass) + (255,))
+
+
+def column(img, colour):
+    """Mercury's silver column."""
+    tube(img, shade(colour, 0.55), shade(colour, 0.85), shade(colour, 0.6))
+
+
+def spirit(img, colour):
+    """Red-dyed spirit, the bright red line of every school and garden thermometer."""
+    tube(img, shade(SPIRIT, 0.8), SPIRIT, shade(SPIRIT, 0.8))
 
 
 def coil(img, colour):
