@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "P",
+    "B",
+    "P"
+  ],
+  "key": {
+    "P": {
+      "item": "tfmg:plastic_sheet"
+    },
+    "B": {
+      "tag": "c:barrels/wooden"
+    }
+  },
+  "result": {
+    "id": "fundamentals:plastic_fluid_tank",
+    "count": 1
+  }
+}

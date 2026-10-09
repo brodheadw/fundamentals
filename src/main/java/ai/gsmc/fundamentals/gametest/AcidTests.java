@@ -79,7 +79,7 @@ public class AcidTests {
 
     @GameTest(template = "battery", timeoutTicks = 300)
     public void copperPipesCorrodeUnderAcid(GameTestHelper helper) {
-        Block tank = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:fluid_tank"));
+        Block tank = BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "plastic_fluid_tank"));
         Block pump = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("tfmg:plastic_mechanical_pump"));
         Block pipe = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:fluid_pipe"));
         Block cog = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:cogwheel"));
@@ -115,5 +115,34 @@ public class AcidTests {
         double acid = Hazards.chance(new net.neoforged.neoforge.fluids.FluidStack(Acids.all().get("hydrochloric_acid").source, 1));
         helper.assertTrue(liquor > 0 && liquor < acid, "a liquor should eat copper, more slowly than acid: " + liquor + " vs " + acid);
         helper.succeed();
+    }
+
+    @GameTest(template = "battery", timeoutTicks = 300)
+    public void copperTanksCorrodeAndPlasticAndCreativeDoNot(GameTestHelper helper) {
+        Block copper = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:fluid_tank"));
+        Block plastic = BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "plastic_fluid_tank"));
+        Block creative = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:creative_fluid_tank"));
+        helper.assertTrue(Hazards.corrodible(BuiltInRegistries.BLOCK.get(ResourceLocation.parse("tfmg:steel_fluid_tank")).defaultBlockState()), "a steel tank should corrode");
+        var acid = new net.neoforged.neoforge.fluids.FluidStack(Acids.all().get("hydrochloric_acid").source, 1000);
+        BlockPos[] at = {new BlockPos(2, 1, 2), new BlockPos(10, 1, 2), new BlockPos(18, 1, 2)};
+        Block[] tanks = {copper, plastic, creative};
+        for (int i = 0; i < 3; i++) {
+            helper.setBlock(at[i], tanks[i].defaultBlockState());
+            var tank = (com.simibubi.create.content.fluids.tank.FluidTankBlockEntity) helper.getBlockEntity(at[i]);
+            if (tank.getTankInventory() instanceof com.simibubi.create.content.fluids.tank.CreativeFluidTankBlockEntity.CreativeSmartFluidTank endless) {
+                endless.setContainedFluid(acid);
+            } else {
+                tank.getTankInventory().fill(acid.copy(), net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE);
+            }
+        }
+        double was = Hazards.corrosionChance;
+        Hazards.corrosionChance = 1.0;
+        helper.runAfterDelay(100, () -> {
+            Hazards.corrosionChance = was;
+            helper.assertBlockNotPresent(copper, at[0]);
+            helper.assertBlockPresent(plastic, at[1]);
+            helper.assertBlockPresent(creative, at[2]);
+            helper.succeed();
+        });
     }
 }
