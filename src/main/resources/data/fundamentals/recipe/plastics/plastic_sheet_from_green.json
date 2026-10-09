@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "fundamentals:green_plastic_block"
+    }
+  ],
+  "result": {
+    "id": "tfmg:plastic_sheet",
+    "count": 9
+  }
+}

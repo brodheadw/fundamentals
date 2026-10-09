@@ -1,0 +1,22 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:black_plastic_block",
+    "fundamentals:blue_plastic_block",
+    "fundamentals:brown_plastic_block",
+    "fundamentals:cyan_plastic_block",
+    "fundamentals:gray_plastic_block",
+    "fundamentals:green_plastic_block",
+    "fundamentals:light_blue_plastic_block",
+    "fundamentals:light_gray_plastic_block",
+    "fundamentals:lime_plastic_block",
+    "fundamentals:magenta_plastic_block",
+    "fundamentals:orange_plastic_block",
+    "fundamentals:pink_plastic_block",
+    "fundamentals:purple_plastic_block",
+    "fundamentals:red_plastic_block",
+    "fundamentals:white_plastic_block",
+    "fundamentals:yellow_plastic_block",
+    "tfmg:plastic_block"
+  ]
+}

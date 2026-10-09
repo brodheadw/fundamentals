@@ -137,7 +137,7 @@ public final class Separation {
                 .requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.COPPER).noOcclusion());
         registry.accept(id("mixer_settler"), mixerSettler);
         magnetomigrationCell = new MagnetomigrationCellBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SNOW)
-                .requiresCorrectToolForDrops().strength(1.5F, 6.0F).sound(SoundType.STONE));
+                .requiresCorrectToolForDrops().strength(1.5F, 6.0F).sound(SoundType.STONE).noOcclusion());
         registry.accept(id("magnetomigration_cell"), magnetomigrationCell);
         plasticTank = new PlasticTankBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SNOW)
                 .requiresCorrectToolForDrops().strength(0.8F).sound(SoundType.STONE).noOcclusion()

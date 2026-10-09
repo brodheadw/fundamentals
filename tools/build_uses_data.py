@@ -3,15 +3,17 @@
 Create and The Factory Must Grow we take over so that they need them; and the roads the base metals take
 instead of Create's crushing-and-furnace shortcuts. Re-run after any edit.
 
-    python3 tools/paint_uses.py && python3 tools/build_uses_data.py
+    python3 tools/paint_uses.py && python3 tools/paint_plastics.py && python3 tools/build_uses_data.py
 
 Everything of ours lands in recipe/uses/; a takeover is written at the other mod's own recipe path
 under data/<mod>/, which replaces theirs.
 """
 import json
 import shutil
+import zipfile
+from pathlib import Path
 
-from build_ore_data import ASSETS, DATA, cube, drop_self, write
+from build_ore_data import ASSETS, DATA, cube, drop_self, tag as tag_file, write
 
 USES = DATA / "recipe/uses"
 TFMG = DATA.parent / "tfmg/recipe"
@@ -40,6 +42,21 @@ PLATINUM = DATA / "recipe/platinum"
 PGMS = ("platinum", "palladium", "rhodium", "ruthenium", "iridium", "osmium")
 ROASTING = DATA / "recipe/roasting"
 LITHIUM = DATA / "recipe/lithium"
+PLASTICS = DATA / "recipe/plastics"
+TFMG_ASSETS = ASSETS.parent / "tfmg"
+TFMG_JAR = next(Path.home().glob(".gradle/caches/modules-2/files-2.1/maven.modrinth/create-tfmg/*/*/create-tfmg-*.jar"))
+DYES = ("white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown",
+        "green", "red", "black")
+# registered by plastics.Plastics
+PLASTIC_ITEMS = {"ziegler_natta_catalyst": "Ziegler-Natta Catalyst", "pvc_resin": "PVC Resin", "pvc_sheet": "PVC Sheet"}
+PLASTIC_BLOCKS = {f"{dye}_plastic_block": f"{dye.replace('_', ' ').title()} Plastic Block" for dye in DYES}
+# The Factory Must Grow's plastic pipe family: the models every other one of theirs inherits its render type from.
+TFMG_PLASTIC_MODELS = (["plastic_pipe/core_x", "plastic_pipe/core_y", "plastic_pipe/core_z", "plastic_pipe/casing", "plastic_pipe/item",
+                        "plastic_pipe/window", "plastic_mechanical_pump/block", "plastic_mechanical_pump/item", "plastic_smart_fluid_pipe/block",
+                        "plastic_smart_fluid_pipe/item", "plastic_fluid_valve/item", "plastic_fluid_valve/pointer"]
+                       + [f"plastic_fluid_valve/block_{axis}_{state}" for axis in ("horizontal", "vertical") for state in ("open", "closed")]
+                       + [f"plastic_pipe/{part}/{side}" for part in ("connection", "drain", "rim", "rim_connector")
+                          for side in ("up", "down", "north", "south", "east", "west")])
 
 
 def argon(amount=100):
@@ -630,13 +647,60 @@ def silver_sinks():
            {"count": 1, "id": "tfmg:accumulator"})
 
 
+def plastics():
+    """Polyethylene and polypropylene are made over a Ziegler-Natta catalyst. The first, Natta's, was titanium tetrachloride reduced
+    by aluminium powder to violet TiCl3 with AlCl3 in it, and the olefin polymerises on it at a few atmospheres and under 100 °C. So the
+    Factory's two plastic vats take a catalyst, which comes back nine times in ten, and still pour its molten plastic. PVC is the
+    chemical plant's pipe: ethylene chlorinated and cracked to vinyl chloride, giving off hydrogen chloride, and the monomer polymerised
+    as droplets in water to a white resin that is pressed hot into sheet. A sheet of either makes the Factory's plastic pipe, our tank,
+    cells and casing. Dyed plastic is opaque: eight plastic blocks and a dye make eight of that colour, and one goes back to nine sheets."""
+    mixing("ziegler_natta_catalyst", [fluid("titanium_tetrachloride", 250)] + argon() + item("aluminium_powder"), [result("ziegler_natta_catalyst", 4)], "heated")
+    for olefin in ("ethylene", "propylene"):
+        write(TFMG / f"vat_machine_recipe/plastic_from_{olefin}.json", {
+            "type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:steel_vat", "tfmg:firebrick_lined_vat"],
+            "heat_requirement": "heated", "machines": ["tfmg:mixing"], "min_size": 1,
+            "ingredients": [fluid(f"tfmg:{olefin}", 500)] + item("ziegler_natta_catalyst"),
+            "results": [out_fluid("tfmg:molten_plastic", 500), {"id": "fundamentals:ziegler_natta_catalyst", "chance": 0.9}]})
+    write(PLASTICS / "vinyl_chloride.json", {"type": "create:mixing", "heat_requirement": "heated",
+                                             "ingredients": [fluid("tfmg:ethylene", 500), fluid("chlorine", 500)],
+                                             "results": [out_fluid("vinyl_chloride", 500), out_fluid("hydrochloric_acid", 250)]})
+    write(PLASTICS / "pvc_resin.json", {"type": "create:mixing", "heat_requirement": "heated",
+                                        "ingredients": [fluid("vinyl_chloride", 250), fluid("minecraft:water", 250)], "results": [result("pvc_resin")]})
+    write(PLASTICS / "pvc_sheet.json", {"type": "create:compacting", "heat_requirement": "heated", "ingredients": item("pvc_resin"),
+                                        "results": [result("pvc_sheet")]})
+    tag_file(DATA / "tags/item/plastic_sheets.json", ["tfmg:plastic_sheet", "fundamentals:pvc_sheet"])
+    tag_file(DATA / "tags/item/plastic_blocks.json", ["tfmg:plastic_block"] + [f"fundamentals:{name}" for name in PLASTIC_BLOCKS])
+    sheets = {"I": {"tag": "fundamentals:plastic_sheets"}}
+    shaped(TFMG / "crafting/materials/plastic_pipe.json", ["   ", "III", "   "], sheets, {"count": 4, "id": "tfmg:plastic_pipe"})
+    shaped(TFMG / "crafting/materials/plastic_pipe_vertical.json", ["I", "I", "I"], sheets, {"count": 4, "id": "tfmg:plastic_pipe"})
+    for dye in DYES:
+        shaped(PLASTICS / f"{dye}_plastic_block.json", ["BBB", "BDB", "BBB"], {"B": {"tag": "fundamentals:plastic_blocks"}, "D": {"tag": f"c:dyes/{dye}"}},
+               {"count": 8, "id": f"fundamentals:{dye}_plastic_block"})
+        write(PLASTICS / f"plastic_sheet_from_{dye}.json", {"type": "minecraft:crafting_shapeless", "category": "misc",
+                                                            "ingredients": item(f"{dye}_plastic_block"), "result": result("tfmg:plastic_sheet", 9)})
+    # the dyed pipe stands on The Factory Must Grow's pipe models, which natural plastic draws translucent
+    with zipfile.ZipFile(TFMG_JAR) as jar:
+        pipe = json.loads(jar.read("assets/tfmg/blockstates/plastic_pipe.json"))
+        for name in TFMG_PLASTIC_MODELS:
+            model = json.loads(jar.read(f"assets/tfmg/models/block/{name}.json"))
+            write(TFMG_ASSETS / f"models/block/{name}.json", {**model, "render_type": "minecraft:translucent"})
+    write(ASSETS / "blockstates/dyed_plastic_pipe.json", pipe)
+    write(DATA / "loot_table/blocks/dyed_plastic_pipe.json", {"type": "minecraft:block", "pools": [
+        {"rolls": 1, "bonus_rolls": 0, "entries": [{"type": "minecraft:item", "name": "tfmg:plastic_pipe"}],
+         "conditions": [{"condition": "minecraft:survives_explosion"}]}]})
+
+
 def names():
     path = ASSETS / "lang/en_us.json"
     lang = json.loads(path.read_text(encoding="utf-8"))
     for name, display in {**ITEMS, **PGM_ITEMS}.items():
         lang[f"item.fundamentals.{name}"] = display
         write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})
-    for name, display in BLOCKS.items():
+    for name, display in PLASTIC_ITEMS.items():
+        lang[f"item.fundamentals.{name}"] = display
+        write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})
+    lang["block.fundamentals.dyed_plastic_pipe"] = "Dyed Plastic Pipe"
+    for name, display in {**BLOCKS, **PLASTIC_BLOCKS}.items():
         lang[f"block.fundamentals.{name}"] = display
         write(ASSETS / f"blockstates/{name}.json", {"variants": {"": {"model": f"fundamentals:block/{name}"}}})
         write(ASSETS / f"models/block/{name}.json", cube(f"fundamentals:block/{name}"))
@@ -651,6 +715,8 @@ def main():
     shutil.rmtree(CREATE, ignore_errors=True)
     shutil.rmtree(LITHIUM, ignore_errors=True)
     shutil.rmtree(PLATINUM, ignore_errors=True)
+    shutil.rmtree(PLASTICS, ignore_errors=True)
+    shutil.rmtree(TFMG_ASSETS / "models", ignore_errors=True)
     for pattern in ("roasted_c*", "roasted_pentlandite_*", "copper_calcine_*", "zinc_oxide_*", "roasted_tin_*"):
         for stale in ROASTING.glob(pattern):
             stale.unlink()
@@ -683,6 +749,7 @@ def main():
     silver_sinks()
     thorium()
     lead_and_zinc_sinks()
+    plastics()
     names()
     print("uses written")
 

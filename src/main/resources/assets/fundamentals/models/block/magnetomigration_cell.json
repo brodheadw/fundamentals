@@ -1,5 +1,6 @@
 {
   "parent": "minecraft:block/cube",
+  "render_type": "minecraft:translucent",
   "textures": {
     "north": "fundamentals:block/magnetomigration_cell_end",
     "south": "fundamentals:block/magnetomigration_cell_end",

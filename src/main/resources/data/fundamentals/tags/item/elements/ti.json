@@ -15,6 +15,7 @@
     "fundamentals:titanium_ingot",
     "fundamentals:titanium_oxide",
     "fundamentals:titanium_plate",
-    "fundamentals:titanium_sponge"
+    "fundamentals:titanium_sponge",
+    "fundamentals:ziegler_natta_catalyst"
   ]
 }
