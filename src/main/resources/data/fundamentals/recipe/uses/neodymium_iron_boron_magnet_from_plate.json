@@ -2,12 +2,12 @@
   "type": "tfmg:polarizing",
   "ingredients": [
     {
-      "tag": "c:ingots/samarium_cobalt"
+      "tag": "c:plates/neodymium_iron_boron"
     }
   ],
   "results": [
     {
-      "id": "tfmg:magnet"
+      "id": "fundamentals:neodymium_iron_boron_magnet"
     }
   ]
 }

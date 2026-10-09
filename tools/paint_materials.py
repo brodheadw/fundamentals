@@ -91,6 +91,8 @@ METAL = {
     "scandium": tinted((232, 220, 168), 0.2),
     "didymium": tinted((140, 164, 176)),
     "neodymium_iron_boron": ((40, 42, 50), (82, 86, 98), (130, 134, 148), (196, 200, 214)),
+    # the dysprosium grade is the same black alloy, leaning toward dysprosium's olive so a chest can tell them apart
+    "dysprosium_neodymium_iron_boron": ((44, 46, 36), (88, 94, 70), (136, 144, 108), (200, 208, 170)),
     "samarium_cobalt": ((70, 64, 60), (124, 116, 108), (170, 162, 152), (222, 214, 204)),
     "aluminium_scandium": ((98, 104, 114), (164, 172, 184), (214, 220, 230), (247, 249, 253)),
     "monazite_residue": ((54, 46, 40), (96, 84, 72), (138, 124, 108), (186, 172, 154)),
@@ -102,6 +104,8 @@ METAL = {
     # both thermocouple legs look like nickel: chromel a shade warm, alumel a shade cold, so a chest can tell them apart
     "chromel": tinted((214, 196, 160), 0.22),
     "alumel": tinted((160, 184, 214), 0.22),
+    # cast alnico is a dull grey, a shade warm with its copper and cobalt
+    "alnico": ((70, 68, 66), (126, 122, 118), (174, 170, 164), (218, 214, 208)),
     "tungsten": ((60, 62, 68), (112, 116, 124), (160, 164, 174), (212, 216, 226)),
     # blister copper is copper still holding its oxygen and sulfur, duller than refined and pocked where the SO2 broke out
     "blister_copper": ((84, 40, 28), (142, 74, 50), (186, 106, 74), (222, 150, 112)),
@@ -200,8 +204,8 @@ MATERIALS = {
     "gadolinium": ELEMENT, "terbium": MAGNET_ELEMENT, "dysprosium": MAGNET_ELEMENT, "holmium": OXIDE_ONLY,
     "erbium": OXIDE_ONLY, "thulium": OXIDE_ONLY, "ytterbium": OXIDE_ONLY, "lutetium": OXIDE_ONLY, "yttrium": ELEMENT,
     "scandium": SCANDIUM,
-    "didymium": DIDYMIUM, "neodymium_iron_boron": MAGNET, "samarium_cobalt": MAGNET, "aluminium_scandium": ALLOY, "monazite_residue": RESIDUE,
-    "cobalt": COBALT, "molybdenum": MOLYBDENUM, "rhenium": RHENIUM, "superalloy": STRUCTURAL, "molybdenum_steel": STRUCTURAL, "chromel": INGOT, "alumel": INGOT,
+    "didymium": DIDYMIUM, "neodymium_iron_boron": MAGNET, "dysprosium_neodymium_iron_boron": MAGNET, "samarium_cobalt": MAGNET, "aluminium_scandium": ALLOY, "monazite_residue": RESIDUE,
+    "cobalt": COBALT, "molybdenum": MOLYBDENUM, "rhenium": RHENIUM, "superalloy": STRUCTURAL, "molybdenum_steel": STRUCTURAL, "chromel": INGOT, "alumel": INGOT, "alnico": INGOT,
     "tungsten": TUNGSTEN, "copper_matte": MATTE, "blister_copper": BLISTER,
     "chromite": GROUND_MINERAL, "chromium": CHROMIUM, "ferrochrome": INGOT, "stainless_steel": STRUCTURAL,
     "titanium": TITANIUM, "magnesium": INGOT,
@@ -210,7 +214,7 @@ MATERIALS = {
     "tin_concentrate": CONCENTRATE, "crude_tin": INGOT, "tin": TIN, "bronze": BRONZE, "lead_bullion": INGOT, "silver": PRECIOUS,
 }
 
-DISPLAY = {"bastnasite": "Bastnäsite", "bastnasite_concentrate": "Bastnäsite Concentrate", "neodymium_iron_boron": "NdFeB", "samarium_cobalt": "SmCo", "aluminium_scandium": "Al-Sc"}
+DISPLAY = {"bastnasite": "Bastnäsite", "bastnasite_concentrate": "Bastnäsite Concentrate", "neodymium_iron_boron": "NdFeB", "dysprosium_neodymium_iron_boron": "Dy-NdFeB", "samarium_cobalt": "SmCo", "aluminium_scandium": "Al-Sc"}
 
 
 def item_name(material, form):

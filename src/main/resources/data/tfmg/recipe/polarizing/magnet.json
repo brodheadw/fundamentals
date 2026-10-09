@@ -1,13 +1,7 @@
 {
-  "type": "tfmg:polarizing",
-  "ingredients": [
+  "neoforge:conditions": [
     {
-      "tag": "c:ingots/neodymium_iron_boron"
-    }
-  ],
-  "results": [
-    {
-      "id": "tfmg:magnet"
+      "type": "neoforge:false"
     }
   ]
 }

@@ -1,0 +1,38 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": false,
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:plates/aluminum"
+    },
+    "C": {
+      "item": "tfmg:electromagnetic_coil"
+    },
+    "M": {
+      "item": "fundamentals:alnico_magnet"
+    },
+    "S": {
+      "tag": "c:storage_blocks/steel"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    }
+  },
+  "pattern": [
+    "CM  ",
+    "ACM ",
+    "ASCM",
+    "WAAC"
+  ],
+  "result": {
+    "count": 3,
+    "id": "tfmg:stator",
+    "components": {
+      "fundamentals:magnet": {
+        "grade": "alnico"
+      }
+    }
+  },
+  "show_notification": false
+}

@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:alnico_magnet",
+    "fundamentals:dysprosium_neodymium_iron_boron_magnet",
+    "fundamentals:neodymium_iron_boron_magnet",
+    "fundamentals:samarium_cobalt_magnet",
+    "tfmg:magnet"
+  ]
+}
