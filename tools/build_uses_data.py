@@ -136,8 +136,10 @@ def glass():
 
 def scandium():
     """Al-Sc: a little scandium makes aluminium light and weldable enough for airframes; here it makes a
-    rack go twice as far."""
+    rack go twice as far. The master alloy is mostly made without scandium metal at all: the fluoride stirred into molten
+    aluminium, which takes the fluorine and gives the scandium to the melt, the aluminium fluoride skimmed off as dross."""
     mixing("aluminium_scandium", item("scandium_ingot") + tag("c:ingots/aluminum", 7), [result("aluminium_scandium_ingot", 8)], "superheated")
+    mixing("aluminium_scandium_from_fluoride", item("scandium_fluoride") + tag("c:ingots/aluminum", 7), [result("aluminium_scandium_ingot", 7), result("slag")], "superheated")
     shaped(USES / "panel_rack_from_scandium.json", ["S S", "SSS"], {"S": {"tag": "c:plates/aluminium_scandium"}},
            {"count": 2, "id": "fundamentals:panel_rack"})
 

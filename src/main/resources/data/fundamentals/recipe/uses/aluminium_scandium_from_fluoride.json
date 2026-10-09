@@ -1,0 +1,39 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:scandium_fluoride"
+    },
+    {
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "tag": "c:ingots/aluminum"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:aluminium_scandium_ingot",
+      "count": 7
+    },
+    {
+      "id": "fundamentals:slag"
+    }
+  ],
+  "heat_requirement": "superheated"
+}

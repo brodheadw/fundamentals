@@ -27,8 +27,6 @@ MAGNET_ELEMENT = ("oxalate", "fluoride", "oxide", "dust", "ingot", "nugget", "bl
 VOLATILE = ("oxalate", "oxide", "dust", "ingot")
 VOLATILE_MAGNET = ("oxalate", "oxide", "dust", "ingot", "nugget", "block")
 DIDYMIUM = ("oxalate", "fluoride", "oxide", "dust", "ingot")
-# Scandium and didymium are not in the chloride liquors, so they have no oxalate.
-NO_LIQUOR = ("oxide", "dust", "ingot")
 ALLOY = ("dust", "ingot", "nugget", "plate", "block")
 RESIDUE = ("dust", "block")
 COBALT = ("dust", "ingot", "nugget")
@@ -82,7 +80,7 @@ METAL = {
     "ytterbium": tinted((202, 196, 148)),
     "lutetium": tinted((128, 158, 222)),
     "yttrium": ((68, 70, 78), (118, 122, 132), (168, 172, 182), (220, 224, 230)),
-    "scandium": ((104, 106, 112), (176, 180, 188), (220, 224, 230), (252, 253, 255)),
+    "scandium": tinted((232, 220, 168), 0.2),
     "didymium": tinted((140, 164, 176)),
     "neodymium_iron_boron": ((40, 42, 50), (82, 86, 98), (130, 134, 148), (196, 200, 214)),
     "samarium_cobalt": ((70, 64, 60), (124, 116, 108), (170, 162, 152), (222, 214, 204)),
@@ -123,8 +121,10 @@ OXIDE = {
     "thulium": ((126, 152, 128), (182, 208, 184), (216, 234, 216), (244, 252, 244)),
     "didymium": ((62, 54, 56), (104, 92, 94), (146, 132, 134), (196, 184, 186)),
 }
-for name in ("lanthanum", "gadolinium", "ytterbium", "lutetium", "yttrium", "scandium"):
+for name in ("lanthanum", "gadolinium", "ytterbium", "lutetium", "yttrium"):
     OXIDE[name] = mix(WHITE, METAL[name], 0.3)
+# scandia, and scandium's oxalate and fluoride, are plain white: Sc3+ has no colour to lend them
+OXIDE["scandium"] = WHITE
 # molybdenum trioxide, off the roaster: a pale yellow-white powder
 OXIDE["molybdenum"] = ((160, 156, 118), (218, 214, 170), (240, 238, 204), (254, 253, 234))
 # tungsten trioxide is canary yellow
@@ -151,6 +151,7 @@ ION = {
 }
 for name in ("lanthanum", "cerium", "gadolinium", "terbium", "ytterbium", "lutetium", "yttrium"):
     ION[name] = mix(WHITE, METAL[name], 0.2)
+ION["scandium"] = WHITE
 
 OTHER = {
     "bastnasite_concentrate": ((110, 76, 34), (168, 126, 66), (204, 168, 104), (236, 210, 156)),
@@ -167,13 +168,13 @@ OTHER = {
 
 # material: forms. Same order as the Java registry, which is the order of the creative tab.
 MATERIALS = {
-    "bastnasite": MINERAL, "monazite": MINERAL, "xenotime": MINERAL, "loparite": MINERAL, "euxenite": MINERAL,
+    "bastnasite": MINERAL, "monazite": MINERAL, "xenotime": MINERAL, "loparite": MINERAL, "euxenite": MINERAL, "thortveitite": MINERAL,
     "bastnasite_concentrate": CONCENTRATE, "light_rare_earth_concentrate": CONCENTRATE, "heavy_rare_earth_concentrate": CONCENTRATE,
     "lanthanum": ELEMENT, "cerium": ELEMENT, "praseodymium": MAGNET_ELEMENT, "neodymium": MAGNET_ELEMENT,
     "samarium": VOLATILE_MAGNET, "europium": VOLATILE,
     "gadolinium": ELEMENT, "terbium": MAGNET_ELEMENT, "dysprosium": MAGNET_ELEMENT, "holmium": ELEMENT,
     "erbium": ELEMENT, "thulium": VOLATILE, "ytterbium": VOLATILE, "lutetium": ELEMENT, "yttrium": ELEMENT,
-    "scandium": NO_LIQUOR,
+    "scandium": ELEMENT,
     "didymium": DIDYMIUM, "neodymium_iron_boron": ALLOY, "samarium_cobalt": ALLOY, "aluminium_scandium": ALLOY, "monazite_residue": RESIDUE,
     "cobalt": COBALT, "molybdenum": MOLYBDENUM, "rhenium": RHENIUM, "superalloy": STRUCTURAL, "molybdenum_steel": STRUCTURAL,
     "tungsten": TUNGSTEN, "copper_matte": MATTE, "blister_copper": BLISTER,

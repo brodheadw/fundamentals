@@ -33,7 +33,9 @@ BIOMES = {
     "porphyry": ["#minecraft:is_mountain", "#minecraft:is_hill"],
     "arid_oxide": ["#minecraft:is_badlands", "#minecraft:is_savanna", "minecraft:desert"],
     "laterite": ["#minecraft:is_jungle", "#minecraft:is_savanna", "minecraft:mangrove_swamp"],
-    "pegmatite": ["#minecraft:is_mountain", "#minecraft:is_hill", "#minecraft:is_badlands"],
+    # granite pegmatites crop out where old shield is bare: uplands, the boreal shield of Norway and Canada, Madagascar's plateau
+    "pegmatite": ["#minecraft:is_mountain", "#minecraft:is_hill", "#minecraft:is_badlands", "#minecraft:is_taiga",
+                  "minecraft:savanna_plateau", "minecraft:windswept_savanna"],
     "carbonatite": ["#minecraft:is_mountain", "#minecraft:is_badlands"],
     "alkaline": ["#minecraft:is_taiga", "minecraft:snowy_plains", "minecraft:grove", "minecraft:snowy_slopes"],
     "ion_clay": ["#minecraft:is_jungle"],
@@ -76,6 +78,7 @@ ORES = {
     "ion_adsorption_clay": ("rare_earth", "shovel", None),
     "loparite": ("rare_earth", "pickaxe", "iron"),
     "euxenite": ("rare_earth", "pickaxe", "iron"),
+    "thortveitite": ("rare_earth", "pickaxe", "iron"),
     "native_silver": ("silver", "pickaxe", "iron"),
     "argentite": ("silver", "pickaxe", "iron"),
     "sperrylite": ("platinum", "pickaxe", "iron"),
@@ -184,7 +187,8 @@ DEPOSITS = {
     "nickel_sulfide": ("bed", "gabbro", [("pentlandite", 0.14, "pockets")], (9, 12), (5, 7), None,
                        "anywhere", (-60, -8), 45, "rock"),
     # --- veins and dykes in mountain country ---
-    "pegmatite_dyke": ("vein", "minecraft:granite", [("xenotime", 0.08, "pockets"), ("euxenite", 0.04, "pockets")],
+    "pegmatite_dyke": ("vein", "minecraft:granite", [("xenotime", 0.08, "pockets"), ("euxenite", 0.04, "pockets"),
+                                                         ("thortveitite", 0.01, "pockets")],
                        (11, 15), (3, 5), (14, 24), "pegmatite", (-16, 48), 16, "rock"),
     "spodumene_pegmatite": ("vein", "minecraft:granite", [("spodumene", 0.30, "pockets")], (10, 14), (3, 5), (12, 20),
                             "pegmatite", (0, 64), 14, "rock"),
