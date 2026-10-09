@@ -22,6 +22,7 @@ Y = -60               # the floor the plant stands on is y -61; vats are y -60 a
 ROW = 12              # z between a battery and its children
 LANE = 6              # z north of a battery where the heavy pipe runs east
 MOTOR = "{ScrollValue:64}"
+LIQUOR_PIPE = "tfmg:plastic_pipe"   # the liquors are chlorides in dilute acid and eat copper; the organic does not
 
 lines, fills, refills = [], [], []
 bounds = [0, 0, 0, 0]   # min x, min z, max x, max z, grown as blocks are placed
@@ -122,7 +123,7 @@ def battery(liquor, x0, z0):
 def pipe_north(x, z_from, z_to):
     """Pipe from z_from north to z_to inclusive, pushed by the side pump behind it."""
     for z in range(z_from, z_to - 1, -1):
-        put(x, Y, z, "create:fluid_pipe[north=true,south=true]")
+        put(x, Y, z, f"{LIQUOR_PIPE}[north=true,south=true]")
 
 
 def pipe_jog(x_from, x_to, z_pipe, z_lane, z_to):
@@ -132,16 +133,16 @@ def pipe_jog(x_from, x_to, z_pipe, z_lane, z_to):
         pipe_north(x_from, z_pipe, z_to + 1)
         return
     for z in range(z_pipe, z_lane, -1):
-        put(x_from, Y, z, "create:fluid_pipe[north=true,south=true]")
-    put(x_from, Y, z_lane, "create:fluid_pipe[south=true,east=true]")
+        put(x_from, Y, z, f"{LIQUOR_PIPE}[north=true,south=true]")
+    put(x_from, Y, z_lane, f"{LIQUOR_PIPE}[south=true,east=true]")
     for x in range(x_from + 1, x_to):
         if (x - x_from) % 12 == 6 and x < x_to - 1:
             pump(x, Y, z_lane, "east", "x", (x - 1, Y + 1, z_lane), "east")
         else:
-            put(x, Y, z_lane, "create:fluid_pipe[east=true,west=true]")
-    put(x_to, Y, z_lane, "create:fluid_pipe[west=true,north=true]")
+            put(x, Y, z_lane, f"{LIQUOR_PIPE}[east=true,west=true]")
+    put(x_to, Y, z_lane, f"{LIQUOR_PIPE}[west=true,north=true]")
     for z in range(z_lane - 1, z_to, -1):
-        put(x_to, Y, z, "create:fluid_pipe[north=true,south=true]")
+        put(x_to, Y, z, f"{LIQUOR_PIPE}[north=true,south=true]")
 
 
 def station(x, z):
@@ -149,11 +150,11 @@ def station(x, z):
     of it beside. A basin pours out only onto something a belt could feed (a chute, a depot, another basin) with clear air
     beside it, so the oxalate goes into a chute that drops it into the top of a blast furnace; a furnace gives up what it
     made only from below, so a hopper under it sets the oxide on a depot."""
-    put(x, Y, z, "create:fluid_pipe[north=true,south=true]")
-    put(x, Y, z - 1, "create:fluid_pipe[south=true,up=true]")
-    put(x, Y + 1, z - 1, "create:fluid_pipe[down=true,up=true]")
-    put(x, Y + 2, z - 1, "create:fluid_pipe[down=true,up=true]")
-    put(x, Y + 3, z - 1, "create:fluid_pipe[down=true,north=true]")
+    put(x, Y, z, f"{LIQUOR_PIPE}[north=true,south=true]")
+    put(x, Y, z - 1, f"{LIQUOR_PIPE}[south=true,up=true]")
+    put(x, Y + 1, z - 1, f"{LIQUOR_PIPE}[down=true,up=true]")
+    put(x, Y + 2, z - 1, f"{LIQUOR_PIPE}[down=true,up=true]")
+    put(x, Y + 3, z - 1, f"{LIQUOR_PIPE}[down=true,north=true]")
     put(x, Y + 3, z - 2, 'create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}')
     put(x, Y + 5, z - 2, "create:mechanical_mixer")
     put(x + 1, Y + 5, z - 2, "create:cogwheel[axis=y]")
@@ -190,7 +191,7 @@ def main():
     # both the liquor and the sludge; that one is emptied by a pump into the root's feed tank and by a hopper into a chest
     tank(-9, Y + 1, 1, "crude_rare_earth_liquor")
     pump(-8, Y + 1, 1, "east", "x", (-9, Y + 2, 1), "east")
-    put(-7, Y + 1, 1, "create:fluid_pipe[east=true,west=true]")
+    put(-7, Y + 1, 1, f"{LIQUOR_PIPE}[east=true,west=true]")
     put(-6, Y + 1, 1, 'create:basin[facing=east]{InputItems:{Size:9,Items:[{Slot:0b,id:"tfmg:limesand",count:64}]}}')
     put(-6, Y + 3, 1, "create:mechanical_mixer")
     put(-6, Y + 3, 2, "create:cogwheel[axis=y]")
@@ -200,11 +201,11 @@ def main():
     put(-5, Y - 1, 1, "minecraft:hopper[facing=down]")
     put(-5, Y - 2, 1, "minecraft:chest")
     pump(-4, Y, 1, "east", "x", (-3, Y + 1, 1), "west")
-    put(-3, Y, 1, "create:fluid_pipe[east=true,west=true]")
+    put(-3, Y, 1, f"{LIQUOR_PIPE}[east=true,west=true]")
     # the chests at spawn: the components to build a stage, and the metals to build with
     chest = lambda x, z, items: put(x, Y, z, "minecraft:chest[facing=north]{Items:[" + ",".join(f'{{Slot:{i}b,id:"{it}",count:{n}}}' for i, (it, n) in enumerate(items)) + "]}")
     chest(6, 6, [("fundamentals:mixer_settler", 64), ("create:mechanical_mixer", 16), ("create:cogwheel", 32), ("create:creative_motor", 16), ("create:mechanical_pump", 16),
-                 ("create:fluid_pipe", 64), ("create:fluid_tank", 16), ("create:wrench", 1), ("fundamentals:oxalic_acid", 64), ("create:basin", 4), ("create:chute", 4),
+                 ("create:fluid_pipe", 64), ("tfmg:plastic_pipe", 64), ("create:fluid_tank", 16), ("create:wrench", 1), ("fundamentals:oxalic_acid", 64), ("create:basin", 4), ("create:chute", 4),
                  ("minecraft:blast_furnace", 4), ("create:depot", 4), ("minecraft:coal", 64), ("minecraft:lever", 4)])
     chest(6, 7, [("fundamentals:cobalt_ingot", 64), ("fundamentals:molybdenum_ingot", 64), ("fundamentals:rhenium_ingot", 32), ("fundamentals:tungsten_ingot", 64),
                  ("fundamentals:superalloy_plate", 32), ("fundamentals:molybdenum_steel_plate", 32), ("fundamentals:tungsten_carbide", 32), ("fundamentals:tungsten_filament", 32),
