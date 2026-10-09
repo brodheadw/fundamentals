@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "BBB",
+    "BDB",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "tag": "fundamentals:plastic_blocks"
+    },
+    "D": {
+      "tag": "c:dyes/light_gray"
+    }
+  },
+  "result": {
+    "count": 8,
+    "id": "fundamentals:light_gray_plastic_block"
+  }
+}

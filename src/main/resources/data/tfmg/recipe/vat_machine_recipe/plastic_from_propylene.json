@@ -1,0 +1,32 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "heat_requirement": "heated",
+  "machines": [
+    "tfmg:mixing"
+  ],
+  "min_size": 1,
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "tfmg:propylene"
+    },
+    {
+      "item": "fundamentals:ziegler_natta_catalyst"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:molten_plastic",
+      "amount": 500
+    },
+    {
+      "id": "fundamentals:ziegler_natta_catalyst",
+      "chance": 0.9
+    }
+  ]
+}

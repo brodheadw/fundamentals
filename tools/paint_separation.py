@@ -5,7 +5,7 @@ plant's salts. Edit and re-run; don't hand-edit the PNGs.
 The casing is a welded polypropylene tank, as the real ones are: Create's fluid-tank panel and connected-texture
 sheet (MIT) recoloured by luminance onto a dark flat PP grey, so the frame ribs land on the exterior edges of a stage
 the way Create's connected textures place them. The plastic tank is Create's copper tank sheet by sheet, recoloured the same
-way onto The Factory Must Grow's plastic, so it reads as the same stuff as its plastic pipes and pumps.
+way onto The Factory Must Grow's plastic and then made milky, so it reads as the same stuff as its plastic pipes and pumps.
 
     python3 tools/paint_separation.py
 """
@@ -24,6 +24,8 @@ STEEL = [(30, 33, 38), (40, 44, 50), (48, 52, 59), (56, 61, 68), (66, 72, 80), (
 # The Factory Must Grow's plastic, from its plastic block and pipes: a cool white grey.
 PLASTIC = [(95, 97, 115), (108, 114, 127), (136, 142, 155), (152, 156, 168), (167, 169, 180), (180, 182, 193), (196, 201, 207), (216, 221, 225), (234, 236, 238)]
 COPPER = [(120, 62, 44), (172, 96, 66), (212, 136, 98), (244, 190, 156)]
+# Natural polyethylene and polypropylene, unpigmented: milk-white, and thin enough to see shapes through.
+MILK = (240, 243, 245)
 
 
 def create_texture(name):
@@ -49,6 +51,22 @@ def steel(img, ramp=STEEL, floor=0.25, span=0.6):
             lo, hi = ramp[int(i)], ramp[min(len(ramp) - 1, int(i) + 1)]
             k = i - int(i)
             out.putpixel((x, y), tuple(int(lo[c] + (hi[c] - lo[c]) * k) for c in range(3)) + (255,))
+    return out
+
+
+def milky(img, palette=None):
+    """Natural plastic: the given tones (every opaque one, by default) drawn a quarter of the way to milk-white and let a little
+    light through, the light faces of a panel more than its dark seams and edges."""
+    out = img.copy()
+    px = out.load()
+    for y in range(img.height):
+        for x in range(img.width):
+            r, g, b, a = px[x, y]
+            if a < 255 or palette is not None and (r, g, b) not in palette:
+                continue
+            lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255
+            t = min(1.0, max(0.0, (lum - 0.4) / 0.53))
+            px[x, y] = tuple(round(c + (m - c) * 0.25) for c, m in zip((r, g, b), MILK)) + (round(245 - 60 * t),)
     return out
 
 
@@ -99,7 +117,7 @@ def cell_sheets():
     paramagnetic ions gather; a port in each end where the stream runs on to the next cell."""
     from paint_materials import METAL
     ndfeb = METAL["neodymium_iron_boron"]
-    body = steel(create_texture("fluid_tank"), PLASTIC, 0.32, 0.3)
+    body = milky(steel(create_texture("fluid_tank"), PLASTIC, 0.32, 0.3))
     sheets = {"side": body}
     magnet = body.copy()
     for y in range(3, 13):
@@ -171,7 +189,7 @@ def main():
     steel(create_texture("fluid_tank_top_connected")).save(TEXTURES / "block/mixer_settler_top_connected.png")
     # the copper sheet's tones span only a quarter of the range; stretched over all of the plastic's, it comes out as light as TFMG's
     for sheet in ("", "_connected", "_top", "_top_connected", "_inner", "_inner_connected", "_window", "_window_single"):
-        steel(create_texture(f"fluid_tank{sheet}"), PLASTIC, 0.32, 0.3).save(TEXTURES / f"block/plastic_fluid_tank{sheet}.png")
+        milky(steel(create_texture(f"fluid_tank{sheet}"), PLASTIC, 0.32, 0.3)).save(TEXTURES / f"block/plastic_fluid_tank{sheet}.png")
     for sheet, img in cell_sheets().items():
         img.save(TEXTURES / f"block/magnetomigration_cell_{sheet}.png")
     liquor("still").save(TEXTURES / "block/fluid/liquor_still.png")

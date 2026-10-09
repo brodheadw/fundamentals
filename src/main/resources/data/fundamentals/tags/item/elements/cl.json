@@ -12,7 +12,10 @@
     "fundamentals:hydrochloric_acid_bucket",
     "fundamentals:lithium_chloride",
     "fundamentals:magnesium_chloride",
+    "fundamentals:pvc_resin",
+    "fundamentals:pvc_sheet",
     "fundamentals:salt",
+    "fundamentals:ziegler_natta_catalyst",
     "minecraft:lapis_block",
     "minecraft:lapis_lazuli"
   ]

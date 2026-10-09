@@ -1,0 +1,26 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "tfmg:ethylene"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "fundamentals:chlorine"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:vinyl_chloride",
+      "amount": 500
+    },
+    {
+      "id": "fundamentals:hydrochloric_acid",
+      "amount": 250
+    }
+  ]
+}
