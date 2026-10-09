@@ -80,7 +80,7 @@ public class AcidTests {
     @GameTest(template = "battery", timeoutTicks = 300)
     public void copperPipesCorrodeUnderAcid(GameTestHelper helper) {
         Block tank = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:fluid_tank"));
-        Block pump = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:mechanical_pump"));
+        Block pump = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("tfmg:plastic_mechanical_pump"));
         Block pipe = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:fluid_pipe"));
         Block cog = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:cogwheel"));
         Block motor = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:creative_motor"));
@@ -109,6 +109,8 @@ public class AcidTests {
         Block copper = BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("create", "fluid_pipe"));
         helper.assertFalse(Hazards.corrodible(plastic.defaultBlockState()), "a plastic pipe should not corrode");
         helper.assertTrue(Hazards.corrodible(copper.defaultBlockState()), "a copper pipe should");
+        helper.assertTrue(Hazards.corrodible(BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("create", "mechanical_pump")).defaultBlockState()), "so should a copper pump");
+        helper.assertFalse(Hazards.corrodible(BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("tfmg", "plastic_mechanical_pump")).defaultBlockState()), "but not a plastic one");
         double liquor = Hazards.chance(new net.neoforged.neoforge.fluids.FluidStack(BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "rare_earth_liquor")), 1));
         double acid = Hazards.chance(new net.neoforged.neoforge.fluids.FluidStack(Acids.all().get("hydrochloric_acid").source, 1));
         helper.assertTrue(liquor > 0 && liquor < acid, "a liquor should eat copper, more slowly than acid: " + liquor + " vs " + acid);
