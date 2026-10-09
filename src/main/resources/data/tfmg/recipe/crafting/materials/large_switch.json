@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "WRS",
+    "HMP",
+    "III"
+  ],
+  "key": {
+    "S": {
+      "tag": "c:plates/silver"
+    },
+    "I": {
+      "item": "tfmg:cable_connector"
+    },
+    "M": {
+      "item": "tfmg:steel_mechanism"
+    },
+    "P": {
+      "item": "tfmg:electric_post"
+    },
+    "R": {
+      "item": "tfmg:rebar"
+    },
+    "H": {
+      "item": "tfmg:steel_cable_hub"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "tfmg:large_switch"
+  }
+}

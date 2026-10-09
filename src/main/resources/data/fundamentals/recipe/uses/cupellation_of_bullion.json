@@ -1,0 +1,25 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:lead_bullion_ingot"
+    },
+    {
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "tfmg:air"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:silver_nugget"
+    },
+    {
+      "id": "fundamentals:litharge"
+    }
+  ],
+  "heat_requirement": "heated"
+}

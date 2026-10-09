@@ -127,7 +127,10 @@ public class IronWorkingTests {
         helper.assertTrue(BloomeryBlockEntity.recipeFor(helper.getLevel(), new ItemStack(rawGalena)).isEmpty(),
                 "unroasted galena should not go in the bloomery");
         var smelt = BloomeryBlockEntity.recipeFor(helper.getLevel(), new ItemStack(IronWorking.roastedGalena()));
-        helper.assertTrue(smelt.isPresent() && smelt.get().value().result().is(lead), "roasted galena should give TFMG's lead ingot");
+        Item bullion = item("fundamentals:lead_bullion_ingot");
+        helper.assertTrue(smelt.isPresent() && smelt.get().value().result().is(bullion), "roasted galena should give lead bullion");
+        var remelt = recipes.getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(new ItemStack(bullion)), helper.getLevel());
+        helper.assertTrue(remelt.isPresent() && remelt.get().value().getResultItem(helper.getLevel().registryAccess()).is(lead), "a furnace should remelt bullion to TFMG's lead ingot");
         var copper = BloomeryBlockEntity.recipeFor(helper.getLevel(), new ItemStack(rawMalachite));
         helper.assertTrue(copper.isPresent() && copper.get().value().result().is(Items.COPPER_INGOT), "malachite should give a copper ingot");
         helper.succeed();

@@ -12,8 +12,9 @@ import java.util.function.BiConsumer;
  * glass that welders' goggles are made of, the roasted ores on their way to cobalt, copper, zinc and nickel, the
  * flue dust the molybdenite roaster gives up its rhenium in, the lithium chloride lithium is won from, the ferroboron
  * the magnets take their boron as, the soda ash, sodium salts and aluminium powder of the road to chromium, the roasted tin
- * concentrate the bloomery smelts, the solder circuit boards are joined with, the titania slag ilmenite smelts to, and the
- * magnesium chloride magnesium is won from and the Kroll process gives back. The recipes
+ * concentrate the bloomery smelts, the solder circuit boards are joined with, the titania slag ilmenite smelts to, the
+ * magnesium chloride magnesium is won from and the Kroll process gives back, and the zinc crust the Parkes process skims
+ * the silver off lead bullion in and the litharge cupellation leaves. The recipes
  * are written by tools/build_uses_data.py.
  */
 public final class Uses {
@@ -39,13 +40,15 @@ public final class Uses {
     private static Item solder;
     private static Item titaniaSlag;
     private static Item magnesiumChloride;
+    private static Item silverZincCrust;
+    private static Item litharge;
 
     private Uses() {}
 
     public static List<Item> items() {
         return List.of(phosphor, didymiumGlass, roastedCobaltite, roastedChalcopyrite, rheniumFlueDust, tungstenCarbide, tungstenFilament, clarifierSludge,
                 copperCalcine, zincOxide, roastedPentlandite, lithiumChloride, ferroboron, sodaAsh, sodiumChromate, sodiumDichromate,
-                aluminiumPowder, roastedTinConcentrate, solder, titaniaSlag, magnesiumChloride);
+                aluminiumPowder, roastedTinConcentrate, solder, titaniaSlag, magnesiumChloride, silverZincCrust, litharge);
     }
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
@@ -70,6 +73,8 @@ public final class Uses {
         registry.accept(id("solder"), solder = new Item(new Item.Properties()));
         registry.accept(id("titania_slag"), titaniaSlag = new Item(new Item.Properties()));
         registry.accept(id("magnesium_chloride"), magnesiumChloride = new Item(new Item.Properties()));
+        registry.accept(id("silver_zinc_crust"), silverZincCrust = new Item(new Item.Properties()));
+        registry.accept(id("litharge"), litharge = new Item(new Item.Properties()));
     }
 
     private static ResourceLocation id(String path) {
