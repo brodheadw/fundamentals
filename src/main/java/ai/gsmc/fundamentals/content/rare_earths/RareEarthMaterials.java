@@ -20,14 +20,14 @@ public final class RareEarthMaterials {
     // Europium and the heavies past dysprosium are sold as oxide; nothing here wants them as metal.
     private static final MaterialForm[] OXIDE_FORMS = {OXALATE, OXIDE};
     private static final MaterialForm[] SCANDIUM_FORMS = {OXALATE, FLUORIDE, OXIDE, INGOT, NUGGET};
-    private static final MaterialForm[] MAGNET_FORMS = {INGOT, DUST, NUGGET, PLATE, BLOCK};
+    private static final MaterialForm[] MAGNET_FORMS = {INGOT, NUGGET, PLATE, BLOCK};
     private static final MaterialForm[] ALLOY_FORMS = {INGOT, NUGGET, PLATE, BLOCK};
 
     private RareEarthMaterials() {}
 
     public static void register() {
         mineral("bastnasite", "Bastnäsite", "(Ce,La,Nd)CO3F", MINERAL_FORMS, 0.63, 0);
-        mineral("monazite", null, "(Ce,La,Nd,Th)PO4", MINERAL_FORMS, 0.65, 0.30);
+        mineral("monazite", null, "(Ce,La,Nd,Th)PO4", new MaterialForm[] {ORE, RAW}, 0.65, 0.30);
         mineral("xenotime", null, "YPO4", MINERAL_FORMS, 0.60, 0.10);
         mineral("ion_adsorption_clay", "Ion-Adsorption Clay", "", new MaterialForm[] {ORE, RAW}, 0.33, 0);
         mineral("loparite", null, "(Na,Ca,Ce)(Ti,Nb,Ta)O3", MINERAL_FORMS, 0.61, 0.15);

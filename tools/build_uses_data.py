@@ -173,19 +173,24 @@ def cerium():
 
 
 def lanthanum():
-    """Lanthanum oxide is the stabiliser of the FCC catalyst that cracks heavy oil; the Factory's cracking
-    of naphtha into ethylene and propylene now spends a little of it each run."""
-    write(TFMG / "vat_machine_recipe/naphtha.json", {
+    """Fluid catalytic cracking: heavy oil over a hot zeolite catalyst, its framework held together by lanthanum, breaks to gasoline
+    and propylene and lays coke on the catalyst, which the regenerator burns off; a little catalyst is lost as fines each pass.
+    The Factory's steam cracking of naphtha to ethylene and propylene needs no catalyst and is left as it is."""
+    write(USES / "fluid_catalytic_cracking.json", {
         "type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:steel_vat", "tfmg:firebrick_lined_vat"],
-        "heat_requirement": "heated", "machines": ["tfmg:mixing"], "min_size": 1,
-        "ingredients": [{"type": "neoforge:single", "amount": 500, "fluid": "tfmg:naphtha"}] + item("lanthanum_oxide"),
-        "results": [{"amount": 250, "id": "tfmg:ethylene"}, {"amount": 250, "id": "tfmg:propylene"}]})
+        "heat_requirement": "heated", "machines": ["tfmg:mixing"], "min_size": 1, "processing_time": 100,
+        "ingredients": [fluid("tfmg:heavy_oil", 500)] + item("lanthanum_oxide"),
+        "results": [out_fluid("tfmg:gasoline", 250), out_fluid("tfmg:propylene", 150), {"id": "fundamentals:lanthanum_oxide", "chance": 0.95},
+                    {"id": "tfmg:coal_coke_dust", "chance": 0.25}]})
 
 
 def phosphors():
-    """Europium gives the red and terbium the green, both on a yttria host: the phosphor of every
-    fluorescent tube and screen. The Factory's lamps take it."""
-    mixing("phosphor", item("yttrium_oxide", 2) + item("europium_oxide") + item("terbium_oxide"), [result("phosphor", 4)], "superheated")
+    """The tri-band phosphor of every fluorescent tube: europium's red on a yttria host, and terbium's green in lanthanum phosphate
+    with cerium to take up the ultraviolet, LAP, its phosphate from phosphoric acid. The Factory's lamps take it. The rest of the
+    acid the crackers give off goes the way most phosphoric acid goes, neutralised with ammonia to ammonium phosphate fertiliser."""
+    mixing("phosphor", item("yttrium_oxide", 2) + item("europium_oxide") + item("lanthanum_oxide") + item("cerium_oxide") + item("terbium_oxide")
+           + [fluid("phosphoric_acid", 250)], [result("phosphor", 6)], "superheated")
+    mixing("ammonium_phosphate", [fluid("phosphoric_acid", 250), fluid("ammonia", 250)], [result("minecraft:bone_meal")])
     shaped(TFMG / "crafting/materials/aluminum_lamp.json", ["P ", "BF", "S "],
            {"B": {"item": "tfmg:light_bulb"}, "P": {"item": "create:framed_glass_pane"}, "S": {"tag": "c:plates/aluminum"}, "F": {"item": "fundamentals:phosphor"}},
            {"count": 1, "id": "tfmg:aluminum_lamp"})

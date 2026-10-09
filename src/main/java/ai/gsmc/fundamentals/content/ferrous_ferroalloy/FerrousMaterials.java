@@ -49,12 +49,12 @@ public final class FerrousMaterials {
                 MaterialProperties.builder().density(0.95).hardness(0.75));
         reg("nickel", MaterialType.ELEMENT, "Ni", forms(INGOT, DUST, NUGGET),
                 MaterialProperties.builder().density(1.13).magnetStrength(0.30).conductivity(0.25).hardness(0.50));
-        reg("cobalt", MaterialType.ELEMENT, "Co", forms(INGOT, DUST, NUGGET),
+        reg("cobalt", MaterialType.ELEMENT, "Co", forms(INGOT, NUGGET),
                 MaterialProperties.builder().density(1.13).magnetStrength(0.45).heatResistance(0.85).hardness(0.55));
-        reg("molybdenum", MaterialType.ELEMENT, "Mo", forms(OXIDE, INGOT, DUST),
+        reg("molybdenum", MaterialType.ELEMENT, "Mo", forms(OXIDE, INGOT),
                 MaterialProperties.builder().density(1.30).heatResistance(0.88).hardness(0.80));
         // Rhenium rides in molybdenite at parts per million and leaves the roaster as flue dust; the superalloy is why anyone bothers.
-        reg("rhenium", MaterialType.ELEMENT, "Re", forms(INGOT, DUST),
+        reg("rhenium", MaterialType.ELEMENT, "Re", forms(INGOT),
                 MaterialProperties.builder().density(2.10).heatResistance(1.00).hardness(0.75));
         reg("superalloy", MaterialType.ALLOY, "Ni-Cr-Co-Re", forms(INGOT, PLATE),
                 MaterialProperties.builder().density(0.85).heatResistance(0.98).hardness(0.80));
@@ -68,7 +68,7 @@ public final class FerrousMaterials {
         // the cast magnet before the rare earths: iron with aluminium, nickel, cobalt and a little copper, weak but good past 500 °C
         reg("alnico", MaterialType.ALLOY, "Fe-Al-Ni-Co-Cu", forms(INGOT),
                 MaterialProperties.builder().density(0.95).magnetStrength(0.40).heatResistance(0.90).hardness(0.70));
-        reg("tungsten", MaterialType.ELEMENT, "W", forms(OXIDE, INGOT, DUST, PLATE),
+        reg("tungsten", MaterialType.ELEMENT, "W", forms(OXIDE, INGOT, PLATE),
                 MaterialProperties.builder().density(1.90).heatResistance(1.00).hardness(0.95).conductivity(0.30));
         reg("vanadium", MaterialType.ELEMENT, "V", forms(INGOT, DUST),
                 MaterialProperties.builder().density(0.77).hardness(0.80).heatResistance(0.65));

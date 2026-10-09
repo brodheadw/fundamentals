@@ -15,7 +15,7 @@ cd "$W"
 exec 3> $FIFO
 for i in {1..300}; do grep -q 'Done (' "$OUT" && break; grep -q 'GRADLE_EXIT' "$OUT" && break; sleep 2; done
 echo "test runall" >&3
-sleep 85   # the longest test fires a bloomery for 1200 ticks
+sleep 200  # the batches run one after another, and the bloomery batch alone fires for 1200 ticks
 echo "test runfailed" >&3
 sleep 4
 echo "stop" >&3

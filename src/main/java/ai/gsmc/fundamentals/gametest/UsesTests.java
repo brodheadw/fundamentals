@@ -57,9 +57,14 @@ public class UsesTests {
         ItemStack striker = recipe(helper, "fundamentals:uses/ferrocerium_striker").getResultItem(registries);
         helper.assertTrue(striker.is(net.minecraft.world.item.Items.FLINT_AND_STEEL) && striker.has(DataComponents.UNBREAKABLE),
                 "cerium and iron should make an unbreakable flint and steel");
-        helper.assertTrue(takes(recipe(helper, "tfmg:vat_machine_recipe/naphtha"), "fundamentals:lanthanum_oxide"), "cracking naphtha should spend lanthanum oxide");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/fluid_catalytic_cracking"), "fundamentals:lanthanum_oxide"), "cracking heavy oil should spend lanthanum oxide");
+        helper.assertFalse(takes(recipe(helper, "tfmg:vat_machine_recipe/naphtha"), "fundamentals:lanthanum_oxide"), "steam cracking naphtha wants no catalyst");
+        for (String vessel : new String[] {"fundamentals:mixer_settler", "fundamentals:magnetomigration_cell"}) {
+            helper.assertTrue(takes(recipe(helper, vessel), "fundamentals:stainless_steel_plate"), vessel + " should not need plastic, which needs the olefins");
+        }
         helper.assertTrue(recipe(helper, "fundamentals:uses/phosphor").getResultItem(registries).is(BuiltInRegistries.ITEM.get(ResourceLocation.parse("fundamentals:phosphor")))
-                && takes(recipe(helper, "fundamentals:uses/phosphor"), "fundamentals:europium_oxide"), "europium, terbium and yttria should make phosphor");
+                && takes(recipe(helper, "fundamentals:uses/phosphor"), "fundamentals:europium_oxide")
+                && takes(recipe(helper, "fundamentals:uses/phosphor"), "fundamentals:lanthanum_oxide"), "Y2O3:Eu and LaPO4:Ce,Tb should make phosphor");
         for (String lamp : new String[] {"tfmg:crafting/materials/aluminum_lamp", "tfmg:crafting/materials/circular_light"}) {
             helper.assertTrue(takes(recipe(helper, lamp), "fundamentals:phosphor"), lamp + " should take phosphor");
         }
@@ -80,7 +85,9 @@ public class UsesTests {
         helper.assertTrue(takes(recipe(helper, "tfmg:crafting/materials/gas_lamp"), "fundamentals:gas_mantle"), "the gas lamp should burn a mantle");
         helper.assertTrue(takes(recipe(helper, "fundamentals:uses/exhaust_three_way"), "fundamentals:rhodium_nugget"), "the three-way converter wants rhodium");
         for (String gone : new String[] {"fundamentals:slag", "fundamentals:europium_ingot", "fundamentals:lutetium_ingot", "fundamentals:neodymium_dust",
-                "fundamentals:aluminium_scandium_dust"}) {
+                "fundamentals:aluminium_scandium_dust", "fundamentals:cobalt_dust", "fundamentals:molybdenum_dust", "fundamentals:rhenium_dust",
+                "fundamentals:tungsten_dust", "fundamentals:monazite_dust", "fundamentals:neodymium_iron_boron_dust",
+                "fundamentals:dysprosium_neodymium_iron_boron_dust", "fundamentals:samarium_cobalt_dust"}) {
             helper.assertFalse(BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(gone)), gone + " should be gone");
         }
         helper.succeed();

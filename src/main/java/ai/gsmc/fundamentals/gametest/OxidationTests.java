@@ -1,6 +1,7 @@
 package ai.gsmc.fundamentals.gametest;
 
 import ai.gsmc.fundamentals.Fundamentals;
+import ai.gsmc.fundamentals.oxidation.CanisterItem;
 import ai.gsmc.fundamentals.oxidation.InertDrumBlockEntity;
 import ai.gsmc.fundamentals.oxidation.Oxidation;
 import ai.gsmc.fundamentals.separation.Separation;
@@ -11,6 +12,12 @@ import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
+import net.minecraft.world.SimpleContainer;
+import net.minecraft.world.entity.SlotAccess;
+import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.inventory.ChestMenu;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.util.FakePlayer;
@@ -101,6 +108,58 @@ public class OxidationTests {
         ItemStack polished = SandPaperPolishingRecipe.applyPolish(helper.getLevel(), Vec3.ZERO, green, ItemStack.EMPTY);
         helper.assertTrue(polished.is(Items.COPPER_INGOT) && !polished.has(Oxidation.STAGE), "sand paper should take the verdigris off, gave " + polished);
         helper.assertFalse(SandPaperPolishingRecipe.canPolish(helper.getLevel(), new ItemStack(Items.COPPER_INGOT)), "a bright ingot has nothing to polish");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 100)
+    public void anAgedDropPickedUpWithRoomForSomeIsNotDuplicated(GameTestHelper helper) {
+        FakePlayer player = FakePlayerFactory.getMinecraft(helper.getLevel());
+        Inventory inventory = player.getInventory();
+        inventory.clearContent();
+        inventory.setItem(0, new ItemStack(item("fundamentals:cerium_ingot"), 60));
+        for (int i = 1; i < inventory.items.size(); i++) {
+            inventory.setItem(i, new ItemStack(Items.DIRT, 64));
+        }
+        inventory.offhand.set(0, new ItemStack(Items.DIRT, 64));
+        Vec3 at = Vec3.atCenterOf(helper.absolutePos(new BlockPos(1, 1, 1)));
+        ItemEntity drop = new ItemEntity(helper.getLevel(), at.x, at.y, at.z, new ItemStack(item("fundamentals:cerium_ingot"), 64));
+        drop.setNoPickUpDelay();
+        drop.setData(Oxidation.CLOCK, -HUNDRED_DAYS);
+        helper.getLevel().addFreshEntity(drop);
+        helper.runAfterDelay(5, () -> {
+            drop.playerTouch(player);
+            drop.playerTouch(player);
+            int held = 0;
+            for (ItemStack stack : inventory.items) {
+                held += stack.is(Items.DIRT) ? 0 : stack.getCount();
+            }
+            int total = held + (drop.isAlive() ? drop.getItem().getCount() : 0);
+            inventory.clearContent();
+            helper.assertTrue(drop.getItem().has(Oxidation.STAGE) || !drop.getItem().is(item("fundamentals:cerium_ingot")), "a hundred days on the ground should have aged it");
+            helper.assertTrue(total == 124, "sixty in the pack and sixty-four on the ground should stay 124, not " + total);
+            drop.discard();
+            helper.succeed();
+        });
+    }
+
+    @GameTest(template = "empty")
+    public void aCanisterEmptiedIntoASmallSlotKeepsTheRestSealed(GameTestHelper helper) {
+        FakePlayer player = FakePlayerFactory.getMinecraft(helper.getLevel());
+        SimpleContainer one = new SimpleContainer(1) {
+            @Override
+            public int getMaxStackSize() {
+                return 1;
+            }
+        };
+        Slot slot = new Slot(one, 0, 0, 0);
+        ItemStack canister = new ItemStack(Oxidation.argonCanister());
+        CanisterItem.seal(canister, new ItemStack(item("fundamentals:cerium_ingot"), 64));
+        canister.getItem().overrideStackedOnOther(canister, slot, ClickAction.SECONDARY, player);
+        helper.assertTrue(one.getItem(0).getCount() == 1 && CanisterItem.contents(canister).getCount() == 63,
+                "one should go in and 63 stay sealed, got " + one.getItem(0) + " and " + CanisterItem.contents(canister));
+        ItemStack empty = new ItemStack(Oxidation.argonCanister());
+        helper.assertFalse(empty.getItem().overrideOtherStackedOnMe(empty, canister.copy(), slot, ClickAction.SECONDARY, player, SlotAccess.NULL),
+                "a canister should not seal another canister");
         helper.succeed();
     }
 }
