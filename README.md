@@ -1,6 +1,6 @@
 # Fundamentals
 
-Real ore minerals, real deposits, and the real road from rock to metal. A Create add-on for NeoForge 1.21.1.
+It's everything you've been waiting for. Iron ore? Cringe, not real. Real ore minerals, real deposits, and the real road from rock to metal. A Create add-on for NeoForge 1.21.1.
 
 ![Every ore in the mod](docs/images/all-ores.png)
 
