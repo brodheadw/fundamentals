@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "side": "fundamentals:block/inert_storage_drum_side",
+    "top": "fundamentals:block/inert_storage_drum_top",
+    "bottom": "fundamentals:block/inert_storage_drum_bottom"
+  }
+}

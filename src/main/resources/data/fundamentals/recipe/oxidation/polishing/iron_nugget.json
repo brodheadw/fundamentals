@@ -1,0 +1,29 @@
+{
+  "type": "create:sandpaper_polishing",
+  "ingredients": [
+    {
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "type": "neoforge:components",
+          "items": "minecraft:iron_nugget",
+          "components": {
+            "fundamentals:oxidation_stage": 1
+          }
+        },
+        {
+          "type": "neoforge:components",
+          "items": "minecraft:iron_nugget",
+          "components": {
+            "fundamentals:oxidation_stage": 2
+          }
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:iron_nugget"
+    }
+  ]
+}

@@ -1,9 +1,12 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:corroded_terbium_block",
+    "fundamentals:crumbled_terbium_block",
     "fundamentals:heavy_rare_earth_concentrate",
     "fundamentals:heavy_rare_earth_sulfate",
     "fundamentals:phosphor",
+    "fundamentals:tarnished_terbium_block",
     "fundamentals:terbium_block",
     "fundamentals:terbium_fluoride",
     "fundamentals:terbium_ingot",

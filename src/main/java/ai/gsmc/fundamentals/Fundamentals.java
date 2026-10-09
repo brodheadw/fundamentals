@@ -7,6 +7,9 @@ import ai.gsmc.fundamentals.client.ThermometerRenderer;
 import ai.gsmc.fundamentals.elements.PeriodicTable;
 import ai.gsmc.fundamentals.ironworking.IronWorking;
 import ai.gsmc.fundamentals.loot.AddToChests;
+import ai.gsmc.fundamentals.oxidation.InertDrumBlockEntity;
+import ai.gsmc.fundamentals.oxidation.Oxidation;
+import ai.gsmc.fundamentals.oxidation.Weathering;
 import ai.gsmc.fundamentals.loot.ScarceInChests;
 import ai.gsmc.fundamentals.loot.SwapDrop;
 import ai.gsmc.fundamentals.plastics.Plastics;
@@ -69,6 +72,7 @@ public class Fundamentals {
                 Uses.registerBlocks(helper::register);
                 Plastics.registerBlocks(helper::register);
                 Thermometers.registerBlocks(helper::register);
+                Oxidation.registerBlocks(helper::register);
             });
             event.register(Registries.BLOCK_ENTITY_TYPE, helper -> {
                 IronWorking.registerBlockEntities(helper::register);
@@ -76,6 +80,7 @@ public class Fundamentals {
                 Separation.registerBlockEntities(helper::register);
                 Plastics.registerBlockEntities(helper::register);
                 Thermometers.registerBlockEntities(helper::register);
+                Oxidation.registerBlockEntities(helper::register);
             });
             event.register(Registries.RECIPE_TYPE, helper -> {
                 IronWorking.registerRecipeTypes(helper::register);
@@ -98,8 +103,11 @@ public class Fundamentals {
                 PlatinumMetals.registerItems(helper::register);
                 Plastics.registerItems(helper::register);
                 Thermometers.registerItems(helper::register);
+                Oxidation.registerItems(helper::register);
                 PeriodicTable.registerItems(helper::register);
             });
+            event.register(Registries.DATA_COMPONENT_TYPE, helper -> Oxidation.registerComponents(helper::register));
+            event.register(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, helper -> Oxidation.registerAttachments(helper::register));
             event.register(Registries.FEATURE, helper -> helper.register(DEPOSIT, DepositFeature.INSTANCE));
             event.register(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, helper -> {
                 helper.register(ResourceLocation.fromNamespaceAndPath(MOD_ID, "scarce_in_chests"), ScarceInChests.CODEC);
@@ -113,12 +121,19 @@ public class Fundamentals {
         });
         NeoForge.EVENT_BUS.addListener(Hazards::onPlayerTick);
         NeoForge.EVENT_BUS.addListener(Plastics::onRightClick);
+        NeoForge.EVENT_BUS.addListener(Oxidation::onOpen);
+        NeoForge.EVENT_BUS.addListener(Oxidation::onClose);
+        NeoForge.EVENT_BUS.addListener(Oxidation::onPlayerTick);
+        NeoForge.EVENT_BUS.addListener(Oxidation::onPickup);
+        NeoForge.EVENT_BUS.addListener(Oxidation::onTooltip);
+        modBus.addListener(Oxidation::registerDataMaps);
         modBus.addListener(Heat::registerDataMaps);
         NeoForge.EVENT_BUS.addListener(Heat::registerCommands);
         modBus.addListener(RegisterCapabilitiesEvent.class, event -> {
             event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, Separation.mixerSettlerEntity(), MixerSettlerBlockEntity::handler);
             event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, Separation.magnetomigrationCellEntity(), MagnetomigrationCellBlockEntity::handler);
             event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, Separation.plasticTankEntity(), PlasticTankBlockEntity::handler);
+            event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, Oxidation.drumEntity(), InertDrumBlockEntity::handler);
             event.registerItem(Capabilities.FluidHandler.ITEM, (stack, context) -> new FluidBucketWrapper(stack), Separation.seawaterBucket());
         });
         modBus.addListener(FMLCommonSetupEvent.class, event -> event.enqueueWork(() ->
@@ -143,6 +158,7 @@ public class Fundamentals {
                     HandTools.items().forEach(output::accept);
                     Electricity.items().forEach(output::accept);
                     Thermometers.items().forEach(output::accept);
+                    Oxidation.items().forEach(output::accept);
                     OreBlocks.rawItems().forEach(output::accept);
                     OreBlocks.items().forEach(output::accept);
                 })
@@ -152,7 +168,10 @@ public class Fundamentals {
     private static CreativeModeTab materialsTab() {
         return CreativeModeTab.builder().title(Component.translatable("itemGroup.fundamentals.materials"))
                 .icon(() -> new ItemStack(MaterialItems.items().get(ResourceLocation.fromNamespaceAndPath(MOD_ID, "neodymium_ingot"))))
-                .displayItems((parameters, output) -> MaterialItems.items().values().forEach(output::accept))
+                .displayItems((parameters, output) -> {
+                    MaterialItems.items().values().forEach(output::accept);
+                    Weathering.items().forEach(output::accept);
+                })
                 .build();
     }
 }

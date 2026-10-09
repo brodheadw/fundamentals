@@ -20,6 +20,7 @@ from pathlib import Path
 
 from paint_materials import items
 from paint_minerals import GRADES, ROCK_BLOCKS, VARIANTS, WHOLE
+from paint_oxidation import BLOCKS as OXIDATION_BLOCKS
 
 ROOT = Path(__file__).resolve().parent.parent / "src/main/resources"
 ASSETS = ROOT / "assets/fundamentals"
@@ -232,8 +233,9 @@ PLASTIC_BLOCKS = [f"fundamentals:{dye}_plastic_block" for dye in ("white", "oran
                                                                   "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black")]
 OTHER_MINEABLE = {"pickaxe": ["fundamentals:bloomery", "fundamentals:panel_rack", "fundamentals:solar_panel", "fundamentals:mixer_settler", "fundamentals:plastic_fluid_tank",
                                 "fundamentals:magnetomigration_cell", "fundamentals:dyed_plastic_pipe",
-                                "fundamentals:mercury_thermometer", "fundamentals:bimetallic_thermometer", "fundamentals:type_k_thermocouple", "fundamentals:type_s_thermocouple"] + STORAGE_BLOCKS + PLASTIC_BLOCKS}
-OTHER_TIERED = {"stone": STORAGE_BLOCKS}
+                                "fundamentals:mercury_thermometer", "fundamentals:bimetallic_thermometer", "fundamentals:type_k_thermocouple", "fundamentals:type_s_thermocouple"] + STORAGE_BLOCKS + PLASTIC_BLOCKS
+                + [f"fundamentals:{name}" for name in OXIDATION_BLOCKS]}
+OTHER_TIERED = {"stone": STORAGE_BLOCKS + [f"fundamentals:{name}" for name in OXIDATION_BLOCKS if name != "inert_storage_drum"]}
 
 # Our ores and raw chunks are tagged by commodity in our own namespace, not in c:ores/<metal> and
 # c:raw_materials/<metal>: Create crushes and smelts whatever is in those straight to the metal, which would

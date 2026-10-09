@@ -9,9 +9,11 @@ What's agreed but not built, in the order it's likely to go. The working plan be
   Deferred by Will on 2026-10-08.
 - **Thorium handling.** Carrying thorium residue should slowly hurt (a radiation effect), and a lead-lined cask should
   carry it safely. Deferred the same day.
-- **Storage under argon / tarnish.** Lanthanum, cerium and neodymium oxidise in air. Chests don't tick their
-  contents, so this only works as a sealed canister item (argon-flushed) plus tarnish in the player's inventory and on
-  the ground. Design open since the oxide-to-metal work.
+- **Oxidation loose ends.** Vanilla's iron block and the Factory's steel block don't rust (Create's weathered iron block
+  is the obvious last stage); NdFeB, which really corrodes unless nickel-plated, doesn't age; an aged stack shows its stage
+  only in the tooltip, not its texture; items carried by hoppers or sitting in Create's vaults and toolboxes age only
+  when a player opens a container they land in; there is no desiccant; and calcium and lithium tarnish but never crust
+  through, since nothing here holds the crust.
 - **Temperature consumers.** `Heat.at` exists (the `heat` package). Still to hang on it: the tiers Create's recipes use
   as thresholds on the number, tarnish rate, and kerosene and the extractants igniting near heat. The Wildspell Magic
   side is wildspell-magic#7 (Freezing Grasp and Noon push on it, and spells read it back).

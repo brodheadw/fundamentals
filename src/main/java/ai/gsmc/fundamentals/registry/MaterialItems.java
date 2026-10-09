@@ -6,6 +6,7 @@ import ai.gsmc.fundamentals.material.Material;
 import ai.gsmc.fundamentals.material.MaterialForm;
 import ai.gsmc.fundamentals.material.MaterialRegistry;
 import ai.gsmc.fundamentals.material.MaterialType;
+import ai.gsmc.fundamentals.oxidation.Weathering;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -51,8 +52,11 @@ public final class MaterialItems {
         for (Material material : materials()) {
             if (material.has(MaterialForm.BLOCK)) {
                 ResourceLocation id = id(material, MaterialForm.BLOCK);
-                Block block = new Block(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).requiresCorrectToolForDrops()
-                        .strength(5.0F, 6.0F).sound(SoundType.METAL));
+                Block block = Weathering.storageBlock(material.id());
+                if (block == null) {
+                    block = new Block(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).requiresCorrectToolForDrops()
+                            .strength(5.0F, 6.0F).sound(SoundType.METAL));
+                }
                 BLOCKS.put(id, block);
                 registry.accept(id, block);
             }

@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:corroded_samarium_block",
+    "fundamentals:crumbled_samarium_block",
     "fundamentals:light_rare_earth_concentrate",
     "fundamentals:light_rare_earth_sulfate",
     "fundamentals:samarium_block",
@@ -12,6 +14,7 @@
     "fundamentals:samarium_ingot",
     "fundamentals:samarium_nugget",
     "fundamentals:samarium_oxalate",
-    "fundamentals:samarium_oxide"
+    "fundamentals:samarium_oxide",
+    "fundamentals:tarnished_samarium_block"
   ]
 }

@@ -1,0 +1,22 @@
+{
+  "type": "create:sandpaper_polishing",
+  "ingredients": [
+    {
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "type": "neoforge:components",
+          "items": "minecraft:iron_ingot",
+          "components": {
+            "fundamentals:oxidation_stage": 1
+          }
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:iron_ingot"
+    }
+  ]
+}
