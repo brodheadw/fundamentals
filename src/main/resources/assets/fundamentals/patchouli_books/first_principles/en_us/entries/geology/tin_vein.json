@@ -2,7 +2,7 @@
   "name": "Tin Vein",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_cassiterite",
-  "sortnum": 30,
+  "sortnum": 31,
   "pages": [
     {
       "type": "patchouli:text",

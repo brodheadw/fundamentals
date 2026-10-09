@@ -5,5 +5,6 @@
   "strip": "fundamentals:hydrochloric_acid",
   "stages": 12,
   "light": "fundamentals:lanthanum_liquor",
-  "heavy": "fundamentals:cerium_liquor"
+  "heavy": "fundamentals:cerium_liquor",
+  "light_fraction": 0.35
 }

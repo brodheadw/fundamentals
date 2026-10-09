@@ -158,7 +158,7 @@ def rare_earths():
     category("rare_earths", "The rare earths", "Sixteen metals that travel together and must be parted one by one. The longest road in the mod.",
              "fundamentals:neodymium_ingot", 2)
     entry("rare_earths", "minerals", "The minerals", "fundamentals:raw_bastnasite", pages_of(
-        "The rare earths are not rare, only mixed. Bastnäsite in carbonatite plugs and monazite in beach sand carry the light ones, "
+        "The rare earths are not rare, only mixed. Bastnäsite in carbonatite plugs and monazite carry the light ones: monazite in beach sand, in the weathered top of a carbonatite and in rare quartz veins, "
         "lanthanum to samarium. Xenotime and euxenite in pegmatite veins carry the heavy ones and yttrium, and now and then a greenish-black prism of thortveitite, the one scandium mineral. Loparite under cold country "
         "carries the lights too. Ion-adsorption clay under jungle is the odd one: a clay with the heavy rare earths merely stuck to it, "
         "which is why it is leached and never roasted.", "The minerals") + [
@@ -197,10 +197,13 @@ def rare_earths():
     cut_pages = []
     for liquor, cut in sorted(tree.items(), key=lambda kv: kv[1]["stages"]):
         cut_pages += pages_of(f"{pretty(liquor).capitalize()} parts into {pretty(cut['light'])} (raffinate, head end) and {pretty(cut['heavy'])} "
-                              f"(strip, tail end) in a battery of {cut['stages']} stages charged with {pretty(cut['organic'])}, stripped by {pretty(cut['strip'])}.")
+                              f"(strip, tail end) in a battery of {cut['stages']} stages charged with {pretty(cut['organic'])}, stripped by {pretty(cut['strip'])}. "
+                              f"Each batch comes out {round(cut.get('light_fraction', 0.5) * 100)} per cent raffinate.")
     entry("rare_earths", "cuts", "The fourteen cuts", "fundamentals:neodymium_oxalate", pages_of(
         f"Fourteen cuts take the mixed liquor down to single elements. A battery too short for its cut does nothing; the goggles say how many stages it wants. "
-        "The number is set by how alike the pair is: samarium leaves neodymium in eight, but neodymium from praseodymium takes thirty-two.",
+        "The number is set by how alike the pair is: samarium leaves neodymium in eight, but neodymium from praseodymium takes thirty-two. "
+        "A cut does not halve its liquor: a batch comes out light and heavy as the ore carries them. Monazite is nine parts lights to one of the rest, "
+        "and the clay's heavy liquor two-thirds yttrium, so europium and terbium come out a trickle.",
         "The fourteen cuts") + cut_pages, 3)
     # the road to each metal
     road_pages = []
