@@ -63,7 +63,12 @@ setblock 37 -60 51 minecraft:air
 setblock 37 -60 51 tfmg:plastic_mechanical_pump[facing=east]
 setblock 39 -60 53 minecraft:air
 setblock 39 -60 53 tfmg:plastic_mechanical_pump[facing=west]
+data merge block -18 -58 66 {InputItems:{Size:4,Items:[{Slot:0b,id:"fundamentals:lanthanum_oxide",count:8,components:{"minecraft:custom_data":{charge:1b}}}]}}
 data merge block -15 -58 67 {TankContent:{Fluid:{id:"tfmg:heavy_oil",amount:8000}}}
+setblock -20 -58 66 minecraft:air
+setblock -20 -58 66 create:mechanical_pump[facing=west]
+setblock -18 -58 69 minecraft:air
+setblock -18 -58 69 create:mechanical_pump[facing=south]
 setblock -16 -58 67 minecraft:air
 setblock -16 -58 67 create:mechanical_pump[facing=west]
 scoreboard players set #world showcase 3
