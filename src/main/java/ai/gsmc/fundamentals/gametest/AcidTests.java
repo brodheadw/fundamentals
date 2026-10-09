@@ -102,4 +102,16 @@ public class AcidTests {
             helper.succeed();
         });
     }
+
+    @GameTest(template = "empty")
+    public void liquorsEatCopperSlowlyAndPlasticHolds(GameTestHelper helper) {
+        Block plastic = BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("tfmg", "plastic_pipe"));
+        Block copper = BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("create", "fluid_pipe"));
+        helper.assertFalse(Hazards.corrodible(plastic.defaultBlockState()), "a plastic pipe should not corrode");
+        helper.assertTrue(Hazards.corrodible(copper.defaultBlockState()), "a copper pipe should");
+        double liquor = Hazards.chance(new net.neoforged.neoforge.fluids.FluidStack(BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "rare_earth_liquor")), 1));
+        double acid = Hazards.chance(new net.neoforged.neoforge.fluids.FluidStack(Acids.all().get("hydrochloric_acid").source, 1));
+        helper.assertTrue(liquor > 0 && liquor < acid, "a liquor should eat copper, more slowly than acid: " + liquor + " vs " + acid);
+        helper.succeed();
+    }
 }

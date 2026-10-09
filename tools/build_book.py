@@ -251,7 +251,7 @@ def rare_earths():
         "it is the one acid glass cannot hold. Nitric acid eats copper and iron, and aqua regia, three of hydrochloric to one of nitric, eats gold as well. Phosphoric acid only stings, which is why it is in your cola. Stone, deepslate and the vats shrug all of them off.") + pages_of(
         "Hydrofluoric acid, nitric acid and aqua regia fume. Within two blocks of any of them in the open, as a block or in a basin it is being used in, you take a hit a second and the world swims, and hydrofluoric poisons. "
         "The gas mask is Create's: a diving helmet over a filled copper backtank, which breathes its air instead. "
-        "And acid eats copper: a Create pipe carrying any acid corrodes and, after a couple of minutes on average, bursts and spills it. Run acid in The Factory Must Grow's plastic or glass pipes, which it cannot touch; its metal pipes fare no better than copper."), 9)
+        "And acid eats copper: a Create pipe carrying any acid corrodes and, after a couple of minutes on average, bursts and spills it. The liquors are chlorides in dilute acid, and the spent liquor and brine are chloride too: they eat copper as well, more slowly, eight minutes or so to a pipe. Run the plant in The Factory Must Grow's plastic or glass pipes, which neither can touch; its metal pipes fare no better than copper. The organic, kerosene, is harmless."), 9)
     entry("rare_earths", "making_acids", "Making the acids", "fundamentals:nitric_acid_bucket", pages_of(
         "Sulfuric acid is The Factory Must Grow's, from sulfur and saltpetre in a vat, and every other acid starts from it. "
         "Two salt and 500 mB of sulfuric acid in a heated basin give 500 mB of hydrochloric acid, the salt-cake process; salt is water boiled dry in a heated basin. "
@@ -357,7 +357,7 @@ def platinum():
         "Platinum is a catalyst. Two platinum nuggets, a rhenium ingot and four bauxite powder, heated, make four platinum-rhenium catalyst, "
         "and over one 500 mB of naphtha in a heated vat reforms to 400 mB of gasoline and gives off 100 mB of hydrogen, the catalyst surviving nineteen times in twenty. "
         "Eight platinum nuggets round a rhodium nugget weave the gauze ammonia is burnt over: 250 mB of ammonia and 1,000 mB of air, heated, give 250 mB of nitric acid, Ostwald's process, and the gauze is all but never used up.", "What they are for") + pages_of(
-        "Palladium on ceria burns what an engine leaves: the Factory's exhaust now takes two palladium nuggets with its cerium oxide. "
+        "Palladium on ceria burns what an engine leaves: two palladium nuggets with the cerium oxide make two exhausts instead of one. "
         "Ruthenium lets a superalloy carry more: a ruthenium nugget in the superalloy melt makes six ingots instead of four. "
         "An iridium-tipped spark plug outlasts four plain ones, so an iridium nugget, a flint and an aluminium ingot make four. "
         "And osmium was the first metal filament: an osmium sponge pastes and draws to four filaments, and a light bulb burns one as well as tungsten."), 3)

@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "pattern": [
-    "KPK",
+    "BPB",
     "EPE",
     "CPC"
   ],
   "key": {
-    "K": {
-      "tag": "c:nuggets/palladium"
+    "B": {
+      "item": "minecraft:iron_bars"
     },
     "C": {
       "tag": "c:ingots/cast_iron"
