@@ -40,4 +40,8 @@ execute unless data block 30 -60 37 TankContent.Fluid run data merge block 30 -6
 execute unless data block 26 -59 41 TankContent.Fluid run data merge block 26 -59 41 {TankContent:{Fluid:{id:"fundamentals:seawater",amount:8000}}}
 execute unless data block -18 -58 66 InputItems.Items[0] run data merge block -18 -58 66 {InputItems:{Size:4,Items:[{Slot:0b,id:"fundamentals:lanthanum_oxide",count:8,components:{"minecraft:custom_data":{charge:1b}}}]}}
 execute unless data block -15 -58 67 TankContent.Fluid run data merge block -15 -58 67 {TankContent:{Fluid:{id:"tfmg:heavy_oil",amount:8000}}}
+execute store result score #draw showcase run data get block -21 -58 66 TankContent.Fluid.amount
+execute if score #draw showcase matches 6000.. run data remove block -21 -58 66 TankContent.Fluid
+execute store result score #draw showcase run data get block -18 -58 70 TankContent.Fluid.amount
+execute if score #draw showcase matches 6000.. run data remove block -18 -58 70 TankContent.Fluid
 schedule function showcase:refill 200t

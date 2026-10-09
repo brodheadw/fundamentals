@@ -6691,7 +6691,7 @@ setblock -3 -59 1 create:creative_motor[facing=west]{ScrollValue:64}
 setblock -3 -60 1 tfmg:plastic_pipe[east=true,west=true]
 setblock 6 -60 6 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:mixer_settler",count:64},{Slot:1b,id:"create:mechanical_mixer",count:16},{Slot:2b,id:"create:cogwheel",count:32},{Slot:3b,id:"create:creative_motor",count:16},{Slot:4b,id:"tfmg:plastic_mechanical_pump",count:16},{Slot:5b,id:"create:mechanical_pump",count:8},{Slot:6b,id:"create:fluid_pipe",count:64},{Slot:7b,id:"tfmg:plastic_pipe",count:64},{Slot:8b,id:"create:fluid_tank",count:16},{Slot:9b,id:"fundamentals:plastic_fluid_tank",count:16},{Slot:10b,id:"create:wrench",count:1},{Slot:11b,id:"fundamentals:oxalic_acid",count:64},{Slot:12b,id:"create:basin",count:4},{Slot:13b,id:"create:chute",count:4},{Slot:14b,id:"minecraft:blast_furnace",count:4},{Slot:15b,id:"create:depot",count:4},{Slot:16b,id:"minecraft:coal",count:64},{Slot:17b,id:"minecraft:lever",count:4}]}
 setblock 6 -60 7 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:cobalt_ingot",count:64},{Slot:1b,id:"fundamentals:molybdenum_ingot",count:64},{Slot:2b,id:"fundamentals:rhenium_ingot",count:32},{Slot:3b,id:"fundamentals:tungsten_ingot",count:64},{Slot:4b,id:"fundamentals:superalloy_plate",count:32},{Slot:5b,id:"fundamentals:molybdenum_steel_plate",count:32},{Slot:6b,id:"fundamentals:tungsten_carbide",count:32},{Slot:7b,id:"fundamentals:tungsten_filament",count:32},{Slot:8b,id:"fundamentals:neodymium_iron_boron_ingot",count:32},{Slot:9b,id:"fundamentals:samarium_cobalt_ingot",count:32},{Slot:10b,id:"fundamentals:phosphor",count:32},{Slot:11b,id:"fundamentals:didymium_glass",count:32},{Slot:12b,id:"fundamentals:hydrochloric_acid_bucket",count:1},{Slot:13b,id:"fundamentals:hydrofluoric_acid_bucket",count:1},{Slot:14b,id:"fundamentals:nitric_acid_bucket",count:1},{Slot:15b,id:"fundamentals:raw_borax",count:32},{Slot:16b,id:"fundamentals:cerium_oxide",count:32},{Slot:17b,id:"fundamentals:neodymium_oxide",count:32},{Slot:18b,id:"fundamentals:lanthanum_ingot",count:32},{Slot:19b,id:"fundamentals:neodymium_ingot",count:32},{Slot:20b,id:"fundamentals:dysprosium_ingot",count:32},{Slot:21b,id:"fundamentals:aluminium_scandium_plate",count:32}]}
-setblock 6 -60 8 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"create:goggles",count:1},{Slot:1b,id:"fundamentals:mercury_thermometer",count:4},{Slot:2b,id:"fundamentals:bimetallic_thermometer",count:4},{Slot:3b,id:"fundamentals:type_k_thermocouple",count:4},{Slot:4b,id:"fundamentals:type_s_thermocouple",count:4},{Slot:5b,id:"fundamentals:neodymium_iron_boron_magnet",count:16},{Slot:6b,id:"fundamentals:dysprosium_neodymium_iron_boron_magnet",count:16},{Slot:7b,id:"fundamentals:samarium_cobalt_magnet",count:16},{Slot:8b,id:"fundamentals:alnico_magnet",count:16},{Slot:9b,id:"tfmg:generator",count:1,components:{"fundamentals:magnet":{grade:"neodymium_iron_boron"}}},{Slot:10b,id:"tfmg:generator",count:1,components:{"fundamentals:magnet":{grade:"dysprosium_neodymium_iron_boron"}}},{Slot:11b,id:"tfmg:generator",count:1,components:{"fundamentals:magnet":{grade:"samarium_cobalt"}}},{Slot:12b,id:"tfmg:generator",count:1,components:{"fundamentals:magnet":{grade:"alnico"}}},{Slot:13b,id:"tfmg:electric_motor",count:1,components:{"fundamentals:magnet":{grade:"neodymium_iron_boron"}}},{Slot:14b,id:"tfmg:electric_motor",count:1,components:{"fundamentals:magnet":{grade:"dysprosium_neodymium_iron_boron"}}},{Slot:15b,id:"tfmg:electric_motor",count:1,components:{"fundamentals:magnet":{grade:"samarium_cobalt"}}},{Slot:16b,id:"tfmg:electric_motor",count:1,components:{"fundamentals:magnet":{grade:"alnico"}}},{Slot:17b,id:"fundamentals:argon_canister",count:1},{Slot:18b,id:"fundamentals:argon_canister",count:1},{Slot:19b,id:"fundamentals:canister",count:16},{Slot:20b,id:"fundamentals:inert_storage_drum",count:4},{Slot:21b,id:"fundamentals:seawater_bucket",count:1},{Slot:22b,id:"fundamentals:salt",count:64}]}
+setblock 6 -60 8 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"create:goggles",count:1},{Slot:1b,id:"fundamentals:mercury_thermometer",count:4},{Slot:2b,id:"fundamentals:bimetallic_thermometer",count:4},{Slot:3b,id:"fundamentals:type_k_thermocouple",count:4},{Slot:4b,id:"fundamentals:type_s_thermocouple",count:4},{Slot:5b,id:"fundamentals:spirit_thermometer",count:4},{Slot:6b,id:"fundamentals:neodymium_iron_boron_magnet",count:16},{Slot:7b,id:"fundamentals:dysprosium_neodymium_iron_boron_magnet",count:16},{Slot:8b,id:"fundamentals:samarium_cobalt_magnet",count:16},{Slot:9b,id:"fundamentals:alnico_magnet",count:16},{Slot:10b,id:"tfmg:generator",count:1,components:{"fundamentals:magnet":{grade:"neodymium_iron_boron"}}},{Slot:11b,id:"tfmg:generator",count:1,components:{"fundamentals:magnet":{grade:"dysprosium_neodymium_iron_boron"}}},{Slot:12b,id:"tfmg:generator",count:1,components:{"fundamentals:magnet":{grade:"samarium_cobalt"}}},{Slot:13b,id:"tfmg:generator",count:1,components:{"fundamentals:magnet":{grade:"alnico"}}},{Slot:14b,id:"tfmg:electric_motor",count:1,components:{"fundamentals:magnet":{grade:"neodymium_iron_boron"}}},{Slot:15b,id:"tfmg:electric_motor",count:1,components:{"fundamentals:magnet":{grade:"dysprosium_neodymium_iron_boron"}}},{Slot:16b,id:"tfmg:electric_motor",count:1,components:{"fundamentals:magnet":{grade:"samarium_cobalt"}}},{Slot:17b,id:"tfmg:electric_motor",count:1,components:{"fundamentals:magnet":{grade:"alnico"}}},{Slot:18b,id:"fundamentals:argon_canister",count:1},{Slot:19b,id:"fundamentals:argon_canister",count:1},{Slot:20b,id:"fundamentals:canister",count:16},{Slot:21b,id:"fundamentals:inert_storage_drum",count:4},{Slot:22b,id:"fundamentals:seawater_bucket",count:1},{Slot:23b,id:"fundamentals:salt",count:64}]}
 setblock -20 -60 16 minecraft:polished_andesite
 setblock -20 -59 16 minecraft:polished_andesite
 setblock -20 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Every ore"','""','""','""']},is_waxed:1b}
@@ -7163,6 +7163,10 @@ setblock 19 -60 37 minecraft:blue_ice
 setblock 19 -60 38 minecraft:blue_ice
 setblock 19 -59 37 fundamentals:type_s_thermocouple[facing=up]
 setblock 19 -60 36 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Type S"','"Thermocouple"','""','""']},is_waxed:1b}
+setblock 24 -60 37 minecraft:blue_ice
+setblock 24 -60 38 minecraft:blue_ice
+setblock 24 -59 37 fundamentals:spirit_thermometer[facing=up]
+setblock 24 -60 36 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Spirit"','"Thermometer"','""','""']},is_waxed:1b}
 setblock 1 -60 42 minecraft:polished_andesite
 setblock 1 -59 42 minecraft:polished_andesite
 setblock 1 -59 41 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Ambient"','""','""','""']},is_waxed:1b}
@@ -7178,6 +7182,9 @@ setblock 14 -60 41 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Type
 setblock 19 -60 42 minecraft:polished_andesite
 setblock 19 -59 42 fundamentals:type_s_thermocouple[facing=up]
 setblock 19 -60 41 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Type S"','"Thermocouple"','""','""']},is_waxed:1b}
+setblock 24 -60 42 minecraft:polished_andesite
+setblock 24 -59 42 fundamentals:spirit_thermometer[facing=up]
+setblock 24 -60 41 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Spirit"','"Thermometer"','""','""']},is_waxed:1b}
 setblock 1 -60 47 minecraft:polished_andesite
 setblock 1 -59 47 minecraft:polished_andesite
 setblock 1 -59 46 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Beside three"','"lit blast"','"furnaces"','""']},is_waxed:1b}
@@ -7205,6 +7212,11 @@ setblock 20 -60 47 minecraft:blast_furnace[lit=true]
 setblock 19 -60 48 minecraft:blast_furnace[lit=true]
 setblock 19 -59 47 fundamentals:type_s_thermocouple[facing=up]
 setblock 19 -60 46 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Type S"','"Thermocouple"','""','""']},is_waxed:1b}
+setblock 24 -60 47 minecraft:polished_andesite
+setblock 23 -60 47 minecraft:blast_furnace[lit=true]
+setblock 25 -60 47 minecraft:blast_furnace[lit=true]
+setblock 24 -60 48 minecraft:blast_furnace[lit=true]
+setblock 24 -60 46 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Spirit boils"','"past 150 °C: it"','"would burst"','"here"']},is_waxed:1b}
 setblock 1 -60 52 minecraft:polished_andesite
 setblock 1 -59 52 minecraft:polished_andesite
 setblock 1 -59 51 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"On a lit blast"','"furnace"','""','""']},is_waxed:1b}
@@ -7219,6 +7231,8 @@ setblock 14 -60 51 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Type
 setblock 19 -60 52 minecraft:blast_furnace[lit=true]
 setblock 19 -59 52 fundamentals:type_s_thermocouple[facing=up]
 setblock 19 -60 51 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Type S"','"Thermocouple"','""','""']},is_waxed:1b}
+setblock 24 -60 52 minecraft:blast_furnace[lit=true]
+setblock 24 -60 51 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Spirit boils"','"past 150 °C: it"','"would burst"','"here"']},is_waxed:1b}
 setblock 1 -60 57 minecraft:polished_andesite
 setblock 1 -59 57 minecraft:polished_andesite
 setblock 1 -59 56 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"On a"','"superheated"','"blaze burner"','""']},is_waxed:1b}
@@ -7233,6 +7247,8 @@ setblock 14 -60 56 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Type
 setblock 19 -60 57 create:blaze_burner[blaze=seething]{isCreative:1b}
 setblock 19 -59 57 fundamentals:type_s_thermocouple[facing=up]
 setblock 19 -60 56 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Type S"','"Thermocouple"','""','""']},is_waxed:1b}
+setblock 24 -60 57 create:blaze_burner[blaze=seething]{isCreative:1b}
+setblock 24 -60 56 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Spirit boils"','"past 150 °C: it"','"would burst"','"here"']},is_waxed:1b}
 setblock 26 -60 37 fundamentals:plastic_fluid_tank
 setblock 26 -60 36 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Seawater"','""','""','""']},is_waxed:1b}
 setblock 28 -60 37 fundamentals:plastic_fluid_tank
