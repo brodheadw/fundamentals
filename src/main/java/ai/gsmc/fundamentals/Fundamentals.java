@@ -1,12 +1,14 @@
 package ai.gsmc.fundamentals;
 
 import ai.gsmc.fundamentals.client.GrindingAnimation;
+import ai.gsmc.fundamentals.client.PlasticsClient;
 import ai.gsmc.fundamentals.client.SeparationClient;
 import ai.gsmc.fundamentals.elements.PeriodicTable;
 import ai.gsmc.fundamentals.ironworking.IronWorking;
 import ai.gsmc.fundamentals.loot.AddToChests;
 import ai.gsmc.fundamentals.loot.ScarceInChests;
 import ai.gsmc.fundamentals.loot.SwapDrop;
+import ai.gsmc.fundamentals.plastics.Plastics;
 import ai.gsmc.fundamentals.power.Electricity;
 import ai.gsmc.fundamentals.registry.FundamentalsContent;
 import ai.gsmc.fundamentals.registry.HandTools;
@@ -62,11 +64,13 @@ public class Fundamentals {
                 Electricity.registerBlocks(helper::register);
                 Separation.registerBlocks(helper::register);
                 Uses.registerBlocks(helper::register);
+                Plastics.registerBlocks(helper::register);
             });
             event.register(Registries.BLOCK_ENTITY_TYPE, helper -> {
                 IronWorking.registerBlockEntities(helper::register);
                 Electricity.registerBlockEntities(helper::register);
                 Separation.registerBlockEntities(helper::register);
+                Plastics.registerBlockEntities(helper::register);
             });
             event.register(Registries.RECIPE_TYPE, helper -> {
                 IronWorking.registerRecipeTypes(helper::register);
@@ -87,6 +91,7 @@ public class Fundamentals {
                 Separation.registerItems(helper::register);
                 Uses.registerItems(helper::register);
                 PlatinumMetals.registerItems(helper::register);
+                Plastics.registerItems(helper::register);
                 PeriodicTable.registerItems(helper::register);
             });
             event.register(Registries.FEATURE, helper -> helper.register(DEPOSIT, DepositFeature.INSTANCE));
@@ -101,6 +106,7 @@ public class Fundamentals {
             });
         });
         NeoForge.EVENT_BUS.addListener(Hazards::onPlayerTick);
+        NeoForge.EVENT_BUS.addListener(Plastics::onRightClick);
         modBus.addListener(Heat::registerDataMaps);
         NeoForge.EVENT_BUS.addListener(Heat::registerCommands);
         modBus.addListener(RegisterCapabilitiesEvent.class, event -> {
@@ -113,6 +119,7 @@ public class Fundamentals {
         if (FMLEnvironment.dist == Dist.CLIENT) {
             GrindingAnimation.register(modBus);
             SeparationClient.register(modBus);
+            PlasticsClient.register(modBus);
         }
     }
 
@@ -124,6 +131,7 @@ public class Fundamentals {
                     Separation.items().forEach(output::accept);
                     Uses.items().forEach(output::accept);
                     PlatinumMetals.items().forEach(output::accept);
+                    Plastics.items().forEach(output::accept);
                     HandTools.items().forEach(output::accept);
                     Electricity.items().forEach(output::accept);
                     OreBlocks.rawItems().forEach(output::accept);

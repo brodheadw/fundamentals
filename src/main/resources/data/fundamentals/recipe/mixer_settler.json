@@ -8,7 +8,7 @@
   ],
   "key": {
     "P": {
-      "item": "tfmg:plastic_sheet"
+      "tag": "fundamentals:plastic_sheets"
     },
     "F": {
       "item": "create:fluid_pipe"

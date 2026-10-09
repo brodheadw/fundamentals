@@ -1,6 +1,8 @@
 package ai.gsmc.fundamentals.client;
 
 import ai.gsmc.fundamentals.Fundamentals;
+import ai.gsmc.fundamentals.plastics.Pigment;
+import ai.gsmc.fundamentals.separation.PlasticTankBlock;
 import com.simibubi.create.api.connectivity.ConnectivityHandler;
 import com.simibubi.create.content.fluids.tank.FluidTankCTBehaviour;
 import com.simibubi.create.foundation.block.connected.AllCTTypes;
@@ -17,6 +19,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.client.ChunkRenderTypeSet;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.client.model.data.ModelProperty;
 
@@ -24,7 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /** Create's fluid tank model with our sheets: connected textures across the multiblock, and the walls between two blocks of one
- * tank left out. Create's own is private to its two tanks. */
+ * tank left out. Create's own is private to its two tanks. Natural plastic draws translucent; a dyed tank draws the same milky
+ * sheets cutout, which makes them opaque, tinted by its dye. */
 class PlasticTankModel extends CTModel {
 
     private static final ModelProperty<boolean[]> JOINED = new ModelProperty<>();
@@ -61,6 +65,11 @@ class PlasticTankModel extends CTModel {
             }
         }
         quads.addAll(super.getQuads(state, null, rand, extraData, renderType));
-        return quads;
+        return state.getValue(PlasticTankBlock.COLOR) == Pigment.NONE ? quads : PlasticsClient.tinted(quads);
+    }
+
+    @Override
+    public ChunkRenderTypeSet getRenderTypes(BlockState state, RandomSource rand, ModelData data) {
+        return state.getValue(PlasticTankBlock.COLOR) == Pigment.NONE ? PlasticsClient.TRANSLUCENT : PlasticsClient.CUTOUT;
     }
 }

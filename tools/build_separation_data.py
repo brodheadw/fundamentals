@@ -108,6 +108,8 @@ PRECURSORS = {
     "ehehpa": ("EHEHPA", 0xF2EAC4),
     # colourless like phosphorus trichloride, and like it fuming to hydrogen chloride in moist air but harmless to dry steel
     "titanium_tetrachloride": ("Titanium Tetrachloride", 0xEEF0EA),
+    # the monomer of PVC, a colourless gas liquefied under pressure
+    "vinyl_chloride": ("Vinyl Chloride", 0xEEF0EE),
 }
 GASES = {
     "argon": ("Argon", 0xC8D8F0),
@@ -586,7 +588,7 @@ def mixer_settler():
     write(DATA / "loot_table/blocks/mixer_settler.json", {"type": "minecraft:block", "pools": [drop_self("mixer_settler")]})
     write(RECIPES / "mixer_settler.json", {
         "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["P P", "PPP", "PFP"],
-        "key": {"P": {"item": "tfmg:plastic_sheet"}, "F": {"item": "create:fluid_pipe"}},
+        "key": {"P": {"tag": "fundamentals:plastic_sheets"}, "F": {"item": "create:fluid_pipe"}},
         "result": {"id": "fundamentals:mixer_settler", "count": 6}})
     for name in PLANT_ITEMS:
         write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})
@@ -599,7 +601,8 @@ def magnetomigration_cell():
     faces = {"north": "end", "south": "end", "east": "magnet", "west": "side", "up": "top", "down": "side"}
     tex = {face: f"fundamentals:block/magnetomigration_cell_{sheet}" for face, sheet in faces.items()}
     write(ASSETS / "models/block/magnetomigration_cell.json",
-          {"parent": "minecraft:block/cube", "textures": {**tex, "particle": "fundamentals:block/magnetomigration_cell_side"}})
+          {"parent": "minecraft:block/cube", "render_type": "minecraft:translucent",
+           "textures": {**tex, "particle": "fundamentals:block/magnetomigration_cell_side"}})
     write(ASSETS / "blockstates/magnetomigration_cell.json", {"variants": {
         f"facing={facing}": {"model": "fundamentals:block/magnetomigration_cell", **({"y": y} if y else {})}
         for facing, y in (("north", 0), ("east", 90), ("south", 180), ("west", 270))}})
@@ -607,14 +610,15 @@ def magnetomigration_cell():
     write(DATA / "loot_table/blocks/magnetomigration_cell.json", {"type": "minecraft:block", "pools": [drop_self("magnetomigration_cell")]})
     write(RECIPES / "magnetomigration_cell.json", {
         "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["PPP", "PTM", "PPP"],
-        "key": {"P": {"item": "tfmg:plastic_sheet"}, "T": {"item": "fundamentals:plastic_fluid_tank"}, "M": {"item": "tfmg:magnet"}},
+        "key": {"P": {"tag": "fundamentals:plastic_sheets"}, "T": {"item": "fundamentals:plastic_fluid_tank"}, "M": {"item": "tfmg:magnet"}},
         "result": {"id": "fundamentals:magnetomigration_cell", "count": 1}})
 
 
 def plastic_tank():
     """Create's fluid tank in plastic: its own blockstate on Create's tank models, which take our sheets in place of the copper
     ones, and Create's recipe with plastic sheets for the copper. The acids and liquors are kept in fibreglass and polyethylene
-    tanks for the reason they run in plastic pipe."""
+    tanks for the reason they run in plastic pipe. The models draw it translucent, natural plastic; a dyed tank's colour is a
+    blockstate property the models ignore, and client.PlasticTankModel tints it and draws it opaque."""
     sheets = {"0": "top", "1": "", "3": "window", "4": "inner", "5": "window_single", "particle": ""}
     tex = {k: "fundamentals:block/plastic_fluid_tank" + (f"_{v}" if v else "") for k, v in sheets.items()}
     variants = {}
@@ -624,14 +628,14 @@ def plastic_tank():
             for shape in ("plain", "window", "window_ne", "window_nw", "window_se", "window_sw"):
                 name = f"block_{part}" + ("" if shape == "plain" else f"_{shape}")
                 write(ASSETS / f"models/block/plastic_fluid_tank/{name}.json",
-                      {"parent": f"create:block/fluid_tank/{name}", "render_type": "minecraft:cutout_mipped", "textures": tex})
+                      {"parent": f"create:block/fluid_tank/{name}", "render_type": "minecraft:translucent", "textures": tex})
                 variants[f"bottom={str(bottom).lower()},shape={shape},top={str(top).lower()}"] = {"model": f"fundamentals:block/plastic_fluid_tank/{name}"}
     write(ASSETS / "blockstates/plastic_fluid_tank.json", {"variants": variants})
     write(ASSETS / "models/item/plastic_fluid_tank.json", {"parent": "fundamentals:block/plastic_fluid_tank/block_single_window"})
     write(DATA / "loot_table/blocks/plastic_fluid_tank.json", {"type": "minecraft:block", "pools": [drop_self("plastic_fluid_tank")]})
     write(RECIPES / "plastic_fluid_tank.json", {
         "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["P", "B", "P"],
-        "key": {"P": {"item": "tfmg:plastic_sheet"}, "B": {"tag": "c:barrels/wooden"}},
+        "key": {"P": {"tag": "fundamentals:plastic_sheets"}, "B": {"tag": "c:barrels/wooden"}},
         "result": {"id": "fundamentals:plastic_fluid_tank", "count": 1}})
 
 

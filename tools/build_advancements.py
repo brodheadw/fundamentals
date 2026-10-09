@@ -17,7 +17,7 @@ from pathlib import Path
 
 from build_ore_data import ASSETS, DATA, DISPLAY, ORES, tag, write
 from build_separation_data import DISSOLVES, PLANT_ITEMS
-from build_uses_data import BLOCKS as USES_BLOCKS, ITEMS as USES_ITEMS, PGM_ITEMS
+from build_uses_data import BLOCKS as USES_BLOCKS, ITEMS as USES_ITEMS, PGM_ITEMS, PLASTIC_BLOCKS, PLASTIC_ITEMS
 from paint_elements import ELEMENTS
 from paint_materials import MATERIALS, items as material_items
 
@@ -63,6 +63,9 @@ ITEM_FORMULAS = {
     # a bloom is iron holding its slag, fayalite
     "iron_bloom": "Fe,Fe2SiO4", "roasted_galena": "PbO", "calcined_spodumene": "LiAlSi2O6", "photovoltaic_panel": "Si",
     "clarifier_sludge_block": "Fe(OH)3,Al(OH)3,Th(OH)4",
+    # Natta's catalyst, TiCl3 with the AlCl3 the aluminium leaves in it; polyvinyl chloride, and the polyethylene of the dyed blocks
+    "ziegler_natta_catalyst": "TiCl3,AlCl3", "pvc_resin": "C2H3Cl", "pvc_sheet": "C2H3Cl",
+    **{name: "C2H4" for name in PLASTIC_BLOCKS},
 }
 # Vanilla's, Create's and The Factory Must Grow's.
 OTHER_FORMULAS = {
@@ -102,6 +105,7 @@ OTHER_FORMULAS = {
         "silicon_ingot": "Si", "sulfur_dust": "S", "sulfur": "S", "sulfuric_acid_bucket": "H2SO4", "nitrate_dust": "KNO3",
         "copper_sulfate": "CuSO4", "coal_coke": "C", "coal_coke_dust": "C", "coal_coke_block": "C", "graphite_electrode": "C",
         "thermite_powder": "Al,Fe2O3", "slag": "Fe2SiO4",
+        "plastic_sheet": "C2H4", "plastic_block": "C2H4",
         "hydrogen_bucket": "H2", "neon_bucket": "Ne", "carbon_dioxide_bucket": "CO2", "air_bucket": "N2,O2,Ar",
     },
 }
@@ -157,7 +161,7 @@ def material_formulas():
 def our_items():
     names = [name for _, _, name in material_items()]
     names += [f"raw_{mineral}" for mineral in ORES] + [f"{mineral}_ore" for mineral in ORES]
-    names += list(USES_ITEMS) + list(PGM_ITEMS) + list(PLANT_ITEMS) + list(USES_BLOCKS) + [f"{acid}_bucket" for acid in DISSOLVES]
+    names += list(USES_ITEMS) + list(PGM_ITEMS) + list(PLANT_ITEMS) + list(USES_BLOCKS) + list(PLASTIC_ITEMS) + list(PLASTIC_BLOCKS) + [f"{acid}_bucket" for acid in DISSOLVES]
     names += ["iron_bloom", "roasted_galena", "calcined_spodumene", "photovoltaic_panel"]
     return names
 

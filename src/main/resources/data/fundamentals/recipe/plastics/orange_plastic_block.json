@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "BBB",
+    "BDB",
+    "BBB"
+  ],
+  "key": {
+    "B": {
+      "tag": "fundamentals:plastic_blocks"
+    },
+    "D": {
+      "tag": "c:dyes/orange"
+    }
+  },
+  "result": {
+    "count": 8,
+    "id": "fundamentals:orange_plastic_block"
+  }
+}
