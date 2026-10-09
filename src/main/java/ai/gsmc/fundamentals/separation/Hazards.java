@@ -40,11 +40,12 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import java.util.List;
 
 /**
- * What the plant does to people and pipes. The fuming acids (hydrofluoric, nitric, aqua regia) hurt anyone within reach of them
+ * What the plant does to people and pipes. The fuming acids (hydrofluoric, nitric, aqua regia) and bromine hurt anyone within reach of them
  * in the open: as blocks in the world, or in a basin they are being used in. Create's diving helmet on a filled
  * backtank is the gas mask, and breathes its air. And the acids eat copper: Create's pipes, pumps and valves carrying one
  * corrode and eventually burst, spilling it. The liquors are rare earth chlorides in dilute acid, and the spent liquor, the calcium chloride
- * liquor and bittern are chloride too, so they eat it as well, more slowly. Metal tanks go the same way, ten times slower for the thicker wall.
+ * liquor and bittern are chloride too, so they eat it as well, more slowly, and seawater, a tenth as salt as bittern, slower still.
+ * Metal tanks go the same way, ten times slower for the thicker wall.
  * Plastic pipes, pumps, valves and tanks, and glass pipes, do not corrode.
  */
 public final class Hazards {
@@ -55,6 +56,8 @@ public final class Hazards {
     public static double corrosionChance = 1.0 / 2400;
     /** Per tick, for a pipe carrying a liquor, crude liquor, spent liquor or any other chloride solution: on average eight minutes. */
     public static double liquorCorrosionChance = 1.0 / 9600;
+    /** Per tick, for a pipe carrying seawater: on average half an hour. */
+    public static double seawaterCorrosionChance = 1.0 / 36000;
     /** How many times longer a tank's wall lasts than a pipe's, for the same fluid: twenty minutes under acid, eighty under a liquor. */
     private static final int TANK_WALL = 10;
 
@@ -190,12 +193,12 @@ public final class Hazards {
 
     public static boolean corrodes(Reagents.Kind kind) {
         return kind == Reagents.Kind.ACID || kind == Reagents.Kind.LIQUOR || kind == Reagents.Kind.CRUDE || kind == Reagents.Kind.WASTE
-                || kind == Reagents.Kind.SALINE;
+                || kind == Reagents.Kind.SALINE || kind == Reagents.Kind.WATER;
     }
 
     public static double chance(FluidStack carried) {
         Reagents.Kind kind = Separation.kind(carried.getFluid());
-        return kind == Reagents.Kind.ACID ? corrosionChance : corrodes(kind) ? liquorCorrosionChance : 0;
+        return kind == Reagents.Kind.ACID ? corrosionChance : kind == Reagents.Kind.WATER ? seawaterCorrosionChance : corrodes(kind) ? liquorCorrosionChance : 0;
     }
 
     /** Create's pipes and tanks are copper and TFMG's metal pipes and tanks are metal; only plastic and glass stand up to acid,

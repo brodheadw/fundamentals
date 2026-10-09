@@ -1,9 +1,11 @@
 package ai.gsmc.fundamentals.gametest;
 
 import ai.gsmc.fundamentals.Fundamentals;
+import ai.gsmc.fundamentals.separation.Hazards;
 import ai.gsmc.fundamentals.separation.Separation;
 import ai.gsmc.fundamentals.worldgen.DepositFeature;
 import com.simibubi.create.AllRecipeTypes;
+import com.simibubi.create.content.fluids.tank.BoilerData;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -22,6 +24,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
@@ -63,9 +66,10 @@ public class SaltTests {
             helper.assertTrue(recipe.getFluidIngredients().stream().noneMatch(i -> i.ingredient().test(new FluidStack(Fluids.WATER, 1))),
                     holder.id() + " makes salt from fresh water");
             fromSeawater |= recipe.getFluidIngredients().stream().anyMatch(i -> i.ingredient().test(new FluidStack(Separation.fluid("seawater"), 1)))
-                    && recipe.getFluidResults().stream().anyMatch(f -> f.is(Separation.fluid("bittern")));
+                    && recipe.getFluidResults().stream().anyMatch(f -> f.is(Separation.fluid("bittern")))
+                    && recipe.getFluidResults().stream().anyMatch(f -> f.is(Fluids.WATER) && f.getAmount() == 900);
         }
-        helper.assertTrue(fromSeawater, "seawater should boil down to salt and bittern");
+        helper.assertTrue(fromSeawater, "seawater should boil down to salt and bittern and give its steam back as 900 mB of fresh water");
         var halite = recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "uses/salt_from_halite_milling"));
         helper.assertTrue(halite.isPresent() && halite.get().value().getIngredients().get(0).test(new ItemStack(BuiltInRegistries.ITEM.get(
                 ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "raw_halite")))), "a millstone should grind rock salt to salt");
@@ -75,6 +79,34 @@ public class SaltTests {
                 .get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "evaporite_bed"));
         helper.assertTrue(bed != null && bed.config() instanceof DepositFeature.Config config && config.ores().stream()
                 .anyMatch(ore -> BuiltInRegistries.BLOCK.getKey(ore.state().getBlock()).getPath().equals("halite_ore")), "the evaporite bed should carry halite");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void aBoilerRefusesSeawater(GameTestHelper helper) {
+        IFluidHandler boiler = new BoilerData().createHandler();
+        helper.assertTrue(boiler.fill(new FluidStack(Separation.fluid("seawater"), 1000), IFluidHandler.FluidAction.SIMULATE) == 0, "a boiler should refuse seawater");
+        helper.assertTrue(boiler.fill(new FluidStack(Fluids.WATER, 1000), IFluidHandler.FluidAction.SIMULATE) == 1000, "and take fresh water");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void chlorineFreesBromineFromBittern(GameTestHelper helper) {
+        var holder = helper.getLevel().getRecipeManager().byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "salt/bromine"));
+        helper.assertTrue(holder.isPresent(), "bittern and chlorine should make bromine");
+        ProcessingRecipe<?, ?> recipe = (ProcessingRecipe<?, ?>) holder.get().value();
+        helper.assertTrue(recipe.getFluidIngredients().stream().anyMatch(i -> i.ingredient().test(new FluidStack(Separation.fluid("bittern"), 1)))
+                && recipe.getFluidIngredients().stream().anyMatch(i -> i.ingredient().test(new FluidStack(Separation.fluid("chlorine"), 1)))
+                && recipe.getFluidResults().stream().anyMatch(f -> f.is(Separation.fluid("bromine"))), "from bittern and chlorine to bromine");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void seawaterEatsCopperSlowly(GameTestHelper helper) {
+        double sea = Hazards.chance(new FluidStack(Separation.fluid("seawater"), 1));
+        double bittern = Hazards.chance(new FluidStack(Separation.fluid("bittern"), 1));
+        helper.assertTrue(sea > 0 && sea < bittern, "seawater should eat copper, more slowly than bittern: " + sea + " vs " + bittern);
+        helper.assertTrue(Hazards.chance(new FluidStack(Fluids.WATER, 1)) == 0, "fresh water should not");
         helper.succeed();
     }
 }

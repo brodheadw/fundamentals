@@ -71,9 +71,13 @@ What's agreed but not built, in the order it's likely to go. The working plan be
   the world they belong with hydrofluoric and nitric acid in the fume handling.
 
 - **Salt loose ends.** Seawater is told from fresh water by biome (ocean and beach), so a pool dug on a beach is sea and a
-  lagoon in a river biome is not; it is no block of its own and pours out as water. There is no desalination, so ocean pumps
-  no longer feed what wants fresh water. Salt domes (halite plugs under a gypsum-anhydrite cap) are not generated: halite is
-  only in the evaporite beds. Bittern's potash and bromine are not drawn off.
+  lagoon in a river biome is not; it is no block of its own and pours out as water, so poured seawater still waters crops
+  (seawater refuses to hydrate farmland, but never stands in the world to try). Desalination is the salt pan's condensate,
+  not a membrane or a flash plant of its own. Salt domes (halite plugs under a gypsum-anhydrite cap) are not generated: halite is
+  only in the evaporite beds. Bittern's potash is not drawn off, and bromine comes off it by steaming-out only (the air-blown
+  process for seawater is not modelled).
+- **Bromine's real sinks.** Flame retardants (half the world's bromine), calcium bromide drilling brines, ethylene dibromide for
+  leaded petrol and silver bromide for film are not modelled; the halogen lamp is its one use.
 
 ## Plastics
 

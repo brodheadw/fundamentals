@@ -60,7 +60,7 @@ ITEM_FORMULAS = {
     "salt": "NaCl", "oxalic_acid": "H2C2O4", "roasted_bastnasite": "(Ce,La,Nd)OF", "light_rare_earth_sulfate": "(La,Ce,Pr,Nd,Sm)2(SO4)3",
     "heavy_rare_earth_sulfate": "(Y,Gd,Tb,Dy,Ho,Er,Tm,Yb,Lu)2(SO4)3", "calcium_chloride": "CaCl2", "calcium_ingot": "Ca", "white_phosphorus": "P4",
     "hydrochloric_acid_bucket": "HCl", "nitric_acid_bucket": "HNO3", "phosphoric_acid_bucket": "H3PO4", "hydrofluoric_acid_bucket": "HF",
-    "aqua_regia_bucket": "HNO3,HCl", "seawater_bucket": "H2O,NaCl,MgCl2",
+    "aqua_regia_bucket": "HNO3,HCl", "bromine_bucket": "Br2", "seawater_bucket": "H2O,NaCl,MgCl2",
     # a bloom is iron holding its slag, fayalite
     "iron_bloom": "Fe,Fe2SiO4", "roasted_galena": "PbO", "calcined_spodumene": "LiAlSi2O6", "photovoltaic_panel": "Si",
     "clarifier_sludge_block": "Fe(OH)3,Al(OH)3,Th(OH)4", "mercury": "Hg",
@@ -128,6 +128,7 @@ WHERE = {
     "P": "In bone, monazite and xenotime",
     "Cl": "In salt, seawater and hydrochloric acid",
     "Ar": "In a tank of air",
+    "Br": "In bittern, which chlorine frees it from",
     "K": "In saltpetre and gunpowder",
     "Ca": "In calcite, limestone, bone and fluorite",
     "Au": "Native gold, as it always was",

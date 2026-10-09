@@ -384,7 +384,8 @@ def thermometry():
 
 def tungsten():
     """Scheelite and wolframite decompose in hot hydrochloric acid to tungstic acid, which the heat takes to the trioxide; hydrogen
-    reduces the trioxide to the metal. The metal is drawn to the filament every light bulb burns, and carburised to the carbide
+    reduces the trioxide to the metal. The metal is drawn to the filament every light bulb burns (twice as long in a halogen
+    lamp), and carburised to the carbide
     every drill bites with."""
     for ore in ("scheelite", "wolframite"):
         mixing(f"tungsten_oxide_from_{ore}", item(f"raw_{ore}", 2) + [{"type": "neoforge:single", "amount": 500, "fluid": "fundamentals:hydrochloric_acid"}],
@@ -395,6 +396,10 @@ def tungsten():
     shaped(TFMG / "crafting/materials/light_bulb.json", ["CWC", "CGC", "NNN"],
            {"C": {"tag": "c:nuggets/copper"}, "G": {"item": "create:framed_glass"}, "N": {"tag": "c:nuggets/steel"}, "W": {"item": "fundamentals:tungsten_filament"}},
            {"count": 2, "id": "tfmg:light_bulb"})
+    # The halogen lamp: a whiff of bromine in a quartz envelope carries the tungsten that boils off the filament back onto it, so
+    # the filament runs hotter and lasts twice as long. Bromine's one use here; its big real ones, flame retardants, are not modelled.
+    mixing("light_bulb_halogen", item("tungsten_filament") + tag("c:gems/quartz") + tag("c:nuggets/copper", 4) + tag("c:nuggets/steel", 3)
+           + [{"type": "neoforge:single", "amount": 10, "fluid": "fundamentals:bromine"}], [result("tfmg:light_bulb", 4)])
     shaped(CREATE / "crafting/kinetics/mechanical_drill.json", [" A ", "AIA", " C "],
            {"A": {"item": "create:andesite_alloy"}, "C": {"item": "create:andesite_casing"}, "I": {"item": "fundamentals:tungsten_carbide"}},
            {"count": 1, "id": "create:mechanical_drill"})

@@ -305,6 +305,16 @@
         ]
       }
     },
+    "br": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/br"
+          }
+        ]
+      }
+    },
     "y": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
@@ -667,6 +677,7 @@
       "cu",
       "zn",
       "as",
+      "br",
       "y",
       "nb",
       "mo",

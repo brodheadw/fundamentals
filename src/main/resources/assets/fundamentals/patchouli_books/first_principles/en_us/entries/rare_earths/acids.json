@@ -27,7 +27,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "And acid eats copper: a Create pipe carrying any acid corrodes and, after a couple of minutes on average, bursts and spills it. The liquors are chlorides in dilute acid, and the spent liquor, the calcium chloride liquor and bittern are chloride too: they eat copper as well, more slowly, eight minutes or so to a pipe."
+      "text": "And acid eats copper: a Create pipe carrying any acid corrodes and, after a couple of minutes on average, bursts and spills it."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The liquors are chlorides in dilute acid, and the spent liquor, the calcium chloride liquor and bittern are chloride too: they eat copper as well, more slowly, eight minutes or so to a pipe; seawater slower still, half an hour."
     },
     {
       "type": "patchouli:text",
