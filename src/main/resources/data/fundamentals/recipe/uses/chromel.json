@@ -1,0 +1,42 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "fundamentals:chromium_ingot"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:chromel_ingot",
+      "count": 10
+    }
+  ],
+  "heat_requirement": "superheated"
+}

@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "fundamentals:block/bimetallic_thermometer"
+    },
+    "facing=east": {
+      "model": "fundamentals:block/bimetallic_thermometer",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "fundamentals:block/bimetallic_thermometer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "fundamentals:block/bimetallic_thermometer",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "fundamentals:block/bimetallic_thermometer",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "fundamentals:block/bimetallic_thermometer",
+      "x": 90
+    }
+  }
+}

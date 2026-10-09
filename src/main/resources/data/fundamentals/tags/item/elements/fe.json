@@ -3,6 +3,7 @@
   "values": [
     "create:crushed_raw_iron",
     "create:iron_sheet",
+    "fundamentals:bimetallic_thermometer",
     "fundamentals:bornite_ore",
     "fundamentals:chalcopyrite_ore",
     "fundamentals:chromite_concentrate",

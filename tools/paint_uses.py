@@ -63,6 +63,33 @@ def mantle():
     return img
 
 
+def flask():
+    """Mercury in a stoppered glass flask, the way it was sold: a bright silver pool with a mirror highlight under clear glass."""
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    glass, rim, cork = (200, 222, 230, 110), (150, 176, 188, 230), (138, 96, 58, 255)
+    mercury = [(92, 96, 106, 255), (156, 162, 174, 255), (212, 218, 228, 255), (250, 252, 255, 255)]
+    for y in range(1, 4):
+        for x in range(7, 10):
+            img.putpixel((x, y), cork)
+    for y in range(4, 7):
+        for x in (6, 9):
+            img.putpixel((x, y), rim)
+        for x in (7, 8):
+            img.putpixel((x, y), glass)
+    for y in range(7, 15):
+        half = min(5, 2 + (y - 6))
+        for x in range(8 - half, 8 + half):
+            edge = x in (8 - half, 8 + half - 1) or y == 14
+            if edge:
+                img.putpixel((x, y), rim)
+            elif y >= 10:
+                shade = 1 if x > 9 or y == 13 else 3 if (x, y) in ((4, 10), (5, 10), (4, 11)) else 2
+                img.putpixel((x, y), mercury[0] if y == 13 and x > 9 else mercury[shade])
+            else:
+                img.putpixel((x, y), glass)
+    return img
+
+
 def main():
     heap("phosphor", (255, 250, 252), (240, 226, 236), (196, 170, 190)).save(TEXTURES / "item/phosphor.png")
     lens().save(TEXTURES / "item/didymium_glass.png")
@@ -112,6 +139,7 @@ def main():
     # Parkes crust: zinc-silver alloy skimmed off the lead, a pale grey dross; litharge, PbO off the cupel, orange-yellow
     paint_raw("silver_zinc_crust", ((70, 72, 76), (118, 120, 124), (164, 166, 170), (212, 214, 216))).save(TEXTURES / "item/silver_zinc_crust.png")
     heap("litharge", (252, 206, 100), (230, 150, 46), (164, 88, 22)).save(TEXTURES / "item/litharge.png")
+    flask().save(TEXTURES / "item/mercury.png")
     print("uses textures written")
 
 

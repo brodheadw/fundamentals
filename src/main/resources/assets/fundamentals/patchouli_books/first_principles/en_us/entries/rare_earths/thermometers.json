@@ -1,0 +1,55 @@
+{
+  "name": "Thermometers",
+  "category": "fundamentals:rare_earths",
+  "icon": "fundamentals:type_k_thermocouple",
+  "sortnum": 14,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A thermometer is a dial gauge built like Create's speedometer, what does the sensing standing over an andesite casing. Mount one on the face of a block and it reads that block: a furnace's wall, a vat, a burner.",
+      "title": "Thermometers"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The needle swings bottom left to bottom right across its scale, goggles give the number, and a comparator reads 0 to 15 across the scale. Each kind reads over the range its material allows."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Mercury in glass, -39 to 357 °C: mercury freezes at -38.8 °C and boils at 356.7. Past the top the column boils and bursts its glass, leaving a little mercury and a breath of its vapour, which poisons anyone near and unmasked."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Mercury is roasted out of cinnabar in air, HgS + O2 giving Hg and SO2, the vapour condensed: a raw cinnabar and 250 mB of air in a heated basin give a flask of mercury."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Bimetallic, -50 to 500 °C: a strip of brass on steel curls as it warms, the brass growing half again as fast, and turns the needle itself. Past 500 it pegs."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Type K, -200 to 1,260 °C: chromel (nickel with a tenth of chromium) against alumel (nickel with a little aluminium) gives some 41 microvolts a degree, the everyday industrial thermocouple; past 1,260 the chromel oxidises and the reading drifts, so it pegs."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Nine nickel and a chromium, superheated, give ten chromel; nine nickel and an aluminium ten alumel."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Type S, -50 to 1,600 °C: platinum with a tenth of rhodium against pure platinum gives only ten microvolts a degree but holds its calibration to the melting of steel, for blast furnaces and superheated vats. A rhodium nugget over a platinum nugget make it."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The thermocouples wear their IEC colours: type K green, type S orange, the negative leg white."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:thermometers/mercury_thermometer",
+      "recipe2": "fundamentals:thermometers/bimetallic_thermometer"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:thermometers/type_k_thermocouple",
+      "recipe2": "fundamentals:thermometers/type_s_thermocouple"
+    }
+  ]
+}
