@@ -252,6 +252,7 @@
     "veridium": "create:veridium",
     "limestone": "create:limestone",
     "scoria": "create:scoria",
-    "scorchia": "create:scorchia"
+    "scorchia": "create:scorchia",
+    "quartz": "minecraft:quartz_block"
   }
 }

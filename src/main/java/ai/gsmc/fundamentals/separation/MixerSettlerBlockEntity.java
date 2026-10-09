@@ -381,7 +381,8 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         if (stall.isEmpty()) {
             SeparationRecipe cut = SeparationRecipe.forLiquor(level, head.aqueous.getFluid().getFluid()).orElseThrow();
             tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler.ready",
-                    head.aqueous.getFluid().getHoverName(), Battery.name(cut.light()), Battery.name(cut.heavy()))));
+                    head.aqueous.getFluid().getHoverName(), cut.lightOf(head.batch()), Battery.name(cut.light()),
+                    cut.heavyOf(head.batch()), Battery.name(cut.heavy()))));
             if (head.settled < battery.equilibration()) {
                 tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler.settling", (battery.equilibration() - head.settled) / 20)));
             }

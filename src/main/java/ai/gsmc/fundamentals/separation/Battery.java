@@ -12,7 +12,8 @@ import java.util.Optional;
 /**
  * The stages standing end to end, from the head forward. The head's controller runs the cut for the whole
  * battery: it takes a batch from its own aqueous tank, the feed, and from the tail's, the strip acid, and
- * puts the raffinate in its own out-tank and the loaded strip in the tail's. The stages between carry the
+ * parts the batch between the raffinate in its own out-tank and the loaded strip in the tail's, in the
+ * proportion the feed carries its lighter and heavier rare earths. The stages between carry the
  * organic forward and show the liquor working its way down the line.
  */
 public record Battery(List<MixerSettlerBlockEntity> stages) {
@@ -78,8 +79,9 @@ public record Battery(List<MixerSettlerBlockEntity> stages) {
         if (!tail.aqueous.getFluid().is(cut.strip()) || tail.aqueous.getFluidAmount() < batch) {
             return Optional.of(new Stall("strip", name(cut.strip())));
         }
-        if (head.out.fill(new FluidStack(cut.light(), batch), IFluidHandler.FluidAction.SIMULATE) < batch
-                || tail.out.fill(new FluidStack(cut.heavy(), batch), IFluidHandler.FluidAction.SIMULATE) < batch) {
+        int light = cut.lightOf(batch), heavy = cut.heavyOf(batch);
+        if (head.out.fill(new FluidStack(cut.light(), light), IFluidHandler.FluidAction.SIMULATE) < light
+                || tail.out.fill(new FluidStack(cut.heavy(), heavy), IFluidHandler.FluidAction.SIMULATE) < heavy) {
             return Optional.of(new Stall("full"));
         }
         if (head.waste.fill(new FluidStack(Separation.fluid("spent_liquor"), wastePerCut(head)), IFluidHandler.FluidAction.SIMULATE) < wastePerCut(head)) {
@@ -104,8 +106,8 @@ public record Battery(List<MixerSettlerBlockEntity> stages) {
         }
         head.aqueous.drain(batch, IFluidHandler.FluidAction.EXECUTE);
         tail.aqueous.drain(batch, IFluidHandler.FluidAction.EXECUTE);
-        head.out.fill(new FluidStack(cut.light(), batch), IFluidHandler.FluidAction.EXECUTE);
-        tail.out.fill(new FluidStack(cut.heavy(), batch), IFluidHandler.FluidAction.EXECUTE);
+        head.out.fill(new FluidStack(cut.light(), cut.lightOf(batch)), IFluidHandler.FluidAction.EXECUTE);
+        tail.out.fill(new FluidStack(cut.heavy(), cut.heavyOf(batch)), IFluidHandler.FluidAction.EXECUTE);
         head.waste.fill(new FluidStack(Separation.fluid("spent_liquor"), wastePerCut(head)), IFluidHandler.FluidAction.EXECUTE);
         // The aqueous phase is the depleting feed through the extraction stages and the acid loading up
         // through the strip stages; the stages between the ends fill with one or the other a tenth of a
