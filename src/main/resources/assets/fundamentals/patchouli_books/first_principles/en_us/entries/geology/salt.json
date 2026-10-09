@@ -1,0 +1,27 @@
+{
+  "name": "Salt and seawater",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:seawater_bucket",
+  "sortnum": 91,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The sea is salt and the rivers are not. Water drawn from a source in an ocean or off a beach, by bucket, hose pulley or a pump at an open pipe, comes up as seawater; from a river, a lake, a swamp or a cave it is fresh water as ever. In a tank, a pipe or poured out it is water in all but name.",
+      "title": "Salt and seawater"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Fresh water boils away to nothing: salt is made from seawater. 1,000 mB boiled down in a heated basin leaves two salt and 100 mB of bittern, the bitter mother liquor left once the halite has crystallised, rich in magnesium chloride; 500 mB of bittern boiled down gives a magnesium chloride, the titanium plant's magnesium."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Or dig it: halite, rock salt, lies in seams in the desert evaporite beds with the borax and trona, and a millstone or crushing wheels grind a raw halite to two salt. Bittern is a strong chloride and eats copper pipe like the liquors."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:raw_halite",
+      "text": "Halite is sodium chloride, glassy cubes that are colourless when pure and pink or orange where salt-loving microbes or a trace of iron stained it.",
+      "title": "Halite"
+    }
+  ]
+}

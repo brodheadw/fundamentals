@@ -13,11 +13,14 @@ import com.simibubi.create.foundation.block.connected.AllCTTypes;
 import com.simibubi.create.foundation.block.connected.CTModel;
 import com.simibubi.create.foundation.block.connected.CTSpriteShifter;
 import com.simibubi.create.foundation.block.connected.HorizontalCTBehaviour;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
+import net.neoforged.neoforge.common.NeoForgeMod;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
@@ -53,6 +56,10 @@ public final class SeparationClient {
         });
         modBus.addListener(RegisterClientExtensionsEvent.class, event -> {
             for (Reagents.Reagent reagent : Reagents.ALL) {
+                if (reagent.kind() == Reagents.Kind.WATER) {
+                    event.registerFluidType(new LikeWater(), Separation.fluidTypes().get(reagent.id()));
+                    continue;
+                }
                 // One texture for all of them, tinted; the organics are the opaque ones.
                 int alpha = reagent.kind() == Reagents.Kind.ORGANIC ? 0xF0 : 0xC8;
                 int tint = alpha << 24 | reagent.tint();
@@ -74,6 +81,43 @@ public final class SeparationClient {
                 }, Separation.fluidTypes().get(reagent.id()));
             }
         });
+    }
+
+    /** Seawater drawn exactly as water is: water's textures and the biome's water colour, read from vanilla water's own extensions. */
+    private static class LikeWater implements IClientFluidTypeExtensions {
+        private static IClientFluidTypeExtensions water() {
+            return IClientFluidTypeExtensions.of(NeoForgeMod.WATER_TYPE.value());
+        }
+
+        @Override
+        public ResourceLocation getStillTexture() {
+            return water().getStillTexture();
+        }
+
+        @Override
+        public ResourceLocation getFlowingTexture() {
+            return water().getFlowingTexture();
+        }
+
+        @Override
+        public ResourceLocation getOverlayTexture() {
+            return water().getOverlayTexture();
+        }
+
+        @Override
+        public ResourceLocation getRenderOverlayTexture(Minecraft minecraft) {
+            return water().getRenderOverlayTexture(minecraft);
+        }
+
+        @Override
+        public int getTintColor() {
+            return water().getTintColor();
+        }
+
+        @Override
+        public int getTintColor(FluidState state, BlockAndTintGetter getter, BlockPos pos) {
+            return water().getTintColor(state, getter, pos);
+        }
     }
 
     /** Walls and lids connect only within one stage: two stages end to end stay two tanks. */

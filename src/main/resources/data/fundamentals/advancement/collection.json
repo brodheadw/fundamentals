@@ -527,6 +527,18 @@
           }
         ]
       }
+    },
+    "fundamentals:raw_halite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_halite"
+            ]
+          }
+        ]
+      }
     }
   },
   "parent": "fundamentals:root"

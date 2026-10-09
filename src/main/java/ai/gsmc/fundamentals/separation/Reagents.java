@@ -5,7 +5,7 @@ import java.util.List;
 // Written by tools/build_separation_data.py; edit the table there.
 public final class Reagents {
 
-    public enum Kind { LIQUOR, ORGANIC, ACID, GAS, WASTE, CRUDE, FOULED, PRECURSOR }
+    public enum Kind { LIQUOR, ORGANIC, ACID, GAS, WASTE, SALINE, WATER, CRUDE, FOULED, PRECURSOR }
 
     public record Reagent(String id, int tint, Kind kind) {}
 
@@ -62,6 +62,8 @@ public final class Reagents {
             new Reagent("ruthenium_tetroxide", 0xF0A830, Kind.GAS),
             new Reagent("spent_liquor", 0x8E9A86, Kind.WASTE),
             new Reagent("brine", 0xDCE6E4, Kind.WASTE),
+            new Reagent("bittern", 0xE6DEB8, Kind.SALINE),
+            new Reagent("seawater", 0x3F76E4, Kind.WATER),
             new Reagent("crude_rare_earth_liquor", 0x8E7F86, Kind.CRUDE),
             new Reagent("crude_heavy_rare_earth_liquor", 0x9E9A80, Kind.CRUDE),
             new Reagent("fouled_p204", 0x6E5A38, Kind.FOULED),
