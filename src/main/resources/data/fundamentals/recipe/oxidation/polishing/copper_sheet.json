@@ -1,0 +1,36 @@
+{
+  "type": "create:sandpaper_polishing",
+  "ingredients": [
+    {
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "type": "neoforge:components",
+          "items": "create:copper_sheet",
+          "components": {
+            "fundamentals:oxidation_stage": 1
+          }
+        },
+        {
+          "type": "neoforge:components",
+          "items": "create:copper_sheet",
+          "components": {
+            "fundamentals:oxidation_stage": 2
+          }
+        },
+        {
+          "type": "neoforge:components",
+          "items": "create:copper_sheet",
+          "components": {
+            "fundamentals:oxidation_stage": 3
+          }
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "id": "create:copper_sheet"
+    }
+  ]
+}

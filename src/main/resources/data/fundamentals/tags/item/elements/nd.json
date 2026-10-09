@@ -4,6 +4,8 @@
     "fundamentals:bastnasite_concentrate",
     "fundamentals:bastnasite_dust",
     "fundamentals:bastnasite_ore",
+    "fundamentals:corroded_neodymium_block",
+    "fundamentals:crumbled_neodymium_block",
     "fundamentals:didymium_fluoride",
     "fundamentals:didymium_glass",
     "fundamentals:didymium_ingot",
@@ -28,6 +30,7 @@
     "fundamentals:raw_bastnasite",
     "fundamentals:raw_ion_adsorption_clay",
     "fundamentals:raw_monazite",
-    "fundamentals:roasted_bastnasite"
+    "fundamentals:roasted_bastnasite",
+    "fundamentals:tarnished_neodymium_block"
   ]
 }

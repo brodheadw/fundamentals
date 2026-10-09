@@ -1,0 +1,22 @@
+{
+  "type": "create:sandpaper_polishing",
+  "ingredients": [
+    {
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "type": "neoforge:components",
+          "items": "tfmg:steel_ingot",
+          "components": {
+            "fundamentals:oxidation_stage": 1
+          }
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:steel_ingot"
+    }
+  ]
+}

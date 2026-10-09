@@ -21,6 +21,7 @@ from build_separation_data import DISSOLVES, PLANT_ITEMS
 from build_uses_data import BLOCKS as USES_BLOCKS, ITEMS as USES_ITEMS, PGM_ITEMS, PLASTIC_BLOCKS, PLASTIC_ITEMS
 from paint_elements import ELEMENTS
 from paint_materials import MATERIALS, items as material_items
+from paint_oxidation import BLOCKS as OXIDATION_BLOCKS, FAMILIES as WEATHERING
 
 OUT = DATA / "advancement"
 ELEMENT_TAGS = DATA / "tags/item/elements"
@@ -68,6 +69,11 @@ ITEM_FORMULAS = {
     # Natta's catalyst, TiCl3 with the AlCl3 the aluminium leaves in it; polyvinyl chloride, and the polyethylene of the dyed blocks
     "ziegler_natta_catalyst": "TiCl3,AlCl3", "pvc_resin": "C2H3Cl", "pvc_sheet": "C2H3Cl",
     **{name: "C2H4" for name in PLASTIC_BLOCKS},
+    # rust is hydrated iron(III) oxide; the canister and the drum are steel, the canister holding its argon
+    "rusty_iron_ingot": "Fe,Fe2O3", "rusty_steel_ingot": "Fe-C,Fe2O3", "canister": "Fe", "argon_canister": "Fe,Ar", "inert_storage_drum": "Fe",
+    # a weathered block is its metal under its patina (basic copper carbonate), its tarnish (silver sulfide) or its oxide
+    **{name: {"bronze": "Cu-Sn,Cu2CO3(OH)2", "silver": "Ag,Ag2S"}.get(metal) or next(f"{sym},O" for sym, n in NAME.items() if n.lower() == metal)
+       for metal in WEATHERING for name in OXIDATION_BLOCKS if name.endswith(f"_{metal}_block")},
 }
 # Vanilla's, Create's and The Factory Must Grow's.
 OTHER_FORMULAS = {
@@ -166,6 +172,7 @@ def our_items():
     names += [f"raw_{mineral}" for mineral in ORES] + [f"{mineral}_ore" for mineral in ORES]
     names += list(USES_ITEMS) + list(PGM_ITEMS) + list(PLANT_ITEMS) + list(USES_BLOCKS) + list(PLASTIC_ITEMS) + list(PLASTIC_BLOCKS) + [f"{acid}_bucket" for acid in DISSOLVES] + ["seawater_bucket"]
     names += ["iron_bloom", "roasted_galena", "calcined_spodumene", "photovoltaic_panel"] + list(THERMOMETERS)
+    names += OXIDATION_BLOCKS + ["canister", "argon_canister", "rusty_iron_ingot", "rusty_steel_ingot"]
     return names
 
 

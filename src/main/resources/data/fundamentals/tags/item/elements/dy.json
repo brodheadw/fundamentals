@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:corroded_dysprosium_block",
+    "fundamentals:crumbled_dysprosium_block",
     "fundamentals:dysprosium_block",
     "fundamentals:dysprosium_fluoride",
     "fundamentals:dysprosium_ingot",
@@ -10,6 +12,7 @@
     "fundamentals:heavy_rare_earth_concentrate",
     "fundamentals:heavy_rare_earth_sulfate",
     "fundamentals:ion_adsorption_clay_ore",
-    "fundamentals:raw_ion_adsorption_clay"
+    "fundamentals:raw_ion_adsorption_clay",
+    "fundamentals:tarnished_dysprosium_block"
   ]
 }

@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:argon_canister",
     "tfmg:air_bucket"
   ]
 }

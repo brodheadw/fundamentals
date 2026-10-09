@@ -1,0 +1,66 @@
+{
+  "name": "Oxidation and storage",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:inert_storage_drum",
+  "sortnum": 9,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Metal left in air does not stay as it was made, and a chest does not save it. Aluminium, titanium, chromium, stainless steel, nickel, tin, zinc and lead grow a skin of oxide a few nanometres thick and stop there, so they keep. Gold and the platinum metals never change.",
+      "title": "Oxidation and storage"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Copper, brass and bronze take a patina, dull, then brown, then green with verdigris, which stops at the surface: a bronze statue keeps its shape for two thousand years. Silver blackens with the hydrogen sulfide in air, a film of silver sulfide."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Iron and steel rust, and only with water: in dry air they keep for years, by the sea they go in weeks, and an ingot rusts through to a rusty one, its scale flaking off. The rare earth metals are worse."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Their oxide is bigger than the metal it eats, so it spalls off and bares fresh metal under it: lanthanum and cerium go from a bright ingot to a pile of oxide in days of damp air, praseodymium and neodymium in weeks, samarium, gadolinium and the heavies slowly. Calcium and lithium crust over within hours, magnesium slowly."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)Copper: patina, 3 days a stage; damp, 1 day$(li)Brass: patina, 8 days a stage; damp, 2.7 days$(li)Bronze: patina, 6 days a stage; damp, 2 days$(li)Silver: tarnish, 8 days a stage; damp, 5.3 days$(li)Iron: rust, 15 days a stage; damp, 2.5 days$(li)Steel: rust, 25 days a stage; damp, 4.2 days$(li)Lanthanum: flaking, 1 day a stage; damp, 0.2 days",
+      "title": "Ingots, in game days"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)Cerium: flaking, 1 day a stage; damp, 0.2 days$(li)Praseodymium: flaking, 2 days a stage; damp, 0.5 days$(li)Didymium: flaking, 2.5 days a stage; damp, 0.6 days$(li)Neodymium: flaking, 3 days a stage; damp, 0.8 days$(li)Samarium: flaking, 8 days a stage; damp, 2 days$(li)Gadolinium: flaking, 8 days a stage; damp, 2 days$(li)Terbium: flaking, 15 days a stage; damp, 3.8 days"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)Dysprosium: flaking, 15 days a stage; damp, 3.8 days$(li)Yttrium: flaking, 20 days a stage; damp, 5 days$(li)Calcium: tarnish, 0.5 days a stage; damp, 0.1 days$(li)Lithium: tarnish, 1 day a stage; damp, 0.2 days$(li)Magnesium: tarnish, 10 days a stage; damp, 3.3 days"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The finer the metal, the faster: a nugget ages half again as fast as an ingot, a block a quarter as fast, and nine nuggets crumbled to oxide make one oxide."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Dry air (a desert, the Nether) slows it, and keeps iron from rusting at all; water touching the chest, a jungle or a swamp speeds it; the salt air of a beach or the sea doubles that again. An aged stack no longer stacks with fresh metal."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Create's sand paper polishes a patina, a tarnish or the first oxide off an ingot, nugget or sheet; a rusty ingot polishes back to seven nuggets, the rest gone as rust."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Storage is what the trade does. The inert storage drum holds a chest's worth under a blanket of argon piped in, a thousand millibuckets of it, and nothing inside it ages. Argon seeps out through the bung, ten millibuckets a day, and each time the lid comes off, twenty-five more are lost to the air let in."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Kerosene does the same and does not leak: the alkali metals and the rare earths have always been kept under oil. A canister filled with 100 mB of argon by a spout seals one stack away: right-click the stack onto it, and the canister empty-handed to open it."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Blocks weather in place as vanilla's copper does, one stage at a time, faster in the rain or by water: bronze to verdigris green, silver to black, and neodymium, praseodymium, samarium, terbium and dysprosium blocks tarnish, corrode and crumble to their oxide, nine of it when broken."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A honeycomb waxes bronze and silver as lacquer does a statue or a tray, and an axe scrapes a stage back; no wax saves a rare earth, and nothing scrapes back a block that has crumbled."
+    }
+  ]
+}

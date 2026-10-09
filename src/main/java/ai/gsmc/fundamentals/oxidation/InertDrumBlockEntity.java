@@ -1,0 +1,214 @@
+package ai.gsmc.fundamentals.oxidation;
+
+import ai.gsmc.fundamentals.separation.Separation;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.core.NonNullList;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.ContainerHelper;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.ChestMenu;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
+
+import javax.annotation.Nullable;
+
+/**
+ * A steel drum that holds a chest's worth of items under a blanket of argon, or under kerosene. Nothing in it ages while it is
+ * charged. Argon seeps out through the bung, ten millibuckets a day, and every time the lid comes off a little is lost to the air
+ * let in; kerosene stays. Nothing ticks: the contents are aged, and the gas drawn down, whenever the drum is opened, piped into
+ * or emptied.
+ */
+public class InertDrumBlockEntity extends BaseContainerBlockEntity {
+
+    public static final int CAPACITY = 1000;
+    /** Ten millibuckets of argon a day through the seals. */
+    public static final int TICKS_PER_MB = 2400;
+    /** What a lid's worth of air costs to flush back out. */
+    public static final int VENT = 25;
+    private static final TagKey<Fluid> KEROSENE = TagKey.create(Registries.FLUID, ResourceLocation.parse("c:kerosene"));
+
+    private static final long UNSET = Long.MIN_VALUE;
+
+    private NonNullList<ItemStack> items = NonNullList.withSize(27, ItemStack.EMPTY);
+    private long since = UNSET;
+    private long leakSince = UNSET;
+    private final Tank tank = new Tank();
+
+    private class Tank extends FluidTank {
+        Tank() {
+            super(CAPACITY, stack -> stack.is(Separation.fluid("argon")) || stack.is(KEROSENE));
+        }
+
+        @Override
+        public int fill(FluidStack resource, FluidAction action) {
+            settle();
+            return super.fill(resource, action);
+        }
+
+        @Override
+        public FluidStack drain(FluidStack resource, FluidAction action) {
+            settle();
+            return super.drain(resource, action);
+        }
+
+        @Override
+        public FluidStack drain(int max, FluidAction action) {
+            settle();
+            return super.drain(max, action);
+        }
+
+        void lose(int amount) {
+            super.drain(amount, FluidAction.EXECUTE);
+        }
+
+        @Override
+        protected void onContentsChanged() {
+            setChanged();
+        }
+    }
+
+    public InertDrumBlockEntity(BlockPos pos, BlockState state) {
+        super(Oxidation.drumEntity(), pos, state);
+    }
+
+    public IFluidHandler handler(@Nullable Direction side) {
+        return tank;
+    }
+
+    public FluidStack gas() {
+        settle();
+        return tank.getFluid();
+    }
+
+    private boolean argon() {
+        return tank.getFluid().is(Separation.fluid("argon"));
+    }
+
+    /** Ages what is inside up to now, counting only the time it lay unprotected, and lets out the argon that has leaked since. */
+    public void settle() {
+        if (level == null || level.isClientSide) {
+            return;
+        }
+        long now = level.getGameTime();
+        if (since == UNSET) {
+            since = leakSince = now;
+            setChanged();
+            return;
+        }
+        if (since == now) {
+            return;
+        }
+        long exposed;
+        if (tank.isEmpty()) {
+            exposed = now - since;
+        } else if (argon()) {
+            exposed = Math.max(0, now - Math.max(since, leakSince + (long) tank.getFluidAmount() * TICKS_PER_MB));
+        } else {
+            exposed = 0;
+        }
+        since = now;
+        if (argon()) {
+            int leaked = (int) Math.min(tank.getFluidAmount(), (now - leakSince) / TICKS_PER_MB);
+            leakSince = tank.getFluidAmount() == leaked ? now : leakSince + (long) leaked * TICKS_PER_MB;
+            tank.lose(leaked);
+        } else {
+            leakSince = now;
+        }
+        if (exposed > 0) {
+            for (int i = 0; i < items.size(); i++) {
+                items.set(i, Oxidation.age(items.get(i), exposed, Moisture.AIR, level.random));
+            }
+        }
+        setChanged();
+    }
+
+    /** For tests: as if the drum had stood shut for {@code ticks}. */
+    public void backdate(long ticks) {
+        settle();
+        since -= ticks;
+        leakSince -= ticks;
+    }
+
+    @Override
+    public void startOpen(Player player) {
+        settle();
+        if (argon()) {
+            tank.lose(VENT);
+        }
+    }
+
+    public Component reading() {
+        FluidStack gas = gas();
+        return gas.isEmpty() ? Component.translatable("block.fundamentals.inert_storage_drum.empty")
+                : Component.translatable("block.fundamentals.inert_storage_drum.charged", gas.getAmount(), gas.getHoverName());
+    }
+
+    @Override
+    public ItemStack removeItem(int slot, int amount) {
+        settle();
+        return super.removeItem(slot, amount);
+    }
+
+    @Override
+    public ItemStack removeItemNoUpdate(int slot) {
+        settle();
+        return super.removeItemNoUpdate(slot);
+    }
+
+    @Override
+    protected Component getDefaultName() {
+        return Component.translatable("block.fundamentals.inert_storage_drum");
+    }
+
+    @Override
+    protected NonNullList<ItemStack> getItems() {
+        return items;
+    }
+
+    @Override
+    protected void setItems(NonNullList<ItemStack> items) {
+        this.items = items;
+    }
+
+    @Override
+    protected AbstractContainerMenu createMenu(int id, Inventory inventory) {
+        return ChestMenu.threeRows(id, inventory, this);
+    }
+
+    @Override
+    public int getContainerSize() {
+        return items.size();
+    }
+
+    @Override
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
+        ContainerHelper.saveAllItems(tag, items, registries);
+        tag.put("Tank", tank.writeToNBT(registries, new CompoundTag()));
+        tag.putLong("Since", since);
+        tag.putLong("LeakSince", leakSince);
+    }
+
+    @Override
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
+        items = NonNullList.withSize(getContainerSize(), ItemStack.EMPTY);
+        ContainerHelper.loadAllItems(tag, items, registries);
+        tank.readFromNBT(registries, tag.getCompound("Tank"));
+        since = tag.contains("Since") ? tag.getLong("Since") : UNSET;
+        leakSince = tag.contains("LeakSince") ? tag.getLong("LeakSince") : UNSET;
+    }
+}

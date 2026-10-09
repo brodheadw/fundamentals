@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "fundamentals:block/inert_storage_drum"
+    }
+  }
+}
