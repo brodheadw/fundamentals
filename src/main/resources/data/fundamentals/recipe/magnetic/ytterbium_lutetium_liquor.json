@@ -1,0 +1,9 @@
+{
+  "type": "fundamentals:magnetic",
+  "liquor": "fundamentals:ytterbium_lutetium_liquor",
+  "light": "fundamentals:ytterbium_liquor",
+  "heavy": "fundamentals:lutetium_liquor",
+  "light_fraction": 0.85,
+  "attracted": "fundamentals:ytterbium_liquor",
+  "passes": 4
+}

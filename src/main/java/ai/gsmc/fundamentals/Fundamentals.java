@@ -12,6 +12,7 @@ import ai.gsmc.fundamentals.registry.FundamentalsContent;
 import ai.gsmc.fundamentals.registry.HandTools;
 import ai.gsmc.fundamentals.registry.MaterialItems;
 import ai.gsmc.fundamentals.registry.OreBlocks;
+import ai.gsmc.fundamentals.separation.MagnetomigrationCellBlockEntity;
 import ai.gsmc.fundamentals.separation.MixerSettlerBlockEntity;
 import ai.gsmc.fundamentals.separation.PlasticTankBlockEntity;
 import com.simibubi.create.AllMountedStorageTypes;
@@ -104,6 +105,7 @@ public class Fundamentals {
         NeoForge.EVENT_BUS.addListener(Heat::registerCommands);
         modBus.addListener(RegisterCapabilitiesEvent.class, event -> {
             event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, Separation.mixerSettlerEntity(), MixerSettlerBlockEntity::handler);
+            event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, Separation.magnetomigrationCellEntity(), MagnetomigrationCellBlockEntity::handler);
             event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, Separation.plasticTankEntity(), PlasticTankBlockEntity::handler);
         });
         modBus.addListener(FMLCommonSetupEvent.class, event -> event.enqueueWork(() ->

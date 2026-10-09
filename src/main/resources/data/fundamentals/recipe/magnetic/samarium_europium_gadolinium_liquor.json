@@ -1,0 +1,9 @@
+{
+  "type": "fundamentals:magnetic",
+  "liquor": "fundamentals:samarium_europium_gadolinium_liquor",
+  "light": "fundamentals:samarium_liquor",
+  "heavy": "fundamentals:europium_gadolinium_liquor",
+  "light_fraction": 0.3,
+  "attracted": "fundamentals:europium_gadolinium_liquor",
+  "passes": 3
+}

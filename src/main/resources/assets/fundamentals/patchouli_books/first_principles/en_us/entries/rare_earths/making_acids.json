@@ -2,7 +2,7 @@
   "name": "Making the acids",
   "category": "fundamentals:rare_earths",
   "icon": "fundamentals:nitric_acid_bucket",
-  "sortnum": 10,
+  "sortnum": 11,
   "pages": [
     {
       "type": "patchouli:text",

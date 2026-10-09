@@ -2,7 +2,7 @@
   "name": "Scandium",
   "category": "fundamentals:rare_earths",
   "icon": "fundamentals:scandium_ingot",
-  "sortnum": 6,
+  "sortnum": 7,
   "pages": [
     {
       "type": "patchouli:text",
