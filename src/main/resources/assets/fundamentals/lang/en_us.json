@@ -171,7 +171,7 @@
   "goggles.fundamentals.mixer_settler.plant": "Plant battery of %s, %s mB a batch",
   "goggles.fundamentals.mixer_settler.products": "Out %s at the head, %s at the tail",
   "goggles.fundamentals.mixer_settler.progress": "Organic on %s of %s stages, liquor in %s",
-  "goggles.fundamentals.mixer_settler.ready": "Parting %s into %s and %s",
+  "goggles.fundamentals.mixer_settler.ready": "Parting %s into %s mB %s and %s mB %s a batch",
   "goggles.fundamentals.mixer_settler.settling": "Coming to equilibrium: %s s",
   "goggles.fundamentals.mixer_settler.short": "%s parts in %s stages; this battery has %s",
   "goggles.fundamentals.mixer_settler.stage": "Stage %s across, %s along, %s tall",

@@ -2,7 +2,9 @@
 """The rare earth separation line: the reagent fluids, the solvent-extraction cuts, and the chemistry
 around them. Writes the Java reagent table, the cut recipes, the Create mixing recipes that make the
 reagents and liquors, the oxalate route out, the mixer-settler's and the plastic tank's blockstates, models,
-loot and recipes, the names, and the gametest template. Re-run after any edit; build_ore_data.py last for the tool tags.
+loot and recipes, the names, and the gametest template. Each cut parts a batch in the proportion its feed carries
+light and heavy: Australian monazite and Longnan ion-adsorption clay, per Gupta and Krishnamurthy, Extractive Metallurgy
+of Rare Earths (2005), at MONAZITE below. Re-run after any edit; build_ore_data.py last for the tool tags.
 
     python3 tools/paint_separation.py && python3 tools/build_separation_data.py && python3 tools/build_ore_data.py
 """
@@ -159,6 +161,49 @@ CUTS = [
     ("thulium_ytterbium_lutetium_liquor", "p204", 12, "thulium_liquor", "ytterbium_lutetium_liquor"),
     ("ytterbium_lutetium_liquor", "p507", 20, "ytterbium_liquor", "lutetium_liquor"),
 ]
+# A cut does not part its liquor in half: each batch comes out light and heavy in the proportion the feed carries
+# them. Per cent of the rare earth oxide in the two feeds, from Gupta and Krishnamurthy, Extractive Metallurgy of Rare
+# Earths (CRC, 2005), chapter 1, the analyses Castor and Hedrick also give in Industrial Minerals and Rocks (SME, 2006).
+# The mixed liquor is the lights' ore: Australian east-coast monazite, which bastnäsite (Mountain Pass: La 33, Ce 49,
+# Pr 4, Nd 12, everything after neodymium about 1 per cent) only makes lighter still. The heavy liquor is above all
+# the clay's: the high-yttrium ion-adsorption clay of Longnan, Jiangxi, which Malaysian xenotime (Y 61, Dy 8, Er 6,
+# Yb 7, Gd 4) closely resembles. The clay's own few per cent of lanthanum to neodymium ride with the samarium.
+MONAZITE = {"La": 23.9, "Ce": 46.0, "Pr": 5.0, "Nd": 17.4, "Sm": 2.53, "Eu": 0.05, "Gd": 1.49, "Tb": 0.04, "Dy": 0.69,
+            "Ho": 0.05, "Er": 0.21, "Tm": 0.01, "Yb": 0.12, "Lu": 0.04, "Y": 2.41}
+ION_CLAY = {"Sm": 2.8, "Eu": 0.1, "Gd": 6.9, "Tb": 1.3, "Dy": 6.7, "Ho": 1.6, "Er": 4.9, "Tm": 0.7, "Yb": 2.5, "Lu": 0.4, "Y": 64.9}
+CARRIES = {
+    "rare_earth_liquor": tuple(MONAZITE),
+    "light_rare_earth_liquor": ("La", "Ce", "Pr", "Nd"),
+    "heavy_rare_earth_liquor": tuple(ION_CLAY),
+    "lanthanum_cerium_liquor": ("La", "Ce"),
+    "praseodymium_neodymium_liquor": ("Pr", "Nd"),
+    "samarium_europium_gadolinium_liquor": ("Sm", "Eu", "Gd"),
+    "europium_gadolinium_liquor": ("Eu", "Gd"),
+    "terbium_to_lutetium_liquor": ("Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu", "Y"),
+    "terbium_dysprosium_liquor": ("Tb", "Dy"),
+    "yttrium_heavies_liquor": ("Y", "Ho", "Er", "Tm", "Yb", "Lu"),
+    "holmium_to_lutetium_liquor": ("Ho", "Er", "Tm", "Yb", "Lu"),
+    "holmium_erbium_liquor": ("Ho", "Er"),
+    "thulium_ytterbium_lutetium_liquor": ("Tm", "Yb", "Lu"),
+    "ytterbium_lutetium_liquor": ("Yb", "Lu"),
+    **{f"{e}_liquor": (s,) for e, s in (("lanthanum", "La"), ("cerium", "Ce"), ("praseodymium", "Pr"), ("neodymium", "Nd"),
+                                        ("samarium", "Sm"), ("europium", "Eu"), ("gadolinium", "Gd"), ("terbium", "Tb"),
+                                        ("dysprosium", "Dy"), ("holmium", "Ho"), ("erbium", "Er"), ("thulium", "Tm"),
+                                        ("ytterbium", "Yb"), ("lutetium", "Lu"), ("yttrium", "Y"))},
+}
+LIGHT_BRANCH = ("rare_earth_liquor", "light_rare_earth_liquor", "lanthanum_cerium_liquor", "praseodymium_neodymium_liquor")
+# Fractions are rounded to twentieths and kept between one and nineteen of them, so a pilot battery's 90 mB batch
+# still gives 5 mB of the scarce side: europium is 1.4 per cent of what feeds its cut and comes out at 5.
+LEAST = 0.05
+
+
+def light_fraction(liquor, light, heavy):
+    feed = MONAZITE if liquor in LIGHT_BRANCH else ION_CLAY
+    assert set(CARRIES[light]) | set(CARRIES[heavy]) == set(CARRIES[liquor]), liquor
+    share = sum(feed[e] for e in CARRIES[light]) / sum(feed[e] for e in CARRIES[liquor])
+    return min(1 - LEAST, max(LEAST, round(share * 20) / 20))
+
+
 STRIP = "hydrochloric_acid"
 # the plant's items that are not a form of a material
 PLANT_ITEMS = {"salt": "Salt", "oxalic_acid": "Oxalic Acid", "roasted_bastnasite": "Roasted Bastnäsite", "light_rare_earth_sulfate": "Light Rare Earth Sulfate",
@@ -357,7 +402,7 @@ def cuts():
         write(RECIPES / f"separation/{liquor}.json", {
             "type": "fundamentals:separation", "liquor": f"fundamentals:{liquor}", "organic": f"fundamentals:{organic}",
             "strip": f"fundamentals:{STRIP}", "stages": stages,
-            "light": f"fundamentals:{light}", "heavy": f"fundamentals:{heavy}"})
+            "light": f"fundamentals:{light}", "heavy": f"fundamentals:{heavy}", "light_fraction": light_fraction(liquor, light, heavy)})
 
 
 def oxalates():
@@ -546,7 +591,7 @@ def names():
     lang["goggles.fundamentals.mixer_settler.casing"] = "Casing: a stage is three across and three along"
     lang["goggles.fundamentals.mixer_settler.settling"] = "Coming to equilibrium: %s s"
     lang["goggles.fundamentals.mixer_settler.strip"] = "The far end wants %s"
-    lang["goggles.fundamentals.mixer_settler.ready"] = "Parting %s into %s and %s"
+    lang["goggles.fundamentals.mixer_settler.ready"] = "Parting %s into %s mB %s and %s mB %s a batch"
     lang["goggles.fundamentals.mixer_settler.progress"] = "Organic on %s of %s stages, liquor in %s"
     lang["goggles.fundamentals.mixer_settler.ends"] = "Feed %s, strip %s"
     lang["goggles.fundamentals.mixer_settler.products"] = "Out %s at the head, %s at the tail"

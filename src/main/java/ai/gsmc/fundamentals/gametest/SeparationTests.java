@@ -7,12 +7,14 @@ import ai.gsmc.fundamentals.separation.MixerSettlerBlockEntity;
 import ai.gsmc.fundamentals.separation.Separation;
 import ai.gsmc.fundamentals.separation.SeparationRecipe;
 import ai.gsmc.fundamentals.separation.VatGeometry;
+import ai.gsmc.fundamentals.worldgen.DepositFeature;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.ResourceLocation;
@@ -128,17 +130,20 @@ public class SeparationTests {
     @GameTest(template = "battery", timeoutTicks = 800)
     public void anEightStagePlantBatteryPartsTheLiquor(GameTestHelper helper) {
         int batch = 18 * MixerSettlerBlockEntity.BATCH_PER_CASING;
+        SeparationRecipe cut = SeparationRecipe.forLiquor(helper.getLevel(), Separation.fluid("rare_earth_liquor")).orElseThrow();
+        int light = cut.lightOf(batch), heavy = cut.heavyOf(batch);
+        helper.assertTrue(light + heavy == batch && light > 4 * heavy, "mixed liquor is mostly lights, got " + light + " light to " + heavy + " heavy a batch");
         plantBattery(helper, 8, "p507", () -> {
             helper.assertTrue(fill(helper, 1, Direction.WEST, "rare_earth_liquor", 1000) == 1000, "the head's back face should take the feed");
             helper.assertTrue(fill(helper, 24, Direction.EAST, "hydrochloric_acid", 1000) == 1000, "the tail's front face should take the acid");
             helper.runAfterDelay(settle(8), () -> {
                 FluidStack raffinate = held(helper, 1, Direction.NORTH);
                 FluidStack strip = held(helper, 24, Direction.NORTH);
-                int cuts = raffinate.getAmount() / batch;
-                helper.assertTrue(raffinate.is(Separation.fluid("light_rare_earth_liquor")) && cuts >= 1 && raffinate.getAmount() == cuts * batch,
-                        "the head should hold whole batches of light raffinate, got " + raffinate);
-                helper.assertTrue(strip.is(Separation.fluid("heavy_rare_earth_liquor")) && strip.getAmount() == cuts * batch,
-                        "the tail should hold the same batches of loaded strip, got " + strip);
+                int cuts = raffinate.getAmount() / light;
+                helper.assertTrue(raffinate.is(Separation.fluid("light_rare_earth_liquor")) && cuts >= 1 && raffinate.getAmount() == cuts * light,
+                        "the head should hold whole cuts of light raffinate, got " + raffinate);
+                helper.assertTrue(strip.is(Separation.fluid("heavy_rare_earth_liquor")) && strip.getAmount() == cuts * heavy,
+                        "the tail should hold the heavy share of the same cuts, got " + strip);
                 helper.assertTrue(held(helper, 1, Direction.WEST).getAmount() == 1000 - cuts * batch && held(helper, 24, Direction.EAST).getAmount() == 1000 - cuts * batch,
                         "each cut spends a batch of feed and of acid");
                 int organic = 0;
@@ -184,7 +189,8 @@ public class SeparationTests {
             fill(helper, 24, Direction.EAST, "hydrochloric_acid", 1125);
             helper.runAfterDelay(settle(8), () -> {
                 FluidStack raffinate = held(helper, 1, Direction.NORTH);
-                int small = 9 * MixerSettlerBlockEntity.BATCH_PER_CASING;
+                int small = SeparationRecipe.forLiquor(helper.getLevel(), Separation.fluid("rare_earth_liquor")).orElseThrow()
+                        .lightOf(9 * MixerSettlerBlockEntity.BATCH_PER_CASING);
                 helper.assertTrue(raffinate.is(Separation.fluid("light_rare_earth_liquor")) && raffinate.getAmount() >= small && raffinate.getAmount() % small == 0,
                         "the head should hold small batches of raffinate, got " + raffinate);
                 helper.succeed();
@@ -369,7 +375,9 @@ public class SeparationTests {
             helper.assertTrue(fill(helper, 1, Direction.WEST, "crude_rare_earth_liquor", 2000) == 2000, "the head should take a crude feed");
             fill(helper, 24, Direction.EAST, "hydrochloric_acid", 1000);
             helper.runAfterDelay(settle(8) + 2 * MixerSettlerBlockEntity.PERIOD, () -> {
-                helper.assertTrue(held(helper, 1, Direction.NORTH).getAmount() >= 3 * 18 * MixerSettlerBlockEntity.BATCH_PER_CASING, "three cuts should run on crude feed first");
+                int light = SeparationRecipe.forLiquor(helper.getLevel(), Separation.fluid("rare_earth_liquor")).orElseThrow()
+                        .lightOf(18 * MixerSettlerBlockEntity.BATCH_PER_CASING);
+                helper.assertTrue(held(helper, 1, Direction.NORTH).getAmount() >= 3 * light, "three cuts should run on crude feed first");
                 helper.assertTrue(held(helper, 4, Direction.UP).is(Separation.fluid("fouled_p507")), "the organic should be fouled after three crude cuts");
                 helper.assertTrue(casing(helper, 1, 1, 1).battery().stall().map(Battery.Stall::key).orElse("").equals("crud"), "the goggles should blame the crud");
                 var recipes = helper.getLevel().getRecipeManager();
@@ -471,6 +479,16 @@ public class SeparationTests {
                 "the molten-chloride electrolyses should give off chlorine");
         helper.assertTrue(recipe.apply("fundamentals:mixing/nitric_acid").getRequiredHeat() != com.simibubi.create.content.processing.recipe.HeatCondition.NONE,
                 "nitric acid is distilled off saltpetre: it wants heat");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void monaziteGeneratesInTheCarbonatiteTop(GameTestHelper helper) {
+        var feature = helper.getLevel().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE)
+                .get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "carbonatite_plug"));
+        helper.assertTrue(feature != null && feature.config() instanceof DepositFeature.Config config && config.ores().stream()
+                        .anyMatch(ore -> BuiltInRegistries.BLOCK.getKey(ore.state().getBlock()).getPath().equals("monazite_ore")),
+                "the carbonatite plug should carry monazite");
         helper.succeed();
     }
 

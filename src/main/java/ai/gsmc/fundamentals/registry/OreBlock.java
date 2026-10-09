@@ -37,7 +37,7 @@ public class OreBlock extends Block {
         LATERITE("fundamentals:laterite"),
         ASURINE("create:asurine"), CRIMSITE("create:crimsite"), OCHRUM("create:ochrum"),
         VERIDIUM("create:veridium"), LIMESTONE("create:limestone"), SCORIA("create:scoria"),
-        SCORCHIA("create:scorchia");
+        SCORCHIA("create:scorchia"), QUARTZ("minecraft:quartz_block");
 
         private static Map<Block, Host> byBlock;
 

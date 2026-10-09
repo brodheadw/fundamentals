@@ -162,6 +162,14 @@
     },
     {
       "when": {
+        "host": "quartz"
+      },
+      "apply": {
+        "model": "fundamentals:block/host/quartz"
+      }
+    },
+    {
+      "when": {
         "grade": "core"
       },
       "apply": [

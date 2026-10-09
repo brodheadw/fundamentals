@@ -1,0 +1,13 @@
+{
+  "name": "Monazite Vein",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_monazite",
+  "sortnum": 29,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A vein of quartz block, in mountains, hills and badlands, between y 0 and 40. Carries monazite in masses. Dig at the core: the edges are lean.",
+      "title": "Monazite Vein"
+    }
+  ]
+}

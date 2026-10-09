@@ -2,7 +2,7 @@
   "name": "Silver Vein",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_argentite",
-  "sortnum": 31,
+  "sortnum": 32,
   "pages": [
     {
       "type": "patchouli:text",
