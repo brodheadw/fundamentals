@@ -4,13 +4,17 @@
     {
       "type": "neoforge:single",
       "amount": 1000,
-      "fluid": "minecraft:water"
+      "fluid": "fundamentals:seawater"
     }
   ],
   "results": [
     {
       "id": "fundamentals:salt",
       "count": 2
+    },
+    {
+      "id": "fundamentals:bittern",
+      "amount": 100
     }
   ],
   "heat_requirement": "heated"

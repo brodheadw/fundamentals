@@ -7,6 +7,9 @@
 		"OreVeinTypeMixin",
 		"OreVeinifierMixin",
 		"PipeCorrosionMixin",
+		"SeawaterBucketMixin",
+		"SeawaterHoseMixin",
+		"SeawaterPipeMixin",
 		"TankCorrosionMixin",
 		"TreeNodePositionMixin"
 	],

@@ -1,12 +1,12 @@
 {
   "name": "Evaporite Bed",
   "category": "fundamentals:geology",
-  "icon": "fundamentals:raw_borax",
+  "icon": "fundamentals:raw_halite",
   "sortnum": 14,
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "A bed of sandstone, in badlands, savanna and desert, between y 52 and 68. Carries borax in layers, trona in layers. Dig at the core: the edges are lean.",
+      "text": "A bed of sandstone, in badlands, savanna and desert, between y 52 and 68. Carries halite in layers, borax in layers, trona in layers. Dig at the core: the edges are lean.",
       "title": "Evaporite Bed"
     }
   ]

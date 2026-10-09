@@ -46,6 +46,7 @@ public final class Separation {
     private static Item heavyRareEarthSulfate;
     private static Item calciumChloride;
     private static Item whitePhosphorus;
+    private static Item seawaterBucket;
 
     private Separation() {}
 
@@ -56,6 +57,7 @@ public final class Separation {
     public static Block plasticTank() { return plasticTank; }
     public static BlockEntityType<PlasticTankBlockEntity> plasticTankEntity() { return plasticTankEntity; }
     public static Map<String, FluidType> fluidTypes() { return FLUID_TYPES; }
+    public static Item seawaterBucket() { return seawaterBucket; }
 
     public static Fluid fluid(String id) {
         Fluid fluid = FLUIDS.get(id);
@@ -92,14 +94,16 @@ public final class Separation {
         List<Item> items = new java.util.ArrayList<>(List.of(mixerSettlerItem, magnetomigrationCellItem, plasticTankItem, salt, oxalicAcid, roastedBastnasite,
                 lightRareEarthSulfate, heavyRareEarthSulfate, calciumChloride, calciumIngot, whitePhosphorus));
         Acids.all().values().forEach(acid -> items.add(acid.bucket));
+        items.add(seawaterBucket);
         return items;
     }
 
     public static void registerFluidTypes(BiConsumer<ResourceLocation, FluidType> registry) {
         for (Reagents.Reagent reagent : Reagents.ALL) {
+            String description = "fluid_type." + Fundamentals.MOD_ID + "." + reagent.id();
             // The organics float on the aqueous phase, which is the whole trick of the mixer-settler.
-            FluidType type = new FluidType(FluidType.Properties.create()
-                    .descriptionId("fluid_type." + Fundamentals.MOD_ID + "." + reagent.id())
+            FluidType type = reagent.kind() == Reagents.Kind.WATER ? Seawater.type(description) : new FluidType(FluidType.Properties.create()
+                    .descriptionId(description)
                     .density(reagent.kind() == Reagents.Kind.ORGANIC ? 800 : 1100)
                     .viscosity(reagent.kind() == Reagents.Kind.ORGANIC ? 1500 : 1000));
             FLUID_TYPES.put(reagent.id(), type);
@@ -123,8 +127,11 @@ public final class Separation {
             }
             // Never placed in the world, so the source stands in for its own flowing form.
             Fluid[] self = new Fluid[1];
-            self[0] = new BaseFlowingFluid.Source(new BaseFlowingFluid.Properties(
-                    () -> FLUID_TYPES.get(reagent.id()), () -> self[0], () -> self[0]));
+            BaseFlowingFluid.Properties properties = new BaseFlowingFluid.Properties(() -> FLUID_TYPES.get(reagent.id()), () -> self[0], () -> self[0]);
+            if (reagent.kind() == Reagents.Kind.WATER) {
+                properties.bucket(() -> seawaterBucket);
+            }
+            self[0] = new BaseFlowingFluid.Source(properties);
             FLUIDS.put(reagent.id(), self[0]);
             KINDS.put(self[0], reagent.kind());
             TINTS.put(self[0], reagent.tint());
@@ -182,6 +189,8 @@ public final class Separation {
         for (Acids.Acid acid : Acids.all().values()) {
             registry.accept(id(acid.id + "_bucket"), acid.bucket);
         }
+        registry.accept(id("seawater_bucket"), seawaterBucket = new Seawater.BucketOfSeawater(fluid("seawater"),
+                new Item.Properties().craftRemainder(net.minecraft.world.item.Items.BUCKET).stacksTo(1)));
     }
 
     private static ResourceLocation id(String path) {

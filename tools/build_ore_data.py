@@ -90,6 +90,7 @@ ORES = {
     "fluorite": ("fluorspar", "pickaxe", "stone"),
     "borax": ("boron", "pickaxe", "stone"),
     "trona": ("soda_ash", "pickaxe", "stone"),
+    "halite": ("salt", "pickaxe", None),
 }
 
 # Host rocks that are blocks of their own -> tool.
@@ -148,8 +149,8 @@ DEPOSITS = {
     # fluorspar rides with the lead and zinc, as it does in every Mississippi Valley deposit
     "lead_zinc_bed": ("bed", "create:limestone", [("sphalerite", 0.20, "pockets"), ("galena", 0.13, "pockets"), ("fluorite", 0.10, "pockets")],
                       (9, 13), (3, 5), None, "anywhere", (-40, 36), 10, "rock"),
-    # borax and trona are dry-lake evaporites, laid down together as at Searles Lake: shallow seams in the sandstone under deserts and badlands
-    "evaporite_bed": ("bed", "minecraft:sandstone", [("borax", 0.18, "seams"), ("trona", 0.14, "seams")], (8, 12), (2, 4), None,
+    # borax, trona and halite are dry-lake evaporites, laid down together as at Searles Lake: shallow seams in the sandstone under deserts and badlands
+    "evaporite_bed": ("bed", "minecraft:sandstone", [("halite", 0.20, "seams"), ("borax", 0.18, "seams"), ("trona", 0.14, "seams")], (8, 12), (2, 4), None,
                       "arid_oxide", (52, 68), 9, "rock"),
     "zinc_oxide_bed": ("bed", "create:asurine", [("smithsonite", 0.24, "pockets")], (7, 10), (2, 4), None,
                        "anywhere", (36, 72), 18, "rock"),
