@@ -1,21 +1,10 @@
 {
   "replace": false,
   "values": [
-    "fundamentals:bastnasite_concentrate",
-    "fundamentals:bastnasite_dust",
-    "fundamentals:bastnasite_ore",
-    "fundamentals:ion_adsorption_clay_ore",
     "fundamentals:lanthanum_fluoride",
     "fundamentals:lanthanum_ingot",
     "fundamentals:lanthanum_oxalate",
     "fundamentals:lanthanum_oxide",
-    "fundamentals:light_rare_earth_concentrate",
-    "fundamentals:light_rare_earth_sulfate",
-    "fundamentals:monazite_ore",
-    "fundamentals:phosphor",
-    "fundamentals:raw_bastnasite",
-    "fundamentals:raw_ion_adsorption_clay",
-    "fundamentals:raw_monazite",
-    "fundamentals:roasted_bastnasite"
+    "fundamentals:phosphor"
   ]
 }

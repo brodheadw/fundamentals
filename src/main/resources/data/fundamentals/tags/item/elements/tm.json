@@ -1,8 +1,6 @@
 {
   "replace": false,
   "values": [
-    "fundamentals:heavy_rare_earth_concentrate",
-    "fundamentals:heavy_rare_earth_sulfate",
     "fundamentals:thulium_oxalate",
     "fundamentals:thulium_oxide"
   ]

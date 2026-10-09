@@ -5,13 +5,10 @@
     "fundamentals:aluminium_scandium_ingot",
     "fundamentals:aluminium_scandium_nugget",
     "fundamentals:aluminium_scandium_plate",
-    "fundamentals:raw_thortveitite",
     "fundamentals:scandium_fluoride",
     "fundamentals:scandium_ingot",
     "fundamentals:scandium_nugget",
     "fundamentals:scandium_oxalate",
-    "fundamentals:scandium_oxide",
-    "fundamentals:thortveitite_dust",
-    "fundamentals:thortveitite_ore"
+    "fundamentals:scandium_oxide"
   ]
 }
