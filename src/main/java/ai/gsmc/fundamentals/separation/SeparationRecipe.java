@@ -54,6 +54,10 @@ public record SeparationRecipe(Fluid liquor, Fluid organic, Fluid strip, int sta
 
     /** The light raffinate one batch gives; at least a millibucket of each side, so a small battery still trickles both. */
     public int lightOf(int batch) {
+        return lightOf(batch, lightFraction);
+    }
+
+    static int lightOf(int batch, float lightFraction) {
         return Math.clamp(Math.round(batch * lightFraction), 1, batch - 1);
     }
 

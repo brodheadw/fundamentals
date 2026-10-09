@@ -2,7 +2,7 @@
   "name": "Waste",
   "category": "fundamentals:rare_earths",
   "icon": "fundamentals:monazite_residue_dust",
-  "sortnum": 8,
+  "sortnum": 9,
   "pages": [
     {
       "type": "patchouli:text",

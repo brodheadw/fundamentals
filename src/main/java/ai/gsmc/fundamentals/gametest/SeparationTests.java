@@ -2,6 +2,9 @@ package ai.gsmc.fundamentals.gametest;
 
 import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.separation.Battery;
+import ai.gsmc.fundamentals.separation.MagneticRecipe;
+import ai.gsmc.fundamentals.separation.MagnetomigrationCellBlock;
+import ai.gsmc.fundamentals.separation.MagnetomigrationCellBlockEntity;
 import ai.gsmc.fundamentals.separation.MixerSettlerBlock;
 import ai.gsmc.fundamentals.separation.MixerSettlerBlockEntity;
 import ai.gsmc.fundamentals.separation.Separation;
@@ -511,5 +514,49 @@ public class SeparationTests {
             }
         }
         helper.succeed();
+    }
+
+    private static final BlockState CELL = Separation.magnetomigrationCell().defaultBlockState().setValue(MagnetomigrationCellBlock.FACING, Direction.EAST);
+
+    /** A line of {@code cells} cells along x from x0 at z, flowing east, its head fed 1,000 mB of {@code liquor}. */
+    private static MagnetomigrationCellBlockEntity line(GameTestHelper helper, int x0, int z, int cells, String liquor) {
+        for (int i = 0; i < cells; i++) {
+            helper.setBlock(new BlockPos(x0 + i, 1, z), CELL);
+        }
+        IFluidHandler feed = helper.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, helper.absolutePos(new BlockPos(x0, 1, z)), Direction.WEST);
+        helper.assertTrue(feed != null && feed.fill(new FluidStack(Separation.fluid(liquor), 1000), IFluidHandler.FluidAction.EXECUTE) == 1000,
+                "the head cell's back should take " + liquor);
+        return (MagnetomigrationCellBlockEntity) helper.getBlockEntity(new BlockPos(x0, 1, z));
+    }
+
+    private static FluidStack outlet(GameTestHelper helper, int x, int z, Direction side) {
+        return helper.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, helper.absolutePos(new BlockPos(x, 1, z)), side).getFluidInTank(0);
+    }
+
+    @GameTest(template = "battery", timeoutTicks = 400)
+    public void aMagnetomigrationLinePartsYttriumFromTheHeavies(GameTestHelper helper) {
+        Fluid liquor = Separation.fluid("yttrium_heavies_liquor");
+        MagneticRecipe cut = MagneticRecipe.forLiquor(helper.getLevel(), liquor).orElseThrow();
+        SeparationRecipe battery = SeparationRecipe.forLiquor(helper.getLevel(), liquor).orElseThrow();
+        helper.assertTrue(cut.light() == battery.light() && cut.heavy() == battery.heavy() && cut.lightFraction() == battery.lightFraction()
+                && cut.passes() < battery.stages(), "the magnetic cut should give the battery's products in its proportion, in fewer passes than its stages");
+        helper.assertTrue(MagneticRecipe.forLiquor(helper.getLevel(), Separation.fluid("praseodymium_neodymium_liquor")).isEmpty(),
+                "praseodymium and neodymium are alike in moment and should have no magnetic cut");
+        int n = cut.passes(), batch = MagnetomigrationCellBlockEntity.BATCH;
+        line(helper, 1, 1, n, "yttrium_heavies_liquor");
+        MagnetomigrationCellBlockEntity shortHead = line(helper, 1, 3, n - 1, "yttrium_heavies_liquor");
+        MagnetomigrationCellBlockEntity didymium = line(helper, 12, 1, n, "praseodymium_neodymium_liquor");
+        helper.runAfterDelay(2 * MagnetomigrationCellBlockEntity.PERIOD + 20, () -> {
+            FluidStack drawn = outlet(helper, n, 1, Direction.SOUTH), rest = outlet(helper, n, 1, Direction.NORTH);
+            int cuts = rest.getAmount() / cut.lightOf(batch);
+            helper.assertTrue(rest.is(Separation.fluid("yttrium_liquor")) && cuts >= 1 && rest.getAmount() == cuts * cut.lightOf(batch),
+                    "the tail's far side should hold whole batches of yttrium, got " + rest);
+            helper.assertTrue(drawn.is(Separation.fluid("holmium_to_lutetium_liquor")) && drawn.getAmount() == cuts * cut.heavyOf(batch),
+                    "the tail's magnet side should hold the heavies of the same batches, got " + drawn);
+            helper.assertTrue(shortHead.line().stall().map(s -> s.key().equals("short")).orElse(false)
+                    && outlet(helper, n - 1, 3, Direction.NORTH).isEmpty(), "a line short of its passes should stall and part nothing");
+            helper.assertTrue(didymium.line().stall().map(s -> s.key().equals("no_cut")).orElse(false), "didymium liquor should stall a line: no magnetic cut");
+            helper.succeed();
+        });
     }
 }

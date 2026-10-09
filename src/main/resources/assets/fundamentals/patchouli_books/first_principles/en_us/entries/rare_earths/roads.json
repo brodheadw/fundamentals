@@ -2,7 +2,7 @@
   "name": "The road to each metal",
   "category": "fundamentals:rare_earths",
   "icon": "fundamentals:dysprosium_ingot",
-  "sortnum": 4,
+  "sortnum": 5,
   "pages": [
     {
       "type": "patchouli:text",

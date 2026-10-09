@@ -2,7 +2,7 @@
   "name": "The extractants",
   "category": "fundamentals:rare_earths",
   "icon": "fundamentals:white_phosphorus",
-  "sortnum": 11,
+  "sortnum": 12,
   "pages": [
     {
       "type": "patchouli:text",
