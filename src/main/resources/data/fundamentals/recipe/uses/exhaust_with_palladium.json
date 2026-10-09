@@ -2,13 +2,13 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "pattern": [
-    "BPB",
+    "KPK",
     "EPE",
     "CPC"
   ],
   "key": {
-    "B": {
-      "item": "minecraft:iron_bars"
+    "K": {
+      "tag": "c:nuggets/palladium"
     },
     "C": {
       "tag": "c:ingots/cast_iron"
@@ -21,7 +21,7 @@
     }
   },
   "result": {
-    "count": 1,
+    "count": 2,
     "id": "tfmg:exhaust"
   }
 }

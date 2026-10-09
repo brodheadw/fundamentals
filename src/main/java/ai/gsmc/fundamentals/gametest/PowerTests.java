@@ -33,17 +33,14 @@ public class PowerTests {
                 () -> "a panel put on a rack should make a solar panel facing the way the rack did");
         helper.assertTrue(player.getMainHandItem().isEmpty(), "mounting should use up the panel");
         SolarPanelBlockEntity panel = helper.getBlockEntity(POS);
-        // the sky light of a freshly placed test structure settles a few dozen ticks after placement; read it late
-        helper.runAfterDelay(120, () -> {
-            helper.assertTrue(panel.voltageGeneration() == SolarPanelBlockEntity.VOLTS && panel.powerGeneration() > 0,
-                    "at noon under open sky the panel should generate, got " + panel.voltageGeneration() + " V, " + panel.powerGeneration() + " W");
-            helper.assertTrue(panel.getNetworkPowerGeneration() >= panel.powerGeneration(),
-                    "its network should carry what it makes, got " + panel.getNetworkPowerGeneration() + " W");
-            helper.setBlock(POS.above(), Blocks.STONE);
-            helper.runAfterDelay(40, () -> {
-                helper.assertTrue(panel.voltageGeneration() == 0 && panel.powerGeneration() == 0, "a shaded panel should make nothing");
-                helper.succeed();
-            });
-        });
+        // the sky light of a freshly placed test structure settles late, later still when many tests load at once: wait for it
+        helper.startSequence()
+                .thenWaitUntil(() -> helper.assertTrue(panel.voltageGeneration() == SolarPanelBlockEntity.VOLTS && panel.powerGeneration() > 0,
+                        "at noon under open sky the panel should generate, got " + panel.voltageGeneration() + " V, " + panel.powerGeneration() + " W"))
+                .thenExecute(() -> helper.assertTrue(panel.getNetworkPowerGeneration() >= panel.powerGeneration(),
+                        "its network should carry what it makes, got " + panel.getNetworkPowerGeneration() + " W"))
+                .thenExecute(() -> helper.setBlock(POS.above(), Blocks.STONE))
+                .thenWaitUntil(() -> helper.assertTrue(panel.voltageGeneration() == 0 && panel.powerGeneration() == 0, "a shaded panel should make nothing"))
+                .thenSucceed();
     }
 }
