@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
-"""Paints the plastics: The Factory Must Grow's plastic pipes, pump, valve and smart pipe made milky (their plastic block too,
-though it stays opaque), the plastic blocks in the sixteen dyes, and the Ziegler-Natta catalyst, PVC resin and PVC sheet.
+"""Paints the plastics: The Factory Must Grow's plastic pipes, pump, valve and smart pipe redrawn in the plastic tank's natural
+polyethylene (their plastic block too, though it stays opaque), so every undyed plastic is the one plastic; the plastic blocks in the
+sixteen dyes, and the Ziegler-Natta catalyst, PVC resin and PVC sheet.
 TFMG's own textures are read from its jar and recoloured, so they keep their shapes. Edit and re-run; don't hand-edit the PNGs.
 
     python3 tools/paint_plastics.py
@@ -10,16 +11,19 @@ from pathlib import Path
 
 from PIL import Image
 
-from paint_separation import PLASTIC, TEXTURES, heap, milky, steel
+from paint_separation import PLASTIC, TEXTURES, heap, moulded, steel
 
 TFMG_JAR = next(Path.home().glob(".gradle/caches/modules-2/files-2.1/maven.modrinth/create-tfmg/*/*/create-tfmg-*.jar"))
 TFMG_TEXTURES = TEXTURES.parent.parent / "tfmg/textures"
 
-# The Factory Must Grow's plastic, every tone its plastic textures use; anything else in them (the pump's iron, the valve's
-# handle, the smart pipe's electronics, the glass pipe's glass) is left alone.
+# The Factory Must Grow's plastic, every tone its plastic textures use; anything else in them (the valve's handle, the smart
+# pipe's electronics, the glass pipe's glass) is left alone.
 TFMG_PLASTIC = set(PLASTIC) | {(137, 143, 156), (206, 211, 216), (122, 128, 141)}
-TRANSLUCENT = ("plastic_pipes", "plastic_pipes_connected", "plastic_glass_fluid_pipe", "plastic_pump", "plastic_fluid_valve",
-               "plastic_smart_pipe_1", "plastic_smart_pipe_2")
+TRANSLUCENT = ("plastic_pipes", "plastic_pipes_connected", "plastic_glass_fluid_pipe", "plastic_fluid_valve", "plastic_smart_pipe_1",
+               "plastic_smart_pipe_2")
+# The pump is iron banded round a plastic casing in theirs: all of it is moulded here, each part of its sheet shaded on its own
+# so the dark iron bands come out the casing's plastic: the flange face and its rim, the body's bands, its faces round the bore.
+PUMP_PARTS = ((0, 0, 12, 12), (12, 0, 16, 12), (0, 12, 18, 17), (18, 12, 32, 17), (0, 17, 18, 32), (18, 17, 32, 32))
 # Pigmented plastic, the dyes as moulded: each the colour of vanilla's concrete in that dye, which reads as the solid pigment.
 DYES = {
     "white": (207, 213, 214), "orange": (224, 97, 1), "magenta": (169, 48, 159), "light_blue": (36, 137, 199),
@@ -37,9 +41,9 @@ def tfmg_texture(path):
             return Image.open(f).convert("RGBA").copy()
 
 
-def opaque_milk(img):
+def opaque_plastic(img):
     """The plastic block can't let light through (it is a full block that hides its neighbours' faces), so it only takes the colour."""
-    out = milky(img, TFMG_PLASTIC)
+    out = moulded(img, TFMG_PLASTIC)
     out.putdata([(r, g, b, 255) for r, g, b, _ in out.getdata()])
     return out
 
@@ -53,10 +57,11 @@ def dye_ramp(colour):
 def main():
     (TFMG_TEXTURES / "block").mkdir(parents=True, exist_ok=True)
     for name in TRANSLUCENT:
-        milky(tfmg_texture(f"block/{name}"), TFMG_PLASTIC).save(TFMG_TEXTURES / f"block/{name}.png")
+        moulded(tfmg_texture(f"block/{name}"), TFMG_PLASTIC).save(TFMG_TEXTURES / f"block/{name}.png")
+    moulded(tfmg_texture("block/plastic_pump"), boxes=PUMP_PARTS).save(TFMG_TEXTURES / "block/plastic_pump.png")
     block = tfmg_texture("block/plastic_block")
     block.putdata([(r, g, b, 255) for r, g, b, _ in block.getdata()])
-    opaque_milk(block).save(TFMG_TEXTURES / "block/plastic_block.png")
+    opaque_plastic(block).save(TFMG_TEXTURES / "block/plastic_block.png")
     for dye, colour in DYES.items():
         steel(block, dye_ramp(colour), 0.4, 0.55).save(TEXTURES / f"block/{dye}_plastic_block.png")
     # TiCl3 reduced by aluminium is violet; PVC resin a white powder

@@ -61,7 +61,9 @@ public final class PlasticsClient {
 
         @Override
         public List<BakedQuad> getQuads(@Nullable BlockState state, @Nullable Direction side, RandomSource rand, ModelData data, @Nullable RenderType renderType) {
-            return tinted(super.getQuads(state, side, rand, data, renderType));
+            // The pipe's multipart drops every part whose model's render type isn't the one asked for, and natural plastic's
+            // models are translucent: asked for cutout it would lose its core, the midsection of a straight run.
+            return renderType == null || renderType == RenderType.cutout() ? tinted(super.getQuads(state, side, rand, data, null)) : List.of();
         }
 
         @Override
