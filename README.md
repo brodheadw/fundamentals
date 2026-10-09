@@ -33,6 +33,8 @@ Thirty-nine of them, each dropping a raw chunk of itself:
 
 Vanilla gold and copper ore stay: they are native gold and native copper, which are real minerals. Vanilla iron ore is gone, including the big deep veins, which are magnetite now.
 
+The advancements screen has a Periodic Table tab, all 118 elements in their places: each lights up the first time you hold anything made of it, raw chromite giving you iron, chromium and oxygen at once.
+
 ## From rock to metal
 
 Iron is made the way it was made for three thousand years before the blast furnace. Build a bloomery out of clay, load it with iron ore and charcoal (and only charcoal; the sulfur in coal ruins iron), light it with a torch, and wait. What comes out is not an ingot but a bloom, a spongy lump of iron and slag, which you hammer into wrought iron; the slag is The Factory Must Grow's own, which its concrete and asphalt take. Copper comes straight out of the bloomery from malachite, azurite and cuprite. Galena has to be roasted on a fire first, then gives lead bullion, lead still holding its silver, which a furnace remelts to lead.

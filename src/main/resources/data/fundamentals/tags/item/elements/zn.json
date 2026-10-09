@@ -1,0 +1,25 @@
+{
+  "replace": false,
+  "values": [
+    "create:brass_block",
+    "create:brass_ingot",
+    "create:brass_nugget",
+    "create:brass_sheet",
+    "create:crushed_raw_zinc",
+    "create:deepslate_zinc_ore",
+    "create:raw_zinc",
+    "create:raw_zinc_block",
+    "create:zinc_block",
+    "create:zinc_ingot",
+    "create:zinc_nugget",
+    "create:zinc_ore",
+    "fundamentals:hemimorphite_ore",
+    "fundamentals:raw_hemimorphite",
+    "fundamentals:raw_smithsonite",
+    "fundamentals:raw_sphalerite",
+    "fundamentals:silver_zinc_crust",
+    "fundamentals:smithsonite_ore",
+    "fundamentals:sphalerite_ore",
+    "fundamentals:zinc_oxide"
+  ]
+}

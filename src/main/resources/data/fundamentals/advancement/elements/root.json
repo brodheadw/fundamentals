@@ -1,0 +1,705 @@
+{
+  "display": {
+    "icon": {
+      "id": "fundamentals:element"
+    },
+    "title": {
+      "translate": "advancement.fundamentals.elements.root.title"
+    },
+    "description": {
+      "translate": "advancement.fundamentals.elements.root.description"
+    },
+    "frame": "task",
+    "background": "fundamentals:textures/gui/advancements/backgrounds/periodic_table.png",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "h": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/h"
+          }
+        ]
+      }
+    },
+    "li": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/li"
+          }
+        ]
+      }
+    },
+    "be": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/be"
+          }
+        ]
+      }
+    },
+    "b": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/b"
+          }
+        ]
+      }
+    },
+    "c": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/c"
+          }
+        ]
+      }
+    },
+    "n": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/n"
+          }
+        ]
+      }
+    },
+    "o": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/o"
+          }
+        ]
+      }
+    },
+    "f": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/f"
+          }
+        ]
+      }
+    },
+    "ne": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/ne"
+          }
+        ]
+      }
+    },
+    "na": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/na"
+          }
+        ]
+      }
+    },
+    "mg": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/mg"
+          }
+        ]
+      }
+    },
+    "al": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/al"
+          }
+        ]
+      }
+    },
+    "si": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/si"
+          }
+        ]
+      }
+    },
+    "p": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/p"
+          }
+        ]
+      }
+    },
+    "s": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/s"
+          }
+        ]
+      }
+    },
+    "cl": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/cl"
+          }
+        ]
+      }
+    },
+    "ar": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/ar"
+          }
+        ]
+      }
+    },
+    "k": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/k"
+          }
+        ]
+      }
+    },
+    "ca": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/ca"
+          }
+        ]
+      }
+    },
+    "sc": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/sc"
+          }
+        ]
+      }
+    },
+    "ti": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/ti"
+          }
+        ]
+      }
+    },
+    "cr": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/cr"
+          }
+        ]
+      }
+    },
+    "mn": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/mn"
+          }
+        ]
+      }
+    },
+    "fe": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/fe"
+          }
+        ]
+      }
+    },
+    "co": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/co"
+          }
+        ]
+      }
+    },
+    "ni": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/ni"
+          }
+        ]
+      }
+    },
+    "cu": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/cu"
+          }
+        ]
+      }
+    },
+    "zn": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/zn"
+          }
+        ]
+      }
+    },
+    "as": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/as"
+          }
+        ]
+      }
+    },
+    "y": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/y"
+          }
+        ]
+      }
+    },
+    "nb": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/nb"
+          }
+        ]
+      }
+    },
+    "mo": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/mo"
+          }
+        ]
+      }
+    },
+    "ru": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/ru"
+          }
+        ]
+      }
+    },
+    "rh": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/rh"
+          }
+        ]
+      }
+    },
+    "pd": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/pd"
+          }
+        ]
+      }
+    },
+    "ag": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/ag"
+          }
+        ]
+      }
+    },
+    "sn": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/sn"
+          }
+        ]
+      }
+    },
+    "la": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/la"
+          }
+        ]
+      }
+    },
+    "ce": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/ce"
+          }
+        ]
+      }
+    },
+    "pr": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/pr"
+          }
+        ]
+      }
+    },
+    "nd": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/nd"
+          }
+        ]
+      }
+    },
+    "sm": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/sm"
+          }
+        ]
+      }
+    },
+    "eu": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/eu"
+          }
+        ]
+      }
+    },
+    "gd": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/gd"
+          }
+        ]
+      }
+    },
+    "tb": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/tb"
+          }
+        ]
+      }
+    },
+    "dy": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/dy"
+          }
+        ]
+      }
+    },
+    "ho": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/ho"
+          }
+        ]
+      }
+    },
+    "er": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/er"
+          }
+        ]
+      }
+    },
+    "tm": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/tm"
+          }
+        ]
+      }
+    },
+    "yb": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/yb"
+          }
+        ]
+      }
+    },
+    "lu": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/lu"
+          }
+        ]
+      }
+    },
+    "ta": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/ta"
+          }
+        ]
+      }
+    },
+    "w": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/w"
+          }
+        ]
+      }
+    },
+    "re": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/re"
+          }
+        ]
+      }
+    },
+    "os": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/os"
+          }
+        ]
+      }
+    },
+    "ir": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/ir"
+          }
+        ]
+      }
+    },
+    "pt": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/pt"
+          }
+        ]
+      }
+    },
+    "au": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/au"
+          }
+        ]
+      }
+    },
+    "hg": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/hg"
+          }
+        ]
+      }
+    },
+    "pb": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/pb"
+          }
+        ]
+      }
+    },
+    "th": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/th"
+          }
+        ]
+      }
+    },
+    "u": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/u"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "h",
+      "li",
+      "be",
+      "b",
+      "c",
+      "n",
+      "o",
+      "f",
+      "ne",
+      "na",
+      "mg",
+      "al",
+      "si",
+      "p",
+      "s",
+      "cl",
+      "ar",
+      "k",
+      "ca",
+      "sc",
+      "ti",
+      "cr",
+      "mn",
+      "fe",
+      "co",
+      "ni",
+      "cu",
+      "zn",
+      "as",
+      "y",
+      "nb",
+      "mo",
+      "ru",
+      "rh",
+      "pd",
+      "ag",
+      "sn",
+      "la",
+      "ce",
+      "pr",
+      "nd",
+      "sm",
+      "eu",
+      "gd",
+      "tb",
+      "dy",
+      "ho",
+      "er",
+      "tm",
+      "yb",
+      "lu",
+      "ta",
+      "w",
+      "re",
+      "os",
+      "ir",
+      "pt",
+      "au",
+      "hg",
+      "pb",
+      "th",
+      "u"
+    ]
+  ]
+}

@@ -1,0 +1,716 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "fundamentals:item/element"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "custom_model_data": 1
+      },
+      "model": "fundamentals:item/element/h"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 2
+      },
+      "model": "fundamentals:item/element/he"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 3
+      },
+      "model": "fundamentals:item/element/li"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 4
+      },
+      "model": "fundamentals:item/element/be"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 5
+      },
+      "model": "fundamentals:item/element/b"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 6
+      },
+      "model": "fundamentals:item/element/c"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 7
+      },
+      "model": "fundamentals:item/element/n"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 8
+      },
+      "model": "fundamentals:item/element/o"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 9
+      },
+      "model": "fundamentals:item/element/f"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 10
+      },
+      "model": "fundamentals:item/element/ne"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 11
+      },
+      "model": "fundamentals:item/element/na"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 12
+      },
+      "model": "fundamentals:item/element/mg"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 13
+      },
+      "model": "fundamentals:item/element/al"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 14
+      },
+      "model": "fundamentals:item/element/si"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 15
+      },
+      "model": "fundamentals:item/element/p"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 16
+      },
+      "model": "fundamentals:item/element/s"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 17
+      },
+      "model": "fundamentals:item/element/cl"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 18
+      },
+      "model": "fundamentals:item/element/ar"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 19
+      },
+      "model": "fundamentals:item/element/k"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 20
+      },
+      "model": "fundamentals:item/element/ca"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 21
+      },
+      "model": "fundamentals:item/element/sc"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 22
+      },
+      "model": "fundamentals:item/element/ti"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 23
+      },
+      "model": "fundamentals:item/element/v"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 24
+      },
+      "model": "fundamentals:item/element/cr"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 25
+      },
+      "model": "fundamentals:item/element/mn"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 26
+      },
+      "model": "fundamentals:item/element/fe"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 27
+      },
+      "model": "fundamentals:item/element/co"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 28
+      },
+      "model": "fundamentals:item/element/ni"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 29
+      },
+      "model": "fundamentals:item/element/cu"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 30
+      },
+      "model": "fundamentals:item/element/zn"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 31
+      },
+      "model": "fundamentals:item/element/ga"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 32
+      },
+      "model": "fundamentals:item/element/ge"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 33
+      },
+      "model": "fundamentals:item/element/as"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 34
+      },
+      "model": "fundamentals:item/element/se"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 35
+      },
+      "model": "fundamentals:item/element/br"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 36
+      },
+      "model": "fundamentals:item/element/kr"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 37
+      },
+      "model": "fundamentals:item/element/rb"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 38
+      },
+      "model": "fundamentals:item/element/sr"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 39
+      },
+      "model": "fundamentals:item/element/y"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 40
+      },
+      "model": "fundamentals:item/element/zr"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 41
+      },
+      "model": "fundamentals:item/element/nb"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 42
+      },
+      "model": "fundamentals:item/element/mo"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 43
+      },
+      "model": "fundamentals:item/element/tc"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 44
+      },
+      "model": "fundamentals:item/element/ru"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 45
+      },
+      "model": "fundamentals:item/element/rh"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 46
+      },
+      "model": "fundamentals:item/element/pd"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 47
+      },
+      "model": "fundamentals:item/element/ag"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 48
+      },
+      "model": "fundamentals:item/element/cd"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 49
+      },
+      "model": "fundamentals:item/element/in"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 50
+      },
+      "model": "fundamentals:item/element/sn"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 51
+      },
+      "model": "fundamentals:item/element/sb"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 52
+      },
+      "model": "fundamentals:item/element/te"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 53
+      },
+      "model": "fundamentals:item/element/i"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 54
+      },
+      "model": "fundamentals:item/element/xe"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 55
+      },
+      "model": "fundamentals:item/element/cs"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 56
+      },
+      "model": "fundamentals:item/element/ba"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 57
+      },
+      "model": "fundamentals:item/element/la"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 58
+      },
+      "model": "fundamentals:item/element/ce"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 59
+      },
+      "model": "fundamentals:item/element/pr"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 60
+      },
+      "model": "fundamentals:item/element/nd"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 61
+      },
+      "model": "fundamentals:item/element/pm"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 62
+      },
+      "model": "fundamentals:item/element/sm"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 63
+      },
+      "model": "fundamentals:item/element/eu"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 64
+      },
+      "model": "fundamentals:item/element/gd"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 65
+      },
+      "model": "fundamentals:item/element/tb"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 66
+      },
+      "model": "fundamentals:item/element/dy"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 67
+      },
+      "model": "fundamentals:item/element/ho"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 68
+      },
+      "model": "fundamentals:item/element/er"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 69
+      },
+      "model": "fundamentals:item/element/tm"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 70
+      },
+      "model": "fundamentals:item/element/yb"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 71
+      },
+      "model": "fundamentals:item/element/lu"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 72
+      },
+      "model": "fundamentals:item/element/hf"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 73
+      },
+      "model": "fundamentals:item/element/ta"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 74
+      },
+      "model": "fundamentals:item/element/w"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 75
+      },
+      "model": "fundamentals:item/element/re"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 76
+      },
+      "model": "fundamentals:item/element/os"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 77
+      },
+      "model": "fundamentals:item/element/ir"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 78
+      },
+      "model": "fundamentals:item/element/pt"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 79
+      },
+      "model": "fundamentals:item/element/au"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 80
+      },
+      "model": "fundamentals:item/element/hg"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 81
+      },
+      "model": "fundamentals:item/element/tl"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 82
+      },
+      "model": "fundamentals:item/element/pb"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 83
+      },
+      "model": "fundamentals:item/element/bi"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 84
+      },
+      "model": "fundamentals:item/element/po"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 85
+      },
+      "model": "fundamentals:item/element/at"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 86
+      },
+      "model": "fundamentals:item/element/rn"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 87
+      },
+      "model": "fundamentals:item/element/fr"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 88
+      },
+      "model": "fundamentals:item/element/ra"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 89
+      },
+      "model": "fundamentals:item/element/ac"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 90
+      },
+      "model": "fundamentals:item/element/th"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 91
+      },
+      "model": "fundamentals:item/element/pa"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 92
+      },
+      "model": "fundamentals:item/element/u"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 93
+      },
+      "model": "fundamentals:item/element/np"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 94
+      },
+      "model": "fundamentals:item/element/pu"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 95
+      },
+      "model": "fundamentals:item/element/am"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 96
+      },
+      "model": "fundamentals:item/element/cm"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 97
+      },
+      "model": "fundamentals:item/element/bk"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 98
+      },
+      "model": "fundamentals:item/element/cf"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 99
+      },
+      "model": "fundamentals:item/element/es"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 100
+      },
+      "model": "fundamentals:item/element/fm"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 101
+      },
+      "model": "fundamentals:item/element/md"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 102
+      },
+      "model": "fundamentals:item/element/no"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 103
+      },
+      "model": "fundamentals:item/element/lr"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 104
+      },
+      "model": "fundamentals:item/element/rf"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 105
+      },
+      "model": "fundamentals:item/element/db"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 106
+      },
+      "model": "fundamentals:item/element/sg"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 107
+      },
+      "model": "fundamentals:item/element/bh"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 108
+      },
+      "model": "fundamentals:item/element/hs"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 109
+      },
+      "model": "fundamentals:item/element/mt"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 110
+      },
+      "model": "fundamentals:item/element/ds"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 111
+      },
+      "model": "fundamentals:item/element/rg"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 112
+      },
+      "model": "fundamentals:item/element/cn"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 113
+      },
+      "model": "fundamentals:item/element/nh"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 114
+      },
+      "model": "fundamentals:item/element/fl"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 115
+      },
+      "model": "fundamentals:item/element/mc"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 116
+      },
+      "model": "fundamentals:item/element/lv"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 117
+      },
+      "model": "fundamentals:item/element/ts"
+    },
+    {
+      "predicate": {
+        "custom_model_data": 118
+      },
+      "model": "fundamentals:item/element/og"
+    }
+  ]
+}

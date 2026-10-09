@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:ammonium_chloride",
+    "fundamentals:ammonium_chloroiridate",
+    "fundamentals:ammonium_chloroplatinate",
+    "fundamentals:ammonium_chlororhodate",
+    "fundamentals:ammonium_chlororuthenate",
+    "fundamentals:aqua_regia_bucket",
+    "fundamentals:dichlorodiammine_palladium",
+    "fundamentals:nitric_acid_bucket",
+    "fundamentals:thorium_nitrate",
+    "minecraft:gunpowder",
+    "tfmg:air_bucket",
+    "tfmg:nitrate_dust"
+  ]
+}

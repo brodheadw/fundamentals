@@ -1,0 +1,32 @@
+{
+  "parent": "fundamentals:elements/root",
+  "display": {
+    "icon": {
+      "id": "fundamentals:element",
+      "components": {
+        "minecraft:custom_model_data": 19
+      }
+    },
+    "title": {
+      "translate": "advancement.fundamentals.elements.k.title"
+    },
+    "description": {
+      "translate": "advancement.fundamentals.elements.k.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "k": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/k"
+          }
+        ]
+      }
+    }
+  }
+}

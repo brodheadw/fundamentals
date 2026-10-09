@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:erbium_oxalate",
+    "fundamentals:erbium_oxide",
+    "fundamentals:heavy_rare_earth_concentrate",
+    "fundamentals:heavy_rare_earth_sulfate"
+  ]
+}

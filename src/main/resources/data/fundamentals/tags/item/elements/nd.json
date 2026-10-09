@@ -1,0 +1,33 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:bastnasite_concentrate",
+    "fundamentals:bastnasite_dust",
+    "fundamentals:bastnasite_ore",
+    "fundamentals:didymium_fluoride",
+    "fundamentals:didymium_glass",
+    "fundamentals:didymium_ingot",
+    "fundamentals:didymium_oxalate",
+    "fundamentals:didymium_oxide",
+    "fundamentals:ion_adsorption_clay_ore",
+    "fundamentals:light_rare_earth_concentrate",
+    "fundamentals:light_rare_earth_sulfate",
+    "fundamentals:monazite_dust",
+    "fundamentals:monazite_ore",
+    "fundamentals:neodymium_block",
+    "fundamentals:neodymium_fluoride",
+    "fundamentals:neodymium_ingot",
+    "fundamentals:neodymium_iron_boron_block",
+    "fundamentals:neodymium_iron_boron_dust",
+    "fundamentals:neodymium_iron_boron_ingot",
+    "fundamentals:neodymium_iron_boron_nugget",
+    "fundamentals:neodymium_iron_boron_plate",
+    "fundamentals:neodymium_nugget",
+    "fundamentals:neodymium_oxalate",
+    "fundamentals:neodymium_oxide",
+    "fundamentals:raw_bastnasite",
+    "fundamentals:raw_ion_adsorption_clay",
+    "fundamentals:raw_monazite",
+    "fundamentals:roasted_bastnasite"
+  ]
+}
