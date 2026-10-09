@@ -20,7 +20,7 @@ import java.util.function.BiConsumer;
  * concentrate the bloomery smelts, the solder circuit boards are joined with, the titania slag ilmenite smelts to, the
  * magnesium chloride magnesium is won from and the Kroll process gives back, and the zinc crust the Parkes process skims
  * the silver off lead bullion in and the litharge cupellation leaves, the thorium nitrate a gas mantle is soaked in and the mantle,
- * and the block the clarifier's sludge is packed into. The recipes
+ * the block the clarifier's sludge is packed into, and the mercury cinnabar is retorted to. The recipes
  * are written by tools/build_uses_data.py.
  */
 public final class Uses {
@@ -50,15 +50,18 @@ public final class Uses {
     private static Item litharge;
     private static Item thoriumNitrate;
     private static Item gasMantle;
+    private static Item mercury;
     private static Block sludgeBlock;
     private static Item sludgeBlockItem;
 
     private Uses() {}
 
+    public static Item mercury() { return mercury; }
+
     public static List<Item> items() {
         return List.of(phosphor, didymiumGlass, roastedCobaltite, roastedChalcopyrite, rheniumFlueDust, tungstenCarbide, tungstenFilament, clarifierSludge,
                 copperCalcine, zincOxide, roastedPentlandite, lithiumChloride, ferroboron, sodaAsh, sodiumChromate, sodiumDichromate,
-                aluminiumPowder, roastedTinConcentrate, solder, titaniaSlag, magnesiumChloride, silverZincCrust, litharge, thoriumNitrate, gasMantle, sludgeBlockItem);
+                aluminiumPowder, roastedTinConcentrate, solder, titaniaSlag, magnesiumChloride, silverZincCrust, litharge, thoriumNitrate, gasMantle, mercury, sludgeBlockItem);
     }
 
     public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
@@ -92,6 +95,7 @@ public final class Uses {
         registry.accept(id("litharge"), litharge = new Item(new Item.Properties()));
         registry.accept(id("thorium_nitrate"), thoriumNitrate = new Item(new Item.Properties()));
         registry.accept(id("gas_mantle"), gasMantle = new Item(new Item.Properties()));
+        registry.accept(id("mercury"), mercury = new Item(new Item.Properties()));
         registry.accept(id("clarifier_sludge_block"), sludgeBlockItem = new BlockItem(sludgeBlock, new Item.Properties()));
     }
 

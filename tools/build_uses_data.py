@@ -29,7 +29,7 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "roasted_tin_concentrate": "Roasted Tin Concentrate", "solder": "Solder",
          "titania_slag": "Titania Slag", "magnesium_chloride": "Magnesium Chloride",
          "silver_zinc_crust": "Silver-Zinc Crust", "litharge": "Litharge",
-         "thorium_nitrate": "Thorium Nitrate", "gas_mantle": "Gas Mantle"}
+         "thorium_nitrate": "Thorium Nitrate", "gas_mantle": "Gas Mantle", "mercury": "Mercury"}
 # the blocks of ours that are not a form of a material: name -> display
 BLOCKS = {"clarifier_sludge_block": "Clarifier Tailings"}
 # The platinum refinery's items, registered by uses.PlatinumMetals in this order.
@@ -370,6 +370,16 @@ def alloys():
            {"count": 1, "id": "tfmg:turbine_blade", "components": {"tfmg:fuel_tags": {"kerosene": "c:kerosene"}, "tfmg:fuels": {"kerosene": "Kerosene"}}})
     write(TFMG / "item_application/heavy_machinery_casing.json", {"type": "create:item_application",
           "ingredients": [{"item": "tfmg:steel_casing"}, {"tag": "c:plates/molybdenum_steel"}], "results": [{"id": "tfmg:heavy_machinery_casing"}]})
+
+
+def thermometry():
+    """Mercury: cinnabar roasted in air at about 600 C in a retort, HgS + O2 -> Hg + SO2, the vapour condensed and run off into a
+    flask, as at Almaden since Roman times. And the type K thermocouple's legs: chromel, nickel with a tenth of chromium, and alumel,
+    nickel with a few per cent of aluminium (and the manganese and silicon of the real alloy folded into it), both melted past
+    nickel's 1,455 C."""
+    mixing("mercury", item("raw_cinnabar") + [fluid("tfmg:air", 250)], [result("mercury")], "heated")
+    mixing("chromel", item("tfmg:nickel_ingot", 9) + item("chromium_ingot"), [result("chromel_ingot", 10)], "superheated")
+    mixing("alumel", item("tfmg:nickel_ingot", 9) + tag("c:ingots/aluminum"), [result("alumel_ingot", 10)], "superheated")
 
 
 def tungsten():
@@ -738,6 +748,7 @@ def main():
     rocks()
     loot()
     alloys()
+    thermometry()
     tungsten()
     more_sinks()
     chromium()

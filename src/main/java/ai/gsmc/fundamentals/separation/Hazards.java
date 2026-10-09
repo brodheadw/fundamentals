@@ -64,6 +64,17 @@ public final class Hazards {
 
     /** Everyone within reach of {@code source}, a fuming acid in the open: masked, they breathe their tank; bare, it burns. */
     public static void fume(ServerLevel level, BlockPos source, Acids.Acid acid) {
+        breathe(level, source, acid.poisons);
+        level.sendParticles(ParticleTypes.WHITE_SMOKE, source.getX() + 0.5, source.getY() + 1.1, source.getZ() + 0.5, 3, 0.3, 0.2, 0.3, 0.01);
+    }
+
+    /** The vapour off spilt mercury, once: it poisons whoever is within reach and unmasked. */
+    public static void mercuryVapour(ServerLevel level, BlockPos source) {
+        breathe(level, source, true);
+        level.sendParticles(ParticleTypes.WHITE_SMOKE, source.getX() + 0.5, source.getY() + 0.5, source.getZ() + 0.5, 8, 0.3, 0.3, 0.3, 0.01);
+    }
+
+    private static void breathe(ServerLevel level, BlockPos source, boolean poisons) {
         AABB box = new AABB(source).inflate(REACH);
         for (LivingEntity living : level.getEntitiesOfClass(LivingEntity.class, box)) {
             ItemStack tank = DivingHelmetItem.isWornBy(living) ? BacktankUtil.getAllWithAir(living).stream().findFirst().orElse(ItemStack.EMPTY) : ItemStack.EMPTY;
@@ -73,11 +84,10 @@ public final class Hazards {
             }
             living.hurt(level.damageSources().magic(), 1.0F);
             living.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 100, 0));
-            if (acid.poisons) {
+            if (poisons) {
                 living.addEffect(new MobEffectInstance(MobEffects.POISON, 60, 0));
             }
         }
-        level.sendParticles(ParticleTypes.WHITE_SMOKE, source.getX() + 0.5, source.getY() + 1.1, source.getZ() + 0.5, 3, 0.3, 0.2, 0.3, 0.01);
     }
 
     /** Once a second, each player's surroundings are searched for a basin with a fuming acid in it. */

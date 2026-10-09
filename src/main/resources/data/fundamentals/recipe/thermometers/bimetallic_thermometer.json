@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "U",
+    "L",
+    "A"
+  ],
+  "key": {
+    "U": {
+      "tag": "c:plates/brass"
+    },
+    "L": {
+      "tag": "c:plates/iron"
+    },
+    "A": {
+      "item": "create:andesite_casing"
+    }
+  },
+  "result": {
+    "id": "fundamentals:bimetallic_thermometer",
+    "count": 1
+  }
+}

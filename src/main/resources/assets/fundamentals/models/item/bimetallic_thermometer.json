@@ -1,0 +1,6 @@
+{
+  "parent": "fundamentals:item/thermometer",
+  "textures": {
+    "dial": "fundamentals:block/bimetallic_thermometer_dial"
+  }
+}

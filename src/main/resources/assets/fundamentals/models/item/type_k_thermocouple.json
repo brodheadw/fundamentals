@@ -1,0 +1,6 @@
+{
+  "parent": "fundamentals:item/thermometer",
+  "textures": {
+    "dial": "fundamentals:block/type_k_thermocouple_dial"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "U",
+    "L",
+    "A"
+  ],
+  "key": {
+    "U": {
+      "item": "minecraft:glass_pane"
+    },
+    "L": {
+      "item": "fundamentals:mercury"
+    },
+    "A": {
+      "item": "create:andesite_casing"
+    }
+  },
+  "result": {
+    "id": "fundamentals:mercury_thermometer",
+    "count": 1
+  }
+}

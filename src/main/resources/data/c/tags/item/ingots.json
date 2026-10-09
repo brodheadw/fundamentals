@@ -1,10 +1,12 @@
 {
   "replace": false,
   "values": [
+    "#c:ingots/alumel",
     "#c:ingots/aluminium_scandium",
     "#c:ingots/blister_copper",
     "#c:ingots/bronze",
     "#c:ingots/cerium",
+    "#c:ingots/chromel",
     "#c:ingots/chromium",
     "#c:ingots/cobalt",
     "#c:ingots/crude_tin",

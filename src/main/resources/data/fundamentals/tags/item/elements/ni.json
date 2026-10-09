@@ -2,7 +2,9 @@
   "replace": false,
   "values": [
     "create:crushed_raw_nickel",
+    "fundamentals:alumel_ingot",
     "fundamentals:braggite_ore",
+    "fundamentals:chromel_ingot",
     "fundamentals:converter_matte_dust",
     "fundamentals:nickel_laterite_ore",
     "fundamentals:nickel_matte_dust",
@@ -15,6 +17,7 @@
     "fundamentals:stainless_steel_plate",
     "fundamentals:superalloy_ingot",
     "fundamentals:superalloy_plate",
+    "fundamentals:type_k_thermocouple",
     "tfmg:constantan_block",
     "tfmg:constantan_ingot",
     "tfmg:constantan_nugget",

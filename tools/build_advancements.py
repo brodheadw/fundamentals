@@ -16,6 +16,7 @@ import shutil
 from pathlib import Path
 
 from build_ore_data import ASSETS, DATA, DISPLAY, ORES, tag, write
+from build_heat_data import THERMOMETERS
 from build_separation_data import DISSOLVES, PLANT_ITEMS
 from build_uses_data import BLOCKS as USES_BLOCKS, ITEMS as USES_ITEMS, PGM_ITEMS, PLASTIC_BLOCKS, PLASTIC_ITEMS
 from paint_elements import ELEMENTS
@@ -62,7 +63,8 @@ ITEM_FORMULAS = {
     "aqua_regia_bucket": "HNO3,HCl",
     # a bloom is iron holding its slag, fayalite
     "iron_bloom": "Fe,Fe2SiO4", "roasted_galena": "PbO", "calcined_spodumene": "LiAlSi2O6", "photovoltaic_panel": "Si",
-    "clarifier_sludge_block": "Fe(OH)3,Al(OH)3,Th(OH)4",
+    "clarifier_sludge_block": "Fe(OH)3,Al(OH)3,Th(OH)4", "mercury": "Hg",
+    "mercury_thermometer": "Hg,SiO2", "bimetallic_thermometer": "Cu-Zn,Fe", "type_k_thermocouple": "Ni-Cr,Ni-Al", "type_s_thermocouple": "Pt-Rh,Pt",
     # Natta's catalyst, TiCl3 with the AlCl3 the aluminium leaves in it; polyvinyl chloride, and the polyethylene of the dyed blocks
     "ziegler_natta_catalyst": "TiCl3,AlCl3", "pvc_resin": "C2H3Cl", "pvc_sheet": "C2H3Cl",
     **{name: "C2H4" for name in PLASTIC_BLOCKS},
@@ -162,7 +164,7 @@ def our_items():
     names = [name for _, _, name in material_items()]
     names += [f"raw_{mineral}" for mineral in ORES] + [f"{mineral}_ore" for mineral in ORES]
     names += list(USES_ITEMS) + list(PGM_ITEMS) + list(PLANT_ITEMS) + list(USES_BLOCKS) + list(PLASTIC_ITEMS) + list(PLASTIC_BLOCKS) + [f"{acid}_bucket" for acid in DISSOLVES]
-    names += ["iron_bloom", "roasted_galena", "calcined_spodumene", "photovoltaic_panel"]
+    names += ["iron_bloom", "roasted_galena", "calcined_spodumene", "photovoltaic_panel"] + list(THERMOMETERS)
     return names
 
 

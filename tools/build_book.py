@@ -11,6 +11,7 @@ Patchouli is optional: without it the book's files are ignored and its recipe is
 import json
 import re
 import shutil
+from pathlib import Path
 
 from build_ore_data import ASSETS, BIOMES, DATA, DEPOSITS, PLACERS, write
 from build_separation_data import MOMENTS
@@ -92,6 +93,13 @@ def cuts():
         d = json.loads(path.read_text())
         out[d["liquor"]] = d
     return out
+
+
+def range_of(gauge):
+    """A thermometer's scale as heat.Thermometer gives it."""
+    java = (Path(__file__).resolve().parent.parent / "src/main/java/ai/gsmc/fundamentals/heat/Thermometer.java").read_text(encoding="utf-8")
+    low, high = re.search(rf'"{gauge}", (-?\d+), (-?\d+)', java).groups()
+    return f"{int(low):,} to {int(high):,} °C"
 
 
 def magnetic_cuts():
@@ -326,6 +334,19 @@ def rare_earths():
         "Under open sky the day swings it five degrees either way and rain and thunder take a few off. Then everything hot or cold within reach adds its share with distance: lava at 1,150 °C, fire and a campfire at 800, a lit furnace 750, "
         "a blast furnace 1,500, a bloomery 1,200, a blaze burner at whatever level it burns, and ice and snow the other way. That is inside; walls hold most of it in, so a step from a furnace is hot, not a kiln.", "Temperature") + pages_of(
         "Type /heat to read it where you stand; goggles on a stage read it there. Acid eats twice as fast for every ten degrees warmer. The three heats the recipes ask for, none, a burner (1,000 °C) and a burner fed a blaze cake (1,600 °C), are the coarse version of the same number."), 13)
+    entry("rare_earths", "thermometers", "Thermometers", "fundamentals:type_k_thermocouple", pages_of(
+        "A thermometer is a dial gauge built like Create's speedometer, what does the sensing standing over an andesite casing. Mount one on the face of a block and it reads that block: a furnace's wall, a vat, a burner. "
+        "The needle swings bottom left to bottom right across its scale, goggles give the number, and a comparator reads 0 to 15 across the scale. Each kind reads over the range its material allows.", "Thermometers") + pages_of(
+        f"Mercury in glass, {range_of('mercury_thermometer')}: mercury freezes at -38.8 °C and boils at 356.7. Past the top the column boils and bursts its glass, "
+        "leaving a little mercury and a breath of its vapour, which poisons anyone near and unmasked. Mercury is roasted out of cinnabar in air, HgS + O2 giving Hg and SO2, the vapour condensed: "
+        "a raw cinnabar and 250 mB of air in a heated basin give a flask of mercury.") + pages_of(
+        f"Bimetallic, {range_of('bimetallic_thermometer')}: a strip of brass on steel curls as it warms, the brass growing half again as fast, and turns the needle itself. Past 500 it pegs. "
+        f"Type K, {range_of('type_k_thermocouple')}: chromel (nickel with a tenth of chromium) against alumel (nickel with a little aluminium) gives some 41 microvolts a degree, the everyday industrial thermocouple; past 1,260 the chromel oxidises and the reading drifts, so it pegs. "
+        "Nine nickel and a chromium, superheated, give ten chromel; nine nickel and an aluminium ten alumel.") + pages_of(
+        f"Type S, {range_of('type_s_thermocouple')}: platinum with a tenth of rhodium against pure platinum gives only ten microvolts a degree but holds its calibration to the melting of steel, "
+        "for blast furnaces and superheated vats. A rhodium nugget over a platinum nugget make it. The thermocouples wear their IEC colours: type K green, type S orange, the negative leg white.")
+        + [{"type": "patchouli:crafting", "recipe": "fundamentals:thermometers/mercury_thermometer", "recipe2": "fundamentals:thermometers/bimetallic_thermometer"},
+           {"type": "patchouli:crafting", "recipe": "fundamentals:thermometers/type_k_thermocouple", "recipe2": "fundamentals:thermometers/type_s_thermocouple"}], 14)
 
 
 def metals():
