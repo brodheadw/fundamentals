@@ -62,7 +62,7 @@ public final class Reagents {
             new Reagent("osmium_tetroxide", 0xF2E8A0, Kind.GAS),
             new Reagent("ruthenium_tetroxide", 0xF0A830, Kind.GAS),
             new Reagent("spent_liquor", 0x8E9A86, Kind.WASTE),
-            new Reagent("brine", 0xDCE6E4, Kind.WASTE),
+            new Reagent("calcium_chloride_liquor", 0xDCE6E4, Kind.WASTE),
             new Reagent("bittern", 0xE6DEB8, Kind.SALINE),
             new Reagent("seawater", 0x3F76E4, Kind.WATER),
             new Reagent("crude_rare_earth_liquor", 0x8E7F86, Kind.CRUDE),
