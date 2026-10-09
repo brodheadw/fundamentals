@@ -18,8 +18,6 @@ public final class RareEarthMaterials {
     private static final MaterialForm[] MAGNET_ELEMENT_FORMS = {OXALATE, FLUORIDE, OXIDE, INGOT, DUST, NUGGET, BLOCK};
     private static final MaterialForm[] VOLATILE_FORMS = {OXALATE, OXIDE, INGOT, DUST};
     private static final MaterialForm[] VOLATILE_MAGNET_FORMS = {OXALATE, OXIDE, INGOT, DUST, NUGGET, BLOCK};
-    // Scandium is not in the chloride liquors, so it has no oxalate.
-    private static final MaterialForm[] SCANDIUM_FORMS = {OXIDE, INGOT, DUST};
     private static final MaterialForm[] ALLOY_FORMS = {INGOT, DUST, NUGGET, PLATE, BLOCK};
 
     private RareEarthMaterials() {}
@@ -31,6 +29,7 @@ public final class RareEarthMaterials {
         mineral("ion_adsorption_clay", "Ion-Adsorption Clay", "", new MaterialForm[] {ORE, RAW}, 0.33, 0);
         mineral("loparite", null, "(Na,Ca,Ce)(Ti,Nb,Ta)O3", MINERAL_FORMS, 0.61, 0.15);
         mineral("euxenite", null, "(Y,Ca,Ce,U,Th)(Nb,Ta,Ti)2O6", MINERAL_FORMS, 0.64, 0.35);
+        mineral("thortveitite", null, "(Sc,Y)2Si2O7", MINERAL_FORMS, 0.45, 0);
 
         reg("bastnasite_concentrate", "Bastnäsite Concentrate", MaterialType.CONCENTRATE, "",
                 new MaterialForm[] {CONCENTRATE}, MaterialProperties.builder());
@@ -57,7 +56,7 @@ public final class RareEarthMaterials {
         element("ytterbium", "Yb", VOLATILE_FORMS, 0.88);
         element("lutetium", "Lu", ELEMENT_FORMS, 1.25);
         element("yttrium", "Y", ELEMENT_FORMS, 0.57);
-        element("scandium", "Sc", SCANDIUM_FORMS, 0.38);
+        element("scandium", "Sc", ELEMENT_FORMS, 0.38);
 
         reg("didymium", null, MaterialType.ALLOY, "", new MaterialForm[] {OXALATE, FLUORIDE, OXIDE, INGOT, DUST},
                 MaterialProperties.builder().density(0.88));

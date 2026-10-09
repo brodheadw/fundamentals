@@ -177,6 +177,11 @@
       "mineral": "euxenite"
     },
     {
+      "name": "thortveitite_ore",
+      "soft": false,
+      "mineral": "thortveitite"
+    },
+    {
       "name": "native_silver_ore",
       "soft": false,
       "mineral": "native_silver"

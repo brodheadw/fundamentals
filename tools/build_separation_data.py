@@ -61,6 +61,7 @@ LIQUORS = {
     "ytterbium_liquor": ("Ytterbium Liquor", CLEAR),
     "lutetium_liquor": ("Lutetium Liquor", CLEAR),
     "yttrium_liquor": ("Yttrium Liquor", CLEAR),
+    "scandium_liquor": ("Scandium Liquor", CLEAR),
 }
 # P507 and P204 are colourless to pale yellow and ride in kerosene, so they are straw; naphthenic acid is the dark one.
 ORGANICS = {
@@ -132,7 +133,7 @@ FLUIDS = {**{k: (*v, "LIQUOR") for k, v in {**LIQUORS, **PLATINUM_LIQUORS}.items
 # fluorite back as slag. The volatile four are reduced straight from the oxide by lanthanum metal under
 # argon and distil off, leaving lanthanum oxide to go round again.
 ELECTROLYSIS = ("lanthanum", "cerium", "praseodymium", "neodymium", "didymium")
-CALCIOTHERMIC = ("gadolinium", "terbium", "dysprosium", "holmium", "erbium", "lutetium", "yttrium")
+CALCIOTHERMIC = ("gadolinium", "terbium", "dysprosium", "holmium", "erbium", "lutetium", "yttrium", "scandium")
 LANTHANOTHERMIC = ("samarium", "europium", "thulium", "ytterbium")
 # which liquor precipitates each element's oxalate; everything else is its own name
 OXALATE_FROM = {"didymium": "praseodymium_neodymium_liquor"}
@@ -273,6 +274,10 @@ def chemistry():
            [result_fluid("crude_heavy_rare_earth_liquor", 500), {"id": "fundamentals:monazite_residue_dust", "chance": 0.5}])
     # The clay is not ground or roasted: its rare earths sit on the clay as ions and a salt solution lifts
     # them off, which is why the Chinese heaps are leached in place. What is left is the clay, kaolinite, as before.
+    # Thortveitite is a silicate no acid opens. Chlorinated with coke at about 900 C, its scandium goes over as the chloride and
+    # the silica as silicon tetrachloride, which boils at 58 C and passes on; the chloride is taken up in water.
+    mixing("scandium_liquor", item("thortveitite_dust", 2) + [item("tfmg:coal_coke"), fluid("chlorine", 500), fluid("minecraft:water", 500)],
+           [result_fluid("scandium_liquor", 500)], heated=True)
     mixing("heavy_rare_earth_liquor_from_clay", item("raw_ion_adsorption_clay", 4) + [item("salt"), fluid("minecraft:water", 500)],
            [result_fluid("crude_heavy_rare_earth_liquor", 250), {"id": "minecraft:clay_ball", "count": 4}])
 

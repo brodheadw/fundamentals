@@ -6,12 +6,12 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "The rare earths are not rare, only mixed. Bastnäsite in carbonatite plugs and monazite in beach sand carry the light ones, lanthanum to samarium. Xenotime and euxenite in pegmatite veins carry the heavy ones and yttrium. Loparite under cold country carries the lights too.",
+      "text": "The rare earths are not rare, only mixed. Bastnäsite in carbonatite plugs and monazite in beach sand carry the light ones, lanthanum to samarium. Xenotime and euxenite in pegmatite veins carry the heavy ones and yttrium, and now and then a greenish-black prism of thortveitite, the one scandium mineral.",
       "title": "The minerals"
     },
     {
       "type": "patchouli:text",
-      "text": "Ion-adsorption clay under jungle is the odd one: a clay with the heavy rare earths merely stuck to it, which is why it is leached and never roasted."
+      "text": "Loparite under cold country carries the lights too. Ion-adsorption clay under jungle is the odd one: a clay with the heavy rare earths merely stuck to it, which is why it is leached and never roasted."
     },
     {
       "type": "patchouli:spotlight",

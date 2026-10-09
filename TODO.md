@@ -18,6 +18,10 @@ What's agreed but not built, in the order it's likely to go. The working plan be
 - **Gadolinium** has no sink: its real uses are neutron absorption and MRI contrast and the pack has neither. Holmium,
   thulium, ytterbium and lutetium likewise beyond the glass colours.
 
+- **Scandium by-product routes.** Most real scandium comes off nickel laterite acid leach (HPAL) liquor and bauxite residue,
+  pulled by P204 and stripped with caustic soda. Only thortveitite is modelled; laterite smelts whole and red mud does not exist.
+  Thortveitite's yttrium is not recovered.
+
 ## Other metals
 
 - **Tin.** Cassiterite generates but ends as ore; bronze is the natural sink. Zinc now reaches Create's zinc ingot (and so

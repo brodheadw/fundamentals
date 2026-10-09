@@ -39,6 +39,7 @@ public final class Reagents {
             new Reagent("ytterbium_liquor", 0xDCE6EC, Kind.LIQUOR),
             new Reagent("lutetium_liquor", 0xDCE6EC, Kind.LIQUOR),
             new Reagent("yttrium_liquor", 0xDCE6EC, Kind.LIQUOR),
+            new Reagent("scandium_liquor", 0xDCE6EC, Kind.LIQUOR),
             new Reagent("nickel_copper_sulfate", 0x58A890, Kind.LIQUOR),
             new Reagent("platinum_palladium_liquor", 0xC8701E, Kind.LIQUOR),
             new Reagent("palladium_liquor", 0xA8542A, Kind.LIQUOR),
