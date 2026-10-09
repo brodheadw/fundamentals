@@ -5,6 +5,8 @@ battery (piped north to it) or a single element, which gets a station that preci
 sets the oxide on a depot; neodymium and dysprosium go on to metal in a vat north of their stations. The root's liquor starts
 as monazite: washed, baked in sulfuric acid, leached in hydrochloric and clarified, west of the root. Every battery has
 its mixers, lever, organic feed, acid feed, sump drain and side tanks, every end tank is filled and refilled, and the whole plant is force-loaded so it runs while you walk it.
+South of spawn is a gallery of the rest, each exhibit signed and facing north: every ore, the zirconium, hafnium and beryllium
+routes in frames, magnet grades among blast furnaces, oxidation, thermometers, seawater and corrosion, cracking and plastics.
 
     python3 tools/showcase/build_showcase.py
 
@@ -202,7 +204,7 @@ def vat(x, z, outputs):
         put(x + dx, Y, z + dz, "tfmg:fireproof_bricks")
         put(x + dx, Y + 1, z + dz, "create:blaze_burner[blaze=seething]{isCreative:1b}")
     for (dx, dz), item in outputs:
-        put(x + dx, Y + 1, z + dz, f'create:smart_chute{{Filter:{{id:"fundamentals:{item}",count:1}}}}')
+        put(x + dx, Y + 1, z + dz, f'create:smart_chute{{Filter:{{id:"{item if ":" in item else "fundamentals:" + item}",count:1}}}}')
         put(x + dx, Y, z + dz, "minecraft:chest[facing=west]")
 
 
@@ -311,6 +313,302 @@ def ore():
     put(-9, Y, 1, f"{LIQUOR_PIPE}[north=true,up=true]")
 
 
+LANG = json.loads((ROOT / "src/main/resources/assets/fundamentals/lang/en_us.json").read_text())
+WALL = "minecraft:polished_andesite"
+
+
+def ns(id):
+    return id if ":" in id else f"fundamentals:{id}"
+
+
+def name(id):
+    path = ns(id).split(":")[1]
+    for kind in ("item", "block", "fluid_type"):
+        if ns(id).startswith("fundamentals:") and f"{kind}.fundamentals.{path}" in LANG:
+            return LANG[f"{kind}.fundamentals.{path}"]
+    return path.replace("_", " ").title()
+
+
+def text(words):
+    """A waxed sign's front: words wrapped to four lines of 15 characters, | forcing a break."""
+    rows = []
+    for part in words.split("|"):
+        row = ""
+        for word in part.split():
+            if row and len(row) + 1 + len(word) > 15:
+                rows.append(row)
+                row = word
+            else:
+                row = f"{row} {word}".strip()
+        rows.append(row)
+    assert len(rows) <= 4, words
+    rows += [""] * (4 - len(rows))
+    return "{front_text:{messages:[" + ",".join("'" + json.dumps(r, ensure_ascii=False).replace("'", "\\'") + "'" for r in rows) + "]},is_waxed:1b}"
+
+
+def sign(x, y, z, words):
+    put(x, y, z, "minecraft:birch_sign[rotation=8]" + text(words))
+
+
+def label(x, y, z, words):
+    """On the north face of the block at z + 1."""
+    put(x, y, z, "minecraft:birch_wall_sign[facing=north]" + text(words))
+
+
+def post(x, z, words):
+    put(x, Y, z, WALL)
+    put(x, Y + 1, z, WALL)
+    label(x, Y + 1, z - 1, words)
+
+
+def stack(item):
+    id, count, *components = item
+    return f'id:"{ns(id)}",count:{count}' + (f",components:{components[0]}" if components else "")
+
+
+def chest(x, z, items, y=Y):
+    put(x, y, z, "minecraft:chest[facing=north]{Items:[" + ",".join(f"{{Slot:{i}b,{stack(it)}}}" for i, it in enumerate(items)) + "]}")
+
+
+def frame(x, y, z, item):
+    """An item frame hung on the north face of the block at z + 1."""
+    lines.append(f'summon minecraft:item_frame {x + 0.5} {y + 0.5} {z + 0.5} {{Facing:2b,Fixed:1b,Invulnerable:1b,Item:{{id:"{ns(item)}",count:1}}}}')
+
+
+def ore_wall(x, z):
+    ores = sorted(k.split(".")[2] for k in LANG if k.startswith("block.fundamentals.") and k.count(".") == 2 and k.endswith("_ore"))
+    rocks = ["carbonatite", "gabbro", "laterite", "syenite"]
+    for title, blocks in (("Every ore", ores), ("Host rocks", rocks)):
+        post(x, z, title)
+        x += 1
+        for block in blocks:
+            put(x, Y, z, WALL)
+            put(x, Y + 1, z, ns(block))
+            label(x, Y + 1, z - 1, name(block))
+            x += 1
+        x += 1
+
+
+ROUTES = [
+    ("Zirconium: zircon to ingot", ["raw_zircon", "zircon_concentrate", "crude_zirconium_tetrachloride", "zirconium_tetrachloride",
+                                    "zirconium_sponge", "zirconium_ingot", "zirconium_plate"]),
+    ("Hafnium: parted off the chloride", ["crude_zirconium_tetrachloride", "hafnium_tetrachloride", "hafnium_sponge", "hafnium_ingot"]),
+    ("Zirconia, YSZ and the Factory", ["crude_zirconium_tetrachloride", "zirconium_oxide", "yttrium_oxide", "yttria_stabilised_zirconia",
+                                       "tfmg:turbine_blade", "zircon_concentrate", ("block", "tfmg:casting_basin")]),
+    ("Beryllium: beryl and bertrandite", ["raw_beryl", "beryl_frit", "raw_bertrandite", ("fluid", "beryllium_sulfate_liquor"),
+                                          "beryllium_hydroxide", "ammonium_fluoroberyllate", "beryllium_fluoride", "beryllium_pebbles",
+                                          "beryllium_ingot", "beryllium_oxide", "beryllium_copper_ingot", ("block", "beryllium_copper_block")]),
+]
+
+
+def routes(x, z):
+    """Each route a wall, its stages in frames left to right with their names above; a chest of them all under the title."""
+    for title, steps in ROUTES:
+        for y in range(3):
+            put(x, Y + y, z + 1, WALL)
+        label(x, Y + 2, z, title)
+        chest(x, z, [(s, 64) for s in steps if isinstance(s, str)])
+        x += 1
+        for step in steps:
+            kind, id = step if isinstance(step, tuple) else ("item", step)
+            for y in range(3):
+                put(x, Y + y, z + 1, WALL)
+            label(x, Y + 2, z, name(id))
+            if kind == "item":
+                frame(x, Y + 1, z, id)
+            else:
+                put(x, Y, z, WALL)
+                if kind == "fluid":
+                    tank(x, Y + 1, z, id)
+                else:
+                    put(x, Y + 1, z, ns(id))
+            x += 1
+        x += 1
+
+
+GRADES = [("neodymium_iron_boron", "NdFeB"), ("dysprosium_neodymium_iron_boron", "Dy-NdFeB"), ("samarium_cobalt", "SmCo"), ("alnico", "Alnico")]
+
+
+def magnets(x0, z0):
+    """A generator of each grade turned by a creative motor, as MagnetTests builds them: three lit blast furnaces round each
+    in the hot row (a furnace with no fuel and nothing to smelt stays lit), none in the cold row seven blocks south."""
+    for z, hot in ((z0, True), (z0 + 7, False)):
+        post(x0 - 3, z + 1, "Generators among blast furnaces" if hot else "The same, cold")
+        for i, (grade, short) in enumerate(GRADES):
+            x = x0 + 5 * i
+            put(x, Y, z, "create:creative_motor[facing=south]{ScrollValue:256}")
+            put(x, Y, z + 1, f'tfmg:generator[facing=north]{{components:{{"fundamentals:magnet":{{grade:"{grade}"}}}}}}')
+            if hot:
+                for dx, dy in ((-1, 0), (1, 0), (0, 1)):
+                    put(x + dx, Y + dy, z + 1, "minecraft:blast_furnace[lit=true]")
+            sign(x, Y, z - 1, f"{short}|{'hot' if hot else 'cold'}")
+
+
+AGEING = ["calcium_ingot", "lanthanum_ingot", "cerium_ingot", "neodymium_ingot", "neodymium_nugget", "minecraft:copper_ingot",
+          "bronze_ingot", "silver_ingot", "minecraft:iron_ingot"]
+WEATHERING = [["bronze_block", "exposed_bronze_block", "weathered_bronze_block", "oxidized_bronze_block", "waxed_bronze_block"],
+              ["silver_block", "tarnished_silver_block", "dulled_silver_block", "blackened_silver_block", "waxed_silver_block"]] + [
+    [f"{metal}_block", f"tarnished_{metal}_block", f"corroded_{metal}_block", f"crumbled_{metal}_block"]
+    for metal in ("neodymium", "praseodymium", "samarium", "dysprosium", "terbium")]
+
+
+def oxidation(x0, z0):
+    """The same metals in the open air, under argon, and over water; sealed canisters; blocks at every stage, and fresh ones
+    left out to weather, three of them over water. Damp is a water block beside or under, so the water sits in the floor."""
+    metals = [(m, 16) for m in AGEING]
+    chest(x0, z0, metals)
+    sign(x0, Y, z0 - 1, "In the air")
+    put(x0 + 2, Y, z0, "fundamentals:inert_storage_drum{Items:[" + ",".join(f"{{Slot:{i}b,{stack(m)}}}" for i, m in enumerate(metals))
+        + '],Tank:{Fluid:{id:"fundamentals:argon",amount:1000}}}')
+    sign(x0 + 2, Y, z0 - 1, "Under argon")
+    put(x0 + 4, Y - 1, z0, "minecraft:water")
+    chest(x0 + 4, z0, metals)
+    sign(x0 + 4, Y, z0 - 1, "Over water: damp")
+    sealed = lambda m: ("argon_canister", 1, f'{{"minecraft:container":[{{slot:0,item:{{id:"fundamentals:{m}",count:64}}}}]}}')
+    chest(x0 + 6, z0, [sealed("lanthanum_ingot"), sealed("cerium_ingot"), sealed("neodymium_ingot"), ("argon_canister", 1), ("argon_canister", 1), ("canister", 16)])
+    sign(x0 + 6, Y, z0 - 1, "Argon canisters, three sealed")
+    for row, blocks in enumerate(WEATHERING):
+        z = z0 + 4 + 2 * row
+        for i, block in enumerate(blocks):
+            put(x0 + i, Y, z, ns(block))
+            label(x0 + i, Y, z - 1, name(block))
+    z = z0 + 5 + 2 * len(WEATHERING)
+    for i, block in enumerate(["bronze_block", "silver_block", "neodymium_block"]):
+        put(x0 + i, Y - 1, z, "minecraft:water")
+        put(x0 + i, Y, z, ns(block))
+        label(x0 + i, Y, z - 1, f"{name(block)} over water")
+
+
+THERMOMETERS = ["mercury_thermometer", "bimetallic_thermometer", "type_k_thermocouple", "type_s_thermocouple"]
+FURNACE = "minecraft:blast_furnace[lit=true]"
+
+
+def thermometers(x0, z0):
+    """Each kind on five plinths, reading the block it is mounted on. Stations are five blocks apart and thermometers five
+    along a station, past the reach of each other's heat (a blast furnace reaches 3, a blaze burner 4)."""
+    stations = [("Cold: blue ice", "minecraft:blue_ice", [((0, 1), "minecraft:blue_ice")]),
+                ("Ambient", WALL, []),
+                ("Beside three lit blast furnaces", WALL, [((-1, 0), FURNACE), ((1, 0), FURNACE), ((0, 1), FURNACE)]),
+                ("On a lit blast furnace", FURNACE, []),
+                ("On a superheated blaze burner", "create:blaze_burner[blaze=seething]{isCreative:1b}", [])]
+    for s, (title, plinth, around) in enumerate(stations):
+        z = z0 + 5 * s
+        post(x0 - 3, z, title)
+        for i, kind in enumerate(THERMOMETERS):
+            x = x0 + 5 * i
+            put(x, Y, z, plinth)
+            for (dx, dz), block in around:
+                put(x + dx, Y, z + dz, block)
+            if kind == "mercury_thermometer" and s >= 3:
+                sign(x, Y, z - 1, "Mercury boils at 357 °C: it would burst here")
+                continue
+            put(x, Y + 1, z, f"fundamentals:{kind}[facing=up]")
+            sign(x, Y, z - 1, name(kind))
+
+
+def corrosion_loop(x0, z0, fluid, copper):
+    """A tank pumped round a loop of pipe into a second tank and back: east along z0, west along z0 + 2. A pipe joins every
+    pipe beside it whatever its placed state says, so the two runs keep a row of air between them."""
+    pipe, pump_block, tank_block = ("create:fluid_pipe", "create:mechanical_pump", "create:fluid_tank") if copper else (LIQUOR_PIPE, LIQUOR_PUMP, LIQUOR_TANK)
+    put(x0, Y, z0, tank_block)
+    fills.append(f'data merge block {x0} {Y} {z0} {{TankContent:{{Fluid:{{id:"{ns(fluid)}",amount:8000}}}}}}')
+    pump(x0 + 1, Y, z0, "east", "x", (x0, Y + 1, z0), "east", pump_block)
+    for x in range(x0 + 2, x0 + 5):
+        put(x, Y, z0, f"{pipe}[east=true,west=true]")
+    put(x0 + 5, Y, z0, tank_block)
+    for x in (x0, x0 + 5):
+        put(x, Y, z0 + 1, f"{pipe}[north=true,south=true]")
+    put(x0 + 5, Y, z0 + 2, f"{pipe}[north=true,west=true]")
+    put(x0 + 4, Y, z0 + 2, f"{pipe}[east=true,west=true]")
+    pump(x0 + 3, Y, z0 + 2, "west", "x", (x0 + 4, Y + 1, z0 + 2), "west", pump_block)
+    for x in (x0 + 2, x0 + 1):
+        put(x, Y, z0 + 2, f"{pipe}[east=true,west=true]")
+    put(x0, Y, z0 + 2, f"{pipe}[east=true,north=true]")
+    for x, z, facing in ((x0 + 1, z0, "east"), (x0 + 3, z0 + 2, "west")):
+        fills.extend([f"setblock {x} {Y} {z} minecraft:air", f"setblock {x} {Y} {z} {pump_block}[facing={facing}]"])
+    sign(x0 - 1, Y, z0, f"{name(fluid)} in {'copper' if copper else 'plastic'}")
+
+
+def seawater(x0, z0):
+    """Seawater is no block of its own, so it stands in tanks. A creative-heated basin under a mixer boils seawater pumped
+    into it down to salt and bittern; it keeps both, so it stops once its output is full."""
+    for i, fluid in enumerate(["seawater", "bittern", "bromine"]):
+        tank(x0 + 2 * i, Y, z0, fluid)
+        sign(x0 + 2 * i, Y, z0 - 1, name(fluid))
+    chest(x0 + 6, z0, [("seawater_bucket", 1), ("bromine_bucket", 1), ("salt", 64), ("raw_halite", 64), ("halite_ore", 16),
+                       ("magnesium_chloride", 16), ("raw_ion_adsorption_clay", 16)])
+    sign(x0 + 6, Y, z0 - 1, "Salt, halite, bittern products")
+    z = z0 + 4
+    put(x0, Y, z, WALL)
+    tank(x0, Y + 1, z, "seawater")
+    put(x0 + 1, Y, z, WALL)
+    pump(x0 + 1, Y + 1, z, "east", "x", (x0, Y + 2, z), "east")
+    put(x0 + 2, Y, z, "create:blaze_burner[blaze=kindled]{isCreative:1b}")
+    put(x0 + 2, Y + 1, z, "create:basin[facing=down]")
+    put(x0 + 2, Y + 3, z, "create:mechanical_mixer")
+    put(x0 + 2, Y + 3, z + 1, "create:cogwheel[axis=y]")
+    put(x0 + 2, Y + 4, z + 1, f"create:creative_motor[facing=down]{MOTOR}")
+    fills.extend([f"setblock {x0 + 1} {Y + 1} {z} minecraft:air", f"setblock {x0 + 1} {Y + 1} {z} {LIQUOR_PUMP}[facing=east]"])
+    sign(x0 + 3, Y, z - 1, "Seawater boiled to salt and bittern")
+    for row, fluid in enumerate(["seawater", "hydrochloric_acid"]):
+        for col, copper in enumerate((True, False)):
+            corrosion_loop(x0 + 1 + 9 * col, z0 + 9 + 5 * row, fluid, copper)
+
+
+def cracking(x, z):
+    """Heavy oil cracked over lanthanum oxide in a firebrick vat with an industrial mixer, as the plant's reduction cell: the oil
+    pumped in from the east, the catalyst hoppered in, the coke dust taken out into a chest. Gasoline and propylene stay in
+    the vat, and the catalyst it gives back fills its output, so it runs until either is full."""
+    vat(x, z, [((1, 0), "tfmg:coal_coke_dust")])
+    put(x, Y + 3, z, 'tfmg:industrial_mixer{MixerMode:"mixing"}')
+    put(x, Y + 4, z, f"create:creative_motor[facing=down]{MOTOR}")
+    feed(x + 1, Y + 3, z, "lanthanum_oxide")
+    tank(x + 3, Y + 2, z + 1, "tfmg:heavy_oil", block="create:fluid_tank")
+    pump(x + 2, Y + 2, z + 1, "west", "x", (x + 3, Y + 3, z + 1), "west", "create:mechanical_pump")
+    fills.extend([f"setblock {x + 2} {Y + 2} {z + 1} minecraft:air", f"setblock {x + 2} {Y + 2} {z + 1} create:mechanical_pump[facing=west]"])
+    sign(x, Y, z - 1, "Fluid catalytic cracking")
+    sign(x + 1, Y, z - 1, "Heavy oil over lanthanum oxide")
+
+
+PIGMENTS = ["white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue",
+            "brown", "green", "red", "black"]
+
+
+def plastics(x0, z0):
+    post(x0 - 2, z0, "Plastic blocks: natural, then dyed")
+    put(x0, Y, z0, "tfmg:plastic_block")
+    for i, colour in enumerate(PIGMENTS):
+        put(x0 + 1 + i, Y, z0, f"fundamentals:{colour}_plastic_block")
+    post(x0 - 2, z0 + 3, "Dyed plastic pipe")
+    for i, colour in enumerate(PIGMENTS):
+        put(x0 + 1 + i, Y, z0 + 3, f"fundamentals:dyed_plastic_pipe[color={colour},north=true,south=true]")
+    post(x0 - 2, z0 + 6, "Plastic tanks")
+    for i, pigment in enumerate(["none", "white", "red", "yellow", "green", "blue", "black"]):
+        put(x0 + 2 * i, Y, z0 + 6, f"fundamentals:plastic_fluid_tank[color={pigment}]")
+    post(x0 - 2, z0 + 9, "Plastic pipe, pump, valve")
+    put(x0, Y, z0 + 9, LIQUOR_TANK)
+    pump(x0 + 1, Y, z0 + 9, "east", "x", (x0, Y + 1, z0 + 9), "east")
+    put(x0 + 2, Y, z0 + 9, f"{LIQUOR_PIPE}[east=true,west=true]")
+    put(x0 + 3, Y, z0 + 9, "tfmg:glass_plastic_pipe[axis=x]")
+    put(x0 + 4, Y, z0 + 9, "tfmg:plastic_fluid_valve[facing=east]")
+    put(x0 + 5, Y, z0 + 9, "tfmg:plastic_smart_fluid_pipe[face=floor,facing=east]")
+    put(x0 + 6, Y, z0 + 9, LIQUOR_TANK)
+    chest(x0 + 8, z0 + 9, [("mixer_settler", 6), ("stainless_steel_plate", 64), ("tfmg:plastic_sheet", 64), ("pvc_sheet", 64), ("create:fluid_pipe", 16),
+                           ("ziegler_natta_catalyst", 16), ("pvc_resin", 16)])
+    sign(x0 + 8, Y, z0 + 8, "Mixer-settler: plastic or stainless plate")
+
+
+def gallery():
+    ore_wall(-20, 16)
+    routes(-20, 25)
+    magnets(26, 24)
+    oxidation(-20, 36)
+    thermometers(4, 37)
+    seawater(26, 37)
+    cracking(-18, 66)
+    plastics(-6, 66)
+
+
 def main():
     lines.extend(["scoreboard players set #world showcase 1", "gamemode creative @s", "time set 6000", "weather clear",
                   "gamerule doDaylightCycle false", "gamerule doWeatherCycle false", "gamerule doMobSpawning false", "kill @e[type=item]"])
@@ -333,8 +631,7 @@ def main():
     put(-5, Y - 2, 1, "minecraft:chest")
     pump(-4, Y, 1, "east", "x", (-3, Y + 1, 1), "west")
     put(-3, Y, 1, f"{LIQUOR_PIPE}[east=true,west=true]")
-    # the chests at spawn: the components to build a stage, and the metals to build with
-    chest = lambda x, z, items: put(x, Y, z, "minecraft:chest[facing=north]{Items:[" + ",".join(f'{{Slot:{i}b,id:"{it}",count:{n}}}' for i, (it, n) in enumerate(items)) + "]}")
+    # the chests at spawn: the components to build a stage, the metals to build with, and the gallery's loose things
     chest(6, 6, [("fundamentals:mixer_settler", 64), ("create:mechanical_mixer", 16), ("create:cogwheel", 32), ("create:creative_motor", 16), ("tfmg:plastic_mechanical_pump", 16), ("create:mechanical_pump", 8),
                  ("create:fluid_pipe", 64), ("tfmg:plastic_pipe", 64), ("create:fluid_tank", 16), (LIQUOR_TANK, 16), ("create:wrench", 1), ("fundamentals:oxalic_acid", 64), ("create:basin", 4), ("create:chute", 4),
                  ("minecraft:blast_furnace", 4), ("create:depot", 4), ("minecraft:coal", 64), ("minecraft:lever", 4)])
@@ -344,6 +641,11 @@ def main():
                  ("fundamentals:hydrochloric_acid_bucket", 1), ("fundamentals:hydrofluoric_acid_bucket", 1), ("fundamentals:nitric_acid_bucket", 1), ("fundamentals:raw_borax", 32),
                  ("fundamentals:cerium_oxide", 32), ("fundamentals:neodymium_oxide", 32), ("fundamentals:lanthanum_ingot", 32), ("fundamentals:neodymium_ingot", 32),
                  ("fundamentals:dysprosium_ingot", 32), ("fundamentals:aluminium_scandium_plate", 32)])
+    machine = lambda id, grade: (id, 1, f'{{"fundamentals:magnet":{{grade:"{grade}"}}}}')
+    chest(6, 8, [("create:goggles", 1)] + [(t, 4) for t in THERMOMETERS] + [(f"{g}_magnet", 16) for g, _ in GRADES]
+          + [machine("tfmg:generator", g) for g, _ in GRADES] + [machine("tfmg:electric_motor", g) for g, _ in GRADES]
+          + [("argon_canister", 1), ("argon_canister", 1), ("canister", 16), ("inert_storage_drum", 4), ("seawater_bucket", 1), ("salt", 64)])
+    gallery()
     # the floor, the air over it, and the chunks kept loaded, in pieces small enough for the commands
     x1, z1, x2, z2 = bounds[0] - 6, bounds[1] - 6, bounds[2] + 6, bounds[3] + 6
     prelude = []

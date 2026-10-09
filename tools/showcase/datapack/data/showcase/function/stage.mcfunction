@@ -6,89 +6,137 @@ gamerule doDaylightCycle false
 gamerule doWeatherCycle false
 gamerule doMobSpawning false
 kill @e[type=item]
-fill -24 -61 -84 549 -61 -77 minecraft:smooth_stone
-fill -24 -60 -84 549 -59 -77 minecraft:air
-fill -24 -58 -84 549 -57 -77 minecraft:air
-fill -24 -56 -84 549 -55 -77 minecraft:air
-fill -24 -54 -84 549 -53 -77 minecraft:air
-fill -24 -52 -84 549 -51 -77 minecraft:air
-fill -24 -61 -76 549 -61 -69 minecraft:smooth_stone
-fill -24 -60 -76 549 -59 -69 minecraft:air
-fill -24 -58 -76 549 -57 -69 minecraft:air
-fill -24 -56 -76 549 -55 -69 minecraft:air
-fill -24 -54 -76 549 -53 -69 minecraft:air
-fill -24 -52 -76 549 -51 -69 minecraft:air
-fill -24 -61 -68 549 -61 -61 minecraft:smooth_stone
-fill -24 -60 -68 549 -59 -61 minecraft:air
-fill -24 -58 -68 549 -57 -61 minecraft:air
-fill -24 -56 -68 549 -55 -61 minecraft:air
-fill -24 -54 -68 549 -53 -61 minecraft:air
-fill -24 -52 -68 549 -51 -61 minecraft:air
-fill -24 -61 -60 549 -61 -53 minecraft:smooth_stone
-fill -24 -60 -60 549 -59 -53 minecraft:air
-fill -24 -58 -60 549 -57 -53 minecraft:air
-fill -24 -56 -60 549 -55 -53 minecraft:air
-fill -24 -54 -60 549 -53 -53 minecraft:air
-fill -24 -52 -60 549 -51 -53 minecraft:air
-fill -24 -61 -52 549 -61 -45 minecraft:smooth_stone
-fill -24 -60 -52 549 -59 -45 minecraft:air
-fill -24 -58 -52 549 -57 -45 minecraft:air
-fill -24 -56 -52 549 -55 -45 minecraft:air
-fill -24 -54 -52 549 -53 -45 minecraft:air
-fill -24 -52 -52 549 -51 -45 minecraft:air
-fill -24 -61 -44 549 -61 -37 minecraft:smooth_stone
-fill -24 -60 -44 549 -59 -37 minecraft:air
-fill -24 -58 -44 549 -57 -37 minecraft:air
-fill -24 -56 -44 549 -55 -37 minecraft:air
-fill -24 -54 -44 549 -53 -37 minecraft:air
-fill -24 -52 -44 549 -51 -37 minecraft:air
-fill -24 -61 -36 549 -61 -29 minecraft:smooth_stone
-fill -24 -60 -36 549 -59 -29 minecraft:air
-fill -24 -58 -36 549 -57 -29 minecraft:air
-fill -24 -56 -36 549 -55 -29 minecraft:air
-fill -24 -54 -36 549 -53 -29 minecraft:air
-fill -24 -52 -36 549 -51 -29 minecraft:air
-fill -24 -61 -28 549 -61 -21 minecraft:smooth_stone
-fill -24 -60 -28 549 -59 -21 minecraft:air
-fill -24 -58 -28 549 -57 -21 minecraft:air
-fill -24 -56 -28 549 -55 -21 minecraft:air
-fill -24 -54 -28 549 -53 -21 minecraft:air
-fill -24 -52 -28 549 -51 -21 minecraft:air
-fill -24 -61 -20 549 -61 -13 minecraft:smooth_stone
-fill -24 -60 -20 549 -59 -13 minecraft:air
-fill -24 -58 -20 549 -57 -13 minecraft:air
-fill -24 -56 -20 549 -55 -13 minecraft:air
-fill -24 -54 -20 549 -53 -13 minecraft:air
-fill -24 -52 -20 549 -51 -13 minecraft:air
-fill -24 -61 -12 549 -61 -5 minecraft:smooth_stone
-fill -24 -60 -12 549 -59 -5 minecraft:air
-fill -24 -58 -12 549 -57 -5 minecraft:air
-fill -24 -56 -12 549 -55 -5 minecraft:air
-fill -24 -54 -12 549 -53 -5 minecraft:air
-fill -24 -52 -12 549 -51 -5 minecraft:air
-fill -24 -61 -4 549 -61 3 minecraft:smooth_stone
-fill -24 -60 -4 549 -59 3 minecraft:air
-fill -24 -58 -4 549 -57 3 minecraft:air
-fill -24 -56 -4 549 -55 3 minecraft:air
-fill -24 -54 -4 549 -53 3 minecraft:air
-fill -24 -52 -4 549 -51 3 minecraft:air
-fill -24 -61 4 549 -61 11 minecraft:smooth_stone
-fill -24 -60 4 549 -59 11 minecraft:air
-fill -24 -58 4 549 -57 11 minecraft:air
-fill -24 -56 4 549 -55 11 minecraft:air
-fill -24 -54 4 549 -53 11 minecraft:air
-fill -24 -52 4 549 -51 11 minecraft:air
-fill -24 -61 12 549 -61 13 minecraft:smooth_stone
-fill -24 -60 12 549 -59 13 minecraft:air
-fill -24 -58 12 549 -57 13 minecraft:air
-fill -24 -56 12 549 -55 13 minecraft:air
-fill -24 -54 12 549 -53 13 minecraft:air
-fill -24 -52 12 549 -51 13 minecraft:air
-forceload add -24 -84 103 13
-forceload add 104 -84 231 13
-forceload add 232 -84 359 13
-forceload add 360 -84 487 13
-forceload add 488 -84 549 13
+fill -26 -61 -84 549 -61 -77 minecraft:smooth_stone
+fill -26 -60 -84 549 -59 -77 minecraft:air
+fill -26 -58 -84 549 -57 -77 minecraft:air
+fill -26 -56 -84 549 -55 -77 minecraft:air
+fill -26 -54 -84 549 -53 -77 minecraft:air
+fill -26 -52 -84 549 -51 -77 minecraft:air
+fill -26 -61 -76 549 -61 -69 minecraft:smooth_stone
+fill -26 -60 -76 549 -59 -69 minecraft:air
+fill -26 -58 -76 549 -57 -69 minecraft:air
+fill -26 -56 -76 549 -55 -69 minecraft:air
+fill -26 -54 -76 549 -53 -69 minecraft:air
+fill -26 -52 -76 549 -51 -69 minecraft:air
+fill -26 -61 -68 549 -61 -61 minecraft:smooth_stone
+fill -26 -60 -68 549 -59 -61 minecraft:air
+fill -26 -58 -68 549 -57 -61 minecraft:air
+fill -26 -56 -68 549 -55 -61 minecraft:air
+fill -26 -54 -68 549 -53 -61 minecraft:air
+fill -26 -52 -68 549 -51 -61 minecraft:air
+fill -26 -61 -60 549 -61 -53 minecraft:smooth_stone
+fill -26 -60 -60 549 -59 -53 minecraft:air
+fill -26 -58 -60 549 -57 -53 minecraft:air
+fill -26 -56 -60 549 -55 -53 minecraft:air
+fill -26 -54 -60 549 -53 -53 minecraft:air
+fill -26 -52 -60 549 -51 -53 minecraft:air
+fill -26 -61 -52 549 -61 -45 minecraft:smooth_stone
+fill -26 -60 -52 549 -59 -45 minecraft:air
+fill -26 -58 -52 549 -57 -45 minecraft:air
+fill -26 -56 -52 549 -55 -45 minecraft:air
+fill -26 -54 -52 549 -53 -45 minecraft:air
+fill -26 -52 -52 549 -51 -45 minecraft:air
+fill -26 -61 -44 549 -61 -37 minecraft:smooth_stone
+fill -26 -60 -44 549 -59 -37 minecraft:air
+fill -26 -58 -44 549 -57 -37 minecraft:air
+fill -26 -56 -44 549 -55 -37 minecraft:air
+fill -26 -54 -44 549 -53 -37 minecraft:air
+fill -26 -52 -44 549 -51 -37 minecraft:air
+fill -26 -61 -36 549 -61 -29 minecraft:smooth_stone
+fill -26 -60 -36 549 -59 -29 minecraft:air
+fill -26 -58 -36 549 -57 -29 minecraft:air
+fill -26 -56 -36 549 -55 -29 minecraft:air
+fill -26 -54 -36 549 -53 -29 minecraft:air
+fill -26 -52 -36 549 -51 -29 minecraft:air
+fill -26 -61 -28 549 -61 -21 minecraft:smooth_stone
+fill -26 -60 -28 549 -59 -21 minecraft:air
+fill -26 -58 -28 549 -57 -21 minecraft:air
+fill -26 -56 -28 549 -55 -21 minecraft:air
+fill -26 -54 -28 549 -53 -21 minecraft:air
+fill -26 -52 -28 549 -51 -21 minecraft:air
+fill -26 -61 -20 549 -61 -13 minecraft:smooth_stone
+fill -26 -60 -20 549 -59 -13 minecraft:air
+fill -26 -58 -20 549 -57 -13 minecraft:air
+fill -26 -56 -20 549 -55 -13 minecraft:air
+fill -26 -54 -20 549 -53 -13 minecraft:air
+fill -26 -52 -20 549 -51 -13 minecraft:air
+fill -26 -61 -12 549 -61 -5 minecraft:smooth_stone
+fill -26 -60 -12 549 -59 -5 minecraft:air
+fill -26 -58 -12 549 -57 -5 minecraft:air
+fill -26 -56 -12 549 -55 -5 minecraft:air
+fill -26 -54 -12 549 -53 -5 minecraft:air
+fill -26 -52 -12 549 -51 -5 minecraft:air
+fill -26 -61 -4 549 -61 3 minecraft:smooth_stone
+fill -26 -60 -4 549 -59 3 minecraft:air
+fill -26 -58 -4 549 -57 3 minecraft:air
+fill -26 -56 -4 549 -55 3 minecraft:air
+fill -26 -54 -4 549 -53 3 minecraft:air
+fill -26 -52 -4 549 -51 3 minecraft:air
+fill -26 -61 4 549 -61 11 minecraft:smooth_stone
+fill -26 -60 4 549 -59 11 minecraft:air
+fill -26 -58 4 549 -57 11 minecraft:air
+fill -26 -56 4 549 -55 11 minecraft:air
+fill -26 -54 4 549 -53 11 minecraft:air
+fill -26 -52 4 549 -51 11 minecraft:air
+fill -26 -61 12 549 -61 19 minecraft:smooth_stone
+fill -26 -60 12 549 -59 19 minecraft:air
+fill -26 -58 12 549 -57 19 minecraft:air
+fill -26 -56 12 549 -55 19 minecraft:air
+fill -26 -54 12 549 -53 19 minecraft:air
+fill -26 -52 12 549 -51 19 minecraft:air
+fill -26 -61 20 549 -61 27 minecraft:smooth_stone
+fill -26 -60 20 549 -59 27 minecraft:air
+fill -26 -58 20 549 -57 27 minecraft:air
+fill -26 -56 20 549 -55 27 minecraft:air
+fill -26 -54 20 549 -53 27 minecraft:air
+fill -26 -52 20 549 -51 27 minecraft:air
+fill -26 -61 28 549 -61 35 minecraft:smooth_stone
+fill -26 -60 28 549 -59 35 minecraft:air
+fill -26 -58 28 549 -57 35 minecraft:air
+fill -26 -56 28 549 -55 35 minecraft:air
+fill -26 -54 28 549 -53 35 minecraft:air
+fill -26 -52 28 549 -51 35 minecraft:air
+fill -26 -61 36 549 -61 43 minecraft:smooth_stone
+fill -26 -60 36 549 -59 43 minecraft:air
+fill -26 -58 36 549 -57 43 minecraft:air
+fill -26 -56 36 549 -55 43 minecraft:air
+fill -26 -54 36 549 -53 43 minecraft:air
+fill -26 -52 36 549 -51 43 minecraft:air
+fill -26 -61 44 549 -61 51 minecraft:smooth_stone
+fill -26 -60 44 549 -59 51 minecraft:air
+fill -26 -58 44 549 -57 51 minecraft:air
+fill -26 -56 44 549 -55 51 minecraft:air
+fill -26 -54 44 549 -53 51 minecraft:air
+fill -26 -52 44 549 -51 51 minecraft:air
+fill -26 -61 52 549 -61 59 minecraft:smooth_stone
+fill -26 -60 52 549 -59 59 minecraft:air
+fill -26 -58 52 549 -57 59 minecraft:air
+fill -26 -56 52 549 -55 59 minecraft:air
+fill -26 -54 52 549 -53 59 minecraft:air
+fill -26 -52 52 549 -51 59 minecraft:air
+fill -26 -61 60 549 -61 67 minecraft:smooth_stone
+fill -26 -60 60 549 -59 67 minecraft:air
+fill -26 -58 60 549 -57 67 minecraft:air
+fill -26 -56 60 549 -55 67 minecraft:air
+fill -26 -54 60 549 -53 67 minecraft:air
+fill -26 -52 60 549 -51 67 minecraft:air
+fill -26 -61 68 549 -61 75 minecraft:smooth_stone
+fill -26 -60 68 549 -59 75 minecraft:air
+fill -26 -58 68 549 -57 75 minecraft:air
+fill -26 -56 68 549 -55 75 minecraft:air
+fill -26 -54 68 549 -53 75 minecraft:air
+fill -26 -52 68 549 -51 75 minecraft:air
+fill -26 -61 76 549 -61 81 minecraft:smooth_stone
+fill -26 -60 76 549 -59 81 minecraft:air
+fill -26 -58 76 549 -57 81 minecraft:air
+fill -26 -56 76 549 -55 81 minecraft:air
+fill -26 -54 76 549 -53 81 minecraft:air
+fill -26 -52 76 549 -51 81 minecraft:air
+forceload add -26 -84 101 81
+forceload add 102 -84 229 81
+forceload add 230 -84 357 81
+forceload add 358 -84 485 81
+forceload add 486 -84 549 81
 setblock 0 -60 0 fundamentals:mixer_settler[facing=east]
 setblock 0 -59 0 fundamentals:mixer_settler[facing=east]
 setblock 0 -60 1 fundamentals:mixer_settler[facing=east]
@@ -6643,5 +6691,726 @@ setblock -3 -59 1 create:creative_motor[facing=west]{ScrollValue:64}
 setblock -3 -60 1 tfmg:plastic_pipe[east=true,west=true]
 setblock 6 -60 6 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:mixer_settler",count:64},{Slot:1b,id:"create:mechanical_mixer",count:16},{Slot:2b,id:"create:cogwheel",count:32},{Slot:3b,id:"create:creative_motor",count:16},{Slot:4b,id:"tfmg:plastic_mechanical_pump",count:16},{Slot:5b,id:"create:mechanical_pump",count:8},{Slot:6b,id:"create:fluid_pipe",count:64},{Slot:7b,id:"tfmg:plastic_pipe",count:64},{Slot:8b,id:"create:fluid_tank",count:16},{Slot:9b,id:"fundamentals:plastic_fluid_tank",count:16},{Slot:10b,id:"create:wrench",count:1},{Slot:11b,id:"fundamentals:oxalic_acid",count:64},{Slot:12b,id:"create:basin",count:4},{Slot:13b,id:"create:chute",count:4},{Slot:14b,id:"minecraft:blast_furnace",count:4},{Slot:15b,id:"create:depot",count:4},{Slot:16b,id:"minecraft:coal",count:64},{Slot:17b,id:"minecraft:lever",count:4}]}
 setblock 6 -60 7 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:cobalt_ingot",count:64},{Slot:1b,id:"fundamentals:molybdenum_ingot",count:64},{Slot:2b,id:"fundamentals:rhenium_ingot",count:32},{Slot:3b,id:"fundamentals:tungsten_ingot",count:64},{Slot:4b,id:"fundamentals:superalloy_plate",count:32},{Slot:5b,id:"fundamentals:molybdenum_steel_plate",count:32},{Slot:6b,id:"fundamentals:tungsten_carbide",count:32},{Slot:7b,id:"fundamentals:tungsten_filament",count:32},{Slot:8b,id:"fundamentals:neodymium_iron_boron_ingot",count:32},{Slot:9b,id:"fundamentals:samarium_cobalt_ingot",count:32},{Slot:10b,id:"fundamentals:phosphor",count:32},{Slot:11b,id:"fundamentals:didymium_glass",count:32},{Slot:12b,id:"fundamentals:hydrochloric_acid_bucket",count:1},{Slot:13b,id:"fundamentals:hydrofluoric_acid_bucket",count:1},{Slot:14b,id:"fundamentals:nitric_acid_bucket",count:1},{Slot:15b,id:"fundamentals:raw_borax",count:32},{Slot:16b,id:"fundamentals:cerium_oxide",count:32},{Slot:17b,id:"fundamentals:neodymium_oxide",count:32},{Slot:18b,id:"fundamentals:lanthanum_ingot",count:32},{Slot:19b,id:"fundamentals:neodymium_ingot",count:32},{Slot:20b,id:"fundamentals:dysprosium_ingot",count:32},{Slot:21b,id:"fundamentals:aluminium_scandium_plate",count:32}]}
+setblock 6 -60 8 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"create:goggles",count:1},{Slot:1b,id:"fundamentals:mercury_thermometer",count:4},{Slot:2b,id:"fundamentals:bimetallic_thermometer",count:4},{Slot:3b,id:"fundamentals:type_k_thermocouple",count:4},{Slot:4b,id:"fundamentals:type_s_thermocouple",count:4},{Slot:5b,id:"fundamentals:neodymium_iron_boron_magnet",count:16},{Slot:6b,id:"fundamentals:dysprosium_neodymium_iron_boron_magnet",count:16},{Slot:7b,id:"fundamentals:samarium_cobalt_magnet",count:16},{Slot:8b,id:"fundamentals:alnico_magnet",count:16},{Slot:9b,id:"tfmg:generator",count:1,components:{"fundamentals:magnet":{grade:"neodymium_iron_boron"}}},{Slot:10b,id:"tfmg:generator",count:1,components:{"fundamentals:magnet":{grade:"dysprosium_neodymium_iron_boron"}}},{Slot:11b,id:"tfmg:generator",count:1,components:{"fundamentals:magnet":{grade:"samarium_cobalt"}}},{Slot:12b,id:"tfmg:generator",count:1,components:{"fundamentals:magnet":{grade:"alnico"}}},{Slot:13b,id:"tfmg:electric_motor",count:1,components:{"fundamentals:magnet":{grade:"neodymium_iron_boron"}}},{Slot:14b,id:"tfmg:electric_motor",count:1,components:{"fundamentals:magnet":{grade:"dysprosium_neodymium_iron_boron"}}},{Slot:15b,id:"tfmg:electric_motor",count:1,components:{"fundamentals:magnet":{grade:"samarium_cobalt"}}},{Slot:16b,id:"tfmg:electric_motor",count:1,components:{"fundamentals:magnet":{grade:"alnico"}}},{Slot:17b,id:"fundamentals:argon_canister",count:1},{Slot:18b,id:"fundamentals:argon_canister",count:1},{Slot:19b,id:"fundamentals:canister",count:16},{Slot:20b,id:"fundamentals:inert_storage_drum",count:4},{Slot:21b,id:"fundamentals:seawater_bucket",count:1},{Slot:22b,id:"fundamentals:salt",count:64}]}
+setblock -20 -60 16 minecraft:polished_andesite
+setblock -20 -59 16 minecraft:polished_andesite
+setblock -20 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Every ore"','""','""','""']},is_waxed:1b}
+setblock -19 -60 16 minecraft:polished_andesite
+setblock -19 -59 16 fundamentals:argentite_ore
+setblock -19 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Argentite Ore"','""','""','""']},is_waxed:1b}
+setblock -18 -60 16 minecraft:polished_andesite
+setblock -18 -59 16 fundamentals:azurite_ore
+setblock -18 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Azurite Ore"','""','""','""']},is_waxed:1b}
+setblock -17 -60 16 minecraft:polished_andesite
+setblock -17 -59 16 fundamentals:bastnasite_ore
+setblock -17 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Bastnäsite Ore"','""','""','""']},is_waxed:1b}
+setblock -16 -60 16 minecraft:polished_andesite
+setblock -16 -59 16 fundamentals:bauxite_ore
+setblock -16 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Bauxite"','""','""','""']},is_waxed:1b}
+setblock -15 -60 16 minecraft:polished_andesite
+setblock -15 -59 16 fundamentals:bertrandite_ore
+setblock -15 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Bertrandite Ore"','""','""','""']},is_waxed:1b}
+setblock -14 -60 16 minecraft:polished_andesite
+setblock -14 -59 16 fundamentals:beryl_ore
+setblock -14 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Beryl Ore"','""','""','""']},is_waxed:1b}
+setblock -13 -60 16 minecraft:polished_andesite
+setblock -13 -59 16 fundamentals:borax_ore
+setblock -13 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Borax Ore"','""','""','""']},is_waxed:1b}
+setblock -12 -60 16 minecraft:polished_andesite
+setblock -12 -59 16 fundamentals:bornite_ore
+setblock -12 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Bornite Ore"','""','""','""']},is_waxed:1b}
+setblock -11 -60 16 minecraft:polished_andesite
+setblock -11 -59 16 fundamentals:braggite_ore
+setblock -11 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Braggite Ore"','""','""','""']},is_waxed:1b}
+setblock -10 -60 16 minecraft:polished_andesite
+setblock -10 -59 16 fundamentals:cassiterite_ore
+setblock -10 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Cassiterite Ore"','""','""','""']},is_waxed:1b}
+setblock -9 -60 16 minecraft:polished_andesite
+setblock -9 -59 16 fundamentals:chalcocite_ore
+setblock -9 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Chalcocite Ore"','""','""','""']},is_waxed:1b}
+setblock -8 -60 16 minecraft:polished_andesite
+setblock -8 -59 16 fundamentals:chalcopyrite_ore
+setblock -8 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Chalcopyrite"','"Ore"','""','""']},is_waxed:1b}
+setblock -7 -60 16 minecraft:polished_andesite
+setblock -7 -59 16 fundamentals:chromite_ore
+setblock -7 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Chromite Ore"','""','""','""']},is_waxed:1b}
+setblock -6 -60 16 minecraft:polished_andesite
+setblock -6 -59 16 fundamentals:cinnabar_ore
+setblock -6 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Cinnabar Ore"','""','""','""']},is_waxed:1b}
+setblock -5 -60 16 minecraft:polished_andesite
+setblock -5 -59 16 fundamentals:cobaltite_ore
+setblock -5 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Cobaltite Ore"','""','""','""']},is_waxed:1b}
+setblock -4 -60 16 minecraft:polished_andesite
+setblock -4 -59 16 fundamentals:cooperite_ore
+setblock -4 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Cooperite Ore"','""','""','""']},is_waxed:1b}
+setblock -3 -60 16 minecraft:polished_andesite
+setblock -3 -59 16 fundamentals:covellite_ore
+setblock -3 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Covellite Ore"','""','""','""']},is_waxed:1b}
+setblock -2 -60 16 minecraft:polished_andesite
+setblock -2 -59 16 fundamentals:cuprite_ore
+setblock -2 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Cuprite Ore"','""','""','""']},is_waxed:1b}
+setblock -1 -60 16 minecraft:polished_andesite
+setblock -1 -59 16 fundamentals:euxenite_ore
+setblock -1 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Euxenite Ore"','""','""','""']},is_waxed:1b}
+setblock 0 -60 16 minecraft:polished_andesite
+setblock 0 -59 16 fundamentals:fluorite_ore
+setblock 0 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Fluorite Ore"','""','""','""']},is_waxed:1b}
+setblock 1 -60 16 minecraft:polished_andesite
+setblock 1 -59 16 fundamentals:galena_ore
+setblock 1 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Galena Ore"','""','""','""']},is_waxed:1b}
+setblock 2 -60 16 minecraft:polished_andesite
+setblock 2 -59 16 fundamentals:goethite_ore
+setblock 2 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Goethite"','""','""','""']},is_waxed:1b}
+setblock 3 -60 16 minecraft:polished_andesite
+setblock 3 -59 16 fundamentals:halite_ore
+setblock 3 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Halite Ore"','""','""','""']},is_waxed:1b}
+setblock 4 -60 16 minecraft:polished_andesite
+setblock 4 -59 16 fundamentals:hematite_ore
+setblock 4 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Hematite Ore"','""','""','""']},is_waxed:1b}
+setblock 5 -60 16 minecraft:polished_andesite
+setblock 5 -59 16 fundamentals:hemimorphite_ore
+setblock 5 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Hemimorphite"','"Ore"','""','""']},is_waxed:1b}
+setblock 6 -60 16 minecraft:polished_andesite
+setblock 6 -59 16 fundamentals:ilmenite_ore
+setblock 6 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Ilmenite Ore"','""','""','""']},is_waxed:1b}
+setblock 7 -60 16 minecraft:polished_andesite
+setblock 7 -59 16 fundamentals:ion_adsorption_clay_ore
+setblock 7 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Ion-Adsorption"','"Clay"','""','""']},is_waxed:1b}
+setblock 8 -60 16 minecraft:polished_andesite
+setblock 8 -59 16 fundamentals:loparite_ore
+setblock 8 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Loparite Ore"','""','""','""']},is_waxed:1b}
+setblock 9 -60 16 minecraft:polished_andesite
+setblock 9 -59 16 fundamentals:magnetite_ore
+setblock 9 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Magnetite Ore"','""','""','""']},is_waxed:1b}
+setblock 10 -60 16 minecraft:polished_andesite
+setblock 10 -59 16 fundamentals:malachite_ore
+setblock 10 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Malachite Ore"','""','""','""']},is_waxed:1b}
+setblock 11 -60 16 minecraft:polished_andesite
+setblock 11 -59 16 fundamentals:molybdenite_ore
+setblock 11 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Molybdenite Ore"','""','""','""']},is_waxed:1b}
+setblock 12 -60 16 minecraft:polished_andesite
+setblock 12 -59 16 fundamentals:monazite_ore
+setblock 12 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Monazite Ore"','""','""','""']},is_waxed:1b}
+setblock 13 -60 16 minecraft:polished_andesite
+setblock 13 -59 16 fundamentals:native_silver_ore
+setblock 13 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Native Silver"','"Ore"','""','""']},is_waxed:1b}
+setblock 14 -60 16 minecraft:polished_andesite
+setblock 14 -59 16 fundamentals:nickel_laterite_ore
+setblock 14 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Nickel Laterite"','""','""','""']},is_waxed:1b}
+setblock 15 -60 16 minecraft:polished_andesite
+setblock 15 -59 16 fundamentals:pentlandite_ore
+setblock 15 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Pentlandite Ore"','""','""','""']},is_waxed:1b}
+setblock 16 -60 16 minecraft:polished_andesite
+setblock 16 -59 16 fundamentals:pyrolusite_ore
+setblock 16 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Pyrolusite Ore"','""','""','""']},is_waxed:1b}
+setblock 17 -60 16 minecraft:polished_andesite
+setblock 17 -59 16 fundamentals:rutile_ore
+setblock 17 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Rutile Ore"','""','""','""']},is_waxed:1b}
+setblock 18 -60 16 minecraft:polished_andesite
+setblock 18 -59 16 fundamentals:scheelite_ore
+setblock 18 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Scheelite Ore"','""','""','""']},is_waxed:1b}
+setblock 19 -60 16 minecraft:polished_andesite
+setblock 19 -59 16 fundamentals:smithsonite_ore
+setblock 19 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Smithsonite Ore"','""','""','""']},is_waxed:1b}
+setblock 20 -60 16 minecraft:polished_andesite
+setblock 20 -59 16 fundamentals:sperrylite_ore
+setblock 20 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Sperrylite Ore"','""','""','""']},is_waxed:1b}
+setblock 21 -60 16 minecraft:polished_andesite
+setblock 21 -59 16 fundamentals:sphalerite_ore
+setblock 21 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Sphalerite Ore"','""','""','""']},is_waxed:1b}
+setblock 22 -60 16 minecraft:polished_andesite
+setblock 22 -59 16 fundamentals:spodumene_ore
+setblock 22 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Spodumene Ore"','""','""','""']},is_waxed:1b}
+setblock 23 -60 16 minecraft:polished_andesite
+setblock 23 -59 16 fundamentals:thortveitite_ore
+setblock 23 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Thortveitite"','"Ore"','""','""']},is_waxed:1b}
+setblock 24 -60 16 minecraft:polished_andesite
+setblock 24 -59 16 fundamentals:trona_ore
+setblock 24 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Trona Ore"','""','""','""']},is_waxed:1b}
+setblock 25 -60 16 minecraft:polished_andesite
+setblock 25 -59 16 fundamentals:wolframite_ore
+setblock 25 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Wolframite Ore"','""','""','""']},is_waxed:1b}
+setblock 26 -60 16 minecraft:polished_andesite
+setblock 26 -59 16 fundamentals:xenotime_ore
+setblock 26 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Xenotime Ore"','""','""','""']},is_waxed:1b}
+setblock 27 -60 16 minecraft:polished_andesite
+setblock 27 -59 16 fundamentals:zircon_ore
+setblock 27 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Zircon Ore"','""','""','""']},is_waxed:1b}
+setblock 29 -60 16 minecraft:polished_andesite
+setblock 29 -59 16 minecraft:polished_andesite
+setblock 29 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Host rocks"','""','""','""']},is_waxed:1b}
+setblock 30 -60 16 minecraft:polished_andesite
+setblock 30 -59 16 fundamentals:carbonatite
+setblock 30 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Carbonatite"','""','""','""']},is_waxed:1b}
+setblock 31 -60 16 minecraft:polished_andesite
+setblock 31 -59 16 fundamentals:gabbro
+setblock 31 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Gabbro"','""','""','""']},is_waxed:1b}
+setblock 32 -60 16 minecraft:polished_andesite
+setblock 32 -59 16 fundamentals:laterite
+setblock 32 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Laterite"','""','""','""']},is_waxed:1b}
+setblock 33 -60 16 minecraft:polished_andesite
+setblock 33 -59 16 fundamentals:syenite
+setblock 33 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Syenite"','""','""','""']},is_waxed:1b}
+setblock -20 -60 26 minecraft:polished_andesite
+setblock -20 -59 26 minecraft:polished_andesite
+setblock -20 -58 26 minecraft:polished_andesite
+setblock -20 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Zirconium:"','"zircon to ingot"','""','""']},is_waxed:1b}
+setblock -20 -60 25 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:raw_zircon",count:64},{Slot:1b,id:"fundamentals:zircon_concentrate",count:64},{Slot:2b,id:"fundamentals:crude_zirconium_tetrachloride",count:64},{Slot:3b,id:"fundamentals:zirconium_tetrachloride",count:64},{Slot:4b,id:"fundamentals:zirconium_sponge",count:64},{Slot:5b,id:"fundamentals:zirconium_ingot",count:64},{Slot:6b,id:"fundamentals:zirconium_plate",count:64}]}
+setblock -19 -60 26 minecraft:polished_andesite
+setblock -19 -59 26 minecraft:polished_andesite
+setblock -19 -58 26 minecraft:polished_andesite
+setblock -19 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Raw Zircon"','""','""','""']},is_waxed:1b}
+summon minecraft:item_frame -18.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:raw_zircon",count:1}}
+setblock -18 -60 26 minecraft:polished_andesite
+setblock -18 -59 26 minecraft:polished_andesite
+setblock -18 -58 26 minecraft:polished_andesite
+setblock -18 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Zircon"','"Concentrate"','""','""']},is_waxed:1b}
+summon minecraft:item_frame -17.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:zircon_concentrate",count:1}}
+setblock -17 -60 26 minecraft:polished_andesite
+setblock -17 -59 26 minecraft:polished_andesite
+setblock -17 -58 26 minecraft:polished_andesite
+setblock -17 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Crude Zirconium"','"Tetrachloride"','""','""']},is_waxed:1b}
+summon minecraft:item_frame -16.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:crude_zirconium_tetrachloride",count:1}}
+setblock -16 -60 26 minecraft:polished_andesite
+setblock -16 -59 26 minecraft:polished_andesite
+setblock -16 -58 26 minecraft:polished_andesite
+setblock -16 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Zirconium"','"Tetrachloride"','""','""']},is_waxed:1b}
+summon minecraft:item_frame -15.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:zirconium_tetrachloride",count:1}}
+setblock -15 -60 26 minecraft:polished_andesite
+setblock -15 -59 26 minecraft:polished_andesite
+setblock -15 -58 26 minecraft:polished_andesite
+setblock -15 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Zirconium"','"Sponge"','""','""']},is_waxed:1b}
+summon minecraft:item_frame -14.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:zirconium_sponge",count:1}}
+setblock -14 -60 26 minecraft:polished_andesite
+setblock -14 -59 26 minecraft:polished_andesite
+setblock -14 -58 26 minecraft:polished_andesite
+setblock -14 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Zirconium Ingot"','""','""','""']},is_waxed:1b}
+summon minecraft:item_frame -13.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:zirconium_ingot",count:1}}
+setblock -13 -60 26 minecraft:polished_andesite
+setblock -13 -59 26 minecraft:polished_andesite
+setblock -13 -58 26 minecraft:polished_andesite
+setblock -13 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Zirconium Plate"','""','""','""']},is_waxed:1b}
+summon minecraft:item_frame -12.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:zirconium_plate",count:1}}
+setblock -11 -60 26 minecraft:polished_andesite
+setblock -11 -59 26 minecraft:polished_andesite
+setblock -11 -58 26 minecraft:polished_andesite
+setblock -11 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Hafnium: parted"','"off the"','"chloride"','""']},is_waxed:1b}
+setblock -11 -60 25 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:crude_zirconium_tetrachloride",count:64},{Slot:1b,id:"fundamentals:hafnium_tetrachloride",count:64},{Slot:2b,id:"fundamentals:hafnium_sponge",count:64},{Slot:3b,id:"fundamentals:hafnium_ingot",count:64}]}
+setblock -10 -60 26 minecraft:polished_andesite
+setblock -10 -59 26 minecraft:polished_andesite
+setblock -10 -58 26 minecraft:polished_andesite
+setblock -10 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Crude Zirconium"','"Tetrachloride"','""','""']},is_waxed:1b}
+summon minecraft:item_frame -9.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:crude_zirconium_tetrachloride",count:1}}
+setblock -9 -60 26 minecraft:polished_andesite
+setblock -9 -59 26 minecraft:polished_andesite
+setblock -9 -58 26 minecraft:polished_andesite
+setblock -9 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Hafnium"','"Tetrachloride"','""','""']},is_waxed:1b}
+summon minecraft:item_frame -8.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:hafnium_tetrachloride",count:1}}
+setblock -8 -60 26 minecraft:polished_andesite
+setblock -8 -59 26 minecraft:polished_andesite
+setblock -8 -58 26 minecraft:polished_andesite
+setblock -8 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Hafnium Sponge"','""','""','""']},is_waxed:1b}
+summon minecraft:item_frame -7.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:hafnium_sponge",count:1}}
+setblock -7 -60 26 minecraft:polished_andesite
+setblock -7 -59 26 minecraft:polished_andesite
+setblock -7 -58 26 minecraft:polished_andesite
+setblock -7 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Hafnium Ingot"','""','""','""']},is_waxed:1b}
+summon minecraft:item_frame -6.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:hafnium_ingot",count:1}}
+setblock -5 -60 26 minecraft:polished_andesite
+setblock -5 -59 26 minecraft:polished_andesite
+setblock -5 -58 26 minecraft:polished_andesite
+setblock -5 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Zirconia, YSZ"','"and the Factory"','""','""']},is_waxed:1b}
+setblock -5 -60 25 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:crude_zirconium_tetrachloride",count:64},{Slot:1b,id:"fundamentals:zirconium_oxide",count:64},{Slot:2b,id:"fundamentals:yttrium_oxide",count:64},{Slot:3b,id:"fundamentals:yttria_stabilised_zirconia",count:64},{Slot:4b,id:"tfmg:turbine_blade",count:64},{Slot:5b,id:"fundamentals:zircon_concentrate",count:64}]}
+setblock -4 -60 26 minecraft:polished_andesite
+setblock -4 -59 26 minecraft:polished_andesite
+setblock -4 -58 26 minecraft:polished_andesite
+setblock -4 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Crude Zirconium"','"Tetrachloride"','""','""']},is_waxed:1b}
+summon minecraft:item_frame -3.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:crude_zirconium_tetrachloride",count:1}}
+setblock -3 -60 26 minecraft:polished_andesite
+setblock -3 -59 26 minecraft:polished_andesite
+setblock -3 -58 26 minecraft:polished_andesite
+setblock -3 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Zirconium Oxide"','""','""','""']},is_waxed:1b}
+summon minecraft:item_frame -2.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:zirconium_oxide",count:1}}
+setblock -2 -60 26 minecraft:polished_andesite
+setblock -2 -59 26 minecraft:polished_andesite
+setblock -2 -58 26 minecraft:polished_andesite
+setblock -2 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Yttrium Oxide"','""','""','""']},is_waxed:1b}
+summon minecraft:item_frame -1.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:yttrium_oxide",count:1}}
+setblock -1 -60 26 minecraft:polished_andesite
+setblock -1 -59 26 minecraft:polished_andesite
+setblock -1 -58 26 minecraft:polished_andesite
+setblock -1 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Yttria-Stabilised"','"Zirconia"','""','""']},is_waxed:1b}
+summon minecraft:item_frame -0.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:yttria_stabilised_zirconia",count:1}}
+setblock 0 -60 26 minecraft:polished_andesite
+setblock 0 -59 26 minecraft:polished_andesite
+setblock 0 -58 26 minecraft:polished_andesite
+setblock 0 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Turbine Blade"','""','""','""']},is_waxed:1b}
+summon minecraft:item_frame 0.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"tfmg:turbine_blade",count:1}}
+setblock 1 -60 26 minecraft:polished_andesite
+setblock 1 -59 26 minecraft:polished_andesite
+setblock 1 -58 26 minecraft:polished_andesite
+setblock 1 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Zircon"','"Concentrate"','""','""']},is_waxed:1b}
+summon minecraft:item_frame 1.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:zircon_concentrate",count:1}}
+setblock 2 -60 26 minecraft:polished_andesite
+setblock 2 -59 26 minecraft:polished_andesite
+setblock 2 -58 26 minecraft:polished_andesite
+setblock 2 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Casting Basin"','""','""','""']},is_waxed:1b}
+setblock 2 -60 25 minecraft:polished_andesite
+setblock 2 -59 25 tfmg:casting_basin
+setblock 4 -60 26 minecraft:polished_andesite
+setblock 4 -59 26 minecraft:polished_andesite
+setblock 4 -58 26 minecraft:polished_andesite
+setblock 4 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Beryllium:"','"beryl and"','"bertrandite"','""']},is_waxed:1b}
+setblock 4 -60 25 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:raw_beryl",count:64},{Slot:1b,id:"fundamentals:beryl_frit",count:64},{Slot:2b,id:"fundamentals:raw_bertrandite",count:64},{Slot:3b,id:"fundamentals:beryllium_hydroxide",count:64},{Slot:4b,id:"fundamentals:ammonium_fluoroberyllate",count:64},{Slot:5b,id:"fundamentals:beryllium_fluoride",count:64},{Slot:6b,id:"fundamentals:beryllium_pebbles",count:64},{Slot:7b,id:"fundamentals:beryllium_ingot",count:64},{Slot:8b,id:"fundamentals:beryllium_oxide",count:64},{Slot:9b,id:"fundamentals:beryllium_copper_ingot",count:64}]}
+setblock 5 -60 26 minecraft:polished_andesite
+setblock 5 -59 26 minecraft:polished_andesite
+setblock 5 -58 26 minecraft:polished_andesite
+setblock 5 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Raw Beryl"','""','""','""']},is_waxed:1b}
+summon minecraft:item_frame 5.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:raw_beryl",count:1}}
+setblock 6 -60 26 minecraft:polished_andesite
+setblock 6 -59 26 minecraft:polished_andesite
+setblock 6 -58 26 minecraft:polished_andesite
+setblock 6 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Beryl Frit"','""','""','""']},is_waxed:1b}
+summon minecraft:item_frame 6.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:beryl_frit",count:1}}
+setblock 7 -60 26 minecraft:polished_andesite
+setblock 7 -59 26 minecraft:polished_andesite
+setblock 7 -58 26 minecraft:polished_andesite
+setblock 7 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Raw Bertrandite"','""','""','""']},is_waxed:1b}
+summon minecraft:item_frame 7.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:raw_bertrandite",count:1}}
+setblock 8 -60 26 minecraft:polished_andesite
+setblock 8 -59 26 minecraft:polished_andesite
+setblock 8 -58 26 minecraft:polished_andesite
+setblock 8 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Beryllium"','"Sulfate Liquor"','""','""']},is_waxed:1b}
+setblock 8 -60 25 minecraft:polished_andesite
+setblock 8 -59 25 fundamentals:plastic_fluid_tank
+setblock 9 -60 26 minecraft:polished_andesite
+setblock 9 -59 26 minecraft:polished_andesite
+setblock 9 -58 26 minecraft:polished_andesite
+setblock 9 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Beryllium"','"Hydroxide"','""','""']},is_waxed:1b}
+summon minecraft:item_frame 9.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:beryllium_hydroxide",count:1}}
+setblock 10 -60 26 minecraft:polished_andesite
+setblock 10 -59 26 minecraft:polished_andesite
+setblock 10 -58 26 minecraft:polished_andesite
+setblock 10 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Ammonium"','"Fluoroberyllate"','""','""']},is_waxed:1b}
+summon minecraft:item_frame 10.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:ammonium_fluoroberyllate",count:1}}
+setblock 11 -60 26 minecraft:polished_andesite
+setblock 11 -59 26 minecraft:polished_andesite
+setblock 11 -58 26 minecraft:polished_andesite
+setblock 11 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Beryllium"','"Fluoride"','""','""']},is_waxed:1b}
+summon minecraft:item_frame 11.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:beryllium_fluoride",count:1}}
+setblock 12 -60 26 minecraft:polished_andesite
+setblock 12 -59 26 minecraft:polished_andesite
+setblock 12 -58 26 minecraft:polished_andesite
+setblock 12 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Beryllium"','"Pebbles"','""','""']},is_waxed:1b}
+summon minecraft:item_frame 12.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:beryllium_pebbles",count:1}}
+setblock 13 -60 26 minecraft:polished_andesite
+setblock 13 -59 26 minecraft:polished_andesite
+setblock 13 -58 26 minecraft:polished_andesite
+setblock 13 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Beryllium Ingot"','""','""','""']},is_waxed:1b}
+summon minecraft:item_frame 13.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:beryllium_ingot",count:1}}
+setblock 14 -60 26 minecraft:polished_andesite
+setblock 14 -59 26 minecraft:polished_andesite
+setblock 14 -58 26 minecraft:polished_andesite
+setblock 14 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Beryllium Oxide"','""','""','""']},is_waxed:1b}
+summon minecraft:item_frame 14.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:beryllium_oxide",count:1}}
+setblock 15 -60 26 minecraft:polished_andesite
+setblock 15 -59 26 minecraft:polished_andesite
+setblock 15 -58 26 minecraft:polished_andesite
+setblock 15 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Beryllium"','"Copper Ingot"','""','""']},is_waxed:1b}
+summon minecraft:item_frame 15.5 -58.5 25.5 {Facing:2b,Fixed:1b,Invulnerable:1b,Item:{id:"fundamentals:beryllium_copper_ingot",count:1}}
+setblock 16 -60 26 minecraft:polished_andesite
+setblock 16 -59 26 minecraft:polished_andesite
+setblock 16 -58 26 minecraft:polished_andesite
+setblock 16 -58 25 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Block of"','"Beryllium"','"Copper"','""']},is_waxed:1b}
+setblock 16 -60 25 minecraft:polished_andesite
+setblock 16 -59 25 fundamentals:beryllium_copper_block
+setblock 23 -60 25 minecraft:polished_andesite
+setblock 23 -59 25 minecraft:polished_andesite
+setblock 23 -59 24 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Generators"','"among blast"','"furnaces"','""']},is_waxed:1b}
+setblock 26 -60 24 create:creative_motor[facing=south]{ScrollValue:256}
+setblock 26 -60 25 tfmg:generator[facing=north]{components:{"fundamentals:magnet":{grade:"neodymium_iron_boron"}}}
+setblock 25 -60 25 minecraft:blast_furnace[lit=true]
+setblock 27 -60 25 minecraft:blast_furnace[lit=true]
+setblock 26 -59 25 minecraft:blast_furnace[lit=true]
+setblock 26 -60 23 minecraft:birch_sign[rotation=8]{front_text:{messages:['"NdFeB"','"hot"','""','""']},is_waxed:1b}
+setblock 31 -60 24 create:creative_motor[facing=south]{ScrollValue:256}
+setblock 31 -60 25 tfmg:generator[facing=north]{components:{"fundamentals:magnet":{grade:"dysprosium_neodymium_iron_boron"}}}
+setblock 30 -60 25 minecraft:blast_furnace[lit=true]
+setblock 32 -60 25 minecraft:blast_furnace[lit=true]
+setblock 31 -59 25 minecraft:blast_furnace[lit=true]
+setblock 31 -60 23 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Dy-NdFeB"','"hot"','""','""']},is_waxed:1b}
+setblock 36 -60 24 create:creative_motor[facing=south]{ScrollValue:256}
+setblock 36 -60 25 tfmg:generator[facing=north]{components:{"fundamentals:magnet":{grade:"samarium_cobalt"}}}
+setblock 35 -60 25 minecraft:blast_furnace[lit=true]
+setblock 37 -60 25 minecraft:blast_furnace[lit=true]
+setblock 36 -59 25 minecraft:blast_furnace[lit=true]
+setblock 36 -60 23 minecraft:birch_sign[rotation=8]{front_text:{messages:['"SmCo"','"hot"','""','""']},is_waxed:1b}
+setblock 41 -60 24 create:creative_motor[facing=south]{ScrollValue:256}
+setblock 41 -60 25 tfmg:generator[facing=north]{components:{"fundamentals:magnet":{grade:"alnico"}}}
+setblock 40 -60 25 minecraft:blast_furnace[lit=true]
+setblock 42 -60 25 minecraft:blast_furnace[lit=true]
+setblock 41 -59 25 minecraft:blast_furnace[lit=true]
+setblock 41 -60 23 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Alnico"','"hot"','""','""']},is_waxed:1b}
+setblock 23 -60 32 minecraft:polished_andesite
+setblock 23 -59 32 minecraft:polished_andesite
+setblock 23 -59 31 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"The same, cold"','""','""','""']},is_waxed:1b}
+setblock 26 -60 31 create:creative_motor[facing=south]{ScrollValue:256}
+setblock 26 -60 32 tfmg:generator[facing=north]{components:{"fundamentals:magnet":{grade:"neodymium_iron_boron"}}}
+setblock 26 -60 30 minecraft:birch_sign[rotation=8]{front_text:{messages:['"NdFeB"','"cold"','""','""']},is_waxed:1b}
+setblock 31 -60 31 create:creative_motor[facing=south]{ScrollValue:256}
+setblock 31 -60 32 tfmg:generator[facing=north]{components:{"fundamentals:magnet":{grade:"dysprosium_neodymium_iron_boron"}}}
+setblock 31 -60 30 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Dy-NdFeB"','"cold"','""','""']},is_waxed:1b}
+setblock 36 -60 31 create:creative_motor[facing=south]{ScrollValue:256}
+setblock 36 -60 32 tfmg:generator[facing=north]{components:{"fundamentals:magnet":{grade:"samarium_cobalt"}}}
+setblock 36 -60 30 minecraft:birch_sign[rotation=8]{front_text:{messages:['"SmCo"','"cold"','""','""']},is_waxed:1b}
+setblock 41 -60 31 create:creative_motor[facing=south]{ScrollValue:256}
+setblock 41 -60 32 tfmg:generator[facing=north]{components:{"fundamentals:magnet":{grade:"alnico"}}}
+setblock 41 -60 30 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Alnico"','"cold"','""','""']},is_waxed:1b}
+setblock -20 -60 36 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:calcium_ingot",count:16},{Slot:1b,id:"fundamentals:lanthanum_ingot",count:16},{Slot:2b,id:"fundamentals:cerium_ingot",count:16},{Slot:3b,id:"fundamentals:neodymium_ingot",count:16},{Slot:4b,id:"fundamentals:neodymium_nugget",count:16},{Slot:5b,id:"minecraft:copper_ingot",count:16},{Slot:6b,id:"fundamentals:bronze_ingot",count:16},{Slot:7b,id:"fundamentals:silver_ingot",count:16},{Slot:8b,id:"minecraft:iron_ingot",count:16}]}
+setblock -20 -60 35 minecraft:birch_sign[rotation=8]{front_text:{messages:['"In the air"','""','""','""']},is_waxed:1b}
+setblock -18 -60 36 fundamentals:inert_storage_drum{Items:[{Slot:0b,id:"fundamentals:calcium_ingot",count:16},{Slot:1b,id:"fundamentals:lanthanum_ingot",count:16},{Slot:2b,id:"fundamentals:cerium_ingot",count:16},{Slot:3b,id:"fundamentals:neodymium_ingot",count:16},{Slot:4b,id:"fundamentals:neodymium_nugget",count:16},{Slot:5b,id:"minecraft:copper_ingot",count:16},{Slot:6b,id:"fundamentals:bronze_ingot",count:16},{Slot:7b,id:"fundamentals:silver_ingot",count:16},{Slot:8b,id:"minecraft:iron_ingot",count:16}],Tank:{Fluid:{id:"fundamentals:argon",amount:1000}}}
+setblock -18 -60 35 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Under argon"','""','""','""']},is_waxed:1b}
+setblock -16 -61 36 minecraft:water
+setblock -16 -60 36 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:calcium_ingot",count:16},{Slot:1b,id:"fundamentals:lanthanum_ingot",count:16},{Slot:2b,id:"fundamentals:cerium_ingot",count:16},{Slot:3b,id:"fundamentals:neodymium_ingot",count:16},{Slot:4b,id:"fundamentals:neodymium_nugget",count:16},{Slot:5b,id:"minecraft:copper_ingot",count:16},{Slot:6b,id:"fundamentals:bronze_ingot",count:16},{Slot:7b,id:"fundamentals:silver_ingot",count:16},{Slot:8b,id:"minecraft:iron_ingot",count:16}]}
+setblock -16 -60 35 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Over water:"','"damp"','""','""']},is_waxed:1b}
+setblock -14 -60 36 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:argon_canister",count:1,components:{"minecraft:container":[{slot:0,item:{id:"fundamentals:lanthanum_ingot",count:64}}]}},{Slot:1b,id:"fundamentals:argon_canister",count:1,components:{"minecraft:container":[{slot:0,item:{id:"fundamentals:cerium_ingot",count:64}}]}},{Slot:2b,id:"fundamentals:argon_canister",count:1,components:{"minecraft:container":[{slot:0,item:{id:"fundamentals:neodymium_ingot",count:64}}]}},{Slot:3b,id:"fundamentals:argon_canister",count:1},{Slot:4b,id:"fundamentals:argon_canister",count:1},{Slot:5b,id:"fundamentals:canister",count:16}]}
+setblock -14 -60 35 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Argon"','"canisters,"','"three sealed"','""']},is_waxed:1b}
+setblock -20 -60 40 fundamentals:bronze_block
+setblock -20 -60 39 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Block of Bronze"','""','""','""']},is_waxed:1b}
+setblock -19 -60 40 fundamentals:exposed_bronze_block
+setblock -19 -60 39 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Exposed Block"','"of Bronze"','""','""']},is_waxed:1b}
+setblock -18 -60 40 fundamentals:weathered_bronze_block
+setblock -18 -60 39 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Weathered Block"','"of Bronze"','""','""']},is_waxed:1b}
+setblock -17 -60 40 fundamentals:oxidized_bronze_block
+setblock -17 -60 39 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Oxidized Block"','"of Bronze"','""','""']},is_waxed:1b}
+setblock -16 -60 40 fundamentals:waxed_bronze_block
+setblock -16 -60 39 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Waxed Block of"','"Bronze"','""','""']},is_waxed:1b}
+setblock -20 -60 42 fundamentals:silver_block
+setblock -20 -60 41 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Block of Silver"','""','""','""']},is_waxed:1b}
+setblock -19 -60 42 fundamentals:tarnished_silver_block
+setblock -19 -60 41 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Tarnished Block"','"of Silver"','""','""']},is_waxed:1b}
+setblock -18 -60 42 fundamentals:dulled_silver_block
+setblock -18 -60 41 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Dulled Block of"','"Silver"','""','""']},is_waxed:1b}
+setblock -17 -60 42 fundamentals:blackened_silver_block
+setblock -17 -60 41 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Blackened Block"','"of Silver"','""','""']},is_waxed:1b}
+setblock -16 -60 42 fundamentals:waxed_silver_block
+setblock -16 -60 41 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Waxed Block of"','"Silver"','""','""']},is_waxed:1b}
+setblock -20 -60 44 fundamentals:neodymium_block
+setblock -20 -60 43 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Block of"','"Neodymium"','""','""']},is_waxed:1b}
+setblock -19 -60 44 fundamentals:tarnished_neodymium_block
+setblock -19 -60 43 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Tarnished Block"','"of Neodymium"','""','""']},is_waxed:1b}
+setblock -18 -60 44 fundamentals:corroded_neodymium_block
+setblock -18 -60 43 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Corroded Block"','"of Neodymium"','""','""']},is_waxed:1b}
+setblock -17 -60 44 fundamentals:crumbled_neodymium_block
+setblock -17 -60 43 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Crumbled Block"','"of Neodymium"','""','""']},is_waxed:1b}
+setblock -20 -60 46 fundamentals:praseodymium_block
+setblock -20 -60 45 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Block of"','"Praseodymium"','""','""']},is_waxed:1b}
+setblock -19 -60 46 fundamentals:tarnished_praseodymium_block
+setblock -19 -60 45 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Tarnished Block"','"of Praseodymium"','""','""']},is_waxed:1b}
+setblock -18 -60 46 fundamentals:corroded_praseodymium_block
+setblock -18 -60 45 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Corroded Block"','"of Praseodymium"','""','""']},is_waxed:1b}
+setblock -17 -60 46 fundamentals:crumbled_praseodymium_block
+setblock -17 -60 45 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Crumbled Block"','"of Praseodymium"','""','""']},is_waxed:1b}
+setblock -20 -60 48 fundamentals:samarium_block
+setblock -20 -60 47 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Block of"','"Samarium"','""','""']},is_waxed:1b}
+setblock -19 -60 48 fundamentals:tarnished_samarium_block
+setblock -19 -60 47 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Tarnished Block"','"of Samarium"','""','""']},is_waxed:1b}
+setblock -18 -60 48 fundamentals:corroded_samarium_block
+setblock -18 -60 47 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Corroded Block"','"of Samarium"','""','""']},is_waxed:1b}
+setblock -17 -60 48 fundamentals:crumbled_samarium_block
+setblock -17 -60 47 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Crumbled Block"','"of Samarium"','""','""']},is_waxed:1b}
+setblock -20 -60 50 fundamentals:dysprosium_block
+setblock -20 -60 49 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Block of"','"Dysprosium"','""','""']},is_waxed:1b}
+setblock -19 -60 50 fundamentals:tarnished_dysprosium_block
+setblock -19 -60 49 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Tarnished Block"','"of Dysprosium"','""','""']},is_waxed:1b}
+setblock -18 -60 50 fundamentals:corroded_dysprosium_block
+setblock -18 -60 49 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Corroded Block"','"of Dysprosium"','""','""']},is_waxed:1b}
+setblock -17 -60 50 fundamentals:crumbled_dysprosium_block
+setblock -17 -60 49 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Crumbled Block"','"of Dysprosium"','""','""']},is_waxed:1b}
+setblock -20 -60 52 fundamentals:terbium_block
+setblock -20 -60 51 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Block of"','"Terbium"','""','""']},is_waxed:1b}
+setblock -19 -60 52 fundamentals:tarnished_terbium_block
+setblock -19 -60 51 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Tarnished Block"','"of Terbium"','""','""']},is_waxed:1b}
+setblock -18 -60 52 fundamentals:corroded_terbium_block
+setblock -18 -60 51 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Corroded Block"','"of Terbium"','""','""']},is_waxed:1b}
+setblock -17 -60 52 fundamentals:crumbled_terbium_block
+setblock -17 -60 51 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Crumbled Block"','"of Terbium"','""','""']},is_waxed:1b}
+setblock -20 -61 55 minecraft:water
+setblock -20 -60 55 fundamentals:bronze_block
+setblock -20 -60 54 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Block of Bronze"','"over water"','""','""']},is_waxed:1b}
+setblock -19 -61 55 minecraft:water
+setblock -19 -60 55 fundamentals:silver_block
+setblock -19 -60 54 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Block of Silver"','"over water"','""','""']},is_waxed:1b}
+setblock -18 -61 55 minecraft:water
+setblock -18 -60 55 fundamentals:neodymium_block
+setblock -18 -60 54 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Block of"','"Neodymium over"','"water"','""']},is_waxed:1b}
+setblock 1 -60 37 minecraft:polished_andesite
+setblock 1 -59 37 minecraft:polished_andesite
+setblock 1 -59 36 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Cold: blue ice"','""','""','""']},is_waxed:1b}
+setblock 4 -60 37 minecraft:blue_ice
+setblock 4 -60 38 minecraft:blue_ice
+setblock 4 -59 37 fundamentals:mercury_thermometer[facing=up]
+setblock 4 -60 36 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Mercury"','"Thermometer"','""','""']},is_waxed:1b}
+setblock 9 -60 37 minecraft:blue_ice
+setblock 9 -60 38 minecraft:blue_ice
+setblock 9 -59 37 fundamentals:bimetallic_thermometer[facing=up]
+setblock 9 -60 36 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Bimetallic"','"Thermometer"','""','""']},is_waxed:1b}
+setblock 14 -60 37 minecraft:blue_ice
+setblock 14 -60 38 minecraft:blue_ice
+setblock 14 -59 37 fundamentals:type_k_thermocouple[facing=up]
+setblock 14 -60 36 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Type K"','"Thermocouple"','""','""']},is_waxed:1b}
+setblock 19 -60 37 minecraft:blue_ice
+setblock 19 -60 38 minecraft:blue_ice
+setblock 19 -59 37 fundamentals:type_s_thermocouple[facing=up]
+setblock 19 -60 36 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Type S"','"Thermocouple"','""','""']},is_waxed:1b}
+setblock 1 -60 42 minecraft:polished_andesite
+setblock 1 -59 42 minecraft:polished_andesite
+setblock 1 -59 41 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Ambient"','""','""','""']},is_waxed:1b}
+setblock 4 -60 42 minecraft:polished_andesite
+setblock 4 -59 42 fundamentals:mercury_thermometer[facing=up]
+setblock 4 -60 41 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Mercury"','"Thermometer"','""','""']},is_waxed:1b}
+setblock 9 -60 42 minecraft:polished_andesite
+setblock 9 -59 42 fundamentals:bimetallic_thermometer[facing=up]
+setblock 9 -60 41 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Bimetallic"','"Thermometer"','""','""']},is_waxed:1b}
+setblock 14 -60 42 minecraft:polished_andesite
+setblock 14 -59 42 fundamentals:type_k_thermocouple[facing=up]
+setblock 14 -60 41 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Type K"','"Thermocouple"','""','""']},is_waxed:1b}
+setblock 19 -60 42 minecraft:polished_andesite
+setblock 19 -59 42 fundamentals:type_s_thermocouple[facing=up]
+setblock 19 -60 41 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Type S"','"Thermocouple"','""','""']},is_waxed:1b}
+setblock 1 -60 47 minecraft:polished_andesite
+setblock 1 -59 47 minecraft:polished_andesite
+setblock 1 -59 46 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Beside three"','"lit blast"','"furnaces"','""']},is_waxed:1b}
+setblock 4 -60 47 minecraft:polished_andesite
+setblock 3 -60 47 minecraft:blast_furnace[lit=true]
+setblock 5 -60 47 minecraft:blast_furnace[lit=true]
+setblock 4 -60 48 minecraft:blast_furnace[lit=true]
+setblock 4 -59 47 fundamentals:mercury_thermometer[facing=up]
+setblock 4 -60 46 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Mercury"','"Thermometer"','""','""']},is_waxed:1b}
+setblock 9 -60 47 minecraft:polished_andesite
+setblock 8 -60 47 minecraft:blast_furnace[lit=true]
+setblock 10 -60 47 minecraft:blast_furnace[lit=true]
+setblock 9 -60 48 minecraft:blast_furnace[lit=true]
+setblock 9 -59 47 fundamentals:bimetallic_thermometer[facing=up]
+setblock 9 -60 46 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Bimetallic"','"Thermometer"','""','""']},is_waxed:1b}
+setblock 14 -60 47 minecraft:polished_andesite
+setblock 13 -60 47 minecraft:blast_furnace[lit=true]
+setblock 15 -60 47 minecraft:blast_furnace[lit=true]
+setblock 14 -60 48 minecraft:blast_furnace[lit=true]
+setblock 14 -59 47 fundamentals:type_k_thermocouple[facing=up]
+setblock 14 -60 46 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Type K"','"Thermocouple"','""','""']},is_waxed:1b}
+setblock 19 -60 47 minecraft:polished_andesite
+setblock 18 -60 47 minecraft:blast_furnace[lit=true]
+setblock 20 -60 47 minecraft:blast_furnace[lit=true]
+setblock 19 -60 48 minecraft:blast_furnace[lit=true]
+setblock 19 -59 47 fundamentals:type_s_thermocouple[facing=up]
+setblock 19 -60 46 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Type S"','"Thermocouple"','""','""']},is_waxed:1b}
+setblock 1 -60 52 minecraft:polished_andesite
+setblock 1 -59 52 minecraft:polished_andesite
+setblock 1 -59 51 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"On a lit blast"','"furnace"','""','""']},is_waxed:1b}
+setblock 4 -60 52 minecraft:blast_furnace[lit=true]
+setblock 4 -60 51 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Mercury boils"','"at 357 °C: it"','"would burst"','"here"']},is_waxed:1b}
+setblock 9 -60 52 minecraft:blast_furnace[lit=true]
+setblock 9 -59 52 fundamentals:bimetallic_thermometer[facing=up]
+setblock 9 -60 51 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Bimetallic"','"Thermometer"','""','""']},is_waxed:1b}
+setblock 14 -60 52 minecraft:blast_furnace[lit=true]
+setblock 14 -59 52 fundamentals:type_k_thermocouple[facing=up]
+setblock 14 -60 51 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Type K"','"Thermocouple"','""','""']},is_waxed:1b}
+setblock 19 -60 52 minecraft:blast_furnace[lit=true]
+setblock 19 -59 52 fundamentals:type_s_thermocouple[facing=up]
+setblock 19 -60 51 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Type S"','"Thermocouple"','""','""']},is_waxed:1b}
+setblock 1 -60 57 minecraft:polished_andesite
+setblock 1 -59 57 minecraft:polished_andesite
+setblock 1 -59 56 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"On a"','"superheated"','"blaze burner"','""']},is_waxed:1b}
+setblock 4 -60 57 create:blaze_burner[blaze=seething]{isCreative:1b}
+setblock 4 -60 56 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Mercury boils"','"at 357 °C: it"','"would burst"','"here"']},is_waxed:1b}
+setblock 9 -60 57 create:blaze_burner[blaze=seething]{isCreative:1b}
+setblock 9 -59 57 fundamentals:bimetallic_thermometer[facing=up]
+setblock 9 -60 56 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Bimetallic"','"Thermometer"','""','""']},is_waxed:1b}
+setblock 14 -60 57 create:blaze_burner[blaze=seething]{isCreative:1b}
+setblock 14 -59 57 fundamentals:type_k_thermocouple[facing=up]
+setblock 14 -60 56 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Type K"','"Thermocouple"','""','""']},is_waxed:1b}
+setblock 19 -60 57 create:blaze_burner[blaze=seething]{isCreative:1b}
+setblock 19 -59 57 fundamentals:type_s_thermocouple[facing=up]
+setblock 19 -60 56 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Type S"','"Thermocouple"','""','""']},is_waxed:1b}
+setblock 26 -60 37 fundamentals:plastic_fluid_tank
+setblock 26 -60 36 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Seawater"','""','""','""']},is_waxed:1b}
+setblock 28 -60 37 fundamentals:plastic_fluid_tank
+setblock 28 -60 36 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Bittern"','""','""','""']},is_waxed:1b}
+setblock 30 -60 37 fundamentals:plastic_fluid_tank
+setblock 30 -60 36 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Bromine"','""','""','""']},is_waxed:1b}
+setblock 32 -60 37 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:seawater_bucket",count:1},{Slot:1b,id:"fundamentals:bromine_bucket",count:1},{Slot:2b,id:"fundamentals:salt",count:64},{Slot:3b,id:"fundamentals:raw_halite",count:64},{Slot:4b,id:"fundamentals:halite_ore",count:16},{Slot:5b,id:"fundamentals:magnesium_chloride",count:16},{Slot:6b,id:"fundamentals:raw_ion_adsorption_clay",count:16}]}
+setblock 32 -60 36 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Salt, halite,"','"bittern"','"products"','""']},is_waxed:1b}
+setblock 26 -60 41 minecraft:polished_andesite
+setblock 26 -59 41 fundamentals:plastic_fluid_tank
+setblock 27 -60 41 minecraft:polished_andesite
+setblock 27 -59 41 tfmg:plastic_mechanical_pump[facing=east]
+setblock 27 -58 41 create:cogwheel[axis=x]
+setblock 26 -58 41 create:creative_motor[facing=east]{ScrollValue:64}
+setblock 28 -60 41 create:blaze_burner[blaze=kindled]{isCreative:1b}
+setblock 28 -59 41 create:basin[facing=down]
+setblock 28 -57 41 create:mechanical_mixer
+setblock 28 -57 42 create:cogwheel[axis=y]
+setblock 28 -56 42 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 29 -60 40 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Seawater boiled"','"to salt and"','"bittern"','""']},is_waxed:1b}
+setblock 27 -60 46 create:fluid_tank
+setblock 28 -60 46 create:mechanical_pump[facing=east]
+setblock 28 -59 46 create:cogwheel[axis=x]
+setblock 27 -59 46 create:creative_motor[facing=east]{ScrollValue:64}
+setblock 29 -60 46 create:fluid_pipe[east=true,west=true]
+setblock 30 -60 46 create:fluid_pipe[east=true,west=true]
+setblock 31 -60 46 create:fluid_pipe[east=true,west=true]
+setblock 32 -60 46 create:fluid_tank
+setblock 27 -60 47 create:fluid_pipe[north=true,south=true]
+setblock 32 -60 47 create:fluid_pipe[north=true,south=true]
+setblock 32 -60 48 create:fluid_pipe[north=true,west=true]
+setblock 31 -60 48 create:fluid_pipe[east=true,west=true]
+setblock 30 -60 48 create:mechanical_pump[facing=west]
+setblock 30 -59 48 create:cogwheel[axis=x]
+setblock 31 -59 48 create:creative_motor[facing=west]{ScrollValue:64}
+setblock 29 -60 48 create:fluid_pipe[east=true,west=true]
+setblock 28 -60 48 create:fluid_pipe[east=true,west=true]
+setblock 27 -60 48 create:fluid_pipe[east=true,north=true]
+setblock 26 -60 46 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Seawater in"','"copper"','""','""']},is_waxed:1b}
+setblock 36 -60 46 fundamentals:plastic_fluid_tank
+setblock 37 -60 46 tfmg:plastic_mechanical_pump[facing=east]
+setblock 37 -59 46 create:cogwheel[axis=x]
+setblock 36 -59 46 create:creative_motor[facing=east]{ScrollValue:64}
+setblock 38 -60 46 tfmg:plastic_pipe[east=true,west=true]
+setblock 39 -60 46 tfmg:plastic_pipe[east=true,west=true]
+setblock 40 -60 46 tfmg:plastic_pipe[east=true,west=true]
+setblock 41 -60 46 fundamentals:plastic_fluid_tank
+setblock 36 -60 47 tfmg:plastic_pipe[north=true,south=true]
+setblock 41 -60 47 tfmg:plastic_pipe[north=true,south=true]
+setblock 41 -60 48 tfmg:plastic_pipe[north=true,west=true]
+setblock 40 -60 48 tfmg:plastic_pipe[east=true,west=true]
+setblock 39 -60 48 tfmg:plastic_mechanical_pump[facing=west]
+setblock 39 -59 48 create:cogwheel[axis=x]
+setblock 40 -59 48 create:creative_motor[facing=west]{ScrollValue:64}
+setblock 38 -60 48 tfmg:plastic_pipe[east=true,west=true]
+setblock 37 -60 48 tfmg:plastic_pipe[east=true,west=true]
+setblock 36 -60 48 tfmg:plastic_pipe[east=true,north=true]
+setblock 35 -60 46 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Seawater in"','"plastic"','""','""']},is_waxed:1b}
+setblock 27 -60 51 create:fluid_tank
+setblock 28 -60 51 create:mechanical_pump[facing=east]
+setblock 28 -59 51 create:cogwheel[axis=x]
+setblock 27 -59 51 create:creative_motor[facing=east]{ScrollValue:64}
+setblock 29 -60 51 create:fluid_pipe[east=true,west=true]
+setblock 30 -60 51 create:fluid_pipe[east=true,west=true]
+setblock 31 -60 51 create:fluid_pipe[east=true,west=true]
+setblock 32 -60 51 create:fluid_tank
+setblock 27 -60 52 create:fluid_pipe[north=true,south=true]
+setblock 32 -60 52 create:fluid_pipe[north=true,south=true]
+setblock 32 -60 53 create:fluid_pipe[north=true,west=true]
+setblock 31 -60 53 create:fluid_pipe[east=true,west=true]
+setblock 30 -60 53 create:mechanical_pump[facing=west]
+setblock 30 -59 53 create:cogwheel[axis=x]
+setblock 31 -59 53 create:creative_motor[facing=west]{ScrollValue:64}
+setblock 29 -60 53 create:fluid_pipe[east=true,west=true]
+setblock 28 -60 53 create:fluid_pipe[east=true,west=true]
+setblock 27 -60 53 create:fluid_pipe[east=true,north=true]
+setblock 26 -60 51 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Hydrochloric"','"Acid in copper"','""','""']},is_waxed:1b}
+setblock 36 -60 51 fundamentals:plastic_fluid_tank
+setblock 37 -60 51 tfmg:plastic_mechanical_pump[facing=east]
+setblock 37 -59 51 create:cogwheel[axis=x]
+setblock 36 -59 51 create:creative_motor[facing=east]{ScrollValue:64}
+setblock 38 -60 51 tfmg:plastic_pipe[east=true,west=true]
+setblock 39 -60 51 tfmg:plastic_pipe[east=true,west=true]
+setblock 40 -60 51 tfmg:plastic_pipe[east=true,west=true]
+setblock 41 -60 51 fundamentals:plastic_fluid_tank
+setblock 36 -60 52 tfmg:plastic_pipe[north=true,south=true]
+setblock 41 -60 52 tfmg:plastic_pipe[north=true,south=true]
+setblock 41 -60 53 tfmg:plastic_pipe[north=true,west=true]
+setblock 40 -60 53 tfmg:plastic_pipe[east=true,west=true]
+setblock 39 -60 53 tfmg:plastic_mechanical_pump[facing=west]
+setblock 39 -59 53 create:cogwheel[axis=x]
+setblock 40 -59 53 create:creative_motor[facing=west]{ScrollValue:64}
+setblock 38 -60 53 tfmg:plastic_pipe[east=true,west=true]
+setblock 37 -60 53 tfmg:plastic_pipe[east=true,west=true]
+setblock 36 -60 53 tfmg:plastic_pipe[east=true,north=true]
+setblock 35 -60 51 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Hydrochloric"','"Acid in plastic"','""','""']},is_waxed:1b}
+setblock -18 -58 66 tfmg:fireproof_chemical_vat{Uninitialized:1b}
+setblock -18 -58 67 tfmg:fireproof_chemical_vat
+setblock -17 -58 66 tfmg:fireproof_chemical_vat
+setblock -17 -58 67 tfmg:fireproof_chemical_vat
+setblock -18 -60 66 tfmg:fireproof_bricks
+setblock -18 -59 66 create:blaze_burner[blaze=seething]{isCreative:1b}
+setblock -17 -60 67 tfmg:fireproof_bricks
+setblock -17 -59 67 create:blaze_burner[blaze=seething]{isCreative:1b}
+setblock -17 -59 66 create:smart_chute{Filter:{id:"tfmg:coal_coke_dust",count:1}}
+setblock -17 -60 66 minecraft:chest[facing=west]
+setblock -18 -57 66 tfmg:industrial_mixer{MixerMode:"mixing"}
+setblock -18 -56 66 create:creative_motor[facing=down]{ScrollValue:64}
+setblock -17 -57 66 minecraft:hopper[facing=down]
+setblock -17 -56 66 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:1b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:2b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:3b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:4b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:5b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:6b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:7b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:8b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:9b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:10b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:11b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:12b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:13b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:14b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:15b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:16b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:17b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:18b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:19b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:20b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:21b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:22b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:23b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:24b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:25b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:26b,id:"fundamentals:lanthanum_oxide",count:64}]}
+setblock -15 -58 67 create:fluid_tank
+setblock -16 -58 67 create:mechanical_pump[facing=west]
+setblock -16 -57 67 create:cogwheel[axis=x]
+setblock -15 -57 67 create:creative_motor[facing=west]{ScrollValue:64}
+setblock -18 -60 65 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Fluid catalytic"','"cracking"','""','""']},is_waxed:1b}
+setblock -17 -60 65 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Heavy oil over"','"lanthanum oxide"','""','""']},is_waxed:1b}
+setblock -8 -60 66 minecraft:polished_andesite
+setblock -8 -59 66 minecraft:polished_andesite
+setblock -8 -59 65 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Plastic blocks:"','"natural, then"','"dyed"','""']},is_waxed:1b}
+setblock -6 -60 66 tfmg:plastic_block
+setblock -5 -60 66 fundamentals:white_plastic_block
+setblock -4 -60 66 fundamentals:orange_plastic_block
+setblock -3 -60 66 fundamentals:magenta_plastic_block
+setblock -2 -60 66 fundamentals:light_blue_plastic_block
+setblock -1 -60 66 fundamentals:yellow_plastic_block
+setblock 0 -60 66 fundamentals:lime_plastic_block
+setblock 1 -60 66 fundamentals:pink_plastic_block
+setblock 2 -60 66 fundamentals:gray_plastic_block
+setblock 3 -60 66 fundamentals:light_gray_plastic_block
+setblock 4 -60 66 fundamentals:cyan_plastic_block
+setblock 5 -60 66 fundamentals:purple_plastic_block
+setblock 6 -60 66 fundamentals:blue_plastic_block
+setblock 7 -60 66 fundamentals:brown_plastic_block
+setblock 8 -60 66 fundamentals:green_plastic_block
+setblock 9 -60 66 fundamentals:red_plastic_block
+setblock 10 -60 66 fundamentals:black_plastic_block
+setblock -8 -60 69 minecraft:polished_andesite
+setblock -8 -59 69 minecraft:polished_andesite
+setblock -8 -59 68 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Dyed plastic"','"pipe"','""','""']},is_waxed:1b}
+setblock -5 -60 69 fundamentals:dyed_plastic_pipe[color=white,north=true,south=true]
+setblock -4 -60 69 fundamentals:dyed_plastic_pipe[color=orange,north=true,south=true]
+setblock -3 -60 69 fundamentals:dyed_plastic_pipe[color=magenta,north=true,south=true]
+setblock -2 -60 69 fundamentals:dyed_plastic_pipe[color=light_blue,north=true,south=true]
+setblock -1 -60 69 fundamentals:dyed_plastic_pipe[color=yellow,north=true,south=true]
+setblock 0 -60 69 fundamentals:dyed_plastic_pipe[color=lime,north=true,south=true]
+setblock 1 -60 69 fundamentals:dyed_plastic_pipe[color=pink,north=true,south=true]
+setblock 2 -60 69 fundamentals:dyed_plastic_pipe[color=gray,north=true,south=true]
+setblock 3 -60 69 fundamentals:dyed_plastic_pipe[color=light_gray,north=true,south=true]
+setblock 4 -60 69 fundamentals:dyed_plastic_pipe[color=cyan,north=true,south=true]
+setblock 5 -60 69 fundamentals:dyed_plastic_pipe[color=purple,north=true,south=true]
+setblock 6 -60 69 fundamentals:dyed_plastic_pipe[color=blue,north=true,south=true]
+setblock 7 -60 69 fundamentals:dyed_plastic_pipe[color=brown,north=true,south=true]
+setblock 8 -60 69 fundamentals:dyed_plastic_pipe[color=green,north=true,south=true]
+setblock 9 -60 69 fundamentals:dyed_plastic_pipe[color=red,north=true,south=true]
+setblock 10 -60 69 fundamentals:dyed_plastic_pipe[color=black,north=true,south=true]
+setblock -8 -60 72 minecraft:polished_andesite
+setblock -8 -59 72 minecraft:polished_andesite
+setblock -8 -59 71 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Plastic tanks"','""','""','""']},is_waxed:1b}
+setblock -6 -60 72 fundamentals:plastic_fluid_tank[color=none]
+setblock -4 -60 72 fundamentals:plastic_fluid_tank[color=white]
+setblock -2 -60 72 fundamentals:plastic_fluid_tank[color=red]
+setblock 0 -60 72 fundamentals:plastic_fluid_tank[color=yellow]
+setblock 2 -60 72 fundamentals:plastic_fluid_tank[color=green]
+setblock 4 -60 72 fundamentals:plastic_fluid_tank[color=blue]
+setblock 6 -60 72 fundamentals:plastic_fluid_tank[color=black]
+setblock -8 -60 75 minecraft:polished_andesite
+setblock -8 -59 75 minecraft:polished_andesite
+setblock -8 -59 74 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Plastic pipe,"','"pump, valve"','""','""']},is_waxed:1b}
+setblock -6 -60 75 fundamentals:plastic_fluid_tank
+setblock -5 -60 75 tfmg:plastic_mechanical_pump[facing=east]
+setblock -5 -59 75 create:cogwheel[axis=x]
+setblock -6 -59 75 create:creative_motor[facing=east]{ScrollValue:64}
+setblock -4 -60 75 tfmg:plastic_pipe[east=true,west=true]
+setblock -3 -60 75 tfmg:glass_plastic_pipe[axis=x]
+setblock -2 -60 75 tfmg:plastic_fluid_valve[facing=east]
+setblock -1 -60 75 tfmg:plastic_smart_fluid_pipe[face=floor,facing=east]
+setblock 0 -60 75 fundamentals:plastic_fluid_tank
+setblock 2 -60 75 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:mixer_settler",count:6},{Slot:1b,id:"fundamentals:stainless_steel_plate",count:64},{Slot:2b,id:"tfmg:plastic_sheet",count:64},{Slot:3b,id:"fundamentals:pvc_sheet",count:64},{Slot:4b,id:"create:fluid_pipe",count:16},{Slot:5b,id:"fundamentals:ziegler_natta_catalyst",count:16},{Slot:6b,id:"fundamentals:pvc_resin",count:16}]}
+setblock 2 -60 74 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Mixer-settler:"','"plastic or"','"stainless plate"','""']},is_waxed:1b}
 schedule function showcase:fill 10t
 schedule function showcase:refill 60t
