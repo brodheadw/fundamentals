@@ -57,9 +57,10 @@ public final class FerrousChains {
                 .step(SMELTING, "nickel_laterite", RAW, "ferronickel", INGOT)
                 .build());
 
-        // The Kroll route runs through TiCl4, skipped until there is a fluid form.
+        // Chlorination to TiCl4 is folded into the Kroll step: the tetrachloride is a fluid, not a material form.
         ProcessingChainRegistry.register(ProcessingChain.builder("titanium", "titanium", FerrousMaterials.GROUP)
-                .step(KROLL_PROCESS, "rutile", RAW, "titanium", INGOT)
+                .step(KROLL_PROCESS, "rutile", RAW, "titanium", SPONGE)
+                .step(REFINING, "titanium", SPONGE, "titanium", INGOT)
                 .build());
     }
 }

@@ -289,7 +289,7 @@ def rare_earths():
 
 
 def metals():
-    category("metals", "The other metals", "Cobalt, zinc and nickel, the porphyry chain (copper, molybdenum and the rhenium hiding in it), chromium, and tin.", "fundamentals:cobalt_ingot", 3)
+    category("metals", "The other metals", "Cobalt, zinc and nickel, the porphyry chain (copper, molybdenum and the rhenium hiding in it), chromium, tin and titanium.", "fundamentals:cobalt_ingot", 3)
     entry("metals", "cobalt", "Cobalt", "fundamentals:cobalt_ingot", pages_of(
         "Cobaltite is a cobalt arsenide-sulfide from the silver-cobalt veins in calcite. Roast it on a campfire or in a smoker to drive off the arsenic and sulfur and leave the oxide. "
         "Cobalt melts at 1,495 °C and was never smelted from its ore: the oxide is reduced under hydrogen, as molybdenum is: two roasted cobaltite and 500 mB of hydrogen in a heated chemical vat give two ingots. "
@@ -339,6 +339,18 @@ def metals():
         "two crude tin and a stick in a heated basin give two tin ingots, a slag one time in four.", "Smelting and refining") + pages_of(
         "Three copper and a tin, heated, make four bronze, the first alloy and still the metal of bells: Create's peculiar bell is cast in it, and five bronze ingots under a stick make a bell. "
         "A tin and a lead, heated, make eight solder, and every loop of the Factory's circuit board assembly now solders its parts down.", "Bronze and solder"), 6)
+    entry("metals", "titanium", "Titanium", "fundamentals:titanium_ingot", pages_of(
+        "Ilmenite and rutile are heavy sands, panned from beaches and rivers. Rutile is titanium dioxide already; ilmenite is iron titanate, a third of it iron. "
+        "Four ilmenite and a coal coke, superheated, smelt as the electric furnaces of Sorel and Richards Bay do at about 1,650 °C: "
+        "the iron runs off as a cast iron ingot and the titanium stays behind in two titania slag, black and some eighty-five per cent titania.", "Titanium") + pages_of(
+        "No carbon reduces titanium: it would only make a carbide. It goes through its chloride. Two rutile or two titania slag, a coal coke and 1,000 mB of chlorine, heated, "
+        "give 500 mB of titanium tetrachloride, a colourless liquid that boils at 136 °C and fumes to hydrogen chloride in damp air. "
+        "In a heated vat with a mixer, 500 mB of it, four magnesium and 100 mB of argon give two titanium sponge and four magnesium chloride: the Kroll process.") + pages_of(
+        "Two magnesium chloride electrolysed molten on two electrodes in a heated vat give two magnesium and 500 mB of chlorine, so the magnesium and the chlorine go round again. "
+        "The first magnesium is the Dow process's: 1,000 mB of water (sea water, as salt is boiled from), a limesand and 250 mB of hydrochloric acid, heated, give one magnesium chloride. "
+        "Titanium melts at 1,668 °C, past a blaze cake, and burns hot in air, so the sponge is arc-melted: two sponge and 100 mB of argon on two electrodes, superheated, give two ingots.") + pages_of(
+        "Most titanium never becomes metal. 250 mB of the tetrachloride burnt in 1,000 mB of air in a heated basin gives a titanium oxide, the purest white there is, and 500 mB of chlorine back; "
+        "one oxide makes four white dye. The metal goes where strength for its weight counts: titanium plates in place of steel make four of the Factory's turbine engines instead of two."), 7)
 
 
 def platinum():

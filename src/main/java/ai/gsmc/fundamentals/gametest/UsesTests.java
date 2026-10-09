@@ -81,6 +81,18 @@ public class UsesTests {
     }
 
     @GameTest(template = "empty")
+    public void titaniumIsWonFromIlmeniteAndRutileAndSpent(GameTestHelper helper) {
+        var registries = helper.getLevel().registryAccess();
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/titania_slag"), "fundamentals:raw_ilmenite")
+                && takes(recipe(helper, "fundamentals:uses/titanium_tetrachloride_from_titania_slag"), "fundamentals:titania_slag")
+                && takes(recipe(helper, "fundamentals:uses/titanium_tetrachloride_from_rutile"), "fundamentals:raw_rutile"), "ilmenite and rutile should both chlorinate");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/titanium_ingot"), "fundamentals:titanium_sponge")
+                && recipe(helper, "fundamentals:uses/titanium_ingot").getResultItem(registries).is(stack("fundamentals:titanium_ingot").getItem()), "the sponge should remelt to ingot");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/turbine_engine_from_titanium"), "fundamentals:titanium_plate"), "titanium should build the turbine engine");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
     public void cobaltCopperMolybdenumAndRheniumHaveTheirChains(GameTestHelper helper) {
         var registries = helper.getLevel().registryAccess();
         for (String item : new String[] {"cobalt_ingot", "molybdenum_oxide", "molybdenum_ingot", "rhenium_ingot", "superalloy_plate", "molybdenum_steel_plate", "roasted_cobaltite", "roasted_chalcopyrite", "rhenium_flue_dust",

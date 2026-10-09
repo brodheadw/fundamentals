@@ -18,6 +18,7 @@
     "#c:ingots/iridium",
     "#c:ingots/lanthanum",
     "#c:ingots/lutetium",
+    "#c:ingots/magnesium",
     "#c:ingots/molybdenum",
     "#c:ingots/molybdenum_steel",
     "#c:ingots/neodymium",
@@ -37,6 +38,7 @@
     "#c:ingots/terbium",
     "#c:ingots/thulium",
     "#c:ingots/tin",
+    "#c:ingots/titanium",
     "#c:ingots/tungsten",
     "#c:ingots/ytterbium",
     "#c:ingots/yttrium"
