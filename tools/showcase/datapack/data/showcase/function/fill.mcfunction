@@ -6,6 +6,7 @@ data merge block 4 -57 -22 {TankContent:{Fluid:{id:"fundamentals:p507",amount:80
 data merge block 43 -60 -23 {TankContent:{Fluid:{id:"fundamentals:hydrochloric_acid",amount:8000}}}
 data merge block 47 -57 -22 {TankContent:{Fluid:{id:"fundamentals:p507",amount:8000}}}
 data merge block 146 -60 -23 {TankContent:{Fluid:{id:"fundamentals:hydrochloric_acid",amount:8000}}}
+data merge block 143 -58 -34 {InputItems:{Size:4,Items:[{Slot:0b,id:"fundamentals:neodymium_fluoride",count:64}]}}
 data merge block 150 -57 -10 {TankContent:{Fluid:{id:"fundamentals:p204",amount:8000}}}
 data merge block 183 -60 -11 {TankContent:{Fluid:{id:"fundamentals:hydrochloric_acid",amount:8000}}}
 data merge block 153 -57 -22 {TankContent:{Fluid:{id:"fundamentals:p507",amount:8000}}}
@@ -16,6 +17,9 @@ data merge block 262 -57 -22 {TankContent:{Fluid:{id:"fundamentals:p204",amount:
 data merge block 301 -60 -23 {TankContent:{Fluid:{id:"fundamentals:hydrochloric_acid",amount:8000}}}
 data merge block 265 -57 -34 {TankContent:{Fluid:{id:"fundamentals:p507",amount:8000}}}
 data merge block 328 -60 -35 {TankContent:{Fluid:{id:"fundamentals:hydrochloric_acid",amount:8000}}}
+data merge block 328 -58 -45 {TankContent:{Fluid:{id:"fundamentals:argon",amount:8000}}}
+setblock 327 -58 -45 minecraft:air
+setblock 327 -58 -45 create:mechanical_pump[facing=west]
 data merge block 332 -57 -34 {TankContent:{Fluid:{id:"fundamentals:naphthenic_acid",amount:8000}}}
 data merge block 377 -60 -35 {TankContent:{Fluid:{id:"fundamentals:hydrochloric_acid",amount:8000}}}
 data merge block 374 -57 -46 {TankContent:{Fluid:{id:"fundamentals:p204",amount:8000}}}
