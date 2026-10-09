@@ -26,12 +26,13 @@ SOURCES = {
 }
 
 THERMOMETER_RECIPES = DATA / "recipe/thermometers"
-# The four gauges, as heat.Thermometer lists them: name, and what stands over the andesite casing in the recipe, top to bottom,
-# where Create's speedometer has its compass. Mercury in a glass tube; a strip of brass on steel; chromel and alumel ingots
-# drawn to the two legs of a type K thermocouple; a rhodium nugget alloyed into platinum for the positive leg of type S, a
-# platinum nugget for the negative.
+# The gauges, as heat.Thermometer lists them: name, and what stands over the andesite casing in the recipe, top to bottom,
+# where Create's speedometer has its compass, and anything beside it. Mercury in a glass tube; kerosene in a glass tube,
+# red dye beside it; a strip of brass on steel; chromel and alumel ingots drawn to the two legs of a type K thermocouple; a
+# rhodium nugget alloyed into platinum for the positive leg of type S, a platinum nugget for the negative.
 THERMOMETERS = {
     "mercury_thermometer": ("Mercury Thermometer", {"item": "minecraft:glass_pane"}, {"item": "fundamentals:mercury"}),
+    "spirit_thermometer": ("Spirit Thermometer", {"item": "minecraft:glass_pane"}, {"tag": "c:buckets/kerosene"}, {"tag": "c:dyes/red"}),
     "bimetallic_thermometer": ("Bimetallic Thermometer", {"tag": "c:plates/brass"}, {"tag": "c:plates/iron"}),
     "type_k_thermocouple": ("Type K Thermocouple", {"tag": "c:ingots/chromel"}, {"tag": "c:ingots/alumel"}),
     "type_s_thermocouple": ("Type S Thermocouple", {"tag": "c:nuggets/rhodium"}, {"tag": "c:nuggets/platinum"}),
@@ -66,7 +67,7 @@ def thermometers(lang):
     write(ASSETS / "models/block/thermometer.json", {"parent": "minecraft:block/block", "textures": casing, "elements": casing_elements()})
     write(ASSETS / "models/item/thermometer.json", {"parent": "minecraft:block/block", "textures": {**casing, **needle},
                                                     "elements": casing_elements() + needle_elements(-45)})
-    for name, (display, upper, lower) in THERMOMETERS.items():
+    for name, (display, upper, lower, *beside) in THERMOMETERS.items():
         dial = {"dial": f"fundamentals:block/{name}_dial"}
         write(ASSETS / f"models/block/{name}.json", {"parent": "fundamentals:block/thermometer", "textures": dial})
         write(ASSETS / f"models/item/{name}.json", {"parent": "fundamentals:item/thermometer", "textures": dial})
@@ -76,8 +77,8 @@ def thermometers(lang):
                                      ("up", {"x": 270}), ("down", {"x": 90}))}})
         write(DATA / f"loot_table/blocks/{name}.json", {"type": "minecraft:block", "pools": [drop_self(name)]})
         write(THERMOMETER_RECIPES / f"{name}.json", {
-            "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["U", "L", "A"],
-            "key": {"U": upper, "L": lower, "A": {"item": "create:andesite_casing"}},
+            "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["U ", "LB", "A "] if beside else ["U", "L", "A"],
+            "key": {"U": upper, "L": lower, **({"B": beside[0]} if beside else {}), "A": {"item": "create:andesite_casing"}},
             "result": {"id": f"fundamentals:{name}", "count": 1}})
         lang[f"block.fundamentals.{name}"] = display
     lang["goggles.fundamentals.thermometer.over"] = "Off the scale, past %s °C"

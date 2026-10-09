@@ -72,7 +72,7 @@ ITEM_FORMULAS = {
     # sintered NdFeB is sold nickel-plated against rust; SmCo and cast alnico go bare
     "neodymium_iron_boron_magnet": "Nd2Fe14B,Ni", "dysprosium_neodymium_iron_boron_magnet": "(Nd,Dy)2Fe14B,Ni", "samarium_cobalt_magnet": "SmCo5",
     "alnico_magnet": "Fe-Al-Ni-Co-Cu",
-    "mercury_thermometer": "Hg,SiO2", "bimetallic_thermometer": "Cu-Zn,Fe", "type_k_thermocouple": "Ni-Cr,Ni-Al", "type_s_thermocouple": "Pt-Rh,Pt",
+    "mercury_thermometer": "Hg,SiO2", "spirit_thermometer": "C12H26,SiO2", "bimetallic_thermometer": "Cu-Zn,Fe", "type_k_thermocouple": "Ni-Cr,Ni-Al", "type_s_thermocouple": "Pt-Rh,Pt",
     # Natta's catalyst, TiCl3 with the AlCl3 the aluminium leaves in it; polyvinyl chloride, and the polyethylene of the dyed blocks
     "ziegler_natta_catalyst": "TiCl3,AlCl3", "pvc_resin": "C2H3Cl", "pvc_sheet": "C2H3Cl",
     **{name: "C2H4" for name in PLASTIC_BLOCKS},
