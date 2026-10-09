@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/bronze"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:bronze_plate"
+    }
+  ]
+}

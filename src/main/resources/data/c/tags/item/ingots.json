@@ -3,9 +3,11 @@
   "values": [
     "#c:ingots/aluminium_scandium",
     "#c:ingots/blister_copper",
+    "#c:ingots/bronze",
     "#c:ingots/cerium",
     "#c:ingots/chromium",
     "#c:ingots/cobalt",
+    "#c:ingots/crude_tin",
     "#c:ingots/didymium",
     "#c:ingots/dysprosium",
     "#c:ingots/erbium",
@@ -34,6 +36,7 @@
     "#c:ingots/superalloy",
     "#c:ingots/terbium",
     "#c:ingots/thulium",
+    "#c:ingots/tin",
     "#c:ingots/tungsten",
     "#c:ingots/ytterbium",
     "#c:ingots/yttrium"

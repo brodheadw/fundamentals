@@ -1,0 +1,14 @@
+{
+  "type": "fundamentals:bloomery",
+  "ingredient": {
+    "item": "fundamentals:roasted_tin_concentrate"
+  },
+  "result": {
+    "id": "fundamentals:crude_tin_ingot",
+    "count": 1
+  },
+  "byproduct": {
+    "id": "fundamentals:slag",
+    "count": 1
+  }
+}

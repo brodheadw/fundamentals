@@ -1,0 +1,35 @@
+{
+  "name": "Tin and bronze",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:tin_ingot",
+  "sortnum": 6,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Cassiterite, tin dioxide, comes from the tin veins and from beach and river sand, where it settles because it is seven times as heavy as water. That weight is how it is concentrated: a raw cassiterite washed under an encased fan leaves a tin concentrate behind.",
+      "title": "Cassiterite"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Pyrite and arsenopyrite ride with it, so the concentrate is roasted on a campfire or in a smoker to drive off their sulfur and arsenic."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Charcoal reduces the oxide at 1,200 to 1,300 °C, the bloomery's heat, as the charcoal shaft furnaces of the Cornish blowing houses did: a roasted concentrate smelts to a crude tin ingot and slag.",
+      "title": "Smelting and refining"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "In a factory, two roasted concentrate and a coal coke in a superheated basin give two crude tin and a slag, as a reverberatory furnace does. Crude tin carries iron."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Tin melts at 232 °C, so on a gentle heat it runs off and leaves the iron-tin hardhead behind (liquation), and a green pole stirred through the melt brings up the last dross: two crude tin and a stick in a heated basin give two tin ingots, a slag one time in four."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Three copper and a tin, heated, make four bronze, the first alloy and still the metal of bells: Create's peculiar bell is cast in it, and five bronze ingots under a stick make a bell. A tin and a lead, heated, make eight solder, and every loop of the Factory's circuit board assembly now solders its parts down.",
+      "title": "Bronze and solder"
+    }
+  ]
+}

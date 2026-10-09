@@ -10,6 +10,7 @@
     "fundamentals:borax_ore",
     "fundamentals:bornite_ore",
     "fundamentals:braggite_ore",
+    "fundamentals:bronze_block",
     "fundamentals:carbonatite",
     "fundamentals:cassiterite_ore",
     "fundamentals:chalcocite_ore",
@@ -53,6 +54,7 @@
     "fundamentals:syenite",
     "fundamentals:terbium_block",
     "fundamentals:thortveitite_ore",
+    "fundamentals:tin_block",
     "fundamentals:trona_ore",
     "fundamentals:wolframite_ore",
     "fundamentals:xenotime_ore"

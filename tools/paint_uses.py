@@ -81,6 +81,9 @@ def main():
     heap("reforming_catalyst", (246, 246, 242), (206, 206, 204), (136, 138, 142)).save(TEXTURES / "item/reforming_catalyst.png")
     gauze().save(TEXTURES / "item/platinum_rhodium_gauze.png")
     filament((112, 126, 150, 255), (178, 192, 216, 255)).save(TEXTURES / "item/osmium_filament.png")
+    # roasting burns the sulfides' iron to red-brown oxide among the black cassiterite; solder is a coil of dull tin-lead wire
+    heap("roasted_tin_concentrate", (130, 84, 60), (82, 50, 34), (38, 24, 18)).save(TEXTURES / "item/roasted_tin_concentrate.png")
+    filament((150, 152, 156, 255), (206, 208, 212, 255)).save(TEXTURES / "item/solder.png")
     print("uses textures written")
 
 

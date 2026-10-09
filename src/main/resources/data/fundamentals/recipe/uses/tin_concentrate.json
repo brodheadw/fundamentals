@@ -1,0 +1,13 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_cassiterite"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:tin_concentrate"
+    }
+  ]
+}
