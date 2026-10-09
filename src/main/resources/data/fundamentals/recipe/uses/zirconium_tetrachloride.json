@@ -1,0 +1,35 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:crude_zirconium_tetrachloride"
+    },
+    {
+      "item": "fundamentals:crude_zirconium_tetrachloride"
+    },
+    {
+      "item": "fundamentals:crude_zirconium_tetrachloride"
+    },
+    {
+      "item": "fundamentals:crude_zirconium_tetrachloride"
+    },
+    {
+      "item": "fundamentals:salt"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:zirconium_tetrachloride",
+      "count": 4
+    },
+    {
+      "id": "fundamentals:hafnium_tetrachloride",
+      "chance": 0.1
+    },
+    {
+      "id": "fundamentals:salt",
+      "chance": 0.9
+    }
+  ],
+  "heat_requirement": "heated"
+}

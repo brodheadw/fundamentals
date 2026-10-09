@@ -235,6 +235,21 @@
       "name": "halite_ore",
       "soft": false,
       "mineral": "halite"
+    },
+    {
+      "name": "zircon_ore",
+      "soft": true,
+      "mineral": "zircon"
+    },
+    {
+      "name": "beryl_ore",
+      "soft": false,
+      "mineral": "beryl"
+    },
+    {
+      "name": "bertrandite_ore",
+      "soft": false,
+      "mineral": "bertrandite"
     }
   ],
   "hosts": {

@@ -539,6 +539,42 @@
           }
         ]
       }
+    },
+    "fundamentals:raw_zircon": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_zircon"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_beryl": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_beryl"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_bertrandite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_bertrandite"
+            ]
+          }
+        ]
+      }
     }
   },
   "parent": "fundamentals:root"

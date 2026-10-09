@@ -1,0 +1,36 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:zirconium_oxide"
+    },
+    {
+      "item": "fundamentals:zirconium_oxide"
+    },
+    {
+      "item": "fundamentals:zirconium_oxide"
+    },
+    {
+      "item": "fundamentals:zirconium_oxide"
+    },
+    {
+      "item": "fundamentals:zirconium_oxide"
+    },
+    {
+      "item": "fundamentals:zirconium_oxide"
+    },
+    {
+      "item": "fundamentals:zirconium_oxide"
+    },
+    {
+      "item": "fundamentals:yttrium_oxide"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:yttria_stabilised_zirconia",
+      "count": 8
+    }
+  ],
+  "heat_requirement": "superheated"
+}

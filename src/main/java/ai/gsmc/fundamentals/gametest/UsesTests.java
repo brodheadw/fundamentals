@@ -1,13 +1,17 @@
 package ai.gsmc.fundamentals.gametest;
 
 import ai.gsmc.fundamentals.Fundamentals;
+import ai.gsmc.fundamentals.worldgen.DepositFeature;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
@@ -101,6 +105,56 @@ public class UsesTests {
         helper.assertTrue(takes(recipe(helper, "fundamentals:uses/titanium_ingot"), "fundamentals:titanium_sponge")
                 && recipe(helper, "fundamentals:uses/titanium_ingot").getResultItem(registries).is(stack("fundamentals:titanium_ingot").getItem()), "the sponge should remelt to ingot");
         helper.assertTrue(takes(recipe(helper, "fundamentals:uses/turbine_engine_from_titanium"), "fundamentals:titanium_plate"), "titanium should build the turbine engine");
+        helper.succeed();
+    }
+
+    private static boolean gives(GameTestHelper helper, String recipe, String id) {
+        Recipe<?> found = recipe(helper, recipe);
+        return found.getResultItem(helper.getLevel().registryAccess()).is(stack(id).getItem())
+                || found instanceof ProcessingRecipe<?, ?> processing && processing.getRollableResults().stream().anyMatch(r -> r.getStack().is(stack(id).getItem()));
+    }
+
+    private static boolean carries(GameTestHelper helper, String deposit, String ore) {
+        var feature = helper.getLevel().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE).get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, deposit));
+        if (feature != null && feature.config() instanceof DepositFeature.Config config) {
+            return config.ores().stream().anyMatch(o -> BuiltInRegistries.BLOCK.getKey(o.state().getBlock()).getPath().equals(ore));
+        }
+        return feature != null && feature.config() instanceof OreConfiguration config
+                && config.targetStates.stream().anyMatch(t -> BuiltInRegistries.BLOCK.getKey(t.state.getBlock()).getPath().equals(ore));
+    }
+
+    @GameTest(template = "empty")
+    public void zirconAndHafniumTakeTheKrollRoadFromTheSands(GameTestHelper helper) {
+        helper.assertTrue(carries(helper, "placer_zircon", "zircon_ore") && carries(helper, "syenite_massif", "zircon_ore"), "zircon should lie in the sands and the syenite");
+        helper.assertTrue(gives(helper, "fundamentals:washing/raw_zircon", "fundamentals:zircon_concentrate")
+                && takes(recipe(helper, "fundamentals:uses/crude_zirconium_tetrachloride"), "fundamentals:zircon_concentrate")
+                && gives(helper, "fundamentals:uses/zirconium_tetrachloride", "fundamentals:hafnium_tetrachloride"), "zircon should wash, chlorinate and give up its hafnium");
+        for (String metal : new String[] {"zirconium", "hafnium"}) {
+            helper.assertTrue(takes(recipe(helper, "fundamentals:uses/" + metal + "_sponge"), "fundamentals:" + metal + "_tetrachloride")
+                    && takes(recipe(helper, "fundamentals:uses/" + metal + "_sponge"), "fundamentals:magnesium_ingot")
+                    && gives(helper, "fundamentals:uses/" + metal + "_ingot", "fundamentals:" + metal + "_ingot"), metal + " should be reduced by magnesium and arc-melted");
+        }
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/yttria_stabilised_zirconia"), "fundamentals:zirconium_oxide")
+                && takes(recipe(helper, "fundamentals:uses/yttria_stabilised_zirconia"), "fundamentals:yttrium_oxide")
+                && takes(recipe(helper, "tfmg:turbine_blade"), "fundamentals:yttria_stabilised_zirconia"), "zirconia and yttria should coat the turbine blade");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void berylliumIsWonFromBerylAndBertrandite(GameTestHelper helper) {
+        helper.assertTrue(carries(helper, "pegmatite_dyke", "beryl_ore") && carries(helper, "beryllium_tuff", "bertrandite_ore"),
+                "beryl should be in the pegmatite and bertrandite in the tuff");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/beryl_frit"), "fundamentals:raw_beryl")
+                && takes(recipe(helper, "fundamentals:uses/beryllium_sulfate_liquor"), "fundamentals:beryl_frit")
+                && takes(recipe(helper, "fundamentals:uses/beryllium_sulfate_liquor_from_bertrandite"), "fundamentals:raw_bertrandite"), "beryl frit and bertrandite should leach");
+        helper.assertTrue(gives(helper, "fundamentals:uses/beryllium_hydroxide", "fundamentals:beryllium_hydroxide")
+                && takes(recipe(helper, "fundamentals:uses/ammonium_fluoroberyllate"), "fundamentals:beryllium_hydroxide")
+                && takes(recipe(helper, "fundamentals:uses/beryllium_fluoride"), "fundamentals:ammonium_fluoroberyllate")
+                && takes(recipe(helper, "fundamentals:uses/beryllium_pebbles"), "fundamentals:beryllium_fluoride")
+                && takes(recipe(helper, "fundamentals:uses/beryllium_pebbles"), "fundamentals:magnesium_ingot")
+                && gives(helper, "fundamentals:uses/beryllium_ingot", "fundamentals:beryllium_ingot"), "the liquor should reach the metal through the fluoride");
+        helper.assertTrue(gives(helper, "fundamentals:uses/beryllium_copper_from_oxide", "fundamentals:beryllium_copper_block")
+                && takes(recipe(helper, "fundamentals:uses/cable_connector_from_beryllium_copper"), "fundamentals:beryllium_copper_ingot"), "beryllium should go into copper and the connector");
         helper.succeed();
     }
 

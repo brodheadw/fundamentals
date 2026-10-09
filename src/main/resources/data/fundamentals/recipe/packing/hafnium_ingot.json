@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:nuggets/hafnium"
+    }
+  },
+  "result": {
+    "id": "fundamentals:hafnium_ingot",
+    "count": 1
+  }
+}

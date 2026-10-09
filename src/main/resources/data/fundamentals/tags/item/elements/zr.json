@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:crude_zirconium_tetrachloride",
+    "fundamentals:raw_zircon",
+    "fundamentals:yttria_stabilised_zirconia",
+    "fundamentals:zircon_concentrate",
+    "fundamentals:zircon_ore",
+    "fundamentals:zirconium_ingot",
+    "fundamentals:zirconium_oxide",
+    "fundamentals:zirconium_plate",
+    "fundamentals:zirconium_sponge",
+    "fundamentals:zirconium_tetrachloride"
+  ]
+}

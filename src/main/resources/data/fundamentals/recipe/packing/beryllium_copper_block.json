@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:ingots/beryllium_copper"
+    }
+  },
+  "result": {
+    "id": "fundamentals:beryllium_copper_block",
+    "count": 1
+  }
+}

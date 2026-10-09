@@ -2,7 +2,7 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "pattern": [
-    "III",
+    "IYI",
     "ISI",
     "III"
   ],
@@ -12,6 +12,9 @@
     },
     "I": {
       "tag": "c:plates/superalloy"
+    },
+    "Y": {
+      "item": "fundamentals:yttria_stabilised_zirconia"
     }
   },
   "result": {

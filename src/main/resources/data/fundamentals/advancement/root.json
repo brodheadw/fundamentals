@@ -64,7 +64,10 @@
               "fundamentals:raw_fluorite",
               "fundamentals:raw_borax",
               "fundamentals:raw_trona",
-              "fundamentals:raw_halite"
+              "fundamentals:raw_halite",
+              "fundamentals:raw_zircon",
+              "fundamentals:raw_beryl",
+              "fundamentals:raw_bertrandite"
             ]
           }
         ]

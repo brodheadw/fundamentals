@@ -139,7 +139,9 @@ PLATINUM_LIQUORS = {
     "iridium_rhodium_liquor": ("Iridium-Rhodium Liquor", 0x6A2A1E),
     "rhodium_liquor": ("Rhodium Liquor", 0xC85A6A),
 }
-FLUIDS = {**{k: (*v, "LIQUOR") for k, v in {**LIQUORS, **PLATINUM_LIQUORS}.items()}, **{k: (*v, "ORGANIC") for k, v in ORGANICS.items()},
+# beryllium sulfate, with the aluminium the beryl carried, in the sulfuric acid that opened the frit or the tuff: colourless
+SULFATE_LIQUORS = {"beryllium_sulfate_liquor": ("Beryllium Sulfate Liquor", CLEAR)}
+FLUIDS = {**{k: (*v, "LIQUOR") for k, v in {**LIQUORS, **PLATINUM_LIQUORS, **SULFATE_LIQUORS}.items()}, **{k: (*v, "ORGANIC") for k, v in ORGANICS.items()},
           **{k: (*v, "ACID") for k, v in ACIDS.items()}, **{k: (*v, "GAS") for k, v in GASES.items()},
           **{k: (*v, "WASTE") for k, v in WASTES.items()}, **{k: (*v, "SALINE") for k, v in SALINES.items()}, **{k: (*v, "WATER") for k, v in SEA.items()}, **{k: (*v, "CRUDE") for k, v in CRUDES.items()},
           **{k: (*v, "FOULED") for k, v in FOULED.items()}, **{k: (*v, "PRECURSOR") for k, v in PRECURSORS.items()}}

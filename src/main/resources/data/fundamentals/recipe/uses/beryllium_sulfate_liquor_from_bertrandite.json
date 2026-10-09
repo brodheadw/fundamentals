@@ -1,0 +1,29 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_bertrandite"
+    },
+    {
+      "item": "fundamentals:raw_bertrandite"
+    },
+    {
+      "item": "fundamentals:raw_bertrandite"
+    },
+    {
+      "item": "fundamentals:raw_bertrandite"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "tfmg:sulfuric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:beryllium_sulfate_liquor",
+      "amount": 250
+    }
+  ],
+  "heat_requirement": "heated"
+}
