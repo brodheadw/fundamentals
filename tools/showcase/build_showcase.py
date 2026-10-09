@@ -557,14 +557,34 @@ def seawater(x0, z0):
 
 def cracking(x, z):
     """Heavy oil cracked over lanthanum oxide in a firebrick vat with an industrial mixer, as the plant's reduction cell: the oil
-    pumped in from the east, the catalyst hoppered in, the coke dust taken out into a chest. Gasoline and propylene stay in
-    the vat, and the catalyst it gives back fills its output, so it runs until either is full."""
-    vat(x, z, [((1, 0), "tfmg:coal_coke_dust")])
+    pumped in from the east, the gasoline drawn off west and the propylene south into tanks, each through a smart fluid pipe
+    filtered to it (a pump on the vat drains its input first, so the heavy oil). The vat holds a charge of catalyst, set in
+    once and again by refill when it is spent; it gives the catalyst back into its output, and once that lands on a stack
+    already there it skips the rest of the recipe's items, so no coke dust. A smart chute takes the returned catalyst and the
+    coke dust down into a chest after every batch; its filter respects data and the charge is marked, so the charge stays."""
+    vat(x, z, [])
+    put(x + 1, Y + 1, z, 'create:smart_chute{Filter:{id:"create:filter",count:1,components:{"create:filter_items":['
+        '{slot:0,item:{id:"tfmg:coal_coke_dust",count:1}},{slot:1,item:{id:"fundamentals:lanthanum_oxide",count:1}}],'
+        '"create:filter_items_respect_nbt":true}}}')
+    put(x + 1, Y, z, "minecraft:chest[facing=west]")
     put(x, Y + 3, z, 'tfmg:industrial_mixer{MixerMode:"mixing"}')
     put(x, Y + 4, z, f"create:creative_motor[facing=down]{MOTOR}")
-    feed(x + 1, Y + 3, z, "lanthanum_oxide")
+    charge = (f'data merge block {x} {Y + 2} {z} {{InputItems:{{Size:4,Items:[{{Slot:0b,id:"fundamentals:lanthanum_oxide",count:8,'
+              'components:{"minecraft:custom_data":{charge:1b}}}]}}')
+    fills.append(charge)
+    refills.append(f"execute unless data block {x} {Y + 2} {z} InputItems.Items[0] run {charge}")
     tank(x + 3, Y + 2, z + 1, "tfmg:heavy_oil", block="create:fluid_tank")
     pump(x + 2, Y + 2, z + 1, "west", "x", (x + 3, Y + 3, z + 1), "west", "create:mechanical_pump")
+    draws = [("tfmg:gasoline", (x - 1, z), (x - 2, z), (x - 3, z), "west", "x", "east"),
+             ("tfmg:propylene", (x, z + 2), (x, z + 3), (x, z + 4), "south", "z", "north")]
+    for fluid, (sx, sz), (px, pz), (tx, tz), facing, axis, motor_facing in draws:
+        put(sx, Y + 2, sz, f'create:smart_fluid_pipe[face=floor,facing={facing}]{{Filter:{{id:"{fluid}_bucket",count:1}}}}')
+        pump(px, Y + 2, pz, facing, axis, (tx, Y + 3, tz), motor_facing, "create:mechanical_pump")
+        put(tx, Y, tz, WALL)
+        put(tx, Y + 1, tz, WALL)
+        tank(tx, Y + 2, tz, block="create:fluid_tank")
+        label(tx, Y + 1, tz - 1, name(fluid))
+        fills.extend([f"setblock {px} {Y + 2} {pz} minecraft:air", f"setblock {px} {Y + 2} {pz} create:mechanical_pump[facing={facing}]"])
     fills.extend([f"setblock {x + 2} {Y + 2} {z + 1} minecraft:air", f"setblock {x + 2} {Y + 2} {z + 1} create:mechanical_pump[facing=west]"])
     sign(x, Y, z - 1, "Fluid catalytic cracking")
     sign(x + 1, Y, z - 1, "Heavy oil over lanthanum oxide")

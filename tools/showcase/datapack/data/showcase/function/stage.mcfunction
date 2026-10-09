@@ -6,137 +6,137 @@ gamerule doDaylightCycle false
 gamerule doWeatherCycle false
 gamerule doMobSpawning false
 kill @e[type=item]
-fill -26 -61 -84 549 -61 -77 minecraft:smooth_stone
-fill -26 -60 -84 549 -59 -77 minecraft:air
-fill -26 -58 -84 549 -57 -77 minecraft:air
-fill -26 -56 -84 549 -55 -77 minecraft:air
-fill -26 -54 -84 549 -53 -77 minecraft:air
-fill -26 -52 -84 549 -51 -77 minecraft:air
-fill -26 -61 -76 549 -61 -69 minecraft:smooth_stone
-fill -26 -60 -76 549 -59 -69 minecraft:air
-fill -26 -58 -76 549 -57 -69 minecraft:air
-fill -26 -56 -76 549 -55 -69 minecraft:air
-fill -26 -54 -76 549 -53 -69 minecraft:air
-fill -26 -52 -76 549 -51 -69 minecraft:air
-fill -26 -61 -68 549 -61 -61 minecraft:smooth_stone
-fill -26 -60 -68 549 -59 -61 minecraft:air
-fill -26 -58 -68 549 -57 -61 minecraft:air
-fill -26 -56 -68 549 -55 -61 minecraft:air
-fill -26 -54 -68 549 -53 -61 minecraft:air
-fill -26 -52 -68 549 -51 -61 minecraft:air
-fill -26 -61 -60 549 -61 -53 minecraft:smooth_stone
-fill -26 -60 -60 549 -59 -53 minecraft:air
-fill -26 -58 -60 549 -57 -53 minecraft:air
-fill -26 -56 -60 549 -55 -53 minecraft:air
-fill -26 -54 -60 549 -53 -53 minecraft:air
-fill -26 -52 -60 549 -51 -53 minecraft:air
-fill -26 -61 -52 549 -61 -45 minecraft:smooth_stone
-fill -26 -60 -52 549 -59 -45 minecraft:air
-fill -26 -58 -52 549 -57 -45 minecraft:air
-fill -26 -56 -52 549 -55 -45 minecraft:air
-fill -26 -54 -52 549 -53 -45 minecraft:air
-fill -26 -52 -52 549 -51 -45 minecraft:air
-fill -26 -61 -44 549 -61 -37 minecraft:smooth_stone
-fill -26 -60 -44 549 -59 -37 minecraft:air
-fill -26 -58 -44 549 -57 -37 minecraft:air
-fill -26 -56 -44 549 -55 -37 minecraft:air
-fill -26 -54 -44 549 -53 -37 minecraft:air
-fill -26 -52 -44 549 -51 -37 minecraft:air
-fill -26 -61 -36 549 -61 -29 minecraft:smooth_stone
-fill -26 -60 -36 549 -59 -29 minecraft:air
-fill -26 -58 -36 549 -57 -29 minecraft:air
-fill -26 -56 -36 549 -55 -29 minecraft:air
-fill -26 -54 -36 549 -53 -29 minecraft:air
-fill -26 -52 -36 549 -51 -29 minecraft:air
-fill -26 -61 -28 549 -61 -21 minecraft:smooth_stone
-fill -26 -60 -28 549 -59 -21 minecraft:air
-fill -26 -58 -28 549 -57 -21 minecraft:air
-fill -26 -56 -28 549 -55 -21 minecraft:air
-fill -26 -54 -28 549 -53 -21 minecraft:air
-fill -26 -52 -28 549 -51 -21 minecraft:air
-fill -26 -61 -20 549 -61 -13 minecraft:smooth_stone
-fill -26 -60 -20 549 -59 -13 minecraft:air
-fill -26 -58 -20 549 -57 -13 minecraft:air
-fill -26 -56 -20 549 -55 -13 minecraft:air
-fill -26 -54 -20 549 -53 -13 minecraft:air
-fill -26 -52 -20 549 -51 -13 minecraft:air
-fill -26 -61 -12 549 -61 -5 minecraft:smooth_stone
-fill -26 -60 -12 549 -59 -5 minecraft:air
-fill -26 -58 -12 549 -57 -5 minecraft:air
-fill -26 -56 -12 549 -55 -5 minecraft:air
-fill -26 -54 -12 549 -53 -5 minecraft:air
-fill -26 -52 -12 549 -51 -5 minecraft:air
-fill -26 -61 -4 549 -61 3 minecraft:smooth_stone
-fill -26 -60 -4 549 -59 3 minecraft:air
-fill -26 -58 -4 549 -57 3 minecraft:air
-fill -26 -56 -4 549 -55 3 minecraft:air
-fill -26 -54 -4 549 -53 3 minecraft:air
-fill -26 -52 -4 549 -51 3 minecraft:air
-fill -26 -61 4 549 -61 11 minecraft:smooth_stone
-fill -26 -60 4 549 -59 11 minecraft:air
-fill -26 -58 4 549 -57 11 minecraft:air
-fill -26 -56 4 549 -55 11 minecraft:air
-fill -26 -54 4 549 -53 11 minecraft:air
-fill -26 -52 4 549 -51 11 minecraft:air
-fill -26 -61 12 549 -61 19 minecraft:smooth_stone
-fill -26 -60 12 549 -59 19 minecraft:air
-fill -26 -58 12 549 -57 19 minecraft:air
-fill -26 -56 12 549 -55 19 minecraft:air
-fill -26 -54 12 549 -53 19 minecraft:air
-fill -26 -52 12 549 -51 19 minecraft:air
-fill -26 -61 20 549 -61 27 minecraft:smooth_stone
-fill -26 -60 20 549 -59 27 minecraft:air
-fill -26 -58 20 549 -57 27 minecraft:air
-fill -26 -56 20 549 -55 27 minecraft:air
-fill -26 -54 20 549 -53 27 minecraft:air
-fill -26 -52 20 549 -51 27 minecraft:air
-fill -26 -61 28 549 -61 35 minecraft:smooth_stone
-fill -26 -60 28 549 -59 35 minecraft:air
-fill -26 -58 28 549 -57 35 minecraft:air
-fill -26 -56 28 549 -55 35 minecraft:air
-fill -26 -54 28 549 -53 35 minecraft:air
-fill -26 -52 28 549 -51 35 minecraft:air
-fill -26 -61 36 549 -61 43 minecraft:smooth_stone
-fill -26 -60 36 549 -59 43 minecraft:air
-fill -26 -58 36 549 -57 43 minecraft:air
-fill -26 -56 36 549 -55 43 minecraft:air
-fill -26 -54 36 549 -53 43 minecraft:air
-fill -26 -52 36 549 -51 43 minecraft:air
-fill -26 -61 44 549 -61 51 minecraft:smooth_stone
-fill -26 -60 44 549 -59 51 minecraft:air
-fill -26 -58 44 549 -57 51 minecraft:air
-fill -26 -56 44 549 -55 51 minecraft:air
-fill -26 -54 44 549 -53 51 minecraft:air
-fill -26 -52 44 549 -51 51 minecraft:air
-fill -26 -61 52 549 -61 59 minecraft:smooth_stone
-fill -26 -60 52 549 -59 59 minecraft:air
-fill -26 -58 52 549 -57 59 minecraft:air
-fill -26 -56 52 549 -55 59 minecraft:air
-fill -26 -54 52 549 -53 59 minecraft:air
-fill -26 -52 52 549 -51 59 minecraft:air
-fill -26 -61 60 549 -61 67 minecraft:smooth_stone
-fill -26 -60 60 549 -59 67 minecraft:air
-fill -26 -58 60 549 -57 67 minecraft:air
-fill -26 -56 60 549 -55 67 minecraft:air
-fill -26 -54 60 549 -53 67 minecraft:air
-fill -26 -52 60 549 -51 67 minecraft:air
-fill -26 -61 68 549 -61 75 minecraft:smooth_stone
-fill -26 -60 68 549 -59 75 minecraft:air
-fill -26 -58 68 549 -57 75 minecraft:air
-fill -26 -56 68 549 -55 75 minecraft:air
-fill -26 -54 68 549 -53 75 minecraft:air
-fill -26 -52 68 549 -51 75 minecraft:air
-fill -26 -61 76 549 -61 81 minecraft:smooth_stone
-fill -26 -60 76 549 -59 81 minecraft:air
-fill -26 -58 76 549 -57 81 minecraft:air
-fill -26 -56 76 549 -55 81 minecraft:air
-fill -26 -54 76 549 -53 81 minecraft:air
-fill -26 -52 76 549 -51 81 minecraft:air
-forceload add -26 -84 101 81
-forceload add 102 -84 229 81
-forceload add 230 -84 357 81
-forceload add 358 -84 485 81
-forceload add 486 -84 549 81
+fill -27 -61 -84 549 -61 -77 minecraft:smooth_stone
+fill -27 -60 -84 549 -59 -77 minecraft:air
+fill -27 -58 -84 549 -57 -77 minecraft:air
+fill -27 -56 -84 549 -55 -77 minecraft:air
+fill -27 -54 -84 549 -53 -77 minecraft:air
+fill -27 -52 -84 549 -51 -77 minecraft:air
+fill -27 -61 -76 549 -61 -69 minecraft:smooth_stone
+fill -27 -60 -76 549 -59 -69 minecraft:air
+fill -27 -58 -76 549 -57 -69 minecraft:air
+fill -27 -56 -76 549 -55 -69 minecraft:air
+fill -27 -54 -76 549 -53 -69 minecraft:air
+fill -27 -52 -76 549 -51 -69 minecraft:air
+fill -27 -61 -68 549 -61 -61 minecraft:smooth_stone
+fill -27 -60 -68 549 -59 -61 minecraft:air
+fill -27 -58 -68 549 -57 -61 minecraft:air
+fill -27 -56 -68 549 -55 -61 minecraft:air
+fill -27 -54 -68 549 -53 -61 minecraft:air
+fill -27 -52 -68 549 -51 -61 minecraft:air
+fill -27 -61 -60 549 -61 -53 minecraft:smooth_stone
+fill -27 -60 -60 549 -59 -53 minecraft:air
+fill -27 -58 -60 549 -57 -53 minecraft:air
+fill -27 -56 -60 549 -55 -53 minecraft:air
+fill -27 -54 -60 549 -53 -53 minecraft:air
+fill -27 -52 -60 549 -51 -53 minecraft:air
+fill -27 -61 -52 549 -61 -45 minecraft:smooth_stone
+fill -27 -60 -52 549 -59 -45 minecraft:air
+fill -27 -58 -52 549 -57 -45 minecraft:air
+fill -27 -56 -52 549 -55 -45 minecraft:air
+fill -27 -54 -52 549 -53 -45 minecraft:air
+fill -27 -52 -52 549 -51 -45 minecraft:air
+fill -27 -61 -44 549 -61 -37 minecraft:smooth_stone
+fill -27 -60 -44 549 -59 -37 minecraft:air
+fill -27 -58 -44 549 -57 -37 minecraft:air
+fill -27 -56 -44 549 -55 -37 minecraft:air
+fill -27 -54 -44 549 -53 -37 minecraft:air
+fill -27 -52 -44 549 -51 -37 minecraft:air
+fill -27 -61 -36 549 -61 -29 minecraft:smooth_stone
+fill -27 -60 -36 549 -59 -29 minecraft:air
+fill -27 -58 -36 549 -57 -29 minecraft:air
+fill -27 -56 -36 549 -55 -29 minecraft:air
+fill -27 -54 -36 549 -53 -29 minecraft:air
+fill -27 -52 -36 549 -51 -29 minecraft:air
+fill -27 -61 -28 549 -61 -21 minecraft:smooth_stone
+fill -27 -60 -28 549 -59 -21 minecraft:air
+fill -27 -58 -28 549 -57 -21 minecraft:air
+fill -27 -56 -28 549 -55 -21 minecraft:air
+fill -27 -54 -28 549 -53 -21 minecraft:air
+fill -27 -52 -28 549 -51 -21 minecraft:air
+fill -27 -61 -20 549 -61 -13 minecraft:smooth_stone
+fill -27 -60 -20 549 -59 -13 minecraft:air
+fill -27 -58 -20 549 -57 -13 minecraft:air
+fill -27 -56 -20 549 -55 -13 minecraft:air
+fill -27 -54 -20 549 -53 -13 minecraft:air
+fill -27 -52 -20 549 -51 -13 minecraft:air
+fill -27 -61 -12 549 -61 -5 minecraft:smooth_stone
+fill -27 -60 -12 549 -59 -5 minecraft:air
+fill -27 -58 -12 549 -57 -5 minecraft:air
+fill -27 -56 -12 549 -55 -5 minecraft:air
+fill -27 -54 -12 549 -53 -5 minecraft:air
+fill -27 -52 -12 549 -51 -5 minecraft:air
+fill -27 -61 -4 549 -61 3 minecraft:smooth_stone
+fill -27 -60 -4 549 -59 3 minecraft:air
+fill -27 -58 -4 549 -57 3 minecraft:air
+fill -27 -56 -4 549 -55 3 minecraft:air
+fill -27 -54 -4 549 -53 3 minecraft:air
+fill -27 -52 -4 549 -51 3 minecraft:air
+fill -27 -61 4 549 -61 11 minecraft:smooth_stone
+fill -27 -60 4 549 -59 11 minecraft:air
+fill -27 -58 4 549 -57 11 minecraft:air
+fill -27 -56 4 549 -55 11 minecraft:air
+fill -27 -54 4 549 -53 11 minecraft:air
+fill -27 -52 4 549 -51 11 minecraft:air
+fill -27 -61 12 549 -61 19 minecraft:smooth_stone
+fill -27 -60 12 549 -59 19 minecraft:air
+fill -27 -58 12 549 -57 19 minecraft:air
+fill -27 -56 12 549 -55 19 minecraft:air
+fill -27 -54 12 549 -53 19 minecraft:air
+fill -27 -52 12 549 -51 19 minecraft:air
+fill -27 -61 20 549 -61 27 minecraft:smooth_stone
+fill -27 -60 20 549 -59 27 minecraft:air
+fill -27 -58 20 549 -57 27 minecraft:air
+fill -27 -56 20 549 -55 27 minecraft:air
+fill -27 -54 20 549 -53 27 minecraft:air
+fill -27 -52 20 549 -51 27 minecraft:air
+fill -27 -61 28 549 -61 35 minecraft:smooth_stone
+fill -27 -60 28 549 -59 35 minecraft:air
+fill -27 -58 28 549 -57 35 minecraft:air
+fill -27 -56 28 549 -55 35 minecraft:air
+fill -27 -54 28 549 -53 35 minecraft:air
+fill -27 -52 28 549 -51 35 minecraft:air
+fill -27 -61 36 549 -61 43 minecraft:smooth_stone
+fill -27 -60 36 549 -59 43 minecraft:air
+fill -27 -58 36 549 -57 43 minecraft:air
+fill -27 -56 36 549 -55 43 minecraft:air
+fill -27 -54 36 549 -53 43 minecraft:air
+fill -27 -52 36 549 -51 43 minecraft:air
+fill -27 -61 44 549 -61 51 minecraft:smooth_stone
+fill -27 -60 44 549 -59 51 minecraft:air
+fill -27 -58 44 549 -57 51 minecraft:air
+fill -27 -56 44 549 -55 51 minecraft:air
+fill -27 -54 44 549 -53 51 minecraft:air
+fill -27 -52 44 549 -51 51 minecraft:air
+fill -27 -61 52 549 -61 59 minecraft:smooth_stone
+fill -27 -60 52 549 -59 59 minecraft:air
+fill -27 -58 52 549 -57 59 minecraft:air
+fill -27 -56 52 549 -55 59 minecraft:air
+fill -27 -54 52 549 -53 59 minecraft:air
+fill -27 -52 52 549 -51 59 minecraft:air
+fill -27 -61 60 549 -61 67 minecraft:smooth_stone
+fill -27 -60 60 549 -59 67 minecraft:air
+fill -27 -58 60 549 -57 67 minecraft:air
+fill -27 -56 60 549 -55 67 minecraft:air
+fill -27 -54 60 549 -53 67 minecraft:air
+fill -27 -52 60 549 -51 67 minecraft:air
+fill -27 -61 68 549 -61 75 minecraft:smooth_stone
+fill -27 -60 68 549 -59 75 minecraft:air
+fill -27 -58 68 549 -57 75 minecraft:air
+fill -27 -56 68 549 -55 75 minecraft:air
+fill -27 -54 68 549 -53 75 minecraft:air
+fill -27 -52 68 549 -51 75 minecraft:air
+fill -27 -61 76 549 -61 81 minecraft:smooth_stone
+fill -27 -60 76 549 -59 81 minecraft:air
+fill -27 -58 76 549 -57 81 minecraft:air
+fill -27 -56 76 549 -55 81 minecraft:air
+fill -27 -54 76 549 -53 81 minecraft:air
+fill -27 -52 76 549 -51 81 minecraft:air
+forceload add -27 -84 100 81
+forceload add 101 -84 228 81
+forceload add 229 -84 356 81
+forceload add 357 -84 484 81
+forceload add 485 -84 549 81
 setblock 0 -60 0 fundamentals:mixer_settler[facing=east]
 setblock 0 -59 0 fundamentals:mixer_settler[facing=east]
 setblock 0 -60 1 fundamentals:mixer_settler[facing=east]
@@ -7337,16 +7337,30 @@ setblock -18 -60 66 tfmg:fireproof_bricks
 setblock -18 -59 66 create:blaze_burner[blaze=seething]{isCreative:1b}
 setblock -17 -60 67 tfmg:fireproof_bricks
 setblock -17 -59 67 create:blaze_burner[blaze=seething]{isCreative:1b}
-setblock -17 -59 66 create:smart_chute{Filter:{id:"tfmg:coal_coke_dust",count:1}}
+setblock -17 -59 66 create:smart_chute{Filter:{id:"create:filter",count:1,components:{"create:filter_items":[{slot:0,item:{id:"tfmg:coal_coke_dust",count:1}},{slot:1,item:{id:"fundamentals:lanthanum_oxide",count:1}}],"create:filter_items_respect_nbt":true}}}
 setblock -17 -60 66 minecraft:chest[facing=west]
 setblock -18 -57 66 tfmg:industrial_mixer{MixerMode:"mixing"}
 setblock -18 -56 66 create:creative_motor[facing=down]{ScrollValue:64}
-setblock -17 -57 66 minecraft:hopper[facing=down]
-setblock -17 -56 66 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:1b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:2b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:3b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:4b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:5b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:6b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:7b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:8b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:9b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:10b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:11b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:12b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:13b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:14b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:15b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:16b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:17b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:18b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:19b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:20b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:21b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:22b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:23b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:24b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:25b,id:"fundamentals:lanthanum_oxide",count:64},{Slot:26b,id:"fundamentals:lanthanum_oxide",count:64}]}
 setblock -15 -58 67 create:fluid_tank
 setblock -16 -58 67 create:mechanical_pump[facing=west]
 setblock -16 -57 67 create:cogwheel[axis=x]
 setblock -15 -57 67 create:creative_motor[facing=west]{ScrollValue:64}
+setblock -19 -58 66 create:smart_fluid_pipe[face=floor,facing=west]{Filter:{id:"tfmg:gasoline_bucket",count:1}}
+setblock -20 -58 66 create:mechanical_pump[facing=west]
+setblock -20 -57 66 create:cogwheel[axis=x]
+setblock -21 -57 66 create:creative_motor[facing=east]{ScrollValue:64}
+setblock -21 -60 66 minecraft:polished_andesite
+setblock -21 -59 66 minecraft:polished_andesite
+setblock -21 -58 66 create:fluid_tank
+setblock -21 -59 65 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Gasoline"','""','""','""']},is_waxed:1b}
+setblock -18 -58 68 create:smart_fluid_pipe[face=floor,facing=south]{Filter:{id:"tfmg:propylene_bucket",count:1}}
+setblock -18 -58 69 create:mechanical_pump[facing=south]
+setblock -18 -57 69 create:cogwheel[axis=z]
+setblock -18 -57 70 create:creative_motor[facing=north]{ScrollValue:64}
+setblock -18 -60 70 minecraft:polished_andesite
+setblock -18 -59 70 minecraft:polished_andesite
+setblock -18 -58 70 create:fluid_tank
+setblock -18 -59 69 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Propylene"','""','""','""']},is_waxed:1b}
 setblock -18 -60 65 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Fluid catalytic"','"cracking"','""','""']},is_waxed:1b}
 setblock -17 -60 65 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Heavy oil over"','"lanthanum oxide"','""','""']},is_waxed:1b}
 setblock -8 -60 66 minecraft:polished_andesite
