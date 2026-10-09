@@ -1,0 +1,68 @@
+{
+  "replace": false,
+  "values": {
+    "fundamentals:bronze_block": {
+      "next_oxidation_stage": "fundamentals:exposed_bronze_block"
+    },
+    "fundamentals:exposed_bronze_block": {
+      "next_oxidation_stage": "fundamentals:weathered_bronze_block"
+    },
+    "fundamentals:weathered_bronze_block": {
+      "next_oxidation_stage": "fundamentals:oxidized_bronze_block"
+    },
+    "fundamentals:silver_block": {
+      "next_oxidation_stage": "fundamentals:dulled_silver_block"
+    },
+    "fundamentals:dulled_silver_block": {
+      "next_oxidation_stage": "fundamentals:tarnished_silver_block"
+    },
+    "fundamentals:tarnished_silver_block": {
+      "next_oxidation_stage": "fundamentals:blackened_silver_block"
+    },
+    "fundamentals:praseodymium_block": {
+      "next_oxidation_stage": "fundamentals:tarnished_praseodymium_block"
+    },
+    "fundamentals:tarnished_praseodymium_block": {
+      "next_oxidation_stage": "fundamentals:corroded_praseodymium_block"
+    },
+    "fundamentals:corroded_praseodymium_block": {
+      "next_oxidation_stage": "fundamentals:crumbled_praseodymium_block"
+    },
+    "fundamentals:neodymium_block": {
+      "next_oxidation_stage": "fundamentals:tarnished_neodymium_block"
+    },
+    "fundamentals:tarnished_neodymium_block": {
+      "next_oxidation_stage": "fundamentals:corroded_neodymium_block"
+    },
+    "fundamentals:corroded_neodymium_block": {
+      "next_oxidation_stage": "fundamentals:crumbled_neodymium_block"
+    },
+    "fundamentals:samarium_block": {
+      "next_oxidation_stage": "fundamentals:tarnished_samarium_block"
+    },
+    "fundamentals:tarnished_samarium_block": {
+      "next_oxidation_stage": "fundamentals:corroded_samarium_block"
+    },
+    "fundamentals:corroded_samarium_block": {
+      "next_oxidation_stage": "fundamentals:crumbled_samarium_block"
+    },
+    "fundamentals:terbium_block": {
+      "next_oxidation_stage": "fundamentals:tarnished_terbium_block"
+    },
+    "fundamentals:tarnished_terbium_block": {
+      "next_oxidation_stage": "fundamentals:corroded_terbium_block"
+    },
+    "fundamentals:corroded_terbium_block": {
+      "next_oxidation_stage": "fundamentals:crumbled_terbium_block"
+    },
+    "fundamentals:dysprosium_block": {
+      "next_oxidation_stage": "fundamentals:tarnished_dysprosium_block"
+    },
+    "fundamentals:tarnished_dysprosium_block": {
+      "next_oxidation_stage": "fundamentals:corroded_dysprosium_block"
+    },
+    "fundamentals:corroded_dysprosium_block": {
+      "next_oxidation_stage": "fundamentals:crumbled_dysprosium_block"
+    }
+  }
+}

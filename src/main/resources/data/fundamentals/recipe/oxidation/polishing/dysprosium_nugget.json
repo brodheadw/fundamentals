@@ -1,0 +1,29 @@
+{
+  "type": "create:sandpaper_polishing",
+  "ingredients": [
+    {
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "type": "neoforge:components",
+          "items": "fundamentals:dysprosium_nugget",
+          "components": {
+            "fundamentals:oxidation_stage": 1
+          }
+        },
+        {
+          "type": "neoforge:components",
+          "items": "fundamentals:dysprosium_nugget",
+          "components": {
+            "fundamentals:oxidation_stage": 2
+          }
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:dysprosium_nugget"
+    }
+  ]
+}

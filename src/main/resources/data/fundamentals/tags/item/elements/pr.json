@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:corroded_praseodymium_block",
+    "fundamentals:crumbled_praseodymium_block",
     "fundamentals:didymium_fluoride",
     "fundamentals:didymium_glass",
     "fundamentals:didymium_ingot",
@@ -13,6 +15,7 @@
     "fundamentals:praseodymium_ingot",
     "fundamentals:praseodymium_nugget",
     "fundamentals:praseodymium_oxalate",
-    "fundamentals:praseodymium_oxide"
+    "fundamentals:praseodymium_oxide",
+    "fundamentals:tarnished_praseodymium_block"
   ]
 }
