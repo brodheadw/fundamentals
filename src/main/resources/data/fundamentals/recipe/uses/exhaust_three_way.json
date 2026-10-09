@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "TKR",
+    "EPE",
+    "CPC"
+  ],
+  "key": {
+    "T": {
+      "tag": "c:nuggets/platinum"
+    },
+    "K": {
+      "tag": "c:nuggets/palladium"
+    },
+    "R": {
+      "tag": "c:nuggets/rhodium"
+    },
+    "C": {
+      "tag": "c:ingots/cast_iron"
+    },
+    "P": {
+      "item": "tfmg:cast_iron_pipe"
+    },
+    "E": {
+      "item": "fundamentals:cerium_oxide"
+    }
+  },
+  "result": {
+    "count": 2,
+    "id": "tfmg:exhaust"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/stainless_steel"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:stainless_steel_plate"
+    }
+  ]
+}

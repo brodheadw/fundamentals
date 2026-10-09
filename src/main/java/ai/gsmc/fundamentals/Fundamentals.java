@@ -59,6 +59,7 @@ public class Fundamentals {
                 MaterialItems.registerBlocks(helper::register);
                 Electricity.registerBlocks(helper::register);
                 Separation.registerBlocks(helper::register);
+                Uses.registerBlocks(helper::register);
             });
             event.register(Registries.BLOCK_ENTITY_TYPE, helper -> {
                 IronWorking.registerBlockEntities(helper::register);

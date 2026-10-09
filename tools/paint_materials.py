@@ -21,13 +21,16 @@ OUT = Path(__file__).resolve().parent.parent / "src/main/resources/assets/fundam
 # These mirror the form lists in content/rare_earths/RareEarthMaterials.java.
 MINERAL = ("dust",)
 CONCENTRATE = ("concentrate",)
-ELEMENT = ("oxalate", "fluoride", "oxide", "dust", "ingot")
-MAGNET_ELEMENT = ("oxalate", "fluoride", "oxide", "dust", "ingot", "nugget", "block")
-# Sm, Eu, Tm and Yb are reduced from the oxide by lanthanum, so they never pass through a fluoride.
-VOLATILE = ("oxalate", "oxide", "dust", "ingot")
-VOLATILE_MAGNET = ("oxalate", "oxide", "dust", "ingot", "nugget", "block")
-DIDYMIUM = ("oxalate", "fluoride", "oxide", "dust", "ingot")
-ALLOY = ("dust", "ingot", "nugget", "plate", "block")
+ELEMENT = ("oxalate", "fluoride", "oxide", "ingot")
+MAGNET_ELEMENT = ("oxalate", "fluoride", "oxide", "ingot", "nugget", "block")
+# Samarium is reduced from the oxide by lanthanum, so it never passes through a fluoride.
+VOLATILE_MAGNET = ("oxalate", "oxide", "ingot", "nugget", "block")
+# europium and the heavies past dysprosium are sold as oxide
+OXIDE_ONLY = ("oxalate", "oxide")
+SCANDIUM = ("oxalate", "fluoride", "oxide", "ingot", "nugget")
+DIDYMIUM = ("oxalate", "fluoride", "oxide", "ingot")
+MAGNET = ("dust", "ingot", "nugget", "plate", "block")
+ALLOY = ("ingot", "nugget", "plate", "block")
 RESIDUE = ("dust", "block")
 COBALT = ("dust", "ingot", "nugget")
 MOLYBDENUM = ("oxide", "dust", "ingot")
@@ -190,14 +193,14 @@ MATERIALS = {
     "bastnasite": MINERAL, "monazite": MINERAL, "xenotime": MINERAL, "loparite": MINERAL, "euxenite": MINERAL, "thortveitite": MINERAL,
     "bastnasite_concentrate": CONCENTRATE, "light_rare_earth_concentrate": CONCENTRATE, "heavy_rare_earth_concentrate": CONCENTRATE,
     "lanthanum": ELEMENT, "cerium": ELEMENT, "praseodymium": MAGNET_ELEMENT, "neodymium": MAGNET_ELEMENT,
-    "samarium": VOLATILE_MAGNET, "europium": VOLATILE,
-    "gadolinium": ELEMENT, "terbium": MAGNET_ELEMENT, "dysprosium": MAGNET_ELEMENT, "holmium": ELEMENT,
-    "erbium": ELEMENT, "thulium": VOLATILE, "ytterbium": VOLATILE, "lutetium": ELEMENT, "yttrium": ELEMENT,
-    "scandium": ELEMENT,
-    "didymium": DIDYMIUM, "neodymium_iron_boron": ALLOY, "samarium_cobalt": ALLOY, "aluminium_scandium": ALLOY, "monazite_residue": RESIDUE,
+    "samarium": VOLATILE_MAGNET, "europium": OXIDE_ONLY,
+    "gadolinium": ELEMENT, "terbium": MAGNET_ELEMENT, "dysprosium": MAGNET_ELEMENT, "holmium": OXIDE_ONLY,
+    "erbium": OXIDE_ONLY, "thulium": OXIDE_ONLY, "ytterbium": OXIDE_ONLY, "lutetium": OXIDE_ONLY, "yttrium": ELEMENT,
+    "scandium": SCANDIUM,
+    "didymium": DIDYMIUM, "neodymium_iron_boron": MAGNET, "samarium_cobalt": MAGNET, "aluminium_scandium": ALLOY, "monazite_residue": RESIDUE,
     "cobalt": COBALT, "molybdenum": MOLYBDENUM, "rhenium": RHENIUM, "superalloy": STRUCTURAL, "molybdenum_steel": STRUCTURAL,
     "tungsten": TUNGSTEN, "copper_matte": MATTE, "blister_copper": BLISTER,
-    "chromite": GROUND_MINERAL, "chromium": CHROMIUM, "ferrochrome": INGOT, "stainless_steel": INGOT,
+    "chromite": GROUND_MINERAL, "chromium": CHROMIUM, "ferrochrome": INGOT, "stainless_steel": STRUCTURAL,
     "titanium": TITANIUM, "magnesium": INGOT,
     "nickel_matte": MATTE, "converter_matte": MATTE, "platinum_group_concentrate": CONCENTRATE,
     "platinum": PGM, "palladium": PGM, "rhodium": PGM, "ruthenium": PGM, "iridium": PGM, "osmium": PGM,

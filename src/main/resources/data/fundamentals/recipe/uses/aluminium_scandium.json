@@ -2,7 +2,10 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "fundamentals:scandium_ingot"
+      "item": "fundamentals:scandium_nugget"
+    },
+    {
+      "tag": "c:ingots/aluminum"
     },
     {
       "tag": "c:ingots/aluminum"

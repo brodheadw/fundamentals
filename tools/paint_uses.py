@@ -6,6 +6,7 @@ re-run; don't hand-edit the PNGs.
 """
 from PIL import Image
 
+from paint_materials import paint_block
 from paint_minerals import paint_raw
 from paint_separation import TEXTURES, heap
 
@@ -46,6 +47,22 @@ def gauze():
     return img
 
 
+def mantle():
+    """A Welsbach mantle: a little stocking of knitted thoria, white and loose-meshed, gathered at the neck onto its ring."""
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    mesh, light, shade, ring = (232, 230, 222, 255), (255, 255, 250, 255), (176, 172, 160, 255), (120, 116, 108, 255)
+    for x in range(6, 10):
+        img.putpixel((x, 2), ring)
+        img.putpixel((x, 3), ring)
+    for y in range(4, 14):
+        half = min(4, 1 + (y - 4) // 2) if y < 12 else 4 - (y - 11)
+        for x in range(8 - half - 1, 8 + half + 1):
+            edge = x in (8 - half - 1, 8 + half)
+            colour = shade if edge else light if (x + y) % 3 == 0 and x < 8 else mesh if (x + y) % 2 else shade
+            img.putpixel((x, y), colour)
+    return img
+
+
 def main():
     heap("phosphor", (255, 250, 252), (240, 226, 236), (196, 170, 190)).save(TEXTURES / "item/phosphor.png")
     lens().save(TEXTURES / "item/didymium_glass.png")
@@ -55,6 +72,11 @@ def main():
     heap("tungsten_carbide", (120, 122, 128), (74, 76, 82), (40, 42, 46)).save(TEXTURES / "item/tungsten_carbide.png")
     filament().save(TEXTURES / "item/tungsten_filament.png")
     heap("clarifier_sludge", (150, 128, 96), (112, 92, 64), (70, 56, 38)).save(TEXTURES / "item/clarifier_sludge.png")
+    # the sludge pressed to a cake and packed for the tailings dam: the rust-brown of the iron hydroxide in it
+    paint_block("clarifier_sludge_block", ((62, 48, 32), (104, 84, 58), (140, 118, 86), (176, 152, 116))).save(TEXTURES / "block/clarifier_sludge_block.png")
+    # thorium nitrate is white crystals; the mantle soaked in it and burnt out is the white of thoria
+    heap("thorium_nitrate", (255, 255, 255), (238, 238, 234), (186, 186, 180)).save(TEXTURES / "item/thorium_nitrate.png")
+    mantle().save(TEXTURES / "item/gas_mantle.png")
     # tenorite, CuO, is black; zinc oxide is white; nickel oxide is green, dulled here by the pentlandite's iron oxide
     paint_raw("copper_calcine", ((22, 20, 20), (48, 44, 42), (78, 72, 68), (122, 114, 108))).save(TEXTURES / "item/copper_calcine.png")
     heap("zinc_oxide", (252, 252, 248), (222, 222, 214), (160, 160, 152)).save(TEXTURES / "item/zinc_oxide.png")

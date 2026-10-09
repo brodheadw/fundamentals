@@ -15,11 +15,15 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Palladium on ceria burns what an engine leaves: two palladium nuggets with the cerium oxide make two exhausts instead of one. Ruthenium lets a superalloy carry more: a ruthenium nugget in the superalloy melt makes six ingots instead of four."
+      "text": "The three-way converter: platinum and palladium on ceria burn what an engine leaves, and rhodium breaks down its nitrogen oxides, where four fifths of the world's rhodium goes. A platinum, a palladium and a rhodium nugget with the cerium oxide make two exhausts instead of one."
     },
     {
       "type": "patchouli:text",
-      "text": "An iridium-tipped spark plug outlasts four plain ones, so an iridium nugget, a flint and an aluminium ingot make four. And osmium was the first metal filament: an osmium sponge pastes and draws to four filaments, and a light bulb burns one as well as tungsten."
+      "text": "Ruthenium lets a superalloy carry more: a ruthenium nugget in the superalloy melt makes six ingots instead of four. An iridium-tipped spark plug outlasts four plain ones, so an iridium nugget, a flint and an aluminium ingot make four."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "And osmium was the first metal filament: an osmium sponge pastes and draws to four filaments, and a light bulb burns one as well as tungsten."
     }
   ]
 }

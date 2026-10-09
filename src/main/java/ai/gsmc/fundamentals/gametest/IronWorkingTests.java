@@ -59,7 +59,7 @@ public class IronWorkingTests {
             helper.assertBlockProperty(POS, BloomeryBlock.LIT, false);
             use(helper, player, ItemStack.EMPTY);
             helper.assertItemEntityPresent(IronWorking.ironBloom(), POS, 3);
-            helper.assertItemEntityPresent(IronWorking.slag(), POS, 3);
+            helper.assertItemEntityPresent(item("tfmg:slag"), POS, 3);
             helper.succeed();
         });
     }

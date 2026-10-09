@@ -1,0 +1,39 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:thorium_nitrate"
+    },
+    {
+      "item": "fundamentals:thorium_nitrate"
+    },
+    {
+      "item": "fundamentals:thorium_nitrate"
+    },
+    {
+      "item": "fundamentals:thorium_nitrate"
+    },
+    {
+      "item": "fundamentals:cerium_oxide"
+    },
+    {
+      "tag": "c:strings"
+    },
+    {
+      "tag": "c:strings"
+    },
+    {
+      "tag": "c:strings"
+    },
+    {
+      "tag": "c:strings"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:gas_mantle",
+      "count": 4
+    }
+  ],
+  "heat_requirement": "heated"
+}
