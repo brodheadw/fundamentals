@@ -44,7 +44,7 @@ BIOMES = {
     "hydrothermal": ["#minecraft:is_mountain", "#minecraft:is_hill", "#minecraft:is_badlands"],
 }
 
-# mineral: (commodity, tool, tier). tier = "stone" / "iron" pickaxe needed, or None.
+# mineral: (commodity, tool or tools, tier). tier = "stone" / "iron" pickaxe needed, or None.
 ORES = {
     "hematite": ("iron", "pickaxe", "stone"),
     "magnetite": ("iron", "pickaxe", "stone"),
@@ -73,7 +73,8 @@ ORES = {
     "hemimorphite": ("zinc", "pickaxe", "stone"),
     "cassiterite": ("tin", "pickaxe", "stone"),
     "bastnasite": ("rare_earth", "pickaxe", "iron"),
-    "monazite": ("rare_earth", "shovel", None),
+    # a sand on the beach, and a soft, weathered mineral in its rock; either tool takes it
+    "monazite": ("rare_earth", ("shovel", "pickaxe"), None),
     "xenotime": ("rare_earth", "pickaxe", "iron"),
     "ion_adsorption_clay": ("rare_earth", "shovel", None),
     "loparite": ("rare_earth", "pickaxe", "iron"),
@@ -117,6 +118,7 @@ HOSTS = {
     "limestone": ("create:limestone", "create:block/palettes/stone_types/limestone"),
     "scoria": ("create:scoria", "create:block/palettes/stone_types/scoria"),
     "scorchia": ("create:scorchia", "create:block/palettes/stone_types/scorchia"),
+    "quartz": ("minecraft:quartz_block", "minecraft:block/quartz_block_side"),
 }
 
 # What a deposit may replace. Ore adopts whichever of these it lands in.
@@ -175,7 +177,8 @@ DEPOSITS = {
     "ion_clay_blanket": ("blanket", "ion_adsorption_clay_ore", [], (8, 12), (3, 5), None,
                          "ion_clay", (60, 64), 6, "ground"),
     # --- rare intrusions: bodies of their own rock, the big finds ---
-    "carbonatite_plug": ("plug", "carbonatite", [("bastnasite", 0.16, "pockets")], (6, 9), None, (20, 34),
+    # bastnäsite in the fresh rock; monazite in the weathered top, where at Mount Weld it is most of the ore
+    "carbonatite_plug": ("plug", "carbonatite", [("bastnasite", 0.16, "pockets"), ("monazite", 0.05, "top")], (6, 9), None, (20, 34),
                          "carbonatite", (-56, 0), 36, "rock"),
     "syenite_massif": ("plug", "syenite", [("loparite", 0.10, "seams")], (8, 12), None, (16, 26),
                        "alkaline", (-32, 32), 24, "rock"),
@@ -190,6 +193,10 @@ DEPOSITS = {
     "pegmatite_dyke": ("vein", "minecraft:granite", [("xenotime", 0.08, "pockets"), ("euxenite", 0.04, "pockets"),
                                                          ("thortveitite", 0.01, "pockets")],
                        (11, 15), (3, 5), (14, 24), "pegmatite", (-16, 48), 16, "rock"),
+    # a monazite-quartz vein in old granite-gneiss shield, as at Steenkampskraal, the richest rare earth ore ever mined.
+    # Vanilla has no quartz rock, so the vein is quartz block.
+    "monazite_vein": ("vein", "minecraft:quartz_block", [("monazite", 0.25, "pockets")], (9, 13), (2, 3), (12, 18),
+                      "pegmatite", (0, 40), 48, "rock"),
     "spodumene_pegmatite": ("vein", "minecraft:granite", [("spodumene", 0.30, "pockets")], (10, 14), (3, 5), (12, 20),
                             "pegmatite", (0, 64), 14, "rock"),
     "tin_vein": ("vein", None, [("cassiterite", 0.36, "pockets"), ("wolframite", 0.16, "pockets")],
@@ -371,8 +378,10 @@ def main():
     for name, (commodity, tool, tier) in ORES.items():
         block = f"fundamentals:{name}_ore"
         ore_files(name, DISPLAY.get(name, name.replace("_", " ").title()), lang)
-        blocks.append({"name": f"{name}_ore", "soft": tool == "shovel", "mineral": name})
-        by_tool.setdefault(tool, []).append(block)
+        tools = (tool,) if isinstance(tool, str) else tool
+        blocks.append({"name": f"{name}_ore", "soft": tools[0] == "shovel", "mineral": name})
+        for each in tools:
+            by_tool.setdefault(each, []).append(block)
         if tier:
             by_tier.setdefault(tier, []).append(block)
         by_commodity.setdefault(commodity, []).append(block)

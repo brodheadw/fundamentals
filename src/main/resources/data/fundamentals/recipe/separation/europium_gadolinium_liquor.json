@@ -5,5 +5,6 @@
   "strip": "fundamentals:hydrochloric_acid",
   "stages": 18,
   "light": "fundamentals:europium_liquor",
-  "heavy": "fundamentals:gadolinium_liquor"
+  "heavy": "fundamentals:gadolinium_liquor",
+  "light_fraction": 0.05
 }

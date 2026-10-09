@@ -9,6 +9,13 @@
         },
         "fraction": 0.16,
         "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:monazite_ore"
+        },
+        "fraction": 0.05,
+        "style": "top"
       }
     ],
     "radius": {

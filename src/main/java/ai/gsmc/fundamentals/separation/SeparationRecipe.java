@@ -24,9 +24,10 @@ import java.util.Optional;
 
 /**
  * One cut of a mixer-settler battery: a liquor parts into its lighter and heavier rare earths over at least
- * {@code stages} stages, loaded with {@code organic} on top and stripped with {@code strip} at the far end.
+ * {@code stages} stages, loaded with {@code organic} on top and stripped with {@code strip} at the far end. The
+ * liquor is not half light and half heavy: {@code lightFraction} of each batch comes out as the light raffinate.
  */
-public record SeparationRecipe(Fluid liquor, Fluid organic, Fluid strip, int stages, Fluid light, Fluid heavy)
+public record SeparationRecipe(Fluid liquor, Fluid organic, Fluid strip, int stages, Fluid light, Fluid heavy, float lightFraction)
         implements Recipe<SeparationRecipe.Liquor> {
 
     public static final RecipeType<SeparationRecipe> TYPE = RecipeType.simple(
@@ -49,6 +50,15 @@ public record SeparationRecipe(Fluid liquor, Fluid organic, Fluid strip, int sta
         public boolean isEmpty() {
             return fluid == Fluids.EMPTY;
         }
+    }
+
+    /** The light raffinate one batch gives; at least a millibucket of each side, so a small battery still trickles both. */
+    public int lightOf(int batch) {
+        return Math.clamp(Math.round(batch * lightFraction), 1, batch - 1);
+    }
+
+    public int heavyOf(int batch) {
+        return batch - lightOf(batch);
     }
 
     public static Optional<SeparationRecipe> forLiquor(Level level, Fluid liquor) {
@@ -97,16 +107,22 @@ public record SeparationRecipe(Fluid liquor, Fluid organic, Fluid strip, int sta
                 BuiltInRegistries.FLUID.byNameCodec().fieldOf("strip").forGetter(SeparationRecipe::strip),
                 Codec.intRange(1, 256).fieldOf("stages").forGetter(SeparationRecipe::stages),
                 BuiltInRegistries.FLUID.byNameCodec().fieldOf("light").forGetter(SeparationRecipe::light),
-                BuiltInRegistries.FLUID.byNameCodec().fieldOf("heavy").forGetter(SeparationRecipe::heavy)
+                BuiltInRegistries.FLUID.byNameCodec().fieldOf("heavy").forGetter(SeparationRecipe::heavy),
+                Codec.floatRange(0, 1).optionalFieldOf("light_fraction", 0.5F).forGetter(SeparationRecipe::lightFraction)
         ).apply(i, SeparationRecipe::new));
-        private static final StreamCodec<RegistryFriendlyByteBuf, SeparationRecipe> STREAM_CODEC = StreamCodec.composite(
-                ByteBufCodecs.registry(Registries.FLUID), SeparationRecipe::liquor,
-                ByteBufCodecs.registry(Registries.FLUID), SeparationRecipe::organic,
-                ByteBufCodecs.registry(Registries.FLUID), SeparationRecipe::strip,
-                ByteBufCodecs.VAR_INT, SeparationRecipe::stages,
-                ByteBufCodecs.registry(Registries.FLUID), SeparationRecipe::light,
-                ByteBufCodecs.registry(Registries.FLUID), SeparationRecipe::heavy,
-                SeparationRecipe::new);
+        private static final StreamCodec<RegistryFriendlyByteBuf, Fluid> FLUID = ByteBufCodecs.registry(Registries.FLUID);
+        private static final StreamCodec<RegistryFriendlyByteBuf, SeparationRecipe> STREAM_CODEC = StreamCodec.of(
+                (buf, cut) -> {
+                    FLUID.encode(buf, cut.liquor());
+                    FLUID.encode(buf, cut.organic());
+                    FLUID.encode(buf, cut.strip());
+                    ByteBufCodecs.VAR_INT.encode(buf, cut.stages());
+                    FLUID.encode(buf, cut.light());
+                    FLUID.encode(buf, cut.heavy());
+                    ByteBufCodecs.FLOAT.encode(buf, cut.lightFraction());
+                },
+                buf -> new SeparationRecipe(FLUID.decode(buf), FLUID.decode(buf), FLUID.decode(buf), ByteBufCodecs.VAR_INT.decode(buf),
+                        FLUID.decode(buf), FLUID.decode(buf), ByteBufCodecs.FLOAT.decode(buf)));
 
         @Override
         public MapCodec<SeparationRecipe> codec() {

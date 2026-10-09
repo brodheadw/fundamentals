@@ -3,6 +3,7 @@
   "biomes": "#fundamentals:deposit/pegmatite",
   "features": [
     "fundamentals:pegmatite_dyke",
+    "fundamentals:monazite_vein",
     "fundamentals:spodumene_pegmatite",
     "fundamentals:tin_vein"
   ],
