@@ -4,8 +4,8 @@ plant's salts. Edit and re-run; don't hand-edit the PNGs.
 
 The casing is a welded polypropylene tank, as the real ones are: Create's fluid-tank panel and connected-texture
 sheet (MIT) recoloured by luminance onto a dark flat PP grey, so the frame ribs land on the exterior edges of a stage
-the way Create's connected textures place them. The plastic tank is Create's copper tank sheet by sheet, recoloured the same
-way onto The Factory Must Grow's plastic and then made milky, so it reads as the same stuff as its plastic pipes and pumps.
+the way Create's connected textures place them. The plastic tank is drawn fresh on Create's tank sheet layout: a seamless
+moulded polyethylene tank, milky and ribbed, with a domed lid and a screw-cap manway.
 
     python3 tools/paint_separation.py
 """
@@ -26,6 +26,8 @@ PLASTIC = [(95, 97, 115), (108, 114, 127), (136, 142, 155), (152, 156, 168), (16
 COPPER = [(120, 62, 44), (172, 96, 66), (212, 136, 98), (244, 190, 156)]
 # Natural polyethylene and polypropylene, unpigmented: milk-white, and thin enough to see shapes through.
 MILK = (240, 243, 245)
+# Rotomoulded natural HDPE, the darkest and lightest of its mottling: a warm off-white, light enough that a dye tints it cleanly.
+HDPE = ((210, 207, 198), (232, 230, 223))
 
 
 def create_texture(name):
@@ -111,6 +113,134 @@ def nozzle():
     return img
 
 
+def hdpe(x, y, seed, lift=0, alpha=196):
+    """One texel of rotomoulded natural polyethylene: milk-white, faintly mottled where the powder fused unevenly, and thin
+    enough that what the tank holds shows through."""
+    rng = random.Random(f"{seed}:{x // 2},{y // 3}")
+    fine = random.Random(f"{seed}:{x},{y}").random()
+    t = 0.2 + 0.35 * rng.random() + 0.45 * fine
+    base = tuple(round(lo + (hi - lo) * t) for lo, hi in zip(HDPE[0], HDPE[1]))
+    return tuple(max(0, min(255, c + lift)) for c in base) + (alpha,)
+
+
+def wall_texel(x, y, seed):
+    """The tank wall away from its edges: a moulded stiffening rib every half block, its upper face catching the light and its
+    underside in shadow, thicker and so more opaque than the wall between."""
+    row = y % 8
+    if row == 6:
+        return hdpe(x, y, seed, 12, 232)
+    if row == 7:
+        return hdpe(x, y, seed, -28, 244)
+    if row == 5:
+        return hdpe(x, y, seed, -6, 210)
+    return hdpe(x, y, seed)
+
+
+def tank_wall(left, right, top, bottom, seed):
+    """One block of tank wall, with the rounded vertical corners and the shoulder and foot only where the tank ends; the ribs
+    fall on the same rows in every block, so a tall tank's are evenly spaced."""
+    img = Image.new("RGBA", (16, 16))
+    for y in range(16):
+        for x in range(16):
+            r, g, b, a = wall_texel(x, y, seed)
+            lift, alpha = 0, a
+            if top and y == 0:
+                lift, alpha = 8, 248
+            elif top and y == 1:
+                lift, alpha = -4, 236
+            elif bottom and y == 14:
+                lift, alpha = -10, 236
+            elif bottom and y == 15:
+                lift, alpha = -24, 250
+            if left and x == 0 or right and x == 15:
+                lift, alpha = min(lift, 0) - 16, max(alpha, 240)
+            elif left and x == 1 or right and x == 14:
+                lift, alpha = lift - 6, max(alpha, 218)
+            img.putpixel((x, y), tuple(max(0, min(255, c + lift)) for c in (r, g, b)) + (alpha,))
+    return img
+
+
+def tank_lid(left, right, top, bottom, seed, cap=None, vent=None):
+    """One block of the moulded lid: thicker than the wall and nearly opaque, rolling down to the shoulder at the tank's
+    edges, with a round screw-cap manway, a raised ring and a darker ribbed cap, where one is given."""
+    img = Image.new("RGBA", (16, 16))
+    for y in range(16):
+        for x in range(16):
+            d = min([16] + [x for f in (left,) if f] + [15 - x for f in (right,) if f] + [y for f in (top,) if f] + [15 - y for f in (bottom,) if f])
+            lift = 6 if d >= 4 else (-18, -8, -1, 3)[d]
+            if left and right and top and bottom:
+                lift += round(5 * (1 - ((x - 7.5) ** 2 + (y - 7.5) ** 2) ** 0.5 / 10.6))
+            img.putpixel((x, y), hdpe(x, y, seed, lift, 244 if d >= 2 else 250))
+    mid = tuple((lo + hi) // 2 for lo, hi in zip(*HDPE))
+    for centre, outer, inner in ((cap, 5, 3.6), (vent, 2.2, 1.2)):
+        if centre is None:
+            continue
+        cx, cy = centre
+        for y in range(16):
+            for x in range(16):
+                dx, dy = x - cx, y - cy
+                r = (dx * dx + dy * dy) ** 0.5
+                lit = dx + dy < 0
+                if r < inner:
+                    notch = inner > 2 and r > inner - 1.1 and (x + y) % 2 == 0
+                    lift = -52 if notch else -34 if lit else -42
+                elif r < outer:
+                    lift = 18 if lit else -14
+                elif r < outer + 1 and not lit:
+                    lift = -22
+                else:
+                    continue
+                img.putpixel((x, y), tuple(c + lift for c in mid) + (255,))
+    return img
+
+
+def ct_sheet(tile):
+    """Create's rectangle connected-texture sheet: tile column 0 alone, 1 the left end, 2 between, 3 the right end; row 0 the
+    top end, 1 between, 2 the bottom end, 3 alone."""
+    sheet = Image.new("RGBA", (64, 64))
+    for cy in range(4):
+        for cx in range(4):
+            sheet.paste(tile(cx in (0, 1), cx in (0, 3), cy in (0, 3), cy in (2, 3), f"{cx}{cy}"), (cx * 16, cy * 16))
+    return sheet
+
+
+def plastic_tank_sheets():
+    """The plastic fluid tank, a seamless rotomoulded polyethylene tank on the layout of Create's fluid-tank sheets so its
+    models and connected textures place it: milky wall with moulded ribs, rounded at the tank's corners; a domed lid with a
+    screw-cap manway; no window, because the milky wall shows the liquid's level through it. The window sheets are the wall
+    again, row for row where Create's window models put them: the window of a top or bottom block reads its left half four
+    rows off the face, a middle block its right half on the face's own rows, a single block four rows off."""
+    def lid(left, right, top, bottom, seed):
+        alone = left and right and top and bottom
+        corner = left and top and not right and not bottom
+        return tank_lid(left, right, top, bottom, seed, cap=(7.5, 7.5) if alone else (9.5, 9.5) if corner else None,
+                        vent=(10, 10) if right and bottom and not left and not top else None)
+
+    def inner(left, right, top, bottom, seed):
+        img = Image.new("RGBA", (16, 16))
+        for y in range(16):
+            for x in range(16):
+                img.putpixel((x, y), hdpe(x, y, "inner" + seed, -14, 200))
+        return img
+
+    window = Image.new("RGBA", (16, 16))
+    single = Image.new("RGBA", (16, 16))
+    for y in range(16):
+        for x in range(16):
+            window.putpixel((x, y), wall_texel(x, y + 4 if x < 8 else y, "window"))
+            single.putpixel((x, y), wall_texel(x, y + 4, "single"))
+    return {
+        "": tank_wall(True, True, True, True, "03"),
+        "_connected": ct_sheet(tank_wall),
+        "_top": lid(True, True, True, True, "03"),
+        "_top_connected": ct_sheet(lid),
+        "_inner": inner(True, True, True, True, "03"),
+        "_inner_connected": ct_sheet(inner),
+        "_window": window,
+        "_window_single": single,
+    }
+
+
 def cell_sheets():
     """The magnetomigration cell: the plastic tank's panel on every face; an NdFeB block, the bare sintered magnet's dark grey,
     set in the right wall; a window along the channel on top, the liquor clouding toward the magnet side where the
@@ -187,9 +317,8 @@ def main():
     steel(create_texture("fluid_tank_window")).save(TEXTURES / "block/mixer_settler_window.png")
     steel(create_texture("fluid_tank_top")).save(TEXTURES / "block/mixer_settler_top.png")
     steel(create_texture("fluid_tank_top_connected")).save(TEXTURES / "block/mixer_settler_top_connected.png")
-    # the copper sheet's tones span only a quarter of the range; stretched over all of the plastic's, it comes out as light as TFMG's
-    for sheet in ("", "_connected", "_top", "_top_connected", "_inner", "_inner_connected", "_window", "_window_single"):
-        milky(steel(create_texture(f"fluid_tank{sheet}"), PLASTIC, 0.32, 0.3)).save(TEXTURES / f"block/plastic_fluid_tank{sheet}.png")
+    for sheet, img in plastic_tank_sheets().items():
+        img.save(TEXTURES / f"block/plastic_fluid_tank{sheet}.png")
     for sheet, img in cell_sheets().items():
         img.save(TEXTURES / f"block/magnetomigration_cell_{sheet}.png")
     liquor("still").save(TEXTURES / "block/fluid/liquor_still.png")
