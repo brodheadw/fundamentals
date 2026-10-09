@@ -479,7 +479,9 @@ def oxidation(x0, z0):
         label(x0 + i, Y, z - 1, f"{name(block)} over water")
 
 
-THERMOMETERS = ["mercury_thermometer", "bimetallic_thermometer", "type_k_thermocouple", "type_s_thermocouple"]
+THERMOMETERS = ["mercury_thermometer", "bimetallic_thermometer", "type_k_thermocouple", "type_s_thermocouple", "spirit_thermometer"]
+BURSTS = {"mercury_thermometer": (3, "Mercury boils at 357 °C: it would burst here"),
+          "spirit_thermometer": (2, "Spirit boils past 150 °C: it would burst here")}   # the first station too hot for it
 FURNACE = "minecraft:blast_furnace[lit=true]"
 
 
@@ -499,8 +501,8 @@ def thermometers(x0, z0):
             put(x, Y, z, plinth)
             for (dx, dz), block in around:
                 put(x + dx, Y, z + dz, block)
-            if kind == "mercury_thermometer" and s >= 3:
-                sign(x, Y, z - 1, "Mercury boils at 357 °C: it would burst here")
+            if kind in BURSTS and s >= BURSTS[kind][0]:
+                sign(x, Y, z - 1, BURSTS[kind][1])
                 continue
             put(x, Y + 1, z, f"fundamentals:{kind}[facing=up]")
             sign(x, Y, z - 1, name(kind))
@@ -561,7 +563,8 @@ def cracking(x, z):
     filtered to it (a pump on the vat drains its input first, so the heavy oil). The vat holds a charge of catalyst, set in
     once and again by refill when it is spent; it gives the catalyst back into its output, and once that lands on a stack
     already there it skips the rest of the recipe's items, so no coke dust. A smart chute takes the returned catalyst and the
-    coke dust down into a chest after every batch; its filter respects data and the charge is marked, so the charge stays."""
+    coke dust down into a chest after every batch; its filter respects data and the charge is marked, so the charge stays.
+    Refill empties each product tank once it is nearly full, so the vat never backs up."""
     vat(x, z, [])
     put(x + 1, Y + 1, z, 'create:smart_chute{Filter:{id:"create:filter",count:1,components:{"create:filter_items":['
         '{slot:0,item:{id:"tfmg:coal_coke_dust",count:1}},{slot:1,item:{id:"fundamentals:lanthanum_oxide",count:1}}],'
@@ -584,6 +587,8 @@ def cracking(x, z):
         put(tx, Y + 1, tz, WALL)
         tank(tx, Y + 2, tz, block="create:fluid_tank")
         label(tx, Y + 1, tz - 1, name(fluid))
+        refills.extend([f"execute store result score #draw showcase run data get block {tx} {Y + 2} {tz} TankContent.Fluid.amount",
+                        f"execute if score #draw showcase matches 6000.. run data remove block {tx} {Y + 2} {tz} TankContent.Fluid"])
         fills.extend([f"setblock {px} {Y + 2} {pz} minecraft:air", f"setblock {px} {Y + 2} {pz} create:mechanical_pump[facing={facing}]"])
     fills.extend([f"setblock {x + 2} {Y + 2} {z + 1} minecraft:air", f"setblock {x + 2} {Y + 2} {z + 1} create:mechanical_pump[facing=west]"])
     sign(x, Y, z - 1, "Fluid catalytic cracking")
