@@ -6,8 +6,12 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Nothing in the chain is for its own sake. Neodymium (or didymium) with iron, ferroboron and a little dysprosium, superheated under 100 mB of argon, melts into NdFeB, the strongest magnet; samarium with cobalt into SmCo, which keeps its field hot. Ferroboron is a borax, an iron and two charcoal, superheated.",
+      "text": "Nothing in the chain is for its own sake. Two neodymium, three iron, a ferroboron and a dysprosium, superheated under 100 mB of argon, melt into four NdFeB, the strongest magnet; samarium with cobalt into SmCo, which keeps its field hot.",
       "title": "What they are for"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Praseodymium or didymium serves as well as neodymium, and terbium holds the field better than dysprosium. A gadolinium for one neodymium makes three instead of four. Ferroboron is a borax, an iron and two charcoal, superheated."
     },
     {
       "type": "patchouli:text",
@@ -15,11 +19,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Lanthanum metal reduces the four that boil, and lanthanum oxide is the catalyst that cracks naphtha. Cerium with iron is ferrocerium, the lighter flint, a flint and steel that never wears out. Europium's red and terbium's green on a yttria host are the phosphor every lamp takes. Yttria lines the fireproof vat."
+      "text": "Lanthanum metal reduces samarium, and lanthanum oxide is the catalyst that cracks naphtha. Cerium with iron is ferrocerium, the lighter flint, a flint and steel that never wears out. Europium's red and terbium's green on a yttria host are the phosphor every lamp takes. Yttria lines the fireproof vat."
     },
     {
       "type": "patchouli:text",
-      "text": "Didymium glass is the welder's lens the goggles are made of. Erbium turns glass pink. Scandium in aluminium is the airframe alloy, and makes a panel rack go twice as far. Gadolinium waits for a reactor."
+      "text": "Didymium glass is the welder's lens the goggles are made of. Erbium turns glass pink. Scandium in aluminium is the airframe alloy, and makes a panel rack go twice as far."
     },
     {
       "type": "patchouli:text",

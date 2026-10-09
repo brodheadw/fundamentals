@@ -15,7 +15,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Ferrochrome is what stainless steel is made from: three ferrochrome, a nickel and six steel, superheated, make ten stainless steel, eighteen per cent chromium and ten nickel. A flare burns in its own flame, so the Factory's flarestack is now built on stainless."
+      "text": "Ferrochrome is what stainless steel is made from: three ferrochrome, a nickel and six steel, superheated, make ten stainless steel, eighteen per cent chromium and ten nickel."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A flare burns in its own flame, so the Factory's flarestack is now built on stainless, and the steel chemical vat is lined with stainless plates where it had nickel."
     },
     {
       "type": "patchouli:text",

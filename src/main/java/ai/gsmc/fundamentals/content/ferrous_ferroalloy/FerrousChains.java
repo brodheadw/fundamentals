@@ -39,8 +39,8 @@ public final class FerrousChains {
 
         ProcessingChainRegistry.register(ProcessingChain.builder("tungsten", "tungsten", FerrousMaterials.GROUP)
                 .step(LEACHING, "wolframite", RAW, "ammonium_paratungstate", DUST)
-                .step(CALCINATION, "ammonium_paratungstate", DUST, "tungsten_trioxide", OXIDE)
-                .step(HYDROGEN_REDUCTION, "tungsten_trioxide", OXIDE, "tungsten", DUST)
+                .step(CALCINATION, "ammonium_paratungstate", DUST, "tungsten", OXIDE)
+                .step(HYDROGEN_REDUCTION, "tungsten", OXIDE, "tungsten", DUST)
                 .build());
 
         // MoS2 -> MoO3 -> metal; the oxide step is skipped for now.

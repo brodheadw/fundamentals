@@ -396,6 +396,18 @@
         ]
       }
     },
+    "fundamentals:raw_thortveitite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_thortveitite"
+            ]
+          }
+        ]
+      }
+    },
     "fundamentals:raw_native_silver": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
@@ -463,6 +475,54 @@
           {
             "items": [
               "fundamentals:raw_cinnabar"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_spodumene": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_spodumene"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_fluorite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_fluorite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_borax": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_borax"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_trona": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_trona"
             ]
           }
         ]

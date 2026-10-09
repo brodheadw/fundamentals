@@ -22,8 +22,20 @@
     {
       "type": "patchouli:spotlight",
       "item": "fundamentals:monazite_residue_dust",
-      "text": "Monazite carries thorium. When the light concentrate dissolves, the thorium stays behind as a residue, mildly radioactive and good for nothing here. Nine pack into a block; cast it and bury it deep, away from where you live. Bastnäsite and the clay leave none.",
+      "text": "Monazite carries thorium. When the light concentrate dissolves, the thorium stays behind as a residue, mildly radioactive. Nine pack into a block; cast it and bury it deep, away from where you live. Bastnäsite and the clay leave none.",
       "title": "Residue"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:gas_mantle",
+      "text": "Thorium was the rare earth industry's first product. A residue and 250 mB of nitric acid, heated, give a thorium nitrate. Four nitrate, a cerium oxide and four string, heated, give four gas mantles: Welsbach's thoria, glowing white in a gas flame. The Factory's gas lamp burns one.",
+      "title": "The gas mantle"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:clarifier_sludge_block",
+      "text": "The clarifier's sludge is the iron, aluminium and thorium the lime throws down as hydroxides. Nine pack into a block of tailings, for the dam.",
+      "title": "Tailings"
     }
   ]
 }
