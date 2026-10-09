@@ -1,0 +1,14 @@
+{
+  "type": "create:sandpaper_polishing",
+  "ingredients": [
+    {
+      "item": "fundamentals:rusty_steel_ingot"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:steel_nugget",
+      "count": 7
+    }
+  ]
+}

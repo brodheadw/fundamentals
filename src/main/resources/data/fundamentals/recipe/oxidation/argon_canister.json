@@ -1,0 +1,18 @@
+{
+  "type": "create:filling",
+  "ingredients": [
+    {
+      "item": "fundamentals:canister"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 100,
+      "fluid": "fundamentals:argon"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:argon_canister"
+    }
+  ]
+}

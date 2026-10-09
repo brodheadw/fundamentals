@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "fundamentals:argentite_ore",
+    "fundamentals:blackened_silver_block",
+    "fundamentals:dulled_silver_block",
     "fundamentals:lead_bullion_ingot",
     "fundamentals:native_silver_ore",
     "fundamentals:raw_argentite",
@@ -10,6 +12,11 @@
     "fundamentals:silver_ingot",
     "fundamentals:silver_nugget",
     "fundamentals:silver_plate",
-    "fundamentals:silver_zinc_crust"
+    "fundamentals:silver_zinc_crust",
+    "fundamentals:tarnished_silver_block",
+    "fundamentals:waxed_blackened_silver_block",
+    "fundamentals:waxed_dulled_silver_block",
+    "fundamentals:waxed_silver_block",
+    "fundamentals:waxed_tarnished_silver_block"
   ]
 }

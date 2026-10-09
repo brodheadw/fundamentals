@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "N",
+    "S",
+    "S"
+  ],
+  "key": {
+    "N": {
+      "tag": "c:nuggets/brass"
+    },
+    "S": {
+      "tag": "c:plates/iron"
+    }
+  },
+  "result": {
+    "id": "fundamentals:canister",
+    "count": 2
+  }
+}
