@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=north": {
       "model": "fundamentals:block/inert_storage_drum"
+    },
+    "facing=east": {
+      "model": "fundamentals:block/inert_storage_drum",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "fundamentals:block/inert_storage_drum",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "fundamentals:block/inert_storage_drum",
+      "y": 270
     }
   }
 }

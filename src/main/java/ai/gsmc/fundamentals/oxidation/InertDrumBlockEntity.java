@@ -1,6 +1,8 @@
 package ai.gsmc.fundamentals.oxidation;
 
 import ai.gsmc.fundamentals.separation.Separation;
+import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -8,6 +10,9 @@ import net.minecraft.core.NonNullList;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.ContainerHelper;
@@ -24,6 +29,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 /**
  * A steel drum that holds a chest's worth of items under a blanket of argon, or under kerosene. Nothing in it ages while it is
@@ -31,13 +37,14 @@ import javax.annotation.Nullable;
  * let in; kerosene stays. Nothing ticks: the contents are aged, and the gas drawn down, whenever the drum is opened, piped into
  * or emptied.
  */
-public class InertDrumBlockEntity extends BaseContainerBlockEntity {
+public class InertDrumBlockEntity extends BaseContainerBlockEntity implements IHaveGoggleInformation {
 
     public static final int CAPACITY = 1000;
     /** Ten millibuckets of argon a day through the seals. */
     public static final int TICKS_PER_MB = 2400;
     /** What a lid's worth of air costs to flush back out. */
     public static final int VENT = 25;
+    private static final long DAY = 24000;
     private static final TagKey<Fluid> KEROSENE = TagKey.create(Registries.FLUID, ResourceLocation.parse("c:kerosene"));
 
     private static final long UNSET = Long.MIN_VALUE;
@@ -148,6 +155,61 @@ public class InertDrumBlockEntity extends BaseContainerBlockEntity {
         if (argon()) {
             tank.lose(VENT);
         }
+    }
+
+    /** The gas there is now, by the clocks alone: what goggles read on the client, where nothing settles. */
+    public int gasAt(long now) {
+        if (!argon() || leakSince == UNSET) {
+            return tank.getFluidAmount();
+        }
+        return (int) Math.max(0, tank.getFluidAmount() - (now - leakSince) / TICKS_PER_MB);
+    }
+
+    @Override
+    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+        String key = "goggles.fundamentals.inert_storage_drum.";
+        int gas = level == null ? tank.getFluidAmount() : gasAt(level.getGameTime());
+        tooltip.add(indent(getBlockState().getBlock().getName().withStyle(ChatFormatting.GRAY)));
+        if (gas == 0) {
+            tooltip.add(indent(Component.translatable(key + "no_gas").withStyle(ChatFormatting.GOLD)));
+        } else if (argon()) {
+            tooltip.add(indent(Component.translatable(key + "argon", gas, tank.getFluid().getHoverName(), DAY / TICKS_PER_MB)));
+        } else {
+            tooltip.add(indent(Component.translatable(key + "kerosene", gas, tank.getFluid().getHoverName())));
+        }
+        int stacks = 0, count = 0;
+        for (ItemStack stack : items) {
+            if (!stack.isEmpty()) {
+                stacks++;
+                count += stack.getCount();
+            }
+        }
+        tooltip.add(indent(Component.translatable(key + "holds", stacks, items.size(), count)));
+        tooltip.add(indent(gas == 0 ? Component.translatable(key + "ageing").withStyle(ChatFormatting.RED)
+                : Component.translatable(key + "kept").withStyle(ChatFormatting.DARK_GREEN)));
+        return true;
+    }
+
+    private static Component indent(Component text) {
+        return Component.literal("    ").append(text);
+    }
+
+    @Override
+    public void setChanged() {
+        super.setChanged();
+        if (level != null && !level.isClientSide) {
+            level.sendBlockUpdated(worldPosition, getBlockState(), getBlockState(), 3);
+        }
+    }
+
+    @Override
+    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+        return saveWithoutMetadata(registries);
+    }
+
+    @Override
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
     }
 
     public Component reading() {
