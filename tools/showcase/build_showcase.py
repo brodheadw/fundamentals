@@ -2,8 +2,8 @@
 """Writes the showcase datapack's functions: the whole separation tree, read from the cut recipes, laid out as
 batteries on a flat world. The root battery parts the mixed liquor; each product is either the feed of the next
 battery (piped north to it) or a single element, which gets a station that precipitates the oxalate, smelts it and
-sets the oxide on a depot. Every battery has its mixers, lever, organic feed, acid feed, sump drain and side tanks,
-every end tank is filled and refilled, and the whole plant is force-loaded so it runs while you walk it.
+sets the oxide on a depot; neodymium and dysprosium go on to metal in a vat north of their stations. Every battery has
+its mixers, lever, organic feed, acid feed, sump drain and side tanks, every end tank is filled and refilled, and the whole plant is force-loaded so it runs while you walk it.
 
     python3 tools/showcase/build_showcase.py
 
@@ -168,6 +168,75 @@ def station(x, z):
     put(x, Y, z - 4, "create:depot")
 
 
+def stocked(x, y, z, item):
+    """A chest of 27 stacks of one thing, restocked by refill once it is empty."""
+    items = "{Items:[" + ",".join(f'{{Slot:{i}b,id:"fundamentals:{item}",count:64}}' for i in range(27)) + "]}"
+    put(x, y, z, "minecraft:chest[facing=north]" + items)
+    refills.append(f"execute unless data block {x} {y} {z} Items[0] run data merge block {x} {y} {z} {items}")
+
+
+def feed(x, y, z, item):
+    """A hopper pouring one thing down into the vat under it from a stocked chest on top. One thing per hopper: a hopper
+    full of one item never lets a second through."""
+    put(x, y, z, "minecraft:hopper[facing=down]")
+    stocked(x, y + 1, z, item)
+
+
+def vat(x, z, outputs):
+    """A 2x2 firebrick-lined TFMG vat at y Y+2, its north-west corner at (x, z), and what it stands on. A vat forms its
+    multiblock only when its block entity is marked Uninitialized (setblock places the block before its entity exists, so
+    the placement hook finds nothing), and only the north-west corner may be marked: mark all four and one is left out as a
+    lone vat of size 0 that takes no fluid. That corner is the controller. It reads heat from every block under it and adds
+    them up: a seething blaze burner gives 2, so two creative ones make the 4 that superheated needs, which no 1x1 vat can
+    reach. It runs a recipe only when its attachments (electrode holders, an industrial mixer, anything from one below to
+    one above it) are exactly the recipe's machines, and stops once a product would pass 64 in its output slots. A hopper
+    fills those output slots too once an input stack is full. Its items come out from any side through any extractor,
+    inputs first, so a smart chute filtered to one product pulls it down into a chest (a depot takes one insert and then
+    refuses the next)."""
+    for dx in range(2):
+        for dz in range(2):
+            put(x + dx, Y + 2, z + dz, "tfmg:fireproof_chemical_vat" + ("{Uninitialized:1b}" if dx == dz == 0 else ""))
+    for dx, dz in ((0, 0), (1, 1)):
+        put(x + dx, Y, z + dz, "tfmg:fireproof_bricks")
+        put(x + dx, Y + 1, z + dz, "create:blaze_burner[blaze=seething]{isCreative:1b}")
+    for (dx, dz), item in outputs:
+        put(x + dx, Y + 1, z + dz, f'create:smart_chute{{Filter:{{id:"fundamentals:{item}",count:1}}}}')
+        put(x + dx, Y, z + dz, "minecraft:chest[facing=west]")
+
+
+def electrolysis_cell(x, z, metal):
+    """Fluoride-melt electrolysis north of the oxide station at (x, z): two electrode holders on the vat, each holding a
+    copper electrode and powered from a creative generator straight above it (a holder takes power only from above, and the
+    generators sit on the diagonal so they make two networks); 500 V across an electrode's 10 ohms is 50 A, past the
+    5 A an electrolyser needs. The oxide is hoppered in; the fluoride comes back 9 times in 10 and is set in the vat once,
+    since a hopper would top its output slot past 64 and stop the vat."""
+    vat(x, z - 8, [((1, 0), f"{metal}_ingot")])
+    for dx, dz in ((0, 0), (1, 1)):
+        put(x + dx, Y + 3, z - 8 + dz, 'tfmg:electrode_holder{Electrode:"tfmg:copper"}')
+        put(x + dx, Y + 4, z - 8 + dz, "tfmg:creative_generator")
+    feed(x + 1, Y + 3, z - 8, f"{metal}_oxide")
+    fills.append(f'data merge block {x} {Y + 2} {z - 8} {{InputItems:{{Size:4,Items:[{{Slot:0b,id:"fundamentals:{metal}_fluoride",count:64}}]}}}}')
+
+
+def reduction_cell(x, z, metal):
+    """Calciothermic reduction north of the oxide station at (x, z): an industrial mixer with a mixer blade on the vat
+    (driven from above at 64 rpm; it needs 30), the fluoride and the calcium each hoppered in, argon pumped in from the
+    east; the metal and the fluorite each into a chest. The vat joins its corners into one without telling its neighbours,
+    so a pump placed with it keeps pushing into the corner as it was, takes a sip and stops: fill places the pump again
+    once the vat has formed."""
+    vat(x, z - 8, [((1, 0), f"{metal}_ingot"), ((0, 1), "raw_fluorite")])
+    put(x, Y + 3, z - 8, 'tfmg:industrial_mixer{MixerMode:"mixing"}')
+    put(x, Y + 4, z - 8, f"create:creative_motor[facing=down]{MOTOR}")
+    feed(x + 1, Y + 3, z - 8, f"{metal}_fluoride")
+    feed(x, Y + 3, z - 7, "calcium_ingot")
+    tank(x + 3, Y + 2, z - 7, "argon", block="create:fluid_tank")
+    pump(x + 2, Y + 2, z - 7, "west", "x", (x + 3, Y + 3, z - 7), "west", "create:mechanical_pump")
+    fills.extend([f"setblock {x + 2} {Y + 2} {z - 7} minecraft:air", f"setblock {x + 2} {Y + 2} {z - 7} create:mechanical_pump[facing=west]"])
+
+
+CELLS = {"neodymium_liquor": electrolysis_cell, "dysprosium_liquor": reduction_cell}
+
+
 def place(liquor, x0, z0):
     light_x, heavy_px = battery(liquor, x0, z0)
     if liquor in TAPS:
@@ -181,6 +250,8 @@ def place(liquor, x0, z0):
             place(product, cx, z0 - ROW)
         else:
             station(px, z0 - 2)
+            if product in CELLS:
+                CELLS[product](px, z0 - 2, product.removesuffix("_liquor"))
 
 
 def main():
