@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "fundamentals:item/aged/magnesium_ingot_3"
+  }
+}
