@@ -41,12 +41,21 @@ What's agreed but not built, in the order it's likely to go. The working plan be
   leach folds into the roast, the dichromate step makes no sodium sulfate, and electrolytic chromium is not modelled.
   UG2 chromite carries the platinum metals, which should come off the wash into the platinum group concentrate.
 
+- **Titanium loose ends.** Ilmenite smelts in a superheated basin rather than the Factory's arc furnace (the same yttria wait as
+  ferrochrome), and the cast iron it gives is not the high-purity pig iron Sorel sells. Chlorination makes no CO, CO2 or ferric
+  chloride and the tetrachloride's distillation folds into it; the chloride process burns it in air, not oxygen. The sulfate
+  pigment route, the Becher and synthetic-rutile upgrades, and leucoxene are not modelled. Magnesium has no Pidgeon route
+  (dolomite and ferrosilicon are not in the mod) and no sink of its own beyond the Kroll loop.
+- **Titanium plant tier.** Titanium shrugs off wet chlorine and chloride brines, which is why chlor-alkali and desalination
+  plants pipe them in it. A titanium pipe and tank that the liquors and acids (but not hydrofluoric) cannot corrode would be
+  the metal's natural sink, but it means new pipe and tank blocks; the plastic tank covers the need for now.
+
 ## Reagents
 
 - **Phosphoric acid has no sink** now that the extractants are made from phosphorus trichloride. Its real ones are
   fertiliser and phosphating steel; the old route to phosphorus, phosphoric acid distilled with charcoal, is another.
 - **White phosphorus** ignites in air at about 30 °C and is kept under water. It is an inert item for now.
-- **Chlorine and phosphorus trichloride** are pipe-only fluids, so they neither fume nor poison. If they ever stand in
+- **Chlorine, phosphorus trichloride and titanium tetrachloride** are pipe-only fluids, so they neither fume nor poison. If they ever stand in
   the world they belong with hydrofluoric and nitric acid in the fume handling.
 
 ## Pack and tooling

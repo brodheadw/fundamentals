@@ -70,7 +70,8 @@ public final class Reagents {
             new Reagent("ethylhexanol", 0xEEEEE6, Kind.PRECURSOR),
             new Reagent("phosphorus_trichloride", 0xECF0EC, Kind.PRECURSOR),
             new Reagent("d2ehpa", 0xF0E4B0, Kind.PRECURSOR),
-            new Reagent("ehehpa", 0xF2EAC4, Kind.PRECURSOR));
+            new Reagent("ehehpa", 0xF2EAC4, Kind.PRECURSOR),
+            new Reagent("titanium_tetrachloride", 0xEEF0EA, Kind.PRECURSOR));
 
     private Reagents() {}
 }

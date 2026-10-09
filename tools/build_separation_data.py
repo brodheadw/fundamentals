@@ -102,6 +102,8 @@ PRECURSORS = {
     "phosphorus_trichloride": ("Phosphorus Trichloride", 0xECF0EC),
     "d2ehpa": ("D2EHPA", 0xF0E4B0),
     "ehehpa": ("EHEHPA", 0xF2EAC4),
+    # colourless like phosphorus trichloride, and like it fuming to hydrogen chloride in moist air but harmless to dry steel
+    "titanium_tetrachloride": ("Titanium Tetrachloride", 0xEEF0EA),
 }
 GASES = {
     "argon": ("Argon", 0xC8D8F0),

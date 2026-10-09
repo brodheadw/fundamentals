@@ -43,6 +43,8 @@ INGOT = ("ingot",)
 PGM = ("sponge", "ingot", "nugget")
 TIN = ("ingot", "nugget", "block")
 BRONZE = ("ingot", "nugget", "plate", "block")
+# Titanium too comes out of its retort as a sponge, and its oxide is the white pigment.
+TITANIUM = ("oxide", "sponge", "ingot", "plate")
 
 WHITE = ((150, 150, 148), (206, 206, 204), (236, 236, 234), (255, 255, 255))
 
@@ -99,6 +101,9 @@ METAL = {
     "chromium": ((90, 100, 118), (158, 172, 194), (210, 222, 240), (248, 252, 255)),
     "ferrochrome": ((56, 58, 62), (104, 106, 112), (146, 148, 154), (192, 194, 200)),
     "stainless_steel": ((96, 100, 104), (164, 168, 172), (212, 216, 220), (250, 251, 252)),
+    # titanium is a darker, warmer grey than steel; magnesium the whitest of the light metals
+    "titanium": ((76, 76, 80), (136, 136, 140), (186, 186, 190), (232, 232, 234)),
+    "magnesium": ((116, 118, 122), (190, 192, 196), (232, 234, 236), (255, 255, 255)),
     # platinum, palladium and rhodium are white metals, rhodium the brightest; ruthenium greyer; iridium and osmium lean blue
     "platinum": ((96, 98, 104), (166, 170, 178), (214, 218, 224), (250, 251, 253)),
     "palladium": ((102, 100, 96), (172, 170, 164), (218, 216, 210), (252, 251, 248)),
@@ -137,6 +142,8 @@ OXIDE["molybdenum"] = ((160, 156, 118), (218, 214, 170), (240, 238, 204), (254, 
 OXIDE["tungsten"] = ((150, 140, 60), (208, 196, 96), (236, 226, 140), (252, 246, 196))
 # chromium(III) oxide is the green of chrome oxide green
 OXIDE["chromium"] = ((34, 66, 32), (66, 108, 54), (102, 144, 80), (150, 184, 120))
+# titanium dioxide is the whitest pigment there is, whiter than the other white oxides
+OXIDE["titanium"] = ((176, 178, 180), (228, 229, 230), (247, 247, 248), (255, 255, 255))
 
 # Ground, a mineral shows its streak: chromite is black in the rock and brown as powder.
 STREAK = {"chromite": ((34, 24, 18), (64, 48, 36), (94, 72, 54), (132, 106, 82))}
@@ -187,6 +194,7 @@ MATERIALS = {
     "cobalt": COBALT, "molybdenum": MOLYBDENUM, "rhenium": RHENIUM, "superalloy": STRUCTURAL, "molybdenum_steel": STRUCTURAL,
     "tungsten": TUNGSTEN, "copper_matte": MATTE, "blister_copper": BLISTER,
     "chromite": GROUND_MINERAL, "chromium": CHROMIUM, "ferrochrome": INGOT, "stainless_steel": INGOT,
+    "titanium": TITANIUM, "magnesium": INGOT,
     "nickel_matte": MATTE, "converter_matte": MATTE, "platinum_group_concentrate": CONCENTRATE,
     "platinum": PGM, "palladium": PGM, "rhodium": PGM, "ruthenium": PGM, "iridium": PGM, "osmium": PGM,
     "tin_concentrate": CONCENTRATE, "crude_tin": INGOT, "tin": TIN, "bronze": BRONZE,

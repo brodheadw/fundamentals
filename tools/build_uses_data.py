@@ -24,7 +24,8 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "copper_calcine": "Copper Calcine", "zinc_oxide": "Zinc Oxide", "roasted_pentlandite": "Roasted Pentlandite",
          "lithium_chloride": "Lithium Chloride", "ferroboron": "Ferroboron",
          "soda_ash": "Soda Ash", "sodium_chromate": "Sodium Chromate", "sodium_dichromate": "Sodium Dichromate", "aluminium_powder": "Aluminium Powder",
-         "roasted_tin_concentrate": "Roasted Tin Concentrate", "solder": "Solder"}
+         "roasted_tin_concentrate": "Roasted Tin Concentrate", "solder": "Solder",
+         "titania_slag": "Titania Slag", "magnesium_chloride": "Magnesium Chloride"}
 # The platinum refinery's items, registered by uses.PlatinumMetals in this order.
 PGM_ITEMS = {"ammonium_chloride": "Ammonium Chloride", "insoluble_residue": "Insoluble Residue", "iridium_rhodium_residue": "Iridium-Rhodium Residue",
              "ammonium_chloroplatinate": "Ammonium Chloroplatinate", "dichlorodiammine_palladium": "Dichlorodiammine Palladium",
@@ -372,6 +373,34 @@ def chromium():
                                              "result": result("minecraft:green_dye", 2)})
 
 
+def titanium():
+    """Ilmenite is smelted with coke in an electric furnace at about 1,650 °C, as at Sorel and Richards Bay: the iron runs off as
+    pig iron and the titanium stays in a slag of 80 to 90 per cent TiO2. Rutile is 95 per cent TiO2 already. Either is chlorinated
+    with coke at about 1,000 °C to titanium tetrachloride, which boils at 136 °C and is distilled off. Molten magnesium under argon
+    reduces it in a steel retort at 800 to 850 °C to a sponge of titanium and magnesium chloride (Kroll), and the chloride is
+    electrolysed back to magnesium and chlorine for the next batch. The first magnesium comes the Dow way, from sea water, lime and
+    hydrochloric acid. Titanium melts at 1,668 °C and takes oxygen and nitrogen from the air hot, so the sponge is arc-melted under
+    vacuum, argon here. Nine tenths of the world's titanium never becomes metal but white pigment: the tetrachloride burnt in oxygen gives
+    pure TiO2 and its chlorine back (the chloride process). The metal's place is where strength for its weight counts, the compressor
+    of a gas turbine; the Factory's turbine engine built on titanium plate goes twice as far."""
+    electrodes = ("tfmg:electrode", "tfmg:electrode")
+    mixing("titania_slag", item("raw_ilmenite", 4) + item("tfmg:coal_coke"), [result("titania_slag", 2), result("tfmg:cast_iron_ingot")], "superheated")
+    for feed in ("raw_rutile", "titania_slag"):
+        mixing(f"titanium_tetrachloride_from_{feed.removeprefix('raw_')}", item(feed, 2) + item("tfmg:coal_coke") + [fluid("chlorine", 1000)],
+               [out_fluid("titanium_tetrachloride", 500)], "heated")
+    mixing("magnesium_chloride", [fluid("minecraft:water", 1000), fluid("hydrochloric_acid", 250)] + item("tfmg:limesand"), [result("magnesium_chloride")], "heated")
+    pgm_vat("magnesium_ingot", item("magnesium_chloride", 2), [result("magnesium_ingot", 2), out_fluid("chlorine", 500)], machines=electrodes, folder=USES)
+    pgm_vat("titanium_sponge", item("magnesium_ingot", 4) + [fluid("titanium_tetrachloride", 500)] + argon(),
+            [result("titanium_sponge", 2), result("magnesium_chloride", 4)], folder=USES)
+    pgm_vat("titanium_ingot", item("titanium_sponge", 2) + argon(), [result("titanium_ingot", 2)], machines=electrodes, heat="superheated", folder=USES)
+    mixing("titanium_oxide", [fluid("titanium_tetrachloride", 250), fluid("tfmg:air", 1000)], [result("titanium_oxide"), out_fluid("chlorine", 500)], "heated")
+    write(USES / "titanium_white.json", {"type": "minecraft:crafting_shapeless", "category": "misc", "ingredients": item("titanium_oxide"),
+                                         "result": result("minecraft:white_dye", 4)})
+    shaped(USES / "turbine_engine_from_titanium.json", ["OOO", "PHP", "OOO"],
+           {"H": {"item": "tfmg:heavy_machinery_casing"}, "O": {"tag": "c:plates/titanium"}, "P": {"item": "tfmg:aluminum_pipe"}},
+           {"count": 4, "id": "tfmg:turbine_engine"})
+
+
 def fluid(id, amount):
     return {"type": "neoforge:single", "amount": amount, "fluid": id if ":" in id else f"fundamentals:{id}"}
 
@@ -523,6 +552,7 @@ def main():
     tungsten()
     more_sinks()
     chromium()
+    titanium()
     platinum_feeds()
     platinum_refinery()
     platinum_sinks()
