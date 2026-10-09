@@ -2,7 +2,12 @@ package ai.gsmc.fundamentals.uses;
 
 import ai.gsmc.fundamentals.Fundamentals;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.MapColor;
 
 import java.util.List;
 import java.util.function.BiConsumer;
@@ -14,7 +19,8 @@ import java.util.function.BiConsumer;
  * the magnets take their boron as, the soda ash, sodium salts and aluminium powder of the road to chromium, the roasted tin
  * concentrate the bloomery smelts, the solder circuit boards are joined with, the titania slag ilmenite smelts to, the
  * magnesium chloride magnesium is won from and the Kroll process gives back, and the zinc crust the Parkes process skims
- * the silver off lead bullion in and the litharge cupellation leaves. The recipes
+ * the silver off lead bullion in and the litharge cupellation leaves, the thorium nitrate a gas mantle is soaked in and the mantle,
+ * and the block the clarifier's sludge is packed into. The recipes
  * are written by tools/build_uses_data.py.
  */
 public final class Uses {
@@ -42,13 +48,22 @@ public final class Uses {
     private static Item magnesiumChloride;
     private static Item silverZincCrust;
     private static Item litharge;
+    private static Item thoriumNitrate;
+    private static Item gasMantle;
+    private static Block sludgeBlock;
+    private static Item sludgeBlockItem;
 
     private Uses() {}
 
     public static List<Item> items() {
         return List.of(phosphor, didymiumGlass, roastedCobaltite, roastedChalcopyrite, rheniumFlueDust, tungstenCarbide, tungstenFilament, clarifierSludge,
                 copperCalcine, zincOxide, roastedPentlandite, lithiumChloride, ferroboron, sodaAsh, sodiumChromate, sodiumDichromate,
-                aluminiumPowder, roastedTinConcentrate, solder, titaniaSlag, magnesiumChloride, silverZincCrust, litharge);
+                aluminiumPowder, roastedTinConcentrate, solder, titaniaSlag, magnesiumChloride, silverZincCrust, litharge, thoriumNitrate, gasMantle, sludgeBlockItem);
+    }
+
+    public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
+        registry.accept(id("clarifier_sludge_block"), sludgeBlock = new Block(BlockBehaviour.Properties.of().mapColor(MapColor.DIRT)
+                .strength(0.8F).sound(SoundType.MUD)));
     }
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
@@ -75,6 +90,9 @@ public final class Uses {
         registry.accept(id("magnesium_chloride"), magnesiumChloride = new Item(new Item.Properties()));
         registry.accept(id("silver_zinc_crust"), silverZincCrust = new Item(new Item.Properties()));
         registry.accept(id("litharge"), litharge = new Item(new Item.Properties()));
+        registry.accept(id("thorium_nitrate"), thoriumNitrate = new Item(new Item.Properties()));
+        registry.accept(id("gas_mantle"), gasMantle = new Item(new Item.Properties()));
+        registry.accept(id("clarifier_sludge_block"), sludgeBlockItem = new BlockItem(sludgeBlock, new Item.Properties()));
     }
 
     private static ResourceLocation id(String path) {

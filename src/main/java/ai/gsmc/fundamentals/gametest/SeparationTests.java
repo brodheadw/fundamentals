@@ -433,10 +433,12 @@ public class SeparationTests {
     @GameTest(template = "empty")
     public void everyRareEarthMetalHasARouteFromItsOxide(GameTestHelper helper) {
         var recipes = helper.getLevel().getRecipeManager();
-        for (String element : List.of("lanthanum", "cerium", "praseodymium", "neodymium", "didymium", "gadolinium", "terbium", "dysprosium",
-                "holmium", "erbium", "lutetium", "yttrium", "samarium", "europium", "thulium", "ytterbium")) {
+        List<String> metals = List.of("lanthanum", "cerium", "praseodymium", "neodymium", "didymium", "gadolinium", "terbium", "dysprosium", "yttrium", "samarium");
+        for (String element : metals) {
             helper.assertTrue(recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "reduction/" + element + "_ingot")).isPresent(),
                     element + " has no reduction to metal");
+        }
+        for (String element : Stream.concat(metals.stream(), Stream.of("europium", "holmium", "erbium", "thulium", "ytterbium", "lutetium")).toList()) {
             helper.assertTrue(recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "calcining/" + element + "_oxide"))
                     .filter(r -> r.value().getType() == net.minecraft.world.item.crafting.RecipeType.BLASTING).isPresent(), element + " has no blast-furnace calcining to oxide");
         }

@@ -5,34 +5,25 @@
       "item": "fundamentals:scandium_fluoride"
     },
     {
-      "tag": "c:ingots/aluminum"
+      "tag": "c:storage_blocks/aluminum"
     },
     {
-      "tag": "c:ingots/aluminum"
+      "tag": "c:storage_blocks/aluminum"
     },
     {
-      "tag": "c:ingots/aluminum"
+      "tag": "c:storage_blocks/aluminum"
     },
     {
-      "tag": "c:ingots/aluminum"
-    },
-    {
-      "tag": "c:ingots/aluminum"
-    },
-    {
-      "tag": "c:ingots/aluminum"
-    },
-    {
-      "tag": "c:ingots/aluminum"
+      "tag": "c:storage_blocks/aluminum"
     }
   ],
   "results": [
     {
-      "id": "fundamentals:aluminium_scandium_ingot",
-      "count": 7
+      "id": "fundamentals:aluminium_scandium_block",
+      "count": 4
     },
     {
-      "id": "fundamentals:slag"
+      "id": "tfmg:slag"
     }
   ],
   "heat_requirement": "superheated"

@@ -134,11 +134,12 @@ FLUIDS = {**{k: (*v, "LIQUOR") for k, v in {**LIQUORS, **PLATINUM_LIQUORS}.items
 
 # Oxide to metal. The lights and the heavies go through their fluoride: the lights by molten-salt
 # electrolysis on TFMG's electrodes, the heavies by calciothermic reduction under argon, which gives the
-# fluorite back as slag. The volatile four are reduced straight from the oxide by lanthanum metal under
-# argon and distil off, leaving lanthanum oxide to go round again.
+# fluorite back as slag. Samarium, which boils, is reduced straight from the oxide by lanthanum metal under
+# argon and distils off, leaving lanthanum oxide to go round again. Europium and the heavies past dysprosium
+# are sold as oxide and never reduced.
 ELECTROLYSIS = ("lanthanum", "cerium", "praseodymium", "neodymium", "didymium")
-CALCIOTHERMIC = ("gadolinium", "terbium", "dysprosium", "holmium", "erbium", "lutetium", "yttrium", "scandium")
-LANTHANOTHERMIC = ("samarium", "europium", "thulium", "ytterbium")
+CALCIOTHERMIC = ("gadolinium", "terbium", "dysprosium", "yttrium", "scandium")
+LANTHANOTHERMIC = ("samarium",)
 # which liquor precipitates each element's oxalate; everything else is its own name
 OXALATE_FROM = {"didymium": "praseodymium_neodymium_liquor"}
 
@@ -381,7 +382,7 @@ def solvents():
     # White phosphorus from the electric furnace: phosphate (bone, as for the acid), coke and silica at 1,500 C on electrodes,
     # the phosphorus distilling off and the lime running out as slag.
     chem("white_phosphorus", item("minecraft:bone_meal", 2) + [item("tfmg:coal_coke"), {"tag": "c:sands/colorless"}],
-         [result_item("white_phosphorus"), result_item("slag")], machines=("tfmg:electrode", "tfmg:electrode"), heated="superheated")
+         [result_item("white_phosphorus"), {"id": "tfmg:slag"}], machines=("tfmg:electrode", "tfmg:electrode"), heated="superheated")
     # Chlorine as Scheele found it, hydrochloric acid on pyrolusite, the manganese staying behind as its chloride. The
     # molten-chloride electrolyses give it off too.
     mixing("chlorine", [item("raw_pyrolusite"), fluid(STRIP, 1000)], [result_fluid("chlorine", 250)], heated=True)

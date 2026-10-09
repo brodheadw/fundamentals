@@ -8,11 +8,11 @@ import json
 import shutil
 
 from build_ore_data import ASSETS, DATA, ORES, write
-from paint_materials import ELEMENT, MAGNET_ELEMENT, MATERIALS
+from paint_materials import MATERIALS
 
 OUT = DATA / "advancement"
 RAW = [f"fundamentals:raw_{mineral}" for mineral in ORES]
-RARE_EARTHS = [name for name, forms in MATERIALS.items() if forms in (ELEMENT, MAGNET_ELEMENT) and name != "didymium"]
+RARE_EARTHS = [name for name, forms in MATERIALS.items() if "oxalate" in forms and name != "didymium"]
 GRINDING = sorted(f"fundamentals:grinding/{p.stem}" for p in (DATA / "recipe/grinding").glob("*.json"))
 
 
@@ -34,9 +34,9 @@ ADVANCEMENTS = {
     "concentrate": ("root", "heavy_rare_earth_concentrate", "task", "Heavy Sand",
                     "Wash a rare earth mineral down to a mixed concentrate",
                     {"concentrate": have("fundamentals:light_rare_earth_concentrate", "fundamentals:heavy_rare_earth_concentrate")}, False),
-    "rare_earths": ("concentrate", "neodymium_ingot", "challenge", "Sixteen of Seventeen",
-                    "Hold an ingot of every rare earth. Promethium doesn't count: there isn't any",
-                    {name: have(f"fundamentals:{name}_ingot") for name in RARE_EARTHS}, False),
+    "rare_earths": ("concentrate", "neodymium_oxide", "challenge", "Sixteen of Seventeen",
+                    "Hold the oxide of every rare earth, the form they trade in. Promethium doesn't count: there isn't any",
+                    {name: have(f"fundamentals:{name}_oxide") for name in RARE_EARTHS}, False),
     "magnet": ("concentrate", "neodymium_iron_boron_ingot", "goal", "Permanent",
                "Alloy a rare earth magnet: neodymium-iron-boron or samarium-cobalt",
                {"magnet": have("fundamentals:neodymium_iron_boron_ingot", "fundamentals:samarium_cobalt_ingot")}, False),

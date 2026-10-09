@@ -2,13 +2,13 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "fundamentals:neodymium_ingot"
+      "tag": "fundamentals:magnet_light_rare_earths"
     },
     {
-      "item": "fundamentals:neodymium_ingot"
+      "tag": "fundamentals:magnet_light_rare_earths"
     },
     {
-      "item": "fundamentals:dysprosium_ingot"
+      "tag": "fundamentals:magnet_heavy_rare_earths"
     },
     {
       "tag": "c:ingots/iron"

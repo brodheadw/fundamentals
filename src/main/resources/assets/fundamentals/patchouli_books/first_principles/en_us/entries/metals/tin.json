@@ -28,8 +28,12 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Three copper and a tin, heated, make four bronze, the first alloy and still the metal of bells: Create's peculiar bell is cast in it, and five bronze ingots under a stick make a bell. A tin and a lead, heated, make eight solder, and every loop of the Factory's circuit board assembly now solders its parts down.",
+      "text": "Three copper and a tin, heated, make four bronze, the first alloy and still the metal of bells: Create's peculiar bell is cast in it, and five bronze ingots under a stick make a bell. A plain bearing is a bronze bush, so Create's mechanical bearing takes two bronze plates.",
       "title": "Bronze and solder"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A tin and a lead, heated, make eight solder, and every loop of the Factory's circuit board assembly now solders its parts down."
     }
   ]
 }

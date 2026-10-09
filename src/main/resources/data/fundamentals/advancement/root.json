@@ -53,12 +53,17 @@
               "fundamentals:raw_ion_adsorption_clay",
               "fundamentals:raw_loparite",
               "fundamentals:raw_euxenite",
+              "fundamentals:raw_thortveitite",
               "fundamentals:raw_native_silver",
               "fundamentals:raw_argentite",
               "fundamentals:raw_sperrylite",
               "fundamentals:raw_cooperite",
               "fundamentals:raw_braggite",
-              "fundamentals:raw_cinnabar"
+              "fundamentals:raw_cinnabar",
+              "fundamentals:raw_spodumene",
+              "fundamentals:raw_fluorite",
+              "fundamentals:raw_borax",
+              "fundamentals:raw_trona"
             ]
           }
         ]

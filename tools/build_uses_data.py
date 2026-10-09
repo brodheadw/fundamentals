@@ -11,7 +11,7 @@ under data/<mod>/, which replaces theirs.
 import json
 import shutil
 
-from build_ore_data import ASSETS, DATA, write
+from build_ore_data import ASSETS, DATA, cube, drop_self, write
 
 USES = DATA / "recipe/uses"
 TFMG = DATA.parent / "tfmg/recipe"
@@ -26,7 +26,10 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "soda_ash": "Soda Ash", "sodium_chromate": "Sodium Chromate", "sodium_dichromate": "Sodium Dichromate", "aluminium_powder": "Aluminium Powder",
          "roasted_tin_concentrate": "Roasted Tin Concentrate", "solder": "Solder",
          "titania_slag": "Titania Slag", "magnesium_chloride": "Magnesium Chloride",
-         "silver_zinc_crust": "Silver-Zinc Crust", "litharge": "Litharge"}
+         "silver_zinc_crust": "Silver-Zinc Crust", "litharge": "Litharge",
+         "thorium_nitrate": "Thorium Nitrate", "gas_mantle": "Gas Mantle"}
+# the blocks of ours that are not a form of a material: name -> display
+BLOCKS = {"clarifier_sludge_block": "Clarifier Tailings"}
 # The platinum refinery's items, registered by uses.PlatinumMetals in this order.
 PGM_ITEMS = {"ammonium_chloride": "Ammonium Chloride", "insoluble_residue": "Insoluble Residue", "iridium_rhodium_residue": "Iridium-Rhodium Residue",
              "ammonium_chloroplatinate": "Ammonium Chloroplatinate", "dichlorodiammine_palladium": "Dichlorodiammine Palladium",
@@ -67,15 +70,21 @@ def shaped(path, pattern, key, result):
 
 
 def magnets():
-    """Nd2Fe14B is melted from neodymium (or didymium, as the industry does), iron and boron, with
-    dysprosium to hold its field when hot; SmCo5 from samarium and cobalt. Rare earth metal burns in air when
+    """Nd2Fe14B is melted from neodymium, iron and boron, with dysprosium to hold its field when hot; SmCo5 from samarium and
+    cobalt. Praseodymium sits in the same lattice, so the industry melts didymium (PrNd) as it comes off the plant, and terbium
+    holds the field better than dysprosium does (diffused into the grain boundaries, its main use now). Gadolinium stands in for
+    some of the neodymium in cheaper grades at a cost in strength. Rare earth metal burns in air when
     molten, so both are melted under argon. The boron goes in as ferroboron, which borax, iron and charcoal give
     in the heat of an arc. Both are then polarized into The Factory Must Grow's magnet, which its motors and
     generators are already built from, so a rare earth plant is what a motor needs."""
     mixing("ferroboron", item("raw_borax") + tag("c:ingots/iron") + item("minecraft:charcoal", 2), [result("ferroboron")], "superheated")
-    for name, rare in (("neodymium_iron_boron", "neodymium_ingot"), ("neodymium_iron_boron_from_didymium", "didymium_ingot")):
-        mixing(name, item(rare, 2) + item("dysprosium_ingot") + tag("c:ingots/iron", 3) + item("ferroboron") + argon(),
-               [result("neodymium_iron_boron_ingot", 4)], "superheated")
+    write(DATA / "tags/item/magnet_light_rare_earths.json", {"replace": False, "values": [f"fundamentals:{e}_ingot" for e in ("neodymium", "praseodymium", "didymium")]})
+    write(DATA / "tags/item/magnet_heavy_rare_earths.json", {"replace": False, "values": [f"fundamentals:{e}_ingot" for e in ("dysprosium", "terbium")]})
+    light, heavy = tag("fundamentals:magnet_light_rare_earths"), tag("fundamentals:magnet_heavy_rare_earths")
+    mixing("neodymium_iron_boron", light * 2 + heavy + tag("c:ingots/iron", 3) + item("ferroboron") + argon(),
+           [result("neodymium_iron_boron_ingot", 4)], "superheated")
+    mixing("neodymium_iron_boron_with_gadolinium", light + item("gadolinium_ingot") + heavy + tag("c:ingots/iron", 3) + item("ferroboron") + argon(),
+           [result("neodymium_iron_boron_ingot", 3)], "superheated")
     mixing("samarium_cobalt", item("samarium_ingot") + item("cobalt_ingot", 4) + argon(), [result("samarium_cobalt_ingot", 2)], "superheated")
     write(TFMG / "polarizing/magnet.json", {"type": "tfmg:polarizing", "ingredients": tag("c:ingots/neodymium_iron_boron"),
                                             "results": [{"id": "tfmg:magnet"}]})
@@ -139,10 +148,11 @@ def glass():
 
 def scandium():
     """Al-Sc: a little scandium makes aluminium light and weldable enough for airframes; here it makes a
-    rack go twice as far. The master alloy is mostly made without scandium metal at all: the fluoride stirred into molten
-    aluminium, which takes the fluorine and gives the scandium to the melt, the aluminium fluoride skimmed off as dross."""
-    mixing("aluminium_scandium", item("scandium_ingot") + tag("c:ingots/aluminum", 7), [result("aluminium_scandium_ingot", 8)], "superheated")
-    mixing("aluminium_scandium_from_fluoride", item("scandium_fluoride") + tag("c:ingots/aluminum", 7), [result("aluminium_scandium_ingot", 7), result("slag")], "superheated")
+    rack go twice as far. The master alloy is two per cent scandium, and mostly made without scandium metal at all: the fluoride
+    stirred into molten aluminium, which takes the fluorine and gives the scandium to the melt, the aluminium fluoride skimmed off as dross."""
+    mixing("aluminium_scandium", item("scandium_nugget") + tag("c:ingots/aluminum", 8), [result("aluminium_scandium_ingot", 8)], "superheated")
+    mixing("aluminium_scandium_from_fluoride", item("scandium_fluoride") + tag("c:storage_blocks/aluminum", 4),
+           [result("aluminium_scandium_block", 4), result("tfmg:slag")], "superheated")
     shaped(USES / "panel_rack_from_scandium.json", ["S S", "SSS"], {"S": {"tag": "c:plates/aluminium_scandium"}},
            {"count": 2, "id": "fundamentals:panel_rack"})
 
@@ -187,8 +197,8 @@ def copper_sulfides():
         roast(ore, "copper_calcine", f"copper_calcine_from_{ore}")
     for feed in ("roasted_chalcopyrite", "copper_calcine"):
         write(DATA / f"recipe/bloomery/copper_matte_from_{feed}.json", {"type": "fundamentals:bloomery", "ingredient": {"item": f"fundamentals:{feed}"},
-                                                                       "result": {"id": "fundamentals:copper_matte_dust", "count": 1}, "byproduct": {"id": "fundamentals:slag", "count": 1}})
-    mixing("blister_copper", item("copper_matte_dust", 2) + tag("c:sands/colorless"), [result("blister_copper_ingot", 2), result("slag")], "superheated")
+                                                                       "result": {"id": "fundamentals:copper_matte_dust", "count": 1}, "byproduct": {"id": "tfmg:slag", "count": 1}})
+    mixing("blister_copper", item("copper_matte_dust", 2) + tag("c:sands/colorless"), [result("blister_copper_ingot", 2), result("tfmg:slag")], "superheated")
     write(USES / "copper_ingot_from_blister_copper.json", {"type": "minecraft:blasting", "category": "misc", "ingredient": {"item": "fundamentals:blister_copper_ingot"},
                                                            "result": {"id": "minecraft:copper_ingot"}, "experience": 0.3, "cookingtime": 100})
 
@@ -240,9 +250,9 @@ def nickel():
     """Pentlandite roasts to a nickel oxide that charcoal reduces at a blaze cake's heat, its iron going to slag. Laterite is
     too lean to roast and is smelted whole with charcoal, as it is in the electric furnaces of Indonesia."""
     roast("pentlandite", "roasted_pentlandite")
-    mixing("nickel_ingot", item("roasted_pentlandite") + item("minecraft:charcoal"), [result("tfmg:nickel_ingot"), result("slag")], "superheated")
+    mixing("nickel_ingot", item("roasted_pentlandite") + item("minecraft:charcoal"), [result("tfmg:nickel_ingot"), result("tfmg:slag")], "superheated")
     mixing("nickel_ingot_from_laterite", item("raw_nickel_laterite", 4) + item("minecraft:charcoal", 2),
-           [result("tfmg:nickel_ingot"), result("slag", 2)], "superheated")
+           [result("tfmg:nickel_ingot"), result("tfmg:slag", 2)], "superheated")
 
 
 def tin():
@@ -250,16 +260,20 @@ def tin():
     Roasting drives off the sulfur and arsenic of the pyrite and arsenopyrite that ride with it. Charcoal reduces the oxide at 1,200
     to 1,300 C, as the blowing house's shaft furnace did and the bloomery does; a superheated basin with coke stands in for the
     reverberatory. Crude tin carries iron; tin melts at 232 C, so on a gentle heat it runs off the iron-tin hardhead, and green wood
-    stirred through the melt (poling) brings the last dross up. Bronze is a quarter tin, and bell metal; tin-lead solder joins circuit boards."""
+    stirred through the melt (poling) brings the last dross up. Bronze is a quarter tin, and bell metal, and the plain bearing a shaft turns in;
+    tin-lead solder joins circuit boards."""
     write(USES / "tin_concentrate.json", {"type": "create:splashing", "ingredients": item("raw_cassiterite"), "results": [result("tin_concentrate")]})
     roast("tin_concentrate", "roasted_tin_concentrate", raw=False)
     write(DATA / "recipe/bloomery/crude_tin_from_roasted_tin_concentrate.json", {"type": "fundamentals:bloomery", "ingredient": {"item": "fundamentals:roasted_tin_concentrate"},
-                                                                                "result": {"id": "fundamentals:crude_tin_ingot", "count": 1}, "byproduct": {"id": "fundamentals:slag", "count": 1}})
-    mixing("crude_tin", item("roasted_tin_concentrate", 2) + item("tfmg:coal_coke"), [result("crude_tin_ingot", 2), result("slag")], "superheated")
-    mixing("tin_ingot", item("crude_tin_ingot", 2) + tag("c:rods/wooden"), [result("tin_ingot", 2), {"id": "fundamentals:slag", "chance": 0.25}], "heated")
+                                                                                "result": {"id": "fundamentals:crude_tin_ingot", "count": 1}, "byproduct": {"id": "tfmg:slag", "count": 1}})
+    mixing("crude_tin", item("roasted_tin_concentrate", 2) + item("tfmg:coal_coke"), [result("crude_tin_ingot", 2), result("tfmg:slag")], "superheated")
+    mixing("tin_ingot", item("crude_tin_ingot", 2) + tag("c:rods/wooden"), [result("tin_ingot", 2), {"id": "tfmg:slag", "chance": 0.25}], "heated")
     mixing("bronze_ingot", tag("c:ingots/copper", 3) + tag("c:ingots/tin"), [result("bronze_ingot", 4)], "heated")
     shaped(CREATE / "crafting/curiosities/peculiar_bell.json", ["I", "P"], {"I": {"tag": "c:storage_blocks/bronze"}, "P": {"tag": "c:plates/bronze"}},
            {"count": 1, "id": "create:peculiar_bell"})
+    shaped(CREATE / "crafting/kinetics/mechanical_bearing.json", [" B ", "PCP", " I "],
+           {"B": {"tag": "minecraft:wooden_slabs"}, "C": {"item": "create:andesite_casing"}, "I": {"item": "create:shaft"}, "P": {"tag": "c:plates/bronze"}},
+           {"count": 1, "id": "create:mechanical_bearing"})
     shaped(USES / "bell.json", [" S ", "BBB", "B B"], {"S": {"tag": "c:rods/wooden"}, "B": {"tag": "c:ingots/bronze"}}, {"count": 1, "id": "minecraft:bell"})
     mixing("solder", tag("c:ingots/tin") + tag("c:ingots/lead"), [result("solder", 8)], "heated")
     board = {"item": "tfmg:unfinished_circuit_board"}
@@ -331,9 +345,10 @@ def loot():
 
 def alloys():
     """Where cobalt, chromium, molybdenum and rhenium go: the nickel superalloy of turbine blades, melted under argon as the
-    rare earth magnets are, its chromium what keeps it from scaling in the hot gas, and molybdenum steel for the heavy casings."""
+    rare earth magnets are, its chromium what keeps it from scaling in the hot gas, and molybdenum steel for the heavy casings. A chromium-
+    molybdenum steel is under one per cent molybdenum, and the molybdenum goes into the melt as the roasted trioxide, not as metal."""
     mixing("superalloy", item("tfmg:nickel_ingot", 4) + item("chromium_ingot") + item("cobalt_ingot", 2) + item("rhenium_ingot") + argon(), [result("superalloy_ingot", 4)], "superheated")
-    mixing("molybdenum_steel", item("molybdenum_ingot") + tag("c:ingots/steel", 4), [result("molybdenum_steel_ingot", 4)], "superheated")
+    mixing("molybdenum_steel", item("molybdenum_oxide") + tag("c:ingots/steel", 8), [result("molybdenum_steel_ingot", 8)], "superheated")
     shaped(TFMG / "turbine_blade.json", ["III", "ISI", "III"], {"S": {"item": "create:shaft"}, "I": {"tag": "c:plates/superalloy"}},
            {"count": 1, "id": "tfmg:turbine_blade", "components": {"tfmg:fuel_tags": {"kerosene": "c:kerosene"}, "tfmg:fuels": {"kerosene": "Kerosene"}}})
     write(TFMG / "item_application/heavy_machinery_casing.json", {"type": "create:item_application",
@@ -359,14 +374,16 @@ def tungsten():
 
 
 def more_sinks():
-    """Cerium oxide is the oxygen store of every catalytic converter: the Factory's exhaust takes two. Palladium on the ceria burns what the
-    engine left, so a converter made with palladium nuggets lasts as two. Lithium cobalt oxide is the cathode
+    """Cerium oxide is the oxygen store of every catalytic converter: the Factory's exhaust takes two. The three-way converter puts platinum and
+    palladium on the ceria to burn what the engine left and rhodium to break down its nitrogen oxides (four fifths of all rhodium goes there),
+    so one made with the three lasts as two. Lithium cobalt oxide is the cathode
     the first lithium batteries ran on: the lithium charge takes a cobalt. Neodymium and holmium colour glass, as erbium does."""
     shaped(TFMG / "crafting/materials/exhaust.json", ["BPB", "EPE", "CPC"],
            {"B": {"item": "minecraft:iron_bars"}, "C": {"tag": "c:ingots/cast_iron"}, "P": {"item": "tfmg:cast_iron_pipe"}, "E": {"item": "fundamentals:cerium_oxide"}},
            {"count": 1, "id": "tfmg:exhaust"})
-    shaped(USES / "exhaust_with_palladium.json", ["KPK", "EPE", "CPC"],
-           {"K": {"tag": "c:nuggets/palladium"}, "C": {"tag": "c:ingots/cast_iron"}, "P": {"item": "tfmg:cast_iron_pipe"}, "E": {"item": "fundamentals:cerium_oxide"}},
+    shaped(USES / "exhaust_three_way.json", ["TKR", "EPE", "CPC"],
+           {"T": {"tag": "c:nuggets/platinum"}, "K": {"tag": "c:nuggets/palladium"}, "R": {"tag": "c:nuggets/rhodium"},
+            "C": {"tag": "c:ingots/cast_iron"}, "P": {"item": "tfmg:cast_iron_pipe"}, "E": {"item": "fundamentals:cerium_oxide"}},
            {"count": 2, "id": "tfmg:exhaust"})
     shaped(TFMG / "crafting/materials/lithium_charge.json", [" P ", "LKL", " A "],
            {"A": {"tag": "c:plates/aluminum"}, "L": {"tag": "c:ingots/lithium"}, "P": {"item": "tfmg:plastic_sheet"}, "K": {"item": "fundamentals:cobalt_ingot"}},
@@ -384,8 +401,11 @@ def chromium():
     Soda ash is calcined trona, from the dry lakes where borax lies."""
     write(USES / "soda_ash.json", {"type": "minecraft:smelting", "category": "misc", "ingredient": {"item": "fundamentals:raw_trona"},
                                    "result": {"id": "fundamentals:soda_ash"}, "experience": 0.1, "cookingtime": 200})
-    mixing("ferrochrome", item("chromite_concentrate", 2) + item("tfmg:coal_coke") + tag("tfmg:flux"), [result("ferrochrome_ingot"), result("slag")], "superheated")
+    mixing("ferrochrome", item("chromite_concentrate", 2) + item("tfmg:coal_coke") + tag("tfmg:flux"), [result("ferrochrome_ingot"), result("tfmg:slag")], "superheated")
     mixing("stainless_steel", item("ferrochrome_ingot", 3) + item("tfmg:nickel_ingot") + tag("c:ingots/steel", 6), [result("stainless_steel_ingot", 10)], "superheated")
+    shaped(TFMG / "crafting/materials/steel_chemical_vat.json", ["PPP", "NTN", "PPP"],
+           {"N": {"tag": "c:plates/stainless_steel"}, "P": {"item": "tfmg:heavy_plate"}, "T": {"item": "tfmg:steel_fluid_tank"}},
+           {"count": 2, "id": "tfmg:steel_chemical_vat"})
     shaped(TFMG / "crafting/materials/flarestack.json", ["SPS", "BPB", "CPC"],
            {"B": {"item": "minecraft:iron_bars"}, "C": {"tag": "c:ingots/stainless_steel"}, "P": {"item": "tfmg:cast_iron_pipe"}, "S": {"item": "minecraft:flint_and_steel"}},
            {"count": 1, "id": "tfmg:flarestack"})
@@ -394,7 +414,7 @@ def chromium():
     mixing("chromium_oxide", item("sodium_dichromate") + tag("minecraft:coals"), [result("chromium_oxide"), result("soda_ash")], "heated")
     write(USES / "aluminium_powder.json", {"type": "create:milling", "ingredients": tag("c:ingots/aluminum"), "processing_time": 200,
                                            "results": [result("aluminium_powder", 2)]})
-    mixing("chromium_ingot", item("chromium_oxide") + item("aluminium_powder"), [result("chromium_ingot"), result("slag")], "superheated")
+    mixing("chromium_ingot", item("chromium_oxide") + item("aluminium_powder"), [result("chromium_ingot"), result("tfmg:slag")], "superheated")
     write(USES / "chrome_oxide_green.json", {"type": "minecraft:crafting_shapeless", "category": "misc", "ingredients": item("chromium_oxide"),
                                              "result": result("minecraft:green_dye", 2)})
 
@@ -459,11 +479,11 @@ def platinum_feeds():
     (sperrylite, cooperite, braggite) go into the same leach with the matte and come out as concentrate every time: they are what makes
     a platinum reef worth more than a nickel mine. The leach liquor electrowins to nickel, a little copper, and its acid back."""
     write(DATA / "recipe/bloomery/nickel_matte_from_pentlandite.json", {"type": "fundamentals:bloomery", "ingredient": {"item": "fundamentals:raw_pentlandite"},
-                                                                       "result": {"id": "fundamentals:nickel_matte_dust", "count": 1}, "byproduct": {"id": "fundamentals:slag", "count": 1}})
+                                                                       "result": {"id": "fundamentals:nickel_matte_dust", "count": 1}, "byproduct": {"id": "tfmg:slag", "count": 1}})
     write(DATA / "tags/item/platinum_minerals.json", {"replace": False, "values": [f"fundamentals:raw_{m}" for m in ("sperrylite", "cooperite", "braggite")]})
     sand = tag("c:sands/colorless")
-    pgm_mixing("converter_matte", item("nickel_matte_dust", 2) + sand, [result("converter_matte_dust", 2), result("slag")], "superheated")
-    pgm_mixing("converter_matte_with_copper", item("nickel_matte_dust") + item("copper_matte_dust") + sand, [result("converter_matte_dust", 2), result("slag")], "superheated")
+    pgm_mixing("converter_matte", item("nickel_matte_dust", 2) + sand, [result("converter_matte_dust", 2), result("tfmg:slag")], "superheated")
+    pgm_mixing("converter_matte_with_copper", item("nickel_matte_dust") + item("copper_matte_dust") + sand, [result("converter_matte_dust", 2), result("tfmg:slag")], "superheated")
     acid = fluid("tfmg:sulfuric_acid", 500)
     pgm_mixing("matte_leach", item("converter_matte_dust", 2) + [acid],
                [out_fluid("nickel_copper_sulfate", 500), {"id": "fundamentals:platinum_group_concentrate", "chance": 0.1}], "heated")
@@ -519,7 +539,7 @@ def platinum_refinery():
 
 def platinum_sinks():
     """Platinum and rhenium on alumina reform naphtha to gasoline, giving off hydrogen; platinum with a tenth of rhodium, woven to gauze,
-    burns ammonia to the nitric oxide nitric acid is made from (Ostwald). Palladium's place is the exhaust (more_sinks).
+    burns ammonia to the nitric oxide nitric acid is made from (Ostwald). Palladium's place, and most rhodium's, is the exhaust (more_sinks).
     Ruthenium lets a single-crystal superalloy carry more of everything else. An iridium-tipped spark plug outlasts four, and osmium,
     pasted and sintered, was the filament of the first metal-filament lamp."""
     mixing("reforming_catalyst", item("platinum_nugget", 2) + item("rhenium_ingot") + item("tfmg:bauxite_powder", 4), [result("reforming_catalyst", 4)], "heated")
@@ -549,7 +569,7 @@ def silver():
     in four has to come back from litharge, which charcoal reduces. Rich silver ores, argentite and native silver, were soaked into a
     lead bath on the cupel and cupelled with it."""
     write(DATA / "recipe/bloomery/lead_from_roasted_galena.json", {"type": "fundamentals:bloomery", "ingredient": {"item": "fundamentals:roasted_galena"},
-                                                                   "result": {"id": "fundamentals:lead_bullion_ingot", "count": 1}, "byproduct": {"id": "fundamentals:slag", "count": 1}})
+                                                                   "result": {"id": "fundamentals:lead_bullion_ingot", "count": 1}, "byproduct": {"id": "tfmg:slag", "count": 1}})
     write(USES / "lead_from_bullion.json", {"type": "minecraft:smelting", "category": "misc", "ingredient": {"item": "fundamentals:lead_bullion_ingot"},
                                             "result": {"id": "tfmg:lead_ingot"}, "experience": 0.1, "cookingtime": 200})
     air = [fluid("tfmg:air", 250)]
@@ -560,6 +580,35 @@ def silver():
     for ore in ("argentite", "native_silver"):
         mixing(f"cupellation_of_{ore}", item(f"raw_{ore}") + tag("c:ingots/lead") + cupel, [result("silver_ingot"), result("litharge")], "heated")
     mixing("lead_from_litharge", item("litharge") + item("minecraft:charcoal"), [result("tfmg:lead_ingot")], "heated")
+
+
+def thorium():
+    """Monazite's thorium was the rare earth industry's first product: Welsbach's gas mantle, a cotton stocking soaked in the nitrates of
+    thorium and a hundredth part of cerium, burnt out to a skeleton of thoria that glows white in a gas flame. The residue dissolves in nitric
+    acid to the nitrate. The Factory's gas lamp burns a mantle. The clarifier's sludge, the iron, aluminium and thorium hydroxides the lime
+    throws down, is packed into blocks for the tailings dam as the residue is."""
+    mixing("thorium_nitrate", item("monazite_residue_dust") + [fluid("nitric_acid", 250)], [result("thorium_nitrate")], "heated")
+    mixing("gas_mantle", item("thorium_nitrate", 4) + item("cerium_oxide") + tag("c:strings", 4), [result("gas_mantle", 4)], "heated")
+    shaped(TFMG / "crafting/materials/gas_lamp.json", [" C ", "BGB", "MP "],
+           {"B": {"item": "tfmg:cast_iron_bars"}, "C": {"tag": "c:plates/cast_iron"}, "G": {"item": "create:framed_glass"}, "P": {"item": "tfmg:industrial_pipe"},
+            "M": {"item": "fundamentals:gas_mantle"}},
+           {"count": 1, "id": "tfmg:gas_lamp"})
+    shaped(USES / "clarifier_sludge_block.json", ["###", "###", "###"], {"#": {"item": "fundamentals:clarifier_sludge"}},
+           {"count": 1, "id": "fundamentals:clarifier_sludge_block"})
+
+
+def lead_and_zinc_sinks():
+    """A lead-acid plate is a lead grid pasted with litharge in sulfuric acid: the Factory's accumulator takes a litharge for its paste where
+    it took a block of lead. Zinc oxide is the activator every sulfur cure of rubber needs, so the Factory's rubber takes one."""
+    shaped(TFMG / "crafting/materials/accumulator.json", ["LWL", "SXS", "LCL"],
+           {"X": {"item": "fundamentals:litharge"}, "C": {"item": "tfmg:industrial_aluminum_casing"}, "L": {"tag": "c:plates/lead"},
+            "S": {"item": "tfmg:sulfuric_acid_bucket"}, "W": {"tag": "c:wires/copper"}},
+           {"count": 1, "id": "tfmg:accumulator"})
+    write(TFMG / "vat_machine_recipe/rubber.json", {
+        "type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:steel_vat", "tfmg:firebrick_lined_vat"],
+        "heat_requirement": "heated", "machines": ["tfmg:mixing"], "min_size": 1,
+        "ingredients": [{"item": "tfmg:sulfur_dust"}] + item("zinc_oxide") + [fluid("tfmg:heavy_oil", 250)],
+        "results": [{"id": "tfmg:rubber_sheet"}]})
 
 
 def silver_sinks():
@@ -587,6 +636,12 @@ def names():
     for name, display in {**ITEMS, **PGM_ITEMS}.items():
         lang[f"item.fundamentals.{name}"] = display
         write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})
+    for name, display in BLOCKS.items():
+        lang[f"block.fundamentals.{name}"] = display
+        write(ASSETS / f"blockstates/{name}.json", {"variants": {"": {"model": f"fundamentals:block/{name}"}}})
+        write(ASSETS / f"models/block/{name}.json", cube(f"fundamentals:block/{name}"))
+        write(ASSETS / f"models/item/{name}.json", {"parent": f"fundamentals:block/{name}"})
+        write(DATA / f"loot_table/blocks/{name}.json", {"type": "minecraft:block", "pools": [drop_self(name)]})
     write(path, lang)
 
 
@@ -626,6 +681,8 @@ def main():
     platinum_sinks()
     silver()
     silver_sinks()
+    thorium()
+    lead_and_zinc_sinks()
     names()
     print("uses written")
 

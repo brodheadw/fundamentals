@@ -41,7 +41,7 @@ public final class FerrousMaterials {
                         .heatResistance(0.45).conductivity(0.17).hardness(0.40));
         reg("steel", MaterialType.ALLOY, "", forms(INGOT, DUST, NUGGET, PLATE, BLOCK),
                 MaterialProperties.builder().density(1.0).magnetStrength(0.35).heatResistance(0.60).hardness(0.70));
-        reg("stainless_steel", MaterialType.ALLOY, "Fe-Cr-Ni", forms(INGOT),
+        reg("stainless_steel", MaterialType.ALLOY, "Fe-Cr-Ni", forms(INGOT, PLATE),
                 MaterialProperties.builder().density(1.0).heatResistance(0.70).hardness(0.70));
         reg("chromium", MaterialType.ELEMENT, "Cr", forms(OXIDE, INGOT),
                 MaterialProperties.builder().density(0.92).hardness(0.90).heatResistance(0.70));
@@ -67,7 +67,6 @@ public final class FerrousMaterials {
         reg("titanium", MaterialType.ELEMENT, "Ti", forms(OXIDE, SPONGE, INGOT, PLATE),
                 MaterialProperties.builder().density(0.57).hardness(0.70).heatResistance(0.70).conductivity(0.03));
 
-        reg("tungsten_trioxide", MaterialType.COMPOUND, "WO3", forms(OXIDE, DUST), MaterialProperties.builder());
         reg("ammonium_paratungstate", MaterialType.COMPOUND, "(NH4)10(H2W12O42)", forms(DUST),
                 MaterialProperties.builder());
 

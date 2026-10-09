@@ -19,7 +19,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "A crust, a bone meal and 250 mB of air, heated, give four silver nuggets, a litharge and a zinc oxide for the zinc retort. A bullion cupelled straight, the old way, gives one nugget and its whole lead as litharge. A litharge and a charcoal, heated, reduce back to lead."
+      "text": "A crust, a bone meal and 250 mB of air, heated, give four silver nuggets, a litharge and a zinc oxide for the zinc retort. A bullion cupelled straight, the old way, gives one nugget and its whole lead as litharge."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A litharge and a charcoal, heated, reduce back to lead, and a lead-acid plate is a lead grid pasted with litharge: the Factory's lead accumulator takes a litharge where it took a block of lead."
     },
     {
       "type": "patchouli:text",

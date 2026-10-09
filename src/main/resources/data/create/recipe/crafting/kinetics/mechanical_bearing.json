@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " B ",
+    "PCP",
+    " I "
+  ],
+  "key": {
+    "B": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "C": {
+      "item": "create:andesite_casing"
+    },
+    "I": {
+      "item": "create:shaft"
+    },
+    "P": {
+      "tag": "c:plates/bronze"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "create:mechanical_bearing"
+  }
+}

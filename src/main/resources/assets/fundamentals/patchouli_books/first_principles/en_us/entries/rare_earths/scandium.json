@@ -19,7 +19,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Most scandium never becomes metal. A scandium fluoride stirred into seven aluminium, superheated, gives seven Al-Sc ingots straight, the aluminium taking the fluorine and skimmed off as a slag: the master alloy is made that way. The metal and seven aluminium give eight."
+      "text": "Al-Sc is two per cent scandium, and most scandium never becomes metal. A scandium fluoride stirred into four blocks of aluminium, superheated, gives four blocks of Al-Sc straight, the aluminium taking the fluorine and skimmed off as a slag: the master alloy is made that way."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A scandium nugget and eight aluminium give eight ingots."
     }
   ]
 }

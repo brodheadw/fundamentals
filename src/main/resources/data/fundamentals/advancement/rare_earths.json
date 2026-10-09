@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "id": "fundamentals:neodymium_ingot"
+      "id": "fundamentals:neodymium_oxide"
     },
     "title": {
       "translate": "advancement.fundamentals.rare_earths.title"
@@ -18,7 +18,7 @@
         "items": [
           {
             "items": [
-              "fundamentals:lanthanum_ingot"
+              "fundamentals:lanthanum_oxide"
             ]
           }
         ]
@@ -30,7 +30,7 @@
         "items": [
           {
             "items": [
-              "fundamentals:cerium_ingot"
+              "fundamentals:cerium_oxide"
             ]
           }
         ]
@@ -42,7 +42,7 @@
         "items": [
           {
             "items": [
-              "fundamentals:praseodymium_ingot"
+              "fundamentals:praseodymium_oxide"
             ]
           }
         ]
@@ -54,7 +54,7 @@
         "items": [
           {
             "items": [
-              "fundamentals:neodymium_ingot"
+              "fundamentals:neodymium_oxide"
             ]
           }
         ]
@@ -66,7 +66,7 @@
         "items": [
           {
             "items": [
-              "fundamentals:samarium_ingot"
+              "fundamentals:samarium_oxide"
             ]
           }
         ]
@@ -78,7 +78,7 @@
         "items": [
           {
             "items": [
-              "fundamentals:europium_ingot"
+              "fundamentals:europium_oxide"
             ]
           }
         ]
@@ -90,7 +90,7 @@
         "items": [
           {
             "items": [
-              "fundamentals:gadolinium_ingot"
+              "fundamentals:gadolinium_oxide"
             ]
           }
         ]
@@ -102,7 +102,7 @@
         "items": [
           {
             "items": [
-              "fundamentals:terbium_ingot"
+              "fundamentals:terbium_oxide"
             ]
           }
         ]
@@ -114,7 +114,7 @@
         "items": [
           {
             "items": [
-              "fundamentals:dysprosium_ingot"
+              "fundamentals:dysprosium_oxide"
             ]
           }
         ]
@@ -126,7 +126,7 @@
         "items": [
           {
             "items": [
-              "fundamentals:holmium_ingot"
+              "fundamentals:holmium_oxide"
             ]
           }
         ]
@@ -138,7 +138,7 @@
         "items": [
           {
             "items": [
-              "fundamentals:erbium_ingot"
+              "fundamentals:erbium_oxide"
             ]
           }
         ]
@@ -150,7 +150,7 @@
         "items": [
           {
             "items": [
-              "fundamentals:thulium_ingot"
+              "fundamentals:thulium_oxide"
             ]
           }
         ]
@@ -162,7 +162,7 @@
         "items": [
           {
             "items": [
-              "fundamentals:ytterbium_ingot"
+              "fundamentals:ytterbium_oxide"
             ]
           }
         ]
@@ -174,7 +174,7 @@
         "items": [
           {
             "items": [
-              "fundamentals:lutetium_ingot"
+              "fundamentals:lutetium_oxide"
             ]
           }
         ]
@@ -186,7 +186,7 @@
         "items": [
           {
             "items": [
-              "fundamentals:yttrium_ingot"
+              "fundamentals:yttrium_oxide"
             ]
           }
         ]
@@ -198,7 +198,7 @@
         "items": [
           {
             "items": [
-              "fundamentals:scandium_ingot"
+              "fundamentals:scandium_oxide"
             ]
           }
         ]

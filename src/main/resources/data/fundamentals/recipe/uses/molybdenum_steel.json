@@ -2,7 +2,19 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "fundamentals:molybdenum_ingot"
+      "item": "fundamentals:molybdenum_oxide"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
+    },
+    {
+      "tag": "c:ingots/steel"
     },
     {
       "tag": "c:ingots/steel"
@@ -20,7 +32,7 @@
   "results": [
     {
       "id": "fundamentals:molybdenum_steel_ingot",
-      "count": 4
+      "count": 8
     }
   ],
   "heat_requirement": "superheated"
