@@ -26,5 +26,5 @@ data merge block 444 -57 -58 {TankContent:{Fluid:{id:"fundamentals:p204",amount:
 data merge block 483 -60 -59 {TankContent:{Fluid:{id:"fundamentals:hydrochloric_acid",amount:8000}}}
 data merge block 480 -57 -70 {TankContent:{Fluid:{id:"fundamentals:p507",amount:8000}}}
 data merge block 543 -60 -71 {TankContent:{Fluid:{id:"fundamentals:hydrochloric_acid",amount:8000}}}
-data merge block -6 -60 1 {TankContent:{Fluid:{id:"fundamentals:crude_rare_earth_liquor",amount:8000}}}
+data merge block -9 -59 1 {TankContent:{Fluid:{id:"fundamentals:crude_rare_earth_liquor",amount:8000}}}
 scoreboard players set #world showcase 3
