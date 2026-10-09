@@ -230,7 +230,8 @@ STORAGE_BLOCKS = [f"fundamentals:{name}" for _, form, name in items() if form ==
 PLASTIC_BLOCKS = [f"fundamentals:{dye}_plastic_block" for dye in ("white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray",
                                                                   "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black")]
 OTHER_MINEABLE = {"pickaxe": ["fundamentals:bloomery", "fundamentals:panel_rack", "fundamentals:solar_panel", "fundamentals:mixer_settler", "fundamentals:plastic_fluid_tank",
-                                "fundamentals:magnetomigration_cell", "fundamentals:dyed_plastic_pipe"] + STORAGE_BLOCKS + PLASTIC_BLOCKS}
+                                "fundamentals:magnetomigration_cell", "fundamentals:dyed_plastic_pipe",
+                                "fundamentals:mercury_thermometer", "fundamentals:bimetallic_thermometer", "fundamentals:type_k_thermocouple", "fundamentals:type_s_thermocouple"] + STORAGE_BLOCKS + PLASTIC_BLOCKS}
 OTHER_TIERED = {"stone": STORAGE_BLOCKS}
 
 # Our ores and raw chunks are tagged by commodity in our own namespace, not in c:ores/<metal> and

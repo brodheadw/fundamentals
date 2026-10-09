@@ -15,6 +15,9 @@ What's agreed but not built, in the order it's likely to go. The working plan be
 - **Temperature consumers.** `Heat.at` exists (the `heat` package). Still to hang on it: the tiers Create's recipes use
   as thresholds on the number, tarnish rate, and kerosene and the extractants igniting near heat. The Wildspell Magic
   side is wildspell-magic#7 (Freezing Grasp and Noon push on it, and spells read it back).
+- **Thermometer loose ends.** A type K past 1,260 °C pegs where a real one drifts as its chromel oxidises, and a mercury gauge below
+  −39 °C pegs where its column would freeze. The cinnabar retort gives off no SO2 (there is no fluid for it), mercury has no use
+  beyond the gauge, and the gauges have no Ponder scene.
 - **Hard-rock monazite washes like the sand.** Monazite from a carbonatite top or a quartz vein drops the same raw monazite
   as the beach placer and washes without grinding, as placer and vein cassiterite do. Real vein ore is crushed and milled first.
 - **Gadolinium**'s real uses are neutron absorption and MRI contrast and the pack has neither; it only stands in for some
