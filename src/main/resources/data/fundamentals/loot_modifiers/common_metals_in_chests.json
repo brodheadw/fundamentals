@@ -1,0 +1,64 @@
+{
+  "type": "fundamentals:add_to_chests",
+  "conditions": [],
+  "tables": [
+    "minecraft:chests/village/",
+    "minecraft:chests/abandoned_mineshaft",
+    "minecraft:chests/simple_dungeon",
+    "minecraft:chests/shipwreck_supply",
+    "minecraft:chests/shipwreck_treasure",
+    "minecraft:chests/ruined_portal",
+    "minecraft:chests/underwater_ruin_small",
+    "minecraft:chests/underwater_ruin_big",
+    "betterdungeons:skeleton_dungeon/chests/",
+    "betterdungeons:small_dungeon/chests/",
+    "betterdungeons:small_nether_dungeon/chests/",
+    "betterdungeons:spider_dungeon/chests/",
+    "betterdungeons:zombie_dungeon/chests/"
+  ],
+  "chance": 0.12,
+  "pool": [
+    {
+      "item": "fundamentals:tin_nugget",
+      "weight": 4,
+      "min": 1,
+      "max": 4
+    },
+    {
+      "item": "tfmg:lead_nugget",
+      "weight": 3,
+      "min": 1,
+      "max": 4
+    },
+    {
+      "item": "create:zinc_nugget",
+      "weight": 3,
+      "min": 1,
+      "max": 4
+    },
+    {
+      "item": "tfmg:nickel_nugget",
+      "weight": 2,
+      "min": 1,
+      "max": 3
+    },
+    {
+      "item": "fundamentals:bronze_nugget",
+      "weight": 2,
+      "min": 1,
+      "max": 4
+    },
+    {
+      "item": "fundamentals:tin_ingot",
+      "weight": 1,
+      "min": 1,
+      "max": 1
+    },
+    {
+      "item": "fundamentals:bronze_ingot",
+      "weight": 1,
+      "min": 1,
+      "max": 1
+    }
+  ]
+}

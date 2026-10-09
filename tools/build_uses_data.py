@@ -286,15 +286,40 @@ def rocks():
 
 
 def loot():
-    """Iron is won from ore, so chests (every mod's) keep one iron ingot, nugget, block or armour piece in four; iron golems
-    drop nuggets, scrap rather than bar; and a drowned's copper ingot has gone green to malachite. Tools are the modpack's call."""
+    """Iron is won from ore, so chests (every mod's) keep one iron ingot, nugget, block, tool or armour piece in four; iron golems
+    drop nuggets, scrap rather than bar; and a drowned's copper ingot has gone green to malachite. Structure chests carry a smidge
+    of the pack's metals, rarer the harder the place: tin and lead in a village, silver and tungsten in a stronghold, rare earth
+    oxides and the platinum metals only in end and ancient cities. YUNG's rebuilt structures count as the vanilla ones they replace."""
     modifiers = DATA / "loot_modifiers"
     shutil.rmtree(modifiers, ignore_errors=True)
     common = [{"id": f"#c:{name}", "required": False} for name in ("ingots/iron", "nuggets/iron", "storage_blocks/iron", "raw_materials/iron", "storage_blocks/raw_iron")]
     write(DATA / "tags/item/scarce_in_chests.json", {"replace": False, "values": common + [
-        "minecraft:iron_helmet", "minecraft:iron_chestplate", "minecraft:iron_leggings", "minecraft:iron_boots", "minecraft:iron_horse_armor"]})
+        "minecraft:iron_helmet", "minecraft:iron_chestplate", "minecraft:iron_leggings", "minecraft:iron_boots", "minecraft:iron_horse_armor",
+        "minecraft:iron_sword", "minecraft:iron_axe", "minecraft:iron_pickaxe", "minecraft:iron_shovel", "minecraft:iron_hoe", "minecraft:shears"]})
     write(modifiers / "scarce_iron_in_chests.json", {"type": "fundamentals:scarce_in_chests", "conditions": [],
                                                     "items": "#fundamentals:scarce_in_chests", "keep": 0.25})
+    chests = lambda *names: [f"minecraft:chests/{name}" for name in names]
+    pool = lambda *entries: [{"item": id if ":" in id else f"fundamentals:{id}", "weight": weight, "min": low, "max": high} for id, weight, low, high in entries]
+    tiers = {
+        "common_metals_in_chests": (chests("village/", "abandoned_mineshaft", "simple_dungeon", "shipwreck_supply", "shipwreck_treasure", "ruined_portal",
+                                           "underwater_ruin_small", "underwater_ruin_big") + [f"betterdungeons:{d}/chests/" for d in ("skeleton_dungeon", "small_dungeon", "small_nether_dungeon", "spider_dungeon", "zombie_dungeon")], 0.12,
+                                    pool(("tin_nugget", 4, 1, 4), ("tfmg:lead_nugget", 3, 1, 4), ("create:zinc_nugget", 3, 1, 4), ("tfmg:nickel_nugget", 2, 1, 3),
+                                         ("bronze_nugget", 2, 1, 4), ("tin_ingot", 1, 1, 1), ("bronze_ingot", 1, 1, 1))),
+        "hard_metals_in_chests": (chests("stronghold_corridor", "stronghold_crossing", "stronghold_library", "desert_pyramid", "jungle_temple",
+                                         "bastion_bridge", "bastion_hoglin_stable", "bastion_other", "bastion_treasure", "nether_bridge", "trial_chambers/",
+                                         "woodland_mansion", "pillager_outpost", "buried_treasure")
+                                  + ["betterstrongholds:chests/", "betterdeserttemples:chests/", "betterjungletemples:chests/", "betterfortresses:chests/"], 0.10,
+                                  pool(("silver_nugget", 4, 1, 4), ("cobalt_nugget", 3, 1, 3), ("silver_ingot", 1, 1, 2), ("cobalt_ingot", 1, 1, 1),
+                                       ("tungsten_ingot", 1, 1, 1), ("molybdenum_ingot", 1, 1, 1), ("platinum_nugget", 1, 1, 1))),
+        "rare_metals_in_chests": (chests("end_city_treasure", "ancient_city"), 0.20,
+                                  pool(*[(f"{ree}_oxide", 2, 1, 2) for ree in ("lanthanum", "cerium", "praseodymium", "neodymium", "samarium", "europium", "gadolinium",
+                                                                                "terbium", "dysprosium", "holmium", "erbium", "thulium", "ytterbium", "lutetium", "yttrium", "scandium")],
+                                       *[(f"{ree}_ingot", 1, 1, 1) for ree in ("lanthanum", "cerium", "praseodymium", "neodymium", "samarium", "gadolinium",
+                                                                                "terbium", "dysprosium", "yttrium", "scandium", "didymium")],
+                                       *[(f"{pgm}_nugget", 2, 1, 3) for pgm in PGMS], ("rhenium_ingot", 1, 1, 1))),
+    }
+    for name, (tables, chance, entries) in tiers.items():
+        write(modifiers / f"{name}.json", {"type": "fundamentals:add_to_chests", "conditions": [], "tables": tables, "chance": chance, "pool": entries})
     swaps = {"iron_golem_scrap": ("minecraft:entities/iron_golem", "minecraft:iron_ingot", "minecraft:iron_nugget"),
              "drowned_malachite": ("minecraft:entities/drowned", "minecraft:copper_ingot", "fundamentals:raw_malachite")}
     for name, (table, old, new) in swaps.items():
