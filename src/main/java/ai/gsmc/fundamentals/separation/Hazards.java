@@ -7,6 +7,8 @@ import com.simibubi.create.content.fluids.pipes.EncasedPipeBlock;
 import com.simibubi.create.content.fluids.pipes.FluidPipeBlock;
 import com.simibubi.create.content.fluids.pipes.GlassFluidPipeBlock;
 import com.simibubi.create.content.fluids.pipes.SmartFluidPipeBlock;
+import com.simibubi.create.content.fluids.pipes.valve.FluidValveBlock;
+import com.simibubi.create.content.fluids.pump.PumpBlock;
 import com.simibubi.create.content.processing.basin.BasinBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -36,9 +38,9 @@ import java.util.List;
 /**
  * What the plant does to people and pipes. The fuming acids (hydrofluoric, nitric, aqua regia) hurt anyone within reach of them
  * in the open: as blocks in the world, or in a basin they are being used in. Create's diving helmet on a filled
- * backtank is the gas mask, and breathes its air. And the acids eat copper: Create's pipes carrying one corrode
- * and eventually burst, spilling it. The liquors are rare earth chlorides in dilute acid and the spent liquor and brine
- * are chloride too, so they eat it as well, more slowly. Plastic pipes and glass ones do not corrode.
+ * backtank is the gas mask, and breathes its air. And the acids eat copper: Create's pipes, pumps and valves carrying one
+ * corrode and eventually burst, spilling it. The liquors are rare earth chlorides in dilute acid and the spent liquor and brine
+ * are chloride too, so they eat it as well, more slowly. Plastic pipes, pumps and valves, and glass pipes, do not corrode.
  */
 public final class Hazards {
 
@@ -158,7 +160,8 @@ public final class Hazards {
         if (id.getNamespace().equals("tfmg") && id.getPath().contains("plastic") || block instanceof GlassFluidPipeBlock) {
             return false;
         }
-        if (block instanceof FluidPipeBlock || block instanceof AxisPipeBlock || block instanceof EncasedPipeBlock || block instanceof SmartFluidPipeBlock) {
+        if (block instanceof FluidPipeBlock || block instanceof AxisPipeBlock || block instanceof EncasedPipeBlock || block instanceof SmartFluidPipeBlock
+                || block instanceof PumpBlock || block instanceof FluidValveBlock) {
             return true;
         }
         return id.getNamespace().equals("tfmg") && id.getPath().contains("pipe") && !id.getPath().contains("glass");
