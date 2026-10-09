@@ -15,6 +15,10 @@
     {
       "id": "fundamentals:bittern",
       "amount": 100
+    },
+    {
+      "id": "minecraft:water",
+      "amount": 900
     }
   ],
   "heat_requirement": "heated"
