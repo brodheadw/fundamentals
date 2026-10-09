@@ -516,7 +516,7 @@ def mixer_settler():
     Every size comes from VAT. Create's connected textures put the frame ribs on the exterior edges; the
     fluids inside are drawn by the renderer."""
     tex = {"side": "fundamentals:block/mixer_settler_side", "top": "fundamentals:block/mixer_settler_top",
-           "window": "create:block/fluid_tank_window", "nozzle": "fundamentals:block/mixer_settler_nozzle",
+           "window": "fundamentals:block/mixer_settler_window", "nozzle": "fundamentals:block/mixer_settler_nozzle",
            "particle": "fundamentals:block/mixer_settler_side"}
     full = [0, 0, 16, 16]
 
@@ -563,7 +563,7 @@ def mixer_settler():
         f[axis], t[axis] = WIN0, WIN1
         faces = {side: ("#window", uv, True), INNER[side]: ("#window", uv, False)}
         if part != "bottom":
-            faces["up"] = ("#window", [8, 0, 16, W] if along_x else [8, 0, 8 + W, 8], False)
+            faces["up"] = cap
         out.append(box(f, t, faces))
         return out
 

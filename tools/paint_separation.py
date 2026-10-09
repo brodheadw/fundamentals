@@ -24,10 +24,11 @@ STEEL = [(30, 33, 38), (40, 44, 50), (48, 52, 59), (56, 61, 68), (66, 72, 80), (
 # The Factory Must Grow's plastic, from its plastic block and pipes: a cool white grey.
 PLASTIC = [(95, 97, 115), (108, 114, 127), (136, 142, 155), (152, 156, 168), (167, 169, 180), (180, 182, 193), (196, 201, 207), (216, 221, 225), (234, 236, 238)]
 COPPER = [(120, 62, 44), (172, 96, 66), (212, 136, 98), (244, 190, 156)]
-# Natural polyethylene and polypropylene, unpigmented: milk-white, and thin enough to see shapes through.
-MILK = (240, 243, 245)
 # Rotomoulded natural HDPE, the darkest and lightest of its mottling: a warm off-white, light enough that a dye tints it cleanly.
 HDPE = ((210, 207, 198), (232, 230, 223))
+# How much of the light a natural plastic surface's own alpha lets through that it really does: the plastic is a little thicker than
+# its texels say, so what is behind it shows as shape and shadow, not detail.
+SEE_THROUGH = 0.8
 
 
 def create_texture(name):
@@ -56,19 +57,39 @@ def steel(img, ramp=STEEL, floor=0.25, span=0.6):
     return out
 
 
-def milky(img, palette=None):
-    """Natural plastic: the given tones (every opaque one, by default) drawn a quarter of the way to milk-white and let a little
-    light through, the light faces of a panel more than its dark seams and edges."""
+def moulded(img, palette=None, boxes=()):
+    """Natural plastic over another texture's shapes: the given tones (every opaque one, by default) redrawn as the plastic tank's
+    polyethylene, each one's lightness against its own region's kept as the moulding's light and shade, the shaded seams and
+    edges thicker and so more opaque than the faces. A region is one of the boxes (x0, y0, x1, y1) or else the whole texture;
+    black stays black, the inside of a bore."""
     out = img.copy()
     px = out.load()
+
+    def lum(x, y):
+        r, g, b, _ = px[x, y]
+        return (0.299 * r + 0.587 * g + 0.114 * b) / 255
+
+    def ours(x, y):
+        r, g, b, a = px[x, y]
+        return a == 255 and (palette is None or (r, g, b) in palette) and lum(x, y) > 0.06
+
+    def region(x, y):
+        return next((box for box in boxes if box[0] <= x < box[2] and box[1] <= y < box[3]), (0, 0, img.width, img.height))
+
+    means = {}
     for y in range(img.height):
         for x in range(img.width):
-            r, g, b, a = px[x, y]
-            if a < 255 or palette is not None and (r, g, b) not in palette:
-                continue
-            lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255
-            t = min(1.0, max(0.0, (lum - 0.4) / 0.53))
-            px[x, y] = tuple(round(c + (m - c) * 0.25) for c, m in zip((r, g, b), MILK)) + (round(245 - 60 * t),)
+            if ours(x, y):
+                means.setdefault(region(x, y), []).append(lum(x, y))
+    means = {box: max(values) for box, values in means.items()}
+    paint = {}
+    for y in range(img.height):
+        for x in range(img.width):
+            if ours(x, y):
+                lift = max(-48, min(12, round((lum(x, y) - means[region(x, y)]) * 170) + 8))
+                paint[x, y] = hdpe(x, y, "moulded", lift, 196 if lift > -8 else 220 if lift > -24 else 244)
+    for xy, texel in paint.items():
+        px[xy] = texel
     return out
 
 
@@ -120,7 +141,11 @@ def hdpe(x, y, seed, lift=0, alpha=196):
     fine = random.Random(f"{seed}:{x},{y}").random()
     t = 0.2 + 0.35 * rng.random() + 0.45 * fine
     base = tuple(round(lo + (hi - lo) * t) for lo, hi in zip(HDPE[0], HDPE[1]))
-    return tuple(max(0, min(255, c + lift)) for c in base) + (alpha,)
+    return tuple(max(0, min(255, c + lift)) for c in base) + (solid(alpha),)
+
+
+def solid(alpha):
+    return round(255 - (255 - alpha) * SEE_THROUGH)
 
 
 def wall_texel(x, y, seed):
@@ -145,17 +170,17 @@ def tank_wall(left, right, top, bottom, seed):
             r, g, b, a = wall_texel(x, y, seed)
             lift, alpha = 0, a
             if top and y == 0:
-                lift, alpha = 8, 248
+                lift, alpha = 8, solid(248)
             elif top and y == 1:
-                lift, alpha = -4, 236
+                lift, alpha = -4, solid(236)
             elif bottom and y == 14:
-                lift, alpha = -10, 236
+                lift, alpha = -10, solid(236)
             elif bottom and y == 15:
-                lift, alpha = -24, 250
+                lift, alpha = -24, solid(250)
             if left and x == 0 or right and x == 15:
-                lift, alpha = min(lift, 0) - 16, max(alpha, 240)
+                lift, alpha = min(lift, 0) - 16, max(alpha, solid(240))
             elif left and x == 1 or right and x == 14:
-                lift, alpha = lift - 6, max(alpha, 218)
+                lift, alpha = lift - 6, max(alpha, solid(218))
             img.putpixel((x, y), tuple(max(0, min(255, c + lift)) for c in (r, g, b)) + (alpha,))
     return img
 
@@ -247,7 +272,7 @@ def cell_sheets():
     paramagnetic ions gather; a port in each end where the stream runs on to the next cell."""
     from paint_materials import METAL
     ndfeb = METAL["neodymium_iron_boron"]
-    body = milky(steel(create_texture("fluid_tank"), PLASTIC, 0.32, 0.3))
+    body = moulded(create_texture("fluid_tank"))
     sheets = {"side": body}
     magnet = body.copy()
     for y in range(3, 13):
@@ -313,7 +338,6 @@ def main():
     (TEXTURES / "item").mkdir(parents=True, exist_ok=True)
     steel(create_texture("fluid_tank")).save(TEXTURES / "block/mixer_settler_side.png")
     steel(create_texture("fluid_tank_connected")).save(TEXTURES / "block/mixer_settler_side_connected.png")
-    steel(create_texture("fluid_tank_window")).save(TEXTURES / "block/mixer_settler_window.png")
     steel(create_texture("fluid_tank_window")).save(TEXTURES / "block/mixer_settler_window.png")
     steel(create_texture("fluid_tank_top")).save(TEXTURES / "block/mixer_settler_top.png")
     steel(create_texture("fluid_tank_top_connected")).save(TEXTURES / "block/mixer_settler_top_connected.png")
