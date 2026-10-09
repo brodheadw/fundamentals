@@ -11,6 +11,10 @@ import ai.gsmc.fundamentals.registry.HandTools;
 import ai.gsmc.fundamentals.registry.MaterialItems;
 import ai.gsmc.fundamentals.registry.OreBlocks;
 import ai.gsmc.fundamentals.separation.MixerSettlerBlockEntity;
+import ai.gsmc.fundamentals.separation.PlasticTankBlockEntity;
+import com.simibubi.create.AllMountedStorageTypes;
+import com.simibubi.create.api.contraption.storage.fluid.MountedFluidStorageType;
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import ai.gsmc.fundamentals.heat.Heat;
 import ai.gsmc.fundamentals.separation.Hazards;
 import ai.gsmc.fundamentals.uses.PlatinumMetals;
@@ -93,8 +97,12 @@ public class Fundamentals {
         NeoForge.EVENT_BUS.addListener(Hazards::onPlayerTick);
         modBus.addListener(Heat::registerDataMaps);
         NeoForge.EVENT_BUS.addListener(Heat::registerCommands);
-        modBus.addListener(RegisterCapabilitiesEvent.class, event -> event.registerBlockEntity(
-                Capabilities.FluidHandler.BLOCK, Separation.mixerSettlerEntity(), MixerSettlerBlockEntity::handler));
+        modBus.addListener(RegisterCapabilitiesEvent.class, event -> {
+            event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, Separation.mixerSettlerEntity(), MixerSettlerBlockEntity::handler);
+            event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, Separation.plasticTankEntity(), PlasticTankBlockEntity::handler);
+        });
+        modBus.addListener(FMLCommonSetupEvent.class, event -> event.enqueueWork(() ->
+                MountedFluidStorageType.REGISTRY.register(Separation.plasticTank(), AllMountedStorageTypes.FLUID_TANK.get())));
         if (FMLEnvironment.dist == Dist.CLIENT) {
             GrindingAnimation.register(modBus);
             SeparationClient.register(modBus);

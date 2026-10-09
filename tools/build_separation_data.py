@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """The rare earth separation line: the reagent fluids, the solvent-extraction cuts, and the chemistry
 around them. Writes the Java reagent table, the cut recipes, the Create mixing recipes that make the
-reagents and liquors, the oxalate route out, the mixer-settler's blockstate, model, loot and tags, the
-names, and the gametest template. Re-run after any edit; build_ore_data.py last for the tool tags.
+reagents and liquors, the oxalate route out, the mixer-settler's and the plastic tank's blockstates, models,
+loot and recipes, the names, and the gametest template. Re-run after any edit; build_ore_data.py last for the tool tags.
 
     python3 tools/paint_separation.py && python3 tools/build_separation_data.py && python3 tools/build_ore_data.py
 """
@@ -484,6 +484,30 @@ def mixer_settler():
         write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})
 
 
+def plastic_tank():
+    """Create's fluid tank in plastic: its own blockstate on Create's tank models, which take our sheets in place of the copper
+    ones, and Create's recipe with plastic sheets for the copper. The acids and liquors are kept in fibreglass and polyethylene
+    tanks for the reason they run in plastic pipe."""
+    sheets = {"0": "top", "1": "", "3": "window", "4": "inner", "5": "window_single", "particle": ""}
+    tex = {k: "fundamentals:block/plastic_fluid_tank" + (f"_{v}" if v else "") for k, v in sheets.items()}
+    variants = {}
+    for top in (False, True):
+        for bottom in (False, True):
+            part = "single" if top and bottom else "top" if top else "bottom" if bottom else "middle"
+            for shape in ("plain", "window", "window_ne", "window_nw", "window_se", "window_sw"):
+                name = f"block_{part}" + ("" if shape == "plain" else f"_{shape}")
+                write(ASSETS / f"models/block/plastic_fluid_tank/{name}.json",
+                      {"parent": f"create:block/fluid_tank/{name}", "render_type": "minecraft:cutout_mipped", "textures": tex})
+                variants[f"bottom={str(bottom).lower()},shape={shape},top={str(top).lower()}"] = {"model": f"fundamentals:block/plastic_fluid_tank/{name}"}
+    write(ASSETS / "blockstates/plastic_fluid_tank.json", {"variants": variants})
+    write(ASSETS / "models/item/plastic_fluid_tank.json", {"parent": "fundamentals:block/plastic_fluid_tank/block_single_window"})
+    write(DATA / "loot_table/blocks/plastic_fluid_tank.json", {"type": "minecraft:block", "pools": [drop_self("plastic_fluid_tank")]})
+    write(RECIPES / "plastic_fluid_tank.json", {
+        "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["P", "B", "P"],
+        "key": {"P": {"item": "tfmg:plastic_sheet"}, "B": {"tag": "c:barrels/wooden"}},
+        "result": {"id": "fundamentals:plastic_fluid_tank", "count": 1}})
+
+
 def template():
     """A 27x5x5 gametest floor, patched from the 3x3x3 empty one: room for eight stages end to end with mixers over them."""
     empty = gzip.decompress((DATA / "structure/empty.nbt").read_bytes())
@@ -498,6 +522,7 @@ def names():
     for id, (name, _, _) in FLUIDS.items():
         lang[f"fluid_type.fundamentals.{id}"] = name
     lang["block.fundamentals.mixer_settler"] = "Mixer-Settler Casing"
+    lang["block.fundamentals.plastic_fluid_tank"] = "Plastic Fluid Tank"
     for acid in DISSOLVES:
         lang[f"block.fundamentals.{acid}"] = FLUIDS[acid][0]
         lang[f"item.fundamentals.{acid}_bucket"] = f"{FLUIDS[acid][0]} Bucket"
@@ -530,6 +555,7 @@ def main():
     for folder in ("mixing", "separation", "calcining", "reduction", "solvents"):
         shutil.rmtree(RECIPES / folder, ignore_errors=True)
     shutil.rmtree(ASSETS / "models/block/mixer_settler", ignore_errors=True)
+    shutil.rmtree(ASSETS / "models/block/plastic_fluid_tank", ignore_errors=True)
     for stale in (ASSETS / "models/block").glob("mixer_settler*.json"):
         stale.unlink()
     java_table()
@@ -540,6 +566,7 @@ def main():
     metals()
     solvents()
     mixer_settler()
+    plastic_tank()
     template()
     names()
     print(f"{len(FLUIDS)} fluids, {len(CUTS)} cuts")
