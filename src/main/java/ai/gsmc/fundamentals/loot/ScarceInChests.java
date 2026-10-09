@@ -34,7 +34,8 @@ public class ScarceInChests extends LootModifier {
 
     @Override
     protected ObjectArrayList<ItemStack> doApply(ObjectArrayList<ItemStack> loot, LootContext context) {
-        if (!context.getQueriedLootTableId().getPath().startsWith("chests/")) {
+        String path = context.getQueriedLootTableId().getPath();
+        if (!path.startsWith("chests/") && !path.contains("/chests/")) {
             return loot;
         }
         for (ItemStack stack : loot) {

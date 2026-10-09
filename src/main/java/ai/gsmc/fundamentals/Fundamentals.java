@@ -3,6 +3,7 @@ package ai.gsmc.fundamentals;
 import ai.gsmc.fundamentals.client.GrindingAnimation;
 import ai.gsmc.fundamentals.client.SeparationClient;
 import ai.gsmc.fundamentals.ironworking.IronWorking;
+import ai.gsmc.fundamentals.loot.AddToChests;
 import ai.gsmc.fundamentals.loot.ScarceInChests;
 import ai.gsmc.fundamentals.loot.SwapDrop;
 import ai.gsmc.fundamentals.power.Electricity;
@@ -88,6 +89,7 @@ public class Fundamentals {
             event.register(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, helper -> {
                 helper.register(ResourceLocation.fromNamespaceAndPath(MOD_ID, "scarce_in_chests"), ScarceInChests.CODEC);
                 helper.register(ResourceLocation.fromNamespaceAndPath(MOD_ID, "swap_drop"), SwapDrop.CODEC);
+                helper.register(ResourceLocation.fromNamespaceAndPath(MOD_ID, "add_to_chests"), AddToChests.CODEC);
             });
             event.register(Registries.CREATIVE_MODE_TAB, helper -> {
                 helper.register(MINERALS_TAB, mineralsTab());

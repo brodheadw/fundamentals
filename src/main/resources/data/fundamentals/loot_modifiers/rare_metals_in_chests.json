@@ -1,0 +1,215 @@
+{
+  "type": "fundamentals:add_to_chests",
+  "conditions": [],
+  "tables": [
+    "minecraft:chests/end_city_treasure",
+    "minecraft:chests/ancient_city"
+  ],
+  "chance": 0.2,
+  "pool": [
+    {
+      "item": "fundamentals:lanthanum_oxide",
+      "weight": 2,
+      "min": 1,
+      "max": 2
+    },
+    {
+      "item": "fundamentals:cerium_oxide",
+      "weight": 2,
+      "min": 1,
+      "max": 2
+    },
+    {
+      "item": "fundamentals:praseodymium_oxide",
+      "weight": 2,
+      "min": 1,
+      "max": 2
+    },
+    {
+      "item": "fundamentals:neodymium_oxide",
+      "weight": 2,
+      "min": 1,
+      "max": 2
+    },
+    {
+      "item": "fundamentals:samarium_oxide",
+      "weight": 2,
+      "min": 1,
+      "max": 2
+    },
+    {
+      "item": "fundamentals:europium_oxide",
+      "weight": 2,
+      "min": 1,
+      "max": 2
+    },
+    {
+      "item": "fundamentals:gadolinium_oxide",
+      "weight": 2,
+      "min": 1,
+      "max": 2
+    },
+    {
+      "item": "fundamentals:terbium_oxide",
+      "weight": 2,
+      "min": 1,
+      "max": 2
+    },
+    {
+      "item": "fundamentals:dysprosium_oxide",
+      "weight": 2,
+      "min": 1,
+      "max": 2
+    },
+    {
+      "item": "fundamentals:holmium_oxide",
+      "weight": 2,
+      "min": 1,
+      "max": 2
+    },
+    {
+      "item": "fundamentals:erbium_oxide",
+      "weight": 2,
+      "min": 1,
+      "max": 2
+    },
+    {
+      "item": "fundamentals:thulium_oxide",
+      "weight": 2,
+      "min": 1,
+      "max": 2
+    },
+    {
+      "item": "fundamentals:ytterbium_oxide",
+      "weight": 2,
+      "min": 1,
+      "max": 2
+    },
+    {
+      "item": "fundamentals:lutetium_oxide",
+      "weight": 2,
+      "min": 1,
+      "max": 2
+    },
+    {
+      "item": "fundamentals:yttrium_oxide",
+      "weight": 2,
+      "min": 1,
+      "max": 2
+    },
+    {
+      "item": "fundamentals:scandium_oxide",
+      "weight": 2,
+      "min": 1,
+      "max": 2
+    },
+    {
+      "item": "fundamentals:lanthanum_ingot",
+      "weight": 1,
+      "min": 1,
+      "max": 1
+    },
+    {
+      "item": "fundamentals:cerium_ingot",
+      "weight": 1,
+      "min": 1,
+      "max": 1
+    },
+    {
+      "item": "fundamentals:praseodymium_ingot",
+      "weight": 1,
+      "min": 1,
+      "max": 1
+    },
+    {
+      "item": "fundamentals:neodymium_ingot",
+      "weight": 1,
+      "min": 1,
+      "max": 1
+    },
+    {
+      "item": "fundamentals:samarium_ingot",
+      "weight": 1,
+      "min": 1,
+      "max": 1
+    },
+    {
+      "item": "fundamentals:gadolinium_ingot",
+      "weight": 1,
+      "min": 1,
+      "max": 1
+    },
+    {
+      "item": "fundamentals:terbium_ingot",
+      "weight": 1,
+      "min": 1,
+      "max": 1
+    },
+    {
+      "item": "fundamentals:dysprosium_ingot",
+      "weight": 1,
+      "min": 1,
+      "max": 1
+    },
+    {
+      "item": "fundamentals:yttrium_ingot",
+      "weight": 1,
+      "min": 1,
+      "max": 1
+    },
+    {
+      "item": "fundamentals:scandium_ingot",
+      "weight": 1,
+      "min": 1,
+      "max": 1
+    },
+    {
+      "item": "fundamentals:didymium_ingot",
+      "weight": 1,
+      "min": 1,
+      "max": 1
+    },
+    {
+      "item": "fundamentals:platinum_nugget",
+      "weight": 2,
+      "min": 1,
+      "max": 3
+    },
+    {
+      "item": "fundamentals:palladium_nugget",
+      "weight": 2,
+      "min": 1,
+      "max": 3
+    },
+    {
+      "item": "fundamentals:rhodium_nugget",
+      "weight": 2,
+      "min": 1,
+      "max": 3
+    },
+    {
+      "item": "fundamentals:ruthenium_nugget",
+      "weight": 2,
+      "min": 1,
+      "max": 3
+    },
+    {
+      "item": "fundamentals:iridium_nugget",
+      "weight": 2,
+      "min": 1,
+      "max": 3
+    },
+    {
+      "item": "fundamentals:osmium_nugget",
+      "weight": 2,
+      "min": 1,
+      "max": 3
+    },
+    {
+      "item": "fundamentals:rhenium_ingot",
+      "weight": 1,
+      "min": 1,
+      "max": 1
+    }
+  ]
+}

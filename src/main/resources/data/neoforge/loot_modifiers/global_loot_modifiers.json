@@ -1,8 +1,11 @@
 {
   "replace": false,
   "entries": [
+    "fundamentals:common_metals_in_chests",
     "fundamentals:drowned_malachite",
+    "fundamentals:hard_metals_in_chests",
     "fundamentals:iron_golem_scrap",
+    "fundamentals:rare_metals_in_chests",
     "fundamentals:scarce_iron_in_chests"
   ]
 }
