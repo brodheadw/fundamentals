@@ -35,7 +35,7 @@ Vanilla gold and copper ore stay: they are native gold and native copper, which 
 
 ## From rock to metal
 
-Iron is made the way it was made for three thousand years before the blast furnace. Build a bloomery out of clay, load it with iron ore and charcoal (and only charcoal; the sulfur in coal ruins iron), light it with a torch, and wait. What comes out is not an ingot but a bloom, a spongy lump of iron and slag, which you hammer into wrought iron. Copper comes straight out of the bloomery from malachite, azurite and cuprite. Galena has to be roasted on a fire first, then gives lead.
+Iron is made the way it was made for three thousand years before the blast furnace. Build a bloomery out of clay, load it with iron ore and charcoal (and only charcoal; the sulfur in coal ruins iron), light it with a torch, and wait. What comes out is not an ingot but a bloom, a spongy lump of iron and slag, which you hammer into wrought iron. Copper comes straight out of the bloomery from malachite, azurite and cuprite. Galena has to be roasted on a fire first, then gives lead bullion, lead still holding its silver, which a furnace remelts to lead.
 
 ![Bloomeries and a campfire](docs/images/bloomery.jpg)
 ![Raw chunks, a bloom, slag, the hammer, the mortar and pestle](docs/images/items.jpg)
@@ -93,6 +93,10 @@ The platinum metals ride in nickel-copper sulfide and are never won alone. Raw p
 The refinery is the classical one, batch by batch in basins and vats. Aqua regia (hydrochloric and nitric acid, three to one), or hydrochloric acid with chlorine, takes platinum and palladium and leaves the other four. Ammonium chloride, made from Haber ammonia and hydrochloric acid, drops platinum as the yellow chloroplatinate; ammonia then acid drop palladium as yellow dichlorodiammine palladium. The insolubles chlorinated in a lime slurry give off osmium and ruthenium as their volatile tetroxides; hydrochloric acid catches the ruthenium. What is left, chlorinated with salt, dissolves; ammonium chloride drops iridium as the near-black chloroiridate, and rhodium comes last, rose. The platinum salt ignites to sponge and the rest are reduced under hydrogen; none but palladium melts at 1,600 °C, so each sponge is pressed and sintered to an ingot. Aqua regia exists in the world too: it fumes, and eats gold.
 
 They are spent as catalysts and in small hard parts: platinum-rhenium on alumina reforms naphtha to gasoline and hydrogen; a platinum-rhodium gauze burns Haber ammonia to nitric acid (Ostwald); palladium on ceria makes the Factory's exhaust go twice as far; ruthenium lets the superalloy melt make six ingots instead of four; an iridium-tipped spark plug lasts as long as four; and osmium, the first metal lamp filament, burns in a light bulb as well as tungsten.
+
+### Silver
+
+Most silver has always come out of lead, and here it does too. Galena's lead bullion carries it; stir a zinc ingot into four bullion in a heated basin, the Parkes process, and the silver goes into the zinc, which rises as a crust and leaves three lead behind. The crust is cupelled: blown with air over bone meal, the bone-ash hearth, the lead burns to litharge and the zinc to zinc oxide for the retort, and four silver nuggets stay. Bullion can be cupelled straight, as the ancients did, at the cost of all its lead going to litharge, which charcoal reduces back. Argentite and native silver from the calcite veins are soaked into a lead ingot on the cupel and give an ingot each. Silver goes where it really went: the contacts of The Factory Must Grow's electrical switch and large switch, the finish on a circuit board, and a silver-zinc accumulator.
 
 ### The book
 

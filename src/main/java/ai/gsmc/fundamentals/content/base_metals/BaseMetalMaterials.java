@@ -56,6 +56,8 @@ public final class BaseMetalMaterials {
                 MaterialProperties.builder().density(1.12).conductivity(0.60));
         reg("crude_tin", null, MaterialType.ALLOY, "", new MaterialForm[] {INGOT},
                 MaterialProperties.builder().density(0.95).conductivity(0.13));
+        reg("lead_bullion", null, MaterialType.ALLOY, "", new MaterialForm[] {INGOT},
+                MaterialProperties.builder().density(1.44).conductivity(0.08).hardness(0.10).toxicity(0.60));
 
         reg("copper", null, MaterialType.ELEMENT, "Cu", METAL_FORMS,
                 MaterialProperties.builder().density(1.14).conductivity(1.00).hardness(0.30));

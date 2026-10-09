@@ -45,6 +45,7 @@ TIN = ("ingot", "nugget", "block")
 BRONZE = ("ingot", "nugget", "plate", "block")
 # Titanium too comes out of its retort as a sponge, and its oxide is the white pigment.
 TITANIUM = ("oxide", "sponge", "ingot", "plate")
+PRECIOUS = ("ingot", "nugget", "plate", "block")
 
 WHITE = ((150, 150, 148), (206, 206, 204), (236, 236, 234), (255, 255, 255))
 
@@ -115,6 +116,9 @@ METAL = {
     "tin": ((104, 106, 108), (178, 180, 182), (224, 226, 226), (253, 253, 251)),
     "crude_tin": ((66, 64, 60), (118, 116, 110), (160, 158, 150), (202, 200, 192)),
     "bronze": ((88, 54, 24), (150, 100, 48), (198, 146, 76), (236, 198, 128)),
+    # lead bullion is lead, the dull blue-grey of a fresh cut gone dark; silver the whitest metal there is, a touch warm
+    "lead_bullion": ((44, 48, 60), (84, 90, 106), (122, 128, 146), (168, 174, 192)),
+    "silver": ((118, 116, 114), (198, 198, 196), (240, 240, 238), (255, 255, 255)),
 }
 
 # The oxides are painted the colours they really are; the white ones borrow a little of their
@@ -197,7 +201,7 @@ MATERIALS = {
     "titanium": TITANIUM, "magnesium": INGOT,
     "nickel_matte": MATTE, "converter_matte": MATTE, "platinum_group_concentrate": CONCENTRATE,
     "platinum": PGM, "palladium": PGM, "rhodium": PGM, "ruthenium": PGM, "iridium": PGM, "osmium": PGM,
-    "tin_concentrate": CONCENTRATE, "crude_tin": INGOT, "tin": TIN, "bronze": BRONZE,
+    "tin_concentrate": CONCENTRATE, "crude_tin": INGOT, "tin": TIN, "bronze": BRONZE, "lead_bullion": INGOT, "silver": PRECIOUS,
 }
 
 DISPLAY = {"bastnasite": "Bastnäsite", "bastnasite_concentrate": "Bastnäsite Concentrate", "neodymium_iron_boron": "NdFeB", "samarium_cobalt": "SmCo", "aluminium_scandium": "Al-Sc"}

@@ -17,7 +17,10 @@ public final class PreciousChains {
                 .build());
 
         ProcessingChainRegistry.register(ProcessingChain.builder("silver", "silver", PreciousMaterials.GROUP)
-                .step(SMELTING, "argentite", RAW, "silver", INGOT)
+                .step(BLOOMERY, "galena", RAW, "lead_bullion", INGOT)
+                .step(CUPELLATION, MaterialRef.of("lead_bullion", INGOT), MaterialRef.of("silver", INGOT), MaterialRef.of("lead", OXIDE))
+                .step(CUPELLATION, MaterialRef.of("argentite", RAW), MaterialRef.of("silver", INGOT), MaterialRef.of("lead", OXIDE))
+                .step(CUPELLATION, MaterialRef.of("native_silver", RAW), MaterialRef.of("silver", INGOT), MaterialRef.of("lead", OXIDE))
                 .build());
 
         // The precious-metal refinery's salts, tetroxides and liquors are not materials; the chain names its ends.

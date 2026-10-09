@@ -1,0 +1,28 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_argentite"
+    },
+    {
+      "tag": "c:ingots/lead"
+    },
+    {
+      "item": "minecraft:bone_meal"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "tfmg:air"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:silver_ingot"
+    },
+    {
+      "id": "fundamentals:litharge"
+    }
+  ],
+  "heat_requirement": "heated"
+}

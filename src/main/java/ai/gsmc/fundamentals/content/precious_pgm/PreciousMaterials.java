@@ -32,7 +32,7 @@ public final class PreciousMaterials {
 
         reg("gold", MaterialType.ELEMENT, "Au", forms(INGOT, NUGGET, BLOCK, DUST, PLATE),
                 MaterialProperties.builder().density(2.45).conductivity(0.76).hardness(0.25).heatResistance(0.30));
-        reg("silver", MaterialType.ELEMENT, "Ag", forms(INGOT, NUGGET, BLOCK, DUST, PLATE),
+        reg("silver", MaterialType.ELEMENT, "Ag", forms(INGOT, NUGGET, BLOCK, PLATE),
                 MaterialProperties.builder().density(1.33).conductivity(1.05).hardness(0.25));
 
         reg("platinum", MaterialType.ELEMENT, "Pt", PGM_FORMS,

@@ -1,0 +1,37 @@
+{
+  "name": "Silver",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:silver_ingot",
+  "sortnum": 8,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Most of the world's silver has always come out of lead. Galena carries a little, so roasted galena smelts in the bloomery not to lead but to lead bullion, which holds it. A furnace remelts bullion to plain lead and the silver is lost in it.",
+      "title": "Silver"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "To win it, stir zinc into the molten lead, the Parkes process: zinc and lead do not mix, silver is some three thousand times more soluble in zinc, and the zinc rises with it as a crust. Four bullion and a zinc ingot in a heated basin give three lead and a silver-zinc crust."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Cupellation is how silver has been parted from lead since antiquity: the lead is blown with air on a hearth of bone ash at about 1,000 °C, burns to litharge, the yellow-orange lead oxide, and soaks into the cupel, and a bead of silver stays bright."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A crust, a bone meal and 250 mB of air, heated, give four silver nuggets, a litharge and a zinc oxide for the zinc retort. A bullion cupelled straight, the old way, gives one nugget and its whole lead as litharge. A litharge and a charcoal, heated, reduce back to lead."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The rich silver ores, argentite and native silver from the calcite veins, were soaked into a lead bath on the cupel and cupelled with it: a raw ore, a lead ingot, a bone meal and 250 mB of air, heated, give a silver ingot and a litharge."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Silver conducts better than any metal and its tarnish conducts too, so contacts that arc as they make and break are silver: The Factory's electrical switch and large switch take silver plates."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A circuit board can be finished in silver as well as gold, and four silver plates, two zinc, a plastic separator, copper wire and an aluminium casing make a silver-zinc accumulator."
+    }
+  ]
+}
