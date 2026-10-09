@@ -132,4 +132,18 @@ public class UsesTests {
         helper.assertTrue(BuiltInRegistries.BLOCK.containsKey(ResourceLocation.parse("fundamentals:trona_ore")), "trona should be an ore");
         helper.succeed();
     }
+
+    @GameTest(template = "empty")
+    public void tinIsWonFromCassiteriteAndSpentOnBronzeAndSolder(GameTestHelper helper) {
+        var registries = helper.getLevel().registryAccess();
+        Map.of("fundamentals:uses/tin_concentrate", "tin_concentrate", "fundamentals:roasting/roasted_tin_concentrate_smoking", "roasted_tin_concentrate",
+                "fundamentals:bloomery/crude_tin_from_roasted_tin_concentrate", "crude_tin_ingot", "fundamentals:uses/tin_ingot", "tin_ingot")
+                .forEach((id, out) -> helper.assertTrue(recipe(helper, id).getResultItem(registries).is(stack("fundamentals:" + out).getItem()), id + " should make " + out));
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/tin_concentrate"), "fundamentals:raw_cassiterite")
+                && takes(recipe(helper, "fundamentals:uses/tin_ingot"), "fundamentals:crude_tin_ingot"), "tin should be won from cassiterite");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/bronze_ingot"), "fundamentals:tin_ingot")
+                && takes(recipe(helper, "fundamentals:uses/solder"), "fundamentals:tin_ingot"), "tin should go into bronze and solder");
+        helper.assertTrue(takes(recipe(helper, "create:crafting/curiosities/peculiar_bell"), "fundamentals:bronze_plate"), "the peculiar bell should be bronze");
+        helper.succeed();
+    }
 }

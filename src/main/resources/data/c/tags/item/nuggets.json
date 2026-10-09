@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "#c:nuggets/aluminium_scandium",
+    "#c:nuggets/bronze",
     "#c:nuggets/cobalt",
     "#c:nuggets/dysprosium",
     "#c:nuggets/iridium",
@@ -15,6 +16,7 @@
     "#c:nuggets/ruthenium",
     "#c:nuggets/samarium",
     "#c:nuggets/samarium_cobalt",
-    "#c:nuggets/terbium"
+    "#c:nuggets/terbium",
+    "#c:nuggets/tin"
   ]
 }

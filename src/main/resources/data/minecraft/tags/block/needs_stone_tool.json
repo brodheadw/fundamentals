@@ -5,6 +5,7 @@
     "fundamentals:azurite_ore",
     "fundamentals:borax_ore",
     "fundamentals:bornite_ore",
+    "fundamentals:bronze_block",
     "fundamentals:cassiterite_ore",
     "fundamentals:chalcocite_ore",
     "fundamentals:chalcopyrite_ore",
@@ -27,6 +28,7 @@
     "fundamentals:smithsonite_ore",
     "fundamentals:sphalerite_ore",
     "fundamentals:terbium_block",
+    "fundamentals:tin_block",
     "fundamentals:trona_ore"
   ]
 }

@@ -205,6 +205,7 @@ PLACERS = {
     "monazite": (54, 66, 4, 9),
     "ilmenite": (54, 66, 5, 12),
     "rutile": (54, 66, 3, 9),
+    "cassiterite": (54, 66, 3, 9),
 }
 
 # Ore features of other mods switched off: hematite/magnetite replace vanilla iron (PLAN §2.4),

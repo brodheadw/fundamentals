@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "I",
+    "P"
+  ],
+  "key": {
+    "I": {
+      "tag": "c:storage_blocks/bronze"
+    },
+    "P": {
+      "tag": "c:plates/bronze"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "create:peculiar_bell"
+  }
+}
