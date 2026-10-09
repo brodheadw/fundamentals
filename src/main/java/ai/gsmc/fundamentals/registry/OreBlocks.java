@@ -84,7 +84,7 @@ public final class OreBlocks {
                 .map(Material::id).collect(Collectors.toSet());
         for (String mineral : minerals) {
             if (!blocks.contains(mineral) && !VANILLA.containsKey(mineral)) {
-                Fundamentals.LOGGER.warn("Mineral '{}' has no ore block: add it to tools/build_ore_data.py", mineral);
+                Fundamentals.LOGGER.debug("Mineral '{}' has no ore block: add it to tools/build_ore_data.py", mineral);
             }
         }
         for (String block : blocks) {

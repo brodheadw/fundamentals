@@ -48,7 +48,7 @@ MATERIAL_FORMULAS = {
 }
 # Our items that are not a form of a material.
 ITEM_FORMULAS = {
-    "phosphor": "(Y,Eu,Tb)2O3", "didymium_glass": "SiO2,Pr,Nd", "roasted_cobaltite": "Co3O4", "roasted_chalcopyrite": "CuO,Fe2O3",
+    "phosphor": "Y2O3,Eu,LaPO4,Ce,Tb", "didymium_glass": "SiO2,Pr,Nd", "roasted_cobaltite": "Co3O4", "roasted_chalcopyrite": "CuO,Fe2O3",
     "rhenium_flue_dust": "Re2O7", "tungsten_carbide": "WC", "tungsten_filament": "W", "clarifier_sludge": "Fe(OH)3,Al(OH)3,Th(OH)4",
     "copper_calcine": "CuO,Fe2O3", "zinc_oxide": "ZnO", "roasted_pentlandite": "NiO,Fe2O3", "lithium_chloride": "LiCl",
     "ferroboron": "FeB", "soda_ash": "Na2CO3", "sodium_chromate": "Na2CrO4", "sodium_dichromate": "Na2Cr2O7", "aluminium_powder": "Al",

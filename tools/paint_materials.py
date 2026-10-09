@@ -29,14 +29,14 @@ VOLATILE_MAGNET = ("oxalate", "oxide", "ingot", "nugget", "block")
 OXIDE_ONLY = ("oxalate", "oxide")
 SCANDIUM = ("oxalate", "fluoride", "oxide", "ingot", "nugget")
 DIDYMIUM = ("oxalate", "fluoride", "oxide", "ingot")
-MAGNET = ("dust", "ingot", "nugget", "plate", "block")
+MAGNET = ("ingot", "nugget", "plate", "block")
 ALLOY = ("ingot", "nugget", "plate", "block")
 RESIDUE = ("dust", "block")
-COBALT = ("dust", "ingot", "nugget")
-MOLYBDENUM = ("oxide", "dust", "ingot")
-RHENIUM = ("dust", "ingot")
+COBALT = ("ingot", "nugget")
+MOLYBDENUM = ("oxide", "ingot")
+RHENIUM = ("ingot",)
 STRUCTURAL = ("ingot", "plate")
-TUNGSTEN = ("oxide", "dust", "ingot", "plate")
+TUNGSTEN = ("oxide", "ingot", "plate")
 MATTE = ("dust",)
 BLISTER = ("ingot",)
 GROUND_MINERAL = ("dust", "concentrate")
@@ -212,7 +212,7 @@ OTHER = {
 
 # material: forms. Same order as the Java registry, which is the order of the creative tab.
 MATERIALS = {
-    "bastnasite": MINERAL, "monazite": MINERAL, "xenotime": MINERAL, "loparite": MINERAL, "euxenite": MINERAL, "thortveitite": MINERAL,
+    "bastnasite": MINERAL, "monazite": (), "xenotime": MINERAL, "loparite": MINERAL, "euxenite": MINERAL, "thortveitite": MINERAL,
     "bastnasite_concentrate": CONCENTRATE, "light_rare_earth_concentrate": CONCENTRATE, "heavy_rare_earth_concentrate": CONCENTRATE,
     "lanthanum": ELEMENT, "cerium": ELEMENT, "praseodymium": MAGNET_ELEMENT, "neodymium": MAGNET_ELEMENT,
     "samarium": VOLATILE_MAGNET, "europium": OXIDE_ONLY,
