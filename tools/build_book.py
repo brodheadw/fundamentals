@@ -159,7 +159,7 @@ def rare_earths():
              "fundamentals:neodymium_ingot", 2)
     entry("rare_earths", "minerals", "The minerals", "fundamentals:raw_bastnasite", pages_of(
         "The rare earths are not rare, only mixed. Bastnäsite in carbonatite plugs and monazite in beach sand carry the light ones, "
-        "lanthanum to samarium. Xenotime and euxenite in pegmatite veins carry the heavy ones and yttrium. Loparite under cold country "
+        "lanthanum to samarium. Xenotime and euxenite in pegmatite veins carry the heavy ones and yttrium, and now and then a greenish-black prism of thortveitite, the one scandium mineral. Loparite under cold country "
         "carries the lights too. Ion-adsorption clay under jungle is the odd one: a clay with the heavy rare earths merely stuck to it, "
         "which is why it is leached and never roasted.", "The minerals") + [
         spotlight("fundamentals:light_rare_earth_concentrate", "A millstone or crushing wheels grind bastnäsite, xenotime, loparite and euxenite; monazite is a sand already. "
@@ -226,6 +226,14 @@ def rare_earths():
         "Lanthanothermic distillation, for samarium, europium, thulium and ytterbium, which boil: two oxide and two lanthanum ingots under argon give two ingots and lanthanum oxide to go round again.") + pages_of(
         "Argon is spun out of 1,000 mB of air in a centrifuge vat, nine millibuckets at a time. Calcium is the plant's own calcium chloride, two of it electrolysed molten on electrodes in a heated vat to two ingots. "
         "A kindled blaze burner is 1,000 °C and one fed a blaze cake 1,600. The fluoride bath electrolyses at 1,000 to 1,100 °C, and the two metallothermic reductions run near 1,500, past where the fluorspar slag melts, so all three want the cake."), 6)
+    entry("rare_earths", "scandium", "Scandium", "fundamentals:scandium_ingot", pages_of(
+        "Scandium rides with the rare earths but never with their liquors: almost none of it is in bastnäsite or monazite. Its own mineral is thortveitite, "
+        "a scandium silicate found as a few dark green prisms in a whole pegmatite, as at Iveland in Norway and in Madagascar. Grind it like the others.", "Scandium") + pages_of(
+        "A silicate no acid opens, so it is chlorinated: two thortveitite dust, a coal coke, 500 mB of chlorine and 500 mB of water in a heated basin give 500 mB of scandium liquor. "
+        "The silica leaves as silicon tetrachloride, which boils at 58 °C. From the liquor it is the heavies' road: oxalic acid to the oxalate, calcined white to scandia, "
+        "hydrofluoric acid to the fluoride, and calcium under argon, superheated, to the metal.") + pages_of(
+        "Most scandium never becomes metal. A scandium fluoride stirred into seven aluminium, superheated, gives seven Al-Sc ingots straight, the aluminium taking the fluorine "
+        "and skimmed off as a slag: the master alloy is made that way. The metal and seven aluminium give eight."), 6)
     entry("rare_earths", "uses", "What they are for", "fundamentals:neodymium_iron_boron_ingot", pages_of(
         "Nothing in the chain is for its own sake. Neodymium (or didymium) with iron, ferroboron and a little dysprosium, superheated under 100 mB of argon, melts into NdFeB, the strongest magnet; samarium with cobalt into SmCo, which keeps its field hot. "
         "Ferroboron is a borax, an iron and two charcoal, superheated. "

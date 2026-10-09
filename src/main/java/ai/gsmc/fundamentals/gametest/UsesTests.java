@@ -71,6 +71,16 @@ public class UsesTests {
     }
 
     @GameTest(template = "empty")
+    public void scandiumOxideAndMetalAreMadeSomewhere(GameTestHelper helper) {
+        var registries = helper.getLevel().registryAccess();
+        for (String id : new String[] {"fundamentals:scandium_oxide", "fundamentals:scandium_ingot"}) {
+            helper.assertTrue(helper.getLevel().getRecipeManager().getRecipes().stream().anyMatch(r -> r.value().getResultItem(registries).is(stack(id).getItem())),
+                    id + " should have a recipe that makes it");
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
     public void cobaltCopperMolybdenumAndRheniumHaveTheirChains(GameTestHelper helper) {
         var registries = helper.getLevel().registryAccess();
         for (String item : new String[] {"cobalt_ingot", "molybdenum_oxide", "molybdenum_ingot", "rhenium_ingot", "superalloy_plate", "molybdenum_steel_plate", "roasted_cobaltite", "roasted_chalcopyrite", "rhenium_flue_dust",

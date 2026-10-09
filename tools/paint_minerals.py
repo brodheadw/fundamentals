@@ -106,6 +106,7 @@ P = {
     "xenotime": ((82, 72, 36), (126, 116, 60), (164, 154, 90), (216, 210, 154)),
     "loparite": ((14, 14, 18), (36, 36, 44), (72, 74, 88), (160, 164, 180)),
     "euxenite": ((20, 14, 8), (52, 38, 20), (96, 78, 38), (176, 158, 92)),
+    "thortveitite": ((22, 32, 26), (52, 70, 58), (96, 118, 100), (162, 180, 162)),
     "native_silver": ((120, 126, 136), (176, 182, 192), (214, 220, 228), (250, 252, 255)),
     "argentite": ((18, 20, 26), (44, 48, 58), (78, 84, 98), (144, 152, 168)),
     "sperrylite": ((126, 132, 140), (182, 188, 196), (222, 226, 232), (255, 255, 255)),
@@ -170,6 +171,8 @@ RECIPES = {
     "xenotime": [("crystals", "prism", 4, 1), ("speck", 4)],
     "loparite": [("crystals", "cube", 5, 1), ("speck", 4)],
     "euxenite": [("blob", 5, 4, 7), ("speck", 4)],
+    # Greyish-green to greenish-black prisms, a few in a whole pegmatite.
+    "thortveitite": [("crystals", "prism", 3, 1), ("speck", 3)],
     # --- precious ---
     "native_silver": [("smear", 5, 5, 8), ("speck", 5)],
     "argentite": [("blob", 5, 4, 7), ("companion", "native_silver", 3), ("speck", 3)],
@@ -545,7 +548,7 @@ def paint_rocks():
 
 
 SHEET_ORDER = [
-    "bastnasite", "monazite", "xenotime", "ion_adsorption_clay", "loparite", "euxenite",
+    "bastnasite", "monazite", "xenotime", "ion_adsorption_clay", "loparite", "euxenite", "thortveitite",
     "chalcopyrite", "bornite", "chalcocite", "covellite", "malachite", "azurite", "cuprite",
     "bauxite", "galena", "sphalerite", "smithsonite", "hemimorphite", "cassiterite",
     "hematite", "magnetite", "goethite", "pyrolusite", "pentlandite", "nickel_laterite",

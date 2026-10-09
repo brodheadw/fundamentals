@@ -1,0 +1,25 @@
+{
+  "name": "Scandium",
+  "category": "fundamentals:rare_earths",
+  "icon": "fundamentals:scandium_ingot",
+  "sortnum": 6,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Scandium rides with the rare earths but never with their liquors: almost none of it is in bastnäsite or monazite. Its own mineral is thortveitite, a scandium silicate found as a few dark green prisms in a whole pegmatite, as at Iveland in Norway and in Madagascar. Grind it like the others.",
+      "title": "Scandium"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A silicate no acid opens, so it is chlorinated: two thortveitite dust, a coal coke, 500 mB of chlorine and 500 mB of water in a heated basin give 500 mB of scandium liquor. The silica leaves as silicon tetrachloride, which boils at 58 °C."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "From the liquor it is the heavies' road: oxalic acid to the oxalate, calcined white to scandia, hydrofluoric acid to the fluoride, and calcium under argon, superheated, to the metal."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Most scandium never becomes metal. A scandium fluoride stirred into seven aluminium, superheated, gives seven Al-Sc ingots straight, the aluminium taking the fluorine and skimmed off as a slag: the master alloy is made that way. The metal and seven aluminium give eight."
+    }
+  ]
+}
