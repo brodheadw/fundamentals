@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "north": "fundamentals:block/magnetomigration_cell_end",
+    "south": "fundamentals:block/magnetomigration_cell_end",
+    "east": "fundamentals:block/magnetomigration_cell_magnet",
+    "west": "fundamentals:block/magnetomigration_cell_side",
+    "up": "fundamentals:block/magnetomigration_cell_top",
+    "down": "fundamentals:block/magnetomigration_cell_side",
+    "particle": "fundamentals:block/magnetomigration_cell_side"
+  }
+}

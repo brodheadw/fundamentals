@@ -93,6 +93,44 @@ def nozzle():
     return img
 
 
+def cell_sheets():
+    """The magnetomigration cell: the plastic tank's panel on every face; an NdFeB block, the bare sintered magnet's dark grey,
+    set in the right wall; a window along the channel on top, the liquor clouding toward the magnet side where the
+    paramagnetic ions gather; a port in each end where the stream runs on to the next cell."""
+    from paint_materials import METAL
+    ndfeb = METAL["neodymium_iron_boron"]
+    body = steel(create_texture("fluid_tank"), PLASTIC, 0.32, 0.3)
+    sheets = {"side": body}
+    magnet = body.copy()
+    for y in range(3, 13):
+        for x in range(3, 13):
+            edge = ndfeb[1] if x == 3 or y == 3 else ndfeb[0] if x == 12 or y == 12 else ndfeb[1] if (x * 3 + y * 5) % 11 == 0 else ndfeb[0]
+            magnet.putpixel((x, y), edge + (255,))
+    sheets["magnet"] = magnet
+    top = body.copy()
+    for y in range(1, 15):
+        for x in range(4, 12):
+            if x in (4, 11):
+                top.putpixel((x, y), PLASTIC[1] + (255,))
+                continue
+            cloud = (x - 5) * 9
+            v = 222 - cloud - (8 if (x + 2 * y) % 7 == 0 else 0)
+            top.putpixel((x, y), (v, v + 4, v + 8, 255))
+    sheets["top"] = top
+    end = body.copy()
+    for y in range(16):
+        for x in range(16):
+            r = ((x - 7.5) ** 2 + (y - 7.5) ** 2) ** 0.5
+            if r < 2.2:
+                end.putpixel((x, y), (40, 42, 48, 255))
+            elif r < 4.5:
+                end.putpixel((x, y), PLASTIC[6 if y < 8 else 4] + (255,))
+            elif r < 5.5:
+                end.putpixel((x, y), PLASTIC[1] + (255,))
+    sheets["end"] = end
+    return sheets
+
+
 def heap(seed, highlight, body, shadow):
     """A small heap of crystals, as salt and oxalic acid both are."""
     rng = random.Random(seed)
@@ -134,6 +172,8 @@ def main():
     # the copper sheet's tones span only a quarter of the range; stretched over all of the plastic's, it comes out as light as TFMG's
     for sheet in ("", "_connected", "_top", "_top_connected", "_inner", "_inner_connected", "_window", "_window_single"):
         steel(create_texture(f"fluid_tank{sheet}"), PLASTIC, 0.32, 0.3).save(TEXTURES / f"block/plastic_fluid_tank{sheet}.png")
+    for sheet, img in cell_sheets().items():
+        img.save(TEXTURES / f"block/magnetomigration_cell_{sheet}.png")
     liquor("still").save(TEXTURES / "block/fluid/liquor_still.png")
     liquor("flow", flow=True).save(TEXTURES / "block/fluid/liquor_flow.png")
     heap("salt", (255, 255, 255), (232, 234, 236), (176, 180, 186)).save(TEXTURES / "item/salt.png")

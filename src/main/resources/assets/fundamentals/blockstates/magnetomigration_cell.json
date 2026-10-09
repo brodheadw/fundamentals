@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "fundamentals:block/magnetomigration_cell"
+    },
+    "facing=east": {
+      "model": "fundamentals:block/magnetomigration_cell",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "fundamentals:block/magnetomigration_cell",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "fundamentals:block/magnetomigration_cell",
+      "y": 270
+    }
+  }
+}

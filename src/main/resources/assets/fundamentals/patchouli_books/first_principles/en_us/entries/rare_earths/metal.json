@@ -2,7 +2,7 @@
   "name": "Oxide to metal",
   "category": "fundamentals:rare_earths",
   "icon": "fundamentals:neodymium_ingot",
-  "sortnum": 6,
+  "sortnum": 7,
   "pages": [
     {
       "type": "patchouli:text",

@@ -1,0 +1,9 @@
+{
+  "type": "fundamentals:magnetic",
+  "liquor": "fundamentals:yttrium_heavies_liquor",
+  "light": "fundamentals:yttrium_liquor",
+  "heavy": "fundamentals:holmium_to_lutetium_liquor",
+  "light_fraction": 0.85,
+  "attracted": "fundamentals:holmium_to_lutetium_liquor",
+  "passes": 2
+}
