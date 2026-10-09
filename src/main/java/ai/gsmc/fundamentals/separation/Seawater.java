@@ -40,7 +40,7 @@ public final class Seawater {
         return state.is(Blocks.WATER) && state.getFluidState().isSource() && sea(level.getBiome(pos));
     }
 
-    /** Water's own properties, as NeoForge gives vanilla water's type: it swims, drowns, douses fire and hydrates as water does. */
+    /** Water's own properties, as NeoForge gives vanilla water's type: it swims, drowns and douses fire as water does. It does not water farmland: salt kills crops. */
     public static FluidType type(String descriptionId) {
         return new FluidType(FluidType.Properties.create()
                 .descriptionId(descriptionId)
@@ -51,7 +51,7 @@ public final class Seawater {
                 .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
                 .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
                 .sound(SoundActions.FLUID_VAPORIZE, SoundEvents.FIRE_EXTINGUISH)
-                .canHydrate(true));
+                .canHydrate(false));
     }
 
     public static Fluid fluid() {

@@ -146,11 +146,21 @@ def geology():
         "Heavy minerals weather out of the rock and settle where water slows. " + placer_text + " No digging: pan the sand.", "Placer sands"), 90)
     entry("geology", "salt", "Salt and seawater", "fundamentals:seawater_bucket", pages_of(
         "The sea is salt and the rivers are not. Water drawn from a source in an ocean or off a beach, by bucket, hose pulley or a pump at an open pipe, "
-        "comes up as seawater; from a river, a lake, a swamp or a cave it is fresh water as ever. In a tank, a pipe or poured out it is water in all but name.", "Salt and seawater") + pages_of(
+        "comes up as seawater; from a river, a lake, a swamp or a cave it is fresh water as ever. Poured out it is water again. "
+        "In a pipe its salt tells: seawater eats copper, slowly, half an hour or so to a pipe, so an intake that runs for long wants plastic.", "Salt and seawater") + pages_of(
         "Fresh water boils away to nothing: salt is made from seawater. 1,000 mB boiled down in a heated basin leaves two salt and 100 mB of bittern, "
-        "the bitter mother liquor left once the halite has crystallised, rich in magnesium chloride; 500 mB of bittern boiled down gives a magnesium chloride, "
+        "the bitter mother liquor left once the halite has crystallised, rich in magnesium chloride, and gives back the steam as 900 mB of fresh water: "
+        "a salt works' evaporator and a desalination plant are one machine. 500 mB of bittern boiled down gives a magnesium chloride, "
         "the titanium plant's magnesium. Or dig it: halite, rock salt, lies in seams in the desert evaporite beds with the borax and trona, "
-        "and a millstone or crushing wheels grind a raw halite to two salt. Bittern is a strong chloride and eats copper pipe like the liquors.") + [
+        "and a millstone or crushing wheels grind a raw halite to two salt. Bittern is a strong chloride and eats copper pipe like the liquors.") + pages_of(
+        "Seawater will not raise steam. A boiler takes fresh water only, as real ones take it demineralised: salt would scale the tubes and eat them. "
+        "Nor does it water crops. Seawater is a lixiviant, though: four ion-adsorption clay in 1,000 mB of it under a mixer leach to 250 mB of crude heavy liquor, "
+        "twice the water the salt-and-water leach takes, being half as strong.") + pages_of(
+        "Bittern holds the sea's bromide. 1,000 mB of it and 100 mB of chlorine in a heated vat with a mixer give 100 mB of bromine, "
+        "the chlorine taking the bromide's place, and the bittern's two magnesium chloride. Bromine is a dark red-brown liquid that boils at 59 °C: "
+        "it fumes and poisons like hydrofluoric acid, burns what stands in it, and eats copper, iron and aluminium. "
+        "Ten millibuckets of it in a quartz envelope make a halogen lamp: a tungsten filament, a quartz, four copper and three steel nuggets "
+        "and 10 mB of bromine under a mixer make four light bulbs.", "Bromine") + [
         spotlight("fundamentals:raw_halite", "Halite is sodium chloride, glassy cubes that are colourless when pure and pink or orange where salt-loving microbes or a trace of iron stained it.", "Halite")], 91)
 
 
@@ -315,7 +325,7 @@ def rare_earths():
         "it is the one acid glass cannot hold. Nitric acid eats copper and iron, and aqua regia, three of hydrochloric to one of nitric, eats gold as well. Phosphoric acid only stings, which is why it is in your cola. Stone, deepslate and the vats shrug all of them off.") + pages_of(
         "Hydrofluoric acid, nitric acid and aqua regia fume. Within two blocks of any of them in the open, as a block or in a basin it is being used in, you take a hit a second and the world swims, and hydrofluoric poisons. "
         "The gas mask is Create's: a diving helmet over a filled copper backtank, which breathes its air instead. "
-        "And acid eats copper: a Create pipe carrying any acid corrodes and, after a couple of minutes on average, bursts and spills it. The liquors are chlorides in dilute acid, and the spent liquor, the calcium chloride liquor and bittern are chloride too: they eat copper as well, more slowly, eight minutes or so to a pipe. Run the plant in The Factory Must Grow's plastic pipes, pumps and valves (or glass pipe), which neither can touch; its metal ones fare no better than copper. The organic, kerosene, is harmless. "
+        "And acid eats copper: a Create pipe carrying any acid corrodes and, after a couple of minutes on average, bursts and spills it. The liquors are chlorides in dilute acid, and the spent liquor, the calcium chloride liquor and bittern are chloride too: they eat copper as well, more slowly, eight minutes or so to a pipe; seawater slower still, half an hour. Run the plant in The Factory Must Grow's plastic pipes, pumps and valves (or glass pipe), which neither can touch; its metal ones fare no better than copper. The organic, kerosene, is harmless. "
         "Tanks corrode too, ten times slower for the thicker wall: a copper or metal tank of acid loses a block of its wall in twenty minutes or so, and that block's share of what it held, the acid spilling; under a liquor, in eighty. "
         "Keep the acid and the liquors in the Plastic Fluid Tank, as real plants keep hydrochloric acid in fibreglass and polyethylene.") + [crafting("fundamentals:plastic_fluid_tank")], 10)
     entry("rare_earths", "making_acids", "Making the acids", "fundamentals:nitric_acid_bucket", pages_of(
