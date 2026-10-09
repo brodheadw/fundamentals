@@ -8,6 +8,8 @@
     "create:copper_nugget",
     "create:copper_sheet",
     "create:crushed_raw_copper",
+    "fundamentals:alnico_ingot",
+    "fundamentals:alnico_magnet",
     "fundamentals:azurite_ore",
     "fundamentals:bimetallic_thermometer",
     "fundamentals:blister_copper_ingot",

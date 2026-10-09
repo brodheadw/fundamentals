@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:alnico_ingot",
+    "fundamentals:alnico_magnet",
     "fundamentals:cobalt_dust",
     "fundamentals:cobalt_ingot",
     "fundamentals:cobalt_nugget",
@@ -10,6 +12,7 @@
     "fundamentals:samarium_cobalt_block",
     "fundamentals:samarium_cobalt_dust",
     "fundamentals:samarium_cobalt_ingot",
+    "fundamentals:samarium_cobalt_magnet",
     "fundamentals:samarium_cobalt_nugget",
     "fundamentals:samarium_cobalt_plate",
     "fundamentals:superalloy_ingot",

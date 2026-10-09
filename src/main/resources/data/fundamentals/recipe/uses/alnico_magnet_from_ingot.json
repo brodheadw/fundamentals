@@ -1,0 +1,13 @@
+{
+  "type": "tfmg:polarizing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/alnico"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:alnico_magnet"
+    }
+  ]
+}

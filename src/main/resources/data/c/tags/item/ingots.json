@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "#c:ingots/alnico",
     "#c:ingots/alumel",
     "#c:ingots/aluminium_scandium",
     "#c:ingots/blister_copper",
@@ -12,6 +13,7 @@
     "#c:ingots/crude_tin",
     "#c:ingots/didymium",
     "#c:ingots/dysprosium",
+    "#c:ingots/dysprosium_neodymium_iron_boron",
     "#c:ingots/ferrochrome",
     "#c:ingots/gadolinium",
     "#c:ingots/iridium",

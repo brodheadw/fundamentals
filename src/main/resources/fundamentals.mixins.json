@@ -6,12 +6,17 @@
 	"mixins": [
 		"BoilerFreshWaterMixin",
 		"CompoundContainerAccessor",
+		"GeneratorMagnetMixin",
+		"MagnetGogglesMixin",
+		"MotorMagnetMixin",
 		"OreVeinTypeMixin",
 		"OreVeinifierMixin",
 		"PipeCorrosionMixin",
+		"RotorMagnetMixin",
 		"SeawaterBucketMixin",
 		"SeawaterHoseMixin",
 		"SeawaterPipeMixin",
+		"StatorGogglesMixin",
 		"TankCorrosionMixin",
 		"TreeNodePositionMixin"
 	],

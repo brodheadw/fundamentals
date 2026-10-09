@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:storage_blocks/dysprosium_neodymium_iron_boron"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:dysprosium_neodymium_iron_boron_ingot",
+    "count": 9
+  }
+}
