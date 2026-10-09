@@ -54,6 +54,7 @@ public final class Reagents {
             new Reagent("phosphoric_acid", 0xE8ECE4, Kind.ACID),
             new Reagent("hydrofluoric_acid", 0xE6F0EA, Kind.ACID),
             new Reagent("aqua_regia", 0xE0662A, Kind.ACID),
+            new Reagent("bromine", 0x7A1E0E, Kind.ACID),
             new Reagent("argon", 0xC8D8F0, Kind.GAS),
             new Reagent("chlorine", 0xD2E496, Kind.GAS),
             new Reagent("water_gas", 0xD8DCE0, Kind.GAS),

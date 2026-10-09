@@ -4,6 +4,7 @@
 	"package": "ai.gsmc.fundamentals.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
+		"BoilerFreshWaterMixin",
 		"OreVeinTypeMixin",
 		"OreVeinifierMixin",
 		"PipeCorrosionMixin",

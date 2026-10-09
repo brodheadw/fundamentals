@@ -1,0 +1,43 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:tungsten_filament"
+    },
+    {
+      "tag": "c:gems/quartz"
+    },
+    {
+      "tag": "c:nuggets/copper"
+    },
+    {
+      "tag": "c:nuggets/copper"
+    },
+    {
+      "tag": "c:nuggets/copper"
+    },
+    {
+      "tag": "c:nuggets/copper"
+    },
+    {
+      "tag": "c:nuggets/steel"
+    },
+    {
+      "tag": "c:nuggets/steel"
+    },
+    {
+      "tag": "c:nuggets/steel"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 10,
+      "fluid": "fundamentals:bromine"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:light_bulb",
+      "count": 4
+    }
+  ]
+}

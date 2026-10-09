@@ -80,6 +80,8 @@ ACIDS = {
     "hydrofluoric_acid": ("Hydrofluoric Acid", 0xE6F0EA),
     # three of hydrochloric to one of nitric, fuming orange-red with the nitrosyl chloride and chlorine it gives off
     "aqua_regia": ("Aqua Regia", 0xE0662A),
+    # No acid, but it lives with them: a dense, dark red-brown liquid that boils at 59 C, fumes, burns the skin and eats metal.
+    "bromine": ("Bromine", 0x7A1E0E),
 }
 # What the plant cannot use: the spent chloride liquor every cut leaves behind, and the calcium chloride liquor it
 # becomes once lime has neutralised it. That boils down to calcium chloride, which is where calcium metal comes from.
@@ -311,6 +313,8 @@ DISSOLVES = {
     "phosphoric_acid": [],
     "aqua_regia": ["#c:storage_blocks/gold", "minecraft:gold_block", "minecraft:raw_gold_block", "#c:storage_blocks/copper", "#c:storage_blocks/iron",
                    "minecraft:copper_block", "minecraft:iron_block", "minecraft:cut_copper"],
+    "bromine": ["#c:storage_blocks/aluminum", "#c:storage_blocks/copper", "#c:storage_blocks/iron", "minecraft:copper_block", "minecraft:iron_block",
+                "minecraft:cut_copper"],
 }
 
 
@@ -327,8 +331,10 @@ def acids():
 
 def chemistry():
     # Sea salt: seawater boiled down in a heated pan leaves the halite and, once it has crystallised, the bittern. Fresh water
-    # carries next to no salt. Then the Mannheim process for the acid.
-    mixing("salt", [fluid("seawater", 1000)], [result_item("salt", 2), result_fluid("bittern", 100)], heated=True)
+    # carries next to no salt. The steam is the rest of it, condensed: a vacuum-pan salt works and a thermal desalination
+    # plant are the same evaporator, so the pan gives back the 900 mB the halite and bittern do not keep, as fresh water.
+    # Then the Mannheim process for the acid.
+    mixing("salt", [fluid("seawater", 1000)], [result_item("salt", 2), result_fluid("bittern", 100), {"id": "minecraft:water", "amount": 900}], heated=True)
     mixing("hydrochloric_acid", item("salt", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("hydrochloric_acid", 500)], heated=True)
     # Saltpetre heated in sulfuric acid gives up nitric acid, which boils off at 83 C into the receiver: Glauber's retort.
     mixing("nitric_acid", item("tfmg:nitrate_dust", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("nitric_acid", 500)], heated=True)
@@ -381,6 +387,15 @@ def chemistry():
            [result_fluid("scandium_liquor", 500)], heated=True)
     mixing("heavy_rare_earth_liquor_from_clay", item("raw_ion_adsorption_clay", 4) + [item("salt"), fluid("minecraft:water", 500)],
            [result_fluid("crude_heavy_rare_earth_liquor", 250), {"id": "minecraft:clay_ball", "count": 4}])
+    # Seawater is a lixiviant too, at about half the strength of the 6 to 8 per cent salt the heaps were leached with (and its
+    # magnesium exchanges as well as sodium does): twice as much of it lifts the same rare earths.
+    mixing("heavy_rare_earth_liquor_from_clay_with_seawater", item("raw_ion_adsorption_clay", 4) + [fluid("seawater", 1000)],
+           [result_fluid("crude_heavy_rare_earth_liquor", 250), {"id": "minecraft:clay_ball", "count": 4}])
+    # Bromine from bittern, as it was first made from the Stassfurt potash bitterns: chlorine oxidises the bromide,
+    # Cl2 + 2 Br- -> Br2 + 2 Cl-, one bromine for each chlorine, and steam blown through the hot liquor carries the bromine
+    # out. What is left is bittern still, its magnesium chloride boiling down as it would have: two from 1,000 mB.
+    vat("bromine", [fluid("bittern", 1000), fluid("chlorine", 100)], [result_fluid("bromine", 100), result_item("magnesium_chloride", 2)],
+        ["tfmg:mixing"], folder="salt")
 
 
 def vat(name, ingredients, results, machines, heated=True, time=100, folder="reduction"):
@@ -666,6 +681,7 @@ def names():
         lang[f"block.fundamentals.{acid}"] = FLUIDS[acid][0]
         lang[f"item.fundamentals.{acid}_bucket"] = f"{FLUIDS[acid][0]} Bucket"
     lang["item.fundamentals.seawater_bucket"] = "Seawater Bucket"
+    lang["goggles.fundamentals.boiler.fresh_water"] = "No water coming in: a boiler takes fresh water, never seawater"
     for name, display in PLANT_ITEMS.items():
         lang[f"item.fundamentals.{name}"] = display
     lang["goggles.fundamentals.mixer_settler.stages"] = "Battery of %s stages, %s mB a batch"
