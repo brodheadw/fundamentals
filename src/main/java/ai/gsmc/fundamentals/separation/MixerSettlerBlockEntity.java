@@ -44,6 +44,8 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     /** Ticks of running before a battery of one stage first delivers; each further stage adds as much. */
     public static final int EQUILIBRATION_PER_STAGE = 40;
     static final int STIR_TICKS = 30;
+    /** How often a running battery looks again at what might stop it; a cut always looks first. */
+    private static final int STALL_INTERVAL = 10;
 
     final Tank organic = new Tank();
     final Tank aqueous = new Tank();
@@ -61,6 +63,13 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     /** Cuts run on a crude feed since the organic was last clean; at three the crud fouls it. */
     int crud;
     boolean dirty;
+    /** Bumped whenever a stage anywhere forms, dissolves or loads, which is when a cached battery may have changed. */
+    static int formations;
+    @Nullable
+    private Battery battery;
+    private int batteryFormations;
+    @Nullable
+    private Optional<Battery.Stall> stall;
 
     public MixerSettlerBlockEntity(BlockPos pos, BlockState state) {
         super(Separation.mixerSettlerEntity(), pos, state);
@@ -148,6 +157,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     }
 
     void becomeSingle() {
+        formations++;
         controller = null;
         across = along = tall = 1;
         resize();
@@ -192,7 +202,16 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
 
     public boolean isHead() { return nextStage(false) == null; }
     public boolean isTail() { return nextStage(true) == null; }
-    public Battery battery() { return Battery.of(this); }
+    public Battery battery() {
+        if (level == null || level.isClientSide) {
+            return Battery.of(this);
+        }
+        if (battery == null || batteryFormations != formations || battery.stages().stream().anyMatch(BlockEntity::isRemoved)) {
+            battery = Battery.of(this);
+            batteryFormations = formations;
+        }
+        return battery;
+    }
 
     /** Where the stage's Mechanical Mixer stands: over the middle casing of the trough's top layer. */
     public BlockPos mixerPos() {
@@ -284,7 +303,10 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         if (battery.head() == casing) {
             // the battery comes to equilibrium before its first batch and keeps time after
             // a momentary hiccup costs a little; the lever off or the feed gone costs everything
-            Optional<Battery.Stall> stall = battery.stall();
+            if (casing.stall == null || level.getGameTime() % STALL_INTERVAL == 0) {
+                casing.stall = battery.stall();
+            }
+            Optional<Battery.Stall> stall = casing.stall;
             if (stall.isEmpty()) {
                 casing.settled++;
             } else if (stall.get().key().equals("lever") || stall.get().key().equals("idle")) {
@@ -298,7 +320,10 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
             }
             if (stall.isEmpty() && casing.settled >= battery.equilibration() && ++casing.cooldown >= PERIOD) {
                 casing.cooldown = 0;
-                battery.runCut();
+                casing.stall = battery.stall();
+                if (casing.stall.isEmpty()) {
+                    battery.runCut();
+                }
             }
         }
     }
@@ -434,6 +459,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
+        formations++;
         controller = NbtUtils.readBlockPos(tag, "controller").orElse(null);
         int[] size = tag.getIntArray("size");
         if (size.length == 3) {

@@ -7,9 +7,14 @@
     "PFP"
   ],
   "key": {
-    "P": {
-      "tag": "fundamentals:plastic_sheets"
-    },
+    "P": [
+      {
+        "tag": "fundamentals:plastic_sheets"
+      },
+      {
+        "tag": "c:plates/stainless_steel"
+      }
+    ],
     "F": {
       "item": "create:fluid_pipe"
     }

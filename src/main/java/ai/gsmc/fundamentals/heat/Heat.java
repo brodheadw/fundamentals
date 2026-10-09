@@ -6,12 +6,15 @@ import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.SectionPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.chunk.LevelChunk;
+import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
@@ -73,12 +76,18 @@ public final class Heat {
 
     /** A transient source: {@code celsius} at {@code pos}, falling off over {@code reach}, for {@code ticks}. Negative cools. */
     public static void boost(Level level, BlockPos pos, double celsius, int reach, int ticks) {
+        if (level.isClientSide) {
+            return;
+        }
         BOOSTS.computeIfAbsent(level, l -> new ArrayList<>()).add(new Boost(pos.immutable(), celsius, reach, level.getGameTime() + ticks));
         CACHE.remove(level);
     }
 
-    /** The temperature at {@code pos}, °C. */
+    /** The temperature at {@code pos}, °C. The cache and the boosts are the server's; a client reads the blocks afresh. */
     public static double at(Level level, BlockPos pos) {
+        if (level.isClientSide) {
+            return ambient(level, pos) + sources(level, pos);
+        }
         Map<Long, double[]> cache = CACHE.computeIfAbsent(level, l -> new HashMap<>());
         long key = pos.asLong();
         double[] hit = cache.get(key);
@@ -88,7 +97,10 @@ public final class Heat {
         }
         double value = ambient(level, pos) + sources(level, pos);
         if (cache.size() > 4096) {
-            cache.clear();
+            cache.values().removeIf(v -> now - (long) v[0] >= CACHE_TICKS);
+            if (cache.size() > 4096) {
+                cache.clear();
+            }
         }
         cache.put(key, new double[] {now, value});
         return value;
@@ -114,27 +126,46 @@ public final class Heat {
         return celsius;
     }
 
-    /** Every source within reach, its own heat at its block and its outside heat falling off linearly to nothing at its reach, plus boosts and providers. */
+    /** Every source within reach, its own heat at its block and its outside heat falling off linearly to nothing at its reach, plus boosts
+     * and providers. Only loaded chunks are read, and a chunk section whose palette holds no source is passed over whole. */
     public static double sources(Level level, BlockPos at) {
         double sum = 0;
-        for (BlockPos pos : BlockPos.betweenClosed(at.offset(-MAX_REACH, -MAX_REACH, -MAX_REACH), at.offset(MAX_REACH, MAX_REACH, MAX_REACH))) {
-            BlockState state = level.getBlockState(pos);
-            if (state.isAir()) {
-                continue;
+        int minX = at.getX() - MAX_REACH, maxX = at.getX() + MAX_REACH;
+        int minY = Math.max(level.getMinBuildHeight(), at.getY() - MAX_REACH), maxY = Math.min(level.getMaxBuildHeight() - 1, at.getY() + MAX_REACH);
+        int minZ = at.getZ() - MAX_REACH, maxZ = at.getZ() + MAX_REACH;
+        BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
+        for (int cx = SectionPos.blockToSectionCoord(minX); cx <= SectionPos.blockToSectionCoord(maxX); cx++) {
+            for (int cz = SectionPos.blockToSectionCoord(minZ); cz <= SectionPos.blockToSectionCoord(maxZ); cz++) {
+                if (!(level.getChunkSource().getChunkNow(cx, cz) instanceof LevelChunk chunk)) {
+                    continue;
+                }
+                for (int cy = SectionPos.blockToSectionCoord(minY); cy <= SectionPos.blockToSectionCoord(maxY); cy++) {
+                    LevelChunkSection section = chunk.getSection(chunk.getSectionIndexFromSectionY(cy));
+                    if (section.hasOnlyAir() || !section.maybeHas(Heat::isSource)) {
+                        continue;
+                    }
+                    for (int x = Math.max(minX, cx << 4); x <= Math.min(maxX, (cx << 4) + 15); x++) {
+                        for (int y = Math.max(minY, cy << 4); y <= Math.min(maxY, (cy << 4) + 15); y++) {
+                            for (int z = Math.max(minZ, cz << 4); z <= Math.min(maxZ, (cz << 4) + 15); z++) {
+                                BlockState state = section.getBlockState(x & 15, y & 15, z & 15);
+                                HeatSource source = state.isAir() ? null : state.getBlockHolder().getData(SOURCES);
+                                if (source == null) {
+                                    continue;
+                                }
+                                double scale = SCALERS.containsKey(state.getBlock()) ? SCALERS.get(state.getBlock()).apply(state)
+                                        : state.hasProperty(BlockStateProperties.LIT) && !state.getValue(BlockStateProperties.LIT) ? 0 : 1;
+                                if (scale == 0) {
+                                    continue;
+                                }
+                                double distance = Math.sqrt(pos.set(x, y, z).distSqr(at));
+                                sum += contribution((distance == 0 ? source.celsius() : source.outside()) * scale, source.reach(), distance);
+                            }
+                        }
+                    }
+                }
             }
-            HeatSource source = state.getBlockHolder().getData(SOURCES);
-            if (source == null) {
-                continue;
-            }
-            double scale = SCALERS.containsKey(state.getBlock()) ? SCALERS.get(state.getBlock()).apply(state)
-                    : state.hasProperty(BlockStateProperties.LIT) && !state.getValue(BlockStateProperties.LIT) ? 0 : 1;
-            if (scale == 0) {
-                continue;
-            }
-            double distance = Math.sqrt(pos.distSqr(at));
-            sum += contribution((distance == 0 ? source.celsius() : source.outside()) * scale, source.reach(), distance);
         }
-        List<Boost> boosts = BOOSTS.get(level);
+        List<Boost> boosts = level.isClientSide ? null : BOOSTS.get(level);
         if (boosts != null) {
             long now = level.getGameTime();
             boosts.removeIf(b -> b.until < now);
@@ -146,6 +177,10 @@ public final class Heat {
             sum += provider.celsiusAt(level, at);
         }
         return sum;
+    }
+
+    private static boolean isSource(BlockState state) {
+        return !state.isAir() && state.getBlockHolder().getData(SOURCES) != null;
     }
 
     private static double contribution(double celsius, int reach, double distance) {

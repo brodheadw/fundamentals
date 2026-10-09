@@ -29,6 +29,11 @@ public class CanisterItem extends Item {
         return canister.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyOne();
     }
 
+    /** Anything but another container: a canister in a canister would nest without end. */
+    public static boolean sealable(ItemStack stack) {
+        return !(stack.getItem() instanceof CanisterItem) && !stack.has(DataComponents.CONTAINER);
+    }
+
     public static void seal(ItemStack canister, ItemStack stack) {
         canister.set(DataComponents.CONTAINER, ItemContainerContents.fromItems(List.of(stack)));
     }
@@ -39,7 +44,7 @@ public class CanisterItem extends Item {
             return false;
         }
         ItemStack inside = contents(canister);
-        if (inside.isEmpty() && slot.hasItem()) {
+        if (inside.isEmpty() && slot.hasItem() && sealable(slot.getItem())) {
             ItemStack taken = slot.safeTake(slot.getItem().getCount(), slot.getItem().getCount(), player);
             if (!taken.isEmpty()) {
                 seal(canister, taken);
@@ -47,8 +52,12 @@ public class CanisterItem extends Item {
             return true;
         }
         if (!inside.isEmpty() && !slot.hasItem() && slot.mayPlace(inside)) {
-            slot.safeInsert(inside);
-            player.containerMenu.setCarried(new ItemStack(Oxidation.canister()));
+            ItemStack rest = slot.safeInsert(inside);
+            if (rest.isEmpty()) {
+                player.containerMenu.setCarried(new ItemStack(Oxidation.canister()));
+            } else {
+                seal(canister, rest);
+            }
             return true;
         }
         return false;
@@ -60,7 +69,7 @@ public class CanisterItem extends Item {
             return false;
         }
         ItemStack inside = contents(canister);
-        if (inside.isEmpty() && !other.isEmpty()) {
+        if (inside.isEmpty() && !other.isEmpty() && sealable(other)) {
             seal(canister, other.copy());
             carried.set(ItemStack.EMPTY);
             return true;

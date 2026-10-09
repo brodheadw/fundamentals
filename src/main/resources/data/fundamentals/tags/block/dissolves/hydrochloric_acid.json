@@ -5,7 +5,6 @@
     "minecraft:dripstone_block",
     "minecraft:pointed_dripstone",
     "minecraft:bone_block",
-    "minecraft:tuff",
     {
       "id": "create:limestone",
       "required": false
