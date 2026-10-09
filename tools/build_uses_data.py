@@ -304,12 +304,15 @@ def tungsten():
 
 
 def more_sinks():
-    """Cerium oxide is the oxygen store of every catalytic converter, and palladium on it burns what the engine left: the Factory's exhaust
-    takes two of each, ceria and palladium nuggets. Lithium cobalt oxide is the cathode
+    """Cerium oxide is the oxygen store of every catalytic converter: the Factory's exhaust takes two. Palladium on the ceria burns what the
+    engine left, so a converter made with palladium nuggets lasts as two. Lithium cobalt oxide is the cathode
     the first lithium batteries ran on: the lithium charge takes a cobalt. Neodymium and holmium colour glass, as erbium does."""
-    shaped(TFMG / "crafting/materials/exhaust.json", ["KPK", "EPE", "CPC"],
-           {"K": {"tag": "c:nuggets/palladium"}, "C": {"tag": "c:ingots/cast_iron"}, "P": {"item": "tfmg:cast_iron_pipe"}, "E": {"item": "fundamentals:cerium_oxide"}},
+    shaped(TFMG / "crafting/materials/exhaust.json", ["BPB", "EPE", "CPC"],
+           {"B": {"item": "minecraft:iron_bars"}, "C": {"tag": "c:ingots/cast_iron"}, "P": {"item": "tfmg:cast_iron_pipe"}, "E": {"item": "fundamentals:cerium_oxide"}},
            {"count": 1, "id": "tfmg:exhaust"})
+    shaped(USES / "exhaust_with_palladium.json", ["KPK", "EPE", "CPC"],
+           {"K": {"tag": "c:nuggets/palladium"}, "C": {"tag": "c:ingots/cast_iron"}, "P": {"item": "tfmg:cast_iron_pipe"}, "E": {"item": "fundamentals:cerium_oxide"}},
+           {"count": 2, "id": "tfmg:exhaust"})
     shaped(TFMG / "crafting/materials/lithium_charge.json", [" P ", "LKL", " A "],
            {"A": {"tag": "c:plates/aluminum"}, "L": {"tag": "c:ingots/lithium"}, "P": {"item": "tfmg:plastic_sheet"}, "K": {"item": "fundamentals:cobalt_ingot"}},
            {"count": 1, "id": "tfmg:lithium_charge"})

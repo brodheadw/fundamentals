@@ -37,7 +37,8 @@ import java.util.List;
  * What the plant does to people and pipes. The fuming acids (hydrofluoric, nitric, aqua regia) hurt anyone within reach of them
  * in the open: as blocks in the world, or in a basin they are being used in. Create's diving helmet on a filled
  * backtank is the gas mask, and breathes its air. And the acids eat copper: Create's pipes carrying one corrode
- * and eventually burst, spilling it; TFMG's plastic and glass pipes do not.
+ * and eventually burst, spilling it. The liquors are rare earth chlorides in dilute acid and the spent liquor and brine
+ * are chloride too, so they eat it as well, more slowly. Plastic pipes and glass ones do not corrode.
  */
 public final class Hazards {
 
@@ -45,6 +46,8 @@ public final class Hazards {
     private static final int REACH = 2;
     /** Per tick, for a pipe carrying an acid: on average a pipe lasts two minutes. */
     public static double corrosionChance = 1.0 / 2400;
+    /** Per tick, for a pipe carrying a liquor, crude liquor, spent liquor or brine: on average eight minutes. */
+    public static double liquorCorrosionChance = 1.0 / 9600;
 
     private Hazards() {}
 
@@ -106,34 +109,58 @@ public final class Hazards {
 
     /** Called every tick for every pipe by the mixin on Create's fluid transport: an acid in a corrodible pipe may burst it. */
     public static void corrode(Level level, BlockPos pos, BlockState state, List<FluidStack> carried) {
-        if (level.isClientSide || !corrodible(state) || level.random.nextDouble() >= corrosionChance) {
+        if (level.isClientSide || !corrodible(state)) {
             return;
         }
+        FluidStack eating = null;
         for (FluidStack stack : carried) {
-            if (stack.isEmpty() || Separation.kind(stack.getFluid()) != Reagents.Kind.ACID) {
+            if (stack.isEmpty()) {
                 continue;
             }
-            Acids.Acid acid = Acids.all().values().stream().filter(a -> a.source == stack.getFluid() || a.flowing == stack.getFluid()).findFirst().orElse(null);
-            level.destroyBlock(pos, false);
-            if (acid != null) {
-                level.setBlock(pos, acid.block.defaultBlockState().setValue(LiquidBlock.LEVEL, 6), Block.UPDATE_ALL);
+            Reagents.Kind kind = Separation.kind(stack.getFluid());
+            if (kind == Reagents.Kind.ACID) {
+                eating = stack;
+                break;
             }
-            level.playSound(null, pos, SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.8F, 0.9F);
-            if (level instanceof ServerLevel server) {
-                server.sendParticles(ParticleTypes.CLOUD, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 12, 0.3, 0.3, 0.3, 0.02);
+            if (eating == null && corrodes(kind)) {
+                eating = stack;
             }
+        }
+        if (eating == null || level.random.nextDouble() >= chance(eating)) {
             return;
+        }
+        FluidStack spilled = eating;
+        Acids.Acid acid = Acids.all().values().stream().filter(a -> a.source == spilled.getFluid() || a.flowing == spilled.getFluid()).findFirst().orElse(null);
+        level.destroyBlock(pos, false);
+        if (acid != null) {
+            level.setBlock(pos, acid.block.defaultBlockState().setValue(LiquidBlock.LEVEL, 6), Block.UPDATE_ALL);
+        }
+        level.playSound(null, pos, SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.8F, 0.9F);
+        if (level instanceof ServerLevel server) {
+            server.sendParticles(ParticleTypes.CLOUD, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 12, 0.3, 0.3, 0.3, 0.02);
         }
     }
 
-    /** Create's pipes are copper and TFMG's metal pipes are metal; only plastic and glass stand up to acid. */
+    public static boolean corrodes(Reagents.Kind kind) {
+        return kind == Reagents.Kind.ACID || kind == Reagents.Kind.LIQUOR || kind == Reagents.Kind.CRUDE || kind == Reagents.Kind.WASTE;
+    }
+
+    public static double chance(FluidStack carried) {
+        Reagents.Kind kind = Separation.kind(carried.getFluid());
+        return kind == Reagents.Kind.ACID ? corrosionChance : corrodes(kind) ? liquorCorrosionChance : 0;
+    }
+
+    /** Create's pipes are copper and TFMG's metal pipes are metal; only plastic and glass stand up to acid. TFMG's pipes are
+     * Create's pipe classes underneath, so plastic is told apart by name. */
     public static boolean corrodible(BlockState state) {
         Block block = state.getBlock();
         ResourceLocation id = BuiltInRegistries.BLOCK.getKey(block);
-        if (block instanceof FluidPipeBlock || block instanceof AxisPipeBlock || block instanceof EncasedPipeBlock
-                || block instanceof SmartFluidPipeBlock || block instanceof GlassFluidPipeBlock) {
-            return !(block instanceof GlassFluidPipeBlock);
+        if (id.getNamespace().equals("tfmg") && id.getPath().contains("plastic") || block instanceof GlassFluidPipeBlock) {
+            return false;
         }
-        return id.getNamespace().equals("tfmg") && id.getPath().contains("pipe") && !id.getPath().contains("plastic") && !id.getPath().contains("glass");
+        if (block instanceof FluidPipeBlock || block instanceof AxisPipeBlock || block instanceof EncasedPipeBlock || block instanceof SmartFluidPipeBlock) {
+            return true;
+        }
+        return id.getNamespace().equals("tfmg") && id.getPath().contains("pipe") && !id.getPath().contains("glass");
     }
 }
