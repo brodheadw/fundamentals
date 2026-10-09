@@ -11,7 +11,8 @@ import java.util.function.BiConsumer;
  * The few items of the chains that are not a form of a material: the phosphor the lamps take, the didymium
  * glass that welders' goggles are made of, the roasted ores on their way to cobalt, copper, zinc and nickel, the
  * flue dust the molybdenite roaster gives up its rhenium in, the lithium chloride lithium is won from, the ferroboron
- * the magnets take their boron as, and the soda ash, sodium salts and aluminium powder of the road to chromium. The recipes
+ * the magnets take their boron as, the soda ash, sodium salts and aluminium powder of the road to chromium, the roasted tin
+ * concentrate the bloomery smelts, and the solder circuit boards are joined with. The recipes
  * are written by tools/build_uses_data.py.
  */
 public final class Uses {
@@ -33,13 +34,15 @@ public final class Uses {
     private static Item sodiumChromate;
     private static Item sodiumDichromate;
     private static Item aluminiumPowder;
+    private static Item roastedTinConcentrate;
+    private static Item solder;
 
     private Uses() {}
 
     public static List<Item> items() {
         return List.of(phosphor, didymiumGlass, roastedCobaltite, roastedChalcopyrite, rheniumFlueDust, tungstenCarbide, tungstenFilament, clarifierSludge,
                 copperCalcine, zincOxide, roastedPentlandite, lithiumChloride, ferroboron, sodaAsh, sodiumChromate, sodiumDichromate,
-                aluminiumPowder);
+                aluminiumPowder, roastedTinConcentrate, solder);
     }
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
@@ -60,6 +63,8 @@ public final class Uses {
         registry.accept(id("sodium_chromate"), sodiumChromate = new Item(new Item.Properties()));
         registry.accept(id("sodium_dichromate"), sodiumDichromate = new Item(new Item.Properties()));
         registry.accept(id("aluminium_powder"), aluminiumPowder = new Item(new Item.Properties()));
+        registry.accept(id("roasted_tin_concentrate"), roastedTinConcentrate = new Item(new Item.Properties()));
+        registry.accept(id("solder"), solder = new Item(new Item.Properties()));
     }
 
     private static ResourceLocation id(String path) {

@@ -24,8 +24,11 @@ What's agreed but not built, in the order it's likely to go. The working plan be
 
 ## Other metals
 
-- **Tin.** Cassiterite generates but ends as ore; bronze is the natural sink. Zinc now reaches Create's zinc ingot (and so
-  its brass), but Create's own zinc ore still generates and smelts in a furnace.
+- **Create's zinc ore.** Zinc now reaches Create's zinc ingot (and so its brass), but Create's own zinc ore still generates
+  and smelts in a furnace.
+- **Tin loose ends.** The niobium, tantalum and tungsten a hard-rock tin concentrate carries are not recovered (wolframite is mined
+  on its own), the hardhead liquation leaves goes to slag rather than back to the smelter, and electrolytic tin refining is not
+  modelled. Placer cassiterite still wants a pickaxe like the vein ore.
 - **Platinum group loose ends.** The reef's minerals join the matte at the leach rather than being floated and smelted with
   it, and the converter matte leach and nickel electrowinning each fold two refinery steps into one. The gold, silver,
   selenium and tellurium a real concentrate carries, sperrylite's arsenic, and copper's own anode slimes (the other

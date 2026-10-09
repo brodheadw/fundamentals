@@ -23,7 +23,8 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "tungsten_carbide": "Tungsten Carbide", "tungsten_filament": "Tungsten Filament", "clarifier_sludge": "Clarifier Sludge",
          "copper_calcine": "Copper Calcine", "zinc_oxide": "Zinc Oxide", "roasted_pentlandite": "Roasted Pentlandite",
          "lithium_chloride": "Lithium Chloride", "ferroboron": "Ferroboron",
-         "soda_ash": "Soda Ash", "sodium_chromate": "Sodium Chromate", "sodium_dichromate": "Sodium Dichromate", "aluminium_powder": "Aluminium Powder"}
+         "soda_ash": "Soda Ash", "sodium_chromate": "Sodium Chromate", "sodium_dichromate": "Sodium Dichromate", "aluminium_powder": "Aluminium Powder",
+         "roasted_tin_concentrate": "Roasted Tin Concentrate", "solder": "Solder"}
 # The platinum refinery's items, registered by uses.PlatinumMetals in this order.
 PGM_ITEMS = {"ammonium_chloride": "Ammonium Chloride", "insoluble_residue": "Insoluble Residue", "iridium_rhodium_residue": "Iridium-Rhodium Residue",
              "ammonium_chloroplatinate": "Ammonium Chloroplatinate", "dichlorodiammine_palladium": "Dichlorodiammine Palladium",
@@ -144,10 +145,10 @@ def scandium():
            {"count": 2, "id": "fundamentals:panel_rack"})
 
 
-def roast(ore, roasted, name=None):
+def roast(ore, roasted, name=None, raw=True):
     """A sulfide ore roasted on a campfire or in a smoker, as galena is, to drive off its sulfur (and arsenic)."""
     for kind, time in (("campfire_cooking", 400), ("smoking", 200)):
-        write(ROASTING / f"{name or roasted}_{kind}.json", {"type": f"minecraft:{kind}", "category": "misc", "ingredient": {"item": f"fundamentals:raw_{ore}"},
+        write(ROASTING / f"{name or roasted}_{kind}.json", {"type": f"minecraft:{kind}", "category": "misc", "ingredient": {"item": f"fundamentals:{'raw_' if raw else ''}{ore}"},
                                                    "result": {"id": f"fundamentals:{roasted}"}, "experience": 0.1, "cookingtime": time})
 
 
@@ -240,6 +241,31 @@ def nickel():
     mixing("nickel_ingot", item("roasted_pentlandite") + item("minecraft:charcoal"), [result("tfmg:nickel_ingot"), result("slag")], "superheated")
     mixing("nickel_ingot_from_laterite", item("raw_nickel_laterite", 4) + item("minecraft:charcoal", 2),
            [result("tfmg:nickel_ingot"), result("slag", 2)], "superheated")
+
+
+def tin():
+    """Cassiterite is heavy (7 to the water's 1) and inert, so a wash leaves it behind as concentrate, hard-rock or placer alike.
+    Roasting drives off the sulfur and arsenic of the pyrite and arsenopyrite that ride with it. Charcoal reduces the oxide at 1,200
+    to 1,300 C, as the blowing house's shaft furnace did and the bloomery does; a superheated basin with coke stands in for the
+    reverberatory. Crude tin carries iron; tin melts at 232 C, so on a gentle heat it runs off the iron-tin hardhead, and green wood
+    stirred through the melt (poling) brings the last dross up. Bronze is a quarter tin, and bell metal; tin-lead solder joins circuit boards."""
+    write(USES / "tin_concentrate.json", {"type": "create:splashing", "ingredients": item("raw_cassiterite"), "results": [result("tin_concentrate")]})
+    roast("tin_concentrate", "roasted_tin_concentrate", raw=False)
+    write(DATA / "recipe/bloomery/crude_tin_from_roasted_tin_concentrate.json", {"type": "fundamentals:bloomery", "ingredient": {"item": "fundamentals:roasted_tin_concentrate"},
+                                                                                "result": {"id": "fundamentals:crude_tin_ingot", "count": 1}, "byproduct": {"id": "fundamentals:slag", "count": 1}})
+    mixing("crude_tin", item("roasted_tin_concentrate", 2) + item("tfmg:coal_coke"), [result("crude_tin_ingot", 2), result("slag")], "superheated")
+    mixing("tin_ingot", item("crude_tin_ingot", 2) + tag("c:rods/wooden"), [result("tin_ingot", 2), {"id": "fundamentals:slag", "chance": 0.25}], "heated")
+    mixing("bronze_ingot", tag("c:ingots/copper", 3) + tag("c:ingots/tin"), [result("bronze_ingot", 4)], "heated")
+    shaped(CREATE / "crafting/curiosities/peculiar_bell.json", ["I", "P"], {"I": {"tag": "c:storage_blocks/bronze"}, "P": {"tag": "c:plates/bronze"}},
+           {"count": 1, "id": "create:peculiar_bell"})
+    shaped(USES / "bell.json", [" S ", "BBB", "B B"], {"S": {"tag": "c:rods/wooden"}, "B": {"tag": "c:ingots/bronze"}}, {"count": 1, "id": "minecraft:bell"})
+    mixing("solder", tag("c:ingots/tin") + tag("c:ingots/lead"), [result("solder", 8)], "heated")
+    board = {"item": "tfmg:unfinished_circuit_board"}
+    write(TFMG / "sequenced_assembly/unfinished_circuit_board.json", {
+        "type": "create:sequenced_assembly", "ingredient": {"item": "tfmg:etched_circuit_board"}, "loops": 4, "results": [{"id": "tfmg:circuit_board"}],
+        "sequence": [{"type": "create:deploying", "ingredients": [board, {"item": part}], "results": [{"id": "tfmg:unfinished_circuit_board"}]}
+                     for part in ("tfmg:capacitor_item", "tfmg:resistor", "tfmg:transistor_item", "tfmg:resistor", "fundamentals:solder")],
+        "transitional_item": {"id": "tfmg:unfinished_circuit_board"}})
 
 
 def rocks():
@@ -473,7 +499,7 @@ def main():
     shutil.rmtree(CREATE, ignore_errors=True)
     shutil.rmtree(LITHIUM, ignore_errors=True)
     shutil.rmtree(PLATINUM, ignore_errors=True)
-    for pattern in ("roasted_c*", "roasted_pentlandite_*", "copper_calcine_*", "zinc_oxide_*"):
+    for pattern in ("roasted_c*", "roasted_pentlandite_*", "copper_calcine_*", "zinc_oxide_*", "roasted_tin_*"):
         for stale in ROASTING.glob(pattern):
             stale.unlink()
     magnets()
@@ -490,6 +516,7 @@ def main():
     iron()
     zinc()
     nickel()
+    tin()
     rocks()
     loot()
     alloys()

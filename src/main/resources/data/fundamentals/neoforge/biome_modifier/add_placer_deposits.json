@@ -4,7 +4,8 @@
   "features": [
     "fundamentals:placer_monazite",
     "fundamentals:placer_ilmenite",
-    "fundamentals:placer_rutile"
+    "fundamentals:placer_rutile",
+    "fundamentals:placer_cassiterite"
   ],
   "step": "underground_decoration"
 }
