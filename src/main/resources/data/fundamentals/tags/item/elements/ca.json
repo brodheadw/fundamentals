@@ -1,0 +1,26 @@
+{
+  "replace": false,
+  "values": [
+    "create:limestone",
+    "fundamentals:calcium_chloride",
+    "fundamentals:calcium_ingot",
+    "fundamentals:euxenite_dust",
+    "fundamentals:euxenite_ore",
+    "fundamentals:fluorite_ore",
+    "fundamentals:loparite_dust",
+    "fundamentals:loparite_ore",
+    "fundamentals:raw_euxenite",
+    "fundamentals:raw_fluorite",
+    "fundamentals:raw_loparite",
+    "fundamentals:raw_scheelite",
+    "fundamentals:scheelite_ore",
+    "minecraft:bone",
+    "minecraft:bone_block",
+    "minecraft:bone_meal",
+    "minecraft:calcite",
+    "minecraft:dripstone_block",
+    "minecraft:lapis_block",
+    "minecraft:lapis_lazuli",
+    "minecraft:pointed_dripstone"
+  ]
+}

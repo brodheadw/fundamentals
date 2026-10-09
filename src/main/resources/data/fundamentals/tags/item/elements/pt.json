@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:ammonium_chloroplatinate",
+    "fundamentals:braggite_ore",
+    "fundamentals:cooperite_ore",
+    "fundamentals:platinum_group_concentrate",
+    "fundamentals:platinum_ingot",
+    "fundamentals:platinum_nugget",
+    "fundamentals:platinum_rhodium_gauze",
+    "fundamentals:platinum_sponge",
+    "fundamentals:raw_braggite",
+    "fundamentals:raw_cooperite",
+    "fundamentals:raw_sperrylite",
+    "fundamentals:reforming_catalyst",
+    "fundamentals:sperrylite_ore"
+  ]
+}

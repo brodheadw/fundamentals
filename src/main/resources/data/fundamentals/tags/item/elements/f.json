@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:bastnasite_concentrate",
+    "fundamentals:bastnasite_dust",
+    "fundamentals:bastnasite_ore",
+    "fundamentals:cerium_fluoride",
+    "fundamentals:didymium_fluoride",
+    "fundamentals:dysprosium_fluoride",
+    "fundamentals:fluorite_ore",
+    "fundamentals:gadolinium_fluoride",
+    "fundamentals:hydrofluoric_acid_bucket",
+    "fundamentals:lanthanum_fluoride",
+    "fundamentals:neodymium_fluoride",
+    "fundamentals:praseodymium_fluoride",
+    "fundamentals:raw_bastnasite",
+    "fundamentals:raw_fluorite",
+    "fundamentals:roasted_bastnasite",
+    "fundamentals:scandium_fluoride",
+    "fundamentals:terbium_fluoride",
+    "fundamentals:yttrium_fluoride"
+  ]
+}

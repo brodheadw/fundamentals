@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:gadolinium_fluoride",
+    "fundamentals:gadolinium_ingot",
+    "fundamentals:gadolinium_oxalate",
+    "fundamentals:gadolinium_oxide",
+    "fundamentals:heavy_rare_earth_concentrate",
+    "fundamentals:heavy_rare_earth_sulfate"
+  ]
+}

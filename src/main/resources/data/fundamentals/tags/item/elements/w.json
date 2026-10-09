@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:raw_scheelite",
+    "fundamentals:raw_wolframite",
+    "fundamentals:scheelite_ore",
+    "fundamentals:tungsten_carbide",
+    "fundamentals:tungsten_dust",
+    "fundamentals:tungsten_filament",
+    "fundamentals:tungsten_ingot",
+    "fundamentals:tungsten_oxide",
+    "fundamentals:tungsten_plate",
+    "fundamentals:wolframite_ore"
+  ]
+}

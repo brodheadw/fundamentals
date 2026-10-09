@@ -2,6 +2,7 @@ package ai.gsmc.fundamentals;
 
 import ai.gsmc.fundamentals.client.GrindingAnimation;
 import ai.gsmc.fundamentals.client.SeparationClient;
+import ai.gsmc.fundamentals.elements.PeriodicTable;
 import ai.gsmc.fundamentals.ironworking.IronWorking;
 import ai.gsmc.fundamentals.loot.AddToChests;
 import ai.gsmc.fundamentals.loot.ScarceInChests;
@@ -85,6 +86,7 @@ public class Fundamentals {
                 Separation.registerItems(helper::register);
                 Uses.registerItems(helper::register);
                 PlatinumMetals.registerItems(helper::register);
+                PeriodicTable.registerItems(helper::register);
             });
             event.register(Registries.FEATURE, helper -> helper.register(DEPOSIT, DepositFeature.INSTANCE));
             event.register(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, helper -> {

@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:braggite_ore",
+    "fundamentals:dichlorodiammine_palladium",
+    "fundamentals:palladium_ingot",
+    "fundamentals:palladium_nugget",
+    "fundamentals:palladium_sponge",
+    "fundamentals:platinum_group_concentrate",
+    "fundamentals:raw_braggite"
+  ]
+}

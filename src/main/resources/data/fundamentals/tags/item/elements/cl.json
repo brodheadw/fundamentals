@@ -1,0 +1,19 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:ammonium_chloride",
+    "fundamentals:ammonium_chloroiridate",
+    "fundamentals:ammonium_chloroplatinate",
+    "fundamentals:ammonium_chlororhodate",
+    "fundamentals:ammonium_chlororuthenate",
+    "fundamentals:aqua_regia_bucket",
+    "fundamentals:calcium_chloride",
+    "fundamentals:dichlorodiammine_palladium",
+    "fundamentals:hydrochloric_acid_bucket",
+    "fundamentals:lithium_chloride",
+    "fundamentals:magnesium_chloride",
+    "fundamentals:salt",
+    "minecraft:lapis_block",
+    "minecraft:lapis_lazuli"
+  ]
+}

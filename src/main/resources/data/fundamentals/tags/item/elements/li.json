@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:calcined_spodumene",
+    "fundamentals:lithium_chloride",
+    "fundamentals:raw_spodumene",
+    "fundamentals:spodumene_ore",
+    "tfmg:crushed_raw_lithium",
+    "tfmg:lithium_block",
+    "tfmg:lithium_ingot",
+    "tfmg:lithium_nugget",
+    "tfmg:raw_lithium"
+  ]
+}

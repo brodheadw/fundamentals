@@ -1,0 +1,23 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:euxenite_dust",
+    "fundamentals:euxenite_ore",
+    "fundamentals:heavy_rare_earth_concentrate",
+    "fundamentals:heavy_rare_earth_sulfate",
+    "fundamentals:ion_adsorption_clay_ore",
+    "fundamentals:phosphor",
+    "fundamentals:raw_euxenite",
+    "fundamentals:raw_ion_adsorption_clay",
+    "fundamentals:raw_thortveitite",
+    "fundamentals:raw_xenotime",
+    "fundamentals:thortveitite_dust",
+    "fundamentals:thortveitite_ore",
+    "fundamentals:xenotime_dust",
+    "fundamentals:xenotime_ore",
+    "fundamentals:yttrium_fluoride",
+    "fundamentals:yttrium_ingot",
+    "fundamentals:yttrium_oxalate",
+    "fundamentals:yttrium_oxide"
+  ]
+}

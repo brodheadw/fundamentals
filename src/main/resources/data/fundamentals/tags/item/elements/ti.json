@@ -1,0 +1,20 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:euxenite_dust",
+    "fundamentals:euxenite_ore",
+    "fundamentals:ilmenite_ore",
+    "fundamentals:loparite_dust",
+    "fundamentals:loparite_ore",
+    "fundamentals:raw_euxenite",
+    "fundamentals:raw_ilmenite",
+    "fundamentals:raw_loparite",
+    "fundamentals:raw_rutile",
+    "fundamentals:rutile_ore",
+    "fundamentals:titania_slag",
+    "fundamentals:titanium_ingot",
+    "fundamentals:titanium_oxide",
+    "fundamentals:titanium_plate",
+    "fundamentals:titanium_sponge"
+  ]
+}

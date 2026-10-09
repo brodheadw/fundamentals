@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:insoluble_residue",
+    "fundamentals:osmium_filament",
+    "fundamentals:osmium_ingot",
+    "fundamentals:osmium_nugget",
+    "fundamentals:osmium_sponge",
+    "fundamentals:platinum_group_concentrate"
+  ]
+}
