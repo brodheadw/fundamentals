@@ -8,6 +8,7 @@ import ai.gsmc.fundamentals.separation.MixerSettlerBlockEntity;
 import ai.gsmc.fundamentals.separation.Reagents;
 import ai.gsmc.fundamentals.separation.Separation;
 import com.simibubi.create.CreateClient;
+import com.simibubi.create.content.fluids.tank.FluidTankRenderer;
 import com.simibubi.create.foundation.block.connected.AllCTTypes;
 import com.simibubi.create.foundation.block.connected.CTModel;
 import com.simibubi.create.foundation.block.connected.CTSpriteShifter;
@@ -35,8 +36,10 @@ public final class SeparationClient {
     public static void register(IEventBus modBus) {
         // hold W over a casing
         PonderIndex.addPlugin(new FundamentalsPonderPlugin());
-        modBus.addListener(EntityRenderersEvent.RegisterRenderers.class, event ->
-                event.registerBlockEntityRenderer(Separation.mixerSettlerEntity(), context -> new MixerSettlerRenderer()));
+        modBus.addListener(EntityRenderersEvent.RegisterRenderers.class, event -> {
+            event.registerBlockEntityRenderer(Separation.mixerSettlerEntity(), context -> new MixerSettlerRenderer());
+            event.registerBlockEntityRenderer(Separation.plasticTankEntity(), FluidTankRenderer::new);
+        });
         // Create's connected textures, so the casings of a stage read as one riveted tank; Create swaps the
         // wrapped model in when models bake.
         // the acids stand in the world as liquid blocks, drawn like water
@@ -44,8 +47,10 @@ public final class SeparationClient {
             ItemBlockRenderTypes.setRenderLayer(acid.source, RenderType.translucent());
             ItemBlockRenderTypes.setRenderLayer(acid.flowing, RenderType.translucent());
         }));
-        modBus.addListener(FMLClientSetupEvent.class, event -> CreateClient.MODEL_SWAPPER.getCustomBlockModels()
-                .register(id("mixer_settler"), model -> new CTModel(model, new StageWalls())));
+        modBus.addListener(FMLClientSetupEvent.class, event -> {
+            CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(id("mixer_settler"), model -> new CTModel(model, new StageWalls()));
+            CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(id("plastic_fluid_tank"), PlasticTankModel::new);
+        });
         modBus.addListener(RegisterClientExtensionsEvent.class, event -> {
             for (Reagents.Reagent reagent : Reagents.ALL) {
                 // One texture for all of them, tinted; the organics are the opaque ones.

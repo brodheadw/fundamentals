@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
-"""Paints the mixer-settler casing, the one fluid texture every reagent is tinted from, and the plant's
-salts. Edit and re-run; don't hand-edit the PNGs.
+"""Paints the mixer-settler casing, the plastic fluid tank, the one fluid texture every reagent is tinted from, and the
+plant's salts. Edit and re-run; don't hand-edit the PNGs.
 
 The casing is a welded polypropylene tank, as the real ones are: Create's fluid-tank panel and connected-texture
 sheet (MIT) recoloured by luminance onto a dark flat PP grey, so the frame ribs land on the exterior edges of a stage
-the way Create's connected textures place them.
+the way Create's connected textures place them. The plastic tank is Create's copper tank sheet by sheet, recoloured the same
+way onto The Factory Must Grow's plastic, so it reads as the same stuff as its plastic pipes and pumps.
 
     python3 tools/paint_separation.py
 """
@@ -20,6 +21,8 @@ CREATE_JAR = next(Path.home().glob(".gradle/caches/modules-2/files-2.1/maven.mod
 # Dark steel, from the shadow in a seam to the glint on a rivet.
 # Welded polypropylene sheet, as the real tanks are: dark, flat, a little blue, the frame ribs a shade lighter.
 STEEL = [(30, 33, 38), (40, 44, 50), (48, 52, 59), (56, 61, 68), (66, 72, 80), (84, 91, 100), (104, 112, 122), (128, 136, 146)]
+# The Factory Must Grow's plastic, from its plastic block and pipes: a cool white grey.
+PLASTIC = [(95, 97, 115), (108, 114, 127), (136, 142, 155), (152, 156, 168), (167, 169, 180), (180, 182, 193), (196, 201, 207), (216, 221, 225), (234, 236, 238)]
 COPPER = [(120, 62, 44), (172, 96, 66), (212, 136, 98), (244, 190, 156)]
 
 
@@ -29,8 +32,9 @@ def create_texture(name):
             return Image.open(f).convert("RGBA").copy()
 
 
-def steel(img):
-    """Recolour by luminance onto the steel ramp; transparent pixels (the window's glass) stay as they are."""
+def steel(img, ramp=STEEL, floor=0.25, span=0.6):
+    """Recolour by luminance, from floor over span, onto the steel ramp or another; transparent pixels (the window's glass) stay
+    as they are."""
     out = Image.new("RGBA", img.size)
     px = img.load()
     for y in range(img.height):
@@ -40,9 +44,9 @@ def steel(img):
                 out.putpixel((x, y), (r, g, b, a))
                 continue
             lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255
-            t = min(1.0, max(0.0, (lum - 0.25) / 0.6))
-            i = t * (len(STEEL) - 1)
-            lo, hi = STEEL[int(i)], STEEL[min(len(STEEL) - 1, int(i) + 1)]
+            t = min(1.0, max(0.0, (lum - floor) / span))
+            i = t * (len(ramp) - 1)
+            lo, hi = ramp[int(i)], ramp[min(len(ramp) - 1, int(i) + 1)]
             k = i - int(i)
             out.putpixel((x, y), tuple(int(lo[c] + (hi[c] - lo[c]) * k) for c in range(3)) + (255,))
     return out
@@ -127,6 +131,9 @@ def main():
     steel(create_texture("fluid_tank_window")).save(TEXTURES / "block/mixer_settler_window.png")
     steel(create_texture("fluid_tank_top")).save(TEXTURES / "block/mixer_settler_top.png")
     steel(create_texture("fluid_tank_top_connected")).save(TEXTURES / "block/mixer_settler_top_connected.png")
+    # the copper sheet's tones span only a quarter of the range; stretched over all of the plastic's, it comes out as light as TFMG's
+    for sheet in ("", "_connected", "_top", "_top_connected", "_inner", "_inner_connected", "_window", "_window_single"):
+        steel(create_texture(f"fluid_tank{sheet}"), PLASTIC, 0.32, 0.3).save(TEXTURES / f"block/plastic_fluid_tank{sheet}.png")
     liquor("still").save(TEXTURES / "block/fluid/liquor_still.png")
     liquor("flow", flow=True).save(TEXTURES / "block/fluid/liquor_flow.png")
     heap("salt", (255, 255, 255), (232, 234, 236), (176, 180, 186)).save(TEXTURES / "item/salt.png")

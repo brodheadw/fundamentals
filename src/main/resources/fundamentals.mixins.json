@@ -6,7 +6,8 @@
 	"mixins": [
 		"OreVeinTypeMixin",
 		"OreVeinifierMixin",
-		"PipeCorrosionMixin"
+		"PipeCorrosionMixin",
+		"TankCorrosionMixin"
 	],
 	"client": [],
 	"injectors": {

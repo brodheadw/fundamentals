@@ -215,7 +215,7 @@ REMOVED = {
 
 # Blocks from elsewhere in the mod that share the mining-tool tags this script writes.
 STORAGE_BLOCKS = [f"fundamentals:{name}" for _, form, name in items() if form == "block"]
-OTHER_MINEABLE = {"pickaxe": ["fundamentals:bloomery", "fundamentals:panel_rack", "fundamentals:solar_panel", "fundamentals:mixer_settler"] + STORAGE_BLOCKS}
+OTHER_MINEABLE = {"pickaxe": ["fundamentals:bloomery", "fundamentals:panel_rack", "fundamentals:solar_panel", "fundamentals:mixer_settler", "fundamentals:plastic_fluid_tank"] + STORAGE_BLOCKS}
 OTHER_TIERED = {"stone": STORAGE_BLOCKS}
 
 # Our ores and raw chunks are tagged by commodity in our own namespace, not in c:ores/<metal> and

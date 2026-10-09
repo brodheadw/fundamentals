@@ -32,6 +32,18 @@
     {
       "type": "patchouli:text",
       "text": "Run the plant in The Factory Must Grow's plastic pipes, pumps and valves (or glass pipe), which neither can touch; its metal ones fare no better than copper. The organic, kerosene, is harmless."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Tanks corrode too, ten times slower for the thicker wall: a copper or metal tank of acid loses a block of its wall in twenty minutes or so, and that block's share of what it held, the acid spilling; under a liquor, in eighty."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Keep the acid and the liquors in the Plastic Fluid Tank, as real plants keep hydrochloric acid in fibreglass and polyethylene."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:plastic_fluid_tank"
     }
   ]
 }
