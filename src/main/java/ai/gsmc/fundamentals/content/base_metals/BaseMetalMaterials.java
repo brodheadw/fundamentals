@@ -15,6 +15,8 @@ public final class BaseMetalMaterials {
     private static final MaterialForm[] CONCENTRATE_FORMS = {CONCENTRATE};
     private static final MaterialForm[] METAL_FORMS = {INGOT, DUST, NUGGET, PLATE, BLOCK};
     private static final MaterialForm[] METAL_WITH_OXIDE_FORMS = {OXIDE, INGOT, DUST, NUGGET, PLATE, BLOCK};
+    private static final MaterialForm[] TIN_FORMS = {INGOT, NUGGET, BLOCK};
+    private static final MaterialForm[] BRONZE_FORMS = {INGOT, NUGGET, PLATE, BLOCK};
 
     private BaseMetalMaterials() {}
 
@@ -52,6 +54,8 @@ public final class BaseMetalMaterials {
                 new MaterialForm[] {DUST}, MaterialProperties.builder());
         reg("blister_copper", null, MaterialType.ALLOY, "", new MaterialForm[] {INGOT},
                 MaterialProperties.builder().density(1.12).conductivity(0.60));
+        reg("crude_tin", null, MaterialType.ALLOY, "", new MaterialForm[] {INGOT},
+                MaterialProperties.builder().density(0.95).conductivity(0.13));
 
         reg("copper", null, MaterialType.ELEMENT, "Cu", METAL_FORMS,
                 MaterialProperties.builder().density(1.14).conductivity(1.00).hardness(0.30));
@@ -61,10 +65,10 @@ public final class BaseMetalMaterials {
                 MaterialProperties.builder().density(1.44).conductivity(0.08).hardness(0.10).toxicity(0.60));
         reg("zinc", null, MaterialType.ELEMENT, "Zn", METAL_WITH_OXIDE_FORMS,
                 MaterialProperties.builder().density(0.91).conductivity(0.28).hardness(0.25));
-        reg("tin", null, MaterialType.ELEMENT, "Sn", METAL_FORMS,
+        reg("tin", null, MaterialType.ELEMENT, "Sn", TIN_FORMS,
                 MaterialProperties.builder().density(0.93).conductivity(0.15).hardness(0.15));
 
-        reg("bronze", null, MaterialType.ALLOY, "", METAL_FORMS,
+        reg("bronze", null, MaterialType.ALLOY, "", BRONZE_FORMS,
                 MaterialProperties.builder().density(1.12).conductivity(0.12).hardness(0.45));
         reg("brass", null, MaterialType.ALLOY, "", METAL_FORMS,
                 MaterialProperties.builder().density(1.08).conductivity(0.28).hardness(0.40));

@@ -41,6 +41,8 @@ CHROMIUM = ("oxide", "ingot")
 INGOT = ("ingot",)
 # The platinum metals come out of the refinery as a grey sponge, pressed and sintered to the ingot.
 PGM = ("sponge", "ingot", "nugget")
+TIN = ("ingot", "nugget", "block")
+BRONZE = ("ingot", "nugget", "plate", "block")
 
 WHITE = ((150, 150, 148), (206, 206, 204), (236, 236, 234), (255, 255, 255))
 
@@ -104,6 +106,10 @@ METAL = {
     "ruthenium": ((78, 80, 84), (138, 142, 148), (186, 190, 196), (232, 234, 238)),
     "iridium": ((86, 92, 106), (154, 164, 182), (204, 212, 228), (244, 248, 255)),
     "osmium": ((58, 68, 90), (110, 124, 150), (158, 172, 198), (210, 220, 240)),
+    # tin is a bright silvery white; crude tin is dull with the iron the hardhead carries; bronze the warm golden brown of bell metal
+    "tin": ((104, 106, 108), (178, 180, 182), (224, 226, 226), (253, 253, 251)),
+    "crude_tin": ((66, 64, 60), (118, 116, 110), (160, 158, 150), (202, 200, 192)),
+    "bronze": ((88, 54, 24), (150, 100, 48), (198, 146, 76), (236, 198, 128)),
 }
 
 # The oxides are painted the colours they really are; the white ones borrow a little of their
@@ -164,6 +170,8 @@ OTHER = {
     "platinum_group_concentrate": ((22, 22, 24), (48, 48, 52), (80, 80, 86), (124, 124, 132)),
     "light_rare_earth_concentrate": ((96, 62, 34), (150, 104, 58), (190, 146, 90), (228, 196, 140)),
     "heavy_rare_earth_concentrate": ((84, 76, 48), (132, 122, 78), (172, 162, 110), (216, 208, 160)),
+    # cassiterite concentrate is the mineral's own brown-black
+    "tin_concentrate": ((18, 12, 8), (44, 30, 20), (78, 56, 38), (128, 100, 72)),
 }
 
 # material: forms. Same order as the Java registry, which is the order of the creative tab.
@@ -181,6 +189,7 @@ MATERIALS = {
     "chromite": GROUND_MINERAL, "chromium": CHROMIUM, "ferrochrome": INGOT, "stainless_steel": INGOT,
     "nickel_matte": MATTE, "converter_matte": MATTE, "platinum_group_concentrate": CONCENTRATE,
     "platinum": PGM, "palladium": PGM, "rhodium": PGM, "ruthenium": PGM, "iridium": PGM, "osmium": PGM,
+    "tin_concentrate": CONCENTRATE, "crude_tin": INGOT, "tin": TIN, "bronze": BRONZE,
 }
 
 DISPLAY = {"bastnasite": "Bastnäsite", "bastnasite_concentrate": "Bastnäsite Concentrate", "neodymium_iron_boron": "NdFeB", "samarium_cobalt": "SmCo", "aluminium_scandium": "Al-Sc"}

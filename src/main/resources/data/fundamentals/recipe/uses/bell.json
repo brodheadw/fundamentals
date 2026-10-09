@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " S ",
+    "BBB",
+    "B B"
+  ],
+  "key": {
+    "S": {
+      "tag": "c:rods/wooden"
+    },
+    "B": {
+      "tag": "c:ingots/bronze"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "minecraft:bell"
+  }
+}

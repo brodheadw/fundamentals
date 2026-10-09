@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "#c:plates/aluminium_scandium",
+    "#c:plates/bronze",
     "#c:plates/molybdenum_steel",
     "#c:plates/neodymium_iron_boron",
     "#c:plates/samarium_cobalt",
