@@ -64,7 +64,7 @@ public final class FerrousMaterials {
                 MaterialProperties.builder().density(1.90).heatResistance(1.00).hardness(0.95).conductivity(0.30));
         reg("vanadium", MaterialType.ELEMENT, "V", forms(INGOT, DUST),
                 MaterialProperties.builder().density(0.77).hardness(0.80).heatResistance(0.65));
-        reg("titanium", MaterialType.ELEMENT, "Ti", forms(INGOT, DUST, PLATE),
+        reg("titanium", MaterialType.ELEMENT, "Ti", forms(OXIDE, SPONGE, INGOT, PLATE),
                 MaterialProperties.builder().density(0.57).hardness(0.70).heatResistance(0.70).conductivity(0.03));
 
         reg("tungsten_trioxide", MaterialType.COMPOUND, "WO3", forms(OXIDE, DUST), MaterialProperties.builder());

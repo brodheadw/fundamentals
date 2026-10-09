@@ -1,0 +1,45 @@
+{
+  "name": "Titanium",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:titanium_ingot",
+  "sortnum": 7,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Ilmenite and rutile are heavy sands, panned from beaches and rivers. Rutile is titanium dioxide already; ilmenite is iron titanate, a third of it iron.",
+      "title": "Titanium"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Four ilmenite and a coal coke, superheated, smelt as the electric furnaces of Sorel and Richards Bay do at about 1,650 °C: the iron runs off as a cast iron ingot and the titanium stays behind in two titania slag, black and some eighty-five per cent titania."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "No carbon reduces titanium: it would only make a carbide. It goes through its chloride. Two rutile or two titania slag, a coal coke and 1,000 mB of chlorine, heated, give 500 mB of titanium tetrachloride, a colourless liquid that boils at 136 °C and fumes to hydrogen chloride in damp air."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "In a heated vat with a mixer, 500 mB of it, four magnesium and 100 mB of argon give two titanium sponge and four magnesium chloride: the Kroll process."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two magnesium chloride electrolysed molten on two electrodes in a heated vat give two magnesium and 500 mB of chlorine, so the magnesium and the chlorine go round again."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The first magnesium is the Dow process's: 1,000 mB of water (sea water, as salt is boiled from), a limesand and 250 mB of hydrochloric acid, heated, give one magnesium chloride."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Titanium melts at 1,668 °C, past a blaze cake, and burns hot in air, so the sponge is arc-melted: two sponge and 100 mB of argon on two electrodes, superheated, give two ingots."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Most titanium never becomes metal. 250 mB of the tetrachloride burnt in 1,000 mB of air in a heated basin gives a titanium oxide, the purest white there is, and 500 mB of chlorine back; one oxide makes four white dye."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The metal goes where strength for its weight counts: titanium plates in place of steel make four of the Factory's turbine engines instead of two."
+    }
+  ]
+}

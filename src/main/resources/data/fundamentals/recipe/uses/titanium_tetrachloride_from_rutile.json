@@ -1,0 +1,26 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_rutile"
+    },
+    {
+      "item": "fundamentals:raw_rutile"
+    },
+    {
+      "item": "tfmg:coal_coke"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "fundamentals:chlorine"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:titanium_tetrachloride",
+      "amount": 500
+    }
+  ],
+  "heat_requirement": "heated"
+}
