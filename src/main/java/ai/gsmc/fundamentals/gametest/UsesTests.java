@@ -158,4 +158,16 @@ public class UsesTests {
         helper.assertTrue(takes(recipe(helper, "create:crafting/curiosities/peculiar_bell"), "fundamentals:bronze_plate"), "the peculiar bell should be bronze");
         helper.succeed();
     }
+
+    @GameTest(template = "empty")
+    public void silverComesOutOfLeadAndGoesIntoContacts(GameTestHelper helper) {
+        var registries = helper.getLevel().registryAccess();
+        for (String id : new String[] {"fundamentals:uses/cupellation_of_crust", "fundamentals:uses/cupellation_of_argentite"}) {
+            helper.assertTrue(recipe(helper, id).getResultItem(registries).is(stack("fundamentals:silver_nugget").getItem())
+                    || recipe(helper, id).getResultItem(registries).is(stack("fundamentals:silver_ingot").getItem()), id + " should give silver");
+        }
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/parkes_desilvering"), "fundamentals:lead_bullion_ingot"), "zinc should desilver lead bullion");
+        helper.assertTrue(takes(recipe(helper, "tfmg:crafting/materials/electrical_switch"), "fundamentals:silver_plate"), "the Factory's switch should take silver contacts");
+        helper.succeed();
+    }
 }

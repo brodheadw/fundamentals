@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "SWS",
+    "ZPZ",
+    "SCS"
+  ],
+  "key": {
+    "S": {
+      "tag": "c:plates/silver"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    },
+    "Z": {
+      "tag": "c:ingots/zinc"
+    },
+    "P": {
+      "item": "tfmg:plastic_sheet"
+    },
+    "C": {
+      "item": "tfmg:industrial_aluminum_casing"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "tfmg:accumulator"
+  }
+}

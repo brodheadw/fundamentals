@@ -33,6 +33,10 @@ What's agreed but not built, in the order it's likely to go. The working plan be
   it, and the converter matte leach and nickel electrowinning each fold two refinery steps into one. The gold, silver,
   selenium and tellurium a real concentrate carries, sperrylite's arsenic, and copper's own anode slimes (the other
   by-product source) are not modelled. Osmium tetroxide is a pipe-only fluid: it neither fumes nor blinds.
+- **Silver loose ends.** Every galena bullion carries the same silver; the Parkes crust is cupelled directly, its zinc burnt
+  to oxide, where the works retorted the zinc off first; cupellation is a heated basin, not a reverberatory hearth; and
+  Moebius electrorefining, cyanidation and the copper anode slimes are not modelled. Litharge's own sinks (lead glass, the
+  paste of a lead-acid plate) wait.
 - **Cobalt blue** uses roasted cobaltite directly; a cobalt oxide form would be cleaner.
 - **Arsenic.** Roasting cobaltite really gives off arsenic trioxide. It is not an item yet, and a campfire roast has only
   one output. (Chlorine, the other missing by-product, now comes off the molten-chloride electrolyses.)

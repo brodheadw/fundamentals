@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "RPR",
+    "SCS",
+    "RPR"
+  ],
+  "key": {
+    "C": {
+      "item": "tfmg:heavy_machinery_casing"
+    },
+    "S": {
+      "tag": "c:plates/silver"
+    },
+    "P": {
+      "item": "tfmg:electric_post"
+    },
+    "R": {
+      "tag": "c:dusts/redstone"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "tfmg:electrical_switch"
+  }
+}
