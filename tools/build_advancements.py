@@ -38,17 +38,17 @@ FORM_ADDS = {"oxide": "O", "fluoride": "F", "oxalate": "C2O4"}
 MATERIAL_FORMULAS = {
     "steel": "Fe-C", "bronze": "Cu-Sn", "brass": "Cu-Zn", "blister_copper": "Cu", "crude_tin": "Sn-Fe", "lead_bullion": "Pb-Ag",
     "ferromanganese": "Fe-Mn", "ferronickel": "Fe-Ni", "ferromolybdenum": "Fe-Mo", "ferrotungsten": "Fe-W", "ferrovanadium": "Fe-V",
-    "didymium": "Pr-Nd", "tin_concentrate": "SnO2", "copper_concentrate": "CuFeS2", "lead_concentrate": "PbS", "zinc_concentrate": "ZnS",
+    "didymium": "(Pr,Nd)", "tin_concentrate": "SnO2", "copper_concentrate": "CuFeS2", "lead_concentrate": "PbS", "zinc_concentrate": "ZnS",
     "platinum_group_concentrate": "Pt,Pd,Rh,Ru,Ir,Os",
     "bastnasite_concentrate": "(Ce,La,Nd)CO3F",
     "light_rare_earth_concentrate": "(La,Ce,Pr,Nd,Sm,Th)PO4",
     "heavy_rare_earth_concentrate": "(Y,Gd,Tb,Dy,Ho,Er,Tm,Yb,Lu)PO4",
     # kaolinite holding rare earth ions, heavy ones above all
-    "ion_adsorption_clay": "Al2Si2O5(OH)4,Y,La,Nd,Dy",
+    "ion_adsorption_clay": "Al2Si2O5(OH)4,(Y,La,Nd,Dy)",
 }
 # Our items that are not a form of a material.
 ITEM_FORMULAS = {
-    "phosphor": "Y2O3,Eu,LaPO4,Ce,Tb", "didymium_glass": "SiO2,Pr,Nd", "roasted_cobaltite": "Co3O4", "roasted_chalcopyrite": "CuO,Fe2O3",
+    "phosphor": "Y2O3,Eu,LaPO4,Ce,Tb", "didymium_glass": "SiO2,(Pr,Nd)", "roasted_cobaltite": "Co3O4", "roasted_chalcopyrite": "CuO,Fe2O3",
     "rhenium_flue_dust": "Re2O7", "tungsten_carbide": "WC", "tungsten_filament": "W", "clarifier_sludge": "Fe(OH)3,Al(OH)3,Th(OH)4",
     "copper_calcine": "CuO,Fe2O3", "zinc_oxide": "ZnO", "roasted_pentlandite": "NiO,Fe2O3", "lithium_chloride": "LiCl",
     "ferroboron": "FeB", "soda_ash": "Na2CO3", "sodium_chromate": "Na2CrO4", "sodium_dichromate": "Na2Cr2O7", "aluminium_powder": "Al",
@@ -148,13 +148,15 @@ WHERE = {
     "Au": "Native gold, as it always was",
     "Re": "In the flue dust of a molybdenite roaster",
     **{s: "Parted from platinum group concentrate" for s in ("Ru", "Rh", "Ir", "Os")},
-    **{s: "Parted from monazite and bastnäsite in the mixer-settlers" for s in ("Pr", "Sm")},
-    **{s: "Parted from xenotime and euxenite in the mixer-settlers" for s in ("Gd", "Tb", "Ho", "Er", "Tm", "Yb", "Lu")},
-    "Eu": "Parted from monazite and bastnäsite in the mixer-settlers",
-    "Dy": "In ion-adsorption clay, and parted from xenotime",
+    **{s: "Parted from monazite and bastnäsite in the mixer-settlers" for s in ("La", "Ce", "Pr", "Nd", "Sm", "Eu")},
+    **{s: "Parted from xenotime, euxenite and ionic clay in the mixer-settlers" for s in ("Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu")},
     "Th": "In monazite and euxenite, and the residue they leave",
 }
 SYNTHETIC = {"Tc", "Pm"} | {symbol for symbol, z in SYMBOLS.items() if z >= 93}
+
+
+# A rare earth still mixed with another hasn't been found yet, only the ore or liquor it sits in.
+RARE_EARTH_SYMBOLS = {"Sc", "Y", "La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu"}
 
 
 def elements(formula):
@@ -163,6 +165,12 @@ def elements(formula):
     if not formula or leftover or not found <= set(SYMBOLS):
         return None
     return found
+
+
+def separated(formula):
+    mixed = {s for group in re.findall(r"\(([^()]*)\)", formula) if "," in group for s in re.findall(r"[A-Z][a-z]?", group)}
+    found = elements(formula)
+    return None if found is None else found - (mixed & RARE_EARTH_SYMBOLS)
 
 
 def material_formulas():
@@ -186,14 +194,14 @@ def our_items():
 
 def contents(name, formulas):
     if name in ITEM_FORMULAS:
-        return elements(ITEM_FORMULAS[name])
+        return separated(ITEM_FORMULAS[name])
     material, form = name, None
     if name.startswith("raw_"):
         material = name[4:]
     elif name not in formulas:
         material, _, form = name.rpartition("_")
-    found = elements(formulas.get(material, ""))
-    if not found:
+    found = elements(formulas.get(material, "")) and separated(formulas[material])
+    if found is None:
         raise SystemExit(f"no formula for {name}: give its material one, or list it in ITEM_FORMULAS")
     return found | (elements(FORM_ADDS[form]) if form in FORM_ADDS else set())
 
@@ -207,7 +215,7 @@ def element_tags():
             holders[symbol].append(f"fundamentals:{name}")
     for namespace, entries in OTHER_FORMULAS.items():
         for name, formula in entries.items():
-            for symbol in elements(formula):
+            for symbol in separated(formula):
                 holders[symbol].append(f"{namespace}:{name}")
     return holders
 
