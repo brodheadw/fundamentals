@@ -9,7 +9,7 @@ What's agreed but not built, in the order it's likely to go. The working plan be
   Deferred by Will on 2026-10-08.
 - **Thorium handling.** Carrying thorium residue should slowly hurt (a radiation effect), and a lead-lined cask should
   carry it safely. Deferred the same day.
-- **Storage under argon / tarnish.** Lanthanum, cerium, europium and neodymium oxidise in air. Chests don't tick their
+- **Storage under argon / tarnish.** Lanthanum, cerium and neodymium oxidise in air. Chests don't tick their
   contents, so this only works as a sealed canister item (argon-flushed) plus tarnish in the player's inventory and on
   the ground. Design open since the oxide-to-metal work.
 - **Temperature consumers.** `Heat.at` exists (the `heat` package). Still to hang on it: the tiers Create's recipes use
@@ -17,8 +17,8 @@ What's agreed but not built, in the order it's likely to go. The working plan be
   side is wildspell-magic#7 (Freezing Grasp and Noon push on it, and spells read it back).
 - **Hard-rock monazite washes like the sand.** Monazite from a carbonatite top or a quartz vein drops the same raw monazite
   as the beach placer and washes without grinding, as placer and vein cassiterite do. Real vein ore is crushed and milled first.
-- **Gadolinium** has no sink: its real uses are neutron absorption and MRI contrast and the pack has neither. Holmium,
-  thulium, ytterbium and lutetium likewise beyond the glass colours.
+- **Gadolinium**'s real uses are neutron absorption and MRI contrast and the pack has neither; it only stands in for some
+  neodymium in NdFeB. Thulium, ytterbium and lutetium oxide have no sink at all.
 
 - **Scandium by-product routes.** Most real scandium comes off nickel laterite acid leach (HPAL) liquor and bauxite residue,
   pulled by P204 and stripped with caustic soda. Only thortveitite is modelled; laterite smelts whole and red mud does not exist.
@@ -37,8 +37,7 @@ What's agreed but not built, in the order it's likely to go. The working plan be
   by-product source) are not modelled. Osmium tetroxide is a pipe-only fluid: it neither fumes nor blinds.
 - **Silver loose ends.** Every galena bullion carries the same silver; the Parkes crust is cupelled directly, its zinc burnt
   to oxide, where the works retorted the zinc off first; cupellation is a heated basin, not a reverberatory hearth; and
-  Moebius electrorefining, cyanidation and the copper anode slimes are not modelled. Litharge's own sinks (lead glass, the
-  paste of a lead-acid plate) wait.
+  Moebius electrorefining, cyanidation and the copper anode slimes are not modelled. Litharge in lead glass waits.
 - **Cobalt blue** uses roasted cobaltite directly; a cobalt oxide form would be cleaner.
 - **Arsenic.** Roasting cobaltite really gives off arsenic trioxide. It is not an item yet, and a campfire roast has only
   one output. (Chlorine, the other missing by-product, now comes off the molten-chloride electrolyses.)

@@ -10,15 +10,11 @@
     "#c:ingots/crude_tin",
     "#c:ingots/didymium",
     "#c:ingots/dysprosium",
-    "#c:ingots/erbium",
-    "#c:ingots/europium",
     "#c:ingots/ferrochrome",
     "#c:ingots/gadolinium",
-    "#c:ingots/holmium",
     "#c:ingots/iridium",
     "#c:ingots/lanthanum",
     "#c:ingots/lead_bullion",
-    "#c:ingots/lutetium",
     "#c:ingots/magnesium",
     "#c:ingots/molybdenum",
     "#c:ingots/molybdenum_steel",
@@ -38,11 +34,9 @@
     "#c:ingots/stainless_steel",
     "#c:ingots/superalloy",
     "#c:ingots/terbium",
-    "#c:ingots/thulium",
     "#c:ingots/tin",
     "#c:ingots/titanium",
     "#c:ingots/tungsten",
-    "#c:ingots/ytterbium",
     "#c:ingots/yttrium"
   ]
 }

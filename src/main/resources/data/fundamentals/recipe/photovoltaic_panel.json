@@ -2,13 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "pattern": [
-    "GGG",
+    "GSG",
     "PWN",
     "AAA"
   ],
   "key": {
     "G": {
       "tag": "c:glass_blocks/colorless"
+    },
+    "S": {
+      "tag": "c:nuggets/silver"
     },
     "P": {
       "item": "tfmg:p_semiconductor"

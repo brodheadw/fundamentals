@@ -1,0 +1,19 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:monazite_residue_dust"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:nitric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:thorium_nitrate"
+    }
+  ],
+  "heat_requirement": "heated"
+}

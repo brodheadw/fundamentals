@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "fundamentals:clarifier_sludge"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "fundamentals:clarifier_sludge_block"
+  }
+}

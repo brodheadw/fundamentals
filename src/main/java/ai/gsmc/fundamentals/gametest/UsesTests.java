@@ -34,7 +34,7 @@ public class UsesTests {
 
     @GameTest(template = "empty")
     public void theMagnetAlloysAreSinteredAndPolarizedIntoTheFactorysMagnet(GameTestHelper helper) {
-        Map.of("fundamentals:uses/neodymium_iron_boron", "create:mixing", "fundamentals:uses/neodymium_iron_boron_from_didymium", "create:mixing",
+        Map.of("fundamentals:uses/neodymium_iron_boron", "create:mixing", "fundamentals:uses/neodymium_iron_boron_with_gadolinium", "create:mixing",
                 "fundamentals:uses/samarium_cobalt", "create:mixing", "fundamentals:uses/magnet_from_samarium_cobalt", "tfmg:polarizing")
                 .forEach((id, type) -> helper.assertTrue(BuiltInRegistries.RECIPE_TYPE.getKey(recipe(helper, id).getType()).toString().equals(type),
                         id + " should be a " + type + " recipe"));
@@ -65,8 +65,21 @@ public class UsesTests {
         helper.assertTrue(takes(recipe(helper, "fundamentals:uses/didymium_glass"), "fundamentals:didymium_oxide"), "didymium glass wants didymium oxide");
         helper.assertTrue(recipe(helper, "fundamentals:uses/rose_glass").getResultItem(registries).is(net.minecraft.world.item.Items.PINK_STAINED_GLASS)
                 && takes(recipe(helper, "fundamentals:uses/rose_glass"), "fundamentals:erbium_oxide"), "erbium should make pink glass");
-        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/aluminium_scandium"), "fundamentals:scandium_ingot")
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/aluminium_scandium"), "fundamentals:scandium_nugget")
                 && recipe(helper, "fundamentals:uses/panel_rack_from_scandium").getResultItem(registries).getCount() == 2, "scandium should lighten the rack");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void theLeftoversHaveSinksAndTheOrphansAreGone(GameTestHelper helper) {
+        ItemStack slag = ((ai.gsmc.fundamentals.ironworking.BloomeryRecipe) recipe(helper, "fundamentals:bloomery/iron_bloom")).byproduct();
+        helper.assertTrue(recipe(helper, "tfmg:mixing/concrete_mixture_from_slag").getIngredients().stream().anyMatch(i -> i.test(slag)), "the bloomery's slag should go into concrete");
+        helper.assertTrue(takes(recipe(helper, "tfmg:crafting/materials/gas_lamp"), "fundamentals:gas_mantle"), "the gas lamp should burn a mantle");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/exhaust_three_way"), "fundamentals:rhodium_nugget"), "the three-way converter wants rhodium");
+        for (String gone : new String[] {"fundamentals:slag", "fundamentals:europium_ingot", "fundamentals:lutetium_ingot", "fundamentals:neodymium_dust",
+                "fundamentals:aluminium_scandium_dust"}) {
+            helper.assertFalse(BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(gone)), gone + " should be gone");
+        }
         helper.succeed();
     }
 

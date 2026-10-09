@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:nuggets/scandium"
+    }
+  },
+  "result": {
+    "id": "fundamentals:scandium_ingot",
+    "count": 1
+  }
+}

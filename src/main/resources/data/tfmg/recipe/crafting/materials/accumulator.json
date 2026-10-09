@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "LWL",
+    "SXS",
+    "LCL"
+  ],
+  "key": {
+    "X": {
+      "item": "fundamentals:litharge"
+    },
+    "C": {
+      "item": "tfmg:industrial_aluminum_casing"
+    },
+    "L": {
+      "tag": "c:plates/lead"
+    },
+    "S": {
+      "item": "tfmg:sulfuric_acid_bucket"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "tfmg:accumulator"
+  }
+}

@@ -22,7 +22,6 @@ public final class IronWorking {
     private static BlockEntityType<BloomeryBlockEntity> bloomeryEntity;
     private static Item bloomeryItem;
     private static Item ironBloom;
-    private static Item slag;
     private static Item roastedGalena;
     private static Item calcinedSpodumene;
     private static Item smithingHammer;
@@ -32,12 +31,11 @@ public final class IronWorking {
     public static Block bloomery() { return bloomery; }
     public static BlockEntityType<BloomeryBlockEntity> bloomeryEntity() { return bloomeryEntity; }
     public static Item ironBloom() { return ironBloom; }
-    public static Item slag() { return slag; }
     public static Item roastedGalena() { return roastedGalena; }
     public static Item smithingHammer() { return smithingHammer; }
 
     public static List<Item> items() {
-        return List.of(bloomeryItem, smithingHammer, ironBloom, slag, roastedGalena, calcinedSpodumene);
+        return List.of(bloomeryItem, smithingHammer, ironBloom, roastedGalena, calcinedSpodumene);
     }
 
     public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
@@ -66,7 +64,6 @@ public final class IronWorking {
         registry.accept(id("iron_bloom"), ironBloom = new Item(new Item.Properties()));
         registry.accept(id("roasted_galena"), roastedGalena = new Item(new Item.Properties()));
         registry.accept(id("calcined_spodumene"), calcinedSpodumene = new Item(new Item.Properties()));
-        registry.accept(id("slag"), slag = new Item(new Item.Properties()));
     }
 
     private static ResourceLocation id(String path) {

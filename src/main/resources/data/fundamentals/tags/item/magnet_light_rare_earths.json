@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:neodymium_ingot",
+    "fundamentals:praseodymium_ingot",
+    "fundamentals:didymium_ingot"
+  ]
+}

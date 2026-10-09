@@ -189,9 +189,8 @@ if __name__ == "__main__":
     front(random.Random("front"), True).save(block / "bloomery_front_lit.png")
     top(random.Random("top"), False).save(block / "bloomery_top.png")
     top(random.Random("top"), True).save(block / "bloomery_top_lit.png")
-    # A bloom is spongy iron shot through with slag: dark and rusty. Slag is black and glassy.
+    # A bloom is spongy iron shot through with slag: dark and rusty.
     paint_raw("iron_bloom", ((48, 34, 30), (100, 70, 56), (150, 110, 88), (224, 206, 190))).save(item / "iron_bloom.png")
-    paint_raw("slag", ((18, 18, 22), (40, 40, 48), (70, 72, 86), (150, 156, 176))).save(item / "slag.png")
     # Roasted galena: the sulfide driven off, leaving dull yellow-grey lead oxide.
     paint_raw("roasted_galena", ((82, 76, 56), (134, 126, 92), (178, 170, 128), (226, 220, 184))).save(item / "roasted_galena.png")
     # Calcined spodumene: the roast cracks the crystal open and leaves it chalk-white and crumbly.

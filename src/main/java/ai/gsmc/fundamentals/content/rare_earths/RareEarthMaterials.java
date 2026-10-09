@@ -13,12 +13,15 @@ public final class RareEarthMaterials {
 
     private static final MaterialForm[] MINERAL_FORMS = {ORE, RAW, DUST};
     // Oxide to metal goes three ways: the lights and the heavies through their fluoride (molten-salt
-    // electrolysis and calciothermic reduction), the volatile four straight from the oxide by lanthanum.
-    private static final MaterialForm[] ELEMENT_FORMS = {OXALATE, FLUORIDE, OXIDE, INGOT, DUST};
-    private static final MaterialForm[] MAGNET_ELEMENT_FORMS = {OXALATE, FLUORIDE, OXIDE, INGOT, DUST, NUGGET, BLOCK};
-    private static final MaterialForm[] VOLATILE_FORMS = {OXALATE, OXIDE, INGOT, DUST};
-    private static final MaterialForm[] VOLATILE_MAGNET_FORMS = {OXALATE, OXIDE, INGOT, DUST, NUGGET, BLOCK};
-    private static final MaterialForm[] ALLOY_FORMS = {INGOT, DUST, NUGGET, PLATE, BLOCK};
+    // electrolysis and calciothermic reduction), samarium straight from the oxide by lanthanum.
+    private static final MaterialForm[] ELEMENT_FORMS = {OXALATE, FLUORIDE, OXIDE, INGOT};
+    private static final MaterialForm[] MAGNET_ELEMENT_FORMS = {OXALATE, FLUORIDE, OXIDE, INGOT, NUGGET, BLOCK};
+    private static final MaterialForm[] VOLATILE_MAGNET_FORMS = {OXALATE, OXIDE, INGOT, NUGGET, BLOCK};
+    // Europium and the heavies past dysprosium are sold as oxide; nothing here wants them as metal.
+    private static final MaterialForm[] OXIDE_FORMS = {OXALATE, OXIDE};
+    private static final MaterialForm[] SCANDIUM_FORMS = {OXALATE, FLUORIDE, OXIDE, INGOT, NUGGET};
+    private static final MaterialForm[] MAGNET_FORMS = {INGOT, DUST, NUGGET, PLATE, BLOCK};
+    private static final MaterialForm[] ALLOY_FORMS = {INGOT, NUGGET, PLATE, BLOCK};
 
     private RareEarthMaterials() {}
 
@@ -44,26 +47,26 @@ public final class RareEarthMaterials {
         element("praseodymium", "Pr", MAGNET_ELEMENT_FORMS, 0.86);
         element("neodymium", "Nd", MAGNET_ELEMENT_FORMS, 0.89);
         element("samarium", "Sm", VOLATILE_MAGNET_FORMS, 0.96);
-        element("europium", "Eu", VOLATILE_FORMS, 0.67);
+        element("europium", "Eu", OXIDE_FORMS, 0.67);
 
         // heavy, plus Y and Sc, which separate with them
         element("gadolinium", "Gd", ELEMENT_FORMS, 1.00);
         element("terbium", "Tb", MAGNET_ELEMENT_FORMS, 1.05);
         element("dysprosium", "Dy", MAGNET_ELEMENT_FORMS, 1.09);
-        element("holmium", "Ho", ELEMENT_FORMS, 1.12);
-        element("erbium", "Er", ELEMENT_FORMS, 1.15);
-        element("thulium", "Tm", VOLATILE_FORMS, 1.18);
-        element("ytterbium", "Yb", VOLATILE_FORMS, 0.88);
-        element("lutetium", "Lu", ELEMENT_FORMS, 1.25);
+        element("holmium", "Ho", OXIDE_FORMS, 1.12);
+        element("erbium", "Er", OXIDE_FORMS, 1.15);
+        element("thulium", "Tm", OXIDE_FORMS, 1.18);
+        element("ytterbium", "Yb", OXIDE_FORMS, 0.88);
+        element("lutetium", "Lu", OXIDE_FORMS, 1.25);
         element("yttrium", "Y", ELEMENT_FORMS, 0.57);
-        element("scandium", "Sc", ELEMENT_FORMS, 0.38);
+        element("scandium", "Sc", SCANDIUM_FORMS, 0.38);
 
-        reg("didymium", null, MaterialType.ALLOY, "", new MaterialForm[] {OXALATE, FLUORIDE, OXIDE, INGOT, DUST},
+        reg("didymium", null, MaterialType.ALLOY, "", new MaterialForm[] {OXALATE, FLUORIDE, OXIDE, INGOT},
                 MaterialProperties.builder().density(0.88));
         // Strongest magnet, but loses coercivity when hot; SmCo trades strength for heat.
-        reg("neodymium_iron_boron", "NdFeB", MaterialType.ALLOY, "Nd2Fe14B", ALLOY_FORMS,
+        reg("neodymium_iron_boron", "NdFeB", MaterialType.ALLOY, "Nd2Fe14B", MAGNET_FORMS,
                 MaterialProperties.builder().density(0.95).magnetStrength(1.00).heatResistance(0.30).hardness(0.60));
-        reg("samarium_cobalt", "SmCo", MaterialType.ALLOY, "SmCo5", ALLOY_FORMS,
+        reg("samarium_cobalt", "SmCo", MaterialType.ALLOY, "SmCo5", MAGNET_FORMS,
                 MaterialProperties.builder().density(1.06).magnetStrength(0.70).heatResistance(0.80).hardness(0.55));
         // What monazite leaves behind when it dissolves: thorium and its daughters, mildly radioactive, to be cast into blocks and buried.
         reg("monazite_residue", "Thorium Residue", MaterialType.COMPOUND, "ThO2", new MaterialForm[] {DUST, BLOCK},

@@ -62,7 +62,7 @@ public class PlatinumTests {
         helper.assertTrue(takes(recipe(helper, "fundamentals:uses/reforming"), "fundamentals:reforming_catalyst"), "naphtha should reform over the catalyst");
         helper.assertTrue(takes(recipe(helper, "fundamentals:uses/platinum_rhodium_gauze"), "fundamentals:rhodium_nugget"), "the gauze wants rhodium");
         helper.assertTrue(takes(recipe(helper, "fundamentals:uses/nitric_acid_from_ammonia"), "fundamentals:platinum_rhodium_gauze"), "ammonia burns over the gauze");
-        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/exhaust_with_palladium"), "fundamentals:palladium_nugget"), "palladium makes the exhaust go further");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/exhaust_three_way"), "fundamentals:palladium_nugget"), "palladium makes the exhaust go further");
         helper.assertFalse(takes(recipe(helper, "tfmg:crafting/materials/exhaust"), "fundamentals:palladium_nugget"), "an engine shouldn't wait on palladium");
         helper.assertTrue(takes(recipe(helper, "fundamentals:uses/superalloy_with_ruthenium"), "fundamentals:ruthenium_nugget"), "ruthenium goes in the superalloy");
         helper.assertTrue(takes(recipe(helper, "fundamentals:uses/iridium_spark_plug"), "fundamentals:iridium_nugget"), "the spark plug takes an iridium tip");
