@@ -222,7 +222,8 @@ def rare_earths():
         "the rows ahead are the settling bay, parted from the box by a weir that only the churn tops. "
         "Charge every stage with the extractant from a pipe into its top: it floats and is never used up. Pump the liquor into the back of "
         "the first stage and hydrochloric acid into the front of the last, take the raffinate from the first stage's sides and the loaded strip "
-        "from the last stage's, and throw the lever. Goggles on any stage tell you what the battery is waiting for.") + pages_of(
+        "from the last stage's, and throw the lever. Goggles on any stage tell you what the battery is waiting for. "
+        "The casing is plastic sheet or stainless steel plate, both of which the acid leaves alone.") + pages_of(
         "Two things the plant will not forgive. A mixer over 128 rpm beats the phases into an emulsion that never settles, and the battery stops until it is slowed. "
         "And the organic is not quite immortal: every cut carries a little of it out entrained in the raffinate, two per cent of a batch, so a plant wants a trickle of fresh extractant forever.")
         + [crafting("fundamentals:mixer_settler")], 2)
@@ -258,7 +259,7 @@ def rare_earths():
         "The passes it needs go as one over the moment the contrast is worth: yttrium from the late heavies is quick, lanthanum from cerium (2.5) slow.") + pages_of(
         "Cells placed end to end facing the same way are a line, one pass each. Pipe the liquor into the back of the first; the last cell parts it, "
         "what the magnets drew out of its right side, where the NdFeB block is, and the rest out of its left. The products and their proportion "
-        "are the battery's, so either route feeds the next cut. The cell is plastic, since the chloride liquor eats copper. "
+        "are the battery's, so either route feeds the next cut. The cell is plastic or stainless steel, since the chloride liquor eats copper. "
         "Goggles on any cell say how many passes the cut wants and what the line is waiting for.") + magnetic_pages + pages_of(
         f"The other {len(without)} cuts have no magnetic route, because their two products do not sort by moment. They are {', '.join(without)}. "
         "Praseodymium and neodymium are both 3.6, dysprosium and holmium both 10.6, terbium 9.7 and erbium 9.6 beside them; "
@@ -302,8 +303,8 @@ def rare_earths():
         "Praseodymium or didymium serves as well as neodymium, and terbium as well as dysprosium. A gadolinium for one neodymium makes three instead of four. "
         "Ferroboron is a borax, an iron and two charcoal, superheated. "
         "Polarized, each is the magnet The Factory Must Grow's motors, generators and electric pumps are built from: see Magnets and heat, under Power.", "What they are for") + pages_of(
-        "Lanthanum metal reduces samarium, and lanthanum oxide is the catalyst that cracks naphtha. Cerium with iron is ferrocerium, the lighter flint, a flint and steel that never wears out. "
-        "Europium's red and terbium's green on a yttria host are the phosphor every lamp takes. Yttria lines the fireproof vat. Didymium glass is the welder's lens the goggles are made of. Erbium turns glass pink. "
+        "Lanthanum metal reduces samarium, and lanthanum oxide stabilises the zeolite of the catalyst that cracks heavy oil to gasoline and propylene. Cerium with iron is ferrocerium, the lighter flint, a flint and steel that never wears out. "
+        "Europium's red on a yttria host and terbium's green, with cerium, in lanthanum phosphate are the phosphor every lamp takes. Yttria lines the fireproof vat. Didymium glass is the welder's lens the goggles are made of. Erbium turns glass pink. "
         "Scandium in aluminium is the airframe alloy, and makes a panel rack go twice as far.") + pages_of(
         "Cerium oxide stores and releases oxygen, which is what a catalytic converter does: the Factory's exhaust takes two. Neodymium oxide turns glass purple and holmium oxide yellow, "
         "the way erbium turns it pink. A cobalt in the lithium charge is the lithium cobalt oxide cathode the first lithium cells ran on."), 8)
@@ -322,11 +323,11 @@ def rare_earths():
         "The plant runs on acid, and acid is not a texture. Each one can be bucketed and poured, and does in the world what it does in the bottle. "
         "Stand in any of them and it burns; hydrofluoric acid also poisons. Pour one against a block it attacks and the block cracks as if being mined, "
         "fizzes for five seconds, and is gone, and the acid that ate it is spent.", "The acids") + pages_of(
-        "Hydrochloric acid eats carbonates: calcite, limestone, dripstone, bone, tuff. Hydrofluoric acid eats glass and silica: glass, sand, sandstone, quartz; "
+        "Hydrochloric acid eats carbonates: calcite, limestone, dripstone, bone. Hydrofluoric acid eats glass and silica: glass, sand, sandstone, quartz, tuff; "
         "it is the one acid glass cannot hold. Nitric acid eats copper and iron, and aqua regia, three of hydrochloric to one of nitric, eats gold as well. Phosphoric acid only stings, which is why it is in your cola. Stone, deepslate and the vats shrug all of them off.") + pages_of(
         "Hydrofluoric acid, nitric acid and aqua regia fume. Within two blocks of any of them in the open, as a block or in a basin it is being used in, you take a hit a second and the world swims, and hydrofluoric poisons. "
         "The gas mask is Create's: a diving helmet over a filled copper backtank, which breathes its air instead. "
-        "And acid eats copper: a Create pipe carrying any acid corrodes and, after a couple of minutes on average, bursts and spills it. The liquors are chlorides in dilute acid, and the spent liquor, the calcium chloride liquor and bittern are chloride too: they eat copper as well, more slowly, eight minutes or so to a pipe; seawater slower still, half an hour. Run the plant in The Factory Must Grow's plastic pipes, pumps and valves (or glass pipe), which neither can touch; its metal ones fare no better than copper. The organic, kerosene, is harmless. "
+        "And acid eats copper: a Create pipe carrying any acid corrodes and, after a couple of minutes on average, bursts and spills it. The liquors are chlorides in dilute acid, and the spent liquor, the calcium chloride liquor and bittern are chloride too: they eat copper as well, more slowly, eight minutes or so to a pipe; seawater slower still, half an hour. Run the plant in The Factory Must Grow's plastic pipes, pumps and valves, which neither can touch; its metal ones fare no better than copper, and a glass pipe is a copper pipe with a window. The organic, kerosene, is harmless. "
         "Tanks corrode too, ten times slower for the thicker wall: a copper or metal tank of acid loses a block of its wall in twenty minutes or so, and that block's share of what it held, the acid spilling; under a liquor, in eighty. "
         "Keep the acid and the liquors in the Plastic Fluid Tank, as real plants keep hydrochloric acid in fibreglass and polyethylene.") + [crafting("fundamentals:plastic_fluid_tank")], 10)
     entry("rare_earths", "making_acids", "Making the acids", "fundamentals:nitric_acid_bucket", pages_of(

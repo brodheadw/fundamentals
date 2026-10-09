@@ -9,11 +9,12 @@
     "tfmg:mixing"
   ],
   "min_size": 1,
+  "processing_time": 100,
   "ingredients": [
     {
       "type": "neoforge:single",
       "amount": 500,
-      "fluid": "tfmg:naphtha"
+      "fluid": "tfmg:heavy_oil"
     },
     {
       "item": "fundamentals:lanthanum_oxide"
@@ -21,12 +22,20 @@
   ],
   "results": [
     {
-      "amount": 250,
-      "id": "tfmg:ethylene"
+      "id": "tfmg:gasoline",
+      "amount": 250
     },
     {
-      "amount": 250,
-      "id": "tfmg:propylene"
+      "id": "tfmg:propylene",
+      "amount": 150
+    },
+    {
+      "id": "fundamentals:lanthanum_oxide",
+      "chance": 0.95
+    },
+    {
+      "id": "tfmg:coal_coke_dust",
+      "chance": 0.25
     }
   ]
 }

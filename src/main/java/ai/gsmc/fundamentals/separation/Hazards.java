@@ -4,10 +4,10 @@ import ai.gsmc.fundamentals.Fundamentals;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.content.equipment.armor.DivingHelmetItem;
+import com.simibubi.create.content.fluids.PipeConnection;
 import com.simibubi.create.content.fluids.pipes.AxisPipeBlock;
 import com.simibubi.create.content.fluids.pipes.EncasedPipeBlock;
 import com.simibubi.create.content.fluids.pipes.FluidPipeBlock;
-import com.simibubi.create.content.fluids.pipes.GlassFluidPipeBlock;
 import com.simibubi.create.content.fluids.pipes.SmartFluidPipeBlock;
 import com.simibubi.create.content.fluids.pipes.valve.FluidValveBlock;
 import com.simibubi.create.content.fluids.pump.PumpBlock;
@@ -41,7 +41,9 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.items.IItemHandler;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.IntStream;
 
 /**
@@ -52,7 +54,7 @@ import java.util.stream.IntStream;
  * corrode and eventually burst, spilling it. The liquors are rare earth chlorides in dilute acid, and the spent liquor, the calcium chloride
  * liquor and bittern are chloride too, so they eat it as well, more slowly, and seawater, a tenth as salt as bittern, slower still.
  * Metal tanks go the same way, ten times slower for the thicker wall.
- * Plastic pipes, pumps, valves and tanks, and glass pipes, do not corrode.
+ * Plastic pipes, pumps, valves and tanks do not corrode. A glass pipe is a copper pipe with a window, and corrodes as one.
  */
 public final class Hazards {
 
@@ -68,6 +70,9 @@ public final class Hazards {
     public static double seawaterCorrosionChance = 1.0 / 36000;
     /** How many times longer a tank's wall lasts than a pipe's, for the same fluid: twenty minutes under acid, eighty under a liquor. */
     private static final int TANK_WALL = 10;
+    /** How many ticks apart a pipe is checked, each check standing for all of them. */
+    public static final int PIPE_INTERVAL = 20;
+    private static final Map<Block, Boolean> CORRODIBLE = new ConcurrentHashMap<>();
 
     private Hazards() {}
 
@@ -151,13 +156,15 @@ public final class Hazards {
 
     // ---- corrosion ----
 
-    /** Called every tick for every pipe by the mixin on Create's fluid transport: an acid in a corrodible pipe may burst it. */
-    public static void corrode(Level level, BlockPos pos, BlockState state, List<FluidStack> carried) {
-        if (level.isClientSide || !corrodible(state)) {
-            return;
+    /** Called every {@link #PIPE_INTERVAL} ticks for every pipe by the mixin on Create's fluid transport: an acid in a corrodible
+     * pipe may burst it. True if it did. */
+    public static boolean corrode(Level level, BlockPos pos, BlockState state, Collection<PipeConnection> connections) {
+        if (level.isClientSide) {
+            return false;
         }
         FluidStack eating = null;
-        for (FluidStack stack : carried) {
+        for (PipeConnection connection : connections) {
+            FluidStack stack = connection.getProvidedFluid();
             if (stack.isEmpty()) {
                 continue;
             }
@@ -170,8 +177,8 @@ public final class Hazards {
                 eating = stack;
             }
         }
-        if (eating == null || level.random.nextDouble() >= chance(eating)) {
-            return;
+        if (eating == null || !corrodible(state) || level.random.nextDouble() >= 1 - Math.pow(1 - chance(eating), PIPE_INTERVAL)) {
+            return false;
         }
         FluidStack spilled = eating;
         Acids.Acid acid = Acids.all().values().stream().filter(a -> a.source == spilled.getFluid() || a.flowing == spilled.getFluid()).findFirst().orElse(null);
@@ -183,19 +190,20 @@ public final class Hazards {
         if (level instanceof ServerLevel server) {
             server.sendParticles(ParticleTypes.CLOUD, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 12, 0.3, 0.3, 0.3, 0.02);
         }
+        return true;
     }
 
     /** Called every tick for every Create fluid tank by its mixin, and acts once per tank on the controller: when the wall goes,
-     * one wetted block of it fails, the tank loses that block's share of what it holds, and an acid spills where it stood. */
-    public static void corrodeTank(FluidTankBlockEntity tank) {
+     * one wetted block of it fails, the tank loses that block's share of what it holds, and an acid spills where it stood. True if it did. */
+    public static boolean corrodeTank(FluidTankBlockEntity tank) {
         Level level = tank.getLevel();
         if (level == null || level.isClientSide || !tank.isController()) {
-            return;
+            return false;
         }
         FluidStack held = tank.getTankInventory().getFluid();
         if (held.isEmpty() || !corrodes(Separation.kind(held.getFluid())) || !corrodible(tank.getBlockState())
                 || level.random.nextDouble() >= chance(held) / TANK_WALL) {
-            return;
+            return false;
         }
         int width = tank.getWidth();
         int wetted = Math.max(1, (int) Math.ceil(tank.getFillState() * tank.getHeight()));
@@ -211,6 +219,7 @@ public final class Hazards {
         if (level instanceof ServerLevel server) {
             server.sendParticles(ParticleTypes.CLOUD, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 12, 0.3, 0.3, 0.3, 0.02);
         }
+        return true;
     }
 
     public static boolean corrodes(Reagents.Kind kind) {
@@ -223,14 +232,17 @@ public final class Hazards {
         return kind == Reagents.Kind.ACID ? corrosionChance : kind == Reagents.Kind.WATER ? seawaterCorrosionChance : corrodes(kind) ? liquorCorrosionChance : 0;
     }
 
-    /** Create's pipes and tanks are copper and TFMG's metal pipes and tanks are metal; only plastic and glass stand up to acid,
-     * and a creative tank to anything. TFMG's pipes and our dyed ones are Create's pipe classes underneath, so plastic is told apart by name. */
+    /** Create's pipes and tanks are copper and TFMG's metal pipes and tanks are metal, windowed or not; only plastic stands up to
+     * acid, and a creative tank to anything. TFMG's pipes and our dyed ones are Create's pipe classes underneath, so plastic is told
+     * apart by name. */
     public static boolean corrodible(BlockState state) {
-        Block block = state.getBlock();
+        return CORRODIBLE.computeIfAbsent(state.getBlock(), Hazards::corrodible);
+    }
+
+    private static boolean corrodible(Block block) {
         ResourceLocation id = BuiltInRegistries.BLOCK.getKey(block);
         boolean plastic = (id.getNamespace().equals("tfmg") || id.getNamespace().equals(Fundamentals.MOD_ID)) && id.getPath().contains("plastic");
-        if (plastic || block instanceof GlassFluidPipeBlock || block instanceof PlasticTankBlock
-                || AllBlocks.CREATIVE_FLUID_TANK.has(state)) {
+        if (plastic || block instanceof PlasticTankBlock || block == AllBlocks.CREATIVE_FLUID_TANK.get()) {
             return false;
         }
         if (block instanceof FluidTankBlock || id.getNamespace().equals("tfmg") && id.getPath().endsWith("fluid_tank")) {
@@ -240,6 +252,6 @@ public final class Hazards {
                 || block instanceof PumpBlock || block instanceof FluidValveBlock) {
             return true;
         }
-        return id.getNamespace().equals("tfmg") && id.getPath().contains("pipe") && !id.getPath().contains("glass");
+        return id.getNamespace().equals("tfmg") && id.getPath().contains("pipe");
     }
 }

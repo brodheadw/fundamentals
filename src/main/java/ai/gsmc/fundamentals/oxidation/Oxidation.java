@@ -48,7 +48,8 @@ import java.util.function.BiConsumer;
 /**
  * Metal ageing in air, worked out lazily. Nothing scans a chest on a timer. A container keeps a clock (an attachment on its block
  * entity, or on the player for their inventory) of when its contents were last aged; when a player opens or closes it, every stack
- * in it is aged by the time since, at the rate the item's data map entry gives for the air at that spot. A stack carries only its
+ * in it is aged by the time since, at the rate the item's data map entry gives for the air at that spot, and so it is when a hopper or
+ * pipe takes from it a minute or more after it was last aged. A stack carries only its
  * stage, so a stack that has aged no longer stacks with fresh metal, as vanilla never merges stacks that differ. Each step is an
  * exponential wait with the entry's mean, so it makes no difference how often a chest is looked into. The player's own inventory is
  * aged every few seconds, a dropped item by its age when picked up, and anything in a charged drum or a sealed canister not at all.
@@ -62,6 +63,7 @@ public final class Oxidation {
     public static final AttachmentType<Long> CLOCK = AttachmentType.builder(() -> 0L).serialize(Codec.LONG).build();
     private static final int PLAYER_INTERVAL = 100;
     private static final long DAY = 24000;
+    private static final long UNWATCHED = 1200;
 
     private static Block drum;
     private static BlockEntityType<InertDrumBlockEntity> drumEntity;
@@ -140,7 +142,7 @@ public final class Oxidation {
             return stack;
         }
         if (rate.product().isPresent() && stage == rate.steps()) {
-            int count = stack.getCount() / rate.per();
+            int count = stack.getCount() / rate.per() + (random.nextInt(rate.per()) < stack.getCount() % rate.per() ? 1 : 0);
             return count == 0 ? ItemStack.EMPTY : age(new ItemStack(rate.product().get(), count), left / rate.factor(air), air, random);
         }
         ItemStack aged = stack.copy();
@@ -197,6 +199,22 @@ public final class Oxidation {
         }
     }
 
+    /** A container a hopper or pipe takes from: aged first if it has not been for a minute, so automation does not keep it fresh. */
+    public static void taking(Container container) {
+        if (container instanceof CompoundContainerAccessor both) {
+            taking(both.fundamentals$first());
+            taking(both.fundamentals$second());
+        } else if (container instanceof BlockEntity entity && !(container instanceof InertDrumBlockEntity) && entity.getLevel() instanceof ServerLevel level) {
+            long now = level.getGameTime();
+            if (!entity.hasData(CLOCK)) {
+                entity.setData(CLOCK, now);
+                entity.setChanged();
+            } else if (now - entity.getData(CLOCK) > UNWATCHED) {
+                ageHeld(level, entity, container, entity.getBlockPos());
+            }
+        }
+    }
+
     public static void onOpen(PlayerContainerEvent.Open event) {
         sweep(event.getEntity(), event.getContainer());
     }
@@ -216,18 +234,24 @@ public final class Oxidation {
         if (!(entity.level() instanceof ServerLevel level) || entity.getAge() <= 0) {
             return;
         }
+        long then = entity.hasData(CLOCK) ? entity.getData(CLOCK) : 0;
+        entity.setData(CLOCK, (long) entity.getAge());
+        if (entity.getAge() <= then) {
+            return;
+        }
         Moisture air = entity.isInWater() ? Moisture.WET : Moisture.at(level, entity.blockPosition(), true);
         ItemStack stack = entity.getItem();
-        ItemStack aged = age(stack, entity.getAge(), air, level.random);
+        ItemStack aged = age(stack, entity.getAge() - then, air, level.random);
         if (aged == stack) {
             return;
         }
+        // playerTouch has already taken hold of the old stack; the aged one is picked up next tick
         if (aged.isEmpty()) {
             entity.discard();
-            event.setCanPickup(TriState.FALSE);
         } else {
             entity.setItem(aged);
         }
+        event.setCanPickup(TriState.FALSE);
     }
 
     public static void onTooltip(ItemTooltipEvent event) {

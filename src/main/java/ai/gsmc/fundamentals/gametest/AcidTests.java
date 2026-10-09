@@ -111,6 +111,10 @@ public class AcidTests {
         helper.assertTrue(Hazards.corrodible(copper.defaultBlockState()), "a copper pipe should");
         helper.assertTrue(Hazards.corrodible(BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("create", "mechanical_pump")).defaultBlockState()), "so should a copper pump");
         helper.assertFalse(Hazards.corrodible(BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("tfmg", "plastic_mechanical_pump")).defaultBlockState()), "but not a plastic one");
+        for (String windowed : new String[] {"create:glass_fluid_pipe", "tfmg:glass_steel_pipe"}) {
+            helper.assertTrue(Hazards.corrodible(BuiltInRegistries.BLOCK.get(ResourceLocation.parse(windowed)).defaultBlockState()), windowed + " is metal with a window, and should corrode");
+        }
+        helper.assertFalse(Hazards.corrodible(BuiltInRegistries.BLOCK.get(ResourceLocation.parse("tfmg:glass_plastic_pipe")).defaultBlockState()), "a windowed plastic pipe is still plastic");
         double liquor = Hazards.chance(new net.neoforged.neoforge.fluids.FluidStack(BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "rare_earth_liquor")), 1));
         double acid = Hazards.chance(new net.neoforged.neoforge.fluids.FluidStack(Acids.all().get("hydrochloric_acid").source, 1));
         helper.assertTrue(liquor > 0 && liquor < acid, "a liquor should eat copper, more slowly than acid: " + liquor + " vs " + acid);

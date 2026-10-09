@@ -3,21 +3,13 @@
   "values": [
     "#c:dusts/bastnasite",
     "#c:dusts/chromite",
-    "#c:dusts/cobalt",
     "#c:dusts/converter_matte",
     "#c:dusts/copper_matte",
-    "#c:dusts/dysprosium_neodymium_iron_boron",
     "#c:dusts/euxenite",
     "#c:dusts/loparite",
-    "#c:dusts/molybdenum",
-    "#c:dusts/monazite",
     "#c:dusts/monazite_residue",
-    "#c:dusts/neodymium_iron_boron",
     "#c:dusts/nickel_matte",
-    "#c:dusts/rhenium",
-    "#c:dusts/samarium_cobalt",
     "#c:dusts/thortveitite",
-    "#c:dusts/tungsten",
     "#c:dusts/xenotime"
   ]
 }

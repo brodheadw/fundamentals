@@ -7,12 +7,22 @@
     "PPP"
   ],
   "key": {
-    "P": {
-      "tag": "fundamentals:plastic_sheets"
-    },
-    "T": {
-      "item": "fundamentals:plastic_fluid_tank"
-    },
+    "P": [
+      {
+        "tag": "fundamentals:plastic_sheets"
+      },
+      {
+        "tag": "c:plates/stainless_steel"
+      }
+    ],
+    "T": [
+      {
+        "item": "fundamentals:plastic_fluid_tank"
+      },
+      {
+        "tag": "c:plates/stainless_steel"
+      }
+    ],
     "M": {
       "tag": "fundamentals:magnets"
     }

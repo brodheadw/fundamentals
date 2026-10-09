@@ -309,8 +309,9 @@ def java_table():
 # What each acid eats when it stands against it in the world; hashed entries are tags, and the modded
 # blocks are optional so the tags load without their mods.
 DISSOLVES = {
-    "hydrochloric_acid": ["minecraft:calcite", "minecraft:dripstone_block", "minecraft:pointed_dripstone", "minecraft:bone_block", "minecraft:tuff", "create:limestone"],
-    "hydrofluoric_acid": ["#c:glass_blocks", "#c:glass_panes", "#minecraft:sand", "minecraft:sandstone", "minecraft:red_sandstone", "minecraft:quartz_block", "minecraft:smooth_quartz"],
+    "hydrochloric_acid": ["minecraft:calcite", "minecraft:dripstone_block", "minecraft:pointed_dripstone", "minecraft:bone_block", "create:limestone"],
+    "hydrofluoric_acid": ["#c:glass_blocks", "#c:glass_panes", "#minecraft:sand", "minecraft:sandstone", "minecraft:red_sandstone", "minecraft:quartz_block", "minecraft:smooth_quartz",
+                          "minecraft:tuff"],
     "nitric_acid": ["#c:storage_blocks/copper", "#c:storage_blocks/iron", "minecraft:copper_block", "minecraft:iron_block", "minecraft:cut_copper"],
     "phosphoric_acid": [],
     "aqua_regia": ["#c:storage_blocks/gold", "minecraft:gold_block", "minecraft:raw_gold_block", "#c:storage_blocks/copper", "#c:storage_blocks/iron",
@@ -318,6 +319,11 @@ DISSOLVES = {
     "bromine": ["#c:storage_blocks/aluminum", "#c:storage_blocks/copper", "#c:storage_blocks/iron", "minecraft:copper_block", "minecraft:iron_block",
                 "minecraft:cut_copper"],
 }
+
+
+# What the plant's vessels are built of: plastic sheet, or stainless steel plate as the mixer-settlers of a plant without a
+# polymer works are, so neither the separation plant nor the cracker that gives the olefins waits on the other.
+ACID_PROOF = [{"tag": "fundamentals:plastic_sheets"}, {"tag": "c:plates/stainless_steel"}]
 
 
 def acids():
@@ -613,7 +619,7 @@ def mixer_settler():
     write(DATA / "loot_table/blocks/mixer_settler.json", {"type": "minecraft:block", "pools": [drop_self("mixer_settler")]})
     write(RECIPES / "mixer_settler.json", {
         "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["P P", "PPP", "PFP"],
-        "key": {"P": {"tag": "fundamentals:plastic_sheets"}, "F": {"item": "create:fluid_pipe"}},
+        "key": {"P": ACID_PROOF, "F": {"item": "create:fluid_pipe"}},
         "result": {"id": "fundamentals:mixer_settler", "count": 6}})
     for name in PLANT_ITEMS:
         write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})
@@ -635,7 +641,7 @@ def magnetomigration_cell():
     write(DATA / "loot_table/blocks/magnetomigration_cell.json", {"type": "minecraft:block", "pools": [drop_self("magnetomigration_cell")]})
     write(RECIPES / "magnetomigration_cell.json", {
         "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["PPP", "PTM", "PPP"],
-        "key": {"P": {"tag": "fundamentals:plastic_sheets"}, "T": {"item": "fundamentals:plastic_fluid_tank"}, "M": {"tag": "fundamentals:magnets"}},
+        "key": {"P": ACID_PROOF, "T": [{"item": "fundamentals:plastic_fluid_tank"}, {"tag": "c:plates/stainless_steel"}], "M": {"tag": "fundamentals:magnets"}},
         "result": {"id": "fundamentals:magnetomigration_cell", "count": 1}})
 
 

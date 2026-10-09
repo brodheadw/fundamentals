@@ -11,13 +11,24 @@
       "item": "fundamentals:europium_oxide"
     },
     {
+      "item": "fundamentals:lanthanum_oxide"
+    },
+    {
+      "item": "fundamentals:cerium_oxide"
+    },
+    {
       "item": "fundamentals:terbium_oxide"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:phosphoric_acid"
     }
   ],
   "results": [
     {
       "id": "fundamentals:phosphor",
-      "count": 4
+      "count": 6
     }
   ],
   "heat_requirement": "superheated"

@@ -85,6 +85,7 @@ final class StageFormation {
 
     private static void form(MixerSettlerBlockEntity casing, BlockPos origin, int w, int l, int h) {
         Level level = casing.getLevel();
+        MixerSettlerBlockEntity.formations++;
         // what the stages being absorbed held goes into the new controller, as far as it fits
         Set<MixerSettlerBlockEntity> absorbed = new LinkedHashSet<>();
         List<FluidStack> organics = new ArrayList<>();
@@ -137,6 +138,7 @@ final class StageFormation {
     /** Losing a casing breaks its stage into single casings, which merge again on their own; the tanks are lost. */
     static void dissolve(MixerSettlerBlockEntity casing) {
         Level level = casing.getLevel();
+        MixerSettlerBlockEntity.formations++;
         MixerSettlerBlockEntity stage = casing.stage();
         BlockPos origin = stage.getBlockPos();
         int w = stage.across, l = stage.along, h = stage.tall;
