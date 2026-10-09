@@ -1,0 +1,32 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "machines": [
+    "tfmg:electrode",
+    "tfmg:electrode"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
+  "ingredients": [
+    {
+      "item": "fundamentals:magnesium_chloride"
+    },
+    {
+      "item": "fundamentals:magnesium_chloride"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:magnesium_ingot",
+      "count": 2
+    },
+    {
+      "id": "fundamentals:chlorine",
+      "amount": 500
+    }
+  ],
+  "heat_requirement": "heated"
+}

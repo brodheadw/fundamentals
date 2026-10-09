@@ -19,5 +19,7 @@ public final class LightBatteryMaterials {
         // The ingot, nugget and block are The Factory Must Grow's.
         MaterialRegistry.define(GROUP, "lithium", null, MaterialType.ELEMENT, "Li", new MaterialForm[] {INGOT, NUGGET, BLOCK},
                 MaterialProperties.builder().density(0.07).conductivity(0.18).hardness(0.05));
+        MaterialRegistry.define(GROUP, "magnesium", null, MaterialType.ELEMENT, "Mg", new MaterialForm[] {INGOT},
+                MaterialProperties.builder().density(0.22).conductivity(0.38).hardness(0.10));
     }
 }

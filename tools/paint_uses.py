@@ -67,6 +67,9 @@ def main():
     heap("sodium_chromate", (252, 240, 110), (234, 206, 34), (168, 138, 18)).save(TEXTURES / "item/sodium_chromate.png")
     heap("sodium_dichromate", (255, 160, 80), (226, 98, 28), (150, 52, 16)).save(TEXTURES / "item/sodium_dichromate.png")
     heap("aluminium_powder", (224, 226, 230), (172, 176, 184), (110, 114, 122)).save(TEXTURES / "item/aluminium_powder.png")
+    # titania slag is a black glassy lump off the arc furnace, browned by the iron left in it; magnesium chloride is white
+    paint_raw("titania_slag", ((18, 16, 16), (42, 38, 36), (72, 64, 60), (118, 106, 98))).save(TEXTURES / "item/titania_slag.png")
+    heap("magnesium_chloride", (255, 255, 255), (234, 236, 238), (180, 184, 188)).save(TEXTURES / "item/magnesium_chloride.png")
     # The platinum refinery: sal ammoniac white; the insolubles black; each metal's salt the colour chemists know it by, the
     # chloroplatinate bright yellow, dichlorodiammine palladium a duller yellow, the chlororuthenate red-brown, the chloroiridate
     # near black, the chlororhodate rose. The reforming catalyst is grey-white alumina beads.
