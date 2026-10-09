@@ -23,6 +23,7 @@ ROW = 12              # z between a battery and its children
 LANE = 6              # z north of a battery where the heavy pipe runs east
 MOTOR = "{ScrollValue:64}"
 LIQUOR_PIPE = "tfmg:plastic_pipe"   # the liquors are chlorides in dilute acid and eat copper; the organic does not
+LIQUOR_PUMP = "tfmg:plastic_mechanical_pump"
 
 lines, fills, refills = [], [], []
 bounds = [0, 0, 0, 0]   # min x, min z, max x, max z, grown as blocks are placed
@@ -41,9 +42,9 @@ def tank(x, y, z, fluid=None, amount=8000):
         refills.append(f"execute unless data block {x} {y} {z} TankContent.Fluid run {merge}")
 
 
-def pump(x, y, z, facing, axis, motor_at, motor_facing):
+def pump(x, y, z, facing, axis, motor_at, motor_facing, block=LIQUOR_PUMP):
     """A pump with the cogwheel above it on its axis and a motor beside the cog."""
-    put(x, y, z, f"create:mechanical_pump[facing={facing}]")
+    put(x, y, z, f"{block}[facing={facing}]")
     put(x, y + 1, z, f"create:cogwheel[axis={axis}]")
     put(*motor_at, f"create:creative_motor[facing={motor_facing}]{MOTOR}")
 
@@ -96,7 +97,7 @@ def battery(liquor, x0, z0):
         put(x0 + 3 * i, Y + 3, z0, f"create:creative_motor[facing=down]{MOTOR}")
     # the organic: a tank and pump at the head, a pipe along the top of the right row with a drop into every stage
     tank(x0 - 2, Y + 3, z0 + 2, cut["organic"])
-    pump(x0 - 1, Y + 3, z0 + 2, "east", "x", (x0 - 2, Y + 4, z0 + 2), "east")
+    pump(x0 - 1, Y + 3, z0 + 2, "east", "x", (x0 - 2, Y + 4, z0 + 2), "east", "create:mechanical_pump")
     for x in range(x0, x0 + 3 * n):
         drop = (x - x0) % 3 == 2
         east = x < x0 + 3 * n - 1
@@ -113,7 +114,7 @@ def battery(liquor, x0, z0):
         pump(x, Y, z0 - 1, "north", "z", (x, Y + 1, z0 - 2), "south")
     put(x0, Y + 1, z0 - 1, "minecraft:lever[face=wall,facing=north,powered=false]")
     # the sump under the head, drained into a tank below the floor
-    put(x0, Y - 1, z0, "create:mechanical_pump[facing=down]")
+    put(x0, Y - 1, z0, f"{LIQUOR_PUMP}[facing=down]")
     put(x0 + 1, Y - 1, z0, "create:cogwheel[axis=y]")
     put(x0 + 1, Y - 2, z0, f"create:creative_motor[facing=up]{MOTOR}")
     put(x0, Y - 2, z0, "create:fluid_tank")
@@ -204,7 +205,7 @@ def main():
     put(-3, Y, 1, f"{LIQUOR_PIPE}[east=true,west=true]")
     # the chests at spawn: the components to build a stage, and the metals to build with
     chest = lambda x, z, items: put(x, Y, z, "minecraft:chest[facing=north]{Items:[" + ",".join(f'{{Slot:{i}b,id:"{it}",count:{n}}}' for i, (it, n) in enumerate(items)) + "]}")
-    chest(6, 6, [("fundamentals:mixer_settler", 64), ("create:mechanical_mixer", 16), ("create:cogwheel", 32), ("create:creative_motor", 16), ("create:mechanical_pump", 16),
+    chest(6, 6, [("fundamentals:mixer_settler", 64), ("create:mechanical_mixer", 16), ("create:cogwheel", 32), ("create:creative_motor", 16), ("tfmg:plastic_mechanical_pump", 16), ("create:mechanical_pump", 8),
                  ("create:fluid_pipe", 64), ("tfmg:plastic_pipe", 64), ("create:fluid_tank", 16), ("create:wrench", 1), ("fundamentals:oxalic_acid", 64), ("create:basin", 4), ("create:chute", 4),
                  ("minecraft:blast_furnace", 4), ("create:depot", 4), ("minecraft:coal", 64), ("minecraft:lever", 4)])
     chest(6, 7, [("fundamentals:cobalt_ingot", 64), ("fundamentals:molybdenum_ingot", 64), ("fundamentals:rhenium_ingot", 32), ("fundamentals:tungsten_ingot", 64),
