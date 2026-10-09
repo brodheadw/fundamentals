@@ -8,16 +8,11 @@
     "fundamentals:dysprosium_ingot",
     "fundamentals:dysprosium_neodymium_iron_boron_block",
     "fundamentals:dysprosium_neodymium_iron_boron_ingot",
-    "fundamentals:dysprosium_neodymium_iron_boron_magnet",
     "fundamentals:dysprosium_neodymium_iron_boron_nugget",
     "fundamentals:dysprosium_neodymium_iron_boron_plate",
     "fundamentals:dysprosium_nugget",
     "fundamentals:dysprosium_oxalate",
     "fundamentals:dysprosium_oxide",
-    "fundamentals:heavy_rare_earth_concentrate",
-    "fundamentals:heavy_rare_earth_sulfate",
-    "fundamentals:ion_adsorption_clay_ore",
-    "fundamentals:raw_ion_adsorption_clay",
     "fundamentals:tarnished_dysprosium_block"
   ]
 }
