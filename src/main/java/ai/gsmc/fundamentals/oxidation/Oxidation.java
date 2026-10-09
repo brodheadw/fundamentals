@@ -60,6 +60,7 @@ public final class Oxidation {
             .synced(Rate.CODEC, false).build();
     public static final DataComponentType<Integer> STAGE = DataComponentType.<Integer>builder()
             .persistent(Codec.intRange(1, 8)).networkSynchronized(ByteBufCodecs.VAR_INT).build();
+    public static final ResourceLocation STAGE_PROPERTY = id("oxidation_stage");
     public static final AttachmentType<Long> CLOCK = AttachmentType.builder(() -> 0L).serialize(Codec.LONG).build();
     private static final int PLAYER_INTERVAL = 100;
     private static final long DAY = 24000;
@@ -98,7 +99,7 @@ public final class Oxidation {
 
     public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
         registry.accept(id("inert_storage_drum"), drum = new InertDrumBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY)
-                .requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.NETHERITE_BLOCK)));
+                .requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.NETHERITE_BLOCK).noOcclusion()));
         Weathering.registerBlocks(registry);
     }
 
@@ -114,6 +115,11 @@ public final class Oxidation {
         registry.accept(id("rusty_iron_ingot"), rustyIronIngot = new Item(new Item.Properties()));
         registry.accept(id("rusty_steel_ingot"), rustySteelIngot = new Item(new Item.Properties()));
         Weathering.registerItems(registry);
+    }
+
+    /** The item property the staged item models switch on: the stack's stage, 0 when fresh. */
+    public static float stageProperty(ItemStack stack) {
+        return stack.getOrDefault(STAGE, 0);
     }
 
     /** {@code stack} after {@code ticks} in {@code air}: the same stack if nothing happened, a later stage, or what it turns into. */

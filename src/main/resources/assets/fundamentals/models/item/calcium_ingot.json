@@ -2,5 +2,25 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "fundamentals:item/calcium_ingot"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "fundamentals:oxidation_stage": 1
+      },
+      "model": "fundamentals:item/aged/calcium_ingot_1"
+    },
+    {
+      "predicate": {
+        "fundamentals:oxidation_stage": 2
+      },
+      "model": "fundamentals:item/aged/calcium_ingot_2"
+    },
+    {
+      "predicate": {
+        "fundamentals:oxidation_stage": 3
+      },
+      "model": "fundamentals:item/aged/calcium_ingot_3"
+    }
+  ]
 }

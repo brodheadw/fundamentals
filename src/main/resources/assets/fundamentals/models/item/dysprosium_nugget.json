@@ -2,5 +2,19 @@
   "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "fundamentals:item/dysprosium_nugget"
-  }
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "fundamentals:oxidation_stage": 1
+      },
+      "model": "fundamentals:item/aged/dysprosium_nugget_1"
+    },
+    {
+      "predicate": {
+        "fundamentals:oxidation_stage": 2
+      },
+      "model": "fundamentals:item/aged/dysprosium_nugget_2"
+    }
+  ]
 }

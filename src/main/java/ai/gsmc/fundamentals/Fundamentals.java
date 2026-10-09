@@ -1,6 +1,7 @@
 package ai.gsmc.fundamentals;
 
 import ai.gsmc.fundamentals.client.GrindingAnimation;
+import ai.gsmc.fundamentals.client.OxidationClient;
 import ai.gsmc.fundamentals.client.PlasticsClient;
 import ai.gsmc.fundamentals.client.SeparationClient;
 import ai.gsmc.fundamentals.client.ThermometerRenderer;
@@ -43,6 +44,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.loading.FMLEnvironment;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.wrapper.InvWrapper;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.fluids.capability.wrappers.FluidBucketWrapper;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
@@ -145,6 +147,7 @@ public class Fundamentals {
             event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, Separation.magnetomigrationCellEntity(), MagnetomigrationCellBlockEntity::handler);
             event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, Separation.plasticTankEntity(), PlasticTankBlockEntity::handler);
             event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, Oxidation.drumEntity(), InertDrumBlockEntity::handler);
+            event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, Oxidation.drumEntity(), (drum, side) -> new InvWrapper(drum));
             event.registerItem(Capabilities.FluidHandler.ITEM, (stack, context) -> new FluidBucketWrapper(stack), Separation.seawaterBucket());
         });
         modBus.addListener(FMLCommonSetupEvent.class, event -> event.enqueueWork(() ->
@@ -153,6 +156,7 @@ public class Fundamentals {
             GrindingAnimation.register(modBus);
             SeparationClient.register(modBus);
             PlasticsClient.register(modBus);
+            OxidationClient.register(modBus);
             ThermometerRenderer.register(modBus);
         }
     }

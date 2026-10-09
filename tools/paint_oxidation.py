@@ -62,6 +62,115 @@ DRUM_STEEL = ((38, 42, 50), (66, 72, 82), (98, 104, 116), (140, 146, 158))
 ARGON_GREEN = (40, 104, 52)
 
 
+# What an ingot, nugget or sheet shows as it ages, stage by stage, as build_oxidation_data.py ages it: item -> (what it goes to,
+# the stages it shows before it is something else). The last stage of a rare earth metal is its oxide, so it shows two.
+CRUST = ((128, 128, 124), (178, 178, 172), (212, 212, 206), (236, 236, 230))
+LANTHANIDES = ("lanthanum", "cerium", "praseodymium", "didymium", "neodymium", "samarium", "gadolinium", "terbium", "dysprosium", "yttrium")
+NUGGETS = ("praseodymium", "neodymium", "samarium", "terbium", "dysprosium")
+STAGED = {
+    "minecraft:copper_ingot": ("copper", 3),
+    **{f"fundamentals:{m}_{form}": (m, 3) for m in ("bronze", "silver") for form in ("ingot", "nugget", "plate")},
+    "fundamentals:calcium_ingot": ("calcium", 3), "fundamentals:magnesium_ingot": ("magnesium", 3),
+    **{f"fundamentals:{m}_ingot": (m, 2) for m in LANTHANIDES},
+    **{f"fundamentals:{m}_nugget": (m, 2) for m in NUGGETS},
+}
+COPPER = ((96, 44, 28), (164, 82, 54), (214, 126, 88), (246, 176, 136))
+
+
+def ages_to(metal):
+    """(how it ages, the surface it dulls to, the colour of its blotches): verdigris, black tarnish, a white crust, or the grey
+    bloom of a rare earth's oxide, the same as its storage block."""
+    if metal in ("copper", "bronze"):
+        return "patina", VERDIGRIS, VERDIGRIS
+    if metal == "silver":
+        return "tarnish", ACANTHITE, ACANTHITE
+    if metal in ("calcium", "magnesium"):
+        return "crust", CRUST, CRUST
+    return "oxide", mix(OXIDE[metal], DULL, 0.55), mix(OXIDE[metal], ((236, 236, 232),) * 4, 0.35)
+
+
+def fresh(item):
+    namespace, name = item.split(":")
+    return paint_item("ingot", COPPER) if namespace == "minecraft" else Image.open(OUT / "item" / f"{name}.png").convert("RGBA")
+
+
+def outline(px, body):
+    return [p for p in body if any(px[x, y][3] == 0 if 0 <= x < 16 and 0 <= y < 16 else True
+                                   for x, y in ((p[0] + 1, p[1]), (p[0] - 1, p[1]), (p[0], p[1] + 1), (p[0], p[1] - 1)))]
+
+
+def aged(item, stage):
+    """The fresh item gone over, more at each stage, so it reads at a glance in a chest: its own shading laid by brightness onto
+    what it ages to, blotches of the full colour spreading from flaws, pits, and then what the metal does. Copper and bronze run
+    with streaks of verdigris; silver goes black in patches with a purple bloom at their edges; calcium and magnesium crust
+    white; a rare earth metal loses its shine to a grey-white bloom of oxide, and at its last stage flakes at the edge, the
+    flakes lying under it."""
+    metal, stages = STAGED[item]
+    kind, surface, blotch = ages_to(metal)
+    t = stage / stages
+    img = fresh(item)
+    px = img.load()
+    rng = random.Random(f"aged-{item}-{stage}")
+    body = [(x, y) for y in range(16) for x in range(16) if px[x, y][3]]
+    rim = set(outline(px, body))
+    lum = {p: sum(px[p][:3]) for p in body}
+    lo, hi = min(lum.values()), max(lum.values())
+    # a patina browns before it greens
+    cover = 0.2 + 0.75 * t if kind == "patina" else 0.45 + 0.5 * t
+    for p in body:
+        k = (lum[p] - lo) / max(1, hi - lo) * 3
+        if kind in ("oxide", "crust"):
+            # oxide is matt: the shine goes before the colour does
+            k = 0.8 + k * 0.45
+        tone = tuple(int(a + (b - a) * (k - int(k))) for a, b in zip(surface[int(k)], surface[min(3, int(k) + 1)]))
+        px[p] = tuple(int(c + (d - c) * cover) for c, d in zip(px[p][:3], tone)) + (255,)
+    inner = [p for p in body if p not in rim]
+    flaws = rng.sample(inner, min(len(inner), 1 + 2 * stage))
+    spread = 1.2 + 1.4 * t
+    for p in inner:
+        near = min(abs(p[0] - fx) + abs(p[1] - fy) for fx, fy in flaws)
+        if near <= spread and rng.random() < 0.9 - 0.15 * near:
+            if kind == "tarnish":
+                px[p] = blotch[0 if near < spread - 0.8 else 3 if rng.random() < 0.5 else 1] + (255,)
+            elif kind == "patina":
+                px[p] = blotch[2 if (p[0] + p[1]) % 3 else 3] + (255,)
+            else:
+                px[p] = blotch[3 if rng.random() < 0.6 else 2] + (255,)
+    for p in rng.sample(inner, min(len(inner), (len(inner) * stage) // 14)):
+        px[p] = (surface[0] if kind != "tarnish" else (12, 10, 12)) + (255,)
+    if kind == "patina":
+        tops = {}
+        for x, y in inner:
+            tops.setdefault(x, y)
+        for x in rng.sample(sorted(tops), min(len(tops), 2 * stage)):
+            for y in range(tops[x], tops[x] + rng.randrange(2, 3 + 2 * stage)):
+                if (x, y) in inner:
+                    px[x, y] = VERDIGRIS[3] + (255,)
+    if kind == "oxide" and stage == stages:
+        bottom = max(y for _, y in body)
+        gone = [p for p in rim if p[1] < bottom - 1 and rng.random() < 0.3]
+        for p in gone:
+            px[p] = (0, 0, 0, 0)
+        left = [p for p in body if p not in gone]
+        for p in left:
+            if not any(px[x, y][3] for x, y in ((p[0] + 1, p[1]), (p[0] - 1, p[1]), (p[0], p[1] + 1), (p[0], p[1] - 1))
+                       if 0 <= x < 16 and 0 <= y < 16):
+                px[p] = (0, 0, 0, 0)
+        left = [p for p in left if px[p][3]]
+        for p in outline(px, left):
+            px[p] = surface[0] + (255,)
+        under = sorted({x for x, y in left if y == max(yy for xx, yy in left if xx == x)})
+        for x in rng.sample(under, min(len(under), 3)):
+            y = max(yy for xx, yy in left if xx == x) + 1
+            if y < 16:
+                px[x, y] = blotch[rng.randrange(1, 4)] + (255,)
+    return img
+
+
+def aged_name(item, stage):
+    return f"{item.split(':')[1]}_{stage}"
+
+
 def stage_blocks():
     """name -> palette-faithful texture, for every stage after the first of every family."""
     out = {}
@@ -119,39 +228,88 @@ def rusty(name, pal):
     return img
 
 
+def body_mask():
+    """The drum's footprint, as the model builds it: a 12-wide octagon of pixels, its corners stepped in."""
+    return {(x, z) for x in range(2, 14) for z in range(2, 14) if 3 <= x < 13 or 3 <= z < 13}
+
+
 def drum_side():
+    """One stave of the drum, laid out as the model takes it: the lid's chime at the top, the shoulder painted argon green, the
+    plain sheet below where the gauge sits between the rolling hoops, riveted seams down both sides, light from the left."""
     rng = random.Random("drum-side")
     img = Image.new("RGBA", (16, 16))
     for y in range(16):
         for x in range(16):
-            if y in (0, 15):
-                colour = DRUM_STEEL[0]
-            elif y in (3, 12):
+            curve = DRUM_STEEL[3] if x in (4, 5) else DRUM_STEEL[2] if x < 9 else DRUM_STEEL[1] if x < 12 or rng.random() < 0.5 else DRUM_STEEL[0]
+            if y == 2:
                 colour = DRUM_STEEL[3]
-            elif y in (4, 13):
+            elif y == 15:
                 colour = DRUM_STEEL[0]
-            elif 7 <= y <= 8:
-                colour = ARGON_GREEN if y == 7 else tuple(int(c * 0.75) for c in ARGON_GREEN)
+            elif 3 <= y <= 4:
+                shade = 1.15 if x in (4, 5) else 1.0 if x < 9 else 0.8
+                colour = tuple(min(255, int(c * shade * (1 if y == 3 else 0.82))) for c in ARGON_GREEN)
+            elif x in (3, 12) and y % 3 == 0:
+                colour = DRUM_STEEL[3] if x == 3 else DRUM_STEEL[2]
+            elif x in (2, 13):
+                colour = DRUM_STEEL[0]
             else:
-                # light from the left, round the curve of the drum
-                colour = DRUM_STEEL[2] if x < 5 else DRUM_STEEL[1] if x < 12 or rng.random() < 0.3 else DRUM_STEEL[0]
+                colour = curve
             img.putpixel((x, y), colour + (255,))
     return img
 
 
-def drum_top(bung):
-    img = Image.new("RGBA", (16, 16))
-    for y in range(16):
-        for x in range(16):
-            rim = x in (0, 15) or y in (0, 15)
-            ring = x in (1, 14) or y in (1, 14)
-            colour = DRUM_STEEL[0] if rim else DRUM_STEEL[3] if ring else DRUM_STEEL[2] if (x * 7 + y * 3) % 11 else DRUM_STEEL[1]
-            img.putpixel((x, y), colour + (255,))
+def drum_lid(bung):
+    """The drum's head: the chime rolled round the octagon's edge, a ring pressed in a pixel inside it, and the second, plugged
+    bung; the valve stands over the first."""
+    mask = body_mask()
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    for x, z in mask:
+        edge = sum((x + dx, z + dz) not in mask for dx, dz in ((1, 0), (-1, 0), (0, 1), (0, -1)))
+        inner = not edge and any((x + dx, z + dz) not in mask for dx in (-1, 0, 1) for dz in (-1, 0, 1))
+        colour = DRUM_STEEL[3] if edge and (x < 8 or z < 8) else DRUM_STEEL[1] if edge else DRUM_STEEL[0] if inner \
+            else DRUM_STEEL[2] if (x * 7 + z * 3) % 11 else DRUM_STEEL[1]
+        img.putpixel((x, z), colour + (255,))
     if bung:
-        for x, y in ((10, 10), (11, 10), (10, 11), (11, 11)):
-            img.putpixel((x, y), (ARGON_GREEN if (x, y) == (10, 10) else DRUM_STEEL[0]) + (255,))
-        for x, y in ((4, 4), (5, 4), (4, 5), (5, 5)):
-            img.putpixel((x, y), DRUM_STEEL[0 if (x, y) == (5, 5) else 3] + (255,))
+        for x, z in ((5, 10), (6, 10), (5, 11), (6, 11)):
+            img.putpixel((x, z), DRUM_STEEL[0 if (x, z) == (6, 11) else 3] + (255,))
+    return img
+
+
+BRASS = ((96, 64, 24), (166, 120, 48), (214, 172, 82), (246, 218, 140))
+HANDWHEEL = ((92, 22, 20), (156, 38, 32), (204, 64, 52))
+DIAL = (236, 232, 218)
+
+
+def drum_fittings():
+    """The drum's hardware on one sheet: the rolling hoops (rows 0-1), the gauge's face (0,4)-(6,10) and its brass case
+    (6,4)-(12,6), the valve's brass stem (8,8)-(12,12), and the red handwheel's top (12,10)-(16,14) and rim (12,14)-(16,15)."""
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    put = lambda x, y, c: img.putpixel((x, y), c + (255,))
+    for x in range(16):
+        put(x, 0, DRUM_STEEL[3] if x < 6 else DRUM_STEEL[2])
+        put(x, 1, DRUM_STEEL[0])
+    for y in range(4, 10):
+        for x in range(6):
+            rim = x in (0, 5) or y in (4, 9)
+            put(x, y, (BRASS[2] if x + y < 10 else BRASS[1]) if rim else DIAL)
+    # ticks round the face, then the needle standing well up the scale, and its hub
+    for x, y in ((1, 6), (1, 5), (2, 5)):
+        put(x, y, (110, 106, 98))
+    for x, y in ((3, 6), (4, 5)):
+        put(x, y, (190, 30, 28))
+    put(2, 7, (30, 28, 26))
+    for y in range(4, 6):
+        for x in range(6, 12):
+            put(x, y, BRASS[2] if y == 4 else BRASS[1])
+    for y in range(8, 12):
+        for x in range(8, 12):
+            put(x, y, BRASS[3] if x == 8 else BRASS[2] if x < 10 else BRASS[1] if x < 11 else BRASS[0])
+    for y in range(10, 14):
+        for x in range(12, 16):
+            hub = (x, y) in ((13, 11), (14, 11), (13, 12), (14, 12))
+            put(x, y, BRASS[3] if (x, y) == (13, 11) else BRASS[1] if hub else HANDWHEEL[2] if x + y < 25 else HANDWHEEL[1])
+    for x in range(12, 16):
+        put(x, 14, HANDWHEEL[1])
     return img
 
 
@@ -180,8 +338,13 @@ def main():
     for name, pal in RUSTY.items():
         rusty(name, pal).save(OUT / "item" / f"{name}.png")
     drum_side().save(OUT / "block/inert_storage_drum_side.png")
-    drum_top(True).save(OUT / "block/inert_storage_drum_top.png")
-    drum_top(False).save(OUT / "block/inert_storage_drum_bottom.png")
+    drum_lid(True).save(OUT / "block/inert_storage_drum_top.png")
+    drum_lid(False).save(OUT / "block/inert_storage_drum_bottom.png")
+    drum_fittings().save(OUT / "block/inert_storage_drum_fittings.png")
+    (OUT / "item/aged").mkdir(exist_ok=True)
+    for item, (_, stages) in STAGED.items():
+        for stage in range(1, stages + 1):
+            aged(item, stage).save(OUT / "item/aged" / f"{aged_name(item, stage)}.png")
     canister(None).save(OUT / "item/canister.png")
     canister(ARGON_GREEN).save(OUT / "item/argon_canister.png")
     print(f"wrote {len(stage_blocks())} weathered blocks, the rusty ingots, the drum and the canisters")
