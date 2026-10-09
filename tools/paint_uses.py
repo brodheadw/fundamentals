@@ -87,6 +87,9 @@ def main():
     # roasting burns the sulfides' iron to red-brown oxide among the black cassiterite; solder is a coil of dull tin-lead wire
     heap("roasted_tin_concentrate", (130, 84, 60), (82, 50, 34), (38, 24, 18)).save(TEXTURES / "item/roasted_tin_concentrate.png")
     filament((150, 152, 156, 255), (206, 208, 212, 255)).save(TEXTURES / "item/solder.png")
+    # Parkes crust: zinc-silver alloy skimmed off the lead, a pale grey dross; litharge, PbO off the cupel, orange-yellow
+    paint_raw("silver_zinc_crust", ((70, 72, 76), (118, 120, 124), (164, 166, 170), (212, 214, 216))).save(TEXTURES / "item/silver_zinc_crust.png")
+    heap("litharge", (252, 206, 100), (230, 150, 46), (164, 88, 22)).save(TEXTURES / "item/litharge.png")
     print("uses textures written")
 
 

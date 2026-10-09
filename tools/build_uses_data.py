@@ -25,7 +25,8 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "lithium_chloride": "Lithium Chloride", "ferroboron": "Ferroboron",
          "soda_ash": "Soda Ash", "sodium_chromate": "Sodium Chromate", "sodium_dichromate": "Sodium Dichromate", "aluminium_powder": "Aluminium Powder",
          "roasted_tin_concentrate": "Roasted Tin Concentrate", "solder": "Solder",
-         "titania_slag": "Titania Slag", "magnesium_chloride": "Magnesium Chloride"}
+         "titania_slag": "Titania Slag", "magnesium_chloride": "Magnesium Chloride",
+         "silver_zinc_crust": "Silver-Zinc Crust", "litharge": "Litharge"}
 # The platinum refinery's items, registered by uses.PlatinumMetals in this order.
 PGM_ITEMS = {"ammonium_chloride": "Ammonium Chloride", "insoluble_residue": "Insoluble Residue", "iridium_rhodium_residue": "Iridium-Rhodium Residue",
              "ammonium_chloroplatinate": "Ammonium Chloroplatinate", "dichlorodiammine_palladium": "Dichlorodiammine Palladium",
@@ -513,6 +514,48 @@ def platinum_sinks():
            {"count": 2, "id": "tfmg:light_bulb"})
 
 
+def silver():
+    """Most silver has always come out of lead. Galena carries a little, and roasted galena smelts in the bloomery not to lead but to
+    lead bullion, which holds it; a furnace remelts the bullion to plain lead with the silver lost in it. The Parkes process stirs zinc
+    into molten bullion at 450 to 500 C: the two do not mix, silver is some three thousand times more soluble in zinc than in lead, and the zinc rises with it as
+    a crust that is skimmed off, the lead underneath desilvered. Cupellation is the older art: the silvery lead is blown with air on a
+    hearth of bone ash at about 1,000 C, the lead burns to litharge and soaks into the cupel or runs off, and the silver stays bright.
+    Cupelled straight, every bullion goes to litharge; cupelled as crust, the zinc burns to zinc oxide for the retort and only one lead
+    in four has to come back from litharge, which charcoal reduces. Rich silver ores, argentite and native silver, were soaked into a
+    lead bath on the cupel and cupelled with it."""
+    write(DATA / "recipe/bloomery/lead_from_roasted_galena.json", {"type": "fundamentals:bloomery", "ingredient": {"item": "fundamentals:roasted_galena"},
+                                                                   "result": {"id": "fundamentals:lead_bullion_ingot", "count": 1}, "byproduct": {"id": "fundamentals:slag", "count": 1}})
+    write(USES / "lead_from_bullion.json", {"type": "minecraft:smelting", "category": "misc", "ingredient": {"item": "fundamentals:lead_bullion_ingot"},
+                                            "result": {"id": "tfmg:lead_ingot"}, "experience": 0.1, "cookingtime": 200})
+    air = [fluid("tfmg:air", 250)]
+    cupel = item("minecraft:bone_meal") + air
+    mixing("parkes_desilvering", item("lead_bullion_ingot", 4) + tag("c:ingots/zinc"), [result("tfmg:lead_ingot", 3), result("silver_zinc_crust")], "heated")
+    mixing("cupellation_of_crust", item("silver_zinc_crust") + cupel, [result("silver_nugget", 4), result("litharge"), result("zinc_oxide")], "heated")
+    mixing("cupellation_of_bullion", item("lead_bullion_ingot") + cupel, [result("silver_nugget"), result("litharge")], "heated")
+    for ore in ("argentite", "native_silver"):
+        mixing(f"cupellation_of_{ore}", item(f"raw_{ore}") + tag("c:ingots/lead") + cupel, [result("silver_ingot"), result("litharge")], "heated")
+    mixing("lead_from_litharge", item("litharge") + item("minecraft:charcoal"), [result("tfmg:lead_ingot")], "heated")
+
+
+def silver_sinks():
+    """Silver conducts better than any metal and its oxide conducts too, so a contact that arcs as it makes and breaks stays sound: switchgear
+    contacts are silver. The Factory's switches take silver plates where they had lead and brass. A circuit board can be finished in silver
+    as well as gold (immersion silver), and the silver-zinc cell, densest of the old batteries, makes an accumulator."""
+    shaped(TFMG / "crafting/materials/electrical_switch.json", ["RPR", "SCS", "RPR"],
+           {"C": {"item": "tfmg:heavy_machinery_casing"}, "S": {"tag": "c:plates/silver"}, "P": {"item": "tfmg:electric_post"}, "R": {"tag": "c:dusts/redstone"}},
+           {"count": 1, "id": "tfmg:electrical_switch"})
+    shaped(TFMG / "crafting/materials/large_switch.json", ["WRS", "HMP", "III"],
+           {"S": {"tag": "c:plates/silver"}, "I": {"item": "tfmg:cable_connector"}, "M": {"item": "tfmg:steel_mechanism"}, "P": {"item": "tfmg:electric_post"},
+            "R": {"item": "tfmg:rebar"}, "H": {"item": "tfmg:steel_cable_hub"}, "W": {"tag": "c:wires/copper"}},
+           {"count": 1, "id": "tfmg:large_switch"})
+    write(USES / "coated_circuit_board_with_silver.json", {"type": "create:deploying", "ingredients": [{"item": "tfmg:empty_circuit_board"}, {"tag": "c:plates/silver"}],
+                                                           "results": [{"id": "tfmg:coated_circuit_board"}]})
+    shaped(USES / "accumulator_from_silver_zinc.json", ["SWS", "ZPZ", "SCS"],
+           {"S": {"tag": "c:plates/silver"}, "W": {"tag": "c:wires/copper"}, "Z": {"tag": "c:ingots/zinc"}, "P": {"item": "tfmg:plastic_sheet"},
+            "C": {"item": "tfmg:industrial_aluminum_casing"}},
+           {"count": 1, "id": "tfmg:accumulator"})
+
+
 def names():
     path = ASSETS / "lang/en_us.json"
     lang = json.loads(path.read_text(encoding="utf-8"))
@@ -556,6 +599,8 @@ def main():
     platinum_feeds()
     platinum_refinery()
     platinum_sinks()
+    silver()
+    silver_sinks()
     names()
     print("uses written")
 

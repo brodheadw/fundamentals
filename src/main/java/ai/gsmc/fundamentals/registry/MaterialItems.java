@@ -30,7 +30,8 @@ public final class MaterialItems {
             "copper_matte", "blister_copper", "chromite", "chromium", "ferrochrome", "stainless_steel",
             "nickel_matte", "converter_matte", "platinum_group_concentrate", "platinum", "palladium", "rhodium", "ruthenium", "iridium", "osmium",
             "tin_concentrate", "crude_tin", "tin", "bronze",
-            "titanium", "magnesium");
+            "titanium", "magnesium",
+            "lead_bullion", "silver");
 
     private static final Map<ResourceLocation, Block> BLOCKS = new LinkedHashMap<>();
     private static final Map<ResourceLocation, Item> ITEMS = new LinkedHashMap<>();

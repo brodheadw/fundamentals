@@ -1,0 +1,30 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:lead_bullion_ingot"
+    },
+    {
+      "item": "fundamentals:lead_bullion_ingot"
+    },
+    {
+      "item": "fundamentals:lead_bullion_ingot"
+    },
+    {
+      "item": "fundamentals:lead_bullion_ingot"
+    },
+    {
+      "tag": "c:ingots/zinc"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:lead_ingot",
+      "count": 3
+    },
+    {
+      "id": "fundamentals:silver_zinc_crust"
+    }
+  ],
+  "heat_requirement": "heated"
+}
