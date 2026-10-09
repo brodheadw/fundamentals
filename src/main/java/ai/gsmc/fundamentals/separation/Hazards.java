@@ -43,8 +43,8 @@ import java.util.List;
  * What the plant does to people and pipes. The fuming acids (hydrofluoric, nitric, aqua regia) hurt anyone within reach of them
  * in the open: as blocks in the world, or in a basin they are being used in. Create's diving helmet on a filled
  * backtank is the gas mask, and breathes its air. And the acids eat copper: Create's pipes, pumps and valves carrying one
- * corrode and eventually burst, spilling it. The liquors are rare earth chlorides in dilute acid and the spent liquor and brine
- * are chloride too, so they eat it as well, more slowly. Metal tanks go the same way, ten times slower for the thicker wall.
+ * corrode and eventually burst, spilling it. The liquors are rare earth chlorides in dilute acid, and the spent liquor, the calcium chloride
+ * liquor and bittern are chloride too, so they eat it as well, more slowly. Metal tanks go the same way, ten times slower for the thicker wall.
  * Plastic pipes, pumps, valves and tanks, and glass pipes, do not corrode.
  */
 public final class Hazards {
@@ -53,7 +53,7 @@ public final class Hazards {
     private static final int REACH = 2;
     /** Per tick, for a pipe carrying an acid: on average a pipe lasts two minutes. */
     public static double corrosionChance = 1.0 / 2400;
-    /** Per tick, for a pipe carrying a liquor, crude liquor, spent liquor or brine: on average eight minutes. */
+    /** Per tick, for a pipe carrying a liquor, crude liquor, spent liquor or any other chloride solution: on average eight minutes. */
     public static double liquorCorrosionChance = 1.0 / 9600;
     /** How many times longer a tank's wall lasts than a pipe's, for the same fluid: twenty minutes under acid, eighty under a liquor. */
     private static final int TANK_WALL = 10;
@@ -189,7 +189,8 @@ public final class Hazards {
     }
 
     public static boolean corrodes(Reagents.Kind kind) {
-        return kind == Reagents.Kind.ACID || kind == Reagents.Kind.LIQUOR || kind == Reagents.Kind.CRUDE || kind == Reagents.Kind.WASTE;
+        return kind == Reagents.Kind.ACID || kind == Reagents.Kind.LIQUOR || kind == Reagents.Kind.CRUDE || kind == Reagents.Kind.WASTE
+                || kind == Reagents.Kind.SALINE;
     }
 
     public static double chance(FluidStack carried) {

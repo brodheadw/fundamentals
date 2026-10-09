@@ -70,6 +70,11 @@ What's agreed but not built, in the order it's likely to go. The working plan be
 - **Chlorine, phosphorus trichloride and titanium tetrachloride** are pipe-only fluids, so they neither fume nor poison. If they ever stand in
   the world they belong with hydrofluoric and nitric acid in the fume handling.
 
+- **Salt loose ends.** Seawater is told from fresh water by biome (ocean and beach), so a pool dug on a beach is sea and a
+  lagoon in a river biome is not; it is no block of its own and pours out as water. There is no desalination, so ocean pumps
+  no longer feed what wants fresh water. Salt domes (halite plugs under a gypsum-anhydrite cap) are not generated: halite is
+  only in the evaporite beds. Bittern's potash and bromine are not drawn off.
+
 ## Plastics
 
 - **Plastics loose ends.** Polyethylene and polypropylene are one molten plastic, as TFMG has it. A dyed tank or pipe breaks

@@ -230,6 +230,11 @@
       "name": "trona_ore",
       "soft": false,
       "mineral": "trona"
+    },
+    {
+      "name": "halite_ore",
+      "soft": false,
+      "mineral": "halite"
     }
   ],
   "hosts": {

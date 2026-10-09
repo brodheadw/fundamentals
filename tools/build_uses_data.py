@@ -446,13 +446,21 @@ def chromium():
                                              "result": result("minecraft:green_dye", 2)})
 
 
+def rock_salt():
+    """Halite, rock salt, is mined and ground, not boiled: a millstone or crushing wheels make salt of it."""
+    write(USES / "salt_from_halite_milling.json", {"type": "create:milling", "ingredients": item("raw_halite"), "processing_time": 200,
+                                                   "results": [result("salt", 2)]})
+    write(USES / "salt_from_halite_crushing.json", {"type": "create:crushing", "ingredients": item("raw_halite"), "processing_time": 250,
+                                                    "results": [result("salt", 2), {"id": "fundamentals:salt", "chance": 0.5}]})
+
+
 def titanium():
     """Ilmenite is smelted with coke in an electric furnace at about 1,650 °C, as at Sorel and Richards Bay: the iron runs off as
     pig iron and the titanium stays in a slag of 80 to 90 per cent TiO2. Rutile is 95 per cent TiO2 already. Either is chlorinated
     with coke at about 1,000 °C to titanium tetrachloride, which boils at 136 °C and is distilled off. Molten magnesium under argon
     reduces it in a steel retort at 800 to 850 °C to a sponge of titanium and magnesium chloride (Kroll), and the chloride is
-    electrolysed back to magnesium and chlorine for the next batch. The first magnesium comes the Dow way, from sea water, lime and
-    hydrochloric acid. Titanium melts at 1,668 °C and takes oxygen and nitrogen from the air hot, so the sponge is arc-melted under
+    electrolysed back to magnesium and chlorine for the next batch. The first magnesium comes from the sea: the Dow way, seawater, lime and
+    hydrochloric acid; or from the bittern salt-making leaves, boiled down to the chloride. Titanium melts at 1,668 °C and takes oxygen and nitrogen from the air hot, so the sponge is arc-melted under
     vacuum, argon here. Nine tenths of the world's titanium never becomes metal but white pigment: the tetrachloride burnt in oxygen gives
     pure TiO2 and its chlorine back (the chloride process). The metal's place is where strength for its weight counts, the compressor
     of a gas turbine; the Factory's turbine engine built on titanium plate goes twice as far."""
@@ -461,7 +469,8 @@ def titanium():
     for feed in ("raw_rutile", "titania_slag"):
         mixing(f"titanium_tetrachloride_from_{feed.removeprefix('raw_')}", item(feed, 2) + item("tfmg:coal_coke") + [fluid("chlorine", 1000)],
                [out_fluid("titanium_tetrachloride", 500)], "heated")
-    mixing("magnesium_chloride", [fluid("minecraft:water", 1000), fluid("hydrochloric_acid", 250)] + item("tfmg:limesand"), [result("magnesium_chloride")], "heated")
+    mixing("magnesium_chloride", [fluid("seawater", 1000), fluid("hydrochloric_acid", 250)] + item("tfmg:limesand"), [result("magnesium_chloride")], "heated")
+    mixing("magnesium_chloride_from_bittern", [fluid("bittern", 500)], [result("magnesium_chloride")], "heated")
     pgm_vat("magnesium_ingot", item("magnesium_chloride", 2), [result("magnesium_ingot", 2), out_fluid("chlorine", 500)], machines=electrodes, folder=USES)
     pgm_vat("titanium_sponge", item("magnesium_ingot", 4) + [fluid("titanium_tetrachloride", 500)] + argon(),
             [result("titanium_sponge", 2), result("magnesium_chloride", 4)], folder=USES)
@@ -752,6 +761,7 @@ def main():
     tungsten()
     more_sinks()
     chromium()
+    rock_salt()
     titanium()
     platinum_feeds()
     platinum_refinery()
