@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:borax_ore",
+    "fundamentals:loparite_dust",
+    "fundamentals:loparite_ore",
+    "fundamentals:raw_borax",
+    "fundamentals:raw_loparite",
+    "fundamentals:raw_trona",
+    "fundamentals:salt",
+    "fundamentals:soda_ash",
+    "fundamentals:sodium_chromate",
+    "fundamentals:sodium_dichromate",
+    "fundamentals:trona_ore",
+    "minecraft:lapis_block",
+    "minecraft:lapis_lazuli"
+  ]
+}

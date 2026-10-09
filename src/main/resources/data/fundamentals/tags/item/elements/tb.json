@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:heavy_rare_earth_concentrate",
+    "fundamentals:heavy_rare_earth_sulfate",
+    "fundamentals:phosphor",
+    "fundamentals:terbium_block",
+    "fundamentals:terbium_fluoride",
+    "fundamentals:terbium_ingot",
+    "fundamentals:terbium_nugget",
+    "fundamentals:terbium_oxalate",
+    "fundamentals:terbium_oxide"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "create:crushed_raw_lead",
+    "fundamentals:galena_ore",
+    "fundamentals:lead_bullion_ingot",
+    "fundamentals:litharge",
+    "fundamentals:raw_galena",
+    "fundamentals:roasted_galena",
+    "fundamentals:solder",
+    "tfmg:galena",
+    "tfmg:lead_block",
+    "tfmg:lead_ingot",
+    "tfmg:lead_nugget",
+    "tfmg:lead_sheet",
+    "tfmg:raw_lead"
+  ]
+}

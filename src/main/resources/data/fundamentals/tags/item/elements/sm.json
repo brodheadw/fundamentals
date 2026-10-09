@@ -1,0 +1,17 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:light_rare_earth_concentrate",
+    "fundamentals:light_rare_earth_sulfate",
+    "fundamentals:samarium_block",
+    "fundamentals:samarium_cobalt_block",
+    "fundamentals:samarium_cobalt_dust",
+    "fundamentals:samarium_cobalt_ingot",
+    "fundamentals:samarium_cobalt_nugget",
+    "fundamentals:samarium_cobalt_plate",
+    "fundamentals:samarium_ingot",
+    "fundamentals:samarium_nugget",
+    "fundamentals:samarium_oxalate",
+    "fundamentals:samarium_oxide"
+  ]
+}

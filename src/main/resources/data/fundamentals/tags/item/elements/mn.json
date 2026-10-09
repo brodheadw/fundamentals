@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:pyrolusite_ore",
+    "fundamentals:raw_pyrolusite",
+    "fundamentals:raw_wolframite",
+    "fundamentals:wolframite_ore"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "replace": false,
+  "values": [
+    "create:crushed_raw_nickel",
+    "fundamentals:braggite_ore",
+    "fundamentals:converter_matte_dust",
+    "fundamentals:nickel_laterite_ore",
+    "fundamentals:nickel_matte_dust",
+    "fundamentals:pentlandite_ore",
+    "fundamentals:raw_braggite",
+    "fundamentals:raw_nickel_laterite",
+    "fundamentals:raw_pentlandite",
+    "fundamentals:roasted_pentlandite",
+    "fundamentals:stainless_steel_ingot",
+    "fundamentals:stainless_steel_plate",
+    "fundamentals:superalloy_ingot",
+    "fundamentals:superalloy_plate",
+    "tfmg:constantan_block",
+    "tfmg:constantan_ingot",
+    "tfmg:constantan_nugget",
+    "tfmg:magnetic_alloy_ingot",
+    "tfmg:magnetic_alloy_sheet",
+    "tfmg:nickel_block",
+    "tfmg:nickel_ingot",
+    "tfmg:nickel_nugget",
+    "tfmg:nickel_sheet",
+    "tfmg:raw_nickel"
+  ]
+}

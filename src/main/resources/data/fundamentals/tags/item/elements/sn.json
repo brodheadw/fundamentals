@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:bronze_block",
+    "fundamentals:bronze_ingot",
+    "fundamentals:bronze_nugget",
+    "fundamentals:bronze_plate",
+    "fundamentals:cassiterite_ore",
+    "fundamentals:crude_tin_ingot",
+    "fundamentals:raw_cassiterite",
+    "fundamentals:roasted_tin_concentrate",
+    "fundamentals:solder",
+    "fundamentals:tin_block",
+    "fundamentals:tin_concentrate",
+    "fundamentals:tin_ingot",
+    "fundamentals:tin_nugget"
+  ]
+}

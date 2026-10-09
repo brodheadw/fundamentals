@@ -1,0 +1,25 @@
+{
+  "parent": "fundamentals:elements/root",
+  "display": {
+    "icon": {
+      "id": "fundamentals:element",
+      "components": {
+        "minecraft:custom_model_data": 112
+      }
+    },
+    "title": {
+      "translate": "advancement.fundamentals.elements.cn.title"
+    },
+    "description": {
+      "translate": "advancement.fundamentals.elements.cn.description"
+    },
+    "frame": "task",
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "cn": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

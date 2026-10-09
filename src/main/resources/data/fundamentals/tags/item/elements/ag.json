@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:argentite_ore",
+    "fundamentals:lead_bullion_ingot",
+    "fundamentals:native_silver_ore",
+    "fundamentals:raw_argentite",
+    "fundamentals:raw_native_silver",
+    "fundamentals:silver_block",
+    "fundamentals:silver_ingot",
+    "fundamentals:silver_nugget",
+    "fundamentals:silver_plate",
+    "fundamentals:silver_zinc_crust"
+  ]
+}

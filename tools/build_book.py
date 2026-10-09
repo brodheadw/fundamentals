@@ -428,7 +428,7 @@ def power():
 def book():
     write(BOOK_DATA / "book.json", {
         "name": "Fundamentals: First Principles",
-        "landing_text": "Real minerals, real deposits, and the real road from rock to metal. $(br2)Everything here is as it is in the ground and in the plant; where the book quotes a number, the game was read for it.",
+        "landing_text": "Real minerals, real deposits, and the real road from rock to metal. $(br2)Everything here is as it is in the ground and in the plant; where the book quotes a number, the game was read for it. $(br2)The advancements screen has a periodic table: each element lights up the first time you hold anything made of it.",
         "version": "1", "creative_tab": "fundamentals:minerals", "use_resource_pack": True, "show_progress": False,
         "book_texture": "patchouli:textures/gui/book_brown.png", "model": "patchouli:book_brown",
     })

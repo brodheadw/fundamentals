@@ -7,9 +7,12 @@
 		"OreVeinTypeMixin",
 		"OreVeinifierMixin",
 		"PipeCorrosionMixin",
-		"TankCorrosionMixin"
+		"TankCorrosionMixin",
+		"TreeNodePositionMixin"
 	],
-	"client": [],
+	"client": [
+		"AdvancementWidgetMixin"
+	],
 	"injectors": {
 		"defaultRequire": 1
 	}
