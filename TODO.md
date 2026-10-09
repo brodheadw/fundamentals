@@ -67,6 +67,13 @@ What's agreed but not built, in the order it's likely to go. The working plan be
 - **Chlorine, phosphorus trichloride and titanium tetrachloride** are pipe-only fluids, so they neither fume nor poison. If they ever stand in
   the world they belong with hydrofluoric and nitric acid in the fume handling.
 
+## Plastics
+
+- **Plastics loose ends.** Polyethylene and polypropylene are one molten plastic, as TFMG has it. A dyed tank or pipe breaks
+  back to a plain one, a dyed pipe wrenched to glass or encased loses its dye, and tanks of different colours still join (the
+  next dye colours the whole tank). The Factory's plastic block takes only the milky colour: it is a full block that hides its
+  neighbours' faces, so translucent it would show holes, and making it not do so means a mixin on another mod's block. PVC's stabiliser and plasticiser are not modelled.
+
 ## Pack and tooling
 
 - **Fundamentals in the Wildspell pack.** Not in it yet; adding it brings TFMG in. Will's call.

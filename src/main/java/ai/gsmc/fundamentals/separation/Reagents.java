@@ -71,7 +71,8 @@ public final class Reagents {
             new Reagent("phosphorus_trichloride", 0xECF0EC, Kind.PRECURSOR),
             new Reagent("d2ehpa", 0xF0E4B0, Kind.PRECURSOR),
             new Reagent("ehehpa", 0xF2EAC4, Kind.PRECURSOR),
-            new Reagent("titanium_tetrachloride", 0xEEF0EA, Kind.PRECURSOR));
+            new Reagent("titanium_tetrachloride", 0xEEF0EA, Kind.PRECURSOR),
+            new Reagent("vinyl_chloride", 0xEEF0EE, Kind.PRECURSOR));
 
     private Reagents() {}
 }

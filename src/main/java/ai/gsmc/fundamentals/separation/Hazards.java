@@ -1,5 +1,6 @@
 package ai.gsmc.fundamentals.separation;
 
+import ai.gsmc.fundamentals.Fundamentals;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.content.equipment.armor.DivingHelmetItem;
@@ -187,11 +188,12 @@ public final class Hazards {
     }
 
     /** Create's pipes and tanks are copper and TFMG's metal pipes and tanks are metal; only plastic and glass stand up to acid,
-     * and a creative tank to anything. TFMG's pipes are Create's pipe classes underneath, so plastic is told apart by name. */
+     * and a creative tank to anything. TFMG's pipes and our dyed ones are Create's pipe classes underneath, so plastic is told apart by name. */
     public static boolean corrodible(BlockState state) {
         Block block = state.getBlock();
         ResourceLocation id = BuiltInRegistries.BLOCK.getKey(block);
-        if (id.getNamespace().equals("tfmg") && id.getPath().contains("plastic") || block instanceof GlassFluidPipeBlock || block instanceof PlasticTankBlock
+        boolean plastic = (id.getNamespace().equals("tfmg") || id.getNamespace().equals(Fundamentals.MOD_ID)) && id.getPath().contains("plastic");
+        if (plastic || block instanceof GlassFluidPipeBlock || block instanceof PlasticTankBlock
                 || AllBlocks.CREATIVE_FLUID_TANK.has(state)) {
             return false;
         }
