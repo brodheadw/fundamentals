@@ -571,10 +571,11 @@ def magnets():
                     for m, a, b, c, f in grades())
     entry("power", "magnets", "Magnets and heat", "fundamentals:samarium_cobalt_magnet", pages_of(
         "A permanent magnet holds its field only so hot. Past the temperature it is rated to, the field sags, and comes back as it cools. Further on, part of it is lost for good. "
-        "At its Curie point it is gone. The Factory's motors, generators and stators are built round one grade of magnet and carry it: the item says which, "
+        "At its Curie point it is gone. The Factory's motors, generators, stators, electric pumps and voltmeters are built round one grade of magnet and carry it: the item says which, "
         "and goggles on the block give the grade, the temperature where it stands (the field the thermometers read) and the share of full output it makes.", "Magnets and heat")
         + pages_of(f"In the game, every few seconds: {rows} Output falls from full at the rating to half at the lasting-loss point and to nothing at Curie; "
-                   "a motor turns slower and carries less, a generator gives less. A demagnetised machine stops.", "The grades")
+                   "a motor turns slower and carries less, a generator gives less, an electric pump pushes less. A demagnetised machine stops. "
+                   "A voltmeter's needle swings against its magnet, so it reads low by what the heat has taken of its field.", "The grades")
         + pages_of("The real figures, from the makers' grade tables: sintered NdFeB runs to about 80 °C, Curie point 310 to 400 °C. "
                    "With dysprosium or terbium (the SH, UH and EH grades) it runs to 150 to 230 °C. SmCo runs to 250 to 350 °C, Curie 720 to 825. "
                    "Alnico runs to 450 to 550 °C, Curie about 860, but stores far less energy: about 5 MGOe, against 35 to 52 for NdFeB and 16 to 32 for SmCo. "
@@ -584,7 +585,7 @@ def magnets():
                    "Alnico is iron with aluminium, nickel, cobalt and a little copper: five iron, an aluminium, two nickel, two cobalt and three copper nuggets, superheated, "
                    "cast and heat-treated to ten ingots. Polarize any of the four ingots, or an NdFeB, Dy-NdFeB or SmCo plate, to its magnet. "
                    "The magnet is the first thing a motor or generator takes on the belt, and it decides the grade of the whole.", "Making them")
-        + pages_of("A motor, generator or stator and any magnet in a crafting grid rebuild it round that magnet, at full field: that is how a cooked or demagnetised machine comes back, "
+        + pages_of("A motor, generator, stator, electric pump or voltmeter and any magnet in a crafting grid rebuild it round that magnet, at full field: that is how a cooked or demagnetised machine comes back, "
                    "or a cheap one is upgraded. Machines built before grades, and The Factory Must Grow's own magnets still in a chest, count as Dy-NdFeB, "
                    "which is what every NdFeB the mod made then was. The Factory's magnet is no longer made.", "Rebuilding")
         + [spotlight("fundamentals:alnico_magnet", "The horseshoe: cast alnico, painted red, its two poles bare.", "Alnico")], 1)

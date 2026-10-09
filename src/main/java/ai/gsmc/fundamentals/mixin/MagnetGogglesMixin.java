@@ -1,7 +1,7 @@
 package ai.gsmc.fundamentals.mixin;
 
 import ai.gsmc.fundamentals.magnet.MagnetBehaviour;
-import com.simibubi.create.content.kinetics.base.GeneratingKineticBlockEntity;
+import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -12,8 +12,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-/** The Factory's motor and generator inherit their goggles from Create's generating block entity; a magnet adds its lines there. */
-@Mixin(value = GeneratingKineticBlockEntity.class, remap = false)
+/** The Factory's motor, generator and electric pump inherit their goggles from Create's kinetic block entity; a magnet adds its lines there. */
+@Mixin(value = KineticBlockEntity.class, remap = false)
 public abstract class MagnetGogglesMixin {
 
     @Inject(method = "addToGoggleTooltip", at = @At("RETURN"), cancellable = true)
