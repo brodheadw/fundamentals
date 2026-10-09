@@ -11,6 +11,7 @@
     "#c:plates/stainless_steel",
     "#c:plates/superalloy",
     "#c:plates/titanium",
-    "#c:plates/tungsten"
+    "#c:plates/tungsten",
+    "#c:plates/zirconium"
   ]
 }

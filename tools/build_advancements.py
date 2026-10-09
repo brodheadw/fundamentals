@@ -65,6 +65,10 @@ ITEM_FORMULAS = {
     # a bloom is iron holding its slag, fayalite
     "iron_bloom": "Fe,Fe2SiO4", "roasted_galena": "PbO", "calcined_spodumene": "LiAlSi2O6", "photovoltaic_panel": "Si",
     "clarifier_sludge_block": "Fe(OH)3,Al(OH)3,Th(OH)4", "mercury": "Hg",
+    # the crude chloride still holds the hafnium zircon carries
+    "crude_zirconium_tetrachloride": "ZrCl4,HfCl4", "zirconium_tetrachloride": "ZrCl4", "hafnium_tetrachloride": "HfCl4",
+    "yttria_stabilised_zirconia": "ZrO2,Y2O3", "beryl_frit": "Be3Al2Si6O18", "beryllium_hydroxide": "Be(OH)2",
+    "ammonium_fluoroberyllate": "(NH4)2BeF4", "beryllium_pebbles": "Be",
     # sintered NdFeB is sold nickel-plated against rust; SmCo and cast alnico go bare
     "neodymium_iron_boron_magnet": "Nd2Fe14B,Ni", "dysprosium_neodymium_iron_boron_magnet": "(Nd,Dy)2Fe14B,Ni", "samarium_cobalt_magnet": "SmCo5",
     "alnico_magnet": "Fe-Al-Ni-Co-Cu",
@@ -124,7 +128,8 @@ OTHER_FORMULAS = {
 # Where to look, when the minerals alone would say it badly.
 WHERE = {
     "H": "In water, and in every acid",
-    "Be": "In emerald, which is beryl",
+    "Be": "In beryl, bertrandite and emerald, which is beryl",
+    "Hf": "Parted from zircon, which carries a fiftieth as much",
     "B": "In borax, from dry lake beds",
     "C": "In coal, charcoal, coke and diamond",
     "N": "In nitric acid, saltpetre and air",

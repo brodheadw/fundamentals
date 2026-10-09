@@ -92,6 +92,9 @@ ORES = {
     "borax": ("boron", "pickaxe", "stone"),
     "trona": ("soda_ash", "pickaxe", "stone"),
     "halite": ("salt", "pickaxe", None),
+    "zircon": ("zirconium", ("shovel", "pickaxe"), None),
+    "beryl": ("beryllium", "pickaxe", "iron"),
+    "bertrandite": ("beryllium", "pickaxe", "stone"),
 }
 
 # Host rocks that are blocks of their own -> tool.
@@ -182,7 +185,7 @@ DEPOSITS = {
     # bastnäsite in the fresh rock; monazite in the weathered top, where at Mount Weld it is most of the ore
     "carbonatite_plug": ("plug", "carbonatite", [("bastnasite", 0.16, "pockets"), ("monazite", 0.05, "top")], (6, 9), None, (20, 34),
                          "carbonatite", (-56, 0), 36, "rock"),
-    "syenite_massif": ("plug", "syenite", [("loparite", 0.10, "seams")], (8, 12), None, (16, 26),
+    "syenite_massif": ("plug", "syenite", [("loparite", 0.10, "seams"), ("zircon", 0.02, "disseminated")], (8, 12), None, (16, 26),
                        "alkaline", (-32, 32), 24, "rock"),
     "layered_intrusion": ("bed", "gabbro",
                           [("chromite", 0.12, "seams"), ("pentlandite", 0.05, "pockets"),
@@ -193,14 +196,17 @@ DEPOSITS = {
                        "anywhere", (-60, -8), 45, "rock"),
     # --- veins and dykes in mountain country ---
     "pegmatite_dyke": ("vein", "minecraft:granite", [("xenotime", 0.08, "pockets"), ("euxenite", 0.04, "pockets"),
-                                                         ("thortveitite", 0.01, "pockets")],
+                                                         ("thortveitite", 0.01, "pockets"), ("beryl", 0.04, "pockets")],
                        (11, 15), (3, 5), (14, 24), "pegmatite", (-16, 48), 16, "rock"),
     # a monazite-quartz vein in old granite-gneiss shield, as at Steenkampskraal, the richest rare earth ore ever mined.
     # Vanilla has no quartz rock, so the vein is quartz block.
     "monazite_vein": ("vein", "minecraft:quartz_block", [("monazite", 0.25, "pockets")], (9, 13), (2, 3), (12, 18),
                       "pegmatite", (0, 40), 48, "rock"),
-    "spodumene_pegmatite": ("vein", "minecraft:granite", [("spodumene", 0.30, "pockets")], (10, 14), (3, 5), (12, 20),
+    "spodumene_pegmatite": ("vein", "minecraft:granite", [("spodumene", 0.30, "pockets"), ("beryl", 0.02, "pockets")], (10, 14), (3, 5), (12, 20),
                             "pegmatite", (0, 64), 14, "rock"),
+    # beryllium in the fluorite nodules of a rhyolite tuff, as at Spor Mountain, Utah, where most of the world's beryllium is mined
+    "beryllium_tuff": ("bed", "minecraft:tuff", [("bertrandite", 0.10, "disseminated"), ("fluorite", 0.05, "pockets")], (8, 12), (3, 5), None,
+                       "arid_oxide", (40, 70), 30, "rock"),
     "tin_vein": ("vein", None, [("cassiterite", 0.36, "pockets"), ("wolframite", 0.16, "pockets")],
                  (10, 15), (2, 3), (12, 24), "pegmatite", (-16, 56), 6, "rock"),
     "silver_vein": ("vein", "minecraft:calcite", [("argentite", 0.38, "pockets"), ("native_silver", 0.16, "pockets")],
@@ -215,6 +221,7 @@ PLACERS = {
     "ilmenite": (54, 66, 5, 12),
     "rutile": (54, 66, 3, 9),
     "cassiterite": (54, 66, 3, 9),
+    "zircon": (54, 66, 4, 9),
 }
 
 # Ore features of other mods switched off: hematite/magnetite replace vanilla iron (PLAN §2.4),

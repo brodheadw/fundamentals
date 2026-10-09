@@ -30,7 +30,11 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "roasted_tin_concentrate": "Roasted Tin Concentrate", "solder": "Solder",
          "titania_slag": "Titania Slag", "magnesium_chloride": "Magnesium Chloride",
          "silver_zinc_crust": "Silver-Zinc Crust", "litharge": "Litharge",
-         "thorium_nitrate": "Thorium Nitrate", "gas_mantle": "Gas Mantle", "mercury": "Mercury"}
+         "thorium_nitrate": "Thorium Nitrate", "gas_mantle": "Gas Mantle", "mercury": "Mercury",
+         "crude_zirconium_tetrachloride": "Crude Zirconium Tetrachloride", "zirconium_tetrachloride": "Zirconium Tetrachloride",
+         "hafnium_tetrachloride": "Hafnium Tetrachloride", "yttria_stabilised_zirconia": "Yttria-Stabilised Zirconia",
+         "beryl_frit": "Beryl Frit", "beryllium_hydroxide": "Beryllium Hydroxide", "ammonium_fluoroberyllate": "Ammonium Fluoroberyllate",
+         "beryllium_pebbles": "Beryllium Pebbles"}
 # The magnet alloys and the forms each polarizes from, in the order of magnet.MagnetGrade; the magnet is <alloy>_magnet.
 MAGNET_ALLOYS = {"neodymium_iron_boron": ("ingot", "plate"), "dysprosium_neodymium_iron_boron": ("ingot", "plate"),
                  "samarium_cobalt": ("ingot", "plate"), "alnico": ("ingot",)}
@@ -416,10 +420,12 @@ def loot():
 def alloys():
     """Where cobalt, chromium, molybdenum and rhenium go: the nickel superalloy of turbine blades, melted under argon as the
     rare earth magnets are, its chromium what keeps it from scaling in the hot gas, and molybdenum steel for the heavy casings. A chromium-
-    molybdenum steel is under one per cent molybdenum, and the molybdenum goes into the melt as the roasted trioxide, not as metal."""
+    molybdenum steel is under one per cent molybdenum, and the molybdenum goes into the melt as the roasted trioxide, not as metal.
+    The blade is sprayed with yttria-stabilised zirconia, the ceramic thermal barrier that lets it run in gas hotter than it melts."""
     mixing("superalloy", item("tfmg:nickel_ingot", 4) + item("chromium_ingot") + item("cobalt_ingot", 2) + item("rhenium_ingot") + argon(), [result("superalloy_ingot", 4)], "superheated")
     mixing("molybdenum_steel", item("molybdenum_oxide") + tag("c:ingots/steel", 8), [result("molybdenum_steel_ingot", 8)], "superheated")
-    shaped(TFMG / "turbine_blade.json", ["III", "ISI", "III"], {"S": {"item": "create:shaft"}, "I": {"tag": "c:plates/superalloy"}},
+    shaped(TFMG / "turbine_blade.json", ["IYI", "ISI", "III"],
+           {"S": {"item": "create:shaft"}, "I": {"tag": "c:plates/superalloy"}, "Y": {"item": "fundamentals:yttria_stabilised_zirconia"}},
            {"count": 1, "id": "tfmg:turbine_blade", "components": {"tfmg:fuel_tags": {"kerosene": "c:kerosene"}, "tfmg:fuels": {"kerosene": "Kerosene"}}})
     write(TFMG / "item_application/heavy_machinery_casing.json", {"type": "create:item_application",
           "ingredients": [{"item": "tfmg:steel_casing"}, {"tag": "c:plates/molybdenum_steel"}], "results": [{"id": "tfmg:heavy_machinery_casing"}]})
@@ -539,6 +545,73 @@ def titanium():
     shaped(USES / "turbine_engine_from_titanium.json", ["OOO", "PHP", "OOO"],
            {"H": {"item": "tfmg:heavy_machinery_casing"}, "O": {"tag": "c:plates/titanium"}, "P": {"item": "tfmg:aluminum_pipe"}},
            {"count": 4, "id": "tfmg:turbine_engine"})
+
+
+def zirconium():
+    """Zircon is the third mineral of the heavy sands, after ilmenite and rutile, and is washed out with them by its weight. Most of it
+    never becomes metal: as sand it faces the moulds steel is cast in, standing 2,000 C without being wetted, and milled it is the white
+    of every tile glaze. For the metal it takes the titanium road. Chlorinated with coke at about 1,000 C it gives zirconium tetrachloride,
+    a white solid that sublimes at 331 C, the silica leaving as silicon tetrachloride; the crude chloride hydrolysed in water and calcined
+    is zirconia, the white oxide. Zircon carries a fiftieth as much hafnium, its chemical twin, and the chloride keeps it. The two are
+    parted by extractive distillation through a molten chloride (potassium chloroaluminate at Jarrie, salt here), hafnium tetrachloride
+    being the more volatile and going overhead. Magnesium under argon reduces either chloride to sponge (Kroll), and the sponge is
+    arc-melted as titanium's is. Zirconia with an eighth part of yttria is yttria-stabilised zirconia, the thermal-barrier coat of a
+    turbine blade. Zirconium shrugs off hot hydrochloric and sulfuric acid that stainless and titanium cannot, so the chemical industry lines
+    its vessels with it, and a per cent or two of hafnium in the superalloy keeps its grain boundaries from cracking."""
+    electrodes = ("tfmg:electrode", "tfmg:electrode")
+    mixing("crude_zirconium_tetrachloride", item("zircon_concentrate", 2) + item("tfmg:coal_coke") + [fluid("chlorine", 1000)],
+           [result("crude_zirconium_tetrachloride", 2)], "heated")
+    mixing("zirconium_oxide", item("crude_zirconium_tetrachloride") + [fluid("minecraft:water", 500)], [result("zirconium_oxide"), out_fluid("hydrochloric_acid", 250)], "heated")
+    mixing("zirconium_tetrachloride", item("crude_zirconium_tetrachloride", 4) + item("salt"),
+           [result("zirconium_tetrachloride", 4), {"id": "fundamentals:hafnium_tetrachloride", "chance": 0.1}, {"id": "fundamentals:salt", "chance": 0.9}], "heated")
+    for metal in ("zirconium", "hafnium"):
+        pgm_vat(f"{metal}_sponge", item(f"{metal}_tetrachloride") + item("magnesium_ingot", 2) + argon(),
+                [result(f"{metal}_sponge"), result("magnesium_chloride", 2)], folder=USES)
+        pgm_vat(f"{metal}_ingot", item(f"{metal}_sponge", 2) + argon(), [result(f"{metal}_ingot", 2)], machines=electrodes, heat="superheated", folder=USES)
+    mixing("yttria_stabilised_zirconia", item("zirconium_oxide", 7) + item("yttrium_oxide"), [result("yttria_stabilised_zirconia", 8)], "superheated")
+    shaped(TFMG / "crafting/materials/casting_basin.json", ["BPB", "CZC", "CCC"],
+           {"B": {"item": "tfmg:fireproof_brick"}, "C": {"tag": "c:ingots/cast_iron"}, "P": {"item": "tfmg:cast_iron_pipe"}, "Z": {"item": "fundamentals:zircon_concentrate"}},
+           {"count": 1, "id": "tfmg:casting_basin"})
+    shaped(USES / "white_terracotta_from_zircon.json", ["TTT", "TZT", "TTT"], {"T": {"item": "minecraft:terracotta"}, "Z": {"item": "fundamentals:zircon_concentrate"}},
+           {"count": 8, "id": "minecraft:white_terracotta"})
+    shaped(USES / "steel_chemical_vat_from_zirconium.json", ["PPP", "NTN", "PPP"],
+           {"N": {"tag": "c:plates/zirconium"}, "P": {"item": "tfmg:heavy_plate"}, "T": {"item": "tfmg:steel_fluid_tank"}},
+           {"count": 4, "id": "tfmg:steel_chemical_vat"})
+    mixing("superalloy_with_hafnium", item("tfmg:nickel_ingot", 4) + item("chromium_ingot") + item("cobalt_ingot", 2) + item("rhenium_ingot")
+           + item("hafnium_nugget") + argon(), [result("superalloy_ingot", 6)], "superheated")
+
+
+def beryllium():
+    """Beryl will not open to acid as it is. The Kjellgren-Sawyer process melts it at about 1,650 C and quenches the melt in water to a
+    glass, the frit, which hot sulfuric acid opens, taking the beryllium out as sulfate with the beryl's aluminium; bertrandite, the Spor
+    Mountain ore, a tenth as rich, leaches as it is. Ammonia throws down beryllium hydroxide once the aluminium has crystallised out as alum.
+    Hydrofluoric acid and ammonia take the hydroxide to ammonium fluoroberyllate, crystallised clean, which at about 1,000 C gives up its
+    ammonium fluoride and leaves beryllium fluoride. Magnesium under argon reduces the fluoride at about 1,300 C to pebbles of beryllium in a
+    slag of magnesium fluoride, and the pebbles are melted down. Calcined, the hydroxide is beryllia. Most beryllium goes into copper: two per
+    cent makes beryllium copper, as strong as steel, springy, and sparkless when struck, the metal of connector springs and of the tools used
+    where gas may lie. It is mostly made without the metal, from the oxide reduced by carbon under molten copper in an arc furnace. Emerald is
+    beryl, green with a trace of chromium. The hydroxide, the oxide and the salts are a dust that scars the lungs (berylliosis)."""
+    mixing("beryl_frit", item("raw_beryl", 2) + [fluid("minecraft:water", 250)], [result("beryl_frit", 2)], "superheated")
+    mixing("beryl_frit_from_emerald", item("minecraft:emerald") + [fluid("minecraft:water", 250)], [{"id": "fundamentals:beryl_frit", "chance": 0.5}], "superheated")
+    mixing("beryllium_sulfate_liquor", item("beryl_frit", 2) + [fluid("tfmg:sulfuric_acid", 500)], [out_fluid("beryllium_sulfate_liquor", 500)], "heated")
+    mixing("beryllium_sulfate_liquor_from_bertrandite", item("raw_bertrandite", 4) + [fluid("tfmg:sulfuric_acid", 500)],
+           [out_fluid("beryllium_sulfate_liquor", 250)], "heated")
+    mixing("beryllium_hydroxide", [fluid("beryllium_sulfate_liquor", 500), fluid("ammonia", 250)], [result("beryllium_hydroxide", 2)])
+    mixing("ammonium_fluoroberyllate", item("beryllium_hydroxide", 2) + [fluid("hydrofluoric_acid", 500), fluid("ammonia", 250)], [result("ammonium_fluoroberyllate", 2)])
+    for feed, made in (("ammonium_fluoroberyllate", "beryllium_fluoride"), ("beryllium_hydroxide", "beryllium_oxide")):
+        write(USES / f"{made}.json", {"type": "minecraft:blasting", "category": "misc", "ingredient": {"item": f"fundamentals:{feed}"},
+                                      "result": {"id": f"fundamentals:{made}"}, "experience": 0.3, "cookingtime": 100})
+    pgm_vat("beryllium_pebbles", item("beryllium_fluoride", 2) + item("magnesium_ingot", 2) + argon(), [result("beryllium_pebbles", 2), result("tfmg:slag")],
+            heat="superheated", folder=USES)
+    mixing("beryllium_ingot", item("beryllium_pebbles", 2) + argon(), [result("beryllium_ingot", 2)], "superheated")
+    mixing("beryllium_copper", item("beryllium_nugget") + tag("c:ingots/copper", 5), [result("beryllium_copper_ingot", 5)], "heated")
+    mixing("beryllium_copper_from_oxide", item("beryllium_oxide") + tag("c:storage_blocks/copper", 4) + item("tfmg:coal_coke"),
+           [result("beryllium_copper_block", 4)], "superheated")
+    shaped(USES / "cable_connector_from_beryllium_copper.json", ["OOO", " C ", " N "],
+           {"C": {"item": "tfmg:unfinished_insulator"}, "N": {"tag": "c:ingots/beryllium_copper"}, "O": {"tag": "c:nuggets/steel"}},
+           {"count": 3, "id": "tfmg:cable_connector"})
+    tag_file(DATA / "tags/item/beryllium_dusts.json", [f"fundamentals:{name}" for name in
+                                                       ("beryllium_hydroxide", "beryllium_oxide", "beryllium_fluoride", "ammonium_fluoroberyllate")])
 
 
 def fluid(id, amount):
@@ -829,6 +902,8 @@ def main():
     chromium()
     rock_salt()
     titanium()
+    zirconium()
+    beryllium()
     platinum_feeds()
     platinum_refinery()
     platinum_sinks()

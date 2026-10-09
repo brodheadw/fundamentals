@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "#fundamentals:raw_materials/aluminum",
+    "#fundamentals:raw_materials/beryllium",
     "#fundamentals:raw_materials/boron",
     "#fundamentals:raw_materials/chromium",
     "#fundamentals:raw_materials/cobalt",
@@ -22,6 +23,7 @@
     "#fundamentals:raw_materials/tin",
     "#fundamentals:raw_materials/titanium",
     "#fundamentals:raw_materials/tungsten",
-    "#fundamentals:raw_materials/zinc"
+    "#fundamentals:raw_materials/zinc",
+    "#fundamentals:raw_materials/zirconium"
   ]
 }

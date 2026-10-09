@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "ingredient": {
+    "item": "fundamentals:beryllium_hydroxide"
+  },
+  "result": {
+    "id": "fundamentals:beryllium_oxide"
+  },
+  "experience": 0.3,
+  "cookingtime": 100
+}

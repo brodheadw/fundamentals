@@ -6,6 +6,9 @@
     "fundamentals:azurite_ore",
     "fundamentals:bastnasite_ore",
     "fundamentals:bauxite_ore",
+    "fundamentals:bertrandite_ore",
+    "fundamentals:beryl_ore",
+    "fundamentals:beryllium_copper_block",
     "fundamentals:bimetallic_thermometer",
     "fundamentals:black_plastic_block",
     "fundamentals:blackened_silver_block",
@@ -113,6 +116,7 @@
     "fundamentals:white_plastic_block",
     "fundamentals:wolframite_ore",
     "fundamentals:xenotime_ore",
-    "fundamentals:yellow_plastic_block"
+    "fundamentals:yellow_plastic_block",
+    "fundamentals:zircon_ore"
   ]
 }

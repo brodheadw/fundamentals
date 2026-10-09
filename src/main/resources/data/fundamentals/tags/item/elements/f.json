@@ -1,9 +1,11 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:ammonium_fluoroberyllate",
     "fundamentals:bastnasite_concentrate",
     "fundamentals:bastnasite_dust",
     "fundamentals:bastnasite_ore",
+    "fundamentals:beryllium_fluoride",
     "fundamentals:cerium_fluoride",
     "fundamentals:didymium_fluoride",
     "fundamentals:dysprosium_fluoride",
