@@ -1,0 +1,6 @@
+{
+  "parent": "fundamentals:item/thermometer",
+  "textures": {
+    "dial": "fundamentals:block/spirit_thermometer_dial"
+  }
+}

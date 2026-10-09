@@ -3,12 +3,14 @@ package ai.gsmc.fundamentals.heat;
 import net.minecraft.util.Mth;
 
 /**
- * What a dial gauge reads with, and over what range: mercury in glass from its freezing point to its boiling point, a brass
- * and steel bimetal strip, and the two thermocouples, type K (chromel against alumel) and type S (platinum with a tenth of
- * rhodium against platinum). Past the top the mercury boils and bursts its glass; the rest peg against the stop.
+ * What a dial gauge reads with, and over what range: mercury in glass from its freezing point to its boiling point, red-dyed
+ * kerosene in glass, a brass and steel bimetal strip, and the two thermocouples, type K (chromel against alumel) and type S
+ * (platinum with a tenth of rhodium against platinum). Past the top the mercury and the spirit boil and burst their glass;
+ * the rest peg against the stop.
  */
 public enum Thermometer {
     MERCURY("mercury_thermometer", -39, 357, true),
+    SPIRIT("spirit_thermometer", -60, 150, true),
     BIMETALLIC("bimetallic_thermometer", -50, 500, false),
     TYPE_K("type_k_thermocouple", -200, 1260, false),
     TYPE_S("type_s_thermocouple", -50, 1600, false);

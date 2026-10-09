@@ -7,6 +7,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.joml.Vector3f;
 
 import java.util.List;
 
@@ -27,6 +29,7 @@ import java.util.List;
 public class ThermometerBlockEntity extends BlockEntity implements IHaveGoggleInformation {
 
     public static final int PERIOD = 10;
+    private static final DustParticleOptions SPIRIT_SPRAY = new DustParticleOptions(new Vector3f(0.9F, 0.1F, 0.1F), 0.8F);
 
     private double celsius;
     private boolean read;
@@ -71,7 +74,7 @@ public class ThermometerBlockEntity extends BlockEntity implements IHaveGoggleIn
         double now = Heat.at(level, gauge.sensed());
         Thermometer kind = gauge.kind();
         if (kind.bursts && now > kind.max) {
-            gauge.burst((ServerLevel) level);
+            gauge.burst((ServerLevel) level, kind);
             return;
         }
         if (gauge.read && Math.abs(now - gauge.celsius) < 0.5) {
@@ -97,13 +100,21 @@ public class ThermometerBlockEntity extends BlockEntity implements IHaveGoggleIn
         gauge.dial += (target - gauge.dial) * 0.125F;
     }
 
-    /** Mercury boils at 356.7 °C: the column bursts its glass, leaving a little mercury and a breath of its vapour. */
-    private void burst(ServerLevel level) {
+    /**
+     * The column boils and bursts its glass. Mercury, past 356.7 °C, leaves a little mercury and a breath of its vapour; the
+     * spirit goes with a small pop and a spray of red, leaving nothing.
+     */
+    private void burst(ServerLevel level, Thermometer kind) {
         BlockPos pos = worldPosition;
         level.destroyBlock(pos, false);
-        level.playSound(null, pos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
-        Block.popResource(level, pos, new ItemStack(Uses.mercury()));
-        Hazards.mercuryVapour(level, pos);
+        if (kind == Thermometer.MERCURY) {
+            level.playSound(null, pos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 1.0F, 1.0F);
+            Block.popResource(level, pos, new ItemStack(Uses.mercury()));
+            Hazards.mercuryVapour(level, pos);
+        } else {
+            level.playSound(null, pos, SoundEvents.GLASS_BREAK, SoundSource.BLOCKS, 0.6F, 1.6F);
+            level.sendParticles(SPIRIT_SPRAY, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 12, 0.2, 0.2, 0.2, 0.0);
+        }
     }
 
     @Override

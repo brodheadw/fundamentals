@@ -23,6 +23,14 @@
     },
     {
       "type": "patchouli:text",
+      "text": "Spirit in glass, -60 to 150 °C: the classic red line, kerosene dyed red (others use ethanol, toluene or pentane). It is what replaced mercury in homes and schools: the EU took mercury out of fever and household thermometers from 2009 (Directive 2007/51/EC), and NIST stopped calibrating mercury thermometers in 2011."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It is safer, but reads a shorter range, the spirit boiling long before mercury would, and it wets the glass, so a falling column leaves some behind and reads low until it drains. Past the top it boils and bursts its glass with a small pop, and there is nothing in it to poison anyone."
+    },
+    {
+      "type": "patchouli:text",
       "text": "Bimetallic, -50 to 500 °C: a strip of brass on steel curls as it warms, the brass growing half again as fast, and turns the needle itself. Past 500 it pegs."
     },
     {
@@ -44,12 +52,16 @@
     {
       "type": "patchouli:crafting",
       "recipe": "fundamentals:thermometers/mercury_thermometer",
-      "recipe2": "fundamentals:thermometers/bimetallic_thermometer"
+      "recipe2": "fundamentals:thermometers/spirit_thermometer"
     },
     {
       "type": "patchouli:crafting",
-      "recipe": "fundamentals:thermometers/type_k_thermocouple",
-      "recipe2": "fundamentals:thermometers/type_s_thermocouple"
+      "recipe": "fundamentals:thermometers/bimetallic_thermometer",
+      "recipe2": "fundamentals:thermometers/type_k_thermocouple"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:thermometers/type_s_thermocouple"
     }
   ]
 }

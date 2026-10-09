@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-/** The four dial thermometers, one block each, sharing one block entity. Their models, recipes and names are written by tools/build_heat_data.py. */
+/** The dial thermometers, one block each, sharing one block entity. Their models, recipes and names are written by tools/build_heat_data.py. */
 public final class Thermometers {
 
     private static final Map<Thermometer, Block> BLOCKS = new EnumMap<>(Thermometer.class);
