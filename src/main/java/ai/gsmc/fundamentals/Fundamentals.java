@@ -3,6 +3,7 @@ package ai.gsmc.fundamentals;
 import ai.gsmc.fundamentals.client.GrindingAnimation;
 import ai.gsmc.fundamentals.client.PlasticsClient;
 import ai.gsmc.fundamentals.client.SeparationClient;
+import ai.gsmc.fundamentals.client.ThermometerRenderer;
 import ai.gsmc.fundamentals.elements.PeriodicTable;
 import ai.gsmc.fundamentals.ironworking.IronWorking;
 import ai.gsmc.fundamentals.loot.AddToChests;
@@ -21,6 +22,7 @@ import com.simibubi.create.AllMountedStorageTypes;
 import com.simibubi.create.api.contraption.storage.fluid.MountedFluidStorageType;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import ai.gsmc.fundamentals.heat.Heat;
+import ai.gsmc.fundamentals.heat.Thermometers;
 import ai.gsmc.fundamentals.separation.Hazards;
 import ai.gsmc.fundamentals.uses.PlatinumMetals;
 import ai.gsmc.fundamentals.uses.Uses;
@@ -65,12 +67,14 @@ public class Fundamentals {
                 Separation.registerBlocks(helper::register);
                 Uses.registerBlocks(helper::register);
                 Plastics.registerBlocks(helper::register);
+                Thermometers.registerBlocks(helper::register);
             });
             event.register(Registries.BLOCK_ENTITY_TYPE, helper -> {
                 IronWorking.registerBlockEntities(helper::register);
                 Electricity.registerBlockEntities(helper::register);
                 Separation.registerBlockEntities(helper::register);
                 Plastics.registerBlockEntities(helper::register);
+                Thermometers.registerBlockEntities(helper::register);
             });
             event.register(Registries.RECIPE_TYPE, helper -> {
                 IronWorking.registerRecipeTypes(helper::register);
@@ -92,6 +96,7 @@ public class Fundamentals {
                 Uses.registerItems(helper::register);
                 PlatinumMetals.registerItems(helper::register);
                 Plastics.registerItems(helper::register);
+                Thermometers.registerItems(helper::register);
                 PeriodicTable.registerItems(helper::register);
             });
             event.register(Registries.FEATURE, helper -> helper.register(DEPOSIT, DepositFeature.INSTANCE));
@@ -120,6 +125,7 @@ public class Fundamentals {
             GrindingAnimation.register(modBus);
             SeparationClient.register(modBus);
             PlasticsClient.register(modBus);
+            ThermometerRenderer.register(modBus);
         }
     }
 
@@ -134,6 +140,7 @@ public class Fundamentals {
                     Plastics.items().forEach(output::accept);
                     HandTools.items().forEach(output::accept);
                     Electricity.items().forEach(output::accept);
+                    Thermometers.items().forEach(output::accept);
                     OreBlocks.rawItems().forEach(output::accept);
                     OreBlocks.items().forEach(output::accept);
                 })

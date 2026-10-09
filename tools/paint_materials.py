@@ -99,6 +99,9 @@ METAL = {
     "rhenium": ((92, 94, 100), (156, 160, 168), (206, 210, 218), (246, 248, 252)),
     "superalloy": ((64, 70, 78), (118, 126, 138), (170, 178, 190), (222, 228, 238)),
     "molybdenum_steel": ((56, 60, 70), (104, 110, 124), (152, 160, 176), (206, 212, 226)),
+    # both thermocouple legs look like nickel: chromel a shade warm, alumel a shade cold, so a chest can tell them apart
+    "chromel": tinted((214, 196, 160), 0.22),
+    "alumel": tinted((160, 184, 214), 0.22),
     "tungsten": ((60, 62, 68), (112, 116, 124), (160, 164, 174), (212, 216, 226)),
     # blister copper is copper still holding its oxygen and sulfur, duller than refined and pocked where the SO2 broke out
     "blister_copper": ((84, 40, 28), (142, 74, 50), (186, 106, 74), (222, 150, 112)),
@@ -198,7 +201,7 @@ MATERIALS = {
     "erbium": OXIDE_ONLY, "thulium": OXIDE_ONLY, "ytterbium": OXIDE_ONLY, "lutetium": OXIDE_ONLY, "yttrium": ELEMENT,
     "scandium": SCANDIUM,
     "didymium": DIDYMIUM, "neodymium_iron_boron": MAGNET, "samarium_cobalt": MAGNET, "aluminium_scandium": ALLOY, "monazite_residue": RESIDUE,
-    "cobalt": COBALT, "molybdenum": MOLYBDENUM, "rhenium": RHENIUM, "superalloy": STRUCTURAL, "molybdenum_steel": STRUCTURAL,
+    "cobalt": COBALT, "molybdenum": MOLYBDENUM, "rhenium": RHENIUM, "superalloy": STRUCTURAL, "molybdenum_steel": STRUCTURAL, "chromel": INGOT, "alumel": INGOT,
     "tungsten": TUNGSTEN, "copper_matte": MATTE, "blister_copper": BLISTER,
     "chromite": GROUND_MINERAL, "chromium": CHROMIUM, "ferrochrome": INGOT, "stainless_steel": STRUCTURAL,
     "titanium": TITANIUM, "magnesium": INGOT,

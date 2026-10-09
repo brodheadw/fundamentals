@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "U",
+    "L",
+    "A"
+  ],
+  "key": {
+    "U": {
+      "tag": "c:ingots/chromel"
+    },
+    "L": {
+      "tag": "c:ingots/alumel"
+    },
+    "A": {
+      "item": "create:andesite_casing"
+    }
+  },
+  "result": {
+    "id": "fundamentals:type_k_thermocouple",
+    "count": 1
+  }
+}

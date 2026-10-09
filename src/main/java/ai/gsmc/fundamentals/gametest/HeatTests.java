@@ -2,10 +2,19 @@ package ai.gsmc.fundamentals.gametest;
 
 import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.heat.Heat;
+import ai.gsmc.fundamentals.heat.Thermometer;
+import ai.gsmc.fundamentals.heat.ThermometerBlock;
+import ai.gsmc.fundamentals.heat.ThermometerBlockEntity;
+import ai.gsmc.fundamentals.heat.Thermometers;
+import ai.gsmc.fundamentals.uses.Uses;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ComparatorBlock;
+import net.minecraft.world.level.block.entity.ComparatorBlockEntity;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
@@ -32,5 +41,29 @@ public class HeatTests {
             helper.assertTrue(Math.abs(far - ambient) < 1, "thirteen blocks from both, the climate should stand, got " + far + " vs " + ambient);
             helper.succeed();
         });
+    }
+
+    @GameTest(template = "battery", timeoutTicks = 200)
+    public void aThermometerOnALitBlastFurnaceReadsItAndMercuryBursts(GameTestHelper helper) {
+        BlockPos furnace = new BlockPos(5, 1, 2), typeS = furnace.east(), mercury = furnace.west(), comparator = typeS.east();
+        for (int x = 2; x <= 8; x++) {
+            helper.setBlock(new BlockPos(x, 0, 2), Blocks.STONE);
+        }
+        helper.setBlock(furnace, Blocks.BLAST_FURNACE.defaultBlockState().setValue(AbstractFurnaceBlock.LIT, true));
+        helper.setBlock(typeS, Thermometers.block(Thermometer.TYPE_S).defaultBlockState().setValue(ThermometerBlock.FACING, Direction.EAST));
+        helper.setBlock(mercury, Thermometers.block(Thermometer.MERCURY).defaultBlockState().setValue(ThermometerBlock.FACING, Direction.WEST));
+        helper.setBlock(comparator, Blocks.COMPARATOR.defaultBlockState().setValue(ComparatorBlock.FACING, Direction.WEST));
+        helper.startSequence()
+                .thenWaitUntil(() -> {
+                    ThermometerBlockEntity gauge = helper.getBlockEntity(typeS);
+                    helper.assertTrue(gauge.celsius() > 1400, "a type S on a lit blast furnace should read past 1,400 °C, got " + gauge.celsius());
+                    int signal = ((ComparatorBlockEntity) helper.getBlockEntity(comparator)).getOutputSignal();
+                    helper.assertTrue(signal == Thermometer.TYPE_S.signal(gauge.celsius()) && signal >= 13, "a comparator should read it high on the scale, got " + signal);
+                })
+                .thenExecute(() -> {
+                    helper.assertBlockNotPresent(Thermometers.block(Thermometer.MERCURY), mercury);
+                    helper.assertItemEntityPresent(Uses.mercury(), mercury, 1.5);
+                })
+                .thenSucceed();
     }
 }

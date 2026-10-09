@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "create:crushed_raw_aluminum",
+    "fundamentals:alumel_ingot",
     "fundamentals:aluminium_powder",
     "fundamentals:aluminium_scandium_block",
     "fundamentals:aluminium_scandium_ingot",
@@ -17,6 +18,7 @@
     "fundamentals:raw_spodumene",
     "fundamentals:reforming_catalyst",
     "fundamentals:spodumene_ore",
+    "fundamentals:type_k_thermocouple",
     "fundamentals:ziegler_natta_catalyst",
     "minecraft:clay",
     "minecraft:clay_ball",
