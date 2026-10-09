@@ -1,0 +1,13 @@
+{
+  "name": "Beryllium Tuff",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_bertrandite",
+  "sortnum": 31,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A bed of tuff, in badlands, savanna and desert, between y 40 and 70. Carries bertrandite in scattered grains, fluorite in masses. Dig at the core: the edges are lean.",
+      "title": "Beryllium Tuff"
+    }
+  ]
+}

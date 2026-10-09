@@ -325,6 +325,16 @@
         ]
       }
     },
+    "zr": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/zr"
+          }
+        ]
+      }
+    },
     "nb": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
@@ -535,6 +545,16 @@
         ]
       }
     },
+    "hf": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/hf"
+          }
+        ]
+      }
+    },
     "ta": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
@@ -679,6 +699,7 @@
       "as",
       "br",
       "y",
+      "zr",
       "nb",
       "mo",
       "ru",
@@ -700,6 +721,7 @@
       "tm",
       "yb",
       "lu",
+      "hf",
       "ta",
       "w",
       "re",

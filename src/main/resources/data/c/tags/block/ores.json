@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "#fundamentals:ores/aluminum",
+    "#fundamentals:ores/beryllium",
     "#fundamentals:ores/boron",
     "#fundamentals:ores/chromium",
     "#fundamentals:ores/cobalt",
@@ -22,6 +23,7 @@
     "#fundamentals:ores/tin",
     "#fundamentals:ores/titanium",
     "#fundamentals:ores/tungsten",
-    "#fundamentals:ores/zinc"
+    "#fundamentals:ores/zinc",
+    "#fundamentals:ores/zirconium"
   ]
 }

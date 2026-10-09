@@ -119,6 +119,11 @@ P = {
     "trona": ((150, 140, 116), (204, 196, 174), (230, 224, 206), (250, 246, 234)),
     # colourless to the pale pink and orange that haloarchaea and a trace of iron give rock salt
     "halite": ((168, 128, 116), (216, 184, 172), (238, 218, 208), (255, 250, 246)),
+    # zircon grains are honey-brown to reddish-brown, the colour radiation damage from their own uranium gives them
+    "zircon": ((74, 40, 16), (132, 80, 36), (180, 126, 66), (232, 196, 140)),
+    # beryl is the pale blue-green of aquamarine; bertrandite colourless to white, in a pale tuff
+    "beryl": ((54, 96, 82), (96, 148, 128), (148, 196, 174), (218, 242, 230)),
+    "bertrandite": ((148, 146, 138), (196, 196, 188), (226, 226, 220), (252, 252, 250)),
 }
 
 # Bornite tarnishes iridescent ("peacock ore"): patches of several hues on one lump.
@@ -192,6 +197,13 @@ RECIPES = {
     "trona": [("crystals", "prism", 4, 1), ("speck", 2)],
     # Glassy cubes, the habit every child grows from a salt solution.
     "halite": [("crystals", "cube", 5, 1), ("speck", 3)],
+    # --- zirconium, beryllium ---
+    # Stubby square prisms, washed out of granite into the sands as rounded grains.
+    "zircon": [("crystals", "prism", 4, 1), ("speck", 7)],
+    # Six-sided prisms, sometimes a metre long, in the coarse quartz and feldspar of a pegmatite.
+    "beryl": [("crystals", "prism", 4, 1), ("speck", 3)],
+    # Tiny tablets in the fluorite nodules of a rhyolite tuff, as at Spor Mountain.
+    "bertrandite": [("crystals", "plate", 3, 1), ("speck", 6)],
 }
 
 
@@ -558,6 +570,7 @@ SHEET_ORDER = [
     "hematite", "magnetite", "goethite", "pyrolusite", "pentlandite", "nickel_laterite",
     "chromite", "wolframite", "scheelite", "molybdenite", "cobaltite", "ilmenite", "rutile",
     "native_silver", "argentite", "sperrylite", "cooperite", "braggite", "cinnabar", "spodumene", "fluorite", "borax", "trona", "halite",
+    "zircon", "beryl", "bertrandite",
 ]
 
 

@@ -2,10 +2,12 @@
   "replace": false,
   "values": [
     "#c:nuggets/aluminium_scandium",
+    "#c:nuggets/beryllium",
     "#c:nuggets/bronze",
     "#c:nuggets/cobalt",
     "#c:nuggets/dysprosium",
     "#c:nuggets/dysprosium_neodymium_iron_boron",
+    "#c:nuggets/hafnium",
     "#c:nuggets/iridium",
     "#c:nuggets/neodymium",
     "#c:nuggets/neodymium_iron_boron",

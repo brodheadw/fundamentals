@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "BPB",
+    "CZC",
+    "CCC"
+  ],
+  "key": {
+    "B": {
+      "item": "tfmg:fireproof_brick"
+    },
+    "C": {
+      "tag": "c:ingots/cast_iron"
+    },
+    "P": {
+      "item": "tfmg:cast_iron_pipe"
+    },
+    "Z": {
+      "item": "fundamentals:zircon_concentrate"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "tfmg:casting_basin"
+  }
+}

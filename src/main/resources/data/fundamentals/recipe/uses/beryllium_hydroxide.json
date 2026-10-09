@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "fundamentals:beryllium_sulfate_liquor"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:ammonia"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:beryllium_hydroxide",
+      "count": 2
+    }
+  ]
+}

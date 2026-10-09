@@ -42,6 +42,7 @@ WASHED = {
     "xenotime_dust": "heavy_rare_earth_concentrate",
     "euxenite_dust": "heavy_rare_earth_concentrate",
     "chromite_dust": "chromite_concentrate",
+    "raw_zircon": "zircon_concentrate",
 }
 
 

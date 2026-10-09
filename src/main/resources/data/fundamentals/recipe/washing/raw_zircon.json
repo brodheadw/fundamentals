@@ -1,0 +1,14 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_zircon"
+    }
+  ],
+  "results": [
+    {
+      "chance": 0.5,
+      "id": "fundamentals:zircon_concentrate"
+    }
+  ]
+}

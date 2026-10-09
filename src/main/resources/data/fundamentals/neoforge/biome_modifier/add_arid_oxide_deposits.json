@@ -3,7 +3,8 @@
   "biomes": "#fundamentals:deposit/arid_oxide",
   "features": [
     "fundamentals:evaporite_bed",
-    "fundamentals:oxide_cap"
+    "fundamentals:oxide_cap",
+    "fundamentals:beryllium_tuff"
   ],
   "step": "underground_decoration"
 }

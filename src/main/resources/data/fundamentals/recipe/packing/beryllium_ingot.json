@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:nuggets/beryllium"
+    }
+  },
+  "result": {
+    "id": "fundamentals:beryllium_ingot",
+    "count": 1
+  }
+}

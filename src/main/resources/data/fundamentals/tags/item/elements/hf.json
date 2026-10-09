@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:crude_zirconium_tetrachloride",
+    "fundamentals:hafnium_ingot",
+    "fundamentals:hafnium_nugget",
+    "fundamentals:hafnium_sponge",
+    "fundamentals:hafnium_tetrachloride"
+  ]
+}
