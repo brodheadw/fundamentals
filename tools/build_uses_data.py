@@ -302,7 +302,7 @@ def loot():
     pool = lambda *entries: [{"item": id if ":" in id else f"fundamentals:{id}", "weight": weight, "min": low, "max": high} for id, weight, low, high in entries]
     tiers = {
         "common_metals_in_chests": (chests("village/", "abandoned_mineshaft", "simple_dungeon", "shipwreck_supply", "shipwreck_treasure", "ruined_portal",
-                                           "underwater_ruin_small", "underwater_ruin_big") + ["bettermineshafts:chests/", "betterdungeons:chests/"], 0.12,
+                                           "underwater_ruin_small", "underwater_ruin_big") + [f"betterdungeons:{d}/chests/" for d in ("skeleton_dungeon", "small_dungeon", "small_nether_dungeon", "spider_dungeon", "zombie_dungeon")], 0.12,
                                     pool(("tin_nugget", 4, 1, 4), ("tfmg:lead_nugget", 3, 1, 4), ("create:zinc_nugget", 3, 1, 4), ("tfmg:nickel_nugget", 2, 1, 3),
                                          ("bronze_nugget", 2, 1, 4), ("tin_ingot", 1, 1, 1), ("bronze_ingot", 1, 1, 1))),
         "hard_metals_in_chests": (chests("stronghold_corridor", "stronghold_crossing", "stronghold_library", "desert_pyramid", "jungle_temple",

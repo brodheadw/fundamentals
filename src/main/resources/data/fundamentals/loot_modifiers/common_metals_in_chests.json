@@ -10,8 +10,11 @@
     "minecraft:chests/ruined_portal",
     "minecraft:chests/underwater_ruin_small",
     "minecraft:chests/underwater_ruin_big",
-    "bettermineshafts:chests/",
-    "betterdungeons:chests/"
+    "betterdungeons:skeleton_dungeon/chests/",
+    "betterdungeons:small_dungeon/chests/",
+    "betterdungeons:small_nether_dungeon/chests/",
+    "betterdungeons:spider_dungeon/chests/",
+    "betterdungeons:zombie_dungeon/chests/"
   ],
   "chance": 0.12,
   "pool": [
