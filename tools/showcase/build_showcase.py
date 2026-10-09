@@ -2,7 +2,8 @@
 """Writes the showcase datapack's functions: the whole separation tree, read from the cut recipes, laid out as
 batteries on a flat world. The root battery parts the mixed liquor; each product is either the feed of the next
 battery (piped north to it) or a single element, which gets a station that precipitates the oxalate, smelts it and
-sets the oxide on a depot; neodymium and dysprosium go on to metal in a vat north of their stations. Every battery has
+sets the oxide on a depot; neodymium and dysprosium go on to metal in a vat north of their stations. The root's liquor starts
+as monazite: washed, baked in sulfuric acid, leached in hydrochloric and clarified, west of the root. Every battery has
 its mixers, lever, organic feed, acid feed, sump drain and side tanks, every end tank is filled and refilled, and the whole plant is force-loaded so it runs while you walk it.
 
     python3 tools/showcase/build_showcase.py
@@ -38,7 +39,8 @@ def put(x, y, z, block):
 def tank(x, y, z, fluid=None, amount=8000, block=LIQUOR_TANK):
     put(x, y, z, block)
     if fluid:
-        merge = f'data merge block {x} {y} {z} {{TankContent:{{Fluid:{{id:"fundamentals:{fluid}",amount:{amount}}}}}}}'
+        fluid = fluid if ":" in fluid else f"fundamentals:{fluid}"
+        merge = f'data merge block {x} {y} {z} {{TankContent:{{Fluid:{{id:"{fluid}",amount:{amount}}}}}}}'
         fills.append(merge)
         refills.append(f"execute unless data block {x} {y} {z} TankContent.Fluid run {merge}")
 
@@ -254,6 +256,61 @@ def place(liquor, x0, z0):
                 CELLS[product](px, z0 - 2, product.removesuffix("_liquor"))
 
 
+def ore():
+    """Monazite to crude liquor, west of the clarifier, falling one block a step so items only ever go down. The ore is
+    hoppered onto a depot in front of a fan blowing through water (held in a glass trough) and washed to concentrate; a fan
+    washes whatever sits on a depot, and a hopper under it would pull the raw ore straight off it (a depot gives up the
+    stack it is still processing), so a smart chute filtered to the concentrate takes it down into a hopper that feeds the
+    acid bake. The bake is a basin on a kindled creative blaze burner, sulfuric acid pumped in from the south; it spouts the
+    sulfate and the phosphoric acid into a collector, whose phosphoric acid is pumped north into a tank and whose sulfate a
+    hopper under it hands into the leach basin. The leach (hydrochloric acid pumped in from the south) spouts the crude
+    liquor and the residue into a second collector: the liquor is pumped round into the clarifier's crude tank, the
+    residue hoppered into a chest. Two pumps (a pump is a small cogwheel) side by side on one axis mesh, so no two share
+    a row; and a pipe joins whatever holds fluid beside it, whatever its placed state says, so a feed pipe run under the
+    leach basin also filled the collector next to it with acid. An acid pump placed before its tank is filled takes a sip
+    and stops, as at the vats, so fill places both again."""
+    stocked(-15, Y + 7, 1, "raw_monazite")
+    put(-15, Y + 6, 1, "minecraft:hopper[facing=down]")
+    put(-15, Y + 5, 1, "create:depot")
+    put(-18, Y + 5, 1, f"create:creative_motor[facing=east]{MOTOR}")
+    put(-17, Y + 5, 1, "create:encased_fan[facing=east]")
+    for x, y, z in ((-16, Y + 4, 1), (-16, Y + 5, 0), (-16, Y + 5, 2)):
+        put(x, y, z, "minecraft:glass")
+    put(-16, Y + 5, 1, "minecraft:water")
+    put(-15, Y + 4, 1, 'create:smart_chute{Filter:{id:"fundamentals:light_rare_earth_concentrate",count:1}}')
+    put(-15, Y + 3, 1, "minecraft:hopper[facing=east]")
+    # the bake
+    put(-14, Y + 2, 1, "create:blaze_burner[blaze=kindled]{isCreative:1b}")
+    put(-14, Y + 3, 1, "create:basin[facing=east]")
+    put(-14, Y + 5, 1, "create:mechanical_mixer")
+    put(-14, Y + 5, 0, "create:cogwheel[axis=y]")
+    put(-14, Y + 6, 0, f"create:creative_motor[facing=down]{MOTOR}")
+    tank(-14, Y + 3, 3, "tfmg:sulfuric_acid")
+    pump(-14, Y + 3, 2, "north", "z", (-14, Y + 4, 3), "north")
+    put(-13, Y + 2, 1, "create:basin[facing=down]")
+    pump(-13, Y + 2, 0, "north", "z", (-13, Y + 3, -1), "south")
+    tank(-13, Y + 2, -1)
+    put(-13, Y + 1, 1, "minecraft:hopper[facing=east]")
+    # the leach
+    put(-12, Y + 1, 1, "create:basin[facing=east]")
+    put(-12, Y + 3, 1, "create:mechanical_mixer")
+    put(-11, Y + 3, 1, "create:cogwheel[axis=y]")
+    put(-11, Y + 4, 1, f"create:creative_motor[facing=down]{MOTOR}")
+    tank(-12, Y + 1, 3, "hydrochloric_acid")
+    pump(-12, Y + 1, 2, "north", "z", (-12, Y + 2, 3), "north")
+    for x, y in ((-14, Y + 3), (-12, Y + 1)):
+        fills.extend([f"setblock {x} {y} 2 minecraft:air", f"setblock {x} {y} 2 {LIQUOR_PUMP}[facing=north]"])
+    put(-11, Y, 1, "create:basin[facing=down]")
+    put(-11, Y - 1, 1, "minecraft:hopper[facing=down]")
+    put(-11, Y - 2, 1, "minecraft:chest")
+    pump(-11, Y, 0, "north", "z", (-11, Y + 1, -1), "south")
+    put(-11, Y, -1, f"{LIQUOR_PIPE}[south=true,east=true]")
+    put(-10, Y, -1, f"{LIQUOR_PIPE}[west=true,east=true]")
+    put(-9, Y, -1, f"{LIQUOR_PIPE}[west=true,south=true]")
+    put(-9, Y, 0, f"{LIQUOR_PIPE}[north=true,south=true]")
+    put(-9, Y, 1, f"{LIQUOR_PIPE}[north=true,up=true]")
+
+
 def main():
     lines.extend(["scoreboard players set #world showcase 1", "gamemode creative @s", "time set 6000", "weather clear",
                   "gamerule doDaylightCycle false", "gamerule doWeatherCycle false", "gamerule doMobSpawning false", "kill @e[type=item]"])
@@ -262,7 +319,8 @@ def main():
     # the clarifier before the root: crude liquor pumped into a raised basin of lime under a mixer. A basin hands what it makes to
     # the block below and beside it on its facing side (the block beside it must stay clear), all at once or not at all, so it spouts into a second basin, which takes
     # both the liquor and the sludge; that one is emptied by a pump into the root's feed tank and by a hopper into a chest
-    tank(-9, Y + 1, 1, "crude_rare_earth_liquor")
+    ore()
+    tank(-9, Y + 1, 1)
     pump(-8, Y + 1, 1, "east", "x", (-9, Y + 2, 1), "east")
     put(-7, Y + 1, 1, f"{LIQUOR_PIPE}[east=true,west=true]")
     put(-6, Y + 1, 1, 'create:basin[facing=east]{InputItems:{Size:9,Items:[{Slot:0b,id:"tfmg:limesand",count:64}]}}')
