@@ -81,12 +81,18 @@ ACIDS = {
     # three of hydrochloric to one of nitric, fuming orange-red with the nitrosyl chloride and chlorine it gives off
     "aqua_regia": ("Aqua Regia", 0xE0662A),
 }
-# What the plant cannot use: the spent chloride liquor every cut leaves behind, and the calcium chloride brine it
-# becomes once lime has neutralised it. The brine boils down to calcium chloride, which is where calcium metal comes from.
+# What the plant cannot use: the spent chloride liquor every cut leaves behind, and the calcium chloride liquor it
+# becomes once lime has neutralised it. That boils down to calcium chloride, which is where calcium metal comes from.
+# The id stays "brine" so worlds that hold it keep it.
 WASTES = {
     "spent_liquor": ("Spent Liquor", 0x8E9A86),
-    "brine": ("Calcium Chloride Brine", 0xDCE6E4),
+    "brine": ("Calcium Chloride Liquor", 0xDCE6E4),
 }
+# Seawater is water in every way but its salt: it looks, pours and flows as water does, and its tint is vanilla water's.
+SEA = {"seawater": ("Seawater", 0x3F76E4)}
+# Bittern, the bitter, faintly yellow mother liquor left once the halite has crystallised out of seawater, rich in magnesium
+# chloride; a strong chloride, it eats copper like the liquors.
+SALINES = {"bittern": ("Bittern", 0xE6DEB8)}
 # What comes out of the dissolver before anyone has cleaned it: iron, aluminium, thorium and fines still in it. A
 # battery will take it, and it will foul the organic. Lime drops the impurities and clarifies it.
 CRUDES = {
@@ -133,7 +139,7 @@ PLATINUM_LIQUORS = {
 }
 FLUIDS = {**{k: (*v, "LIQUOR") for k, v in {**LIQUORS, **PLATINUM_LIQUORS}.items()}, **{k: (*v, "ORGANIC") for k, v in ORGANICS.items()},
           **{k: (*v, "ACID") for k, v in ACIDS.items()}, **{k: (*v, "GAS") for k, v in GASES.items()},
-          **{k: (*v, "WASTE") for k, v in WASTES.items()}, **{k: (*v, "CRUDE") for k, v in CRUDES.items()},
+          **{k: (*v, "WASTE") for k, v in WASTES.items()}, **{k: (*v, "SALINE") for k, v in SALINES.items()}, **{k: (*v, "WATER") for k, v in SEA.items()}, **{k: (*v, "CRUDE") for k, v in CRUDES.items()},
           **{k: (*v, "FOULED") for k, v in FOULED.items()}, **{k: (*v, "PRECURSOR") for k, v in PRECURSORS.items()}}
 
 # Oxide to metal. The lights and the heavies go through their fluoride: the lights by molten-salt
@@ -291,7 +297,7 @@ def java_table():
              "    public static final List<Reagent> ALL = List.of("]
     entries = [f'            new Reagent("{id}", 0x{tint:06X}, Kind.{kind})' for id, (_, tint, kind) in FLUIDS.items()]
     lines += [",\n".join(entries) + ");", "", "    private Reagents() {}", "}", ""]
-    kinds = sorted({kind for _, _, kind in FLUIDS.values()}, key=["LIQUOR", "ORGANIC", "ACID", "GAS", "WASTE", "CRUDE", "FOULED", "PRECURSOR"].index)
+    kinds = sorted({kind for _, _, kind in FLUIDS.values()}, key=["LIQUOR", "ORGANIC", "ACID", "GAS", "WASTE", "SALINE", "WATER", "CRUDE", "FOULED", "PRECURSOR"].index)
     lines[7] = "    public enum Kind { " + ", ".join(kinds) + " }"
     JAVA.write_text("\n".join(lines), encoding="utf-8")
 
@@ -309,18 +315,20 @@ DISSOLVES = {
 
 
 def acids():
-    """The acids' blocks, buckets and appetites."""
+    """The acids' blocks, buckets and appetites, and the seawater bucket."""
     for acid, eats in DISSOLVES.items():
         write(ASSETS / f"blockstates/{acid}.json", {"variants": {"": {"model": f"fundamentals:block/{acid}"}}})
         write(ASSETS / f"models/block/{acid}.json", {"textures": {"particle": "fundamentals:block/fluid/liquor_still"}})
         write(ASSETS / f"models/item/{acid}_bucket.json", {"parent": "neoforge:item/bucket", "loader": "neoforge:fluid_container", "fluid": f"fundamentals:{acid}"})
         values = [{"id": v, "required": False} if ":" in v and not v.startswith("#") and not v.startswith("minecraft:") else v for v in eats]
         write(DATA / f"tags/block/dissolves/{acid}.json", {"replace": False, "values": values})
+    write(ASSETS / "models/item/seawater_bucket.json", {"parent": "neoforge:item/bucket", "loader": "neoforge:fluid_container", "fluid": "fundamentals:seawater"})
 
 
 def chemistry():
-    # Salt by boiling off water; the Mannheim process for the acid.
-    mixing("salt", [fluid("minecraft:water", 1000)], [result_item("salt", 2)], heated=True)
+    # Sea salt: seawater boiled down in a heated pan leaves the halite and, once it has crystallised, the bittern. Fresh water
+    # carries next to no salt. Then the Mannheim process for the acid.
+    mixing("salt", [fluid("seawater", 1000)], [result_item("salt", 2), result_fluid("bittern", 100)], heated=True)
     mixing("hydrochloric_acid", item("salt", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("hydrochloric_acid", 500)], heated=True)
     # Saltpetre heated in sulfuric acid gives up nitric acid, which boils off at 83 C into the receiver: Glauber's retort.
     mixing("nitric_acid", item("tfmg:nitrate_dust", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("nitric_acid", 500)], heated=True)
@@ -360,7 +368,7 @@ def chemistry():
     # a fouled organic scrubbed clean with lime, a tenth lost with the crud
     for organic in ORGANICS:
         mixing(f"scrub_{organic}", [item("tfmg:limesand"), fluid(f"fouled_{organic}", 1000)], [result_fluid(organic, 900)])
-    # Waste: lime neutralises the spent chloride liquor to calcium chloride brine, which boils down to the dry salt.
+    # Waste: lime neutralises the spent chloride liquor to calcium chloride liquor, which boils down to the dry salt.
     mixing("brine", item("tfmg:limesand", 2) + [fluid("spent_liquor", 1000)], [result_fluid("brine", 1000)])
     mixing("calcium_chloride", [fluid("brine", 1000)], [result_item("calcium_chloride", 3)], heated=True)
     mixing("heavy_rare_earth_liquor", [item("heavy_rare_earth_sulfate"), fluid(STRIP, 500)],
@@ -657,6 +665,7 @@ def names():
     for acid in DISSOLVES:
         lang[f"block.fundamentals.{acid}"] = FLUIDS[acid][0]
         lang[f"item.fundamentals.{acid}_bucket"] = f"{FLUIDS[acid][0]} Bucket"
+    lang["item.fundamentals.seawater_bucket"] = "Seawater Bucket"
     for name, display in PLANT_ITEMS.items():
         lang[f"item.fundamentals.{name}"] = display
     lang["goggles.fundamentals.mixer_settler.stages"] = "Battery of %s stages, %s mB a batch"

@@ -5,6 +5,13 @@
     "ores": [
       {
         "state": {
+          "Name": "fundamentals:halite_ore"
+        },
+        "fraction": 0.2,
+        "style": "seams"
+      },
+      {
+        "state": {
           "Name": "fundamentals:borax_ore"
         },
         "fraction": 0.18,

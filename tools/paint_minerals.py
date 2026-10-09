@@ -117,6 +117,8 @@ P = {
     "fluorite": ((58, 32, 104), (112, 72, 168), (164, 128, 212), (224, 204, 244)),
     "borax": ((146, 142, 134), (198, 196, 190), (232, 232, 228), (252, 252, 250)),
     "trona": ((150, 140, 116), (204, 196, 174), (230, 224, 206), (250, 246, 234)),
+    # colourless to the pale pink and orange that haloarchaea and a trace of iron give rock salt
+    "halite": ((168, 128, 116), (216, 184, 172), (238, 218, 208), (255, 250, 246)),
 }
 
 # Bornite tarnishes iridescent ("peacock ore"): patches of several hues on one lump.
@@ -188,6 +190,8 @@ RECIPES = {
     "borax": [("crystals", "prism", 3, 1), ("speck", 3)],
     # Fibrous, columnar beds a few feet thick under the Green River basin.
     "trona": [("crystals", "prism", 4, 1), ("speck", 2)],
+    # Glassy cubes, the habit every child grows from a salt solution.
+    "halite": [("crystals", "cube", 5, 1), ("speck", 3)],
 }
 
 
@@ -553,7 +557,7 @@ SHEET_ORDER = [
     "bauxite", "galena", "sphalerite", "smithsonite", "hemimorphite", "cassiterite",
     "hematite", "magnetite", "goethite", "pyrolusite", "pentlandite", "nickel_laterite",
     "chromite", "wolframite", "scheelite", "molybdenite", "cobaltite", "ilmenite", "rutile",
-    "native_silver", "argentite", "sperrylite", "cooperite", "braggite", "cinnabar", "spodumene", "fluorite", "borax", "trona",
+    "native_silver", "argentite", "sperrylite", "cooperite", "braggite", "cinnabar", "spodumene", "fluorite", "borax", "trona", "halite",
 ]
 
 

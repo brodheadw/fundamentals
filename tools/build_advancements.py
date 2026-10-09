@@ -60,7 +60,7 @@ ITEM_FORMULAS = {
     "salt": "NaCl", "oxalic_acid": "H2C2O4", "roasted_bastnasite": "(Ce,La,Nd)OF", "light_rare_earth_sulfate": "(La,Ce,Pr,Nd,Sm)2(SO4)3",
     "heavy_rare_earth_sulfate": "(Y,Gd,Tb,Dy,Ho,Er,Tm,Yb,Lu)2(SO4)3", "calcium_chloride": "CaCl2", "calcium_ingot": "Ca", "white_phosphorus": "P4",
     "hydrochloric_acid_bucket": "HCl", "nitric_acid_bucket": "HNO3", "phosphoric_acid_bucket": "H3PO4", "hydrofluoric_acid_bucket": "HF",
-    "aqua_regia_bucket": "HNO3,HCl",
+    "aqua_regia_bucket": "HNO3,HCl", "seawater_bucket": "H2O,NaCl,MgCl2",
     # a bloom is iron holding its slag, fayalite
     "iron_bloom": "Fe,Fe2SiO4", "roasted_galena": "PbO", "calcined_spodumene": "LiAlSi2O6", "photovoltaic_panel": "Si",
     "clarifier_sludge_block": "Fe(OH)3,Al(OH)3,Th(OH)4", "mercury": "Hg",
@@ -122,11 +122,11 @@ WHERE = {
     "O": "In water, air and most ores",
     "F": "In fluorite, and the acid made from it",
     "Ne": "Spun out of air in a centrifuge",
-    "Na": "In salt, trona and borax",
-    "Mg": "Won from magnesium chloride",
+    "Na": "In salt, halite, seawater, trona and borax",
+    "Mg": "In seawater, and the bittern it leaves",
     "Si": "In quartz, sand and flint",
     "P": "In bone, monazite and xenotime",
-    "Cl": "In salt and hydrochloric acid",
+    "Cl": "In salt, seawater and hydrochloric acid",
     "Ar": "In a tank of air",
     "K": "In saltpetre and gunpowder",
     "Ca": "In calcite, limestone, bone and fluorite",
@@ -163,7 +163,7 @@ def material_formulas():
 def our_items():
     names = [name for _, _, name in material_items()]
     names += [f"raw_{mineral}" for mineral in ORES] + [f"{mineral}_ore" for mineral in ORES]
-    names += list(USES_ITEMS) + list(PGM_ITEMS) + list(PLANT_ITEMS) + list(USES_BLOCKS) + list(PLASTIC_ITEMS) + list(PLASTIC_BLOCKS) + [f"{acid}_bucket" for acid in DISSOLVES]
+    names += list(USES_ITEMS) + list(PGM_ITEMS) + list(PLANT_ITEMS) + list(USES_BLOCKS) + list(PLASTIC_ITEMS) + list(PLASTIC_BLOCKS) + [f"{acid}_bucket" for acid in DISSOLVES] + ["seawater_bucket"]
     names += ["iron_bloom", "roasted_galena", "calcined_spodumene", "photovoltaic_panel"] + list(THERMOMETERS)
     return names
 

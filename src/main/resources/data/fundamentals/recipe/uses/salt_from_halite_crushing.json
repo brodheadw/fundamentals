@@ -1,0 +1,19 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_halite"
+    }
+  ],
+  "processing_time": 250,
+  "results": [
+    {
+      "id": "fundamentals:salt",
+      "count": 2
+    },
+    {
+      "id": "fundamentals:salt",
+      "chance": 0.5
+    }
+  ]
+}
