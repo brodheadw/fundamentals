@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "#c:storage_blocks/aluminium_scandium",
+    "#c:storage_blocks/beryllium_copper",
     "#c:storage_blocks/bronze",
     "#c:storage_blocks/dysprosium",
     "#c:storage_blocks/dysprosium_neodymium_iron_boron",

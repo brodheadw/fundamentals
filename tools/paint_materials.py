@@ -49,6 +49,11 @@ BRONZE = ("ingot", "nugget", "plate", "block")
 # Titanium too comes out of its retort as a sponge, and its oxide is the white pigment.
 TITANIUM = ("oxide", "sponge", "ingot", "plate")
 PRECIOUS = ("ingot", "nugget", "plate", "block")
+# Zirconium and hafnium leave the Kroll retort as sponge as titanium does; beryllium goes through its fluoride to the metal.
+ZIRCONIUM = ("oxide", "sponge", "ingot", "plate")
+HAFNIUM = ("sponge", "ingot", "nugget")
+BERYLLIUM = ("oxide", "fluoride", "ingot", "nugget")
+COPPER_ALLOY = ("ingot", "block")
 
 WHITE = ((150, 150, 148), (206, 206, 204), (236, 236, 234), (255, 255, 255))
 
@@ -129,6 +134,12 @@ METAL = {
     # lead bullion is lead, the dull blue-grey of a fresh cut gone dark; silver the whitest metal there is, a touch warm
     "lead_bullion": ((44, 48, 60), (84, 90, 106), (122, 128, 146), (168, 174, 192)),
     "silver": ((118, 116, 114), (198, 198, 196), (240, 240, 238), (255, 255, 255)),
+    # zirconium a whiter grey than titanium; hafnium the darker, heavier steel grey; beryllium a dull blue-grey
+    "zirconium": ((88, 90, 94), (152, 154, 158), (202, 204, 208), (242, 243, 245)),
+    "hafnium": ((66, 68, 74), (122, 124, 132), (172, 174, 182), (222, 224, 230)),
+    "beryllium": ((78, 84, 92), (138, 146, 156), (186, 194, 204), (230, 236, 244)),
+    # beryllium copper is copper with a golden cast, two per cent of beryllium hardly showing
+    "beryllium_copper": ((104, 52, 28), (170, 100, 58), (214, 148, 96), (244, 202, 152)),
 }
 
 # The oxides are painted the colours they really are; the white ones borrow a little of their
@@ -158,6 +169,9 @@ OXIDE["tungsten"] = ((150, 140, 60), (208, 196, 96), (236, 226, 140), (252, 246,
 OXIDE["chromium"] = ((34, 66, 32), (66, 108, 54), (102, 144, 80), (150, 184, 120))
 # titanium dioxide is the whitest pigment there is, whiter than the other white oxides
 OXIDE["titanium"] = ((176, 178, 180), (228, 229, 230), (247, 247, 248), (255, 255, 255))
+# zirconia and beryllia are white powders
+OXIDE["zirconium"] = WHITE
+OXIDE["beryllium"] = WHITE
 
 # Ground, a mineral shows its streak: chromite is black in the rock and brown as powder.
 STREAK = {"chromite": ((34, 24, 18), (64, 48, 36), (94, 72, 54), (132, 106, 82))}
@@ -179,6 +193,7 @@ ION = {
 for name in ("lanthanum", "cerium", "gadolinium", "terbium", "ytterbium", "lutetium", "yttrium"):
     ION[name] = mix(WHITE, METAL[name], 0.2)
 ION["scandium"] = WHITE
+ION["beryllium"] = WHITE
 
 OTHER = {
     "bastnasite_concentrate": ((110, 76, 34), (168, 126, 66), (204, 168, 104), (236, 210, 156)),
@@ -212,6 +227,7 @@ MATERIALS = {
     "nickel_matte": MATTE, "converter_matte": MATTE, "platinum_group_concentrate": CONCENTRATE,
     "platinum": PGM, "palladium": PGM, "rhodium": PGM, "ruthenium": PGM, "iridium": PGM, "osmium": PGM,
     "tin_concentrate": CONCENTRATE, "crude_tin": INGOT, "tin": TIN, "bronze": BRONZE, "lead_bullion": INGOT, "silver": PRECIOUS,
+    "zircon": CONCENTRATE, "zirconium": ZIRCONIUM, "hafnium": HAFNIUM, "beryllium": BERYLLIUM, "beryllium_copper": COPPER_ALLOY,
 }
 
 DISPLAY = {"bastnasite": "Bastnäsite", "bastnasite_concentrate": "Bastnäsite Concentrate", "neodymium_iron_boron": "NdFeB", "dysprosium_neodymium_iron_boron": "Dy-NdFeB", "samarium_cobalt": "SmCo", "aluminium_scandium": "Al-Sc"}

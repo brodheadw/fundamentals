@@ -1,0 +1,44 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "fundamentals:chromium_ingot"
+    },
+    {
+      "item": "fundamentals:cobalt_ingot"
+    },
+    {
+      "item": "fundamentals:cobalt_ingot"
+    },
+    {
+      "item": "fundamentals:rhenium_ingot"
+    },
+    {
+      "item": "fundamentals:hafnium_nugget"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 100,
+      "fluid": "fundamentals:argon"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:superalloy_ingot",
+      "count": 6
+    }
+  ],
+  "heat_requirement": "superheated"
+}

@@ -1,0 +1,27 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:beryllium_hydroxide"
+    },
+    {
+      "item": "fundamentals:beryllium_hydroxide"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "fundamentals:hydrofluoric_acid"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:ammonia"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:ammonium_fluoroberyllate",
+      "count": 2
+    }
+  ]
+}

@@ -66,6 +66,16 @@ What's agreed but not built, in the order it's likely to go. The working plan be
 - **Titanium plant tier.** Titanium shrugs off wet chlorine and chloride brines, which is why chlor-alkali and desalination
   plants pipe them in it. A titanium pipe and tank that the liquors and acids (but not hydrofluoric) cannot corrode would be
   the metal's natural sink, but it means new pipe and tank blocks; the plastic tank covers the need for now.
+- **Zirconium and hafnium loose ends.** Most zirconium metal and nearly all hafnium go into reactors (Zircaloy, zirconium with a
+  per cent and a half of tin, clads the fuel; hafnium makes control rods), and the pack has no reactor, so neither has its biggest sink;
+  zirconium only lines a chemical vat and hafnium only goes into the superalloy. The extractive distillation is one basin with salt for
+  the potassium chloroaluminate melt; the MIBK-thiocyanate and TBP solvent extractions are not modelled, nor is alkali fusion of zircon or
+  baddeleyite. Zircon carries no uranium or thorium here, the chlorination makes no silicon tetrachloride, and hard-rock zircon washes
+  without grinding as the sand does. Yttria still lines the fireproof vat where zirconia belongs.
+- **Beryllium loose ends.** The alum the aluminium of beryl crystallises out as, and the ammonium sulfate and ammonium fluoride the route
+  gives off, are not modelled; nor is solvent extraction of the sulfate with D2EHPA. Beryllium's light, stiff aerospace parts and X-ray
+  windows have no sink, nor non-sparking tools. The dust hazard is acute (a cough and nausea while it is breathed) where berylliosis is
+  chronic, and dust in a chest, on a belt or in a vat is harmless.
 
 ## Reagents
 

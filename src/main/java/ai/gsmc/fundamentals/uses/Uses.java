@@ -20,7 +20,9 @@ import java.util.function.BiConsumer;
  * concentrate the bloomery smelts, the solder circuit boards are joined with, the titania slag ilmenite smelts to, the
  * magnesium chloride magnesium is won from and the Kroll process gives back, and the zinc crust the Parkes process skims
  * the silver off lead bullion in and the litharge cupellation leaves, the thorium nitrate a gas mantle is soaked in and the mantle,
- * the block the clarifier's sludge is packed into, and the mercury cinnabar is retorted to. The recipes
+ * the block the clarifier's sludge is packed into, the mercury cinnabar is retorted to, the zirconium and hafnium chlorides of the
+ * Kroll road and the yttria-stabilised zirconia turbine blades are coated with, and the frit, hydroxide, fluoroberyllate and pebbles
+ * of the road from beryl to beryllium. The recipes
  * are written by tools/build_uses_data.py.
  */
 public final class Uses {
@@ -51,6 +53,14 @@ public final class Uses {
     private static Item thoriumNitrate;
     private static Item gasMantle;
     private static Item mercury;
+    private static Item crudeZirconiumTetrachloride;
+    private static Item zirconiumTetrachloride;
+    private static Item hafniumTetrachloride;
+    private static Item yttriaStabilisedZirconia;
+    private static Item berylFrit;
+    private static Item berylliumHydroxide;
+    private static Item ammoniumFluoroberyllate;
+    private static Item berylliumPebbles;
     private static Block sludgeBlock;
     private static Item sludgeBlockItem;
 
@@ -61,7 +71,9 @@ public final class Uses {
     public static List<Item> items() {
         return List.of(phosphor, didymiumGlass, roastedCobaltite, roastedChalcopyrite, rheniumFlueDust, tungstenCarbide, tungstenFilament, clarifierSludge,
                 copperCalcine, zincOxide, roastedPentlandite, lithiumChloride, ferroboron, sodaAsh, sodiumChromate, sodiumDichromate,
-                aluminiumPowder, roastedTinConcentrate, solder, titaniaSlag, magnesiumChloride, silverZincCrust, litharge, thoriumNitrate, gasMantle, mercury, sludgeBlockItem);
+                aluminiumPowder, roastedTinConcentrate, solder, titaniaSlag, magnesiumChloride, silverZincCrust, litharge, thoriumNitrate, gasMantle, mercury,
+                crudeZirconiumTetrachloride, zirconiumTetrachloride, hafniumTetrachloride, yttriaStabilisedZirconia, berylFrit, berylliumHydroxide, ammoniumFluoroberyllate,
+                berylliumPebbles, sludgeBlockItem);
     }
 
     public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
@@ -96,6 +108,14 @@ public final class Uses {
         registry.accept(id("thorium_nitrate"), thoriumNitrate = new Item(new Item.Properties()));
         registry.accept(id("gas_mantle"), gasMantle = new Item(new Item.Properties()));
         registry.accept(id("mercury"), mercury = new Item(new Item.Properties()));
+        registry.accept(id("crude_zirconium_tetrachloride"), crudeZirconiumTetrachloride = new Item(new Item.Properties()));
+        registry.accept(id("zirconium_tetrachloride"), zirconiumTetrachloride = new Item(new Item.Properties()));
+        registry.accept(id("hafnium_tetrachloride"), hafniumTetrachloride = new Item(new Item.Properties()));
+        registry.accept(id("yttria_stabilised_zirconia"), yttriaStabilisedZirconia = new Item(new Item.Properties()));
+        registry.accept(id("beryl_frit"), berylFrit = new Item(new Item.Properties()));
+        registry.accept(id("beryllium_hydroxide"), berylliumHydroxide = new Item(new Item.Properties()));
+        registry.accept(id("ammonium_fluoroberyllate"), ammoniumFluoroberyllate = new Item(new Item.Properties()));
+        registry.accept(id("beryllium_pebbles"), berylliumPebbles = new Item(new Item.Properties()));
         registry.accept(id("clarifier_sludge_block"), sludgeBlockItem = new BlockItem(sludgeBlock, new Item.Properties()));
     }
 

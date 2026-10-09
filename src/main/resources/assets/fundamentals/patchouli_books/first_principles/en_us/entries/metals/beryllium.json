@@ -1,0 +1,47 @@
+{
+  "name": "Beryllium",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:beryllium_ingot",
+  "sortnum": 11,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Beryl is pale green or blue-green, six-sided prisms in the pegmatites; emerald and aquamarine are beryl. Bertrandite is the white mineral of the beryllium tuffs of the dry country, rhyolite ash with fluorite nodules, as at Spor Mountain, Utah, where most of the world's beryllium is mined.",
+      "title": "Beryllium"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Beryl will not open to acid as it is: two raw beryl and 250 mB of water, superheated, melt at about 1,650 °C and quench to two beryl frit, a glass (Kjellgren and Sawyer). Two frit and 500 mB of sulfuric acid, heated, give 500 mB of beryllium sulfate liquor."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Bertrandite leaches as it is, a tenth as rich: four raw and 500 mB of the acid give 250 mB. An emerald melts to a frit one time in two."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "500 mB of liquor and 250 mB of ammonia give two beryllium hydroxide, the aluminium having crystallised out as alum."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two hydroxide, 500 mB of hydrofluoric acid and 250 mB of ammonia give two ammonium fluoroberyllate, which a blast furnace takes to beryllium fluoride, the ammonium fluoride passing off; the hydroxide calcined in one is beryllium oxide, beryllia."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two fluoride, two magnesium and 100 mB of argon in a superheated vat with a mixer give two beryllium pebbles and a slag of magnesium fluoride, and two pebbles melted under argon, superheated, give two ingots. Beryllium is lighter than aluminium and stiffer than steel, and lets X-rays through as glass lets light."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The dust is the danger: the hydroxide, the oxide and the salts scar the lungs (berylliosis). Held in the hand or stirred in a basin they are breathed by everyone near, and only Create's diving helmet on a filled backtank keeps it out.",
+      "title": "Berylliosis"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Most beryllium goes into copper. A beryllium nugget and five copper ingots, heated, make five beryllium copper, as strong as steel, springy and sparkless when struck.",
+      "title": "Beryllium copper"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It is mostly made without the metal: a beryllium oxide, four copper blocks and a coal coke, superheated, give four blocks, as an arc furnace makes the master alloy. The spring contact in a connector is beryllium copper, so the Factory's cable connector built on it makes three."
+    }
+  ]
+}

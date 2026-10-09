@@ -23,6 +23,13 @@
         },
         "fraction": 0.01,
         "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:beryl_ore"
+        },
+        "fraction": 0.04,
+        "style": "pockets"
       }
     ],
     "radius": {

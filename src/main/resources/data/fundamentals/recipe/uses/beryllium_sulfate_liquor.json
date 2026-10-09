@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:beryl_frit"
+    },
+    {
+      "item": "fundamentals:beryl_frit"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "tfmg:sulfuric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:beryllium_sulfate_liquor",
+      "amount": 500
+    }
+  ],
+  "heat_requirement": "heated"
+}

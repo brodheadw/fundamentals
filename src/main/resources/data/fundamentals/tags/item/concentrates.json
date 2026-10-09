@@ -6,6 +6,7 @@
     "#fundamentals:concentrates/heavy_rare_earth_concentrate",
     "#fundamentals:concentrates/light_rare_earth_concentrate",
     "#fundamentals:concentrates/platinum_group_concentrate",
-    "#fundamentals:concentrates/tin_concentrate"
+    "#fundamentals:concentrates/tin_concentrate",
+    "#fundamentals:concentrates/zircon"
   ]
 }

@@ -9,6 +9,13 @@
         },
         "fraction": 0.1,
         "style": "seams"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:zircon_ore"
+        },
+        "fraction": 0.02,
+        "style": "disseminated"
       }
     ],
     "radius": {

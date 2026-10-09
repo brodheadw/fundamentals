@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:beryllium_pebbles"
+    },
+    {
+      "item": "fundamentals:beryllium_pebbles"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 100,
+      "fluid": "fundamentals:argon"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:beryllium_ingot",
+      "count": 2
+    }
+  ],
+  "heat_requirement": "superheated"
+}

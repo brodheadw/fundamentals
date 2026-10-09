@@ -1,0 +1,47 @@
+{
+  "name": "Zirconium and hafnium",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:zirconium_ingot",
+  "sortnum": 10,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Zircon is the third mineral of the heavy sands, after ilmenite and rutile: honey-brown grains panned from beach and river sand, and a few in the syenite massifs. Washed under an encased fan, the light quartz goes and half stays as zircon concentrate. Most zircon never becomes metal.",
+      "title": "Zirconium"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "As sand it faces a mould, standing 2,000 °C unwetted, so the Factory's casting basin takes a zircon concentrate; milled, it is the white of tile glaze, and one in eight terracotta makes eight white."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "For the metal it takes titanium's road. Two concentrate, a coal coke and 1,000 mB of chlorine, heated, give two crude zirconium tetrachloride, a white solid that sublimes at 331 °C, the silica leaving as silicon tetrachloride."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A crude chloride and 500 mB of water, heated, hydrolyse and calcine to a zirconium oxide, zirconia, and give 250 mB of hydrochloric acid back."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Zircon carries a fiftieth as much hafnium, its chemical twin, and the chloride keeps it.",
+      "title": "Hafnium"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The two are parted by extractive distillation through a molten chloride, hafnium tetrachloride the more volatile: four crude chloride and a salt, heated, give four zirconium tetrachloride and, one time in ten, a hafnium tetrachloride; the salt comes back nine times in ten."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Each chloride is reduced as titanium's is: one tetrachloride, two magnesium and 100 mB of argon in a heated vat with a mixer give a sponge and two magnesium chloride, and two sponge and argon on two electrodes, superheated, arc-melt to two ingots."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Seven zirconia and a yttrium oxide, superheated, make eight yttria-stabilised zirconia, the ceramic coat that lets a turbine blade run in gas hotter than it melts: the Factory's turbine blade takes one.",
+      "title": "What they are for"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Zirconium shrugs off hot hydrochloric and sulfuric acid that stainless cannot, so two zirconium plates line four steel chemical vats where stainless lines two. A hafnium nugget in the superalloy melt, against cracking at the grain boundaries, makes six ingots where it made four."
+    }
+  ]
+}

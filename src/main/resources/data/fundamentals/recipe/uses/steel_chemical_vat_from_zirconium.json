@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PPP",
+    "NTN",
+    "PPP"
+  ],
+  "key": {
+    "N": {
+      "tag": "c:plates/zirconium"
+    },
+    "P": {
+      "item": "tfmg:heavy_plate"
+    },
+    "T": {
+      "item": "tfmg:steel_fluid_tank"
+    }
+  },
+  "result": {
+    "count": 4,
+    "id": "tfmg:steel_chemical_vat"
+  }
+}

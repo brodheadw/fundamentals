@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "#fundamentals:oxides/beryllium",
     "#fundamentals:oxides/cerium",
     "#fundamentals:oxides/chromium",
     "#fundamentals:oxides/didymium",
@@ -21,6 +22,7 @@
     "#fundamentals:oxides/titanium",
     "#fundamentals:oxides/tungsten",
     "#fundamentals:oxides/ytterbium",
-    "#fundamentals:oxides/yttrium"
+    "#fundamentals:oxides/yttrium",
+    "#fundamentals:oxides/zirconium"
   ]
 }

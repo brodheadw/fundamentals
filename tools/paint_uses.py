@@ -192,6 +192,16 @@ def main():
     paint_raw("silver_zinc_crust", ((70, 72, 76), (118, 120, 124), (164, 166, 170), (212, 214, 216))).save(TEXTURES / "item/silver_zinc_crust.png")
     heap("litharge", (252, 206, 100), (230, 150, 46), (164, 88, 22)).save(TEXTURES / "item/litharge.png")
     flask().save(TEXTURES / "item/mercury.png")
+    # the zirconium chlorides are white; the crude one yellowed by the ferric chloride in it. Yttria-stabilised zirconia is an off-white ceramic powder
+    heap("crude_zirconium_tetrachloride", (252, 248, 224), (228, 222, 186), (170, 162, 122)).save(TEXTURES / "item/crude_zirconium_tetrachloride.png")
+    heap("zirconium_tetrachloride", (255, 255, 255), (236, 238, 238), (182, 186, 188)).save(TEXTURES / "item/zirconium_tetrachloride.png")
+    heap("hafnium_tetrachloride", (255, 255, 255), (230, 232, 236), (172, 176, 184)).save(TEXTURES / "item/hafnium_tetrachloride.png")
+    heap("yttria_stabilised_zirconia", (254, 252, 244), (232, 228, 214), (176, 170, 152)).save(TEXTURES / "item/yttria_stabilised_zirconia.png")
+    # beryl frit is a pale green glass, quenched to grit; the hydroxide and the fluoroberyllate are white; the pebbles dull grey metal
+    paint_raw("beryl_frit", ((58, 94, 82), (108, 148, 130), (162, 198, 180), (226, 244, 236))).save(TEXTURES / "item/beryl_frit.png")
+    heap("beryllium_hydroxide", (255, 255, 255), (240, 240, 238), (190, 190, 186)).save(TEXTURES / "item/beryllium_hydroxide.png")
+    heap("ammonium_fluoroberyllate", (255, 255, 255), (236, 240, 240), (184, 190, 192)).save(TEXTURES / "item/ammonium_fluoroberyllate.png")
+    paint_raw("beryllium_pebbles", ((70, 76, 84), (124, 132, 142), (170, 178, 188), (216, 222, 230))).save(TEXTURES / "item/beryllium_pebbles.png")
     magnets()
     print("uses textures written")
 

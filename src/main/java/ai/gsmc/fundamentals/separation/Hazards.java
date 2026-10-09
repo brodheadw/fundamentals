@@ -17,14 +17,17 @@ import com.simibubi.create.content.processing.basin.BasinBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -36,19 +39,24 @@ import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
+import net.neoforged.neoforge.items.IItemHandler;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * What the plant does to people and pipes. The fuming acids (hydrofluoric, nitric, aqua regia) and bromine hurt anyone within reach of them
  * in the open: as blocks in the world, or in a basin they are being used in. Create's diving helmet on a filled
- * backtank is the gas mask, and breathes its air. And the acids eat copper: Create's pipes, pumps and valves carrying one
+ * backtank is the gas mask, and breathes its air. Beryllium's hydroxide, oxide and salts are a dust that scars the lungs: held in the hand or
+ * stirred in a basin, they are breathed the same way. And the acids eat copper: Create's pipes, pumps and valves carrying one
  * corrode and eventually burst, spilling it. The liquors are rare earth chlorides in dilute acid, and the spent liquor, the calcium chloride
  * liquor and bittern are chloride too, so they eat it as well, more slowly, and seawater, a tenth as salt as bittern, slower still.
  * Metal tanks go the same way, ten times slower for the thicker wall.
  * Plastic pipes, pumps, valves and tanks, and glass pipes, do not corrode.
  */
 public final class Hazards {
+
+    private static final TagKey<Item> BERYLLIUM_DUSTS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "beryllium_dusts"));
 
     /** How far a fuming source reaches. */
     private static final int REACH = 2;
@@ -77,6 +85,12 @@ public final class Hazards {
         level.sendParticles(ParticleTypes.WHITE_SMOKE, source.getX() + 0.5, source.getY() + 0.5, source.getZ() + 0.5, 8, 0.3, 0.3, 0.3, 0.01);
     }
 
+    /** Beryllium dust raised where it is handled in the open: whoever is within reach and unmasked breathes it. */
+    public static void berylliumDust(ServerLevel level, BlockPos source) {
+        breathe(level, source, false);
+        level.sendParticles(ParticleTypes.WHITE_ASH, source.getX() + 0.5, source.getY() + 1.0, source.getZ() + 0.5, 6, 0.3, 0.3, 0.3, 0.01);
+    }
+
     private static void breathe(ServerLevel level, BlockPos source, boolean poisons) {
         AABB box = new AABB(source).inflate(REACH);
         for (LivingEntity living : level.getEntitiesOfClass(LivingEntity.class, box)) {
@@ -93,16 +107,24 @@ public final class Hazards {
         }
     }
 
-    /** Once a second, each player's surroundings are searched for a basin with a fuming acid in it. */
+    /** Once a second, each player's hands are checked for beryllium dust, and their surroundings searched for a basin with a fuming acid
+     * or beryllium dust in it. */
     public static void onPlayerTick(PlayerTickEvent.Post event) {
         if (!(event.getEntity() instanceof ServerPlayer player) || player.tickCount % 20 != 0) {
             return;
         }
         ServerLevel level = player.serverLevel();
         BlockPos at = player.blockPosition();
+        if (player.getMainHandItem().is(BERYLLIUM_DUSTS) || player.getOffhandItem().is(BERYLLIUM_DUSTS)) {
+            berylliumDust(level, at);
+        }
         for (BlockPos pos : BlockPos.betweenClosed(at.offset(-REACH - 1, -REACH, -REACH - 1), at.offset(REACH + 1, REACH, REACH + 1))) {
             if (!(level.getBlockState(pos).getBlock() instanceof BasinBlock)) {
                 continue;
+            }
+            IItemHandler items = level.getCapability(Capabilities.ItemHandler.BLOCK, pos, null);
+            if (items != null && IntStream.range(0, items.getSlots()).anyMatch(i -> items.getStackInSlot(i).is(BERYLLIUM_DUSTS))) {
+                berylliumDust(level, pos.immutable());
             }
             IFluidHandler tanks = level.getCapability(Capabilities.FluidHandler.BLOCK, pos, null);
             if (tanks == null) {

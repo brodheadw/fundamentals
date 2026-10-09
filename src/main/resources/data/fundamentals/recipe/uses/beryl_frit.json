@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_beryl"
+    },
+    {
+      "item": "fundamentals:raw_beryl"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "minecraft:water"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:beryl_frit",
+      "count": 2
+    }
+  ],
+  "heat_requirement": "superheated"
+}

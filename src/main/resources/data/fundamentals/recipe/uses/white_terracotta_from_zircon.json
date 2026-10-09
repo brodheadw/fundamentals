@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "TTT",
+    "TZT",
+    "TTT"
+  ],
+  "key": {
+    "T": {
+      "item": "minecraft:terracotta"
+    },
+    "Z": {
+      "item": "fundamentals:zircon_concentrate"
+    }
+  },
+  "result": {
+    "count": 8,
+    "id": "minecraft:white_terracotta"
+  }
+}
