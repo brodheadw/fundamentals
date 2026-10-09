@@ -65,6 +65,9 @@ public final class FerrousMaterials {
                 MaterialProperties.builder().density(1.10).heatResistance(0.80).conductivity(0.03));
         reg("alumel", MaterialType.ALLOY, "Ni-Al", forms(INGOT),
                 MaterialProperties.builder().density(1.10).heatResistance(0.75).conductivity(0.05));
+        // the cast magnet before the rare earths: iron with aluminium, nickel, cobalt and a little copper, weak but good past 500 °C
+        reg("alnico", MaterialType.ALLOY, "Fe-Al-Ni-Co-Cu", forms(INGOT),
+                MaterialProperties.builder().density(0.95).magnetStrength(0.40).heatResistance(0.90).hardness(0.70));
         reg("tungsten", MaterialType.ELEMENT, "W", forms(OXIDE, INGOT, DUST, PLATE),
                 MaterialProperties.builder().density(1.90).heatResistance(1.00).hardness(0.95).conductivity(0.30));
         reg("vanadium", MaterialType.ELEMENT, "V", forms(INGOT, DUST),

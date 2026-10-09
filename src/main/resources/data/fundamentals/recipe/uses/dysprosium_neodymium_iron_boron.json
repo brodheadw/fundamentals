@@ -1,0 +1,38 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "fundamentals:magnet_light_rare_earths"
+    },
+    {
+      "tag": "fundamentals:magnet_light_rare_earths"
+    },
+    {
+      "tag": "fundamentals:magnet_heavy_rare_earths"
+    },
+    {
+      "tag": "c:ingots/iron"
+    },
+    {
+      "tag": "c:ingots/iron"
+    },
+    {
+      "tag": "c:ingots/iron"
+    },
+    {
+      "item": "fundamentals:ferroboron"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 100,
+      "fluid": "fundamentals:argon"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:dysprosium_neodymium_iron_boron_ingot",
+      "count": 4
+    }
+  ],
+  "heat_requirement": "superheated"
+}

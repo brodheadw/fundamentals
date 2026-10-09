@@ -633,7 +633,7 @@ def magnetomigration_cell():
     write(DATA / "loot_table/blocks/magnetomigration_cell.json", {"type": "minecraft:block", "pools": [drop_self("magnetomigration_cell")]})
     write(RECIPES / "magnetomigration_cell.json", {
         "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["PPP", "PTM", "PPP"],
-        "key": {"P": {"tag": "fundamentals:plastic_sheets"}, "T": {"item": "fundamentals:plastic_fluid_tank"}, "M": {"item": "tfmg:magnet"}},
+        "key": {"P": {"tag": "fundamentals:plastic_sheets"}, "T": {"item": "fundamentals:plastic_fluid_tank"}, "M": {"tag": "fundamentals:magnets"}},
         "result": {"id": "fundamentals:magnetomigration_cell", "count": 1}})
 
 

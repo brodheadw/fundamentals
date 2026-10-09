@@ -1,6 +1,6 @@
 {
   "name": "Power",
-  "description": "Sunlight into The Factory Must Grow's grid.",
+  "description": "Sunlight into The Factory Must Grow's grid, and the magnets its machines turn on.",
   "icon": "fundamentals:photovoltaic_panel",
   "sortnum": 5
 }

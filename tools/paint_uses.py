@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Paints the items the rare earths are spent on: the phosphor and the didymium glass. Edit and
+"""Paints the items the rare earths are spent on: the phosphor, the didymium glass and the magnets. Edit and
 re-run; don't hand-edit the PNGs.
 
     python3 tools/paint_uses.py
@@ -90,6 +90,58 @@ def flask():
     return img
 
 
+def bar(tones, band=None):
+    """A sintered block magnet seen from above the front edge: a lit top, a front face and a shaded end, with a stripe of
+    `band` round its middle where a grade is marked."""
+    dark, mid, light, shine = tones
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    for y in range(6, 12):
+        for x in range(2, 12):
+            img.putpixel((x, y), dark if y == 11 or x == 2 else mid)
+    for y in (4, 5):
+        for x in range(2 + 6 - y, 12 + 6 - y):
+            img.putpixel((x, y), shine if (x, y) in ((5, 4), (6, 4), (4, 5)) else light)
+    for x in (12, 13):
+        for y in range(6 - (x - 11), 12 - (x - 11)):
+            img.putpixel((x, y), dark)
+    if band:
+        for y in range(6, 12):
+            img.putpixel((6, y), band[0])
+            img.putpixel((7, y), band[0] if y == 11 else band[1])
+        for x, y in ((7, 5), (8, 5), (8, 4), (9, 4)):
+            img.putpixel((x, y), band[1])
+    return img
+
+
+def horseshoe(paint, pole):
+    """The alnico horseshoe, painted red as they always were, its two pole faces bare metal."""
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    for y in range(2, 14):
+        for x in range(2, 14):
+            dx, dy = x - 7.5, y - 7.5
+            r = (dx * dx + dy * dy) ** 0.5
+            arc = y <= 7.5 and 2.6 <= r <= 5.9
+            leg = y > 7.5 and (2 <= x <= 4 or 11 <= x <= 13)
+            if not (arc or leg):
+                continue
+            tones = pole if y >= 11 else paint
+            edge = (arc and (r > 5.2 or r < 3.2)) or (leg and x in (2, 4, 11, 13))
+            lit = x < 7 and not edge
+            img.putpixel((x, y), tones[0] if edge else tones[2] if lit else tones[1])
+    return img
+
+
+def magnets():
+    """NdFeB rusts unless plated, so a sintered magnet is sold nickel bright; the dysprosium grade the same with its band;
+    SmCo needs no plating and stays matte; alnico is cast and painted red."""
+    nickel = ((92, 96, 104, 255), (170, 174, 182, 255), (214, 218, 226, 255), (250, 252, 255, 255))
+    bar(nickel).save(TEXTURES / "item/neodymium_iron_boron_magnet.png")
+    bar(nickel, ((98, 104, 46, 255), (156, 166, 78, 255))).save(TEXTURES / "item/dysprosium_neodymium_iron_boron_magnet.png")
+    bar(((44, 40, 38, 255), (84, 78, 74, 255), (120, 114, 108, 255), (156, 150, 142, 255))).save(TEXTURES / "item/samarium_cobalt_magnet.png")
+    horseshoe(((112, 20, 18, 255), (184, 40, 34, 255), (226, 84, 70, 255)),
+              ((96, 98, 104, 255), (176, 180, 188, 255), (226, 230, 236, 255))).save(TEXTURES / "item/alnico_magnet.png")
+
+
 def main():
     heap("phosphor", (255, 250, 252), (240, 226, 236), (196, 170, 190)).save(TEXTURES / "item/phosphor.png")
     lens().save(TEXTURES / "item/didymium_glass.png")
@@ -140,6 +192,7 @@ def main():
     paint_raw("silver_zinc_crust", ((70, 72, 76), (118, 120, 124), (164, 166, 170), (212, 214, 216))).save(TEXTURES / "item/silver_zinc_crust.png")
     heap("litharge", (252, 206, 100), (230, 150, 46), (164, 88, 22)).save(TEXTURES / "item/litharge.png")
     flask().save(TEXTURES / "item/mercury.png")
+    magnets()
     print("uses textures written")
 
 

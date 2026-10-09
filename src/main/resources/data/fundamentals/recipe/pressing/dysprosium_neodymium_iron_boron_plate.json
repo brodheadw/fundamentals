@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/dysprosium_neodymium_iron_boron"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:dysprosium_neodymium_iron_boron_plate"
+    }
+  ]
+}

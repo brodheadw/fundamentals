@@ -298,10 +298,10 @@ def rare_earths():
         "Al-Sc is two per cent scandium, and most scandium never becomes metal. A scandium fluoride stirred into four blocks of aluminium, superheated, gives four blocks of Al-Sc straight, the aluminium taking the fluorine "
         "and skimmed off as a slag: the master alloy is made that way. A scandium nugget and eight aluminium give eight ingots."), 7)
     entry("rare_earths", "uses", "What they are for", "fundamentals:neodymium_iron_boron_ingot", pages_of(
-        "Nothing in the chain is for its own sake. Two neodymium, three iron, a ferroboron and a dysprosium, superheated under 100 mB of argon, melt into four NdFeB, the strongest magnet; samarium with cobalt into SmCo, which keeps its field hot. "
-        "Praseodymium or didymium serves as well as neodymium, and terbium holds the field better than dysprosium. A gadolinium for one neodymium makes three instead of four. "
+        "Nothing in the chain is for its own sake. Two neodymium, three iron and a ferroboron, superheated under 100 mB of argon, melt into four NdFeB, the strongest magnet; a dysprosium in the same melt makes four Dy-NdFeB, which keeps its field hot; samarium with cobalt makes SmCo, hotter still. "
+        "Praseodymium or didymium serves as well as neodymium, and terbium as well as dysprosium. A gadolinium for one neodymium makes three instead of four. "
         "Ferroboron is a borax, an iron and two charcoal, superheated. "
-        "Polarized, either is the magnet The Factory Must Grow's motors, generators and electric pumps are built from.", "What they are for") + pages_of(
+        "Polarized, each is the magnet The Factory Must Grow's motors, generators and electric pumps are built from: see Magnets and heat, under Power.", "What they are for") + pages_of(
         "Lanthanum metal reduces samarium, and lanthanum oxide is the catalyst that cracks naphtha. Cerium with iron is ferrocerium, the lighter flint, a flint and steel that never wears out. "
         "Europium's red and terbium's green on a yttria host are the phosphor every lamp takes. Yttria lines the fireproof vat. Didymium glass is the welder's lens the goggles are made of. Erbium turns glass pink. "
         "Scandium in aluminium is the airframe alloy, and makes a panel rack go twice as far.") + pages_of(
@@ -524,11 +524,42 @@ def platinum():
 
 
 def power():
-    category("power", "Power", "Sunlight into The Factory Must Grow's grid.", "fundamentals:photovoltaic_panel", 5)
+    category("power", "Power", "Sunlight into The Factory Must Grow's grid, and the magnets its machines turn on.", "fundamentals:photovoltaic_panel", 5)
     entry("power", "solar", "Solar panels", "fundamentals:photovoltaic_panel", pages_of(
         "A solar panel goes on a rack. Build the rack from steel and set it down facing the way you want, then mount a photovoltaic panel on it: a P and an N semiconductor from The Factory Must Grow under glass, in an aluminium frame, with a silver nugget for the front contacts printed on every cell. "
         "Under open sky it feeds the electrical network, 120 volts while the sun is up and up to 200 watts at noon, nothing at night or in shade. Break it and you get the rack and the panel back.", "Solar panels")
         + [crafting("fundamentals:panel_rack"), crafting("fundamentals:photovoltaic_panel")], 0)
+    magnets()
+
+
+def grades():
+    """The magnet grades as magnet.MagnetGrade gives them: (material, rated, lasting loss, Curie, strength)."""
+    java = (Path(__file__).resolve().parent.parent / "src/main/java/ai/gsmc/fundamentals/magnet/MagnetGrade.java").read_text(encoding="utf-8")
+    return [(m, int(a), int(b), int(c), float(f)) for m, a, b, c, f in re.findall(r'[A-Z_]+\("([a-z_]+)", (\d+), (\d+), (\d+), ([\d.]+)F\)', java)]
+
+
+def magnets():
+    rows = " ".join(f"{LANG[f'item.fundamentals.{m}_magnet']}: rated {a:,} °C, lasting loss past {b:,}, Curie {c:,}, {round(f * 100)}% strength."
+                    for m, a, b, c, f in grades())
+    entry("power", "magnets", "Magnets and heat", "fundamentals:samarium_cobalt_magnet", pages_of(
+        "A permanent magnet holds its field only so hot. Past the temperature it is rated to, the field sags, and comes back as it cools. Further on, part of it is lost for good. "
+        "At its Curie point it is gone. The Factory's motors, generators and stators are built round one grade of magnet and carry it: the item says which, "
+        "and goggles on the block give the grade, the temperature where it stands (the field the thermometers read) and the share of full output it makes.", "Magnets and heat")
+        + pages_of(f"In the game, every few seconds: {rows} Output falls from full at the rating to half at the lasting-loss point and to nothing at Curie; "
+                   "a motor turns slower and carries less, a generator gives less. A demagnetised machine stops.", "The grades")
+        + pages_of("The real figures, from the makers' grade tables: sintered NdFeB runs to about 80 °C, Curie point 310 to 400 °C. "
+                   "With dysprosium or terbium (the SH, UH and EH grades) it runs to 150 to 230 °C. SmCo runs to 250 to 350 °C, Curie 720 to 825. "
+                   "Alnico runs to 450 to 550 °C, Curie about 860, but stores far less energy: about 5 MGOe, against 35 to 52 for NdFeB and 16 to 32 for SmCo. "
+                   "So aircraft and missiles fly SmCo, alnico lives on in sensors, and every other motor is NdFeB with dysprosium for the heat, "
+                   "which is most of why the world wants dysprosium (US Department of Energy, Critical Materials Strategy, 2011).", "Why it matters")
+        + pages_of("Plain NdFeB is two neodymium, three iron and a ferroboron under argon; a dysprosium or terbium in the melt makes Dy-NdFeB. "
+                   "Alnico is iron with aluminium, nickel, cobalt and a little copper: five iron, an aluminium, two nickel, two cobalt and three copper nuggets, superheated, "
+                   "cast and heat-treated to ten ingots. Polarize any of the four ingots, or an NdFeB, Dy-NdFeB or SmCo plate, to its magnet. "
+                   "The magnet is the first thing a motor or generator takes on the belt, and it decides the grade of the whole.", "Making them")
+        + pages_of("A motor, generator or stator and any magnet in a crafting grid rebuild it round that magnet, at full field: that is how a cooked or demagnetised machine comes back, "
+                   "or a cheap one is upgraded. Machines built before grades, and The Factory Must Grow's own magnets still in a chest, count as Dy-NdFeB, "
+                   "which is what every NdFeB the mod made then was. The Factory's magnet is no longer made.", "Rebuilding")
+        + [spotlight("fundamentals:alnico_magnet", "The horseshoe: cast alnico, painted red, its two poles bare.", "Alnico")], 1)
 
 
 def plastics():

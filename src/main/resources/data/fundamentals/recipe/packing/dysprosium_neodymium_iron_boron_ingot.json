@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:nuggets/dysprosium_neodymium_iron_boron"
+    }
+  },
+  "result": {
+    "id": "fundamentals:dysprosium_neodymium_iron_boron_ingot",
+    "count": 1
+  }
+}

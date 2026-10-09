@@ -63,9 +63,11 @@ public final class RareEarthMaterials {
 
         reg("didymium", null, MaterialType.ALLOY, "", new MaterialForm[] {OXALATE, FLUORIDE, OXIDE, INGOT},
                 MaterialProperties.builder().density(0.88));
-        // Strongest magnet, but loses coercivity when hot; SmCo trades strength for heat.
+        // Strongest magnet, but loses coercivity when hot; dysprosium or terbium in it holds the field hot; SmCo trades strength for heat.
         reg("neodymium_iron_boron", "NdFeB", MaterialType.ALLOY, "Nd2Fe14B", MAGNET_FORMS,
                 MaterialProperties.builder().density(0.95).magnetStrength(1.00).heatResistance(0.30).hardness(0.60));
+        reg("dysprosium_neodymium_iron_boron", "Dy-NdFeB", MaterialType.ALLOY, "(Nd,Dy)2Fe14B", MAGNET_FORMS,
+                MaterialProperties.builder().density(0.96).magnetStrength(0.97).heatResistance(0.55).hardness(0.60));
         reg("samarium_cobalt", "SmCo", MaterialType.ALLOY, "SmCo5", MAGNET_FORMS,
                 MaterialProperties.builder().density(1.06).magnetStrength(0.70).heatResistance(0.80).hardness(0.55));
         // What monazite leaves behind when it dissolves: thorium and its daughters, mildly radioactive, to be cast into blocks and buried.

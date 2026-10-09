@@ -1,0 +1,13 @@
+{
+  "type": "tfmg:polarizing",
+  "ingredients": [
+    {
+      "tag": "c:plates/samarium_cobalt"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:samarium_cobalt_magnet"
+    }
+  ]
+}

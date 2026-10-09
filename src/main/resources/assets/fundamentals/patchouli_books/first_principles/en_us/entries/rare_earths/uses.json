@@ -6,16 +6,16 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Nothing in the chain is for its own sake. Two neodymium, three iron, a ferroboron and a dysprosium, superheated under 100 mB of argon, melt into four NdFeB, the strongest magnet; samarium with cobalt into SmCo, which keeps its field hot.",
+      "text": "Nothing in the chain is for its own sake. Two neodymium, three iron and a ferroboron, superheated under 100 mB of argon, melt into four NdFeB, the strongest magnet; a dysprosium in the same melt makes four Dy-NdFeB, which keeps its field hot; samarium with cobalt makes SmCo, hotter still.",
       "title": "What they are for"
     },
     {
       "type": "patchouli:text",
-      "text": "Praseodymium or didymium serves as well as neodymium, and terbium holds the field better than dysprosium. A gadolinium for one neodymium makes three instead of four. Ferroboron is a borax, an iron and two charcoal, superheated."
+      "text": "Praseodymium or didymium serves as well as neodymium, and terbium as well as dysprosium. A gadolinium for one neodymium makes three instead of four. Ferroboron is a borax, an iron and two charcoal, superheated."
     },
     {
       "type": "patchouli:text",
-      "text": "Polarized, either is the magnet The Factory Must Grow's motors, generators and electric pumps are built from."
+      "text": "Polarized, each is the magnet The Factory Must Grow's motors, generators and electric pumps are built from: see Magnets and heat, under Power."
     },
     {
       "type": "patchouli:text",

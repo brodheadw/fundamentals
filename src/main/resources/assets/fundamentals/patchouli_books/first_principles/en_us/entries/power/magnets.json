@@ -1,0 +1,63 @@
+{
+  "name": "Magnets and heat",
+  "category": "fundamentals:power",
+  "icon": "fundamentals:samarium_cobalt_magnet",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A permanent magnet holds its field only so hot. Past the temperature it is rated to, the field sags, and comes back as it cools. Further on, part of it is lost for good. At its Curie point it is gone.",
+      "title": "Magnets and heat"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The Factory's motors, generators and stators are built round one grade of magnet and carry it: the item says which, and goggles on the block give the grade, the temperature where it stands (the field the thermometers read) and the share of full output it makes."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "In the game, every few seconds: NdFeB Magnet: rated 80 °C, lasting loss past 120, Curie 320, 100% strength. Dy-NdFeB Magnet: rated 180 °C, lasting loss past 230, Curie 340, 100% strength. SmCo Magnet: rated 300 °C, lasting loss past 400, Curie 800, 80% strength.",
+      "title": "The grades"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Alnico Magnet: rated 525 °C, lasting loss past 600, Curie 860, 40% strength. Output falls from full at the rating to half at the lasting-loss point and to nothing at Curie; a motor turns slower and carries less, a generator gives less. A demagnetised machine stops."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The real figures, from the makers' grade tables: sintered NdFeB runs to about 80 °C, Curie point 310 to 400 °C. With dysprosium or terbium (the SH, UH and EH grades) it runs to 150 to 230 °C. SmCo runs to 250 to 350 °C, Curie 720 to 825.",
+      "title": "Why it matters"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Alnico runs to 450 to 550 °C, Curie about 860, but stores far less energy: about 5 MGOe, against 35 to 52 for NdFeB and 16 to 32 for SmCo."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "So aircraft and missiles fly SmCo, alnico lives on in sensors, and every other motor is NdFeB with dysprosium for the heat, which is most of why the world wants dysprosium (US Department of Energy, Critical Materials Strategy, 2011)."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Plain NdFeB is two neodymium, three iron and a ferroboron under argon; a dysprosium or terbium in the melt makes Dy-NdFeB. Alnico is iron with aluminium, nickel, cobalt and a little copper: five iron, an aluminium, two nickel, two cobalt and three copper nuggets, superheated, cast and heat-treated to ten ingots.",
+      "title": "Making them"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Polarize any of the four ingots, or an NdFeB, Dy-NdFeB or SmCo plate, to its magnet. The magnet is the first thing a motor or generator takes on the belt, and it decides the grade of the whole."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A motor, generator or stator and any magnet in a crafting grid rebuild it round that magnet, at full field: that is how a cooked or demagnetised machine comes back, or a cheap one is upgraded.",
+      "title": "Rebuilding"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Machines built before grades, and The Factory Must Grow's own magnets still in a chest, count as Dy-NdFeB, which is what every NdFeB the mod made then was. The Factory's magnet is no longer made."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:alnico_magnet",
+      "text": "The horseshoe: cast alnico, painted red, its two poles bare.",
+      "title": "Alnico"
+    }
+  ]
+}
