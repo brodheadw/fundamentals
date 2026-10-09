@@ -14,7 +14,7 @@
       "item": "fundamentals:plastic_fluid_tank"
     },
     "M": {
-      "item": "tfmg:magnet"
+      "tag": "fundamentals:magnets"
     }
   },
   "result": {

@@ -33,14 +33,13 @@ public class UsesTests {
     }
 
     @GameTest(template = "empty")
-    public void theMagnetAlloysAreSinteredAndPolarizedIntoTheFactorysMagnet(GameTestHelper helper) {
+    public void theMagnetAlloysAreMeltedUnderArgon(GameTestHelper helper) {
         Map.of("fundamentals:uses/neodymium_iron_boron", "create:mixing", "fundamentals:uses/neodymium_iron_boron_with_gadolinium", "create:mixing",
-                "fundamentals:uses/samarium_cobalt", "create:mixing", "fundamentals:uses/magnet_from_samarium_cobalt", "tfmg:polarizing")
+                "fundamentals:uses/dysprosium_neodymium_iron_boron", "create:mixing", "fundamentals:uses/samarium_cobalt", "create:mixing")
                 .forEach((id, type) -> helper.assertTrue(BuiltInRegistries.RECIPE_TYPE.getKey(recipe(helper, id).getType()).toString().equals(type),
                         id + " should be a " + type + " recipe"));
-        Recipe<?> magnet = recipe(helper, "tfmg:polarizing/magnet");
-        helper.assertTrue(takes(magnet, "fundamentals:neodymium_iron_boron_ingot"), "the Factory's magnet should be polarized from NdFeB");
-        helper.assertTrue(!takes(magnet, "tfmg:magnetic_alloy_ingot"), "the Factory's magnetic alloy should no longer make a magnet on its own");
+        helper.assertTrue(!takes(recipe(helper, "fundamentals:uses/neodymium_iron_boron"), "fundamentals:dysprosium_ingot")
+                && takes(recipe(helper, "fundamentals:uses/dysprosium_neodymium_iron_boron"), "fundamentals:terbium_ingot"), "only the heat grade wants dysprosium or terbium");
         helper.assertTrue(takes(recipe(helper, "fundamentals:uses/neodymium_iron_boron"), "fundamentals:ferroboron")
                 && takes(recipe(helper, "fundamentals:uses/ferroboron"), "fundamentals:raw_borax"), "NdFeB wants boron as ferroboron, from borax");
         helper.assertTrue(takes(recipe(helper, "fundamentals:uses/samarium_cobalt"), "fundamentals:cobalt_ingot"), "SmCo wants cobalt metal");

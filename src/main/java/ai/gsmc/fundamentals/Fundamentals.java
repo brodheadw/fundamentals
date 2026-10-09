@@ -7,6 +7,7 @@ import ai.gsmc.fundamentals.client.ThermometerRenderer;
 import ai.gsmc.fundamentals.elements.PeriodicTable;
 import ai.gsmc.fundamentals.ironworking.IronWorking;
 import ai.gsmc.fundamentals.loot.AddToChests;
+import ai.gsmc.fundamentals.magnet.Magnets;
 import ai.gsmc.fundamentals.oxidation.InertDrumBlockEntity;
 import ai.gsmc.fundamentals.oxidation.Oxidation;
 import ai.gsmc.fundamentals.oxidation.Weathering;
@@ -89,6 +90,7 @@ public class Fundamentals {
             event.register(Registries.RECIPE_SERIALIZER, helper -> {
                 IronWorking.registerRecipeSerializers(helper::register);
                 Separation.registerRecipeSerializers(helper::register);
+                Magnets.registerRecipeSerializers(helper::register);
             });
             event.register(NeoForgeRegistries.Keys.FLUID_TYPES, helper -> Separation.registerFluidTypes(helper::register));
             event.register(Registries.FLUID, helper -> Separation.registerFluids(helper::register));
@@ -103,13 +105,17 @@ public class Fundamentals {
                 Electricity.registerItems(helper::register);
                 Separation.registerItems(helper::register);
                 Uses.registerItems(helper::register);
+                Magnets.registerItems(helper::register);
                 PlatinumMetals.registerItems(helper::register);
                 Plastics.registerItems(helper::register);
                 Thermometers.registerItems(helper::register);
                 Oxidation.registerItems(helper::register);
                 PeriodicTable.registerItems(helper::register);
             });
-            event.register(Registries.DATA_COMPONENT_TYPE, helper -> Oxidation.registerComponents(helper::register));
+            event.register(Registries.DATA_COMPONENT_TYPE, helper -> {
+                Oxidation.registerComponents(helper::register);
+                Magnets.registerComponents(helper::register);
+            });
             event.register(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, helper -> Oxidation.registerAttachments(helper::register));
             event.register(Registries.FEATURE, helper -> helper.register(DEPOSIT, DepositFeature.INSTANCE));
             event.register(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, helper -> {
@@ -129,6 +135,8 @@ public class Fundamentals {
         NeoForge.EVENT_BUS.addListener(Oxidation::onPlayerTick);
         NeoForge.EVENT_BUS.addListener(Oxidation::onPickup);
         NeoForge.EVENT_BUS.addListener(Oxidation::onTooltip);
+        NeoForge.EVENT_BUS.addListener(Magnets::onTooltip);
+        NeoForge.EVENT_BUS.addListener(Magnets::attach);
         modBus.addListener(Oxidation::registerDataMaps);
         modBus.addListener(Heat::registerDataMaps);
         NeoForge.EVENT_BUS.addListener(Heat::registerCommands);
@@ -156,6 +164,7 @@ public class Fundamentals {
                     IronWorking.items().forEach(output::accept);
                     Separation.items().forEach(output::accept);
                     Uses.items().forEach(output::accept);
+                    Magnets.items().forEach(output::accept);
                     PlatinumMetals.items().forEach(output::accept);
                     Plastics.items().forEach(output::accept);
                     HandTools.items().forEach(output::accept);

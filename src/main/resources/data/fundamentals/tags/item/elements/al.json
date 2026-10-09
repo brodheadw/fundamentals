@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "create:crushed_raw_aluminum",
+    "fundamentals:alnico_ingot",
+    "fundamentals:alnico_magnet",
     "fundamentals:alumel_ingot",
     "fundamentals:aluminium_powder",
     "fundamentals:aluminium_scandium_block",

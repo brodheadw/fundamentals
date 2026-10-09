@@ -17,6 +17,7 @@ from build_ore_data import ASSETS, DATA, cube, drop_self, tag as tag_file, write
 
 USES = DATA / "recipe/uses"
 TFMG = DATA.parent / "tfmg/recipe"
+TFMG_LOOT = DATA.parent / "tfmg/loot_table/blocks"
 CREATE = DATA.parent / "create/recipe"
 
 # the items of ours that are not a form of a material: name -> display
@@ -30,6 +31,13 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "titania_slag": "Titania Slag", "magnesium_chloride": "Magnesium Chloride",
          "silver_zinc_crust": "Silver-Zinc Crust", "litharge": "Litharge",
          "thorium_nitrate": "Thorium Nitrate", "gas_mantle": "Gas Mantle", "mercury": "Mercury"}
+# The magnet alloys and the forms each polarizes from, in the order of magnet.MagnetGrade; the magnet is <alloy>_magnet.
+MAGNET_ALLOYS = {"neodymium_iron_boron": ("ingot", "plate"), "dysprosium_neodymium_iron_boron": ("ingot", "plate"),
+                 "samarium_cobalt": ("ingot", "plate"), "alnico": ("ingot",)}
+MAGNET_GRADES = ("NdFeB", "Dy-NdFeB", "SmCo", "Alnico")
+MAGNETS = {f"{alloy}_magnet": f"{grade} Magnet" for alloy, grade in zip(MAGNET_ALLOYS, MAGNET_GRADES)}
+# The Factory's machines built round magnets that take a grade, and their recipes there.
+MAGNET_MACHINES = {"electric_motor": "sequenced_assembly/motor", "generator": "sequenced_assembly/generator", "stator": "mechanical_crafting/stator"}
 # the blocks of ours that are not a form of a material: name -> display
 BLOCKS = {"clarifier_sludge_block": "Clarifier Tailings"}
 # The platinum refinery's items, registered by uses.PlatinumMetals in this order.
@@ -87,26 +95,71 @@ def shaped(path, pattern, key, result):
 
 
 def magnets():
-    """Nd2Fe14B is melted from neodymium, iron and boron, with dysprosium to hold its field when hot; SmCo5 from samarium and
-    cobalt. Praseodymium sits in the same lattice, so the industry melts didymium (PrNd) as it comes off the plant, and terbium
-    holds the field better than dysprosium does (diffused into the grain boundaries, its main use now). Gadolinium stands in for
-    some of the neodymium in cheaper grades at a cost in strength. Rare earth metal burns in air when
-    molten, so both are melted under argon. The boron goes in as ferroboron, which borax, iron and charcoal give
-    in the heat of an arc. Both are then polarized into The Factory Must Grow's magnet, which its motors and
-    generators are already built from, so a rare earth plant is what a motor needs."""
+    """Nd2Fe14B is melted from neodymium, iron and boron; SmCo5 from samarium and cobalt. Praseodymium sits in the same lattice,
+    so the industry melts didymium (PrNd) as it comes off the plant, and gadolinium stands in for some of the neodymium in
+    cheaper grades at a cost in strength. Plain NdFeB loses its coercivity past about 80 C; dysprosium or terbium in the melt
+    (or diffused into the grain boundaries, terbium's main use now) holds it to 150-230 C, which is what every motor grade
+    carries. Rare earth metal burns in air when molten, so all are melted under argon. The boron goes in as ferroboron, which
+    borax, iron and charcoal give in the heat of an arc. Alnico, the magnet before the rare earths, is iron with 8-12 per cent
+    aluminium, 15-26 nickel, 5-24 cobalt and a few of copper, cast and heat-treated in a field: five iron, an aluminium, two
+    nickel, two cobalt and three copper nuggets is 49 per cent iron, 10 aluminium, 19 nickel, 19 cobalt and 3 copper.
+    Each alloy polarizes into its own magnet, and the Factory's motors, generators and stators are built from one grade
+    and carry it (magnet.Magnets): their own recipes are taken over per grade, magnet step first so the deployer can tell
+    which grade a part is being built to. The Factory's magnet is no longer made; what a world already holds still works,
+    as the dysprosium grade it was."""
     mixing("ferroboron", item("raw_borax") + tag("c:ingots/iron") + item("minecraft:charcoal", 2), [result("ferroboron")], "superheated")
     write(DATA / "tags/item/magnet_light_rare_earths.json", {"replace": False, "values": [f"fundamentals:{e}_ingot" for e in ("neodymium", "praseodymium", "didymium")]})
     write(DATA / "tags/item/magnet_heavy_rare_earths.json", {"replace": False, "values": [f"fundamentals:{e}_ingot" for e in ("dysprosium", "terbium")]})
     light, heavy = tag("fundamentals:magnet_light_rare_earths"), tag("fundamentals:magnet_heavy_rare_earths")
-    mixing("neodymium_iron_boron", light * 2 + heavy + tag("c:ingots/iron", 3) + item("ferroboron") + argon(),
-           [result("neodymium_iron_boron_ingot", 4)], "superheated")
-    mixing("neodymium_iron_boron_with_gadolinium", light + item("gadolinium_ingot") + heavy + tag("c:ingots/iron", 3) + item("ferroboron") + argon(),
-           [result("neodymium_iron_boron_ingot", 3)], "superheated")
+    boride = tag("c:ingots/iron", 3) + item("ferroboron") + argon()
+    mixing("neodymium_iron_boron", light * 2 + boride, [result("neodymium_iron_boron_ingot", 4)], "superheated")
+    mixing("neodymium_iron_boron_with_gadolinium", light + item("gadolinium_ingot") + boride, [result("neodymium_iron_boron_ingot", 3)], "superheated")
+    mixing("dysprosium_neodymium_iron_boron", light * 2 + heavy + boride, [result("dysprosium_neodymium_iron_boron_ingot", 4)], "superheated")
+    mixing("dysprosium_neodymium_iron_boron_with_gadolinium", light + item("gadolinium_ingot") + heavy + boride,
+           [result("dysprosium_neodymium_iron_boron_ingot", 3)], "superheated")
     mixing("samarium_cobalt", item("samarium_ingot") + item("cobalt_ingot", 4) + argon(), [result("samarium_cobalt_ingot", 2)], "superheated")
-    write(TFMG / "polarizing/magnet.json", {"type": "tfmg:polarizing", "ingredients": tag("c:ingots/neodymium_iron_boron"),
-                                            "results": [{"id": "tfmg:magnet"}]})
-    write(USES / "magnet_from_samarium_cobalt.json", {"type": "tfmg:polarizing", "ingredients": tag("c:ingots/samarium_cobalt"),
-                                                      "results": [{"id": "tfmg:magnet"}]})
+    mixing("alnico", tag("c:ingots/iron", 5) + tag("c:ingots/aluminum") + tag("c:ingots/nickel", 2) + tag("c:ingots/cobalt", 2) + tag("c:nuggets/copper", 3),
+           [result("alnico_ingot", 10)], "superheated")
+    for alloy, forms in MAGNET_ALLOYS.items():
+        for form in forms:
+            write(USES / f"{alloy}_magnet_from_{form}.json", {"type": "tfmg:polarizing", "ingredients": tag(f"c:{form}s/{alloy}"),
+                                                              "results": [{"id": f"fundamentals:{alloy}_magnet"}]})
+    disabled(TFMG / "polarizing/magnet.json")
+    tag_file(DATA / "tags/item/magnets.json", [f"fundamentals:{alloy}_magnet" for alloy in MAGNET_ALLOYS] + ["tfmg:magnet"])
+    tag_file(DATA / "tags/item/magnet_machines.json", [f"tfmg:{machine}" for machine in MAGNET_MACHINES])
+    write(USES / "magnet_rebuild.json", {"type": "fundamentals:magnet_rebuild", "category": "misc"})
+    with zipfile.ZipFile(TFMG_JAR) as jar:
+        def original(path):
+            return json.loads(jar.read(f"data/tfmg/recipe/{path}.json"))
+
+        for path in ("crafting/materials/voltmeter", "crafting/materials/electric_pump"):
+            recipe = original(path)
+            recipe["key"] = {k: {"tag": "fundamentals:magnets"} if v == {"item": "tfmg:magnet"} else v for k, v in recipe["key"].items()}
+            write(TFMG / f"{path}.json", recipe)
+        for machine, path in MAGNET_MACHINES.items():
+            recipe = original(path)
+            disabled(TFMG / f"{path}.json")
+            for alloy in MAGNET_ALLOYS:
+                magnet = {"item": f"fundamentals:{alloy}_magnet"}
+                if alloy == "dysprosium_neodymium_iron_boron":
+                    magnet = [magnet, {"item": "tfmg:magnet"}]
+                charge = {"fundamentals:magnet": {"grade": alloy}}
+                graded = json.loads(json.dumps(recipe))
+                if graded["type"] == "create:sequenced_assembly":
+                    steps = graded["sequence"]
+                    step = next(s for s in steps if {"item": "tfmg:magnet"} in s["ingredients"])
+                    step["ingredients"] = [magnet if i == {"item": "tfmg:magnet"} else i for i in step["ingredients"]]
+                    graded["sequence"] = [step] + [s for s in steps if s is not step]
+                    graded["results"][0]["components"] = charge
+                else:
+                    graded["key"] = {k: magnet if v == {"item": "tfmg:magnet"} else v for k, v in graded["key"].items()}
+                    graded["result"]["components"] = charge
+                write(USES / f"{machine}_with_{alloy}_magnet.json", graded)
+            table = json.loads(jar.read(f"data/tfmg/loot_table/blocks/{machine}.json"))
+            for pool in table["pools"]:
+                for entry in pool["entries"]:
+                    entry["functions"] = [{"function": "minecraft:copy_components", "source": "block_entity", "include": ["fundamentals:magnet"]}]
+            write(TFMG_LOOT / f"{machine}.json", table)
 
 
 def cerium():
@@ -717,13 +770,20 @@ def plastics():
 def names():
     path = ASSETS / "lang/en_us.json"
     lang = json.loads(path.read_text(encoding="utf-8"))
-    for name, display in {**ITEMS, **PGM_ITEMS}.items():
+    for name, display in {**ITEMS, **PGM_ITEMS, **MAGNETS}.items():
         lang[f"item.fundamentals.{name}"] = display
         write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})
     for name, display in PLASTIC_ITEMS.items():
         lang[f"item.fundamentals.{name}"] = display
         write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})
     lang["block.fundamentals.dyed_plastic_pipe"] = "Dyed Plastic Pipe"
+    lang["tooltip.fundamentals.magnet.grade"] = "%s, rated to %s °C"
+    lang["tooltip.fundamentals.magnet.field"] = "Overheated: %s%% of its field left"
+    lang["tooltip.fundamentals.magnet.demagnetised"] = "Demagnetised: rebuild it with a magnet"
+    lang["goggles.fundamentals.magnet.grade"] = "%s, rated to %s °C"
+    lang["goggles.fundamentals.magnet.output"] = "At %s °C: %s%% of full output"
+    lang["goggles.fundamentals.magnet.field"] = "%s%% of its field left: it has been past %s °C"
+    lang["goggles.fundamentals.magnet.demagnetised"] = "Demagnetised past its Curie point, %s °C: rebuild it with a magnet"
     for name, display in {**BLOCKS, **PLASTIC_BLOCKS}.items():
         lang[f"block.fundamentals.{name}"] = display
         write(ASSETS / f"blockstates/{name}.json", {"variants": {"": {"model": f"fundamentals:block/{name}"}}})
@@ -736,6 +796,7 @@ def names():
 def main():
     shutil.rmtree(USES, ignore_errors=True)
     shutil.rmtree(TFMG, ignore_errors=True)
+    shutil.rmtree(TFMG_LOOT.parent, ignore_errors=True)
     shutil.rmtree(CREATE, ignore_errors=True)
     shutil.rmtree(LITHIUM, ignore_errors=True)
     shutil.rmtree(PLATINUM, ignore_errors=True)
