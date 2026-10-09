@@ -12,13 +12,15 @@
 		"OreVeinTypeMixin",
 		"OreVeinifierMixin",
 		"PipeCorrosionMixin",
+		"PumpMagnetMixin",
 		"RotorMagnetMixin",
 		"SeawaterBucketMixin",
 		"SeawaterHoseMixin",
 		"SeawaterPipeMixin",
 		"StatorGogglesMixin",
 		"TankCorrosionMixin",
-		"TreeNodePositionMixin"
+		"TreeNodePositionMixin",
+		"VoltmeterMagnetMixin"
 	],
 	"client": [
 		"AdvancementWidgetMixin"

@@ -6,8 +6,12 @@ import ai.gsmc.fundamentals.magnet.MagnetCharge;
 import ai.gsmc.fundamentals.magnet.MagnetGrade;
 import ai.gsmc.fundamentals.magnet.Magnets;
 import com.drmangotea.tfmg.content.electricity.generators.GeneratorBlockEntity;
+import com.drmangotea.tfmg.content.electricity.utilities.electric_pump.ElectricPumpBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.AllBlocks;
+import com.simibubi.create.content.fluids.FluidTransportBehaviour;
+import com.simibubi.create.content.fluids.PipeConnection;
+import com.simibubi.create.content.fluids.pump.PumpBlockEntity;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.content.kinetics.motor.CreativeMotorBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -25,6 +29,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
+import java.lang.reflect.Method;
 import java.util.List;
 
 /** The four magnets, and a generator that knows which it was built with and what the heat has done to it. */
@@ -62,7 +67,7 @@ public class MagnetTests {
             helper.assertTrue(BuiltInRegistries.RECIPE_TYPE.getKey(polarize.getType()).toString().equals("tfmg:polarizing")
                     && takes(polarize, "fundamentals:" + grade.material + "_ingot") && polarize.getResultItem(registries).is(Magnets.magnet(grade)),
                     grade.material + " should polarize to its own magnet");
-            for (String machine : new String[] {"electric_motor", "generator", "stator"}) {
+            for (String machine : new String[] {"electric_motor", "generator", "stator", "electric_pump", "voltmeter"}) {
                 Recipe<?> built = recipe(helper, "fundamentals:uses/" + machine + "_with_" + grade.magnet());
                 MagnetCharge charge = built.getResultItem(registries).get(Magnets.CHARGE);
                 helper.assertTrue(charge != null && charge.grade() == grade && charge.field() == 1, machine + " built with " + grade + " should carry it, got " + charge);
@@ -71,7 +76,6 @@ public class MagnetTests {
         helper.assertTrue(helper.getLevel().getRecipeManager().byKey(ResourceLocation.parse("tfmg:polarizing/magnet")).isEmpty(), "the Factory's own magnet should no longer be made");
         helper.assertTrue(Magnets.grade(new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("tfmg:magnet")))) == MagnetGrade.DY_NDFEB,
                 "a Factory magnet already in a world should count as Dy-NdFeB");
-        helper.assertTrue(takes(recipe(helper, "tfmg:crafting/materials/voltmeter"), "fundamentals:alnico_magnet"), "the voltmeter should take any magnet");
         helper.succeed();
     }
 
@@ -108,6 +112,59 @@ public class MagnetTests {
                             "SmCo should shrug off the furnaces, got " + MagnetBehaviour.output(smco) + ", " + smco.generation() + " vs " + cold.generation());
                     List<ItemStack> drops = Block.getDrops(hot.getBlockState(), helper.getLevel(), hot.getBlockPos(), hot);
                     helper.assertTrue(drops.size() == 1 && cooked.equals(drops.getFirst().get(Magnets.CHARGE)), "the broken generator should drop with its cooked magnet, got " + drops);
+                })
+                .thenSucceed();
+    }
+
+    private static ElectricPumpBlockEntity pump(GameTestHelper helper, int x, MagnetGrade grade, boolean furnaces) {
+        BlockPos at = new BlockPos(x, 1, 2);
+        helper.setBlock(at, TFMGBlocks.ELECTRIC_PUMP.getDefaultState().setValue(DirectionalKineticBlock.FACING, Direction.EAST));
+        for (BlockPos pipe : List.of(at.west(), at.east())) {
+            helper.setBlock(pipe, Block.updateFromNeighbourShapes(AllBlocks.FLUID_PIPE.getDefaultState(), helper.getLevel(), helper.absolutePos(pipe)));
+        }
+        ItemStack item = new ItemStack(TFMGBlocks.ELECTRIC_PUMP.get());
+        item.set(Magnets.CHARGE, new MagnetCharge(grade, 1));
+        ElectricPumpBlockEntity pump = helper.getBlockEntity(at);
+        pump.applyComponentsFromItemStack(item);
+        if (furnaces) {
+            for (BlockPos furnace : List.of(at.north(), at.south(), at.above())) {
+                helper.setBlock(furnace, Blocks.BLAST_FURNACE.defaultBlockState().setValue(AbstractFurnaceBlock.LIT, true));
+            }
+        }
+        return pump;
+    }
+
+    private static float pressure(GameTestHelper helper, ElectricPumpBlockEntity pump) throws ReflectiveOperationException {
+        pump.data.voltage = 100;
+        Method distribute = PumpBlockEntity.class.getDeclaredMethod("distributePressureTo", Direction.class);
+        distribute.setAccessible(true);
+        float sum = 0;
+        for (Direction side : new Direction[] {Direction.EAST, Direction.WEST}) {
+            distribute.invoke(pump, side);
+            FluidTransportBehaviour pipe = BlockEntityBehaviour.get(helper.getLevel(), pump.getBlockPos().relative(side), FluidTransportBehaviour.TYPE);
+            for (PipeConnection connection : pipe.interfaces.values()) {
+                sum += connection.getPressure().getFirst() + connection.getPressure().getSecond();
+            }
+        }
+        return sum;
+    }
+
+    @GameTest(template = "battery", timeoutTicks = 400)
+    public void anNdFeBElectricPumpAmongBlastFurnacesPushesLess(GameTestHelper helper) {
+        ElectricPumpBlockEntity hot = pump(helper, 3, MagnetGrade.NDFEB, true);
+        ElectricPumpBlockEntity cold = pump(helper, 11, MagnetGrade.NDFEB, false);
+        helper.startSequence()
+                .thenIdle(1)
+                .thenExecute(() -> {
+                    List.of(hot, cold).forEach(p -> BlockEntityBehaviour.get(p, MagnetBehaviour.TYPE).check());
+                    try {
+                        float hotPressure = pressure(helper, hot), coldPressure = pressure(helper, cold);
+                        helper.assertTrue(coldPressure > 0 && hotPressure < coldPressure, "NdFeB between blast furnaces should push less, got " + hotPressure + " vs " + coldPressure);
+                    } catch (ReflectiveOperationException e) {
+                        throw new IllegalStateException(e);
+                    }
+                    MagnetCharge cooked = hot.components().get(Magnets.CHARGE);
+                    helper.assertTrue(cooked != null && cooked.field() < 1, "past 120 °C the pump's NdFeB should lose field for good, got " + cooked);
                 })
                 .thenSucceed();
     }
