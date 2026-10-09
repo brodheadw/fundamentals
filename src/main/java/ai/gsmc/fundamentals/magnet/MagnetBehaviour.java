@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import java.util.List;
 
 /**
- * Rides on a Factory motor, generator or stator: every few seconds reads the temperature where it stands, burns off what
+ * Rides on a Factory motor, generator, stator, electric pump or voltmeter: every few seconds reads the temperature where it stands, burns off what
  * field the heat takes for good (kept on the block entity's components, so the block drops with it), and holds the share
  * of output the machine's own code is scaled by.
  */
@@ -36,6 +36,12 @@ public class MagnetBehaviour extends BlockEntityBehaviour {
     public static float output(BlockEntity be) {
         MagnetBehaviour magnet = be == null ? null : BlockEntityBehaviour.get(be, TYPE);
         return magnet == null ? 1 : magnet.output;
+    }
+
+    /** The share of its own grade's full field the magnet has: what a meter, calibrated to that grade, reads by. */
+    public static float field(BlockEntity be) {
+        MagnetBehaviour magnet = be == null ? null : BlockEntityBehaviour.get(be, TYPE);
+        return magnet == null ? 1 : magnet.output / magnet.charge.grade().strength;
     }
 
     @Override

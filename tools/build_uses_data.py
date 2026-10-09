@@ -41,7 +41,8 @@ MAGNET_ALLOYS = {"neodymium_iron_boron": ("ingot", "plate"), "dysprosium_neodymi
 MAGNET_GRADES = ("NdFeB", "Dy-NdFeB", "SmCo", "Alnico")
 MAGNETS = {f"{alloy}_magnet": f"{grade} Magnet" for alloy, grade in zip(MAGNET_ALLOYS, MAGNET_GRADES)}
 # The Factory's machines built round magnets that take a grade, and their recipes there.
-MAGNET_MACHINES = {"electric_motor": "sequenced_assembly/motor", "generator": "sequenced_assembly/generator", "stator": "mechanical_crafting/stator"}
+MAGNET_MACHINES = {"electric_motor": "sequenced_assembly/motor", "generator": "sequenced_assembly/generator", "stator": "mechanical_crafting/stator",
+                   "electric_pump": "crafting/materials/electric_pump", "voltmeter": "crafting/materials/voltmeter"}
 # the blocks of ours that are not a form of a material: name -> display
 BLOCKS = {"clarifier_sludge_block": "Clarifier Tailings"}
 # The platinum refinery's items, registered by uses.PlatinumMetals in this order.
@@ -107,7 +108,7 @@ def magnets():
     borax, iron and charcoal give in the heat of an arc. Alnico, the magnet before the rare earths, is iron with 8-12 per cent
     aluminium, 15-26 nickel, 5-24 cobalt and a few of copper, cast and heat-treated in a field: five iron, an aluminium, two
     nickel, two cobalt and three copper nuggets is 49 per cent iron, 10 aluminium, 19 nickel, 19 cobalt and 3 copper.
-    Each alloy polarizes into its own magnet, and the Factory's motors, generators and stators are built from one grade
+    Each alloy polarizes into its own magnet, and the Factory's motors, generators, stators, electric pumps and voltmeters are built from one grade
     and carry it (magnet.Magnets): their own recipes are taken over per grade, magnet step first so the deployer can tell
     which grade a part is being built to. The Factory's magnet is no longer made; what a world already holds still works,
     as the dysprosium grade it was."""
@@ -136,10 +137,6 @@ def magnets():
         def original(path):
             return json.loads(jar.read(f"data/tfmg/recipe/{path}.json"))
 
-        for path in ("crafting/materials/voltmeter", "crafting/materials/electric_pump"):
-            recipe = original(path)
-            recipe["key"] = {k: {"tag": "fundamentals:magnets"} if v == {"item": "tfmg:magnet"} else v for k, v in recipe["key"].items()}
-            write(TFMG / f"{path}.json", recipe)
         for machine, path in MAGNET_MACHINES.items():
             recipe = original(path)
             disabled(TFMG / f"{path}.json")

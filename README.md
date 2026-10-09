@@ -22,7 +22,7 @@ An ore takes on whatever rock it formed in. The same hematite sits in stone, dee
 
 ## The minerals
 
-Forty-two of them, each dropping a raw chunk of itself:
+Forty-seven of them, each dropping a raw chunk of itself:
 
 - **Iron and ferroalloys:** Hematite, Magnetite, Goethite, Pyrolusite, Pentlandite, Nickel Laterite, Chromite, Wolframite, Scheelite, Molybdenite, Cobaltite, Ilmenite, Rutile
 - **Copper:** Chalcopyrite, Bornite, Chalcocite, Covellite, Malachite, Azurite, Cuprite
@@ -31,6 +31,7 @@ Forty-two of them, each dropping a raw chunk of itself:
 - **Zirconium and beryllium:** Zircon, Beryl, Bertrandite
 - **Rare earths:** Bastnäsite, Monazite, Xenotime, Ion-Adsorption Clay, Loparite, Euxenite, Thortveitite (scandium)
 - **Precious:** Native Silver, Argentite, Sperrylite, Cooperite, Braggite, Cinnabar
+- **Fluxes and salts:** Fluorite, Borax, Trona, Halite
 
 Vanilla gold and copper ore stay: they are native gold and native copper, which are real minerals. Vanilla iron ore is gone, including the big deep veins, which are magnetite now.
 
@@ -137,7 +138,7 @@ Four dial thermometers read it, gauges built like Create's speedometer, what doe
 
 ### Magnets and heat
 
-A permanent magnet holds its field only so hot. There are four: NdFeB, Dy-NdFeB, SmCo and alnico, the cast magnet before the rare earths (iron with aluminium, nickel, cobalt and a little copper, superheated to ten ingots). Each alloy's ingot or plate polarizes into its own magnet; The Factory Must Grow's magnet is no longer made. Its motors, generators and large-generator stators are built round one grade, the magnet going in first, and carry it on the item and the placed block, which reads the temperature where it stands every five seconds. Past the grade's rating its output sags and comes back as it cools; past a second point part of the field is lost for good, and the block drops with what is left; at the Curie point it is gone and the machine stops. A machine and a magnet in a crafting grid rebuild it at that grade. Goggles give the grade, the temperature and the share of output. The in-game numbers: NdFeB rated 80 °C, lasting loss past 120, Curie 320; Dy-NdFeB 180, 230, 340; SmCo 300, 400, 800, at 80% of NdFeB's strength; alnico 525, 600, 860, at 40%. Real sintered NdFeB runs to about 80 °C (Curie 310–400), the dysprosium grades (SH, UH, EH) to 150–230, SmCo to 250–350 (Curie 720–825) and alnico to 450–550 (Curie about 860), but alnico stores about 5 MGOe against NdFeB's 35–52 and SmCo's 16–32: so aircraft fly SmCo, alnico lives on in sensors, and every other motor is NdFeB with dysprosium for the heat. Machines built before grades, and any Factory magnet still in a chest, count as Dy-NdFeB, which every NdFeB the mod made then was.
+A permanent magnet holds its field only so hot. There are four: NdFeB, Dy-NdFeB, SmCo and alnico, the cast magnet before the rare earths (iron with aluminium, nickel, cobalt and a little copper, superheated to ten ingots). Each alloy's ingot or plate polarizes into its own magnet; The Factory Must Grow's magnet is no longer made. Its motors, generators, large-generator stators, electric pumps and voltmeters are built round one grade, the magnet going in first, and carry it on the item and the placed block, which reads the temperature where it stands every five seconds. Past the grade's rating its output sags and comes back as it cools; past a second point part of the field is lost for good, and the block drops with what is left; at the Curie point it is gone and the machine stops. A pump pushes less as a motor turns slower, and a voltmeter, whose needle swings against its magnet, reads low by what its field has lost. A machine and a magnet in a crafting grid rebuild it at that grade. Goggles give the grade, the temperature and the share of output. The in-game numbers: NdFeB rated 80 °C, lasting loss past 120, Curie 320; Dy-NdFeB 180, 230, 340; SmCo 300, 400, 800, at 80% of NdFeB's strength; alnico 525, 600, 860, at 40%. Real sintered NdFeB runs to about 80 °C (Curie 310–400), the dysprosium grades (SH, UH, EH) to 150–230, SmCo to 250–350 (Curie 720–825) and alnico to 450–550 (Curie about 860), but alnico stores about 5 MGOe against NdFeB's 35–52 and SmCo's 16–32: so aircraft fly SmCo, alnico lives on in sensors, and every other motor is NdFeB with dysprosium for the heat. Machines built before grades, and any Factory magnet still in a chest, count as Dy-NdFeB, which every NdFeB the mod made then was.
 
 ## Power
 

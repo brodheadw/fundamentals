@@ -77,6 +77,8 @@ public final class Magnets {
     public static void attach(BlockEntityBehaviourEvent event) {
         event.forType(TFMGBlockEntities.ELECTRIC_MOTOR.get(), be -> event.attach(new MagnetBehaviour(be, be::updateGeneratedRotation)));
         event.forType(TFMGBlockEntities.GENERATOR.get(), be -> event.attach(new MagnetBehaviour(be, be::updateNextTick)));
+        event.forType(TFMGBlockEntities.ELECTRIC_PUMP.get(), be -> event.attach(new MagnetBehaviour(be, be::updatePressureChange)));
+        event.forType(TFMGBlockEntities.VOLTMETER.get(), be -> event.attach(new MagnetBehaviour(be, () -> {})));
         event.forType(TFMGBlockEntities.STATOR.get(), be -> event.attach(new MagnetBehaviour(be, () -> {
             if (be.rotor != null && be.getLevel().getBlockEntity(be.rotor) instanceof RotorBlockEntity rotor) {
                 rotor.updateNextTick();

@@ -2,7 +2,9 @@
   "replace": false,
   "values": [
     "tfmg:electric_motor",
+    "tfmg:electric_pump",
     "tfmg:generator",
-    "tfmg:stator"
+    "tfmg:stator",
+    "tfmg:voltmeter"
   ]
 }

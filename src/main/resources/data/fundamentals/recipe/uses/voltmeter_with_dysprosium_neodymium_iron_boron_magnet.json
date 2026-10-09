@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "tag": "c:ingots/steel"
+    },
+    "C": {
+      "item": "minecraft:compass"
+    },
+    "M": [
+      {
+        "item": "fundamentals:dysprosium_neodymium_iron_boron_magnet"
+      },
+      {
+        "item": "tfmg:magnet"
+      }
+    ],
+    "N": {
+      "tag": "c:nuggets/steel"
+    }
+  },
+  "pattern": [
+    "NNN",
+    "NCN",
+    "AMA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "tfmg:voltmeter",
+    "components": {
+      "fundamentals:magnet": {
+        "grade": "dysprosium_neodymium_iron_boron"
+      }
+    }
+  }
+}

@@ -14,8 +14,7 @@ What's agreed but not built, in the order it's likely to go. The working plan be
   only in the tooltip, not its texture; items carried by hoppers or sitting in Create's vaults and toolboxes age only
   when a player opens a container they land in; there is no desiccant; and calcium and lithium tarnish but never crust
   through, since nothing here holds the crust.
-- **Magnet loose ends.** The electric pump and the voltmeter take any magnet but ignore its grade and the heat, and so does the
-  magnetomigration cell; and a motor or generator rebuilt in the grid takes one magnet where the belt took three. Alnico is one cast-and-treated step with no field anneal of its own, sintered NdFeB has no pressing or
+- **Magnet loose ends.** The magnetomigration cell takes any magnet but ignores its grade and the heat; and a motor, generator or electric pump rebuilt in the grid takes one magnet where it was built with two or three. Alnico is one cast-and-treated step with no field anneal of its own, sintered NdFeB has no pressing or
   sintering step, and grain-boundary diffusion (terbium on a finished magnet) is folded into the melt.
 - **Temperature consumers.** `Heat.at` exists (the `heat` package). Still to hang on it: the tiers Create's recipes use
   as thresholds on the number, tarnish rate, and kerosene and the extractants igniting near heat. The Wildspell Magic

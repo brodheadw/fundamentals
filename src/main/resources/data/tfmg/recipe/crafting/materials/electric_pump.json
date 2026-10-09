@@ -1,33 +1,7 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "C": {
-      "item": "tfmg:circuit_board"
-    },
-    "K": {
-      "item": "tfmg:electromagnetic_coil"
-    },
-    "M": {
-      "tag": "fundamentals:magnets"
-    },
-    "P": {
-      "item": "tfmg:steel_mechanical_pump"
-    },
-    "Q": {
-      "item": "tfmg:capacitor_item"
-    },
-    "W": {
-      "tag": "c:wires/copper"
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:false"
     }
-  },
-  "pattern": [
-    "MQK",
-    "CPW",
-    "MQK"
-  ],
-  "result": {
-    "count": 1,
-    "id": "tfmg:electric_pump"
-  }
+  ]
 }

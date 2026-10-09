@@ -11,7 +11,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "The Factory's motors, generators and stators are built round one grade of magnet and carry it: the item says which, and goggles on the block give the grade, the temperature where it stands (the field the thermometers read) and the share of full output it makes."
+      "text": "The Factory's motors, generators, stators, electric pumps and voltmeters are built round one grade of magnet and carry it: the item says which, and goggles on the block give the grade, the temperature where it stands (the field the thermometers read) and the share of full output it makes."
     },
     {
       "type": "patchouli:text",
@@ -20,7 +20,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Alnico Magnet: rated 525 °C, lasting loss past 600, Curie 860, 40% strength. Output falls from full at the rating to half at the lasting-loss point and to nothing at Curie; a motor turns slower and carries less, a generator gives less. A demagnetised machine stops."
+      "text": "Alnico Magnet: rated 525 °C, lasting loss past 600, Curie 860, 40% strength. Output falls from full at the rating to half at the lasting-loss point and to nothing at Curie; a motor turns slower and carries less, a generator gives less, an electric pump pushes less. A demagnetised machine stops."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A voltmeter's needle swings against its magnet, so it reads low by what the heat has taken of its field."
     },
     {
       "type": "patchouli:text",
@@ -46,7 +50,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "A motor, generator or stator and any magnet in a crafting grid rebuild it round that magnet, at full field: that is how a cooked or demagnetised machine comes back, or a cheap one is upgraded.",
+      "text": "A motor, generator, stator, electric pump or voltmeter and any magnet in a crafting grid rebuild it round that magnet, at full field: that is how a cooked or demagnetised machine comes back, or a cheap one is upgraded.",
       "title": "Rebuilding"
     },
     {
