@@ -85,10 +85,10 @@ ACIDS = {
 }
 # What the plant cannot use: the spent chloride liquor every cut leaves behind, and the calcium chloride liquor it
 # becomes once lime has neutralised it. That boils down to calcium chloride, which is where calcium metal comes from.
-# The id stays "brine" so worlds that hold it keep it.
+# Once called brine; the old id is aliased to this one so tanks in older worlds keep it.
 WASTES = {
     "spent_liquor": ("Spent Liquor", 0x8E9A86),
-    "brine": ("Calcium Chloride Liquor", 0xDCE6E4),
+    "calcium_chloride_liquor": ("Calcium Chloride Liquor", 0xDCE6E4),
 }
 # Seawater is water in every way but its salt: it looks, pours and flows as water does, and its tint is vanilla water's.
 SEA = {"seawater": ("Seawater", 0x3F76E4)}
@@ -375,8 +375,8 @@ def chemistry():
     for organic in ORGANICS:
         mixing(f"scrub_{organic}", [item("tfmg:limesand"), fluid(f"fouled_{organic}", 1000)], [result_fluid(organic, 900)])
     # Waste: lime neutralises the spent chloride liquor to calcium chloride liquor, which boils down to the dry salt.
-    mixing("brine", item("tfmg:limesand", 2) + [fluid("spent_liquor", 1000)], [result_fluid("brine", 1000)])
-    mixing("calcium_chloride", [fluid("brine", 1000)], [result_item("calcium_chloride", 3)], heated=True)
+    mixing("calcium_chloride_liquor", item("tfmg:limesand", 2) + [fluid("spent_liquor", 1000)], [result_fluid("calcium_chloride_liquor", 1000)])
+    mixing("calcium_chloride", [fluid("calcium_chloride_liquor", 1000)], [result_item("calcium_chloride", 3)], heated=True)
     mixing("heavy_rare_earth_liquor", [item("heavy_rare_earth_sulfate"), fluid(STRIP, 500)],
            [result_fluid("crude_heavy_rare_earth_liquor", 500), {"id": "fundamentals:monazite_residue_dust", "chance": 0.5}])
     # The clay is not ground or roasted: its rare earths sit on the clay as ions and a salt solution lifts

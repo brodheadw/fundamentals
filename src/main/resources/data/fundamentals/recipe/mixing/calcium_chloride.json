@@ -4,7 +4,7 @@
     {
       "type": "neoforge:single",
       "amount": 1000,
-      "fluid": "fundamentals:brine"
+      "fluid": "fundamentals:calcium_chloride_liquor"
     }
   ],
   "results": [

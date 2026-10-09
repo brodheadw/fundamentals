@@ -453,7 +453,7 @@ public class SeparationTests {
                 .test(new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("fundamentals:light_rare_earth_concentrate")))),
                 "hydrochloric acid barely touches a phosphate: the concentrate should be cracked in sulfuric acid before the leach");
         for (String reagent : List.of("mixing/hydrofluoric_acid", "reduction/argon", "reduction/calcium_ingot", "mixing/neodymium_fluoride", "mixing/bastnasite_concentrate",
-                "mixing/light_rare_earth_sulfate", "mixing/heavy_rare_earth_sulfate", "mixing/rare_earth_liquor_from_bastnasite", "mixing/brine", "mixing/calcium_chloride",
+                "mixing/light_rare_earth_sulfate", "mixing/heavy_rare_earth_sulfate", "mixing/rare_earth_liquor_from_bastnasite", "mixing/calcium_chloride_liquor", "mixing/calcium_chloride",
                 "packing/monazite_residue_block")) {
             helper.assertTrue(recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, reagent)).isPresent(), reagent + " is missing");
         }

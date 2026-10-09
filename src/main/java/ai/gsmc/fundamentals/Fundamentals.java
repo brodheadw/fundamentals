@@ -92,6 +92,9 @@ public class Fundamentals {
             });
             event.register(NeoForgeRegistries.Keys.FLUID_TYPES, helper -> Separation.registerFluidTypes(helper::register));
             event.register(Registries.FLUID, helper -> Separation.registerFluids(helper::register));
+            if (event.getRegistryKey().equals(Registries.FLUID)) {
+                event.getRegistry().addAlias(ResourceLocation.fromNamespaceAndPath(MOD_ID, "brine"), ResourceLocation.fromNamespaceAndPath(MOD_ID, "calcium_chloride_liquor"));
+            }
             event.register(Registries.ITEM, helper -> {
                 OreBlocks.registerItems(helper::register);
                 IronWorking.registerItems(helper::register);
