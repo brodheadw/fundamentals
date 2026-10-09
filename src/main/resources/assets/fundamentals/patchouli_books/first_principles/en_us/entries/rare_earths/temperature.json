@@ -2,7 +2,7 @@
   "name": "Temperature",
   "category": "fundamentals:rare_earths",
   "icon": "minecraft:campfire",
-  "sortnum": 12,
+  "sortnum": 13,
   "pages": [
     {
       "type": "patchouli:text",

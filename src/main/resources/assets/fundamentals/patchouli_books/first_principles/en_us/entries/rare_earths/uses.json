@@ -2,7 +2,7 @@
   "name": "What they are for",
   "category": "fundamentals:rare_earths",
   "icon": "fundamentals:neodymium_iron_boron_ingot",
-  "sortnum": 7,
+  "sortnum": 8,
   "pages": [
     {
       "type": "patchouli:text",

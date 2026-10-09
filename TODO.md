@@ -23,6 +23,10 @@ What's agreed but not built, in the order it's likely to go. The working plan be
 - **Scandium by-product routes.** Most real scandium comes off nickel laterite acid leach (HPAL) liquor and bauxite residue,
   pulled by P204 and stripped with caustic soda. Only thortveitite is modelled; laterite smelts whole and red mud does not exist.
   Thortveitite's yttrium is not recovered.
+- **Magnetic separation loose ends.** The magnetomigration line hands over the battery's exact products, so the few per cent
+  of diamagnetic lutetium and weak ytterbium in the late heavies go with them to the magnet, where a real cell would leave
+  them behind. Its 50 mB batch is fixed and does not grow with the line, the liquor in the cells is not drawn, and it has no
+  Ponder scene and no line in the showcase.
 
 ## Other metals
 

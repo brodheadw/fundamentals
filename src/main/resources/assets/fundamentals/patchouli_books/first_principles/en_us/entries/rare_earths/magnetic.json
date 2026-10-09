@@ -1,0 +1,65 @@
+{
+  "name": "Magnetic separation",
+  "category": "fundamentals:rare_earths",
+  "icon": "fundamentals:magnetomigration_cell",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Neighbouring rare earth ions are chemical near-twins, which is why a battery needs dozens of stages. Magnetically they are not: their partly filled 4f shells give them wildly different moments.",
+      "title": "Magnetic separation"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A permanent magnet's field gradient pulls the strongly paramagnetic ions through the liquor toward it and leaves the diamagnetic ones behind, with no organic, no acid and no power. It is new and lab-stage: PNNL showed it in 2026, KU Leuven measured the migration following the susceptibility, and no plant runs it yet."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Effective moments of the ions, in Bohr magnetons: La 0, Ce 2.5, Pr 3.6, Nd 3.6, Sm 1.5, Eu 3.4, Gd 7.9, Tb 9.7, Dy 10.6, Ho 10.6, Er 9.6, Tm 7.6, Yb 4.5, Lu 0, Y 0. Yttrium, lanthanum and lutetium have no unpaired 4f electron and nothing pulls them."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A cut can go magnetic only where its two products sort by moment, one side carrying a tenth of the other's susceptibility or less. The passes it needs go as one over the moment the contrast is worth: yttrium from the late heavies is quick, lanthanum from cerium (2.5) slow."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Cells placed end to end facing the same way are a line, one pass each. Pipe the liquor into the back of the first; the last cell parts it, what the magnets drew out of its right side, where the NdFeB block is, and the rest out of its left. The products and their proportion are the battery's, so either route feeds the next cut."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The cell is plastic, since the chloride liquor eats copper. Goggles on any cell say how many passes the cut wants and what the line is waiting for."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Yttrium and late heavies liquor: 2 cells, where its battery wants 14 stages. The magnets draw holmium-to-lutetium liquor; yttrium liquor runs on past them."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Samarium-europium-gadolinium liquor: 3 cells, where its battery wants 16 stages. The magnets draw europium-gadolinium liquor; samarium liquor runs on past them."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ytterbium-lutetium liquor: 4 cells, where its battery wants 20 stages. The magnets draw ytterbium liquor; lutetium liquor runs on past them."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Lanthanum-cerium liquor: 7 cells, where its battery wants 12 stages. The magnets draw cerium liquor; lanthanum liquor runs on past them."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The other 10 cuts have no magnetic route, because their two products do not sort by moment."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "They are europium-gadolinium liquor, heavy rare earth liquor, holmium-erbium liquor, holmium-to-lutetium liquor, light rare earth liquor, didymium liquor, rare earth liquor, terbium-dysprosium liquor, terbium-to-lutetium liquor, thulium-ytterbium-lutetium liquor."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Praseodymium and neodymium are both 3.6, dysprosium and holmium both 10.6, terbium 9.7 and erbium 9.6 beside them; and the broad cuts carry strong and weak ions on both sides, yttrium at nothing among the strongly magnetic heavies, gadolinium at 7.9 beside samarium at 1.5. Those are solvent extraction's alone."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:magnetomigration_cell"
+    }
+  ]
+}

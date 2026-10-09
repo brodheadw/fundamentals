@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-/** Solvent extraction: the reagent fluids and the mixer-settler they run through. */
+/** Solvent extraction: the reagent fluids and the mixer-settler they run through; and the magnetomigration cell, the magnetic route for the cuts that have one. */
 public final class Separation {
 
     private static final Map<String, FluidType> FLUID_TYPES = new LinkedHashMap<>();
@@ -32,6 +32,9 @@ public final class Separation {
     private static Block mixerSettler;
     private static BlockEntityType<MixerSettlerBlockEntity> mixerSettlerEntity;
     private static Item mixerSettlerItem;
+    private static Block magnetomigrationCell;
+    private static BlockEntityType<MagnetomigrationCellBlockEntity> magnetomigrationCellEntity;
+    private static Item magnetomigrationCellItem;
     private static Block plasticTank;
     private static BlockEntityType<PlasticTankBlockEntity> plasticTankEntity;
     private static Item plasticTankItem;
@@ -48,6 +51,8 @@ public final class Separation {
 
     public static Block mixerSettler() { return mixerSettler; }
     public static BlockEntityType<MixerSettlerBlockEntity> mixerSettlerEntity() { return mixerSettlerEntity; }
+    public static Block magnetomigrationCell() { return magnetomigrationCell; }
+    public static BlockEntityType<MagnetomigrationCellBlockEntity> magnetomigrationCellEntity() { return magnetomigrationCellEntity; }
     public static Block plasticTank() { return plasticTank; }
     public static BlockEntityType<PlasticTankBlockEntity> plasticTankEntity() { return plasticTankEntity; }
     public static Map<String, FluidType> fluidTypes() { return FLUID_TYPES; }
@@ -84,7 +89,7 @@ public final class Separation {
     }
 
     public static List<Item> items() {
-        List<Item> items = new java.util.ArrayList<>(List.of(mixerSettlerItem, plasticTankItem, salt, oxalicAcid, roastedBastnasite,
+        List<Item> items = new java.util.ArrayList<>(List.of(mixerSettlerItem, magnetomigrationCellItem, plasticTankItem, salt, oxalicAcid, roastedBastnasite,
                 lightRareEarthSulfate, heavyRareEarthSulfate, calciumChloride, calciumIngot, whitePhosphorus));
         Acids.all().values().forEach(acid -> items.add(acid.bucket));
         return items;
@@ -131,6 +136,9 @@ public final class Separation {
         mixerSettler = new MixerSettlerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY)
                 .requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.COPPER).noOcclusion());
         registry.accept(id("mixer_settler"), mixerSettler);
+        magnetomigrationCell = new MagnetomigrationCellBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SNOW)
+                .requiresCorrectToolForDrops().strength(1.5F, 6.0F).sound(SoundType.STONE));
+        registry.accept(id("magnetomigration_cell"), magnetomigrationCell);
         plasticTank = new PlasticTankBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SNOW)
                 .requiresCorrectToolForDrops().strength(0.8F).sound(SoundType.STONE).noOcclusion()
                 .isRedstoneConductor((state, level, pos) -> true));
@@ -143,20 +151,25 @@ public final class Separation {
     public static void registerBlockEntities(BiConsumer<ResourceLocation, BlockEntityType<?>> registry) {
         mixerSettlerEntity = BlockEntityType.Builder.of(MixerSettlerBlockEntity::new, mixerSettler).build(null);
         registry.accept(id("mixer_settler"), mixerSettlerEntity);
+        magnetomigrationCellEntity = BlockEntityType.Builder.of(MagnetomigrationCellBlockEntity::new, magnetomigrationCell).build(null);
+        registry.accept(id("magnetomigration_cell"), magnetomigrationCellEntity);
         plasticTankEntity = BlockEntityType.Builder.of(PlasticTankBlockEntity::new, plasticTank).build(null);
         registry.accept(id("plastic_fluid_tank"), plasticTankEntity);
     }
 
     public static void registerRecipeTypes(BiConsumer<ResourceLocation, RecipeType<?>> registry) {
         registry.accept(id("separation"), SeparationRecipe.TYPE);
+        registry.accept(id("magnetic"), MagneticRecipe.TYPE);
     }
 
     public static void registerRecipeSerializers(BiConsumer<ResourceLocation, RecipeSerializer<?>> registry) {
         registry.accept(id("separation"), SeparationRecipe.SERIALIZER);
+        registry.accept(id("magnetic"), MagneticRecipe.SERIALIZER);
     }
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
         registry.accept(id("mixer_settler"), mixerSettlerItem = new BlockItem(mixerSettler, new Item.Properties()));
+        registry.accept(id("magnetomigration_cell"), magnetomigrationCellItem = new BlockItem(magnetomigrationCell, new Item.Properties()));
         registry.accept(id("plastic_fluid_tank"), plasticTankItem = new FluidTankItem(plasticTank, new Item.Properties()));
         registry.accept(id("salt"), salt = new Item(new Item.Properties()));
         registry.accept(id("calcium_ingot"), calciumIngot = new Item(new Item.Properties()));

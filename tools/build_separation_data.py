@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """The rare earth separation line: the reagent fluids, the solvent-extraction cuts, and the chemistry
 around them. Writes the Java reagent table, the cut recipes, the Create mixing recipes that make the
-reagents and liquors, the oxalate route out, the mixer-settler's and the plastic tank's blockstates, models,
+reagents and liquors, the oxalate route out, the magnetic route for the cuts whose ions differ in moment (at MOMENTS
+below), the mixer-settler's, the magnetomigration cell's and the plastic tank's blockstates, models,
 loot and recipes, the names, and the gametest template. Each cut parts a batch in the proportion its feed carries
 light and heavy: Australian monazite and Longnan ion-adsorption clay, per Gupta and Krishnamurthy, Extractive Metallurgy
 of Rare Earths (2005), at MONAZITE below. Re-run after any edit; build_ore_data.py last for the tool tags.
@@ -10,6 +11,7 @@ of Rare Earths (2005), at MONAZITE below. Re-run after any edit; build_ore_data.
 """
 import gzip
 import json
+import math
 import shutil
 from pathlib import Path
 
@@ -203,6 +205,47 @@ def light_fraction(liquor, light, heavy):
     assert set(CARRIES[light]) | set(CARRIES[heavy]) == set(CARRIES[liquor]), liquor
     share = sum(feed[e] for e in CARRIES[light]) / sum(feed[e] for e in CARRIES[liquor])
     return min(1 - LEAST, max(LEAST, round(share * 20) / 20))
+
+
+# Magnetomigration. The trivalent ions are chemically near-twins, which is why solvent extraction takes dozens of stages,
+# but their 4f shells give them very different paramagnetism. Effective moments of the Ln3+ ions in Bohr magnetons (Y3+,
+# La3+ and Lu3+ have no unpaired f electron and are diamagnetic). A permanent magnet's field gradient pulls the paramagnetic
+# ions through the solution toward it and leaves the diamagnetic ones: PNNL, "Local magnetic field gradients enable critical
+# material separations" (2026), https://www.pnnl.gov/publications/local-magnetic-field-gradients-enable-critical-material-separations;
+# PCCP (2025), Dy3+ and Gd3+ moving toward the strongest gradient and Y3+ away, https://pubs.rsc.org/en/content/articlepdf/2025/cp/d5cp02703a;
+# KU Leuven, migration that follows susceptibility, https://lirias.kuleuven.be/bitstream/123456789/642674/2/MagSuscGradients_postprint.pdf.
+# It is a laboratory result: no plant runs it.
+MOMENTS = {"La": 0, "Ce": 2.5, "Pr": 3.6, "Nd": 3.6, "Sm": 1.5, "Eu": 3.4, "Gd": 7.9, "Tb": 9.7, "Dy": 10.6, "Ho": 10.6,
+           "Er": 9.6, "Tm": 7.6, "Yb": 4.5, "Lu": 0, "Y": 0}
+# A cut is magnetic only when its two products sort by moment: the weaker side carries at most a tenth of the stronger
+# side's susceptibility, and at most a twentieth of the feed sits on the wrong side (an ion whose own susceptibility is
+# nearer the other product's). Susceptibility goes as the moment squared (Curie), and a cell drifts ions as far as their
+# susceptibility contrast carries them, so the passes a cut needs go as PASS_MOMENT over the moment that contrast is worth.
+WEAK = 0.1
+STRAY = 0.05
+PASS_MOMENT = 16
+
+
+def magnetic_cut(liquor, stages, light, heavy):
+    """(the product drawn to the magnet, passes) for a cut whose products sort by moment, or None."""
+    feed = MONAZITE if liquor in LIGHT_BRANCH else ION_CLAY
+
+    def chi(side):
+        return sum(feed[e] * MOMENTS[e] ** 2 for e in CARRIES[side]) / sum(feed[e] for e in CARRIES[side])
+
+    (drawn, strong), (left, weak) = sorted(((light, chi(light)), (heavy, chi(heavy))), key=lambda kv: -kv[1])
+    if strong == 0 or weak > WEAK * strong:
+        return None
+    middle = (strong + weak) / 2
+    stray = sum(feed[e] for e in CARRIES[drawn] if MOMENTS[e] ** 2 < middle) + sum(feed[e] for e in CARRIES[left] if MOMENTS[e] ** 2 > middle)
+    if stray > STRAY * sum(feed[e] for e in CARRIES[liquor]):
+        return None
+    passes = math.ceil(PASS_MOMENT / math.sqrt(strong - weak))
+    assert passes <= 0.6 * stages, liquor
+    return drawn, passes
+
+
+MAGNETIC = {liquor: cut for liquor, _, stages, light, heavy in CUTS if (cut := magnetic_cut(liquor, stages, light, heavy))}
 
 
 STRIP = "hydrochloric_acid"
@@ -406,6 +449,18 @@ def cuts():
             "light": f"fundamentals:{light}", "heavy": f"fundamentals:{heavy}", "light_fraction": light_fraction(liquor, light, heavy)})
 
 
+def magnetic():
+    """The magnetic route for the cuts that have one: the same products in the same proportion as the battery, so either
+    feeds the next cut."""
+    for liquor, _, _, light, heavy in CUTS:
+        if liquor in MAGNETIC:
+            drawn, passes = MAGNETIC[liquor]
+            write(RECIPES / f"magnetic/{liquor}.json", {
+                "type": "fundamentals:magnetic", "liquor": f"fundamentals:{liquor}", "light": f"fundamentals:{light}",
+                "heavy": f"fundamentals:{heavy}", "light_fraction": light_fraction(liquor, light, heavy),
+                "attracted": f"fundamentals:{drawn}", "passes": passes})
+
+
 def oxalates():
     """A single-element liquor precipitates with oxalic acid, and the oxalate calcines to the oxide at 800 to
     1,000 °C, past what a plain furnace reaches: a blast furnace, or Create's fan over lava."""
@@ -537,6 +592,25 @@ def mixer_settler():
         write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})
 
 
+def magnetomigration_cell():
+    """A plastic channel with an NdFeB block set in its right wall. The liquor runs along the channel, cell to cell, and the
+    paramagnetic ions drift into the stream along the magnet; the last cell splits the stream, magnet side out of its right
+    face, the rest out of its left. Plastic because the chloride liquor eats copper, and no power: the magnets are permanent."""
+    faces = {"north": "end", "south": "end", "east": "magnet", "west": "side", "up": "top", "down": "side"}
+    tex = {face: f"fundamentals:block/magnetomigration_cell_{sheet}" for face, sheet in faces.items()}
+    write(ASSETS / "models/block/magnetomigration_cell.json",
+          {"parent": "minecraft:block/cube", "textures": {**tex, "particle": "fundamentals:block/magnetomigration_cell_side"}})
+    write(ASSETS / "blockstates/magnetomigration_cell.json", {"variants": {
+        f"facing={facing}": {"model": "fundamentals:block/magnetomigration_cell", **({"y": y} if y else {})}
+        for facing, y in (("north", 0), ("east", 90), ("south", 180), ("west", 270))}})
+    write(ASSETS / "models/item/magnetomigration_cell.json", {"parent": "fundamentals:block/magnetomigration_cell"})
+    write(DATA / "loot_table/blocks/magnetomigration_cell.json", {"type": "minecraft:block", "pools": [drop_self("magnetomigration_cell")]})
+    write(RECIPES / "magnetomigration_cell.json", {
+        "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["PPP", "PTM", "PPP"],
+        "key": {"P": {"item": "tfmg:plastic_sheet"}, "T": {"item": "fundamentals:plastic_fluid_tank"}, "M": {"item": "tfmg:magnet"}},
+        "result": {"id": "fundamentals:magnetomigration_cell", "count": 1}})
+
+
 def plastic_tank():
     """Create's fluid tank in plastic: its own blockstate on Create's tank models, which take our sheets in place of the copper
     ones, and Create's recipe with plastic sheets for the copper. The acids and liquors are kept in fibreglass and polyethylene
@@ -601,11 +675,22 @@ def names():
     lang["goggles.fundamentals.mixer_settler.crud"] = "Crud at the interface: a dirty feed has fouled the organic; drain it and scrub it with lime"
     lang["goggles.fundamentals.mixer_settler.emulsion"] = "The mixer is too fast: the phases emulsify and will not settle"
     lang["goggles.fundamentals.mixer_settler.nothing"] = "nothing"
+    lang["block.fundamentals.magnetomigration_cell"] = "Magnetomigration Cell"
+    cell = "goggles.fundamentals.magnetomigration_cell"
+    lang[f"{cell}.line"] = "Line of %s cells, %s mB a batch"
+    lang[f"{cell}.idle"] = "Nothing in the feed"
+    lang[f"{cell}.no_cut"] = "%s has no magnetic cut: its products do not sort by moment"
+    lang[f"{cell}.short"] = "%s parts in %s passes; this line has %s cells"
+    lang[f"{cell}.full"] = "The outlets are full: pipe the products away from the last cell's sides"
+    lang[f"{cell}.ready"] = "Parting %s: %s mB %s to the magnets, %s mB %s away a batch"
+    lang[f"{cell}.passes"] = "%s passes wanted, %s cells in line"
+    lang[f"{cell}.feed"] = "Feed %s"
+    lang[f"{cell}.outlets"] = "Magnet side %s, far side %s"
     write(path, lang)
 
 
 def main():
-    for folder in ("mixing", "separation", "calcining", "reduction", "solvents"):
+    for folder in ("mixing", "separation", "magnetic", "calcining", "reduction", "solvents"):
         shutil.rmtree(RECIPES / folder, ignore_errors=True)
     shutil.rmtree(ASSETS / "models/block/mixer_settler", ignore_errors=True)
     shutil.rmtree(ASSETS / "models/block/plastic_fluid_tank", ignore_errors=True)
@@ -614,15 +699,17 @@ def main():
     java_table()
     chemistry()
     cuts()
+    magnetic()
     oxalates()
     acids()
     metals()
     solvents()
     mixer_settler()
+    magnetomigration_cell()
     plastic_tank()
     template()
     names()
-    print(f"{len(FLUIDS)} fluids, {len(CUTS)} cuts")
+    print(f"{len(FLUIDS)} fluids, {len(CUTS)} cuts, {len(MAGNETIC)} with a magnetic route")
 
 
 if __name__ == "__main__":

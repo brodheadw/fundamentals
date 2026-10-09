@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PPP",
+    "PTM",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "item": "tfmg:plastic_sheet"
+    },
+    "T": {
+      "item": "fundamentals:plastic_fluid_tank"
+    },
+    "M": {
+      "item": "tfmg:magnet"
+    }
+  },
+  "result": {
+    "id": "fundamentals:magnetomigration_cell",
+    "count": 1
+  }
+}
