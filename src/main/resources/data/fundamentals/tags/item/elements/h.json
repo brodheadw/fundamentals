@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:aluminium_hydroxide",
     "fundamentals:ammonium_chloride",
     "fundamentals:ammonium_chloroiridate",
     "fundamentals:ammonium_chloroplatinate",

@@ -34,7 +34,8 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "crude_zirconium_tetrachloride": "Crude Zirconium Tetrachloride", "zirconium_tetrachloride": "Zirconium Tetrachloride",
          "hafnium_tetrachloride": "Hafnium Tetrachloride", "yttria_stabilised_zirconia": "Yttria-Stabilised Zirconia",
          "beryl_frit": "Beryl Frit", "beryllium_hydroxide": "Beryllium Hydroxide", "ammonium_fluoroberyllate": "Ammonium Fluoroberyllate",
-         "beryllium_pebbles": "Beryllium Pebbles"}
+         "beryllium_pebbles": "Beryllium Pebbles", "dimensionally_stable_anode": "Dimensionally Stable Anode", "red_mud": "Red Mud",
+         "aluminium_hydroxide": "Aluminium Hydroxide", "alumina": "Alumina", "cryolite": "Cryolite"}
 # The magnet alloys and the forms each polarizes from, in the order of magnet.MagnetGrade; the magnet is <alloy>_magnet.
 MAGNET_ALLOYS = {"neodymium_iron_boron": ("ingot", "plate"), "dysprosium_neodymium_iron_boron": ("ingot", "plate"),
                  "samarium_cobalt": ("ingot", "plate"), "alnico": ("ingot",)}
@@ -709,7 +710,8 @@ def platinum_refinery():
 def platinum_sinks():
     """Platinum and rhenium on alumina reform naphtha to gasoline, giving off hydrogen; platinum with a tenth of rhodium, woven to gauze,
     burns ammonia to the nitric oxide nitric acid is made from (Ostwald). Palladium's place, and most rhodium's, is the exhaust (more_sinks).
-    Ruthenium lets a single-crystal superalloy carry more of everything else. An iridium-tipped spark plug outlasts four, and osmium,
+    Ruthenium lets a single-crystal superalloy carry more of everything else. A spark plug is an alumina insulator round a nickel-alloy
+    centre electrode, and an iridium tip outlasts four plain plugs and a platinum one three (NGK, Denso); osmium,
     pasted and sintered, was the filament of the first metal-filament lamp."""
     mixing("reforming_catalyst", item("platinum_nugget", 2) + item("rhenium_ingot") + item("tfmg:bauxite_powder", 4), [result("reforming_catalyst", 4)], "heated")
     pgm_vat("reforming", item("reforming_catalyst") + [fluid("tfmg:naphtha", 500)],
@@ -720,12 +722,53 @@ def platinum_sinks():
            [out_fluid("nitric_acid", 250), {"id": "fundamentals:platinum_rhodium_gauze", "chance": 0.98}], "heated")
     mixing("superalloy_with_ruthenium", item("tfmg:nickel_ingot", 4) + item("chromium_ingot") + item("cobalt_ingot", 2) + item("rhenium_ingot")
            + item("ruthenium_nugget") + argon(), [result("superalloy_ingot", 6)], "superheated")
-    shaped(USES / "iridium_spark_plug.json", ["I", "F", "A"], {"I": {"tag": "c:nuggets/iridium"}, "F": {"item": "minecraft:flint"}, "A": {"tag": "c:ingots/aluminum"}},
-           {"count": 4, "id": "tfmg:spark_plug"})
+    for tip, count in (("iridium", 4), ("platinum", 3)):
+        shaped(USES / f"{tip}_spark_plug.json", ["T", "A", "N"], {"T": {"tag": f"c:nuggets/{tip}"}, "A": {"item": "fundamentals:alumina"}, "N": {"tag": "c:nuggets/nickel"}},
+               {"count": count, "id": "tfmg:spark_plug"})
     write(USES / "osmium_filament.json", {"type": "minecraft:crafting_shapeless", "category": "misc", "ingredients": item("osmium_sponge"), "result": result("osmium_filament", 4)})
     shaped(USES / "light_bulb_from_osmium.json", ["CWC", "CGC", "NNN"],
            {"C": {"tag": "c:nuggets/copper"}, "G": {"item": "create:framed_glass"}, "N": {"tag": "c:nuggets/steel"}, "W": {"item": "fundamentals:osmium_filament"}},
            {"count": 2, "id": "tfmg:light_bulb"})
+
+
+def chlor_alkali():
+    """Nearly all chlorine and all caustic soda come from one cell: brine electrolysed across a cation membrane, 2 NaCl + 2 H2O ->
+    Cl2 + H2 + 2 NaOH, chlorine at the anode, hydrogen and caustic at the cathode (O'Brien, Bommaraju and Hine, Handbook of
+    Chlor-Alkali Technology, 2005). The anode is De Nora's dimensionally stable anode, titanium coated with ruthenium and iridium oxides
+    baked on from their chlorides, which outlasts the graphite it replaced by years (Trasatti, Electrochimica Acta 45, 2000). Before the
+    cell, caustic soda was soda ash boiled with lime, Na2CO3 + Ca(OH)2 -> 2 NaOH + CaCO3, which is what Bayer's first plants ran on."""
+    mixing("salt_brine", item("salt", 2) + [fluid("minecraft:water", 1000)], [out_fluid("salt_brine", 1000)])
+    mixing("dimensionally_stable_anode", tag("c:plates/titanium") + tag("c:nuggets/ruthenium") + tag("c:nuggets/iridium") + [fluid("hydrochloric_acid", 100)],
+           [result("dimensionally_stable_anode")], "heated")
+    pgm_vat("chlor_alkali", item("dimensionally_stable_anode") + [fluid("salt_brine", 1000)],
+            [out_fluid("chlorine", 500), out_fluid("caustic_soda", 500), out_fluid("tfmg:hydrogen", 500),
+             {"id": "fundamentals:dimensionally_stable_anode", "chance": 0.99}], machines=("tfmg:electrode", "tfmg:electrode"), heat=None, folder=USES)
+    mixing("caustic_soda_from_soda_ash", item("soda_ash") + item("tfmg:limesand") + [fluid("minecraft:water", 500)], [out_fluid("caustic_soda", 250)], "heated")
+
+
+def aluminium():
+    """Bayer (1888): bauxite digested in hot caustic soda under pressure at 150 to 250 C goes into solution as sodium aluminate, and
+    what will not dissolve, iron oxide with the titania, silica and the trace scandium and rare earths, settles out as red mud. The
+    cooled liquor, seeded, throws down aluminium hydroxide and the caustic goes back to the digesters; calcined at about 1,100 C the
+    hydroxide is alumina. Hall-Heroult (1886): alumina dissolved in molten cryolite at about 960 C is electrolysed between a carbon
+    cathode and carbon anodes that burn to carbon dioxide as they go, some 400 kg of carbon to the tonne; the cryolite is the bath and
+    is all but never spent. Cryolite is made, the Greenland mine being worked out: aluminium hydroxide with hydrofluoric acid and caustic
+    soda or soda ash (Grjotheim and Kvande, Introduction to Aluminium Electrolysis, 1993; Ullmann's, Aluminum Oxide)."""
+    pgm_vat("sodium_aluminate_liquor", item("tfmg:bauxite_powder", 2) + [fluid("caustic_soda", 500)],
+            [out_fluid("sodium_aluminate_liquor", 500), result("red_mud")], folder=USES)
+    mixing("aluminium_hydroxide", [fluid("sodium_aluminate_liquor", 500)], [result("aluminium_hydroxide"), out_fluid("caustic_soda", 400)])
+    write(USES / "alumina.json", {"type": "minecraft:blasting", "category": "misc", "ingredient": {"item": "fundamentals:aluminium_hydroxide"},
+                                  "result": {"id": "fundamentals:alumina"}, "experience": 0.2, "cookingtime": 100})
+    mixing("cryolite", item("aluminium_hydroxide") + [fluid("hydrofluoric_acid", 500), fluid("caustic_soda", 250)], [result("cryolite", 2)])
+    mixing("cryolite_from_soda_ash", item("aluminium_hydroxide") + item("soda_ash") + [fluid("hydrofluoric_acid", 500)], [result("cryolite", 2)])
+    disabled(TFMG / "vat_machine_recipe/aluminum.json")
+    pgm_vat("aluminium_ingot", item("alumina", 2) + item("cryolite") + item("tfmg:coal_coke"),
+            [result("tfmg:aluminum_ingot"), {"id": "fundamentals:cryolite", "chance": 0.95}, out_fluid("tfmg:carbon_dioxide", 250)],
+            machines=("tfmg:graphite_electrode", "tfmg:graphite_electrode"), folder=USES)
+    write(TFMG / "mechanical_crafting/spark_plug.json", {"type": "create:mechanical_crafting", "accept_mirrored": False, "category": "misc",
+                                                         "pattern": ["N", "A", "S"], "key": {"N": {"tag": "c:nuggets/nickel"}, "A": {"item": "fundamentals:alumina"},
+                                                                                             "S": {"tag": "c:nuggets/steel"}},
+                                                         "result": {"count": 1, "id": "tfmg:spark_plug"}, "show_notification": False})
 
 
 def silver():
@@ -909,6 +952,8 @@ def main():
     platinum_feeds()
     platinum_refinery()
     platinum_sinks()
+    chlor_alkali()
+    aluminium()
     silver()
     silver_sinks()
     thorium()

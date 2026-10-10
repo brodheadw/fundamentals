@@ -2,19 +2,19 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "pattern": [
-    "I",
-    "F",
-    "A"
+    "T",
+    "A",
+    "N"
   ],
   "key": {
-    "I": {
+    "T": {
       "tag": "c:nuggets/iridium"
     },
-    "F": {
-      "item": "minecraft:flint"
-    },
     "A": {
-      "tag": "c:ingots/aluminum"
+      "item": "fundamentals:alumina"
+    },
+    "N": {
+      "tag": "c:nuggets/nickel"
     }
   },
   "result": {

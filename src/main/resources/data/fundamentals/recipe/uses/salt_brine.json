@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:salt"
+    },
+    {
+      "item": "fundamentals:salt"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "minecraft:water"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:salt_brine",
+      "amount": 1000
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "c:plates/titanium"
+    },
+    {
+      "tag": "c:nuggets/ruthenium"
+    },
+    {
+      "tag": "c:nuggets/iridium"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 100,
+      "fluid": "fundamentals:hydrochloric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:dimensionally_stable_anode"
+    }
+  ],
+  "heat_requirement": "heated"
+}

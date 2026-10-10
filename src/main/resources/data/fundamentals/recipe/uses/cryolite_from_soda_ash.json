@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:aluminium_hydroxide"
+    },
+    {
+      "item": "fundamentals:soda_ash"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "fundamentals:hydrofluoric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:cryolite",
+      "count": 2
+    }
+  ]
+}

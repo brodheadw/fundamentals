@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "fundamentals:ammonium_chlororuthenate",
+    "fundamentals:dimensionally_stable_anode",
     "fundamentals:insoluble_residue",
     "fundamentals:platinum_group_concentrate",
     "fundamentals:ruthenium_ingot",

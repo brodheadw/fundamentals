@@ -1,0 +1,60 @@
+{
+  "name": "Aluminium",
+  "category": "fundamentals:metals",
+  "icon": "tfmg:aluminum_ingot",
+  "sortnum": 12,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Bauxite is not one mineral but a weathered rock under tropical soil: gibbsite and boehmite, the aluminium hydroxides, reddened by iron oxide. A millstone grinds raw bauxite to bauxite powder. No one electrolyses that straight to metal.",
+      "title": "Aluminium"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The alumina is first got out of it clean, Bayer's way (1888), and then electrolysed dissolved in molten cryolite, Hall's and Héroult's (1886)."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two bauxite powder and 500 mB of caustic soda in a heated chemical vat with a mixer, the digester at 150 to 250 °C under pressure, give 500 mB of sodium aluminate liquor and a red mud, what the caustic will not take: iron oxide, titania, silica, and a little scandium and the rare earths.",
+      "title": "Bayer"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "500 mB of liquor under a mixer, cold, throws down an aluminium hydroxide and gives 400 mB of caustic soda back to the digester. A blast furnace calcines the hydroxide at about 1,100 °C to alumina."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Red mud is the industry's great waste, more than a tonne for every tonne of alumina, piled in ponds; it is also the largest scandium resource there is.",
+      "title": "Red mud"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Cryolite, sodium aluminium fluoride, is the bath. The Greenland mine that gave it is worked out, so it is made: an aluminium hydroxide, 500 mB of hydrofluoric acid and 250 mB of caustic soda give two, or the hydroxide and 500 mB of the acid with a soda ash for the caustic.",
+      "title": "Cryolite"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two alumina, a cryolite and a coal coke in a heated vat between two graphite electrodes give an aluminium ingot and 250 mB of carbon dioxide.",
+      "title": "Hall-Héroult"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The alumina dissolves in the cryolite melt at about 960 °C, under a kindled burner's 1,000; the coke is the anode, burning away as the oxygen comes off on it, some 400 kg of carbon to the tonne of metal; the cryolite comes back nineteen times in twenty. Every aluminium ingot The Factory Must Grow takes comes this way now."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A pot gives off hydrogen fluoride from its bath: within two blocks of a vat with cryolite in it you take a hit a second and are poisoned, unless Create's diving helmet on a filled backtank keeps it out.",
+      "title": "Fluoride"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Alumina is a spark plug's insulator, ninety-five per cent of it, round a nickel-alloy centre electrode: a nickel nugget, an alumina and a steel nugget make a plug in a mechanical crafter. A precious tip lasts: an iridium nugget, an alumina and a nickel nugget make four plugs, and a platinum one three.",
+      "title": "Spark plugs"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: Grjotheim and Kvande, Introduction to Aluminium Electrolysis (Aluminium-Verlag, 1993); Ullmann's Encyclopedia of Industrial Chemistry, \"Aluminum Oxide\" and \"Aluminum\"; Evans, \"The History, Challenges, and New Developments in the Management and Use of Bauxite Residue\", Journal of Sustainable Metallurgy 2 (2016).",
+      "title": "Sources"
+    }
+  ]
+}

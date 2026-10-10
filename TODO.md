@@ -28,7 +28,9 @@ What's agreed but not built, in the order it's likely to go. The working plan be
   neodymium in NdFeB. Thulium, ytterbium and lutetium oxide have no sink at all.
 
 - **Scandium by-product routes.** Most real scandium comes off nickel laterite acid leach (HPAL) liquor and bauxite residue,
-  pulled by P204 and stripped with caustic soda. Only thortveitite is modelled; laterite smelts whole and red mud does not exist.
+  pulled by P204 and stripped with caustic soda. Only thortveitite is modelled; laterite smelts whole, and the Bayer digester's red mud,
+  which carries the bauxite's scandium (some 100 g a tonne) with its iron, titania and rare earths, is a dead end: acid-leaching it for
+  scandium is the obvious next route.
   Thortveitite's yttrium is not recovered.
 - **Magnetic separation loose ends.** The magnetomigration line hands over the battery's exact products, so the few per cent
   of diamagnetic lutetium and weak ytterbium in the late heavies go with them to the magnet, where a real cell would leave
@@ -62,6 +64,11 @@ What's agreed but not built, in the order it's likely to go. The working plan be
   chloride and the tetrachloride's distillation folds into it; the chloride process burns it in air, not oxygen. The sulfate
   pigment route, the Becher and synthetic-rutile upgrades, and leucoxene are not modelled. Magnesium has no Pidgeon route
   (dolomite and ferrosilicon are not in the mod) and no sink of its own beyond the Kroll loop.
+- **Aluminium loose ends.** The Bayer liquor precipitates unseeded (real precipitators are seeded with recycled gibbsite), there
+  is no desilication step, and red mud has no sink or tailings block. The chlor-alkali cell folds brine purification (calcium and
+  magnesium have to come down to parts per billion for the membrane) into dissolving salt; seawater reaches it only as salt. The pot
+  burns coke rather than a prebaked anode, its bath takes no aluminium fluoride make-up, and the fluoride fume is any vat holding
+  cryolite. Cobalt blue and the reforming catalyst still take bauxite powder where real ones take alumina.
 - **Titanium plant tier.** Titanium shrugs off wet chlorine and chloride brines, which is why chlor-alkali and desalination
   plants pipe them in it. A titanium pipe and tank that the liquors and acids (but not hydrofluoric) cannot corrode would be
   the metal's natural sink, but it means new pipe and tank blocks; the plastic tank covers the need for now.

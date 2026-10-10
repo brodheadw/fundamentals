@@ -337,7 +337,21 @@ def rare_earths():
         "Two bone meal and 500 mB, cold, give phosphoric acid, the wet process with bone for phosphate rock; cracking monazite frees more.", "Making the acids") + pages_of(
         "Oxalic acid is sugar oxidised by nitric acid, Scheele's route: two sugar and 250 mB of nitric acid, heated, give two oxalic acid. "
         "Chlorine is Scheele's too: a raw pyrolusite in 1,000 mB of hot hydrochloric acid gives 250 mB, the manganese staying behind as its chloride. "
+        "That is the old way, and the chlor-alkali cell (next) gives twice as much from two salt. "
         "The molten-chloride electrolyses give it off as well, 500 mB with every two calcium and 250 with every lithium."), 11)
+    entry("rare_earths", "chlor_alkali", "The chlor-alkali cell", "fundamentals:dimensionally_stable_anode", pages_of(
+        "Nearly all the world's chlorine and all its caustic soda come out of one cell. Brine, salt saturated in water, is electrolysed across a membrane that lets only sodium through: "
+        "chlorine comes off the anode, hydrogen and caustic soda, sodium hydroxide, off the cathode. Two salt in 1,000 mB of water under a mixer make 1,000 mB of brine. "
+        "1,000 mB of brine in a chemical vat with two electrodes and a dimensionally stable anode give 500 mB each of chlorine, caustic soda and hydrogen, with no burner: "
+        "the current keeps the cell near 90 °C. The anode comes back ninety-nine times in a hundred.", "The chlor-alkali cell") + pages_of(
+        "The anode is what made the membrane cell. Graphite anodes wore away in the wet chlorine and fouled the cell; De Nora's dimensionally stable anode is titanium "
+        "coated with ruthenium and iridium oxides, painted on as their chlorides and fired, and lasts for years. "
+        "A titanium plate, a ruthenium nugget, an iridium nugget and 100 mB of hydrochloric acid, heated, make one.", "The anode") + pages_of(
+        "Before the cell, caustic soda was soda ash boiled with lime, and Bayer's first plants ran on it: a soda ash, a limesand and 500 mB of water, heated, give 250 mB. "
+        "Caustic soda leaves copper and steel alone, which is why it is shipped in steel, but it eats aluminium: The Factory Must Grow's aluminium pipes, pumps, valves and tanks "
+        "corrode under it and under the aluminate liquor, as copper does under a liquor.", "Caustic soda") + pages_of(
+        "Sources: O'Brien, Bommaraju and Hine, Handbook of Chlor-Alkali Technology (Springer, 2005); Ullmann's Encyclopedia of Industrial Chemistry, \"Chlorine\"; "
+        "Trasatti, \"Electrocatalysis: understanding the success of DSA\", Electrochimica Acta 45 (2000).", "Sources"), 11)
     entry("rare_earths", "extractants", "The extractants", "fundamentals:white_phosphorus", pages_of(
         "P204 and P507 are both 2-ethylhexyl esters on one phosphorus atom, and the industry makes them from propylene and phosphate rock. So do you, in The Factory Must Grow's chemical vats with an industrial mixer unless a step says otherwise. "
         "First water gas: a coal coke and 500 mB of water, heated, give 1,000 mB of carbon monoxide and hydrogen. Shifted with another 500 mB of water, heated, 1,000 mB of water gas gives 1,000 mB of hydrogen and 500 of carbon dioxide; "
@@ -408,7 +422,7 @@ def oxidation():
 
 
 def metals():
-    category("metals", "The other metals", "Cobalt, zinc and nickel, the porphyry chain (copper, molybdenum and the rhenium hiding in it), chromium, tin, titanium, the silver in lead, zirconium and hafnium, and beryllium.", "fundamentals:cobalt_ingot", 3)
+    category("metals", "The other metals", "Cobalt, zinc and nickel, the porphyry chain (copper, molybdenum and the rhenium hiding in it), chromium, tin, titanium, the silver in lead, zirconium and hafnium, beryllium, and aluminium.", "fundamentals:cobalt_ingot", 3)
     entry("metals", "cobalt", "Cobalt", "fundamentals:cobalt_ingot", pages_of(
         "Cobaltite is a cobalt arsenide-sulfide from the silver-cobalt veins in calcite. Roast it on a campfire or in a smoker to drive off the arsenic and sulfur and leave the oxide. "
         "Cobalt melts at 1,495 °C and was never smelted from its ore: the oxide is reduced under hydrogen, as molybdenum is: two roasted cobaltite and 500 mB of hydrogen in a heated chemical vat give two ingots. "
@@ -511,6 +525,24 @@ def metals():
         "Most beryllium goes into copper. A beryllium nugget and five copper ingots, heated, make five beryllium copper, as strong as steel, springy and sparkless when struck. "
         "It is mostly made without the metal: a beryllium oxide, four copper blocks and a coal coke, superheated, give four blocks, as an arc furnace makes the master alloy. "
         "The spring contact in a connector is beryllium copper, so the Factory's cable connector built on it makes three.", "Beryllium copper"), 11)
+    entry("metals", "aluminium", "Aluminium", "tfmg:aluminum_ingot", pages_of(
+        "Bauxite is not one mineral but a weathered rock under tropical soil: gibbsite and boehmite, the aluminium hydroxides, reddened by iron oxide. A millstone grinds raw bauxite to bauxite powder. "
+        "No one electrolyses that straight to metal. The alumina is first got out of it clean, Bayer's way (1888), and then electrolysed dissolved in molten cryolite, Hall's and Héroult's (1886).", "Aluminium") + pages_of(
+        "Two bauxite powder and 500 mB of caustic soda in a heated chemical vat with a mixer, the digester at 150 to 250 °C under pressure, give 500 mB of sodium aluminate liquor and a red mud, "
+        "what the caustic will not take: iron oxide, titania, silica, and a little scandium and the rare earths. 500 mB of liquor under a mixer, cold, throws down an aluminium hydroxide "
+        "and gives 400 mB of caustic soda back to the digester. A blast furnace calcines the hydroxide at about 1,100 °C to alumina.", "Bayer") + pages_of(
+        "Red mud is the industry's great waste, more than a tonne for every tonne of alumina, piled in ponds; it is also the largest scandium resource there is.", "Red mud") + pages_of(
+        "Cryolite, sodium aluminium fluoride, is the bath. The Greenland mine that gave it is worked out, so it is made: an aluminium hydroxide, 500 mB of hydrofluoric acid "
+        "and 250 mB of caustic soda give two, or the hydroxide and 500 mB of the acid with a soda ash for the caustic.", "Cryolite") + pages_of(
+        "Two alumina, a cryolite and a coal coke in a heated vat between two graphite electrodes give an aluminium ingot and 250 mB of carbon dioxide. "
+        "The alumina dissolves in the cryolite melt at about 960 °C, under a kindled burner's 1,000; the coke is the anode, burning away as the oxygen comes off on it, "
+        "some 400 kg of carbon to the tonne of metal; the cryolite comes back nineteen times in twenty. Every aluminium ingot The Factory Must Grow takes comes this way now.", "Hall-Héroult") + pages_of(
+        "A pot gives off hydrogen fluoride from its bath: within two blocks of a vat with cryolite in it you take a hit a second and are poisoned, "
+        "unless Create's diving helmet on a filled backtank keeps it out.", "Fluoride") + pages_of(
+        "Alumina is a spark plug's insulator, ninety-five per cent of it, round a nickel-alloy centre electrode: a nickel nugget, an alumina and a steel nugget make a plug in a mechanical crafter. "
+        "A precious tip lasts: an iridium nugget, an alumina and a nickel nugget make four plugs, and a platinum one three.", "Spark plugs") + pages_of(
+        "Sources: Grjotheim and Kvande, Introduction to Aluminium Electrolysis (Aluminium-Verlag, 1993); Ullmann's Encyclopedia of Industrial Chemistry, \"Aluminum Oxide\" and \"Aluminum\"; "
+        "Evans, \"The History, Challenges, and New Developments in the Management and Use of Bauxite Residue\", Journal of Sustainable Metallurgy 2 (2016).", "Sources"), 12)
     oxidation()
 
 
@@ -553,7 +585,7 @@ def platinum():
         "The three-way converter: platinum and palladium on ceria burn what an engine leaves, and rhodium breaks down its nitrogen oxides, where four fifths of the world's rhodium goes. "
         "A platinum, a palladium and a rhodium nugget with the cerium oxide make two exhausts instead of one. "
         "Ruthenium lets a superalloy carry more: a ruthenium nugget in the superalloy melt makes six ingots instead of four. "
-        "An iridium-tipped spark plug outlasts four plain ones, so an iridium nugget, a flint and an aluminium ingot make four. "
+        "An iridium-tipped spark plug outlasts four plain ones, so an iridium nugget, an alumina and a nickel nugget make four, and a platinum nugget three. "
         "And osmium was the first metal filament: an osmium sponge pastes and draws to four filaments, and a light bulb burns one as well as tungsten."), 3)
 
 

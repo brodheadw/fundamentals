@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "T",
+    "A",
+    "N"
+  ],
+  "key": {
+    "T": {
+      "tag": "c:nuggets/platinum"
+    },
+    "A": {
+      "item": "fundamentals:alumina"
+    },
+    "N": {
+      "tag": "c:nuggets/nickel"
+    }
+  },
+  "result": {
+    "count": 3,
+    "id": "tfmg:spark_plug"
+  }
+}

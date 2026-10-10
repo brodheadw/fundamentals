@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "fundamentals:borax_ore",
+    "fundamentals:cryolite",
     "fundamentals:halite_ore",
     "fundamentals:loparite_dust",
     "fundamentals:loparite_ore",
@@ -9,6 +10,7 @@
     "fundamentals:raw_halite",
     "fundamentals:raw_loparite",
     "fundamentals:raw_trona",
+    "fundamentals:red_mud",
     "fundamentals:salt",
     "fundamentals:seawater_bucket",
     "fundamentals:soda_ash",

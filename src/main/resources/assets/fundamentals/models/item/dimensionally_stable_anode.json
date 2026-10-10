@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "fundamentals:item/dimensionally_stable_anode"
+  }
+}

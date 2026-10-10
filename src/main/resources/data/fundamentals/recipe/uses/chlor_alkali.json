@@ -1,0 +1,41 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "machines": [
+    "tfmg:electrode",
+    "tfmg:electrode"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
+  "ingredients": [
+    {
+      "item": "fundamentals:dimensionally_stable_anode"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "fundamentals:salt_brine"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:chlorine",
+      "amount": 500
+    },
+    {
+      "id": "fundamentals:caustic_soda",
+      "amount": 500
+    },
+    {
+      "id": "tfmg:hydrogen",
+      "amount": 500
+    },
+    {
+      "id": "fundamentals:dimensionally_stable_anode",
+      "chance": 0.99
+    }
+  ]
+}

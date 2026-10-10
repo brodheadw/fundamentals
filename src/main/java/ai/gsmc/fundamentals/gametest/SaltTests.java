@@ -102,6 +102,24 @@ public class SaltTests {
     }
 
     @GameTest(template = "empty")
+    public void theChlorAlkaliCellMakesChlorineCausticSodaAndHydrogen(GameTestHelper helper) {
+        var holder = helper.getLevel().getRecipeManager().byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "uses/chlor_alkali"));
+        helper.assertTrue(holder.isPresent(), "brine should electrolyse in a cell");
+        ProcessingRecipe<?, ?> recipe = (ProcessingRecipe<?, ?>) holder.get().value();
+        helper.assertTrue(recipe.getFluidIngredients().stream().anyMatch(i -> i.ingredient().test(new FluidStack(Separation.fluid("salt_brine"), 1)))
+                && recipe.getIngredients().stream().anyMatch(i -> i.test(new ItemStack(BuiltInRegistries.ITEM.get(
+                        ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "dimensionally_stable_anode"))))), "the cell takes brine over a dimensionally stable anode");
+        for (var product : new net.minecraft.world.level.material.Fluid[] {Separation.fluid("chlorine"), Separation.fluid("caustic_soda"),
+                BuiltInRegistries.FLUID.get(ResourceLocation.parse("tfmg:hydrogen"))}) {
+            helper.assertTrue(recipe.getFluidResults().stream().anyMatch(f -> f.is(product)), "the cell should give " + BuiltInRegistries.FLUID.getKey(product));
+        }
+        var caustic = Separation.kind(Separation.fluid("caustic_soda"));
+        helper.assertTrue(Hazards.eats(caustic, BuiltInRegistries.BLOCK.get(ResourceLocation.parse("tfmg:aluminum_pipe")).defaultBlockState())
+                && !Hazards.eats(caustic, com.simibubi.create.AllBlocks.FLUID_PIPE.getDefaultState()), "caustic soda should eat aluminium pipe and leave copper alone");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
     public void seawaterEatsCopperSlowly(GameTestHelper helper) {
         double sea = Hazards.chance(new FluidStack(Separation.fluid("seawater"), 1));
         double bittern = Hazards.chance(new FluidStack(Separation.fluid("bittern"), 1));

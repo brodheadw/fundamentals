@@ -94,7 +94,7 @@ WASTES = {
 SEA = {"seawater": ("Seawater", 0x3F76E4)}
 # Bittern, the bitter, faintly yellow mother liquor left once the halite has crystallised out of seawater, rich in magnesium
 # chloride; a strong chloride, it eats copper like the liquors.
-SALINES = {"bittern": ("Bittern", 0xE6DEB8)}
+SALINES = {"bittern": ("Bittern", 0xE6DEB8), "salt_brine": ("Salt Brine", 0xE2ECEE)}
 # What comes out of the dissolver before anyone has cleaned it: iron, aluminium, thorium and fines still in it. A
 # battery will take it, and it will foul the organic. Lime drops the impurities and clarifies it.
 CRUDES = {
@@ -141,10 +141,12 @@ PLATINUM_LIQUORS = {
 }
 # beryllium sulfate, with the aluminium the beryl carried, in the sulfuric acid that opened the frit or the tuff: colourless
 SULFATE_LIQUORS = {"beryllium_sulfate_liquor": ("Beryllium Sulfate Liquor", CLEAR)}
+CAUSTICS = {"caustic_soda": ("Caustic Soda", 0xEEF2F0), "sodium_aluminate_liquor": ("Sodium Aluminate Liquor", 0xB8864A)}
 FLUIDS = {**{k: (*v, "LIQUOR") for k, v in {**LIQUORS, **PLATINUM_LIQUORS, **SULFATE_LIQUORS}.items()}, **{k: (*v, "ORGANIC") for k, v in ORGANICS.items()},
           **{k: (*v, "ACID") for k, v in ACIDS.items()}, **{k: (*v, "GAS") for k, v in GASES.items()},
           **{k: (*v, "WASTE") for k, v in WASTES.items()}, **{k: (*v, "SALINE") for k, v in SALINES.items()}, **{k: (*v, "WATER") for k, v in SEA.items()}, **{k: (*v, "CRUDE") for k, v in CRUDES.items()},
-          **{k: (*v, "FOULED") for k, v in FOULED.items()}, **{k: (*v, "PRECURSOR") for k, v in PRECURSORS.items()}}
+          **{k: (*v, "FOULED") for k, v in FOULED.items()}, **{k: (*v, "PRECURSOR") for k, v in PRECURSORS.items()},
+          **{k: (*v, "CAUSTIC") for k, v in CAUSTICS.items()}}
 
 # Oxide to metal. The lights and the heavies go through their fluoride: the lights by molten-salt
 # electrolysis on TFMG's electrodes, the heavies by calciothermic reduction under argon, which gives the
@@ -301,7 +303,7 @@ def java_table():
              "    public static final List<Reagent> ALL = List.of("]
     entries = [f'            new Reagent("{id}", 0x{tint:06X}, Kind.{kind})' for id, (_, tint, kind) in FLUIDS.items()]
     lines += [",\n".join(entries) + ");", "", "    private Reagents() {}", "}", ""]
-    kinds = sorted({kind for _, _, kind in FLUIDS.values()}, key=["LIQUOR", "ORGANIC", "ACID", "GAS", "WASTE", "SALINE", "WATER", "CRUDE", "FOULED", "PRECURSOR"].index)
+    kinds = sorted({kind for _, _, kind in FLUIDS.values()}, key=["LIQUOR", "ORGANIC", "ACID", "GAS", "WASTE", "SALINE", "WATER", "CRUDE", "FOULED", "PRECURSOR", "CAUSTIC"].index)
     lines[7] = "    public enum Kind { " + ", ".join(kinds) + " }"
     JAVA.write_text("\n".join(lines), encoding="utf-8")
 

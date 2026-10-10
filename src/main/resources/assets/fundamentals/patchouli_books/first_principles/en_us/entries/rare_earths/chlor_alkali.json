@@ -1,0 +1,40 @@
+{
+  "name": "The chlor-alkali cell",
+  "category": "fundamentals:rare_earths",
+  "icon": "fundamentals:dimensionally_stable_anode",
+  "sortnum": 11,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Nearly all the world's chlorine and all its caustic soda come out of one cell. Brine, salt saturated in water, is electrolysed across a membrane that lets only sodium through: chlorine comes off the anode, hydrogen and caustic soda, sodium hydroxide, off the cathode.",
+      "title": "The chlor-alkali cell"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two salt in 1,000 mB of water under a mixer make 1,000 mB of brine. 1,000 mB of brine in a chemical vat with two electrodes and a dimensionally stable anode give 500 mB each of chlorine, caustic soda and hydrogen, with no burner: the current keeps the cell near 90 °C. The anode comes back ninety-nine times in a hundred."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The anode is what made the membrane cell. Graphite anodes wore away in the wet chlorine and fouled the cell; De Nora's dimensionally stable anode is titanium coated with ruthenium and iridium oxides, painted on as their chlorides and fired, and lasts for years.",
+      "title": "The anode"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A titanium plate, a ruthenium nugget, an iridium nugget and 100 mB of hydrochloric acid, heated, make one."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Before the cell, caustic soda was soda ash boiled with lime, and Bayer's first plants ran on it: a soda ash, a limesand and 500 mB of water, heated, give 250 mB.",
+      "title": "Caustic soda"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Caustic soda leaves copper and steel alone, which is why it is shipped in steel, but it eats aluminium: The Factory Must Grow's aluminium pipes, pumps, valves and tanks corrode under it and under the aluminate liquor, as copper does under a liquor."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: O'Brien, Bommaraju and Hine, Handbook of Chlor-Alkali Technology (Springer, 2005); Ullmann's Encyclopedia of Industrial Chemistry, \"Chlorine\"; Trasatti, \"Electrocatalysis: understanding the success of DSA\", Electrochimica Acta 45 (2000).",
+      "title": "Sources"
+    }
+  ]
+}

@@ -22,7 +22,8 @@ import java.util.function.BiConsumer;
  * the silver off lead bullion in and the litharge cupellation leaves, the thorium nitrate a gas mantle is soaked in and the mantle,
  * the block the clarifier's sludge is packed into, the mercury cinnabar is retorted to, the zirconium and hafnium chlorides of the
  * Kroll road and the yttria-stabilised zirconia turbine blades are coated with, and the frit, hydroxide, fluoroberyllate and pebbles
- * of the road from beryl to beryllium. The recipes
+ * of the road from beryl to beryllium, the dimensionally stable anode of the chlor-alkali cell, and the red mud, aluminium hydroxide, alumina
+ * and cryolite of the Bayer and Hall-Héroult road to aluminium. The recipes
  * are written by tools/build_uses_data.py.
  */
 public final class Uses {
@@ -61,19 +62,25 @@ public final class Uses {
     private static Item berylliumHydroxide;
     private static Item ammoniumFluoroberyllate;
     private static Item berylliumPebbles;
+    private static Item dimensionallyStableAnode;
+    private static Item redMud;
+    private static Item aluminiumHydroxide;
+    private static Item alumina;
+    private static Item cryolite;
     private static Block sludgeBlock;
     private static Item sludgeBlockItem;
 
     private Uses() {}
 
     public static Item mercury() { return mercury; }
+    public static Item cryolite() { return cryolite; }
 
     public static List<Item> items() {
         return List.of(phosphor, didymiumGlass, roastedCobaltite, roastedChalcopyrite, rheniumFlueDust, tungstenCarbide, tungstenFilament, clarifierSludge,
                 copperCalcine, zincOxide, roastedPentlandite, lithiumChloride, ferroboron, sodaAsh, sodiumChromate, sodiumDichromate,
                 aluminiumPowder, roastedTinConcentrate, solder, titaniaSlag, magnesiumChloride, silverZincCrust, litharge, thoriumNitrate, gasMantle, mercury,
                 crudeZirconiumTetrachloride, zirconiumTetrachloride, hafniumTetrachloride, yttriaStabilisedZirconia, berylFrit, berylliumHydroxide, ammoniumFluoroberyllate,
-                berylliumPebbles, sludgeBlockItem);
+                berylliumPebbles, dimensionallyStableAnode, redMud, aluminiumHydroxide, alumina, cryolite, sludgeBlockItem);
     }
 
     public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
@@ -116,6 +123,11 @@ public final class Uses {
         registry.accept(id("beryllium_hydroxide"), berylliumHydroxide = new Item(new Item.Properties()));
         registry.accept(id("ammonium_fluoroberyllate"), ammoniumFluoroberyllate = new Item(new Item.Properties()));
         registry.accept(id("beryllium_pebbles"), berylliumPebbles = new Item(new Item.Properties()));
+        registry.accept(id("dimensionally_stable_anode"), dimensionallyStableAnode = new Item(new Item.Properties()));
+        registry.accept(id("red_mud"), redMud = new Item(new Item.Properties()));
+        registry.accept(id("aluminium_hydroxide"), aluminiumHydroxide = new Item(new Item.Properties()));
+        registry.accept(id("alumina"), alumina = new Item(new Item.Properties()));
+        registry.accept(id("cryolite"), cryolite = new Item(new Item.Properties()));
         registry.accept(id("clarifier_sludge_block"), sludgeBlockItem = new BlockItem(sludgeBlock, new Item.Properties()));
     }
 
