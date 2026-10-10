@@ -18,9 +18,9 @@ PAGE_CHARS = 330
 NUMBERS = dict(enumerate(("zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen").split()))
 
 WHERE = {
-    "anywhere": "anywhere in the overworld", "porphyry": "under mountains and hills", "arid_oxide": "in badlands, savanna and desert",
-    "laterite": "under jungle, savanna and mangrove", "pegmatite": "in mountains, hills and badlands", "carbonatite": "under mountains and badlands",
-    "alkaline": "under taiga and snowy country", "ion_clay": "under jungle", "wetland": "in swamps and bogs", "hydrothermal": "in mountain and hill country",
+    "anywhere": "anywhere in the overworld", "porphyry": "under mountains and hills, down into the deep dark beneath them", "arid_oxide": "in badlands, savanna and desert",
+    "laterite": "under jungle, savanna and mangrove", "pegmatite": "in mountains, hills and badlands and the deep dark beneath them", "carbonatite": "deep under mountains and badlands, in the deep dark",
+    "alkaline": "under taiga and snowy country and in the deep dark", "ion_clay": "under jungle", "wetland": "in swamps and bogs", "hydrothermal": "in mountain and hill country and the deep dark beneath it",
     "placer": "in beach and river sand", "temperate": "under temperate forest, plains, hills and swamp", "alpine": "in the mountains",
 }
 STYLE = {"pockets": "masses", "seams": "layers", "disseminated": "scattered grains", "top": "an enriched top"}

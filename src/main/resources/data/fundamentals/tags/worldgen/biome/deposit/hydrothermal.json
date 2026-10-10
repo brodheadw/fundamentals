@@ -3,6 +3,7 @@
   "values": [
     "#minecraft:is_badlands",
     "#minecraft:is_hill",
-    "#minecraft:is_mountain"
+    "#minecraft:is_mountain",
+    "minecraft:deep_dark"
   ]
 }

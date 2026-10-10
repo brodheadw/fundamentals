@@ -12,8 +12,8 @@
       }
     ],
     "radius": {
-      "min": 9,
-      "max": 13
+      "min": 8,
+      "max": 12
     },
     "thickness": {
       "min": 4,
