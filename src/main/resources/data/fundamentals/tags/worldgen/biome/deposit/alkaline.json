@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "#minecraft:is_taiga",
+    "minecraft:deep_dark",
     "minecraft:grove",
     "minecraft:snowy_plains",
     "minecraft:snowy_slopes"
