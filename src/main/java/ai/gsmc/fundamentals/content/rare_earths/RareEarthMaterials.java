@@ -19,7 +19,8 @@ public final class RareEarthMaterials {
     private static final MaterialForm[] VOLATILE_MAGNET_FORMS = {OXALATE, OXIDE, INGOT, NUGGET, BLOCK};
     // Europium and the heavies past dysprosium are sold as oxide; nothing here wants them as metal.
     private static final MaterialForm[] OXIDE_FORMS = {OXALATE, OXIDE};
-    private static final MaterialForm[] SCANDIUM_FORMS = {OXALATE, FLUORIDE, OXIDE, INGOT, NUGGET};
+    // Scandium and yttrium go into alloys by the nugget: Al-Sc and the MCrAlY bond coat.
+    private static final MaterialForm[] ALLOYING_FORMS = {OXALATE, FLUORIDE, OXIDE, INGOT, NUGGET};
     private static final MaterialForm[] MAGNET_FORMS = {INGOT, NUGGET, PLATE, BLOCK};
     private static final MaterialForm[] ALLOY_FORMS = {INGOT, NUGGET, PLATE, BLOCK};
 
@@ -58,8 +59,8 @@ public final class RareEarthMaterials {
         element("thulium", "Tm", OXIDE_FORMS, 1.18);
         element("ytterbium", "Yb", OXIDE_FORMS, 0.88);
         element("lutetium", "Lu", OXIDE_FORMS, 1.25);
-        element("yttrium", "Y", ELEMENT_FORMS, 0.57);
-        element("scandium", "Sc", SCANDIUM_FORMS, 0.38);
+        element("yttrium", "Y", ALLOYING_FORMS, 0.57);
+        element("scandium", "Sc", ALLOYING_FORMS, 0.38);
 
         reg("didymium", null, MaterialType.ALLOY, "", new MaterialForm[] {OXALATE, FLUORIDE, OXIDE, INGOT},
                 MaterialProperties.builder().density(0.88));

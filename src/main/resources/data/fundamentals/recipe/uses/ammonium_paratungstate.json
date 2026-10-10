@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "fundamentals:sodium_tungstate_liquor"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:ammonia"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:ammonium_paratungstate",
+      "count": 2
+    }
+  ],
+  "heat_requirement": "heated"
+}

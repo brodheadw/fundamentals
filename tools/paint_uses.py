@@ -230,6 +230,12 @@ def main():
     # nickel oxide roasted from matte is the green of bunsenite, greyed by what the roast leaves; carbonyl pellets are bright, nearly pure nickel
     paint_raw("nickel_oxide", ((50, 72, 44), (90, 120, 72), (130, 160, 102), (178, 204, 148))).save(TEXTURES / "item/nickel_oxide.png")
     paint_raw("nickel_pellets", ((96, 96, 90), (160, 160, 152), (206, 206, 198), (244, 244, 238))).save(TEXTURES / "item/nickel_pellets.png")
+    # tungstic acid is yellow; APT, ammonium perrhenate and lithium carbonate are white crystals; MCrAlY a grey gas-atomised metal powder
+    heap("tungstic_acid", (250, 238, 120), (226, 204, 60), (160, 140, 30)).save(TEXTURES / "item/tungstic_acid.png")
+    heap("ammonium_paratungstate", (255, 255, 255), (240, 242, 244), (192, 196, 202)).save(TEXTURES / "item/ammonium_paratungstate.png")
+    heap("ammonium_perrhenate", (255, 255, 255), (236, 238, 242), (184, 188, 196)).save(TEXTURES / "item/ammonium_perrhenate.png")
+    heap("lithium_carbonate", (255, 255, 255), (242, 242, 240), (196, 196, 192)).save(TEXTURES / "item/lithium_carbonate.png")
+    heap("mcraly_powder", (196, 198, 204), (140, 144, 152), (84, 88, 96)).save(TEXTURES / "item/mcraly_powder.png")
     magnets()
     print("uses textures written")
 

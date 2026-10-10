@@ -180,8 +180,9 @@ def geology():
         "Bittern holds the sea's bromide. 1,000 mB of it and 100 mB of chlorine in a heated vat with a mixer give 100 mB of bromine, "
         "the chlorine taking the bromide's place, and the bittern's two magnesium chloride. Bromine is a dark red-brown liquid that boils at 59 °C: "
         "it fumes and poisons like hydrofluoric acid, burns what stands in it, and eats copper, iron and aluminium. "
-        "Ten millibuckets of it in a quartz envelope make a halogen lamp: a tungsten filament, a quartz, four copper and three steel nuggets "
-        "and 10 mB of bromine under a mixer make four light bulbs.", "Bromine") + [
+        "Ten millibuckets of it in a quartz envelope make a halogen lamp: a tungsten filament, a quartz, a molybdenum ingot, three steel nuggets "
+        "and 10 mB of bromine under a mixer make four light bulbs. The quartz is sealed round molybdenum foil, the one metal whose expansion lets the seal hold, "
+        "and the filament stands on molybdenum supports (Ullmann's, Molybdenum).", "Bromine") + [
         spotlight("fundamentals:raw_halite", "Halite is sodium chloride, glassy cubes that are colourless when pure and pink or orange where salt-loving microbes or a trace of iron stained it.", "Halite")], 91)
 
 
@@ -469,11 +470,11 @@ def oxidation():
 
 
 def metals():
-    category("metals", "The other metals", "Cobalt, zinc, nickel and Mond's carbonyl, the porphyry chain (copper, molybdenum and the rhenium hiding in it), chromium, tin, titanium, the silver in lead, zirconium and hafnium, beryllium, and aluminium.", "fundamentals:cobalt_ingot", 3)
+    category("metals", "The other metals", "Cobalt, zinc, nickel and Mond's carbonyl, the porphyry chain (copper, molybdenum and the rhenium hiding in it), tungsten, chromium, tin, titanium, the silver in lead, zirconium and hafnium, beryllium, aluminium and lithium.", "fundamentals:cobalt_ingot", 3)
     entry("metals", "cobalt", "Cobalt", "fundamentals:cobalt_ingot", pages_of(
         "Cobaltite is a cobalt arsenide-sulfide from the silver-cobalt veins in calcite. Roast it on a campfire or in a smoker to drive off the arsenic and sulfur and leave the oxide. "
         "Cobalt melts at 1,495 °C and was never smelted from its ore: the oxide is reduced under hydrogen, as molybdenum is: two roasted cobaltite and 500 mB of hydrogen in a heated chemical vat give two ingots. "
-        "Cobalt is half of SmCo; two cobalt, four nickel, a chromium and a rhenium make the superalloy. "
+        "Cobalt is half of SmCo and a tenth of the superalloy. "
         "Roasted cobaltite calcined with two bauxite powder is cobalt blue, four blue dye.", "Cobalt") + pages_of(
         "Veins like Cobalt, Ontario, and Bou Azzer, Morocco, are the old sources and a small one now. About three quarters of the world's cobalt is mined in the "
         "Democratic Republic of the Congo, from its copper-cobalt ores, and most of the rest comes out of nickel refineries (USGS, Mineral Commodity Summaries 2025). "
@@ -487,19 +488,35 @@ def metals():
         "A porphyry copper stock carries chalcopyrite with a little molybdenite, and the molybdenite carries rhenium at parts per million. "
         "A copper sulfide smelts not to copper but to matte. Chalcopyrite roasted on a fire, or the calcine bornite, chalcocite and covellite roast to, melts in the bloomery to copper matte and slag. "
         "Two matte and a sand, superheated, are the converter: the air burns off the sulfur and the iron, which the sand fluxes to slag, and leaves two blister copper. The blast furnace fire-refines blister to copper. "
-        "Two raw molybdenite roasted in a heated basin give two molybdenum trioxide, and half the time a rhenium flue dust: "
-        "the roaster's flue is where every gram of the world's rhenium comes from.", "The porphyry chain") + pages_of(
-        "Both oxides are reduced under hydrogen in a heated chemical vat with an industrial mixer, as the industry does: two trioxide and 500 mB of hydrogen give two molybdenum ingots, "
-        "two flue dust and 250 mB give one rhenium ingot. The hydrogen is shifted from water gas; the extractants entry under the rare earths says how."), 1)
+        "Two raw molybdenite roasted in a heated basin give two molybdenum trioxide, and one time in ten a rhenium flue dust: "
+        "the roaster's flue is where all mined rhenium comes from, though about a quarter of the rhenium used is now recycled from superalloy scrap "
+        "and spent catalyst (USGS, Mineral Commodity Summaries 2025).", "The porphyry chain") + pages_of(
+        "The trioxide is reduced under hydrogen in a heated chemical vat with an industrial mixer, as the industry does: two trioxide and 500 mB of hydrogen give two molybdenum ingots. "
+        "The flue dust is scrubbed into water and its perrhenate taken up on an ion exchanger and stripped with ammonia: a flue dust, 250 mB of water and 50 mB of ammonia give an ammonium perrhenate, "
+        "white crystals, and one with 250 mB of hydrogen in the vat gives two rhenium nuggets. The hydrogen is shifted from water gas; the extractants entry under the rare earths says how.", "Rhenium") + pages_of(
+        "Real molybdenite concentrate carries 100 to 3,000 ppm of rhenium. A nugget to every ten molybdenite here is a few times the richest of it, "
+        "so that a superalloy melt costs a vein and not a mountain."), 1)
     entry("metals", "superalloy", "Superalloy and molybdenum steel", "fundamentals:superalloy_ingot", pages_of(
-        "Four nickel, a chromium, two cobalt and a rhenium, superheated under 100 mB of argon, make four ingots of the nickel superalloy that turbine blades are cast from, the chromium what keeps it from scaling in the hot gas; "
-        "The Factory Must Grow's turbine blade now takes its plates. Molybdenum goes into steel as the roasted trioxide, under one per cent of it: a molybdenum trioxide and eight steel, superheated, make eight molybdenum steel, and its plates now make the heavy machinery casing.",
-        "Superalloy and molybdenum steel"), 2)
+        "Six nickel, a cobalt, a chromium and a tungsten ingot, five aluminium and two rhenium nuggets, superheated under 100 mB of argon, make seven ingots of a single-crystal nickel superalloy "
+        "after CMSX-4, which is Ni-6.5Cr-9Co-6W-6.5Ta-5.6Al-3Re-1Ti (Reed, The Superalloys, 2006): 61 per cent nickel, ten each of cobalt, chromium and tungsten, 5.7 aluminium and 2.3 rhenium, "
+        "the tungsten standing in for the tantalum too, which is not in the pack.", "Superalloy") + pages_of(
+        "The aluminium is what makes it a superalloy. It precipitates as ordered Ni3Al, gamma-prime, which keeps the alloy strong almost to its melting point, and with the chromium it grows "
+        "the alumina scale that keeps it from burning in the hot gas; tungsten and rhenium stiffen it against creep.") + pages_of(
+        "The Factory Must Grow's turbine blade takes its plates, coated as a real blade is: a yttria-stabilised zirconia thermal barrier over an MCrAlY bond coat. "
+        "Four nickel, two cobalt, a chromium, an aluminium and a yttrium nugget, superheated under 100 mB of argon, atomise to eight MCrAlY powder, NiCoCrAlY as Amdry 365 is "
+        "(Ni-23Co-17Cr-12.5Al-0.5Y); its yttrium pins the alumina scale to the blade.", "The blade") + pages_of(
+        "Molybdenum goes into steel as the roasted trioxide, not as metal. A molybdenum trioxide and six blocks of steel, superheated, make 54 molybdenum steel, about one per cent molybdenum, "
+        "the share in the creep-resistant chromium-molybdenum boiler and pressure-vessel steels (ASTM A387 grade 22 is 0.9 to 1.1 per cent, 4140 0.15 to 0.25), their chromium left out. "
+        "Its plates make the heavy machinery casing.", "Molybdenum steel"), 2)
     entry("metals", "tungsten", "Tungsten", "fundamentals:tungsten_ingot", pages_of(
-        "Scheelite from the limestone skarns and wolframite from the tin veins both decompose in hot hydrochloric acid: two raw ore and 500 mB in a heated basin give two tungsten oxide, "
-        "the canary-yellow trioxide powder, and hydrogen in a heated chemical vat reduces two oxide to two ingots. "
+        "Wolframite, from the tin veins, will not open to acid. Two raw wolframite and 500 mB of caustic soda in a heated chemical vat with a mixer, the pressure digester at 150 to 200 °C, "
+        "give 500 mB of sodium tungstate liquor, the iron and manganese left behind as hydroxides; or two wolframite and two soda ash fused over a superheated burner and leached in 500 mB of water give the same. "
+        "Scheelite, from the limestone skarns, opens to hot hydrochloric acid: two raw scheelite and 500 mB, heated, throw down two yellow tungstic acid.", "Tungsten") + pages_of(
+        "Either way the tungsten is taken up as ammonium tungstate and crystallised as ammonium paratungstate, APT, the form tungsten is traded in. "
+        "500 mB of the liquor and 250 mB of ammonia, heated, give two APT, the amine extraction and ammonia strip folded into the one step; two tungstic acid dissolved in 250 mB of ammonia give two as well. "
+        "A blast furnace calcines APT to the canary-yellow trioxide, and hydrogen in a heated chemical vat reduces two oxide to two ingots (Lassner and Schubert, Tungsten, 1999).", "APT") + pages_of(
         "One ingot draws to four filaments, and the Factory's light bulb now burns one. One ingot and two coals, superheated, carburise to two tungsten carbide, "
-        "and Create's mechanical drill now bites with it.", "Tungsten"), 3)
+        "and Create's mechanical drill now bites with it. Ten per cent of the superalloy is tungsten.", "What it is for"), 3)
     entry("metals", "zinc_nickel", "Zinc and nickel", "fundamentals:zinc_oxide", pages_of(
         "Neither melts out of its ore in a furnace. Sphalerite roasts on a fire to zinc oxide, and smithsonite and hemimorphite, the old calamine, calcine to it. "
         "Zinc boils at 907 °C, below the heat that reduces it, so it was distilled from a sealed retort packed with charcoal: "
@@ -583,7 +600,7 @@ def metals():
         "on two electrodes, superheated, arc-melt to two ingots.") + pages_of(
         "Twelve zirconia and a yttrium oxide, superheated, make thirteen yttria-stabilised zirconia, 7.7 per cent yttria as the 7YSZ of a turbine's thermal barrier is, the ceramic coat that lets a turbine blade run in gas hotter than it melts: the Factory's turbine blade takes one. "
         "Zirconium shrugs off hot hydrochloric and sulfuric acid that stainless cannot, so two zirconium plates line four steel chemical vats where stainless lines two. "
-        "A hafnium nugget in the superalloy melt, against cracking at the grain boundaries, makes six ingots where it made four.", "What they are for"), 10)
+        "A hafnium nugget in the superalloy melt, against cracking at the grain boundaries, makes nine ingots where it made seven.", "What they are for"), 10)
     entry("metals", "beryllium", "Beryllium", "fundamentals:beryllium_ingot", pages_of(
         "Beryl is pale green or blue-green, six-sided prisms in the pegmatites; emerald and aquamarine are beryl. Bertrandite is the white mineral of the beryllium tuffs of the dry country, "
         "rhyolite ash with fluorite nodules, as at Spor Mountain, Utah, where most of the world's beryllium is mined.", "Beryllium") + pages_of(
@@ -617,6 +634,16 @@ def metals():
         "A precious tip lasts: an iridium nugget, an alumina and a nickel nugget make four plugs, and a platinum one three.", "Spark plugs") + pages_of(
         "Sources: Grjotheim and Kvande, Introduction to Aluminium Electrolysis (Aluminium-Verlag, 1993); Ullmann's Encyclopedia of Industrial Chemistry, \"Aluminum Oxide\" and \"Aluminum\"; "
         "Evans, \"The History, Challenges, and New Developments in the Management and Use of Bauxite Residue\", Journal of Sustainable Metallurgy 2 (2016).", "Sources"), 12)
+    entry("metals", "lithium", "Lithium", "tfmg:lithium_ingot", pages_of(
+        "Spodumene, LiAlSi2O6, is the pale pyroxene of the lithium pegmatites. A blast furnace calcines it at about 1,050 °C from alpha to beta-spodumene, which opens to acid where the alpha form will not. "
+        "Two calcined spodumene, 250 mB of sulfuric acid and 500 mB of water, heated, are the acid roast at about 250 °C and the water leach, and give 500 mB of lithium sulfate liquor. "
+        "Two soda ash in the hot liquor throw down two lithium carbonate, the sodium sulfate staying in solution.", "Spodumene") + pages_of(
+        "Lithium carbonate is what the trade sells. For the metal it goes to the chloride: two carbonate and 500 mB of hydrochloric acid, heated, give two lithium chloride and 250 mB of carbon dioxide. "
+        "Lithium cannot be won from water, so the dry chloride is electrolysed molten, with potassium chloride in the real bath, at about 450 °C: two chloride on two electrodes in a heated vat "
+        "give a lithium ingot, half the time three nuggets more, and 250 mB of chlorine.", "Carbonate to metal") + pages_of(
+        "About a third of the world's lithium comes not from rock but from the brines under the salt flats of Chile, Argentina and Tibet, evaporated in ponds and precipitated with soda ash; "
+        "there is no such brine in the pack yet.") + pages_of(
+        "Sources: Ullmann's Encyclopedia of Industrial Chemistry, \"Lithium and Lithium Compounds\"; the Talison and Tianqi spodumene flowsheets; USGS, Mineral Commodity Summaries 2025, Lithium.", "Sources"), 13)
     oxidation()
 
 
@@ -655,12 +682,12 @@ def platinum():
         "None of the six melts at 1,600 °C but palladium; platinum melts at 1,768, rhodium at 1,964, ruthenium at 2,334, iridium at 2,446 and osmium past 3,000. "
         "So the sponge is not cast but pressed, as Wollaston first made platinum malleable: Create's press over a basin on a burner fed a blaze cake sinters each sponge to an ingot, and nine nuggets pack to one."), 2)
     entry("platinum", "uses", "What they are for", "fundamentals:platinum_rhodium_gauze", pages_of(
-        "Platinum is a catalyst. Two platinum nuggets, a rhenium ingot and four bauxite powder, heated, make four platinum-rhenium catalyst, "
+        "Platinum is a catalyst. Two platinum and two rhenium nuggets and four bauxite powder, heated, make four platinum-rhenium catalyst, "
         "and over one 500 mB of naphtha in a heated vat reforms to 400 mB of gasoline and gives off 100 mB of hydrogen, the catalyst surviving nineteen times in twenty. "
         "Eight platinum nuggets round a rhodium nugget weave the gauze ammonia is burnt over: 250 mB of ammonia and 1,000 mB of air, heated, give 250 mB of nitric acid, Ostwald's process, and the gauze is all but never used up.", "What they are for") + pages_of(
         "The three-way converter: platinum and palladium on ceria burn what an engine leaves, and rhodium breaks down its nitrogen oxides, where four fifths of the world's rhodium goes. "
         "A platinum, a palladium and a rhodium nugget with the cerium oxide make two exhausts instead of one. "
-        "Ruthenium lets a superalloy carry more: a ruthenium nugget in the superalloy melt makes six ingots instead of four. "
+        "Ruthenium lets a superalloy carry more: a ruthenium nugget in the superalloy melt makes nine ingots instead of seven. "
         "An iridium-tipped spark plug outlasts four plain ones, so an iridium nugget, an alumina and a nickel nugget make four, and a platinum nugget three. "
         "And osmium was the first metal filament: an osmium sponge pastes and draws to four filaments, and a light bulb burns one as well as tungsten."), 3)
 

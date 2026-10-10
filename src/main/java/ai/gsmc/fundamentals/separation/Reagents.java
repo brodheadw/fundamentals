@@ -49,6 +49,7 @@ public final class Reagents {
             new Reagent("iridium_rhodium_liquor", 0x6A2A1E, Kind.LIQUOR),
             new Reagent("rhodium_liquor", 0xC85A6A, Kind.LIQUOR),
             new Reagent("beryllium_sulfate_liquor", 0xDCE6EC, Kind.LIQUOR),
+            new Reagent("lithium_sulfate_liquor", 0xDCE6EC, Kind.LIQUOR),
             new Reagent("p204", 0xEAD88C, Kind.ORGANIC),
             new Reagent("p507", 0xECE0A8, Kind.ORGANIC),
             new Reagent("naphthenic_acid", 0xA8843C, Kind.ORGANIC),
@@ -82,7 +83,8 @@ public final class Reagents {
             new Reagent("titanium_tetrachloride", 0xEEF0EA, Kind.PRECURSOR),
             new Reagent("vinyl_chloride", 0xEEF0EE, Kind.PRECURSOR),
             new Reagent("caustic_soda", 0xEEF2F0, Kind.CAUSTIC),
-            new Reagent("sodium_aluminate_liquor", 0xB8864A, Kind.CAUSTIC));
+            new Reagent("sodium_aluminate_liquor", 0xB8864A, Kind.CAUSTIC),
+            new Reagent("sodium_tungstate_liquor", 0xE6ECE8, Kind.CAUSTIC));
 
     private Reagents() {}
 }

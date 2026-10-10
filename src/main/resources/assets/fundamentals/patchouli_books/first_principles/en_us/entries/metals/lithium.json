@@ -1,0 +1,35 @@
+{
+  "name": "Lithium",
+  "category": "fundamentals:metals",
+  "icon": "tfmg:lithium_ingot",
+  "sortnum": 13,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Spodumene, LiAlSi2O6, is the pale pyroxene of the lithium pegmatites. A blast furnace calcines it at about 1,050 °C from alpha to beta-spodumene, which opens to acid where the alpha form will not.",
+      "title": "Spodumene"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two calcined spodumene, 250 mB of sulfuric acid and 500 mB of water, heated, are the acid roast at about 250 °C and the water leach, and give 500 mB of lithium sulfate liquor. Two soda ash in the hot liquor throw down two lithium carbonate, the sodium sulfate staying in solution."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Lithium carbonate is what the trade sells. For the metal it goes to the chloride: two carbonate and 500 mB of hydrochloric acid, heated, give two lithium chloride and 250 mB of carbon dioxide.",
+      "title": "Carbonate to metal"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Lithium cannot be won from water, so the dry chloride is electrolysed molten, with potassium chloride in the real bath, at about 450 °C: two chloride on two electrodes in a heated vat give a lithium ingot, half the time three nuggets more, and 250 mB of chlorine."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "About a third of the world's lithium comes not from rock but from the brines under the salt flats of Chile, Argentina and Tibet, evaporated in ponds and precipitated with soda ash; there is no such brine in the pack yet."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: Ullmann's Encyclopedia of Industrial Chemistry, \"Lithium and Lithium Compounds\"; the Talison and Tianqi spodumene flowsheets; USGS, Mineral Commodity Summaries 2025, Lithium.",
+      "title": "Sources"
+    }
+  ]
+}

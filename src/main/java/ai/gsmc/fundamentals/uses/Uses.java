@@ -15,7 +15,8 @@ import java.util.function.BiConsumer;
 /**
  * The few items of the chains that are not a form of a material: the phosphor the lamps take, the didymium
  * glass that welders' goggles are made of, the roasted ores on their way to cobalt, copper, zinc and nickel, the
- * flue dust the molybdenite roaster gives up its rhenium in, the lithium chloride lithium is won from, the ferroboron
+ * flue dust the molybdenite roaster gives up its rhenium in and the ammonium perrhenate that is crystallised from it, the tungstic acid
+ * and ammonium paratungstate of the road to tungsten, the lithium carbonate and chloride lithium is won from, the ferroboron
  * the magnets take their boron as, the soda ash, sodium salts and aluminium powder of the road to chromium, the roasted tin
  * concentrate the bloomery smelts, the solder circuit boards are joined with, the titania slag ilmenite smelts to, the
  * magnesium chloride magnesium is won from and the Kroll process gives back, and the zinc crust the Parkes process skims
@@ -23,8 +24,8 @@ import java.util.function.BiConsumer;
  * the block the clarifier's sludge is packed into, the mercury cinnabar is retorted to, the zirconium and hafnium chlorides of the
  * Kroll road and the yttria-stabilised zirconia turbine blades are coated with, and the frit, hydroxide, fluoroberyllate and pebbles
  * of the road from beryl to beryllium, the dimensionally stable anode of the chlor-alkali cell, and the red mud, aluminium hydroxide, alumina
- * and cryolite of the Bayer and Hall-Héroult road to aluminium, and the nickel oxide the Mond process takes and the pellets it gives. The recipes
- * are written by tools/build_uses_data.py.
+ * and cryolite of the Bayer and Hall-Héroult road to aluminium, and the nickel oxide the Mond process takes and the pellets it gives, and the MCrAlY
+ * bond coat under a turbine blade's ceramic. The recipes are written by tools/build_uses_data.py.
  */
 public final class Uses {
 
@@ -69,6 +70,11 @@ public final class Uses {
     private static Item cryolite;
     private static Item nickelOxide;
     private static Item nickelPellets;
+    private static Item tungsticAcid;
+    private static Item ammoniumParatungstate;
+    private static Item ammoniumPerrhenate;
+    private static Item lithiumCarbonate;
+    private static Item mcralyPowder;
     private static Block sludgeBlock;
     private static Item sludgeBlockItem;
 
@@ -82,7 +88,8 @@ public final class Uses {
                 copperCalcine, zincOxide, roastedPentlandite, lithiumChloride, ferroboron, sodaAsh, sodiumChromate, sodiumDichromate,
                 aluminiumPowder, roastedTinConcentrate, solder, titaniaSlag, magnesiumChloride, silverZincCrust, litharge, thoriumNitrate, gasMantle, mercury,
                 crudeZirconiumTetrachloride, zirconiumTetrachloride, hafniumTetrachloride, yttriaStabilisedZirconia, berylFrit, berylliumHydroxide, ammoniumFluoroberyllate,
-                berylliumPebbles, dimensionallyStableAnode, redMud, aluminiumHydroxide, alumina, cryolite, nickelOxide, nickelPellets, sludgeBlockItem);
+                berylliumPebbles, dimensionallyStableAnode, redMud, aluminiumHydroxide, alumina, cryolite, nickelOxide, nickelPellets,
+                tungsticAcid, ammoniumParatungstate, ammoniumPerrhenate, lithiumCarbonate, mcralyPowder, sludgeBlockItem);
     }
 
     public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
@@ -132,6 +139,11 @@ public final class Uses {
         registry.accept(id("cryolite"), cryolite = new Item(new Item.Properties()));
         registry.accept(id("nickel_oxide"), nickelOxide = new Item(new Item.Properties()));
         registry.accept(id("nickel_pellets"), nickelPellets = new Item(new Item.Properties()));
+        registry.accept(id("tungstic_acid"), tungsticAcid = new Item(new Item.Properties()));
+        registry.accept(id("ammonium_paratungstate"), ammoniumParatungstate = new Item(new Item.Properties()));
+        registry.accept(id("ammonium_perrhenate"), ammoniumPerrhenate = new Item(new Item.Properties()));
+        registry.accept(id("lithium_carbonate"), lithiumCarbonate = new Item(new Item.Properties()));
+        registry.accept(id("mcraly_powder"), mcralyPowder = new Item(new Item.Properties()));
         registry.accept(id("clarifier_sludge_block"), sludgeBlockItem = new BlockItem(sludgeBlock, new Item.Properties()));
     }
 

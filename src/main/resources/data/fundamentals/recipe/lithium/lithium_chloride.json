@@ -3,10 +3,10 @@
   "heat_requirement": "heated",
   "ingredients": [
     {
-      "item": "fundamentals:calcined_spodumene"
+      "item": "fundamentals:lithium_carbonate"
     },
     {
-      "item": "fundamentals:calcined_spodumene"
+      "item": "fundamentals:lithium_carbonate"
     },
     {
       "type": "neoforge:single",
@@ -18,6 +18,10 @@
     {
       "id": "fundamentals:lithium_chloride",
       "count": 2
+    },
+    {
+      "id": "tfmg:carbon_dioxide",
+      "amount": 250
     }
   ]
 }

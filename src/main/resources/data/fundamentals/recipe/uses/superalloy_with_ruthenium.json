@@ -14,16 +14,40 @@
       "item": "tfmg:nickel_ingot"
     },
     {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "fundamentals:cobalt_ingot"
+    },
+    {
       "item": "fundamentals:chromium_ingot"
     },
     {
-      "item": "fundamentals:cobalt_ingot"
+      "item": "fundamentals:tungsten_ingot"
     },
     {
-      "item": "fundamentals:cobalt_ingot"
+      "tag": "c:nuggets/aluminum"
     },
     {
-      "item": "fundamentals:rhenium_ingot"
+      "tag": "c:nuggets/aluminum"
+    },
+    {
+      "tag": "c:nuggets/aluminum"
+    },
+    {
+      "tag": "c:nuggets/aluminum"
+    },
+    {
+      "tag": "c:nuggets/aluminum"
+    },
+    {
+      "item": "fundamentals:rhenium_nugget"
+    },
+    {
+      "item": "fundamentals:rhenium_nugget"
     },
     {
       "item": "fundamentals:ruthenium_nugget"
@@ -37,7 +61,7 @@
   "results": [
     {
       "id": "fundamentals:superalloy_ingot",
-      "count": 6
+      "count": 9
     }
   ],
   "heat_requirement": "superheated"
