@@ -2,7 +2,7 @@
   "name": "Spodumene Pegmatite",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_spodumene",
-  "sortnum": 30,
+  "sortnum": 32,
   "pages": [
     {
       "type": "patchouli:text",

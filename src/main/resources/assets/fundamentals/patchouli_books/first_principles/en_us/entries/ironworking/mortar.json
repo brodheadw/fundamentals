@@ -2,7 +2,7 @@
   "name": "Mortar and pestle",
   "category": "fundamentals:ironworking",
   "icon": "fundamentals:mortar_and_pestle",
-  "sortnum": 2,
+  "sortnum": 3,
   "pages": [
     {
       "type": "patchouli:text",

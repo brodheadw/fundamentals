@@ -10,7 +10,7 @@ Requires [Create](https://modrinth.com/mod/create) and [Create: The Factory Must
 
 ## Deposits, not blobs
 
-Ore generates as the kind of body it really forms: banded iron beds, lead-zinc beds in limestone, silver and cobalt veins in calcite, porphyry copper stocks, bauxite and nickel laterite under tropical soil, carbonatite plugs for the rare earths with monazite in their weathered tops, a rare monazite vein in quartz, a dark layered intrusion at the bottom of the world for chromite and the platinum metals. Each body is rich at its core and peters out at the edges, and the grade of an ore block decides what it drops.
+Ore generates as the kind of body it really forms: banded iron beds, siderite ironstone among coal seams and in mountain limestone, lead-zinc beds in limestone, silver and cobalt veins in calcite, porphyry copper stocks, bauxite and nickel laterite under tropical soil, carbonatite plugs for the rare earths with monazite in their weathered tops, a rare monazite vein in quartz, a dark layered intrusion at the bottom of the world for chromite and the platinum metals. Each body is rich at its core and peters out at the edges, and the grade of an ore block decides what it drops.
 
 ![A banded iron bed in crimsite](docs/images/banded-iron-in-crimsite.jpg)
 ![A silver vein in calcite](docs/images/silver-vein-in-calcite.jpg)
@@ -22,9 +22,9 @@ An ore takes on whatever rock it formed in. The same hematite sits in stone, dee
 
 ## The minerals
 
-Forty-seven of them, each dropping a raw chunk of itself:
+Forty-eight of them, each dropping a raw chunk of itself:
 
-- **Iron and ferroalloys:** Hematite, Magnetite, Goethite, Pyrolusite, Pentlandite, Nickel Laterite, Chromite, Wolframite, Scheelite, Molybdenite, Cobaltite, Ilmenite, Rutile
+- **Iron and ferroalloys:** Hematite, Magnetite, Goethite, Siderite, Pyrolusite, Pentlandite, Nickel Laterite, Chromite, Wolframite, Scheelite, Molybdenite, Cobaltite, Ilmenite, Rutile
 - **Copper:** Chalcopyrite, Bornite, Chalcocite, Covellite, Malachite, Azurite, Cuprite
 - **Aluminium, lead, zinc, tin:** Bauxite, Galena, Sphalerite, Smithsonite, Hemimorphite, Cassiterite
 - **Lithium:** Spodumene
@@ -39,7 +39,7 @@ The advancements screen has a Periodic Table tab, all 118 elements in their plac
 
 ## From rock to metal
 
-Iron is made the way it was made for three thousand years before the blast furnace. Build a bloomery out of clay, load it with iron ore and charcoal (and only charcoal; the sulfur in coal ruins iron), light it with a torch, and wait. What comes out is not an ingot but a bloom, a spongy lump of iron and slag, which you hammer into wrought iron; the slag is The Factory Must Grow's own, which its concrete and asphalt take. Copper comes straight out of the bloomery from malachite, azurite and cuprite. Galena has to be roasted on a fire first, then gives lead bullion, lead still holding its silver, which a furnace remelts to lead.
+Iron is made the way it was made for three thousand years before the blast furnace. Build a bloomery out of clay, load it with iron ore and charcoal (and only charcoal; the sulfur in coal ruins iron), light it with a torch, and wait. What comes out is not an ingot but a bloom, a spongy lump of iron and slag, which you hammer into wrought iron; the slag is The Factory Must Grow's own, which its concrete and asphalt take. Copper comes straight out of the bloomery from malachite, azurite and cuprite. Siderite, iron carbonate, has to be roasted on a fire before it blooms, and so does galena, which then gives lead bullion, lead still holding its silver, which a furnace remelts to lead.
 
 ![Bloomeries and a campfire](docs/images/bloomery.jpg)
 ![Raw chunks, a bloom, slag, the hammer, the mortar and pestle](docs/images/items.jpg)

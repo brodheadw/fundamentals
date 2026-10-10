@@ -2,7 +2,7 @@
   "name": "Pegmatite Dyke",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_xenotime",
-  "sortnum": 28,
+  "sortnum": 30,
   "pages": [
     {
       "type": "patchouli:text",

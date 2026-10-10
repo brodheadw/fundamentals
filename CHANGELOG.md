@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- Siderite, iron carbonate: clay ironstone and blackband in coal-measure beds under temperate country, sparry iron in mountain limestone. Roasted on a campfire or in a smoker, it blooms and crushes like the other iron ores; raw, the bloomery refuses it.
 - Chlor-alkali: brine electrolysed over a dimensionally stable anode (titanium, ruthenium, iridium) gives chlorine, caustic soda and hydrogen; caustic soda also from soda ash and lime, and it eats aluminium pipe. Aluminium by Bayer and Hall-Héroult: caustic digests bauxite to aluminate liquor and red mud, then aluminium hydroxide and alumina, electrolysed in cryolite on graphite electrodes to TFMG's aluminium ingot, replacing TFMG's straight electrolysis of bauxite. Spark plugs insulate with alumina, with iridium or platinum tips.
 - Plastics: TFMG's plastic vats need a Ziegler-Natta catalyst; PVC from ethylene and chlorine as an alternative plastic sheet; natural plastic (tank, cells, TFMG's pipes) is milky and translucent; sixteen dyed plastic blocks; plastic tanks and pipes dye in place.
 - Now a Create add-on for NeoForge; the Fabric target is dropped.

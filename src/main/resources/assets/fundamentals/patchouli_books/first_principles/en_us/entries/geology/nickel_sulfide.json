@@ -2,7 +2,7 @@
   "name": "Nickel Sulfide",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_pentlandite",
-  "sortnum": 27,
+  "sortnum": 29,
   "pages": [
     {
       "type": "patchouli:text",

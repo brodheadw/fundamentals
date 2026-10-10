@@ -221,6 +221,7 @@ def main():
     heap("mcraly_powder", (196, 198, 204), (140, 144, 152), (84, 88, 96)).save(TEXTURES / "item/mcraly_powder.png")
     heap("boric_acid", (255, 255, 255), (242, 242, 238), (196, 196, 190)).save(TEXTURES / "item/boric_acid.png")
     spangled().save(TEXTURES / "item/galvanized_steel_plate.png")
+    paint_raw("roasted_siderite", ((38, 20, 18), (72, 38, 32), (106, 60, 48), (152, 104, 88))).save(TEXTURES / "item/roasted_siderite.png")
     magnets()
     print("uses textures written")
 

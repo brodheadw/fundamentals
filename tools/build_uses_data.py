@@ -31,7 +31,7 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "nickel_oxide": "Nickel Oxide", "nickel_pellets": "Nickel Pellets", "tungstic_acid": "Tungstic Acid",
          "ammonium_paratungstate": "Ammonium Paratungstate", "ammonium_perrhenate": "Ammonium Perrhenate", "lithium_carbonate": "Lithium Carbonate",
          "mcraly_powder": "MCrAlY Powder", "boric_acid": "Boric Acid",
-         "galvanized_steel_plate": "Galvanized Steel Plate"}
+         "galvanized_steel_plate": "Galvanized Steel Plate", "roasted_siderite": "Roasted Siderite"}
 # In the order of magnet.MagnetGrade.
 MAGNET_ALLOYS = {"neodymium_iron_boron": ("ingot", "plate"), "dysprosium_neodymium_iron_boron": ("ingot", "plate"),
                  "samarium_cobalt": ("ingot", "plate"), "alnico": ("ingot",)}
@@ -260,9 +260,13 @@ def crushing(name, ingredient, results, time=250):
 
 
 def iron():
-    for ore in ("hematite", "magnetite", "goethite"):
-        write(USES / f"crushed_iron_from_{ore}.json", {"type": "create:crushing", "ingredients": item(f"raw_{ore}"), "processing_time": 400,
-                                                       "results": [{"id": "create:crushed_raw_iron"}, {"id": "create:experience_nugget", "chance": 0.75}]})
+    roast("siderite", "roasted_siderite")
+    feeds = {"hematite": "raw_hematite", "magnetite": "raw_magnetite", "goethite": "raw_goethite", "roasted_siderite": "roasted_siderite"}
+    for name, feed in feeds.items():
+        write(USES / f"crushed_iron_from_{name}.json", {"type": "create:crushing", "ingredients": item(feed), "processing_time": 400,
+                                                        "results": [{"id": "create:crushed_raw_iron"}, {"id": "create:experience_nugget", "chance": 0.75}]})
+    write(DATA / "recipe/bloomery/iron_bloom.json", {"type": "fundamentals:bloomery", "ingredient": [{"item": ns(feed)} for feed in feeds.values()],
+                                                     "result": {"id": "fundamentals:iron_bloom", "count": 1}, "byproduct": {"id": "tfmg:slag", "count": 1}})
     for path in ("smelting/iron_ingot_from_crushed", "blasting/iron_ingot_from_crushed", "splashing/crushed_raw_iron"):
         disabled(CREATE / f"{path}.json")
 
@@ -779,7 +783,7 @@ def main():
     shutil.rmtree(PLATINUM, ignore_errors=True)
     shutil.rmtree(PLASTICS, ignore_errors=True)
     shutil.rmtree(TFMG_ASSETS / "models", ignore_errors=True)
-    for pattern in ("roasted_c*", "roasted_pentlandite_*", "nickel_oxide_*", "copper_calcine_*", "zinc_oxide_*", "roasted_tin_*"):
+    for pattern in ("roasted_c*", "roasted_pentlandite_*", "roasted_siderite_*", "nickel_oxide_*", "copper_calcine_*", "zinc_oxide_*", "roasted_tin_*"):
         for stale in ROASTING.glob(pattern):
             stale.unlink()
     magnets()

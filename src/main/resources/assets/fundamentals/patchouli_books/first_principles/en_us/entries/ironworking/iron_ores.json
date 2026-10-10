@@ -1,0 +1,35 @@
+{
+  "name": "The iron ores",
+  "category": "fundamentals:ironworking",
+  "icon": "fundamentals:raw_siderite",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Four minerals carry the world's iron. Hematite, Fe2O3, is 70 per cent iron and red however dark it looks; it makes the great banded beds. Magnetite, Fe3O4, is 72 per cent, black and magnetic, in beds deep down. Goethite, FeO(OH), is the yellow-brown bog iron that collects under swamps.",
+      "title": "The iron ores"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Siderite, FeCO3, is iron carbonate, 48 per cent iron, pale tan to yellow-brown where fresh and brown where it has weathered."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Siderite fed Europe's iron for centuries. The Weald of Sussex and Kent smelted its clay ironstone from Roman times through the Middle Ages and was England's iron country until the eighteenth century (Cleere and Crossley, The Iron Industry of the Weald, 1985)."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The Coal Measures carry it as clay ironstone nodules and as blackband, ironstone beds with their own coal in them, which David Mushet found in Scotland in 1801 and which fed Staffordshire and Lanarkshire. Erzberg in Styria is a mountain of it, mined since the Middle Ages and still worked in terraces."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Here it lies in two kinds of ground: beds in the coal measures under temperate country, layers and nodules of it among seams of coal, and sparry iron, massive siderite in limestone, in the mountains. It is low in sulfur, its phosphorus varies from bed to bed, and it often carries manganese, which made Styrian steel prized."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:roasted_siderite",
+      "text": "A carbonate must be roasted before it smelts: at about 500 °C FeCO3 gives up its carbon dioxide and leaves FeO, which the air takes on to Fe2O3 and Fe3O4. Roast raw siderite on a campfire or in a smoker. The bloomery refuses it raw; roasted, it blooms like any other iron ore (Tylecote, A History of Metallurgy).",
+      "title": "Roasting siderite"
+    }
+  ]
+}

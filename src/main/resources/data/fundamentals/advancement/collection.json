@@ -48,6 +48,18 @@
         ]
       }
     },
+    "fundamentals:raw_siderite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_siderite"
+            ]
+          }
+        ]
+      }
+    },
     "fundamentals:raw_pyrolusite": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {

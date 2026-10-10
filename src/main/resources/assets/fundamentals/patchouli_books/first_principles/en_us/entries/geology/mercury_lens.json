@@ -2,7 +2,7 @@
   "name": "Mercury Lens",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_cinnabar",
-  "sortnum": 18,
+  "sortnum": 20,
   "pages": [
     {
       "type": "patchouli:text",

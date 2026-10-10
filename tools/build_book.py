@@ -21,7 +21,7 @@ WHERE = {
     "anywhere": "anywhere in the overworld", "porphyry": "under mountains and hills", "arid_oxide": "in badlands, savanna and desert",
     "laterite": "under jungle, savanna and mangrove", "pegmatite": "in mountains, hills and badlands", "carbonatite": "under mountains and badlands",
     "alkaline": "under taiga and snowy country", "ion_clay": "under jungle", "wetland": "in swamps and bogs", "hydrothermal": "in mountain and hill country",
-    "placer": "in beach and river sand",
+    "placer": "in beach and river sand", "temperate": "under temperate forest, plains, hills and swamp", "alpine": "in the mountains",
 }
 STYLE = {"pockets": "masses", "seams": "layers", "disseminated": "scattered grains", "top": "an enriched top"}
 KIND = {"bed": "a bed", "plug": "a plug", "blanket": "a blanket just under the surface", "vein": "a vein"}
@@ -172,23 +172,37 @@ def geology():
 
 def ironworking():
     category("ironworking", "By hand", "Iron, copper and lead the way they were won for three thousand years, before any machine.", "fundamentals:smithing_hammer", 1)
+    entry("ironworking", "iron_ores", "The iron ores", "fundamentals:raw_siderite", pages_of(
+        "Four minerals carry the world's iron. Hematite, Fe2O3, is 70 per cent iron and red however dark it looks; it makes the great banded beds. "
+        "Magnetite, Fe3O4, is 72 per cent, black and magnetic, in beds deep down. Goethite, FeO(OH), is the yellow-brown bog iron that collects "
+        "under swamps. Siderite, FeCO3, is iron carbonate, 48 per cent iron, pale tan to yellow-brown where fresh and brown where it has weathered.", "The iron ores") + pages_of(
+        "Siderite fed Europe's iron for centuries. The Weald of Sussex and Kent smelted its clay ironstone from Roman times through the Middle Ages "
+        "and was England's iron country until the eighteenth century (Cleere and Crossley, The Iron Industry of the Weald, 1985). The Coal Measures "
+        "carry it as clay ironstone nodules and as blackband, ironstone beds with their own coal in them, which David Mushet found in Scotland in 1801 "
+        "and which fed Staffordshire and Lanarkshire. Erzberg in Styria is a mountain of it, mined since the Middle Ages and still worked in terraces.") + pages_of(
+        "Here it lies in two kinds of ground: beds in the coal measures under temperate country, layers and nodules of it among seams of coal, "
+        "and sparry iron, massive siderite in limestone, in the mountains. It is low in sulfur, its phosphorus varies from bed to bed, and it often "
+        "carries manganese, which made Styrian steel prized.") + [
+        spotlight("fundamentals:roasted_siderite", "A carbonate must be roasted before it smelts: at about 500 °C FeCO3 gives up its carbon dioxide and leaves FeO, "
+                  "which the air takes on to Fe2O3 and Fe3O4. Roast raw siderite on a campfire or in a smoker. The bloomery refuses it raw; "
+                  "roasted, it blooms like any other iron ore (Tylecote, A History of Metallurgy).", "Roasting siderite")], 0)
     entry("ironworking", "bloomery", "The bloomery", "fundamentals:bloomery", pages_of(
         "Build a bloomery out of clay, load it with iron ore and charcoal, light it with a torch and wait. Only charcoal: the sulfur in coal "
-        "ruins iron. What comes out is not an ingot but a bloom, a spongy lump of iron and slag that never melted.", "The bloomery")
-        + [crafting("fundamentals:bloomery")], 0)
+        "ruins iron. What comes out is not an ingot but a bloom, a spongy lump of iron and slag that never melted. Siderite goes in roasted.", "The bloomery")
+        + [crafting("fundamentals:bloomery")], 1)
     entry("ironworking", "bloom", "Bloom and hammer", "fundamentals:iron_bloom", pages_of(
         "A bloom is hammered, not cast. Beat it with the smithing hammer to drive the slag out and weld the iron together into wrought iron. "
         "Copper comes straight out of the bloomery from malachite, azurite and cuprite. Galena has to be roasted on a fire first, which "
         "drives off its sulfur; the roasted ore then gives lead bullion, lead still holding its silver, which a furnace remelts to lead.", "Bloom and hammer") + pages_of(
-        "A furnace never reduces iron ore, and neither does a fan. Create's crushing wheels grind hematite, magnetite and goethite to crushed iron ore, "
+        "A furnace never reduces iron ore, and neither does a fan. Create's crushing wheels grind hematite, magnetite, goethite and roasted siderite to crushed iron ore, "
         "and that goes to The Factory Must Grow's blast furnace, which has the coke and the heat. Crimsite is the iron stone and crushes to hematite; "
         "washed gravel leaves a little magnetite black sand. The slag every smelt leaves is The Factory Must Grow's own, which its concrete and asphalt take as aggregate, as the world's slag goes to cement and roads.")
-        + [crafting("fundamentals:smithing_hammer")], 1)
+        + [crafting("fundamentals:smithing_hammer")], 2)
     entry("ironworking", "mortar", "Mortar and pestle", "fundamentals:mortar_and_pestle", pages_of(
         "A mortar and pestle grinds by hand what Create's millstone grinds by power: grain to flour, bone to meal, and coloured minerals "
         "to the pigments painters have ground since antiquity: hematite red, goethite yellow, malachite green, azurite blue, pyrolusite black, "
         "cinnabar vermilion. Hold the mortar in one hand and the material in the other.", "Mortar and pestle")
-        + [crafting("fundamentals:mortar_and_pestle")], 2)
+        + [crafting("fundamentals:mortar_and_pestle")], 3)
 
 
 def rare_earths():

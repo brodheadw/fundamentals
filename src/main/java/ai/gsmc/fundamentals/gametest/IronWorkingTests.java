@@ -5,17 +5,24 @@ import ai.gsmc.fundamentals.ironworking.BloomeryBlock;
 import ai.gsmc.fundamentals.ironworking.BloomeryBlockEntity;
 import ai.gsmc.fundamentals.ironworking.IronWorking;
 import ai.gsmc.fundamentals.registry.HandTools;
+import ai.gsmc.fundamentals.worldgen.DepositFeature;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.GameType;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.levelgen.placement.PlacedFeature;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
@@ -94,4 +101,38 @@ public class IronWorkingTests {
         helper.succeed();
     }
 
+    @GameTest(template = "empty")
+    public void bloomeryTakesSideriteOnlyRoasted(GameTestHelper helper) {
+        helper.setBlock(POS, IronWorking.bloomery());
+        Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+        BloomeryBlockEntity bloomery = helper.getBlockEntity(POS);
+        use(helper, player, new ItemStack(item("fundamentals:raw_siderite")));
+        helper.assertTrue(bloomery.oreCount() == 0, "raw siderite is a carbonate and must be roasted before the bloomery takes it");
+        use(helper, player, new ItemStack(item("fundamentals:roasted_siderite")));
+        helper.assertTrue(bloomery.oreCount() == 1, "the bloomery should take roasted siderite");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void sideriteLiesInTheCoalMeasures(GameTestHelper helper) {
+        ServerLevel level = helper.getLevel();
+        ResourceKey<PlacedFeature> placed = ResourceKey.create(Registries.PLACED_FEATURE, Fundamentals.id("coal_measures"));
+        helper.assertTrue(level.registryAccess().registryOrThrow(Registries.BIOME).getOrThrow(Biomes.FOREST).getGenerationSettings().features()
+                .stream().anyMatch(step -> step.stream().anyMatch(feature -> feature.is(placed))), "the coal measures should generate under forest");
+        DepositFeature.Config shipped = (DepositFeature.Config) level.registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE)
+                .get(Fundamentals.id("coal_measures")).config();
+        DepositFeature.Config small = new DepositFeature.Config(shipped.shape(), shipped.host(), shipped.ores(), new DepositFeature.Range(6, 6),
+                shipped.thickness(), shipped.height(), shipped.replaceable());
+        BlockPos centre = helper.absolutePos(new BlockPos(1, 8, 1));
+        Iterable<BlockPos> box = BlockPos.betweenClosed(centre.offset(-6, -5, -6), centre.offset(6, 5, 6));
+        box.forEach(pos -> level.setBlock(pos, Blocks.STONE.defaultBlockState(), 2));
+        DepositFeature.INSTANCE.place(small, level, level.getChunkSource().getGenerator(), level.getRandom(), centre);
+        int siderite = 0;
+        for (BlockPos pos : box) {
+            siderite += BuiltInRegistries.BLOCK.getKey(level.getBlockState(pos).getBlock()).getPath().equals("siderite_ore") ? 1 : 0;
+        }
+        box.forEach(pos -> level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2));
+        helper.assertTrue(siderite > 0, "a coal measures bed placed in stone should carry siderite");
+        helper.succeed();
+    }
 }
