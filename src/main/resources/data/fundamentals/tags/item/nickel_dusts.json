@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:converter_matte_dust",
+    "fundamentals:nickel_matte_dust",
+    "fundamentals:nickel_oxide",
+    "fundamentals:roasted_pentlandite"
+  ]
+}

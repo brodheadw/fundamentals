@@ -81,7 +81,7 @@ public final class FerrousMaterials {
         reg("ferrochrome", MaterialType.ALLOY, "Fe-Cr-C", forms(INGOT),
                 MaterialProperties.builder().hardness(0.85).heatResistance(0.65));
         reg("ferromanganese", MaterialType.ALLOY, "", forms(INGOT, DUST), MaterialProperties.builder().hardness(0.70));
-        reg("ferronickel", MaterialType.ALLOY, "", forms(INGOT, DUST),
+        reg("ferronickel", MaterialType.ALLOY, "Fe-Ni", forms(INGOT),
                 MaterialProperties.builder().magnetStrength(0.25).hardness(0.55));
         reg("ferromolybdenum", MaterialType.ALLOY, "", forms(INGOT, DUST),
                 MaterialProperties.builder().heatResistance(0.80).hardness(0.80));

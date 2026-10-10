@@ -69,7 +69,7 @@ public class TakeoverTests {
                         .is(TagKey.create(Registries.ITEM, ResourceLocation.parse(tag))), item + " is in #" + tag + ", which Create crushes or smelts straight to metal"));
         var recipes = helper.getLevel().getRecipeManager();
         helper.assertTrue(recipes.byKey(ResourceLocation.parse("create:smelting/iron_ingot_from_crushed")).isEmpty(), "a furnace still reduces crushed iron ore");
-        for (String id : new String[] {"fundamentals:uses/zinc_ingot", "fundamentals:uses/nickel_ingot"}) {
+        for (String id : new String[] {"fundamentals:uses/zinc_ingot", "fundamentals:platinum/nickel_electrowinning"}) {
             helper.assertTrue(recipes.byKey(ResourceLocation.parse(id)).isPresent(), id + " did not load");
         }
         helper.succeed();

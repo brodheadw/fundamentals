@@ -1,0 +1,29 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "machines": [
+    "tfmg:electrode",
+    "tfmg:electrode"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "fundamentals:cobalt_chloride_liquor"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:cobalt_ingot"
+    },
+    {
+      "id": "fundamentals:chlorine",
+      "amount": 250
+    }
+  ]
+}

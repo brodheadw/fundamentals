@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smoking",
+  "category": "misc",
+  "ingredient": {
+    "item": "fundamentals:converter_matte_dust"
+  },
+  "result": {
+    "id": "fundamentals:nickel_oxide"
+  },
+  "experience": 0.1,
+  "cookingtime": 200
+}
