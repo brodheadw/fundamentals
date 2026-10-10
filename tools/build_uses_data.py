@@ -35,7 +35,8 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "hafnium_tetrachloride": "Hafnium Tetrachloride", "yttria_stabilised_zirconia": "Yttria-Stabilised Zirconia",
          "beryl_frit": "Beryl Frit", "beryllium_hydroxide": "Beryllium Hydroxide", "ammonium_fluoroberyllate": "Ammonium Fluoroberyllate",
          "beryllium_pebbles": "Beryllium Pebbles", "dimensionally_stable_anode": "Dimensionally Stable Anode", "red_mud": "Red Mud",
-         "aluminium_hydroxide": "Aluminium Hydroxide", "alumina": "Alumina", "cryolite": "Cryolite"}
+         "aluminium_hydroxide": "Aluminium Hydroxide", "alumina": "Alumina", "cryolite": "Cryolite",
+         "nickel_oxide": "Nickel Oxide", "nickel_pellets": "Nickel Pellets"}
 # The magnet alloys and the forms each polarizes from, in the order of magnet.MagnetGrade; the magnet is <alloy>_magnet.
 MAGNET_ALLOYS = {"neodymium_iron_boron": ("ingot", "plate"), "dysprosium_neodymium_iron_boron": ("ingot", "plate"),
                  "samarium_cobalt": ("ingot", "plate"), "alnico": ("ingot",)}
@@ -329,12 +330,35 @@ def zinc():
 
 
 def nickel():
-    """Pentlandite roasts to a nickel oxide that charcoal reduces at a blaze cake's heat, its iron going to slag. Laterite is
-    too lean to roast and is smelted whole with charcoal, as it is in the electric furnaces of Indonesia."""
+    """Carbon reduces iron with nickel, so a nickel ore smelted with carbon gives not nickel but ferronickel: roasted pentlandite
+    or laterite smelted whole, as the rotary kiln-electric furnaces of New Caledonia and Indonesia smelt it, to an alloy of 20 to 40
+    per cent nickel (Crundwell et al., Extractive Metallurgy of Nickel, Cobalt and Platinum Group Metals, 2011), taken here as a third.
+    It goes into stainless steel, where two thirds of the world's nickel goes; class 1 nickel comes off the matte, by the sulfate leach
+    and electrowinning or by the Mond process. Matte roasted dead gives off its sulfur and leaves nickel oxide; water gas reduces it
+    at 400 C and its carbon monoxide carries the nickel off at 50 C as the carbonyl, Ni + 4 CO -> Ni(CO)4, which decomposes on hot
+    pellets at about 230 C to nickel 99.97 per cent pure and gives the monoxide back (Mond, Langer and Quincke, 1890; Clydach from
+    1902). What does not volatilise is the residue the Acton refinery took the platinum metals from. The leach liquor carries the
+    cobalt: an organophosphorus extractant (Cyanex 272 in the West, P507 in China) takes cobalt over nickel at about pH 5 and
+    hydrochloric acid strips it to cobalt chloride, which electrowins to cobalt and chlorine, as at Nikkelverk."""
     roast("pentlandite", "roasted_pentlandite")
-    mixing("nickel_ingot", item("roasted_pentlandite") + item("minecraft:charcoal"), [result("tfmg:nickel_ingot"), result("tfmg:slag")], "superheated")
-    mixing("nickel_ingot_from_laterite", item("raw_nickel_laterite", 4) + item("minecraft:charcoal", 2),
-           [result("tfmg:nickel_ingot"), result("tfmg:slag", 2)], "superheated")
+    roast("converter_matte_dust", "nickel_oxide", raw=False)
+    mixing("ferronickel", item("roasted_pentlandite") + item("minecraft:charcoal"), [result("ferronickel_ingot"), result("tfmg:slag")], "superheated")
+    mixing("ferronickel_from_laterite", item("raw_nickel_laterite", 4) + item("minecraft:charcoal", 2),
+           [result("ferronickel_ingot"), result("tfmg:slag", 2)], "superheated")
+    pgm_vat("nickel_carbonyl", item("nickel_oxide", 2) + [fluid("water_gas", 1000)],
+            [out_fluid("nickel_carbonyl", 500), {"id": "fundamentals:platinum_group_concentrate", "chance": 0.1}], folder=USES)
+    pgm_vat("carbonyl_decomposition", [fluid("nickel_carbonyl", 500)], [result("nickel_pellets", 2), out_fluid("water_gas", 500)], folder=USES)
+    write(USES / "nickel_ingot_from_pellets.json", {"type": "create:compacting", "heat_requirement": "heated", "ingredients": item("nickel_pellets"),
+                                                    "results": [result("tfmg:nickel_ingot")]})
+    pgm_vat("cobalt_extraction", [fluid("nickel_copper_sulfate", 1000), fluid("p507", 250), fluid("hydrochloric_acid", 50)],
+            [out_fluid("nickel_sulfate_liquor", 950), out_fluid("cobalt_chloride_liquor", 50), out_fluid("p507", 245)], heat=None, folder=USES)
+    pgm_vat("nickel_electrowinning_from_raffinate", [fluid("nickel_sulfate_liquor", 500)],
+            [result("tfmg:nickel_ingot"), {"id": "minecraft:copper_ingot", "chance": 0.5}, out_fluid("tfmg:sulfuric_acid", 250)],
+            machines=("tfmg:electrode", "tfmg:electrode"), heat=None, folder=USES)
+    pgm_vat("cobalt_electrowinning", [fluid("cobalt_chloride_liquor", 500)], [result("cobalt_ingot"), out_fluid("chlorine", 250)],
+            machines=("tfmg:electrode", "tfmg:electrode"), heat=None, folder=USES)
+    tag_file(DATA / "tags/item/nickel_dusts.json", [f"fundamentals:{name}" for name in ("nickel_matte_dust", "converter_matte_dust", "roasted_pentlandite", "nickel_oxide")])
+    tag_file(DATA / "tags/item/sulfides.json", [f"fundamentals:{name}" for name in ("raw_pentlandite", "raw_cobaltite", "converter_matte_dust")])
 
 
 def tin():
@@ -502,6 +526,8 @@ def chromium():
                                    "result": {"id": "fundamentals:soda_ash"}, "experience": 0.1, "cookingtime": 200})
     mixing("ferrochrome", item("chromite_concentrate", 2) + item("tfmg:coal_coke") + tag("tfmg:flux"), [result("ferrochrome_ingot"), result("tfmg:slag")], "superheated")
     mixing("stainless_steel", item("ferrochrome_ingot", 3) + item("tfmg:nickel_ingot") + tag("c:ingots/steel", 6), [result("stainless_steel_ingot", 10)], "superheated")
+    mixing("stainless_steel_from_ferronickel", item("ferrochrome_ingot", 3) + item("ferronickel_ingot", 3) + tag("c:ingots/steel", 4),
+           [result("stainless_steel_ingot", 10)], "superheated")
     shaped(TFMG / "crafting/materials/steel_chemical_vat.json", ["PPP", "NTN", "PPP"],
            {"N": {"tag": "c:plates/stainless_steel"}, "P": {"item": "tfmg:heavy_plate"}, "T": {"item": "tfmg:steel_fluid_tank"}},
            {"count": 2, "id": "tfmg:steel_chemical_vat"})
@@ -925,7 +951,7 @@ def main():
     shutil.rmtree(PLATINUM, ignore_errors=True)
     shutil.rmtree(PLASTICS, ignore_errors=True)
     shutil.rmtree(TFMG_ASSETS / "models", ignore_errors=True)
-    for pattern in ("roasted_c*", "roasted_pentlandite_*", "copper_calcine_*", "zinc_oxide_*", "roasted_tin_*"):
+    for pattern in ("roasted_c*", "roasted_pentlandite_*", "nickel_oxide_*", "copper_calcine_*", "zinc_oxide_*", "roasted_tin_*"):
         for stale in ROASTING.glob(pattern):
             stale.unlink()
     magnets()

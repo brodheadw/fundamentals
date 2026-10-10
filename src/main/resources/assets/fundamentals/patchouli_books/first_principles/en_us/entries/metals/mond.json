@@ -1,0 +1,55 @@
+{
+  "name": "Mond nickel and its poisons",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:nickel_pellets",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Ludwig Mond found in 1890 that carbon monoxide carries nickel off as a gas at 50 °C and gives it back when heated past 180 °C, and iron, copper and cobalt hardly at all (Mond, Langer and Quincke, Journal of the Chemical Society, 1890).",
+      "title": "The Mond process"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "His refinery at Clydach in Wales has run on it since 1902, and Copper Cliff in Sudbury runs it under pressure."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Converter matte roasted dead on a campfire or in a smoker burns off its sulfur and leaves nickel oxide."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two nickel oxide and 1,000 mB of water gas in a heated chemical vat with a mixer give 500 mB of nickel carbonyl, the water gas's hydrogen reducing the oxide at 400 °C and its monoxide taking the nickel, Ni + 4 CO to Ni(CO)4; one time in ten the residue is a platinum group concentrate, as Clydach's residues fed the Acton refinery."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "500 mB of carbonyl in a heated vat decomposes at about 230 °C on hot pellets to two nickel pellets, 99.97 per cent nickel, and 500 mB of the gas goes back round. A heated press over a basin squeezes a pellet into a nickel ingot."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Nickel carbonyl is among the most poisonous gases in industry. NIOSH puts the level immediately dangerous to life at 2 parts per million, and its faint musty smell comes only above that.",
+      "title": "Nickel carbonyl"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It does not eat a pipe or a tank, but where it gets out, from an open pipe end, a broken pipe, tank or vat, or a basin, it reaches three blocks: headache, nausea and weakness at once, and a hard hit every second."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The worst comes later. A day or so after exposure the lungs fill (pulmonary oedema), however well the victim felt; here it comes half a minute later, as withering that lasts four seconds for each second breathed. Only Create's diving helmet on a filled backtank keeps it out, and it burns two of the tank's air a second doing so."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Keep the carbonyl in closed pipes and tanks, and wear the mask to break into them."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The dusts of the nickel smelter cause lung and nasal cancer: the men who roasted and leached matte at Clydach died of them at many times the expected rate (Doll, 1958), and the International Agency for Research on Cancer puts nickel compounds in its first group.",
+      "title": "The dusts and the fume"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Nickel matte, converter matte, roasted pentlandite and nickel oxide held in the hand or stirred in a basin are breathed by everyone near. And a sulfide roasting on a lit campfire or in a lit smoker or furnace, pentlandite, cobaltite or matte, gives off sulfur dioxide that stings anyone within two blocks."
+    }
+  ]
+}

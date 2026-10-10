@@ -127,12 +127,17 @@ GASES = {
     # the two volatile tetroxides of the platinum refinery: osmium's pale yellow, ruthenium's yellow-orange
     "osmium_tetroxide": ("Osmium Tetroxide", 0xF2E8A0),
     "ruthenium_tetroxide": ("Ruthenium Tetroxide", 0xF0A830),
+    # Mond's volatile nickel carbonyl, a colourless liquid boiling at 43 C that the volatiliser gives off as vapour
+    "nickel_carbonyl": ("Nickel Carbonyl", 0xEEEEDC),
 }
-# The base-metal refinery's sulfate leach, green with nickel, and the precious-metal refinery's chloride liquors, the colours of
+# The base-metal refinery's sulfate leach, green with nickel, its raffinate greener once the cobalt is out, the cobalt stripped as the
+# rose chloride, and the precious-metal refinery's chloride liquors, the colours of
 # their complexes: chloroplatinic acid orange, tetrachloropalladate red-brown, palladium's tetrammine colourless, hexachloroiridate
 # dark red-brown, rhodium's chloro complexes rose.
 PLATINUM_LIQUORS = {
     "nickel_copper_sulfate": ("Nickel-Copper Sulfate Liquor", 0x58A890),
+    "nickel_sulfate_liquor": ("Nickel Sulfate Liquor", 0x4CA060),
+    "cobalt_chloride_liquor": ("Cobalt Chloride Liquor", 0xD25A78),
     "platinum_palladium_liquor": ("Platinum-Palladium Liquor", 0xC8701E),
     "palladium_liquor": ("Palladium Liquor", 0xA8542A),
     "palladium_tetrammine_liquor": ("Palladium Tetrammine Liquor", 0xE6E8E0),

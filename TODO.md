@@ -56,6 +56,14 @@ What's agreed but not built, in the order it's likely to go. The working plan be
   to oxide, where the works retorted the zinc off first; cupellation is a heated basin, not a reverberatory hearth; and
   Moebius electrorefining, cyanidation and the copper anode slimes are not modelled. Litharge in lead glass waits.
 - **Cobalt blue** uses roasted cobaltite directly; a cobalt oxide form would be cleaner.
+- **Nickel and cobalt loose ends.** The Congo's copper-cobalt ores (heterogenite, carrollite), three quarters of real cobalt, are not
+  modelled; cobalt comes off the nickel refinery's sulfate liquor or cobaltite. Laterite has no high-pressure acid leach (HPAL) to
+  mixed hydroxide, so no cobalt or scandium off it, and no nickel pig iron grade below ferronickel. The cobalt extraction folds
+  extraction, scrub and strip into one vat step on P507 rather than a mixer-settler battery on Cyanex 272, which the mod does not make.
+  The Mond volatiliser folds the 400 °C reducer and the 50 °C volatiliser into one heated vat, and copper is not leached out of
+  the roasted matte first. The carbonyl's delayed oedema is kept in memory and lost on a restart; nickel carbonyl has no item
+  form. Sulfur dioxide comes only off nickel and cobalt sulfides roasting on campfires and in furnaces: chalcopyrite, sphalerite,
+  galena and molybdenite roasts, the bloomery's matte smelt and the converter give off none, and it is not a fluid to make acid of.
 - **Arsenic.** Roasting cobaltite really gives off arsenic trioxide. It is not an item yet, and a campfire roast has only
   one output. (Chlorine, the other missing by-product, now comes off the molten-chloride electrolyses.)
 - **Chromium loose ends.** Ferrochrome smelts in a superheated basin; The Factory Must Grow's arc furnace (a firebrick vat on

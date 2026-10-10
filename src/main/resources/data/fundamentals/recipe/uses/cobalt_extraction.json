@@ -1,0 +1,43 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "machines": [
+    "tfmg:mixing"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "fundamentals:nickel_copper_sulfate"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:p507"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 50,
+      "fluid": "fundamentals:hydrochloric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:nickel_sulfate_liquor",
+      "amount": 950
+    },
+    {
+      "id": "fundamentals:cobalt_chloride_liquor",
+      "amount": 50
+    },
+    {
+      "id": "fundamentals:p507",
+      "amount": 245
+    }
+  ]
+}

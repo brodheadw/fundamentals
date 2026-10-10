@@ -19,12 +19,21 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Pentlandite roasts on a fire to a nickel oxide; with a charcoal, superheated, it gives a nickel ingot and the iron goes to slag, and whatever platinum it carried with it. Smelted raw in the bloomery instead, it gives the nickel matte the platinum metals are won from.",
+      "text": "Carbon does not part nickel from iron: it reduces both, and they alloy. Pentlandite roasted on a fire and smelted with a charcoal, superheated, gives a ferronickel ingot and a slag, and whatever platinum it carried is lost in it.",
+      "title": "Ferronickel"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Nickel laterite, a weathered rock of 1.5 to 2.5 per cent nickel, is smelted whole: four of it with two charcoal, superheated, give one ferronickel and two slag, as the rotary kilns and electric furnaces of New Caledonia and Indonesia smelt it at about 1,550 °C."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Real ferronickel runs 20 to 40 per cent nickel, and nickel pig iron less (Crundwell and others, Extractive Metallurgy of Nickel, Cobalt and Platinum Group Metals, 2011); here an ingot is a third nickel. None of it is ever nickel metal.",
       "title": "Nickel"
     },
     {
       "type": "patchouli:text",
-      "text": "Nickel laterite is too lean to roast: four of it with two charcoal, superheated, give one ingot and two slag, as the electric furnaces of Indonesia smelt it whole."
+      "text": "It goes where two thirds of the world's nickel goes, into stainless steel, which wants the iron anyway: three ferrochrome, three ferronickel and four steel, superheated, make ten stainless. Nickel metal comes from sulfide matte: leached and electrowon, under the platinum metals, or by Mond's carbonyl."
     }
   ]
 }

@@ -227,6 +227,9 @@ def main():
     heap("aluminium_hydroxide", (255, 255, 255), (240, 240, 236), (192, 192, 186)).save(TEXTURES / "item/aluminium_hydroxide.png")
     heap("alumina", (255, 255, 255), (244, 244, 244), (200, 202, 206)).save(TEXTURES / "item/alumina.png")
     heap("cryolite", (255, 255, 255), (232, 236, 238), (178, 186, 190)).save(TEXTURES / "item/cryolite.png")
+    # nickel oxide roasted from matte is the green of bunsenite, greyed by what the roast leaves; carbonyl pellets are bright, nearly pure nickel
+    paint_raw("nickel_oxide", ((50, 72, 44), (90, 120, 72), (130, 160, 102), (178, 204, 148))).save(TEXTURES / "item/nickel_oxide.png")
+    paint_raw("nickel_pellets", ((96, 96, 90), (160, 160, 152), (206, 206, 198), (244, 244, 238))).save(TEXTURES / "item/nickel_pellets.png")
     magnets()
     print("uses textures written")
 

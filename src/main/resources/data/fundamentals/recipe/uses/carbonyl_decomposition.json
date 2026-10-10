@@ -1,0 +1,30 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "machines": [
+    "tfmg:mixing"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "fundamentals:nickel_carbonyl"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:nickel_pellets",
+      "count": 2
+    },
+    {
+      "id": "fundamentals:water_gas",
+      "amount": 500
+    }
+  ],
+  "heat_requirement": "heated"
+}
