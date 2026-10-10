@@ -24,8 +24,9 @@ import java.util.function.BiConsumer;
  * the block the clarifier's sludge is packed into, the mercury cinnabar is retorted to, the zirconium and hafnium chlorides of the
  * Kroll road and the yttria-stabilised zirconia turbine blades are coated with, and the frit, hydroxide, fluoroberyllate and pebbles
  * of the road from beryl to beryllium, the dimensionally stable anode of the chlor-alkali cell, and the red mud, aluminium hydroxide, alumina
- * and cryolite of the Bayer and Hall-Héroult road to aluminium, and the nickel oxide the Mond process takes and the pellets it gives, and the MCrAlY
- * bond coat under a turbine blade's ceramic. The recipes are written by tools/build_uses_data.py.
+ * and cryolite of the Bayer and Hall-Héroult road to aluminium, the nickel oxide the Mond process takes and the pellets it gives, the MCrAlY
+ * bond coat under a turbine blade's ceramic, the boric acid that dopes silicon p-type and goes into ferroboron, and the galvanized plate
+ * hot-dip zinc keeps from rusting. The recipes are written by tools/build_uses_data.py.
  */
 public final class Uses {
 
@@ -75,6 +76,8 @@ public final class Uses {
     private static Item ammoniumPerrhenate;
     private static Item lithiumCarbonate;
     private static Item mcralyPowder;
+    private static Item boricAcid;
+    private static Item galvanizedSteelPlate;
     private static Block sludgeBlock;
     private static Item sludgeBlockItem;
 
@@ -89,7 +92,8 @@ public final class Uses {
                 aluminiumPowder, roastedTinConcentrate, solder, titaniaSlag, magnesiumChloride, silverZincCrust, litharge, thoriumNitrate, gasMantle, mercury,
                 crudeZirconiumTetrachloride, zirconiumTetrachloride, hafniumTetrachloride, yttriaStabilisedZirconia, berylFrit, berylliumHydroxide, ammoniumFluoroberyllate,
                 berylliumPebbles, dimensionallyStableAnode, redMud, aluminiumHydroxide, alumina, cryolite, nickelOxide, nickelPellets,
-                tungsticAcid, ammoniumParatungstate, ammoniumPerrhenate, lithiumCarbonate, mcralyPowder, sludgeBlockItem);
+                tungsticAcid, ammoniumParatungstate, ammoniumPerrhenate, lithiumCarbonate, mcralyPowder,
+                boricAcid, galvanizedSteelPlate, sludgeBlockItem);
     }
 
     public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
@@ -144,6 +148,8 @@ public final class Uses {
         registry.accept(id("ammonium_perrhenate"), ammoniumPerrhenate = new Item(new Item.Properties()));
         registry.accept(id("lithium_carbonate"), lithiumCarbonate = new Item(new Item.Properties()));
         registry.accept(id("mcraly_powder"), mcralyPowder = new Item(new Item.Properties()));
+        registry.accept(id("boric_acid"), boricAcid = new Item(new Item.Properties()));
+        registry.accept(id("galvanized_steel_plate"), galvanizedSteelPlate = new Item(new Item.Properties()));
         registry.accept(id("clarifier_sludge_block"), sludgeBlockItem = new BlockItem(sludgeBlock, new Item.Properties()));
     }
 

@@ -32,8 +32,16 @@
     },
     {
       "type": "patchouli:text",
-      "text": "One ingot draws to four filaments, and the Factory's light bulb now burns one. One ingot and two coals, superheated, carburise to two tungsten carbide, and Create's mechanical drill now bites with it. Ten per cent of the superalloy is tungsten.",
+      "text": "One ingot draws to four filaments, and the Factory's light bulb now burns one.",
       "title": "What it is for"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "In a vacuum the filament boils away and blackens the glass; Langmuir filled the bulb with an inert gas in 1913, and lamps have been argon-filled since: a filament, a framed glass, four copper and three steel nuggets and 50 mB of argon under a mixer make three bulbs where crafting makes two."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "One ingot and two coals, superheated, carburise to two tungsten carbide, and Create's mechanical drill now bites with it. Ten per cent of the superalloy is tungsten."
     }
   ]
 }

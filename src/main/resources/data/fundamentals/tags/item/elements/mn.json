@@ -1,6 +1,8 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:ferromanganese_ingot",
+    "fundamentals:manganese_steel_ingot",
     "fundamentals:pyrolusite_ore",
     "fundamentals:raw_pyrolusite",
     "fundamentals:raw_wolframite",

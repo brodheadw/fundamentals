@@ -1,0 +1,29 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_pyrolusite"
+    },
+    {
+      "item": "fundamentals:raw_pyrolusite"
+    },
+    {
+      "item": "tfmg:coal_coke"
+    },
+    {
+      "tag": "c:nuggets/iron"
+    },
+    {
+      "tag": "tfmg:flux"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:ferromanganese_ingot"
+    },
+    {
+      "id": "tfmg:slag"
+    }
+  ],
+  "heat_requirement": "superheated"
+}

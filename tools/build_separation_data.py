@@ -375,10 +375,12 @@ def chemistry():
     # The organophosphorus extractants are made neat (solvents() below) and cut with kerosene, a quarter extractant, only
     # as the organic is made up. Each is saponified then too, with lime rather than ammonia (calcium saponification, which
     # Chinese plants moved to so that the raffinate carries no ammonia): that is what sets the pH the cuts work at.
-    # Naphthenic acid is petroleum's own: washed out of the oil as soluble sodium soaps with soda ash and freed again with acid.
+    # Naphthenic acid is petroleum's own: washed out of the oil as soluble sodium soaps with caustic soda, as refineries do, and freed
+    # again with acid. Three fluids are more than a basin holds, so it is a vat.
     mixing("p204", [fluid("d2ehpa", 250), fluid("tfmg:kerosene", 750), item("tfmg:limesand")], [result_fluid("p204", 1000)])
     mixing("p507", [fluid("ehehpa", 250), fluid("tfmg:kerosene", 750), item("tfmg:limesand")], [result_fluid("p507", 1000)])
-    mixing("naphthenic_acid", [fluid("tfmg:heavy_oil", 1000), fluid("tfmg:sulfuric_acid", 250), item("soda_ash")], [result_fluid("naphthenic_acid", 500)], heated=True)
+    vat("naphthenic_acid", [fluid("tfmg:heavy_oil", 1000), fluid("caustic_soda", 250), fluid("tfmg:sulfuric_acid", 250)], [result_fluid("naphthenic_acid", 500)],
+        ["tfmg:mixing"], folder="mixing")
     # Froth flotation for bastnasite: the ground mineral beaten with water and a fatty-acid collector, naphthenic acid,
     # floats the rare earth carbonate off the gangue. About half of what goes in comes out as concentrate.
     mixing("bastnasite_concentrate", item("bastnasite_dust", 2) + [fluid("minecraft:water", 250), fluid("naphthenic_acid", 100)],
@@ -440,8 +442,10 @@ def chemistry():
     mixing(liquor, [item(salt), fluid("nitric_acid", 250)], [result_fluid(liquor, 250)], heated=True)
     # Bromine from bittern, as it was first made from the Stassfurt potash bitterns: chlorine oxidises the bromide,
     # Cl2 + 2 Br- -> Br2 + 2 Cl-, one bromine for each chlorine, and steam blown through the hot liquor carries the bromine
-    # out. What is left is bittern still, its magnesium chloride boiling down as it would have: two from 1,000 mB.
-    vat("bromine", [fluid("bittern", 1000), fluid("chlorine", 100)], [result_fluid("bromine", 100), result_item("magnesium_chloride", 2)],
+    # out. What is left is bittern still, its magnesium chloride boiling down as it would have: two from 1,000 mB. Seawater holds
+    # 65 mg of bromide a litre, so the 10,000 mB of it behind this bittern really holds some 0.2 mB of bromine; 20 is a hundred times
+    # that, scarce enough to be worth the chlorine and plenty for the lamps.
+    vat("bromine", [fluid("bittern", 1000), fluid("chlorine", 20)], [result_fluid("bromine", 20), result_item("magnesium_chloride", 2)],
         ["tfmg:mixing"], folder="salt")
 
 

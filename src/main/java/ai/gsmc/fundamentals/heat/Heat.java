@@ -40,8 +40,10 @@ public final class Heat {
     public static final DataMapType<Block, HeatSource> SOURCES = DataMapType.builder(
             ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "heat_source"), Registries.BLOCK, HeatSource.CODEC).build();
 
-    /** °C = SCALE × biome temperature + OFFSET: tundra -5, taiga 1, plains 15, jungle 19, desert 45. */
-    public static final double SCALE = 25, OFFSET = -5;
+    /** Vanilla's biome temperature against the annual mean in °C, interpolated between: tundra -5, taiga 1, plains and swamp 15,
+     * jungle 26 as the wet tropics are, and the deserts, savannas, badlands and the Nether 30, a hot desert's year round.
+     * Vanilla's scale crowds the temperate and the tropical together (plains 0.8, jungle 0.95), so one straight line cannot place both. */
+    private static final double[][] CLIMATE = {{-1, -30}, {0, -5}, {0.8, 15}, {0.95, 26}, {2, 30}};
     /** Half the day-night swing under open sky, and what rain and thunder take off. */
     public static final double SWING = 5, RAIN = -3, THUNDER = -5;
     private static final int CACHE_TICKS = 20;
@@ -111,9 +113,8 @@ public final class Heat {
     /** The climate: biome, altitude, time of day and weather, the last two only under open sky. */
     public static double ambient(Level level, BlockPos pos) {
         Holder<Biome> biome = level.getBiome(pos);
-        double t = biome.value().getBaseTemperature();
         // vanilla's own height rule for snow: about a degree of its scale per eight hundred blocks above 80, which is a fifth of a °C per 8 blocks
-        double celsius = SCALE * t + OFFSET - Math.max(0, pos.getY() - 80) * 0.025;
+        double celsius = climate(biome.value().getBaseTemperature()) - Math.max(0, pos.getY() - 80) * 0.025;
         if (level.canSeeSky(pos) && level.dimensionType().hasSkyLight()) {
             double day = (level.getDayTime() % 24000) / 24000.0;
             celsius += SWING * Math.cos((day - 0.25) * 2 * Math.PI);
@@ -124,6 +125,16 @@ public final class Heat {
             }
         }
         return celsius;
+    }
+
+    /** A biome's annual mean, °C, for vanilla's base temperature {@code t}; past either end the line runs on. */
+    public static double climate(double t) {
+        int i = 1;
+        while (i < CLIMATE.length - 1 && t > CLIMATE[i][0]) {
+            i++;
+        }
+        double[] a = CLIMATE[i - 1], b = CLIMATE[i];
+        return a[1] + (t - a[0]) * (b[1] - a[1]) / (b[0] - a[0]);
     }
 
     /** Every source within reach, its own heat at its block and its outside heat falling off linearly to nothing at its reach, plus boosts

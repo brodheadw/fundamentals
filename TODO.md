@@ -106,6 +106,13 @@ What's agreed but not built, in the order it's likely to go. The working plan be
   gives off, are not modelled; nor is solvent extraction of the sulfate with D2EHPA. Beryllium's light, stiff aerospace parts and X-ray
   windows have no sink, nor non-sparking tools. The dust hazard is acute (a cough and nausea while it is breathed) where berylliosis is
   chronic, and dust in a chest, on a belt or in a vat is harmless.
+- **Manganese loose ends.** Ferromanganese goes only into Hadfield steel; the little manganese every ordinary steel takes as
+  deoxidiser and desulphuriser, silicomanganese, and electrolytic manganese metal are not modelled. Pyrolusite is near pure
+  MnO2, so the furnace's iron comes in as a nugget rather than with the ore.
+- **Primary molybdenum.** Molybdenite rides only in the porphyry stock, about one part to thirty of the copper; the Climax and
+  Henderson kind of deposit, mined for molybdenum alone and half the world's supply, is not generated.
+- **Alloy shorthand.** Alumel's manganese and silicon are folded into its aluminium; bell metal is the same bronze as the
+  bearings, not a richer tin bronze.
 
 ## Reagents
 
@@ -113,7 +120,9 @@ What's agreed but not built, in the order it's likely to go. The working plan be
   fertiliser and phosphating steel; the old route to phosphorus, phosphoric acid distilled with charcoal, is another.
 - **White phosphorus** ignites in air at about 30 °C and is kept under water. It is an inert item for now.
 - **Chlorine, phosphorus trichloride and titanium tetrachloride** are pipe-only fluids, so they neither fume nor poison. If they ever stand in
-  the world they belong with hydrofluoric and nitric acid in the fume handling.
+  the world they belong with the fuming acids in the fume handling.
+- **Acid strength.** Every acid is one strength, so hydrochloric acid always fumes as the concentrated acid does and nitric
+  acid always leaves aluminium alone as the concentrated acid does; dilute nitric really does attack aluminium.
 
 - **Salt loose ends.** Seawater is told from fresh water by biome (ocean and beach), so a pool dug on a beach is sea and a
   lagoon in a river biome is not; it is no block of its own and pours out as water, so poured seawater still waters crops
@@ -122,7 +131,8 @@ What's agreed but not built, in the order it's likely to go. The working plan be
   only in the evaporite beds. Bittern's potash is not drawn off, and bromine comes off it by steaming-out only (the air-blown
   process for seawater is not modelled).
 - **Bromine's real sinks.** Flame retardants (half the world's bromine), calcium bromide drilling brines, ethylene dibromide for
-  leaded petrol and silver bromide for film are not modelled; the halogen lamp is its one use.
+  leaded petrol and silver bromide for film are not modelled; the halogen lamp is its one use. Titanium holds it unharmed,
+  though dry bromine attacks titanium as dry chlorine does.
 
 ## Plastics
 

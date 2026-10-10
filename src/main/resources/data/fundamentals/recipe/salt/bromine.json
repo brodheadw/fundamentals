@@ -12,7 +12,7 @@
     },
     {
       "type": "neoforge:single",
-      "amount": 100,
+      "amount": 20,
       "fluid": "fundamentals:chlorine"
     }
   ],
@@ -24,7 +24,7 @@
   "results": [
     {
       "id": "fundamentals:bromine",
-      "amount": 100
+      "amount": 20
     },
     {
       "id": "fundamentals:magnesium_chloride",

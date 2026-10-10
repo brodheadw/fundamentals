@@ -67,18 +67,21 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.IntStream;
 
 /**
- * What the plant does to people and pipes. The fuming acids (hydrofluoric, nitric, aqua regia) and bromine hurt anyone within reach of them
+ * What the plant does to people and pipes. The fuming acids (hydrochloric, hydrofluoric, nitric, aqua regia) and bromine hurt anyone within reach of them
  * in the open: as blocks in the world, or in a basin they are being used in. Create's diving helmet on a filled
- * backtank is the gas mask, and breathes its air. Beryllium's hydroxide, oxide and salts are a dust that scars the lungs, and nickel matte,
+ * backtank is the gas mask, and breathes its air. Beryllium's hydroxide, oxide, salts and pebbles are a dust that scars the lungs, and nickel matte,
  * roasted pentlandite and nickel oxide a dust that causes lung and nasal cancer: held in the hand or stirred in a basin, they are breathed
  * the same way. A sulfide roasting on a lit campfire or in a lit smoker or furnace gives off sulfur dioxide. Nickel carbonyl is the worst
  * of them: it never eats a pipe, but where it escapes, from an open pipe end, a broken pipe or tank, or a basin, it hurts hard, and a day
  * later (half a minute here) the lungs fill and the body withers. And the acids eat copper: Create's pipes, pumps and valves carrying one
  * corrode and eventually burst, spilling it. The liquors are rare earth chlorides in dilute acid, and the spent liquor, the calcium chloride
- * liquor and bittern are chloride too, so they eat it as well, more slowly, and seawater, a tenth as salt as bittern, slower still.
- * Metal tanks go the same way, ten times slower for the thicker wall.
+ * liquor and bittern are chloride too, so they eat it as well, more slowly, and seawater, a tenth as salt as bittern, slower still: copper
+ * takes seawater well enough that cupronickel is the sea's standard pipe, and what fails is the plain copper of a fast intake.
+ * Metal tanks go the same way, ten times slower for the thicker wall. Concentrated nitric acid passivates aluminium, which is what it is
+ * shipped in, so it leaves The Factory Must Grow's aluminium alone.
  * Plastic pipes, pumps, valves and tanks do not corrode, but soften: past {@link #PLASTIC_SOFTENS} at the wall, from the heat round
- * them or the fluid in them, they sag and burst. Titanium shrugs off everything the plant carries but hydrofluoric acid, which eats
+ * them or the fluid in them, they sag and burst. Bromine is the exception: it swells and attacks polyethylene and polypropylene, and is
+ * kept in glass, lead-lined steel or fluoropolymer, so it eats plastic at an acid's pace. Titanium shrugs off everything the plant carries but hydrofluoric acid, which eats
  * it fast, dry chlorine, and hydrochloric acid gone hot, and it keeps its strength hot. A glass pipe is a copper pipe with a window,
  * and corrodes as one.
  * Caustic soda and the sodium aluminate liquor are the other way about: they leave copper and steel alone and eat aluminium, so only
@@ -97,8 +100,8 @@ public final class Hazards {
     public static double corrosionChance = 1.0 / 2400;
     /** Per tick, for a pipe carrying a liquor, crude liquor, spent liquor or any other chloride solution: on average eight minutes. */
     public static double liquorCorrosionChance = 1.0 / 9600;
-    /** Per tick, for a pipe carrying seawater: on average half an hour. */
-    public static double seawaterCorrosionChance = 1.0 / 36000;
+    /** Per tick, for a pipe carrying seawater: on average an hour. */
+    public static double seawaterCorrosionChance = 1.0 / 72000;
     /** Per tick, for a titanium pipe carrying hydrofluoric acid: on average thirty seconds. Fluoride dissolves the oxide skin
      * every other acid leaves, and the metal under it; dry chlorine and hot hydrochloric acid take it at copper's acid rate. */
     public static double fluorideChance = 1.0 / 600;
@@ -422,8 +425,8 @@ public final class Hazards {
     /** Per tick, the chance {@code carried} at {@code celsius} bursts a pipe of {@code state}. */
     public static double chance(BlockState state, FluidStack carried, double celsius) {
         return switch (wall(state)) {
-            case METAL -> eats(Separation.kind(carried.getFluid()), state) ? chance(carried) : 0;
-            case PLASTIC -> celsius > PLASTIC_SOFTENS ? softeningChance : 0;
+            case METAL -> eats(Separation.kind(carried.getFluid()), state) && !(is(carried, "nitric_acid") && aluminium(state)) ? chance(carried) : 0;
+            case PLASTIC -> celsius > PLASTIC_SOFTENS ? softeningChance : is(carried, "bromine") ? corrosionChance : 0;
             case TITANIUM -> is(carried, "hydrofluoric_acid") ? fluorideChance
                     : is(carried, "chlorine") || is(carried, "hydrochloric_acid") && celsius > TITANIUM_HCL ? corrosionChance : 0;
             case PROOF -> 0;
@@ -449,7 +452,11 @@ public final class Hazards {
 
     /** Whether a fluid of this kind eats a pipe, pump, valve or tank of this block: caustic only aluminium, the rest what corrodes. */
     public static boolean eats(@Nullable Reagents.Kind kind, BlockState state) {
-        return kind == Reagents.Kind.CAUSTIC ? ALUMINIUM.computeIfAbsent(state.getBlock(), Hazards::aluminium) : corrodes(kind) && corrodible(state);
+        return kind == Reagents.Kind.CAUSTIC ? aluminium(state) : corrodes(kind) && corrodible(state);
+    }
+
+    private static boolean aluminium(BlockState state) {
+        return ALUMINIUM.computeIfAbsent(state.getBlock(), Hazards::aluminium);
     }
 
     private static boolean aluminium(Block block) {
