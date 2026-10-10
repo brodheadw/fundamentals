@@ -1,0 +1,28 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "create:compacting",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "type": "neoforge:tag",
+      "amount": 250,
+      "tag": "c:argon"
+    },
+    {
+      "item": "chemica:stabilized_fibers"
+    },
+    {
+      "item": "chemica:stabilized_fibers"
+    }
+  ],
+  "results": [
+    {
+      "id": "chemica:carbon_fiber_strands"
+    }
+  ]
+}

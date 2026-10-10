@@ -1,0 +1,46 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:cast_iron_vat",
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "type": "neoforge:tag",
+      "amount": 1000,
+      "tag": "c:brine"
+    }
+  ],
+  "machines": [
+    "tfmg:electrode",
+    "tfmg:electrode"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
+  "results": [
+    {
+      "amount": 180,
+      "id": "tfmg:hydrogen"
+    },
+    {
+      "amount": 100,
+      "id": "fundamentals:salt_brine"
+    },
+    {
+      "amount": 360,
+      "id": "fundamentals:chlorine"
+    },
+    {
+      "amount": 360,
+      "id": "fundamentals:caustic_soda"
+    }
+  ]
+}

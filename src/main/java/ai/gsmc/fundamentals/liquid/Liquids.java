@@ -2,6 +2,7 @@ package ai.gsmc.fundamentals.liquid;
 
 import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.separation.Hazards;
+import ai.gsmc.fundamentals.separation.Separation;
 import com.simibubi.create.content.fluids.FluidTransportBehaviour;
 import com.simibubi.create.content.fluids.PipeConnection;
 import com.wildspell.fundamental.api.heat.Heat;
@@ -71,7 +72,7 @@ public final class Liquids {
         if (fluid == Fluids.EMPTY) {
             return null;
         }
-        Fluid still = fluid instanceof FlowingFluid flowing ? flowing.getSource() : fluid;
+        Fluid still = Separation.reagent(fluid instanceof FlowingFluid flowing ? flowing.getSource() : fluid);
         return still.builtInRegistryHolder().getData(PROPERTIES);
     }
 

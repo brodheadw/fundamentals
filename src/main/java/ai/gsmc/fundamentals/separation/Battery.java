@@ -76,7 +76,7 @@ public record Battery(List<MixerSettlerBlockEntity> stages) {
         if (!stages.stream().allMatch(s -> s.organic.getFluid().is(cut.organic()) && s.organic.getFluidAmount() >= batch)) {
             return Optional.of(new Stall("organic", name(cut.organic())));
         }
-        if (!tail.aqueous.getFluid().is(cut.strip()) || tail.aqueous.getFluidAmount() < batch) {
+        if (Separation.reagent(tail.aqueous.getFluid().getFluid()) != cut.strip() || tail.aqueous.getFluidAmount() < batch) {
             return Optional.of(new Stall("strip", name(cut.strip())));
         }
         int light = cut.lightOf(batch), heavy = cut.heavyOf(batch);

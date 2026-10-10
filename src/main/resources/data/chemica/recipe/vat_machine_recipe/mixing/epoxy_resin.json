@@ -1,0 +1,50 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "chemica:epichlorohydrin"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 250,
+      "tag": "c:caustic_soda"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "chemica:phenol"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "chemica:acetone"
+    }
+  ],
+  "machines": [
+    "tfmg:mixing"
+  ],
+  "min_size": 3,
+  "processing_time": 300,
+  "results": [
+    {
+      "amount": 1000,
+      "id": "chemica:epoxy_resin"
+    },
+    {
+      "amount": 150,
+      "id": "fundamentals:salt_brine"
+    }
+  ]
+}

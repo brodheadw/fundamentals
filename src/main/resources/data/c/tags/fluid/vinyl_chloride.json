@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:vinyl_chloride",
+    {
+      "id": "chemica:vinyl_chloride_monomer",
+      "required": false
+    },
+    {
+      "id": "chemica:flowing_vinyl_chloride_monomer",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:argon",
+    {
+      "id": "chemica:argon",
+      "required": false
+    },
+    {
+      "id": "chemica:flowing_argon",
+      "required": false
+    }
+  ]
+}

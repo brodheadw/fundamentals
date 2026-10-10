@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:nitric_acid",
+    "fundamentals:nitric_acid_flowing",
+    {
+      "id": "chemica:nitric_acid",
+      "required": false
+    },
+    {
+      "id": "chemica:flowing_nitric_acid",
+      "required": false
+    }
+  ]
+}

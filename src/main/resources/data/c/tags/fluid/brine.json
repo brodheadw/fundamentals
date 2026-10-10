@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:salt_brine",
+    {
+      "id": "chemica:brine",
+      "required": false
+    },
+    {
+      "id": "chemica:flowing_brine",
+      "required": false
+    }
+  ]
+}

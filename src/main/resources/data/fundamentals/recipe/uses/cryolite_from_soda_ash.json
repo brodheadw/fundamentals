@@ -8,9 +8,9 @@
       "item": "fundamentals:soda_ash"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 500,
-      "fluid": "fundamentals:hydrofluoric_acid"
+      "tag": "c:acids/hydrofluoric"
     }
   ],
   "results": [

@@ -23,9 +23,9 @@
       "item": "fundamentals:magnesium_ingot"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 100,
-      "fluid": "fundamentals:argon"
+      "tag": "c:argon"
     }
   ],
   "results": [

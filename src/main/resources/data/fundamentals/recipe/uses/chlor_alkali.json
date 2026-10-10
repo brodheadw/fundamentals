@@ -15,9 +15,9 @@
       "item": "fundamentals:dimensionally_stable_anode"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 1000,
-      "fluid": "fundamentals:salt_brine"
+      "tag": "c:brine"
     }
   ],
   "results": [

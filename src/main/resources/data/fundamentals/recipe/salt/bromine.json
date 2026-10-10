@@ -11,9 +11,9 @@
       "fluid": "fundamentals:bittern"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 20,
-      "fluid": "fundamentals:chlorine"
+      "tag": "c:chlorine"
     }
   ],
   "machines": [

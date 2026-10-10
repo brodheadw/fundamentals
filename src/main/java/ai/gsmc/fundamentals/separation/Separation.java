@@ -3,6 +3,7 @@ package ai.gsmc.fundamentals.separation;
 import ai.gsmc.fundamentals.Fundamentals;
 import com.simibubi.create.content.fluids.tank.FluidTankItem;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -20,6 +21,7 @@ import javax.annotation.Nullable;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.function.BiConsumer;
 
 /** Solvent extraction: the reagent fluids and the mixer-settler they run through; and the magnetomigration cell, the magnetic route for the cuts that have one. */
@@ -74,7 +76,17 @@ public final class Separation {
     /** What a fluid is to the separation line, or null for anything that is not a reagent. */
     @Nullable
     public static Reagents.Kind kind(Fluid fluid) {
-        return KINDS.get(fluid);
+        return KINDS.get(reagent(fluid));
+    }
+
+    /** The reagent of ours a fluid stands for: itself, or the one whose tag {@code fundamentals:<reagent>} holds it, as Chemica's hydrochloric acid stands for ours. */
+    @SuppressWarnings("deprecation")
+    public static Fluid reagent(Fluid fluid) {
+        if (KINDS.containsKey(fluid)) {
+            return fluid;
+        }
+        return fluid.builtInRegistryHolder().tags().map(TagKey::location).filter(id -> id.getNamespace().equals(Fundamentals.MOD_ID))
+                .map(id -> FLUIDS.get(id.getPath())).filter(Objects::nonNull).findFirst().orElse(fluid);
     }
 
     /** The clean liquor a crude one clarifies to, or the fluid itself if it is not crude. */

@@ -21,9 +21,9 @@
       "fluid": "fundamentals:p507"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 50,
-      "fluid": "fundamentals:hydrochloric_acid"
+      "tag": "c:acids/hydrochloric"
     }
   ],
   "results": [

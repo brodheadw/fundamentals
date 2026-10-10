@@ -17,9 +17,9 @@
       "item": "tfmg:limesand"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 250,
-      "fluid": "fundamentals:chlorine"
+      "tag": "c:chlorine"
     },
     {
       "type": "neoforge:single",
