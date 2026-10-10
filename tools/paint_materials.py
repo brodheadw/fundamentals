@@ -1,33 +1,19 @@
 #!/usr/bin/env python3
-"""Paints an item for every form a material comes in: concentrate, oxide, dust, ingot, nugget,
-plate and storage block. One silhouette per form, in vanilla's idiom (a dark rim, light from the
-top left), recoloured per material. Edit and re-run; don't hand-edit the PNGs.
-
-    python3 tools/paint_materials.py            # write textures
-    python3 tools/paint_materials.py sheet.png  # also write a labelled contact sheet
-
-Only the rare earths so far. Run tools/build_material_data.py afterwards.
-"""
 import random
 import sys
-from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
 from paint_minerals import P, ramp
+from common import TEXTURES
 
-OUT = Path(__file__).resolve().parent.parent / "src/main/resources/assets/fundamentals/textures"
-
-# These mirror the form lists in content/rare_earths/RareEarthMaterials.java.
+# Same forms and order as content/rare_earths/RareEarthMaterials.java.
 MINERAL = ("dust",)
 CONCENTRATE = ("concentrate",)
 ELEMENT = ("oxalate", "fluoride", "oxide", "ingot")
 MAGNET_ELEMENT = ("oxalate", "fluoride", "oxide", "ingot", "nugget", "block")
-# Samarium is reduced from the oxide by lanthanum, so it never passes through a fluoride.
 VOLATILE_MAGNET = ("oxalate", "oxide", "ingot", "nugget", "block")
-# europium and the heavies past dysprosium are sold as oxide
 OXIDE_ONLY = ("oxalate", "oxide")
-# scandium and yttrium go into alloys by the nugget: Al-Sc and the MCrAlY bond coat
 ALLOYING = ("oxalate", "fluoride", "oxide", "ingot", "nugget")
 DIDYMIUM = ("oxalate", "fluoride", "oxide", "ingot")
 MAGNET = ("ingot", "nugget", "plate", "block")
@@ -43,14 +29,11 @@ BLISTER = ("ingot",)
 GROUND_MINERAL = ("dust", "concentrate")
 CHROMIUM = ("oxide", "ingot")
 INGOT = ("ingot",)
-# The platinum metals come out of the refinery as a grey sponge, pressed and sintered to the ingot.
 PGM = ("sponge", "ingot", "nugget")
 TIN = ("ingot", "nugget", "block")
 BRONZE = ("ingot", "nugget", "plate", "block")
-# Titanium too comes out of its retort as a sponge, and its oxide is the white pigment.
 TITANIUM = ("oxide", "sponge", "ingot", "plate")
 PRECIOUS = ("ingot", "nugget", "plate", "block")
-# Zirconium and hafnium leave the Kroll retort as sponge as titanium does; beryllium goes through its fluoride to the metal.
 ZIRCONIUM = ("oxide", "sponge", "ingot", "nugget", "plate")
 HAFNIUM = ("sponge", "ingot", "nugget")
 BERYLLIUM = ("oxide", "fluoride", "ingot", "nugget")
@@ -67,7 +50,6 @@ SILVER = ((84, 86, 92), (146, 150, 158), (198, 202, 210), (240, 242, 248))
 
 
 def tinted(hue, strength=0.38):
-    """Silver leaning toward `hue`, tone for tone."""
     out = []
     for tone in SILVER:
         scale = sum(tone) / sum(hue)
@@ -75,9 +57,6 @@ def tinted(hue, strength=0.38):
     return tuple(out)
 
 
-# The metals are all silver. Each leans toward the colour its salts or phosphors are known by
-# (praseodymium green, neodymium lilac, erbium rose, terbium's green glow), so sixteen ingots can
-# be told apart in a chest.
 METAL = {
     "lanthanum": tinted((206, 198, 176)),
     "cerium": tinted((214, 186, 118)),
@@ -97,7 +76,6 @@ METAL = {
     "scandium": tinted((232, 220, 168), 0.2),
     "didymium": tinted((140, 164, 176)),
     "neodymium_iron_boron": ((40, 42, 50), (82, 86, 98), (130, 134, 148), (196, 200, 214)),
-    # the dysprosium grade is the same black alloy, leaning toward dysprosium's olive so a chest can tell them apart
     "dysprosium_neodymium_iron_boron": ((44, 46, 36), (88, 94, 70), (136, 144, 108), (200, 208, 170)),
     "samarium_cobalt": ((70, 64, 60), (124, 116, 108), (170, 162, 152), (222, 214, 204)),
     "aluminium_scandium": ((98, 104, 114), (164, 172, 184), (214, 220, 230), (247, 249, 253)),
@@ -107,49 +85,36 @@ METAL = {
     "rhenium": ((92, 94, 100), (156, 160, 168), (206, 210, 218), (246, 248, 252)),
     "superalloy": ((64, 70, 78), (118, 126, 138), (170, 178, 190), (222, 228, 238)),
     "molybdenum_steel": ((56, 60, 70), (104, 110, 124), (152, 160, 176), (206, 212, 226)),
-    # both thermocouple legs look like nickel: chromel a shade warm, alumel a shade cold, so a chest can tell them apart
     "chromel": tinted((214, 196, 160), 0.22),
     "alumel": tinted((160, 184, 214), 0.22),
-    # cast alnico is a dull grey, a shade warm with its copper and cobalt
     "alnico": ((70, 68, 66), (126, 122, 118), (174, 170, 164), (218, 214, 208)),
     "tungsten": ((60, 62, 68), (112, 116, 124), (160, 164, 174), (212, 216, 226)),
-    # blister copper is copper still holding its oxygen and sulfur, duller than refined and pocked where the SO2 broke out
     "blister_copper": ((84, 40, 28), (142, 74, 50), (186, 106, 74), (222, 150, 112)),
     "chromium": ((90, 100, 118), (158, 172, 194), (210, 222, 240), (248, 252, 255)),
     "ferrochrome": ((56, 58, 62), (104, 106, 112), (146, 148, 154), (192, 194, 200)),
-    # ferronickel off the electric furnace is a dull grey, a shade warmer and brighter than iron for its nickel
     "ferronickel": ((70, 68, 64), (126, 122, 116), (174, 170, 162), (220, 216, 208)),
-    # ferromanganese is a silver-grey metal that takes a warm bronze tarnish; Hadfield's steel looks like any steel
     "ferromanganese": ((70, 64, 58), (128, 118, 108), (176, 166, 154), (220, 212, 200)),
     "manganese_steel": ((58, 62, 68), (108, 114, 122), (158, 164, 172), (208, 214, 222)),
     "stainless_steel": ((96, 100, 104), (164, 168, 172), (212, 216, 220), (250, 251, 252)),
-    # titanium is a darker, warmer grey than steel; magnesium the whitest of the light metals
     "titanium": ((76, 76, 80), (136, 136, 140), (186, 186, 190), (232, 232, 234)),
     "magnesium": ((116, 118, 122), (190, 192, 196), (232, 234, 236), (255, 255, 255)),
-    # platinum, palladium and rhodium are white metals, rhodium the brightest; ruthenium greyer; iridium and osmium lean blue
     "platinum": ((96, 98, 104), (166, 170, 178), (214, 218, 224), (250, 251, 253)),
     "palladium": ((102, 100, 96), (172, 170, 164), (218, 216, 210), (252, 251, 248)),
     "rhodium": ((112, 114, 120), (184, 188, 194), (228, 230, 236), (255, 255, 255)),
     "ruthenium": ((78, 80, 84), (138, 142, 148), (186, 190, 196), (232, 234, 238)),
     "iridium": ((86, 92, 106), (154, 164, 182), (204, 212, 228), (244, 248, 255)),
     "osmium": ((58, 68, 90), (110, 124, 150), (158, 172, 198), (210, 220, 240)),
-    # tin is a bright silvery white; crude tin is dull with the iron the hardhead carries; bronze the warm golden brown of bell metal
     "tin": ((104, 106, 108), (178, 180, 182), (224, 226, 226), (253, 253, 251)),
     "crude_tin": ((66, 64, 60), (118, 116, 110), (160, 158, 150), (202, 200, 192)),
     "bronze": ((88, 54, 24), (150, 100, 48), (198, 146, 76), (236, 198, 128)),
-    # lead bullion is lead, the dull blue-grey of a fresh cut gone dark; silver the whitest metal there is, a touch warm
     "lead_bullion": ((44, 48, 60), (84, 90, 106), (122, 128, 146), (168, 174, 192)),
     "silver": ((118, 116, 114), (198, 198, 196), (240, 240, 238), (255, 255, 255)),
-    # zirconium a whiter grey than titanium; hafnium the darker, heavier steel grey; beryllium a dull blue-grey
     "zirconium": ((88, 90, 94), (152, 154, 158), (202, 204, 208), (242, 243, 245)),
     "hafnium": ((66, 68, 74), (122, 124, 132), (172, 174, 182), (222, 224, 230)),
     "beryllium": ((78, 84, 92), (138, 146, 156), (186, 194, 204), (230, 236, 244)),
-    # beryllium copper is copper with a golden cast, two per cent of beryllium hardly showing
     "beryllium_copper": ((104, 52, 28), (170, 100, 58), (214, 148, 96), (244, 202, 152)),
 }
 
-# The oxides are painted the colours they really are; the white ones borrow a little of their
-# metal's tint.
 OXIDE = {
     "cerium": ((156, 144, 96), (214, 202, 146), (238, 230, 186), (254, 250, 226)),
     "praseodymium": ((30, 24, 20), (62, 50, 42), (98, 82, 70), (150, 132, 116)),
@@ -165,26 +130,16 @@ OXIDE = {
 }
 for name in ("lanthanum", "gadolinium", "ytterbium", "lutetium", "yttrium"):
     OXIDE[name] = mix(WHITE, METAL[name], 0.3)
-# scandia, and scandium's oxalate and fluoride, are plain white: Sc3+ has no colour to lend them
 OXIDE["scandium"] = WHITE
-# molybdenum trioxide, off the roaster: a pale yellow-white powder
 OXIDE["molybdenum"] = ((160, 156, 118), (218, 214, 170), (240, 238, 204), (254, 253, 234))
-# tungsten trioxide is canary yellow
 OXIDE["tungsten"] = ((150, 140, 60), (208, 196, 96), (236, 226, 140), (252, 246, 196))
-# chromium(III) oxide is the green of chrome oxide green
 OXIDE["chromium"] = ((34, 66, 32), (66, 108, 54), (102, 144, 80), (150, 184, 120))
-# titanium dioxide is the whitest pigment there is, whiter than the other white oxides
 OXIDE["titanium"] = ((176, 178, 180), (228, 229, 230), (247, 247, 248), (255, 255, 255))
-# zirconia and beryllia are white powders
 OXIDE["zirconium"] = WHITE
 OXIDE["beryllium"] = WHITE
 
-# Ground, a mineral shows its streak: chromite is black in the rock and brown as powder.
 STREAK = {"chromite": ((34, 24, 18), (64, 48, 36), (94, 72, 54), (132, 106, 82))}
 
-# The oxalates and fluorides are salts of the trivalent ion, so they take the ion's colour, not the
-# oxide's: praseodymium's are green although Pr6O11 is black, terbium's white although Tb4O7 is brown.
-# Each entry is the ion's colour at full strength; the salts are mixed toward white from it.
 ION = {
     "praseodymium": ((88, 150, 96), (136, 196, 140), (180, 226, 180), (222, 246, 220)),
     "neodymium": ((120, 104, 168), (168, 152, 212), (206, 194, 238), (236, 230, 252)),
@@ -203,20 +158,15 @@ ION["beryllium"] = WHITE
 
 OTHER = {
     "bastnasite_concentrate": ((110, 76, 34), (168, 126, 66), (204, 168, 104), (236, 210, 156)),
-    # matte, the molten Cu2S-FeS tapped from the smelter and granulated: dark grey-black with a bronze sheen
     "copper_matte": ((20, 18, 18), (44, 40, 38), (78, 70, 62), (136, 116, 92)),
-    # nickel matte is the dark bronze-grey of pentlandite melted with its iron sulfide; converter matte, blown free of the iron, the paler bronze of heazlewoodite
     "nickel_matte": ((26, 24, 20), (54, 50, 42), (92, 84, 66), (146, 132, 98)),
     "converter_matte": ((50, 44, 32), (98, 88, 62), (148, 134, 94), (204, 188, 138)),
-    # the base-metal refinery's residue, the platinum metals as a fine black-grey powder
     "platinum_group_concentrate": ((22, 22, 24), (48, 48, 52), (80, 80, 86), (124, 124, 132)),
     "light_rare_earth_concentrate": ((96, 62, 34), (150, 104, 58), (190, 146, 90), (228, 196, 140)),
     "heavy_rare_earth_concentrate": ((84, 76, 48), (132, 122, 78), (172, 162, 110), (216, 208, 160)),
-    # cassiterite concentrate is the mineral's own brown-black
     "tin_concentrate": ((18, 12, 8), (44, 30, 20), (78, 56, 38), (128, 100, 72)),
 }
 
-# material: forms. Same order as the Java registry, which is the order of the creative tab.
 MATERIALS = {
     "bastnasite": MINERAL, "monazite": (), "xenotime": MINERAL, "loparite": MINERAL, "euxenite": MINERAL, "thortveitite": MINERAL,
     "bastnasite_concentrate": CONCENTRATE, "light_rare_earth_concentrate": CONCENTRATE, "heavy_rare_earth_concentrate": CONCENTRATE,
@@ -244,7 +194,6 @@ def item_name(material, form):
 
 
 def items():
-    """(material, form, item name) for everything painted here."""
     return [(material, form, item_name(material, form)) for material, forms in MATERIALS.items() for form in forms]
 
 
@@ -252,13 +201,10 @@ def palette(material, form):
     if form == "oxide":
         return OXIDE[material]
     if form == "oxalate":
-        # the hydrated oxalate is a pale powder with the ion's cast
         return mix(WHITE, ION[material], 0.5)
     if form == "fluoride":
-        # the anhydrous fluoride shows the ion more strongly
         return mix(WHITE, ION[material], 0.8)
     if form == "sponge":
-        # a sponge is the metal unmelted, a dull grey whatever the metal
         return mix(METAL[material], ((120, 120, 122),) * 4, 0.55)
     if material in STREAK:
         return STREAK[material]
@@ -266,11 +212,9 @@ def palette(material, form):
         return P[material]
     if material in OTHER:
         return OTHER[material]
-    # A metal ground to powder loses its shine.
     return mix(METAL[material], ((0, 0, 0),) * 4, 0.22) if form == "dust" else METAL[material]
 
 
-# Digits are tones of ramp(): 0 the darkest rim, 7 the highlight.
 SHAPES = {
     "ingot": [
         "................",
@@ -416,7 +360,6 @@ SHAPES = {
         "................",
         "................",
     ],
-    # a porous lump, pitted where the salt's gases left it
     "sponge": [
         "................",
         "................",
@@ -450,7 +393,6 @@ def paint_item(form, pal):
 
 
 def paint_block(name, pal):
-    """A storage block: a rimmed slab in three cast courses, as vanilla's metal blocks are."""
     tones, rng = ramp(pal), random.Random("block-" + name)
     img = Image.new("RGBA", (16, 16))
     for y in range(16):
@@ -469,7 +411,6 @@ def paint_block(name, pal):
 
 
 def blistered(img, pal):
-    """Pock the ingot's top with the craters the gas left as the blister copper set: a dark pit under a lit lip."""
     tones, rng = ramp(pal), random.Random("blister")
     body = [(x, y) for y, row in enumerate(SHAPES["ingot"]) for x, t in enumerate(row) if t in "67" and 0 < y < 15]
     for x, y in rng.sample(body, 6):
@@ -488,7 +429,6 @@ def paint(material, form):
 
 
 def contact_sheet(path, scale=6):
-    """Every item, one material to a row, on an inventory slot's grey."""
     forms = ["concentrate", "oxide", "sponge", "dust", "ingot", "nugget", "plate", "block"]
     tile, pad, label = 16 * scale, 8, 170
     sheet = Image.new("RGB", (label + len(forms) * (tile + pad) + pad, len(MATERIALS) * (tile + pad) + pad + 20), (40, 42, 46))
@@ -508,7 +448,7 @@ def contact_sheet(path, scale=6):
 
 if __name__ == "__main__":
     for material, form, name in items():
-        paint(material, form).save(OUT / ("block" if form == "block" else "item") / f"{name}.png")
+        paint(material, form).save(TEXTURES / ("block" if form == "block" else "item") / f"{name}.png")
     print(f"wrote {len(items())} material textures")
     if len(sys.argv) > 1:
         contact_sheet(sys.argv[1])

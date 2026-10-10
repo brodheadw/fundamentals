@@ -15,10 +15,6 @@ import net.neoforged.neoforge.common.loot.LootModifier;
 
 import java.util.List;
 
-/**
- * Puts a smidge of the pack's metals into structure chests: a table named in {@code tables} (an exact id, or a prefix ending
- * in {@code /}) gets, with chance {@code chance}, one stack drawn by weight from {@code pool}.
- */
 public class AddToChests extends LootModifier {
 
     public record Entry(Item item, int weight, int min, int max) {

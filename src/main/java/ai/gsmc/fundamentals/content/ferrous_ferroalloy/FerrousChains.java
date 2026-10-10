@@ -27,7 +27,6 @@ public final class FerrousChains {
                 .step(CONVERTING, "ferrochrome", INGOT, "stainless_steel", INGOT)
                 .build());
 
-        // The soda roast, leach, acidification and carbon reduction to Cr2O3 run through sodium salts that are not materials.
         ProcessingChainRegistry.register(ProcessingChain.builder("chromium", "chromium", FerrousMaterials.GROUP)
                 .step(ROASTING, "chromite", CONCENTRATE, "chromium", OXIDE)
                 .step(ALUMINOTHERMIC_REDUCTION, "chromium", OXIDE, "chromium", INGOT)
@@ -43,7 +42,6 @@ public final class FerrousChains {
                 .step(HYDROGEN_REDUCTION, "tungsten", OXIDE, "tungsten", INGOT)
                 .build());
 
-        // MoS2 -> MoO3 -> metal; the oxide step is skipped for now.
         ProcessingChainRegistry.register(ProcessingChain.builder("molybdenum", "molybdenum", FerrousMaterials.GROUP)
                 .step(ROASTING, "molybdenite", RAW, "molybdenum", INGOT)
                 .build());
@@ -57,7 +55,6 @@ public final class FerrousChains {
                 .step(SMELTING, "nickel_laterite", RAW, "ferronickel", INGOT)
                 .build());
 
-        // Chlorination to TiCl4 is folded into the Kroll step: the tetrachloride is a fluid, not a material form.
         ProcessingChainRegistry.register(ProcessingChain.builder("titanium", "titanium", FerrousMaterials.GROUP)
                 .step(KROLL_PROCESS, "rutile", RAW, "titanium", SPONGE)
                 .step(REFINING, "titanium", SPONGE, "titanium", INGOT)

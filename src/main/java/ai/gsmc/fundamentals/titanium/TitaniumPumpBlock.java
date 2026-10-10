@@ -4,7 +4,6 @@ import com.simibubi.create.content.fluids.pump.PumpBlock;
 import com.simibubi.create.content.fluids.pump.PumpBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
-/** Create's mechanical pump with a titanium body. */
 public class TitaniumPumpBlock extends PumpBlock {
 
     public TitaniumPumpBlock(Properties properties) {

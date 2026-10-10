@@ -11,20 +11,15 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.model.data.ModelData;
 
-/**
- * Swings a thermometer's needle over its dial. The needle is its own model, drawn facing north with its pivot at the centre
- * of the dial, and turned here to the way the gauge faces; it sweeps 240 degrees, bottom left to bottom right.
- */
 public class ThermometerRenderer implements BlockEntityRenderer<ThermometerBlockEntity> {
 
     private static final ModelResourceLocation NEEDLE = ModelResourceLocation.standalone(
-            ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "block/thermometer_needle"));
+            Fundamentals.id("block/thermometer_needle"));
     private static final float SWEEP = 240;
 
     public static void register(IEventBus modBus) {

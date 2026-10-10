@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import java.util.List;
 
-/** Create's pipes have no goggles; these give them the properties of what they carry. */
 @Mixin(value = {FluidPipeBlockEntity.class, StraightPipeBlockEntity.class, SmartFluidPipeBlockEntity.class}, remap = false)
 public abstract class PipeGogglesMixin implements IHaveGoggleInformation {
 

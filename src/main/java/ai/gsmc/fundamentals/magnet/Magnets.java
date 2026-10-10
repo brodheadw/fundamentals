@@ -20,11 +20,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-/**
- * The four permanent magnets the Factory's machines are built from, polarized from their alloys, and what the heat does to
- * a machine built with them. The magnet grade travels as a data component from the recipe to the machine item, into the
- * placed block entity's components and back out in its drop. The recipes are written by tools/build_uses_data.py.
- */
 public final class Magnets {
 
     public static final DataComponentType<MagnetCharge> CHARGE = DataComponentType.<MagnetCharge>builder()
@@ -44,7 +39,6 @@ public final class Magnets {
         return List.copyOf(MAGNETS.values());
     }
 
-    /** The grade of a magnet item; the Factory's own magnet, all made from dysprosium-bearing NdFeB before grades, counts as that. */
     public static MagnetGrade grade(ItemStack stack) {
         for (Map.Entry<MagnetGrade, Item> magnet : MAGNETS.entrySet()) {
             if (stack.is(magnet.getValue())) {
@@ -62,16 +56,16 @@ public final class Magnets {
         for (MagnetGrade grade : MagnetGrade.values()) {
             Item item = new Item(new Item.Properties());
             MAGNETS.put(grade, item);
-            registry.accept(id(grade.magnet()), item);
+            registry.accept(Fundamentals.id(grade.magnet()), item);
         }
     }
 
     public static void registerComponents(BiConsumer<ResourceLocation, DataComponentType<?>> registry) {
-        registry.accept(id("magnet"), CHARGE);
+        registry.accept(Fundamentals.id("magnet"), CHARGE);
     }
 
     public static void registerRecipeSerializers(BiConsumer<ResourceLocation, RecipeSerializer<?>> registry) {
-        registry.accept(id("magnet_rebuild"), REBUILD);
+        registry.accept(Fundamentals.id("magnet_rebuild"), REBUILD);
     }
 
     public static void attach(BlockEntityBehaviourEvent event) {
@@ -100,7 +94,4 @@ public final class Magnets {
         }
     }
 
-    private static ResourceLocation id(String path) {
-        return ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, path);
-    }
 }

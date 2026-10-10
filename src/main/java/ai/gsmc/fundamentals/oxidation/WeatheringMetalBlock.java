@@ -12,12 +12,6 @@ import net.neoforged.neoforge.common.ItemAbility;
 
 import javax.annotation.Nullable;
 
-/**
- * A metal block that weathers the way vanilla's copper does, a stage at a time on random ticks, held back by its neighbours,
- * with the stages, the honeycomb wax and the axe's scraping read from NeoForge's oxidizables and waxables data maps. Unlike
- * copper, how fast depends on the metal ({@code rate} times copper's) and the air round it. A block whose last stage has
- * crumbled to oxide cannot be scraped back.
- */
 public class WeatheringMetalBlock extends Block implements WeatheringCopper {
 
     private final WeatherState age;

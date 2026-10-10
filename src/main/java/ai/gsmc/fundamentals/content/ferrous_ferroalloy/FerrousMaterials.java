@@ -20,7 +20,7 @@ public final class FerrousMaterials {
         mineral("hematite", "Hematite", "Fe2O3", "iron",
                 MaterialProperties.builder().density(0.66).magnetStrength(0.05));
         mineral("magnetite", "Magnetite", "Fe3O4", "iron",
-                MaterialProperties.builder().density(0.66).magnetStrength(0.20)); // lodestone mineral
+                MaterialProperties.builder().density(0.66).magnetStrength(0.20));
         mineral("goethite", "Goethite", "FeO(OH)", "iron", MaterialProperties.builder().density(0.48));
         mineral("pyrolusite", "Pyrolusite", "MnO2", "manganese", MaterialProperties.builder().density(0.63));
         mineral("pentlandite", "Pentlandite", "(Fe,Ni)9S8", "nickel", MaterialProperties.builder().density(0.61));
@@ -32,7 +32,7 @@ public final class FerrousMaterials {
         mineral("scheelite", "Scheelite", "CaWO4", "tungsten", MaterialProperties.builder().density(0.76));
         mineral("molybdenite", "Molybdenite", "MoS2", "molybdenum", MaterialProperties.builder().density(0.60));
         mineral("cobaltite", "Cobaltite", "CoAsS", "cobalt",
-                MaterialProperties.builder().density(0.80).toxicity(0.20)); // As-bearing
+                MaterialProperties.builder().density(0.80).toxicity(0.20));
         mineral("ilmenite", "Ilmenite", "FeTiO3", "titanium", MaterialProperties.builder().density(0.60));
         mineral("rutile", "Rutile", "TiO2", "titanium", MaterialProperties.builder().density(0.53));
 
@@ -53,22 +53,18 @@ public final class FerrousMaterials {
                 MaterialProperties.builder().density(1.13).magnetStrength(0.45).heatResistance(0.85).hardness(0.55));
         reg("molybdenum", MaterialType.ELEMENT, "Mo", forms(OXIDE, INGOT),
                 MaterialProperties.builder().density(1.30).heatResistance(0.88).hardness(0.80));
-        // Rhenium rides in molybdenite at parts per million and leaves the roaster as flue dust; the superalloy is why anyone bothers.
         reg("rhenium", MaterialType.ELEMENT, "Re", forms(INGOT, NUGGET),
                 MaterialProperties.builder().density(2.10).heatResistance(1.00).hardness(0.75));
         reg("superalloy", MaterialType.ALLOY, "Ni-Co-Cr-W-Al-Re", forms(INGOT, PLATE),
                 MaterialProperties.builder().density(0.85).heatResistance(0.98).hardness(0.80));
         reg("molybdenum_steel", MaterialType.ALLOY, "Fe-Mo", forms(INGOT, PLATE),
                 MaterialProperties.builder().density(0.80).heatResistance(0.70).hardness(0.85));
-        // Hadfield's steel, 12 to 14 per cent manganese and about 1 carbon: austenitic, it work-hardens where it is struck
         reg("manganese_steel", MaterialType.ALLOY, "Fe-Mn-C", forms(INGOT),
                 MaterialProperties.builder().density(1.0).hardness(0.85));
-        // the two legs of a type K thermocouple: chromel is nickel with a tenth of chromium, alumel nickel with a few per cent of aluminium
         reg("chromel", MaterialType.ALLOY, "Ni-Cr", forms(INGOT),
                 MaterialProperties.builder().density(1.10).heatResistance(0.80).conductivity(0.03));
         reg("alumel", MaterialType.ALLOY, "Ni-Al", forms(INGOT),
                 MaterialProperties.builder().density(1.10).heatResistance(0.75).conductivity(0.05));
-        // the cast magnet before the rare earths: iron with aluminium, nickel, cobalt and a little copper, weak but good past 500 °C
         reg("alnico", MaterialType.ALLOY, "Fe-Al-Ni-Co-Cu", forms(INGOT),
                 MaterialProperties.builder().density(0.95).magnetStrength(0.40).heatResistance(0.90).hardness(0.70));
         reg("tungsten", MaterialType.ELEMENT, "W", forms(OXIDE, INGOT),

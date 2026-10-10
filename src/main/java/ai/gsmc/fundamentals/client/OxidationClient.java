@@ -5,7 +5,6 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 
-/** An aged ingot, nugget or sheet looks its stage: the item models pick a stage's model by this property. */
 public final class OxidationClient {
 
     private OxidationClient() {}

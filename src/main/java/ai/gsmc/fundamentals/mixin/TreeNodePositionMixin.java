@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/** The server lays every tab out as a tree and sends the positions to clients; the periodic table is pinned to its grid right after. */
 @Mixin(TreeNodePosition.class)
 public abstract class TreeNodePositionMixin {
 

@@ -1,14 +1,6 @@
 #!/usr/bin/env python3
-"""Paints the titanium pipe, pump, valve and tank: Create's own textures (MIT), their copper redrawn as titanium plate, a cool
-grey whose shadows go faintly blue and highlights faintly straw, the thin oxide that heat and anodising leave on it. The iron,
-the glass, the bore and the valve's dial are left as they are. Edit and re-run; don't hand-edit the PNGs.
-
-    python3 tools/paint_titanium.py
-"""
 from paint_separation import TEXTURES, create_texture
 
-# Create's copper, every tone its pipes, pump, valve and tank use, darkest (the inside of a bore) first; and titanium tone for tone,
-# blue-grey in the seams, straw on the glints.
 COPPER = [(61, 22, 30), (91, 41, 36), (121, 59, 43), (144, 73, 49), (154, 80, 56), (167, 90, 64), (178, 98, 71), (194, 107, 76),
           (200, 116, 86), (214, 123, 91), (227, 130, 108)]
 TITANIUM = [(38, 41, 53), (56, 60, 74), (76, 80, 95), (97, 101, 114), (112, 115, 126), (128, 131, 138), (143, 145, 149), (158, 159, 160),

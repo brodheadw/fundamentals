@@ -13,10 +13,6 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.loot.LootModifier;
 
-/**
- * Thins the given items out of every chest's loot, any mod's: each one found survives with chance {@code keep}. Iron is
- * won from ore here, so a village smithy should not hand it out by the stack.
- */
 public class ScarceInChests extends LootModifier {
 
     public static final MapCodec<ScarceInChests> CODEC = RecordCodecBuilder.mapCodec(instance -> codecStart(instance).and(instance.group(

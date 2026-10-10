@@ -24,7 +24,6 @@ import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
@@ -41,8 +40,6 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-/** The titanium pipework drawn as Create draws its own: the rims and drains where a pipe meets something, the pump's cog, the
- * valve's pointer, the tank's fluid and connected walls. */
 public final class TitaniumClient {
 
     // Partials must exist before models are registered, so they are made when this class loads, from the mod's constructor.
@@ -52,7 +49,7 @@ public final class TitaniumClient {
         for (ComponentPartials partial : ComponentPartials.values()) {
             Map<Direction, PartialModel> faces = new EnumMap<>(Direction.class);
             for (Direction d : Iterate.directions) {
-                faces.put(d, PartialModel.of(id("block/titanium_pipe/" + partial.name().toLowerCase() + "/" + d.getSerializedName())));
+                faces.put(d, PartialModel.of(Fundamentals.id("block/titanium_pipe/" + partial.name().toLowerCase() + "/" + d.getSerializedName())));
             }
             RIMS.put(partial, faces);
         }
@@ -63,9 +60,9 @@ public final class TitaniumClient {
     public static void register(IEventBus modBus) {
         modBus.addListener(FMLClientSetupEvent.class, event -> {
             for (String block : new String[] {"titanium_pipe", "titanium_mechanical_pump", "titanium_fluid_valve"}) {
-                CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(id(block), Rims::new);
+                CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(Fundamentals.id(block), Rims::new);
             }
-            CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(id("titanium_fluid_tank"), model -> new TankModel(model, "titanium_fluid_tank"));
+            CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(Fundamentals.id("titanium_fluid_tank"), model -> new TankModel(model, "titanium_fluid_tank"));
             event.enqueueWork(() -> {
                 SimpleBlockEntityVisualizer.builder(Titanium.pumpEntity()).factory(SingleAxisRotatingVisual.ofZ(AllPartialModels.MECHANICAL_PUMP_COG))
                         .skipVanillaRender(be -> true).apply();
@@ -79,7 +76,6 @@ public final class TitaniumClient {
         });
     }
 
-    /** Create's PipeAttachmentModel with titanium rims for its copper ones; there is no casing to draw. */
     private static class Rims extends BakedModelWrapperWithData {
 
         private static final ModelProperty<Attached> ATTACHED = new ModelProperty<>();
@@ -139,9 +135,5 @@ public final class TitaniumClient {
         public TriState useAmbientOcclusion(BlockState state, ModelData data, RenderType renderType) {
             return TriState.TRUE;
         }
-    }
-
-    private static ResourceLocation id(String path) {
-        return ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, path);
     }
 }

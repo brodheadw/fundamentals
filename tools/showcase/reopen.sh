@@ -1,5 +1,4 @@
 #!/bin/zsh
-# Reopen the existing showcase world without re-staging it, once the running client has exited.
 # usage: tools/showcase/reopen.sh [repo]
 set -u
 W=${1:-$(cd "$(dirname "$0")/../.." && pwd)}; cd "$W"

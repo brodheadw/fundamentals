@@ -7,7 +7,6 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
 
-/** The electric pump has a motor in it: the pressure it puts on its pipes is scaled by what the heat has left of its magnets. */
 @Mixin(value = ElectricPumpBlockEntity.class, remap = false)
 public abstract class PumpMagnetMixin {
 

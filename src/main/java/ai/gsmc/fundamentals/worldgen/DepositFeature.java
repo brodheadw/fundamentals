@@ -114,7 +114,7 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
                 double d = Math.sqrt(dx * dx + dz * dz) / (radius * body.edge(dx, dz));
                 if (d >= 1) continue;
                 double centre = dipX * dx + dipZ * dz;
-                double half = Math.max(0.6, thickness / 2.0 * Math.sqrt(1 - d * d));  // thins to the edge
+                double half = Math.max(0.6, thickness / 2.0 * Math.sqrt(1 - d * d));
                 for (int dy = (int) Math.floor(centre - half); dy <= Math.ceil(centre + half); dy++) {
                     body.put(dx, dy, dz, dy - centre, (dy - centre) / half, Math.max(d, Math.abs(dy - centre) / half * 0.8));
                 }
@@ -144,7 +144,7 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
     private static void vein(Body body, RandomSource random, int radius, int thickness, int height) {
         double strike = random.nextDouble() * Math.PI;
         double nx = Math.cos(strike), nz = Math.sin(strike);
-        double dip = (random.nextDouble() - 0.5) * 0.7;  // sideways shift per block of depth: steep, not vertical
+        double dip = (random.nextDouble() - 0.5) * 0.7;
         double halfHeight = height / 2.0;
         for (int dx = -REACH; dx <= REACH; dx++) {
             for (int dz = -REACH; dz <= REACH; dz++) {
@@ -153,7 +153,6 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
                 for (int dy = (int) -halfHeight; dy <= halfHeight; dy++) {
                     double across = dx * nx + dz * nz + dy * dip;
                     double taper = Math.sqrt(1 - Math.pow(along / radius, 2)) * Math.sqrt(1 - Math.pow(dy / (halfHeight + 1), 2));
-                    // Veins pinch and swell along their length.
                     double half = thickness / 2.0 * taper * (0.6 + 0.9 * body.noise(along * 0.2, dy * 0.2, 80));
                     if (half > 0.3 && Math.abs(across) <= Math.max(half, 0.5)) {
                         body.put(dx, dy, dz, dy, dy / (halfHeight + 1),
@@ -175,7 +174,6 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
                 if (!body.level.getFluidState(pos.set(x, surface + 1, z)).isEmpty()) continue;
                 int depth = (int) Math.ceil(thickness * Math.sqrt(1 - d * d));
                 for (int k = 0; k < depth; k++) {
-                    // Starts one block down, leaving the topsoil in place.
                     body.put(dx, surface - 1 - k - body.origin.getY(), dz, -k, 1 - 2.0 * k / depth, d);
                 }
             }
@@ -205,7 +203,6 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
             return Noise.value(seed + salt, a, b, 0);
         }
 
-        // layer counts blocks up the dip, vertical runs -1 at the bottom to +1 at the top, edge 0 at the heart to 1 at the rim.
         void put(int dx, int dy, int dz, double layer, double vertical, double edge) {
             if (Math.abs(dx) > REACH || Math.abs(dz) > REACH) return;
             pos.set(origin.getX() + dx, origin.getY() + dy, origin.getZ() + dz);
@@ -220,7 +217,6 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
         }
 
         private BlockState stateAt(double layer, double vertical, double edge, BlockState existing) {
-            // Rich in the middle, a scatter at the rim: no deposit ends in a clean wall of ore.
             float richness = (float) (1 - 0.85 * edge * edge);
             for (int i = 0; i < config.ores().size(); i++) {
                 Ore ore = config.ores().get(i);
@@ -256,7 +252,6 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
             Arrays.sort(SORTED);
         }
 
-        // The noise level that a fraction of space exceeds.
         static double threshold(float fraction) {
             int index = (int) ((1 - fraction) * (SORTED.length - 1));
             return SORTED[Mth.clamp(index, 0, SORTED.length - 1)];

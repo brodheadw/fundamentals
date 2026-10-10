@@ -1,6 +1,5 @@
 package ai.gsmc.fundamentals.material;
 
-// Gameplay scale, not SI: roughly 0..1, with iron's density and copper's conductivity as 1.0.
 public record MaterialProperties(
         double density,
         double magnetStrength,

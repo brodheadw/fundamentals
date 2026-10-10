@@ -10,7 +10,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-/** Create's boiler already takes only fresh water (it asks for exactly minecraft:water); a starved boiler's goggles say so, since seawater looks the same in a pipe. */
 @Mixin(value = BoilerData.class, remap = false)
 public abstract class BoilerFreshWaterMixin {
 

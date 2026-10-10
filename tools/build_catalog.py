@@ -1,14 +1,9 @@
 #!/usr/bin/env python3
-"""Merges the per-group research files in docs/research/ into data/ores.json and
-docs/ore-catalog.md. Re-run after editing any docs/research/*.json:
-
-    python3 tools/build_catalog.py
-"""
 import json
 from collections import defaultdict
-from pathlib import Path
+from common import REPO
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = REPO
 RESEARCH = ROOT / "docs/research"
 DATA_OUT = ROOT / "data/ores.json"
 CATALOG_OUT = ROOT / "docs/ore-catalog.md"
@@ -23,29 +18,21 @@ GROUPS = {
     "minor-specialty": "Minor, Specialty & Radioactive Metals",
 }
 
-# Ordered roughly by position in a real flowsheet.
 STAGE_ORDER = [
-    # Comminution & physical concentration
     "Crushing", "Grinding", "Washing", "Screening",
     "GravitySeparation", "MagneticSeparation", "ElectrostaticSeparation", "FrothFlotation",
-    # Thermal pre-treatment
     "Decrepitation", "Roasting", "Volatilization", "Calcination", "Sintering",
     "Chlorination", "Cracking",
-    # Pyrometallurgy / reduction
     "Smelting", "Converting",
     "CarbothermicReduction", "AluminothermicReduction", "SilicothermicReduction",
     "MetallothermicReduction", "HydrogenReduction", "Reduction", "KrollProcess",
-    # Hydrometallurgy
     "Leaching", "PressureOxidation", "BioOxidation", "Dissolution",
     "SolventExtraction", "IonExchange", "CarbonAdsorption",
     "Precipitation", "Evaporation", "Crystallization",
-    # Electrometallurgy
     "Electrowinning", "Electrolysis", "HallHeroult", "MoltenSaltElectrolysis",
     "ChlorAlkali", "Electrorefining",
-    # Named industrial processes
     "BayerProcess", "SolvayProcess", "ContactProcess", "ClausProcess",
     "FraschProcess", "SiemensProcess", "Cupellation", "Retorting",
-    # Finishing
     "Refining", "Purification", "Alloying",
 ]
 

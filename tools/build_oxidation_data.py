@@ -1,28 +1,13 @@
 #!/usr/bin/env python3
-"""Metal in air: how fast each metal item ages (the fundamentals:oxidation item data map), the weathering storage blocks'
-stages for NeoForge's oxidizables and waxables data maps, their models, loot and names, the inert storage drum, the
-argon canister, and the sandpaper polishing that takes the stages back off. Re-run after any edit; build_ore_data.py last
-for the tool tags.
-
-    python3 tools/paint_oxidation.py && python3 tools/build_oxidation_data.py && python3 tools/build_ore_data.py
-
-The rates are Minecraft days per stage in ordinary air, rounded from the real behaviour: lanthanum and cerium go from a fresh
-ingot to oxide in days of damp air, neodymium and praseodymium in weeks, samarium, gadolinium and the heavies slowly; iron
-rusts only with water about; copper and bronze take a patina that stops at the surface; silver blackens with the sulfur in
-air; aluminium, titanium, chromium, stainless steel, nickel, tin, zinc and lead put on a skin of oxide and stop, and gold and
-the platinum metals never change at all, so none of them has an entry.
-"""
-import json
 import shutil
 
 from build_chemica_compat import fluid_ingredient
-from build_ore_data import ASSETS, DATA, ROOT, cube, drop_self, write
+from common import ASSETS, DATA, RESOURCES, cube, drop_self, read_lang, write, write_lang
 from paint_oxidation import FAMILIES, STAGED, aged_name, family_blocks
 
 RECIPES = DATA / "recipe/oxidation"
 DAY_FACTOR = {"ingot": 1, "plate": 1, "nugget": 1.5, "block": 0.25}
 
-# metal: (kind, days per stage as an ingot, dry factor, wet factor, the oxide a flaking metal ends as)
 METALS = {
     "copper": ("patina", 9, 0.25, 3, None),
     "brass": ("patina", 24, 0.25, 3, None),
@@ -40,13 +25,11 @@ METALS = {
     "terbium": ("flaking", 45, 0.25, 4, "fundamentals:terbium_oxide"),
     "dysprosium": ("flaking", 45, 0.25, 4, "fundamentals:dysprosium_oxide"),
     "yttrium": ("flaking", 60, 0.25, 4, "fundamentals:yttrium_oxide"),
-    # the alkali and alkaline earth metals crust over white (calcium, magnesium) or black (lithium's nitride); nothing here holds the crust
     "calcium": ("tarnish", 1.5, 0.25, 4, None),
     "lithium": ("tarnish", 3, 0.25, 4, None),
     "magnesium": ("tarnish", 30, 0.25, 3, None),
 }
 
-# item: (metal, form)
 ITEMS = {
     "minecraft:copper_ingot": ("copper", "ingot"), "create:copper_nugget": ("copper", "nugget"), "create:copper_sheet": ("copper", "plate"),
     "create:brass_ingot": ("brass", "ingot"), "create:brass_nugget": ("brass", "nugget"), "create:brass_sheet": ("brass", "plate"),
@@ -61,9 +44,7 @@ ITEMS = {
                                                          "terbium", "dysprosium", "yttrium")},
     **{f"fundamentals:{m}_nugget": (m, "nugget") for m in ("praseodymium", "neodymium", "samarium", "terbium", "dysprosium")},
 }
-# An ingot of iron or steel rusts through to a rusty one, which sandpaper takes back to seven nuggets: the rest flaked off.
 RUSTY = {"minecraft:iron_ingot": ("rusty_iron_ingot", "minecraft:iron_nugget"), "tfmg:steel_ingot": ("rusty_steel_ingot", "tfmg:steel_nugget")}
-# Vanilla's copper weathers block by block in the world already; held as items, in a chest, it goes the same way.
 COPPER_PIECES = ("copper_block", "cut_copper", "chiseled_copper", "cut_copper_slab", "cut_copper_stairs", "copper_door",
                  "copper_trapdoor", "copper_grate", "copper_bulb")
 COPPER_STAGES = ("", "exposed_", "weathered_", "oxidized_")
@@ -128,21 +109,18 @@ def stage_blocks(lang):
             write(ASSETS / f"models/item/{name}.json", {"parent": f"fundamentals:block/{texture}"})
             pool = drop_self(name)
             if crumbles and name == f"{prefixes[3]}{metal}_block":
-                # a block crumbled to oxide comes apart as the oxide: nine of it
                 pool = {**pool, "entries": [{"type": "minecraft:item", "name": f"fundamentals:{metal}_oxide",
                                              "functions": [{"function": "minecraft:set_count", "count": 9}]}]}
             write(DATA / f"loot_table/blocks/{name}.json", {"type": "minecraft:block", "pools": [pool]})
             stage = name.removeprefix("waxed_").removesuffix(f"{metal}_block").rstrip("_")
             lang[f"block.fundamentals.{name}"] = ("Waxed " if name.startswith("waxed_") else "") + \
                 (f"{STAGE_TITLES[stage]} " if stage else "") + f"Block of {display}"
-    neoforge = ROOT / "data/neoforge/data_maps/block"
+    neoforge = RESOURCES / "data/neoforge/data_maps/block"
     write(neoforge / "oxidizables.json", {"replace": False, "values": oxidizables})
     write(neoforge / "waxables.json", {"replace": False, "values": waxables})
 
 
 def staged_models(values):
-    """Each stage of an ageing ingot, nugget or sheet its own look: the item's model picks the stage's model by the
-    fundamentals:oxidation_stage item property, which reads the stage off the stack."""
     for item, (_, stages) in STAGED.items():
         entry = values[item]
         shown = entry.get("stages", 3)
@@ -152,14 +130,12 @@ def staged_models(values):
         generated = lambda texture: {"parent": "minecraft:item/generated", "textures": {"layer0": texture}}
         for stage in range(1, stages + 1):
             write(ASSETS / f"models/item/aged/{aged_name(item, stage)}.json", generated(f"fundamentals:item/aged/{aged_name(item, stage)}"))
-        write(ROOT / f"assets/{namespace}/models/item/{name}.json", {**generated(f"{namespace}:item/{name}"), "overrides": [
+        write(RESOURCES / f"assets/{namespace}/models/item/{name}.json", {**generated(f"{namespace}:item/{name}"), "overrides": [
             {"predicate": {"fundamentals:oxidation_stage": stage}, "model": f"fundamentals:item/aged/{aged_name(item, stage)}"}
             for stage in range(1, stages + 1)]})
 
 
 def polishing(values):
-    """Sandpaper takes a patina, a tarnish, the first rust or the first oxide off an ingot, nugget or sheet, at no loss; a rusty
-    ingot comes back as seven nuggets."""
     for item, entry in values.items():
         if entry.get("stages", 3) == 0:
             continue
@@ -180,8 +156,6 @@ def box(a, b, faces, **extra):
 
 
 def drum_elements():
-    """A sealed steel drum in Create's manner: an octagon of staves, two rolling hoops, the lid's valve with its red handwheel on
-    top, and a pressure gauge on the front (north; the blockstate turns it to face whoever placed it)."""
     side, lid, base, fit = "#side", "#top", "#bottom", "#fittings"
     stave = lambda u0, u1: {"texture": side, "uv": [u0, 2, u1, 16]}
     elements = [
@@ -258,8 +232,7 @@ def storage(lang):
 
 def main():
     shutil.rmtree(RECIPES, ignore_errors=True)
-    lang_path = ASSETS / "lang/en_us.json"
-    lang = json.loads(lang_path.read_text(encoding="utf-8"))
+    lang = read_lang()
     values = rates()
     write(DATA / "data_maps/item/oxidation.json", {"replace": False, "values": values})
     stage_blocks(lang)
@@ -269,7 +242,7 @@ def main():
     for kind, names in STAGE_NAMES.items():
         for i, name in enumerate(names, 1):
             lang[f"oxidation.fundamentals.{kind}.{i}"] = name
-    write(lang_path, dict(sorted(lang.items())))
+    write_lang(lang)
     print(f"{len(values)} ageing metal items, {sum(len(family_blocks(m)) for m in FAMILIES)} weathering blocks")
 
 

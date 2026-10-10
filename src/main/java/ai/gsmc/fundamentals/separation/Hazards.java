@@ -67,117 +67,68 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.IntStream;
 import javax.annotation.Nullable;
 
-/**
- * What the plant does to people and pipes. The fuming acids (hydrochloric, hydrofluoric, nitric, aqua regia) and bromine hurt anyone within reach of them
- * in the open: as blocks in the world, or in a basin they are being used in. Create's diving helmet on a filled
- * backtank is the gas mask, and breathes its air. Beryllium's hydroxide, oxide, salts and pebbles are a dust that scars the lungs, and nickel matte,
- * roasted pentlandite and nickel oxide a dust that causes lung and nasal cancer: held in the hand or stirred in a basin, they are breathed
- * the same way. A sulfide roasting on a lit campfire or in a lit smoker or furnace gives off sulfur dioxide. Nickel carbonyl is the worst
- * of them: it never eats a pipe, but where it escapes, from an open pipe end, a broken pipe or tank, or a basin, it hurts hard, and a day
- * later (half a minute here) the lungs fill and the body withers. And the acids eat copper: Create's pipes, pumps and valves carrying one
- * corrode and eventually burst, spilling it. The liquors are rare earth chlorides in dilute acid, and the spent liquor, the calcium chloride
- * liquor and bittern are chloride too, so they eat it as well, more slowly, and seawater, a tenth as salt as bittern, slower still: copper
- * takes seawater well enough that cupronickel is the sea's standard pipe, and what fails is the plain copper of a fast intake.
- * Metal tanks go the same way, ten times slower for the thicker wall. Concentrated nitric acid passivates aluminium, which is what it is
- * shipped in, so it leaves The Factory Must Grow's aluminium alone.
- * Plastic pipes, pumps, valves and tanks do not corrode, but soften: past {@link #PLASTIC_SOFTENS} at the wall, from the heat round
- * them or the fluid in them, they sag and burst. Bromine is the exception: it swells and attacks polyethylene and polypropylene, and is
- * kept in glass, lead-lined steel or fluoropolymer, so it eats plastic at an acid's pace. Titanium shrugs off everything the plant carries but hydrofluoric acid, which eats
- * it fast, dry chlorine, and hydrochloric acid gone hot, and it keeps its strength hot. A glass pipe is a copper pipe with a window,
- * and corrodes as one.
- * Caustic soda and the sodium aluminate liquor are the other way about: they leave copper and steel alone and eat aluminium, so only
- * The Factory Must Grow's aluminium pipes, pumps, valves and tanks corrode under them, at a liquor's pace. And a Hall-Héroult pot gives off
- * hydrogen fluoride: a vat with cryolite in it fumes as hydrofluoric acid does.
- */
 public final class Hazards {
 
-    private static final TagKey<Item> BERYLLIUM_DUSTS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "beryllium_dusts"));
-    private static final TagKey<Item> NICKEL_DUSTS = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "nickel_dusts"));
-    private static final TagKey<Item> SULFIDES = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "sulfides"));
+    private static final TagKey<Item> BERYLLIUM_DUSTS = TagKey.create(Registries.ITEM, Fundamentals.id("beryllium_dusts"));
+    private static final TagKey<Item> NICKEL_DUSTS = TagKey.create(Registries.ITEM, Fundamentals.id("nickel_dusts"));
+    private static final TagKey<Item> SULFIDES = TagKey.create(Registries.ITEM, Fundamentals.id("sulfides"));
 
-    /** How far a fuming source reaches. */
     private static final int REACH = 2;
-    /** Per tick, for a pipe carrying an acid: on average a pipe lasts two minutes. */
     public static double corrosionChance = 1.0 / 2400;
-    /** Per tick, for a pipe carrying a liquor, crude liquor, spent liquor or any other chloride solution: on average eight minutes. */
     public static double liquorCorrosionChance = 1.0 / 9600;
-    /** Per tick, for a pipe carrying seawater: on average an hour. */
     public static double seawaterCorrosionChance = 1.0 / 72000;
-    /** Per tick, for a titanium pipe carrying hydrofluoric acid: on average thirty seconds. Fluoride dissolves the oxide skin
-     * every other acid leaves, and the metal under it; dry chlorine and hot hydrochloric acid take it at copper's acid rate. */
     public static double fluorideChance = 1.0 / 600;
-    /** Per tick, for a plastic pipe hotter than it can stand: on average five seconds. */
     public static double softeningChance = 1.0 / 100;
-    /** °C at the wall past which plastic pipe sags: polyethylene and polypropylene pressure pipe is rated to 80 to 95 and both are
-     * soft by 110, well short of melting at 130 to 165. */
     public static final double PLASTIC_SOFTENS = 110;
-    /** °C past which hydrochloric acid takes titanium: its oxide skin holds in the cold acid and goes in the hot. */
     public static final double TITANIUM_HCL = 60;
-    /** How many times longer a tank's wall lasts than a pipe's, for the same fluid: twenty minutes under acid, eighty under a liquor. */
     private static final int TANK_WALL = 10;
-    /** How many ticks apart a pipe is checked, each check standing for all of them. */
     public static final int PIPE_INTERVAL = 20;
     private static final Map<Block, Wall> WALLS = new ConcurrentHashMap<>();
     private static final Map<Block, Boolean> ALUMINIUM = new ConcurrentHashMap<>();
-    /** How far nickel carbonyl reaches where it escapes. */
     private static final int CARBONYL_REACH = 3;
-    /** What a second of it does to the unmasked: the headache, nausea and weakness come at once. */
     private static final float CARBONYL_DAMAGE = 3.0F;
-    /** Ticks from the first breath to the pulmonary oedema, which really comes twelve to thirty-six hours later. */
     public static final int CARBONYL_ONSET = 600;
-    /** Ticks of withering each second breathed earns at the onset, and the most it comes to. */
     private static final int WITHER_PER_DOSE = 80, WITHER_MOST = 1200;
-    /** Seconds a broken pipe or tank goes on giving off what it held. */
     private static final int LEAK_SECONDS = 3;
-    /** Who has breathed nickel carbonyl: the tick its oedema comes on, and how many seconds of it they breathed. */
     private static final Map<UUID, long[]> CARBONYL_DOSES = new ConcurrentHashMap<>();
     private static final Queue<Leak> LEAKS = new ConcurrentLinkedQueue<>();
 
     private record Leak(ServerLevel level, BlockPos pos, int[] left) {}
 
-    /** What a vessel is made of, which decides what eats it; PROOF for a creative tank and anything that holds no fluid. */
     public enum Wall { METAL, TITANIUM, PLASTIC, PROOF }
 
     private Hazards() {}
 
-    // ---- fumes ----
-
-    /** Everyone within reach of {@code source}, a fuming acid in the open: masked, they breathe their tank; bare, it burns. */
     public static void fume(ServerLevel level, BlockPos source, Acids.Acid acid) {
         breathe(level, source, acid.poisons);
         level.sendParticles(ParticleTypes.WHITE_SMOKE, source.getX() + 0.5, source.getY() + 1.1, source.getZ() + 0.5, 3, 0.3, 0.2, 0.3, 0.01);
     }
 
-    /** The vapour off spilt mercury, once: it poisons whoever is within reach and unmasked. */
     public static void mercuryVapour(ServerLevel level, BlockPos source) {
         breathe(level, source, true);
         level.sendParticles(ParticleTypes.WHITE_SMOKE, source.getX() + 0.5, source.getY() + 0.5, source.getZ() + 0.5, 8, 0.3, 0.3, 0.3, 0.01);
     }
 
-    /** Hydrogen fluoride off the cryolite bath of a Hall-Héroult pot: it burns and poisons whoever is within reach and unmasked. */
     public static void fluorideFume(ServerLevel level, BlockPos source) {
         breathe(level, source, true);
         level.sendParticles(ParticleTypes.WHITE_SMOKE, source.getX() + 0.5, source.getY() + 1.1, source.getZ() + 0.5, 3, 0.3, 0.2, 0.3, 0.01);
     }
 
-    /** Beryllium or nickel dust raised where it is handled in the open: whoever is within reach and unmasked breathes it. */
     public static void lungDust(ServerLevel level, BlockPos source) {
         breathe(level, source, false);
         level.sendParticles(ParticleTypes.WHITE_ASH, source.getX() + 0.5, source.getY() + 1.0, source.getZ() + 0.5, 6, 0.3, 0.3, 0.3, 0.01);
     }
 
-    /** Sulfur dioxide off a sulfide roasting in the open. */
     public static void sulfurDioxide(ServerLevel level, BlockPos source) {
         breathe(level, source, false);
         level.sendParticles(ParticleTypes.SMOKE, source.getX() + 0.5, source.getY() + 1.0, source.getZ() + 0.5, 4, 0.2, 0.3, 0.2, 0.01);
     }
 
-    /** What boils off an open basin: the fumes, the poison or the carbonyl it carries, and the steam. */
     public static void vapour(ServerLevel level, BlockPos source, Fluid fluid, boolean toxic) {
-        Acids.Acid acid = fuming(fluid);
+        Acids.Acid acid = Acids.of(fluid);
         if (isCarbonyl(fluid)) {
             nickelCarbonyl(level, source);
-        } else if (acid != null) {
+        } else if (acid != null && acid.fumes) {
             fume(level, source, acid);
         } else if (toxic) {
             breathe(level, source, true);
@@ -185,7 +136,6 @@ public final class Hazards {
         level.sendParticles(ParticleTypes.CLOUD, source.getX() + 0.5, source.getY() + 1.0, source.getZ() + 0.5, 4, 0.25, 0.1, 0.25, 0.01);
     }
 
-    /** A second of nickel carbonyl escaping at {@code source}. */
     public static void nickelCarbonyl(ServerLevel level, BlockPos source) {
         long onset = level.getGameTime() + CARBONYL_ONSET;
         for (LivingEntity living : level.getEntitiesOfClass(LivingEntity.class, new AABB(source).inflate(CARBONYL_REACH))) {
@@ -200,7 +150,6 @@ public final class Hazards {
         level.sendParticles(ParticleTypes.WHITE_ASH, source.getX() + 0.5, source.getY() + 0.5, source.getZ() + 0.5, 2, 0.4, 0.4, 0.4, 0.01);
     }
 
-    /** {@code pos} gives off nickel carbonyl for a few seconds: a pipe or tank holding it has been broken. */
     public static void leak(ServerLevel level, BlockPos pos) {
         LEAKS.add(new Leak(level, pos.immutable(), new int[] {LEAK_SECONDS}));
     }
@@ -209,7 +158,6 @@ public final class Hazards {
         return fluid == Separation.fluid("nickel_carbonyl");
     }
 
-    /** An open pipe end letting nickel carbonyl out poisons the air round it, a second at a time. */
     public static void registerPipeEffects() {
         OpenPipeEffectHandler.REGISTRY.register(Separation.fluid("nickel_carbonyl"), (level, area, fluid) -> {
             if (level instanceof ServerLevel server && server.getGameTime() % 20 == 0) {
@@ -232,7 +180,6 @@ public final class Hazards {
         }
     }
 
-    /** True if {@code living} wears the diving helmet on a backtank with air in it, which then gives up {@code air}. */
     private static boolean masked(LivingEntity living, int air) {
         ItemStack tank = DivingHelmetItem.isWornBy(living) ? BacktankUtil.getAllWithAir(living).stream().findFirst().orElse(ItemStack.EMPTY) : ItemStack.EMPTY;
         if (tank.isEmpty()) {
@@ -242,8 +189,6 @@ public final class Hazards {
         return true;
     }
 
-    /** Once a second, each player's hands are checked for beryllium or nickel dust, and their surroundings searched for a basin with a
-     * fuming acid, nickel carbonyl or a dust in it, for a vat with cryolite in it, and for a sulfide roasting. */
     public static void onPlayerTick(PlayerTickEvent.Post event) {
         if (!(event.getEntity() instanceof ServerPlayer player) || player.tickCount % 20 != 0) {
             return;
@@ -283,8 +228,8 @@ public final class Hazards {
                     nickelCarbonyl(level, pos.immutable());
                     break;
                 }
-                Acids.Acid acid = fuming(fluid);
-                if (acid != null) {
+                Acids.Acid acid = Acids.of(fluid);
+                if (acid != null && acid.fumes) {
                     fume(level, pos.immutable(), acid);
                     break;
                 }
@@ -307,8 +252,6 @@ public final class Hazards {
         return entity instanceof AbstractFurnaceBlockEntity furnace && furnace.getItem(0).is(SULFIDES);
     }
 
-    /** Once a second: the leaks give off what they still hold, or catch fire where it is hot enough, and whoever breathed nickel carbonyl
-     * half a minute ago withers. */
     public static void onServerTick(ServerTickEvent.Post event) {
         MinecraftServer server = event.getServer();
         if (server.getTickCount() % 20 != 0) {
@@ -357,19 +300,6 @@ public final class Hazards {
         return tanks != null && IntStream.range(0, tanks.getTanks()).anyMatch(i -> isCarbonyl(tanks.getFluidInTank(i).getFluid()));
     }
 
-    private static Acids.Acid fuming(Fluid fluid) {
-        for (Acids.Acid acid : Acids.all().values()) {
-            if (acid.fumes && (acid.source == fluid || acid.flowing == fluid)) {
-                return acid;
-            }
-        }
-        return null;
-    }
-
-    // ---- corrosion ----
-
-    /** Called every {@link #PIPE_INTERVAL} ticks for every pipe by the mixin on Create's fluid transport: what it carries may burst
-     * it, by eating it or, plastic, by the heat. True if it did. */
     public static boolean corrode(Level level, BlockPos pos, BlockState state, Collection<PipeConnection> connections) {
         Wall wall = wall(state);
         if (level.isClientSide || wall == Wall.PROOF) {
@@ -398,8 +328,6 @@ public final class Hazards {
         return true;
     }
 
-    /** Called every tick for every Create fluid tank by its mixin, and acts once per tank on the controller: when the wall goes,
-     * one wetted block of it fails, the tank loses that block's share of what it holds, and an acid spills where it stood. True if it did. */
     public static boolean corrodeTank(FluidTankBlockEntity tank) {
         Level level = tank.getLevel();
         if (level == null || level.isClientSide || !tank.isController()) {
@@ -422,9 +350,8 @@ public final class Hazards {
         return true;
     }
 
-    /** The wall at {@code pos} fails: the block goes, an acid spills where it stood, and anything flammable may catch. */
     private static void burst(Level level, BlockPos pos, Fluid fluid) {
-        Acids.Acid acid = Acids.all().values().stream().filter(a -> a.source == fluid || a.flowing == fluid).findFirst().orElse(null);
+        Acids.Acid acid = Acids.of(fluid);
         level.destroyBlock(pos, false);
         if (acid != null) {
             level.setBlock(pos, acid.block.defaultBlockState().setValue(LiquidBlock.LEVEL, 6), Block.UPDATE_ALL);
@@ -436,12 +363,10 @@ public final class Hazards {
         }
     }
 
-    /** A fluid's own temperature, °C: lava and the melts are hot, and so is a stream that leaves its process hot. */
     private static double celsius(FluidStack stack) {
         return Liquids.own(stack);
     }
 
-    /** Per tick, the chance {@code carried} at {@code celsius} bursts a pipe of {@code state}. */
     public static double chance(BlockState state, FluidStack carried, double celsius) {
         return switch (wall(state)) {
             case METAL -> eats(Separation.kind(carried.getFluid()), state) && !(is(carried, "nitric_acid") && aluminium(state)) ? chance(carried) : 0;
@@ -469,7 +394,6 @@ public final class Hazards {
                 : corrodes(kind) || kind == Reagents.Kind.CAUSTIC ? liquorCorrosionChance : 0;
     }
 
-    /** Whether a fluid of this kind eats a pipe, pump, valve or tank of this block: caustic only aluminium, the rest what corrodes. */
     public static boolean eats(@Nullable Reagents.Kind kind, BlockState state) {
         return kind == Reagents.Kind.CAUSTIC ? aluminium(state) : corrodes(kind) && corrodible(state);
     }
@@ -483,14 +407,10 @@ public final class Hazards {
         return WALLS.computeIfAbsent(block, Hazards::wall) == Wall.METAL && id.getNamespace().equals("tfmg") && id.getPath().contains("aluminum");
     }
 
-    /** Create's pipes and tanks are copper and TFMG's metal pipes and tanks are metal, windowed or not; the acids and chlorides eat
-     * them all. Plastic and titanium are told apart by name, since TFMG's pipes, our dyed ones and our titanium ones are Create's pipe
-     * classes underneath; a creative tank is proof against anything. */
     public static Wall wall(BlockState state) {
         return WALLS.computeIfAbsent(state.getBlock(), Hazards::wall);
     }
 
-    /** True for a metal vessel the acids and chlorides eat. */
     public static boolean corrodible(BlockState state) {
         return wall(state) == Wall.METAL;
     }

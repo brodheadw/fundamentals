@@ -22,10 +22,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import java.util.EnumMap;
 import java.util.Map;
 
-/**
- * A dial thermometer: a small gauge mounted on the face of a block, facing out from it, reading the temperature of the block
- * it is mounted on, so it can go on a furnace, a vat or a burner's wall. Comparators read it across its scale.
- */
 public class ThermometerBlock extends BaseEntityBlock {
 
     public static final DirectionProperty FACING = BlockStateProperties.FACING;

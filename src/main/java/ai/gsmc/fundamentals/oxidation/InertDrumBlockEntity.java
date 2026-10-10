@@ -31,18 +31,10 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 import javax.annotation.Nullable;
 import java.util.List;
 
-/**
- * A steel drum that holds a chest's worth of items under a blanket of argon, or under kerosene. Nothing in it ages while it is
- * charged. Argon seeps out through the bung, ten millibuckets a day, and every time the lid comes off a little is lost to the air
- * let in; kerosene stays. Nothing ticks: the contents are aged, and the gas drawn down, whenever the drum is opened, piped into
- * or emptied.
- */
 public class InertDrumBlockEntity extends BaseContainerBlockEntity implements IHaveGoggleInformation {
 
     public static final int CAPACITY = 1000;
-    /** Ten millibuckets of argon a day through the seals. */
     public static final int TICKS_PER_MB = 2400;
-    /** What a lid's worth of air costs to flush back out. */
     public static final int VENT = 25;
     private static final long DAY = 24000;
     private static final TagKey<Fluid> KEROSENE = TagKey.create(Registries.FLUID, ResourceLocation.parse("c:kerosene"));
@@ -104,7 +96,6 @@ public class InertDrumBlockEntity extends BaseContainerBlockEntity implements IH
         return Separation.reagent(tank.getFluid().getFluid()) == Separation.fluid("argon");
     }
 
-    /** Ages what is inside up to now, counting only the time it lay unprotected, and lets out the argon that has leaked since. */
     public void settle() {
         if (level == null || level.isClientSide) {
             return;
@@ -142,7 +133,6 @@ public class InertDrumBlockEntity extends BaseContainerBlockEntity implements IH
         setChanged();
     }
 
-    /** For tests: as if the drum had stood shut for {@code ticks}. */
     public void backdate(long ticks) {
         settle();
         since -= ticks;
@@ -157,7 +147,6 @@ public class InertDrumBlockEntity extends BaseContainerBlockEntity implements IH
         }
     }
 
-    /** The gas there is now, by the clocks alone: what goggles read on the client, where nothing settles. */
     public int gasAt(long now) {
         if (!argon() || leakSince == UNSET) {
             return tank.getFluidAmount();

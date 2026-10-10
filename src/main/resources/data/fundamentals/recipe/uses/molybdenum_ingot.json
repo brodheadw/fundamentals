@@ -4,7 +4,6 @@
     "tfmg:steel_vat",
     "tfmg:firebrick_lined_vat"
   ],
-  "heat_requirement": "heated",
   "machines": [
     "tfmg:mixing"
   ],
@@ -28,5 +27,6 @@
       "id": "fundamentals:molybdenum_ingot",
       "count": 2
     }
-  ]
+  ],
+  "heat_requirement": "heated"
 }

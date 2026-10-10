@@ -1,19 +1,10 @@
 #!/usr/bin/env python3
-"""Fundamentals: First Principles, the in-game book (Patchouli). The chapters are written here; whatever
-they say about the data (which minerals form which deposits, how many stages each cut takes, how long
-the road from liquor to each metal is) is read from the generators and the recipe files, so the book
-cannot drift from the game. Re-run after any edit to the chain.
-
-    python3 tools/build_book.py
-
-Patchouli is optional: without it the book's files are ignored and its recipe is conditioned away.
-"""
 import json
 import re
 import shutil
-from pathlib import Path
 
-from build_ore_data import ASSETS, BIOMES, DATA, DEPOSITS, DISPLAY, PLACERS, write
+from common import ASSETS, DATA, JAVA, write
+from build_ore_data import DEPOSITS, DISPLAY, PLACERS
 from build_separation_data import CURIE, MOMENTS, TITANIUM_PIPEWORK, ZINC_REDUCTION
 from build_oxidation_data import METALS as AGEING
 from build_heat_data import REFERENCES, liquids
@@ -40,7 +31,6 @@ LANG = json.loads((ASSETS / "lang/en_us.json").read_text(encoding="utf-8"))
 
 
 def pretty(id):
-    """A fluid or item by the name the game shows, lower-cased for the middle of a sentence."""
     key = id.split(":")[-1]
     name = LANG.get(f"fluid_type.fundamentals.{key}") or LANG.get(f"item.fundamentals.{key}") or LANG.get(f"block.fundamentals.{key}")
     if name is None:
@@ -49,7 +39,6 @@ def pretty(id):
 
 
 def pages_of(text, title=None):
-    """Patchouli truncates a page; split a long text at sentence ends into pages that fit."""
     sentences = re.split(r"(?<=[.!?])\s+", text.strip())
     pages, current = [], ""
     for s in sentences:
@@ -88,8 +77,6 @@ def entry(cat, id, name, icon, pages, sortnum=0):
     write(BOOK_ASSETS / f"entries/{cat}/{id}.json", {"name": name, "category": f"fundamentals:{cat}", "icon": icon, "sortnum": sortnum, "pages": pages})
 
 
-# ---- the data the chapters quote ----
-
 def cuts():
     out = {}
     for path in sorted((RECIPES / "separation").glob("*.json")):
@@ -99,8 +86,7 @@ def cuts():
 
 
 def range_of(gauge):
-    """A thermometer's scale as heat.Thermometer gives it."""
-    java = (Path(__file__).resolve().parent.parent / "src/main/java/ai/gsmc/fundamentals/heat/Thermometer.java").read_text(encoding="utf-8")
+    java = (JAVA / "heat/Thermometer.java").read_text(encoding="utf-8")
     low, high = re.search(rf'"{gauge}", (-?\d+), (-?\d+)', java).groups()
     return f"{int(low):,} to {int(high):,} °C"
 
@@ -110,20 +96,17 @@ def magnetic_cuts():
 
 
 def susceptibility(element, celsius):
-    """χ(T) / χ(20 °C) as separation.Paramagnetism gives it, in per cent."""
     share = CURIE.get(element, 1.0)
     return round(100 * (share * 293 / (celsius + 273.15) + 1 - share))
 
 
 def hazard(name):
-    """A constant of separation.Hazards: a temperature as it is, a per-tick chance as the seconds it averages."""
-    java = (Path(__file__).resolve().parent.parent / "src/main/java/ai/gsmc/fundamentals/separation/Hazards.java").read_text(encoding="utf-8")
+    java = (JAVA / "separation/Hazards.java").read_text(encoding="utf-8")
     value = re.search(rf"{name} = ([0-9./ ]+);", java).group(1)
     return round(eval(value)) if "/" not in value else round(1 / eval(value) / 20)
 
 
 def roads(tree):
-    """Every single-element liquor and the batteries it takes to reach it from the mixed liquor."""
     roads = {}
 
     feed, _, *reduced = ZINC_REDUCTION
@@ -143,8 +126,6 @@ def roads(tree):
     walk("fundamentals:rare_earth_liquor", [])
     return roads
 
-
-# ---- chapters ----
 
 def geology():
     category("geology", "Geology", "Where the minerals are, and why they are there.", "fundamentals:raw_hematite", 0)
@@ -257,7 +238,6 @@ def rare_earths():
         "Two things the plant will not forgive. A mixer over 128 rpm beats the phases into an emulsion that never settles, and the battery stops until it is slowed. "
         "And the organic is not quite immortal: every cut carries a little of it out entrained in the raffinate, two per cent of a batch, so a plant wants a trickle of fresh extractant forever.")
         + [crafting("fundamentals:mixer_settler")], 2)
-    # the cuts, as the data has them
     cut_pages = []
     for liquor, cut in sorted(tree.items(), key=lambda kv: kv[1]["stages"]):
         cut_pages += pages_of(f"{pretty(liquor).capitalize()} parts into {pretty(cut['light'])} (raffinate, head end) and {pretty(cut['heavy'])} "
@@ -314,7 +294,6 @@ def rare_earths():
         "Praseodymium and neodymium are both 3.6, dysprosium and holmium both 10.6, terbium 9.7 and erbium 9.6 beside them; "
         "and the broad cuts carry strong and weak ions on both sides, yttrium at nothing among the strongly magnetic heavies, gadolinium at 7.9 beside samarium at 1.5. "
         "Those are solvent extraction's alone.") + [crafting("fundamentals:magnetomigration_cell")], 4)
-    # the road to each metal
     road_pages = []
     for liquor, path in sorted(roads(tree).items(), key=lambda kv: sum(s for s, _ in kv[1])):
         total = sum(s for s, _ in path)
@@ -441,7 +420,6 @@ def rare_earths():
 
 
 def liquid_rows():
-    """A line a liquid, or one for a family that shares its figures: density, viscosity, freezing and boiling point, flash point, hazards."""
     groups = {}
     for id, (name, *figures) in liquids().items():
         groups.setdefault(json.dumps(figures[:8], sort_keys=True, default=sorted), []).append(name)
@@ -459,15 +437,13 @@ def liquid_rows():
 
 
 def figure(value):
-    """As the goggles give it: three significant figures, or whole and grouped from a hundred up."""
     if abs(value) >= 100:
         return f"{value:,.0f}"
     return f"{float(f'{value:.3g}'):g}"
 
 
 def liquid_constant(name):
-    """A constant of liquid.Liquids."""
-    java = (Path(__file__).resolve().parent.parent / "src/main/java/ai/gsmc/fundamentals/liquid/Liquids.java").read_text(encoding="utf-8")
+    java = (JAVA / "liquid/Liquids.java").read_text(encoding="utf-8")
     return float(re.search(rf"\b{name} = ([0-9.]+)", java).group(1))
 
 
@@ -494,7 +470,6 @@ def liquids_entry():
 
 
 def ageing_table():
-    """A line a metal: how long an ingot takes per stage in ordinary air, and in damp air, from the data map's rates."""
     def days(d):
         return f"{d:g} day" + ("" if d == 1 else "s")
     lines = [f"$(li){metal.title()}: {kind}, {days(d)} a stage; damp, {days(round(d / wet, 1)) if wet else 'never'}"
@@ -775,8 +750,7 @@ def power():
 
 
 def grades():
-    """The magnet grades as magnet.MagnetGrade gives them: (material, rated, lasting loss, Curie, strength)."""
-    java = (Path(__file__).resolve().parent.parent / "src/main/java/ai/gsmc/fundamentals/magnet/MagnetGrade.java").read_text(encoding="utf-8")
+    java = (JAVA / "magnet/MagnetGrade.java").read_text(encoding="utf-8")
     return [(m, int(a), int(b), int(c), float(f)) for m, a, b, c, f in re.findall(r'[A-Z_]+\("([a-z_]+)", (\d+), (\d+), (\d+), ([\d.]+)F\)', java)]
 
 
@@ -854,7 +828,6 @@ def book():
 
 
 def check():
-    """Every recipe a page shows must exist."""
     missing = []
     for path in BOOK_ASSETS.glob("entries/*/*.json"):
         for page in json.loads(path.read_text())["pages"]:

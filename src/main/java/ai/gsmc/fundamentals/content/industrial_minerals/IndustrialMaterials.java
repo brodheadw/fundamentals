@@ -32,7 +32,7 @@ public final class IndustrialMaterials {
         reg("potash", MaterialType.COMPOUND, "KCl", forms(DUST), MaterialProperties.builder().density(0.25));
         reg("quicklime", MaterialType.COMPOUND, "CaO", forms(DUST), MaterialProperties.builder().density(0.42));
         reg("phosphorus", MaterialType.ELEMENT, "P", forms(DUST),
-                MaterialProperties.builder().density(0.23).toxicity(0.30)); // white P is nasty
+                MaterialProperties.builder().density(0.23).toxicity(0.30));
     }
 
     private static MaterialForm[] forms(MaterialForm... f) {

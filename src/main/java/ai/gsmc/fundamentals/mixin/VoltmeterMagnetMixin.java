@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/** A moving-coil meter's needle swings against its magnet's field, so a meter whose magnet the heat has weakened reads low. */
 @Mixin(value = VoltMeterBlockEntity.class, remap = false)
 public abstract class VoltmeterMagnetMixin {
 
