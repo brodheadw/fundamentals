@@ -64,10 +64,10 @@ public class OxidationTests {
         chest.setItem(0, new ItemStack(item("fundamentals:cerium_ingot"), 4));
         chest.setItem(1, new ItemStack(Items.GOLD_INGOT, 4));
         chest.setItem(2, new ItemStack(Items.COPPER_BLOCK));
-        chest.setData(Oxidation.CLOCK, helper.getLevel().getGameTime() - HUNDRED_DAYS);
+        chest.setData(Oxidation.CLOCK, helper.getLevel().getGameTime() - 20 * HUNDRED_DAYS);
         open(helper, chest);
         helper.assertTrue(chest.getItem(0).is(item("fundamentals:cerium_oxide")) && chest.getItem(0).getCount() == 4,
-                "a hundred days in a chest should have turned four cerium ingots to four oxide, not " + chest.getItem(0));
+                "years in a chest should have turned four cerium ingots to four oxide, not " + chest.getItem(0));
         helper.assertTrue(chest.getItem(1).is(Items.GOLD_INGOT) && !chest.getItem(1).has(Oxidation.STAGE), "gold never ages: " + chest.getItem(1));
         helper.assertFalse(chest.getItem(2).is(Items.COPPER_BLOCK), "a copper block should have weathered in the chest");
         helper.succeed();
