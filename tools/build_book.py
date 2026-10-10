@@ -16,6 +16,7 @@ from pathlib import Path
 from build_ore_data import ASSETS, BIOMES, DATA, DEPOSITS, DISPLAY, PLACERS, write
 from build_separation_data import CURIE, MOMENTS, TITANIUM_PIPEWORK, ZINC_REDUCTION
 from build_oxidation_data import METALS as AGEING
+from build_heat_data import REFERENCES, liquids
 
 BOOK = "first_principles"
 BOOK_DATA = DATA / f"patchouli_books/{BOOK}"
@@ -439,6 +440,59 @@ def rare_earths():
            {"type": "patchouli:crafting", "recipe": "fundamentals:thermometers/type_s_thermocouple"}], 14)
 
 
+def liquid_rows():
+    """A line a liquid, or one for a family that shares its figures: density, viscosity, freezing and boiling point, flash point, hazards."""
+    groups = {}
+    for id, (name, *figures) in liquids().items():
+        groups.setdefault(json.dumps(figures[:8], sort_keys=True, default=sorted), []).append(name)
+    rows = []
+    for key, names in groups.items():
+        density, viscosity, freezes, boils, flash, _, _, hazards = json.loads(key)
+        name = names[0] if len(names) == 1 else f"{names[0]} and {len(names) - 1} like it"
+        points = f"{figure(freezes)} to {figure(boils)}" if freezes is not None and boils is not None else \
+            f"freezes {figure(freezes)}" if freezes is not None else f"boils {figure(boils)}" if boils is not None else ""
+        marks = [f"flash {figure(flash)}"] if flash is not None else []
+        marks += [h for h in ("toxic", "fuming", "corrosive") if h in hazards]
+        cells = [figure(density), figure(viscosity) if viscosity is not None else "-", points or "-"] + marks
+        rows.append(f"$(li)$(l){name}$(): " + ", ".join(cells))
+    return rows
+
+
+def figure(value):
+    """As the goggles give it: three significant figures, or whole and grouped from a hundred up."""
+    if abs(value) >= 100:
+        return f"{value:,.0f}"
+    return f"{float(f'{value:.3g}'):g}"
+
+
+def liquid_constant(name):
+    """A constant of liquid.Liquids."""
+    java = (Path(__file__).resolve().parent.parent / "src/main/java/ai/gsmc/fundamentals/liquid/Liquids.java").read_text(encoding="utf-8")
+    return float(re.search(rf"\b{name} = ([0-9.]+)", java).group(1))
+
+
+def liquids_entry():
+    rows, table_of = liquid_rows(), liquids()
+    vent, every, viscous = int(liquid_constant("VENT")), int(liquid_constant("VENT_INTERVAL")) // 20, figure(liquid_constant("VISCOUS"))
+    seawater, bayer, carbonyl = table_of["fundamentals:seawater"][3], table_of["fundamentals:sodium_aluminate_liquor"][7], table_of["fundamentals:nickel_carbonyl"][6]
+    table = [{"type": "patchouli:text", "text": "".join(rows[i:i + 5]), **({"title": "The table"} if i == 0 else {})} for i in range(0, len(rows), 5)]
+    entry("rare_earths", "liquids", "Liquid properties", "minecraft:water_bucket", pages_of(
+        f"Every fluid in the plant is a real one, with its real density, viscosity, freezing and boiling point and flash point; goggles on a pipe, "
+        "pump, valve, tank or basin give them. Water-based fluids freeze in the pipe: below the freezing point a pipe holds still and a pump moves "
+        f"nothing until the heat comes back. Water freezes at 0 °C, seawater at {figure(seawater)}, brines and acids far lower.", "Liquid properties") + pages_of(
+        f"A fluid past its boiling point in an open basin, with no mixer or press over it, boils off {vent} mB every {every} seconds, "
+        "and whatever it carries is breathed: acid fumes, poison, nickel carbonyl. In a pipe or tank the goggles warn instead. "
+        f"Fresh Bayer liquor leaves the digester at {figure(bayer)} °C under pressure, too hot for plastic pipe. A flammable fluid let out by a burst pipe "
+        "past its flash point beside a flame, lava or a burner, or anywhere past its autoignition temperature, catches fire; "
+        f"nickel carbonyl ignites at {figure(carbonyl)} °C. Spilt oils and fuels in the world burn as wood does, the lower the flash point the readier.") + pages_of(
+        f"Thick fluids pump slower, as the Hydraulic Institute's correction has a pump lose flow past about {viscous} mPa·s: "
+        "heavy oil at 3,000 mPa·s goes at about half, and a polymer melt or fresh concrete no slower than a quarter. "
+        "Each line of the table gives density in kg/m³, viscosity in mPa·s, and freezing to boiling point in °C, then the flash point and hazards. "
+        "Gases are at 20 °C and 1 atm and hot melts at their own temperature; an oil's freezing point is its pour point.")
+        + table + [{"type": "patchouli:text", "text": "".join(f"$(li){text}" for text in list(REFERENCES.values())[i:i + 3]),
+                    **({"title": "Sources"} if i == 0 else {})} for i in range(0, len(REFERENCES), 3)], 15)
+
+
 def ageing_table():
     """A line a metal: how long an ingot takes per stage in ordinary air, and in damp air, from the data map's rates."""
     def days(d):
@@ -819,6 +873,7 @@ def main():
     geology()
     ironworking()
     rare_earths()
+    liquids_entry()
     metals()
     platinum()
     power()
