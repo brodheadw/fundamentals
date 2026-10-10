@@ -22,6 +22,7 @@ class Dependencies {
     val tfmgMin = property("deps.tfmg_min").toString()
     val principlesVersion = property("deps.principles_version").toString()
     val principlesMin = property("deps.principles_min").toString()
+    val chemicaVersion = property("deps.chemica_version").toString()
 }
 
 class McData {
@@ -86,6 +87,9 @@ dependencies {
     modLocalRuntime("maven.modrinth:create-tfmg:${deps.tfmgVersion}")
     modCompileOnly("maven.modrinth:create:${deps.createVersion}")
     modCompileOnly("maven.modrinth:create-tfmg:${deps.tfmgVersion}")
+    // Chemica is optional: tools/build_chemica_compat.py reads its recipes from this jar, and -Pchemica runs it alongside.
+    modCompileOnly("maven.modrinth:chemica:${deps.chemicaVersion}")
+    if (providers.gradleProperty("chemica").isPresent) modLocalRuntime("maven.modrinth:chemica:${deps.chemicaVersion}")
     // Create ships these inside its jar, but a dev run does not unpack them.
     for (bundled in listOf("net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1",
             "dev.engine-room.flywheel:flywheel-neoforge-1.21.1:1.0.6", "com.tterrag.registrate:Registrate:MC1.21-1.3.0+67")) {

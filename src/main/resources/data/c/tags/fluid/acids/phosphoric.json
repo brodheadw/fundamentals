@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:phosphoric_acid",
+    "fundamentals:phosphoric_acid_flowing",
+    {
+      "id": "chemica:phosphoric_acid",
+      "required": false
+    },
+    {
+      "id": "chemica:flowing_phosphoric_acid",
+      "required": false
+    }
+  ]
+}

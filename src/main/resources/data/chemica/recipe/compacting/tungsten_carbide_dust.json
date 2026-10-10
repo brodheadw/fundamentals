@@ -1,0 +1,23 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "create:compacting",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "c:ingots/tungsten"
+    },
+    {
+      "item": "chemica:coal_dust"
+    }
+  ],
+  "results": [
+    {
+      "id": "chemica:tungsten_carbide_dust"
+    }
+  ]
+}

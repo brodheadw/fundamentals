@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:ammonia",
+    {
+      "id": "chemica:ammonia",
+      "required": false
+    },
+    {
+      "id": "chemica:flowing_ammonia",
+      "required": false
+    }
+  ]
+}

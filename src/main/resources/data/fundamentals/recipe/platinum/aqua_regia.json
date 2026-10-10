@@ -2,14 +2,14 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 375,
-      "fluid": "fundamentals:hydrochloric_acid"
+      "tag": "c:acids/hydrochloric"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 125,
-      "fluid": "fundamentals:nitric_acid"
+      "tag": "c:acids/nitric"
     }
   ],
   "results": [

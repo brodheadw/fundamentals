@@ -2,6 +2,18 @@
   "replace": false,
   "values": [
     "fundamentals:pvc_sheet",
-    "tfmg:plastic_sheet"
+    "tfmg:plastic_sheet",
+    {
+      "id": "chemica:polyethylene_sheet",
+      "required": false
+    },
+    {
+      "id": "chemica:polyvinyl_chloride_sheet",
+      "required": false
+    },
+    {
+      "id": "chemica:polytetrafluoroethylene_sheet",
+      "required": false
+    }
   ]
 }

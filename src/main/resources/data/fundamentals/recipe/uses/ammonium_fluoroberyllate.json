@@ -8,14 +8,14 @@
       "item": "fundamentals:beryllium_hydroxide"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 500,
-      "fluid": "fundamentals:hydrofluoric_acid"
+      "tag": "c:acids/hydrofluoric"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 250,
-      "fluid": "fundamentals:ammonia"
+      "tag": "c:ammonia"
     }
   ],
   "results": [

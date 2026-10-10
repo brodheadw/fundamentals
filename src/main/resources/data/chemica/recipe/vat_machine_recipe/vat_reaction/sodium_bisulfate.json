@@ -1,0 +1,35 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "ingredients": [
+    {
+      "tag": "c:dusts/salt"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "tfmg:sulfuric_acid"
+    }
+  ],
+  "machines": [],
+  "min_size": 1,
+  "processing_time": 300,
+  "results": [
+    {
+      "amount": 250,
+      "id": "fundamentals:hydrochloric_acid"
+    },
+    {
+      "id": "chemica:sodium_bisulfate_dust"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "ingredients": [
+    {
+      "item": "chemica:caustic_soda_dust"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 1000,
+      "tag": "c:chlorine"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "minecraft:water"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "chemica:propene"
+    }
+  ],
+  "machines": [],
+  "min_size": 1,
+  "processing_time": 350,
+  "results": [
+    {
+      "amount": 1000,
+      "id": "chemica:epichlorohydrin"
+    },
+    {
+      "amount": 500,
+      "id": "fundamentals:hydrochloric_acid"
+    },
+    {
+      "amount": 250,
+      "id": "fundamentals:salt_brine"
+    }
+  ]
+}

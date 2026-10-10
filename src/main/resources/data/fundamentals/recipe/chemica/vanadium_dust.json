@@ -1,0 +1,41 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "create:mixing",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_magnetite"
+    },
+    {
+      "item": "fundamentals:raw_magnetite"
+    },
+    {
+      "item": "fundamentals:raw_magnetite"
+    },
+    {
+      "item": "fundamentals:raw_magnetite"
+    },
+    {
+      "tag": "c:dusts/soda_ash"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "minecraft:water"
+    }
+  ],
+  "results": [
+    {
+      "id": "chemica:vanadium_dust"
+    },
+    {
+      "id": "create:crushed_raw_iron",
+      "count": 3
+    }
+  ]
+}

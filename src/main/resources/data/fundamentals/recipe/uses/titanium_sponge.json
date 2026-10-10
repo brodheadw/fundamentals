@@ -23,14 +23,14 @@
       "item": "fundamentals:magnesium_ingot"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 500,
-      "fluid": "fundamentals:titanium_tetrachloride"
+      "tag": "c:titanium_tetrachloride"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 100,
-      "fluid": "fundamentals:argon"
+      "tag": "c:argon"
     }
   ],
   "results": [

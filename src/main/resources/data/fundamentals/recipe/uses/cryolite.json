@@ -5,14 +5,14 @@
       "item": "fundamentals:aluminium_hydroxide"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 500,
-      "fluid": "fundamentals:hydrofluoric_acid"
+      "tag": "c:acids/hydrofluoric"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 250,
-      "fluid": "fundamentals:caustic_soda"
+      "tag": "c:caustic_soda"
     }
   ],
   "results": [

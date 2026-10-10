@@ -11,9 +11,9 @@
       "tag": "c:nuggets/iridium"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 100,
-      "fluid": "fundamentals:hydrochloric_acid"
+      "tag": "c:acids/hydrochloric"
     }
   ],
   "results": [

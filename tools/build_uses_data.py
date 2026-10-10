@@ -13,6 +13,7 @@ import shutil
 import zipfile
 from pathlib import Path
 
+from build_chemica_compat import CHEMICA_SHEETS, fluid_ingredient, optional
 from build_ore_data import ASSETS, DATA, cube, drop_self, tag as tag_file, write
 
 USES = DATA / "recipe/uses"
@@ -78,7 +79,7 @@ TFMG_PLASTIC_MODELS = (["plastic_pipe/core_x", "plastic_pipe/core_y", "plastic_p
 
 
 def argon(amount=100):
-    return [{"type": "neoforge:single", "amount": amount, "fluid": "fundamentals:argon"}]
+    return [fluid_ingredient("argon", amount)]
 
 
 def item(id, count=1):
@@ -263,7 +264,7 @@ def roast(ore, roasted, name=None, raw=True):
 def vat(name, items, fluid_id, amount, results, machines=("tfmg:mixing",), heat="heated"):
     write(USES / f"{name}.json", {"type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:steel_vat", "tfmg:firebrick_lined_vat"],
                                   "heat_requirement": heat, "machines": list(machines), "min_size": 1, "processing_time": 100,
-                                  "ingredients": items + [{"type": "neoforge:single", "amount": amount, "fluid": fluid_id}], "results": results})
+                                  "ingredients": items + [fluid_ingredient(fluid_id, amount)], "results": results})
 
 
 def cobalt():
@@ -740,7 +741,7 @@ def beryllium():
 
 
 def fluid(id, amount):
-    return {"type": "neoforge:single", "amount": amount, "fluid": id if ":" in id else f"fundamentals:{id}"}
+    return fluid_ingredient(id, amount)
 
 
 def out_fluid(id, amount):
@@ -984,7 +985,7 @@ def plastics():
                                         "ingredients": [fluid("vinyl_chloride", 250), fluid("minecraft:water", 250)], "results": [result("pvc_resin")]})
     write(PLASTICS / "pvc_sheet.json", {"type": "create:compacting", "heat_requirement": "heated", "ingredients": item("pvc_resin"),
                                         "results": [result("pvc_sheet")]})
-    tag_file(DATA / "tags/item/plastic_sheets.json", ["tfmg:plastic_sheet", "fundamentals:pvc_sheet"])
+    write(DATA / "tags/item/plastic_sheets.json", {"replace": False, "values": ["fundamentals:pvc_sheet", "tfmg:plastic_sheet"] + optional(CHEMICA_SHEETS)})
     tag_file(DATA / "tags/item/plastic_blocks.json", ["tfmg:plastic_block"] + [f"fundamentals:{name}" for name in PLASTIC_BLOCKS])
     sheets = {"I": {"tag": "fundamentals:plastic_sheets"}}
     shaped(TFMG / "crafting/materials/plastic_pipe.json", ["   ", "III", "   "], sheets, {"count": 4, "id": "tfmg:plastic_pipe"})

@@ -1,0 +1,39 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:cast_iron_vat",
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "ingredients": [
+    {
+      "type": "neoforge:tag",
+      "amount": 500,
+      "tag": "c:ammonia"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "tfmg:sulfuric_acid"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "chemica:oxygen"
+    }
+  ],
+  "machines": [],
+  "min_size": 1,
+  "processing_time": 300,
+  "results": [
+    {
+      "id": "chemica:ammonium_persulfate"
+    }
+  ]
+}

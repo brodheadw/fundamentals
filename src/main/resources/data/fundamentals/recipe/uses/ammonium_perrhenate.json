@@ -10,9 +10,9 @@
       "fluid": "minecraft:water"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 50,
-      "fluid": "fundamentals:ammonia"
+      "tag": "c:ammonia"
     }
   ],
   "results": [
