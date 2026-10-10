@@ -357,21 +357,21 @@ def paint_banded(c, cells, pal):
 
 def paint_clay(variant=0):
     rng = random.Random(seed("ion_adsorption_clay", variant))
-    tones = [(150, 84, 52), (172, 102, 62), (190, 122, 76), (204, 142, 92)]
-    kaolin = [(222, 196, 164), (236, 220, 196)]
+    tones = [(144, 90, 60), (158, 102, 68), (170, 114, 77), (182, 127, 87)]
+    kaolin = [(204, 178, 148), (216, 196, 170)]
     raw = [[rng.random() for _ in range(SIZE)] for _ in range(SIZE)]
     img = Image.new("RGB", (SIZE, SIZE))
     for y in range(SIZE):
         for x in range(SIZE):
             v = sum(raw[(y + dy) % SIZE][(x + dx) % SIZE] for dx in (-2, -1, 0, 1, 2) for dy in (-1, 0, 1)) / 15
             img.putpixel((x, y), tones[min(3, max(0, int((v - 0.32) * 11)))])
-    for _ in range(8):
+    for _ in range(6):
         x, y = rng.randrange(SIZE), rng.randrange(SIZE)
         img.putpixel((x, y), rng.choice(kaolin))
         if rng.random() < 0.5:
             img.putpixel(((x + 1) % SIZE, y), kaolin[0])
     for _ in range(5):
-        img.putpixel((rng.randrange(SIZE), rng.randrange(SIZE)), (112, 60, 40))
+        img.putpixel((rng.randrange(SIZE), rng.randrange(SIZE)), (122, 80, 56))
     return img
 
 

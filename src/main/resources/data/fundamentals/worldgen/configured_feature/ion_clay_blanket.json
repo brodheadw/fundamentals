@@ -4,12 +4,12 @@
     "shape": "blanket",
     "ores": [],
     "radius": {
-      "min": 8,
-      "max": 12
+      "min": 7,
+      "max": 10
     },
     "thickness": {
-      "min": 3,
-      "max": 5
+      "min": 2,
+      "max": 4
     },
     "replaceable": "fundamentals:deposit_replaceable/ground",
     "host": {
