@@ -2,8 +2,9 @@
 """Writes the showcase datapack's functions: the whole separation tree, read from the cut recipes, laid out as
 batteries on a flat world. The root battery parts the mixed liquor; each product is either the feed of the next
 battery (piped north to it) or a single element, which gets a station that precipitates the oxalate, smelts it and
-sets the oxide on a depot; neodymium and dysprosium go on to metal in a vat north of their stations. The root's liquor starts
-as monazite: washed, baked in sulfuric acid, leached in hydrochloric and clarified, west of the root. Every battery has
+sets the oxide on a depot; neodymium and dysprosium go on to metal in a vat north of their stations, and europium leaves
+gadolinium in a zinc basin before either reaches a station. The root's liquor starts as monazite: washed, baked in
+sulfuric acid, dropped as carbonate by soda ash, leached in hydrochloric and clarified, west of the root. Every battery has
 its mixers, lever, organic feed, acid feed, sump drain and side tanks, every end tank is filled and refilled, and the whole plant is force-loaded so it runs while you walk it.
 South of spawn is a gallery of the rest, each exhibit signed and facing north: every ore, the zirconium, hafnium and beryllium
 routes in frames, magnet grades among blast furnaces, oxidation, thermometers, seawater and corrosion, cracking and plastics.
@@ -161,20 +162,85 @@ def station(x, z):
     put(x, Y + 1, z - 1, f"{LIQUOR_PIPE}[down=true,up=true]")
     put(x, Y + 2, z - 1, f"{LIQUOR_PIPE}[down=true,up=true]")
     put(x, Y + 3, z - 1, f"{LIQUOR_PIPE}[down=true,north=true]")
-    put(x, Y + 3, z - 2, 'create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}')
-    put(x, Y + 5, z - 2, "create:mechanical_mixer")
-    put(x + 1, Y + 5, z - 2, "create:cogwheel[axis=y]")
-    put(x + 1, Y + 6, z - 2, f"create:creative_motor[facing=down]{MOTOR}")
-    put(x - 1, Y, z - 2, 'minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}')
-    put(x, Y + 2, z - 3, "create:chute")
-    put(x, Y + 1, z - 3, 'minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}')
-    put(x, Y, z - 3, "minecraft:hopper[facing=north]")
-    put(x, Y, z - 4, "create:depot")
+    oxalate(x, z - 2)
+
+
+def oxalate(x, z):
+    """A station's basin at (x, Y + 3, z) under its mixer, and the chute, furnace and depot north of it."""
+    put(x, Y + 3, z, 'create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}')
+    put(x, Y + 5, z, "create:mechanical_mixer")
+    put(x + 1, Y + 5, z, "create:cogwheel[axis=y]")
+    put(x + 1, Y + 6, z, f"create:creative_motor[facing=down]{MOTOR}")
+    put(x - 1, Y, z, 'minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}')
+    put(x, Y + 2, z - 1, "create:chute")
+    put(x, Y + 1, z - 1, 'minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}')
+    put(x, Y, z - 1, "minecraft:hopper[facing=north]")
+    put(x, Y, z - 2, "create:depot")
+
+
+def mixer(x, y, z, cog):
+    """A mixer over the basin two below it, turned by a cogwheel beside it at cog (x, z) with the motor on top."""
+    put(x, y, z, "create:mechanical_mixer")
+    put(cog[0], y, cog[1], "create:cogwheel[axis=y]")
+    put(cog[0], y + 1, cog[1], f"create:creative_motor[facing=down]{MOTOR}")
+
+
+def replace_pump(x, y, z, facing):
+    """A pump placed before the tank it draws on is filled takes a sip and stops, so fill places it again."""
+    fills.extend([f"setblock {x} {y} {z} minecraft:air", f"setblock {x} {y} {z} {LIQUOR_PUMP}[facing={facing}]"])
+
+
+def zinc_reduction(x, z):
+    """Europium out of the europium-gadolinium liquor from the side pump's outlet at (x, z). The liquor fills a tank, kept
+    topped up since a batch takes a bucket of it and a sulfate comes only one batch in five, and is pumped up into a basin
+    under a mixer with zinc hoppered in and sulfuric acid pumped in from the east. It pours the gadolinium liquor and any
+    europium sulfate into a basin below: a pump draws the liquor west and down into the gadolinium station, a hopper hands
+    the sulfate north into a heated basin of nitric acid, and that pours the europium liquor straight into the europium
+    station's basin."""
+    put(x, Y, z, f"{LIQUOR_PIPE}[north=true,south=true]")
+    tank(x, Y, z - 1, "europium_gadolinium_liquor")
+    pump(x, Y, z - 2, "north", "z", (x, Y + 1, z - 1), "north")
+    replace_pump(x, Y, z - 2, "north")
+    put(x, Y, z - 3, f"{LIQUOR_PIPE}[south=true,up=true]")
+    for y in range(Y + 1, Y + 6):
+        put(x, y, z - 3, f"{LIQUOR_PIPE}[down=true,up=true]")
+    put(x, Y + 6, z - 3, f"{LIQUOR_PIPE}[down=true,north=true]")
+    z -= 4
+    put(x, Y + 6, z, "create:basin[facing=north]")
+    mixer(x, Y + 8, z, (x + 1, z))
+    put(x - 1, Y + 6, z, "minecraft:hopper[facing=east]")
+    stocked(x - 1, Y + 7, z, "create:zinc_nugget")
+    tank(x + 2, Y + 6, z, "tfmg:sulfuric_acid")
+    pump(x + 1, Y + 6, z, "west", "x", (x + 2, Y + 7, z), "west")
+    replace_pump(x + 1, Y + 6, z, "west")
+    sign(x + 3, Y, z, "Zinc reduces europium:|its sulfate drops")
+    # what it pours
+    put(x, Y + 5, z - 1, "create:basin[facing=down]")
+    pump(x - 1, Y + 5, z - 1, "west", "x", (x - 2, Y + 6, z - 1), "east")
+    put(x - 2, Y + 5, z - 1, f"{LIQUOR_PIPE}[east=true,down=true]")
+    put(x - 2, Y + 4, z - 1, f"{LIQUOR_PIPE}[up=true,down=true]")
+    put(x - 2, Y + 3, z - 1, f"{LIQUOR_PIPE}[up=true,north=true]")
+    oxalate(x - 2, z - 2)
+    put(x - 3, Y + 3, z - 2, "minecraft:hopper[facing=east]")   # this station runs a batch every few seconds, so it is kept in acid
+    stocked(x - 3, Y + 4, z - 2, "oxalic_acid")
+    sign(x - 3, Y, z - 1, "Gadolinium liquor")
+    put(x, Y + 4, z - 1, "minecraft:hopper[facing=north]")
+    # the nitric acid
+    put(x, Y + 3, z - 2, "create:blaze_burner[blaze=kindled]{isCreative:1b}")
+    put(x, Y + 4, z - 2, "create:basin[facing=north]")
+    mixer(x, Y + 6, z - 2, (x + 1, z - 2))
+    tank(x + 2, Y + 4, z - 2, "nitric_acid")
+    pump(x + 1, Y + 4, z - 2, "west", "x", (x + 2, Y + 5, z - 2), "west")
+    replace_pump(x + 1, Y + 4, z - 2, "west")
+    sign(x + 3, Y, z - 2, "Europium sulfate|in nitric acid,|heated")
+    oxalate(x, z - 3)
+    put(x - 1, Y + 3, z - 3, "minecraft:hopper[facing=east]")
+    stocked(x - 1, Y + 4, z - 3, "oxalic_acid")
 
 
 def stocked(x, y, z, item):
     """A chest of 27 stacks of one thing, restocked by refill once it is empty."""
-    items = "{Items:[" + ",".join(f'{{Slot:{i}b,id:"fundamentals:{item}",count:64}}' for i in range(27)) + "]}"
+    items = "{Items:[" + ",".join(f'{{Slot:{i}b,id:"{ns(item)}",count:64}}' for i in range(27)) + "]}"
     put(x, y, z, "minecraft:chest[facing=north]" + items)
     refills.append(f"execute unless data block {x} {y} {z} Items[0] run data merge block {x} {y} {z} {items}")
 
@@ -239,6 +305,7 @@ def reduction_cell(x, z, metal):
 
 
 CELLS = {"neodymium_liquor": electrolysis_cell, "dysprosium_liquor": reduction_cell}
+REDUCTIONS = {"europium_gadolinium_liquor": zinc_reduction}   # mixed liquors parted by a reagent, not a cut
 
 
 def place(liquor, x0, z0):
@@ -252,6 +319,8 @@ def place(liquor, x0, z0):
             cx = x0 + 3 if product == cut["light"] else heavy_x(liquor, x0)
             pipe_jog(px, cx - 2, z0 - 2, z0 - LANE, z0 - ROW + 1)
             place(product, cx, z0 - ROW)
+        elif product in REDUCTIONS:
+            REDUCTIONS[product](px, z0 - 2)
         else:
             station(px, z0 - 2)
             if product in CELLS:
@@ -265,52 +334,60 @@ def ore():
     stack it is still processing), so a smart chute filtered to the concentrate takes it down into a hopper that feeds the
     acid bake. The bake is a basin on a kindled creative blaze burner, sulfuric acid pumped in from the south; it spouts the
     sulfate and the phosphoric acid into a collector, whose phosphoric acid is pumped north into a tank and whose sulfate a
-    hopper under it hands into the leach basin. The leach (hydrochloric acid pumped in from the south) spouts the crude
-    liquor and the residue into a second collector: the liquor is pumped round into the clarifier's crude tank, the
-    residue hoppered into a chest. Two pumps (a pump is a small cogwheel) side by side on one axis mesh, so no two share
-    a row; and a pipe joins whatever holds fluid beside it, whatever its placed state says, so a feed pipe run under the
-    leach basin also filled the collector next to it with acid. An acid pump placed before its tank is filled takes a sip
-    and stops, as at the vats, so fill places both again."""
-    stocked(-15, Y + 7, 1, "raw_monazite")
-    put(-15, Y + 6, 1, "minecraft:hopper[facing=down]")
-    put(-15, Y + 5, 1, "create:depot")
-    put(-18, Y + 5, 1, f"create:creative_motor[facing=east]{MOTOR}")
-    put(-17, Y + 5, 1, "create:encased_fan[facing=east]")
-    for x, y, z in ((-16, Y + 4, 1), (-16, Y + 5, 0), (-16, Y + 5, 2)):
+    hopper under it hands into the carbonate basin. There soda ash (hoppered in from the north) and water (pumped in from
+    the south) drop the carbonate, which the basin spouts with the residue straight into the leach basin; a smart chute
+    under the leach takes the residue down into a chest. The leach (hydrochloric acid pumped in from the north) spouts the
+    crude liquor into a collector, pumped round into the clarifier's crude tank. Two pumps (a pump is a small cogwheel)
+    side by side on one axis mesh, so the feeds take turns north and south; and a pipe joins whatever holds fluid beside
+    it, whatever its placed state says, so no pipe runs beside a basin or tank it should not feed. An acid pump placed
+    before its tank is filled takes a sip and stops, as at the vats, so fill places each again."""
+    stocked(-16, Y + 9, 1, "raw_monazite")
+    put(-16, Y + 8, 1, "minecraft:hopper[facing=down]")
+    put(-16, Y + 7, 1, "create:depot")
+    put(-19, Y + 7, 1, f"create:creative_motor[facing=east]{MOTOR}")
+    put(-18, Y + 7, 1, "create:encased_fan[facing=east]")
+    for x, y, z in ((-17, Y + 6, 1), (-17, Y + 7, 0), (-17, Y + 7, 2)):
         put(x, y, z, "minecraft:glass")
-    put(-16, Y + 5, 1, "minecraft:water")
-    put(-15, Y + 4, 1, 'create:smart_chute{Filter:{id:"fundamentals:light_rare_earth_concentrate",count:1}}')
-    put(-15, Y + 3, 1, "minecraft:hopper[facing=east]")
+    put(-17, Y + 7, 1, "minecraft:water")
+    put(-16, Y + 6, 1, 'create:smart_chute{Filter:{id:"fundamentals:light_rare_earth_concentrate",count:1}}')
+    put(-16, Y + 5, 1, "minecraft:hopper[facing=east]")
+    sign(-16, Y, -1, "Monazite washed to concentrate")
     # the bake
-    put(-14, Y + 2, 1, "create:blaze_burner[blaze=kindled]{isCreative:1b}")
-    put(-14, Y + 3, 1, "create:basin[facing=east]")
-    put(-14, Y + 5, 1, "create:mechanical_mixer")
-    put(-14, Y + 5, 0, "create:cogwheel[axis=y]")
-    put(-14, Y + 6, 0, f"create:creative_motor[facing=down]{MOTOR}")
-    tank(-14, Y + 3, 3, "tfmg:sulfuric_acid")
-    pump(-14, Y + 3, 2, "north", "z", (-14, Y + 4, 3), "north")
-    put(-13, Y + 2, 1, "create:basin[facing=down]")
-    pump(-13, Y + 2, 0, "north", "z", (-13, Y + 3, -1), "south")
-    tank(-13, Y + 2, -1)
-    put(-13, Y + 1, 1, "minecraft:hopper[facing=east]")
+    put(-15, Y + 4, 1, "create:blaze_burner[blaze=kindled]{isCreative:1b}")
+    put(-15, Y + 5, 1, "create:basin[facing=east]")
+    mixer(-15, Y + 7, 1, (-15, 0))
+    tank(-15, Y + 5, 3, "tfmg:sulfuric_acid")
+    pump(-15, Y + 5, 2, "north", "z", (-15, Y + 6, 3), "north")
+    replace_pump(-15, Y + 5, 2, "north")
+    put(-14, Y + 4, 1, "create:basin[facing=down]")
+    pump(-14, Y + 4, 0, "north", "z", (-14, Y + 5, -1), "south")
+    tank(-14, Y + 4, -1)
+    put(-14, Y + 3, 1, "minecraft:hopper[facing=east]")
+    sign(-15, Y, -1, "Baked in hot sulfuric acid")
+    # the carbonate
+    put(-13, Y + 3, 1, "create:basin[facing=east]")
+    mixer(-13, Y + 5, 1, (-13, 0))
+    put(-13, Y + 3, 0, "minecraft:hopper[facing=south]")
+    stocked(-13, Y + 4, 0, "soda_ash")
+    tank(-13, Y + 3, 3, "minecraft:water")
+    pump(-13, Y + 3, 2, "north", "z", (-13, Y + 4, 3), "north")
+    replace_pump(-13, Y + 3, 2, "north")
+    sign(-13, Y, -1, "Soda ash and water: carbonate")
     # the leach
-    put(-12, Y + 1, 1, "create:basin[facing=east]")
-    put(-12, Y + 3, 1, "create:mechanical_mixer")
-    put(-11, Y + 3, 1, "create:cogwheel[axis=y]")
-    put(-11, Y + 4, 1, f"create:creative_motor[facing=down]{MOTOR}")
-    tank(-12, Y + 1, 3, "hydrochloric_acid")
-    pump(-12, Y + 1, 2, "north", "z", (-12, Y + 2, 3), "north")
-    for x, y in ((-14, Y + 3), (-12, Y + 1)):
-        fills.extend([f"setblock {x} {y} 2 minecraft:air", f"setblock {x} {y} 2 {LIQUOR_PUMP}[facing=north]"])
-    put(-11, Y, 1, "create:basin[facing=down]")
-    put(-11, Y - 1, 1, "minecraft:hopper[facing=down]")
-    put(-11, Y - 2, 1, "minecraft:chest")
-    pump(-11, Y, 0, "north", "z", (-11, Y + 1, -1), "south")
-    put(-11, Y, -1, f"{LIQUOR_PIPE}[south=true,east=true]")
-    put(-10, Y, -1, f"{LIQUOR_PIPE}[west=true,east=true]")
-    put(-9, Y, -1, f"{LIQUOR_PIPE}[west=true,south=true]")
-    put(-9, Y, 0, f"{LIQUOR_PIPE}[north=true,south=true]")
-    put(-9, Y, 1, f"{LIQUOR_PIPE}[north=true,up=true]")
+    put(-12, Y + 2, 1, "create:basin[facing=east]")
+    mixer(-12, Y + 4, 1, (-11, 1))
+    tank(-12, Y + 2, -1, "hydrochloric_acid")
+    pump(-12, Y + 2, 0, "south", "z", (-12, Y + 3, -1), "south")
+    replace_pump(-12, Y + 2, 0, "south")
+    put(-12, Y + 1, 1, 'create:smart_chute{Filter:{id:"fundamentals:monazite_residue_dust",count:1}}')
+    put(-12, Y, 1, "minecraft:chest")
+    sign(-12, Y, -1, "Carbonate in hydrochloric: crude liquor")
+    put(-11, Y + 1, 1, "create:basin[facing=down]")
+    pump(-11, Y + 1, 2, "south", "z", (-11, Y + 2, 3), "north")
+    put(-11, Y + 1, 3, f"{LIQUOR_PIPE}[north=true,east=true]")
+    put(-10, Y + 1, 3, f"{LIQUOR_PIPE}[west=true,east=true]")
+    put(-9, Y + 1, 3, f"{LIQUOR_PIPE}[west=true,north=true]")
+    put(-9, Y + 1, 2, f"{LIQUOR_PIPE}[north=true,south=true]")
 
 
 LANG = json.loads((ROOT / "src/main/resources/assets/fundamentals/lang/en_us.json").read_text())
@@ -671,15 +748,16 @@ def main():
           + [machine("tfmg:generator", g) for g, _ in GRADES] + [machine("tfmg:electric_motor", g) for g, _ in GRADES]
           + [("argon_canister", 1), ("argon_canister", 1), ("canister", 16), ("inert_storage_drum", 4), ("seawater_bucket", 1), ("salt", 64)])
     gallery()
-    # the floor, the air over it, and the chunks kept loaded, in pieces small enough for the commands
+    # the chunks kept loaded, then the floor and the air over it, in pieces small enough for the commands (a fill
+    # in a chunk not yet loaded fails)
     x1, z1, x2, z2 = bounds[0] - 6, bounds[1] - 6, bounds[2] + 6, bounds[3] + 6
     prelude = []
+    for x in range(x1, x2 + 1, 128):
+        prelude.append(f"forceload add {x} {z1} {min(x + 127, x2)} {z2}")
     for z in range(z1, z2 + 1, 8):
         prelude.append(f"fill {x1} -61 {z} {x2} -61 {min(z + 7, z2)} minecraft:smooth_stone")
         for y in range(-60, -50, 2):
             prelude.append(f"fill {x1} {y} {z} {x2} {y + 1} {min(z + 7, z2)} minecraft:air")
-    for x in range(x1, x2 + 1, 128):
-        prelude.append(f"forceload add {x} {z1} {min(x + 127, x2)} {z2}")
     lines[head:head] = prelude
     lines.extend(["schedule function showcase:fill 10t", "schedule function showcase:refill 60t"])
     (FUNCTIONS / "stage.mcfunction").write_text("\n".join(lines) + "\n")
