@@ -1,0 +1,7 @@
+{
+  "parent": "create:block/fluid_pipe/r_x",
+  "textures": {
+    "0": "fundamentals:block/titanium_pipes_connected",
+    "particle": "fundamentals:block/titanium_fluid_tank_top"
+  }
+}

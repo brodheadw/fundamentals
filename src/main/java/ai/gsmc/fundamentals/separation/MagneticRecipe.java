@@ -23,9 +23,10 @@ import java.util.Optional;
 /**
  * The magnetic route for a cut whose two products differ strongly in paramagnetism: a line of at least {@code passes}
  * magnetomigration cells parts the liquor into the same light and heavy products, in the same {@code lightFraction}, as
- * the cut's battery does. {@code attracted} is whichever of the two the magnets draw.
+ * the cut's battery does. {@code attracted} is whichever of the two the magnets draw. {@code curieShare} is how much of the
+ * two products' difference in susceptibility follows Curie's law, which sets how it goes with the liquor's temperature.
  */
-public record MagneticRecipe(Fluid liquor, Fluid light, Fluid heavy, float lightFraction, Fluid attracted, int passes)
+public record MagneticRecipe(Fluid liquor, Fluid light, Fluid heavy, float lightFraction, Fluid attracted, int passes, float curieShare)
         implements Recipe<SeparationRecipe.Liquor> {
 
     public static final RecipeType<MagneticRecipe> TYPE = RecipeType.simple(
@@ -47,6 +48,11 @@ public record MagneticRecipe(Fluid liquor, Fluid light, Fluid heavy, float light
     /** How much of {@code product}, the light or the heavy, a batch gives. */
     public int of(Fluid product, int batch) {
         return product == light ? lightOf(batch) : heavyOf(batch);
+    }
+
+    /** The products' difference in susceptibility at {@code celsius}, as a fraction of what it is at 20 °C. */
+    public double contrast(double celsius) {
+        return Paramagnetism.relative(curieShare, celsius);
     }
 
     public static Optional<MagneticRecipe> forLiquor(Level level, Fluid liquor) {
@@ -95,7 +101,8 @@ public record MagneticRecipe(Fluid liquor, Fluid light, Fluid heavy, float light
                 BuiltInRegistries.FLUID.byNameCodec().fieldOf("heavy").forGetter(MagneticRecipe::heavy),
                 Codec.floatRange(0, 1).fieldOf("light_fraction").forGetter(MagneticRecipe::lightFraction),
                 BuiltInRegistries.FLUID.byNameCodec().fieldOf("attracted").forGetter(MagneticRecipe::attracted),
-                Codec.intRange(1, 256).fieldOf("passes").forGetter(MagneticRecipe::passes)
+                Codec.intRange(1, 256).fieldOf("passes").forGetter(MagneticRecipe::passes),
+                Codec.FLOAT.optionalFieldOf("curie_share", 1F).forGetter(MagneticRecipe::curieShare)
         ).apply(i, MagneticRecipe::new));
         private static final StreamCodec<RegistryFriendlyByteBuf, Fluid> FLUID = ByteBufCodecs.registry(Registries.FLUID);
         private static final StreamCodec<RegistryFriendlyByteBuf, MagneticRecipe> STREAM_CODEC = StreamCodec.of(
@@ -106,9 +113,10 @@ public record MagneticRecipe(Fluid liquor, Fluid light, Fluid heavy, float light
                     ByteBufCodecs.FLOAT.encode(buf, cut.lightFraction());
                     FLUID.encode(buf, cut.attracted());
                     ByteBufCodecs.VAR_INT.encode(buf, cut.passes());
+                    ByteBufCodecs.FLOAT.encode(buf, cut.curieShare());
                 },
                 buf -> new MagneticRecipe(FLUID.decode(buf), FLUID.decode(buf), FLUID.decode(buf), ByteBufCodecs.FLOAT.decode(buf),
-                        FLUID.decode(buf), ByteBufCodecs.VAR_INT.decode(buf)));
+                        FLUID.decode(buf), ByteBufCodecs.VAR_INT.decode(buf), ByteBufCodecs.FLOAT.decode(buf)));
 
         @Override
         public MapCodec<MagneticRecipe> codec() {

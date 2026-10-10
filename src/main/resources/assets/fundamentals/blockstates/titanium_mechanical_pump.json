@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "fundamentals:block/titanium_mechanical_pump/block",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "fundamentals:block/titanium_mechanical_pump/block",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "fundamentals:block/titanium_mechanical_pump/block",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "fundamentals:block/titanium_mechanical_pump/block",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "fundamentals:block/titanium_mechanical_pump/block"
+    },
+    "facing=west": {
+      "model": "fundamentals:block/titanium_mechanical_pump/block",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

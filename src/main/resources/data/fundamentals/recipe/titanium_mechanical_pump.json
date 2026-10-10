@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "create:cogwheel"
+    },
+    {
+      "item": "fundamentals:titanium_pipe"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:titanium_mechanical_pump",
+    "count": 1
+  }
+}

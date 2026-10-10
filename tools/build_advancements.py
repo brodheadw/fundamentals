@@ -17,7 +17,7 @@ from pathlib import Path
 
 from build_ore_data import ASSETS, DATA, DISPLAY, ORES, tag, write
 from build_heat_data import THERMOMETERS
-from build_separation_data import DISSOLVES, PLANT_ITEMS
+from build_separation_data import DISSOLVES, PLANT_ITEMS, TITANIUM_PIPEWORK
 from build_uses_data import BLOCKS as USES_BLOCKS, ITEMS as USES_ITEMS, MAGNETS, PGM_ITEMS, PLASTIC_BLOCKS, PLASTIC_ITEMS
 from paint_elements import ELEMENTS
 from paint_materials import MATERIALS, items as material_items
@@ -80,6 +80,8 @@ ITEM_FORMULAS = {
     "mercury_thermometer": "Hg,SiO2", "spirit_thermometer": "C12H26,SiO2", "bimetallic_thermometer": "Cu-Zn,Fe", "type_k_thermocouple": "Ni-Cr,Ni-Al", "type_s_thermocouple": "Pt-Rh,Pt",
     # Natta's catalyst, TiCl3 with the AlCl3 the aluminium leaves in it; polyvinyl chloride, and the polyethylene of the dyed blocks
     "ziegler_natta_catalyst": "TiCl3,AlCl3", "pvc_resin": "C2H3Cl", "pvc_sheet": "C2H3Cl",
+    # the titanium pipework is commercially pure titanium, grade 2
+    **{name: "Ti" for name in TITANIUM_PIPEWORK},
     **{name: "C2H4" for name in PLASTIC_BLOCKS},
     # rust is hydrated iron(III) oxide; the canister and the drum are steel, the canister holding its argon
     "rusty_iron_ingot": "Fe,Fe2O3", "rusty_steel_ingot": "Fe-C,Fe2O3", "canister": "Fe", "argon_canister": "Fe,Ar", "inert_storage_drum": "Fe",
@@ -193,7 +195,7 @@ def our_items():
     names += [f"raw_{mineral}" for mineral in ORES] + [f"{mineral}_ore" for mineral in ORES]
     names += list(USES_ITEMS) + list(PGM_ITEMS) + list(MAGNETS) + list(PLANT_ITEMS) + list(USES_BLOCKS) + list(PLASTIC_ITEMS) + list(PLASTIC_BLOCKS) + [f"{acid}_bucket" for acid in DISSOLVES] + ["seawater_bucket"]
     names += ["iron_bloom", "roasted_galena", "calcined_spodumene", "photovoltaic_panel"] + list(THERMOMETERS)
-    names += OXIDATION_BLOCKS + ["canister", "argon_canister", "rusty_iron_ingot", "rusty_steel_ingot"]
+    names += OXIDATION_BLOCKS + ["canister", "argon_canister", "rusty_iron_ingot", "rusty_steel_ingot"] + list(TITANIUM_PIPEWORK)
     return names
 
 

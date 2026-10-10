@@ -1,0 +1,7 @@
+{
+  "parent": "create:block/fluid_pipe/drain/east",
+  "textures": {
+    "0": "fundamentals:block/titanium_pipes",
+    "particle": "fundamentals:block/titanium_pipes"
+  }
+}

@@ -18,7 +18,7 @@ What's agreed but not built, in the order it's likely to go. The working plan be
   only in the tooltip, not its texture; items carried by hoppers or sitting in Create's vaults and toolboxes age only
   when a player opens a container they land in; there is no desiccant; and calcium and lithium tarnish but never crust
   through, since nothing here holds the crust.
-- **Magnet loose ends.** The magnetomigration cell takes any magnet but ignores its grade and the heat; and a motor, generator or electric pump rebuilt in the grid takes one magnet where it was built with two or three. Alnico is one cast-and-treated step with no field anneal of its own, sintered NdFeB has no pressing or
+- **Magnet loose ends.** The magnetomigration cell takes any magnet but ignores its grade, and the heat that weakens a real NdFeB block (it reads the heat only for the ions' susceptibility); and a motor, generator or electric pump rebuilt in the grid takes one magnet where it was built with two or three. Alnico is one cast-and-treated step with no field anneal of its own, sintered NdFeB has no pressing or
   sintering step, and grain-boundary diffusion (terbium on a finished magnet) is folded into the melt.
 - **Temperature consumers.** `Heat.at` exists (the `heat` package). Still to hang on it: the tiers Create's recipes use
   as thresholds on the number, tarnish rate, and kerosene and the extractants igniting near heat. The Wildspell Magic
@@ -81,9 +81,11 @@ What's agreed but not built, in the order it's likely to go. The working plan be
   magnesium have to come down to parts per billion for the membrane) into dissolving salt; seawater reaches it only as salt. The pot
   burns coke rather than a prebaked anode, its bath takes no aluminium fluoride make-up, and the fluoride fume is any vat holding
   cryolite. Cobalt blue and the reforming catalyst still take bauxite powder where real ones take alumina.
-- **Titanium plant tier.** Titanium shrugs off wet chlorine and chloride brines, which is why chlor-alkali and desalination
-  plants pipe them in it. A titanium pipe and tank that the liquors and acids (but not hydrofluoric) cannot corrode would be
-  the metal's natural sink, but it means new pipe and tank blocks; the plastic tank covers the need for now.
+- **Titanium pipework loose ends.** There is no glass, encased or smart titanium pipe, and the pump's cog and the valve's pointer
+  are Create's copper ones. All chlorine counts as dry, so it eats titanium even where a real line's would be wet. Plastic has one
+  softening point, polyethylene's, where PVC really goes soft nearer 80 °C, and a plastic pipe softens only while it carries
+  something; the plastic magnetomigration cell and mixer-settler casing never soften, and a cell's liquor can be read hotter than
+  the 105 °C or so it would boil at.
 - **Zirconium and hafnium loose ends.** Most zirconium metal and nearly all hafnium go into reactors (Zircaloy, zirconium with a
   per cent and a half of tin, clads the fuel; hafnium makes control rods), and the pack has no reactor, so neither has its biggest sink;
   zirconium only lines a chemical vat and hafnium only goes into the superalloy. The extractive distillation is one basin with salt for

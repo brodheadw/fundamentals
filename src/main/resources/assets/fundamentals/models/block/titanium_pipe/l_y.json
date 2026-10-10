@@ -1,0 +1,7 @@
+{
+  "parent": "create:block/fluid_pipe/l_y",
+  "textures": {
+    "0": "fundamentals:block/titanium_pipes_connected",
+    "particle": "fundamentals:block/titanium_fluid_tank_top"
+  }
+}

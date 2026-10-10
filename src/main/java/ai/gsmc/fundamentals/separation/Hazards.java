@@ -1,6 +1,7 @@
 package ai.gsmc.fundamentals.separation;
 
 import ai.gsmc.fundamentals.Fundamentals;
+import ai.gsmc.fundamentals.heat.Heat;
 import ai.gsmc.fundamentals.uses.Uses;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlockEntity;
 import com.simibubi.create.AllBlocks;
@@ -76,7 +77,10 @@ import java.util.stream.IntStream;
  * corrode and eventually burst, spilling it. The liquors are rare earth chlorides in dilute acid, and the spent liquor, the calcium chloride
  * liquor and bittern are chloride too, so they eat it as well, more slowly, and seawater, a tenth as salt as bittern, slower still.
  * Metal tanks go the same way, ten times slower for the thicker wall.
- * Plastic pipes, pumps, valves and tanks do not corrode. A glass pipe is a copper pipe with a window, and corrodes as one.
+ * Plastic pipes, pumps, valves and tanks do not corrode, but soften: past {@link #PLASTIC_SOFTENS} at the wall, from the heat round
+ * them or the fluid in them, they sag and burst. Titanium shrugs off everything the plant carries but hydrofluoric acid, which eats
+ * it fast, dry chlorine, and hydrochloric acid gone hot, and it keeps its strength hot. A glass pipe is a copper pipe with a window,
+ * and corrodes as one.
  * Caustic soda and the sodium aluminate liquor are the other way about: they leave copper and steel alone and eat aluminium, so only
  * The Factory Must Grow's aluminium pipes, pumps, valves and tanks corrode under them, at a liquor's pace. And a Hall-Héroult pot gives off
  * hydrogen fluoride: a vat with cryolite in it fumes as hydrofluoric acid does.
@@ -95,11 +99,21 @@ public final class Hazards {
     public static double liquorCorrosionChance = 1.0 / 9600;
     /** Per tick, for a pipe carrying seawater: on average half an hour. */
     public static double seawaterCorrosionChance = 1.0 / 36000;
+    /** Per tick, for a titanium pipe carrying hydrofluoric acid: on average thirty seconds. Fluoride dissolves the oxide skin
+     * every other acid leaves, and the metal under it; dry chlorine and hot hydrochloric acid take it at copper's acid rate. */
+    public static double fluorideChance = 1.0 / 600;
+    /** Per tick, for a plastic pipe hotter than it can stand: on average five seconds. */
+    public static double softeningChance = 1.0 / 100;
+    /** °C at the wall past which plastic pipe sags: polyethylene and polypropylene pressure pipe is rated to 80 to 95 and both are
+     * soft by 110, well short of melting at 130 to 165. */
+    public static final double PLASTIC_SOFTENS = 110;
+    /** °C past which hydrochloric acid takes titanium: its oxide skin holds in the cold acid and goes in the hot. */
+    public static final double TITANIUM_HCL = 60;
     /** How many times longer a tank's wall lasts than a pipe's, for the same fluid: twenty minutes under acid, eighty under a liquor. */
     private static final int TANK_WALL = 10;
     /** How many ticks apart a pipe is checked, each check standing for all of them. */
     public static final int PIPE_INTERVAL = 20;
-    private static final Map<Block, Boolean> CORRODIBLE = new ConcurrentHashMap<>();
+    private static final Map<Block, Wall> WALLS = new ConcurrentHashMap<>();
     private static final Map<Block, Boolean> ALUMINIUM = new ConcurrentHashMap<>();
     /** How far nickel carbonyl reaches where it escapes. */
     private static final int CARBONYL_REACH = 3;
@@ -116,6 +130,9 @@ public final class Hazards {
     private static final Queue<Leak> LEAKS = new ConcurrentLinkedQueue<>();
 
     private record Leak(ServerLevel level, BlockPos pos, int[] left) {}
+
+    /** What a vessel is made of, which decides what eats it; PROOF for a creative tank and anything that holds no fluid. */
+    public enum Wall { METAL, TITANIUM, PLASTIC, PROOF }
 
     private Hazards() {}
 
@@ -330,43 +347,33 @@ public final class Hazards {
 
     // ---- corrosion ----
 
-    /** Called every {@link #PIPE_INTERVAL} ticks for every pipe by the mixin on Create's fluid transport: an acid in a corrodible
-     * pipe may burst it. True if it did. */
+    /** Called every {@link #PIPE_INTERVAL} ticks for every pipe by the mixin on Create's fluid transport: what it carries may burst
+     * it, by eating it or, plastic, by the heat. True if it did. */
     public static boolean corrode(Level level, BlockPos pos, BlockState state, Collection<PipeConnection> connections) {
-        if (level.isClientSide) {
+        Wall wall = wall(state);
+        if (level.isClientSide || wall == Wall.PROOF) {
             return false;
         }
         FluidStack eating = null;
+        double worst = 0, heat = Double.NaN;
         for (PipeConnection connection : connections) {
             FluidStack stack = connection.getProvidedFluid();
             if (stack.isEmpty()) {
                 continue;
             }
-            Reagents.Kind kind = Separation.kind(stack.getFluid());
-            if (!eats(kind, state)) {
-                continue;
+            if (wall != Wall.METAL && Double.isNaN(heat)) {
+                heat = Heat.at(level, pos);
             }
-            if (kind == Reagents.Kind.ACID) {
-                eating = stack;
-                break;
-            }
-            if (eating == null) {
+            double chance = chance(state, stack, wall == Wall.METAL ? celsius(stack) : Math.max(heat, celsius(stack)));
+            if (chance > worst) {
+                worst = chance;
                 eating = stack;
             }
         }
-        if (eating == null || level.random.nextDouble() >= 1 - Math.pow(1 - chance(eating), PIPE_INTERVAL)) {
+        if (eating == null || level.random.nextDouble() >= 1 - Math.pow(1 - worst, PIPE_INTERVAL)) {
             return false;
         }
-        FluidStack spilled = eating;
-        Acids.Acid acid = Acids.all().values().stream().filter(a -> a.source == spilled.getFluid() || a.flowing == spilled.getFluid()).findFirst().orElse(null);
-        level.destroyBlock(pos, false);
-        if (acid != null) {
-            level.setBlock(pos, acid.block.defaultBlockState().setValue(LiquidBlock.LEVEL, 6), Block.UPDATE_ALL);
-        }
-        level.playSound(null, pos, SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.8F, 0.9F);
-        if (level instanceof ServerLevel server) {
-            server.sendParticles(ParticleTypes.CLOUD, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 12, 0.3, 0.3, 0.3, 0.02);
-        }
+        burst(level, pos, eating.getFluid());
         return true;
     }
 
@@ -378,15 +385,24 @@ public final class Hazards {
             return false;
         }
         FluidStack held = tank.getTankInventory().getFluid();
-        if (held.isEmpty() || !eats(Separation.kind(held.getFluid()), tank.getBlockState())
-                || level.random.nextDouble() >= chance(held) / TANK_WALL) {
+        BlockState state = tank.getBlockState();
+        if (held.isEmpty() || wall(state) == Wall.PROOF) {
+            return false;
+        }
+        double celsius = wall(state) == Wall.METAL ? celsius(held) : Math.max(Heat.at(level, tank.getBlockPos()), celsius(held));
+        if (level.random.nextDouble() >= chance(state, held, celsius) / TANK_WALL) {
             return false;
         }
         int width = tank.getWidth();
         int wetted = Math.max(1, (int) Math.ceil(tank.getFillState() * tank.getHeight()));
         BlockPos pos = tank.getBlockPos().offset(level.random.nextInt(width), level.random.nextInt(wetted), level.random.nextInt(width));
-        Fluid fluid = held.getFluid();
         tank.getTankInventory().drain(held.getAmount() / (width * width * tank.getHeight()), IFluidHandler.FluidAction.EXECUTE);
+        burst(level, pos, held.getFluid());
+        return true;
+    }
+
+    /** The wall at {@code pos} fails: the block goes, an acid spills where it stood. */
+    private static void burst(Level level, BlockPos pos, Fluid fluid) {
         Acids.Acid acid = Acids.all().values().stream().filter(a -> a.source == fluid || a.flowing == fluid).findFirst().orElse(null);
         level.destroyBlock(pos, false);
         if (acid != null) {
@@ -396,7 +412,28 @@ public final class Hazards {
         if (level instanceof ServerLevel server) {
             server.sendParticles(ParticleTypes.CLOUD, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 12, 0.3, 0.3, 0.3, 0.02);
         }
-        return true;
+    }
+
+    /** A fluid's own temperature, °C: lava is hot, and everything else the plant carries stands at about room temperature. */
+    private static double celsius(FluidStack stack) {
+        return stack.getFluid().getFluidType().getTemperature(stack) - 273.15;
+    }
+
+    /** Per tick, the chance {@code carried} at {@code celsius} bursts a pipe of {@code state}. */
+    public static double chance(BlockState state, FluidStack carried, double celsius) {
+        return switch (wall(state)) {
+            case METAL -> eats(Separation.kind(carried.getFluid()), state) ? chance(carried) : 0;
+            case PLASTIC -> celsius > PLASTIC_SOFTENS ? softeningChance : 0;
+            case TITANIUM -> is(carried, "hydrofluoric_acid") ? fluorideChance
+                    : is(carried, "chlorine") || is(carried, "hydrochloric_acid") && celsius > TITANIUM_HCL ? corrosionChance : 0;
+            case PROOF -> 0;
+        };
+    }
+
+    private static boolean is(FluidStack stack, String reagent) {
+        Acids.Acid acid = Acids.all().get(reagent);
+        Fluid fluid = stack.getFluid();
+        return acid == null ? fluid == Separation.fluid(reagent) : fluid == acid.source || fluid == acid.flowing;
     }
 
     public static boolean corrodes(Reagents.Kind kind) {
@@ -417,29 +454,40 @@ public final class Hazards {
 
     private static boolean aluminium(Block block) {
         ResourceLocation id = BuiltInRegistries.BLOCK.getKey(block);
-        return corrodible(block) && id.getNamespace().equals("tfmg") && id.getPath().contains("aluminum");
+        return WALLS.computeIfAbsent(block, Hazards::wall) == Wall.METAL && id.getNamespace().equals("tfmg") && id.getPath().contains("aluminum");
     }
 
-    /** Create's pipes and tanks are copper and TFMG's metal pipes and tanks are metal, windowed or not; only plastic stands up to
-     * acid, and a creative tank to anything. TFMG's pipes and our dyed ones are Create's pipe classes underneath, so plastic is told
-     * apart by name. */
+    /** Create's pipes and tanks are copper and TFMG's metal pipes and tanks are metal, windowed or not; the acids and chlorides eat
+     * them all. Plastic and titanium are told apart by name, since TFMG's pipes, our dyed ones and our titanium ones are Create's pipe
+     * classes underneath; a creative tank is proof against anything. */
+    public static Wall wall(BlockState state) {
+        return WALLS.computeIfAbsent(state.getBlock(), Hazards::wall);
+    }
+
+    /** True for a metal vessel the acids and chlorides eat. */
     public static boolean corrodible(BlockState state) {
-        return CORRODIBLE.computeIfAbsent(state.getBlock(), Hazards::corrodible);
+        return wall(state) == Wall.METAL;
     }
 
-    private static boolean corrodible(Block block) {
+    private static Wall wall(Block block) {
         ResourceLocation id = BuiltInRegistries.BLOCK.getKey(block);
-        boolean plastic = (id.getNamespace().equals("tfmg") || id.getNamespace().equals(Fundamentals.MOD_ID)) && id.getPath().contains("plastic");
-        if (plastic || block instanceof PlasticTankBlock || block == AllBlocks.CREATIVE_FLUID_TANK.get()) {
-            return false;
+        boolean ours = id.getNamespace().equals(Fundamentals.MOD_ID), tfmg = id.getNamespace().equals("tfmg");
+        if ((tfmg || ours) && id.getPath().contains("plastic") || block instanceof PlasticTankBlock) {
+            return Wall.PLASTIC;
         }
-        if (block instanceof FluidTankBlock || id.getNamespace().equals("tfmg") && id.getPath().endsWith("fluid_tank")) {
-            return true;
+        if (ours && id.getPath().startsWith("titanium_")) {
+            return Wall.TITANIUM;
+        }
+        if (block == AllBlocks.CREATIVE_FLUID_TANK.get()) {
+            return Wall.PROOF;
+        }
+        if (block instanceof FluidTankBlock || tfmg && id.getPath().endsWith("fluid_tank")) {
+            return Wall.METAL;
         }
         if (block instanceof FluidPipeBlock || block instanceof AxisPipeBlock || block instanceof EncasedPipeBlock || block instanceof SmartFluidPipeBlock
                 || block instanceof PumpBlock || block instanceof FluidValveBlock) {
-            return true;
+            return Wall.METAL;
         }
-        return id.getNamespace().equals("tfmg") && id.getPath().contains("pipe");
+        return tfmg && id.getPath().contains("pipe") ? Wall.METAL : Wall.PROOF;
     }
 }

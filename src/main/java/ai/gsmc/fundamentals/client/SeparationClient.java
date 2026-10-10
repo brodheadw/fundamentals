@@ -52,7 +52,7 @@ public final class SeparationClient {
         }));
         modBus.addListener(FMLClientSetupEvent.class, event -> {
             CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(id("mixer_settler"), model -> new CTModel(model, new StageWalls()));
-            CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(id("plastic_fluid_tank"), PlasticTankModel::new);
+            CreateClient.MODEL_SWAPPER.getCustomBlockModels().register(id("plastic_fluid_tank"), model -> new TankModel(model, "plastic_fluid_tank"));
         });
         modBus.addListener(RegisterClientExtensionsEvent.class, event -> {
             for (Reagents.Reagent reagent : Reagents.ALL) {

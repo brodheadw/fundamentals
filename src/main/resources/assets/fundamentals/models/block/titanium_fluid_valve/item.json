@@ -1,0 +1,9 @@
+{
+  "parent": "create:block/fluid_valve/item",
+  "render_type": "minecraft:cutout_mipped",
+  "textures": {
+    "2": "fundamentals:block/titanium_fluid_valve",
+    "4": "fundamentals:block/titanium_valve_open",
+    "particle": "fundamentals:block/titanium_valve_closed"
+  }
+}

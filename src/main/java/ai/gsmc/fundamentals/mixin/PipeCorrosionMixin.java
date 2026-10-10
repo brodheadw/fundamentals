@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/** Once a second of a Create pipe's fluid transport, the acid it carries gets its chance to eat it; a burst pipe ticks no further. */
+/** Once a second of a Create pipe's fluid transport, what it carries gets its chance to eat it, and the heat to soften a plastic one; a burst pipe ticks no further. */
 @Mixin(value = FluidTransportBehaviour.class, remap = false)
 public abstract class PipeCorrosionMixin {
 

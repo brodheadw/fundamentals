@@ -10,7 +10,9 @@ import java.util.Optional;
 /**
  * Magnetomigration cells standing end to end, from the head forward. Each cell is a pass: the liquor runs along the line
  * and its paramagnetic ions drift a little further into the stream along the magnets at every one. A line at least as
- * long as its cut's passes parts each batch into the cut's two products, in the proportion the battery would.
+ * long as its cut's passes parts each batch into the cut's two products, in the proportion the battery would. What each cell
+ * draws aside goes with the products' difference in susceptibility, so a warm line holds each batch as much longer as its
+ * temperature weakens that.
  */
 public record MagnetomigrationLine(List<MagnetomigrationCellBlockEntity> cells) {
 
@@ -32,6 +34,12 @@ public record MagnetomigrationLine(List<MagnetomigrationCellBlockEntity> cells) 
     public MagnetomigrationCellBlockEntity head() { return cells.getFirst(); }
     public MagnetomigrationCellBlockEntity tail() { return cells.getLast(); }
     public int size() { return cells.size(); }
+
+    /** Ticks a batch takes at the head's temperature. */
+    public int period() {
+        double contrast = MagneticRecipe.forLiquor(head().getLevel(), head().feed.getFluid().getFluid()).map(cut -> cut.contrast(head().celsius())).orElse(1.0);
+        return (int) Math.round(MagnetomigrationCellBlockEntity.PERIOD / contrast);
+    }
 
     public Optional<Stall> stall() {
         FluidStack feed = head().feed.getFluid();

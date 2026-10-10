@@ -1,0 +1,53 @@
+{
+  "name": "Titanium pipework",
+  "category": "fundamentals:plastics",
+  "icon": "fundamentals:titanium_pipe",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Plastic has one weakness: heat. Polyethylene and polypropylene pressure pipe is rated to 80 or 95 °C and is soft by 110. A plastic pipe, pump or valve in use whose wall is past 110 °C, from a burner, fire or lava beside it or lava inside, sags and bursts in 5 seconds or so, and a plastic tank in ten times that.",
+      "title": "Titanium pipework"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A steam boiler is no place for one."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Titanium is what a chemical plant pipes hot, corrosive work in."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It is a reactive metal, but in air or water it grows an oxide skin a few nanometres thick that heals as fast as anything scratches it, so long as there is something oxidising about: chlorides, hot brine, seawater, wet chlorine, nitric acid and even aqua regia leave it alone, and it keeps its strength hot."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two titanium plate and a titanium ingot make four Titanium Pipe; a cogwheel on one makes a pump, a plate a valve, and two plate round a barrel a tank."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It has its own weaknesses. Hydrofluoric acid dissolves the skin and the metal under it: a titanium pipe of it bursts in 30 seconds or so, quicker than copper goes under any acid, so keep it in plastic. Dry chlorine, with no water to mend the skin, burns titanium, and chlorine gas eats it as an acid eats copper."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Hydrochloric acid it shrugs off cold, and not past 60 °C. See Schutz and Thomas, Corrosion of Titanium and Titanium Alloys, in the ASM Handbook, vol. 13."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:titanium_pipe"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:titanium_mechanical_pump"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:titanium_fluid_valve"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:titanium_fluid_tank"
+    }
+  ]
+}
