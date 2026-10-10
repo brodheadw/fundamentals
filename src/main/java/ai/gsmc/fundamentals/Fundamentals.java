@@ -30,6 +30,7 @@ import com.simibubi.create.api.contraption.storage.fluid.MountedFluidStorageType
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import ai.gsmc.fundamentals.heat.Heat;
 import ai.gsmc.fundamentals.heat.Thermometers;
+import ai.gsmc.fundamentals.liquid.Liquids;
 import ai.gsmc.fundamentals.separation.Hazards;
 import ai.gsmc.fundamentals.uses.PlatinumMetals;
 import ai.gsmc.fundamentals.uses.Uses;
@@ -149,6 +150,8 @@ public class Fundamentals {
         NeoForge.EVENT_BUS.addListener(Magnets::attach);
         modBus.addListener(Oxidation::registerDataMaps);
         modBus.addListener(Heat::registerDataMaps);
+        modBus.addListener(Liquids::registerDataMaps);
+        NeoForge.EVENT_BUS.addListener(Liquids::onDataMapsUpdated);
         NeoForge.EVENT_BUS.addListener(Heat::registerCommands);
         modBus.addListener(RegisterCapabilitiesEvent.class, event -> {
             event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, Separation.mixerSettlerEntity(), MixerSettlerBlockEntity::handler);

@@ -1,0 +1,815 @@
+{
+  "replace": false,
+  "values": {
+    "fundamentals:rare_earth_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:light_rare_earth_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:heavy_rare_earth_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:lanthanum_cerium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:praseodymium_neodymium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:samarium_europium_gadolinium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:europium_gadolinium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:terbium_to_lutetium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:terbium_dysprosium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:yttrium_heavies_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:holmium_to_lutetium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:holmium_erbium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:thulium_ytterbium_lutetium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:ytterbium_lutetium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:lanthanum_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:cerium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:praseodymium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:neodymium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:samarium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:europium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:gadolinium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:terbium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:dysprosium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:holmium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:erbium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:thulium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:ytterbium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:lutetium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:yttrium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:scandium_liquor": {
+      "density": 1300,
+      "viscosity": 2.4,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:nickel_copper_sulfate": {
+      "density": 1250,
+      "viscosity": 1.9,
+      "freezes": -4,
+      "boils": 102,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:nickel_sulfate_liquor": {
+      "density": 1220,
+      "viscosity": 1.8,
+      "freezes": -4,
+      "boils": 102,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:cobalt_chloride_liquor": {
+      "density": 1200,
+      "viscosity": 1.8,
+      "freezes": -12,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:platinum_palladium_liquor": {
+      "density": 1150,
+      "viscosity": 1.5,
+      "freezes": -55,
+      "boils": 108,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:palladium_liquor": {
+      "density": 1150,
+      "viscosity": 1.5,
+      "freezes": -55,
+      "boils": 108,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:iridium_rhodium_liquor": {
+      "density": 1150,
+      "viscosity": 1.5,
+      "freezes": -55,
+      "boils": 108,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:rhodium_liquor": {
+      "density": 1150,
+      "viscosity": 1.5,
+      "freezes": -55,
+      "boils": 108,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:palladium_tetrammine_liquor": {
+      "density": 1040,
+      "viscosity": 1.1,
+      "freezes": -6,
+      "boils": 100,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:beryllium_sulfate_liquor": {
+      "density": 1280,
+      "viscosity": 2.6,
+      "freezes": -8,
+      "boils": 103,
+      "aqueous": true,
+      "toxic": true,
+      "corrosive": true
+    },
+    "fundamentals:lithium_sulfate_liquor": {
+      "density": 1180,
+      "viscosity": 1.6,
+      "freezes": -8,
+      "boils": 102,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:p204": {
+      "density": 850,
+      "viscosity": 3.5,
+      "freezes": -40,
+      "boils": 150,
+      "flash_point": 38,
+      "autoignition": 210
+    },
+    "fundamentals:p507": {
+      "density": 845,
+      "viscosity": 3.2,
+      "freezes": -40,
+      "boils": 150,
+      "flash_point": 38,
+      "autoignition": 210
+    },
+    "fundamentals:naphthenic_acid": {
+      "density": 850,
+      "viscosity": 4.0,
+      "freezes": -40,
+      "boils": 150,
+      "flash_point": 38,
+      "autoignition": 210
+    },
+    "fundamentals:fouled_p204": {
+      "density": 860,
+      "viscosity": 7.0,
+      "freezes": -40,
+      "boils": 150,
+      "flash_point": 38,
+      "autoignition": 210
+    },
+    "fundamentals:fouled_p507": {
+      "density": 855,
+      "viscosity": 6.5,
+      "freezes": -40,
+      "boils": 150,
+      "flash_point": 38,
+      "autoignition": 210
+    },
+    "fundamentals:fouled_naphthenic_acid": {
+      "density": 860,
+      "viscosity": 8.0,
+      "freezes": -40,
+      "boils": 150,
+      "flash_point": 38,
+      "autoignition": 210
+    },
+    "fundamentals:hydrochloric_acid": {
+      "density": 1179,
+      "viscosity": 1.9,
+      "freezes": -30,
+      "boils": 61,
+      "aqueous": true,
+      "corrosive": true,
+      "fuming": true
+    },
+    "fundamentals:nitric_acid": {
+      "density": 1410,
+      "viscosity": 2.0,
+      "freezes": -41,
+      "boils": 121,
+      "aqueous": true,
+      "corrosive": true,
+      "fuming": true
+    },
+    "fundamentals:phosphoric_acid": {
+      "density": 1579,
+      "viscosity": 14,
+      "freezes": -17,
+      "boils": 135,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:hydrofluoric_acid": {
+      "density": 1150,
+      "viscosity": 1.0,
+      "freezes": -35,
+      "boils": 108,
+      "aqueous": true,
+      "toxic": true,
+      "corrosive": true,
+      "fuming": true
+    },
+    "fundamentals:aqua_regia": {
+      "density": 1210,
+      "viscosity": 1.8,
+      "freezes": -42,
+      "boils": 108,
+      "aqueous": true,
+      "corrosive": true,
+      "fuming": true
+    },
+    "fundamentals:bromine": {
+      "density": 3103,
+      "viscosity": 0.94,
+      "freezes": -7.2,
+      "boils": 58.8,
+      "toxic": true,
+      "corrosive": true,
+      "fuming": true
+    },
+    "fundamentals:argon": {
+      "density": 1.66,
+      "viscosity": 0.0223,
+      "freezes": -189.3,
+      "boils": -185.8
+    },
+    "fundamentals:chlorine": {
+      "density": 2.99,
+      "viscosity": 0.0134,
+      "freezes": -101.5,
+      "boils": -34.0,
+      "toxic": true,
+      "corrosive": true
+    },
+    "fundamentals:water_gas": {
+      "density": 0.66,
+      "viscosity": 0.0145,
+      "freezes": -205,
+      "boils": -191.5,
+      "flash_point": -191.5,
+      "autoignition": 500,
+      "toxic": true
+    },
+    "fundamentals:ammonia": {
+      "density": 0.72,
+      "viscosity": 0.0099,
+      "freezes": -77.7,
+      "boils": -33.3,
+      "toxic": true
+    },
+    "fundamentals:osmium_tetroxide": {
+      "density": 5100,
+      "freezes": 40.6,
+      "boils": 129.7,
+      "toxic": true
+    },
+    "fundamentals:ruthenium_tetroxide": {
+      "density": 3290,
+      "freezes": 25.4,
+      "boils": 40,
+      "toxic": true
+    },
+    "fundamentals:nickel_carbonyl": {
+      "density": 1319,
+      "freezes": -19.3,
+      "boils": 43,
+      "flash_point": -20,
+      "autoignition": 60,
+      "toxic": true
+    },
+    "fundamentals:spent_liquor": {
+      "density": 1060,
+      "viscosity": 1.1,
+      "freezes": -5,
+      "boils": 101,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:calcium_chloride_liquor": {
+      "density": 1180,
+      "viscosity": 2.0,
+      "freezes": -19,
+      "boils": 105,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:bittern": {
+      "density": 1260,
+      "viscosity": 3.0,
+      "freezes": -30,
+      "boils": 110,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:salt_brine": {
+      "density": 1197,
+      "viscosity": 1.9,
+      "freezes": -21.1,
+      "boils": 108.8,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:seawater": {
+      "density": 1025,
+      "viscosity": 1.08,
+      "freezes": -1.9,
+      "boils": 100.6,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:crude_rare_earth_liquor": {
+      "density": 1350,
+      "viscosity": 3.0,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:crude_heavy_rare_earth_liquor": {
+      "density": 1350,
+      "viscosity": 3.0,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:ethylhexanol": {
+      "density": 833,
+      "viscosity": 9.8,
+      "freezes": -76,
+      "boils": 184.6,
+      "flash_point": 73,
+      "autoignition": 290
+    },
+    "fundamentals:phosphorus_trichloride": {
+      "density": 1574,
+      "viscosity": 0.65,
+      "freezes": -93.6,
+      "boils": 76.1,
+      "toxic": true
+    },
+    "fundamentals:d2ehpa": {
+      "density": 975,
+      "viscosity": 35,
+      "freezes": -60,
+      "flash_point": 206
+    },
+    "fundamentals:ehehpa": {
+      "density": 950,
+      "viscosity": 36,
+      "freezes": -60,
+      "flash_point": 190
+    },
+    "fundamentals:titanium_tetrachloride": {
+      "density": 1726,
+      "viscosity": 0.83,
+      "freezes": -24.1,
+      "boils": 136.4
+    },
+    "fundamentals:vinyl_chloride": {
+      "density": 2.6,
+      "viscosity": 0.0108,
+      "freezes": -153.8,
+      "boils": -13.4,
+      "flash_point": -78,
+      "autoignition": 472
+    },
+    "fundamentals:caustic_soda": {
+      "density": 1274,
+      "viscosity": 4.4,
+      "freezes": -17,
+      "boils": 112,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:sodium_tungstate_liquor": {
+      "density": 1200,
+      "viscosity": 2.0,
+      "freezes": -10,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:sodium_aluminate_liquor": {
+      "density": 1320,
+      "viscosity": 12,
+      "freezes": -15,
+      "boils": 112,
+      "celsius": 145,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "minecraft:water": {
+      "density": 998.2,
+      "viscosity": 1.002,
+      "freezes": 0,
+      "boils": 100,
+      "aqueous": true
+    },
+    "minecraft:lava": {
+      "density": 2700,
+      "viscosity": 100000,
+      "freezes": 1000,
+      "celsius": 1150
+    },
+    "tfmg:crude_oil": {
+      "density": 870,
+      "viscosity": 10,
+      "freezes": -20,
+      "boils": 35,
+      "flash_point": -20
+    },
+    "tfmg:heavy_oil": {
+      "density": 990,
+      "viscosity": 3000,
+      "freezes": 15,
+      "boils": 350,
+      "flash_point": 66,
+      "autoignition": 407
+    },
+    "tfmg:lubrication_oil": {
+      "density": 870,
+      "viscosity": 150,
+      "freezes": -15,
+      "flash_point": 220,
+      "autoignition": 370
+    },
+    "tfmg:creosote": {
+      "density": 1080,
+      "viscosity": 10,
+      "boils": 200,
+      "flash_point": 74,
+      "autoignition": 335
+    },
+    "tfmg:naphtha": {
+      "density": 720,
+      "viscosity": 0.6,
+      "boils": 30,
+      "flash_point": -22,
+      "autoignition": 290
+    },
+    "tfmg:gasoline": {
+      "density": 740,
+      "viscosity": 0.6,
+      "boils": 35,
+      "flash_point": -43,
+      "autoignition": 280
+    },
+    "tfmg:kerosene": {
+      "density": 800,
+      "viscosity": 1.6,
+      "freezes": -40,
+      "boils": 150,
+      "flash_point": 38,
+      "autoignition": 210
+    },
+    "tfmg:diesel": {
+      "density": 840,
+      "viscosity": 4.0,
+      "freezes": -15,
+      "boils": 180,
+      "flash_point": 52,
+      "autoignition": 210
+    },
+    "tfmg:napalm": {
+      "density": 800,
+      "viscosity": 20000,
+      "boils": 35,
+      "flash_point": -43,
+      "autoignition": 280
+    },
+    "tfmg:cooling_fluid": {
+      "density": 1070,
+      "viscosity": 3.8,
+      "freezes": -37,
+      "boils": 107,
+      "aqueous": true
+    },
+    "tfmg:sulfuric_acid": {
+      "density": 1830,
+      "viscosity": 23,
+      "freezes": -32,
+      "boils": 280,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "tfmg:liquid_concrete": {
+      "density": 2400,
+      "viscosity": 50000,
+      "freezes": -2,
+      "boils": 100,
+      "aqueous": true
+    },
+    "tfmg:liquid_asphalt": {
+      "density": 1020,
+      "viscosity": 300,
+      "freezes": 50,
+      "flash_point": 230,
+      "autoignition": 485,
+      "celsius": 160
+    },
+    "tfmg:molten_plastic": {
+      "density": 760,
+      "viscosity": 1000000,
+      "freezes": 130,
+      "flash_point": 340,
+      "autoignition": 350,
+      "celsius": 230
+    },
+    "tfmg:molten_steel": {
+      "density": 7000,
+      "viscosity": 6,
+      "freezes": 1500,
+      "boils": 2860,
+      "celsius": 1600
+    },
+    "tfmg:molten_slag": {
+      "density": 2800,
+      "viscosity": 500,
+      "freezes": 1350,
+      "celsius": 1500
+    },
+    "tfmg:liquid_silicon": {
+      "density": 2570,
+      "viscosity": 0.88,
+      "freezes": 1414,
+      "boils": 3265,
+      "celsius": 1450
+    },
+    "tfmg:air": {
+      "density": 1.204,
+      "viscosity": 0.0181,
+      "boils": -194.3
+    },
+    "tfmg:hot_air": {
+      "density": 0.277,
+      "viscosity": 0.049,
+      "boils": -194.3,
+      "celsius": 1000
+    },
+    "tfmg:carbon_dioxide": {
+      "density": 1.84,
+      "viscosity": 0.0147,
+      "boils": -78.5
+    },
+    "tfmg:neon": {
+      "density": 0.84,
+      "viscosity": 0.0313,
+      "freezes": -248.6,
+      "boils": -246.1
+    },
+    "tfmg:hydrogen": {
+      "density": 0.0838,
+      "viscosity": 0.0088,
+      "freezes": -259.2,
+      "boils": -252.9,
+      "flash_point": -252.9,
+      "autoignition": 500
+    },
+    "tfmg:furnace_gas": {
+      "density": 1.25,
+      "viscosity": 0.017,
+      "boils": -191,
+      "flash_point": -191,
+      "autoignition": 630,
+      "toxic": true
+    },
+    "tfmg:ethylene": {
+      "density": 1.17,
+      "viscosity": 0.0101,
+      "freezes": -169.2,
+      "boils": -103.7,
+      "flash_point": -136,
+      "autoignition": 450
+    },
+    "tfmg:propylene": {
+      "density": 1.75,
+      "viscosity": 0.0083,
+      "freezes": -185.2,
+      "boils": -47.6,
+      "flash_point": -108,
+      "autoignition": 455
+    },
+    "tfmg:propane": {
+      "density": 1.83,
+      "viscosity": 0.008,
+      "freezes": -187.7,
+      "boils": -42.1,
+      "flash_point": -104,
+      "autoignition": 470
+    },
+    "tfmg:butane": {
+      "density": 2.48,
+      "viscosity": 0.0074,
+      "freezes": -138.3,
+      "boils": -0.5,
+      "flash_point": -60,
+      "autoignition": 405
+    },
+    "tfmg:lpg": {
+      "density": 2.0,
+      "viscosity": 0.0078,
+      "freezes": -188,
+      "boils": -42,
+      "flash_point": -104,
+      "autoignition": 450
+    }
+  }
+}

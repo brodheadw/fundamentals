@@ -1,0 +1,107 @@
+{
+  "name": "Liquid properties",
+  "category": "fundamentals:rare_earths",
+  "icon": "minecraft:water_bucket",
+  "sortnum": 15,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Every fluid in the plant is a real one, with its real density, viscosity, freezing and boiling point and flash point; goggles on a pipe, pump, valve, tank or basin give them. Water-based fluids freeze in the pipe: below the freezing point a pipe holds still and a pump moves nothing until the heat comes back.",
+      "title": "Liquid properties"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Water freezes at 0 °C, seawater at -1.9, brines and acids far lower."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A fluid past its boiling point in an open basin, with no mixer or press over it, boils off 25 mB every 2 seconds, and whatever it carries is breathed: acid fumes, poison, nickel carbonyl. In a pipe or tank the goggles warn instead. Fresh Bayer liquor leaves the digester at 145 °C under pressure, too hot for plastic pipe."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A flammable fluid let out by a burst pipe past its flash point beside a flame, lava or a burner, or anywhere past its autoignition temperature, catches fire; nickel carbonyl ignites at 60 °C. Spilt oils and fuels in the world burn as wood does, the lower the flash point the readier."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Thick fluids pump slower, as the Hydraulic Institute's correction has a pump lose flow past about 100 mPa·s: heavy oil at 3,000 mPa·s goes at about half, and a polymer melt or fresh concrete no slower than a quarter."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Each line of the table gives density in kg/m³, viscosity in mPa·s, and freezing to boiling point in °C, then the flash point and hazards. Gases are at 20 °C and 1 atm and hot melts at their own temperature; an oil's freezing point is its pour point."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)$(l)Rare Earth Liquor and 29 like it$(): 1,300, 2.4, -15 to 104, corrosive$(li)$(l)Nickel-Copper Sulfate Liquor$(): 1,250, 1.9, -4 to 102, corrosive$(li)$(l)Nickel Sulfate Liquor$(): 1,220, 1.8, -4 to 102, corrosive$(li)$(l)Cobalt Chloride Liquor$(): 1,200, 1.8, -12 to 104, corrosive$(li)$(l)Platinum-Palladium Liquor and 3 like it$(): 1,150, 1.5, -55 to 108, corrosive",
+      "title": "The table"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)$(l)Palladium Tetrammine Liquor$(): 1,040, 1.1, -6 to 100, corrosive$(li)$(l)Beryllium Sulfate Liquor$(): 1,280, 2.6, -8 to 103, toxic, corrosive$(li)$(l)Lithium Sulfate Liquor$(): 1,180, 1.6, -8 to 102, corrosive$(li)$(l)P204$(): 850, 3.5, -40 to 150, flash 38$(li)$(l)P507$(): 845, 3.2, -40 to 150, flash 38"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)$(l)Naphthenic Acid$(): 850, 4, -40 to 150, flash 38$(li)$(l)Fouled P204$(): 860, 7, -40 to 150, flash 38$(li)$(l)Fouled P507$(): 855, 6.5, -40 to 150, flash 38$(li)$(l)Fouled Naphthenic Acid$(): 860, 8, -40 to 150, flash 38$(li)$(l)Hydrochloric Acid$(): 1,179, 1.9, -30 to 61, fuming, corrosive"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)$(l)Nitric Acid$(): 1,410, 2, -41 to 121, fuming, corrosive$(li)$(l)Phosphoric Acid$(): 1,579, 14, -17 to 135, corrosive$(li)$(l)Hydrofluoric Acid$(): 1,150, 1, -35 to 108, toxic, fuming, corrosive$(li)$(l)Aqua Regia$(): 1,210, 1.8, -42 to 108, fuming, corrosive$(li)$(l)Bromine$(): 3,103, 0.94, -7.2 to 58.8, toxic, fuming, corrosive"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)$(l)Argon$(): 1.66, 0.0223, -189 to -186$(li)$(l)Chlorine$(): 2.99, 0.0134, -102 to -34, toxic, corrosive$(li)$(l)Water Gas$(): 0.66, 0.0145, -205 to -192, flash -192, toxic$(li)$(l)Ammonia$(): 0.72, 0.0099, -77.7 to -33.3, toxic$(li)$(l)Osmium Tetroxide$(): 5,100, -, 40.6 to 130, toxic"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)$(l)Ruthenium Tetroxide$(): 3,290, -, 25.4 to 40, toxic$(li)$(l)Nickel Carbonyl$(): 1,319, -, -19.3 to 43, flash -20, toxic$(li)$(l)Spent Liquor$(): 1,060, 1.1, -5 to 101, corrosive$(li)$(l)Calcium Chloride Liquor$(): 1,180, 2, -19 to 105, corrosive$(li)$(l)Bittern$(): 1,260, 3, -30 to 110, corrosive"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)$(l)Salt Brine$(): 1,197, 1.9, -21.1 to 109, corrosive$(li)$(l)Seawater$(): 1,025, 1.08, -1.9 to 101, corrosive$(li)$(l)Crude Rare Earth Liquor and 1 like it$(): 1,350, 3, -15 to 104, corrosive$(li)$(l)2-Ethylhexanol$(): 833, 9.8, -76 to 185, flash 73$(li)$(l)Phosphorus Trichloride$(): 1,574, 0.65, -93.6 to 76.1, toxic"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)$(l)D2EHPA$(): 975, 35, freezes -60, flash 206$(li)$(l)EHEHPA$(): 950, 36, freezes -60, flash 190$(li)$(l)Titanium Tetrachloride$(): 1,726, 0.83, -24.1 to 136$(li)$(l)Vinyl Chloride$(): 2.6, 0.0108, -154 to -13.4, flash -78$(li)$(l)Caustic Soda$(): 1,274, 4.4, -17 to 112, corrosive"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)$(l)Sodium Tungstate Liquor$(): 1,200, 2, -10 to 104, corrosive$(li)$(l)Sodium Aluminate Liquor$(): 1,320, 12, -15 to 112, corrosive$(li)$(l)Water$(): 998, 1, 0 to 100$(li)$(l)Lava$(): 2,700, 100,000, freezes 1,000$(li)$(l)Crude Oil$(): 870, 10, -20 to 35, flash -20"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)$(l)Heavy Oil$(): 990, 3,000, 15 to 350, flash 66$(li)$(l)Lubrication Oil$(): 870, 150, freezes -15, flash 220$(li)$(l)Creosote$(): 1,080, 10, boils 200, flash 74$(li)$(l)Naphtha$(): 720, 0.6, boils 30, flash -22$(li)$(l)Gasoline$(): 740, 0.6, boils 35, flash -43"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)$(l)Kerosene$(): 800, 1.6, -40 to 150, flash 38$(li)$(l)Diesel$(): 840, 4, -15 to 180, flash 52$(li)$(l)Napalm$(): 800, 20,000, boils 35, flash -43$(li)$(l)Cooling Fluid$(): 1,070, 3.8, -37 to 107$(li)$(l)Sulfuric Acid$(): 1,830, 23, -32 to 280, corrosive"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)$(l)Liquid Concrete$(): 2,400, 50,000, -2 to 100$(li)$(l)Liquid Asphalt$(): 1,020, 300, freezes 50, flash 230$(li)$(l)Molten Plastic$(): 760, 1,000,000, freezes 130, flash 340$(li)$(l)Molten Steel$(): 7,000, 6, 1,500 to 2,860$(li)$(l)Molten Slag$(): 2,800, 500, freezes 1,350"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)$(l)Liquid Silicon$(): 2,570, 0.88, 1,414 to 3,265$(li)$(l)Air$(): 1.2, 0.0181, boils -194$(li)$(l)Hot Air$(): 0.277, 0.049, boils -194$(li)$(l)Carbon Dioxide$(): 1.84, 0.0147, boils -78.5$(li)$(l)Neon$(): 0.84, 0.0313, -249 to -246"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)$(l)Hydrogen$(): 0.0838, 0.0088, -259 to -253, flash -253$(li)$(l)Furnace Gas$(): 1.25, 0.017, boils -191, flash -191, toxic$(li)$(l)Ethylene$(): 1.17, 0.0101, -169 to -104, flash -136$(li)$(l)Propylene$(): 1.75, 0.0083, -185 to -47.6, flash -108$(li)$(l)Propane$(): 1.83, 0.008, -188 to -42.1, flash -104"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)$(l)Butane$(): 2.48, 0.0074, -138 to -0.5, flash -60$(li)$(l)LPG$(): 2, 0.0078, -188 to -42, flash -104"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)CRC Handbook of Chemistry and Physics, 97th ed. (2016): constants, and concentrative properties of aqueous solutions$(li)Perry's Chemical Engineers' Handbook, 9th ed. (2019), section 2$(li)NIST Chemistry WebBook, SRD 69: thermophysical properties of fluids",
+      "title": "Sources"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)Supplier safety data sheets (Sigma-Aldrich, Fisher, OxyChem, Daihachi, ExxonMobil): grades, flash points, autoignition$(li)ASTM D1655, D975, D396 and D4814: jet fuel, diesel, fuel oil and gasoline$(li)USGS Volcano Hazards Program: basaltic lava"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)ANSI/HI 9.6.7 (Hydraulic Institute, 2015): viscosity and pump performance"
+    }
+  ]
+}
