@@ -2,7 +2,7 @@
   "name": "Nickel Laterite Blanket",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_nickel_laterite",
-  "sortnum": 22,
+  "sortnum": 24,
   "pages": [
     {
       "type": "patchouli:text",

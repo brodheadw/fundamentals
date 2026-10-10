@@ -1,8 +1,19 @@
 {
   "type": "fundamentals:bloomery",
-  "ingredient": {
-    "tag": "fundamentals:raw_materials/iron"
-  },
+  "ingredient": [
+    {
+      "item": "fundamentals:raw_hematite"
+    },
+    {
+      "item": "fundamentals:raw_magnetite"
+    },
+    {
+      "item": "fundamentals:raw_goethite"
+    },
+    {
+      "item": "fundamentals:roasted_siderite"
+    }
+  ],
   "result": {
     "id": "fundamentals:iron_bloom",
     "count": 1

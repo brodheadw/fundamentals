@@ -32,6 +32,11 @@
       "mineral": "goethite"
     },
     {
+      "name": "siderite_ore",
+      "soft": false,
+      "mineral": "siderite"
+    },
+    {
       "name": "pyrolusite_ore",
       "soft": false,
       "mineral": "pyrolusite"

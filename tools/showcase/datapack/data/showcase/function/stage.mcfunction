@@ -6313,47 +6313,50 @@ setblock 18 -60 16 minecraft:polished_andesite
 setblock 18 -59 16 fundamentals:scheelite_ore
 setblock 18 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Scheelite Ore"','""','""','""']},is_waxed:1b}
 setblock 19 -60 16 minecraft:polished_andesite
-setblock 19 -59 16 fundamentals:smithsonite_ore
-setblock 19 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Smithsonite Ore"','""','""','""']},is_waxed:1b}
+setblock 19 -59 16 fundamentals:siderite_ore
+setblock 19 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Siderite Ore"','""','""','""']},is_waxed:1b}
 setblock 20 -60 16 minecraft:polished_andesite
-setblock 20 -59 16 fundamentals:sperrylite_ore
-setblock 20 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Sperrylite Ore"','""','""','""']},is_waxed:1b}
+setblock 20 -59 16 fundamentals:smithsonite_ore
+setblock 20 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Smithsonite Ore"','""','""','""']},is_waxed:1b}
 setblock 21 -60 16 minecraft:polished_andesite
-setblock 21 -59 16 fundamentals:sphalerite_ore
-setblock 21 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Sphalerite Ore"','""','""','""']},is_waxed:1b}
+setblock 21 -59 16 fundamentals:sperrylite_ore
+setblock 21 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Sperrylite Ore"','""','""','""']},is_waxed:1b}
 setblock 22 -60 16 minecraft:polished_andesite
-setblock 22 -59 16 fundamentals:spodumene_ore
-setblock 22 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Spodumene Ore"','""','""','""']},is_waxed:1b}
+setblock 22 -59 16 fundamentals:sphalerite_ore
+setblock 22 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Sphalerite Ore"','""','""','""']},is_waxed:1b}
 setblock 23 -60 16 minecraft:polished_andesite
-setblock 23 -59 16 fundamentals:thortveitite_ore
-setblock 23 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Thortveitite"','"Ore"','""','""']},is_waxed:1b}
+setblock 23 -59 16 fundamentals:spodumene_ore
+setblock 23 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Spodumene Ore"','""','""','""']},is_waxed:1b}
 setblock 24 -60 16 minecraft:polished_andesite
-setblock 24 -59 16 fundamentals:trona_ore
-setblock 24 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Trona Ore"','""','""','""']},is_waxed:1b}
+setblock 24 -59 16 fundamentals:thortveitite_ore
+setblock 24 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Thortveitite"','"Ore"','""','""']},is_waxed:1b}
 setblock 25 -60 16 minecraft:polished_andesite
-setblock 25 -59 16 fundamentals:wolframite_ore
-setblock 25 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Wolframite Ore"','""','""','""']},is_waxed:1b}
+setblock 25 -59 16 fundamentals:trona_ore
+setblock 25 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Trona Ore"','""','""','""']},is_waxed:1b}
 setblock 26 -60 16 minecraft:polished_andesite
-setblock 26 -59 16 fundamentals:xenotime_ore
-setblock 26 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Xenotime Ore"','""','""','""']},is_waxed:1b}
+setblock 26 -59 16 fundamentals:wolframite_ore
+setblock 26 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Wolframite Ore"','""','""','""']},is_waxed:1b}
 setblock 27 -60 16 minecraft:polished_andesite
-setblock 27 -59 16 fundamentals:zircon_ore
-setblock 27 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Zircon Ore"','""','""','""']},is_waxed:1b}
-setblock 29 -60 16 minecraft:polished_andesite
-setblock 29 -59 16 minecraft:polished_andesite
-setblock 29 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Host rocks"','""','""','""']},is_waxed:1b}
+setblock 27 -59 16 fundamentals:xenotime_ore
+setblock 27 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Xenotime Ore"','""','""','""']},is_waxed:1b}
+setblock 28 -60 16 minecraft:polished_andesite
+setblock 28 -59 16 fundamentals:zircon_ore
+setblock 28 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Zircon Ore"','""','""','""']},is_waxed:1b}
 setblock 30 -60 16 minecraft:polished_andesite
-setblock 30 -59 16 fundamentals:carbonatite
-setblock 30 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Carbonatite"','""','""','""']},is_waxed:1b}
+setblock 30 -59 16 minecraft:polished_andesite
+setblock 30 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Host rocks"','""','""','""']},is_waxed:1b}
 setblock 31 -60 16 minecraft:polished_andesite
-setblock 31 -59 16 fundamentals:gabbro
-setblock 31 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Gabbro"','""','""','""']},is_waxed:1b}
+setblock 31 -59 16 fundamentals:carbonatite
+setblock 31 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Carbonatite"','""','""','""']},is_waxed:1b}
 setblock 32 -60 16 minecraft:polished_andesite
-setblock 32 -59 16 fundamentals:laterite
-setblock 32 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Laterite"','""','""','""']},is_waxed:1b}
+setblock 32 -59 16 fundamentals:gabbro
+setblock 32 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Gabbro"','""','""','""']},is_waxed:1b}
 setblock 33 -60 16 minecraft:polished_andesite
-setblock 33 -59 16 fundamentals:syenite
-setblock 33 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Syenite"','""','""','""']},is_waxed:1b}
+setblock 33 -59 16 fundamentals:laterite
+setblock 33 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Laterite"','""','""','""']},is_waxed:1b}
+setblock 34 -60 16 minecraft:polished_andesite
+setblock 34 -59 16 fundamentals:syenite
+setblock 34 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Syenite"','""','""','""']},is_waxed:1b}
 setblock -20 -60 26 minecraft:polished_andesite
 setblock -20 -59 26 minecraft:polished_andesite
 setblock -20 -58 26 minecraft:polished_andesite

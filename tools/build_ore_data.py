@@ -22,12 +22,16 @@ BIOMES = {
     "placer": ["#minecraft:is_beach", "#minecraft:is_river"],
     "wetland": ["minecraft:swamp", "minecraft:mangrove_swamp"],
     "hydrothermal": ["#minecraft:is_mountain", "#minecraft:is_hill", "#minecraft:is_badlands"],
+    "temperate": ["#minecraft:is_forest", "#minecraft:is_hill", "minecraft:plains", "minecraft:sunflower_plains", "minecraft:meadow",
+                  "minecraft:swamp"],
+    "alpine": ["#minecraft:is_mountain"],
 }
 
 ORES = {
     "hematite": ("iron", "pickaxe", "stone"),
     "magnetite": ("iron", "pickaxe", "stone"),
     "goethite": ("iron", "pickaxe", None),
+    "siderite": ("iron", "pickaxe", "stone"),
     "pyrolusite": ("manganese", "pickaxe", "stone"),
     "pentlandite": ("nickel", "pickaxe", "iron"),
     "nickel_laterite": ("nickel", "shovel", None),
@@ -113,6 +117,10 @@ DEPOSITS = {
     "magnetite_bed": ("bed", None, [("hematite", 0.06, "seams"), ("magnetite", 0.42, "pockets")],
                       (8, 12), (3, 5), None, "anywhere", (-56, 8), 12, "rock"),
     "bog_iron": ("blanket", "goethite_ore", [], (6, 9), (1, 2), None, "wetland", (60, 64), 3, "ground"),
+    "coal_measures": ("bed", None, [("siderite", 0.18, "seams"), ("minecraft:coal_ore", 0.22, "seams"), ("siderite", 0.14, "pockets")],
+                      (9, 13), (4, 6), None, "temperate", (16, 72), 10, "rock"),
+    "sparry_iron": ("bed", "create:limestone", [("siderite", 0.40, "pockets")], (8, 12), (4, 7), None,
+                    "alpine", (48, 120), 18, "rock"),
     "lead_zinc_bed": ("bed", "create:limestone", [("sphalerite", 0.20, "pockets"), ("galena", 0.13, "pockets"), ("fluorite", 0.10, "pockets")],
                       (9, 13), (3, 5), None, "anywhere", (-40, 36), 10, "rock"),
     "evaporite_bed": ("bed", "minecraft:sandstone", [("halite", 0.20, "seams"), ("borax", 0.18, "seams"), ("trona", 0.14, "seams")], (8, 12), (2, 4), None,
@@ -286,7 +294,7 @@ def main():
     stale = {name for name in textures if "_ore_" in name} - expected
     assert not (expected - textures) and not stale, \
         f"textures and block tables disagree: missing {sorted(expected - textures)}, stale {sorted(stale)}"
-    generated = {ore for _, _, ores, *_ in DEPOSITS.values() for ore, _, _ in ores} | set(PLACERS) \
+    generated = {ore for _, _, ores, *_ in DEPOSITS.values() for ore, _, _ in ores if ":" not in ore} | set(PLACERS) \
         | {row[1][:-4] for row in DEPOSITS.values() if row[1] and row[1].endswith("_ore")}
     assert generated == set(ORES), f"ores that never generate, or unknown ores: {sorted(generated ^ set(ORES))}"
 
@@ -342,7 +350,7 @@ def main():
 
     by_biomes = {}
     for name, (shape, host, ores, radius, thickness, height, where, y, chunks, replaces) in DEPOSITS.items():
-        entries = [{"state": state(f"{ore}_ore"), "fraction": share, "style": style} for ore, share, style in ores]
+        entries = [{"state": state(ore if ":" in ore else f"{ore}_ore"), "fraction": share, "style": style} for ore, share, style in ores]
         config = {"shape": shape, "ores": entries,
                   "radius": {"min": radius[0], "max": radius[1]},
                   "thickness": {"min": (thickness or (1, 1))[0], "max": (thickness or (1, 1))[1]},

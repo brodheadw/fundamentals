@@ -2,7 +2,7 @@
   "name": "Evaporite Bed",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_halite",
-  "sortnum": 14,
+  "sortnum": 16,
   "pages": [
     {
       "type": "patchouli:text",
