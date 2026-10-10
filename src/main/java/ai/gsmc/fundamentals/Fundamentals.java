@@ -131,6 +131,9 @@ public class Fundamentals {
             });
         });
         NeoForge.EVENT_BUS.addListener(Hazards::onPlayerTick);
+        NeoForge.EVENT_BUS.addListener(Hazards::onServerTick);
+        NeoForge.EVENT_BUS.addListener(Hazards::onBreak);
+        NeoForge.EVENT_BUS.addListener(Hazards::onExplosion);
         NeoForge.EVENT_BUS.addListener(Plastics::onRightClick);
         NeoForge.EVENT_BUS.addListener(Oxidation::onOpen);
         NeoForge.EVENT_BUS.addListener(Oxidation::onClose);
@@ -150,8 +153,10 @@ public class Fundamentals {
             event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, Oxidation.drumEntity(), (drum, side) -> new InvWrapper(drum));
             event.registerItem(Capabilities.FluidHandler.ITEM, (stack, context) -> new FluidBucketWrapper(stack), Separation.seawaterBucket());
         });
-        modBus.addListener(FMLCommonSetupEvent.class, event -> event.enqueueWork(() ->
-                MountedFluidStorageType.REGISTRY.register(Separation.plasticTank(), AllMountedStorageTypes.FLUID_TANK.get())));
+        modBus.addListener(FMLCommonSetupEvent.class, event -> event.enqueueWork(() -> {
+            MountedFluidStorageType.REGISTRY.register(Separation.plasticTank(), AllMountedStorageTypes.FLUID_TANK.get());
+            Hazards.registerPipeEffects();
+        }));
         if (FMLEnvironment.dist == Dist.CLIENT) {
             GrindingAnimation.register(modBus);
             SeparationClient.register(modBus);

@@ -116,6 +116,8 @@ METAL = {
     "blister_copper": ((84, 40, 28), (142, 74, 50), (186, 106, 74), (222, 150, 112)),
     "chromium": ((90, 100, 118), (158, 172, 194), (210, 222, 240), (248, 252, 255)),
     "ferrochrome": ((56, 58, 62), (104, 106, 112), (146, 148, 154), (192, 194, 200)),
+    # ferronickel off the electric furnace is a dull grey, a shade warmer and brighter than iron for its nickel
+    "ferronickel": ((70, 68, 64), (126, 122, 116), (174, 170, 162), (220, 216, 208)),
     "stainless_steel": ((96, 100, 104), (164, 168, 172), (212, 216, 220), (250, 251, 252)),
     # titanium is a darker, warmer grey than steel; magnesium the whitest of the light metals
     "titanium": ((76, 76, 80), (136, 136, 140), (186, 186, 190), (232, 232, 234)),
@@ -222,7 +224,7 @@ MATERIALS = {
     "didymium": DIDYMIUM, "neodymium_iron_boron": MAGNET, "dysprosium_neodymium_iron_boron": MAGNET, "samarium_cobalt": MAGNET, "aluminium_scandium": ALLOY, "monazite_residue": RESIDUE,
     "cobalt": COBALT, "molybdenum": MOLYBDENUM, "rhenium": RHENIUM, "superalloy": STRUCTURAL, "molybdenum_steel": STRUCTURAL, "chromel": INGOT, "alumel": INGOT, "alnico": INGOT,
     "tungsten": TUNGSTEN, "copper_matte": MATTE, "blister_copper": BLISTER,
-    "chromite": GROUND_MINERAL, "chromium": CHROMIUM, "ferrochrome": INGOT, "stainless_steel": STRUCTURAL,
+    "chromite": GROUND_MINERAL, "chromium": CHROMIUM, "ferrochrome": INGOT, "ferronickel": INGOT, "stainless_steel": STRUCTURAL,
     "titanium": TITANIUM, "magnesium": INGOT,
     "nickel_matte": MATTE, "converter_matte": MATTE, "platinum_group_concentrate": CONCENTRATE,
     "platinum": PGM, "palladium": PGM, "rhodium": PGM, "ruthenium": PGM, "iridium": PGM, "osmium": PGM,

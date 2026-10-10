@@ -448,12 +448,20 @@ def oxidation():
 
 
 def metals():
-    category("metals", "The other metals", "Cobalt, zinc and nickel, the porphyry chain (copper, molybdenum and the rhenium hiding in it), chromium, tin, titanium, the silver in lead, zirconium and hafnium, beryllium, and aluminium.", "fundamentals:cobalt_ingot", 3)
+    category("metals", "The other metals", "Cobalt, zinc, nickel and Mond's carbonyl, the porphyry chain (copper, molybdenum and the rhenium hiding in it), chromium, tin, titanium, the silver in lead, zirconium and hafnium, beryllium, and aluminium.", "fundamentals:cobalt_ingot", 3)
     entry("metals", "cobalt", "Cobalt", "fundamentals:cobalt_ingot", pages_of(
         "Cobaltite is a cobalt arsenide-sulfide from the silver-cobalt veins in calcite. Roast it on a campfire or in a smoker to drive off the arsenic and sulfur and leave the oxide. "
         "Cobalt melts at 1,495 °C and was never smelted from its ore: the oxide is reduced under hydrogen, as molybdenum is: two roasted cobaltite and 500 mB of hydrogen in a heated chemical vat give two ingots. "
         "Cobalt is half of SmCo; two cobalt, four nickel, a chromium and a rhenium make the superalloy. "
-        "Roasted cobaltite calcined with two bauxite powder is cobalt blue, four blue dye.", "Cobalt"), 0)
+        "Roasted cobaltite calcined with two bauxite powder is cobalt blue, four blue dye.", "Cobalt") + pages_of(
+        "Veins like Cobalt, Ontario, and Bou Azzer, Morocco, are the old sources and a small one now. About three quarters of the world's cobalt is mined in the "
+        "Democratic Republic of the Congo, from its copper-cobalt ores, and most of the rest comes out of nickel refineries (USGS, Mineral Commodity Summaries 2025). "
+        "The nickel refinery's sulfate liquor carries it: 1,000 mB of it, 250 mB of P507 and 50 mB of hydrochloric acid under a mixer in a chemical vat give 950 mB of nickel sulfate liquor, "
+        "50 mB of rose cobalt chloride liquor and 245 mB of the organic back. Electrowon on two electrodes, 500 mB of the cobalt liquor gives a cobalt ingot and 250 mB of chlorine, "
+        "as Nikkelverk wins its cobalt.", "From nickel") + pages_of(
+        "The extractant takes cobalt over nickel at about pH 5 and the acid strips it again: one step here for the extraction, scrub and strip sections of a real circuit. "
+        "Western refineries run Cyanex 272, a phosphinic acid that parts the two some thousands of times over; Chinese ones the phosphonic P507, which does it some hundreds of times "
+        "(Flett, Cobalt-nickel separation in hydrometallurgy, 2004). A twentieth of the nickel's weight in cobalt comes out, rather more than a nickel sulfide ore really carries."), 0)
     entry("metals", "porphyry", "Copper, molybdenum, rhenium", "fundamentals:raw_molybdenite", pages_of(
         "A porphyry copper stock carries chalcopyrite with a little molybdenite, and the molybdenite carries rhenium at parts per million. "
         "A copper sulfide smelts not to copper but to matte. Chalcopyrite roasted on a fire, or the calcine bornite, chalcocite and covellite roast to, melts in the bloomery to copper matte and slag. "
@@ -476,8 +484,27 @@ def metals():
         "Zinc boils at 907 °C, below the heat that reduces it, so it was distilled from a sealed retort packed with charcoal: "
         "a zinc oxide and a charcoal in a basin over a blaze burner fed a blaze cake give a zinc ingot. Asurine, the zinc stone, crushes to smithsonite. "
         "Zinc oxide is also what every sulfur cure of rubber needs to work, so the Factory's rubber takes one.", "Zinc") + pages_of(
-        "Pentlandite roasts on a fire to a nickel oxide; with a charcoal, superheated, it gives a nickel ingot and the iron goes to slag, and whatever platinum it carried with it. Smelted raw in the bloomery instead, it gives the nickel matte the platinum metals are won from. "
-        "Nickel laterite is too lean to roast: four of it with two charcoal, superheated, give one ingot and two slag, as the electric furnaces of Indonesia smelt it whole.", "Nickel"), 4)
+        "Carbon does not part nickel from iron: it reduces both, and they alloy. Pentlandite roasted on a fire and smelted with a charcoal, superheated, gives a ferronickel ingot and a slag, "
+        "and whatever platinum it carried is lost in it. Nickel laterite, a weathered rock of 1.5 to 2.5 per cent nickel, is smelted whole: four of it with two charcoal, superheated, "
+        "give one ferronickel and two slag, as the rotary kilns and electric furnaces of New Caledonia and Indonesia smelt it at about 1,550 °C.", "Ferronickel") + pages_of(
+        "Real ferronickel runs 20 to 40 per cent nickel, and nickel pig iron less (Crundwell and others, Extractive Metallurgy of Nickel, Cobalt and Platinum Group Metals, 2011); here an ingot is a third nickel. "
+        "None of it is ever nickel metal. It goes where two thirds of the world's nickel goes, into stainless steel, which wants the iron anyway: three ferrochrome, three ferronickel and four steel, superheated, make ten stainless. "
+        "Nickel metal comes from sulfide matte: leached and electrowon, under the platinum metals, or by Mond's carbonyl.", "Nickel"), 4)
+    entry("metals", "mond", "Mond nickel and its poisons", "fundamentals:nickel_pellets", pages_of(
+        "Ludwig Mond found in 1890 that carbon monoxide carries nickel off as a gas at 50 °C and gives it back when heated past 180 °C, and iron, copper and cobalt hardly at all (Mond, Langer and Quincke, Journal of the Chemical Society, 1890). "
+        "His refinery at Clydach in Wales has run on it since 1902, and Copper Cliff in Sudbury runs it under pressure.", "The Mond process") + pages_of(
+        "Converter matte roasted dead on a campfire or in a smoker burns off its sulfur and leaves nickel oxide. Two nickel oxide and 1,000 mB of water gas in a heated chemical vat with a mixer give 500 mB of nickel carbonyl, "
+        "the water gas's hydrogen reducing the oxide at 400 °C and its monoxide taking the nickel, Ni + 4 CO to Ni(CO)4; one time in ten the residue is a platinum group concentrate, as Clydach's residues fed the Acton refinery.") + pages_of(
+        "500 mB of carbonyl in a heated vat decomposes at about 230 °C on hot pellets to two nickel pellets, 99.97 per cent nickel, and 500 mB of the gas goes back round. "
+        "A heated press over a basin squeezes a pellet into a nickel ingot.") + pages_of(
+        "Nickel carbonyl is among the most poisonous gases in industry. NIOSH puts the level immediately dangerous to life at 2 parts per million, and its faint musty smell comes only above that. "
+        "It does not eat a pipe or a tank, but where it gets out, from an open pipe end, a broken pipe, tank or vat, or a basin, it reaches three blocks: "
+        "headache, nausea and weakness at once, and a hard hit every second.", "Nickel carbonyl") + pages_of(
+        "The worst comes later. A day or so after exposure the lungs fill (pulmonary oedema), however well the victim felt; here it comes half a minute later, as withering that lasts four seconds for each second breathed. "
+        "Only Create's diving helmet on a filled backtank keeps it out, and it burns two of the tank's air a second doing so. Keep the carbonyl in closed pipes and tanks, and wear the mask to break into them.") + pages_of(
+        "The dusts of the nickel smelter cause lung and nasal cancer: the men who roasted and leached matte at Clydach died of them at many times the expected rate (Doll, 1958), "
+        "and the International Agency for Research on Cancer puts nickel compounds in its first group. Nickel matte, converter matte, roasted pentlandite and nickel oxide held in the hand or stirred in a basin are breathed by everyone near. "
+        "And a sulfide roasting on a lit campfire or in a lit smoker or furnace, pentlandite, cobaltite or matte, gives off sulfur dioxide that stings anyone within two blocks.", "The dusts and the fume"), 4)
     entry("metals", "chromium", "Ferrochrome and chromium", "fundamentals:ferrochrome_ingot", pages_of(
         "Chromite is chromium's only ore, black seams in the gabbro of the deep layered intrusion. A millstone or crushing wheels grind it to a brown powder, and a wash under an encased fan "
         "leaves the heavy chromite behind as concentrate, half of what goes in. Iron in chromite reduces along with the chromium, so smelting gives not chromium but ferrochrome: "
@@ -583,7 +610,9 @@ def platinum():
         "The base-metal refinery leaches two converter matte in 500 mB of hot sulfuric acid. The nickel and copper dissolve to a green sulfate liquor; "
         "what will not dissolve is the platinum group concentrate, one time in ten from a plain nickel matte. "
         "The deep layered intrusion's platinum minerals, sperrylite, cooperite and braggite, are what make it a reef and not a nickel mine: one in the leach with the matte gives a concentrate every time. "
-        "The liquor electrowins on two electrodes in a vat, 500 mB to a nickel ingot, a copper ingot half the time, and 250 mB of its acid back."), 0)
+        "The liquor electrowins on two electrodes in a vat, 500 mB to a nickel ingot, a copper ingot half the time, and 250 mB of its acid back. "
+        "It carries the cobalt too, which P507 takes out first, leaving a nickel sulfate liquor that electrowins the same way: the cobalt entry says how. "
+        "Or the matte goes the Mond way, by carbonyl."), 0)
     entry("platinum", "reagents", "Aqua regia and ammonia", "fundamentals:aqua_regia_bucket", pages_of(
         "Aqua regia is 375 mB of hydrochloric acid and 125 mB of nitric, mixed cold: the royal water that dissolves gold, and the only common acid that takes platinum. It fumes like nitric acid; wear the mask. "
         "Ammonia is made as Haber and Bosch made it: 750 mB of hydrogen and 250 mB of air over a raw magnetite, the iron catalyst, in a heated basin, give 500 mB and the magnetite back nine times in ten. "
