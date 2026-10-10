@@ -1,7 +1,6 @@
 package ai.gsmc.fundamentals.separation;
 
 import ai.gsmc.fundamentals.Fundamentals;
-import ai.gsmc.fundamentals.heat.Heat;
 import ai.gsmc.fundamentals.liquid.Liquids;
 import ai.gsmc.fundamentals.uses.Uses;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlockEntity;
@@ -21,6 +20,7 @@ import com.simibubi.create.content.fluids.tank.FluidTankBlock;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
 import com.simibubi.create.content.processing.basin.BasinBlock;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.wildspell.fundamental.api.heat.Heat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -58,7 +58,6 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.items.IItemHandler;
 
-import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Queue;
@@ -66,6 +65,7 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.IntStream;
+import javax.annotation.Nullable;
 
 /**
  * What the plant does to people and pipes. The fuming acids (hydrochloric, hydrofluoric, nitric, aqua regia) and bromine hurt anyone within reach of them

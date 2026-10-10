@@ -1,7 +1,7 @@
 package ai.gsmc.fundamentals.separation;
 
-import ai.gsmc.fundamentals.heat.Heat;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
+import com.wildspell.fundamental.api.heat.Heat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -18,10 +18,10 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
-import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import javax.annotation.Nullable;
 
 /**
  * One cell of a magnetomigration line. The head cell holds the feed, piped into its back; the tail holds the two streams

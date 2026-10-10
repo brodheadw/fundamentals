@@ -1,7 +1,6 @@
 package ai.gsmc.fundamentals.gametest;
 
 import ai.gsmc.fundamentals.Fundamentals;
-import ai.gsmc.fundamentals.heat.Heat;
 import ai.gsmc.fundamentals.liquid.Liquid;
 import ai.gsmc.fundamentals.liquid.Liquids;
 import ai.gsmc.fundamentals.separation.Acids;
@@ -9,6 +8,7 @@ import ai.gsmc.fundamentals.separation.Hazards;
 import ai.gsmc.fundamentals.separation.Reagents;
 import ai.gsmc.fundamentals.separation.Separation;
 import ai.gsmc.fundamentals.titanium.Titanium;
+import com.wildspell.fundamental.api.heat.Heat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;

@@ -1,7 +1,7 @@
 package ai.gsmc.fundamentals.separation;
 
 import ai.gsmc.fundamentals.Fundamentals;
-import ai.gsmc.fundamentals.heat.Heat;
+import com.wildspell.fundamental.api.heat.Heat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
