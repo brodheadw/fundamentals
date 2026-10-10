@@ -1,6 +1,7 @@
 package ai.gsmc.fundamentals.gametest;
 
 import ai.gsmc.fundamentals.Fundamentals;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -20,6 +21,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
@@ -36,7 +38,8 @@ public class TakeoverTests {
     public void spodumeneAndBauxiteFeedTheFactorysMachines(GameTestHelper helper) {
         helper.assertTrue(BuiltInRegistries.BLOCK.containsKey(ResourceLocation.parse("fundamentals:spodumene_ore"))
                 && BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse("fundamentals:raw_spodumene")), "spodumene should be an ore with a raw chunk");
-        Map<String, String> machines = Map.of("lithium/calcined_spodumene", "minecraft:blasting", "lithium/lithium_chloride", "create:mixing", "lithium/lithium_ingot", "tfmg:vat_machine_recipe",
+        Map<String, String> machines = Map.of("lithium/calcined_spodumene", "minecraft:blasting", "lithium/lithium_sulfate_liquor", "create:mixing",
+                "lithium/lithium_carbonate", "create:mixing", "lithium/lithium_chloride", "create:mixing", "lithium/lithium_ingot", "tfmg:vat_machine_recipe",
                 "aluminium/bauxite_powder", "create:milling", "aluminium/bauxite_powder_from_crushed", "create:milling");
         machines.forEach((id, machine) -> {
             var recipe = helper.getLevel().getRecipeManager().byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, id));
@@ -46,6 +49,13 @@ public class TakeoverTests {
         var lithium = (com.simibubi.create.content.processing.recipe.ProcessingRecipe<?, ?>) helper.getLevel().getRecipeManager()
                 .byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "lithium/lithium_ingot")).orElseThrow().value();
         helper.assertTrue(lithium.getFluidIngredients().isEmpty(), "lithium cannot be won from water: the vat should electrolyse the dry chloride");
+        var roast = recipe(helper, "lithium/lithium_sulfate_liquor");
+        var carbonate = recipe(helper, "lithium/lithium_carbonate");
+        var chloride = recipe(helper, "lithium/lithium_chloride");
+        helper.assertTrue(takes(roast, "fundamentals:calcined_spodumene") && takesFluid(roast, "tfmg:sulfuric_acid") && !takesFluid(roast, "fundamentals:hydrochloric_acid"),
+                "beta-spodumene is acid-roasted with sulfuric acid, not hydrochloric");
+        helper.assertTrue(takes(carbonate, "fundamentals:soda_ash") && takesFluid(carbonate, "fundamentals:lithium_sulfate_liquor"), "soda ash throws down lithium carbonate");
+        helper.assertTrue(takes(chloride, "fundamentals:lithium_carbonate") && takesFluid(chloride, "fundamentals:hydrochloric_acid"), "the chloride is made from the carbonate");
         helper.succeed();
     }
 
@@ -88,6 +98,20 @@ public class TakeoverTests {
         }
         helper.assertTrue(iron * 2 < gold * 3, "mineshaft chests gave " + iron + " iron ingots to " + gold + " gold; unthinned it is three to one");
         helper.succeed();
+    }
+
+    private static ProcessingRecipe<?, ?> recipe(GameTestHelper helper, String id) {
+        var found = helper.getLevel().getRecipeManager().byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, id));
+        helper.assertTrue(found.isPresent(), id + " did not load");
+        return (ProcessingRecipe<?, ?>) found.get().value();
+    }
+
+    private static boolean takes(ProcessingRecipe<?, ?> recipe, String id) {
+        return recipe.getIngredients().stream().anyMatch(i -> i.test(new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse(id)))));
+    }
+
+    private static boolean takesFluid(ProcessingRecipe<?, ?> recipe, String id) {
+        return recipe.getFluidIngredients().stream().anyMatch(i -> i.ingredient().test(new FluidStack(BuiltInRegistries.FLUID.get(ResourceLocation.parse(id)), 1)));
     }
 
     private static List<ItemStack> roll(ServerLevel level, ResourceKey<LootTable> key, int times, boolean raw) {

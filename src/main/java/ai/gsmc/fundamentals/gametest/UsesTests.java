@@ -12,6 +12,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
+import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
@@ -34,6 +36,17 @@ public class UsesTests {
 
     private static boolean takes(Recipe<?> recipe, String id) {
         return recipe.getIngredients().stream().anyMatch(i -> i.test(stack(id)));
+    }
+
+    private static boolean takesFluid(Recipe<?> recipe, String id) {
+        Fluid fluid = BuiltInRegistries.FLUID.get(ResourceLocation.parse(id));
+        return recipe instanceof ProcessingRecipe<?, ?> processing
+                && processing.getFluidIngredients().stream().anyMatch(i -> i.ingredient().test(new FluidStack(fluid, 1)));
+    }
+
+    private static boolean givesFluid(Recipe<?> recipe, String id) {
+        Fluid fluid = BuiltInRegistries.FLUID.get(ResourceLocation.parse(id));
+        return recipe instanceof ProcessingRecipe<?, ?> processing && processing.getFluidResults().stream().anyMatch(f -> f.is(fluid));
     }
 
     @GameTest(template = "empty")
@@ -172,30 +185,48 @@ public class UsesTests {
     @GameTest(template = "empty")
     public void cobaltCopperMolybdenumAndRheniumHaveTheirChains(GameTestHelper helper) {
         var registries = helper.getLevel().registryAccess();
-        for (String item : new String[] {"cobalt_ingot", "molybdenum_oxide", "molybdenum_ingot", "rhenium_ingot", "superalloy_plate", "molybdenum_steel_plate", "roasted_cobaltite", "roasted_chalcopyrite", "rhenium_flue_dust",
+        for (String item : new String[] {"cobalt_ingot", "molybdenum_oxide", "molybdenum_ingot", "rhenium_ingot", "rhenium_nugget", "ammonium_perrhenate", "superalloy_plate", "molybdenum_steel_plate", "roasted_cobaltite", "roasted_chalcopyrite", "rhenium_flue_dust",
                 "copper_matte_dust", "blister_copper_ingot"}) {
             helper.assertTrue(BuiltInRegistries.ITEM.containsKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, item)), item + " is not an item");
         }
         Map.of("fundamentals:roasting/roasted_cobaltite_campfire_cooking", "minecraft:campfire_cooking", "fundamentals:uses/cobalt_ingot", "tfmg:vat_machine_recipe",
                 "fundamentals:bloomery/copper_matte_from_roasted_chalcopyrite", "fundamentals:bloomery", "fundamentals:uses/blister_copper", "create:mixing",
                 "fundamentals:uses/copper_ingot_from_blister_copper", "minecraft:blasting", "fundamentals:uses/molybdenum_oxide", "create:mixing",
-                "fundamentals:uses/molybdenum_ingot", "tfmg:vat_machine_recipe", "fundamentals:uses/rhenium_ingot", "tfmg:vat_machine_recipe",
+                "fundamentals:uses/molybdenum_ingot", "tfmg:vat_machine_recipe", "fundamentals:uses/rhenium_nugget", "tfmg:vat_machine_recipe",
                 "fundamentals:uses/superalloy", "create:mixing", "fundamentals:uses/molybdenum_steel", "create:mixing")
                 .forEach((id, type) -> helper.assertTrue(BuiltInRegistries.RECIPE_TYPE.getKey(recipe(helper, id).getType()).toString().equals(type), id + " should be a " + type));
         helper.assertTrue(recipe(helper, "fundamentals:bloomery/copper_matte_from_roasted_chalcopyrite").getResultItem(registries).is(stack("fundamentals:copper_matte_dust").getItem()),
                 "roasted chalcopyrite should smelt to matte, not copper");
         helper.assertTrue(takes(recipe(helper, "tfmg:turbine_blade"), "fundamentals:superalloy_plate"), "the turbine blade should take superalloy plates");
         helper.assertTrue(takes(recipe(helper, "tfmg:item_application/heavy_machinery_casing"), "fundamentals:molybdenum_steel_plate"), "the heavy casing should take molybdenum steel");
-        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/superalloy"), "fundamentals:rhenium_ingot"), "the superalloy wants rhenium");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/ammonium_perrhenate"), "fundamentals:rhenium_flue_dust")
+                && takesFluid(recipe(helper, "fundamentals:uses/ammonium_perrhenate"), "fundamentals:ammonia")
+                && takes(recipe(helper, "fundamentals:uses/rhenium_nugget"), "fundamentals:ammonium_perrhenate"), "rhenium goes flue dust to ammonium perrhenate to metal");
+        var superalloy = recipe(helper, "fundamentals:uses/superalloy");
+        helper.assertTrue(takes(superalloy, "tfmg:aluminum_nugget") && takes(superalloy, "fundamentals:tungsten_ingot"),
+                "gamma-prime Ni3Al and the alumina scale make a superalloy: it wants aluminium, and tungsten");
+        helper.assertTrue(takes(superalloy, "fundamentals:rhenium_nugget") && !takes(superalloy, "fundamentals:rhenium_ingot"), "the superalloy is a few per cent rhenium");
+        helper.assertTrue(takes(recipe(helper, "tfmg:turbine_blade"), "fundamentals:mcraly_powder")
+                && takes(recipe(helper, "fundamentals:uses/mcraly_powder"), "fundamentals:yttrium_nugget"), "the blade's MCrAlY bond coat wants yttrium");
         helper.succeed();
     }
 
     @GameTest(template = "empty")
     public void tungstenAndTheLastSinks(GameTestHelper helper) {
-        for (String item : new String[] {"tungsten_oxide", "tungsten_ingot", "tungsten_plate", "tungsten_carbide", "tungsten_filament"}) {
+        for (String item : new String[] {"tungsten_oxide", "tungsten_ingot", "tungsten_carbide", "tungsten_filament", "tungstic_acid", "ammonium_paratungstate"}) {
             helper.assertTrue(BuiltInRegistries.ITEM.containsKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, item)), item + " is not an item");
         }
-        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/tungsten_oxide_from_scheelite"), "fundamentals:raw_scheelite"), "scheelite should give the trioxide");
+        var wolframite = helper.getLevel().getRecipeManager().getRecipes().stream().map(r -> r.value()).filter(r -> takes(r, "fundamentals:raw_wolframite")).toList();
+        helper.assertTrue(wolframite.stream().noneMatch(r -> takesFluid(r, "fundamentals:hydrochloric_acid"))
+                && wolframite.stream().anyMatch(r -> takesFluid(r, "fundamentals:caustic_soda") && givesFluid(r, "fundamentals:sodium_tungstate_liquor")),
+                "wolframite will not open to hydrochloric acid; caustic soda digests it to sodium tungstate");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/tungstic_acid"), "fundamentals:raw_scheelite")
+                && takesFluid(recipe(helper, "fundamentals:uses/tungstic_acid"), "fundamentals:hydrochloric_acid"), "scheelite opens to hydrochloric acid");
+        helper.assertTrue(takesFluid(recipe(helper, "fundamentals:uses/ammonium_paratungstate"), "fundamentals:sodium_tungstate_liquor")
+                && takesFluid(recipe(helper, "fundamentals:uses/ammonium_paratungstate"), "fundamentals:ammonia")
+                && takes(recipe(helper, "fundamentals:uses/tungsten_oxide"), "fundamentals:ammonium_paratungstate"), "the tungstate goes through APT to the trioxide");
+        helper.assertFalse(BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse("fundamentals:tungsten_plate")), "tungsten plate had no use and should be gone");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/light_bulb_halogen"), "fundamentals:molybdenum_ingot"), "a halogen lamp seals through molybdenum foil");
         helper.assertTrue(BuiltInRegistries.RECIPE_TYPE.getKey(recipe(helper, "fundamentals:uses/tungsten_ingot").getType()).toString().equals("tfmg:vat_machine_recipe"), "tungsten is reduced in a vat");
         helper.assertTrue(takes(recipe(helper, "tfmg:crafting/materials/light_bulb"), "fundamentals:tungsten_filament"), "the light bulb should burn a tungsten filament");
         helper.assertTrue(takes(recipe(helper, "create:crafting/kinetics/mechanical_drill"), "fundamentals:tungsten_carbide"), "the drill should bite with carbide");

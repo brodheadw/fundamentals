@@ -2,10 +2,10 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "fundamentals:raw_wolframite"
+      "item": "fundamentals:raw_scheelite"
     },
     {
-      "item": "fundamentals:raw_wolframite"
+      "item": "fundamentals:raw_scheelite"
     },
     {
       "type": "neoforge:single",
@@ -15,7 +15,7 @@
   ],
   "results": [
     {
-      "id": "fundamentals:tungsten_oxide",
+      "id": "fundamentals:tungstic_acid",
       "count": 2
     }
   ],

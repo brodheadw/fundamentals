@@ -44,7 +44,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Ten millibuckets of it in a quartz envelope make a halogen lamp: a tungsten filament, a quartz, four copper and three steel nuggets and 10 mB of bromine under a mixer make four light bulbs."
+      "text": "Ten millibuckets of it in a quartz envelope make a halogen lamp: a tungsten filament, a quartz, a molybdenum ingot, three steel nuggets and 10 mB of bromine under a mixer make four light bulbs."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The quartz is sealed round molybdenum foil, the one metal whose expansion lets the seal hold, and the filament stands on molybdenum supports (Ullmann's, Molybdenum)."
     },
     {
       "type": "patchouli:spotlight",

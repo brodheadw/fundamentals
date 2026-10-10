@@ -6,12 +6,34 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Four nickel, a chromium, two cobalt and a rhenium, superheated under 100 mB of argon, make four ingots of the nickel superalloy that turbine blades are cast from, the chromium what keeps it from scaling in the hot gas; The Factory Must Grow's turbine blade now takes its plates.",
-      "title": "Superalloy and molybdenum steel"
+      "text": "Six nickel, a cobalt, a chromium and a tungsten ingot, five aluminium and two rhenium nuggets, superheated under 100 mB of argon, make seven ingots of a single-crystal nickel superalloy after CMSX-4, which is Ni-6.5Cr-9Co-6W-6.5Ta-5.6Al-3Re-1Ti (Reed, The Superalloys, 2006): 61 per cent nickel, ten each of cobalt, chromium and tungsten, 5.7 aluminium and 2.3 rhenium, the tungsten standing in for the tantalum too, which is not in the pack.",
+      "title": "Superalloy"
     },
     {
       "type": "patchouli:text",
-      "text": "Molybdenum goes into steel as the roasted trioxide, under one per cent of it: a molybdenum trioxide and eight steel, superheated, make eight molybdenum steel, and its plates now make the heavy machinery casing."
+      "text": "The aluminium is what makes it a superalloy. It precipitates as ordered Ni3Al, gamma-prime, which keeps the alloy strong almost to its melting point, and with the chromium it grows the alumina scale that keeps it from burning in the hot gas; tungsten and rhenium stiffen it against creep."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The Factory Must Grow's turbine blade takes its plates, coated as a real blade is: a yttria-stabilised zirconia thermal barrier over an MCrAlY bond coat.",
+      "title": "The blade"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Four nickel, two cobalt, a chromium, an aluminium and a yttrium nugget, superheated under 100 mB of argon, atomise to eight MCrAlY powder, NiCoCrAlY as Amdry 365 is (Ni-23Co-17Cr-12.5Al-0.5Y); its yttrium pins the alumina scale to the blade."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Molybdenum goes into steel as the roasted trioxide, not as metal.",
+      "title": "Molybdenum steel"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A molybdenum trioxide and six blocks of steel, superheated, make 54 molybdenum steel, about one per cent molybdenum, the share in the creep-resistant chromium-molybdenum boiler and pressure-vessel steels (ASTM A387 grade 22 is 0.9 to 1.1 per cent, 4140 0.15 to 0.25), their chromium left out."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Its plates make the heavy machinery casing."
     }
   ]
 }

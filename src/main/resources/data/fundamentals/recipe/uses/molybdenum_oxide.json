@@ -15,7 +15,7 @@
     },
     {
       "id": "fundamentals:rhenium_flue_dust",
-      "chance": 0.5
+      "chance": 0.1
     }
   ],
   "heat_requirement": "heated"

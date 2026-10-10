@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:mcraly_powder",
     "fundamentals:phosphor",
     "fundamentals:raw_xenotime",
     "fundamentals:xenotime_dust",
@@ -8,6 +9,7 @@
     "fundamentals:yttria_stabilised_zirconia",
     "fundamentals:yttrium_fluoride",
     "fundamentals:yttrium_ingot",
+    "fundamentals:yttrium_nugget",
     "fundamentals:yttrium_oxalate",
     "fundamentals:yttrium_oxide"
   ]

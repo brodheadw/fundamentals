@@ -48,6 +48,16 @@ What's agreed but not built, in the order it's likely to go. The working plan be
 - **Tin loose ends.** The niobium, tantalum and tungsten a hard-rock tin concentrate carries are not recovered (wolframite is mined
   on its own), the hardhead liquation leaves goes to slag rather than back to the smelter, and electrolytic tin refining is not
   modelled. Placer cassiterite still wants a pickaxe like the vein ore.
+- **Tungsten, molybdenum and rhenium loose ends.** The wolframite digest leaves no iron-manganese hydroxide residue and the APT step no
+  spent sodium liquor; scheelite has only the acid route, not the soda-ash autoclave most of it now goes through. Tungsten carbide is not
+  cobalt-cemented. The superalloy's tantalum (6.5 per cent of CMSX-4) is folded into its tungsten, as tantalum is not in the pack.
+  Molybdenum steel carries no chromium and takes the trioxide where many melt shops add ferromolybdenum. Rhenium comes a few times
+  richer than the best real molybdenite, and none is recycled from superalloy scrap or spent catalyst as a quarter of it really is.
+  Tungsten plate was dropped for want of an honest sink: heavy-alloy weights, X-ray targets and furnace heat shields have no machine here.
+- **Lithium loose ends.** The salt-flat brines (about a third of supply: pond evaporation, then soda ash) are not modelled, as the pack
+  has no such brine and seawater's 0.2 ppm is no ore. The acid roast's leached aluminosilicate and the sodium sulfate the carbonate step
+  leaves are not given, the molten bath is lithium chloride without its potassium chloride, and lithium carbonate's own uses (cathodes,
+  glass and ceramics) have no sink.
 - **Platinum group loose ends.** The reef's minerals join the matte at the leach rather than being floated and smelted with
   it, and the converter matte leach and nickel electrowinning each fold two refinery steps into one. The gold, silver,
   selenium and tellurium a real concentrate carries, sperrylite's arsenic, and copper's own anode slimes (the other

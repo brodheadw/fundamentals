@@ -36,7 +36,9 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "beryl_frit": "Beryl Frit", "beryllium_hydroxide": "Beryllium Hydroxide", "ammonium_fluoroberyllate": "Ammonium Fluoroberyllate",
          "beryllium_pebbles": "Beryllium Pebbles", "dimensionally_stable_anode": "Dimensionally Stable Anode", "red_mud": "Red Mud",
          "aluminium_hydroxide": "Aluminium Hydroxide", "alumina": "Alumina", "cryolite": "Cryolite",
-         "nickel_oxide": "Nickel Oxide", "nickel_pellets": "Nickel Pellets"}
+         "nickel_oxide": "Nickel Oxide", "nickel_pellets": "Nickel Pellets", "tungstic_acid": "Tungstic Acid",
+         "ammonium_paratungstate": "Ammonium Paratungstate", "ammonium_perrhenate": "Ammonium Perrhenate", "lithium_carbonate": "Lithium Carbonate",
+         "mcraly_powder": "MCrAlY Powder"}
 # The magnet alloys and the forms each polarizes from, in the order of magnet.MagnetGrade; the magnet is <alloy>_magnet.
 MAGNET_ALLOYS = {"neodymium_iron_boron": ("ingot", "plate"), "dysprosium_neodymium_iron_boron": ("ingot", "plate"),
                  "samarium_cobalt": ("ingot", "plate"), "alnico": ("ingot",)}
@@ -263,12 +265,18 @@ def cobalt():
 
 def copper_molybdenum_rhenium():
     """The porphyry chain. Chalcopyrite is roasted of part of its sulfur and smelted to matte. Molybdenite
-    roasts to molybdenum trioxide, and the rhenium in it leaves up the flue: the roaster's dust is where every gram of
-    rhenium on earth comes from. Both oxides are reduced under hydrogen, as the industry does, in a heated vat."""
+    roasts to molybdenum trioxide, and the rhenium in it leaves up the flue as the heptoxide: the roaster's scrubbers are where
+    all mined rhenium comes from, though about a quarter of supply is now recycled superalloy and catalyst (USGS, Mineral
+    Commodity Summaries 2025). The scrub liquor's perrhenate is taken up on an ion exchanger, stripped with ammonia and
+    crystallised as ammonium perrhenate, which hydrogen reduces to the metal powder. Real molybdenite concentrate carries
+    100 to 3,000 ppm rhenium; here a flue dust one roast in ten, two nuggets to the dust, is a nugget per ten molybdenite,
+    a few times the richest real concentrate, so that a superalloy melt costs a vein and not a mountain. The trioxide is reduced
+    under hydrogen, as the industry does, in a heated vat."""
     roast("chalcopyrite", "roasted_chalcopyrite")
-    mixing("molybdenum_oxide", item("raw_molybdenite", 2), [result("molybdenum_oxide", 2), {"id": "fundamentals:rhenium_flue_dust", "chance": 0.5}], "heated")
+    mixing("molybdenum_oxide", item("raw_molybdenite", 2), [result("molybdenum_oxide", 2), {"id": "fundamentals:rhenium_flue_dust", "chance": 0.1}], "heated")
     vat("molybdenum_ingot", item("molybdenum_oxide", 2), "tfmg:hydrogen", 500, [result("molybdenum_ingot", 2)])
-    vat("rhenium_ingot", item("rhenium_flue_dust", 2), "tfmg:hydrogen", 250, [result("rhenium_ingot")])
+    mixing("ammonium_perrhenate", item("rhenium_flue_dust") + [fluid("minecraft:water", 250), fluid("ammonia", 50)], [result("ammonium_perrhenate")])
+    vat("rhenium_nugget", item("ammonium_perrhenate"), "tfmg:hydrogen", 250, [result("rhenium_nugget", 2)])
 
 
 def copper_sulfides():
@@ -287,14 +295,22 @@ def copper_sulfides():
 
 
 def lithium():
-    """Spodumene calcined white in the blast furnace opens to hot hydrochloric acid, which takes its lithium as the
-    chloride; boiled dry, that is the salt lithium is won from. Lithium cannot be won from water, so the dry chloride
-    is electrolysed molten, at about 450 C, and gives off its chlorine at the anode."""
+    """Spodumene is calcined at about 1,050 C from alpha to the open beta form, roasted with sulfuric acid at about 250 C and
+    leached in water to lithium sulfate; soda ash throws down lithium carbonate from the hot liquor, the sodium sulfate staying in
+    solution (Ullmann's, Lithium and Lithium Compounds; the Talison-Tianqi flowsheet). Hydrochloric acid turns the carbonate to
+    the chloride, giving off carbon dioxide; boiled dry, that is the salt lithium is won from. Lithium cannot be won from water,
+    so the dry chloride is electrolysed molten, with potassium chloride in the real bath, at about 450 C, and gives off its
+    chlorine at the anode."""
     write(LITHIUM / "calcined_spodumene.json", {"type": "minecraft:blasting", "category": "misc", "ingredient": {"item": "fundamentals:raw_spodumene"},
                                                 "result": {"id": "fundamentals:calcined_spodumene"}, "experience": 0.2, "cookingtime": 100})
-    write(LITHIUM / "lithium_chloride.json", {"type": "create:mixing", "heat_requirement": "heated", "ingredients": item("calcined_spodumene", 2)
-                                              + [{"type": "neoforge:single", "amount": 500, "fluid": "fundamentals:hydrochloric_acid"}],
-                                              "results": [result("lithium_chloride", 2)]})
+    write(LITHIUM / "lithium_sulfate_liquor.json", {"type": "create:mixing", "heat_requirement": "heated", "ingredients": item("calcined_spodumene", 2)
+                                                    + [fluid("tfmg:sulfuric_acid", 250), fluid("minecraft:water", 500)],
+                                                    "results": [out_fluid("lithium_sulfate_liquor", 500)]})
+    write(LITHIUM / "lithium_carbonate.json", {"type": "create:mixing", "heat_requirement": "heated", "ingredients": item("soda_ash", 2)
+                                               + [fluid("lithium_sulfate_liquor", 500)], "results": [result("lithium_carbonate", 2)]})
+    write(LITHIUM / "lithium_chloride.json", {"type": "create:mixing", "heat_requirement": "heated", "ingredients": item("lithium_carbonate", 2)
+                                              + [fluid("hydrochloric_acid", 500)],
+                                              "results": [result("lithium_chloride", 2), out_fluid("tfmg:carbon_dioxide", 250)]})
     write(LITHIUM / "lithium_ingot.json", {"type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:steel_vat", "tfmg:firebrick_lined_vat"],
                                            "heat_requirement": "heated", "machines": ["tfmg:electrode", "tfmg:electrode"], "min_size": 1, "processing_time": 100,
                                            "ingredients": item("lithium_chloride", 2),
@@ -449,15 +465,31 @@ def loot():
         "replace": False, "entries": [f"fundamentals:{path.stem}" for path in sorted(modifiers.glob("*.json"))]})
 
 
+def superalloy(extra=(), count=7):
+    """A second-generation single-crystal nickel superalloy after CMSX-4, Ni-6.5Cr-9Co-6W-6.5Ta-5.6Al-3Re-1Ti (Reed, The Superalloys,
+    2006): six nickel, a cobalt, a chromium and a tungsten ingot, five aluminium and two rhenium nuggets are 61 per cent nickel, 10 each
+    of cobalt, chromium and tungsten, 5.7 aluminium and 2.3 rhenium, the tungsten standing in for the tantalum too, which is not in the pack."""
+    return (item("tfmg:nickel_ingot", 6) + item("cobalt_ingot") + item("chromium_ingot") + item("tungsten_ingot") + tag("c:nuggets/aluminum", 5)
+            + item("rhenium_nugget", 2) + list(extra) + argon()), [result("superalloy_ingot", count)]
+
+
 def alloys():
-    """Where cobalt, chromium, molybdenum and rhenium go: the nickel superalloy of turbine blades, melted under argon as the
-    rare earth magnets are, its chromium what keeps it from scaling in the hot gas, and molybdenum steel for the heavy casings. A chromium-
-    molybdenum steel is under one per cent molybdenum, and the molybdenum goes into the melt as the roasted trioxide, not as metal.
-    The blade is sprayed with yttria-stabilised zirconia, the ceramic thermal barrier that lets it run in gas hotter than it melts."""
-    mixing("superalloy", item("tfmg:nickel_ingot", 4) + item("chromium_ingot") + item("cobalt_ingot", 2) + item("rhenium_ingot") + argon(), [result("superalloy_ingot", 4)], "superheated")
-    mixing("molybdenum_steel", item("molybdenum_oxide") + tag("c:ingots/steel", 8), [result("molybdenum_steel_ingot", 8)], "superheated")
-    shaped(TFMG / "turbine_blade.json", ["IYI", "ISI", "III"],
-           {"S": {"item": "create:shaft"}, "I": {"tag": "c:plates/superalloy"}, "Y": {"item": "fundamentals:yttria_stabilised_zirconia"}},
+    """Where cobalt, chromium, molybdenum, tungsten and rhenium go: the nickel superalloy of turbine blades, melted under argon as the
+    rare earth magnets are. Its aluminium is what makes it a superalloy: it precipitates as the ordered Ni3Al gamma-prime that holds
+    the strength to near the melting point, and with the chromium it grows the alumina scale that keeps it from burning in the hot gas;
+    tungsten and rhenium stiffen the matrix against creep. The blade is sprayed with an MCrAlY bond coat, NiCoCrAlY gas-atomised under
+    argon (Amdry 365 is Ni-23Co-17Cr-12.5Al-0.5Y: four nickel, two cobalt, a chromium, an aluminium and a yttrium nugget is
+    49-25-12-12-1.4), whose yttrium pins the alumina scale to it, and over that the yttria-stabilised zirconia, the ceramic thermal
+    barrier that lets it run in gas hotter than it melts. Molybdenum goes into steel as the roasted trioxide, not as metal: a trioxide
+    in six blocks of steel is about one per cent, the molybdenum of the creep-resistant chromium-molybdenum boiler and pressure-vessel
+    steels (ASTM A387 grade 22 is 0.9 to 1.1), their chromium left out."""
+    mixing("superalloy", *superalloy(), "superheated")
+    mixing("molybdenum_steel", item("molybdenum_oxide") + tag("c:storage_blocks/steel", 6), [result("molybdenum_steel_ingot", 54)], "superheated")
+    mixing("mcraly_powder", item("tfmg:nickel_ingot", 4) + item("cobalt_ingot", 2) + item("chromium_ingot") + tag("c:ingots/aluminum") + item("yttrium_nugget")
+           + argon(), [result("mcraly_powder", 8)], "superheated")
+    shaped(TFMG / "turbine_blade.json", ["IYI", "ISI", "IBI"],
+           {"S": {"item": "create:shaft"}, "I": {"tag": "c:plates/superalloy"}, "Y": {"item": "fundamentals:yttria_stabilised_zirconia"},
+            "B": {"item": "fundamentals:mcraly_powder"}},
            {"count": 1, "id": "tfmg:turbine_blade", "components": {"tfmg:fuel_tags": {"kerosene": "c:kerosene"}, "tfmg:fuels": {"kerosene": "Kerosene"}}})
     write(TFMG / "item_application/heavy_machinery_casing.json", {"type": "create:item_application",
           "ingredients": [{"item": "tfmg:steel_casing"}, {"tag": "c:plates/molybdenum_steel"}], "results": [{"id": "tfmg:heavy_machinery_casing"}]})
@@ -474,23 +506,32 @@ def thermometry():
 
 
 def tungsten():
-    """Scheelite and wolframite decompose in hot hydrochloric acid to tungstic acid, which the heat takes to the trioxide; hydrogen
-    reduces the trioxide to the metal. The metal is drawn to the filament every light bulb burns (twice as long in a halogen
-    lamp), and carburised to the carbide
-    every drill bites with."""
-    for ore in ("scheelite", "wolframite"):
-        mixing(f"tungsten_oxide_from_{ore}", item(f"raw_{ore}", 2) + [{"type": "neoforge:single", "amount": 500, "fluid": "fundamentals:hydrochloric_acid"}],
-               [result("tungsten_oxide", 2)], "heated")
+    """Wolframite does not open to acid; it is digested in caustic soda under pressure at 150 to 200 C, or fused with soda ash and
+    leached in water, to sodium tungstate, the iron and manganese left as hydroxides. Scheelite opens to hot hydrochloric acid, which
+    throws down yellow tungstic acid. Either way the tungsten is taken up as ammonium tungstate, the liquor by an amine extractant or
+    ion exchanger stripped with ammonia (folded into one step here), the acid by dissolving it in ammonia, and evaporated to
+    crystals of ammonium paratungstate, APT, the form tungsten is traded in. Calcined, APT gives off its ammonia and water and leaves
+    the yellow trioxide, and hydrogen reduces that to the metal powder (Lassner and Schubert, Tungsten, 1999). The metal is drawn
+    to the filament every light bulb burns, and carburised to the carbide every drill bites with. A halogen lamp seals its quartz
+    envelope round molybdenum foil, the one metal whose expansion lets the seal hold, and stands the filament on molybdenum
+    supports (Ullmann's, Molybdenum); a whiff of bromine carries the tungsten that boils off the filament back onto it, so it runs
+    hotter and lasts twice as long. Bromine's one use here; its big real ones, flame retardants, are not modelled."""
+    pgm_vat("sodium_tungstate_liquor", item("raw_wolframite", 2) + [fluid("caustic_soda", 500)], [out_fluid("sodium_tungstate_liquor", 500)], folder=USES)
+    mixing("sodium_tungstate_liquor_from_soda_ash", item("raw_wolframite", 2) + item("soda_ash", 2) + [fluid("minecraft:water", 500)],
+           [out_fluid("sodium_tungstate_liquor", 500)], "superheated")
+    mixing("tungstic_acid", item("raw_scheelite", 2) + [fluid("hydrochloric_acid", 500)], [result("tungstic_acid", 2)], "heated")
+    mixing("ammonium_paratungstate", [fluid("sodium_tungstate_liquor", 500), fluid("ammonia", 250)], [result("ammonium_paratungstate", 2)], "heated")
+    mixing("ammonium_paratungstate_from_tungstic_acid", item("tungstic_acid", 2) + [fluid("ammonia", 250)], [result("ammonium_paratungstate", 2)], "heated")
+    write(USES / "tungsten_oxide.json", {"type": "minecraft:blasting", "category": "misc", "ingredient": {"item": "fundamentals:ammonium_paratungstate"},
+                                         "result": {"id": "fundamentals:tungsten_oxide"}, "experience": 0.2, "cookingtime": 100})
     vat("tungsten_ingot", item("tungsten_oxide", 2), "tfmg:hydrogen", 500, [result("tungsten_ingot", 2)])
     mixing("tungsten_carbide", item("tungsten_ingot") + tag("minecraft:coals", 2), [result("tungsten_carbide", 2)], "superheated")
     write(USES / "tungsten_filament.json", {"type": "minecraft:crafting_shapeless", "category": "misc", "ingredients": item("tungsten_ingot"), "result": result("tungsten_filament", 4)})
     shaped(TFMG / "crafting/materials/light_bulb.json", ["CWC", "CGC", "NNN"],
            {"C": {"tag": "c:nuggets/copper"}, "G": {"item": "create:framed_glass"}, "N": {"tag": "c:nuggets/steel"}, "W": {"item": "fundamentals:tungsten_filament"}},
            {"count": 2, "id": "tfmg:light_bulb"})
-    # The halogen lamp: a whiff of bromine in a quartz envelope carries the tungsten that boils off the filament back onto it, so
-    # the filament runs hotter and lasts twice as long. Bromine's one use here; its big real ones, flame retardants, are not modelled.
-    mixing("light_bulb_halogen", item("tungsten_filament") + tag("c:gems/quartz") + tag("c:nuggets/copper", 4) + tag("c:nuggets/steel", 3)
-           + [{"type": "neoforge:single", "amount": 10, "fluid": "fundamentals:bromine"}], [result("tfmg:light_bulb", 4)])
+    mixing("light_bulb_halogen", item("tungsten_filament") + tag("c:gems/quartz") + item("molybdenum_ingot") + tag("c:nuggets/steel", 3)
+           + [fluid("bromine", 10)], [result("tfmg:light_bulb", 4)])
     shaped(CREATE / "crafting/kinetics/mechanical_drill.json", [" A ", "AIA", " C "],
            {"A": {"item": "create:andesite_alloy"}, "C": {"item": "create:andesite_casing"}, "I": {"item": "fundamentals:tungsten_carbide"}},
            {"count": 1, "id": "create:mechanical_drill"})
@@ -611,8 +652,7 @@ def zirconium():
     shaped(USES / "steel_chemical_vat_from_zirconium.json", ["PPP", "NTN", "PPP"],
            {"N": {"tag": "c:plates/zirconium"}, "P": {"item": "tfmg:heavy_plate"}, "T": {"item": "tfmg:steel_fluid_tank"}},
            {"count": 4, "id": "tfmg:steel_chemical_vat"})
-    mixing("superalloy_with_hafnium", item("tfmg:nickel_ingot", 4) + item("chromium_ingot") + item("cobalt_ingot", 2) + item("rhenium_ingot")
-           + item("hafnium_nugget") + argon(), [result("superalloy_ingot", 6)], "superheated")
+    mixing("superalloy_with_hafnium", *superalloy(item("hafnium_nugget"), 9), "superheated")
 
 
 def beryllium():
@@ -744,15 +784,14 @@ def platinum_sinks():
     Ruthenium lets a single-crystal superalloy carry more of everything else. A spark plug is an alumina insulator round a nickel-alloy
     centre electrode, and an iridium tip outlasts four plain plugs and a platinum one three (NGK, Denso); osmium,
     pasted and sintered, was the filament of the first metal-filament lamp."""
-    mixing("reforming_catalyst", item("platinum_nugget", 2) + item("rhenium_ingot") + item("tfmg:bauxite_powder", 4), [result("reforming_catalyst", 4)], "heated")
+    mixing("reforming_catalyst", item("platinum_nugget", 2) + item("rhenium_nugget", 2) + item("tfmg:bauxite_powder", 4), [result("reforming_catalyst", 4)], "heated")
     pgm_vat("reforming", item("reforming_catalyst") + [fluid("tfmg:naphtha", 500)],
             [out_fluid("tfmg:gasoline", 400), out_fluid("tfmg:hydrogen", 100), {"id": "fundamentals:reforming_catalyst", "chance": 0.95}], folder=USES)
     shaped(USES / "platinum_rhodium_gauze.json", ["PPP", "PRP", "PPP"], {"P": {"tag": "c:nuggets/platinum"}, "R": {"tag": "c:nuggets/rhodium"}},
            {"count": 1, "id": "fundamentals:platinum_rhodium_gauze"})
     mixing("nitric_acid_from_ammonia", [fluid("ammonia", 250), fluid("tfmg:air", 1000)] + item("platinum_rhodium_gauze"),
            [out_fluid("nitric_acid", 250), {"id": "fundamentals:platinum_rhodium_gauze", "chance": 0.98}], "heated")
-    mixing("superalloy_with_ruthenium", item("tfmg:nickel_ingot", 4) + item("chromium_ingot") + item("cobalt_ingot", 2) + item("rhenium_ingot")
-           + item("ruthenium_nugget") + argon(), [result("superalloy_ingot", 6)], "superheated")
+    mixing("superalloy_with_ruthenium", *superalloy(item("ruthenium_nugget"), 9), "superheated")
     for tip, count in (("iridium", 4), ("platinum", 3)):
         shaped(USES / f"{tip}_spark_plug.json", ["T", "A", "N"], {"T": {"tag": f"c:nuggets/{tip}"}, "A": {"item": "fundamentals:alumina"}, "N": {"tag": "c:nuggets/nickel"}},
                {"count": count, "id": "tfmg:spark_plug"})
