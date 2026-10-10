@@ -6,14 +6,17 @@
     },
     {
       "type": "neoforge:single",
-      "amount": 500,
+      "amount": 250,
       "fluid": "fundamentals:hydrochloric_acid"
     }
   ],
   "results": [
     {
       "id": "fundamentals:crude_rare_earth_liquor",
-      "amount": 500
+      "amount": 250
+    },
+    {
+      "id": "fundamentals:cerium_concentrate"
     }
   ],
   "heat_requirement": "heated"

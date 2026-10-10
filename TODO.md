@@ -7,6 +7,10 @@ What's agreed but not built, in the order it's likely to go. The working plan be
 - **Scrub section.** Real batteries have extraction, scrubbing and stripping sections, with a dilute-acid scrub feed in the
   middle; we fold the scrub into the stage count. Modelling it means a third feed port per battery and a scrub acid.
   Deferred by Will on 2026-10-08.
+- **Cracking loose ends.** Bastnäsite's liquor is the shared mixed liquor, so it parts in monazite's proportions though its
+  cerium has gone to the cerium concentrate; the leach gives half the liquor instead. The carbonate precipitation's sodium
+  sulfate and the carbon dioxide the carbonate gives off in acid are not modelled, nor ammonium sulfate as the clay's
+  lixiviant. The showcase's ore line still leaches the sulfate straight in hydrochloric acid and wants a carbonate basin.
 - **Thorium handling.** Carrying thorium residue should slowly hurt (a radiation effect), and a lead-lined cask should
   carry it safely. Deferred the same day.
 - **Oxidation loose ends.** Vanilla's iron block and the Factory's steel block don't rust (Create's weathered iron block
@@ -113,4 +117,4 @@ What's agreed but not built, in the order it's likely to go. The working plan be
 - **Full-pack dev client.** Loading all of the pack's jars into the magic dev client crashed in the Aether's renderer
   registration on a mixin error (2026-10-08). The clean route is the real Modrinth profile with Fundamentals and TFMG
   added, not a dev client pretending to be the pack.
-- **Modrinth gallery.** Still shows the old three-battery picture; the fourteen-battery tree deserves a shot.
+- **Modrinth gallery.** Still shows the old three-battery picture; the thirteen-battery tree deserves a shot.

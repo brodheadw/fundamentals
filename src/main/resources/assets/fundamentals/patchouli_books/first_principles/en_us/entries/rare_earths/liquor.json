@@ -7,20 +7,26 @@
     {
       "type": "patchouli:spotlight",
       "item": "fundamentals:light_rare_earth_sulfate",
-      "text": "Monazite, xenotime and the rest are phosphates hydrochloric acid barely touches, so they are cracked first: a concentrate baked with 250 mB of sulfuric acid in a heated basin gives a rare earth sulfate and frees 125 mB of phosphoric acid.",
+      "text": "Monazite, xenotime and the rest are phosphates hydrochloric acid barely touches, so they are cracked first: a concentrate roasted with 250 mB of sulfuric acid in a heated basin gives a rare earth sulfate and frees 125 mB of phosphoric acid. It is the hot roast of Baotou, 500 to 800 °C, and that hot the thorium turns to a pyrophosphate no water dissolves.",
       "title": "Cracking"
     },
     {
       "type": "patchouli:spotlight",
-      "item": "fundamentals:roasted_bastnasite",
-      "text": "Bastnäsite is a carbonate and needs no acid bake: roast its concentrate on a campfire or in a smoker, and the roasted ore dissolves in 500 mB of hot hydrochloric acid straight to 500 mB of crude liquor, leaving nothing behind.",
-      "title": "Roasting"
+      "item": "fundamentals:monazite_residue_dust",
+      "text": "The sulfate leaches in cold water, since rare earth sulfates dissolve worse hot, and the thorium stays behind as a residue; xenotime and euxenite leave one half the time. Bake it cooler, at 200 to 300 °C as the old monazite plants did, and the thorium dissolves with the rare earths.",
+      "title": "Leaching"
     },
     {
       "type": "patchouli:spotlight",
-      "item": "fundamentals:monazite_residue_dust",
-      "text": "A sulfate leaches in 500 mB of hydrochloric acid under a mixer, cold, since rare earth sulfates dissolve worse hot, to 500 mB of crude liquor. Monazite's thorium stays behind as a residue; xenotime and euxenite leave one half the time.",
-      "title": "Leaching"
+      "item": "fundamentals:light_rare_earth_carbonate",
+      "text": "A sulfate does not turn to a chloride in hydrochloric acid, so the plant goes by way of the carbonate: a sulfate, a soda ash and 500 mB of water under a mixer give a rare earth carbonate and the residue. The carbonate fizzes away its carbon dioxide in 500 mB of hydrochloric acid to 500 mB of crude liquor.",
+      "title": "Carbonate"
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:cerium_concentrate",
+      "text": "Bastnäsite is a carbonate and needs no acid bake: roast its concentrate on a campfire or in a smoker. Roasting in air takes its cerium to Ce(IV), which hydrochloric acid will not touch, so the roasted ore in 250 mB of hot acid gives 250 mB of crude liquor and leaves a cerium concentrate, which Mountain Pass sold as it was. A blast furnace calcines it to cerium oxide.",
+      "title": "Roasting"
     },
     {
       "type": "patchouli:spotlight",
@@ -33,6 +39,18 @@
       "item": "fundamentals:raw_ion_adsorption_clay",
       "text": "The clay needs no acid and no heat: four clay, a salt and 500 mB of water in a basin under a mixer leach straight to 250 mB of heavy liquor, and the clay comes back as clay. That is the whole reason Chinese clays supply the world's heavy rare earths.",
       "title": "Leaching"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Salt is the old lixiviant, sodium chloride in heaps in the 1970s. Ammonium sulfate replaced it, and is now pumped into the hillside through boreholes and the liquor caught below: in-situ leaching. It is cheap and it is ruinous."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The ammonium soaks into the groundwater and the streams, the soaked slopes slide, and Ganzhou in Jiangxi has spent billions of yuan cleaning up after it. Sources: Chi and Tian, Weathered Crust Elution-Deposited Rare Earth Ores (2008); Yang and others, Environmental Development (2013)."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The cracking, the carbonate and bastnäsite's ceria are as Gupta and Krishnamurthy give them in Extractive Metallurgy of Rare Earths (2005), and Habashi in his Handbook of Extractive Metallurgy (1997)."
     }
   ]
 }

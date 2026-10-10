@@ -14,7 +14,7 @@ import shutil
 from pathlib import Path
 
 from build_ore_data import ASSETS, BIOMES, DATA, DEPOSITS, PLACERS, write
-from build_separation_data import MOMENTS
+from build_separation_data import MOMENTS, ZINC_REDUCTION
 from build_oxidation_data import METALS as AGEING
 
 BOOK = "first_principles"
@@ -23,6 +23,7 @@ BOOK_ASSETS = ASSETS / f"patchouli_books/{BOOK}/en_us"
 RECIPES = DATA / "recipe"
 
 PAGE_CHARS = 330
+NUMBERS = dict(enumerate(("zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen").split()))
 
 WHERE = {
     "anywhere": "anywhere in the overworld", "porphyry": "under mountains and hills", "arid_oxide": "in badlands, savanna and desert",
@@ -111,7 +112,13 @@ def roads(tree):
     """Every single-element liquor and the batteries it takes to reach it from the mixed liquor."""
     roads = {}
 
+    feed, _, *reduced = ZINC_REDUCTION
+
     def walk(liquor, path):
+        if liquor == f"fundamentals:{feed}":
+            for product in reduced:
+                roads[f"fundamentals:{product}"] = path + [(0, "zinc")]
+            return
         if liquor not in tree:
             roads[liquor] = path
             return
@@ -200,17 +207,23 @@ def rare_earths():
         spotlight("fundamentals:bastnasite_dust", "Bastnäsite will not wash: it is floated, as in every carbonatite mill. Two bastnäsite dust beaten with 250 mB of water and 100 mB of naphthenic acid, the fatty-acid collector, "
                   "in a basin under a mixer, and the rare earth carbonate comes off the top as bastnäsite concentrate, one and sometimes two.", "Flotation")], 0)
     entry("rare_earths", "liquor", "Liquor", "fundamentals:salt", [
-        spotlight("fundamentals:light_rare_earth_sulfate", "Monazite, xenotime and the rest are phosphates hydrochloric acid barely touches, so they are cracked first: a concentrate baked with 250 mB of sulfuric acid in a heated basin "
-                  "gives a rare earth sulfate and frees 125 mB of phosphoric acid.", "Cracking"),
-        spotlight("fundamentals:roasted_bastnasite", "Bastnäsite is a carbonate and needs no acid bake: roast its concentrate on a campfire or in a smoker, and the roasted ore dissolves in 500 mB of hot hydrochloric acid "
-                  "straight to 500 mB of crude liquor, leaving nothing behind.", "Roasting"),
-        spotlight("fundamentals:monazite_residue_dust", "A sulfate leaches in 500 mB of hydrochloric acid under a mixer, cold, since rare earth sulfates dissolve worse hot, to 500 mB of crude liquor. "
-                  "Monazite's thorium stays behind as a residue; xenotime and euxenite leave one half the time.", "Leaching"),
+        spotlight("fundamentals:light_rare_earth_sulfate", "Monazite, xenotime and the rest are phosphates hydrochloric acid barely touches, so they are cracked first: a concentrate roasted with 250 mB of sulfuric acid in a heated basin "
+                  "gives a rare earth sulfate and frees 125 mB of phosphoric acid. It is the hot roast of Baotou, 500 to 800 °C, and that hot the thorium turns to a pyrophosphate no water dissolves.", "Cracking"),
+        spotlight("fundamentals:monazite_residue_dust", "The sulfate leaches in cold water, since rare earth sulfates dissolve worse hot, and the thorium stays behind as a residue; xenotime and euxenite leave one half the time. "
+                  "Bake it cooler, at 200 to 300 °C as the old monazite plants did, and the thorium dissolves with the rare earths.", "Leaching"),
+        spotlight("fundamentals:light_rare_earth_carbonate", "A sulfate does not turn to a chloride in hydrochloric acid, so the plant goes by way of the carbonate: a sulfate, a soda ash and 500 mB of water under a mixer "
+                  "give a rare earth carbonate and the residue. The carbonate fizzes away its carbon dioxide in 500 mB of hydrochloric acid to 500 mB of crude liquor.", "Carbonate"),
+        spotlight("fundamentals:cerium_concentrate", "Bastnäsite is a carbonate and needs no acid bake: roast its concentrate on a campfire or in a smoker. Roasting in air takes its cerium to Ce(IV), which hydrochloric acid will not touch, "
+                  "so the roasted ore in 250 mB of hot acid gives 250 mB of crude liquor and leaves a cerium concentrate, which Mountain Pass sold as it was. A blast furnace calcines it to cerium oxide.", "Roasting"),
         spotlight("fundamentals:clarifier_sludge", "Crude liquor still carries iron, aluminium and fines, and a battery fed it will run three cuts and then foul: crud at the interface, the organic turned brown and useless. "
                   "So clarify first: 1,000 mB of crude liquor and two limesand under a mixer drop the impurities as a sludge and leave 1,000 mB of liquor a battery wants. "
                   "A fouled organic is not lost: drained and scrubbed with one limesand, 1,000 mB gives back 900.", "Clarifying"),
         spotlight("fundamentals:raw_ion_adsorption_clay", "The clay needs no acid and no heat: four clay, a salt and 500 mB of water in a basin under a mixer leach straight to 250 mB of heavy liquor, and the clay comes back as clay. "
-                  "That is the whole reason Chinese clays supply the world's heavy rare earths.", "Leaching")], 1)
+                  "That is the whole reason Chinese clays supply the world's heavy rare earths.", "Leaching")] + pages_of(
+        "Salt is the old lixiviant, sodium chloride in heaps in the 1970s. Ammonium sulfate replaced it, and is now pumped into the hillside through boreholes and the liquor caught below: in-situ leaching. "
+        "It is cheap and it is ruinous. The ammonium soaks into the groundwater and the streams, the soaked slopes slide, and Ganzhou in Jiangxi has spent billions of yuan cleaning up after it. "
+        "Sources: Chi and Tian, Weathered Crust Elution-Deposited Rare Earth Ores (2008); Yang and others, Environmental Development (2013). "
+        "The cracking, the carbonate and bastnäsite's ceria are as Gupta and Krishnamurthy give them in Extractive Metallurgy of Rare Earths (2005), and Habashi in his Handbook of Extractive Metallurgy (1997)."), 1)
     entry("rare_earths", "mixer_settler", "Solvent extraction", "fundamentals:mixer_settler", pages_of(
         "Chlorides of neighbouring rare earths are almost identical, so no one step parts them. Instead the liquor is shaken with an "
         "organic extractant (P507, P204 or naphthenic acid, cut with kerosene and saponified with lime as it is made up, which sets the pH the cut works at) that prefers the heavier ions "
@@ -233,12 +246,23 @@ def rare_earths():
         cut_pages += pages_of(f"{pretty(liquor).capitalize()} parts into {pretty(cut['light'])} (raffinate, head end) and {pretty(cut['heavy'])} "
                               f"(strip, tail end) in a battery of {cut['stages']} stages charged with {pretty(cut['organic'])}, stripped by {pretty(cut['strip'])}. "
                               f"Each batch comes out {round(cut.get('light_fraction', 0.5) * 100)} per cent raffinate.")
-    entry("rare_earths", "cuts", "The fourteen cuts", "fundamentals:neodymium_oxalate", pages_of(
-        f"Fourteen cuts take the mixed liquor down to single elements. A battery too short for its cut does nothing; the goggles say how many stages it wants. "
+    count = NUMBERS[len(tree)]
+    feed, salt, europium, gadolinium = ZINC_REDUCTION
+    zinc = json.loads((RECIPES / f"mixing/{salt}.json").read_text())
+    batch = next(i["amount"] for i in zinc["ingredients"] if i.get("fluid") == f"fundamentals:{feed}")
+    acid = next(i["amount"] for i in zinc["ingredients"] if i.get("fluid") == "tfmg:sulfuric_acid")
+    left = next(r["amount"] for r in zinc["results"] if r["id"] == f"fundamentals:{gadolinium}")
+    chance = next(r["chance"] for r in zinc["results"] if r["id"] == f"fundamentals:{salt}")
+    entry("rare_earths", "cuts", f"The {count} cuts", "fundamentals:neodymium_oxalate", pages_of(
+        f"{count.capitalize()} cuts take the mixed liquor down to single elements. A battery too short for its cut does nothing; the goggles say how many stages it wants. "
         "The number is set by how alike the pair is: samarium leaves neodymium in eight, but neodymium from praseodymium takes thirty-two. "
         "A cut does not halve its liquor: a batch comes out light and heavy as the ore carries them. Monazite is nine parts lights to one of the rest, "
         "and the clay's heavy liquor two-thirds yttrium, so europium and terbium come out a trickle.",
-        "The fourteen cuts") + cut_pages, 3)
+        f"The {count} cuts") + pages_of(
+        "Europium is not cut from gadolinium at all, though P507 would do it in eighteen stages. It alone of the rare earths goes to a 2+ ion, and zinc takes it there. "
+        f"{batch:,} mB of {pretty(feed)}, a zinc nugget and {acid} mB of sulfuric acid under a mixer give {left} mB of {pretty(gadolinium)}, and the europium drops "
+        f"as a white europium sulfate one batch in {NUMBERS[round(1 / chance)]}. Heated in 250 mB of nitric acid it goes back to 250 mB of {pretty(europium)}. "
+        "That is McCoy's method of 1935, and still how europium is parted.") + cut_pages, 3)
     magnetic = magnetic_cuts()
     moments = ", ".join(f"{e} {m:g}" for e, m in MOMENTS.items())
     magnetic_pages = []
@@ -269,8 +293,8 @@ def rare_earths():
     road_pages = []
     for liquor, path in sorted(roads(tree).items(), key=lambda kv: sum(s for s, _ in kv[1])):
         total = sum(s for s, _ in path)
-        legs = ", then ".join(f"{s} stages with {o}" for s, o in path)
-        road_pages += pages_of(f"{pretty(liquor).replace(' liquor', '').capitalize()}: {len(path)} batteries, {total} stages in all. {legs}.")
+        legs = ", then ".join("zinc in a basin" if o == "zinc" else f"{s} stages with {o}" for s, o in path)
+        road_pages += pages_of(f"{pretty(liquor).replace(' liquor', '').capitalize()}: {sum(1 for s, _ in path if s)} batteries, {total} stages in all. {legs}.")
     entry("rare_earths", "roads", "The road to each metal", "fundamentals:dysprosium_ingot", pages_of(
         "From the mixed liquor to one element is a chain of batteries, each fed by the one before. These are the roads, shortest first. "
         "The heavy liquor can also be leached straight from the clay, which skips the first eight stages for everything on the heavy side.",
@@ -299,12 +323,14 @@ def rare_earths():
         "Al-Sc is two per cent scandium, and most scandium never becomes metal. A scandium fluoride stirred into four blocks of aluminium, superheated, gives four blocks of Al-Sc straight, the aluminium taking the fluorine "
         "and skimmed off as a slag: the master alloy is made that way. A scandium nugget and eight aluminium give eight ingots."), 7)
     entry("rare_earths", "uses", "What they are for", "fundamentals:neodymium_iron_boron_ingot", pages_of(
-        "Nothing in the chain is for its own sake. Two neodymium, three iron and a ferroboron, superheated under 100 mB of argon, melt into four NdFeB, the strongest magnet; a dysprosium in the same melt makes four Dy-NdFeB, which keeps its field hot; samarium with cobalt makes SmCo, hotter still. "
-        "Praseodymium or didymium serves as well as neodymium, and terbium as well as dysprosium. A gadolinium for one neodymium makes three instead of four. "
+        "Nothing in the chain is for its own sake. Two neodymium, three iron and a ferroboron, superheated under 100 mB of argon, melt into four NdFeB, the strongest magnet. Dy-NdFeB, which keeps its field hot, is 8 per cent dysprosium as the EH grades are: three neodymium, a dysprosium, six iron and two ferroboron under 200 mB of argon make eight. "
+        "SmCo, hotter still, is Sm2(Co,Fe,Cu,Zr)17: two samarium, four cobalt, an iron, four copper nuggets and two zirconium nuggets under 200 mB of argon make seven. "
+        "Praseodymium or didymium serves as well as neodymium, and terbium as well as dysprosium. A gadolinium for a neodymium makes three for every four. "
         "Ferroboron is a borax, an iron and two charcoal, superheated. "
         "Polarized, each is the magnet The Factory Must Grow's motors, generators and electric pumps are built from: see Magnets and heat, under Power.", "What they are for") + pages_of(
         "Lanthanum metal reduces samarium, and lanthanum oxide stabilises the zeolite of the catalyst that cracks heavy oil to gasoline and propylene. Cerium with iron is ferrocerium, the lighter flint, a flint and steel that never wears out. "
-        "Europium's red on a yttria host and terbium's green, with cerium, in lanthanum phosphate are the phosphor every lamp takes. Yttria lines the fireproof vat. Didymium glass is the welder's lens the goggles are made of. Erbium turns glass pink. "
+        "The phosphor every lamp takes is two of the tri-band tube's three: the red is yttria doped with europium, Y2O3:Eu (YOX), and the green lanthanum phosphate doped with cerium and terbium, LaPO4:Ce,Tb (LAP), "
+        "the cerium taking up the ultraviolet and handing it to the terbium (Ullmann's Encyclopedia, Luminescent Materials). Yttria lines the fireproof vat. Didymium glass is the welder's lens the goggles are made of. Erbium turns glass pink. "
         "Scandium in aluminium is the airframe alloy, and makes a panel rack go twice as far.") + pages_of(
         "Cerium oxide stores and releases oxygen, which is what a catalytic converter does: the Factory's exhaust takes two. Neodymium oxide turns glass purple and holmium oxide yellow, "
         "the way erbium turns it pink. A cobalt in the lithium charge is the lithium cobalt oxide cathode the first lithium cells ran on."), 8)
@@ -314,10 +340,10 @@ def rare_earths():
         "and the goggles say so. Pump it out through the head stage's underside.", "Waste") + [
         spotlight("fundamentals:calcium_chloride", "Two limesand in 1,000 mB of spent liquor in a basin under a mixer neutralise it to calcium chloride liquor, and 1,000 mB of that boiled in a heated basin leaves three calcium chloride. "
                   "That is what calcium metal is electrolysed from: the plant's waste closes its own loop.", "Lime"),
-        spotlight("fundamentals:monazite_residue_dust", "Monazite carries thorium. When the light concentrate dissolves, the thorium stays behind as a residue, mildly radioactive. "
+        spotlight("fundamentals:monazite_residue_dust", "Monazite carries thorium. Roasted hot in sulfuric acid, the thorium turns to a pyrophosphate and stays behind when the sulfate is leached, a residue, mildly radioactive. "
                   "Nine pack into a block; cast it and bury it deep, away from where you live. Bastnäsite and the clay leave none.", "Residue"),
-        spotlight("fundamentals:gas_mantle", "Thorium was the rare earth industry's first product. A residue and 250 mB of nitric acid, heated, give a thorium nitrate. Four nitrate, a cerium oxide and four string, heated, "
-                  "give four gas mantles: Welsbach's thoria, glowing white in a gas flame. The Factory's gas lamp burns one.", "The gas mantle"),
+        spotlight("fundamentals:gas_mantle", "Thorium was the rare earth industry's first product. A residue and 250 mB of nitric acid, heated, give a thorium nitrate. Four nitrate, 10 mB of cerium liquor and four string, heated, "
+                  "give four gas mantles: Welsbach's thoria with a hundredth part of ceria, glowing white in a gas flame. The Factory's gas lamp burns one.", "The gas mantle"),
         spotlight("fundamentals:clarifier_sludge_block", "The clarifier's sludge is the iron, aluminium and thorium the lime throws down as hydroxides. Nine pack into a block of tailings, for the dam.", "Tailings")], 9)
     entry("rare_earths", "acids", "The acids", "fundamentals:hydrochloric_acid_bucket", pages_of(
         "The plant runs on acid, and acid is not a texture. Each one can be bucketed and poured, and does in the world what it does in the bottle. "
@@ -426,7 +452,7 @@ def metals():
     entry("metals", "cobalt", "Cobalt", "fundamentals:cobalt_ingot", pages_of(
         "Cobaltite is a cobalt arsenide-sulfide from the silver-cobalt veins in calcite. Roast it on a campfire or in a smoker to drive off the arsenic and sulfur and leave the oxide. "
         "Cobalt melts at 1,495 °C and was never smelted from its ore: the oxide is reduced under hydrogen, as molybdenum is: two roasted cobaltite and 500 mB of hydrogen in a heated chemical vat give two ingots. "
-        "Four cobalt and a samarium make SmCo; two cobalt, four nickel, a chromium and a rhenium make the superalloy. "
+        "Cobalt is half of SmCo; two cobalt, four nickel, a chromium and a rhenium make the superalloy. "
         "Roasted cobaltite calcined with two bauxite powder is cobalt blue, four blue dye.", "Cobalt"), 0)
     entry("metals", "porphyry", "Copper, molybdenum, rhenium", "fundamentals:raw_molybdenite", pages_of(
         "A porphyry copper stock carries chalcopyrite with a little molybdenite, and the molybdenite carries rhenium at parts per million. "
@@ -507,7 +533,7 @@ def metals():
         "four crude chloride and a salt, heated, give four zirconium tetrachloride and, one time in ten, a hafnium tetrachloride; the salt comes back nine times in ten.", "Hafnium") + pages_of(
         "Each chloride is reduced as titanium's is: one tetrachloride, two magnesium and 100 mB of argon in a heated vat with a mixer give a sponge and two magnesium chloride, and two sponge and argon "
         "on two electrodes, superheated, arc-melt to two ingots.") + pages_of(
-        "Seven zirconia and a yttrium oxide, superheated, make eight yttria-stabilised zirconia, the ceramic coat that lets a turbine blade run in gas hotter than it melts: the Factory's turbine blade takes one. "
+        "Twelve zirconia and a yttrium oxide, superheated, make thirteen yttria-stabilised zirconia, 7.7 per cent yttria as the 7YSZ of a turbine's thermal barrier is, the ceramic coat that lets a turbine blade run in gas hotter than it melts: the Factory's turbine blade takes one. "
         "Zirconium shrugs off hot hydrochloric and sulfuric acid that stainless cannot, so two zirconium plates line four steel chemical vats where stainless lines two. "
         "A hafnium nugget in the superalloy melt, against cracking at the grain boundaries, makes six ingots where it made four.", "What they are for"), 10)
     entry("metals", "beryllium", "Beryllium", "fundamentals:beryllium_ingot", pages_of(
@@ -619,7 +645,8 @@ def magnets():
                    "Alnico runs to 450 to 550 °C, Curie about 860, but stores far less energy: about 5 MGOe, against 35 to 52 for NdFeB and 16 to 32 for SmCo. "
                    "So aircraft and missiles fly SmCo, alnico lives on in sensors, and every other motor is NdFeB with dysprosium for the heat, "
                    "which is most of why the world wants dysprosium (US Department of Energy, Critical Materials Strategy, 2011).", "Why it matters")
-        + pages_of("Plain NdFeB is two neodymium, three iron and a ferroboron under argon; a dysprosium or terbium in the melt makes Dy-NdFeB. "
+        + pages_of("Plain NdFeB is two neodymium, three iron and a ferroboron under argon; three neodymium, a dysprosium or terbium, six iron and two ferroboron make eight Dy-NdFeB. "
+                   "SmCo is two samarium, four cobalt, an iron and four copper and two zirconium nuggets, the Sm2Co17 type every high-temperature grade is. "
                    "Alnico is iron with aluminium, nickel, cobalt and a little copper: five iron, an aluminium, two nickel, two cobalt and three copper nuggets, superheated, "
                    "cast and heat-treated to ten ingots. Polarize any of the four ingots, or an NdFeB, Dy-NdFeB or SmCo plate, to its magnet. "
                    "The magnet is the first thing a motor or generator takes on the belt, and it decides the grade of the whole.", "Making them")

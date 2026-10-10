@@ -59,7 +59,8 @@ ITEM_FORMULAS = {
     "ammonium_chloroiridate": "(NH4)2IrCl6", "ammonium_chlororhodate": "(NH4)3RhCl6", "reforming_catalyst": "Pt,Re,Al2O3",
     "platinum_rhodium_gauze": "Pt-Rh", "osmium_filament": "Os",
     "salt": "NaCl", "oxalic_acid": "H2C2O4", "roasted_bastnasite": "(Ce,La,Nd)OF", "light_rare_earth_sulfate": "(La,Ce,Pr,Nd,Sm)2(SO4)3",
-    "heavy_rare_earth_sulfate": "(Y,Gd,Tb,Dy,Ho,Er,Tm,Yb,Lu)2(SO4)3", "calcium_chloride": "CaCl2", "calcium_ingot": "Ca", "white_phosphorus": "P4",
+    "heavy_rare_earth_sulfate": "(Y,Gd,Tb,Dy,Ho,Er,Tm,Yb,Lu)2(SO4)3", "light_rare_earth_carbonate": "(La,Ce,Pr,Nd,Sm)2(CO3)3",
+    "heavy_rare_earth_carbonate": "(Y,Gd,Tb,Dy,Ho,Er,Tm,Yb,Lu)2(CO3)3", "cerium_concentrate": "CeO2,(La,Nd)OF", "europium_sulfate": "EuSO4","calcium_chloride": "CaCl2", "calcium_ingot": "Ca", "white_phosphorus": "P4",
     "hydrochloric_acid_bucket": "HCl", "nitric_acid_bucket": "HNO3", "phosphoric_acid_bucket": "H3PO4", "hydrofluoric_acid_bucket": "HF",
     "aqua_regia_bucket": "HNO3,HCl", "bromine_bucket": "Br2", "seawater_bucket": "H2O,NaCl,MgCl2",
     # a bloom is iron holding its slag, fayalite
@@ -72,7 +73,7 @@ ITEM_FORMULAS = {
     "dimensionally_stable_anode": "Ti,RuO2,IrO2", "red_mud": "Fe2O3,TiO2,Al2O3,SiO2,Na2O,(Sc,Y,La,Ce)", "aluminium_hydroxide": "Al(OH)3",
     "alumina": "Al2O3", "cryolite": "Na3AlF6",
     # sintered NdFeB is sold nickel-plated against rust; SmCo and cast alnico go bare
-    "neodymium_iron_boron_magnet": "Nd2Fe14B,Ni", "dysprosium_neodymium_iron_boron_magnet": "(Nd,Dy)2Fe14B,Ni", "samarium_cobalt_magnet": "SmCo5",
+    "neodymium_iron_boron_magnet": "Nd2Fe14B,Ni", "dysprosium_neodymium_iron_boron_magnet": "(Nd,Dy)2Fe14B,Ni", "samarium_cobalt_magnet": "Sm2(Co,Fe,Cu,Zr)17",
     "alnico_magnet": "Fe-Al-Ni-Co-Cu",
     "mercury_thermometer": "Hg,SiO2", "spirit_thermometer": "C12H26,SiO2", "bimetallic_thermometer": "Cu-Zn,Fe", "type_k_thermocouple": "Ni-Cr,Ni-Al", "type_s_thermocouple": "Pt-Rh,Pt",
     # Natta's catalyst, TiCl3 with the AlCl3 the aluminium leaves in it; polyvinyl chloride, and the polyethylene of the dyed blocks

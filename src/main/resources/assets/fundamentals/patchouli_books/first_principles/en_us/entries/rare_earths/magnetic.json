@@ -47,11 +47,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "The other 10 cuts have no magnetic route, because their two products do not sort by moment."
-    },
-    {
-      "type": "patchouli:text",
-      "text": "They are europium-gadolinium liquor, heavy rare earth liquor, holmium-erbium liquor, holmium-to-lutetium liquor, light rare earth liquor, didymium liquor, rare earth liquor, terbium-dysprosium liquor, terbium-to-lutetium liquor, thulium-ytterbium-lutetium liquor."
+      "text": "The other 9 cuts have no magnetic route, because their two products do not sort by moment. They are heavy rare earth liquor, holmium-erbium liquor, holmium-to-lutetium liquor, light rare earth liquor, didymium liquor, rare earth liquor, terbium-dysprosium liquor, terbium-to-lutetium liquor, thulium-ytterbium-lutetium liquor."
     },
     {
       "type": "patchouli:text",

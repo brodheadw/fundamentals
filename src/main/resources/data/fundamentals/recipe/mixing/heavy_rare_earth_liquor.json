@@ -2,7 +2,7 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "fundamentals:heavy_rare_earth_sulfate"
+      "item": "fundamentals:heavy_rare_earth_carbonate"
     },
     {
       "type": "neoforge:single",
@@ -14,10 +14,6 @@
     {
       "id": "fundamentals:crude_heavy_rare_earth_liquor",
       "amount": 500
-    },
-    {
-      "id": "fundamentals:monazite_residue_dust",
-      "chance": 0.5
     }
   ]
 }

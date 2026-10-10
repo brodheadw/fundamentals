@@ -28,7 +28,7 @@ public final class LightBatteryMaterials {
                 MaterialProperties.builder().density(0.34).hardness(0.80).toxicity(0.10));
         MaterialRegistry.defineMineral(GROUP, "bertrandite", null, "Be4Si2O7(OH)2", "beryllium", new MaterialForm[] {ORE, RAW},
                 MaterialProperties.builder().density(0.33).hardness(0.65).toxicity(0.10));
-        MaterialRegistry.define(GROUP, "zirconium", null, MaterialType.ELEMENT, "Zr", new MaterialForm[] {OXIDE, SPONGE, INGOT, PLATE},
+        MaterialRegistry.define(GROUP, "zirconium", null, MaterialType.ELEMENT, "Zr", new MaterialForm[] {OXIDE, SPONGE, INGOT, NUGGET, PLATE},
                 MaterialProperties.builder().density(0.83).hardness(0.55).heatResistance(0.80).conductivity(0.04));
         MaterialRegistry.define(GROUP, "hafnium", null, MaterialType.ELEMENT, "Hf", new MaterialForm[] {SPONGE, INGOT, NUGGET},
                 MaterialProperties.builder().density(1.69).hardness(0.60).heatResistance(0.90).conductivity(0.05));

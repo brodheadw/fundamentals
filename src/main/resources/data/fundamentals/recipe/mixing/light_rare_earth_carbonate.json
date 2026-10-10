@@ -1,0 +1,24 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:light_rare_earth_sulfate"
+    },
+    {
+      "item": "fundamentals:soda_ash"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "minecraft:water"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:light_rare_earth_carbonate"
+    },
+    {
+      "id": "fundamentals:monazite_residue_dust"
+    }
+  ]
+}

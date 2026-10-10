@@ -50,7 +50,7 @@ BRONZE = ("ingot", "nugget", "plate", "block")
 TITANIUM = ("oxide", "sponge", "ingot", "plate")
 PRECIOUS = ("ingot", "nugget", "plate", "block")
 # Zirconium and hafnium leave the Kroll retort as sponge as titanium does; beryllium goes through its fluoride to the metal.
-ZIRCONIUM = ("oxide", "sponge", "ingot", "plate")
+ZIRCONIUM = ("oxide", "sponge", "ingot", "nugget", "plate")
 HAFNIUM = ("sponge", "ingot", "nugget")
 BERYLLIUM = ("oxide", "fluoride", "ingot", "nugget")
 COPPER_ALLOY = ("ingot", "block")

@@ -354,6 +354,12 @@ def main():
     heap("roasted_bastnasite", (240, 222, 178), (210, 184, 132), (150, 124, 82)).save(TEXTURES / "item/roasted_bastnasite.png")
     heap("light_sulfate", (250, 242, 242), (226, 214, 216), (170, 158, 162)).save(TEXTURES / "item/light_rare_earth_sulfate.png")
     heap("heavy_sulfate", (250, 248, 238), (228, 224, 208), (172, 168, 150)).save(TEXTURES / "item/heavy_rare_earth_sulfate.png")
+    # the carbonates are white, the light one pinked by its neodymium as the sulfate is; the ceria bastnäsite's leach leaves is
+    # the pale yellow of CeO2, dulled by the lanthanum fluoride with it; europium(II) sulfate is white
+    heap("light_carbonate", (252, 246, 246), (232, 222, 224), (178, 166, 170)).save(TEXTURES / "item/light_rare_earth_carbonate.png")
+    heap("heavy_carbonate", (254, 252, 244), (234, 230, 216), (180, 176, 160)).save(TEXTURES / "item/heavy_rare_earth_carbonate.png")
+    heap("cerium_concentrate", (246, 236, 196), (222, 204, 150), (164, 146, 98)).save(TEXTURES / "item/cerium_concentrate.png")
+    heap("europium_sulfate", (255, 255, 255), (236, 236, 238), (184, 184, 190)).save(TEXTURES / "item/europium_sulfate.png")
     heap("calcium_chloride", (255, 255, 255), (240, 240, 236), (190, 190, 184)).save(TEXTURES / "item/calcium_chloride.png")
     sticks((252, 250, 232), (238, 232, 196), (196, 186, 136)).save(TEXTURES / "item/white_phosphorus.png")
     ingot(((88, 90, 94), (138, 141, 146), (180, 184, 190), (222, 226, 232))).save(TEXTURES / "item/calcium_ingot.png")

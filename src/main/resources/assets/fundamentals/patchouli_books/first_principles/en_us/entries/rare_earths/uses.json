@@ -6,16 +6,20 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Nothing in the chain is for its own sake. Two neodymium, three iron and a ferroboron, superheated under 100 mB of argon, melt into four NdFeB, the strongest magnet; a dysprosium in the same melt makes four Dy-NdFeB, which keeps its field hot; samarium with cobalt makes SmCo, hotter still.",
+      "text": "Nothing in the chain is for its own sake. Two neodymium, three iron and a ferroboron, superheated under 100 mB of argon, melt into four NdFeB, the strongest magnet.",
       "title": "What they are for"
     },
     {
       "type": "patchouli:text",
-      "text": "Praseodymium or didymium serves as well as neodymium, and terbium as well as dysprosium. A gadolinium for one neodymium makes three instead of four. Ferroboron is a borax, an iron and two charcoal, superheated."
+      "text": "Dy-NdFeB, which keeps its field hot, is 8 per cent dysprosium as the EH grades are: three neodymium, a dysprosium, six iron and two ferroboron under 200 mB of argon make eight."
     },
     {
       "type": "patchouli:text",
-      "text": "Polarized, each is the magnet The Factory Must Grow's motors, generators and electric pumps are built from: see Magnets and heat, under Power."
+      "text": "SmCo, hotter still, is Sm2(Co,Fe,Cu,Zr)17: two samarium, four cobalt, an iron, four copper nuggets and two zirconium nuggets under 200 mB of argon make seven. Praseodymium or didymium serves as well as neodymium, and terbium as well as dysprosium. A gadolinium for a neodymium makes three for every four."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ferroboron is a borax, an iron and two charcoal, superheated. Polarized, each is the magnet The Factory Must Grow's motors, generators and electric pumps are built from: see Magnets and heat, under Power."
     },
     {
       "type": "patchouli:text",
@@ -23,7 +27,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Europium's red on a yttria host and terbium's green, with cerium, in lanthanum phosphate are the phosphor every lamp takes. Yttria lines the fireproof vat. Didymium glass is the welder's lens the goggles are made of. Erbium turns glass pink. Scandium in aluminium is the airframe alloy, and makes a panel rack go twice as far."
+      "text": "The phosphor every lamp takes is two of the tri-band tube's three: the red is yttria doped with europium, Y2O3:Eu (YOX), and the green lanthanum phosphate doped with cerium and terbium, LaPO4:Ce,Tb (LAP), the cerium taking up the ultraviolet and handing it to the terbium (Ullmann's Encyclopedia, Luminescent Materials)."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Yttria lines the fireproof vat. Didymium glass is the welder's lens the goggles are made of. Erbium turns glass pink. Scandium in aluminium is the airframe alloy, and makes a panel rack go twice as far."
     },
     {
       "type": "patchouli:text",

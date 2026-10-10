@@ -14,7 +14,9 @@
       "item": "fundamentals:thorium_nitrate"
     },
     {
-      "item": "fundamentals:cerium_oxide"
+      "type": "neoforge:single",
+      "amount": 10,
+      "fluid": "fundamentals:cerium_liquor"
     },
     {
       "tag": "c:strings"

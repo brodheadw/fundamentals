@@ -68,7 +68,7 @@ public final class RareEarthMaterials {
                 MaterialProperties.builder().density(0.95).magnetStrength(1.00).heatResistance(0.30).hardness(0.60));
         reg("dysprosium_neodymium_iron_boron", "Dy-NdFeB", MaterialType.ALLOY, "(Nd,Dy)2Fe14B", MAGNET_FORMS,
                 MaterialProperties.builder().density(0.96).magnetStrength(0.97).heatResistance(0.55).hardness(0.60));
-        reg("samarium_cobalt", "SmCo", MaterialType.ALLOY, "SmCo5", MAGNET_FORMS,
+        reg("samarium_cobalt", "SmCo", MaterialType.ALLOY, "Sm2(Co,Fe,Cu,Zr)17", MAGNET_FORMS,
                 MaterialProperties.builder().density(1.06).magnetStrength(0.70).heatResistance(0.80).hardness(0.55));
         // What monazite leaves behind when it dissolves: thorium and its daughters, mildly radioactive, to be cast into blocks and buried.
         reg("monazite_residue", "Thorium Residue", MaterialType.COMPOUND, "ThO2", new MaterialForm[] {DUST, BLOCK},
