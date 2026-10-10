@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "ingredient": {
+    "item": "fundamentals:cerium_concentrate"
+  },
+  "result": {
+    "id": "fundamentals:cerium_oxide"
+  },
+  "experience": 0.3,
+  "cookingtime": 100
+}

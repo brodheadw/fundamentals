@@ -2,21 +2,18 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "fundamentals:roasted_bastnasite"
+      "item": "fundamentals:europium_sulfate"
     },
     {
       "type": "neoforge:single",
       "amount": 250,
-      "fluid": "fundamentals:hydrochloric_acid"
+      "fluid": "fundamentals:nitric_acid"
     }
   ],
   "results": [
     {
-      "id": "fundamentals:crude_rare_earth_liquor",
+      "id": "fundamentals:europium_liquor",
       "amount": 250
-    },
-    {
-      "id": "fundamentals:cerium_concentrate"
     }
   ],
   "heat_requirement": "heated"

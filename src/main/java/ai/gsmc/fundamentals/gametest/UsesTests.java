@@ -46,7 +46,11 @@ public class UsesTests {
                 && takes(recipe(helper, "fundamentals:uses/dysprosium_neodymium_iron_boron"), "fundamentals:terbium_ingot"), "only the heat grade wants dysprosium or terbium");
         helper.assertTrue(takes(recipe(helper, "fundamentals:uses/neodymium_iron_boron"), "fundamentals:ferroboron")
                 && takes(recipe(helper, "fundamentals:uses/ferroboron"), "fundamentals:raw_borax"), "NdFeB wants boron as ferroboron, from borax");
-        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/samarium_cobalt"), "fundamentals:cobalt_ingot"), "SmCo wants cobalt metal");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/samarium_cobalt"), "fundamentals:cobalt_ingot")
+                && takes(recipe(helper, "fundamentals:uses/samarium_cobalt"), "fundamentals:zirconium_nugget"), "SmCo is Sm2(Co,Fe,Cu,Zr)17: it wants cobalt and zirconium");
+        var dy = recipe(helper, "fundamentals:uses/dysprosium_neodymium_iron_boron").getIngredients();
+        long heavy = dy.stream().filter(i -> i.test(stack("fundamentals:dysprosium_ingot"))).count();
+        helper.assertTrue(heavy * 10 <= dy.size(), "Dy-NdFeB carries 8 to 10 per cent heavy rare earth, not " + heavy + " in " + dy.size());
         helper.assertTrue(BuiltInRegistries.BLOCK.containsKey(ResourceLocation.parse("fundamentals:borax_ore")), "borax should be an ore");
         helper.succeed();
     }

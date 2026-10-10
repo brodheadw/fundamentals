@@ -5,6 +5,9 @@
       "tag": "fundamentals:magnet_light_rare_earths"
     },
     {
+      "tag": "fundamentals:magnet_light_rare_earths"
+    },
+    {
       "item": "fundamentals:gadolinium_ingot"
     },
     {
@@ -20,18 +23,30 @@
       "tag": "c:ingots/iron"
     },
     {
+      "tag": "c:ingots/iron"
+    },
+    {
+      "tag": "c:ingots/iron"
+    },
+    {
+      "tag": "c:ingots/iron"
+    },
+    {
+      "item": "fundamentals:ferroboron"
+    },
+    {
       "item": "fundamentals:ferroboron"
     },
     {
       "type": "neoforge:single",
-      "amount": 100,
+      "amount": 200,
       "fluid": "fundamentals:argon"
     }
   ],
   "results": [
     {
       "id": "fundamentals:dysprosium_neodymium_iron_boron_ingot",
-      "count": 3
+      "count": 6
     }
   ],
   "heat_requirement": "superheated"

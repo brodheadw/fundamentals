@@ -1,0 +1,28 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "fundamentals:europium_gadolinium_liquor"
+    },
+    {
+      "tag": "c:nuggets/zinc"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 100,
+      "fluid": "tfmg:sulfuric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:gadolinium_liquor",
+      "amount": 950
+    },
+    {
+      "id": "fundamentals:europium_sulfate",
+      "chance": 0.2
+    }
+  ]
+}

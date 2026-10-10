@@ -1,17 +1,29 @@
 {
-  "name": "The fourteen cuts",
+  "name": "The thirteen cuts",
   "category": "fundamentals:rare_earths",
   "icon": "fundamentals:neodymium_oxalate",
   "sortnum": 3,
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Fourteen cuts take the mixed liquor down to single elements. A battery too short for its cut does nothing; the goggles say how many stages it wants. The number is set by how alike the pair is: samarium leaves neodymium in eight, but neodymium from praseodymium takes thirty-two.",
-      "title": "The fourteen cuts"
+      "text": "Thirteen cuts take the mixed liquor down to single elements. A battery too short for its cut does nothing; the goggles say how many stages it wants. The number is set by how alike the pair is: samarium leaves neodymium in eight, but neodymium from praseodymium takes thirty-two.",
+      "title": "The thirteen cuts"
     },
     {
       "type": "patchouli:text",
       "text": "A cut does not halve its liquor: a batch comes out light and heavy as the ore carries them. Monazite is nine parts lights to one of the rest, and the clay's heavy liquor two-thirds yttrium, so europium and terbium come out a trickle."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Europium is not cut from gadolinium at all, though P507 would do it in eighteen stages. It alone of the rare earths goes to a 2+ ion, and zinc takes it there."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "1,000 mB of europium-gadolinium liquor, a zinc nugget and 100 mB of sulfuric acid under a mixer give 950 mB of gadolinium liquor, and the europium drops as a white europium sulfate one batch in five. Heated in 250 mB of nitric acid it goes back to 250 mB of europium liquor."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "That is McCoy's method of 1935, and still how europium is parted."
     },
     {
       "type": "patchouli:text",
@@ -48,10 +60,6 @@
     {
       "type": "patchouli:text",
       "text": "Samarium-europium-gadolinium liquor parts into samarium liquor (raffinate, head end) and europium-gadolinium liquor (strip, tail end) in a battery of 16 stages charged with P507, stripped by hydrochloric acid. Each batch comes out 30 per cent raffinate."
-    },
-    {
-      "type": "patchouli:text",
-      "text": "Europium-gadolinium liquor parts into europium liquor (raffinate, head end) and gadolinium liquor (strip, tail end) in a battery of 18 stages charged with P507, stripped by hydrochloric acid. Each batch comes out 5 per cent raffinate."
     },
     {
       "type": "patchouli:text",

@@ -23,6 +23,14 @@
     },
     {
       "type": "patchouli:text",
+      "text": "Europium: 3 batteries, 34 stages in all. 8 stages with P507, then 10 stages with P204, then 16 stages with P507, then zinc in a basin."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Gadolinium: 3 batteries, 34 stages in all. 8 stages with P507, then 10 stages with P204, then 16 stages with P507, then zinc in a basin."
+    },
+    {
+      "type": "patchouli:text",
       "text": "Yttrium: 4 batteries, 44 stages in all. 8 stages with P507, then 10 stages with P204, then 12 stages with P204, then 14 stages with naphthenic acid."
     },
     {
@@ -32,14 +40,6 @@
     {
       "type": "patchouli:text",
       "text": "Dysprosium: 4 batteries, 50 stages in all. 8 stages with P507, then 10 stages with P204, then 12 stages with P204, then 20 stages with P507."
-    },
-    {
-      "type": "patchouli:text",
-      "text": "Europium: 4 batteries, 52 stages in all. 8 stages with P507, then 10 stages with P204, then 16 stages with P507, then 18 stages with P507."
-    },
-    {
-      "type": "patchouli:text",
-      "text": "Gadolinium: 4 batteries, 52 stages in all. 8 stages with P507, then 10 stages with P204, then 16 stages with P507, then 18 stages with P507."
     },
     {
       "type": "patchouli:text",
