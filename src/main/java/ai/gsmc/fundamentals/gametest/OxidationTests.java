@@ -5,13 +5,7 @@ import ai.gsmc.fundamentals.oxidation.CanisterItem;
 import ai.gsmc.fundamentals.oxidation.InertDrumBlockEntity;
 import ai.gsmc.fundamentals.oxidation.Oxidation;
 import ai.gsmc.fundamentals.separation.Separation;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import com.simibubi.create.content.equipment.sandPaper.SandPaperPolishingRecipe;
-import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTest;
@@ -37,20 +31,11 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.common.DataMapHooks;
-import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 
 @GameTestHolder(Fundamentals.MOD_ID)
 @PrefixGameTestTemplate(false)

@@ -3,8 +3,6 @@ package ai.gsmc.fundamentals.gametest;
 import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.separation.Hazards;
 import ai.gsmc.fundamentals.separation.Separation;
-import ai.gsmc.fundamentals.worldgen.DepositFeature;
-import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.fluids.tank.BoilerData;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import net.minecraft.core.BlockPos;

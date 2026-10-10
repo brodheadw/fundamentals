@@ -6,12 +6,8 @@ import ai.gsmc.fundamentals.magnet.MagnetCharge;
 import ai.gsmc.fundamentals.magnet.MagnetGrade;
 import ai.gsmc.fundamentals.magnet.Magnets;
 import com.drmangotea.tfmg.content.electricity.generators.GeneratorBlockEntity;
-import com.drmangotea.tfmg.content.electricity.utilities.electric_pump.ElectricPumpBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.simibubi.create.AllBlocks;
-import com.simibubi.create.content.fluids.FluidTransportBehaviour;
-import com.simibubi.create.content.fluids.PipeConnection;
-import com.simibubi.create.content.fluids.pump.PumpBlockEntity;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.content.kinetics.motor.CreativeMotorBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
@@ -29,7 +25,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
-import java.lang.reflect.Method;
 import java.util.List;
 
 @GameTestHolder(Fundamentals.MOD_ID)
