@@ -1,0 +1,44 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "fundamentals:cobalt_ingot"
+    },
+    {
+      "item": "fundamentals:cobalt_ingot"
+    },
+    {
+      "item": "fundamentals:chromium_ingot"
+    },
+    {
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "item": "fundamentals:yttrium_nugget"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 100,
+      "fluid": "fundamentals:argon"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:mcraly_powder",
+      "count": 8
+    }
+  ],
+  "heat_requirement": "superheated"
+}

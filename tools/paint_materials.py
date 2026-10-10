@@ -27,16 +27,17 @@ MAGNET_ELEMENT = ("oxalate", "fluoride", "oxide", "ingot", "nugget", "block")
 VOLATILE_MAGNET = ("oxalate", "oxide", "ingot", "nugget", "block")
 # europium and the heavies past dysprosium are sold as oxide
 OXIDE_ONLY = ("oxalate", "oxide")
-SCANDIUM = ("oxalate", "fluoride", "oxide", "ingot", "nugget")
+# scandium and yttrium go into alloys by the nugget: Al-Sc and the MCrAlY bond coat
+ALLOYING = ("oxalate", "fluoride", "oxide", "ingot", "nugget")
 DIDYMIUM = ("oxalate", "fluoride", "oxide", "ingot")
 MAGNET = ("ingot", "nugget", "plate", "block")
 ALLOY = ("ingot", "nugget", "plate", "block")
 RESIDUE = ("dust", "block")
 COBALT = ("ingot", "nugget")
 MOLYBDENUM = ("oxide", "ingot")
-RHENIUM = ("ingot",)
+RHENIUM = ("ingot", "nugget")
 STRUCTURAL = ("ingot", "plate")
-TUNGSTEN = ("oxide", "ingot", "plate")
+TUNGSTEN = ("oxide", "ingot")
 MATTE = ("dust",)
 BLISTER = ("ingot",)
 GROUND_MINERAL = ("dust", "concentrate")
@@ -219,8 +220,8 @@ MATERIALS = {
     "lanthanum": ELEMENT, "cerium": ELEMENT, "praseodymium": MAGNET_ELEMENT, "neodymium": MAGNET_ELEMENT,
     "samarium": VOLATILE_MAGNET, "europium": OXIDE_ONLY,
     "gadolinium": ELEMENT, "terbium": MAGNET_ELEMENT, "dysprosium": MAGNET_ELEMENT, "holmium": OXIDE_ONLY,
-    "erbium": OXIDE_ONLY, "thulium": OXIDE_ONLY, "ytterbium": OXIDE_ONLY, "lutetium": OXIDE_ONLY, "yttrium": ELEMENT,
-    "scandium": SCANDIUM,
+    "erbium": OXIDE_ONLY, "thulium": OXIDE_ONLY, "ytterbium": OXIDE_ONLY, "lutetium": OXIDE_ONLY, "yttrium": ALLOYING,
+    "scandium": ALLOYING,
     "didymium": DIDYMIUM, "neodymium_iron_boron": MAGNET, "dysprosium_neodymium_iron_boron": MAGNET, "samarium_cobalt": MAGNET, "aluminium_scandium": ALLOY, "monazite_residue": RESIDUE,
     "cobalt": COBALT, "molybdenum": MOLYBDENUM, "rhenium": RHENIUM, "superalloy": STRUCTURAL, "molybdenum_steel": STRUCTURAL, "chromel": INGOT, "alumel": INGOT, "alnico": INGOT,
     "tungsten": TUNGSTEN, "copper_matte": MATTE, "blister_copper": BLISTER,

@@ -15,11 +15,24 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Two raw molybdenite roasted in a heated basin give two molybdenum trioxide, and half the time a rhenium flue dust: the roaster's flue is where every gram of the world's rhenium comes from."
+      "text": "Two raw molybdenite roasted in a heated basin give two molybdenum trioxide, and one time in ten a rhenium flue dust: the roaster's flue is where all mined rhenium comes from, though about a quarter of the rhenium used is now recycled from superalloy scrap and spent catalyst (USGS, Mineral Commodity Summaries 2025)."
     },
     {
       "type": "patchouli:text",
-      "text": "Both oxides are reduced under hydrogen in a heated chemical vat with an industrial mixer, as the industry does: two trioxide and 500 mB of hydrogen give two molybdenum ingots, two flue dust and 250 mB give one rhenium ingot. The hydrogen is shifted from water gas; the extractants entry under the rare earths says how."
+      "text": "The trioxide is reduced under hydrogen in a heated chemical vat with an industrial mixer, as the industry does: two trioxide and 500 mB of hydrogen give two molybdenum ingots.",
+      "title": "Rhenium"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The flue dust is scrubbed into water and its perrhenate taken up on an ion exchanger and stripped with ammonia: a flue dust, 250 mB of water and 50 mB of ammonia give an ammonium perrhenate, white crystals, and one with 250 mB of hydrogen in the vat gives two rhenium nuggets."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The hydrogen is shifted from water gas; the extractants entry under the rare earths says how."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Real molybdenite concentrate carries 100 to 3,000 ppm of rhenium. A nugget to every ten molybdenite here is a few times the richest of it, so that a superalloy melt costs a vein and not a mountain."
     }
   ]
 }

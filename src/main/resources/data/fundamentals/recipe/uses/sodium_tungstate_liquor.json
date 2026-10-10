@@ -4,7 +4,6 @@
     "tfmg:steel_vat",
     "tfmg:firebrick_lined_vat"
   ],
-  "heat_requirement": "heated",
   "machines": [
     "tfmg:mixing"
   ],
@@ -12,20 +11,22 @@
   "processing_time": 100,
   "ingredients": [
     {
-      "item": "fundamentals:rhenium_flue_dust"
+      "item": "fundamentals:raw_wolframite"
     },
     {
-      "item": "fundamentals:rhenium_flue_dust"
+      "item": "fundamentals:raw_wolframite"
     },
     {
       "type": "neoforge:single",
-      "amount": 250,
-      "fluid": "tfmg:hydrogen"
+      "amount": 500,
+      "fluid": "fundamentals:caustic_soda"
     }
   ],
   "results": [
     {
-      "id": "fundamentals:rhenium_ingot"
+      "id": "fundamentals:sodium_tungstate_liquor",
+      "amount": 500
     }
-  ]
+  ],
+  "heat_requirement": "heated"
 }

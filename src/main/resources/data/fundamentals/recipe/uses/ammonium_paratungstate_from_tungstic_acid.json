@@ -2,20 +2,20 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "fundamentals:raw_scheelite"
+      "item": "fundamentals:tungstic_acid"
     },
     {
-      "item": "fundamentals:raw_scheelite"
+      "item": "fundamentals:tungstic_acid"
     },
     {
       "type": "neoforge:single",
-      "amount": 500,
-      "fluid": "fundamentals:hydrochloric_acid"
+      "amount": 250,
+      "fluid": "fundamentals:ammonia"
     }
   ],
   "results": [
     {
-      "id": "fundamentals:tungsten_oxide",
+      "id": "fundamentals:ammonium_paratungstate",
       "count": 2
     }
   ],

@@ -1,9 +1,11 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:ammonium_perrhenate",
     "fundamentals:reforming_catalyst",
     "fundamentals:rhenium_flue_dust",
     "fundamentals:rhenium_ingot",
+    "fundamentals:rhenium_nugget",
     "fundamentals:superalloy_ingot",
     "fundamentals:superalloy_plate"
   ]

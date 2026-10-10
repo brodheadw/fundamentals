@@ -148,9 +148,11 @@ PLATINUM_LIQUORS = {
     "iridium_rhodium_liquor": ("Iridium-Rhodium Liquor", 0x6A2A1E),
     "rhodium_liquor": ("Rhodium Liquor", 0xC85A6A),
 }
-# beryllium sulfate, with the aluminium the beryl carried, in the sulfuric acid that opened the frit or the tuff: colourless
-SULFATE_LIQUORS = {"beryllium_sulfate_liquor": ("Beryllium Sulfate Liquor", CLEAR)}
-CAUSTICS = {"caustic_soda": ("Caustic Soda", 0xEEF2F0), "sodium_aluminate_liquor": ("Sodium Aluminate Liquor", 0xB8864A)}
+# beryllium sulfate, with the aluminium the beryl carried, in the sulfuric acid that opened the frit or the tuff, and lithium sulfate leached from acid-roasted spodumene: colourless
+SULFATE_LIQUORS = {"beryllium_sulfate_liquor": ("Beryllium Sulfate Liquor", CLEAR), "lithium_sulfate_liquor": ("Lithium Sulfate Liquor", CLEAR)}
+# sodium tungstate, from wolframite opened by caustic or soda ash, is colourless and strongly alkaline
+CAUSTICS = {"caustic_soda": ("Caustic Soda", 0xEEF2F0), "sodium_aluminate_liquor": ("Sodium Aluminate Liquor", 0xB8864A),
+            "sodium_tungstate_liquor": ("Sodium Tungstate Liquor", 0xE6ECE8)}
 FLUIDS = {**{k: (*v, "LIQUOR") for k, v in {**LIQUORS, **PLATINUM_LIQUORS, **SULFATE_LIQUORS}.items()}, **{k: (*v, "ORGANIC") for k, v in ORGANICS.items()},
           **{k: (*v, "ACID") for k, v in ACIDS.items()}, **{k: (*v, "GAS") for k, v in GASES.items()},
           **{k: (*v, "WASTE") for k, v in WASTES.items()}, **{k: (*v, "SALINE") for k, v in SALINES.items()}, **{k: (*v, "WATER") for k, v in SEA.items()}, **{k: (*v, "CRUDE") for k, v in CRUDES.items()},

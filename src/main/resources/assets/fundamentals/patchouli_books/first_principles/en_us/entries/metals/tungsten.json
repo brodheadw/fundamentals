@@ -6,12 +6,34 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Scheelite from the limestone skarns and wolframite from the tin veins both decompose in hot hydrochloric acid: two raw ore and 500 mB in a heated basin give two tungsten oxide, the canary-yellow trioxide powder, and hydrogen in a heated chemical vat reduces two oxide to two ingots.",
+      "text": "Wolframite, from the tin veins, will not open to acid.",
       "title": "Tungsten"
     },
     {
       "type": "patchouli:text",
-      "text": "One ingot draws to four filaments, and the Factory's light bulb now burns one. One ingot and two coals, superheated, carburise to two tungsten carbide, and Create's mechanical drill now bites with it."
+      "text": "Two raw wolframite and 500 mB of caustic soda in a heated chemical vat with a mixer, the pressure digester at 150 to 200 °C, give 500 mB of sodium tungstate liquor, the iron and manganese left behind as hydroxides; or two wolframite and two soda ash fused over a superheated burner and leached in 500 mB of water give the same."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Scheelite, from the limestone skarns, opens to hot hydrochloric acid: two raw scheelite and 500 mB, heated, throw down two yellow tungstic acid."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Either way the tungsten is taken up as ammonium tungstate and crystallised as ammonium paratungstate, APT, the form tungsten is traded in.",
+      "title": "APT"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "500 mB of the liquor and 250 mB of ammonia, heated, give two APT, the amine extraction and ammonia strip folded into the one step; two tungstic acid dissolved in 250 mB of ammonia give two as well."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A blast furnace calcines APT to the canary-yellow trioxide, and hydrogen in a heated chemical vat reduces two oxide to two ingots (Lassner and Schubert, Tungsten, 1999)."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "One ingot draws to four filaments, and the Factory's light bulb now burns one. One ingot and two coals, superheated, carburise to two tungsten carbide, and Create's mechanical drill now bites with it. Ten per cent of the superalloy is tungsten.",
+      "title": "What it is for"
     }
   ]
 }
