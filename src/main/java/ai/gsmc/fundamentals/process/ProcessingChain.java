@@ -6,17 +6,12 @@ import ai.gsmc.fundamentals.material.MaterialRegistry;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 public record ProcessingChain(String id, String commodity, String group, List<ProcessingStep> steps) {
 
     public ProcessingChain {
         steps = List.copyOf(steps);
-    }
-
-    public Tier maxTier() {
-        return steps.stream().map(ProcessingStep::tier).max(Comparator.naturalOrder()).orElse(Tier.T0);
     }
 
     public List<String> validate() {

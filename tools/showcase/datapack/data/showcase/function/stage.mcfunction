@@ -6200,7 +6200,7 @@ setblock -20 -59 16 minecraft:polished_andesite
 setblock -20 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Every ore"','""','""','""']},is_waxed:1b}
 setblock -19 -60 16 minecraft:polished_andesite
 setblock -19 -59 16 fundamentals:argentite_ore
-setblock -19 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Argentite Ore"','""','""','""']},is_waxed:1b}
+setblock -19 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Acanthite Ore"','""','""','""']},is_waxed:1b}
 setblock -18 -60 16 minecraft:polished_andesite
 setblock -18 -59 16 fundamentals:azurite_ore
 setblock -18 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Azurite Ore"','""','""','""']},is_waxed:1b}

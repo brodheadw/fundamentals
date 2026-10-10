@@ -19,7 +19,6 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
-/** Runs only with Chemica installed: ./gradlew -Pchemica runServer, or ORG_GRADLE_PROJECT_chemica=1 tools/gametest.sh. */
 @GameTestHolder(Fundamentals.MOD_ID)
 @PrefixGameTestTemplate(false)
 public class ChemicaTests {
@@ -30,6 +29,7 @@ public class ChemicaTests {
 
     @GameTest(template = "empty")
     public void chemicasReagentsAreOurs(GameTestHelper helper) {
+        // Passes without Chemica; run it with ORG_GRADLE_PROJECT_chemica=1 tools/gametest.sh.
         if (!ModList.get().isLoaded("chemica")) {
             helper.succeed();
             return;

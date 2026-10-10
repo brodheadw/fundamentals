@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/** A hose pulley lowered into the sea draws seawater, read where the hose ends. */
 @Mixin(value = FluidDrainingBehaviour.class, remap = false)
 public abstract class SeawaterHoseMixin {
 

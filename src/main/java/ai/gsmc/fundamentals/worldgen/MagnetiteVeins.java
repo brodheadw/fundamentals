@@ -3,7 +3,6 @@ package ai.gsmc.fundamentals.worldgen;
 import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.registry.OreBlock;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.BlockState;
 
 public final class MagnetiteVeins {
@@ -18,13 +17,13 @@ public final class MagnetiteVeins {
 
     private MagnetiteVeins() {}
 
-    // Called as terrain starts generating: the vein type itself is created before any mod block is registered.
+    // The vein type is created before any mod block is registered, so this runs as terrain starts generating.
     public static void apply() {
         if (applied || iron == null) {
             return;
         }
         BlockState magnetite = BuiltInRegistries.BLOCK
-                .get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "magnetite_ore"))
+                .get(Fundamentals.id("magnetite_ore"))
                 .defaultBlockState();
         if (!magnetite.hasProperty(OreBlock.GRADE)) {
             return;

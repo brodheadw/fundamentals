@@ -20,7 +20,7 @@ public final class HandTools {
     }
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
-        registry.accept(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "mortar_and_pestle"),
+        registry.accept(Fundamentals.id("mortar_and_pestle"),
                 mortarAndPestle = new MortarItem(new Item.Properties().durability(128)));
     }
 }

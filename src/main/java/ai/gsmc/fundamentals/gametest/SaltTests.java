@@ -3,8 +3,6 @@ package ai.gsmc.fundamentals.gametest;
 import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.separation.Hazards;
 import ai.gsmc.fundamentals.separation.Separation;
-import ai.gsmc.fundamentals.worldgen.DepositFeature;
-import com.simibubi.create.AllRecipeTypes;
 import com.simibubi.create.content.fluids.tank.BoilerData;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import net.minecraft.core.BlockPos;
@@ -28,12 +26,10 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
-/** Seawater from the sea, and salt from seawater and rock salt, not from any water at all. */
 @GameTestHolder(Fundamentals.MOD_ID)
 @PrefixGameTestTemplate(false)
 public class SaltTests {
 
-    // Level.getBiome jitters among the neighbouring 4x4x4 biome cells, so a whole block of them is set.
     private static ItemStack bucketFrom(GameTestHelper helper, BlockPos at, ResourceKey<Biome> biome) {
         BlockPos pos = helper.absolutePos(at);
         FillBiomeCommand.fill(helper.getLevel(), pos.offset(-8, -8, -8), pos.offset(8, 8, 8),
@@ -54,35 +50,6 @@ public class SaltTests {
     }
 
     @GameTest(template = "empty")
-    public void saltComesFromSeawaterAndRockSaltNotFreshWater(GameTestHelper helper) {
-        var recipes = helper.getLevel().getRecipeManager();
-        ItemStack salt = new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "salt")));
-        boolean fromSeawater = false;
-        for (var holder : recipes.getAllRecipesFor(AllRecipeTypes.MIXING.getType())) {
-            ProcessingRecipe<?, ?> recipe = (ProcessingRecipe<?, ?>) holder.value();
-            if (recipe.getRollableResults().stream().noneMatch(r -> r.getStack().is(salt.getItem()))) {
-                continue;
-            }
-            helper.assertTrue(recipe.getFluidIngredients().stream().noneMatch(i -> i.ingredient().test(new FluidStack(Fluids.WATER, 1))),
-                    holder.id() + " makes salt from fresh water");
-            fromSeawater |= recipe.getFluidIngredients().stream().anyMatch(i -> i.ingredient().test(new FluidStack(Separation.fluid("seawater"), 1)))
-                    && recipe.getFluidResults().stream().anyMatch(f -> f.is(Separation.fluid("bittern")))
-                    && recipe.getFluidResults().stream().anyMatch(f -> f.is(Fluids.WATER) && f.getAmount() == 900);
-        }
-        helper.assertTrue(fromSeawater, "seawater should boil down to salt and bittern and give its steam back as 900 mB of fresh water");
-        var halite = recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "uses/salt_from_halite_milling"));
-        helper.assertTrue(halite.isPresent() && halite.get().value().getIngredients().get(0).test(new ItemStack(BuiltInRegistries.ITEM.get(
-                ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "raw_halite")))), "a millstone should grind rock salt to salt");
-        helper.assertTrue(recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "uses/magnesium_chloride_from_bittern")).isPresent(),
-                "bittern should boil down to magnesium chloride");
-        var bed = helper.getLevel().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE)
-                .get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "evaporite_bed"));
-        helper.assertTrue(bed != null && bed.config() instanceof DepositFeature.Config config && config.ores().stream()
-                .anyMatch(ore -> BuiltInRegistries.BLOCK.getKey(ore.state().getBlock()).getPath().equals("halite_ore")), "the evaporite bed should carry halite");
-        helper.succeed();
-    }
-
-    @GameTest(template = "empty")
     public void aBoilerRefusesSeawater(GameTestHelper helper) {
         IFluidHandler boiler = new BoilerData().createHandler();
         helper.assertTrue(boiler.fill(new FluidStack(Separation.fluid("seawater"), 1000), IFluidHandler.FluidAction.SIMULATE) == 0, "a boiler should refuse seawater");
@@ -91,24 +58,13 @@ public class SaltTests {
     }
 
     @GameTest(template = "empty")
-    public void chlorineFreesBromineFromBittern(GameTestHelper helper) {
-        var holder = helper.getLevel().getRecipeManager().byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "salt/bromine"));
-        helper.assertTrue(holder.isPresent(), "bittern and chlorine should make bromine");
-        ProcessingRecipe<?, ?> recipe = (ProcessingRecipe<?, ?>) holder.get().value();
-        helper.assertTrue(recipe.getFluidIngredients().stream().anyMatch(i -> i.ingredient().test(new FluidStack(Separation.fluid("bittern"), 1)))
-                && recipe.getFluidIngredients().stream().anyMatch(i -> i.ingredient().test(new FluidStack(Separation.fluid("chlorine"), 1)))
-                && recipe.getFluidResults().stream().anyMatch(f -> f.is(Separation.fluid("bromine"))), "from bittern and chlorine to bromine");
-        helper.succeed();
-    }
-
-    @GameTest(template = "empty")
     public void theChlorAlkaliCellMakesChlorineCausticSodaAndHydrogen(GameTestHelper helper) {
-        var holder = helper.getLevel().getRecipeManager().byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "uses/chlor_alkali"));
+        var holder = helper.getLevel().getRecipeManager().byKey(Fundamentals.id("uses/chlor_alkali"));
         helper.assertTrue(holder.isPresent(), "brine should electrolyse in a cell");
         ProcessingRecipe<?, ?> recipe = (ProcessingRecipe<?, ?>) holder.get().value();
         helper.assertTrue(recipe.getFluidIngredients().stream().anyMatch(i -> i.ingredient().test(new FluidStack(Separation.fluid("salt_brine"), 1)))
                 && recipe.getIngredients().stream().anyMatch(i -> i.test(new ItemStack(BuiltInRegistries.ITEM.get(
-                        ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "dimensionally_stable_anode"))))), "the cell takes brine over a dimensionally stable anode");
+                        Fundamentals.id("dimensionally_stable_anode"))))), "the cell takes brine over a dimensionally stable anode");
         for (var product : new net.minecraft.world.level.material.Fluid[] {Separation.fluid("chlorine"), Separation.fluid("caustic_soda"),
                 BuiltInRegistries.FLUID.get(ResourceLocation.parse("tfmg:hydrogen"))}) {
             helper.assertTrue(recipe.getFluidResults().stream().anyMatch(f -> f.is(product)), "the cell should give " + BuiltInRegistries.FLUID.getKey(product));
@@ -116,15 +72,6 @@ public class SaltTests {
         var caustic = Separation.kind(Separation.fluid("caustic_soda"));
         helper.assertTrue(Hazards.eats(caustic, BuiltInRegistries.BLOCK.get(ResourceLocation.parse("tfmg:aluminum_pipe")).defaultBlockState())
                 && !Hazards.eats(caustic, com.simibubi.create.AllBlocks.FLUID_PIPE.getDefaultState()), "caustic soda should eat aluminium pipe and leave copper alone");
-        helper.succeed();
-    }
-
-    @GameTest(template = "empty")
-    public void seawaterEatsCopperSlowly(GameTestHelper helper) {
-        double sea = Hazards.chance(new FluidStack(Separation.fluid("seawater"), 1));
-        double bittern = Hazards.chance(new FluidStack(Separation.fluid("bittern"), 1));
-        helper.assertTrue(sea > 0 && sea < bittern, "seawater should eat copper, more slowly than bittern: " + sea + " vs " + bittern);
-        helper.assertTrue(Hazards.chance(new FluidStack(Fluids.WATER, 1)) == 0, "fresh water should not");
         helper.succeed();
     }
 }

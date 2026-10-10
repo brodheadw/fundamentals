@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/** A generator's voltage and power both come off generation(), scaled here by what the heat has left of its magnets. */
 @Mixin(value = GeneratorBlockEntity.class, remap = false)
 public abstract class GeneratorMagnetMixin {
 

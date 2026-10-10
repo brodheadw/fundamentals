@@ -28,29 +28,18 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * One casing of a stage. Casings merge as they are placed into the largest box they complete, up to three
- * across, three along and two tall ({@link StageFormation}), and a box at least three by three is a stage.
- * The casing at a stage's back-left-bottom corner is its controller: it holds the tanks, which grow with the
- * stage, and the renderer draws the fluids from it; the others point at it. A stage is stirred by Create's
- * Mechanical Mixer standing over the middle of its trough, and stages standing end to end are a
- * {@link Battery}, run from the head stage's controller. Where everything sits is {@link VatGeometry}.
- */
 public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleInformation {
 
     public static final int CAPACITY_PER_CASING = 250;
     public static final int BATCH_PER_CASING = 10;
     public static final int PERIOD = 100;
-    /** Ticks of running before a battery of one stage first delivers; each further stage adds as much. */
     public static final int EQUILIBRATION_PER_STAGE = 40;
     static final int STIR_TICKS = 30;
-    /** How often a running battery looks again at what might stop it; a cut always looks first. */
     private static final int STALL_INTERVAL = 10;
 
     final Tank organic = new Tank();
     final Tank aqueous = new Tank();
     final Tank out = new Tank();
-    /** The sump: the spent liquor every cut leaves, drained from under the head stage. */
     final Tank waste = new Tank();
     @Nullable
     BlockPos controller;
@@ -60,16 +49,14 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     int stirring;
     int cooldown;
     int settled;
-    /** Cuts run on a crude feed since the organic was last clean; at three the crud fouls it. */
     int crud;
     boolean dirty;
-    /** Bumped whenever a stage anywhere forms, dissolves or loads, which is when a cached battery may have changed. */
     static int formations;
     @Nullable
     private Battery battery;
     private int batteryFormations;
     @Nullable
-    private Optional<Battery.Stall> stall;
+    private Optional<Stall> stall;
 
     public MixerSettlerBlockEntity(BlockPos pos, BlockState state) {
         super(Separation.mixerSettlerEntity(), pos, state);
@@ -87,8 +74,6 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         }
     }
 
-    // ---- the stage: size, tanks, controller ----
-
     public FluidStack organic() { return organic.getFluid(); }
     public FluidStack aqueous() { return aqueous.getFluid(); }
     public boolean stirring() { return stirring > 0; }
@@ -97,19 +82,15 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     public int tall() { return tall; }
     public int volume() { return across * along * tall; }
     public int capacity() { return CAPACITY_PER_CASING * volume(); }
-    /** The two phases share the vat, so each tank holds half of it; the out-tank is a separate buffer. */
     public int phaseCapacity() { return capacity() / 2; }
     public int batch() { return BATCH_PER_CASING * volume(); }
     public boolean isController() { return controller == null || worldPosition.equals(controller); }
-    /** A stage is at least three across and three along; anything less is just casing. */
     public boolean isStage() { MixerSettlerBlockEntity s = stage(); return s.across >= 3 && s.along >= 3; }
     public BlockPos controllerPos() { return controller == null ? worldPosition : controller; }
 
-    /** How full each phase is, the number the renderer and the physics both read. */
     public float aqueousFill() { return (float) aqueous.getFluidAmount() / phaseCapacity(); }
     public float organicFill() { return (float) organic.getFluidAmount() / phaseCapacity(); }
 
-    /** The fluid surface, in blocks above the stage's bottom, where the renderer draws it. */
     public double surface() {
         MixerSettlerBlockEntity stage = stage();
         return VatGeometry.get().surface(stage.tall, stage.aqueousFill(), stage.organicFill());
@@ -132,7 +113,6 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         return level.getBlockEntity(pos) instanceof MixerSettlerBlockEntity casing && casing.facing() == facing() ? casing : null;
     }
 
-    /** The controller of this casing's stage; a casing whose controller no longer claims it is a stage of one again. */
     public MixerSettlerBlockEntity stage() {
         if (controller != null) {
             MixerSettlerBlockEntity head = casingAt(controller);
@@ -151,7 +131,6 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         return a >= 0 && a < across && l >= 0 && l < along && rel.getY() >= 0 && rel.getY() < tall;
     }
 
-    /** The casing {@code a} to the right, {@code l} forward and {@code u} up from {@code origin}. */
     BlockPos cell(BlockPos origin, int a, int l, int u) {
         return origin.relative(right(), a).relative(facing(), l).above(u);
     }
@@ -179,14 +158,10 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         stirring = 0;
     }
 
-    /** The stage's whole box, for the renderer, which draws it all from the controller. */
     public AABB stageBox() {
         return AABB.encapsulatingFullBlocks(worldPosition, cell(worldPosition, across - 1, along - 1, tall - 1));
     }
 
-    // ---- the battery: neighbours, mixer, lever ----
-
-    /** The controller of the stage of the same size standing end to end with this one, ahead or behind. */
     @Nullable
     MixerSettlerBlockEntity nextStage(boolean ahead) {
         MixerSettlerBlockEntity me = stage();
@@ -213,12 +188,10 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         return battery;
     }
 
-    /** Where the stage's Mechanical Mixer stands: over the middle casing of the trough's top layer. */
     public BlockPos mixerPos() {
         return cell(worldPosition, across / 2, 0, tall - 1).above();
     }
 
-    /** Over this speed the mixer beats the phases into an emulsion that will not settle. */
     public static final float MAX_MIXER_SPEED = 128;
 
     public boolean isStirred() {
@@ -229,7 +202,6 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         return level.getBlockEntity(mixerPos()) instanceof MechanicalMixerBlockEntity mixer && Math.abs(mixer.getSpeed()) > MAX_MIXER_SPEED;
     }
 
-    /** Whether any casing of this stage has a redstone signal: the lever on the head stage's wall. */
     public boolean hasSignal() {
         for (int a = 0; a < across; a++) {
             for (int l = 0; l < along; l++) {
@@ -243,11 +215,6 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         return false;
     }
 
-    /**
-     * Which tank a pipe on {@code side} of this casing reaches, if any: the organic from above anywhere; the
-     * feed and the raffinate at the back and sides of the first stage; the acid and the loaded strip at the
-     * front and sides of the last; the spent liquor from under the first.
-     */
     @Nullable
     public IFluidHandler handler(@Nullable Direction side) {
         if (side == null || !isStage()) {
@@ -275,8 +242,6 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         return null;
     }
 
-    // ---- running ----
-
     static void serverTick(Level level, BlockPos pos, BlockState state, MixerSettlerBlockEntity casing) {
         if (!casing.isController() || !casing.isStage()) {
             return;
@@ -301,12 +266,10 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
             level.sendBlockUpdated(pos, state, state, 3);
         }
         if (battery.head() == casing) {
-            // the battery comes to equilibrium before its first batch and keeps time after
-            // a momentary hiccup costs a little; the lever off or the feed gone costs everything
             if (casing.stall == null || level.getGameTime() % STALL_INTERVAL == 0) {
                 casing.stall = battery.stall();
             }
-            Optional<Battery.Stall> stall = casing.stall;
+            Optional<Stall> stall = casing.stall;
             if (stall.isEmpty()) {
                 casing.settled++;
             } else if (stall.get().key().equals("lever") || stall.get().key().equals("idle")) {
@@ -315,7 +278,6 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
                 casing.settled = Math.max(0, casing.settled - 2);
             }
             if (level.getGameTime() % 20 == 0) {
-                // the countdown the goggles show lives on the client; keep it current while it runs
                 casing.dirty = true;
             }
             if (stall.isEmpty() && casing.settled >= battery.equilibration() && ++casing.cooldown >= PERIOD) {
@@ -328,11 +290,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         }
     }
 
-    /**
-     * Create's mixer lowers its head when it believes it is working. Its cycle is head down by tick 20, a
-     * basin's processing, head up by 40; over a running battery we start it and then hold it at the bottom of
-     * the cycle every tick, so the head stays in the hatch until the battery stops.
-     */
+    // Create's mixer lowers its head only while it believes it is working: hold it at the bottom of its cycle while the battery runs.
     private void driveMixer() {
         if (!(level.getBlockEntity(mixerPos()) instanceof MechanicalMixerBlockEntity mixer)) {
             return;
@@ -347,7 +305,6 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         }
     }
 
-    /** The ports in the end walls appear when a stage stands end to end with another. */
     private void showLinks() {
         boolean ahead = nextStage(true) != null;
         boolean behind = nextStage(false) != null;
@@ -366,7 +323,6 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         }
     }
 
-    /** The organic runs forward along the battery: a stage with more than the one ahead sends some on. */
     private void flowOrganicForward() {
         MixerSettlerBlockEntity next = nextStage(true);
         if (next == null || organic.isEmpty()) {
@@ -376,21 +332,17 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         if (excess <= 0) {
             return;
         }
-        // a quarter of the difference a second, capped at a quarter batch: a 32-stage line charges in minutes, not a quarter hour
         FluidStack moved = organic.drain(Math.max(1, Math.min(excess / 4, batch() / 4)), IFluidHandler.FluidAction.SIMULATE);
         int taken = next.organic.fill(moved, IFluidHandler.FluidAction.EXECUTE);
         organic.drain(taken, IFluidHandler.FluidAction.EXECUTE);
     }
 
-    /** A few bubbles at the shaft, where the mixer beats the two phases together. */
     private void bubble(ServerLevel level) {
         BlockPos at = mixerPos().below();
         double x = at.getX() + 0.5, y = worldPosition.getY() + surface(), z = at.getZ() + 0.5;
         level.sendParticles(ParticleTypes.BUBBLE_POP, x, y, z, 3, 0.2, 0.03, 0.2, 0.0);
         level.sendParticles(ParticleTypes.SPLASH, x, y + 0.05, z, 2, 0.15, 0.0, 0.15, 0.0);
     }
-
-    // ---- goggles ----
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
@@ -402,7 +354,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         MixerSettlerBlockEntity head = battery.head();
         tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler.stages", battery.size(), head.batch())));
         tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler.stage", head.across, head.along, head.tall)));
-        Optional<Battery.Stall> stall = battery.stall();
+        Optional<Stall> stall = battery.stall();
         if (stall.isEmpty()) {
             SeparationRecipe cut = SeparationRecipe.forLiquor(level, head.aqueous.getFluid().getFluid()).orElseThrow();
             tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler.ready",
@@ -414,7 +366,6 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         } else if (!stall.get().key().equals("full")) {
             tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler." + stall.get().key(), stall.get().args())));
         }
-        // How far along the line things have got, and what sits at the ends
         long charged = battery.stages().stream().filter(s -> s.organic.getFluidAmount() >= s.batch()).count();
         long wet = battery.stages().stream().filter(s -> !s.aqueous.isEmpty()).count();
         tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler.progress", charged, battery.size(), wet)));
@@ -437,8 +388,6 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
     private static Component indent(Component text) {
         return Component.literal("    ").append(text);
     }
-
-    // ---- saving ----
 
     @Override
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {

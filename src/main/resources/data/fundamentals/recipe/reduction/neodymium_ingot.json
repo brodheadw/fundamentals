@@ -4,6 +4,12 @@
     "tfmg:steel_vat",
     "tfmg:firebrick_lined_vat"
   ],
+  "machines": [
+    "tfmg:electrode",
+    "tfmg:electrode"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
   "ingredients": [
     {
       "item": "fundamentals:neodymium_fluoride"
@@ -15,12 +21,6 @@
       "item": "fundamentals:neodymium_oxide"
     }
   ],
-  "machines": [
-    "tfmg:electrode",
-    "tfmg:electrode"
-  ],
-  "min_size": 1,
-  "processing_time": 100,
   "results": [
     {
       "id": "fundamentals:neodymium_ingot",

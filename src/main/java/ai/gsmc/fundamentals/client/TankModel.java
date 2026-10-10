@@ -15,7 +15,6 @@ import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockAndTintGetter;
 import net.minecraft.world.level.block.state.BlockState;
@@ -26,9 +25,6 @@ import net.neoforged.neoforge.client.model.data.ModelProperty;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Create's fluid tank model with our sheets, plastic's or titanium's: connected textures across the multiblock, and the walls
- * between two blocks of one tank left out. Create's own is private to its two tanks. Natural plastic draws translucent; a dyed tank
- * draws the same milky sheets cutout, which makes them opaque, tinted by its dye. Titanium draws as its models say. */
 class TankModel extends CTModel {
 
     private static final ModelProperty<boolean[]> JOINED = new ModelProperty<>();
@@ -38,8 +34,8 @@ class TankModel extends CTModel {
     }
 
     private static CTSpriteShiftEntry shift(String name) {
-        return CTSpriteShifter.getCT(AllCTTypes.RECTANGLE, ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "block/" + name),
-                ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "block/" + name + "_connected"));
+        return CTSpriteShifter.getCT(AllCTTypes.RECTANGLE, Fundamentals.id("block/" + name),
+                Fundamentals.id("block/" + name + "_connected"));
     }
 
     @Override

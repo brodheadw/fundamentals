@@ -5,7 +5,6 @@ import net.minecraft.world.item.DyeColor;
 
 import javax.annotation.Nullable;
 
-/** What a plastic is coloured with: nothing, natural and milky, or one of the dyes, which make it opaque. */
 public enum Pigment implements StringRepresentable {
     NONE(null), WHITE(DyeColor.WHITE), ORANGE(DyeColor.ORANGE), MAGENTA(DyeColor.MAGENTA), LIGHT_BLUE(DyeColor.LIGHT_BLUE),
     YELLOW(DyeColor.YELLOW), LIME(DyeColor.LIME), PINK(DyeColor.PINK), GRAY(DyeColor.GRAY), LIGHT_GRAY(DyeColor.LIGHT_GRAY),

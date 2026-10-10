@@ -26,7 +26,6 @@ import org.joml.Vector3f;
 
 import java.util.List;
 
-/** Samples the temperature of the block its gauge is mounted on every half second and sends it to the client, where the needle swings toward it. */
 public class ThermometerBlockEntity extends BlockEntity implements IHaveGoggleInformation {
 
     public static final int PERIOD = 10;
@@ -49,7 +48,6 @@ public class ThermometerBlockEntity extends BlockEntity implements IHaveGoggleIn
         return getBlockState().getValue(ThermometerBlock.FACING);
     }
 
-    /** The block it is mounted on, whose temperature it reads. */
     public BlockPos sensed() {
         return worldPosition.relative(facing().getOpposite());
     }
@@ -58,7 +56,6 @@ public class ThermometerBlockEntity extends BlockEntity implements IHaveGoggleIn
         return celsius;
     }
 
-    /** Where the needle stands between ticks, 0 to 1 across the scale and a little past 1 when pegged. */
     public float dial(float partialTick) {
         return prevDial + (dial - prevDial) * partialTick;
     }
@@ -101,10 +98,6 @@ public class ThermometerBlockEntity extends BlockEntity implements IHaveGoggleIn
         gauge.dial += (target - gauge.dial) * 0.125F;
     }
 
-    /**
-     * The column boils and bursts its glass. Mercury, past 356.7 °C, leaves a little mercury and a breath of its vapour; the
-     * spirit goes with a small pop and a spray of red, leaving nothing.
-     */
     private void burst(ServerLevel level, Thermometer kind) {
         BlockPos pos = worldPosition;
         level.destroyBlock(pos, false);

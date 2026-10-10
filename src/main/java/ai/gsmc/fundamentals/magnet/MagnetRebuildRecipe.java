@@ -3,7 +3,6 @@ package ai.gsmc.fundamentals.magnet;
 import ai.gsmc.fundamentals.Fundamentals;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -13,10 +12,9 @@ import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 
-/** A motor, generator or stator with a fresh magnet: rebuilt round it, at that magnet's grade and full field. */
 public class MagnetRebuildRecipe extends CustomRecipe {
 
-    public static final TagKey<Item> MACHINES = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "magnet_machines"));
+    public static final TagKey<Item> MACHINES = TagKey.create(Registries.ITEM, Fundamentals.id("magnet_machines"));
 
     public MagnetRebuildRecipe(CraftingBookCategory category) {
         super(category);

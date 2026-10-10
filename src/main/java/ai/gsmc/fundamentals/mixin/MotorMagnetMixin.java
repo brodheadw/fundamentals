@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/** A motor turns as fast as its magnets let it: its speed, and with it the stress it can carry, scaled by what the heat has left. */
 @Mixin(value = ElectricMotorBlockEntity.class, remap = false)
 public abstract class MotorMagnetMixin {
 

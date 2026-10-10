@@ -11,10 +11,6 @@ import net.minecraft.world.level.Level;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 
-/**
- * Fundamentals' side of the temperature field, which Fundamentals: Principles keeps ({@link Heat}): the heat of Create's
- * blaze burner by its level, and {@code /heat}. The sources this mod adds are in its {@code fundamentalmagic:heat_source} data map.
- */
 public final class Temperatures {
 
     private Temperatures() {}
@@ -30,7 +26,6 @@ public final class Temperatures {
         return Component.translatable("heat.fundamentals.readout", String.format("%.0f", c), String.format("%.0f", Heat.fahrenheit(c)));
     }
 
-    /** {@code /heat}: the temperature where you stand. */
     public static void registerCommands(RegisterCommandsEvent event) {
         event.getDispatcher().register(Commands.literal("heat").executes(ctx -> {
             var source = ctx.getSource();

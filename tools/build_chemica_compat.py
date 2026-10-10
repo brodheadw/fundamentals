@@ -1,28 +1,11 @@
 #!/usr/bin/env python3
-"""Chemica, The Factory Must Grow's chemistry add-on, makes a dozen of our reagents its own way. Fundamentals does not need it, but
-with both installed they are one chemical industry, not two: either mod's hydrochloric acid, chlorine or argon goes into the other's
-recipes, the mixer-settlers, the inert drum and the pipes that corrode. docs/chemica.md has the overlap and the reasons. Re-run
-after any edit; it reads Chemica's recipes out of its jar in the Gradle cache, so build once first.
-
-    python3 tools/build_chemica_compat.py
-
-Each shared reagent gets a c: fluid tag holding both mods' fluid, which our recipes take, and a fundamentals:<reagent> tag pointing
-at it, which is how separation.Separation.reagent knows another mod's fluid for ours. Chemica's own recipes that touch a shared
-reagent are rewritten under data/chemica/, behind a mod_loaded condition: they take the tag, and they give our fluid, so a base
-running both makes one hydrochloric acid. The few of its recipes that contradict ours are taken over or switched off.
-
-Chemica's ores, and the generic metals it wins from them, are the generic ore this mod exists to replace. With Chemica loaded its
-ores no longer generate; its recipes take our ingots, nuggets and plates by c: tag and give ours; every recipe that still needs one
-of its ores, raw chunks or crushed ores is switched off; and the four metals we do not make (vanadium, tantalum, graphite and
-antimony, which only Chemica's dopant took) get a real road from our minerals, under data/fundamentals/recipe/chemica/.
-"""
 import re
 import json
 import shutil
 import zipfile
 from pathlib import Path
 
-from build_ore_data import DATA, write
+from common import DATA, fluid, ns, write
 from paint_separation import CREATE_JAR
 
 C_TAGS = DATA.parent / "c/tags"
@@ -31,7 +14,6 @@ CRUSHING = DATA.parent / "create/recipe/crushing"
 CHEMICA_JAR = next(Path.home().glob(".gradle/caches/modules-2/files-2.1/maven.modrinth/chemica/*/*/chemica-*.jar"))
 LOADED = [{"type": "neoforge:mod_loaded", "modid": "chemica"}]
 
-# our reagent -> (its c: fluid tag, Chemica's fluid); Chemica's own acid tags already have these names
 SHARED = {
     "hydrochloric_acid": ("acids/hydrochloric", "hydrochloric_acid"),
     "nitric_acid": ("acids/nitric", "nitric_acid"),
@@ -45,13 +27,10 @@ SHARED = {
     "titanium_tetrachloride": ("titanium_tetrachloride", "titanium_tetrachloride"),
     "vinyl_chloride": ("vinyl_chloride", "vinyl_chloride_monomer"),
 }
-# Chemica's items that are ours under another name, and the c: tag each is known by
 ITEMS = {"salt": ("salt", "dusts/salt"), "soda_ash": ("soda_ash", "dusts/soda_ash")}
-# the plastic sheets of ours and The Factory's that stand for Chemica's
 SHEETS = {"pvc": "fundamentals:pvc_sheet", "polyethylene": "tfmg:plastic_sheet"}
 CHEMICA_SHEETS = ["chemica:polyethylene_sheet", "chemica:polyvinyl_chloride_sheet", "chemica:polytetrafluoroethylene_sheet"]
 
-# Chemica's recipes that contradict ours, switched off: path -> why
 SWITCHED_OFF = {
     "mixing/salt": "salt boiled out of fresh water; it comes from seawater or halite",
     "mixing/brine": "our brine, from the same salt and water",
@@ -68,16 +47,11 @@ SWITCHED_OFF = {
     "casting/polyethylene_sheet": "its polyethylene melt is no longer made; The Factory's plastic sheet serves",
     "casting/polyvinyl_chloride": "its PVC melt is no longer made; our PVC sheet serves",
 }
-# Chemica's items that only its ores give: a recipe that takes one is switched off
 ORE_ITEM = re.compile(r"chemica:((deepslate_)?[a-z]+_ore|raw_[a-z_]+|crushed_raw_[a-z]+|crushed_graphite|([a-z]+_grade_)?rutile_(crystal|dust)"
                       r"|fervorite|zelosite|antimony_(ingot|nugget|dust))")
-# the metals both mods make: Chemica's ingots, nuggets and sheets stand for ours by c: tag
 METALS = ("tin", "silver", "platinum", "cobalt", "chromium", "tungsten", "molybdenum", "titanium", "magnesium", "iridium")
-# Chemica's items that are one of ours under another name, as a recipe takes them
 INPUTS = {"chemica:tungsten_dust": {"tag": "c:ingots/tungsten"}, "chemica:phosphorus_dust": {"item": "fundamentals:white_phosphorus"}}
-# where one recipe wants the real compound rather than the metal: chromic acid is made from sodium dichromate
 RECIPE_INPUTS = {"vat_machine_recipe/mixing/chromic_acid": {"chemica:chromium_dust": {"item": "fundamentals:sodium_dichromate"}}}
-# a byproduct Chemica names that does not exist, and native copper's real one (it carries silver, not arsenic)
 MISNAMED = {"chemica:sulfur_dust": "tfmg:sulfur_dust"}
 NATIVE_COPPER = {"chemica:arsenic_dust": "fundamentals:silver_nugget"}
 # Chemica's vat recipes spell some of these in camelCase, which The Factory's vat ignores
@@ -88,12 +62,10 @@ ARC = {"type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:firebrick_
 
 
 def fluid_ingredient(id, amount):
-    """A fluid a recipe of ours takes: a shared reagent by its c: tag, so Chemica's serves, anything else as itself."""
-    id = id if ":" in id else f"fundamentals:{id}"
-    namespace, name = id.split(":")
+    namespace, name = ns(id).split(":")
     if namespace == "fundamentals" and name in SHARED:
         return {"type": "neoforge:tag", "amount": amount, "tag": f"c:{SHARED[name][0]}"}
-    return {"type": "neoforge:single", "amount": amount, "fluid": id}
+    return fluid(id, amount)
 
 
 def optional(ids):
@@ -101,7 +73,6 @@ def optional(ids):
 
 
 def rewrite(node, inputs, outputs):
-    """Chemica's recipe with every shared fluid or item taken by tag and given as ours."""
     if isinstance(node, list):
         return [rewrite(each, inputs, outputs) for each in node]
     if not isinstance(node, dict):
@@ -118,7 +89,6 @@ def rewrite(node, inputs, outputs):
 
 
 def takes(node):
-    """Every item a recipe names on its own, not by tag."""
     if isinstance(node, list):
         return [i for each in node for i in takes(each)]
     if not isinstance(node, dict):
@@ -127,17 +97,14 @@ def takes(node):
 
 
 def take_over(path, recipe):
-    """Sodium is won from molten salt, not brine, which gives up hydrogen first (the Downs cell)."""
     if path == "vat_machine_recipe/electrolysis/salt":
         recipe["ingredients"] = [i for i in recipe["ingredients"] if i.get("fluid") != "minecraft:water"]
         recipe["results"] = [r for r in recipe["results"] if r["id"] != "minecraft:water"]
     return recipe
 
 
+# Chemica's own takeovers of Create's ore crushing are in 1.20 Forge's format and fail to load, leaving copper and gold ore uncrushable.
 def crushing(chemica, create):
-    """Chemica's takeovers of Create's ore crushing, which add a byproduct (arsenic with gold, cobalt with nickel, vanadium with
-    iron), are still in 1.20 Forge's format and fail to load, which leaves copper and gold ore with no crushing recipe at all.
-    Create's own recipe with Chemica's byproduct added is what Chemica meant."""
     written = 0
     for entry in sorted(chemica.namelist()):
         if not (entry.startswith("data/create/recipe/crushing/") and entry.endswith(".json")):
@@ -153,8 +120,6 @@ def crushing(chemica, create):
 
 
 def raw_materials():
-    """Chemica's raw ore chunks in the c:raw_materials tags, which Create's compat crushing takes: with its ores gone they are struck
-    off. build_ore_data.py writes the tags, as it owns that folder."""
     with zipfile.ZipFile(CHEMICA_JAR) as jar:
         tags = {Path(e).stem: json.loads(jar.read(e))["values"] for e in jar.namelist()
                 if e.startswith("data/c/tags/item/raw_materials/") and e.endswith(".json")}
@@ -167,11 +132,6 @@ def mixing(name, ingredients, results, heat):
 
 
 def missing_metals():
-    """The metals Chemica wants that we do not otherwise make, won the way they are. Vanadium rides in titanomagnetite: roasted with
-    soda ash and leached, it comes off as sodium vanadate, and the calcine goes on to the blast furnace (Highveld); its oxide is
-    reduced by aluminium. Tantalum is digested out of its niobate-tantalate in hydrofluoric acid and its fluoride reduced by sodium
-    under argon (Ullmann's, Niobium and Tantalum); euxenite is the one of ours that carries it. Graphite is made, not dug, by baking
-    coke to 2,500 C in an electric furnace (Acheson)."""
     mixing("vanadium_dust", [{"item": "fundamentals:raw_magnetite"}] * 4 + [{"tag": "c:dusts/soda_ash"}, fluid_ingredient("minecraft:water", 500)],
            [{"id": "chemica:vanadium_dust"}, {"id": "create:crushed_raw_iron", "count": 3}], "heated")
     mixing("vanadium_ingot", [{"item": "chemica:vanadium_dust"}] * 2 + [{"item": "fundamentals:aluminium_powder"}],
@@ -230,7 +190,6 @@ def main():
             path = entry[len("data/chemica/recipe/"):-len(".json")]
             original = json.loads(jar.read(entry))
             made = {r.get("id", r.get("item")) for r in original.get("results", []) + [original.get("result") or {}]}
-            # Chemica packing or pressing its own form of a metal we make: ours does that already
             ours_already = (made & ours_too and path.startswith(("crafting/", "pressing/"))) or path.endswith("_ingot_crafting_from_nugget") and \
                 f"chemica:{path.split('/')[-1].split('_')[0]}_nugget" in ours_too
             if path in SWITCHED_OFF or ours_already or any(ORE_ITEM.fullmatch(i) for i in takes(original)):

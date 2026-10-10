@@ -1,5 +1,4 @@
 #!/bin/zsh
-# A brand-new flat showcase world with the plant staged by the datapack, then the client into it.
 # usage: tools/showcase/fresh.sh [repo]   (defaults to the repo this script is in)
 # Kills any running showcase client of this repo first; never run it while someone is playing.
 set -u

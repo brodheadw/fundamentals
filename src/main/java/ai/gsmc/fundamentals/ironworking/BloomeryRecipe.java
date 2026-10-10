@@ -1,12 +1,11 @@
 package ai.gsmc.fundamentals.ironworking;
 
+import ai.gsmc.fundamentals.Fundamentals;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.network.RegistryFriendlyByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
@@ -18,7 +17,7 @@ import net.minecraft.world.level.Level;
 public record BloomeryRecipe(Ingredient ingredient, ItemStack result, ItemStack byproduct) implements Recipe<SingleRecipeInput> {
 
     public static final RecipeType<BloomeryRecipe> TYPE = RecipeType.simple(
-            ResourceLocation.fromNamespaceAndPath("fundamentals", "bloomery"));
+            Fundamentals.id("bloomery"));
     public static final RecipeSerializer<BloomeryRecipe> SERIALIZER = new Serializer();
 
     @Override

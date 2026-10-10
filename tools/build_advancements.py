@@ -1,40 +1,26 @@
 #!/usr/bin/env python3
-"""Writes the advancements: a handful of milestones, not a checklist, and the periodic table, a tab with an
-advancement per element. Re-run after adding a mineral, an item, a grinding recipe or a rare earth.
-
-    python3 tools/paint_elements.py && python3 tools/build_advancements.py
-
-An element lights up the first time the player holds anything made of it: each has an item tag,
-fundamentals:elements/<symbol>, of every item that contains it. Ours are read off the formulas in
-content/*/*Materials.java, a form adding what it adds (an oxide its oxygen); the items that are not a form of a
-material, and vanilla's, Create's and TFMG's, are listed by hand below. An element nothing contains stays a dim
-tile. PeriodicTable.java pins the tab to the table, by the atomic number each icon carries.
-"""
-import json
 import re
 import shutil
-from pathlib import Path
 
-from build_ore_data import ASSETS, DATA, DISPLAY, ORES, tag, write
+from common import ASSETS, DATA, JAVA, read_lang, tag, write, write_lang
+from build_ore_data import DISPLAY, ORES
 from build_heat_data import THERMOMETERS
 from build_separation_data import DISSOLVES, PLANT_ITEMS, TITANIUM_PIPEWORK
 from build_uses_data import BLOCKS as USES_BLOCKS, ITEMS as USES_ITEMS, MAGNETS, PGM_ITEMS, PLASTIC_BLOCKS, PLASTIC_ITEMS
 from paint_elements import ELEMENTS
-from paint_materials import MATERIALS, items as material_items
+from paint_materials import items as material_items
 from paint_oxidation import BLOCKS as OXIDATION_BLOCKS, FAMILIES as WEATHERING
 
 OUT = DATA / "advancement"
 ELEMENT_TAGS = DATA / "tags/item/elements"
-JAVA = Path(__file__).resolve().parent.parent / "src/main/java/ai/gsmc/fundamentals/content"
+CONTENT = JAVA / "content"
 RAW = [f"fundamentals:raw_{mineral}" for mineral in ORES]
 GRINDING = sorted(f"fundamentals:grinding/{p.stem}" for p in (DATA / "recipe/grinding").glob("*.json"))
 SYMBOLS = {symbol: z for z, (symbol, _, _) in ELEMENTS.items()}
 NAME = {symbol: name for symbol, name, _ in ELEMENTS.values()}
 RARE_EARTHS = [NAME[s].lower() for s in ("La", "Ce", "Pr", "Nd", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu", "Y", "Sc")]
 
-# What a form adds to its material.
 FORM_ADDS = {"oxide": "O", "fluoride": "F", "oxalate": "C2O4"}
-# Materials registered without a formula.
 MATERIAL_FORMULAS = {
     "steel": "Fe-C", "bronze": "Cu-Sn", "brass": "Cu-Zn", "blister_copper": "Cu", "crude_tin": "Sn-Fe", "lead_bullion": "Pb-Ag",
     "ferromanganese": "Fe-Mn", "ferronickel": "Fe-Ni", "ferromolybdenum": "Fe-Mo", "ferrotungsten": "Fe-W", "ferrovanadium": "Fe-V",
@@ -43,10 +29,8 @@ MATERIAL_FORMULAS = {
     "bastnasite_concentrate": "(Ce,La,Nd)CO3F",
     "light_rare_earth_concentrate": "(La,Ce,Pr,Nd,Sm,Th)PO4",
     "heavy_rare_earth_concentrate": "(Y,Gd,Tb,Dy,Ho,Er,Tm,Yb,Lu)PO4",
-    # kaolinite holding rare earth ions, heavy ones above all
     "ion_adsorption_clay": "Al2Si2O5(OH)4,(Y,La,Nd,Dy)",
 }
-# Our items that are not a form of a material.
 ITEM_FORMULAS = {
     "phosphor": "Y2O3,Eu,LaPO4,Ce,Tb", "didymium_glass": "SiO2,(Pr,Nd)", "roasted_cobaltite": "Co3O4", "roasted_chalcopyrite": "CuO,Fe2O3",
     "rhenium_flue_dust": "Re2O7", "tungsten_carbide": "WC", "tungsten_filament": "W", "clarifier_sludge": "Fe(OH)3,Al(OH)3,Th(OH)4",
@@ -63,37 +47,27 @@ ITEM_FORMULAS = {
     "heavy_rare_earth_carbonate": "(Y,Gd,Tb,Dy,Ho,Er,Tm,Yb,Lu)2(CO3)3", "cerium_concentrate": "CeO2,(La,Nd)OF", "europium_sulfate": "EuSO4","calcium_chloride": "CaCl2", "calcium_ingot": "Ca", "white_phosphorus": "P4",
     "hydrochloric_acid_bucket": "HCl", "nitric_acid_bucket": "HNO3", "phosphoric_acid_bucket": "H3PO4", "hydrofluoric_acid_bucket": "HF",
     "aqua_regia_bucket": "HNO3,HCl", "bromine_bucket": "Br2", "seawater_bucket": "H2O,NaCl,MgCl2",
-    # a bloom is iron holding its slag, fayalite
     "iron_bloom": "Fe,Fe2SiO4", "roasted_galena": "PbO", "calcined_spodumene": "LiAlSi2O6", "photovoltaic_panel": "Si",
     "clarifier_sludge_block": "Fe(OH)3,Al(OH)3,Th(OH)4", "mercury": "Hg",
-    # the crude chloride still holds the hafnium zircon carries
     "crude_zirconium_tetrachloride": "ZrCl4,HfCl4", "zirconium_tetrachloride": "ZrCl4", "hafnium_tetrachloride": "HfCl4",
     "yttria_stabilised_zirconia": "ZrO2,Y2O3", "beryl_frit": "Be3Al2Si6O18", "beryllium_hydroxide": "Be(OH)2",
     "ammonium_fluoroberyllate": "(NH4)2BeF4", "beryllium_pebbles": "Be",
     "dimensionally_stable_anode": "Ti,RuO2,IrO2", "red_mud": "Fe2O3,TiO2,Al2O3,SiO2,Na2O,(Sc,Y,La,Ce)", "aluminium_hydroxide": "Al(OH)3",
     "alumina": "Al2O3", "cryolite": "Na3AlF6",
-    # the oxide roasted from converter matte, and the pellets nickel carbonyl decomposes to
     "nickel_oxide": "NiO", "nickel_pellets": "Ni",
     "tungstic_acid": "H2WO4", "ammonium_paratungstate": "(NH4)10H2W12O42", "ammonium_perrhenate": "NH4ReO4", "lithium_carbonate": "Li2CO3",
     "mcraly_powder": "Ni-Co-Cr-Al-Y",
-    # boric acid freed from borax; a steel plate under its coat of zinc
     "boric_acid": "H3BO3", "galvanized_steel_plate": "Fe-C,Zn",
-    # sintered NdFeB is sold nickel-plated against rust; SmCo and cast alnico go bare
     "neodymium_iron_boron_magnet": "Nd2Fe14B,Ni", "dysprosium_neodymium_iron_boron_magnet": "(Nd,Dy)2Fe14B,Ni", "samarium_cobalt_magnet": "Sm2(Co,Fe,Cu,Zr)17",
     "alnico_magnet": "Fe-Al-Ni-Co-Cu",
     "mercury_thermometer": "Hg,SiO2", "spirit_thermometer": "C12H26,SiO2", "bimetallic_thermometer": "Cu-Zn,Fe", "type_k_thermocouple": "Ni-Cr,Ni-Al", "type_s_thermocouple": "Pt-Rh,Pt",
-    # Natta's catalyst, TiCl3 with the AlCl3 the aluminium leaves in it; polyvinyl chloride, and the polyethylene of the dyed blocks
     "ziegler_natta_catalyst": "TiCl3,AlCl3", "pvc_resin": "C2H3Cl", "pvc_sheet": "C2H3Cl",
-    # the titanium pipework is commercially pure titanium, grade 2
     **{name: "Ti" for name in TITANIUM_PIPEWORK},
     **{name: "C2H4" for name in PLASTIC_BLOCKS},
-    # rust is hydrated iron(III) oxide; the canister and the drum are steel, the canister holding its argon
     "rusty_iron_ingot": "Fe,Fe2O3", "rusty_steel_ingot": "Fe-C,Fe2O3", "canister": "Fe", "argon_canister": "Fe,Ar", "inert_storage_drum": "Fe",
-    # a weathered block is its metal under its patina (basic copper carbonate), its tarnish (silver sulfide) or its oxide
     **{name: {"bronze": "Cu-Sn,Cu2CO3(OH)2", "silver": "Ag,Ag2S"}.get(metal) or next(f"{sym},O" for sym, n in NAME.items() if n.lower() == metal)
        for metal in WEATHERING for name in OXIDATION_BLOCKS if name.endswith(f"_{metal}_block")},
 }
-# Vanilla's, Create's and The Factory Must Grow's.
 OTHER_FORMULAS = {
     "minecraft": {
         "water_bucket": "H2O", "ice": "H2O", "snowball": "H2O",
@@ -137,7 +111,6 @@ OTHER_FORMULAS = {
     },
 }
 
-# Where to look, when the minerals alone would say it badly.
 WHERE = {
     "H": "In water, and in every acid",
     "Be": "In beryl, bertrandite and emerald, which is beryl",
@@ -167,7 +140,6 @@ WHERE = {
 SYNTHETIC = {"Tc", "Pm"} | {symbol for symbol, z in SYMBOLS.items() if z >= 93}
 
 
-# A rare earth still mixed with another hasn't been found yet, only the ore or liquor it sits in.
 RARE_EARTH_SYMBOLS = {"Sc", "Y", "La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu"}
 
 
@@ -186,10 +158,9 @@ def separated(formula):
 
 
 def material_formulas():
-    """Material id -> formula, from the registry's Java."""
     formulas = {}
     call = re.compile(r'\b(?:mineral|reg|element|defineMineral|define)\(\s*(?:GROUP\s*,\s*)?"([a-z_]+)"((?:\s*,\s*(?:"[^"]*"|null|[A-Za-z_.]+))*)')
-    for java in sorted(JAVA.glob("*/*Materials.java")):
+    for java in sorted(CONTENT.glob("*/*Materials.java")):
         for material, args in call.findall(java.read_text(encoding="utf-8")):
             formulas[material] = next((s for s in re.findall(r'"([^"]*)"', args) if elements(s)), "")
     return {**formulas, **MATERIAL_FORMULAS}
@@ -219,7 +190,6 @@ def contents(name, formulas):
 
 
 def element_tags():
-    """symbol -> the item ids that contain it."""
     formulas = material_formulas()
     holders = {symbol: [] for symbol in SYMBOLS}
     for name in dict.fromkeys(our_items()):
@@ -257,7 +227,6 @@ def tile(z):
     return {"id": "fundamentals:element", "components": {"minecraft:custom_model_data": z}}
 
 
-# name: (parent, icon, frame, title, description, criteria, True if any one criterion will do)
 ADVANCEMENTS = {
     "root": (None, "raw_hematite", "task", "Fundamentals", "Dig a mineral out of the ground",
              {"raw": have(*RAW)}, False),
@@ -325,8 +294,7 @@ def main():
     oxides = {f"{name}_oxide" for name in RARE_EARTHS}
     assert oxides <= {name for _, _, name in material_items()}, f"rare earth oxides missing: {sorted(oxides - {n for _, _, n in material_items()})}"
     shutil.rmtree(OUT, ignore_errors=True)
-    lang_path = ASSETS / "lang/en_us.json"
-    lang = json.loads(lang_path.read_text(encoding="utf-8"))
+    lang = read_lang()
     for name, (parent, icon, frame, title, description, criteria, any_one) in ADVANCEMENTS.items():
         key = f"advancement.fundamentals.{name}"
         lang[f"{key}.title"], lang[f"{key}.description"] = title, description
@@ -344,7 +312,7 @@ def main():
             advancement["requirements"] = [list(criteria)]
         write(OUT / f"{name}.json", advancement)
     found = periodic_table(lang)
-    write(lang_path, dict(sorted(lang.items())))
+    write_lang(lang)
     print(f"wrote {len(ADVANCEMENTS)} advancements and a periodic table of {len(ELEMENTS)}, {len(found)} of them to be found: {' '.join(found)}")
 
 

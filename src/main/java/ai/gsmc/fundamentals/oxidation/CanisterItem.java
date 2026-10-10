@@ -14,11 +14,6 @@ import net.minecraft.world.item.component.ItemContainerContents;
 
 import java.util.List;
 
-/**
- * A steel canister flushed with argon, holding one stack sealed away from the air. Right-click a stack onto it (or it onto a
- * stack) to seal it in; right-click it empty-handed to open it, which lets the argon go and leaves an empty canister. What is
- * sealed inside never ages: the ageing pass only ever looks at the canister.
- */
 public class CanisterItem extends Item {
 
     public CanisterItem(Properties properties) {
@@ -29,7 +24,6 @@ public class CanisterItem extends Item {
         return canister.getOrDefault(DataComponents.CONTAINER, ItemContainerContents.EMPTY).copyOne();
     }
 
-    /** Anything but another container: a canister in a canister would nest without end. */
     public static boolean sealable(ItemStack stack) {
         return !(stack.getItem() instanceof CanisterItem) && !stack.has(DataComponents.CONTAINER);
     }

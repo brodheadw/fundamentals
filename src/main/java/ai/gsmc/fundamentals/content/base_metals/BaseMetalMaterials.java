@@ -21,13 +21,11 @@ public final class BaseMetalMaterials {
     private BaseMetalMaterials() {}
 
     public static void register() {
-        // copper sulfides: float, then smelt
         mineral("chalcopyrite", "copper", "CuFeS2", 0.53, 0);
         mineral("bornite", "copper", "Cu5FeS4", 0.64, 0);
         mineral("chalcocite", "copper", "Cu2S", 0.71, 0);
         mineral("covellite", "copper", "CuS", 0.60, 0);
 
-        // copper oxides and carbonates: smelt directly, or leach and electrowin
         mineral("malachite", "copper", "Cu2CO3(OH)2", 0.50, 0);
         mineral("azurite", "copper", "Cu3(CO3)2(OH)2", 0.48, 0);
         mineral("cuprite", "copper", "Cu2O", 0.78, 0);
