@@ -60,6 +60,9 @@ public final class FerrousMaterials {
                 MaterialProperties.builder().density(0.85).heatResistance(0.98).hardness(0.80));
         reg("molybdenum_steel", MaterialType.ALLOY, "Fe-Mo", forms(INGOT, PLATE),
                 MaterialProperties.builder().density(0.80).heatResistance(0.70).hardness(0.85));
+        // Hadfield's steel, 12 to 14 per cent manganese and about 1 carbon: austenitic, it work-hardens where it is struck
+        reg("manganese_steel", MaterialType.ALLOY, "Fe-Mn-C", forms(INGOT),
+                MaterialProperties.builder().density(1.0).hardness(0.85));
         // the two legs of a type K thermocouple: chromel is nickel with a tenth of chromium, alumel nickel with a few per cent of aluminium
         reg("chromel", MaterialType.ALLOY, "Ni-Cr", forms(INGOT),
                 MaterialProperties.builder().density(1.10).heatResistance(0.80).conductivity(0.03));
@@ -80,7 +83,7 @@ public final class FerrousMaterials {
 
         reg("ferrochrome", MaterialType.ALLOY, "Fe-Cr-C", forms(INGOT),
                 MaterialProperties.builder().hardness(0.85).heatResistance(0.65));
-        reg("ferromanganese", MaterialType.ALLOY, "", forms(INGOT, DUST), MaterialProperties.builder().hardness(0.70));
+        reg("ferromanganese", MaterialType.ALLOY, "", forms(INGOT), MaterialProperties.builder().hardness(0.70));
         reg("ferronickel", MaterialType.ALLOY, "Fe-Ni", forms(INGOT),
                 MaterialProperties.builder().magnetStrength(0.25).hardness(0.55));
         reg("ferromolybdenum", MaterialType.ALLOY, "", forms(INGOT, DUST),

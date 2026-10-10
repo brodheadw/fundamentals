@@ -1,0 +1,26 @@
+{
+  "name": "Ferromanganese and manganese steel",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:ferromanganese_ingot",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Nine tenths of the world's manganese goes into steel (USGS, Mineral Commodity Summaries, Manganese): a little in every heat takes up its sulfur and oxygen, and it goes in as ferromanganese.",
+      "title": "Ferromanganese"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two raw pyrolusite, a coal coke, an iron nugget and a limesand flux, superheated, smelt as a submerged-arc furnace does at about 1,500 °C to a ferromanganese ingot, four fifths manganese, and a slag."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A lot of it is Hadfield's steel (1882), 12 to 14 per cent manganese and 1 of carbon, which hardens where it is struck: crusher jaws, railway crossings, the Brodie helmet. A ferromanganese and six steel, superheated, make seven manganese steel.",
+      "title": "Manganese steel"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "As wear plate a thin plate of it does a thick one's work, so a manganese steel ingot, pressed three times as a steel one is, gives two of the Factory's heavy plates."
+    }
+  ]
+}

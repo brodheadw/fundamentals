@@ -36,7 +36,8 @@ import java.util.Map;
  * The acids exist in the world, not only in pipes: each has a flowing form, a block and a bucket, hurts whatever
  * stands in it, and eats the blocks it really attacks, listed in the block tag {@code fundamentals:dissolves/<acid>}
  * (hydrochloric acid takes carbonates, hydrofluoric glass and silica, nitric copper and iron, aqua regia gold as well; phosphoric acid only
- * stings). Bromine is no acid but lives with them: it burns, fumes and poisons like hydrofluoric, and eats copper, iron and aluminium. A block being eaten cracks like one being mined, over five seconds, then fizzes away, and the acid
+ * stings). Bromine is no acid but lives with them: it burns, fumes and poisons like hydrofluoric, and eats copper, iron and aluminium, and
+ * polyethylene too. A block being eaten cracks like one being mined, over five seconds, then fizzes away, and the acid
  * that ate it is spent.
  */
 public final class Acids {
@@ -53,7 +54,7 @@ public final class Acids {
         public final String id;
         public final float damage;
         public final boolean poisons;
-        /** Hydrofluoric and nitric acid, aqua regia and bromine fume in the open: standing near them bare hurts. */
+        /** Hydrochloric, hydrofluoric and nitric acid, aqua regia and bromine fume in the open: standing near them bare hurts. */
         public final boolean fumes;
         public final TagKey<Block> dissolves;
         public final FlowingFluid source;
@@ -91,7 +92,7 @@ public final class Acids {
                 if (reagent.kind() == Reagents.Kind.ACID) {
                     boolean toxic = reagent.id().equals("hydrofluoric_acid") || reagent.id().equals("bromine");
                     float damage = toxic ? 2.0F : reagent.id().equals("phosphoric_acid") ? 0.5F : 1.0F;
-                    all.put(reagent.id(), new Acid(reagent.id(), damage, toxic, toxic || reagent.id().equals("nitric_acid") || reagent.id().equals("aqua_regia")));
+                    all.put(reagent.id(), new Acid(reagent.id(), damage, toxic, !reagent.id().equals("phosphoric_acid")));
                 }
             }
         }

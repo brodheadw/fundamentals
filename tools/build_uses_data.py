@@ -38,7 +38,8 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "aluminium_hydroxide": "Aluminium Hydroxide", "alumina": "Alumina", "cryolite": "Cryolite",
          "nickel_oxide": "Nickel Oxide", "nickel_pellets": "Nickel Pellets", "tungstic_acid": "Tungstic Acid",
          "ammonium_paratungstate": "Ammonium Paratungstate", "ammonium_perrhenate": "Ammonium Perrhenate", "lithium_carbonate": "Lithium Carbonate",
-         "mcraly_powder": "MCrAlY Powder"}
+         "mcraly_powder": "MCrAlY Powder", "boric_acid": "Boric Acid",
+         "galvanized_steel_plate": "Galvanized Steel Plate"}
 # The magnet alloys and the forms each polarizes from, in the order of magnet.MagnetGrade; the magnet is <alloy>_magnet.
 MAGNET_ALLOYS = {"neodymium_iron_boron": ("ingot", "plate"), "dysprosium_neodymium_iron_boron": ("ingot", "plate"),
                  "samarium_cobalt": ("ingot", "plate"), "alnico": ("ingot",)}
@@ -93,10 +94,14 @@ def result(id, count=1):
 
 
 def mixing(name, ingredients, results, heat=None):
+    mixing_at(USES / f"{name}.json", ingredients, results, heat)
+
+
+def mixing_at(path, ingredients, results, heat=None):
     recipe = {"type": "create:mixing", "ingredients": ingredients, "results": results}
     if heat:
         recipe["heat_requirement"] = heat
-    write(USES / f"{name}.json", recipe)
+    write(path, recipe)
 
 
 def shaped(path, pattern, key, result):
@@ -112,14 +117,16 @@ def magnets():
     SmCo is Sm2(Co,Fe,Cu,Zr)17, per Arnold Magnetics 23 to 28 per cent samarium, 14 to 20 iron, 4 to 6 copper and 1.5 to 3
     zirconium in cobalt: two samarium, four cobalt, an iron and four copper and two zirconium nuggets is 26, 13, 6 and 3 in 52
     cobalt, seven ingots of the 7.7 melted. Rare earth metal burns in air when molten, so all are melted under argon. The boron goes in as ferroboron, which
-    borax, iron and charcoal give in the heat of an arc. Alnico, the magnet before the rare earths, is iron with 8-12 per cent
+    boric acid, iron and charcoal give in the heat of an arc: not borax, whose sodium would ride into the melt, but the boric acid sulfuric acid
+    frees from it, Na2B4O7 + H2SO4 + 5 H2O -> 4 H3BO3 + Na2SO4, its oxide being what the carbon reduces. Alnico, the magnet before the rare earths, is iron with 8-12 per cent
     aluminium, 15-26 nickel, 5-24 cobalt and a few of copper, cast and heat-treated in a field: five iron, an aluminium, two
     nickel, two cobalt and three copper nuggets is 49 per cent iron, 10 aluminium, 19 nickel, 19 cobalt and 3 copper.
     Each alloy polarizes into its own magnet, and the Factory's motors, generators, stators, electric pumps and voltmeters are built from one grade
     and carry it (magnet.Magnets): their own recipes are taken over per grade, magnet step first so the deployer can tell
     which grade a part is being built to. The Factory's magnet is no longer made; what a world already holds still works,
     as the dysprosium grade it was."""
-    mixing("ferroboron", item("raw_borax") + tag("c:ingots/iron") + item("minecraft:charcoal", 2), [result("ferroboron")], "superheated")
+    mixing("boric_acid", item("raw_borax") + [fluid("tfmg:sulfuric_acid", 250)], [result("boric_acid", 2)], "heated")
+    mixing("ferroboron", item("boric_acid") + tag("c:ingots/iron") + item("minecraft:charcoal", 2), [result("ferroboron")], "superheated")
     write(DATA / "tags/item/magnet_light_rare_earths.json", {"replace": False, "values": [f"fundamentals:{e}_ingot" for e in ("neodymium", "praseodymium", "didymium")]})
     write(DATA / "tags/item/magnet_heavy_rare_earths.json", {"replace": False, "values": [f"fundamentals:{e}_ingot" for e in ("dysprosium", "terbium")]})
     light, heavy = tag("fundamentals:magnet_light_rare_earths"), tag("fundamentals:magnet_heavy_rare_earths")
@@ -195,17 +202,21 @@ def lanthanum():
 
 def phosphors():
     """The tri-band phosphor of every fluorescent tube: europium's red on a yttria host, and terbium's green in lanthanum phosphate
-    with cerium to take up the ultraviolet, LAP, its phosphate from phosphoric acid. The Factory's lamps take it. The rest of the
+    with cerium to take up the ultraviolet, LAP, its phosphate from phosphoric acid. The Factory's lamps take it. The ultraviolet is
+    mercury's: a fluorescent tube is a few milligrams of mercury vapour in argon, the arc through it shining at 254 nm on the phosphor
+    (the EU's RoHS directive allows 3 to 5 mg a tube), so the lamps take mercury too, a flask doing for two. The rest of the
     acid the crackers give off goes the way most phosphoric acid goes, neutralised with ammonia to ammonium phosphate fertiliser."""
     mixing("phosphor", item("yttrium_oxide", 2) + item("europium_oxide") + item("lanthanum_oxide") + item("cerium_oxide") + item("terbium_oxide")
            + [fluid("phosphoric_acid", 250)], [result("phosphor", 6)], "superheated")
     mixing("ammonium_phosphate", [fluid("phosphoric_acid", 250), fluid("ammonia", 250)], [result("minecraft:bone_meal")])
-    shaped(TFMG / "crafting/materials/aluminum_lamp.json", ["P ", "BF", "S "],
-           {"B": {"item": "tfmg:light_bulb"}, "P": {"item": "create:framed_glass_pane"}, "S": {"tag": "c:plates/aluminum"}, "F": {"item": "fundamentals:phosphor"}},
-           {"count": 1, "id": "tfmg:aluminum_lamp"})
-    shaped(TFMG / "crafting/materials/circular_light.json", ["P ", "BF", "S "],
-           {"B": {"item": "tfmg:light_bulb"}, "P": {"item": "create:framed_glass"}, "S": {"tag": "c:nuggets/steel"}, "F": {"item": "fundamentals:phosphor"}},
-           {"count": 1, "id": "tfmg:circular_light"})
+    shaped(TFMG / "crafting/materials/aluminum_lamp.json", ["PMP", "BFB", "SFS"],
+           {"B": {"item": "tfmg:light_bulb"}, "P": {"item": "create:framed_glass_pane"}, "S": {"tag": "c:plates/aluminum"}, "F": {"item": "fundamentals:phosphor"},
+            "M": {"item": "fundamentals:mercury"}},
+           {"count": 2, "id": "tfmg:aluminum_lamp"})
+    shaped(TFMG / "crafting/materials/circular_light.json", ["PMP", "BFB", "SFS"],
+           {"B": {"item": "tfmg:light_bulb"}, "P": {"item": "create:framed_glass"}, "S": {"tag": "c:nuggets/steel"}, "F": {"item": "fundamentals:phosphor"},
+            "M": {"item": "fundamentals:mercury"}},
+           {"count": 2, "id": "tfmg:circular_light"})
 
 
 def yttrium():
@@ -382,15 +393,16 @@ def tin():
     Roasting drives off the sulfur and arsenic of the pyrite and arsenopyrite that ride with it. Charcoal reduces the oxide at 1,200
     to 1,300 C, as the blowing house's shaft furnace did and the bloomery does; a superheated basin with coke stands in for the
     reverberatory. Crude tin carries iron; tin melts at 232 C, so on a gentle heat it runs off the iron-tin hardhead, and green wood
-    stirred through the melt (poling) brings the last dross up. Bronze is a quarter tin, and bell metal, and the plain bearing a shaft turns in;
-    tin-lead solder joins circuit boards."""
+    stirred through the melt (poling) brings the last dross up. Arsenical copper came before it; tin bronze is copper with about an eighth
+    of tin, seven to one here (bell metal is a harder fifth to a quarter tin), and is bells and the plain bearing a shaft turns in.
+    Tin-lead solder joins circuit boards."""
     write(USES / "tin_concentrate.json", {"type": "create:splashing", "ingredients": item("raw_cassiterite"), "results": [result("tin_concentrate")]})
     roast("tin_concentrate", "roasted_tin_concentrate", raw=False)
     write(DATA / "recipe/bloomery/crude_tin_from_roasted_tin_concentrate.json", {"type": "fundamentals:bloomery", "ingredient": {"item": "fundamentals:roasted_tin_concentrate"},
                                                                                 "result": {"id": "fundamentals:crude_tin_ingot", "count": 1}, "byproduct": {"id": "tfmg:slag", "count": 1}})
     mixing("crude_tin", item("roasted_tin_concentrate", 2) + item("tfmg:coal_coke"), [result("crude_tin_ingot", 2), result("tfmg:slag")], "superheated")
     mixing("tin_ingot", item("crude_tin_ingot", 2) + tag("c:rods/wooden"), [result("tin_ingot", 2), {"id": "tfmg:slag", "chance": 0.25}], "heated")
-    mixing("bronze_ingot", tag("c:ingots/copper", 3) + tag("c:ingots/tin"), [result("bronze_ingot", 4)], "heated")
+    mixing("bronze_ingot", tag("c:ingots/copper", 7) + tag("c:ingots/tin"), [result("bronze_ingot", 8)], "heated")
     shaped(CREATE / "crafting/curiosities/peculiar_bell.json", ["I", "P"], {"I": {"tag": "c:storage_blocks/bronze"}, "P": {"tag": "c:plates/bronze"}},
            {"count": 1, "id": "create:peculiar_bell"})
     shaped(CREATE / "crafting/kinetics/mechanical_bearing.json", [" B ", "PCP", " I "],
@@ -498,11 +510,44 @@ def alloys():
 def thermometry():
     """Mercury: cinnabar roasted in air at about 600 C in a retort, HgS + O2 -> Hg + SO2, the vapour condensed and run off into a
     flask, as at Almaden since Roman times. And the type K thermocouple's legs: chromel, nickel with a tenth of chromium, and alumel,
-    nickel with a few per cent of aluminium (and the manganese and silicon of the real alloy folded into it), both melted past
-    nickel's 1,455 C."""
+    nickel with 2 per cent each of aluminium and manganese and 1 of silicon (ASTM E230), here four aluminium nuggets in nine nickel
+    with the manganese and silicon folded into the aluminium; both melted past nickel's 1,455 C."""
     mixing("mercury", item("raw_cinnabar") + [fluid("tfmg:air", 250)], [result("mercury")], "heated")
     mixing("chromel", item("tfmg:nickel_ingot", 9) + item("chromium_ingot"), [result("chromel_ingot", 10)], "superheated")
-    mixing("alumel", item("tfmg:nickel_ingot", 9) + tag("c:ingots/aluminum"), [result("alumel_ingot", 10)], "superheated")
+    mixing("alumel", item("tfmg:nickel_ingot", 9) + tag("c:nuggets/aluminum", 4), [result("alumel_ingot", 9)], "superheated")
+
+
+def semiconductors():
+    """Silicon is made n-type by a donor from group 15, phosphorus or arsenic, and p-type by an acceptor from group 13, boron, each
+    diffused into the hot wafer at 900 to 1,100 C (Sze, Physics of Semiconductor Devices): phosphorus from its chloride or the white
+    element, boron from boric acid. The Factory dopes with sulfur, which is no donor in silicon, and aluminium, an acceptor no fab uses;
+    both are taken over. A dopant is parts per million of the wafer, so one does for four."""
+    mixing_at(TFMG / "mixing/n_semiconductor.json", item("tfmg:silicon_ingot", 4) + item("white_phosphorus"), [result("tfmg:n_semiconductor", 4)], "heated")
+    mixing_at(TFMG / "mixing/p_semiconductor.json", item("tfmg:silicon_ingot", 4) + item("boric_acid"), [result("tfmg:p_semiconductor", 4)], "heated")
+
+
+def manganese():
+    """Nine tenths of the world's manganese goes into steel (USGS, Mineral Commodity Summaries, Manganese), as ferromanganese or
+    silicomanganese smelted from the ore with coke in a submerged-arc or blast furnace at about 1,500 C: the manganese and the iron the
+    ore carries (an iron nugget here, pyrolusite being near pure MnO2) reduce together to an alloy about four fifths manganese and a few
+    per cent carbon. A little in every steel takes up its
+    sulfur and oxygen; a lot is Hadfield's steel (1882), 12 to 14 per cent manganese and 1 of carbon, which stays austenitic and hardens
+    where it is struck, the steel of crusher jaws, railway crossings and the Brodie helmet. One ferromanganese in six steel is 11 per cent
+    manganese. As wear plate, a thinner plate of it lasts as a thick one of mild steel, so an ingot presses to two of the Factory's heavy plates."""
+    mixing("ferromanganese", item("raw_pyrolusite", 2) + item("tfmg:coal_coke") + tag("c:nuggets/iron") + tag("tfmg:flux"),
+           [result("ferromanganese_ingot"), result("tfmg:slag")], "superheated")
+    mixing("manganese_steel", item("ferromanganese_ingot") + tag("c:ingots/steel", 6), [result("manganese_steel_ingot", 7)], "superheated")
+    with zipfile.ZipFile(TFMG_JAR) as jar:
+        plate = json.loads(jar.read("data/tfmg/recipe/sequenced_assembly/heavy_plate.json"))
+    write(USES / "heavy_plate_from_manganese_steel.json", {**plate, "ingredient": {"tag": "c:ingots/manganese_steel"}, "results": [{"id": "tfmg:heavy_plate", "count": 2}]})
+
+
+def galvanizing():
+    """Half the world's zinc goes on steel (International Zinc Association): dipped in molten zinc at about 450 C, the steel takes a
+    coat that rusts in its place and, scratched through, still corrodes before the steel does. A coat is a few per cent of a plate's
+    weight, a zinc nugget to four. A galvanized plate does what a steel plate does and never rusts."""
+    mixing("galvanized_steel_plate", item("tfmg:heavy_plate", 4) + tag("c:nuggets/zinc"), [result("galvanized_steel_plate", 4)], "heated")
+    write(DATA.parent / "c/tags/item/plates/steel.json", {"replace": False, "values": ["fundamentals:galvanized_steel_plate"]})
 
 
 def tungsten():
@@ -512,7 +557,9 @@ def tungsten():
     ion exchanger stripped with ammonia (folded into one step here), the acid by dissolving it in ammonia, and evaporated to
     crystals of ammonium paratungstate, APT, the form tungsten is traded in. Calcined, APT gives off its ammonia and water and leaves
     the yellow trioxide, and hydrogen reduces that to the metal powder (Lassner and Schubert, Tungsten, 1999). The metal is drawn
-    to the filament every light bulb burns, and carburised to the carbide every drill bites with. A halogen lamp seals its quartz
+    to the filament every light bulb burns, and carburised to the carbide every drill bites with. In a vacuum the hot filament
+    boils away and blackens the glass; Langmuir (1913) filled the bulb with an inert gas that holds the tungsten back, and lamps
+    have been argon-filled since, so an argon bulb lasts half again as long. A halogen lamp seals its quartz
     envelope round molybdenum foil, the one metal whose expansion lets the seal hold, and stands the filament on molybdenum
     supports (Ullmann's, Molybdenum); a whiff of bromine carries the tungsten that boils off the filament back onto it, so it runs
     hotter and lasts twice as long. Bromine's one use here; its big real ones, flame retardants, are not modelled."""
@@ -530,6 +577,8 @@ def tungsten():
     shaped(TFMG / "crafting/materials/light_bulb.json", ["CWC", "CGC", "NNN"],
            {"C": {"tag": "c:nuggets/copper"}, "G": {"item": "create:framed_glass"}, "N": {"tag": "c:nuggets/steel"}, "W": {"item": "fundamentals:tungsten_filament"}},
            {"count": 2, "id": "tfmg:light_bulb"})
+    mixing("light_bulb_argon", item("tungsten_filament") + item("create:framed_glass") + tag("c:nuggets/copper", 4) + tag("c:nuggets/steel", 3) + argon(50),
+           [result("tfmg:light_bulb", 3)])
     mixing("light_bulb_halogen", item("tungsten_filament") + tag("c:gems/quartz") + item("molybdenum_ingot") + tag("c:nuggets/steel", 3)
            + [fluid("bromine", 10)], [result("tfmg:light_bulb", 4)])
     shaped(CREATE / "crafting/kinetics/mechanical_drill.json", [" A ", "AIA", " C "],
@@ -656,15 +705,17 @@ def zirconium():
 
 
 def beryllium():
-    """Beryl will not open to acid as it is. The Kjellgren-Sawyer process melts it at about 1,650 C and quenches the melt in water to a
-    glass, the frit, which hot sulfuric acid opens, taking the beryllium out as sulfate with the beryl's aluminium; bertrandite, the Spor
-    Mountain ore, a tenth as rich, leaches as it is. Ammonia throws down beryllium hydroxide once the aluminium has crystallised out as alum.
+    """Beryl will not open to acid as it is. The Kjellgren-Sawyer process melts it in an arc furnace at about 1,650 C, past a blaze
+    cake's 1,600, so the superheated basin stands in; the melt is quenched in water to a glass, the frit, which hot sulfuric acid opens,
+    taking the beryllium out as sulfate with the beryl's aluminium. Bertrandite, the Spor Mountain ore, leaches as it is, but is poorer:
+    a quarter as rich here, and the real ore is under one per cent beryllium oxide to sorted beryl's ten. Ammonia throws down beryllium
+    hydroxide once the aluminium has crystallised out as alum.
     Hydrofluoric acid and ammonia take the hydroxide to ammonium fluoroberyllate, crystallised clean, which at about 1,000 C gives up its
     ammonium fluoride and leaves beryllium fluoride. Magnesium under argon reduces the fluoride at about 1,300 C to pebbles of beryllium in a
     slag of magnesium fluoride, and the pebbles are melted down. Calcined, the hydroxide is beryllia. Most beryllium goes into copper: two per
     cent makes beryllium copper, as strong as steel, springy, and sparkless when struck, the metal of connector springs and of the tools used
     where gas may lie. It is mostly made without the metal, from the oxide reduced by carbon under molten copper in an arc furnace. Emerald is
-    beryl, green with a trace of chromium. The hydroxide, the oxide and the salts are a dust that scars the lungs (berylliosis)."""
+    beryl, green with a trace of chromium. The hydroxide, the oxide, the salts and the metal's own dust scar the lungs (berylliosis)."""
     mixing("beryl_frit", item("raw_beryl", 2) + [fluid("minecraft:water", 250)], [result("beryl_frit", 2)], "superheated")
     mixing("beryl_frit_from_emerald", item("minecraft:emerald") + [fluid("minecraft:water", 250)], [{"id": "fundamentals:beryl_frit", "chance": 0.5}], "superheated")
     mixing("beryllium_sulfate_liquor", item("beryl_frit", 2) + [fluid("tfmg:sulfuric_acid", 500)], [out_fluid("beryllium_sulfate_liquor", 500)], "heated")
@@ -685,7 +736,7 @@ def beryllium():
            {"C": {"item": "tfmg:unfinished_insulator"}, "N": {"tag": "c:ingots/beryllium_copper"}, "O": {"tag": "c:nuggets/steel"}},
            {"count": 3, "id": "tfmg:cable_connector"})
     tag_file(DATA / "tags/item/beryllium_dusts.json", [f"fundamentals:{name}" for name in
-                                                       ("beryllium_hydroxide", "beryllium_oxide", "beryllium_fluoride", "ammonium_fluoroberyllate")])
+                                                       ("beryllium_hydroxide", "beryllium_oxide", "beryllium_fluoride", "ammonium_fluoroberyllate", "beryllium_pebbles")])
 
 
 def fluid(id, amount):
@@ -848,7 +899,7 @@ def silver():
     a crust that is skimmed off, the lead underneath desilvered. Cupellation is the older art: the silvery lead is blown with air on a
     hearth of bone ash at about 1,000 C, the lead burns to litharge and soaks into the cupel or runs off, and the silver stays bright.
     Cupelled straight, every bullion goes to litharge; cupelled as crust, the zinc burns to zinc oxide for the retort and only one lead
-    in four has to come back from litharge, which charcoal reduces. Rich silver ores, argentite and native silver, were soaked into a
+    in four has to come back from litharge, which charcoal reduces. Rich silver ores, acanthite and native silver, were soaked into a
     lead bath on the cupel and cupelled with it."""
     write(DATA / "recipe/bloomery/lead_from_roasted_galena.json", {"type": "fundamentals:bloomery", "ingredient": {"item": "fundamentals:roasted_galena"},
                                                                    "result": {"id": "fundamentals:lead_bullion_ingot", "count": 1}, "byproduct": {"id": "tfmg:slag", "count": 1}})
@@ -928,7 +979,7 @@ def plastics():
             "results": [out_fluid("tfmg:molten_plastic", 500), {"id": "fundamentals:ziegler_natta_catalyst", "chance": 0.9}]})
     write(PLASTICS / "vinyl_chloride.json", {"type": "create:mixing", "heat_requirement": "heated",
                                              "ingredients": [fluid("tfmg:ethylene", 500), fluid("chlorine", 500)],
-                                             "results": [out_fluid("vinyl_chloride", 500), out_fluid("hydrochloric_acid", 250)]})
+                                             "results": [out_fluid("vinyl_chloride", 500), out_fluid("hydrochloric_acid", 500)]})
     write(PLASTICS / "pvc_resin.json", {"type": "create:mixing", "heat_requirement": "heated",
                                         "ingredients": [fluid("vinyl_chloride", 250), fluid("minecraft:water", 250)], "results": [result("pvc_resin")]})
     write(PLASTICS / "pvc_sheet.json", {"type": "create:compacting", "heat_requirement": "heated", "ingredients": item("pvc_resin"),
@@ -1012,6 +1063,9 @@ def main():
     loot()
     alloys()
     thermometry()
+    semiconductors()
+    manganese()
+    galvanizing()
     tungsten()
     more_sinks()
     chromium()

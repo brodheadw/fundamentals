@@ -28,8 +28,12 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Three copper and a tin, heated, make four bronze, the first alloy and still the metal of bells: Create's peculiar bell is cast in it, and five bronze ingots under a stick make a bell. A plain bearing is a bronze bush, so Create's mechanical bearing takes two bronze plates.",
+      "text": "Arsenical copper came first, but tin bronze is the alloy of the age named for it: copper with about an eighth of tin, and bell metal harder still at a fifth to a quarter.",
       "title": "Bronze and solder"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Seven copper and a tin, heated, make eight bronze, still the metal of bells: Create's peculiar bell is cast in it, and five bronze ingots under a stick make a bell. A plain bearing is a bronze bush, so Create's mechanical bearing takes two bronze plates."
     },
     {
       "type": "patchouli:text",

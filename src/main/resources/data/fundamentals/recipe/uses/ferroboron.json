@@ -2,7 +2,7 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "fundamentals:raw_borax"
+      "item": "fundamentals:boric_acid"
     },
     {
       "tag": "c:ingots/iron"

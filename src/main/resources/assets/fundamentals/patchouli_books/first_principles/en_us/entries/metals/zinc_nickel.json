@@ -19,6 +19,15 @@
     },
     {
       "type": "patchouli:text",
+      "text": "Half the world's zinc goes on steel (International Zinc Association). Dipped in molten zinc at about 450 °C, steel takes a coat that corrodes in its place and, scratched through, still goes before the steel does.",
+      "title": "Galvanizing"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Four heavy plates and a zinc nugget, heated, give four galvanized steel plates, which do anything a steel plate does and never rust; a bare heavy plate rusts as a steel ingot does."
+    },
+    {
+      "type": "patchouli:text",
       "text": "Carbon does not part nickel from iron: it reduces both, and they alloy. Pentlandite roasted on a fire and smelted with a charcoal, superheated, gives a ferronickel ingot and a slag, and whatever platinum it carried is lost in it.",
       "title": "Ferronickel"
     },

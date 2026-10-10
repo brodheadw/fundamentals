@@ -1,0 +1,27 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "tfmg:heavy_plate"
+    },
+    {
+      "item": "tfmg:heavy_plate"
+    },
+    {
+      "item": "tfmg:heavy_plate"
+    },
+    {
+      "item": "tfmg:heavy_plate"
+    },
+    {
+      "tag": "c:nuggets/zinc"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:galvanized_steel_plate",
+      "count": 4
+    }
+  ],
+  "heat_requirement": "heated"
+}

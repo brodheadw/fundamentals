@@ -76,6 +76,8 @@ ITEM_FORMULAS = {
     "nickel_oxide": "NiO", "nickel_pellets": "Ni",
     "tungstic_acid": "H2WO4", "ammonium_paratungstate": "(NH4)10H2W12O42", "ammonium_perrhenate": "NH4ReO4", "lithium_carbonate": "Li2CO3",
     "mcraly_powder": "Ni-Co-Cr-Al-Y",
+    # boric acid freed from borax; a steel plate under its coat of zinc
+    "boric_acid": "H3BO3", "galvanized_steel_plate": "Fe-C,Zn",
     # sintered NdFeB is sold nickel-plated against rust; SmCo and cast alnico go bare
     "neodymium_iron_boron_magnet": "Nd2Fe14B,Ni", "dysprosium_neodymium_iron_boron_magnet": "(Nd,Dy)2Fe14B,Ni", "samarium_cobalt_magnet": "Sm2(Co,Fe,Cu,Zr)17",
     "alnico_magnet": "Fe-Al-Ni-Co-Cu",
@@ -124,7 +126,8 @@ OTHER_FORMULAS = {
         "lithium_ingot": "Li", "lithium_nugget": "Li", "lithium_block": "Li", "raw_lithium": "Li", "crushed_raw_lithium": "Li",
         "constantan_ingot": "Cu-Ni", "constantan_nugget": "Cu-Ni", "constantan_block": "Cu-Ni",
         "cast_iron_ingot": "Fe-C", "cast_iron_nugget": "Fe-C", "cast_iron_sheet": "Fe-C", "cast_iron_block": "Fe-C",
-        "steel_ingot": "Fe-C", "steel_nugget": "Fe-C", "steel_block": "Fe-C",
+        "steel_ingot": "Fe-C", "steel_nugget": "Fe-C", "steel_block": "Fe-C", "heavy_plate": "Fe-C",
+        "n_semiconductor": "Si,P", "p_semiconductor": "Si,B",
         "magnetic_alloy_ingot": "Fe-Ni-Si-C", "magnetic_alloy_sheet": "Fe-Ni-Si-C",
         "silicon_ingot": "Si", "sulfur_dust": "S", "sulfur": "S", "sulfuric_acid_bucket": "H2SO4", "nitrate_dust": "KNO3",
         "copper_sulfate": "CuSO4", "coal_coke": "C", "coal_coke_dust": "C", "coal_coke_block": "C", "graphite_electrode": "C",

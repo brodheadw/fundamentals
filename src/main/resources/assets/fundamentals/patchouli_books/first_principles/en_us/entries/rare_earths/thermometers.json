@@ -35,11 +35,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Type K, -200 to 1,260 °C: chromel (nickel with a tenth of chromium) against alumel (nickel with a little aluminium) gives some 41 microvolts a degree, the everyday industrial thermocouple; past 1,260 the chromel oxidises and the reading drifts, so it pegs."
+      "text": "Type K, -200 to 1,260 °C: chromel (nickel with a tenth of chromium) against alumel (nickel with 2 per cent each of aluminium and manganese and 1 of silicon) gives some 41 microvolts a degree, the everyday industrial thermocouple; past 1,260 the chromel oxidises and the reading drifts, so it pegs."
     },
     {
       "type": "patchouli:text",
-      "text": "Nine nickel and a chromium, superheated, give ten chromel; nine nickel and an aluminium ten alumel."
+      "text": "Nine nickel and a chromium, superheated, give ten chromel; nine nickel and four aluminium nuggets nine alumel, the aluminium standing for the manganese and silicon as well."
     },
     {
       "type": "patchouli:text",
