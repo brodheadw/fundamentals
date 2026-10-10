@@ -16,10 +16,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 
-/**
- * A magnetomigration cell: a plastic channel the liquor runs along, facing the way it flows, with an NdFeB block in its
- * right wall. Cells standing end to end facing the same way are one {@link MagnetomigrationLine}.
- */
 public class MagnetomigrationCellBlock extends BaseEntityBlock {
 
     public static final MapCodec<MagnetomigrationCellBlock> CODEC = simpleCodec(MagnetomigrationCellBlock::new);
@@ -50,7 +46,6 @@ public class MagnetomigrationCellBlock extends BaseEntityBlock {
         return RenderShape.MODEL;
     }
 
-    // A cell joining or leaving the line moves the head and tail, and with them the ports pipes see.
     @Override
     protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighbor, BlockPos from, boolean moved) {
         super.neighborChanged(state, level, pos, neighbor, from, moved);

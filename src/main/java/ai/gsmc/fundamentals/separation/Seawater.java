@@ -23,10 +23,6 @@ import net.neoforged.neoforge.fluids.FluidType;
 
 import javax.annotation.Nullable;
 
-/**
- * Water is salt where it is the sea. A water source drawn from an ocean or a beach, by bucket, hose pulley or open pipe, comes up as
- * seawater; a river, a lake, a swamp or a cave gives fresh water as ever. Seawater is no block of its own: it looks and behaves as water does, and poured out it is water again.
- */
 public final class Seawater {
 
     private Seawater() {}
@@ -35,12 +31,10 @@ public final class Seawater {
         return biome.is(BiomeTags.IS_OCEAN) || biome.is(BiomeTags.IS_BEACH);
     }
 
-    /** Whether the block at {@code pos} is a water source standing in the sea. */
     public static boolean seaSource(LevelReader level, BlockPos pos, BlockState state) {
         return state.is(Blocks.WATER) && state.getFluidState().isSource() && sea(level.getBiome(pos));
     }
 
-    /** Water's own properties, as NeoForge gives vanilla water's type: it swims, drowns and douses fire as water does. It does not water farmland: salt kills crops. */
     public static FluidType type(String descriptionId) {
         return new FluidType(FluidType.Properties.create()
                 .descriptionId(descriptionId)
@@ -58,7 +52,6 @@ public final class Seawater {
         return Separation.fluid("seawater");
     }
 
-    /** {@code drawn}, as seawater if it is water and was drawn from the sea. */
     public static FluidStack drawn(FluidStack drawn) {
         return drawn.is(Fluids.WATER) ? new FluidStack(fluid(), drawn.getAmount()) : drawn;
     }

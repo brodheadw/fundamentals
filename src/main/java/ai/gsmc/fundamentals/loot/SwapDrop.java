@@ -10,7 +10,6 @@ import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.neoforged.neoforge.common.loot.LootModifier;
 
-/** Turns one item in a loot roll into another, count for count: an iron golem's ingots into nuggets, a drowned's copper ingot into malachite. */
 public class SwapDrop extends LootModifier {
 
     public static final MapCodec<SwapDrop> CODEC = RecordCodecBuilder.mapCodec(instance -> codecStart(instance).and(instance.group(

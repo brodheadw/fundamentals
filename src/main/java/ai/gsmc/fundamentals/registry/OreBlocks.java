@@ -40,7 +40,7 @@ public final class OreBlocks {
                     ? BlockBehaviour.Properties.of().mapColor(MapColor.DIRT).strength(0.6F).sound(SoundType.GRAVEL)
                     : BlockBehaviour.Properties.of().mapColor(MapColor.STONE).requiresCorrectToolForDrops()
                             .strength(def.mineral() == null ? 1.5F : 3.0F, 3.0F);
-            ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, def.name());
+            ResourceLocation id = Fundamentals.id(def.name());
             Block block = def.mineral() == null ? new Block(props) : new OreBlock(props);
             BLOCKS.put(id, block);
             registry.accept(id, block);
@@ -56,7 +56,7 @@ public final class OreBlocks {
         });
         for (OreData.BlockDef def : OreData.get().blocks()) {
             if (def.mineral() != null) {
-                ResourceLocation id = ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "raw_" + def.mineral());
+                ResourceLocation id = Fundamentals.id("raw_" + def.mineral());
                 Item raw = new Item(new Item.Properties());
                 RAW.put(def.mineral(), raw);
                 registry.accept(id, raw);

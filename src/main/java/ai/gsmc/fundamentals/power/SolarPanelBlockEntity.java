@@ -31,7 +31,6 @@ public class SolarPanelBlockEntity extends ElectricBlockEntity {
         }
     }
 
-    // A cell holds its voltage as the light fades; what falls off is the power behind it.
     @Override
     public int voltageGeneration() {
         return sun > 0 ? VOLTS : 0;

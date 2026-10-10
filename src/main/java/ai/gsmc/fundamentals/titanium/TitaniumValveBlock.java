@@ -4,7 +4,6 @@ import com.simibubi.create.content.fluids.pipes.valve.FluidValveBlock;
 import com.simibubi.create.content.fluids.pipes.valve.FluidValveBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
-/** Create's fluid valve with a titanium body. */
 public class TitaniumValveBlock extends FluidValveBlock {
 
     public TitaniumValveBlock(Properties properties) {

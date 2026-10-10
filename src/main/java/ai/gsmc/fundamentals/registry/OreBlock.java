@@ -28,7 +28,6 @@ public class OreBlock extends Block {
         }
     }
 
-    // Must match HOSTS in tools/build_ore_data.py, which writes a model for each.
     public enum Host implements StringRepresentable {
         STONE("minecraft:stone"), DEEPSLATE("minecraft:deepslate"), GRANITE("minecraft:granite"),
         DIORITE("minecraft:diorite"), ANDESITE("minecraft:andesite"), TUFF("minecraft:tuff"),

@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/** No tree lines across the periodic table. */
 @Mixin(AdvancementWidget.class)
 public abstract class AdvancementWidgetMixin {
 

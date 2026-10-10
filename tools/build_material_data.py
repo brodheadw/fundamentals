@@ -1,22 +1,12 @@
 #!/usr/bin/env python3
-"""Writes what the material items painted by paint_materials.py need besides their textures:
-models, names, tags, the storage blocks' blockstates and loot, the recipes that pack nuggets
-into ingots into blocks and press plates, and the rare earth minerals' first steps on Create's
-machines, and chromite's. Re-run after any edit.
-
-    python3 tools/paint_materials.py && python3 tools/build_material_data.py && python3 tools/build_ore_data.py
-
-build_ore_data.py comes last because it owns the mining-tool tags the storage blocks go into.
-"""
-import json
 import shutil
 
-from build_ore_data import ASSETS, C_TAGS, DATA, cube, drop_self, tag, write
+from common import ASSETS, DATA, cube, drop_self, read_lang, tag, write, write_lang
+from build_ore_data import C_TAGS
 from paint_materials import DISPLAY, MATERIALS, item_name
 
 RECIPES = DATA / "recipe"
 
-# form: (common tag folder, name of the item for a material called X)
 FORMS = {
     "concentrate": (DATA / "tags/item/concentrates", "{}"),
     "oxalate": (DATA / "tags/item/oxalates", "{} Oxalate"),
@@ -30,12 +20,8 @@ FORMS = {
     "block": (C_TAGS / "item/storage_blocks", "Block of {}"),
 }
 
-# Minerals ground in a millstone or crushing wheels. Monazite is a sand already.
 GROUND = ("bastnasite", "xenotime", "loparite", "euxenite", "thortveitite", "chromite")
 
-# Gravity concentration, done as a wash under an encased fan: what goes in, and which
-# concentrate the heavy grains left behind are. Bastnäsite needs flotation and the clay a leach;
-# neither has a machine yet.
 WASHED = {
     "raw_monazite": "light_rare_earth_concentrate",
     "loparite_dust": "light_rare_earth_concentrate",
@@ -47,7 +33,6 @@ WASHED = {
 
 
 def packed(small, big, name):
-    """Nine of `small` make one `big`, and back."""
     write(RECIPES / f"packing/{name}.json", {
         "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["###", "###", "###"],
         "key": {"#": {"tag": small["tag"]}}, "result": {"id": big["id"], "count": 1}})
@@ -63,8 +48,7 @@ def main():
                   RECIPES / "crushing", RECIPES / "washing"):
         shutil.rmtree(stale, ignore_errors=True)
 
-    lang_path = ASSETS / "lang/en_us.json"
-    lang = json.loads(lang_path.read_text(encoding="utf-8"))
+    lang = read_lang()
     lang["itemGroup.fundamentals.materials"] = "Fundamentals Materials"
 
     tagged = {form: [] for form in FORMS}
@@ -93,7 +77,6 @@ def main():
         if "nugget" in made:
             packed(made["nugget"], made["ingot"], f"{material}_ingot")
         if "block" in made:
-            # a metal's block packs from its ingot; a residue's from its dust
             packed(made.get("ingot") or made["dust"], made["block"], f"{material}_block")
         if "plate" in made:
             write(RECIPES / f"pressing/{material}_plate.json", {
@@ -115,7 +98,7 @@ def main():
     for form, (folder, _) in FORMS.items():
         tag(folder.with_suffix(".json"), tagged[form])
     tag(C_TAGS / "block/storage_blocks.json", tagged["block"])
-    write(lang_path, dict(sorted(lang.items())))
+    write_lang(lang)
     print(f"wrote {sum(len(forms) for forms in MATERIALS.values())} material items")
 
 

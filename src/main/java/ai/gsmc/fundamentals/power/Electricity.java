@@ -35,21 +35,18 @@ public final class Electricity {
     public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
         BlockBehaviour.Properties rack = BlockBehaviour.Properties.of().mapColor(MapColor.METAL).requiresCorrectToolForDrops()
                 .strength(2.0F, 4.0F).sound(SoundType.METAL).noOcclusion();
-        registry.accept(id("panel_rack"), panelRack = new PanelRackBlock(rack));
-        registry.accept(id("solar_panel"), solarPanel = new SolarPanelBlock(rack));
+        registry.accept(Fundamentals.id("panel_rack"), panelRack = new PanelRackBlock(rack));
+        registry.accept(Fundamentals.id("solar_panel"), solarPanel = new SolarPanelBlock(rack));
     }
 
     public static void registerBlockEntities(BiConsumer<ResourceLocation, BlockEntityType<?>> registry) {
         solarPanelEntity = BlockEntityType.Builder.of(SolarPanelBlockEntity::new, solarPanel).build(null);
-        registry.accept(id("solar_panel"), solarPanelEntity);
+        registry.accept(Fundamentals.id("solar_panel"), solarPanelEntity);
     }
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
-        registry.accept(id("panel_rack"), panelRackItem = new BlockItem(panelRack, new Item.Properties()));
-        registry.accept(id("photovoltaic_panel"), photovoltaicPanel = new Item(new Item.Properties()));
+        registry.accept(Fundamentals.id("panel_rack"), panelRackItem = new BlockItem(panelRack, new Item.Properties()));
+        registry.accept(Fundamentals.id("photovoltaic_panel"), photovoltaicPanel = new Item(new Item.Properties()));
     }
 
-    private static ResourceLocation id(String path) {
-        return ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, path);
-    }
 }

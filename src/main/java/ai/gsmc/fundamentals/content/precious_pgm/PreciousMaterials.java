@@ -17,12 +17,11 @@ public final class PreciousMaterials {
     private PreciousMaterials() {}
 
     public static void register() {
-        // native_gold is vanilla's gold ore; it is defined so chains have something to refer to.
         mineral("native_gold", "Native Gold", "Au", "gold", MaterialProperties.builder().density(2.45));
         mineral("native_silver", "Native Silver", "Ag", "silver", MaterialProperties.builder().density(1.33));
         mineral("argentite", "Acanthite", "Ag2S", "silver", MaterialProperties.builder().density(0.92));
         mineral("sperrylite", "Sperrylite", "PtAs2", "platinum",
-                MaterialProperties.builder().density(1.40).toxicity(0.20)); // As-bearing
+                MaterialProperties.builder().density(1.40).toxicity(0.20));
         mineral("cooperite", "Cooperite", "PtS", "platinum", MaterialProperties.builder().density(1.26));
         mineral("braggite", "Braggite", "(Pt,Pd,Ni)S", "platinum", MaterialProperties.builder().density(1.26));
         mineral("cinnabar", "Cinnabar", "HgS", "mercury", MaterialProperties.builder().density(1.03).toxicity(0.60));
@@ -47,9 +46,8 @@ public final class PreciousMaterials {
                 MaterialProperties.builder().density(2.86).hardness(0.70).heatResistance(0.90));
         reg("osmium", MaterialType.ELEMENT, "Os", PGM_FORMS,
                 MaterialProperties.builder().density(2.87).hardness(0.80).heatResistance(0.88)
-                        .toxicity(0.30)); // OsO4 is toxic
+                        .toxicity(0.30));
 
-        // Mercury is DUST until there is a fluid form.
         reg("mercury", MaterialType.ELEMENT, "Hg", forms(DUST),
                 MaterialProperties.builder().density(1.72).toxicity(0.90));
 

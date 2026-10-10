@@ -1,34 +1,21 @@
 #!/usr/bin/env python3
-"""Paints what metal turns into in air, and what keeps it from it: each weathering storage block at each stage (bronze going
-to a verdigris green, silver blackening with sulfide, the rare earth metals tarnishing, corroding and crumbling to their
-oxide's colour), the rusty iron and steel ingots, the inert storage drum and the argon canister. Edit and re-run; don't
-hand-edit the PNGs.
-
-    python3 tools/paint_oxidation.py && python3 tools/build_oxidation_data.py
-
-FAMILIES mirrors oxidation/Weathering.java.
-"""
 import random
-from pathlib import Path
 
 from PIL import Image
 
 from paint_materials import METAL, OXIDE, mix, paint_block, paint_item
+from common import TEXTURES
 
-OUT = Path(__file__).resolve().parent.parent / "src/main/resources/assets/fundamentals/textures"
 
 PATINA = ("", "exposed_", "weathered_", "oxidized_")
 TARNISH = ("", "dulled_", "tarnished_", "blackened_")
 FLAKING = ("", "tarnished_", "corroded_", "crumbled_")
 
-# Basic copper carbonate and sulfate, the verdigris of a bronze statue: the blue-green of vanilla's oxidised copper, a shade duller.
 VERDIGRIS = ((34, 82, 70), (62, 128, 106), (96, 166, 138), (146, 204, 178))
-# Silver sulfide, which is what tarnish is: brown-black with a bloom of purple at the edges.
 ACANTHITE = ((18, 14, 18), (40, 32, 40), (68, 56, 66), (106, 92, 104))
-# Hydrated iron(III) oxide: the orange-brown of rust.
 RUST = ((74, 30, 14), (128, 58, 26), (170, 88, 42), (206, 128, 72))
 
-# metal: (stage prefixes, the colour it goes to, honeycomb waxes it, its last stage has crumbled)
+# Mirrors oxidation/Weathering.java.
 FAMILIES = {
     "bronze": (PATINA, VERDIGRIS, True, False),
     "silver": (TARNISH, ACANTHITE, True, False),
@@ -41,14 +28,12 @@ FAMILIES = {
 
 
 def family_blocks(metal):
-    """The blocks a weathering metal adds to its storage block, in Weathering.java's order: the later stages, then the waxed four."""
     prefixes, _, waxable, _ = FAMILIES[metal]
     return [f"{p}{metal}_block" for p in prefixes[1:]] + ([f"waxed_{p}{metal}_block" for p in prefixes] if waxable else [])
 
 
 BLOCKS = [name for metal in FAMILIES for name in family_blocks(metal)] + ["inert_storage_drum"]
 
-# How far each stage's surface has gone over, and how much of it is spots of the full colour.
 DULL = ((40, 40, 44), (78, 78, 84), (110, 110, 116), (150, 150, 156))
 COVER = (0.0, 0.3, 0.6, 0.85)
 SPOTS = (0.0, 0.12, 0.3, 0.55)
@@ -57,13 +42,10 @@ IRON = ((72, 72, 72), (150, 150, 150), (204, 204, 204), (236, 236, 236))
 STEEL = ((44, 48, 56), (88, 94, 106), (132, 138, 150), (184, 190, 202))
 RUSTY = {"rusty_iron_ingot": IRON, "rusty_steel_ingot": STEEL}
 
-# The drum: The Factory Must Grow's steel, and the dark green that marks an argon cylinder (EN 1089-3, RAL 6001).
 DRUM_STEEL = ((38, 42, 50), (66, 72, 82), (98, 104, 116), (140, 146, 158))
 ARGON_GREEN = (40, 104, 52)
 
 
-# What an ingot, nugget or sheet shows as it ages, stage by stage, as build_oxidation_data.py ages it: item -> (what it goes to,
-# the stages it shows before it is something else). The last stage of a rare earth metal is its oxide, so it shows two.
 CRUST = ((128, 128, 124), (178, 178, 172), (212, 212, 206), (236, 236, 230))
 LANTHANIDES = ("lanthanum", "cerium", "praseodymium", "didymium", "neodymium", "samarium", "gadolinium", "terbium", "dysprosium", "yttrium")
 NUGGETS = ("praseodymium", "neodymium", "samarium", "terbium", "dysprosium")
@@ -78,8 +60,6 @@ COPPER = ((96, 44, 28), (164, 82, 54), (214, 126, 88), (246, 176, 136))
 
 
 def ages_to(metal):
-    """(how it ages, the surface it dulls to, the colour of its blotches): verdigris, black tarnish, a white crust, or the grey
-    bloom of a rare earth's oxide, the same as its storage block."""
     if metal in ("copper", "bronze"):
         return "patina", VERDIGRIS, VERDIGRIS
     if metal == "silver":
@@ -91,7 +71,7 @@ def ages_to(metal):
 
 def fresh(item):
     namespace, name = item.split(":")
-    return paint_item("ingot", COPPER) if namespace == "minecraft" else Image.open(OUT / "item" / f"{name}.png").convert("RGBA")
+    return paint_item("ingot", COPPER) if namespace == "minecraft" else Image.open(TEXTURES / "item" / f"{name}.png").convert("RGBA")
 
 
 def outline(px, body):
@@ -100,11 +80,6 @@ def outline(px, body):
 
 
 def aged(item, stage):
-    """The fresh item gone over, more at each stage, so it reads at a glance in a chest: its own shading laid by brightness onto
-    what it ages to, blotches of the full colour spreading from flaws, pits, and then what the metal does. Copper and bronze run
-    with streaks of verdigris; silver goes black in patches with a purple bloom at their edges; calcium and magnesium crust
-    white; a rare earth metal loses its shine to a grey-white bloom of oxide, and at its last stage flakes at the edge, the
-    flakes lying under it."""
     metal, stages = STAGED[item]
     kind, surface, blotch = ages_to(metal)
     t = stage / stages
@@ -115,12 +90,10 @@ def aged(item, stage):
     rim = set(outline(px, body))
     lum = {p: sum(px[p][:3]) for p in body}
     lo, hi = min(lum.values()), max(lum.values())
-    # a patina browns before it greens
     cover = 0.2 + 0.75 * t if kind == "patina" else 0.45 + 0.5 * t
     for p in body:
         k = (lum[p] - lo) / max(1, hi - lo) * 3
         if kind in ("oxide", "crust"):
-            # oxide is matt: the shine goes before the colour does
             k = 0.8 + k * 0.45
         tone = tuple(int(a + (b - a) * (k - int(k))) for a, b in zip(surface[int(k)], surface[min(3, int(k) + 1)]))
         px[p] = tuple(int(c + (d - c) * cover) for c, d in zip(px[p][:3], tone)) + (255,)
@@ -172,7 +145,6 @@ def aged_name(item, stage):
 
 
 def stage_blocks():
-    """name -> palette-faithful texture, for every stage after the first of every family."""
     out = {}
     for metal, (prefixes, colour, _, crumbles) in FAMILIES.items():
         for stage in range(1, 4):
@@ -180,7 +152,6 @@ def stage_blocks():
             if crumbles and stage == 3:
                 out[name] = crumbled(name, colour)
                 continue
-            # a rare earth metal dulls to grey before its oxide shows; patina and tarnish are their own colour from the start
             surface = mix(colour, DULL, 0.55) if crumbles else colour
             img = paint_block(f"{metal}-{stage}", mix(METAL[metal], surface, COVER[stage]))
             spotted(img, colour, SPOTS[stage], name)
@@ -189,7 +160,6 @@ def stage_blocks():
 
 
 def spotted(img, colour, share, seed):
-    """Blooms of the full colour, clumped as corrosion starts at a flaw and spreads."""
     rng = random.Random("spots-" + seed)
     tones = (colour[0], colour[1], colour[2], colour[3])
     seeds = [(rng.randrange(1, 15), rng.randrange(1, 15)) for _ in range(int(share * 14) + 1)]
@@ -202,7 +172,6 @@ def spotted(img, colour, share, seed):
 
 
 def crumbled(name, colour):
-    """Metal gone to its oxide: a powdery block of the oxide's colour, cracked through, with a last fleck of metal here and there."""
     rng = random.Random("crumbled-" + name)
     img = Image.new("RGBA", (16, 16))
     cracks = set()
@@ -229,13 +198,10 @@ def rusty(name, pal):
 
 
 def body_mask():
-    """The drum's footprint, as the model builds it: a 12-wide octagon of pixels, its corners stepped in."""
     return {(x, z) for x in range(2, 14) for z in range(2, 14) if 3 <= x < 13 or 3 <= z < 13}
 
 
 def drum_side():
-    """One stave of the drum, laid out as the model takes it: the lid's chime at the top, the shoulder painted argon green, the
-    plain sheet below where the gauge sits between the rolling hoops, riveted seams down both sides, light from the left."""
     rng = random.Random("drum-side")
     img = Image.new("RGBA", (16, 16))
     for y in range(16):
@@ -259,8 +225,6 @@ def drum_side():
 
 
 def drum_lid(bung):
-    """The drum's head: the chime rolled round the octagon's edge, a ring pressed in a pixel inside it, and the second, plugged
-    bung; the valve stands over the first."""
     mask = body_mask()
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
     for x, z in mask:
@@ -281,8 +245,6 @@ DIAL = (236, 232, 218)
 
 
 def drum_fittings():
-    """The drum's hardware on one sheet: the rolling hoops (rows 0-1), the gauge's face (0,4)-(6,10) and its brass case
-    (6,4)-(12,6), the valve's brass stem (8,8)-(12,12), and the red handwheel's top (12,10)-(16,14) and rim (12,14)-(16,15)."""
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
     put = lambda x, y, c: img.putpixel((x, y), c + (255,))
     for x in range(16):
@@ -292,7 +254,6 @@ def drum_fittings():
         for x in range(6):
             rim = x in (0, 5) or y in (4, 9)
             put(x, y, (BRASS[2] if x + y < 10 else BRASS[1]) if rim else DIAL)
-    # ticks round the face, then the needle standing well up the scale, and its hub
     for x, y in ((1, 6), (1, 5), (2, 5)):
         put(x, y, (110, 106, 98))
     for x, y in ((3, 6), (4, 5)):
@@ -314,7 +275,6 @@ def drum_fittings():
 
 
 def canister(shoulder):
-    """A little gas cylinder standing upright: a steel body, its shoulder painted for the gas, a brass valve on top."""
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
     brass = ((120, 90, 30), (190, 150, 60), (230, 200, 110))
     for y in range(1, 4):
@@ -334,19 +294,19 @@ def canister(shoulder):
 
 def main():
     for name, img in stage_blocks().items():
-        img.save(OUT / "block" / f"{name}.png")
+        img.save(TEXTURES / "block" / f"{name}.png")
     for name, pal in RUSTY.items():
-        rusty(name, pal).save(OUT / "item" / f"{name}.png")
-    drum_side().save(OUT / "block/inert_storage_drum_side.png")
-    drum_lid(True).save(OUT / "block/inert_storage_drum_top.png")
-    drum_lid(False).save(OUT / "block/inert_storage_drum_bottom.png")
-    drum_fittings().save(OUT / "block/inert_storage_drum_fittings.png")
-    (OUT / "item/aged").mkdir(exist_ok=True)
+        rusty(name, pal).save(TEXTURES / "item" / f"{name}.png")
+    drum_side().save(TEXTURES / "block/inert_storage_drum_side.png")
+    drum_lid(True).save(TEXTURES / "block/inert_storage_drum_top.png")
+    drum_lid(False).save(TEXTURES / "block/inert_storage_drum_bottom.png")
+    drum_fittings().save(TEXTURES / "block/inert_storage_drum_fittings.png")
+    (TEXTURES / "item/aged").mkdir(exist_ok=True)
     for item, (_, stages) in STAGED.items():
         for stage in range(1, stages + 1):
-            aged(item, stage).save(OUT / "item/aged" / f"{aged_name(item, stage)}.png")
-    canister(None).save(OUT / "item/canister.png")
-    canister(ARGON_GREEN).save(OUT / "item/argon_canister.png")
+            aged(item, stage).save(TEXTURES / "item/aged" / f"{aged_name(item, stage)}.png")
+    canister(None).save(TEXTURES / "item/canister.png")
+    canister(ARGON_GREEN).save(TEXTURES / "item/argon_canister.png")
     print(f"wrote {len(stage_blocks())} weathered blocks, the rusty ingots, the drum and the canisters")
 
 

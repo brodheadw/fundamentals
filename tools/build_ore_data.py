@@ -1,40 +1,19 @@
 #!/usr/bin/env python3
-"""Generates every data/asset file the ore and rock blocks need, from the tables below.
-
-Blocks (ORES, ROCKS): blockstate, block + item model, loot table, mining/commodity tags, lang.
-World generation (DEPOSITS, PLACERS): configured + placed features, each deposit type's biome
-tag and the NeoForge biome modifiers. Re-run after any edit.
-
-    python3 tools/paint_minerals.py && python3 tools/build_ore_data.py
-
-Ore does not generate as scattered blobs. Each row of DEPOSITS is a body in a real shape
-(worldgen.DepositFeature): tune a deposit by editing its row.
-
-An ore block takes on the rock it formed in: its `host` blockstate property picks the texture
-drawn under the mineral (HOSTS below), so one ore block serves stone, deepslate, granite, the
-Create stones and our own rocks. A few ores are whole rocks instead (paint_minerals.WHOLE).
-"""
-import json
 import shutil
-from pathlib import Path
 
+from common import ASSETS, DATA, RESOURCES, cube, drop_self, ns, read_lang, tag, write, write_lang
 from paint_materials import items
 from paint_minerals import GRADES, ROCK_BLOCKS, VARIANTS, WHOLE
 from paint_oxidation import BLOCKS as OXIDATION_BLOCKS
 
-ROOT = Path(__file__).resolve().parent.parent / "src/main/resources"
-ASSETS = ROOT / "assets/fundamentals"
-DATA = ROOT / "data/fundamentals"
-MC_TAGS = ROOT / "data/minecraft/tags/block"
-C_TAGS = ROOT / "data/c/tags"
+MC_TAGS = RESOURCES / "data/minecraft/tags/block"
+C_TAGS = RESOURCES / "data/c/tags"
 
-# Where a deposit type occurs (PLAN §5).
 BIOMES = {
     "anywhere": ["#minecraft:is_overworld"],
     "porphyry": ["#minecraft:is_mountain", "#minecraft:is_hill"],
     "arid_oxide": ["#minecraft:is_badlands", "#minecraft:is_savanna", "minecraft:desert"],
     "laterite": ["#minecraft:is_jungle", "#minecraft:is_savanna", "minecraft:mangrove_swamp"],
-    # granite pegmatites crop out where old shield is bare: uplands, the boreal shield of Norway and Canada, Madagascar's plateau
     "pegmatite": ["#minecraft:is_mountain", "#minecraft:is_hill", "#minecraft:is_badlands", "#minecraft:is_taiga",
                   "minecraft:savanna_plateau", "minecraft:windswept_savanna"],
     "carbonatite": ["#minecraft:is_mountain", "#minecraft:is_badlands"],
@@ -45,7 +24,6 @@ BIOMES = {
     "hydrothermal": ["#minecraft:is_mountain", "#minecraft:is_hill", "#minecraft:is_badlands"],
 }
 
-# mineral: (commodity, tool or tools, tier). tier = "stone" / "iron" pickaxe needed, or None.
 ORES = {
     "hematite": ("iron", "pickaxe", "stone"),
     "magnetite": ("iron", "pickaxe", "stone"),
@@ -74,7 +52,6 @@ ORES = {
     "hemimorphite": ("zinc", "pickaxe", "stone"),
     "cassiterite": ("tin", "pickaxe", "stone"),
     "bastnasite": ("rare_earth", "pickaxe", "iron"),
-    # a sand on the beach, and a soft, weathered mineral in its rock; either tool takes it
     "monazite": ("rare_earth", ("shovel", "pickaxe"), None),
     "xenotime": ("rare_earth", "pickaxe", "iron"),
     "ion_adsorption_clay": ("rare_earth", "shovel", None),
@@ -97,11 +74,8 @@ ORES = {
     "bertrandite": ("beryllium", "pickaxe", "stone"),
 }
 
-# Host rocks that are blocks of their own -> tool.
 ROCKS = {name: "shovel" if name == "laterite" else "pickaxe" for name in ROCK_BLOCKS}
 
-# Rocks an ore can sit in: host name -> (block it stands for, texture drawn under the mineral).
-# Must list the same names, in the same order, as registry.OreBlock.Host.
 HOSTS = {
     "stone": ("minecraft:stone", "minecraft:block/stone"),
     "deepslate": ("minecraft:deepslate", "minecraft:block/deepslate"),
@@ -126,7 +100,6 @@ HOSTS = {
     "quartz": ("minecraft:quartz_block", "minecraft:block/quartz_block_side"),
 }
 
-# What a deposit may replace. Ore adopts whichever of these it lands in.
 ROCK = ["#minecraft:stone_ore_replaceables", "#minecraft:deepslate_ore_replaceables", "minecraft:calcite",
         "minecraft:dripstone_block"] + [block for block, _ in HOSTS.values() if block.startswith("create:")]
 REPLACEABLE = {
@@ -134,26 +107,14 @@ REPLACEABLE = {
     "ground": ROCK + ["#minecraft:dirt", "minecraft:gravel", "minecraft:clay", "minecraft:mud"],
 }
 
-# name: shape, host, [(ore, share of the body, style)], radius, thickness, height,
-#       where (BIOMES key), y range of the centre, one per N chunks, what it replaces.
-# host   a block the whole body is turned into, or None to leave the existing rock in place so
-#        the ore sits directly in whatever is there (stone, deepslate, granite, a Create stone...).
-#        A host ending in _ore means the whole body is that ore (bog iron, REE clay).
-# styles disseminated (scattered grains) / pockets (masses) / seams (layers) / top (upper part).
 DEPOSITS = {
-    # Create's stones are themed on metals, and we use them that way: crimsite carries iron,
-    # asurine zinc, ochrum the rusty oxidised cap, limestone the lead-zinc and manganese beds.
-    # --- iron: beds of banded iron formation, common everywhere ---
     "hematite_bed": ("bed", "create:crimsite", [("magnetite", 0.06, "seams"), ("hematite", 0.42, "pockets")],
                      (9, 14), (3, 6), None, "anywhere", (0, 96), 5, "rock"),
     "magnetite_bed": ("bed", None, [("hematite", 0.06, "seams"), ("magnetite", 0.42, "pockets")],
                       (8, 12), (3, 5), None, "anywhere", (-56, 8), 12, "rock"),
     "bog_iron": ("blanket", "goethite_ore", [], (6, 9), (1, 2), None, "wetland", (60, 64), 3, "ground"),
-    # --- stratabound beds in ordinary rock ---
-    # fluorspar rides with the lead and zinc, as it does in every Mississippi Valley deposit
     "lead_zinc_bed": ("bed", "create:limestone", [("sphalerite", 0.20, "pockets"), ("galena", 0.13, "pockets"), ("fluorite", 0.10, "pockets")],
                       (9, 13), (3, 5), None, "anywhere", (-40, 36), 10, "rock"),
-    # borax, trona and halite are dry-lake evaporites, laid down together as at Searles Lake: shallow seams in the sandstone under deserts and badlands
     "evaporite_bed": ("bed", "minecraft:sandstone", [("halite", 0.20, "seams"), ("borax", 0.18, "seams"), ("trona", 0.14, "seams")], (8, 12), (2, 4), None,
                       "arid_oxide", (52, 68), 9, "rock"),
     "zinc_oxide_bed": ("bed", "create:asurine", [("smithsonite", 0.24, "pockets")], (7, 10), (2, 4), None,
@@ -164,26 +125,20 @@ DEPOSITS = {
                        "hydrothermal", (-32, 40), 14, "rock"),
     "mercury_lens": ("bed", None, [("cinnabar", 0.25, "pockets")], (5, 8), (2, 4), None,
                      "hydrothermal", (0, 72), 14, "rock"),
-    # --- porphyry copper: a big low-grade stock of andesite, enriched near the top ---
-    # molybdenum rides with the copper at about one part in thirty (Sillitoe, Economic Geology 105, 2010), counting the copper of every sulfide
     "porphyry_stock": ("plug", "minecraft:andesite",
                        [("chalcopyrite", 0.18, "pockets"), ("molybdenite", 0.01, "pockets"),
                         ("bornite", 0.04, "disseminated"), ("chalcocite", 0.07, "top"), ("covellite", 0.02, "top")],
                        (7, 11), None, (24, 40), "porphyry", (0, 70), 5, "rock"),
-    # --- the oxidised cap over copper and zinc, just under the surface in dry country ---
     "oxide_cap": ("blanket", "create:ochrum",
                   [("malachite", 0.20, "pockets"), ("azurite", 0.10, "pockets"), ("cuprite", 0.06, "disseminated"),
                    ("hemimorphite", 0.06, "pockets")],
                   (9, 14), (5, 8), None, "arid_oxide", (60, 64), 4, "rock"),
-    # --- tropical weathering blankets: these are rocks of their own ---
     "bauxite_blanket": ("blanket", "laterite", [("bauxite", 0.50, "pockets")], (10, 15), (4, 7), None,
                         "laterite", (60, 64), 5, "ground"),
     "nickel_laterite_blanket": ("blanket", "laterite", [("nickel_laterite", 0.40, "pockets")], (9, 13), (4, 6),
                                 None, "laterite", (60, 64), 9, "ground"),
     "ion_clay_blanket": ("blanket", "ion_adsorption_clay_ore", [], (8, 12), (3, 5), None,
                          "ion_clay", (60, 64), 6, "ground"),
-    # --- rare intrusions: bodies of their own rock, the big finds ---
-    # bastnäsite in the fresh rock; monazite in the weathered top, where at Mount Weld it is most of the ore
     "carbonatite_plug": ("plug", "carbonatite", [("bastnasite", 0.16, "pockets"), ("monazite", 0.05, "top")], (6, 9), None, (20, 34),
                          "carbonatite", (-56, 0), 36, "rock"),
     "syenite_massif": ("plug", "syenite", [("loparite", 0.10, "seams"), ("zircon", 0.02, "disseminated")], (8, 12), None, (16, 26),
@@ -195,17 +150,13 @@ DEPOSITS = {
                           (12, 15), (8, 12), None, "anywhere", (-60, -28), 80, "rock"),
     "nickel_sulfide": ("bed", "gabbro", [("pentlandite", 0.14, "pockets")], (9, 12), (5, 7), None,
                        "anywhere", (-60, -8), 45, "rock"),
-    # --- veins and dykes in mountain country ---
     "pegmatite_dyke": ("vein", "minecraft:granite", [("xenotime", 0.08, "pockets"), ("euxenite", 0.04, "pockets"),
                                                          ("thortveitite", 0.01, "pockets"), ("beryl", 0.04, "pockets")],
                        (11, 15), (3, 5), (14, 24), "pegmatite", (-16, 48), 16, "rock"),
-    # a monazite-quartz vein in old granite-gneiss shield, as at Steenkampskraal, the richest rare earth ore ever mined.
-    # Vanilla has no quartz rock, so the vein is quartz block.
     "monazite_vein": ("vein", "minecraft:quartz_block", [("monazite", 0.25, "pockets")], (9, 13), (2, 3), (12, 18),
                       "pegmatite", (0, 40), 48, "rock"),
     "spodumene_pegmatite": ("vein", "minecraft:granite", [("spodumene", 0.30, "pockets"), ("beryl", 0.02, "pockets")], (10, 14), (3, 5), (12, 20),
                             "pegmatite", (0, 64), 14, "rock"),
-    # beryllium in the fluorite nodules of a rhyolite tuff, as at Spor Mountain, Utah, where most of the world's beryllium is mined
     "beryllium_tuff": ("bed", "minecraft:tuff", [("bertrandite", 0.10, "disseminated"), ("fluorite", 0.05, "pockets")], (8, 12), (3, 5), None,
                        "arid_oxide", (40, 70), 30, "rock"),
     "tin_vein": ("vein", None, [("cassiterite", 0.36, "pockets"), ("wolframite", 0.16, "pockets")],
@@ -216,7 +167,6 @@ DEPOSITS = {
                     "hydrothermal", (-32, 32), 20, "rock"),
 }
 
-# Heavy minerals washed into beach and river sand: (y_min, y_max, veins per chunk, vein size).
 PLACERS = {
     "monazite": (54, 66, 4, 9),
     "ilmenite": (54, 66, 5, 12),
@@ -225,9 +175,6 @@ PLACERS = {
     "zircon": (54, 66, 4, 9),
 }
 
-# Ore features of other mods switched off: hematite/magnetite replace vanilla iron (PLAN §2.4),
-# and galena, spodumene and pentlandite replace TFMG's lead, lithium and nickel ores. Vanilla gold and copper ore stay — they are native gold
-# and native copper.
 REMOVED = {
     "vanilla_iron": ["minecraft:ore_iron_upper", "minecraft:ore_iron_middle", "minecraft:ore_iron_small"],
     "tfmg_lead_ore": ["tfmg:lead_ore"],
@@ -235,7 +182,6 @@ REMOVED = {
     "tfmg_nickel_ore": ["tfmg:nickel_ore"],
 }
 
-# Blocks from elsewhere in the mod that share the mining-tool tags this script writes.
 STORAGE_BLOCKS = [f"fundamentals:{name}" for _, form, name in items() if form == "block"]
 PLASTIC_BLOCKS = [f"fundamentals:{dye}_plastic_block" for dye in ("white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray",
                                                                   "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black")]
@@ -246,43 +192,17 @@ OTHER_MINEABLE = {"pickaxe": ["fundamentals:bloomery", "fundamentals:panel_rack"
                 + [f"fundamentals:{name}" for name in OXIDATION_BLOCKS]}
 OTHER_TIERED = {"stone": STORAGE_BLOCKS + [f"fundamentals:{name}" for name in OXIDATION_BLOCKS if name != "inert_storage_drum"]}
 
-# Our ores and raw chunks are tagged by commodity in our own namespace, not in c:ores/<metal> and
-# c:raw_materials/<metal>: Create crushes and smelts whatever is in those straight to the metal, which would
-# skip every roast and plant. Bauxite alone is shared, since its road runs through Create's crushed aluminium.
 SHARED = ("aluminum",)
 
-# argentite is the high-temperature form of Ag2S and inverts to acanthite below 177 °C, so every specimen in hand is acanthite (IMA); the id stays
 DISPLAY = {"bastnasite": "Bastnäsite", "ion_adsorption_clay": "Ion-Adsorption Clay", "argentite": "Acanthite"}
 
-def write(path, obj):
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(obj, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-
-
-def tag(path, values):
-    write(path, {"replace": False, "values": sorted(values)})
-
-
-# Raw chunks one ore block drops, by grade: (min, max, chance of dropping at all). Fortune
-# multiplies them like vanilla ore; Silk Touch takes the block instead.
 DROPS = {"core": (2, 3, 1.0), "edge": (1, 1, 1.0), "trace": (1, 1, 0.5)}
 
 SILK_TOUCH = {"condition": "minecraft:match_tool", "predicate": {"predicates": {"minecraft:enchantments": [
     {"enchantments": "minecraft:silk_touch", "levels": {"min": 1}}]}}}
 
 
-def drop_self(name, conditions=()):
-    return {"rolls": 1, "bonus_rolls": 0,
-            "entries": [{"type": "minecraft:item", "name": f"fundamentals:{name}"}],
-            "conditions": [{"condition": "minecraft:survives_explosion"}, *conditions]}
-
-
-def cube(texture):
-    return {"parent": "minecraft:block/cube_all", "textures": {"all": texture}}
-
-
 def overlay(texture):
-    """A cube showing only the mineral; the host rock's model is drawn underneath it."""
     faces = {side: {"texture": "#ore", "cullface": side} for side in ("down", "up", "north", "south", "west", "east")}
     return {"parent": "minecraft:block/block", "render_type": "minecraft:cutout",
             "textures": {"particle": texture, "ore": texture},
@@ -298,9 +218,6 @@ def rock_files(name, display, lang):
 
 
 def ore_files(mineral, display, lang):
-    """One ore block and the raw chunk it drops. The blockstate is assembled from parts: the
-    host rock's cube (by `host`), then the mineral on top (by `grade`, several variants so a
-    large body does not tile). Richer ore drops more."""
     name, whole = f"{mineral}_ore", mineral in WHOLE
     parts, pools = [], []
     if not whole:
@@ -327,7 +244,6 @@ def ore_files(mineral, display, lang):
                       "entries": [{"type": "minecraft:alternatives", "children": [
                           {"type": "minecraft:item", "name": f"fundamentals:{name}", "conditions": [SILK_TOUCH]}, raw]}]})
     write(ASSETS / f"blockstates/{name}.json", {"multipart": parts})
-    # In the hand it is shown as it looks in plain stone.
     item = cube(f"fundamentals:block/{name}_edge_0") if whole else {
         "parent": "minecraft:block/block",
         "textures": {"particle": "minecraft:block/stone", "base": "minecraft:block/stone",
@@ -344,7 +260,7 @@ def ore_files(mineral, display, lang):
 
 
 def state(block, **properties):
-    out = {"Name": block if ":" in block else f"fundamentals:{block}"}
+    out = {"Name": ns(block)}
     if properties:
         out["Properties"] = properties
     return out
@@ -374,14 +290,12 @@ def main():
         | {row[1][:-4] for row in DEPOSITS.values() if row[1] and row[1].endswith("_ore")}
     assert generated == set(ORES), f"ores that never generate, or unknown ores: {sorted(generated ^ set(ORES))}"
 
-    # Only the worldgen and commodity-tag folders are wholly ours; everything else is shared and just overwritten.
     for stale in (DATA / "worldgen", DATA / "neoforge", DATA / "tags/worldgen", DATA / "tags/block/ores", DATA / "tags/item/ores",
                   DATA / "tags/item/raw_materials", C_TAGS / "block/ores", C_TAGS / "item/ores", C_TAGS / "item/raw_materials"):
         shutil.rmtree(stale, ignore_errors=True)
     shutil.rmtree(ASSETS / "models/block/ore", ignore_errors=True)
 
-    lang_path = ASSETS / "lang/en_us.json"
-    lang = json.loads(lang_path.read_text(encoding="utf-8"))  # other entries are kept as they are
+    lang = read_lang()
     lang["itemGroup.fundamentals.minerals"] = "Fundamentals"
 
     for host, (_, texture) in HOSTS.items():
@@ -403,7 +317,7 @@ def main():
             by_tier.setdefault(tier, []).append(block)
         by_commodity.setdefault(commodity, []).append(block)
         raw_by_commodity.setdefault(commodity, []).append(f"fundamentals:raw_{name}")
-    write(lang_path, dict(sorted(lang.items())))
+    write_lang(lang)
 
     for tool, names in by_tool.items():
         tag(MC_TAGS / f"mineable/{tool}.json", names + OTHER_MINEABLE.get(tool, []))
@@ -452,8 +366,6 @@ def main():
 
     for where, features in by_biomes.items():
         tag(DATA / f"tags/worldgen/biome/deposit/{where}.json", BIOMES[where])
-        # After underground_ores, so a deposit lands on top of the stone layers Create generates
-        # there and its ore takes on whichever Create stone it sits in.
         write(DATA / f"neoforge/biome_modifier/add_{where}_deposits.json", {
             "type": "neoforge:add_features", "biomes": f"#fundamentals:deposit/{where}", "features": features,
             "step": "underground_decoration"})
@@ -461,9 +373,7 @@ def main():
         write(DATA / f"neoforge/biome_modifier/remove_{name}.json", {
             "type": "neoforge:remove_features", "biomes": "#minecraft:is_overworld", "features": features,
             "steps": ["underground_ores"]})
-    # registry.OreBlocks registers exactly these blocks, so a block exists when its models, loot,
-    # tags and spawn rules do.
-    write(ROOT / "fundamentals_ores.json", {
+    write(RESOURCES / "fundamentals_ores.json", {
         "blocks": blocks, "hosts": {host: block for host, (block, _) in HOSTS.items()}})
     print(f"wrote {len(blocks)} blocks ({len(ORES)} minerals, {len(ROCKS)} rocks), "
           f"{len(DEPOSITS)} deposit types, {len(PLACERS)} placers")

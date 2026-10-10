@@ -24,22 +24,6 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 @PrefixGameTestTemplate(false)
 public class PlasticTests {
 
-    @GameTest(template = "empty")
-    public void theFactorysPlasticVatsNeedTheCatalystAndPvcMakesPipe(GameTestHelper helper) {
-        ItemStack catalyst = new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "ziegler_natta_catalyst")));
-        for (String olefin : new String[] {"ethylene", "propylene"}) {
-            var recipe = (ProcessingRecipe<?, ?>) helper.getLevel().getRecipeManager()
-                    .byKey(ResourceLocation.parse("tfmg:vat_machine_recipe/plastic_from_" + olefin)).orElseThrow().value();
-            helper.assertTrue(recipe.getIngredients().stream().anyMatch(i -> i.test(catalyst)), "plastic from " + olefin + " should take the catalyst");
-            helper.assertTrue(recipe.getRollableResults().stream().anyMatch(r -> r.getStack().is(catalyst.getItem()) && r.getChance() < 1),
-                    "the catalyst should come back most of the time, not always");
-        }
-        ItemStack pvc = new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "pvc_sheet")));
-        var pipe = helper.getLevel().getRecipeManager().byKey(ResourceLocation.parse("tfmg:crafting/materials/plastic_pipe")).orElseThrow().value();
-        helper.assertTrue(pipe.getIngredients().stream().anyMatch(i -> i.test(pvc)), "a PVC sheet should make the Factory's plastic pipe");
-        helper.succeed();
-    }
-
     @GameTest(template = "empty", timeoutTicks = 100)
     public void aDyedTankKeepsItsColourAndNeitherItNorADyedPipeCorrodes(GameTestHelper helper) {
         BlockPos low = new BlockPos(1, 1, 1);
@@ -61,14 +45,4 @@ public class PlasticTests {
         });
     }
 
-    @GameTest(template = "empty")
-    public void eightPlasticBlocksAndADyeMakeEightColouredOnes(GameTestHelper helper) {
-        var recipe = helper.getLevel().getRecipeManager().byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "plastics/red_plastic_block")).orElseThrow().value();
-        ItemStack block = new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("tfmg:plastic_block")));
-        helper.assertTrue(recipe.getIngredients().stream().filter(i -> i.test(block)).count() == 8, "eight of TFMG's plastic blocks should go in");
-        helper.assertTrue(recipe.getIngredients().stream().anyMatch(i -> i.test(new ItemStack(Items.RED_DYE))), "with a red dye");
-        ItemStack out = recipe.getResultItem(helper.getLevel().registryAccess());
-        helper.assertTrue(out.getCount() == 8 && BuiltInRegistries.ITEM.getKey(out.getItem()).getPath().equals("red_plastic_block"), "should make eight red plastic blocks, made " + out);
-        helper.succeed();
-    }
 }

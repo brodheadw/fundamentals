@@ -9,7 +9,6 @@ import org.spongepowered.asm.mixin.Mixin;
 
 import java.util.List;
 
-/** The stator implements the goggles interface but never fills it; this supplies the method, with its magnet's lines. */
 @Mixin(value = StatorBlockEntity.class, remap = false)
 public abstract class StatorGogglesMixin {
 

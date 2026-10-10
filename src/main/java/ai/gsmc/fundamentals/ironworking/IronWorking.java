@@ -42,31 +42,28 @@ public final class IronWorking {
         bloomery = new BloomeryBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_ORANGE)
                 .requiresCorrectToolForDrops().strength(2.0F, 4.0F).sound(SoundType.STONE)
                 .lightLevel(state -> state.getValue(BloomeryBlock.LIT) ? 13 : 0));
-        registry.accept(id("bloomery"), bloomery);
+        registry.accept(Fundamentals.id("bloomery"), bloomery);
     }
 
     public static void registerBlockEntities(BiConsumer<ResourceLocation, BlockEntityType<?>> registry) {
         bloomeryEntity = BlockEntityType.Builder.of(BloomeryBlockEntity::new, bloomery).build(null);
-        registry.accept(id("bloomery"), bloomeryEntity);
+        registry.accept(Fundamentals.id("bloomery"), bloomeryEntity);
     }
 
     public static void registerRecipeTypes(BiConsumer<ResourceLocation, RecipeType<?>> registry) {
-        registry.accept(id("bloomery"), BloomeryRecipe.TYPE);
+        registry.accept(Fundamentals.id("bloomery"), BloomeryRecipe.TYPE);
     }
 
     public static void registerRecipeSerializers(BiConsumer<ResourceLocation, RecipeSerializer<?>> registry) {
-        registry.accept(id("bloomery"), BloomeryRecipe.SERIALIZER);
+        registry.accept(Fundamentals.id("bloomery"), BloomeryRecipe.SERIALIZER);
     }
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
-        registry.accept(id("bloomery"), bloomeryItem = new BlockItem(bloomery, new Item.Properties()));
-        registry.accept(id("smithing_hammer"), smithingHammer = new HandToolItem(new Item.Properties().durability(96)));
-        registry.accept(id("iron_bloom"), ironBloom = new Item(new Item.Properties()));
-        registry.accept(id("roasted_galena"), roastedGalena = new Item(new Item.Properties()));
-        registry.accept(id("calcined_spodumene"), calcinedSpodumene = new Item(new Item.Properties()));
+        registry.accept(Fundamentals.id("bloomery"), bloomeryItem = new BlockItem(bloomery, new Item.Properties()));
+        registry.accept(Fundamentals.id("smithing_hammer"), smithingHammer = new HandToolItem(new Item.Properties().durability(96)));
+        registry.accept(Fundamentals.id("iron_bloom"), ironBloom = new Item(new Item.Properties()));
+        registry.accept(Fundamentals.id("roasted_galena"), roastedGalena = new Item(new Item.Properties()));
+        registry.accept(Fundamentals.id("calcined_spodumene"), calcinedSpodumene = new Item(new Item.Properties()));
     }
 
-    private static ResourceLocation id(String path) {
-        return ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, path);
-    }
 }

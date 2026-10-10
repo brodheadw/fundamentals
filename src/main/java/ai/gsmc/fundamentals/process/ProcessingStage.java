@@ -83,15 +83,4 @@ public enum ProcessingStage {
         return Arrays.stream(id().split("_")).map(StringUtils::capitalize).collect(Collectors.joining(" "));
     }
 
-    // "Leaching(Cyanidation)" is LEACHING; an unknown token is null.
-    public static ProcessingStage fromCatalog(String token) {
-        if (token == null) return null;
-        String base = token.split("\\(", 2)[0].trim();
-        String snake = base.replaceAll("([a-z0-9])([A-Z])", "$1_$2").toUpperCase(Locale.ROOT);
-        try {
-            return valueOf(snake);
-        } catch (IllegalArgumentException e) {
-            return null;
-        }
-    }
 }

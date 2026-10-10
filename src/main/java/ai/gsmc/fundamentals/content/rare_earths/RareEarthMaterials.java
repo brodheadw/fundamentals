@@ -12,14 +12,10 @@ public final class RareEarthMaterials {
     public static final String GROUP = "rare_earths";
 
     private static final MaterialForm[] MINERAL_FORMS = {ORE, RAW, DUST};
-    // Oxide to metal goes three ways: the lights and the heavies through their fluoride (molten-salt
-    // electrolysis and calciothermic reduction), samarium straight from the oxide by lanthanum.
     private static final MaterialForm[] ELEMENT_FORMS = {OXALATE, FLUORIDE, OXIDE, INGOT};
     private static final MaterialForm[] MAGNET_ELEMENT_FORMS = {OXALATE, FLUORIDE, OXIDE, INGOT, NUGGET, BLOCK};
     private static final MaterialForm[] VOLATILE_MAGNET_FORMS = {OXALATE, OXIDE, INGOT, NUGGET, BLOCK};
-    // Europium and the heavies past dysprosium are sold as oxide; nothing here wants them as metal.
     private static final MaterialForm[] OXIDE_FORMS = {OXALATE, OXIDE};
-    // Scandium and yttrium go into alloys by the nugget: Al-Sc and the MCrAlY bond coat.
     private static final MaterialForm[] ALLOYING_FORMS = {OXALATE, FLUORIDE, OXIDE, INGOT, NUGGET};
     private static final MaterialForm[] MAGNET_FORMS = {INGOT, NUGGET, PLATE, BLOCK};
     private static final MaterialForm[] ALLOY_FORMS = {INGOT, NUGGET, PLATE, BLOCK};
@@ -42,7 +38,6 @@ public final class RareEarthMaterials {
         reg("heavy_rare_earth_concentrate", null, MaterialType.CONCENTRATE, "",
                 new MaterialForm[] {CONCENTRATE}, MaterialProperties.builder());
 
-        // light
         element("lanthanum", "La", ELEMENT_FORMS, 0.78);
         element("cerium", "Ce", ELEMENT_FORMS, 0.86);
         element("praseodymium", "Pr", MAGNET_ELEMENT_FORMS, 0.86);
@@ -50,7 +45,6 @@ public final class RareEarthMaterials {
         element("samarium", "Sm", VOLATILE_MAGNET_FORMS, 0.96);
         element("europium", "Eu", OXIDE_FORMS, 0.67);
 
-        // heavy, plus Y and Sc, which separate with them
         element("gadolinium", "Gd", ELEMENT_FORMS, 1.00);
         element("terbium", "Tb", MAGNET_ELEMENT_FORMS, 1.05);
         element("dysprosium", "Dy", MAGNET_ELEMENT_FORMS, 1.09);
@@ -64,17 +58,14 @@ public final class RareEarthMaterials {
 
         reg("didymium", null, MaterialType.ALLOY, "", new MaterialForm[] {OXALATE, FLUORIDE, OXIDE, INGOT},
                 MaterialProperties.builder().density(0.88));
-        // Strongest magnet, but loses coercivity when hot; dysprosium or terbium in it holds the field hot; SmCo trades strength for heat.
         reg("neodymium_iron_boron", "NdFeB", MaterialType.ALLOY, "Nd2Fe14B", MAGNET_FORMS,
                 MaterialProperties.builder().density(0.95).magnetStrength(1.00).heatResistance(0.30).hardness(0.60));
         reg("dysprosium_neodymium_iron_boron", "Dy-NdFeB", MaterialType.ALLOY, "(Nd,Dy)2Fe14B", MAGNET_FORMS,
                 MaterialProperties.builder().density(0.96).magnetStrength(0.97).heatResistance(0.55).hardness(0.60));
         reg("samarium_cobalt", "SmCo", MaterialType.ALLOY, "Sm2(Co,Fe,Cu,Zr)17", MAGNET_FORMS,
                 MaterialProperties.builder().density(1.06).magnetStrength(0.70).heatResistance(0.80).hardness(0.55));
-        // What monazite leaves behind when it dissolves: thorium and its daughters, mildly radioactive, to be cast into blocks and buried.
         reg("monazite_residue", "Thorium Residue", MaterialType.COMPOUND, "ThO2", new MaterialForm[] {DUST, BLOCK},
                 MaterialProperties.builder().density(0.90).radioactivity(0.60));
-        // A little scandium in aluminium: the light, weldable alloy of aircraft frames.
         reg("aluminium_scandium", "Al-Sc", MaterialType.ALLOY, "Al3Sc", ALLOY_FORMS,
                 MaterialProperties.builder().density(0.28).hardness(0.55));
     }

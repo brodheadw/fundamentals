@@ -45,22 +45,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.BiConsumer;
 
-/**
- * Metal ageing in air, worked out lazily. Nothing scans a chest on a timer. A container keeps a clock (an attachment on its block
- * entity, or on the player for their inventory) of when its contents were last aged; when a player opens or closes it, every stack
- * in it is aged by the time since, at the rate the item's data map entry gives for the air at that spot, and so it is when a hopper or
- * pipe takes from it a minute or more after it was last aged. A stack carries only its
- * stage, so a stack that has aged no longer stacks with fresh metal, as vanilla never merges stacks that differ. Each step is an
- * exponential wait with the entry's mean, so it makes no difference how often a chest is looked into. The player's own inventory is
- * aged every few seconds, a dropped item by its age when picked up, and anything in a charged drum or a sealed canister not at all.
- */
 public final class Oxidation {
 
-    public static final DataMapType<Item, Rate> RATES = DataMapType.builder(id("oxidation"), Registries.ITEM, Rate.CODEC)
+    public static final DataMapType<Item, Rate> RATES = DataMapType.builder(Fundamentals.id("oxidation"), Registries.ITEM, Rate.CODEC)
             .synced(Rate.CODEC, false).build();
     public static final DataComponentType<Integer> STAGE = DataComponentType.<Integer>builder()
             .persistent(Codec.intRange(1, 8)).networkSynchronized(ByteBufCodecs.VAR_INT).build();
-    public static final ResourceLocation STAGE_PROPERTY = id("oxidation_stage");
+    public static final ResourceLocation STAGE_PROPERTY = Fundamentals.id("oxidation_stage");
     public static final AttachmentType<Long> CLOCK = AttachmentType.builder(() -> 0L).serialize(Codec.LONG).build();
     private static final int PLAYER_INTERVAL = 100;
     private static final long DAY = 24000;
@@ -90,39 +81,37 @@ public final class Oxidation {
     }
 
     public static void registerComponents(BiConsumer<ResourceLocation, DataComponentType<?>> registry) {
-        registry.accept(id("oxidation_stage"), STAGE);
+        registry.accept(Fundamentals.id("oxidation_stage"), STAGE);
     }
 
     public static void registerAttachments(BiConsumer<ResourceLocation, AttachmentType<?>> registry) {
-        registry.accept(id("oxidation_clock"), CLOCK);
+        registry.accept(Fundamentals.id("oxidation_clock"), CLOCK);
     }
 
     public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
-        registry.accept(id("inert_storage_drum"), drum = new InertDrumBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY)
+        registry.accept(Fundamentals.id("inert_storage_drum"), drum = new InertDrumBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY)
                 .requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.NETHERITE_BLOCK).noOcclusion()));
         Weathering.registerBlocks(registry);
     }
 
     public static void registerBlockEntities(BiConsumer<ResourceLocation, BlockEntityType<?>> registry) {
         drumEntity = BlockEntityType.Builder.of(InertDrumBlockEntity::new, drum).build(null);
-        registry.accept(id("inert_storage_drum"), drumEntity);
+        registry.accept(Fundamentals.id("inert_storage_drum"), drumEntity);
     }
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
-        registry.accept(id("inert_storage_drum"), drumItem = new BlockItem(drum, new Item.Properties()));
-        registry.accept(id("canister"), canister = new Item(new Item.Properties().stacksTo(16)));
-        registry.accept(id("argon_canister"), argonCanister = new CanisterItem(new Item.Properties().stacksTo(1)));
-        registry.accept(id("rusty_iron_ingot"), rustyIronIngot = new Item(new Item.Properties()));
-        registry.accept(id("rusty_steel_ingot"), rustySteelIngot = new Item(new Item.Properties()));
+        registry.accept(Fundamentals.id("inert_storage_drum"), drumItem = new BlockItem(drum, new Item.Properties()));
+        registry.accept(Fundamentals.id("canister"), canister = new Item(new Item.Properties().stacksTo(16)));
+        registry.accept(Fundamentals.id("argon_canister"), argonCanister = new CanisterItem(new Item.Properties().stacksTo(1)));
+        registry.accept(Fundamentals.id("rusty_iron_ingot"), rustyIronIngot = new Item(new Item.Properties()));
+        registry.accept(Fundamentals.id("rusty_steel_ingot"), rustySteelIngot = new Item(new Item.Properties()));
         Weathering.registerItems(registry);
     }
 
-    /** The item property the staged item models switch on: the stack's stage, 0 when fresh. */
     public static float stageProperty(ItemStack stack) {
         return stack.getOrDefault(STAGE, 0);
     }
 
-    /** {@code stack} after {@code ticks} in {@code air}: the same stack if nothing happened, a later stage, or what it turns into. */
     public static ItemStack age(ItemStack stack, double ticks, Moisture air, RandomSource random) {
         if (stack.isEmpty() || ticks <= 0) {
             return stack;
@@ -156,7 +145,6 @@ public final class Oxidation {
         return aged;
     }
 
-    /** Ages a container's contents up to now by its clock, in the air at {@code pos} (ordinary air if null), and resets the clock. */
     public static void ageHeld(ServerLevel level, IAttachmentHolder holder, Container container, @Nullable BlockPos pos) {
         long now = level.getGameTime();
         long then = holder.hasData(CLOCK) ? holder.getData(CLOCK) : now;
@@ -176,7 +164,6 @@ public final class Oxidation {
         container.setChanged();
     }
 
-    /** Ages everything a menu shows: the container it opens and the player's own inventory. */
     public static void sweep(Player player, AbstractContainerMenu menu) {
         if (!(player.level() instanceof ServerLevel level)) {
             return;
@@ -205,7 +192,6 @@ public final class Oxidation {
         }
     }
 
-    /** A container a hopper or pipe takes from: aged first if it has not been for a minute, so automation does not keep it fresh. */
     public static void taking(Container container) {
         if (container instanceof CompoundContainerAccessor both) {
             taking(both.fundamentals$first());
@@ -275,7 +261,4 @@ public final class Oxidation {
         }
     }
 
-    private static ResourceLocation id(String path) {
-        return ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, path);
-    }
 }

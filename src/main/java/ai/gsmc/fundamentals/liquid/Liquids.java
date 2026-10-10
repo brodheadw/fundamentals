@@ -10,7 +10,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseFireBlock;
@@ -36,29 +35,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-/**
- * What a fluid's real properties do in play. Water-based fluids freeze in the pipe: below their freezing point a pipe stops ticking
- * and a pump's network stops moving them until the heat comes back. A fluid past its boiling point in an open basin boils off, and
- * what it gives off is breathed. A flammable fluid let out by a burst pipe beside a flame, past its flash point, or anywhere past its
- * autoignition temperature, catches fire, and spilt ones in the world burn as vanilla's fire burns wood. Viscous fluids pump slower,
- * after the Hydraulic Institute's viscosity correction. Goggles on a pipe, pump, valve, tank or basin give the figures. The figures are
- * {@link Liquid}s in the data map {@link #PROPERTIES}.
- */
 public final class Liquids {
 
     public static final DataMapType<Fluid, Liquid> PROPERTIES = DataMapType.builder(
-            ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "liquid_properties"), Registries.FLUID, Liquid.CODEC)
+            Fundamentals.id("liquid_properties"), Registries.FLUID, Liquid.CODEC)
             .synced(Liquid.CODEC, false).build();
 
-    /** Ticks between a pump network's looks at whether what it moves has frozen. */
     public static final int INTERVAL = 20;
-    /** Ticks between an open basin's boil-offs, and the millibuckets each takes. */
     public static final int VENT_INTERVAL = 40, VENT = 25;
-    /** How far below the climate the blocks round a pipe can cool it: blue ice is -20 °C and a few of them add up. */
     private static final double COLDEST = 40;
-    /** °C of heat from the blocks round it that means a flame or a hot surface close by, which lights a flammable past its flash point. */
     private static final double SPARK = 100;
-    /** mPa·s past which a pump slows, the slowest it gets, and how fast it falls off per decade of viscosity. */
     private static final double VISCOUS = 100, SLOWEST = 0.25, PER_DECADE = 0.35;
 
     private Liquids() {}
@@ -76,13 +62,11 @@ public final class Liquids {
         return still.builtInRegistryHolder().getData(PROPERTIES);
     }
 
-    /** A fluid's own temperature, °C: a hot stream's from the table, else whatever its fluid type says. */
     public static double own(FluidStack stack) {
         Liquid liquid = of(stack.getFluid());
         return liquid != null && liquid.celsius().isPresent() ? liquid.celsius().get() : stack.getFluid().getFluidType().getTemperature(stack) - 273.15;
     }
 
-    /** What {@code fluid} at {@code pos} stands at: the heat round it, or its own if it runs hotter. */
     public static double celsius(Level level, BlockPos pos, Fluid fluid) {
         Liquid liquid = of(fluid);
         double here = Heat.at(level, pos);
@@ -108,21 +92,17 @@ public final class Liquids {
         return false;
     }
 
-    /** Past its boiling point, and a liquid at room temperature: a gas in a pipe is no news. */
     public static boolean boiling(Level level, BlockPos pos, Fluid fluid) {
         Liquid liquid = of(fluid);
         return liquid != null && liquid.boils().filter(b -> b > 20).isPresent() && celsius(level, pos, fluid) > liquid.boils().get();
     }
 
-    /** The share of its usual flow a pump moves {@code fluid} at. */
     public static double pumping(Fluid fluid) {
         Liquid liquid = of(fluid);
         double viscosity = liquid == null ? 0 : liquid.viscosity().orElse(0.0);
         return viscosity <= VISCOUS ? 1 : Math.max(SLOWEST, 1 - PER_DECADE * Math.log10(viscosity / VISCOUS));
     }
 
-    /** Called every {@link #VENT_INTERVAL} ticks for every basin: open to the sky above (no mixer or press over it), whatever in it
-     * is past its boiling point boils off a little, and is breathed. */
     public static void vent(ServerLevel level, BlockPos pos) {
         if (!level.getBlockState(pos.above()).isAir() || !level.getBlockState(pos.above(2)).isAir()) {
             return;
@@ -142,8 +122,6 @@ public final class Liquids {
         }
     }
 
-    /** {@code fluid} let out at {@code pos} catches fire if it can: past its autoignition temperature, or past its flash point with a
-     * flame or hot surface close by. True if it did. */
     public static boolean ignite(Level level, BlockPos pos, Fluid fluid) {
         Liquid liquid = of(fluid);
         if (liquid == null || !liquid.flammable()) {
@@ -160,7 +138,6 @@ public final class Liquids {
         return true;
     }
 
-    /** Spilt in the world, a flammable fluid burns as vanilla's fire burns its fuels: the lower the flash point, the readier. */
     public static void onDataMapsUpdated(DataMapsUpdatedEvent event) {
         event.ifRegistry(Registries.FLUID, registry -> registry.getDataMap(PROPERTIES).forEach((key, liquid) -> {
             Block block = registry.getOrThrow(key).defaultFluidState().createLegacyBlock().getBlock();
@@ -180,8 +157,6 @@ public final class Liquids {
                 .findFirst().orElse(null);
     }
 
-    /** The goggles' lines for {@code fluid} at {@code pos}: what it is, and what it is doing there. False if there is nothing to say;
-     * {@code named} heads them with its name, for a pipe, which Create gives none. */
     public static boolean describe(@Nullable Level level, BlockPos pos, @Nullable Fluid fluid, List<Component> tooltip, boolean named) {
         Liquid liquid = fluid == null || level == null ? null : of(fluid);
         if (liquid == null) {
@@ -227,7 +202,6 @@ public final class Liquids {
         return true;
     }
 
-    /** Three significant figures, or whole and grouped from a hundred up. */
     public static String figure(double value) {
         return Math.abs(value) >= 100 ? String.format("%,.0f", value)
                 : new BigDecimal(value).round(new MathContext(3)).stripTrailingZeros().toPlainString();

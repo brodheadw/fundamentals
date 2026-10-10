@@ -9,17 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * The stages standing end to end, from the head forward. The head's controller runs the cut for the whole
- * battery: it takes a batch from its own aqueous tank, the feed, and from the tail's, the strip acid, and
- * parts the batch between the raffinate in its own out-tank and the loaded strip in the tail's, in the
- * proportion the feed carries its lighter and heavier rare earths. The stages between carry the
- * organic forward and show the liquor working its way down the line.
- */
 public record Battery(List<MixerSettlerBlockEntity> stages) {
-
-    /** Why the head is not cutting: a lang key under goggles.fundamentals.mixer_settler and its arguments. */
-    public record Stall(String key, Object... args) {}
 
     public static Battery of(MixerSettlerBlockEntity casing) {
         MixerSettlerBlockEntity head = casing.stage();
@@ -37,13 +27,10 @@ public record Battery(List<MixerSettlerBlockEntity> stages) {
     public MixerSettlerBlockEntity tail() { return stages.getLast(); }
     public int size() { return stages.size(); }
 
-    /** The battery runs while the head stage has a redstone signal: the lever on its wall. */
     public boolean isSwitchedOn() { return head().hasSignal(); }
 
-    /** What every cut leaves in the sump: a fifth of a batch of spent liquor. */
     static int wastePerCut(MixerSettlerBlockEntity head) { return Math.max(1, head.batch() / 5); }
 
-    /** Ticks of running before the first batch: each stage adds as much. */
     public int equilibration() { return MixerSettlerBlockEntity.EQUILIBRATION_PER_STAGE * size(); }
 
     public Optional<Stall> stall() {
@@ -90,13 +77,11 @@ public record Battery(List<MixerSettlerBlockEntity> stages) {
         return Optional.empty();
     }
 
-    /** One batch through the whole battery; only called when {@link #stall()} is empty. */
     void runCut() {
         MixerSettlerBlockEntity head = head(), tail = tail();
         FluidStack feed = head.aqueous.getFluid();
         SeparationRecipe cut = SeparationRecipe.forLiquor(head.getLevel(), Separation.clarified(feed.getFluid())).orElseThrow();
         int batch = head.batch();
-        // a little organic leaves entrained in the raffinate every cut; a dirty feed leaves crud, and three cuts of it foul the organic
         head.organic.drain(Math.max(1, batch / 50), IFluidHandler.FluidAction.EXECUTE);
         if (Separation.kind(feed.getFluid()) == Reagents.Kind.CRUDE && ++head.crud >= 3) {
             head.crud = 0;
@@ -109,9 +94,6 @@ public record Battery(List<MixerSettlerBlockEntity> stages) {
         head.out.fill(new FluidStack(cut.light(), cut.lightOf(batch)), IFluidHandler.FluidAction.EXECUTE);
         tail.out.fill(new FluidStack(cut.heavy(), cut.heavyOf(batch)), IFluidHandler.FluidAction.EXECUTE);
         head.waste.fill(new FluidStack(Separation.fluid("spent_liquor"), wastePerCut(head)), IFluidHandler.FluidAction.EXECUTE);
-        // The aqueous phase is the depleting feed through the extraction stages and the acid loading up
-        // through the strip stages; the stages between the ends fill with one or the other a tenth of a
-        // stage at a time, so the liquor is seen to work its way down the line.
         int strip = size() * 2 / 5;
         for (int i = 0; i < size(); i++) {
             MixerSettlerBlockEntity stage = stages.get(i);

@@ -23,7 +23,6 @@ public final class PreciousChains {
                 .step(CUPELLATION, MaterialRef.of("native_silver", RAW), MaterialRef.of("silver", INGOT), MaterialRef.of("lead", OXIDE))
                 .build());
 
-        // The precious-metal refinery's salts, tetroxides and liquors are not materials; the chain names its ends.
         ProcessingChainRegistry.register(ProcessingChain.builder("platinum", "platinum", PreciousMaterials.GROUP)
                 .step(SMELTING, "pentlandite", RAW, "nickel_matte", DUST)
                 .step(CONVERTING, "nickel_matte", DUST, "converter_matte", DUST)

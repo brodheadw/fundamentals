@@ -4,6 +4,11 @@
     "tfmg:steel_vat",
     "tfmg:firebrick_lined_vat"
   ],
+  "machines": [
+    "tfmg:mixing"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
   "ingredients": [
     {
       "item": "tfmg:coal_coke"
@@ -14,11 +19,6 @@
       "fluid": "minecraft:water"
     }
   ],
-  "machines": [
-    "tfmg:mixing"
-  ],
-  "min_size": 1,
-  "processing_time": 100,
   "results": [
     {
       "id": "fundamentals:water_gas",

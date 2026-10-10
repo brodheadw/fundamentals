@@ -11,7 +11,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-/** The large generator's magnets are in its eight stators: the rotor makes the average of what the heat has left in them. */
 @Mixin(value = RotorBlockEntity.class, remap = false)
 public abstract class RotorMagnetMixin {
 

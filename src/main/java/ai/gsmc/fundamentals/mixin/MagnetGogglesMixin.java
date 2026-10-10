@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-/** The Factory's motor, generator and electric pump inherit their goggles from Create's kinetic block entity; a magnet adds its lines there. */
 @Mixin(value = KineticBlockEntity.class, remap = false)
 public abstract class MagnetGogglesMixin {
 

@@ -11,8 +11,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
-/** Create's fluid tank in plastic, which the acids and liquors cannot touch: the same multiblock, windows and capacity, its own
- * block entity type so it joins only other plastic tanks. Natural, it is milky and lets light through; dyed, it is opaque. */
 public class PlasticTankBlock extends FluidTankBlock {
 
     public static final EnumProperty<Pigment> COLOR = EnumProperty.create("color", Pigment.class);

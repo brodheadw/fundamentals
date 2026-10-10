@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/** A hopper or pipe drawing from a chest or barrel ages what is in it first, as opening it would. */
 @Mixin(value = InvWrapper.class, remap = false)
 public abstract class InvWrapperAgeingMixin {
 

@@ -1,20 +1,12 @@
 #!/usr/bin/env python3
-"""The Ponder scene for the mixer-settler ("hold W" over the casing): the structure it plays in, the words
-it says, and the names Ponder looks those words up by. The storyboard itself is Java
-(client/ponder/MixerSettlerScenes.java); its text comes from here, so the scene and the lang file cannot
-disagree. Re-run after any edit.
-
-    python3 tools/build_ponder.py
-"""
 import gzip
 import json
 import struct
-from pathlib import Path
 
-from build_ore_data import ASSETS, write
+from common import ASSETS, JAVA, read_lang, write_lang
 
 SCENE = "mixer_settler"
-JAVA = Path(__file__).resolve().parent.parent / "src/main/java/ai/gsmc/fundamentals/client/ponder/MixerSettlerPonderText.java"
+PONDER_TEXT = JAVA / "client/ponder/MixerSettlerPonderText.java"
 
 HEADER = "Parting the rare earths in a mixer-settler battery"
 TEXTS = [
@@ -27,8 +19,6 @@ TEXTS = [
     "Goggles on any casing tell you what the battery holds, what it is waiting for, and how far the organic and the liquor have got down the line.",
 ]
 
-
-# ---- a small NBT writer, enough for a structure ----
 
 def tag(t, value):
     if t == 1: return struct.pack(">b", value)
@@ -73,7 +63,6 @@ def fluid(id, amount):
 
 
 def structure(size, blocks):
-    """blocks: (x, y, z, name, properties, nbt) with nbt a compound value or None."""
     palette, index = [], {}
     entries = []
     for x, y, z, name, props, nbt in blocks:
@@ -94,16 +83,14 @@ def structure(size, blocks):
 
 
 def scene_blocks():
-    """A plant stage facing east at x 3..5, z 2..4, with its mixer, feed and acid at the ends, products at the sides,
-    P507 from above and the lever on the back wall. Blockstates and tanks are written as a merged stage saves them."""
     blocks = []
     for x in range(9):
         for z in range(7):
             blocks.append((x, 0, z, "minecraft:white_concrete", {}, None))
     origin = (3, 1, 2)
     w, l, h = 3, 3, 2
-    for a in range(w):          # right of the controller: +z (facing east, right is south)
-        for l0 in range(l):     # along the facing: +x
+    for a in range(w):
+        for l0 in range(l):
             for u in range(h):
                 x, y, z = origin[0] + l0, origin[1] + u, origin[2] + a
                 props = {"facing": "east", "left": str(a > 0).lower(), "right": str(a < w - 1).lower(), "back": str(l0 > 0).lower(),
@@ -118,7 +105,6 @@ def scene_blocks():
     hatch = (origin[0], origin[1] + h - 1, origin[2] + w // 2)
     blocks.append((hatch[0], hatch[1] + 1, hatch[2], "create:mechanical_mixer", {}, None))
     blocks.append((hatch[0], hatch[1] + 1, hatch[2] + 1, "create:cogwheel", {"axis": "y"}, None))
-    # feed at the back, acid at the front, raffinate and strip at the sides, P507 from above
     blocks += [(2, 1, 3, "create:mechanical_pump", {"facing": "east"}, None), (1, 1, 3, "create:fluid_tank", {}, fluid("light_rare_earth_liquor", 4000)),
                (6, 1, 3, "create:mechanical_pump", {"facing": "west"}, None), (7, 1, 3, "create:fluid_tank", {}, fluid("hydrochloric_acid", 4000)),
                (3, 1, 1, "create:mechanical_pump", {"facing": "north"}, None), (3, 1, 0, "create:fluid_tank", {}, None),
@@ -132,14 +118,13 @@ def main():
     out = ASSETS / f"ponder/{SCENE}.nbt"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_bytes(structure((9, 5, 7), scene_blocks()))
-    path = ASSETS / "lang/en_us.json"
-    lang = json.loads(path.read_text(encoding="utf-8"))
+    lang = read_lang()
     lang[f"fundamentals.ponder.{SCENE}.header"] = HEADER
     for i, text in enumerate(TEXTS, 1):
         lang[f"fundamentals.ponder.{SCENE}.text_{i}"] = text
-    write(path, lang)
-    JAVA.parent.mkdir(parents=True, exist_ok=True)
-    JAVA.write_text("package ai.gsmc.fundamentals.client.ponder;\n\n// Written by tools/build_ponder.py; edit the words there.\n"
+    write_lang(lang)
+    PONDER_TEXT.parent.mkdir(parents=True, exist_ok=True)
+    PONDER_TEXT.write_text("package ai.gsmc.fundamentals.client.ponder;\n\n// Written by tools/build_ponder.py; edit the words there.\n"
                     "public final class MixerSettlerPonderText {\n\n    public static final String HEADER = " + json.dumps(HEADER) + ";\n"
                     "    public static final String[] TEXTS = {\n" + "".join(f"            {json.dumps(t)},\n" for t in TEXTS)
                     + "    };\n\n    private MixerSettlerPonderText() {}\n}\n", encoding="utf-8")

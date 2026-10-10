@@ -14,8 +14,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/** A pump's network moves nothing while what it draws has frozen at either end of its first pipe, looked at once a second, and moves
- * a viscous fluid slower. */
 @Mixin(value = FluidNetwork.class, remap = false)
 public abstract class FluidNetworkMixin {
 

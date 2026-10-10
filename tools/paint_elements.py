@@ -1,17 +1,9 @@
 #!/usr/bin/env python3
-"""Paints the periodic table tab: a 16x16 tile per element (its symbol in a 3x5 pixel font, doubled,
-on the colour of its family), the table icon the tab and the bare item show, and the tab's
-background. Edit and re-run; don't hand-edit the PNGs. Run tools/build_advancements.py afterwards.
-
-    python3 tools/paint_elements.py            # write textures
-    python3 tools/paint_elements.py sheet.png  # also write the whole table, enlarged
-"""
 import sys
-from pathlib import Path
 
 from PIL import Image
+from common import TEXTURES
 
-TEXTURES = Path(__file__).resolve().parent.parent / "src/main/resources/assets/fundamentals/textures"
 TILES = TEXTURES / "item/element"
 BACKGROUND = TEXTURES / "gui/advancements/backgrounds/periodic_table.png"
 
@@ -38,7 +30,6 @@ FAMILIES = {
     "noble_gas": "He Ne Ar Kr Xe Rn Og",
 }
 
-# Each family's tile, dark enough under white letters: (fill, rim).
 COLOURS = {
     "alkali_metal": ((178, 54, 52), (112, 30, 30)),
     "alkaline_earth": ((196, 114, 34), (124, 68, 18)),
@@ -61,15 +52,12 @@ def family(z, symbol):
     return next((name for name, members in FAMILIES.items() if symbol in members.split()), "transition")
 
 
-# z: (symbol, name, family)
 ELEMENTS = {z: (symbol, name, family(z, symbol))
             for z, (symbol, name) in enumerate((entry.split() for entry in NAMES.replace("\n", "").split(",")), start=1)}
 assert len(ELEMENTS) == 118
 
 
 def cell(z):
-    """(column, row) on the table: groups 1-18 across, periods down, the f-block in two rows below a gap.
-    ElementTable.java places the advancements by the same rule."""
     starts = (1, 3, 11, 19, 37, 55, 87, 119)
     period = next(p for p in range(7) if z < starts[p + 1])
     i = z - starts[period]
@@ -124,8 +112,6 @@ def tile(symbol, fill, rim):
 
 
 def table_icon():
-    """The whole table in miniature, a pixel an element, for the tab and the bare item: the transition
-    metals squeezed from ten columns to eight."""
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
     for z, (_, _, fam) in ELEMENTS.items():
         col, row = cell(z)
@@ -141,7 +127,6 @@ def table_icon():
 
 
 def background():
-    """Near-black slate with a faint grid, so the tiles carry the colour."""
     img = Image.new("RGBA", (16, 16), (22, 24, 30, 255))
     for i in range(16):
         img.putpixel((i, 0), (30, 33, 41, 255))

@@ -32,11 +32,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-/**
- * Polymers: the Ziegler-Natta catalyst The Factory Must Grow's olefins now polymerise over, PVC from ethylene and chlorine, plastic
- * blocks in the sixteen dyes, and dyeing: a dye on a plastic tank colours the whole tank, and on a plastic pipe makes it a
- * {@link DyedPlasticPipeBlock}. The recipes are written by tools/build_uses_data.py.
- */
 public final class Plastics {
 
     private static final ResourceLocation PLASTIC_PIPE = ResourceLocation.parse("tfmg:plastic_pipe");
@@ -56,27 +51,27 @@ public final class Plastics {
             Block block = new Block(BlockBehaviour.Properties.of().mapColor(dye.getMapColor()).requiresCorrectToolForDrops()
                     .strength(1.5F, 6.0F).sound(SoundType.STONE));
             BLOCKS.put(dye, block);
-            registry.accept(id(dye.getSerializedName() + "_plastic_block"), block);
+            registry.accept(Fundamentals.id(dye.getSerializedName() + "_plastic_block"), block);
         }
         dyedPipe = new DyedPlasticPipeBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SNOW).forceSolidOn().strength(1.0F).sound(SoundType.STONE));
-        registry.accept(id("dyed_plastic_pipe"), dyedPipe);
+        registry.accept(Fundamentals.id("dyed_plastic_pipe"), dyedPipe);
     }
 
     public static void registerBlockEntities(BiConsumer<ResourceLocation, BlockEntityType<?>> registry) {
         dyedPipeEntity = BlockEntityType.Builder.of((pos, state) -> new FluidPipeBlockEntity(dyedPipeEntity, pos, state), dyedPipe).build(null);
-        registry.accept(id("dyed_plastic_pipe"), dyedPipeEntity);
+        registry.accept(Fundamentals.id("dyed_plastic_pipe"), dyedPipeEntity);
     }
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
         for (String name : new String[] {"ziegler_natta_catalyst", "pvc_resin", "pvc_sheet"}) {
             Item item = new Item(new Item.Properties());
             ITEMS.add(item);
-            registry.accept(id(name), item);
+            registry.accept(Fundamentals.id(name), item);
         }
         BLOCKS.forEach((dye, block) -> {
             Item item = new BlockItem(block, new Item.Properties());
             ITEMS.add(item);
-            registry.accept(id(dye.getSerializedName() + "_plastic_block"), item);
+            registry.accept(Fundamentals.id(dye.getSerializedName() + "_plastic_block"), item);
         });
     }
 
@@ -99,7 +94,6 @@ public final class Plastics {
                 || BuiltInRegistries.BLOCK.getKey(state.getBlock()).equals(PLASTIC_PIPE);
     }
 
-    /** Colours the plastic at {@code pos}: a whole tank, or one pipe. False if it was that colour already. */
     public static boolean dye(Level level, BlockPos pos, DyeColor dye) {
         BlockState state = level.getBlockState(pos);
         if (state.getBlock() instanceof PlasticTankBlock) {
@@ -140,7 +134,4 @@ public final class Plastics {
         return to.hasProperty(property) ? to.setValue(property, from.getValue(property)) : to;
     }
 
-    private static ResourceLocation id(String path) {
-        return ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, path);
-    }
 }

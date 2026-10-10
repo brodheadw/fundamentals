@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/** A pump drawing through an open pipe end from a water source in the sea draws seawater: Create's pumps and The Factory Must Grow's, which are Create's underneath. */
 @Mixin(value = OpenEndedPipe.class, remap = false)
 public abstract class SeawaterPipeMixin {
 
