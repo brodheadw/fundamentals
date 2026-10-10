@@ -1,7 +1,6 @@
 package ai.gsmc.fundamentals.gametest;
 
 import ai.gsmc.fundamentals.Fundamentals;
-import ai.gsmc.fundamentals.separation.Battery;
 import ai.gsmc.fundamentals.separation.Stall;
 import ai.gsmc.fundamentals.separation.MagneticRecipe;
 import ai.gsmc.fundamentals.separation.MagnetomigrationCellBlock;
@@ -12,7 +11,6 @@ import ai.gsmc.fundamentals.separation.Paramagnetism;
 import ai.gsmc.fundamentals.separation.Separation;
 import ai.gsmc.fundamentals.separation.SeparationRecipe;
 import ai.gsmc.fundamentals.separation.VatGeometry;
-import ai.gsmc.fundamentals.worldgen.DepositFeature;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -20,7 +18,6 @@ import com.wildspell.fundamental.api.heat.Heat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.ResourceLocation;
@@ -315,6 +312,45 @@ public class SeparationTests {
                 for (String id : List.of("mixing/scrub_p507", "mixing/clarify_rare_earth_liquor", "mixing/clarify_heavy_rare_earth_liquor")) {
                     helper.assertTrue(recipes.byKey(Fundamentals.id(id)).isPresent(), id + " is missing");
                 }
+                helper.succeed();
+            });
+        });
+    }
+
+    @GameTest(template = "battery", timeoutTicks = 200)
+    public void aMixerTooFastEmulsifiesTheStage(GameTestHelper helper) {
+        plantBattery(helper, 8, "p507", () -> {
+            // the same motor block again would be a no-op setBlock, and its old speed would stand: clear it first
+            helper.setBlock(new BlockPos(4, 4, 3), Blocks.AIR);
+            mixer(helper, 4, 3, 2, 256);
+            fill(helper, 1, Direction.WEST, "rare_earth_liquor", 1000);
+            fill(helper, 24, Direction.EAST, "hydrochloric_acid", 1000);
+            helper.runAfterDelay(SPIN_UP * 2, () -> {
+                String stall = casing(helper, 1, 1, 1).battery().stall().map(Stall::key).orElse("");
+                helper.assertTrue(stall.equals("emulsion"), "the goggles should blame the over-fast mixer, said " + stall + " at " + casing(helper, 4, 1, 1).isOverStirred());
+                helper.succeed();
+            });
+        });
+    }
+
+    @GameTest(template = "battery", timeoutTicks = 400)
+    public void oxalicAcidPrecipitatesNeodymiumFromItsLiquor(GameTestHelper helper) {
+        Block basin = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:basin"));
+        helper.setBlock(new BlockPos(2, 1, 2), basin.defaultBlockState());
+        mixer(helper, 2, 3, 2);
+        helper.runAfterDelay(SPIN_UP, () -> {
+            BlockPos at = helper.absolutePos(new BlockPos(2, 1, 2));
+            IFluidHandler tank = helper.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, at, Direction.NORTH);
+            var items = helper.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, at, Direction.NORTH);
+            tank.fill(new FluidStack(Separation.fluid("neodymium_liquor"), 250), IFluidHandler.FluidAction.EXECUTE);
+            items.insertItem(0, new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("fundamentals:oxalic_acid")), 1), false);
+            helper.runAfterDelay(200, () -> {
+                var oxalate = BuiltInRegistries.ITEM.get(ResourceLocation.parse("fundamentals:neodymium_oxalate"));
+                boolean made = false;
+                for (int slot = 0; slot < items.getSlots(); slot++) {
+                    made |= items.getStackInSlot(slot).is(oxalate);
+                }
+                helper.assertTrue(made && tank.getFluidInTank(0).isEmpty(), "the mixer should have turned the liquor and acid into neodymium oxalate");
                 helper.succeed();
             });
         });
