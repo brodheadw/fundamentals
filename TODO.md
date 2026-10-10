@@ -21,8 +21,13 @@ What's agreed but not built, in the order it's likely to go. The working plan be
 - **Magnet loose ends.** The magnetomigration cell takes any magnet but ignores its grade, and the heat that weakens a real NdFeB block (it reads the heat only for the ions' susceptibility); and a motor, generator or electric pump rebuilt in the grid takes one magnet where it was built with two or three. Alnico is one cast-and-treated step with no field anneal of its own, sintered NdFeB has no pressing or
   sintering step, and grain-boundary diffusion (terbium on a finished magnet) is folded into the melt.
 - **Temperature consumers.** `Heat.at` exists (the `heat` package). Still to hang on it: the tiers Create's recipes use
-  as thresholds on the number, tarnish rate, and kerosene and the extractants igniting near heat. The Wildspell Magic
+  as thresholds on the number, and tarnish rate. The Wildspell Magic
   side is wildspell-magic#7 (Freezing Grasp and Noon push on it, and spells read it back).
+- **Liquid loose ends.** Only water-based fluids freeze: heavy oil past its pour point, bromine, osmium tetroxide and the
+  melts below their freezing points still flow. A fluid's temperature is its process's or the heat round it, never carried
+  or cooled along a line, so Bayer liquor is 145 °C in any pipe. A tank past its boiling point only warns; the extractants
+  ignite only from a burst pipe, never an open pipe end; and the mixer-settler and magnetomigration cell show no properties.
+  The FluidType density and viscosity of our reagents are still the old two values, not the table's.
 - **Thermometer loose ends.** A type K past 1,260 °C pegs where a real one drifts as its chromel oxidises, and a mercury gauge below
   −39 °C pegs where its column would freeze. The cinnabar retort gives off no SO2 (there is no fluid for it), mercury has no use
   beyond the gauge, and the gauges have no Ponder scene.

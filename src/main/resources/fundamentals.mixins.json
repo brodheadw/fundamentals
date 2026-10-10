@@ -4,8 +4,10 @@
 	"package": "ai.gsmc.fundamentals.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
+		"BasinVentMixin",
 		"BoilerFreshWaterMixin",
 		"CompoundContainerAccessor",
+		"FluidNetworkMixin",
 		"GeneratorMagnetMixin",
 		"InvWrapperAgeingMixin",
 		"MagnetGogglesMixin",
@@ -13,6 +15,7 @@
 		"OreVeinTypeMixin",
 		"OreVeinifierMixin",
 		"PipeCorrosionMixin",
+		"PipeGogglesMixin",
 		"PumpMagnetMixin",
 		"RotorMagnetMixin",
 		"SeawaterBucketMixin",
@@ -22,6 +25,7 @@
 		"StatorGogglesMixin",
 		"TankCorrosionMixin",
 		"TreeNodePositionMixin",
+		"VesselGogglesMixin",
 		"VoltmeterMagnetMixin"
 	],
 	"client": [

@@ -2,6 +2,7 @@ package ai.gsmc.fundamentals.separation;
 
 import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.heat.Heat;
+import ai.gsmc.fundamentals.liquid.Liquids;
 import ai.gsmc.fundamentals.uses.Uses;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlockEntity;
 import com.simibubi.create.AllBlocks;
@@ -171,6 +172,19 @@ public final class Hazards {
         level.sendParticles(ParticleTypes.SMOKE, source.getX() + 0.5, source.getY() + 1.0, source.getZ() + 0.5, 4, 0.2, 0.3, 0.2, 0.01);
     }
 
+    /** What boils off an open basin: the fumes, the poison or the carbonyl it carries, and the steam. */
+    public static void vapour(ServerLevel level, BlockPos source, Fluid fluid, boolean toxic) {
+        Acids.Acid acid = fuming(fluid);
+        if (isCarbonyl(fluid)) {
+            nickelCarbonyl(level, source);
+        } else if (acid != null) {
+            fume(level, source, acid);
+        } else if (toxic) {
+            breathe(level, source, true);
+        }
+        level.sendParticles(ParticleTypes.CLOUD, source.getX() + 0.5, source.getY() + 1.0, source.getZ() + 0.5, 4, 0.25, 0.1, 0.25, 0.01);
+    }
+
     /** A second of nickel carbonyl escaping at {@code source}. */
     public static void nickelCarbonyl(ServerLevel level, BlockPos source) {
         long onset = level.getGameTime() + CARBONYL_ONSET;
@@ -293,13 +307,17 @@ public final class Hazards {
         return entity instanceof AbstractFurnaceBlockEntity furnace && furnace.getItem(0).is(SULFIDES);
     }
 
-    /** Once a second: the leaks give off what they still hold, and whoever breathed nickel carbonyl half a minute ago withers. */
+    /** Once a second: the leaks give off what they still hold, or catch fire where it is hot enough, and whoever breathed nickel carbonyl
+     * half a minute ago withers. */
     public static void onServerTick(ServerTickEvent.Post event) {
         MinecraftServer server = event.getServer();
         if (server.getTickCount() % 20 != 0) {
             return;
         }
         LEAKS.removeIf(leak -> {
+            if (Liquids.ignite(leak.level(), leak.pos(), Separation.fluid("nickel_carbonyl"))) {
+                return true;
+            }
             nickelCarbonyl(leak.level(), leak.pos());
             return --leak.left()[0] <= 0;
         });
@@ -404,7 +422,7 @@ public final class Hazards {
         return true;
     }
 
-    /** The wall at {@code pos} fails: the block goes, an acid spills where it stood. */
+    /** The wall at {@code pos} fails: the block goes, an acid spills where it stood, and anything flammable may catch. */
     private static void burst(Level level, BlockPos pos, Fluid fluid) {
         Acids.Acid acid = Acids.all().values().stream().filter(a -> a.source == fluid || a.flowing == fluid).findFirst().orElse(null);
         level.destroyBlock(pos, false);
@@ -412,14 +430,15 @@ public final class Hazards {
             level.setBlock(pos, acid.block.defaultBlockState().setValue(LiquidBlock.LEVEL, 6), Block.UPDATE_ALL);
         }
         level.playSound(null, pos, SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.8F, 0.9F);
+        Liquids.ignite(level, pos, fluid);
         if (level instanceof ServerLevel server) {
             server.sendParticles(ParticleTypes.CLOUD, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 12, 0.3, 0.3, 0.3, 0.02);
         }
     }
 
-    /** A fluid's own temperature, °C: lava is hot, and everything else the plant carries stands at about room temperature. */
+    /** A fluid's own temperature, °C: lava and the melts are hot, and so is a stream that leaves its process hot. */
     private static double celsius(FluidStack stack) {
-        return stack.getFluid().getFluidType().getTemperature(stack) - 273.15;
+        return Liquids.own(stack);
     }
 
     /** Per tick, the chance {@code carried} at {@code celsius} bursts a pipe of {@code state}. */
