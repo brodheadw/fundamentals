@@ -1,5 +1,6 @@
 package ai.gsmc.fundamentals.separation;
 
+import ai.gsmc.fundamentals.heat.Heat;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,18 +26,21 @@ import java.util.function.Predicate;
 /**
  * One cell of a magnetomigration line. The head cell holds the feed, piped into its back; the tail holds the two streams
  * the line parts it into, drained from its sides: the right, where the magnet is, gives what the magnets draw, the left
- * the rest. The head runs the line.
+ * the rest. The head runs the line, and reads its temperature every {@link #SAMPLE} ticks: the colder the liquor, the more
+ * magnetic its ions and the sooner a batch is parted.
  */
 public class MagnetomigrationCellBlockEntity extends BlockEntity implements IHaveGoggleInformation {
 
     public static final int CAPACITY = 1000;
     public static final int BATCH = 50;
     public static final int PERIOD = 100;
+    public static final int SAMPLE = 40;
 
     final Tank feed = new Tank(stack -> Separation.kind(stack.getFluid()) == Reagents.Kind.LIQUOR);
     final Tank near = new Tank(stack -> true);
     final Tank far = new Tank(stack -> true);
     int cooldown;
+    private double celsius = Double.NaN;
     private boolean dirty;
 
     public MagnetomigrationCellBlockEntity(BlockPos pos, BlockState state) {
@@ -90,11 +94,24 @@ public class MagnetomigrationCellBlockEntity extends BlockEntity implements IHav
         return null;
     }
 
+    /** The liquor's temperature, °C, as the head last read it; a cell not yet read is taken at 20. */
+    public double celsius() {
+        return Double.isNaN(celsius) ? Paramagnetism.ROOM_KELVIN - 273.15 : celsius;
+    }
+
     static void serverTick(Level level, BlockPos pos, BlockState state, MagnetomigrationCellBlockEntity cell) {
         if (cell.next(false) == null) {
+            if (Double.isNaN(cell.celsius) || Math.floorMod(level.getGameTime() + pos.asLong(), SAMPLE) == 0) {
+                double now = Heat.at(level, pos);
+                if (Double.isNaN(cell.celsius) || Math.abs(now - cell.celsius) >= 0.5) {
+                    cell.celsius = now;
+                    cell.setChanged();
+                    cell.dirty = true;
+                }
+            }
             MagnetomigrationLine line = cell.line();
             if (line.stall().isEmpty()) {
-                if (++cell.cooldown >= PERIOD) {
+                if (++cell.cooldown >= line.period()) {
                     cell.cooldown = 0;
                     line.run();
                 }
@@ -123,6 +140,8 @@ public class MagnetomigrationCellBlockEntity extends BlockEntity implements IHav
             tooltip.add(indent(Component.translatable("goggles.fundamentals.magnetomigration_cell." + stall.get().key(), stall.get().args())));
         }
         cut.ifPresent(c -> tooltip.add(indent(Component.translatable("goggles.fundamentals.magnetomigration_cell.passes", c.passes(), line.size()))));
+        cut.ifPresent(c -> tooltip.add(indent(Component.translatable("goggles.fundamentals.magnetomigration_cell.heat", String.format("%.0f", head.celsius()),
+                String.format("%.0f", 100 * c.contrast(head.celsius())), String.format("%.1f", line.period() / 20.0)))));
         tooltip.add(indent(Component.translatable("goggles.fundamentals.magnetomigration_cell.feed", held(head.feed))));
         tooltip.add(indent(Component.translatable("goggles.fundamentals.magnetomigration_cell.outlets", held(tail.near), held(tail.far))));
         return true;
@@ -148,6 +167,9 @@ public class MagnetomigrationCellBlockEntity extends BlockEntity implements IHav
         tag.put("near", near.getFluid().saveOptional(registries));
         tag.put("far", far.getFluid().saveOptional(registries));
         tag.putInt("cooldown", cooldown);
+        if (!Double.isNaN(celsius)) {
+            tag.putDouble("celsius", celsius);
+        }
     }
 
     @Override
@@ -157,6 +179,7 @@ public class MagnetomigrationCellBlockEntity extends BlockEntity implements IHav
         near.setFluid(FluidStack.parseOptional(registries, tag.getCompound("near")));
         far.setFluid(FluidStack.parseOptional(registries, tag.getCompound("far")));
         cooldown = tag.getInt("cooldown");
+        celsius = tag.contains("celsius") ? tag.getDouble("celsius") : Double.NaN;
     }
 
     @Override

@@ -14,7 +14,7 @@ import shutil
 from pathlib import Path
 
 from build_ore_data import ASSETS, BIOMES, DATA, DEPOSITS, PLACERS, write
-from build_separation_data import MOMENTS, ZINC_REDUCTION
+from build_separation_data import CURIE, MOMENTS, TITANIUM_PIPEWORK, ZINC_REDUCTION
 from build_oxidation_data import METALS as AGEING
 
 BOOK = "first_principles"
@@ -106,6 +106,19 @@ def range_of(gauge):
 
 def magnetic_cuts():
     return {d["liquor"]: d for d in (json.loads(p.read_text()) for p in sorted((RECIPES / "magnetic").glob("*.json")))}
+
+
+def susceptibility(element, celsius):
+    """χ(T) / χ(20 °C) as separation.Paramagnetism gives it, in per cent."""
+    share = CURIE.get(element, 1.0)
+    return round(100 * (share * 293 / (celsius + 273.15) + 1 - share))
+
+
+def hazard(name):
+    """A constant of separation.Hazards: a temperature as it is, a per-tick chance as the seconds it averages."""
+    java = (Path(__file__).resolve().parent.parent / "src/main/java/ai/gsmc/fundamentals/separation/Hazards.java").read_text(encoding="utf-8")
+    value = re.search(rf"{name} = ([0-9./ ]+);", java).group(1)
+    return round(eval(value)) if "/" not in value else round(1 / eval(value) / 20)
 
 
 def roads(tree):
@@ -284,7 +297,15 @@ def rare_earths():
         "Cells placed end to end facing the same way are a line, one pass each. Pipe the liquor into the back of the first; the last cell parts it, "
         "what the magnets drew out of its right side, where the NdFeB block is, and the rest out of its left. The products and their proportion "
         "are the battery's, so either route feeds the next cut. The cell is plastic or stainless steel, since the chloride liquor eats copper. "
-        "Goggles on any cell say how many passes the cut wants and what the line is waiting for.") + magnetic_pages + pages_of(
+        "Goggles on any cell say how many passes the cut wants and what the line is waiting for.") + pages_of(
+        "Cold helps. A paramagnetic ion's susceptibility follows Curie's law, one over the absolute temperature: the colder the liquor, the less "
+        "the jostling of the heat undoes the field's lining up of the moments, and the harder the magnets draw. The head cell reads the liquor's "
+        f"temperature, and a batch takes as much longer as the cut's contrast falls: at 0 °C the ions are {susceptibility('Nd', 0)} per cent as "
+        f"magnetic as at 20, at 80 °C {susceptibility('Nd', 80)}, and the goggles give the figure and the time a batch takes.", "Cold and heat") + pages_of(
+        "Samarium and europium are the exceptions. Their first excited levels lie so close above the ground level that the field mixes them in, "
+        "a susceptibility Van Vleck explained in 1932 that does not care for temperature; europium's ground level has no moment at all. "
+        f"So samarium at 80 °C is still {susceptibility('Sm', 80)} per cent of itself at 20, and europium {susceptibility('Eu', 80)}. "
+        "Cotton's Lanthanide and Actinide Chemistry gives the moments and why.") + magnetic_pages + pages_of(
         f"The other {len(without)} cuts have no magnetic route, because their two products do not sort by moment. They are {', '.join(without)}. "
         "Praseodymium and neodymium are both 3.6, dysprosium and holmium both 10.6, terbium 9.7 and erbium 9.6 beside them; "
         "and the broad cuts carry strong and weak ions on both sides, yttrium at nothing among the strongly magnetic heavies, gadolinium at 7.9 beside samarium at 1.5. "
@@ -353,7 +374,7 @@ def rare_earths():
         "it is the one acid glass cannot hold. Nitric acid eats copper and iron, and aqua regia, three of hydrochloric to one of nitric, eats gold as well. Phosphoric acid only stings, which is why it is in your cola. Stone, deepslate and the vats shrug all of them off.") + pages_of(
         "Hydrofluoric acid, nitric acid and aqua regia fume. Within two blocks of any of them in the open, as a block or in a basin it is being used in, you take a hit a second and the world swims, and hydrofluoric poisons. "
         "The gas mask is Create's: a diving helmet over a filled copper backtank, which breathes its air instead. "
-        "And acid eats copper: a Create pipe carrying any acid corrodes and, after a couple of minutes on average, bursts and spills it. The liquors are chlorides in dilute acid, and the spent liquor, the calcium chloride liquor and bittern are chloride too: they eat copper as well, more slowly, eight minutes or so to a pipe; seawater slower still, half an hour. Run the plant in The Factory Must Grow's plastic pipes, pumps and valves, which neither can touch; its metal ones fare no better than copper, and a glass pipe is a copper pipe with a window. The organic, kerosene, is harmless. "
+        "And acid eats copper: a Create pipe carrying any acid corrodes and, after a couple of minutes on average, bursts and spills it. The liquors are chlorides in dilute acid, and the spent liquor, the calcium chloride liquor and bittern are chloride too: they eat copper as well, more slowly, eight minutes or so to a pipe; seawater slower still, half an hour. Run the plant in The Factory Must Grow's plastic pipes, pumps and valves, which neither can touch, or in titanium (see Titanium pipework, under Plastics); the Factory's metal ones fare no better than copper, and a glass pipe is a copper pipe with a window. The organic, kerosene, is harmless. "
         "Tanks corrode too, ten times slower for the thicker wall: a copper or metal tank of acid loses a block of its wall in twenty minutes or so, and that block's share of what it held, the acid spilling; under a liquor, in eighty. "
         "Keep the acid and the liquors in the Plastic Fluid Tank, as real plants keep hydrochloric acid in fibreglass and polyethylene.") + [crafting("fundamentals:plastic_fluid_tank")], 10)
     entry("rare_earths", "making_acids", "Making the acids", "fundamentals:nitric_acid_bucket", pages_of(
@@ -686,7 +707,8 @@ def magnets():
 
 
 def plastics():
-    category("plastics", "Plastics", "Polyethylene, polypropylene and PVC: the plant's pipe and tank, natural or dyed.", "fundamentals:orange_plastic_block", 6)
+    category("plastics", "Plastics", "Polyethylene, polypropylene and PVC: the plant's pipe and tank, natural or dyed; and titanium, where plastic is too hot.",
+             "fundamentals:orange_plastic_block", 6)
     entry("plastics", "plastics", "Plastics", "fundamentals:ziegler_natta_catalyst", pages_of(
         "The Factory's olefins do not polymerise by being heated. Polyethylene and polypropylene are made over a Ziegler-Natta catalyst, a titanium chloride: "
         "Natta's first was titanium tetrachloride reduced by aluminium powder to violet TiCl3. 250 mB of titanium tetrachloride, 100 mB of argon and an aluminium powder, heated, "
@@ -701,6 +723,20 @@ def plastics():
         "Plants colour their lines by what is in them, after ASME A13.1: orange for toxic and corrosive, so the acids and liquors; yellow for flammable, the olefins, "
         "kerosene and the organic; green for water; blue for compressed air. A line you can read from across the plant is a line nobody cuts into by mistake.", "Colour codes")
         + [crafting("fundamentals:plastics/orange_plastic_block")], 0)
+    softens = hazard("PLASTIC_SOFTENS")
+    entry("plastics", "titanium", "Titanium pipework", "fundamentals:titanium_pipe", pages_of(
+        f"Plastic has one weakness: heat. Polyethylene and polypropylene pressure pipe is rated to 80 or 95 °C and is soft by {softens}. "
+        f"A plastic pipe, pump or valve in use whose wall is past {softens} °C, from a burner, fire or lava beside it or lava inside, "
+        f"sags and bursts in {hazard('softeningChance')} seconds or so, and a plastic tank in ten times that. A steam boiler is no place for one.", "Titanium pipework") + pages_of(
+        "Titanium is what a chemical plant pipes hot, corrosive work in. It is a reactive metal, but in air or water it grows an oxide skin a few "
+        "nanometres thick that heals as fast as anything scratches it, so long as there is something oxidising about: chlorides, hot brine, seawater, "
+        "wet chlorine, nitric acid and even aqua regia leave it alone, and it keeps its strength hot. Two titanium plate and a titanium ingot make four "
+        "Titanium Pipe; a cogwheel on one makes a pump, a plate a valve, and two plate round a barrel a tank.") + pages_of(
+        "It has its own weaknesses. Hydrofluoric acid dissolves the skin and the metal under it: a titanium pipe of it bursts in "
+        f"{hazard('fluorideChance')} seconds or so, quicker than copper goes under any acid, so keep it in plastic. Dry chlorine, with no water to mend "
+        f"the skin, burns titanium, and chlorine gas eats it as an acid eats copper. Hydrochloric acid it shrugs off cold, and not past {hazard('TITANIUM_HCL')} °C. "
+        "See Schutz and Thomas, Corrosion of Titanium and Titanium Alloys, in the ASM Handbook, vol. 13.")
+        + [crafting(f"fundamentals:{name}") for name in TITANIUM_PIPEWORK], 1)
 
 
 def book():

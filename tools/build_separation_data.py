@@ -12,13 +12,17 @@ of Rare Earths (2005), at MONAZITE below. Re-run after any edit; build_ore_data.
 import gzip
 import json
 import math
+import re
 import shutil
+import zipfile
 from pathlib import Path
 
 from build_ore_data import ASSETS, DATA, ROOT, drop_self, write
 from paint_materials import MATERIALS
+from paint_separation import CREATE_JAR
 
 JAVA = Path(__file__).resolve().parent.parent / "src/main/java/ai/gsmc/fundamentals/separation/Reagents.java"
+PARAMAGNETISM = JAVA.parent / "Paramagnetism.java"
 RECIPES = DATA / "recipe"
 
 # The vat's proportions in sixteenths of a block. Written to fundamentals_vat.json for VatGeometry.java, so the
@@ -247,14 +251,18 @@ MOMENTS = {"La": 0, "Ce": 2.5, "Pr": 3.6, "Nd": 3.6, "Sm": 1.5, "Eu": 3.4, "Gd":
 WEAK = 0.1
 STRAY = 0.05
 PASS_MOMENT = 16
+# The share of each ion's susceptibility that follows Curie's law, 1/T; Sm3+ and Eu3+ are mostly flat Van Vleck. The cell scales a
+# cut's contrast by the share of it that is Curie's, so the table lives with that code, in Paramagnetism.java.
+CURIE = {e: float(v) for e, v in re.findall(r'"(\w+)", ([0-9.]+)', re.search(r"CURIE = Map\.of\(([^)]*)\)", PARAMAGNETISM.read_text(encoding="utf-8")).group(1))}
 
 
 def magnetic_cut(liquor, stages, light, heavy):
-    """(the product drawn to the magnet, passes) for a cut whose products sort by moment, or None."""
+    """(the product drawn to the magnet, passes, the share of the contrast that follows Curie's law) for a cut whose products
+    sort by moment, or None."""
     feed = MONAZITE if liquor in LIGHT_BRANCH else ION_CLAY
 
-    def chi(side):
-        return sum(feed[e] * MOMENTS[e] ** 2 for e in CARRIES[side]) / sum(feed[e] for e in CARRIES[side])
+    def chi(side, curie=False):
+        return sum(feed[e] * MOMENTS[e] ** 2 * (CURIE.get(e, 1.0) if curie else 1) for e in CARRIES[side]) / sum(feed[e] for e in CARRIES[side])
 
     (drawn, strong), (left, weak) = sorted(((light, chi(light)), (heavy, chi(heavy))), key=lambda kv: -kv[1])
     if strong == 0 or weak > WEAK * strong:
@@ -265,7 +273,7 @@ def magnetic_cut(liquor, stages, light, heavy):
         return None
     passes = math.ceil(PASS_MOMENT / math.sqrt(strong - weak))
     assert passes <= 0.6 * stages, liquor
-    return drawn, passes
+    return drawn, passes, round((chi(drawn, True) - chi(left, True)) / (strong - weak), 2)
 
 
 MAGNETIC = {liquor: cut for liquor, _, stages, light, heavy in CUTS if (cut := magnetic_cut(liquor, stages, light, heavy))}
@@ -516,11 +524,11 @@ def magnetic():
     feeds the next cut."""
     for liquor, _, _, light, heavy in CUTS:
         if liquor in MAGNETIC:
-            drawn, passes = MAGNETIC[liquor]
+            drawn, passes, curie = MAGNETIC[liquor]
             write(RECIPES / f"magnetic/{liquor}.json", {
                 "type": "fundamentals:magnetic", "liquor": f"fundamentals:{liquor}", "light": f"fundamentals:{light}",
                 "heavy": f"fundamentals:{heavy}", "light_fraction": light_fraction(liquor, light, heavy),
-                "attracted": f"fundamentals:{drawn}", "passes": passes})
+                "attracted": f"fundamentals:{drawn}", "passes": passes, "curie_share": curie})
 
 
 def oxalates():
@@ -674,29 +682,100 @@ def magnetomigration_cell():
         "result": {"id": "fundamentals:magnetomigration_cell", "count": 1}})
 
 
-def plastic_tank():
-    """Create's fluid tank in plastic: its own blockstate on Create's tank models, which take our sheets in place of the copper
-    ones, and Create's recipe with plastic sheets for the copper. The acids and liquors are kept in fibreglass and polyethylene
-    tanks for the reason they run in plastic pipe. The models draw it translucent, natural plastic; a dyed tank's colour is a
-    blockstate property the models ignore, and client.PlasticTankModel tints it and draws it opaque."""
+def tank(name, render_type):
+    """Create's fluid tank in our sheets: its own blockstate on Create's tank models, which take ours in place of the copper ones."""
     sheets = {"0": "top", "1": "", "3": "window", "4": "inner", "5": "window_single", "particle": ""}
-    tex = {k: "fundamentals:block/plastic_fluid_tank" + (f"_{v}" if v else "") for k, v in sheets.items()}
+    tex = {k: f"fundamentals:block/{name}" + (f"_{v}" if v else "") for k, v in sheets.items()}
     variants = {}
     for top in (False, True):
         for bottom in (False, True):
             part = "single" if top and bottom else "top" if top else "bottom" if bottom else "middle"
             for shape in ("plain", "window", "window_ne", "window_nw", "window_se", "window_sw"):
-                name = f"block_{part}" + ("" if shape == "plain" else f"_{shape}")
-                write(ASSETS / f"models/block/plastic_fluid_tank/{name}.json",
-                      {"parent": f"create:block/fluid_tank/{name}", "render_type": "minecraft:translucent", "textures": tex})
-                variants[f"bottom={str(bottom).lower()},shape={shape},top={str(top).lower()}"] = {"model": f"fundamentals:block/plastic_fluid_tank/{name}"}
-    write(ASSETS / "blockstates/plastic_fluid_tank.json", {"variants": variants})
-    write(ASSETS / "models/item/plastic_fluid_tank.json", {"parent": "fundamentals:block/plastic_fluid_tank/block_single_window"})
-    write(DATA / "loot_table/blocks/plastic_fluid_tank.json", {"type": "minecraft:block", "pools": [drop_self("plastic_fluid_tank")]})
+                model = f"block_{part}" + ("" if shape == "plain" else f"_{shape}")
+                write(ASSETS / f"models/block/{name}/{model}.json", {"parent": f"create:block/fluid_tank/{model}", "render_type": render_type, "textures": tex})
+                variants[f"bottom={str(bottom).lower()},shape={shape},top={str(top).lower()}"] = {"model": f"fundamentals:block/{name}/{model}"}
+    write(ASSETS / f"blockstates/{name}.json", {"variants": variants})
+    write(ASSETS / f"models/item/{name}.json", {"parent": f"fundamentals:block/{name}/block_single_window"})
+    write(DATA / f"loot_table/blocks/{name}.json", {"type": "minecraft:block", "pools": [drop_self(name)]})
+
+
+def plastic_tank():
+    """Create's fluid tank in plastic, and Create's recipe with plastic sheets for the copper. The acids and liquors are kept in
+    fibreglass and polyethylene tanks for the reason they run in plastic pipe. The models draw it translucent, natural plastic; a
+    dyed tank's colour is a blockstate property the models ignore, and client.TankModel tints it and draws it opaque."""
+    tank("plastic_fluid_tank", "minecraft:translucent")
     write(RECIPES / "plastic_fluid_tank.json", {
         "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["P", "B", "P"],
         "key": {"P": {"tag": "fundamentals:plastic_sheets"}, "B": {"tag": "c:barrels/wooden"}},
         "result": {"id": "fundamentals:plastic_fluid_tank", "count": 1}})
+
+
+def create_json(path):
+    with zipfile.ZipFile(CREATE_JAR) as jar:
+        return json.loads(jar.read(f"assets/create/{path}"))
+
+
+# Create's copper sheets and the titanium ones paint_titanium.py draws over them.
+TITANIUM_SHEETS = {"create:block/pipes": "titanium_pipes", "create:block/pipes_connected": "titanium_pipes_connected", "create:block/pump": "titanium_pump",
+                   "create:block/fluid_valve": "titanium_fluid_valve", "create:block/valve_open": "titanium_valve_open",
+                   "create:block/valve_closed": "titanium_valve_closed", "block/copper_block": "titanium_fluid_tank_top",
+                   "create:block/copper_underside": "titanium_fluid_valve"}
+TITANIUM_PIPEWORK = {"titanium_pipe": "Titanium Pipe", "titanium_mechanical_pump": "Titanium Mechanical Pump", "titanium_fluid_valve": "Titanium Fluid Valve",
+                     "titanium_fluid_tank": "Titanium Fluid Tank"}
+
+
+def titanium_copy(create_dir, ours, render_type=None):
+    """Every model in one of Create's model folders but its partials Create draws itself (the pump's cog, the valve's pointer) and the
+    casing and window titanium has none of, under ours, its copper sheets swapped for titanium ones."""
+    with zipfile.ZipFile(CREATE_JAR) as jar:
+        paths = sorted(n for n in jar.namelist() if n.startswith(f"assets/create/models/block/{create_dir}/") and n.endswith(".json")
+                       and Path(n).stem not in ("cog", "pointer", "casing", "window"))
+    for path in paths:
+        model = path.removeprefix(f"assets/create/models/block/{create_dir}/").removesuffix(".json")
+        textures, parent = {}, f"create:block/{create_dir}/{model}"
+        while parent and parent.startswith("create:block/"):
+            data = create_json(f"models/{parent.removeprefix('create:')}.json")
+            textures = {**data.get("textures", {}), **textures}
+            parent = data.get("parent")
+        swapped = {k: f"fundamentals:block/{TITANIUM_SHEETS[v]}" for k, v in textures.items() if v in TITANIUM_SHEETS}
+        write(ASSETS / f"models/block/{ours}/{model}.json",
+              {"parent": f"create:block/{create_dir}/{model}", **({"render_type": render_type} if render_type else {}), "textures": swapped})
+
+
+def titanium_blockstate(create_name, ours):
+    text = json.dumps(create_json(f"blockstates/{create_name}.json")).replace(f"create:block/{create_name}/", f"fundamentals:block/{ours}/")
+    write(ASSETS / f"blockstates/{ours}.json", json.loads(text))
+
+
+def titanium_pipework():
+    """Create's pipe, pump, valve and tank in titanium: Create's blockstates and models with titanium sheets, Create's recipes with
+    titanium plate and ingot for the copper. Titanium carries what plastic does and stays strong hot, and a chemical plant pipes its
+    hot chloride and wet chlorine in it."""
+    titanium_copy("fluid_pipe", "titanium_pipe")
+    titanium_blockstate("fluid_pipe", "titanium_pipe")
+    titanium_copy("mechanical_pump", "titanium_mechanical_pump")
+    titanium_blockstate("mechanical_pump", "titanium_mechanical_pump")
+    titanium_copy("fluid_valve", "titanium_fluid_valve", "minecraft:cutout_mipped")
+    titanium_blockstate("fluid_valve", "titanium_fluid_valve")
+    tank("titanium_fluid_tank", "minecraft:cutout_mipped")
+    for name, model in (("titanium_pipe", "item"), ("titanium_mechanical_pump", "item"), ("titanium_fluid_valve", "item")):
+        write(ASSETS / f"models/item/{name}.json", {"parent": f"fundamentals:block/{name}/{model}"})
+    for name in TITANIUM_PIPEWORK:
+        if name != "titanium_fluid_tank":
+            write(DATA / f"loot_table/blocks/{name}.json", {"type": "minecraft:block", "pools": [drop_self(name)]})
+    write(RECIPES / "titanium_pipe.json", {
+        "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["SIS"],
+        "key": {"S": {"tag": "c:plates/titanium"}, "I": {"tag": "c:ingots/titanium"}}, "result": {"id": "fundamentals:titanium_pipe", "count": 4}})
+    write(RECIPES / "titanium_mechanical_pump.json", {
+        "type": "minecraft:crafting_shapeless", "category": "misc", "ingredients": [{"item": "create:cogwheel"}, {"item": "fundamentals:titanium_pipe"}],
+        "result": {"id": "fundamentals:titanium_mechanical_pump", "count": 1}})
+    write(RECIPES / "titanium_fluid_valve.json", {
+        "type": "minecraft:crafting_shapeless", "category": "misc", "ingredients": [{"tag": "c:plates/titanium"}, {"item": "fundamentals:titanium_pipe"}],
+        "result": {"id": "fundamentals:titanium_fluid_valve", "count": 1}})
+    write(RECIPES / "titanium_fluid_tank.json", {
+        "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["P", "B", "P"],
+        "key": {"P": {"tag": "c:plates/titanium"}, "B": {"tag": "c:barrels/wooden"}},
+        "result": {"id": "fundamentals:titanium_fluid_tank", "count": 1}})
 
 
 def template():
@@ -714,6 +793,8 @@ def names():
         lang[f"fluid_type.fundamentals.{id}"] = name
     lang["block.fundamentals.mixer_settler"] = "Mixer-Settler Casing"
     lang["block.fundamentals.plastic_fluid_tank"] = "Plastic Fluid Tank"
+    for name, display in TITANIUM_PIPEWORK.items():
+        lang[f"block.fundamentals.{name}"] = display
     for acid in DISSOLVES:
         lang[f"block.fundamentals.{acid}"] = FLUIDS[acid][0]
         lang[f"item.fundamentals.{acid}_bucket"] = f"{FLUIDS[acid][0]} Bucket"
@@ -750,6 +831,7 @@ def names():
     lang[f"{cell}.full"] = "The outlets are full: pipe the products away from the last cell's sides"
     lang[f"{cell}.ready"] = "Parting %s: %s mB %s to the magnets, %s mB %s away a batch"
     lang[f"{cell}.passes"] = "%s passes wanted, %s cells in line"
+    lang[f"{cell}.heat"] = "Liquor at %s °C, the cut %s%% as magnetic as at 20 °C: a batch every %s s"
     lang[f"{cell}.feed"] = "Feed %s"
     lang[f"{cell}.outlets"] = "Magnet side %s, far side %s"
     write(path, lang)
@@ -759,7 +841,8 @@ def main():
     for folder in ("mixing", "separation", "magnetic", "calcining", "reduction", "solvents"):
         shutil.rmtree(RECIPES / folder, ignore_errors=True)
     shutil.rmtree(ASSETS / "models/block/mixer_settler", ignore_errors=True)
-    shutil.rmtree(ASSETS / "models/block/plastic_fluid_tank", ignore_errors=True)
+    for vessel in ("plastic_fluid_tank", *TITANIUM_PIPEWORK):
+        shutil.rmtree(ASSETS / f"models/block/{vessel}", ignore_errors=True)
     for stale in (ASSETS / "models/block").glob("mixer_settler*.json"):
         stale.unlink()
     java_table()
@@ -773,6 +856,7 @@ def main():
     mixer_settler()
     magnetomigration_cell()
     plastic_tank()
+    titanium_pipework()
     template()
     names()
     print(f"{len(FLUIDS)} fluids, {len(CUTS)} cuts, {len(MAGNETIC)} with a magnetic route")
