@@ -6,6 +6,11 @@ gamerule doDaylightCycle false
 gamerule doWeatherCycle false
 gamerule doMobSpawning false
 kill @e[type=item]
+forceload add -27 -84 100 81
+forceload add 101 -84 228 81
+forceload add 229 -84 356 81
+forceload add 357 -84 484 81
+forceload add 485 -84 495 81
 fill -27 -61 -84 495 -61 -77 minecraft:smooth_stone
 fill -27 -60 -84 495 -59 -77 minecraft:air
 fill -27 -58 -84 495 -57 -77 minecraft:air
@@ -132,11 +137,6 @@ fill -27 -58 76 495 -57 81 minecraft:air
 fill -27 -56 76 495 -55 81 minecraft:air
 fill -27 -54 76 495 -53 81 minecraft:air
 fill -27 -52 76 495 -51 81 minecraft:air
-forceload add -27 -84 100 81
-forceload add 101 -84 228 81
-forceload add 229 -84 356 81
-forceload add 357 -84 484 81
-forceload add 485 -84 495 81
 setblock 0 -60 0 fundamentals:mixer_settler[facing=east]
 setblock 0 -59 0 fundamentals:mixer_settler[facing=east]
 setblock 0 -60 1 fundamentals:mixer_settler[facing=east]
@@ -2878,19 +2878,69 @@ setblock 156 -59 -29 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"m
 setblock 156 -60 -29 minecraft:hopper[facing=north]
 setblock 156 -60 -30 create:depot
 setblock 201 -60 -26 tfmg:plastic_pipe[north=true,south=true]
-setblock 201 -60 -27 tfmg:plastic_pipe[south=true,up=true]
-setblock 201 -59 -27 tfmg:plastic_pipe[down=true,up=true]
-setblock 201 -58 -27 tfmg:plastic_pipe[down=true,up=true]
-setblock 201 -57 -27 tfmg:plastic_pipe[down=true,north=true]
-setblock 201 -57 -28 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
-setblock 201 -55 -28 create:mechanical_mixer
-setblock 202 -55 -28 create:cogwheel[axis=y]
-setblock 202 -54 -28 create:creative_motor[facing=down]{ScrollValue:64}
-setblock 200 -60 -28 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
-setblock 201 -58 -29 create:chute
-setblock 201 -59 -29 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
-setblock 201 -60 -29 minecraft:hopper[facing=north]
-setblock 201 -60 -30 create:depot
+setblock 201 -60 -27 fundamentals:plastic_fluid_tank
+setblock 201 -60 -28 tfmg:plastic_mechanical_pump[facing=north]
+setblock 201 -59 -28 create:cogwheel[axis=z]
+setblock 201 -59 -27 create:creative_motor[facing=north]{ScrollValue:64}
+setblock 201 -60 -29 tfmg:plastic_pipe[south=true,up=true]
+setblock 201 -59 -29 tfmg:plastic_pipe[down=true,up=true]
+setblock 201 -58 -29 tfmg:plastic_pipe[down=true,up=true]
+setblock 201 -57 -29 tfmg:plastic_pipe[down=true,up=true]
+setblock 201 -56 -29 tfmg:plastic_pipe[down=true,up=true]
+setblock 201 -55 -29 tfmg:plastic_pipe[down=true,up=true]
+setblock 201 -54 -29 tfmg:plastic_pipe[down=true,north=true]
+setblock 201 -54 -30 create:basin[facing=north]
+setblock 201 -52 -30 create:mechanical_mixer
+setblock 202 -52 -30 create:cogwheel[axis=y]
+setblock 202 -51 -30 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 200 -54 -30 minecraft:hopper[facing=east]
+setblock 200 -53 -30 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"create:zinc_nugget",count:64},{Slot:1b,id:"create:zinc_nugget",count:64},{Slot:2b,id:"create:zinc_nugget",count:64},{Slot:3b,id:"create:zinc_nugget",count:64},{Slot:4b,id:"create:zinc_nugget",count:64},{Slot:5b,id:"create:zinc_nugget",count:64},{Slot:6b,id:"create:zinc_nugget",count:64},{Slot:7b,id:"create:zinc_nugget",count:64},{Slot:8b,id:"create:zinc_nugget",count:64},{Slot:9b,id:"create:zinc_nugget",count:64},{Slot:10b,id:"create:zinc_nugget",count:64},{Slot:11b,id:"create:zinc_nugget",count:64},{Slot:12b,id:"create:zinc_nugget",count:64},{Slot:13b,id:"create:zinc_nugget",count:64},{Slot:14b,id:"create:zinc_nugget",count:64},{Slot:15b,id:"create:zinc_nugget",count:64},{Slot:16b,id:"create:zinc_nugget",count:64},{Slot:17b,id:"create:zinc_nugget",count:64},{Slot:18b,id:"create:zinc_nugget",count:64},{Slot:19b,id:"create:zinc_nugget",count:64},{Slot:20b,id:"create:zinc_nugget",count:64},{Slot:21b,id:"create:zinc_nugget",count:64},{Slot:22b,id:"create:zinc_nugget",count:64},{Slot:23b,id:"create:zinc_nugget",count:64},{Slot:24b,id:"create:zinc_nugget",count:64},{Slot:25b,id:"create:zinc_nugget",count:64},{Slot:26b,id:"create:zinc_nugget",count:64}]}
+setblock 203 -54 -30 fundamentals:plastic_fluid_tank
+setblock 202 -54 -30 tfmg:plastic_mechanical_pump[facing=west]
+setblock 202 -53 -30 create:cogwheel[axis=x]
+setblock 203 -53 -30 create:creative_motor[facing=west]{ScrollValue:64}
+setblock 204 -60 -30 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Zinc reduces"','"europium:"','"its sulfate"','"drops"']},is_waxed:1b}
+setblock 201 -55 -31 create:basin[facing=down]
+setblock 200 -55 -31 tfmg:plastic_mechanical_pump[facing=west]
+setblock 200 -54 -31 create:cogwheel[axis=x]
+setblock 199 -54 -31 create:creative_motor[facing=east]{ScrollValue:64}
+setblock 199 -55 -31 tfmg:plastic_pipe[east=true,down=true]
+setblock 199 -56 -31 tfmg:plastic_pipe[up=true,down=true]
+setblock 199 -57 -31 tfmg:plastic_pipe[up=true,north=true]
+setblock 199 -57 -32 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 199 -55 -32 create:mechanical_mixer
+setblock 200 -55 -32 create:cogwheel[axis=y]
+setblock 200 -54 -32 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 198 -60 -32 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
+setblock 199 -58 -33 create:chute
+setblock 199 -59 -33 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 199 -60 -33 minecraft:hopper[facing=north]
+setblock 199 -60 -34 create:depot
+setblock 198 -57 -32 minecraft:hopper[facing=east]
+setblock 198 -56 -32 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64},{Slot:1b,id:"fundamentals:oxalic_acid",count:64},{Slot:2b,id:"fundamentals:oxalic_acid",count:64},{Slot:3b,id:"fundamentals:oxalic_acid",count:64},{Slot:4b,id:"fundamentals:oxalic_acid",count:64},{Slot:5b,id:"fundamentals:oxalic_acid",count:64},{Slot:6b,id:"fundamentals:oxalic_acid",count:64},{Slot:7b,id:"fundamentals:oxalic_acid",count:64},{Slot:8b,id:"fundamentals:oxalic_acid",count:64},{Slot:9b,id:"fundamentals:oxalic_acid",count:64},{Slot:10b,id:"fundamentals:oxalic_acid",count:64},{Slot:11b,id:"fundamentals:oxalic_acid",count:64},{Slot:12b,id:"fundamentals:oxalic_acid",count:64},{Slot:13b,id:"fundamentals:oxalic_acid",count:64},{Slot:14b,id:"fundamentals:oxalic_acid",count:64},{Slot:15b,id:"fundamentals:oxalic_acid",count:64},{Slot:16b,id:"fundamentals:oxalic_acid",count:64},{Slot:17b,id:"fundamentals:oxalic_acid",count:64},{Slot:18b,id:"fundamentals:oxalic_acid",count:64},{Slot:19b,id:"fundamentals:oxalic_acid",count:64},{Slot:20b,id:"fundamentals:oxalic_acid",count:64},{Slot:21b,id:"fundamentals:oxalic_acid",count:64},{Slot:22b,id:"fundamentals:oxalic_acid",count:64},{Slot:23b,id:"fundamentals:oxalic_acid",count:64},{Slot:24b,id:"fundamentals:oxalic_acid",count:64},{Slot:25b,id:"fundamentals:oxalic_acid",count:64},{Slot:26b,id:"fundamentals:oxalic_acid",count:64}]}
+setblock 198 -60 -31 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Gadolinium"','"liquor"','""','""']},is_waxed:1b}
+setblock 201 -56 -31 minecraft:hopper[facing=north]
+setblock 201 -57 -32 create:blaze_burner[blaze=kindled]{isCreative:1b}
+setblock 201 -56 -32 create:basin[facing=north]
+setblock 201 -54 -32 create:mechanical_mixer
+setblock 202 -54 -32 create:cogwheel[axis=y]
+setblock 202 -53 -32 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 203 -56 -32 fundamentals:plastic_fluid_tank
+setblock 202 -56 -32 tfmg:plastic_mechanical_pump[facing=west]
+setblock 202 -55 -32 create:cogwheel[axis=x]
+setblock 203 -55 -32 create:creative_motor[facing=west]{ScrollValue:64}
+setblock 204 -60 -32 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Europium"','"sulfate"','"in nitric acid,"','"heated"']},is_waxed:1b}
+setblock 201 -57 -33 create:basin[facing=north]{InputItems:{Size:9,Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}}
+setblock 201 -55 -33 create:mechanical_mixer
+setblock 202 -55 -33 create:cogwheel[axis=y]
+setblock 202 -54 -33 create:creative_motor[facing=down]{ScrollValue:64}
+setblock 200 -60 -33 minecraft:chest[facing=west]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64}]}
+setblock 201 -58 -34 create:chute
+setblock 201 -59 -34 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
+setblock 201 -60 -34 minecraft:hopper[facing=north]
+setblock 201 -60 -35 create:depot
+setblock 200 -57 -33 minecraft:hopper[facing=east]
+setblock 200 -56 -33 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:oxalic_acid",count:64},{Slot:1b,id:"fundamentals:oxalic_acid",count:64},{Slot:2b,id:"fundamentals:oxalic_acid",count:64},{Slot:3b,id:"fundamentals:oxalic_acid",count:64},{Slot:4b,id:"fundamentals:oxalic_acid",count:64},{Slot:5b,id:"fundamentals:oxalic_acid",count:64},{Slot:6b,id:"fundamentals:oxalic_acid",count:64},{Slot:7b,id:"fundamentals:oxalic_acid",count:64},{Slot:8b,id:"fundamentals:oxalic_acid",count:64},{Slot:9b,id:"fundamentals:oxalic_acid",count:64},{Slot:10b,id:"fundamentals:oxalic_acid",count:64},{Slot:11b,id:"fundamentals:oxalic_acid",count:64},{Slot:12b,id:"fundamentals:oxalic_acid",count:64},{Slot:13b,id:"fundamentals:oxalic_acid",count:64},{Slot:14b,id:"fundamentals:oxalic_acid",count:64},{Slot:15b,id:"fundamentals:oxalic_acid",count:64},{Slot:16b,id:"fundamentals:oxalic_acid",count:64},{Slot:17b,id:"fundamentals:oxalic_acid",count:64},{Slot:18b,id:"fundamentals:oxalic_acid",count:64},{Slot:19b,id:"fundamentals:oxalic_acid",count:64},{Slot:20b,id:"fundamentals:oxalic_acid",count:64},{Slot:21b,id:"fundamentals:oxalic_acid",count:64},{Slot:22b,id:"fundamentals:oxalic_acid",count:64},{Slot:23b,id:"fundamentals:oxalic_acid",count:64},{Slot:24b,id:"fundamentals:oxalic_acid",count:64},{Slot:25b,id:"fundamentals:oxalic_acid",count:64},{Slot:26b,id:"fundamentals:oxalic_acid",count:64}]}
 setblock 180 -60 -14 tfmg:plastic_pipe[north=true,south=true]
 setblock 180 -60 -15 tfmg:plastic_pipe[north=true,south=true]
 setblock 180 -60 -16 tfmg:plastic_pipe[north=true,south=true]
@@ -6067,51 +6117,64 @@ setblock 486 -58 -77 create:chute
 setblock 486 -59 -77 minecraft:blast_furnace[facing=south]{Items:[{Slot:1b,id:"minecraft:coal",count:64}]}
 setblock 486 -60 -77 minecraft:hopper[facing=north]
 setblock 486 -60 -78 create:depot
-setblock -15 -53 1 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:raw_monazite",count:64},{Slot:1b,id:"fundamentals:raw_monazite",count:64},{Slot:2b,id:"fundamentals:raw_monazite",count:64},{Slot:3b,id:"fundamentals:raw_monazite",count:64},{Slot:4b,id:"fundamentals:raw_monazite",count:64},{Slot:5b,id:"fundamentals:raw_monazite",count:64},{Slot:6b,id:"fundamentals:raw_monazite",count:64},{Slot:7b,id:"fundamentals:raw_monazite",count:64},{Slot:8b,id:"fundamentals:raw_monazite",count:64},{Slot:9b,id:"fundamentals:raw_monazite",count:64},{Slot:10b,id:"fundamentals:raw_monazite",count:64},{Slot:11b,id:"fundamentals:raw_monazite",count:64},{Slot:12b,id:"fundamentals:raw_monazite",count:64},{Slot:13b,id:"fundamentals:raw_monazite",count:64},{Slot:14b,id:"fundamentals:raw_monazite",count:64},{Slot:15b,id:"fundamentals:raw_monazite",count:64},{Slot:16b,id:"fundamentals:raw_monazite",count:64},{Slot:17b,id:"fundamentals:raw_monazite",count:64},{Slot:18b,id:"fundamentals:raw_monazite",count:64},{Slot:19b,id:"fundamentals:raw_monazite",count:64},{Slot:20b,id:"fundamentals:raw_monazite",count:64},{Slot:21b,id:"fundamentals:raw_monazite",count:64},{Slot:22b,id:"fundamentals:raw_monazite",count:64},{Slot:23b,id:"fundamentals:raw_monazite",count:64},{Slot:24b,id:"fundamentals:raw_monazite",count:64},{Slot:25b,id:"fundamentals:raw_monazite",count:64},{Slot:26b,id:"fundamentals:raw_monazite",count:64}]}
-setblock -15 -54 1 minecraft:hopper[facing=down]
-setblock -15 -55 1 create:depot
-setblock -18 -55 1 create:creative_motor[facing=east]{ScrollValue:64}
-setblock -17 -55 1 create:encased_fan[facing=east]
-setblock -16 -56 1 minecraft:glass
-setblock -16 -55 0 minecraft:glass
-setblock -16 -55 2 minecraft:glass
-setblock -16 -55 1 minecraft:water
-setblock -15 -56 1 create:smart_chute{Filter:{id:"fundamentals:light_rare_earth_concentrate",count:1}}
-setblock -15 -57 1 minecraft:hopper[facing=east]
-setblock -14 -58 1 create:blaze_burner[blaze=kindled]{isCreative:1b}
-setblock -14 -57 1 create:basin[facing=east]
-setblock -14 -55 1 create:mechanical_mixer
-setblock -14 -55 0 create:cogwheel[axis=y]
-setblock -14 -54 0 create:creative_motor[facing=down]{ScrollValue:64}
-setblock -14 -57 3 fundamentals:plastic_fluid_tank
-setblock -14 -57 2 tfmg:plastic_mechanical_pump[facing=north]
-setblock -14 -56 2 create:cogwheel[axis=z]
-setblock -14 -56 3 create:creative_motor[facing=north]{ScrollValue:64}
-setblock -13 -58 1 create:basin[facing=down]
-setblock -13 -58 0 tfmg:plastic_mechanical_pump[facing=north]
-setblock -13 -57 0 create:cogwheel[axis=z]
-setblock -13 -57 -1 create:creative_motor[facing=south]{ScrollValue:64}
-setblock -13 -58 -1 fundamentals:plastic_fluid_tank
-setblock -13 -59 1 minecraft:hopper[facing=east]
-setblock -12 -59 1 create:basin[facing=east]
-setblock -12 -57 1 create:mechanical_mixer
-setblock -11 -57 1 create:cogwheel[axis=y]
-setblock -11 -56 1 create:creative_motor[facing=down]{ScrollValue:64}
-setblock -12 -59 3 fundamentals:plastic_fluid_tank
-setblock -12 -59 2 tfmg:plastic_mechanical_pump[facing=north]
-setblock -12 -58 2 create:cogwheel[axis=z]
-setblock -12 -58 3 create:creative_motor[facing=north]{ScrollValue:64}
-setblock -11 -60 1 create:basin[facing=down]
-setblock -11 -61 1 minecraft:hopper[facing=down]
-setblock -11 -62 1 minecraft:chest
-setblock -11 -60 0 tfmg:plastic_mechanical_pump[facing=north]
-setblock -11 -59 0 create:cogwheel[axis=z]
-setblock -11 -59 -1 create:creative_motor[facing=south]{ScrollValue:64}
-setblock -11 -60 -1 tfmg:plastic_pipe[south=true,east=true]
-setblock -10 -60 -1 tfmg:plastic_pipe[west=true,east=true]
-setblock -9 -60 -1 tfmg:plastic_pipe[west=true,south=true]
-setblock -9 -60 0 tfmg:plastic_pipe[north=true,south=true]
-setblock -9 -60 1 tfmg:plastic_pipe[north=true,up=true]
+setblock -16 -51 1 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:raw_monazite",count:64},{Slot:1b,id:"fundamentals:raw_monazite",count:64},{Slot:2b,id:"fundamentals:raw_monazite",count:64},{Slot:3b,id:"fundamentals:raw_monazite",count:64},{Slot:4b,id:"fundamentals:raw_monazite",count:64},{Slot:5b,id:"fundamentals:raw_monazite",count:64},{Slot:6b,id:"fundamentals:raw_monazite",count:64},{Slot:7b,id:"fundamentals:raw_monazite",count:64},{Slot:8b,id:"fundamentals:raw_monazite",count:64},{Slot:9b,id:"fundamentals:raw_monazite",count:64},{Slot:10b,id:"fundamentals:raw_monazite",count:64},{Slot:11b,id:"fundamentals:raw_monazite",count:64},{Slot:12b,id:"fundamentals:raw_monazite",count:64},{Slot:13b,id:"fundamentals:raw_monazite",count:64},{Slot:14b,id:"fundamentals:raw_monazite",count:64},{Slot:15b,id:"fundamentals:raw_monazite",count:64},{Slot:16b,id:"fundamentals:raw_monazite",count:64},{Slot:17b,id:"fundamentals:raw_monazite",count:64},{Slot:18b,id:"fundamentals:raw_monazite",count:64},{Slot:19b,id:"fundamentals:raw_monazite",count:64},{Slot:20b,id:"fundamentals:raw_monazite",count:64},{Slot:21b,id:"fundamentals:raw_monazite",count:64},{Slot:22b,id:"fundamentals:raw_monazite",count:64},{Slot:23b,id:"fundamentals:raw_monazite",count:64},{Slot:24b,id:"fundamentals:raw_monazite",count:64},{Slot:25b,id:"fundamentals:raw_monazite",count:64},{Slot:26b,id:"fundamentals:raw_monazite",count:64}]}
+setblock -16 -52 1 minecraft:hopper[facing=down]
+setblock -16 -53 1 create:depot
+setblock -19 -53 1 create:creative_motor[facing=east]{ScrollValue:64}
+setblock -18 -53 1 create:encased_fan[facing=east]
+setblock -17 -54 1 minecraft:glass
+setblock -17 -53 0 minecraft:glass
+setblock -17 -53 2 minecraft:glass
+setblock -17 -53 1 minecraft:water
+setblock -16 -54 1 create:smart_chute{Filter:{id:"fundamentals:light_rare_earth_concentrate",count:1}}
+setblock -16 -55 1 minecraft:hopper[facing=east]
+setblock -16 -60 -1 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Monazite washed"','"to concentrate"','""','""']},is_waxed:1b}
+setblock -15 -56 1 create:blaze_burner[blaze=kindled]{isCreative:1b}
+setblock -15 -55 1 create:basin[facing=east]
+setblock -15 -53 1 create:mechanical_mixer
+setblock -15 -53 0 create:cogwheel[axis=y]
+setblock -15 -52 0 create:creative_motor[facing=down]{ScrollValue:64}
+setblock -15 -55 3 fundamentals:plastic_fluid_tank
+setblock -15 -55 2 tfmg:plastic_mechanical_pump[facing=north]
+setblock -15 -54 2 create:cogwheel[axis=z]
+setblock -15 -54 3 create:creative_motor[facing=north]{ScrollValue:64}
+setblock -14 -56 1 create:basin[facing=down]
+setblock -14 -56 0 tfmg:plastic_mechanical_pump[facing=north]
+setblock -14 -55 0 create:cogwheel[axis=z]
+setblock -14 -55 -1 create:creative_motor[facing=south]{ScrollValue:64}
+setblock -14 -56 -1 fundamentals:plastic_fluid_tank
+setblock -14 -57 1 minecraft:hopper[facing=east]
+setblock -15 -60 -1 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Baked in hot"','"sulfuric acid"','""','""']},is_waxed:1b}
+setblock -13 -57 1 create:basin[facing=east]
+setblock -13 -55 1 create:mechanical_mixer
+setblock -13 -55 0 create:cogwheel[axis=y]
+setblock -13 -54 0 create:creative_motor[facing=down]{ScrollValue:64}
+setblock -13 -57 0 minecraft:hopper[facing=south]
+setblock -13 -56 0 minecraft:chest[facing=north]{Items:[{Slot:0b,id:"fundamentals:soda_ash",count:64},{Slot:1b,id:"fundamentals:soda_ash",count:64},{Slot:2b,id:"fundamentals:soda_ash",count:64},{Slot:3b,id:"fundamentals:soda_ash",count:64},{Slot:4b,id:"fundamentals:soda_ash",count:64},{Slot:5b,id:"fundamentals:soda_ash",count:64},{Slot:6b,id:"fundamentals:soda_ash",count:64},{Slot:7b,id:"fundamentals:soda_ash",count:64},{Slot:8b,id:"fundamentals:soda_ash",count:64},{Slot:9b,id:"fundamentals:soda_ash",count:64},{Slot:10b,id:"fundamentals:soda_ash",count:64},{Slot:11b,id:"fundamentals:soda_ash",count:64},{Slot:12b,id:"fundamentals:soda_ash",count:64},{Slot:13b,id:"fundamentals:soda_ash",count:64},{Slot:14b,id:"fundamentals:soda_ash",count:64},{Slot:15b,id:"fundamentals:soda_ash",count:64},{Slot:16b,id:"fundamentals:soda_ash",count:64},{Slot:17b,id:"fundamentals:soda_ash",count:64},{Slot:18b,id:"fundamentals:soda_ash",count:64},{Slot:19b,id:"fundamentals:soda_ash",count:64},{Slot:20b,id:"fundamentals:soda_ash",count:64},{Slot:21b,id:"fundamentals:soda_ash",count:64},{Slot:22b,id:"fundamentals:soda_ash",count:64},{Slot:23b,id:"fundamentals:soda_ash",count:64},{Slot:24b,id:"fundamentals:soda_ash",count:64},{Slot:25b,id:"fundamentals:soda_ash",count:64},{Slot:26b,id:"fundamentals:soda_ash",count:64}]}
+setblock -13 -57 3 fundamentals:plastic_fluid_tank
+setblock -13 -57 2 tfmg:plastic_mechanical_pump[facing=north]
+setblock -13 -56 2 create:cogwheel[axis=z]
+setblock -13 -56 3 create:creative_motor[facing=north]{ScrollValue:64}
+setblock -13 -60 -1 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Soda ash and"','"water:"','"carbonate"','""']},is_waxed:1b}
+setblock -12 -58 1 create:basin[facing=east]
+setblock -12 -56 1 create:mechanical_mixer
+setblock -11 -56 1 create:cogwheel[axis=y]
+setblock -11 -55 1 create:creative_motor[facing=down]{ScrollValue:64}
+setblock -12 -58 -1 fundamentals:plastic_fluid_tank
+setblock -12 -58 0 tfmg:plastic_mechanical_pump[facing=south]
+setblock -12 -57 0 create:cogwheel[axis=z]
+setblock -12 -57 -1 create:creative_motor[facing=south]{ScrollValue:64}
+setblock -12 -59 1 create:smart_chute{Filter:{id:"fundamentals:monazite_residue_dust",count:1}}
+setblock -12 -60 1 minecraft:chest
+setblock -12 -60 -1 minecraft:birch_sign[rotation=8]{front_text:{messages:['"Carbonate in"','"hydrochloric:"','"crude liquor"','""']},is_waxed:1b}
+setblock -11 -59 1 create:basin[facing=down]
+setblock -11 -59 2 tfmg:plastic_mechanical_pump[facing=south]
+setblock -11 -58 2 create:cogwheel[axis=z]
+setblock -11 -58 3 create:creative_motor[facing=north]{ScrollValue:64}
+setblock -11 -59 3 tfmg:plastic_pipe[north=true,east=true]
+setblock -10 -59 3 tfmg:plastic_pipe[west=true,east=true]
+setblock -9 -59 3 tfmg:plastic_pipe[west=true,north=true]
+setblock -9 -59 2 tfmg:plastic_pipe[north=true,south=true]
 setblock -9 -59 1 fundamentals:plastic_fluid_tank
 setblock -8 -59 1 tfmg:plastic_mechanical_pump[facing=east]
 setblock -8 -58 1 create:cogwheel[axis=x]
