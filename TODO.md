@@ -10,7 +10,7 @@ What's agreed but not built, in the order it's likely to go. The working plan be
 - **Cracking loose ends.** Bastnäsite's liquor is the shared mixed liquor, so it parts in monazite's proportions though its
   cerium has gone to the cerium concentrate; the leach gives half the liquor instead. The carbonate precipitation's sodium
   sulfate and the carbon dioxide the carbonate gives off in acid are not modelled, nor ammonium sulfate as the clay's
-  lixiviant. The showcase's ore line still leaches the sulfate straight in hydrochloric acid and wants a carbonate basin.
+  lixiviant.
 - **Thorium handling.** Carrying thorium residue should slowly hurt (a radiation effect), and a lead-lined cask should
   carry it safely. Deferred the same day.
 - **Oxidation loose ends.** Vanilla's iron block and the Factory's steel block don't rust (Create's weathered iron block

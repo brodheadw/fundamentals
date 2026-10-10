@@ -11,6 +11,15 @@ data merge block 150 -57 -10 {TankContent:{Fluid:{id:"fundamentals:p204",amount:
 data merge block 183 -60 -11 {TankContent:{Fluid:{id:"fundamentals:hydrochloric_acid",amount:8000}}}
 data merge block 153 -57 -22 {TankContent:{Fluid:{id:"fundamentals:p507",amount:8000}}}
 data merge block 204 -60 -23 {TankContent:{Fluid:{id:"fundamentals:hydrochloric_acid",amount:8000}}}
+data merge block 201 -60 -27 {TankContent:{Fluid:{id:"fundamentals:europium_gadolinium_liquor",amount:8000}}}
+setblock 201 -60 -28 minecraft:air
+setblock 201 -60 -28 tfmg:plastic_mechanical_pump[facing=north]
+data merge block 203 -54 -30 {TankContent:{Fluid:{id:"tfmg:sulfuric_acid",amount:8000}}}
+setblock 202 -54 -30 minecraft:air
+setblock 202 -54 -30 tfmg:plastic_mechanical_pump[facing=west]
+data merge block 203 -56 -32 {TankContent:{Fluid:{id:"fundamentals:nitric_acid",amount:8000}}}
+setblock 202 -56 -32 minecraft:air
+setblock 202 -56 -32 tfmg:plastic_mechanical_pump[facing=west]
 data merge block 208 -57 -22 {TankContent:{Fluid:{id:"fundamentals:p204",amount:8000}}}
 data merge block 247 -60 -23 {TankContent:{Fluid:{id:"fundamentals:hydrochloric_acid",amount:8000}}}
 data merge block 211 -57 -34 {TankContent:{Fluid:{id:"fundamentals:p507",amount:8000}}}
@@ -28,12 +37,15 @@ data merge block 390 -57 -58 {TankContent:{Fluid:{id:"fundamentals:p204",amount:
 data merge block 429 -60 -59 {TankContent:{Fluid:{id:"fundamentals:hydrochloric_acid",amount:8000}}}
 data merge block 426 -57 -70 {TankContent:{Fluid:{id:"fundamentals:p507",amount:8000}}}
 data merge block 489 -60 -71 {TankContent:{Fluid:{id:"fundamentals:hydrochloric_acid",amount:8000}}}
-data merge block -14 -57 3 {TankContent:{Fluid:{id:"tfmg:sulfuric_acid",amount:8000}}}
-data merge block -12 -59 3 {TankContent:{Fluid:{id:"fundamentals:hydrochloric_acid",amount:8000}}}
-setblock -14 -57 2 minecraft:air
-setblock -14 -57 2 tfmg:plastic_mechanical_pump[facing=north]
-setblock -12 -59 2 minecraft:air
-setblock -12 -59 2 tfmg:plastic_mechanical_pump[facing=north]
+data merge block -15 -55 3 {TankContent:{Fluid:{id:"tfmg:sulfuric_acid",amount:8000}}}
+setblock -15 -55 2 minecraft:air
+setblock -15 -55 2 tfmg:plastic_mechanical_pump[facing=north]
+data merge block -13 -57 3 {TankContent:{Fluid:{id:"minecraft:water",amount:8000}}}
+setblock -13 -57 2 minecraft:air
+setblock -13 -57 2 tfmg:plastic_mechanical_pump[facing=north]
+data merge block -12 -58 -1 {TankContent:{Fluid:{id:"fundamentals:hydrochloric_acid",amount:8000}}}
+setblock -12 -58 0 minecraft:air
+setblock -12 -58 0 tfmg:plastic_mechanical_pump[facing=south]
 data merge block 8 -59 25 {TankContent:{Fluid:{id:"fundamentals:beryllium_sulfate_liquor",amount:8000}}}
 data merge block 26 -60 37 {TankContent:{Fluid:{id:"fundamentals:seawater",amount:8000}}}
 data merge block 28 -60 37 {TankContent:{Fluid:{id:"fundamentals:bittern",amount:8000}}}
