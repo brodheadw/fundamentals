@@ -41,6 +41,8 @@
     "minecraft:sand",
     "tfmg:magnetic_alloy_ingot",
     "tfmg:magnetic_alloy_sheet",
+    "tfmg:n_semiconductor",
+    "tfmg:p_semiconductor",
     "tfmg:silicon_ingot",
     "tfmg:slag"
   ]

@@ -20,7 +20,7 @@ public final class PreciousMaterials {
         // native_gold is vanilla's gold ore; it is defined so chains have something to refer to.
         mineral("native_gold", "Native Gold", "Au", "gold", MaterialProperties.builder().density(2.45));
         mineral("native_silver", "Native Silver", "Ag", "silver", MaterialProperties.builder().density(1.33));
-        mineral("argentite", "Argentite", "Ag2S", "silver", MaterialProperties.builder().density(0.92));
+        mineral("argentite", "Acanthite", "Ag2S", "silver", MaterialProperties.builder().density(0.92));
         mineral("sperrylite", "Sperrylite", "PtAs2", "platinum",
                 MaterialProperties.builder().density(1.40).toxicity(0.20)); // As-bearing
         mineral("cooperite", "Cooperite", "PtS", "platinum", MaterialProperties.builder().density(1.26));

@@ -77,6 +77,21 @@ public class AcidTests {
         });
     }
 
+    @GameTest(template = "empty")
+    public void whatEatsWhichWall(GameTestHelper helper) {
+        helper.assertTrue(Acids.all().get("hydrochloric_acid").fumes && !Acids.all().get("phosphoric_acid").fumes, "concentrated hydrochloric acid fumes; phosphoric does not");
+        var plastic = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("tfmg:plastic_pipe")).defaultBlockState();
+        var aluminium = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("tfmg:aluminum_pipe")).defaultBlockState();
+        var copper = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:fluid_pipe")).defaultBlockState();
+        var bromine = new net.neoforged.neoforge.fluids.FluidStack(Acids.all().get("bromine").source, 1);
+        var nitric = new net.neoforged.neoforge.fluids.FluidStack(Acids.all().get("nitric_acid").source, 1);
+        var hydrochloric = new net.neoforged.neoforge.fluids.FluidStack(Acids.all().get("hydrochloric_acid").source, 1);
+        helper.assertTrue(Hazards.chance(plastic, bromine, 20) > 0 && Hazards.chance(plastic, hydrochloric, 20) == 0, "bromine should eat plastic, and the acids not");
+        helper.assertTrue(Hazards.chance(aluminium, nitric, 20) == 0 && Hazards.chance(aluminium, hydrochloric, 20) > 0 && Hazards.chance(copper, nitric, 20) > 0,
+                "nitric acid should leave aluminium alone and still eat copper");
+        helper.succeed();
+    }
+
     @GameTest(template = "battery", timeoutTicks = 300)
     public void copperPipesCorrodeUnderAcid(GameTestHelper helper) {
         Block tank = BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "plastic_fluid_tank"));

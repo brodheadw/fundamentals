@@ -13,7 +13,7 @@ import re
 import shutil
 from pathlib import Path
 
-from build_ore_data import ASSETS, BIOMES, DATA, DEPOSITS, PLACERS, write
+from build_ore_data import ASSETS, BIOMES, DATA, DEPOSITS, DISPLAY, PLACERS, write
 from build_separation_data import CURIE, MOMENTS, TITANIUM_PIPEWORK, ZINC_REDUCTION
 from build_oxidation_data import METALS as AGEING
 
@@ -43,7 +43,7 @@ def pretty(id):
     key = id.split(":")[-1]
     name = LANG.get(f"fluid_type.fundamentals.{key}") or LANG.get(f"item.fundamentals.{key}") or LANG.get(f"block.fundamentals.{key}")
     if name is None:
-        return key.replace("_", " ")
+        return DISPLAY.get(key, key.replace("_", " ")).lower()
     return name if name.isupper() else name.lower()
 
 
@@ -168,7 +168,8 @@ def geology():
     entry("geology", "salt", "Salt and seawater", "fundamentals:seawater_bucket", pages_of(
         "The sea is salt and the rivers are not. Water drawn from a source in an ocean or off a beach, by bucket, hose pulley or a pump at an open pipe, "
         "comes up as seawater; from a river, a lake, a swamp or a cave it is fresh water as ever. Poured out it is water again. "
-        "In a pipe its salt tells: seawater eats copper, slowly, half an hour or so to a pipe, so an intake that runs for long wants plastic.", "Salt and seawater") + pages_of(
+        "In a pipe its salt tells, though slowly: copper takes seawater well enough that cupronickel is the sea's standard pipe, and plain copper "
+        "goes in an hour or so, so an intake that runs for long wants plastic or titanium.", "Salt and seawater") + pages_of(
         "Fresh water boils away to nothing: salt is made from seawater. 1,000 mB boiled down in a heated basin leaves two salt and 100 mB of bittern, "
         "the bitter mother liquor left once the halite has crystallised, rich in magnesium chloride, and gives back the steam as 900 mB of fresh water: "
         "a salt works' evaporator and a desalination plant are one machine. 500 mB of bittern boiled down gives a magnesium chloride, "
@@ -177,9 +178,10 @@ def geology():
         "Seawater will not raise steam. A boiler takes fresh water only, as real ones take it demineralised: salt would scale the tubes and eat them. "
         "Nor does it water crops. Seawater is a lixiviant, though: four ion-adsorption clay in 1,000 mB of it under a mixer leach to 250 mB of crude heavy liquor, "
         "twice the water the salt-and-water leach takes, being half as strong.") + pages_of(
-        "Bittern holds the sea's bromide. 1,000 mB of it and 100 mB of chlorine in a heated vat with a mixer give 100 mB of bromine, "
-        "the chlorine taking the bromide's place, and the bittern's two magnesium chloride. Bromine is a dark red-brown liquid that boils at 59 °C: "
-        "it fumes and poisons like hydrofluoric acid, burns what stands in it, and eats copper, iron and aluminium. "
+        "Bittern holds the sea's bromide. 1,000 mB of it and 20 mB of chlorine in a heated vat with a mixer give 20 mB of bromine, "
+        "the chlorine taking the bromide's place, and the bittern's two magnesium chloride. That is still a hundred times what the sea really gives, 65 milligrams a litre. "
+        "Bromine is a dark red-brown liquid that boils at 59 °C: it fumes and poisons like hydrofluoric acid, burns what stands in it, and eats copper, iron and aluminium. "
+        "Unlike the acids it attacks polyethylene too, so a plastic pipe or tank of it fails as copper does under acid; real plants hold it in glass-lined and lead-lined steel. "
         "Ten millibuckets of it in a quartz envelope make a halogen lamp: a tungsten filament, a quartz, a molybdenum ingot, three steel nuggets "
         "and 10 mB of bromine under a mixer make four light bulbs. The quartz is sealed round molybdenum foil, the one metal whose expansion lets the seal hold, "
         "and the filament stands on molybdenum supports (Ullmann's, Molybdenum).", "Bromine") + [
@@ -348,11 +350,12 @@ def rare_earths():
         "Nothing in the chain is for its own sake. Two neodymium, three iron and a ferroboron, superheated under 100 mB of argon, melt into four NdFeB, the strongest magnet. Dy-NdFeB, which keeps its field hot, is 8 per cent dysprosium as the EH grades are: three neodymium, a dysprosium, six iron and two ferroboron under 200 mB of argon make eight. "
         "SmCo, hotter still, is Sm2(Co,Fe,Cu,Zr)17: two samarium, four cobalt, an iron, four copper nuggets and two zirconium nuggets under 200 mB of argon make seven. "
         "Praseodymium or didymium serves as well as neodymium, and terbium as well as dysprosium. A gadolinium for a neodymium makes three for every four. "
-        "Ferroboron is a borax, an iron and two charcoal, superheated. "
+        "Ferroboron is reduced from boric acid, not borax, whose sodium the melt would keep: a raw borax and 250 mB of sulfuric acid, heated, give two boric acid, and a boric acid, an iron and two charcoal, superheated, a ferroboron. "
         "Polarized, each is the magnet The Factory Must Grow's motors, generators and electric pumps are built from: see Magnets and heat, under Power.", "What they are for") + pages_of(
         "Lanthanum metal reduces samarium, and lanthanum oxide stabilises the zeolite of the catalyst that cracks heavy oil to gasoline and propylene. Cerium with iron is ferrocerium, the lighter flint, a flint and steel that never wears out. "
         "The phosphor every lamp takes is two of the tri-band tube's three: the red is yttria doped with europium, Y2O3:Eu (YOX), and the green lanthanum phosphate doped with cerium and terbium, LaPO4:Ce,Tb (LAP), "
-        "the cerium taking up the ultraviolet and handing it to the terbium (Ullmann's Encyclopedia, Luminescent Materials). Yttria lines the fireproof vat. Didymium glass is the welder's lens the goggles are made of. Erbium turns glass pink. "
+        "the cerium taking up the ultraviolet and handing it to the terbium (Ullmann's Encyclopedia, Luminescent Materials). "
+        "The ultraviolet is mercury's, a few milligrams of its vapour in every tube (3 to 5 mg under the EU's RoHS directive): the Factory's aluminium lamp and circular light take two phosphor and a mercury for every pair. Yttria lines the fireproof vat. Didymium glass is the welder's lens the goggles are made of. Erbium turns glass pink. "
         "Scandium in aluminium is the airframe alloy, and makes a panel rack go twice as far.") + pages_of(
         "Cerium oxide stores and releases oxygen, which is what a catalytic converter does: the Factory's exhaust takes two. Neodymium oxide turns glass purple and holmium oxide yellow, "
         "the way erbium turns it pink. A cobalt in the lithium charge is the lithium cobalt oxide cathode the first lithium cells ran on."), 8)
@@ -373,11 +376,11 @@ def rare_earths():
         "fizzes for five seconds, and is gone, and the acid that ate it is spent.", "The acids") + pages_of(
         "Hydrochloric acid eats carbonates: calcite, limestone, dripstone, bone. Hydrofluoric acid eats glass and silica: glass, sand, sandstone, quartz, tuff; "
         "it is the one acid glass cannot hold. Nitric acid eats copper and iron, and aqua regia, three of hydrochloric to one of nitric, eats gold as well. Phosphoric acid only stings, which is why it is in your cola. Stone, deepslate and the vats shrug all of them off.") + pages_of(
-        "Hydrofluoric acid, nitric acid and aqua regia fume. Within two blocks of any of them in the open, as a block or in a basin it is being used in, you take a hit a second and the world swims, and hydrofluoric poisons. "
+        "Concentrated hydrochloric acid, hydrofluoric acid, nitric acid and aqua regia fume. Within two blocks of any of them in the open, as a block or in a basin it is being used in, you take a hit a second and the world swims, and hydrofluoric poisons. "
         "The gas mask is Create's: a diving helmet over a filled copper backtank, which breathes its air instead. "
-        "And acid eats copper: a Create pipe carrying any acid corrodes and, after a couple of minutes on average, bursts and spills it. The liquors are chlorides in dilute acid, and the spent liquor, the calcium chloride liquor and bittern are chloride too: they eat copper as well, more slowly, eight minutes or so to a pipe; seawater slower still, half an hour. Run the plant in The Factory Must Grow's plastic pipes, pumps and valves, which neither can touch, or in titanium (see Titanium pipework, under Plastics); the Factory's metal ones fare no better than copper, and a glass pipe is a copper pipe with a window. The organic, kerosene, is harmless. "
+        "And acid eats copper: a Create pipe carrying any acid corrodes and, after a couple of minutes on average, bursts and spills it. The liquors are chlorides in dilute acid, and the spent liquor, the calcium chloride liquor and bittern are chloride too: they eat copper as well, more slowly, eight minutes or so to a pipe; seawater slower still, an hour. Concentrated nitric acid passivates aluminium, which is what it is shipped in, so the Factory's aluminium pipes carry it unharmed. Run the plant in The Factory Must Grow's plastic pipes, pumps and valves, which neither can touch, or in titanium (see Titanium pipework, under Plastics); the Factory's metal ones fare no better than copper, and a glass pipe is a copper pipe with a window. The organic, kerosene, is harmless. "
         "Tanks corrode too, ten times slower for the thicker wall: a copper or metal tank of acid loses a block of its wall in twenty minutes or so, and that block's share of what it held, the acid spilling; under a liquor, in eighty. "
-        "Keep the acid and the liquors in the Plastic Fluid Tank, as real plants keep hydrochloric acid in fibreglass and polyethylene.") + [crafting("fundamentals:plastic_fluid_tank")], 10)
+        "Keep the acid and the liquors in the Plastic Fluid Tank, as real plants keep hydrochloric acid in fibreglass and polyethylene; but not bromine, which eats plastic.") + [crafting("fundamentals:plastic_fluid_tank")], 10)
     entry("rare_earths", "making_acids", "Making the acids", "fundamentals:nitric_acid_bucket", pages_of(
         "Sulfuric acid is The Factory Must Grow's, from sulfur and saltpetre in a vat, and every other acid starts from it. "
         "Two salt and 500 mB of sulfuric acid in a heated basin give 500 mB of hydrochloric acid, the salt-cake process; salt is seawater boiled down, or rock salt ground (see Salt and seawater, under Geology). "
@@ -410,9 +413,9 @@ def rare_earths():
         "P204 is D2EHPA: 500 mB of 2-ethylhexanol, 250 of phosphorus trichloride, 500 of air and 250 of water, cold, give 250 mB of it, the air taking the phosphorus to phosphate. "
         "P507 is EHEHPA: the same without the air, heated, which rearranges the phosphite to a phosphonate, carbon bonded to phosphorus. Both give 500 mB of hydrochloric acid back. "
         "Neat, they are too thick to use: 250 mB with 750 mB of kerosene and a limesand under a mixer make 1,000 mB of P204 or P507.") + pages_of(
-        "Naphthenic acid is petroleum's own, washed out of the oil as sodium soaps and freed with acid: 1,000 mB of heavy oil with a soda ash and 250 mB of sulfuric acid, heated, gives 500 mB."), 12)
+        "Naphthenic acid is petroleum's own, washed out of the oil with caustic soda as sodium soaps and freed with acid: 1,000 mB of heavy oil, 250 mB of caustic soda and 250 mB of sulfuric acid in a heated vat with a mixer give 500 mB."), 12)
     entry("rare_earths", "temperature", "Temperature", "minecraft:campfire", pages_of(
-        "Every block has a temperature. The biome gives the climate: tundra about -5 °C, taiga 1, plains 15, jungle 19, desert 45, cooler with altitude the way vanilla decides where snow lies. "
+        "Every block has a temperature. The biome gives the climate: tundra about -5 °C, taiga 1, plains 15, jungle 26, desert 30, cooler with altitude the way vanilla decides where snow lies. "
         "Under open sky the day swings it five degrees either way and rain and thunder take a few off. Then everything hot or cold within reach adds its share with distance: lava at 1,150 °C, fire and a campfire at 800, a lit furnace 750, "
         "a blast furnace 1,500, a bloomery 1,200, a blaze burner at whatever level it burns, and ice and snow the other way. That is inside; walls hold most of it in, so a step from a furnace is hot, not a kiln.", "Temperature") + pages_of(
         "Type /heat to read it where you stand; goggles on a stage read it there. Acid eats twice as fast for every ten degrees warmer. The three heats the recipes ask for, none, a burner (1,000 °C) and a burner fed a blaze cake (1,600 °C), are the coarse version of the same number."), 13)
@@ -427,8 +430,8 @@ def rare_earths():
         "It is safer, but reads a shorter range, the spirit boiling long before mercury would, and it wets the glass, so a falling column leaves some behind and reads low until it drains. "
         "Past the top it boils and bursts its glass with a small pop, and there is nothing in it to poison anyone.") + pages_of(
         f"Bimetallic, {range_of('bimetallic_thermometer')}: a strip of brass on steel curls as it warms, the brass growing half again as fast, and turns the needle itself. Past 500 it pegs. "
-        f"Type K, {range_of('type_k_thermocouple')}: chromel (nickel with a tenth of chromium) against alumel (nickel with a little aluminium) gives some 41 microvolts a degree, the everyday industrial thermocouple; past 1,260 the chromel oxidises and the reading drifts, so it pegs. "
-        "Nine nickel and a chromium, superheated, give ten chromel; nine nickel and an aluminium ten alumel.") + pages_of(
+        f"Type K, {range_of('type_k_thermocouple')}: chromel (nickel with a tenth of chromium) against alumel (nickel with 2 per cent each of aluminium and manganese and 1 of silicon) gives some 41 microvolts a degree, the everyday industrial thermocouple; past 1,260 the chromel oxidises and the reading drifts, so it pegs. "
+        "Nine nickel and a chromium, superheated, give ten chromel; nine nickel and four aluminium nuggets nine alumel, the aluminium standing for the manganese and silicon as well.") + pages_of(
         f"Type S, {range_of('type_s_thermocouple')}: platinum with a tenth of rhodium against pure platinum gives only ten microvolts a degree but holds its calibration to the melting of steel, "
         "for blast furnaces and superheated vats. A rhodium nugget over a platinum nugget make it. The thermocouples wear their IEC colours: type K green, type S orange, the negative leg white.")
         + [{"type": "patchouli:crafting", "recipe": "fundamentals:thermometers/mercury_thermometer", "recipe2": "fundamentals:thermometers/spirit_thermometer"},
@@ -473,7 +476,8 @@ def metals():
     category("metals", "The other metals", "Cobalt, zinc, nickel and Mond's carbonyl, the porphyry chain (copper, molybdenum and the rhenium hiding in it), tungsten, chromium, tin, titanium, the silver in lead, zirconium and hafnium, beryllium, aluminium and lithium.", "fundamentals:cobalt_ingot", 3)
     entry("metals", "cobalt", "Cobalt", "fundamentals:cobalt_ingot", pages_of(
         "Cobaltite is a cobalt arsenide-sulfide from the silver-cobalt veins in calcite. Roast it on a campfire or in a smoker to drive off the arsenic and sulfur and leave the oxide. "
-        "Cobalt melts at 1,495 °C and was never smelted from its ore: the oxide is reduced under hydrogen, as molybdenum is: two roasted cobaltite and 500 mB of hydrogen in a heated chemical vat give two ingots. "
+        "Cobalt melts at 1,495 °C. The Congo's copper-cobalt ore was once smelted in electric furnaces to a white alloy of cobalt, copper and iron and refined from that; "
+        "here the oxide is reduced under hydrogen, as molybdenum is: two roasted cobaltite and 500 mB of hydrogen in a heated chemical vat give two ingots. "
         "Cobalt is half of SmCo and a tenth of the superalloy. "
         "Roasted cobaltite calcined with two bauxite powder is cobalt blue, four blue dye.", "Cobalt") + pages_of(
         "Veins like Cobalt, Ontario, and Bou Azzer, Morocco, are the old sources and a small one now. About three quarters of the world's cobalt is mined in the "
@@ -515,13 +519,18 @@ def metals():
         "Either way the tungsten is taken up as ammonium tungstate and crystallised as ammonium paratungstate, APT, the form tungsten is traded in. "
         "500 mB of the liquor and 250 mB of ammonia, heated, give two APT, the amine extraction and ammonia strip folded into the one step; two tungstic acid dissolved in 250 mB of ammonia give two as well. "
         "A blast furnace calcines APT to the canary-yellow trioxide, and hydrogen in a heated chemical vat reduces two oxide to two ingots (Lassner and Schubert, Tungsten, 1999).", "APT") + pages_of(
-        "One ingot draws to four filaments, and the Factory's light bulb now burns one. One ingot and two coals, superheated, carburise to two tungsten carbide, "
+        "One ingot draws to four filaments, and the Factory's light bulb now burns one. In a vacuum the filament boils away and blackens the glass; Langmuir filled the bulb with an inert gas in 1913, "
+        "and lamps have been argon-filled since: a filament, a framed glass, four copper and three steel nuggets and 50 mB of argon under a mixer make three bulbs where crafting makes two. "
+        "One ingot and two coals, superheated, carburise to two tungsten carbide, "
         "and Create's mechanical drill now bites with it. Ten per cent of the superalloy is tungsten.", "What it is for"), 3)
     entry("metals", "zinc_nickel", "Zinc and nickel", "fundamentals:zinc_oxide", pages_of(
         "Neither melts out of its ore in a furnace. Sphalerite roasts on a fire to zinc oxide, and smithsonite and hemimorphite, the old calamine, calcine to it. "
         "Zinc boils at 907 °C, below the heat that reduces it, so it was distilled from a sealed retort packed with charcoal: "
         "a zinc oxide and a charcoal in a basin over a blaze burner fed a blaze cake give a zinc ingot. Asurine, the zinc stone, crushes to smithsonite. "
         "Zinc oxide is also what every sulfur cure of rubber needs to work, so the Factory's rubber takes one.", "Zinc") + pages_of(
+        "Half the world's zinc goes on steel (International Zinc Association). Dipped in molten zinc at about 450 °C, steel takes a coat that corrodes in its place and, scratched through, "
+        "still goes before the steel does. Four heavy plates and a zinc nugget, heated, give four galvanized steel plates, which do anything a steel plate does and never rust; "
+        "a bare heavy plate rusts as a steel ingot does.", "Galvanizing") + pages_of(
         "Carbon does not part nickel from iron: it reduces both, and they alloy. Pentlandite roasted on a fire and smelted with a charcoal, superheated, gives a ferronickel ingot and a slag, "
         "and whatever platinum it carried is lost in it. Nickel laterite, a weathered rock of 1.5 to 2.5 per cent nickel, is smelted whole: four of it with two charcoal, superheated, "
         "give one ferronickel and two slag, as the rotary kilns and electric furnaces of New Caledonia and Indonesia smelt it at about 1,550 °C.", "Ferronickel") + pages_of(
@@ -554,6 +563,11 @@ def metals():
         "Two chromate and 250 mB of sulfuric acid in a basin make the orange sodium dichromate. Heated with a coal it is reduced to the green chromium oxide and gives one soda ash back. "
         "Last, the thermite: a chromium oxide and an aluminium powder (an aluminium ingot milled to two), lit by a burner fed a blaze cake, burn on by themselves past 2,000 °C to a chromium ingot and a slag of alumina. "
         "The superalloy takes the metal, and one oxide makes two green dye, the chrome oxide green of the paint box."), 5)
+    entry("metals", "manganese", "Ferromanganese and manganese steel", "fundamentals:ferromanganese_ingot", pages_of(
+        "Nine tenths of the world's manganese goes into steel (USGS, Mineral Commodity Summaries, Manganese): a little in every heat takes up its sulfur and oxygen, and it goes in as ferromanganese. "
+        "Two raw pyrolusite, a coal coke, an iron nugget and a limesand flux, superheated, smelt as a submerged-arc furnace does at about 1,500 °C to a ferromanganese ingot, four fifths manganese, and a slag.", "Ferromanganese") + pages_of(
+        "A lot of it is Hadfield's steel (1882), 12 to 14 per cent manganese and 1 of carbon, which hardens where it is struck: crusher jaws, railway crossings, the Brodie helmet. "
+        "A ferromanganese and six steel, superheated, make seven manganese steel. As wear plate a thin plate of it does a thick one's work, so a manganese steel ingot, pressed three times as a steel one is, gives two of the Factory's heavy plates.", "Manganese steel"), 5)
     entry("metals", "tin", "Tin and bronze", "fundamentals:tin_ingot", pages_of(
         "Cassiterite, tin dioxide, comes from the tin veins and from beach and river sand, where it settles because it is seven times as heavy as water. "
         "That weight is how it is concentrated: a raw cassiterite washed under an encased fan leaves a tin concentrate behind. "
@@ -562,7 +576,8 @@ def metals():
         "In a factory, two roasted concentrate and a coal coke in a superheated basin give two crude tin and a slag, as a reverberatory furnace does. "
         "Crude tin carries iron. Tin melts at 232 °C, so on a gentle heat it runs off and leaves the iron-tin hardhead behind (liquation), and a green pole stirred through the melt brings up the last dross: "
         "two crude tin and a stick in a heated basin give two tin ingots, a slag one time in four.", "Smelting and refining") + pages_of(
-        "Three copper and a tin, heated, make four bronze, the first alloy and still the metal of bells: Create's peculiar bell is cast in it, and five bronze ingots under a stick make a bell. A plain bearing is a bronze bush, so Create's mechanical bearing takes two bronze plates. "
+        "Arsenical copper came first, but tin bronze is the alloy of the age named for it: copper with about an eighth of tin, and bell metal harder still at a fifth to a quarter. "
+        "Seven copper and a tin, heated, make eight bronze, still the metal of bells: Create's peculiar bell is cast in it, and five bronze ingots under a stick make a bell. A plain bearing is a bronze bush, so Create's mechanical bearing takes two bronze plates. "
         "A tin and a lead, heated, make eight solder, and every loop of the Factory's circuit board assembly now solders its parts down.", "Bronze and solder"), 6)
     entry("metals", "titanium", "Titanium", "fundamentals:titanium_ingot", pages_of(
         "Ilmenite and rutile are heavy sands, panned from beaches and rivers. Rutile is titanium dioxide already; ilmenite is iron titanate, a third of it iron. "
@@ -585,8 +600,9 @@ def metals():
         "and a bead of silver stays bright. A crust, a bone meal and 250 mB of air, heated, give four silver nuggets, a litharge and a zinc oxide for the zinc retort. "
         "A bullion cupelled straight, the old way, gives one nugget and its whole lead as litharge. A litharge and a charcoal, heated, reduce back to lead, "
         "and a lead-acid plate is a lead grid pasted with litharge: the Factory's lead accumulator takes a litharge where it took a block of lead.") + pages_of(
-        "The rich silver ores, argentite and native silver from the calcite veins, were soaked into a lead bath on the cupel and cupelled with it: a raw ore, a lead ingot, a bone meal and 250 mB of air, heated, give a silver ingot and a litharge. "
-        "Silver conducts better than any metal and its tarnish conducts too, so contacts that arc as they make and break are silver: The Factory's electrical switch and large switch take silver plates. "
+        "The rich silver ores, acanthite and native silver from the calcite veins, were soaked into a lead bath on the cupel and cupelled with it: a raw ore, a lead ingot, a bone meal and 250 mB of air, heated, give a silver ingot and a litharge. "
+        "Silver conducts better than any metal, and the oxide an arc burns on it conducts too and gives up its oxygen in the heat, so contacts that arc as they make and break are silver: "
+        "The Factory's electrical switch and large switch take silver plates. Its black tarnish, the sulfide, is the trouble: it raises a contact's resistance. "
         "A circuit board can be finished in silver as well as gold, and four silver plates, two zinc, a plastic separator, copper wire and an aluminium casing make a silver-zinc accumulator."), 8)
     entry("metals", "zirconium", "Zirconium and hafnium", "fundamentals:zirconium_ingot", pages_of(
         "Zircon is the third mineral of the heavy sands, after ilmenite and rutile: honey-brown grains panned from beach and river sand, and a few in the syenite massifs. "
@@ -604,14 +620,15 @@ def metals():
     entry("metals", "beryllium", "Beryllium", "fundamentals:beryllium_ingot", pages_of(
         "Beryl is pale green or blue-green, six-sided prisms in the pegmatites; emerald and aquamarine are beryl. Bertrandite is the white mineral of the beryllium tuffs of the dry country, "
         "rhyolite ash with fluorite nodules, as at Spor Mountain, Utah, where most of the world's beryllium is mined.", "Beryllium") + pages_of(
-        "Beryl will not open to acid as it is: two raw beryl and 250 mB of water, superheated, melt at about 1,650 °C and quench to two beryl frit, a glass (Kjellgren and Sawyer). "
-        "Two frit and 500 mB of sulfuric acid, heated, give 500 mB of beryllium sulfate liquor. Bertrandite leaches as it is, a tenth as rich: four raw and 500 mB of the acid give 250 mB. "
+        "Beryl will not open to acid as it is. It is melted in an arc furnace at about 1,650 °C, a little past a blaze cake, and quenched to a glass, the frit (Kjellgren and Sawyer): "
+        "two raw beryl and 250 mB of water, superheated, give two beryl frit. "
+        "Two frit and 500 mB of sulfuric acid, heated, give 500 mB of beryllium sulfate liquor. Bertrandite leaches as it is, but is poorer: four raw and 500 mB of the acid give 250 mB, a quarter of what beryl gives. "
         "An emerald melts to a frit one time in two.") + pages_of(
         "500 mB of liquor and 250 mB of ammonia give two beryllium hydroxide, the aluminium having crystallised out as alum. Two hydroxide, 500 mB of hydrofluoric acid and 250 mB of ammonia give two ammonium fluoroberyllate, "
         "which a blast furnace takes to beryllium fluoride, the ammonium fluoride passing off; the hydroxide calcined in one is beryllium oxide, beryllia.") + pages_of(
         "Two fluoride, two magnesium and 100 mB of argon in a superheated vat with a mixer give two beryllium pebbles and a slag of magnesium fluoride, and two pebbles melted under argon, superheated, give two ingots. "
         "Beryllium is lighter than aluminium and stiffer than steel, and lets X-rays through as glass lets light.") + pages_of(
-        "The dust is the danger: the hydroxide, the oxide and the salts scar the lungs (berylliosis). Held in the hand or stirred in a basin they are breathed by everyone near, "
+        "The dust is the danger: the hydroxide, the oxide, the salts and the metal's pebbles scar the lungs (berylliosis). Held in the hand or stirred in a basin they are breathed by everyone near, "
         "and only Create's diving helmet on a filled backtank keeps it out.", "Berylliosis") + pages_of(
         "Most beryllium goes into copper. A beryllium nugget and five copper ingots, heated, make five beryllium copper, as strong as steel, springy and sparkless when struck. "
         "It is mostly made without the metal: a beryllium oxide, four copper blocks and a coal coke, superheated, give four blocks, as an arc furnace makes the master alloy. "
@@ -696,6 +713,8 @@ def power():
     category("power", "Power", "Sunlight into The Factory Must Grow's grid, and the magnets its machines turn on.", "fundamentals:photovoltaic_panel", 5)
     entry("power", "solar", "Solar panels", "fundamentals:photovoltaic_panel", pages_of(
         "A solar panel goes on a rack. Build the rack from steel and set it down facing the way you want, then mount a photovoltaic panel on it: a P and an N semiconductor from The Factory Must Grow under glass, in an aluminium frame, with a silver nugget for the front contacts printed on every cell. "
+        "Silicon is doped n-type with a donor from group 15 and p-type with an acceptor from group 13 (Sze, Physics of Semiconductor Devices): four silicon and a white phosphorus, heated, give four N semiconductor, "
+        "and four silicon and a boric acid four P, where the Factory used sulfur and aluminium. "
         "Under open sky it feeds the electrical network, 120 volts while the sun is up and up to 200 watts at noon, nothing at night or in shade. Break it and you get the rack and the panel back.", "Solar panels")
         + [crafting("fundamentals:panel_rack"), crafting("fundamentals:photovoltaic_panel")], 0)
     magnets()
@@ -741,7 +760,7 @@ def plastics():
         "Natta's first was titanium tetrachloride reduced by aluminium powder to violet TiCl3. 250 mB of titanium tetrachloride, 100 mB of argon and an aluminium powder, heated, "
         "make four catalyst. In the Factory's heated vat 500 mB of ethylene or propylene over a catalyst gives 500 mB of molten plastic, and the catalyst back nine times in ten; "
         "the casting machine and plastic sheets go on as before.", "Plastics") + pages_of(
-        "PVC is what chemical plants pipe their acids in. 500 mB of ethylene and 500 mB of chlorine, heated, give 500 mB of vinyl chloride and 250 mB of hydrochloric acid, "
+        "PVC is what chemical plants pipe their acids in. 500 mB of ethylene and 500 mB of chlorine, heated, give 500 mB of vinyl chloride and 500 mB of hydrochloric acid, "
         "the hydrogen chloride the cracking gives off. 250 mB of vinyl chloride stirred hot into 250 mB of water polymerises as droplets to a PVC resin, a white powder, "
         "and a resin pressed on a heated basin is a grey PVC sheet. A PVC sheet does anything a plastic sheet does in a pipe, a tank, a cell or a casing.") + pages_of(
         "Natural plastic is milky: the tank, the cells and the Factory's plastic pipes let a little light and the shape of what is behind them through. "

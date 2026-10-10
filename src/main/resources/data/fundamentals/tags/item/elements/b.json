@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "fundamentals:borax_ore",
+    "fundamentals:boric_acid",
     "fundamentals:dysprosium_neodymium_iron_boron_block",
     "fundamentals:dysprosium_neodymium_iron_boron_ingot",
     "fundamentals:dysprosium_neodymium_iron_boron_magnet",
@@ -13,6 +14,7 @@
     "fundamentals:neodymium_iron_boron_magnet",
     "fundamentals:neodymium_iron_boron_nugget",
     "fundamentals:neodymium_iron_boron_plate",
-    "fundamentals:raw_borax"
+    "fundamentals:raw_borax",
+    "tfmg:p_semiconductor"
   ]
 }

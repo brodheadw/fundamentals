@@ -4,9 +4,11 @@ re-run; don't hand-edit the PNGs.
 
     python3 tools/paint_uses.py
 """
+import random
+
 from PIL import Image
 
-from paint_materials import paint_block
+from paint_materials import paint_block, paint_item
 from paint_minerals import paint_raw
 from paint_separation import TEXTURES, heap
 
@@ -44,6 +46,21 @@ def gauze():
                 img.putpixel((x, y), rim)
             elif x % 2 == 0 or y % 2 == 0:
                 img.putpixel((x, y), light if (x + y) % 4 == 0 else wire)
+    return img
+
+
+def spangled():
+    """A steel plate hot-dipped in zinc: the plate's own silhouette in zinc's bluish white, its face broken into the flat grains
+    the zinc freezes in, each a shade off its neighbours."""
+    img = paint_item("plate", ((92, 98, 106), (164, 170, 178), (208, 214, 220), (240, 244, 248)))
+    rng = random.Random("spangle")
+    seeds = [((rng.randrange(16), rng.randrange(16)), rng.choice((-14, -6, 6, 12))) for _ in range(7)]
+    for y in range(16):
+        for x in range(16):
+            r, g, b, a = img.getpixel((x, y))
+            if a and r > 120:
+                shift = min(seeds, key=lambda s: (s[0][0] - x) ** 2 + (s[0][1] - y) ** 2)[1]
+                img.putpixel((x, y), tuple(max(0, min(255, c + shift)) for c in (r, g, b)) + (a,))
     return img
 
 
@@ -236,6 +253,9 @@ def main():
     heap("ammonium_perrhenate", (255, 255, 255), (236, 238, 242), (184, 188, 196)).save(TEXTURES / "item/ammonium_perrhenate.png")
     heap("lithium_carbonate", (255, 255, 255), (242, 242, 240), (196, 196, 192)).save(TEXTURES / "item/lithium_carbonate.png")
     heap("mcraly_powder", (196, 198, 204), (140, 144, 152), (84, 88, 96)).save(TEXTURES / "item/mcraly_powder.png")
+    # boric acid is white, pearly flakes; a hot-dipped plate is bright zinc, crystallised in spangles
+    heap("boric_acid", (255, 255, 255), (242, 242, 238), (196, 196, 190)).save(TEXTURES / "item/boric_acid.png")
+    spangled().save(TEXTURES / "item/galvanized_steel_plate.png")
     magnets()
     print("uses textures written")
 

@@ -101,6 +101,13 @@
       "wet": 6,
       "stages": 2
     },
+    "tfmg:heavy_plate": {
+      "kind": "rust",
+      "days": 75.0,
+      "dry": 0,
+      "wet": 6,
+      "stages": 2
+    },
     "fundamentals:calcium_ingot": {
       "kind": "tarnish",
       "days": 1.5

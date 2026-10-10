@@ -119,6 +119,9 @@ METAL = {
     "ferrochrome": ((56, 58, 62), (104, 106, 112), (146, 148, 154), (192, 194, 200)),
     # ferronickel off the electric furnace is a dull grey, a shade warmer and brighter than iron for its nickel
     "ferronickel": ((70, 68, 64), (126, 122, 116), (174, 170, 162), (220, 216, 208)),
+    # ferromanganese is a silver-grey metal that takes a warm bronze tarnish; Hadfield's steel looks like any steel
+    "ferromanganese": ((70, 64, 58), (128, 118, 108), (176, 166, 154), (220, 212, 200)),
+    "manganese_steel": ((58, 62, 68), (108, 114, 122), (158, 164, 172), (208, 214, 222)),
     "stainless_steel": ((96, 100, 104), (164, 168, 172), (212, 216, 220), (250, 251, 252)),
     # titanium is a darker, warmer grey than steel; magnesium the whitest of the light metals
     "titanium": ((76, 76, 80), (136, 136, 140), (186, 186, 190), (232, 232, 234)),
@@ -223,9 +226,9 @@ MATERIALS = {
     "erbium": OXIDE_ONLY, "thulium": OXIDE_ONLY, "ytterbium": OXIDE_ONLY, "lutetium": OXIDE_ONLY, "yttrium": ALLOYING,
     "scandium": ALLOYING,
     "didymium": DIDYMIUM, "neodymium_iron_boron": MAGNET, "dysprosium_neodymium_iron_boron": MAGNET, "samarium_cobalt": MAGNET, "aluminium_scandium": ALLOY, "monazite_residue": RESIDUE,
-    "cobalt": COBALT, "molybdenum": MOLYBDENUM, "rhenium": RHENIUM, "superalloy": STRUCTURAL, "molybdenum_steel": STRUCTURAL, "chromel": INGOT, "alumel": INGOT, "alnico": INGOT,
+    "cobalt": COBALT, "molybdenum": MOLYBDENUM, "rhenium": RHENIUM, "superalloy": STRUCTURAL, "molybdenum_steel": STRUCTURAL, "manganese_steel": INGOT, "chromel": INGOT, "alumel": INGOT, "alnico": INGOT,
     "tungsten": TUNGSTEN, "copper_matte": MATTE, "blister_copper": BLISTER,
-    "chromite": GROUND_MINERAL, "chromium": CHROMIUM, "ferrochrome": INGOT, "ferronickel": INGOT, "stainless_steel": STRUCTURAL,
+    "chromite": GROUND_MINERAL, "chromium": CHROMIUM, "ferrochrome": INGOT, "ferromanganese": INGOT, "ferronickel": INGOT, "stainless_steel": STRUCTURAL,
     "titanium": TITANIUM, "magnesium": INGOT,
     "nickel_matte": MATTE, "converter_matte": MATTE, "platinum_group_concentrate": CONCENTRATE,
     "platinum": PGM, "palladium": PGM, "rhodium": PGM, "ruthenium": PGM, "iridium": PGM, "osmium": PGM,

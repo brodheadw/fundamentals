@@ -1,0 +1,27 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "tfmg:silicon_ingot"
+    },
+    {
+      "item": "tfmg:silicon_ingot"
+    },
+    {
+      "item": "tfmg:silicon_ingot"
+    },
+    {
+      "item": "tfmg:silicon_ingot"
+    },
+    {
+      "item": "fundamentals:white_phosphorus"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:n_semiconductor",
+      "count": 4
+    }
+  ],
+  "heat_requirement": "heated"
+}

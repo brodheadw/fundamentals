@@ -1,0 +1,43 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:tungsten_filament"
+    },
+    {
+      "item": "create:framed_glass"
+    },
+    {
+      "tag": "c:nuggets/copper"
+    },
+    {
+      "tag": "c:nuggets/copper"
+    },
+    {
+      "tag": "c:nuggets/copper"
+    },
+    {
+      "tag": "c:nuggets/copper"
+    },
+    {
+      "tag": "c:nuggets/steel"
+    },
+    {
+      "tag": "c:nuggets/steel"
+    },
+    {
+      "tag": "c:nuggets/steel"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 50,
+      "fluid": "fundamentals:argon"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:light_bulb",
+      "count": 3
+    }
+  ]
+}

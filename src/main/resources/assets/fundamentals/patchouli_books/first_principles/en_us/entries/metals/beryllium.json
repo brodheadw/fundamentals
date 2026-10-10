@@ -11,11 +11,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Beryl will not open to acid as it is: two raw beryl and 250 mB of water, superheated, melt at about 1,650 °C and quench to two beryl frit, a glass (Kjellgren and Sawyer). Two frit and 500 mB of sulfuric acid, heated, give 500 mB of beryllium sulfate liquor."
+      "text": "Beryl will not open to acid as it is. It is melted in an arc furnace at about 1,650 °C, a little past a blaze cake, and quenched to a glass, the frit (Kjellgren and Sawyer): two raw beryl and 250 mB of water, superheated, give two beryl frit. Two frit and 500 mB of sulfuric acid, heated, give 500 mB of beryllium sulfate liquor."
     },
     {
       "type": "patchouli:text",
-      "text": "Bertrandite leaches as it is, a tenth as rich: four raw and 500 mB of the acid give 250 mB. An emerald melts to a frit one time in two."
+      "text": "Bertrandite leaches as it is, but is poorer: four raw and 500 mB of the acid give 250 mB, a quarter of what beryl gives. An emerald melts to a frit one time in two."
     },
     {
       "type": "patchouli:text",
@@ -31,7 +31,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "The dust is the danger: the hydroxide, the oxide and the salts scar the lungs (berylliosis). Held in the hand or stirred in a basin they are breathed by everyone near, and only Create's diving helmet on a filled backtank keeps it out.",
+      "text": "The dust is the danger: the hydroxide, the oxide, the salts and the metal's pebbles scar the lungs (berylliosis). Held in the hand or stirred in a basin they are breathed by everyone near, and only Create's diving helmet on a filled backtank keeps it out.",
       "title": "Berylliosis"
     },
     {

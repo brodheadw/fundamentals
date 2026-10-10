@@ -165,8 +165,9 @@ DEPOSITS = {
     "mercury_lens": ("bed", None, [("cinnabar", 0.25, "pockets")], (5, 8), (2, 4), None,
                      "hydrothermal", (0, 72), 14, "rock"),
     # --- porphyry copper: a big low-grade stock of andesite, enriched near the top ---
+    # molybdenum rides with the copper at about one part in thirty (Sillitoe, Economic Geology 105, 2010), counting the copper of every sulfide
     "porphyry_stock": ("plug", "minecraft:andesite",
-                       [("chalcopyrite", 0.18, "pockets"), ("molybdenite", 0.04, "pockets"),
+                       [("chalcopyrite", 0.18, "pockets"), ("molybdenite", 0.01, "pockets"),
                         ("bornite", 0.04, "disseminated"), ("chalcocite", 0.07, "top"), ("covellite", 0.02, "top")],
                        (7, 11), None, (24, 40), "porphyry", (0, 70), 5, "rock"),
     # --- the oxidised cap over copper and zinc, just under the surface in dry country ---
@@ -250,7 +251,8 @@ OTHER_TIERED = {"stone": STORAGE_BLOCKS + [f"fundamentals:{name}" for name in OX
 # skip every roast and plant. Bauxite alone is shared, since its road runs through Create's crushed aluminium.
 SHARED = ("aluminum",)
 
-DISPLAY = {"bastnasite": "Bastnäsite", "ion_adsorption_clay": "Ion-Adsorption Clay"}
+# argentite is the high-temperature form of Ag2S and inverts to acanthite below 177 °C, so every specimen in hand is acanthite (IMA); the id stays
+DISPLAY = {"bastnasite": "Bastnäsite", "ion_adsorption_clay": "Ion-Adsorption Clay", "argentite": "Acanthite"}
 
 def write(path, obj):
     path.parent.mkdir(parents=True, exist_ok=True)

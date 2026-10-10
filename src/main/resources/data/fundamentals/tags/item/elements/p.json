@@ -13,6 +13,7 @@
     "fundamentals:xenotime_ore",
     "minecraft:bone",
     "minecraft:bone_block",
-    "minecraft:bone_meal"
+    "minecraft:bone_meal",
+    "tfmg:n_semiconductor"
   ]
 }

@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Every block has a temperature. The biome gives the climate: tundra about -5 °C, taiga 1, plains 15, jungle 19, desert 45, cooler with altitude the way vanilla decides where snow lies. Under open sky the day swings it five degrees either way and rain and thunder take a few off.",
+      "text": "Every block has a temperature. The biome gives the climate: tundra about -5 °C, taiga 1, plains 15, jungle 26, desert 30, cooler with altitude the way vanilla decides where snow lies. Under open sky the day swings it five degrees either way and rain and thunder take a few off.",
       "title": "Temperature"
     },
     {
