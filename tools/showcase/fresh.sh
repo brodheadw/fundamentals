@@ -6,7 +6,8 @@ set -u
 W=${1:-$(cd "$(dirname "$0")/../.." && pwd)}; cd "$W"
 export JAVA_HOME=${JAVA_HOME:-$HOME/.local/jdk/jdk-21.0.12.1+1/Contents/Home}
 LOGS=run/showcase-logs; mkdir -p $LOGS
-pkill -f "$W/run" 2>/dev/null; for i in {1..30}; do pgrep -f "$W/run" >/dev/null || break; sleep 1; done; sleep 2
+CLIENT="$W/versions/[^ ]*/argFiles/run"
+pkill -f "$CLIENT" 2>/dev/null; for i in {1..30}; do pgrep -f "$CLIENT" >/dev/null || break; sleep 1; done; sleep 2
 rm -rf run/world; echo 'eula=true' > run/eula.txt
 printf 'server-port=25634\nonline-mode=false\nlevel-name=world\nlevel-type=minecraft:flat\nmax-tick-time=-1\n' > run/server.properties
 FIFO=$(mktemp -u); mkfifo $FIFO; (./gradlew runServer < $FIFO > $LOGS/world.log 2>&1 &); exec 3> $FIFO
