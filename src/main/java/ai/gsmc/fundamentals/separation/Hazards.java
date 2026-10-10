@@ -454,7 +454,7 @@ public final class Hazards {
 
     private static boolean is(FluidStack stack, String reagent) {
         Acids.Acid acid = Acids.all().get(reagent);
-        Fluid fluid = stack.getFluid();
+        Fluid fluid = Separation.reagent(stack.getFluid());
         return acid == null ? fluid == Separation.fluid(reagent) : fluid == acid.source || fluid == acid.flowing;
     }
 

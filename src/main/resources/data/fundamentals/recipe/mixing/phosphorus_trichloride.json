@@ -5,9 +5,9 @@
       "item": "fundamentals:white_phosphorus"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 750,
-      "fluid": "fundamentals:chlorine"
+      "tag": "c:chlorine"
     }
   ],
   "results": [

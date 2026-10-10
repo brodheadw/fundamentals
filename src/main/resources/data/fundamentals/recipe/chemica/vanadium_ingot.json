@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "item": "chemica:vanadium_dust"
+    },
+    {
+      "item": "chemica:vanadium_dust"
+    },
+    {
+      "item": "fundamentals:aluminium_powder"
+    }
+  ],
+  "results": [
+    {
+      "id": "chemica:vanadium_ingot"
+    },
+    {
+      "id": "fundamentals:alumina",
+      "chance": 0.5
+    }
+  ]
+}

@@ -50,3 +50,11 @@ type = "required"
 versionRange = "[${principles_min},0.5)"
 ordering = "AFTER"
 side = "BOTH"
+
+# Optional. Loading after it is what lets data/chemica/ replace its recipes; see tools/build_chemica_compat.py.
+[[dependencies.${id}]]
+modId = "chemica"
+type = "optional"
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"

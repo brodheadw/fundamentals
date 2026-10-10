@@ -420,6 +420,9 @@ def main():
         tag(DATA / f"tags/item/raw_materials/{commodity}.json", names)
     for commodity in SHARED:
         tag(C_TAGS / f"item/raw_materials/{commodity}.json", [f"#fundamentals:raw_materials/{commodity}"])
+    from build_chemica_compat import optional, raw_materials
+    for metal, theirs in raw_materials().items():
+        write(C_TAGS / f"item/raw_materials/{metal}.json", {"replace": False, "values": [], "remove": optional(theirs)})
     for key, values in REPLACEABLE.items():
         tag(DATA / f"tags/block/deposit_replaceable/{key}.json", values)
 

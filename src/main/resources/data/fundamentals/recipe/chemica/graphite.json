@@ -1,0 +1,33 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:firebrick_lined_vat"
+  ],
+  "min_size": 1,
+  "processing_time": 200,
+  "machines": [
+    "tfmg:graphite_electrode",
+    "tfmg:graphite_electrode",
+    "tfmg:graphite_electrode"
+  ],
+  "ingredients": [
+    {
+      "item": "tfmg:coal_coke"
+    },
+    {
+      "item": "tfmg:coal_coke"
+    }
+  ],
+  "results": [
+    {
+      "id": "chemica:purified_graphite_flakes",
+      "count": 2
+    }
+  ]
+}

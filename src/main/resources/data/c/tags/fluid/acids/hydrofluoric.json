@@ -1,0 +1,15 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:hydrofluoric_acid",
+    "fundamentals:hydrofluoric_acid_flowing",
+    {
+      "id": "chemica:hydrofluoric_acid",
+      "required": false
+    },
+    {
+      "id": "chemica:flowing_hydrofluoric_acid",
+      "required": false
+    }
+  ]
+}

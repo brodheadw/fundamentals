@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " a ",
+    "bbb"
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:light_gray_dye"
+    },
+    "b": {
+      "tag": "c:plates/pvc"
+    }
+  },
+  "result": {
+    "id": "chemica:empty_pvc_circuit_board",
+    "count": 1
+  }
+}

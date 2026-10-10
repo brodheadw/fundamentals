@@ -20,9 +20,9 @@
       "item": "fundamentals:terbium_oxide"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 250,
-      "fluid": "fundamentals:phosphoric_acid"
+      "tag": "c:acids/phosphoric"
     }
   ],
   "results": [

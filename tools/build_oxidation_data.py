@@ -15,6 +15,7 @@ the platinum metals never change at all, so none of them has an entry.
 import json
 import shutil
 
+from build_chemica_compat import fluid_ingredient
 from build_ore_data import ASSETS, DATA, ROOT, cube, drop_self, write
 from paint_oxidation import FAMILIES, STAGED, aged_name, family_blocks
 
@@ -236,7 +237,7 @@ def storage(lang):
         "result": {"id": "fundamentals:canister", "count": 2}})
     write(RECIPES / "argon_canister.json", {
         "type": "create:filling",
-        "ingredients": [{"item": "fundamentals:canister"}, {"type": "neoforge:single", "amount": 100, "fluid": "fundamentals:argon"}],
+        "ingredients": [{"item": "fundamentals:canister"}, fluid_ingredient("argon", 100)],
         "results": [{"id": "fundamentals:argon_canister"}]})
     lang["block.fundamentals.inert_storage_drum"] = "Inert Storage Drum"
     lang["block.fundamentals.inert_storage_drum.empty"] = "No argon or kerosene: what is inside is in the air"

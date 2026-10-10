@@ -1,0 +1,21 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "type": "neoforge:tag",
+      "amount": 100,
+      "tag": "c:caustic_soda"
+    }
+  ],
+  "results": [
+    {
+      "id": "chemica:caustic_soda_dust"
+    }
+  ]
+}

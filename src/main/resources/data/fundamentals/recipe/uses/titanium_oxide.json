@@ -2,9 +2,9 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 250,
-      "fluid": "fundamentals:titanium_tetrachloride"
+      "tag": "c:titanium_tetrachloride"
     },
     {
       "type": "neoforge:single",

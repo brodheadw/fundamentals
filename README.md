@@ -6,7 +6,7 @@ It's everything you've been waiting for. Iron ore? Cringe, not real. Real ore mi
 
 Vanilla gives you "iron ore". The ground doesn't. Iron is in hematite and magnetite, lead is in galena, zinc is in sphalerite, the rare earths are in bastnäsite and monazite and a clay that doesn't even have a mineral name. Fundamentals replaces the generic ores with the minerals that actually carry each metal, puts them in the ground the way geology does, and makes you win the metal out of them the way smiths and smelters did, by hand at first and with Create's machines later.
 
-Requires [Create](https://modrinth.com/mod/create) and [Create: The Factory Must Grow](https://modrinth.com/mod/create-tfmg). Alpha: the geology is in, and the rare earth chain runs from ore to magnet.
+Requires [Create](https://modrinth.com/mod/create) and [Create: The Factory Must Grow](https://modrinth.com/mod/create-tfmg). [Chemica](https://modrinth.com/mod/chemica) is optional: installed alongside, its acids, gases and plastics and ours are one industry ([docs/chemica.md](docs/chemica.md)). Alpha: the geology is in, and the rare earth chain runs from ore to magnet.
 
 ## Deposits, not blobs
 

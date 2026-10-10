@@ -29,9 +29,9 @@
       "tag": "c:nuggets/steel"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 50,
-      "fluid": "fundamentals:argon"
+      "tag": "c:argon"
     }
   ],
   "results": [

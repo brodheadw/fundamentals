@@ -5,9 +5,9 @@
       "item": "fundamentals:europium_sulfate"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 250,
-      "fluid": "fundamentals:nitric_acid"
+      "tag": "c:acids/nitric"
     }
   ],
   "results": [
