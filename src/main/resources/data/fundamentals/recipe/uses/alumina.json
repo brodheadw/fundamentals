@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "ingredient": {
+    "item": "fundamentals:aluminium_hydroxide"
+  },
+  "result": {
+    "id": "fundamentals:alumina"
+  },
+  "experience": 0.2,
+  "cookingtime": 100
+}

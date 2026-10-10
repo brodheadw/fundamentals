@@ -5,7 +5,7 @@ import java.util.List;
 // Written by tools/build_separation_data.py; edit the table there.
 public final class Reagents {
 
-    public enum Kind { LIQUOR, ORGANIC, ACID, GAS, WASTE, SALINE, WATER, CRUDE, FOULED, PRECURSOR }
+    public enum Kind { LIQUOR, ORGANIC, ACID, GAS, WASTE, SALINE, WATER, CRUDE, FOULED, PRECURSOR, CAUSTIC }
 
     public record Reagent(String id, int tint, Kind kind) {}
 
@@ -65,6 +65,7 @@ public final class Reagents {
             new Reagent("spent_liquor", 0x8E9A86, Kind.WASTE),
             new Reagent("calcium_chloride_liquor", 0xDCE6E4, Kind.WASTE),
             new Reagent("bittern", 0xE6DEB8, Kind.SALINE),
+            new Reagent("salt_brine", 0xE2ECEE, Kind.SALINE),
             new Reagent("seawater", 0x3F76E4, Kind.WATER),
             new Reagent("crude_rare_earth_liquor", 0x8E7F86, Kind.CRUDE),
             new Reagent("crude_heavy_rare_earth_liquor", 0x9E9A80, Kind.CRUDE),
@@ -76,7 +77,9 @@ public final class Reagents {
             new Reagent("d2ehpa", 0xF0E4B0, Kind.PRECURSOR),
             new Reagent("ehehpa", 0xF2EAC4, Kind.PRECURSOR),
             new Reagent("titanium_tetrachloride", 0xEEF0EA, Kind.PRECURSOR),
-            new Reagent("vinyl_chloride", 0xEEF0EE, Kind.PRECURSOR));
+            new Reagent("vinyl_chloride", 0xEEF0EE, Kind.PRECURSOR),
+            new Reagent("caustic_soda", 0xEEF2F0, Kind.CAUSTIC),
+            new Reagent("sodium_aluminate_liquor", 0xB8864A, Kind.CAUSTIC));
 
     private Reagents() {}
 }

@@ -8,7 +8,7 @@
   ],
   "key": {
     "T": {
-      "tag": "c:nuggets/iridium"
+      "tag": "c:nuggets/platinum"
     },
     "A": {
       "item": "fundamentals:alumina"
@@ -18,7 +18,7 @@
     }
   },
   "result": {
-    "count": 4,
+    "count": 3,
     "id": "tfmg:spark_plug"
   }
 }

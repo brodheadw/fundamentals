@@ -1,6 +1,8 @@
 package ai.gsmc.fundamentals.separation;
 
 import ai.gsmc.fundamentals.Fundamentals;
+import ai.gsmc.fundamentals.uses.Uses;
+import com.drmangotea.tfmg.content.machinery.vat.base.VatBlockEntity;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import com.simibubi.create.content.equipment.armor.DivingHelmetItem;
@@ -41,6 +43,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.items.IItemHandler;
 
+import javax.annotation.Nullable;
 import java.util.Collection;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -55,6 +58,9 @@ import java.util.stream.IntStream;
  * liquor and bittern are chloride too, so they eat it as well, more slowly, and seawater, a tenth as salt as bittern, slower still.
  * Metal tanks go the same way, ten times slower for the thicker wall.
  * Plastic pipes, pumps, valves and tanks do not corrode. A glass pipe is a copper pipe with a window, and corrodes as one.
+ * Caustic soda and the sodium aluminate liquor are the other way about: they leave copper and steel alone and eat aluminium, so only
+ * The Factory Must Grow's aluminium pipes, pumps, valves and tanks corrode under them, at a liquor's pace. And a Hall-Héroult pot gives off
+ * hydrogen fluoride: a vat with cryolite in it fumes as hydrofluoric acid does.
  */
 public final class Hazards {
 
@@ -73,6 +79,7 @@ public final class Hazards {
     /** How many ticks apart a pipe is checked, each check standing for all of them. */
     public static final int PIPE_INTERVAL = 20;
     private static final Map<Block, Boolean> CORRODIBLE = new ConcurrentHashMap<>();
+    private static final Map<Block, Boolean> ALUMINIUM = new ConcurrentHashMap<>();
 
     private Hazards() {}
 
@@ -88,6 +95,12 @@ public final class Hazards {
     public static void mercuryVapour(ServerLevel level, BlockPos source) {
         breathe(level, source, true);
         level.sendParticles(ParticleTypes.WHITE_SMOKE, source.getX() + 0.5, source.getY() + 0.5, source.getZ() + 0.5, 8, 0.3, 0.3, 0.3, 0.01);
+    }
+
+    /** Hydrogen fluoride off the cryolite bath of a Hall-Héroult pot: it burns and poisons whoever is within reach and unmasked. */
+    public static void fluorideFume(ServerLevel level, BlockPos source) {
+        breathe(level, source, true);
+        level.sendParticles(ParticleTypes.WHITE_SMOKE, source.getX() + 0.5, source.getY() + 1.1, source.getZ() + 0.5, 3, 0.3, 0.2, 0.3, 0.01);
     }
 
     /** Beryllium dust raised where it is handled in the open: whoever is within reach and unmasked breathes it. */
@@ -113,7 +126,7 @@ public final class Hazards {
     }
 
     /** Once a second, each player's hands are checked for beryllium dust, and their surroundings searched for a basin with a fuming acid
-     * or beryllium dust in it. */
+     * or beryllium dust in it, and for a vat with cryolite in it. */
     public static void onPlayerTick(PlayerTickEvent.Post event) {
         if (!(event.getEntity() instanceof ServerPlayer player) || player.tickCount % 20 != 0) {
             return;
@@ -124,6 +137,11 @@ public final class Hazards {
             berylliumDust(level, at);
         }
         for (BlockPos pos : BlockPos.betweenClosed(at.offset(-REACH - 1, -REACH, -REACH - 1), at.offset(REACH + 1, REACH, REACH + 1))) {
+            if (level.getBlockEntity(pos) instanceof VatBlockEntity vat && vat.isController()
+                    && IntStream.range(0, vat.inputInventory.getSlots()).anyMatch(i -> vat.inputInventory.getStackInSlot(i).is(Uses.cryolite()))) {
+                fluorideFume(level, pos.immutable());
+                continue;
+            }
             if (!(level.getBlockState(pos).getBlock() instanceof BasinBlock)) {
                 continue;
             }
@@ -169,15 +187,18 @@ public final class Hazards {
                 continue;
             }
             Reagents.Kind kind = Separation.kind(stack.getFluid());
+            if (!eats(kind, state)) {
+                continue;
+            }
             if (kind == Reagents.Kind.ACID) {
                 eating = stack;
                 break;
             }
-            if (eating == null && corrodes(kind)) {
+            if (eating == null) {
                 eating = stack;
             }
         }
-        if (eating == null || !corrodible(state) || level.random.nextDouble() >= 1 - Math.pow(1 - chance(eating), PIPE_INTERVAL)) {
+        if (eating == null || level.random.nextDouble() >= 1 - Math.pow(1 - chance(eating), PIPE_INTERVAL)) {
             return false;
         }
         FluidStack spilled = eating;
@@ -201,7 +222,7 @@ public final class Hazards {
             return false;
         }
         FluidStack held = tank.getTankInventory().getFluid();
-        if (held.isEmpty() || !corrodes(Separation.kind(held.getFluid())) || !corrodible(tank.getBlockState())
+        if (held.isEmpty() || !eats(Separation.kind(held.getFluid()), tank.getBlockState())
                 || level.random.nextDouble() >= chance(held) / TANK_WALL) {
             return false;
         }
@@ -229,7 +250,18 @@ public final class Hazards {
 
     public static double chance(FluidStack carried) {
         Reagents.Kind kind = Separation.kind(carried.getFluid());
-        return kind == Reagents.Kind.ACID ? corrosionChance : kind == Reagents.Kind.WATER ? seawaterCorrosionChance : corrodes(kind) ? liquorCorrosionChance : 0;
+        return kind == Reagents.Kind.ACID ? corrosionChance : kind == Reagents.Kind.WATER ? seawaterCorrosionChance
+                : corrodes(kind) || kind == Reagents.Kind.CAUSTIC ? liquorCorrosionChance : 0;
+    }
+
+    /** Whether a fluid of this kind eats a pipe, pump, valve or tank of this block: caustic only aluminium, the rest what corrodes. */
+    public static boolean eats(@Nullable Reagents.Kind kind, BlockState state) {
+        return kind == Reagents.Kind.CAUSTIC ? ALUMINIUM.computeIfAbsent(state.getBlock(), Hazards::aluminium) : corrodes(kind) && corrodible(state);
+    }
+
+    private static boolean aluminium(Block block) {
+        ResourceLocation id = BuiltInRegistries.BLOCK.getKey(block);
+        return corrodible(block) && id.getNamespace().equals("tfmg") && id.getPath().contains("aluminum");
     }
 
     /** Create's pipes and tanks are copper and TFMG's metal pipes and tanks are metal, windowed or not; only plastic stands up to

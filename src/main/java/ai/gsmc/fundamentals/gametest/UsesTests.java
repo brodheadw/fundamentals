@@ -219,6 +219,40 @@ public class UsesTests {
     }
 
     @GameTest(template = "empty")
+    public void bauxiteGoesThroughBayerToAlumina(GameTestHelper helper) {
+        ProcessingRecipe<?, ?> digest = (ProcessingRecipe<?, ?>) recipe(helper, "fundamentals:uses/sodium_aluminate_liquor");
+        helper.assertTrue(takes(digest, "tfmg:bauxite_powder") && digest.getRollableResults().stream().anyMatch(r -> r.getStack().is(stack("fundamentals:red_mud").getItem())),
+                "bauxite should digest to aluminate liquor and leave red mud");
+        ProcessingRecipe<?, ?> precipitate = (ProcessingRecipe<?, ?>) recipe(helper, "fundamentals:uses/aluminium_hydroxide");
+        helper.assertTrue(precipitate.getRollableResults().stream().anyMatch(r -> r.getStack().is(stack("fundamentals:aluminium_hydroxide").getItem())),
+                "the liquor should throw down aluminium hydroxide");
+        Recipe<?> calcine = recipe(helper, "fundamentals:uses/alumina");
+        helper.assertTrue(takes(calcine, "fundamentals:aluminium_hydroxide") && calcine.getResultItem(helper.getLevel().registryAccess()).is(stack("fundamentals:alumina").getItem()),
+                "the hydroxide should calcine to alumina");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void hallHeroultMakesTheFactorysAluminium(GameTestHelper helper) {
+        helper.assertTrue(helper.getLevel().getRecipeManager().byKey(ResourceLocation.parse("tfmg:vat_machine_recipe/aluminum")).isEmpty(),
+                "bauxite powder should no longer electrolyse straight to aluminium");
+        ProcessingRecipe<?, ?> pot = (ProcessingRecipe<?, ?>) recipe(helper, "fundamentals:uses/aluminium_ingot");
+        helper.assertTrue(takes(pot, "fundamentals:alumina") && takes(pot, "fundamentals:cryolite") && takes(pot, "tfmg:coal_coke"),
+                "the pot takes alumina in cryolite and burns a carbon anode");
+        helper.assertTrue(pot.getRollableResults().stream().anyMatch(r -> r.getStack().is(stack("tfmg:aluminum_ingot").getItem())), "the pot should give the Factory's aluminium");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void aSparkPlugIsAnAluminaInsulator(GameTestHelper helper) {
+        for (String id : new String[] {"tfmg:mechanical_crafting/spark_plug", "fundamentals:uses/iridium_spark_plug", "fundamentals:uses/platinum_spark_plug"}) {
+            helper.assertTrue(takes(recipe(helper, id), "fundamentals:alumina") && !takes(recipe(helper, id), "tfmg:aluminum_ingot"), id + " should insulate with alumina, not aluminium");
+        }
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/platinum_spark_plug"), "fundamentals:platinum_nugget"), "a plug can be platinum-tipped");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
     public void tinIsWonFromCassiteriteAndSpentOnBronzeAndSolder(GameTestHelper helper) {
         var registries = helper.getLevel().registryAccess();
         Map.of("fundamentals:uses/tin_concentrate", "tin_concentrate", "fundamentals:roasting/roasted_tin_concentrate_smoking", "roasted_tin_concentrate",
