@@ -8,9 +8,9 @@
       "fluid": "tfmg:ethylene"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 500,
-      "fluid": "fundamentals:chlorine"
+      "tag": "c:chlorine"
     }
   ],
   "results": [

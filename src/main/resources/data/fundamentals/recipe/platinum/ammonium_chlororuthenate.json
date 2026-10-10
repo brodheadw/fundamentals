@@ -7,9 +7,9 @@
       "fluid": "fundamentals:ruthenium_tetroxide"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 250,
-      "fluid": "fundamentals:hydrochloric_acid"
+      "tag": "c:acids/hydrochloric"
     },
     {
       "item": "fundamentals:ammonium_chloride"

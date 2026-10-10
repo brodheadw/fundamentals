@@ -56,7 +56,7 @@ public class InertDrumBlockEntity extends BaseContainerBlockEntity implements IH
 
     private class Tank extends FluidTank {
         Tank() {
-            super(CAPACITY, stack -> stack.is(Separation.fluid("argon")) || stack.is(KEROSENE));
+            super(CAPACITY, stack -> Separation.reagent(stack.getFluid()) == Separation.fluid("argon") || stack.is(KEROSENE));
         }
 
         @Override
@@ -101,7 +101,7 @@ public class InertDrumBlockEntity extends BaseContainerBlockEntity implements IH
     }
 
     private boolean argon() {
-        return tank.getFluid().is(Separation.fluid("argon"));
+        return Separation.reagent(tank.getFluid().getFluid()) == Separation.fluid("argon");
     }
 
     /** Ages what is inside up to now, counting only the time it lay unprotected, and lets out the argon that has leaked since. */

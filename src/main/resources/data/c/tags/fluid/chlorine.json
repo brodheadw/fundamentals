@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:chlorine",
+    {
+      "id": "chemica:chlorine",
+      "required": false
+    },
+    {
+      "id": "chemica:flowing_chlorine",
+      "required": false
+    }
+  ]
+}

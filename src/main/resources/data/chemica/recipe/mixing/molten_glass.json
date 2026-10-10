@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "minecraft:sand"
+    },
+    {
+      "tag": "c:dusts/soda_ash"
+    }
+  ],
+  "results": [
+    {
+      "amount": 100,
+      "id": "chemica:molten_glass"
+    }
+  ]
+}

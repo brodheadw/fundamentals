@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:caustic_soda",
+    {
+      "id": "chemica:caustic_soda",
+      "required": false
+    },
+    {
+      "id": "chemica:flowing_caustic_soda",
+      "required": false
+    }
+  ]
+}

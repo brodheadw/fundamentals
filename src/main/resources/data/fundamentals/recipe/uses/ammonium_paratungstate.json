@@ -7,9 +7,9 @@
       "fluid": "fundamentals:sodium_tungstate_liquor"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 250,
-      "fluid": "fundamentals:ammonia"
+      "tag": "c:ammonia"
     }
   ],
   "results": [

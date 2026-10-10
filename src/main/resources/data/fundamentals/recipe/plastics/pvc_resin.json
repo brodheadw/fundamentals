@@ -3,9 +3,9 @@
   "heat_requirement": "heated",
   "ingredients": [
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 250,
-      "fluid": "fundamentals:vinyl_chloride"
+      "tag": "c:vinyl_chloride"
     },
     {
       "type": "neoforge:single",

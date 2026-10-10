@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:titanium_tetrachloride",
+    {
+      "id": "chemica:titanium_tetrachloride",
+      "required": false
+    },
+    {
+      "id": "chemica:flowing_titanium_tetrachloride",
+      "required": false
+    }
+  ]
+}

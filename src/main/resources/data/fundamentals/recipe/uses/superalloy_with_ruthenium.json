@@ -53,9 +53,9 @@
       "item": "fundamentals:ruthenium_nugget"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 100,
-      "fluid": "fundamentals:argon"
+      "tag": "c:argon"
     }
   ],
   "results": [

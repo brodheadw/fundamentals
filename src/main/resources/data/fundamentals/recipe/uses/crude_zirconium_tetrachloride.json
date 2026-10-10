@@ -11,9 +11,9 @@
       "item": "tfmg:coal_coke"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 1000,
-      "fluid": "fundamentals:chlorine"
+      "tag": "c:chlorine"
     }
   ],
   "results": [

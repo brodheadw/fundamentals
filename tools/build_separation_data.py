@@ -17,6 +17,7 @@ import shutil
 import zipfile
 from pathlib import Path
 
+from build_chemica_compat import fluid_ingredient
 from build_ore_data import ASSETS, DATA, ROOT, drop_self, write
 from paint_materials import MATERIALS
 from paint_separation import CREATE_JAR
@@ -290,7 +291,7 @@ PLANT_ITEMS = {"salt": "Salt", "oxalic_acid": "Oxalic Acid", "roasted_bastnasite
 
 
 def fluid(id, amount):
-    return {"type": "neoforge:single", "amount": amount, "fluid": id if ":" in id else f"fundamentals:{id}"}
+    return fluid_ingredient(id, amount)
 
 
 def item(id, count=1):

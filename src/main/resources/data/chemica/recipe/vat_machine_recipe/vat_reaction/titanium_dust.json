@@ -1,0 +1,40 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "ingredients": [
+    {
+      "type": "neoforge:tag",
+      "amount": 500,
+      "tag": "c:titanium_tetrachloride"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 150,
+      "tag": "c:argon"
+    },
+    {
+      "tag": "c:ingots/magnesium"
+    }
+  ],
+  "machines": [],
+  "min_size": 1,
+  "processing_time": 400,
+  "results": [
+    {
+      "count": 4,
+      "id": "chemica:titanium_dust"
+    },
+    {
+      "id": "chemica:magnesium_dust"
+    }
+  ]
+}

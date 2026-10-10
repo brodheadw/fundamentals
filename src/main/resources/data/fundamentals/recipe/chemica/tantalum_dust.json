@@ -1,0 +1,29 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "create:mixing",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "tag": "c:dusts/euxenite"
+    },
+    {
+      "tag": "c:dusts/euxenite"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 500,
+      "tag": "c:acids/hydrofluoric"
+    }
+  ],
+  "results": [
+    {
+      "id": "chemica:tantalum_dust",
+      "chance": 0.25
+    }
+  ]
+}

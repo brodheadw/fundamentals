@@ -2,14 +2,14 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 250,
-      "fluid": "fundamentals:phosphoric_acid"
+      "tag": "c:acids/phosphoric"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 250,
-      "fluid": "fundamentals:ammonia"
+      "tag": "c:ammonia"
     }
   ],
   "results": [

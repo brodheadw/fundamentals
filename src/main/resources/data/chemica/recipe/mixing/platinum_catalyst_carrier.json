@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "chemica:platinum_catalyst"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 100,
+      "tag": "c:acids/hydrochloric"
+    }
+  ],
+  "results": [
+    {
+      "amount": 100,
+      "id": "chemica:platinum_catalyst_carrier"
+    }
+  ]
+}

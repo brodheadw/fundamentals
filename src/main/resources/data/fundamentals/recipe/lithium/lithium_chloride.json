@@ -9,9 +9,9 @@
       "item": "fundamentals:lithium_carbonate"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 500,
-      "fluid": "fundamentals:hydrochloric_acid"
+      "tag": "c:acids/hydrochloric"
     }
   ],
   "results": [
