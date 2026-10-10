@@ -2,7 +2,7 @@
   "name": "Cobalt Vein",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_cobaltite",
-  "sortnum": 34,
+  "sortnum": 36,
   "pages": [
     {
       "type": "patchouli:text",

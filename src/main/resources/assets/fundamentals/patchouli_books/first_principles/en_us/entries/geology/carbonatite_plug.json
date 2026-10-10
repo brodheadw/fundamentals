@@ -2,7 +2,7 @@
   "name": "Carbonatite Plug",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_bastnasite",
-  "sortnum": 24,
+  "sortnum": 26,
   "pages": [
     {
       "type": "patchouli:text",

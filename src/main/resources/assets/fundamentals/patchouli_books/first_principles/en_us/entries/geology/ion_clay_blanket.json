@@ -2,7 +2,7 @@
   "name": "Ion Clay Blanket",
   "category": "fundamentals:geology",
   "icon": "fundamentals:ion_adsorption_clay_ore",
-  "sortnum": 23,
+  "sortnum": 25,
   "pages": [
     {
       "type": "patchouli:text",

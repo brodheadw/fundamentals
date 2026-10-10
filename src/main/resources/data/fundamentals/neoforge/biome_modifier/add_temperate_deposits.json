@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#fundamentals:deposit/temperate",
+  "features": [
+    "fundamentals:coal_measures"
+  ],
+  "step": "underground_decoration"
+}

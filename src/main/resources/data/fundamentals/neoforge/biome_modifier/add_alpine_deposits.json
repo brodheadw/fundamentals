@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#fundamentals:deposit/alpine",
+  "features": [
+    "fundamentals:sparry_iron"
+  ],
+  "step": "underground_decoration"
+}

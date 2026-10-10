@@ -2,7 +2,7 @@
   "name": "Bloom and hammer",
   "category": "fundamentals:ironworking",
   "icon": "fundamentals:iron_bloom",
-  "sortnum": 1,
+  "sortnum": 2,
   "pages": [
     {
       "type": "patchouli:text",
@@ -15,7 +15,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "A furnace never reduces iron ore, and neither does a fan. Create's crushing wheels grind hematite, magnetite and goethite to crushed iron ore, and that goes to The Factory Must Grow's blast furnace, which has the coke and the heat."
+      "text": "A furnace never reduces iron ore, and neither does a fan. Create's crushing wheels grind hematite, magnetite, goethite and roasted siderite to crushed iron ore, and that goes to The Factory Must Grow's blast furnace, which has the coke and the heat."
     },
     {
       "type": "patchouli:text",

@@ -2,7 +2,7 @@
   "name": "Manganese Bed",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_pyrolusite",
-  "sortnum": 16,
+  "sortnum": 18,
   "pages": [
     {
       "type": "patchouli:text",
