@@ -1,9 +1,9 @@
 package ai.gsmc.fundamentals.magnet;
 
-import ai.gsmc.fundamentals.heat.Heat;
 import com.simibubi.create.foundation.blockEntity.SmartBlockEntity;
 import com.simibubi.create.foundation.blockEntity.behaviour.BehaviourType;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
+import com.wildspell.fundamental.api.heat.Heat;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.component.DataComponentMap;

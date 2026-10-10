@@ -20,6 +20,8 @@ class Dependencies {
     val createMin = property("deps.create_min").toString()
     val tfmgVersion = property("deps.tfmg_version").toString()
     val tfmgMin = property("deps.tfmg_min").toString()
+    val principlesVersion = property("deps.principles_version").toString()
+    val principlesMin = property("deps.principles_min").toString()
 }
 
 class McData {
@@ -57,6 +59,11 @@ repositories {
     maven("https://api.modrinth.com/maven") // Create
     maven("https://maven.createmod.net")         // the libraries Create bundles: Ponder, Flywheel
     maven("https://maven.ithundxr.dev/snapshots") // ...and Registrate
+    exclusiveContent {
+        // Fundamentals: Principles, from `./gradlew publishToMavenLocal` in its checkout
+        forRepository { mavenLocal() }
+        filter { includeGroup("com.wildspell.fundamental") }
+    }
 }
 
 dependencies {
@@ -73,6 +80,8 @@ dependencies {
     "neoForge"("net.neoforged:neoforge:${deps.neoforgeVersion}")
     modCompileOnly("maven.modrinth:create:${deps.createVersion}")
     modCompileOnly("maven.modrinth:create-tfmg:${deps.tfmgVersion}")
+    // bundled inside our jar, so players never install it separately
+    include(modImplementation("com.wildspell.fundamental:fundamentalmagic:${deps.principlesVersion}")!!)
     modLocalRuntime("maven.modrinth:create:${deps.createVersion}")
     modLocalRuntime("maven.modrinth:create-tfmg:${deps.tfmgVersion}")
     modCompileOnly("maven.modrinth:create:${deps.createVersion}")
@@ -107,7 +116,8 @@ tasks.processResources {
         "issues" to mod.issues,
         "neoforge_version" to deps.neoforgeVersion,
         "create_min" to deps.createMin,
-        "tfmg_min" to deps.tfmgMin
+        "tfmg_min" to deps.tfmgMin,
+        "principles_min" to deps.principlesMin
     )
 
     props.forEach { (k, v) -> inputs.property(k, v) }

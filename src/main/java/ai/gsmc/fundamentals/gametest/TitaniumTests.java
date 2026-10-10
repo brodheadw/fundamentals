@@ -1,12 +1,12 @@
 package ai.gsmc.fundamentals.gametest;
 
 import ai.gsmc.fundamentals.Fundamentals;
-import ai.gsmc.fundamentals.heat.Heat;
 import ai.gsmc.fundamentals.separation.Acids;
 import ai.gsmc.fundamentals.separation.Hazards;
 import ai.gsmc.fundamentals.separation.Separation;
 import ai.gsmc.fundamentals.titanium.Titanium;
 import com.simibubi.create.content.fluids.tank.FluidTankBlockEntity;
+import com.wildspell.fundamental.api.heat.Heat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
