@@ -169,7 +169,6 @@ CUTS = [
     ("praseodymium_neodymium_liquor", "p507", 32, "praseodymium_liquor", "neodymium_liquor"),
     ("heavy_rare_earth_liquor", "p204", 10, "samarium_europium_gadolinium_liquor", "terbium_to_lutetium_liquor"),
     ("samarium_europium_gadolinium_liquor", "p507", 16, "samarium_liquor", "europium_gadolinium_liquor"),
-    ("europium_gadolinium_liquor", "p507", 18, "europium_liquor", "gadolinium_liquor"),
     ("terbium_to_lutetium_liquor", "p204", 12, "terbium_dysprosium_liquor", "yttrium_heavies_liquor"),
     ("terbium_dysprosium_liquor", "p507", 20, "terbium_liquor", "dysprosium_liquor"),
     ("yttrium_heavies_liquor", "naphthenic_acid", 14, "yttrium_liquor", "holmium_to_lutetium_liquor"),
@@ -208,6 +207,11 @@ CARRIES = {
                                         ("dysprosium", "Dy"), ("holmium", "Ho"), ("erbium", "Er"), ("thulium", "Tm"),
                                         ("ytterbium", "Yb"), ("lutetium", "Lu"), ("yttrium", "Y"))},
 }
+# Europium is not parted from gadolinium by a cut. Zinc reduces it, alone of the rare earths, to Eu2+, which sulfate drops
+# as europium(II) sulfate the way it drops barium (McCoy, 1935; the reduction route every Chinese europium line runs, per
+# Gupta and Krishnamurthy), and the gadolinium stays in the liquor. A batch gives europium in the proportion the 18-stage P507
+# cut it replaced gave, and the sulfate goes back into nitric acid, oxidised, as the europium liquor the oxalate wants.
+ZINC_REDUCTION = ("europium_gadolinium_liquor", "europium_sulfate", "europium_liquor", "gadolinium_liquor")
 LIGHT_BRANCH = ("rare_earth_liquor", "light_rare_earth_liquor", "lanthanum_cerium_liquor", "praseodymium_neodymium_liquor")
 # Fractions are rounded to twentieths and kept between one and nineteen of them, so a pilot battery's 90 mB batch
 # still gives 5 mB of the scarce side: europium is 1.4 per cent of what feeds its cut and comes out at 5.
@@ -266,7 +270,8 @@ STRIP = "hydrochloric_acid"
 # the plant's items that are not a form of a material
 PLANT_ITEMS = {"salt": "Salt", "oxalic_acid": "Oxalic Acid", "roasted_bastnasite": "Roasted Bastnäsite", "light_rare_earth_sulfate": "Light Rare Earth Sulfate",
                "heavy_rare_earth_sulfate": "Heavy Rare Earth Sulfate", "calcium_chloride": "Calcium Chloride", "calcium_ingot": "Calcium Ingot",
-               "white_phosphorus": "White Phosphorus"}
+               "white_phosphorus": "White Phosphorus", "light_rare_earth_carbonate": "Light Rare Earth Carbonate",
+               "heavy_rare_earth_carbonate": "Heavy Rare Earth Carbonate", "cerium_concentrate": "Cerium Concentrate", "europium_sulfate": "Europium Sulfate"}
 
 
 def fluid(id, amount):
@@ -363,22 +368,34 @@ def chemistry():
     # floats the rare earth carbonate off the gangue. About half of what goes in comes out as concentrate.
     mixing("bastnasite_concentrate", item("bastnasite_dust", 2) + [fluid("minecraft:water", 250), fluid("naphthenic_acid", 100)],
            [result_item("bastnasite_concentrate"), {"id": "fundamentals:bastnasite_concentrate", "chance": 0.5}])
-    # Bastnäsite is roasted in air at about 600 C, which drives off the carbon dioxide and leaves oxides hot hydrochloric
-    # acid takes; it carries next to no thorium, so it leaves no residue.
+    # Bastnäsite is roasted in air at about 600 C, which drives off the carbon dioxide and takes its cerium to Ce(IV). Hot
+    # hydrochloric acid leaches the trivalent lanthanum, praseodymium and neodymium and leaves the ceria behind, which
+    # Molycorp sold as cerium concentrate and which calcines clean to ceria. Cerium is half of what bastnäsite carries, so a
+    # roasted concentrate gives half the liquor it would whole.
     for kind, time in (("campfire_cooking", 400), ("smoking", 200)):
         write(RECIPES / f"roasting/roasted_bastnasite_{kind}.json", {"type": f"minecraft:{kind}", "category": "misc", "ingredient": item("bastnasite_concentrate"),
                                                                     "result": {"id": "fundamentals:roasted_bastnasite"}, "experience": 0.1, "cookingtime": time})
-    mixing("rare_earth_liquor_from_bastnasite", [item("roasted_bastnasite"), fluid(STRIP, 500)], [result_fluid("crude_rare_earth_liquor", 500)], heated=True)
-    # Monazite, xenotime and the rest are phosphates and niobates hydrochloric acid barely touches. They are baked in
-    # concentrated sulfuric acid at 200 to 300 C, which turns the rare earths to sulfates and frees the phosphate as
-    # phosphoric acid. The cake is leached cold (rare earth sulfates dissolve worse when hot) and turned to chloride;
-    # monazite's thorium stays behind as a residue, as does the uranium and thorium of xenotime and euxenite.
-    # Lime then drops the iron, aluminium and the rest as a sludge, and the clarified liquor is what a battery wants.
+    mixing("rare_earth_liquor_from_bastnasite", [item("roasted_bastnasite"), fluid(STRIP, 250)],
+           [result_fluid("crude_rare_earth_liquor", 250), result_item("cerium_concentrate")], heated=True)
+    write(RECIPES / "calcining/cerium_oxide_from_concentrate.json", {
+        "type": "minecraft:blasting", "category": "misc", "ingredient": item("cerium_concentrate"),
+        "result": {"id": "fundamentals:cerium_oxide"}, "experience": 0.3, "cookingtime": 100})
+    # Monazite, xenotime and the rest are phosphates and niobates hydrochloric acid barely touches. They are roasted in
+    # concentrated sulfuric acid at 500 to 800 C, as at Baotou, which turns the rare earths to sulfates and frees the
+    # phosphate as phosphoric acid; that hot, the thorium goes to its pyrophosphate, which water does not take up. (Baked
+    # at 200 to 300 C instead, the thorium dissolves with the rare earths.) The cake is leached in cold water, since rare
+    # earth sulfates dissolve worse hot, and the thorium stays behind as a residue, as does the uranium and thorium of
+    # xenotime and euxenite. A sulfate does not turn to a chloride in hydrochloric acid, so soda ash drops the rare earths
+    # out of the leach as their carbonate, which hydrochloric acid dissolves, the carbon dioxide fizzing off. Lime then
+    # drops the iron, aluminium and the rest as a sludge, and the clarified liquor is what a battery wants.
     for grade in ("light", "heavy"):
         mixing(f"{grade}_rare_earth_sulfate", [item(f"{grade}_rare_earth_concentrate"), fluid("tfmg:sulfuric_acid", 250)],
                [result_item(f"{grade}_rare_earth_sulfate"), result_fluid("phosphoric_acid", 125)], heated=True)
-    mixing("rare_earth_liquor", [item("light_rare_earth_sulfate"), fluid(STRIP, 500)],
-           [result_fluid("crude_rare_earth_liquor", 500), result_item("monazite_residue_dust")])
+    residue = {"light": result_item("monazite_residue_dust"), "heavy": {"id": "fundamentals:monazite_residue_dust", "chance": 0.5}}
+    for grade, crude, name in (("light", "crude_rare_earth_liquor", "rare_earth_liquor"), ("heavy", "crude_heavy_rare_earth_liquor", "heavy_rare_earth_liquor")):
+        mixing(f"{grade}_rare_earth_carbonate", [item(f"{grade}_rare_earth_sulfate"), item("soda_ash"), fluid("minecraft:water", 500)],
+               [result_item(f"{grade}_rare_earth_carbonate"), residue[grade]])
+        mixing(name, [item(f"{grade}_rare_earth_carbonate"), fluid(STRIP, 500)], [result_fluid(crude, 500)])
     for crude, clean in (("crude_rare_earth_liquor", "rare_earth_liquor"), ("crude_heavy_rare_earth_liquor", "heavy_rare_earth_liquor")):
         mixing(f"clarify_{clean}", item("tfmg:limesand", 2) + [fluid(crude, 1000)], [result_fluid(clean, 1000), result_item("clarifier_sludge")])
     # a fouled organic scrubbed clean with lime, a tenth lost with the crud
@@ -387,10 +404,9 @@ def chemistry():
     # Waste: lime neutralises the spent chloride liquor to calcium chloride liquor, which boils down to the dry salt.
     mixing("calcium_chloride_liquor", item("tfmg:limesand", 2) + [fluid("spent_liquor", 1000)], [result_fluid("calcium_chloride_liquor", 1000)])
     mixing("calcium_chloride", [fluid("calcium_chloride_liquor", 1000)], [result_item("calcium_chloride", 3)], heated=True)
-    mixing("heavy_rare_earth_liquor", [item("heavy_rare_earth_sulfate"), fluid(STRIP, 500)],
-           [result_fluid("crude_heavy_rare_earth_liquor", 500), {"id": "fundamentals:monazite_residue_dust", "chance": 0.5}])
-    # The clay is not ground or roasted: its rare earths sit on the clay as ions and a salt solution lifts
-    # them off, which is why the Chinese heaps are leached in place. What is left is the clay, kaolinite, as before.
+    # The clay is not ground or roasted: its rare earths sit on the clay as ions and a salt solution lifts them off. Salt,
+    # sodium chloride, was the first lixiviant, in heaps, from the 1970s; ammonium sulfate replaced it in the 1980s, now
+    # pumped into the hillside in place. Salt is what the plant has. What is left is the clay, kaolinite, as before.
     # Thortveitite is a silicate no acid opens. Chlorinated with coke at about 900 C, its scandium goes over as the chloride and
     # the silica as silicon tetrachloride, which boils at 58 C and passes on; the chloride is taken up in water.
     mixing("scandium_liquor", item("thortveitite_dust", 2) + [item("tfmg:coal_coke"), fluid("chlorine", 500), fluid("minecraft:water", 500)],
@@ -401,6 +417,12 @@ def chemistry():
     # magnesium exchanges as well as sodium does): twice as much of it lifts the same rare earths.
     mixing("heavy_rare_earth_liquor_from_clay_with_seawater", item("raw_ion_adsorption_clay", 4) + [fluid("seawater", 1000)],
            [result_fluid("crude_heavy_rare_earth_liquor", 250), {"id": "minecraft:clay_ball", "count": 4}])
+    # A zinc nugget is far more zinc than a batch's europium wants; the sulfuric acid is the sulfate that drops it.
+    feed, salt, liquor, rest = ZINC_REDUCTION
+    europium = light_fraction(feed, liquor, rest)
+    mixing(salt, [fluid(feed, 1000), {"tag": "c:nuggets/zinc"}, fluid("tfmg:sulfuric_acid", 100)],
+           [result_fluid(rest, round(1000 * (1 - europium))), {"id": f"fundamentals:{salt}", "chance": round(1000 * europium / 250, 2)}])
+    mixing(liquor, [item(salt), fluid("nitric_acid", 250)], [result_fluid(liquor, 250)], heated=True)
     # Bromine from bittern, as it was first made from the Stassfurt potash bitterns: chlorine oxidises the bromide,
     # Cl2 + 2 Br- -> Br2 + 2 Cl-, one bromine for each chlorine, and steam blown through the hot liquor carries the bromine
     # out. What is left is bittern still, its magnesium chloride boiling down as it would have: two from 1,000 mB.

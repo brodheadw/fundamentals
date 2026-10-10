@@ -452,6 +452,15 @@ public class SeparationTests {
         helper.assertTrue(!recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "mixing/rare_earth_liquor")).orElseThrow().value().getIngredients().get(0)
                 .test(new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("fundamentals:light_rare_earth_concentrate")))),
                 "hydrochloric acid barely touches a phosphate: the concentrate should be cracked in sulfuric acid before the leach");
+        for (String grade : List.of("light", "heavy")) {
+            var leach = recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "mixing/" + (grade.equals("light") ? "" : "heavy_") + "rare_earth_liquor")).orElseThrow().value();
+            helper.assertTrue(leach.getIngredients().stream().anyMatch(i -> i.test(new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("fundamentals:" + grade + "_rare_earth_carbonate")))))
+                    && leach.getIngredients().stream().noneMatch(i -> i.test(new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("fundamentals:" + grade + "_rare_earth_sulfate"))))),
+                    "a sulfate does not metathesise in hydrochloric acid: the " + grade + " leach should dissolve the carbonate");
+        }
+        var bastnasite = (com.simibubi.create.content.processing.recipe.ProcessingRecipe<?, ?>) recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "mixing/rare_earth_liquor_from_bastnasite")).orElseThrow().value();
+        helper.assertTrue(bastnasite.getRollableResults().stream().anyMatch(r -> r.getStack().is(BuiltInRegistries.ITEM.get(ResourceLocation.parse("fundamentals:cerium_concentrate")))),
+                "roasted bastnäsite's Ce(IV) should stay out of the hydrochloric acid as cerium concentrate");
         for (String reagent : List.of("mixing/hydrofluoric_acid", "reduction/argon", "reduction/calcium_ingot", "mixing/neodymium_fluoride", "mixing/bastnasite_concentrate",
                 "mixing/light_rare_earth_sulfate", "mixing/heavy_rare_earth_sulfate", "mixing/rare_earth_liquor_from_bastnasite", "mixing/calcium_chloride_liquor", "mixing/calcium_chloride",
                 "packing/monazite_residue_block")) {
@@ -501,11 +510,17 @@ public class SeparationTests {
     public void everyLiquorIsCutDownToSingleElements(GameTestHelper helper) {
         List<SeparationRecipe> cuts = helper.getLevel().getRecipeManager().getAllRecipesFor(SeparationRecipe.TYPE)
                 .stream().map(RecipeHolder::value).toList();
-        helper.assertTrue(cuts.size() == 14, "expected 14 cuts, found " + cuts.size());
+        helper.assertTrue(cuts.size() == 13, "expected 13 cuts, found " + cuts.size());
         Set<Fluid> parted = cuts.stream().map(SeparationRecipe::liquor).collect(Collectors.toSet());
         Set<Fluid> made = cuts.stream().flatMap(c -> Stream.of(c.light(), c.heavy())).collect(Collectors.toSet());
+        Fluid reduced = Separation.fluid("europium_gadolinium_liquor");
+        helper.assertTrue(made.contains(reduced) && !parted.contains(reduced), "europium should leave gadolinium by zinc reduction, not a cut");
+        var zinc = (com.simibubi.create.content.processing.recipe.ProcessingRecipe<?, ?>) helper.getLevel().getRecipeManager()
+                .byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "mixing/europium_sulfate")).orElseThrow().value();
+        helper.assertTrue(zinc.getIngredients().stream().anyMatch(i -> i.test(new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("create:zinc_nugget")))))
+                && zinc.getFluidResults().stream().anyMatch(s -> s.getFluid() == Separation.fluid("gadolinium_liquor")), "zinc should drop europium and leave gadolinium liquor");
         for (Fluid liquor : made) {
-            if (!parted.contains(liquor)) {
+            if (!parted.contains(liquor) && liquor != reduced) {
                 String id = BuiltInRegistries.FLUID.getKey(liquor).getPath();
                 helper.assertTrue(id.chars().filter(ch -> ch == '_').count() == 1, id + " is a mixed liquor nothing parts");
                 var oxalate = helper.getLevel().getRecipeManager().byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID,

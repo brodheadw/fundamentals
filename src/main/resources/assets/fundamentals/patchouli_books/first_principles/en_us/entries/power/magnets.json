@@ -41,12 +41,16 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Plain NdFeB is two neodymium, three iron and a ferroboron under argon; a dysprosium or terbium in the melt makes Dy-NdFeB. Alnico is iron with aluminium, nickel, cobalt and a little copper: five iron, an aluminium, two nickel, two cobalt and three copper nuggets, superheated, cast and heat-treated to ten ingots.",
+      "text": "Plain NdFeB is two neodymium, three iron and a ferroboron under argon; three neodymium, a dysprosium or terbium, six iron and two ferroboron make eight Dy-NdFeB. SmCo is two samarium, four cobalt, an iron and four copper and two zirconium nuggets, the Sm2Co17 type every high-temperature grade is.",
       "title": "Making them"
     },
     {
       "type": "patchouli:text",
-      "text": "Polarize any of the four ingots, or an NdFeB, Dy-NdFeB or SmCo plate, to its magnet. The magnet is the first thing a motor or generator takes on the belt, and it decides the grade of the whole."
+      "text": "Alnico is iron with aluminium, nickel, cobalt and a little copper: five iron, an aluminium, two nickel, two cobalt and three copper nuggets, superheated, cast and heat-treated to ten ingots. Polarize any of the four ingots, or an NdFeB, Dy-NdFeB or SmCo plate, to its magnet."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The magnet is the first thing a motor or generator takes on the belt, and it decides the grade of the whole."
     },
     {
       "type": "patchouli:text",

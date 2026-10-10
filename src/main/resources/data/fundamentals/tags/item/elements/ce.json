@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:cerium_concentrate",
     "fundamentals:cerium_fluoride",
     "fundamentals:cerium_ingot",
     "fundamentals:cerium_oxalate",

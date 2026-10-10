@@ -101,11 +101,14 @@ def shaped(path, pattern, key, result):
 
 
 def magnets():
-    """Nd2Fe14B is melted from neodymium, iron and boron; SmCo5 from samarium and cobalt. Praseodymium sits in the same lattice,
-    so the industry melts didymium (PrNd) as it comes off the plant, and gadolinium stands in for some of the neodymium in
-    cheaper grades at a cost in strength. Plain NdFeB loses its coercivity past about 80 C; dysprosium or terbium in the melt
-    (or diffused into the grain boundaries, terbium's main use now) holds it to 150-230 C, which is what every motor grade
-    carries. Rare earth metal burns in air when molten, so all are melted under argon. The boron goes in as ferroboron, which
+    """Nd2Fe14B is melted from neodymium, iron and boron. Praseodymium sits in the same lattice, so the industry melts didymium
+    (PrNd) as it comes off the plant, and gadolinium stands in for some of the neodymium in cheaper grades at a cost in
+    strength. Plain NdFeB loses its coercivity past about 80 C; dysprosium or terbium in the melt (or diffused into the grain
+    boundaries, terbium's main use now) holds it to 150-230 C, which is what every motor grade carries: the EH and AH grades
+    are 8 to 10 per cent heavy rare earth, and three neodymium, a dysprosium, six iron and two ferroboron is 8. The high-temperature
+    SmCo is Sm2(Co,Fe,Cu,Zr)17, per Arnold Magnetics 23 to 28 per cent samarium, 14 to 20 iron, 4 to 6 copper and 1.5 to 3
+    zirconium in cobalt: two samarium, four cobalt, an iron and four copper and two zirconium nuggets is 26, 13, 6 and 3 in 52
+    cobalt, seven ingots of the 7.7 melted. Rare earth metal burns in air when molten, so all are melted under argon. The boron goes in as ferroboron, which
     borax, iron and charcoal give in the heat of an arc. Alnico, the magnet before the rare earths, is iron with 8-12 per cent
     aluminium, 15-26 nickel, 5-24 cobalt and a few of copper, cast and heat-treated in a field: five iron, an aluminium, two
     nickel, two cobalt and three copper nuggets is 49 per cent iron, 10 aluminium, 19 nickel, 19 cobalt and 3 copper.
@@ -120,10 +123,12 @@ def magnets():
     boride = tag("c:ingots/iron", 3) + item("ferroboron") + argon()
     mixing("neodymium_iron_boron", light * 2 + boride, [result("neodymium_iron_boron_ingot", 4)], "superheated")
     mixing("neodymium_iron_boron_with_gadolinium", light + item("gadolinium_ingot") + boride, [result("neodymium_iron_boron_ingot", 3)], "superheated")
-    mixing("dysprosium_neodymium_iron_boron", light * 2 + heavy + boride, [result("dysprosium_neodymium_iron_boron_ingot", 4)], "superheated")
-    mixing("dysprosium_neodymium_iron_boron_with_gadolinium", light + item("gadolinium_ingot") + heavy + boride,
-           [result("dysprosium_neodymium_iron_boron_ingot", 3)], "superheated")
-    mixing("samarium_cobalt", item("samarium_ingot") + item("cobalt_ingot", 4) + argon(), [result("samarium_cobalt_ingot", 2)], "superheated")
+    double = tag("c:ingots/iron", 6) + item("ferroboron", 2) + argon(200)
+    mixing("dysprosium_neodymium_iron_boron", light * 3 + heavy + double, [result("dysprosium_neodymium_iron_boron_ingot", 8)], "superheated")
+    mixing("dysprosium_neodymium_iron_boron_with_gadolinium", light * 2 + item("gadolinium_ingot") + heavy + double,
+           [result("dysprosium_neodymium_iron_boron_ingot", 6)], "superheated")
+    mixing("samarium_cobalt", item("samarium_ingot", 2) + item("cobalt_ingot", 4) + tag("c:ingots/iron") + tag("c:nuggets/copper", 4) + tag("c:nuggets/zirconium", 2)
+           + argon(200), [result("samarium_cobalt_ingot", 7)], "superheated")
     mixing("alnico", tag("c:ingots/iron", 5) + tag("c:ingots/aluminum") + tag("c:ingots/nickel", 2) + tag("c:ingots/cobalt", 2) + tag("c:nuggets/copper", 3),
            [result("alnico_ingot", 10)], "superheated")
     for alloy, forms in MAGNET_ALLOYS.items():
@@ -558,7 +563,7 @@ def zirconium():
     is zirconia, the white oxide. Zircon carries a fiftieth as much hafnium, its chemical twin, and the chloride keeps it. The two are
     parted by extractive distillation through a molten chloride (potassium chloroaluminate at Jarrie, salt here), hafnium tetrachloride
     being the more volatile and going overhead. Magnesium under argon reduces either chloride to sponge (Kroll), and the sponge is
-    arc-melted as titanium's is. Zirconia with an eighth part of yttria is yttria-stabilised zirconia, the thermal-barrier coat of a
+    arc-melted as titanium's is. Zirconia with 7 to 8 per cent yttria (7YSZ) is yttria-stabilised zirconia, the thermal-barrier coat of a
     turbine blade. Zirconium shrugs off hot hydrochloric and sulfuric acid that stainless and titanium cannot, so the chemical industry lines
     its vessels with it, and a per cent or two of hafnium in the superalloy keeps its grain boundaries from cracking."""
     electrodes = ("tfmg:electrode", "tfmg:electrode")
@@ -571,7 +576,7 @@ def zirconium():
         pgm_vat(f"{metal}_sponge", item(f"{metal}_tetrachloride") + item("magnesium_ingot", 2) + argon(),
                 [result(f"{metal}_sponge"), result("magnesium_chloride", 2)], folder=USES)
         pgm_vat(f"{metal}_ingot", item(f"{metal}_sponge", 2) + argon(), [result(f"{metal}_ingot", 2)], machines=electrodes, heat="superheated", folder=USES)
-    mixing("yttria_stabilised_zirconia", item("zirconium_oxide", 7) + item("yttrium_oxide"), [result("yttria_stabilised_zirconia", 8)], "superheated")
+    mixing("yttria_stabilised_zirconia", item("zirconium_oxide", 12) + item("yttrium_oxide"), [result("yttria_stabilised_zirconia", 13)], "superheated")
     shaped(TFMG / "crafting/materials/casting_basin.json", ["BPB", "CZC", "CCC"],
            {"B": {"item": "tfmg:fireproof_brick"}, "C": {"tag": "c:ingots/cast_iron"}, "P": {"item": "tfmg:cast_iron_pipe"}, "Z": {"item": "fundamentals:zircon_concentrate"}},
            {"count": 1, "id": "tfmg:casting_basin"})
@@ -797,10 +802,10 @@ def silver():
 def thorium():
     """Monazite's thorium was the rare earth industry's first product: Welsbach's gas mantle, a cotton stocking soaked in the nitrates of
     thorium and a hundredth part of cerium, burnt out to a skeleton of thoria that glows white in a gas flame. The residue dissolves in nitric
-    acid to the nitrate. The Factory's gas lamp burns a mantle. The clarifier's sludge, the iron, aluminium and thorium hydroxides the lime
+    acid to the nitrate. A cerium liquor's 250 mB is an oxide's worth, so 10 mB to four nitrate is the hundredth part. The Factory's gas lamp burns a mantle. The clarifier's sludge, the iron, aluminium and thorium hydroxides the lime
     throws down, is packed into blocks for the tailings dam as the residue is."""
     mixing("thorium_nitrate", item("monazite_residue_dust") + [fluid("nitric_acid", 250)], [result("thorium_nitrate")], "heated")
-    mixing("gas_mantle", item("thorium_nitrate", 4) + item("cerium_oxide") + tag("c:strings", 4), [result("gas_mantle", 4)], "heated")
+    mixing("gas_mantle", item("thorium_nitrate", 4) + [fluid("cerium_liquor", 10)] + tag("c:strings", 4), [result("gas_mantle", 4)], "heated")
     shaped(TFMG / "crafting/materials/gas_lamp.json", [" C ", "BGB", "MP "],
            {"B": {"item": "tfmg:cast_iron_bars"}, "C": {"tag": "c:plates/cast_iron"}, "G": {"item": "create:framed_glass"}, "P": {"item": "tfmg:industrial_pipe"},
             "M": {"item": "fundamentals:gas_mantle"}},

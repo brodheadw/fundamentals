@@ -44,6 +44,10 @@ public final class Separation {
     private static Item roastedBastnasite;
     private static Item lightRareEarthSulfate;
     private static Item heavyRareEarthSulfate;
+    private static Item lightRareEarthCarbonate;
+    private static Item heavyRareEarthCarbonate;
+    private static Item ceriumConcentrate;
+    private static Item europiumSulfate;
     private static Item calciumChloride;
     private static Item whitePhosphorus;
     private static Item seawaterBucket;
@@ -92,7 +96,8 @@ public final class Separation {
 
     public static List<Item> items() {
         List<Item> items = new java.util.ArrayList<>(List.of(mixerSettlerItem, magnetomigrationCellItem, plasticTankItem, salt, oxalicAcid, roastedBastnasite,
-                lightRareEarthSulfate, heavyRareEarthSulfate, calciumChloride, calciumIngot, whitePhosphorus));
+                lightRareEarthSulfate, heavyRareEarthSulfate, lightRareEarthCarbonate, heavyRareEarthCarbonate, ceriumConcentrate, europiumSulfate,
+                calciumChloride, calciumIngot, whitePhosphorus));
         Acids.all().values().forEach(acid -> items.add(acid.bucket));
         items.add(seawaterBucket);
         return items;
@@ -184,6 +189,10 @@ public final class Separation {
         registry.accept(id("roasted_bastnasite"), roastedBastnasite = new Item(new Item.Properties()));
         registry.accept(id("light_rare_earth_sulfate"), lightRareEarthSulfate = new Item(new Item.Properties()));
         registry.accept(id("heavy_rare_earth_sulfate"), heavyRareEarthSulfate = new Item(new Item.Properties()));
+        registry.accept(id("light_rare_earth_carbonate"), lightRareEarthCarbonate = new Item(new Item.Properties()));
+        registry.accept(id("heavy_rare_earth_carbonate"), heavyRareEarthCarbonate = new Item(new Item.Properties()));
+        registry.accept(id("cerium_concentrate"), ceriumConcentrate = new Item(new Item.Properties()));
+        registry.accept(id("europium_sulfate"), europiumSulfate = new Item(new Item.Properties()));
         registry.accept(id("calcium_chloride"), calciumChloride = new Item(new Item.Properties()));
         registry.accept(id("white_phosphorus"), whitePhosphorus = new Item(new Item.Properties()));
         for (Acids.Acid acid : Acids.all().values()) {
