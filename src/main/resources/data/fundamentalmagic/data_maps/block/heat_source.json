@@ -1,0 +1,44 @@
+{
+  "replace": false,
+  "values": {
+    "create:blaze_burner": {
+      "celsius": 1000,
+      "reach": 4,
+      "outside": 150
+    },
+    "fundamentals:bloomery": {
+      "celsius": 1200,
+      "reach": 3,
+      "outside": 100
+    },
+    "tfmg:molten_steel": {
+      "celsius": 1550,
+      "reach": 4,
+      "outside": 300
+    },
+    "tfmg:molten_slag": {
+      "celsius": 1450,
+      "reach": 4,
+      "outside": 300
+    },
+    "tfmg:blue_fire": {
+      "celsius": 800,
+      "reach": 3,
+      "outside": 400
+    },
+    "tfmg:green_fire": {
+      "celsius": 800,
+      "reach": 3,
+      "outside": 400
+    },
+    "tfmg:lithium_fire": {
+      "celsius": 800,
+      "reach": 3,
+      "outside": 400
+    },
+    "tfmg:lithium_torch": {
+      "celsius": 40,
+      "reach": 1
+    }
+  }
+}

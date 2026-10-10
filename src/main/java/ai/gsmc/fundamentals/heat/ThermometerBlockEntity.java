@@ -3,6 +3,7 @@ package ai.gsmc.fundamentals.heat;
 import ai.gsmc.fundamentals.separation.Hazards;
 import ai.gsmc.fundamentals.uses.Uses;
 import com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation;
+import com.wildspell.fundamental.api.heat.Heat;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

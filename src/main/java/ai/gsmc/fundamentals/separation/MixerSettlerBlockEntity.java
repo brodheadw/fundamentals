@@ -421,7 +421,7 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler.ends", held(head.aqueous), held(battery.tail().aqueous))));
         tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler.products", held(head.out), held(battery.tail().out))));
         tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler.sump", held(head.waste))));
-        tooltip.add(indent(Component.translatable("goggles.fundamentals.heat", String.format("%.0f", ai.gsmc.fundamentals.heat.Heat.at(level, worldPosition)))));
+        tooltip.add(indent(Component.translatable("goggles.fundamentals.heat", String.format("%.0f", com.wildspell.fundamental.api.heat.Heat.at(level, worldPosition)))));
         return true;
     }
 
