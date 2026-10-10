@@ -22,6 +22,7 @@ public final class FerrousMaterials {
         mineral("magnetite", "Magnetite", "Fe3O4", "iron",
                 MaterialProperties.builder().density(0.66).magnetStrength(0.20));
         mineral("goethite", "Goethite", "FeO(OH)", "iron", MaterialProperties.builder().density(0.48));
+        mineral("siderite", "Siderite", "FeCO3", "iron", MaterialProperties.builder().density(0.50));
         mineral("pyrolusite", "Pyrolusite", "MnO2", "manganese", MaterialProperties.builder().density(0.63));
         mineral("pentlandite", "Pentlandite", "(Fe,Ni)9S8", "nickel", MaterialProperties.builder().density(0.61));
         mineral("nickel_laterite", "Nickel Laterite", "(Fe,Ni)O(OH)", "nickel",

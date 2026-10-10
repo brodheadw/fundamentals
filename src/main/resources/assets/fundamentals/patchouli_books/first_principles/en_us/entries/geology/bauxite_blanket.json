@@ -2,7 +2,7 @@
   "name": "Bauxite Blanket",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_bauxite",
-  "sortnum": 21,
+  "sortnum": 23,
   "pages": [
     {
       "type": "patchouli:text",

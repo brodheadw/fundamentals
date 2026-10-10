@@ -2,7 +2,7 @@
   "name": "Monazite Vein",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_monazite",
-  "sortnum": 29,
+  "sortnum": 31,
   "pages": [
     {
       "type": "patchouli:text",

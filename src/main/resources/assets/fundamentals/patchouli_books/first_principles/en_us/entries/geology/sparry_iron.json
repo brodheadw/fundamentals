@@ -1,0 +1,13 @@
+{
+  "name": "Sparry Iron",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_siderite",
+  "sortnum": 14,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A bed of limestone, in the mountains, between y 48 and 120. Carries siderite in masses. Dig at the core: the edges are lean.",
+      "title": "Sparry Iron"
+    }
+  ]
+}

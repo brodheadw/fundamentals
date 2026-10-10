@@ -2,7 +2,7 @@
   "name": "Lead Zinc Bed",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_sphalerite",
-  "sortnum": 13,
+  "sortnum": 15,
   "pages": [
     {
       "type": "patchouli:text",

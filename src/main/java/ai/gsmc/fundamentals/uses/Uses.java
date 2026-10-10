@@ -25,7 +25,7 @@ public final class Uses {
             "yttria_stabilised_zirconia", "beryl_frit", "beryllium_hydroxide", "ammonium_fluoroberyllate", "beryllium_pebbles",
             "dimensionally_stable_anode", "red_mud", "aluminium_hydroxide", "alumina", "cryolite", "nickel_oxide", "nickel_pellets",
             "tungstic_acid", "ammonium_paratungstate", "ammonium_perrhenate", "lithium_carbonate", "mcraly_powder", "boric_acid",
-            "galvanized_steel_plate");
+            "galvanized_steel_plate", "roasted_siderite");
 
     public static final List<String> PLATINUM_IDS = List.of(
             "ammonium_chloride", "insoluble_residue", "iridium_rhodium_residue", "ammonium_chloroplatinate",

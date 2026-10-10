@@ -2,11 +2,11 @@
   "name": "The bloomery",
   "category": "fundamentals:ironworking",
   "icon": "fundamentals:bloomery",
-  "sortnum": 0,
+  "sortnum": 1,
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Build a bloomery out of clay, load it with iron ore and charcoal, light it with a torch and wait. Only charcoal: the sulfur in coal ruins iron. What comes out is not an ingot but a bloom, a spongy lump of iron and slag that never melted.",
+      "text": "Build a bloomery out of clay, load it with iron ore and charcoal, light it with a torch and wait. Only charcoal: the sulfur in coal ruins iron. What comes out is not an ingot but a bloom, a spongy lump of iron and slag that never melted. Siderite goes in roasted.",
       "title": "The bloomery"
     },
     {

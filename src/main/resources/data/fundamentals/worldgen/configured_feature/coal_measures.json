@@ -1,0 +1,38 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "bed",
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:siderite_ore"
+        },
+        "fraction": 0.18,
+        "style": "seams"
+      },
+      {
+        "state": {
+          "Name": "minecraft:coal_ore"
+        },
+        "fraction": 0.22,
+        "style": "seams"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:siderite_ore"
+        },
+        "fraction": 0.14,
+        "style": "pockets"
+      }
+    ],
+    "radius": {
+      "min": 9,
+      "max": 13
+    },
+    "thickness": {
+      "min": 4,
+      "max": 6
+    },
+    "replaceable": "fundamentals:deposit_replaceable/rock"
+  }
+}

@@ -2,7 +2,7 @@
   "name": "Tungsten Skarn",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_scheelite",
-  "sortnum": 17,
+  "sortnum": 19,
   "pages": [
     {
       "type": "patchouli:text",
