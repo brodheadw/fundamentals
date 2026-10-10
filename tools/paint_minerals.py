@@ -415,18 +415,27 @@ def paint_goethite(variant=0):
     return c.finish()
 
 
-def paint_nickel_laterite(variant=0):
-    rng = random.Random(seed("nickel_laterite", variant))
-    tones = [(122, 78, 34), (150, 102, 44), (174, 128, 58), (196, 152, 76)]
+NICKEL_GRADES = {"core": (0.42, 2, 5), "edge": (0.26, 1, 3), "trace": (0.12, 0, 2)}
+
+
+def paint_nickel_laterite(variant=0, grade="edge"):
+    rng = random.Random(seed("nickel_laterite", variant, grade))
+    ochre = [(154, 102, 42), (178, 128, 56), (198, 152, 74)]
     green = [(74, 124, 62), (106, 160, 82), (144, 192, 106)]
-    img = Image.new("RGB", (SIZE, SIZE))
+    mottle, veins, patches = NICKEL_GRADES[grade]
+    img = host_rock(rng, "laterite")
     for p, v in field(rng, 2, 1).items():
-        img.putpixel(p, tones[min(3, int(v * 4))])
-    for style in ("wavy", "diag"):
+        if v >= 1 - mottle:
+            img.putpixel(p, ochre[min(2, int((v - 1 + mottle) / mottle * 3))])
+    for style in ("wavy", "diag")[:veins]:
         for x, y in vein_path(rng, style):
             img.putpixel((x, y), rng.choice(green))
             if rng.random() < 0.35:
                 img.putpixel(wrap(x, y + 1), green[0])
+    for _ in range(patches):
+        x, y = rng.randrange(SIZE), rng.randrange(SIZE)
+        for p in {(x, y), wrap(x + 1, y), wrap(x, y + 1)} if rng.random() < 0.5 else {(x, y)}:
+            img.putpixel(p, rng.choice(green[1:]))
     return img
 
 
@@ -435,7 +444,8 @@ def paint_all():
              "nickel_laterite": paint_nickel_laterite}
     assert set(whole) == set(WHOLE)
     out = {name: {g: [build(name, v, g) for v in range(VARIANTS)] for g in GRADES} for name in RECIPES}
-    out.update({name: {g: [paint(v).convert("RGBA") for v in range(VARIANTS)] for g in GRADES}
+    out.update({name: {g: [(paint(v, g) if name == "nickel_laterite" else paint(v)).convert("RGBA") for v in range(VARIANTS)]
+                       for g in GRADES}
                 for name, paint in whole.items()})
     return out
 
