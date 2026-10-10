@@ -1,12 +1,12 @@
 package ai.gsmc.fundamentals.gametest;
 
 import ai.gsmc.fundamentals.Fundamentals;
-import ai.gsmc.fundamentals.heat.Heat;
 import ai.gsmc.fundamentals.heat.Thermometer;
 import ai.gsmc.fundamentals.heat.ThermometerBlock;
 import ai.gsmc.fundamentals.heat.ThermometerBlockEntity;
 import ai.gsmc.fundamentals.heat.Thermometers;
 import ai.gsmc.fundamentals.uses.Uses;
+import com.wildspell.fundamental.api.heat.Heat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.gametest.framework.GameTest;

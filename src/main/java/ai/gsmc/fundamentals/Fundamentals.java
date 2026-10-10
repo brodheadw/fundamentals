@@ -28,7 +28,7 @@ import ai.gsmc.fundamentals.titanium.Titanium;
 import com.simibubi.create.AllMountedStorageTypes;
 import com.simibubi.create.api.contraption.storage.fluid.MountedFluidStorageType;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
-import ai.gsmc.fundamentals.heat.Heat;
+import ai.gsmc.fundamentals.heat.Temperatures;
 import ai.gsmc.fundamentals.heat.Thermometers;
 import ai.gsmc.fundamentals.liquid.Liquids;
 import ai.gsmc.fundamentals.separation.Hazards;
@@ -149,10 +149,10 @@ public class Fundamentals {
         NeoForge.EVENT_BUS.addListener(Magnets::onTooltip);
         NeoForge.EVENT_BUS.addListener(Magnets::attach);
         modBus.addListener(Oxidation::registerDataMaps);
-        modBus.addListener(Heat::registerDataMaps);
+        modBus.addListener(Temperatures::setup);
         modBus.addListener(Liquids::registerDataMaps);
         NeoForge.EVENT_BUS.addListener(Liquids::onDataMapsUpdated);
-        NeoForge.EVENT_BUS.addListener(Heat::registerCommands);
+        NeoForge.EVENT_BUS.addListener(Temperatures::registerCommands);
         modBus.addListener(RegisterCapabilitiesEvent.class, event -> {
             event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, Separation.mixerSettlerEntity(), MixerSettlerBlockEntity::handler);
             event.registerBlockEntity(Capabilities.FluidHandler.BLOCK, Separation.magnetomigrationCellEntity(), MagnetomigrationCellBlockEntity::handler);

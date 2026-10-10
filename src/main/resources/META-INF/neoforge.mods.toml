@@ -43,3 +43,10 @@ type = "required"
 versionRange = "[${tfmg_min},)"
 ordering = "AFTER"
 side = "BOTH"
+
+[[dependencies.${id}]]
+modId = "fundamentalmagic"
+type = "required"
+versionRange = "[${principles_min},0.5)"
+ordering = "AFTER"
+side = "BOTH"
