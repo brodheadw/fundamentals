@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "ingredient": {
+    "item": "fundamentals:ammonium_paratungstate"
+  },
+  "result": {
+    "id": "fundamentals:tungsten_oxide"
+  },
+  "experience": 0.2,
+  "cookingtime": 100
+}

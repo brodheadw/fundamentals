@@ -1,14 +1,17 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:ammonium_paratungstate",
     "fundamentals:raw_scheelite",
     "fundamentals:raw_wolframite",
     "fundamentals:scheelite_ore",
+    "fundamentals:superalloy_ingot",
+    "fundamentals:superalloy_plate",
     "fundamentals:tungsten_carbide",
     "fundamentals:tungsten_filament",
     "fundamentals:tungsten_ingot",
     "fundamentals:tungsten_oxide",
-    "fundamentals:tungsten_plate",
+    "fundamentals:tungstic_acid",
     "fundamentals:wolframite_ore"
   ]
 }

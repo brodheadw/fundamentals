@@ -5,34 +5,28 @@
       "item": "fundamentals:molybdenum_oxide"
     },
     {
-      "tag": "c:ingots/steel"
+      "tag": "c:storage_blocks/steel"
     },
     {
-      "tag": "c:ingots/steel"
+      "tag": "c:storage_blocks/steel"
     },
     {
-      "tag": "c:ingots/steel"
+      "tag": "c:storage_blocks/steel"
     },
     {
-      "tag": "c:ingots/steel"
+      "tag": "c:storage_blocks/steel"
     },
     {
-      "tag": "c:ingots/steel"
+      "tag": "c:storage_blocks/steel"
     },
     {
-      "tag": "c:ingots/steel"
-    },
-    {
-      "tag": "c:ingots/steel"
-    },
-    {
-      "tag": "c:ingots/steel"
+      "tag": "c:storage_blocks/steel"
     }
   ],
   "results": [
     {
       "id": "fundamentals:molybdenum_steel_ingot",
-      "count": 8
+      "count": 54
     }
   ],
   "heat_requirement": "superheated"

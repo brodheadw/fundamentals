@@ -1,0 +1,29 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_wolframite"
+    },
+    {
+      "item": "fundamentals:raw_wolframite"
+    },
+    {
+      "item": "fundamentals:soda_ash"
+    },
+    {
+      "item": "fundamentals:soda_ash"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "minecraft:water"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:sodium_tungstate_liquor",
+      "amount": 500
+    }
+  ],
+  "heat_requirement": "superheated"
+}

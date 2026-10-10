@@ -54,9 +54,9 @@ public final class FerrousMaterials {
         reg("molybdenum", MaterialType.ELEMENT, "Mo", forms(OXIDE, INGOT),
                 MaterialProperties.builder().density(1.30).heatResistance(0.88).hardness(0.80));
         // Rhenium rides in molybdenite at parts per million and leaves the roaster as flue dust; the superalloy is why anyone bothers.
-        reg("rhenium", MaterialType.ELEMENT, "Re", forms(INGOT),
+        reg("rhenium", MaterialType.ELEMENT, "Re", forms(INGOT, NUGGET),
                 MaterialProperties.builder().density(2.10).heatResistance(1.00).hardness(0.75));
-        reg("superalloy", MaterialType.ALLOY, "Ni-Cr-Co-Re", forms(INGOT, PLATE),
+        reg("superalloy", MaterialType.ALLOY, "Ni-Co-Cr-W-Al-Re", forms(INGOT, PLATE),
                 MaterialProperties.builder().density(0.85).heatResistance(0.98).hardness(0.80));
         reg("molybdenum_steel", MaterialType.ALLOY, "Fe-Mo", forms(INGOT, PLATE),
                 MaterialProperties.builder().density(0.80).heatResistance(0.70).hardness(0.85));
@@ -68,7 +68,7 @@ public final class FerrousMaterials {
         // the cast magnet before the rare earths: iron with aluminium, nickel, cobalt and a little copper, weak but good past 500 °C
         reg("alnico", MaterialType.ALLOY, "Fe-Al-Ni-Co-Cu", forms(INGOT),
                 MaterialProperties.builder().density(0.95).magnetStrength(0.40).heatResistance(0.90).hardness(0.70));
-        reg("tungsten", MaterialType.ELEMENT, "W", forms(OXIDE, INGOT, PLATE),
+        reg("tungsten", MaterialType.ELEMENT, "W", forms(OXIDE, INGOT),
                 MaterialProperties.builder().density(1.90).heatResistance(1.00).hardness(0.95).conductivity(0.30));
         reg("vanadium", MaterialType.ELEMENT, "V", forms(INGOT, DUST),
                 MaterialProperties.builder().density(0.77).hardness(0.80).heatResistance(0.65));

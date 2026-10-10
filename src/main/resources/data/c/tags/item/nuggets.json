@@ -15,6 +15,7 @@
     "#c:nuggets/palladium",
     "#c:nuggets/platinum",
     "#c:nuggets/praseodymium",
+    "#c:nuggets/rhenium",
     "#c:nuggets/rhodium",
     "#c:nuggets/ruthenium",
     "#c:nuggets/samarium",
@@ -23,6 +24,7 @@
     "#c:nuggets/silver",
     "#c:nuggets/terbium",
     "#c:nuggets/tin",
+    "#c:nuggets/yttrium",
     "#c:nuggets/zirconium"
   ]
 }
