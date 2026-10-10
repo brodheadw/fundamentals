@@ -26,15 +26,15 @@ import net.neoforged.neoforge.client.model.data.ModelProperty;
 import java.util.ArrayList;
 import java.util.List;
 
-/** Create's fluid tank model with our sheets: connected textures across the multiblock, and the walls between two blocks of one
- * tank left out. Create's own is private to its two tanks. Natural plastic draws translucent; a dyed tank draws the same milky
- * sheets cutout, which makes them opaque, tinted by its dye. */
-class PlasticTankModel extends CTModel {
+/** Create's fluid tank model with our sheets, plastic's or titanium's: connected textures across the multiblock, and the walls
+ * between two blocks of one tank left out. Create's own is private to its two tanks. Natural plastic draws translucent; a dyed tank
+ * draws the same milky sheets cutout, which makes them opaque, tinted by its dye. Titanium draws as its models say. */
+class TankModel extends CTModel {
 
     private static final ModelProperty<boolean[]> JOINED = new ModelProperty<>();
 
-    PlasticTankModel(BakedModel model) {
-        super(model, new FluidTankCTBehaviour(shift("plastic_fluid_tank"), shift("plastic_fluid_tank_top"), shift("plastic_fluid_tank_inner")));
+    TankModel(BakedModel model, String sheets) {
+        super(model, new FluidTankCTBehaviour(shift(sheets), shift(sheets + "_top"), shift(sheets + "_inner")));
     }
 
     private static CTSpriteShiftEntry shift(String name) {
@@ -65,11 +65,14 @@ class PlasticTankModel extends CTModel {
             }
         }
         quads.addAll(super.getQuads(state, null, rand, extraData, renderType));
-        return state.getValue(PlasticTankBlock.COLOR) == Pigment.NONE ? quads : PlasticsClient.tinted(quads);
+        return !state.hasProperty(PlasticTankBlock.COLOR) || state.getValue(PlasticTankBlock.COLOR) == Pigment.NONE ? quads : PlasticsClient.tinted(quads);
     }
 
     @Override
     public ChunkRenderTypeSet getRenderTypes(BlockState state, RandomSource rand, ModelData data) {
+        if (!state.hasProperty(PlasticTankBlock.COLOR)) {
+            return super.getRenderTypes(state, rand, data);
+        }
         return state.getValue(PlasticTankBlock.COLOR) == Pigment.NONE ? PlasticsClient.TRANSLUCENT : PlasticsClient.CUTOUT;
     }
 }

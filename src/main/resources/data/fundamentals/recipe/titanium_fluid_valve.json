@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "tag": "c:plates/titanium"
+    },
+    {
+      "item": "fundamentals:titanium_pipe"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:titanium_fluid_valve",
+    "count": 1
+  }
+}

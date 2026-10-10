@@ -1,12 +1,14 @@
 package ai.gsmc.fundamentals.gametest;
 
 import ai.gsmc.fundamentals.Fundamentals;
+import ai.gsmc.fundamentals.heat.Heat;
 import ai.gsmc.fundamentals.separation.Battery;
 import ai.gsmc.fundamentals.separation.MagneticRecipe;
 import ai.gsmc.fundamentals.separation.MagnetomigrationCellBlock;
 import ai.gsmc.fundamentals.separation.MagnetomigrationCellBlockEntity;
 import ai.gsmc.fundamentals.separation.MixerSettlerBlock;
 import ai.gsmc.fundamentals.separation.MixerSettlerBlockEntity;
+import ai.gsmc.fundamentals.separation.Paramagnetism;
 import ai.gsmc.fundamentals.separation.Separation;
 import ai.gsmc.fundamentals.separation.SeparationRecipe;
 import ai.gsmc.fundamentals.separation.VatGeometry;
@@ -571,6 +573,26 @@ public class SeparationTests {
             helper.assertTrue(shortHead.line().stall().map(s -> s.key().equals("short")).orElse(false)
                     && outlet(helper, n - 1, 3, Direction.NORTH).isEmpty(), "a line short of its passes should stall and part nothing");
             helper.assertTrue(didymium.line().stall().map(s -> s.key().equals("no_cut")).orElse(false), "didymium liquor should stall a line: no magnetic cut");
+            helper.succeed();
+        });
+    }
+
+    @GameTest(template = "battery", timeoutTicks = 600)
+    public void aColdLinePartsFasterThanAHotOneAndSamariumBarelyCares(GameTestHelper helper) {
+        double nd = Paramagnetism.relative("Nd", -20) / Paramagnetism.relative("Nd", 150), sm = Paramagnetism.relative("Sm", -20) / Paramagnetism.relative("Sm", 150);
+        helper.assertTrue(nd > 1.5 && sm < 1.25 && Paramagnetism.relative("Eu", 150) == Paramagnetism.relative("Eu", -20),
+                "neodymium should follow Curie's law and samarium and europium mostly not: Nd " + nd + ", Sm " + sm);
+        BlockPos hot = new BlockPos(4, 1, 2), cold = new BlockPos(20, 1, 2);
+        Heat.boost(helper.getLevel(), helper.absolutePos(hot), 200, 2, 600);
+        Heat.boost(helper.getLevel(), helper.absolutePos(cold), -60, 2, 600);
+        int n = MagneticRecipe.forLiquor(helper.getLevel(), Separation.fluid("yttrium_heavies_liquor")).orElseThrow().passes();
+        MagnetomigrationCellBlockEntity hotHead = line(helper, hot.getX(), hot.getZ(), n, "yttrium_heavies_liquor");
+        MagnetomigrationCellBlockEntity coldHead = line(helper, cold.getX(), cold.getZ(), n, "yttrium_heavies_liquor");
+        helper.runAfterDelay(500, () -> {
+            int hotDrawn = outlet(helper, hot.getX() + n - 1, hot.getZ(), Direction.SOUTH).getAmount();
+            int coldDrawn = outlet(helper, cold.getX() + n - 1, cold.getZ(), Direction.SOUTH).getAmount();
+            helper.assertTrue(hotHead.celsius() > 150 && coldHead.celsius() < 0, "the heads should read their heat: " + hotHead.celsius() + " / " + coldHead.celsius());
+            helper.assertTrue(coldDrawn > hotDrawn && hotDrawn > 0, "the cold line should part more in the same time: cold " + coldDrawn + " mB, hot " + hotDrawn);
             helper.succeed();
         });
     }
