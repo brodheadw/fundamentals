@@ -58,7 +58,8 @@ public class UsesTests {
         helper.assertTrue(!takes(recipe(helper, "fundamentals:uses/neodymium_iron_boron"), "fundamentals:dysprosium_ingot")
                 && takes(recipe(helper, "fundamentals:uses/dysprosium_neodymium_iron_boron"), "fundamentals:terbium_ingot"), "only the heat grade wants dysprosium or terbium");
         helper.assertTrue(takes(recipe(helper, "fundamentals:uses/neodymium_iron_boron"), "fundamentals:ferroboron")
-                && takes(recipe(helper, "fundamentals:uses/ferroboron"), "fundamentals:raw_borax"), "NdFeB wants boron as ferroboron, from borax");
+                && takes(recipe(helper, "fundamentals:uses/ferroboron"), "fundamentals:boric_acid")
+                && takes(recipe(helper, "fundamentals:uses/boric_acid"), "fundamentals:raw_borax"), "NdFeB wants boron as ferroboron, from boric acid freed from borax");
         helper.assertTrue(takes(recipe(helper, "fundamentals:uses/samarium_cobalt"), "fundamentals:cobalt_ingot")
                 && takes(recipe(helper, "fundamentals:uses/samarium_cobalt"), "fundamentals:zirconium_nugget"), "SmCo is Sm2(Co,Fe,Cu,Zr)17: it wants cobalt and zirconium");
         var dy = recipe(helper, "fundamentals:uses/dysprosium_neodymium_iron_boron").getIngredients();
@@ -83,7 +84,8 @@ public class UsesTests {
                 && takes(recipe(helper, "fundamentals:uses/phosphor"), "fundamentals:europium_oxide")
                 && takes(recipe(helper, "fundamentals:uses/phosphor"), "fundamentals:lanthanum_oxide"), "Y2O3:Eu and LaPO4:Ce,Tb should make phosphor");
         for (String lamp : new String[] {"tfmg:crafting/materials/aluminum_lamp", "tfmg:crafting/materials/circular_light"}) {
-            helper.assertTrue(takes(recipe(helper, lamp), "fundamentals:phosphor"), lamp + " should take phosphor");
+            helper.assertTrue(takes(recipe(helper, lamp), "fundamentals:phosphor") && takes(recipe(helper, lamp), "fundamentals:mercury"),
+                    lamp + " is a fluorescent tube: it should take phosphor and mercury");
         }
         helper.assertTrue(takes(recipe(helper, "tfmg:crafting/materials/fireproof_chemical_vat"), "fundamentals:yttrium_oxide"), "the fireproof vat should take yttria");
         helper.assertTrue(takes(recipe(helper, "create:crafting/kinetics/goggles"), "fundamentals:didymium_glass"), "goggles should be didymium glass");
@@ -298,6 +300,29 @@ public class UsesTests {
         helper.assertTrue(takes(recipe(helper, "fundamentals:uses/bronze_ingot"), "fundamentals:tin_ingot")
                 && takes(recipe(helper, "fundamentals:uses/solder"), "fundamentals:tin_ingot"), "tin should go into bronze and solder");
         helper.assertTrue(takes(recipe(helper, "create:crafting/curiosities/peculiar_bell"), "fundamentals:bronze_plate"), "the peculiar bell should be bronze");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void siliconIsDopedWithPhosphorusAndBoron(GameTestHelper helper) {
+        Recipe<?> n = recipe(helper, "tfmg:mixing/n_semiconductor"), p = recipe(helper, "tfmg:mixing/p_semiconductor");
+        helper.assertTrue(takes(n, "fundamentals:white_phosphorus") && !takes(n, "tfmg:sulfur_dust"), "n-type silicon wants a group 15 donor, not sulfur");
+        helper.assertTrue(takes(p, "fundamentals:boric_acid") && !takes(p, "tfmg:aluminum_ingot"), "p-type silicon wants boron, not aluminium");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void manganeseGoesIntoSteelAndZincOntoIt(GameTestHelper helper) {
+        var registries = helper.getLevel().registryAccess();
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/ferromanganese"), "fundamentals:raw_pyrolusite")
+                && recipe(helper, "fundamentals:uses/ferromanganese").getResultItem(registries).is(stack("fundamentals:ferromanganese_ingot").getItem()), "pyrolusite should smelt to ferromanganese");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/manganese_steel"), "fundamentals:ferromanganese_ingot"), "Hadfield steel wants ferromanganese");
+        helper.assertTrue(recipe(helper, "fundamentals:uses/heavy_plate_from_manganese_steel").getResultItem(registries).getCount() == 2, "manganese steel should press to two heavy plates");
+        var steelPlates = net.minecraft.tags.TagKey.create(net.minecraft.core.registries.Registries.ITEM, ResourceLocation.parse("c:plates/steel"));
+        helper.assertTrue(stack("fundamentals:galvanized_steel_plate").is(steelPlates), "a galvanized plate should serve as a steel plate");
+        helper.assertTrue(stack("tfmg:heavy_plate").getItemHolder().getData(ai.gsmc.fundamentals.oxidation.Oxidation.RATES) != null
+                && stack("fundamentals:galvanized_steel_plate").getItemHolder().getData(ai.gsmc.fundamentals.oxidation.Oxidation.RATES) == null,
+                "a bare heavy plate should rust and a galvanized one not");
         helper.succeed();
     }
 

@@ -28,7 +28,7 @@ public final class MaterialItems {
     private static final Set<String> GROUPS = Set.of(RareEarthMaterials.GROUP);
     // Materials outside those groups whose forms are items anyway, because a chain here makes them.
     private static final Set<String> ITEM_IDS = Set.of("cobalt", "molybdenum", "rhenium", "superalloy", "molybdenum_steel", "chromel", "alumel", "alnico", "tungsten",
-            "copper_matte", "blister_copper", "chromite", "chromium", "ferrochrome", "ferronickel", "stainless_steel",
+            "copper_matte", "blister_copper", "chromite", "chromium", "ferrochrome", "ferronickel", "stainless_steel", "ferromanganese", "manganese_steel",
             "nickel_matte", "converter_matte", "platinum_group_concentrate", "platinum", "palladium", "rhodium", "ruthenium", "iridium", "osmium",
             "tin_concentrate", "crude_tin", "tin", "bronze",
             "titanium", "magnesium", "zircon", "zirconium", "hafnium", "beryllium", "beryllium_copper",

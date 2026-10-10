@@ -23,15 +23,19 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Hydrofluoric acid, nitric acid and aqua regia fume. Within two blocks of any of them in the open, as a block or in a basin it is being used in, you take a hit a second and the world swims, and hydrofluoric poisons. The gas mask is Create's: a diving helmet over a filled copper backtank, which breathes its air instead."
+      "text": "Concentrated hydrochloric acid, hydrofluoric acid, nitric acid and aqua regia fume. Within two blocks of any of them in the open, as a block or in a basin it is being used in, you take a hit a second and the world swims, and hydrofluoric poisons."
     },
     {
       "type": "patchouli:text",
-      "text": "And acid eats copper: a Create pipe carrying any acid corrodes and, after a couple of minutes on average, bursts and spills it."
+      "text": "The gas mask is Create's: a diving helmet over a filled copper backtank, which breathes its air instead. And acid eats copper: a Create pipe carrying any acid corrodes and, after a couple of minutes on average, bursts and spills it."
     },
     {
       "type": "patchouli:text",
-      "text": "The liquors are chlorides in dilute acid, and the spent liquor, the calcium chloride liquor and bittern are chloride too: they eat copper as well, more slowly, eight minutes or so to a pipe; seawater slower still, half an hour."
+      "text": "The liquors are chlorides in dilute acid, and the spent liquor, the calcium chloride liquor and bittern are chloride too: they eat copper as well, more slowly, eight minutes or so to a pipe; seawater slower still, an hour."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Concentrated nitric acid passivates aluminium, which is what it is shipped in, so the Factory's aluminium pipes carry it unharmed."
     },
     {
       "type": "patchouli:text",
@@ -43,7 +47,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Keep the acid and the liquors in the Plastic Fluid Tank, as real plants keep hydrochloric acid in fibreglass and polyethylene."
+      "text": "Keep the acid and the liquors in the Plastic Fluid Tank, as real plants keep hydrochloric acid in fibreglass and polyethylene; but not bromine, which eats plastic."
     },
     {
       "type": "patchouli:crafting",

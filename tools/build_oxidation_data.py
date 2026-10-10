@@ -52,7 +52,7 @@ ITEMS = {
     "fundamentals:bronze_ingot": ("bronze", "ingot"), "fundamentals:bronze_nugget": ("bronze", "nugget"), "fundamentals:bronze_plate": ("bronze", "plate"),
     "fundamentals:silver_ingot": ("silver", "ingot"), "fundamentals:silver_nugget": ("silver", "nugget"), "fundamentals:silver_plate": ("silver", "plate"),
     "minecraft:iron_ingot": ("iron", "ingot"), "minecraft:iron_nugget": ("iron", "nugget"), "create:iron_sheet": ("iron", "plate"),
-    "tfmg:steel_ingot": ("steel", "ingot"), "tfmg:steel_nugget": ("steel", "nugget"),
+    "tfmg:steel_ingot": ("steel", "ingot"), "tfmg:steel_nugget": ("steel", "nugget"), "tfmg:heavy_plate": ("steel", "plate"),
     "fundamentals:calcium_ingot": ("calcium", "ingot"), "fundamentals:magnesium_ingot": ("magnesium", "ingot"),
     "tfmg:lithium_ingot": ("lithium", "ingot"), "tfmg:lithium_nugget": ("lithium", "nugget"),
     "fundamentals:didymium_ingot": ("didymium", "ingot"),

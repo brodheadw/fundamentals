@@ -29,13 +29,22 @@
       "item": "tfmg:nickel_ingot"
     },
     {
-      "tag": "c:ingots/aluminum"
+      "tag": "c:nuggets/aluminum"
+    },
+    {
+      "tag": "c:nuggets/aluminum"
+    },
+    {
+      "tag": "c:nuggets/aluminum"
+    },
+    {
+      "tag": "c:nuggets/aluminum"
     }
   ],
   "results": [
     {
       "id": "fundamentals:alumel_ingot",
-      "count": 10
+      "count": 9
     }
   ],
   "heat_requirement": "superheated"

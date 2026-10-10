@@ -29,6 +29,8 @@ public class HeatTests {
         BlockPos here = helper.absolutePos(new BlockPos(13, 1, 2));
         double ambient = Heat.at(helper.getLevel(), here);
         helper.assertTrue(ambient > -30 && ambient < 60, "a plausible climate, got " + ambient);
+        helper.assertTrue(Math.abs(Heat.climate(0.8) - 15) < 1e-9 && Math.abs(Heat.climate(0.95) - 26) < 1e-9 && Heat.climate(2) < 35,
+                "plains should be temperate, a jungle tropical, a desert hot but not past any real annual mean");
         helper.assertTrue(Math.abs(Heat.fahrenheit(100) - 212) < 1e-9 && Math.abs(Heat.fahrenheit(-40) + 40) < 1e-9, "Fahrenheit should convert");
         helper.setBlock(new BlockPos(2, 1, 2), Blocks.LAVA);
         helper.setBlock(new BlockPos(24, 1, 2), Blocks.BLUE_ICE);

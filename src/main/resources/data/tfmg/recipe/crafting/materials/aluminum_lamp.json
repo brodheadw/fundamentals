@@ -2,9 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "pattern": [
-    "P ",
-    "BF",
-    "S "
+    "PMP",
+    "BFB",
+    "SFS"
   ],
   "key": {
     "B": {
@@ -18,10 +18,13 @@
     },
     "F": {
       "item": "fundamentals:phosphor"
+    },
+    "M": {
+      "item": "fundamentals:mercury"
     }
   },
   "result": {
-    "count": 1,
+    "count": 2,
     "id": "tfmg:aluminum_lamp"
   }
 }
