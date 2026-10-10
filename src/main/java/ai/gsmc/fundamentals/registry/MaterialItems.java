@@ -15,7 +15,6 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 
-import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,9 +23,7 @@ import java.util.function.BiConsumer;
 
 public final class MaterialItems {
 
-    // Groups whose forms are items so far. The others wait on mapping forms to the items vanilla, Create and TFMG already have.
     private static final Set<String> GROUPS = Set.of(RareEarthMaterials.GROUP);
-    // Materials outside those groups whose forms are items anyway, because a chain here makes them.
     private static final Set<String> ITEM_IDS = Set.of("cobalt", "molybdenum", "rhenium", "superalloy", "molybdenum_steel", "chromel", "alumel", "alnico", "tungsten",
             "copper_matte", "blister_copper", "chromite", "chromium", "ferrochrome", "ferronickel", "stainless_steel", "ferromanganese", "manganese_steel",
             "nickel_matte", "converter_matte", "platinum_group_concentrate", "platinum", "palladium", "rhodium", "ruthenium", "iridium", "osmium",
@@ -41,7 +38,7 @@ public final class MaterialItems {
 
     public static ResourceLocation id(Material material, MaterialForm form) {
         boolean named = form == MaterialForm.CONCENTRATE && material.type() == MaterialType.CONCENTRATE;
-        return ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, named ? material.id() : material.id() + "_" + form.id());
+        return Fundamentals.id(named ? material.id() : material.id() + "_" + form.id());
     }
 
     public static List<Material> materials() {

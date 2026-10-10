@@ -4,6 +4,11 @@
     "tfmg:steel_vat",
     "tfmg:firebrick_lined_vat"
   ],
+  "machines": [
+    "tfmg:centrifuge"
+  ],
+  "min_size": 1,
+  "processing_time": 10,
   "ingredients": [
     {
       "type": "neoforge:single",
@@ -11,11 +16,6 @@
       "fluid": "tfmg:air"
     }
   ],
-  "machines": [
-    "tfmg:centrifuge"
-  ],
-  "min_size": 1,
-  "processing_time": 10,
   "results": [
     {
       "id": "fundamentals:argon",

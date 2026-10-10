@@ -7,7 +7,6 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-/** Create's fluid pipe in titanium: the same pipe, with its own block entity type and model. */
 public class TitaniumPipeBlock extends FluidPipeBlock {
 
     public TitaniumPipeBlock(Properties properties) {

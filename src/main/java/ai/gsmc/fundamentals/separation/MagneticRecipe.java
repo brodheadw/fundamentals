@@ -1,5 +1,6 @@
 package ai.gsmc.fundamentals.separation;
 
+import ai.gsmc.fundamentals.Fundamentals;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -9,7 +10,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -20,17 +20,11 @@ import net.minecraft.world.level.material.Fluid;
 
 import java.util.Optional;
 
-/**
- * The magnetic route for a cut whose two products differ strongly in paramagnetism: a line of at least {@code passes}
- * magnetomigration cells parts the liquor into the same light and heavy products, in the same {@code lightFraction}, as
- * the cut's battery does. {@code attracted} is whichever of the two the magnets draw. {@code curieShare} is how much of the
- * two products' difference in susceptibility follows Curie's law, which sets how it goes with the liquor's temperature.
- */
 public record MagneticRecipe(Fluid liquor, Fluid light, Fluid heavy, float lightFraction, Fluid attracted, int passes, float curieShare)
         implements Recipe<SeparationRecipe.Liquor> {
 
     public static final RecipeType<MagneticRecipe> TYPE = RecipeType.simple(
-            ResourceLocation.fromNamespaceAndPath("fundamentals", "magnetic"));
+            Fundamentals.id("magnetic"));
     public static final RecipeSerializer<MagneticRecipe> SERIALIZER = new Serializer();
 
     public int lightOf(int batch) {
@@ -45,12 +39,10 @@ public record MagneticRecipe(Fluid liquor, Fluid light, Fluid heavy, float light
         return attracted == light ? heavy : light;
     }
 
-    /** How much of {@code product}, the light or the heavy, a batch gives. */
     public int of(Fluid product, int batch) {
         return product == light ? lightOf(batch) : heavyOf(batch);
     }
 
-    /** The products' difference in susceptibility at {@code celsius}, as a fraction of what it is at 20 °C. */
     public double contrast(double celsius) {
         return Paramagnetism.relative(curieShare, celsius);
     }

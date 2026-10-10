@@ -32,7 +32,6 @@ import ai.gsmc.fundamentals.heat.Temperatures;
 import ai.gsmc.fundamentals.heat.Thermometers;
 import ai.gsmc.fundamentals.liquid.Liquids;
 import ai.gsmc.fundamentals.separation.Hazards;
-import ai.gsmc.fundamentals.uses.PlatinumMetals;
 import ai.gsmc.fundamentals.uses.Uses;
 import net.neoforged.neoforge.common.NeoForge;
 import ai.gsmc.fundamentals.separation.Separation;
@@ -61,9 +60,13 @@ public class Fundamentals {
     public static final String MOD_ID = "fundamentals";
     public static final Logger LOGGER = LoggerFactory.getLogger("Fundamentals");
 
-    private static final ResourceLocation MINERALS_TAB = ResourceLocation.fromNamespaceAndPath(MOD_ID, "minerals");
-    private static final ResourceLocation MATERIALS_TAB = ResourceLocation.fromNamespaceAndPath(MOD_ID, "materials");
-    private static final ResourceLocation DEPOSIT = ResourceLocation.fromNamespaceAndPath(MOD_ID, "deposit");
+    private static final ResourceLocation MINERALS_TAB = id("minerals");
+    private static final ResourceLocation MATERIALS_TAB = id("materials");
+    private static final ResourceLocation DEPOSIT = id("deposit");
+
+    public static ResourceLocation id(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
+    }
 
     public Fundamentals(IEventBus modBus) {
         LOGGER.info("Fundamentals initializing");
@@ -102,7 +105,7 @@ public class Fundamentals {
             event.register(NeoForgeRegistries.Keys.FLUID_TYPES, helper -> Separation.registerFluidTypes(helper::register));
             event.register(Registries.FLUID, helper -> Separation.registerFluids(helper::register));
             if (event.getRegistryKey().equals(Registries.FLUID)) {
-                event.getRegistry().addAlias(ResourceLocation.fromNamespaceAndPath(MOD_ID, "brine"), ResourceLocation.fromNamespaceAndPath(MOD_ID, "calcium_chloride_liquor"));
+                event.getRegistry().addAlias(id("brine"), id("calcium_chloride_liquor"));
             }
             event.register(Registries.ITEM, helper -> {
                 OreBlocks.registerItems(helper::register);
@@ -113,7 +116,6 @@ public class Fundamentals {
                 Separation.registerItems(helper::register);
                 Uses.registerItems(helper::register);
                 Magnets.registerItems(helper::register);
-                PlatinumMetals.registerItems(helper::register);
                 Plastics.registerItems(helper::register);
                 Titanium.registerItems(helper::register);
                 Thermometers.registerItems(helper::register);
@@ -127,9 +129,9 @@ public class Fundamentals {
             event.register(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, helper -> Oxidation.registerAttachments(helper::register));
             event.register(Registries.FEATURE, helper -> helper.register(DEPOSIT, DepositFeature.INSTANCE));
             event.register(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, helper -> {
-                helper.register(ResourceLocation.fromNamespaceAndPath(MOD_ID, "scarce_in_chests"), ScarceInChests.CODEC);
-                helper.register(ResourceLocation.fromNamespaceAndPath(MOD_ID, "swap_drop"), SwapDrop.CODEC);
-                helper.register(ResourceLocation.fromNamespaceAndPath(MOD_ID, "add_to_chests"), AddToChests.CODEC);
+                helper.register(id("scarce_in_chests"), ScarceInChests.CODEC);
+                helper.register(id("swap_drop"), SwapDrop.CODEC);
+                helper.register(id("add_to_chests"), AddToChests.CODEC);
             });
             event.register(Registries.CREATIVE_MODE_TAB, helper -> {
                 helper.register(MINERALS_TAB, mineralsTab());
@@ -185,7 +187,6 @@ public class Fundamentals {
                     Separation.items().forEach(output::accept);
                     Uses.items().forEach(output::accept);
                     Magnets.items().forEach(output::accept);
-                    PlatinumMetals.items().forEach(output::accept);
                     Plastics.items().forEach(output::accept);
                     Titanium.items().forEach(output::accept);
                     HandTools.items().forEach(output::accept);
@@ -200,7 +201,7 @@ public class Fundamentals {
 
     private static CreativeModeTab materialsTab() {
         return CreativeModeTab.builder().title(Component.translatable("itemGroup.fundamentals.materials"))
-                .icon(() -> new ItemStack(MaterialItems.items().get(ResourceLocation.fromNamespaceAndPath(MOD_ID, "neodymium_ingot"))))
+                .icon(() -> new ItemStack(MaterialItems.items().get(id("neodymium_ingot"))))
                 .displayItems((parameters, output) -> {
                     MaterialItems.items().values().forEach(output::accept);
                     Weathering.items().forEach(output::accept);

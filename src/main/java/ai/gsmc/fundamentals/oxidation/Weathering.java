@@ -18,14 +18,8 @@ import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-/**
- * The metal storage blocks that weather in place: bronze to a green patina and silver to black, both of which honeycomb waxes
- * (the lacquer on a bronze statue or a silver tray); and the rare earth metal blocks, which tarnish, corrode and crumble to
- * their oxide, and which no wax saves. Mirrored in tools/paint_oxidation.py, which paints the stages and writes their data.
- */
 public final class Weathering {
 
-    /** A weathering metal: the prefix of each stage's block, how fast it goes relative to copper, its response to dry and damp air. */
     public record Family(String metal, List<String> prefixes, double rate, double dry, double wet, boolean waxable, boolean crumbles) {}
 
     private static final List<String> PATINA = List.of("", "exposed_", "weathered_", "oxidized_");
@@ -56,7 +50,6 @@ public final class Weathering {
                 .strength(crumbled ? 2.0F : 5.0F, 6.0F).sound(crumbled ? SoundType.TUFF : SoundType.METAL);
     }
 
-    /** The unweathered block of a metal that weathers, for MaterialItems to register under the storage block's own id, or null. */
     @Nullable
     public static Block storageBlock(String metal) {
         Family family = FAMILIES.get(metal);
@@ -84,7 +77,7 @@ public final class Weathering {
                 Block block = age == null ? new Block(properties(false))
                         : new WeatheringMetalBlock(age, family, properties(family.crumbles() && age == WeatherState.OXIDIZED));
                 BLOCKS.add(block);
-                registry.accept(id(names.get(i)), block);
+                registry.accept(Fundamentals.id(names.get(i)), block);
             }
         }
     }
@@ -95,12 +88,9 @@ public final class Weathering {
             for (String name : names(family)) {
                 Item item = new BlockItem(BLOCKS.get(i++), new Item.Properties());
                 ITEMS.add(item);
-                registry.accept(id(name), item);
+                registry.accept(Fundamentals.id(name), item);
             }
         }
     }
 
-    private static ResourceLocation id(String path) {
-        return ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, path);
-    }
 }

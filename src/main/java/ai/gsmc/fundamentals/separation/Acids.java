@@ -5,7 +5,6 @@ import com.wildspell.fundamental.api.heat.Heat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -28,21 +27,13 @@ import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 
+import javax.annotation.Nullable;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/**
- * The acids exist in the world, not only in pipes: each has a flowing form, a block and a bucket, hurts whatever
- * stands in it, and eats the blocks it really attacks, listed in the block tag {@code fundamentals:dissolves/<acid>}
- * (hydrochloric acid takes carbonates, hydrofluoric glass and silica, nitric copper and iron, aqua regia gold as well; phosphoric acid only
- * stings). Bromine is no acid but lives with them: it burns, fumes and poisons like hydrofluoric, and eats copper, iron and aluminium, and
- * polyethylene too. A block being eaten cracks like one being mined, over five seconds, then fizzes away, and the acid
- * that ate it is spent.
- */
 public final class Acids {
 
-    /** Ticks between bites, and bites to eat a block through at 20 °C: reactions go twice as fast for every ten degrees. */
     private static final int BITE = 20;
     private static final int BITES = 5;
 
@@ -54,7 +45,6 @@ public final class Acids {
         public final String id;
         public final float damage;
         public final boolean poisons;
-        /** Hydrochloric, hydrofluoric and nitric acid, aqua regia and bromine fume in the open: standing near them bare hurts. */
         public final boolean fumes;
         public final TagKey<Block> dissolves;
         public final FlowingFluid source;
@@ -67,7 +57,7 @@ public final class Acids {
             this.damage = damage;
             this.poisons = poisons;
             this.fumes = fumes;
-            this.dissolves = BlockTags.create(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "dissolves/" + id));
+            this.dissolves = BlockTags.create(Fundamentals.id("dissolves/" + id));
             FlowingFluid[] pair = new FlowingFluid[2];
             Block[] block = new Block[1];
             Item[] bucket = new Item[1];
@@ -84,7 +74,6 @@ public final class Acids {
 
     private Acids() {}
 
-    /** Every acid in the reagent table, built once; the registries take the pieces from here. */
     public static Map<String, Acid> all() {
         if (all == null) {
             all = new LinkedHashMap<>();
@@ -99,12 +88,12 @@ public final class Acids {
         return all;
     }
 
-    public static boolean isAcid(Fluid fluid) {
-        return all().values().stream().anyMatch(a -> a.source == fluid || a.flowing == fluid);
+    @Nullable
+    public static Acid of(Fluid fluid) {
+        return all().values().stream().filter(a -> a.source == fluid || a.flowing == fluid).findFirst().orElse(null);
     }
 
     public static class AcidBlock extends LiquidBlock {
-        /** How far each block being eaten has got; server-side and transient, which is fine: a reload just starts the bite over. */
         private static final Map<BlockPos, Integer> EATEN = new HashMap<>();
         private final Acid acid;
 
@@ -149,7 +138,6 @@ public final class Acids {
                     level.destroyBlock(at, false);
                     level.sendParticles(ParticleTypes.CLOUD, at.getX() + 0.5, at.getY() + 0.6, at.getZ() + 0.5, 10, 0.3, 0.2, 0.3, 0.02);
                     level.playSound(null, at, SoundEvents.LAVA_EXTINGUISH, SoundSource.BLOCKS, 0.6F, 1.2F);
-                    // the acid that did the eating is used up
                     level.setBlock(pos, Blocks.AIR.defaultBlockState(), Block.UPDATE_ALL);
                     return;
                 }

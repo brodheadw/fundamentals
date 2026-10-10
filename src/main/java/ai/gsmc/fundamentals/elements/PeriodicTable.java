@@ -9,22 +9,16 @@ import net.minecraft.world.item.component.CustomModelData;
 
 import java.util.function.BiConsumer;
 
-/**
- * The periodic table advancement tab: an advancement per element, each unlocked by holding anything in its tag
- * fundamentals:elements/&lt;symbol&gt;. Vanilla lays a tab out as a tree; this one is pinned to the table instead, each
- * element at its group and period, read off the atomic number its icon carries as custom model data. The advancements,
- * tags and tile models are written by tools/build_advancements.py, the tiles by tools/paint_elements.py.
- */
 public final class PeriodicTable {
 
-    public static final ResourceLocation ROOT = ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "elements/root");
+    public static final ResourceLocation ROOT = Fundamentals.id("elements/root");
 
     private static final int[] PERIOD_STARTS = {1, 3, 11, 19, 37, 55, 87, 119};
 
     private PeriodicTable() {}
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
-        registry.accept(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "element"), new Item(new Item.Properties().stacksTo(1)));
+        registry.accept(Fundamentals.id("element"), new Item(new Item.Properties().stacksTo(1)));
     }
 
     public static boolean isTable(AdvancementNode node) {
@@ -47,7 +41,6 @@ public final class PeriodicTable {
         }
     }
 
-    /** Column (group - 1) and row (period - 1) of element z; the f-block sits in two rows below a half-row gap. Matches cell() in tools/paint_elements.py. */
     public static float[] cell(int z) {
         int period = 0;
         while (z >= PERIOD_STARTS[period + 1]) {

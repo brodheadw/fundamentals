@@ -1,33 +1,17 @@
 #!/usr/bin/env python3
-"""Paints the mixer-settler casing, the plastic fluid tank, the one fluid texture every reagent is tinted from, and the
-plant's salts. Edit and re-run; don't hand-edit the PNGs.
-
-The casing is a welded polypropylene tank, as the real ones are: Create's fluid-tank panel and connected-texture
-sheet (MIT) recoloured by luminance onto a dark flat PP grey, so the frame ribs land on the exterior edges of a stage
-the way Create's connected textures place them. The plastic tank is drawn fresh on Create's tank sheet layout: a seamless
-moulded polyethylene tank, milky and ribbed, with a domed lid and a screw-cap manway.
-
-    python3 tools/paint_separation.py
-"""
 import random
 import zipfile
 from pathlib import Path
 
 from PIL import Image
+from common import TEXTURES
 
-TEXTURES = Path(__file__).resolve().parent.parent / "src/main/resources/assets/fundamentals/textures"
 CREATE_JAR = next(Path.home().glob(".gradle/caches/modules-2/files-2.1/maven.modrinth/create/*/*/create-*.jar"))
 
-# Dark steel, from the shadow in a seam to the glint on a rivet.
-# Welded polypropylene sheet, as the real tanks are: dark, flat, a little blue, the frame ribs a shade lighter.
 STEEL = [(30, 33, 38), (40, 44, 50), (48, 52, 59), (56, 61, 68), (66, 72, 80), (84, 91, 100), (104, 112, 122), (128, 136, 146)]
-# The Factory Must Grow's plastic, from its plastic block and pipes: a cool white grey.
 PLASTIC = [(95, 97, 115), (108, 114, 127), (136, 142, 155), (152, 156, 168), (167, 169, 180), (180, 182, 193), (196, 201, 207), (216, 221, 225), (234, 236, 238)]
 COPPER = [(120, 62, 44), (172, 96, 66), (212, 136, 98), (244, 190, 156)]
-# Rotomoulded natural HDPE, the darkest and lightest of its mottling: a warm off-white, light enough that a dye tints it cleanly.
 HDPE = ((210, 207, 198), (232, 230, 223))
-# How much of the light a natural plastic surface's own alpha lets through that it really does: the plastic is a little thicker than
-# its texels say, so what is behind it shows as shape and shadow, not detail.
 SEE_THROUGH = 0.8
 
 
@@ -38,8 +22,6 @@ def create_texture(name):
 
 
 def steel(img, ramp=STEEL, floor=0.25, span=0.6):
-    """Recolour by luminance, from floor over span, onto the steel ramp or another; transparent pixels (the window's glass) stay
-    as they are."""
     out = Image.new("RGBA", img.size)
     px = img.load()
     for y in range(img.height):
@@ -58,10 +40,6 @@ def steel(img, ramp=STEEL, floor=0.25, span=0.6):
 
 
 def moulded(img, palette=None, boxes=()):
-    """Natural plastic over another texture's shapes: the given tones (every opaque one, by default) redrawn as the plastic tank's
-    polyethylene, each one's lightness against its own region's kept as the moulding's light and shade, the shaded seams and
-    edges thicker and so more opaque than the faces. A region is one of the boxes (x0, y0, x1, y1) or else the whole texture;
-    black stays black, the inside of a bore."""
     out = img.copy()
     px = out.load()
 
@@ -94,8 +72,6 @@ def moulded(img, palette=None, boxes=()):
 
 
 def liquor(seed, flow=False):
-    """A still liquid: pale ripples on white, tinted per fluid by the game. The flow texture is the same
-    at twice the height so pipes can scroll it."""
     rng = random.Random(seed)
     h = 32 if flow else 16
     img = Image.new("RGBA", (16, h))
@@ -108,7 +84,6 @@ def liquor(seed, flow=False):
 
 
 def ingot(pal):
-    """The calcium ingot, drawn with the materials painter's ingot shape in a dull grey."""
     from paint_materials import SHAPES, ramp
     tones = ramp(pal)
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
@@ -120,7 +95,6 @@ def ingot(pal):
 
 
 def nozzle():
-    """A copper port flange: a ring with a dark bore, on a transparent ground."""
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
     for y in range(16):
         for x in range(16):
@@ -135,8 +109,6 @@ def nozzle():
 
 
 def hdpe(x, y, seed, lift=0, alpha=196):
-    """One texel of rotomoulded natural polyethylene: milk-white, faintly mottled where the powder fused unevenly, and thin
-    enough that what the tank holds shows through."""
     rng = random.Random(f"{seed}:{x // 2},{y // 3}")
     fine = random.Random(f"{seed}:{x},{y}").random()
     t = 0.2 + 0.35 * rng.random() + 0.45 * fine
@@ -149,8 +121,6 @@ def solid(alpha):
 
 
 def wall_texel(x, y, seed):
-    """The tank wall away from its edges: a moulded stiffening rib every half block, its upper face catching the light and its
-    underside in shadow, thicker and so more opaque than the wall between."""
     row = y % 8
     if row == 6:
         return hdpe(x, y, seed, 12, 232)
@@ -162,8 +132,6 @@ def wall_texel(x, y, seed):
 
 
 def tank_wall(left, right, top, bottom, seed):
-    """One block of tank wall, with the rounded vertical corners and the shoulder and foot only where the tank ends; the ribs
-    fall on the same rows in every block, so a tall tank's are evenly spaced."""
     img = Image.new("RGBA", (16, 16))
     for y in range(16):
         for x in range(16):
@@ -186,8 +154,6 @@ def tank_wall(left, right, top, bottom, seed):
 
 
 def tank_lid(left, right, top, bottom, seed, cap=None, vent=None):
-    """One block of the moulded lid: thicker than the wall and nearly opaque, rolling down to the shoulder at the tank's
-    edges, with a round screw-cap manway, a raised ring and a darker ribbed cap, where one is given."""
     img = Image.new("RGBA", (16, 16))
     for y in range(16):
         for x in range(16):
@@ -220,8 +186,6 @@ def tank_lid(left, right, top, bottom, seed, cap=None, vent=None):
 
 
 def ct_sheet(tile):
-    """Create's rectangle connected-texture sheet: tile column 0 alone, 1 the left end, 2 between, 3 the right end; row 0 the
-    top end, 1 between, 2 the bottom end, 3 alone."""
     sheet = Image.new("RGBA", (64, 64))
     for cy in range(4):
         for cx in range(4):
@@ -230,11 +194,6 @@ def ct_sheet(tile):
 
 
 def plastic_tank_sheets():
-    """The plastic fluid tank, a seamless rotomoulded polyethylene tank on the layout of Create's fluid-tank sheets so its
-    models and connected textures place it: milky wall with moulded ribs, rounded at the tank's corners; a domed lid with a
-    screw-cap manway; no window, because the milky wall shows the liquid's level through it. The window sheets are the wall
-    again, row for row where Create's window models put them: the window of a top or bottom block reads its left half four
-    rows off the face, a middle block its right half on the face's own rows, a single block four rows off."""
     def lid(left, right, top, bottom, seed):
         alone = left and right and top and bottom
         corner = left and top and not right and not bottom
@@ -267,9 +226,6 @@ def plastic_tank_sheets():
 
 
 def cell_sheets():
-    """The magnetomigration cell: the plastic tank's panel on every face; an NdFeB block, the bare sintered magnet's dark grey,
-    set in the right wall; a window along the channel on top, the liquor clouding toward the magnet side where the
-    paramagnetic ions gather; a port in each end where the stream runs on to the next cell."""
     from paint_materials import METAL
     ndfeb = METAL["neodymium_iron_boron"]
     body = moulded(create_texture("fluid_tank"))
@@ -305,7 +261,6 @@ def cell_sheets():
 
 
 def heap(seed, highlight, body, shadow):
-    """A small heap of crystals, as salt and oxalic acid both are."""
     rng = random.Random(seed)
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
     profile = [0, 0, 0, 0, 0, 1, 2, 3, 4, 4, 3, 2, 1, 0, 0, 0]
@@ -321,7 +276,6 @@ def heap(seed, highlight, body, shadow):
 
 
 def sticks(highlight, body, shadow):
-    """Two cast sticks lying across each other, as white phosphorus is sold (and kept under water)."""
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
     for x0, y0, length in ((1, 11, 11), (5, 14, 10)):
         for i in range(length):
@@ -349,13 +303,9 @@ def main():
     liquor("flow", flow=True).save(TEXTURES / "block/fluid/liquor_flow.png")
     heap("salt", (255, 255, 255), (232, 234, 236), (176, 180, 186)).save(TEXTURES / "item/salt.png")
     heap("oxalic", (255, 255, 252), (238, 236, 224), (184, 180, 160)).save(TEXTURES / "item/oxalic_acid.png")
-    # roasting oxidises the cerium to CeO2, which turns the concentrate buff; the sulfates are white, the light one pinked by
-    # its neodymium; calcium chloride is white
     heap("roasted_bastnasite", (240, 222, 178), (210, 184, 132), (150, 124, 82)).save(TEXTURES / "item/roasted_bastnasite.png")
     heap("light_sulfate", (250, 242, 242), (226, 214, 216), (170, 158, 162)).save(TEXTURES / "item/light_rare_earth_sulfate.png")
     heap("heavy_sulfate", (250, 248, 238), (228, 224, 208), (172, 168, 150)).save(TEXTURES / "item/heavy_rare_earth_sulfate.png")
-    # the carbonates are white, the light one pinked by its neodymium as the sulfate is; the ceria bastnäsite's leach leaves is
-    # the pale yellow of CeO2, dulled by the lanthanum fluoride with it; europium(II) sulfate is white
     heap("light_carbonate", (252, 246, 246), (232, 222, 224), (178, 166, 170)).save(TEXTURES / "item/light_rare_earth_carbonate.png")
     heap("heavy_carbonate", (254, 252, 244), (234, 230, 216), (180, 176, 160)).save(TEXTURES / "item/heavy_rare_earth_carbonate.png")
     heap("cerium_concentrate", (246, 236, 196), (222, 204, 150), (164, 146, 98)).save(TEXTURES / "item/cerium_concentrate.png")

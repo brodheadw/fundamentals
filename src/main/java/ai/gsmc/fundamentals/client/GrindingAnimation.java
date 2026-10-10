@@ -10,7 +10,6 @@ import net.minecraft.client.renderer.entity.ItemRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.HumanoidArm;
@@ -24,9 +23,9 @@ import net.neoforged.neoforge.common.NeoForge;
 public final class GrindingAnimation {
 
     private static final ModelResourceLocation BOWL = ModelResourceLocation.standalone(
-            ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "item/mortar_bowl"));
+            Fundamentals.id("item/mortar_bowl"));
     private static final ModelResourceLocation PESTLE = ModelResourceLocation.standalone(
-            ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "item/pestle"));
+            Fundamentals.id("item/pestle"));
 
     private static final float FEED_TICKS = 8;
 
@@ -80,7 +79,6 @@ public final class GrindingAnimation {
             float x = Mth.lerp(arrive, side * 0.56F, bowlX + Mth.cos(swirl) * 0.05F);
             float y = Mth.lerp(arrive, -0.52F, bowlY + Mth.sin(swirl) * 0.03F - Mth.abs(Mth.sin(swirl * 0.5F)) * 0.02F);
             pose.translate(x, y, -0.70F);
-            // A flat sprite has to keep facing the camera, so the pestle only tilts in the view plane.
             pose.mulPose(Axis.ZP.rotationDegrees(side * (-28 + Mth.sin(swirl) * 6) * arrive));
             draw(items, player.getUseItem(), context, left, pose, event, PESTLE);
         }

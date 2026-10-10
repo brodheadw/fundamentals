@@ -23,12 +23,6 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import javax.annotation.Nullable;
 
-/**
- * One cell of a magnetomigration line. The head cell holds the feed, piped into its back; the tail holds the two streams
- * the line parts it into, drained from its sides: the right, where the magnet is, gives what the magnets draw, the left
- * the rest. The head runs the line, and reads its temperature every {@link #SAMPLE} ticks: the colder the liquor, the more
- * magnetic its ions and the sooner a batch is parted.
- */
 public class MagnetomigrationCellBlockEntity extends BlockEntity implements IHaveGoggleInformation {
 
     public static final int CAPACITY = 1000;
@@ -63,7 +57,6 @@ public class MagnetomigrationCellBlockEntity extends BlockEntity implements IHav
         return getBlockState().getValue(MagnetomigrationCellBlock.FACING);
     }
 
-    /** The same-facing cell ahead of this one, or behind it. */
     @Nullable
     MagnetomigrationCellBlockEntity next(boolean ahead) {
         BlockPos at = worldPosition.relative(facing(), ahead ? 1 : -1);
@@ -74,7 +67,6 @@ public class MagnetomigrationCellBlockEntity extends BlockEntity implements IHav
         return MagnetomigrationLine.of(this);
     }
 
-    /** The feed into the back of the head cell, and the two streams out of the tail's sides: magnet side right, the rest left. */
     @Nullable
     public IFluidHandler handler(@Nullable Direction side) {
         if (side == null) {
@@ -94,7 +86,6 @@ public class MagnetomigrationCellBlockEntity extends BlockEntity implements IHav
         return null;
     }
 
-    /** The liquor's temperature, °C, as the head last read it; a cell not yet read is taken at 20. */
     public double celsius() {
         return Double.isNaN(celsius) ? Paramagnetism.ROOM_KELVIN - 273.15 : celsius;
     }
@@ -130,7 +121,7 @@ public class MagnetomigrationCellBlockEntity extends BlockEntity implements IHav
         MagnetomigrationLine line = line();
         MagnetomigrationCellBlockEntity head = line.head(), tail = line.tail();
         tooltip.add(indent(Component.translatable("goggles.fundamentals.magnetomigration_cell.line", line.size(), BATCH)));
-        Optional<MagnetomigrationLine.Stall> stall = line.stall();
+        Optional<Stall> stall = line.stall();
         Optional<MagneticRecipe> cut = MagneticRecipe.forLiquor(level, head.feed.getFluid().getFluid());
         if (stall.isEmpty()) {
             MagneticRecipe c = cut.orElseThrow();

@@ -6,10 +6,6 @@ import net.neoforged.neoforge.fluids.capability.templates.FluidTank;
 
 import javax.annotation.Nullable;
 
-/**
- * A stage's tank seen through a pipe. The top port takes only organics, the end ports only liquors and
- * acids, and the side ports ({@code organic == null}) only give.
- */
 record Port(FluidTank tank, @Nullable Boolean organic) implements IFluidHandler {
 
     private boolean accepts(FluidStack stack) {
@@ -17,7 +13,6 @@ record Port(FluidTank tank, @Nullable Boolean organic) implements IFluidHandler 
             return false;
         }
         Reagents.Kind kind = Separation.kind(stack.getFluid());
-        // the ends take a crude liquor too: the plant will run on it, and foul
         return organic ? kind == Reagents.Kind.ORGANIC : kind == Reagents.Kind.LIQUOR || kind == Reagents.Kind.ACID || kind == Reagents.Kind.CRUDE;
     }
 

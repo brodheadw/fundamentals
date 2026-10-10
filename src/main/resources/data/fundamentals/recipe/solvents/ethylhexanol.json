@@ -4,6 +4,11 @@
     "tfmg:steel_vat",
     "tfmg:firebrick_lined_vat"
   ],
+  "machines": [
+    "tfmg:mixing"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
   "ingredients": [
     {
       "item": "fundamentals:cobalt_ingot"
@@ -24,11 +29,6 @@
       "fluid": "tfmg:hydrogen"
     }
   ],
-  "machines": [
-    "tfmg:mixing"
-  ],
-  "min_size": 1,
-  "processing_time": 100,
   "results": [
     {
       "id": "fundamentals:ethylhexanol",

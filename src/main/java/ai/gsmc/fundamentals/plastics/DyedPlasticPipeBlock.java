@@ -15,8 +15,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 
-/** The Factory Must Grow's plastic pipe with a dye in it: one block, its colour a property. It is made by dyeing a placed
- * plastic pipe and comes back off as a plain one. */
 public class DyedPlasticPipeBlock extends TFMGPipeBlock {
 
     public static final EnumProperty<DyeColor> COLOR = EnumProperty.create("color", DyeColor.class);

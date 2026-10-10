@@ -33,7 +33,6 @@ public class PowerTests {
                 () -> "a panel put on a rack should make a solar panel facing the way the rack did");
         helper.assertTrue(player.getMainHandItem().isEmpty(), "mounting should use up the panel");
         SolarPanelBlockEntity panel = helper.getBlockEntity(POS);
-        // the sky light of a freshly placed test structure settles late, later still when many tests load at once: wait for it
         helper.startSequence()
                 .thenWaitUntil(() -> helper.assertTrue(panel.voltageGeneration() == SolarPanelBlockEntity.VOLTS && panel.powerGeneration() > 0,
                         "at noon under open sky the panel should generate, got " + panel.voltageGeneration() + " V, " + panel.powerGeneration() + " W"))

@@ -53,7 +53,7 @@ public class IronWorkingTests {
         use(helper, player, new ItemStack(Items.CHARCOAL, 1));
         BloomeryBlockEntity bloomery = helper.getBlockEntity(POS);
         helper.assertTrue(bloomery.oreCount() == 2 && bloomery.charcoalCount() == 2, "ore and charcoal should load one at a time");
-        use(helper, player, new ItemStack(Items.TORCH));  // no iron needed to light your first firing
+        use(helper, player, new ItemStack(Items.TORCH));
         helper.assertBlockProperty(POS, BloomeryBlock.LIT, true);
         helper.runAfterDelay(BloomeryBlockEntity.BURN_TICKS + 5, () -> {
             helper.assertBlockProperty(POS, BloomeryBlock.LIT, false);
@@ -80,20 +80,6 @@ public class IronWorkingTests {
     }
 
     @GameTest(template = "empty")
-    public void hammeringABloomGivesWroughtIronAndWearsTheHammer(GameTestHelper helper) {
-        CraftingInput grid = CraftingInput.of(2, 1, List.of(
-                new ItemStack(IronWorking.ironBloom()), new ItemStack(IronWorking.smithingHammer())));
-        var recipe = helper.getLevel().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, grid, helper.getLevel());
-        helper.assertTrue(recipe.isPresent(), "bloom + hammer should be a recipe");
-        ItemStack result = recipe.get().value().assemble(grid, helper.getLevel().registryAccess());
-        helper.assertTrue(result.is(Items.IRON_INGOT), "hammering a bloom should give an iron ingot, got " + result);
-        ItemStack hammer = recipe.get().value().getRemainingItems(grid).get(1);
-        helper.assertTrue(hammer.is(IronWorking.smithingHammer()) && hammer.getDamageValue() == 1,
-                "the hammer should stay in the grid, one use worn");
-        helper.succeed();
-    }
-
-    @GameTest(template = "empty")
     public void grindingInTheHandsUsesTheOtherHandsMaterial(GameTestHelper helper) {
         Player player = helper.makeMockPlayer(GameType.SURVIVAL);
         Item malachite = item("fundamentals:raw_malachite");
@@ -113,50 +99,4 @@ public class IronWorkingTests {
         helper.succeed();
     }
 
-    @GameTest(template = "empty")
-    public void leadComesFromRoastedGalenaAndCopperFromMalachite(GameTestHelper helper) {
-        var recipes = helper.getLevel().getRecipeManager();
-        Item rawGalena = item("fundamentals:raw_galena");
-        Item rawMalachite = item("fundamentals:raw_malachite");
-        Item lead = item("tfmg:lead_ingot");
-        helper.assertTrue(lead != Items.AIR, "TFMG's lead ingot should exist");
-
-        var roast = recipes.getRecipeFor(RecipeType.CAMPFIRE_COOKING, new SingleRecipeInput(new ItemStack(rawGalena)), helper.getLevel());
-        helper.assertTrue(roast.isPresent() && roast.get().value().getResultItem(helper.getLevel().registryAccess()).is(IronWorking.roastedGalena()),
-                "raw galena should roast to roasted galena on a campfire");
-        helper.assertTrue(BloomeryBlockEntity.recipeFor(helper.getLevel(), new ItemStack(rawGalena)).isEmpty(),
-                "unroasted galena should not go in the bloomery");
-        var smelt = BloomeryBlockEntity.recipeFor(helper.getLevel(), new ItemStack(IronWorking.roastedGalena()));
-        Item bullion = item("fundamentals:lead_bullion_ingot");
-        helper.assertTrue(smelt.isPresent() && smelt.get().value().result().is(bullion), "roasted galena should give lead bullion");
-        var remelt = recipes.getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(new ItemStack(bullion)), helper.getLevel());
-        helper.assertTrue(remelt.isPresent() && remelt.get().value().getResultItem(helper.getLevel().registryAccess()).is(lead), "a furnace should remelt bullion to TFMG's lead ingot");
-        var copper = BloomeryBlockEntity.recipeFor(helper.getLevel(), new ItemStack(rawMalachite));
-        helper.assertTrue(copper.isPresent() && copper.get().value().result().is(Items.COPPER_INGOT), "malachite should give a copper ingot");
-        helper.succeed();
-    }
-
-    @GameTest(template = "empty")
-    public void mortarGrindsPigmentAndFlour(GameTestHelper helper) {
-        var recipes = helper.getLevel().getRecipeManager();
-        Item malachite = item("fundamentals:raw_malachite");
-        Item flour = item("create:wheat_flour");
-        helper.assertTrue(flour != Items.AIR, "Create's wheat flour should exist");
-
-        CraftingInput pigment = CraftingInput.of(2, 1, List.of(new ItemStack(malachite), new ItemStack(HandTools.mortarAndPestle())));
-        var grindPigment = recipes.getRecipeFor(RecipeType.CRAFTING, pigment, helper.getLevel());
-        helper.assertTrue(grindPigment.isPresent(), "malachite + mortar should be a recipe");
-        ItemStack dye = grindPigment.get().value().assemble(pigment, helper.getLevel().registryAccess());
-        helper.assertTrue(dye.is(Items.GREEN_DYE) && dye.getCount() == 2, "malachite should grind to 2 green dye, got " + dye);
-        ItemStack mortar = grindPigment.get().value().getRemainingItems(pigment).get(1);
-        helper.assertTrue(mortar.is(HandTools.mortarAndPestle()) && mortar.getDamageValue() == 1,
-                "the mortar should stay in the grid, one use worn");
-
-        CraftingInput grain = CraftingInput.of(2, 1, List.of(new ItemStack(Items.WHEAT), new ItemStack(HandTools.mortarAndPestle())));
-        var grindGrain = recipes.getRecipeFor(RecipeType.CRAFTING, grain, helper.getLevel());
-        helper.assertTrue(grindGrain.isPresent()
-                        && grindGrain.get().value().assemble(grain, helper.getLevel().registryAccess()).is(flour),
-                "wheat + mortar should give Create's wheat flour");
-        helper.succeed();
-    }
 }

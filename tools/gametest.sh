@@ -1,7 +1,5 @@
 #!/bin/zsh
 # Runs every gametest headless and prints the failures. usage: tools/gametest.sh [repo] [port] [log]
-# A dedicated server comes up on a fifo, `test runall` runs the lot, and because passes are only announced to
-# players, `test runfailed` is asked afterwards: "No tests found" means everything passed.
 set -u
 W=${1:-$(cd "$(dirname "$0")/.." && pwd)}; PORT=${2:-25599}; OUT=${3:-$W/run/gametest.log}
 export JAVA_HOME=${JAVA_HOME:-$HOME/.local/jdk/jdk-21.0.12.1+1/Contents/Home}
@@ -15,7 +13,7 @@ cd "$W"
 exec 3> $FIFO
 for i in {1..300}; do grep -q 'Done (' "$OUT" && break; grep -q 'GRADLE_EXIT' "$OUT" && break; sleep 2; done
 echo "test runall" >&3
-sleep 200  # the batches run one after another, and the bloomery batch alone fires for 1200 ticks
+sleep 200
 echo "test runfailed" >&3
 sleep 4
 echo "stop" >&3

@@ -6,6 +6,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.Block;
@@ -18,19 +19,22 @@ import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 import net.neoforged.neoforge.fluids.FluidType;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.BiConsumer;
 
-/** Solvent extraction: the reagent fluids and the mixer-settler they run through; and the magnetomigration cell, the magnetic route for the cuts that have one. */
 public final class Separation {
 
     private static final Map<String, FluidType> FLUID_TYPES = new LinkedHashMap<>();
     private static final Map<String, Fluid> FLUIDS = new LinkedHashMap<>();
     private static final Map<Fluid, Reagents.Kind> KINDS = new LinkedHashMap<>();
     private static final Map<Fluid, Integer> TINTS = new LinkedHashMap<>();
+    private static final List<String> ITEM_IDS = List.of("salt", "calcium_ingot", "oxalic_acid", "roasted_bastnasite", "light_rare_earth_sulfate", "heavy_rare_earth_sulfate",
+            "light_rare_earth_carbonate", "heavy_rare_earth_carbonate", "cerium_concentrate", "europium_sulfate", "calcium_chloride", "white_phosphorus");
+    private static final List<Item> ITEMS = new ArrayList<>();
     private static Block mixerSettler;
     private static BlockEntityType<MixerSettlerBlockEntity> mixerSettlerEntity;
     private static Item mixerSettlerItem;
@@ -40,18 +44,6 @@ public final class Separation {
     private static Block plasticTank;
     private static BlockEntityType<PlasticTankBlockEntity> plasticTankEntity;
     private static Item plasticTankItem;
-    private static Item salt;
-    private static Item calciumIngot;
-    private static Item oxalicAcid;
-    private static Item roastedBastnasite;
-    private static Item lightRareEarthSulfate;
-    private static Item heavyRareEarthSulfate;
-    private static Item lightRareEarthCarbonate;
-    private static Item heavyRareEarthCarbonate;
-    private static Item ceriumConcentrate;
-    private static Item europiumSulfate;
-    private static Item calciumChloride;
-    private static Item whitePhosphorus;
     private static Item seawaterBucket;
 
     private Separation() {}
@@ -73,13 +65,11 @@ public final class Separation {
         return fluid;
     }
 
-    /** What a fluid is to the separation line, or null for anything that is not a reagent. */
     @Nullable
     public static Reagents.Kind kind(Fluid fluid) {
         return KINDS.get(reagent(fluid));
     }
 
-    /** The reagent of ours a fluid stands for: itself, or the one whose tag {@code fundamentals:<reagent>} holds it, as Chemica's hydrochloric acid stands for ours. */
     @SuppressWarnings("deprecation")
     public static Fluid reagent(Fluid fluid) {
         if (KINDS.containsKey(fluid)) {
@@ -89,27 +79,26 @@ public final class Separation {
                 .map(id -> FLUIDS.get(id.getPath())).filter(Objects::nonNull).findFirst().orElse(fluid);
     }
 
-    /** The clean liquor a crude one clarifies to, or the fluid itself if it is not crude. */
     public static Fluid clarified(Fluid fluid) {
-        String id = FLUIDS.entrySet().stream().filter(e -> e.getValue() == fluid).map(Map.Entry::getKey).findFirst().orElse("");
+        String id = idOf(fluid);
         return id.startsWith("crude_") ? FLUIDS.getOrDefault(id.substring(6), fluid) : fluid;
     }
 
-    /** The fouled form of an organic. */
     public static Fluid fouled(Fluid organic) {
-        String id = FLUIDS.entrySet().stream().filter(e -> e.getValue() == organic).map(Map.Entry::getKey).findFirst().orElse("");
-        return FLUIDS.getOrDefault("fouled_" + id, organic);
+        return FLUIDS.getOrDefault("fouled_" + idOf(organic), organic);
     }
 
-    /** The reagent's colour as the table gives it, or Create's white for anything else. */
+    private static String idOf(Fluid fluid) {
+        return FLUIDS.entrySet().stream().filter(e -> e.getValue() == fluid).map(Map.Entry::getKey).findFirst().orElse("");
+    }
+
     public static int tint(Fluid fluid) {
         return TINTS.getOrDefault(fluid, 0xFFFFFF);
     }
 
     public static List<Item> items() {
-        List<Item> items = new java.util.ArrayList<>(List.of(mixerSettlerItem, magnetomigrationCellItem, plasticTankItem, salt, oxalicAcid, roastedBastnasite,
-                lightRareEarthSulfate, heavyRareEarthSulfate, lightRareEarthCarbonate, heavyRareEarthCarbonate, ceriumConcentrate, europiumSulfate,
-                calciumChloride, calciumIngot, whitePhosphorus));
+        List<Item> items = new ArrayList<>(List.of(mixerSettlerItem, magnetomigrationCellItem, plasticTankItem));
+        items.addAll(ITEMS);
         Acids.all().values().forEach(acid -> items.add(acid.bucket));
         items.add(seawaterBucket);
         return items;
@@ -118,31 +107,28 @@ public final class Separation {
     public static void registerFluidTypes(BiConsumer<ResourceLocation, FluidType> registry) {
         for (Reagents.Reagent reagent : Reagents.ALL) {
             String description = "fluid_type." + Fundamentals.MOD_ID + "." + reagent.id();
-            // The organics float on the aqueous phase, which is the whole trick of the mixer-settler.
             FluidType type = reagent.kind() == Reagents.Kind.WATER ? Seawater.type(description) : new FluidType(FluidType.Properties.create()
                     .descriptionId(description)
                     .density(reagent.kind() == Reagents.Kind.ORGANIC ? 800 : 1100)
                     .viscosity(reagent.kind() == Reagents.Kind.ORGANIC ? 1500 : 1000));
             FLUID_TYPES.put(reagent.id(), type);
-            registry.accept(id(reagent.id()), type);
+            registry.accept(Fundamentals.id(reagent.id()), type);
         }
     }
 
     public static void registerFluids(BiConsumer<ResourceLocation, Fluid> registry) {
         for (Reagents.Reagent reagent : Reagents.ALL) {
             if (reagent.kind() == Reagents.Kind.ACID) {
-                // the acids live in the world too: source, flowing form, block and bucket, built in Acids
                 Acids.Acid acid = Acids.all().get(reagent.id());
                 FLUIDS.put(reagent.id(), acid.source);
                 for (Fluid fluid : new Fluid[] {acid.source, acid.flowing}) {
                     KINDS.put(fluid, reagent.kind());
                     TINTS.put(fluid, reagent.tint());
                 }
-                registry.accept(id(reagent.id()), acid.source);
-                registry.accept(id(reagent.id() + "_flowing"), acid.flowing);
+                registry.accept(Fundamentals.id(reagent.id()), acid.source);
+                registry.accept(Fundamentals.id(reagent.id() + "_flowing"), acid.flowing);
                 continue;
             }
-            // Never placed in the world, so the source stands in for its own flowing form.
             Fluid[] self = new Fluid[1];
             BaseFlowingFluid.Properties properties = new BaseFlowingFluid.Properties(() -> FLUID_TYPES.get(reagent.id()), () -> self[0], () -> self[0]);
             if (reagent.kind() == Reagents.Kind.WATER) {
@@ -152,69 +138,59 @@ public final class Separation {
             FLUIDS.put(reagent.id(), self[0]);
             KINDS.put(self[0], reagent.kind());
             TINTS.put(self[0], reagent.tint());
-            registry.accept(id(reagent.id()), self[0]);
+            registry.accept(Fundamentals.id(reagent.id()), self[0]);
         }
     }
 
     public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
         mixerSettler = new MixerSettlerBlock(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_GRAY)
                 .requiresCorrectToolForDrops().strength(3.0F, 6.0F).sound(SoundType.COPPER).noOcclusion());
-        registry.accept(id("mixer_settler"), mixerSettler);
+        registry.accept(Fundamentals.id("mixer_settler"), mixerSettler);
         magnetomigrationCell = new MagnetomigrationCellBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SNOW)
                 .requiresCorrectToolForDrops().strength(1.5F, 6.0F).sound(SoundType.STONE).noOcclusion());
-        registry.accept(id("magnetomigration_cell"), magnetomigrationCell);
+        registry.accept(Fundamentals.id("magnetomigration_cell"), magnetomigrationCell);
         plasticTank = new PlasticTankBlock(BlockBehaviour.Properties.of().mapColor(MapColor.SNOW)
                 .requiresCorrectToolForDrops().strength(0.8F).sound(SoundType.STONE).noOcclusion()
                 .isRedstoneConductor((state, level, pos) -> true));
-        registry.accept(id("plastic_fluid_tank"), plasticTank);
+        registry.accept(Fundamentals.id("plastic_fluid_tank"), plasticTank);
         for (Acids.Acid acid : Acids.all().values()) {
-            registry.accept(id(acid.id), acid.block);
+            registry.accept(Fundamentals.id(acid.id), acid.block);
         }
     }
 
     public static void registerBlockEntities(BiConsumer<ResourceLocation, BlockEntityType<?>> registry) {
         mixerSettlerEntity = BlockEntityType.Builder.of(MixerSettlerBlockEntity::new, mixerSettler).build(null);
-        registry.accept(id("mixer_settler"), mixerSettlerEntity);
+        registry.accept(Fundamentals.id("mixer_settler"), mixerSettlerEntity);
         magnetomigrationCellEntity = BlockEntityType.Builder.of(MagnetomigrationCellBlockEntity::new, magnetomigrationCell).build(null);
-        registry.accept(id("magnetomigration_cell"), magnetomigrationCellEntity);
+        registry.accept(Fundamentals.id("magnetomigration_cell"), magnetomigrationCellEntity);
         plasticTankEntity = BlockEntityType.Builder.of(PlasticTankBlockEntity::new, plasticTank).build(null);
-        registry.accept(id("plastic_fluid_tank"), plasticTankEntity);
+        registry.accept(Fundamentals.id("plastic_fluid_tank"), plasticTankEntity);
     }
 
     public static void registerRecipeTypes(BiConsumer<ResourceLocation, RecipeType<?>> registry) {
-        registry.accept(id("separation"), SeparationRecipe.TYPE);
-        registry.accept(id("magnetic"), MagneticRecipe.TYPE);
+        registry.accept(Fundamentals.id("separation"), SeparationRecipe.TYPE);
+        registry.accept(Fundamentals.id("magnetic"), MagneticRecipe.TYPE);
     }
 
     public static void registerRecipeSerializers(BiConsumer<ResourceLocation, RecipeSerializer<?>> registry) {
-        registry.accept(id("separation"), SeparationRecipe.SERIALIZER);
-        registry.accept(id("magnetic"), MagneticRecipe.SERIALIZER);
+        registry.accept(Fundamentals.id("separation"), SeparationRecipe.SERIALIZER);
+        registry.accept(Fundamentals.id("magnetic"), MagneticRecipe.SERIALIZER);
     }
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
-        registry.accept(id("mixer_settler"), mixerSettlerItem = new BlockItem(mixerSettler, new Item.Properties()));
-        registry.accept(id("magnetomigration_cell"), magnetomigrationCellItem = new BlockItem(magnetomigrationCell, new Item.Properties()));
-        registry.accept(id("plastic_fluid_tank"), plasticTankItem = new FluidTankItem(plasticTank, new Item.Properties()));
-        registry.accept(id("salt"), salt = new Item(new Item.Properties()));
-        registry.accept(id("calcium_ingot"), calciumIngot = new Item(new Item.Properties()));
-        registry.accept(id("oxalic_acid"), oxalicAcid = new Item(new Item.Properties()));
-        registry.accept(id("roasted_bastnasite"), roastedBastnasite = new Item(new Item.Properties()));
-        registry.accept(id("light_rare_earth_sulfate"), lightRareEarthSulfate = new Item(new Item.Properties()));
-        registry.accept(id("heavy_rare_earth_sulfate"), heavyRareEarthSulfate = new Item(new Item.Properties()));
-        registry.accept(id("light_rare_earth_carbonate"), lightRareEarthCarbonate = new Item(new Item.Properties()));
-        registry.accept(id("heavy_rare_earth_carbonate"), heavyRareEarthCarbonate = new Item(new Item.Properties()));
-        registry.accept(id("cerium_concentrate"), ceriumConcentrate = new Item(new Item.Properties()));
-        registry.accept(id("europium_sulfate"), europiumSulfate = new Item(new Item.Properties()));
-        registry.accept(id("calcium_chloride"), calciumChloride = new Item(new Item.Properties()));
-        registry.accept(id("white_phosphorus"), whitePhosphorus = new Item(new Item.Properties()));
-        for (Acids.Acid acid : Acids.all().values()) {
-            registry.accept(id(acid.id + "_bucket"), acid.bucket);
+        registry.accept(Fundamentals.id("mixer_settler"), mixerSettlerItem = new BlockItem(mixerSettler, new Item.Properties()));
+        registry.accept(Fundamentals.id("magnetomigration_cell"), magnetomigrationCellItem = new BlockItem(magnetomigrationCell, new Item.Properties()));
+        registry.accept(Fundamentals.id("plastic_fluid_tank"), plasticTankItem = new FluidTankItem(plasticTank, new Item.Properties()));
+        for (String id : ITEM_IDS) {
+            Item item = new Item(new Item.Properties());
+            ITEMS.add(item);
+            registry.accept(Fundamentals.id(id), item);
         }
-        registry.accept(id("seawater_bucket"), seawaterBucket = new Seawater.BucketOfSeawater(fluid("seawater"),
-                new Item.Properties().craftRemainder(net.minecraft.world.item.Items.BUCKET).stacksTo(1)));
+        for (Acids.Acid acid : Acids.all().values()) {
+            registry.accept(Fundamentals.id(acid.id + "_bucket"), acid.bucket);
+        }
+        registry.accept(Fundamentals.id("seawater_bucket"), seawaterBucket = new Seawater.BucketOfSeawater(fluid("seawater"),
+                new Item.Properties().craftRemainder(Items.BUCKET).stacksTo(1)));
     }
 
-    private static ResourceLocation id(String path) {
-        return ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, path);
-    }
 }

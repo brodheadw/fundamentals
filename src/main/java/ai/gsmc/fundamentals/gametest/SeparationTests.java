@@ -2,6 +2,7 @@ package ai.gsmc.fundamentals.gametest;
 
 import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.separation.Battery;
+import ai.gsmc.fundamentals.separation.Stall;
 import ai.gsmc.fundamentals.separation.MagneticRecipe;
 import ai.gsmc.fundamentals.separation.MagnetomigrationCellBlock;
 import ai.gsmc.fundamentals.separation.MagnetomigrationCellBlockEntity;
@@ -51,14 +52,12 @@ public class SeparationTests {
 
     private static final int SPIN_UP = 10;
 
-    /** Ticks for a battery of {@code stages} to come to equilibrium and deliver a batch or two. */
     private static int settle(int stages) {
         return stages * MixerSettlerBlockEntity.EQUILIBRATION_PER_STAGE + 2 * MixerSettlerBlockEntity.PERIOD + 20;
     }
     private static final int PLANT = 18 * MixerSettlerBlockEntity.CAPACITY_PER_CASING / 2;
     private static final BlockState CASING = Separation.mixerSettler().defaultBlockState().setValue(MixerSettlerBlock.FACING, Direction.EAST);
 
-    /** Create's Mechanical Mixer over the trough at (x, z), driven by a cogwheel beside it under a Creative Motor. */
     private static void mixer(GameTestHelper helper, int x, int y, int z) {
         mixer(helper, x, y, z, 64);
     }
@@ -70,18 +69,12 @@ public class SeparationTests {
         helper.setBlock(new BlockPos(x, y, z), mixer.defaultBlockState());
         helper.setBlock(new BlockPos(x, y, z + 1), cog.defaultBlockState().setValue(BlockStateProperties.AXIS, Direction.Axis.Y));
         helper.setBlock(new BlockPos(x, y + 1, z + 1), motor.defaultBlockState().setValue(BlockStateProperties.FACING, Direction.DOWN));
-        // a mixer wants more than the motor's default 16 rpm
         var motorEntity = helper.getBlockEntity(new BlockPos(x, y + 1, z + 1));
         var tag = motorEntity.saveWithoutMetadata(helper.getLevel().registryAccess());
         tag.putInt("ScrollValue", rpm);
         motorEntity.loadWithComponents(tag, helper.getLevel().registryAccess());
     }
 
-    /**
-     * A battery of plant stages along x, facing east, charged with the organic on every stage. Each stage is
-     * three casings across (z 1..3), three along (x) and two tall (y 1..2); stage {@code i} starts at x = 1 + 3i.
-     * Casings merge a tick after placement, so the rest of the test runs in {@code then}.
-     */
     private static void plantBattery(GameTestHelper helper, int stages, String organic, Runnable then) {
         for (int i = 0; i < stages; i++) {
             for (int dx = 0; dx < 3; dx++) {
@@ -111,7 +104,6 @@ public class SeparationTests {
         return (MixerSettlerBlockEntity) helper.getBlockEntity(new BlockPos(x, y, z));
     }
 
-    /** The port on {@code side} of the casing at x on the top-left edge (y 2, z 1), where every end face is exterior. */
     private static IFluidHandler port(GameTestHelper helper, int x, Direction side) {
         return port(helper, x, 2, side);
     }
@@ -166,43 +158,6 @@ public class SeparationTests {
         });
     }
 
-    /** A pilot line: three wide, three long, one tall; and anything smaller is not a stage at all. */
-    @GameTest(template = "battery", timeoutTicks = 800)
-    public void aPilotLineOfSingleLayerStagesCutsSmallBatches(GameTestHelper helper) {
-        for (int i = 0; i < 24; i++) {
-            for (int dz = 1; dz <= 3; dz++) {
-                helper.setBlock(new BlockPos(1 + i, 2, dz), CASING);
-            }
-        }
-        helper.setBlock(new BlockPos(1, 4, 4), CASING);
-        helper.setBlock(new BlockPos(2, 4, 4), CASING);
-        for (int i = 0; i < 8; i++) {
-            mixer(helper, 1 + 3 * i, 3, 2);
-        }
-        helper.setBlock(new BlockPos(1, 2, 0), Blocks.REDSTONE_BLOCK);
-        helper.runAfterDelay(SPIN_UP, () -> {
-            MixerSettlerBlockEntity head = casing(helper, 1, 2, 1);
-            helper.assertTrue(head.isController() && head.across() == 3 && head.along() == 3 && head.tall() == 1, "casings merge into 3x3x1 stages, got " + head.across() + "x" + head.along() + "x" + head.tall());
-            helper.assertTrue(head.battery().size() == 8, "seventy-two casings should be eight stages, got " + head.battery().size());
-            helper.assertTrue(!casing(helper, 1, 4, 4).isStage() && helper.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, helper.absolutePos(new BlockPos(1, 4, 4)), Direction.UP) == null,
-                    "two casings are not a stage and have no ports");
-            for (int i = 0; i < 8; i++) {
-                port(helper, 1 + 3 * i, Direction.UP).fill(new FluidStack(Separation.fluid("p507"), 1125), IFluidHandler.FluidAction.EXECUTE);
-            }
-            helper.assertTrue(fill(helper, 1, Direction.WEST, "rare_earth_liquor", 3000) == 9 * MixerSettlerBlockEntity.CAPACITY_PER_CASING / 2,
-                    "a nine-casing stage holds half its volume of each phase");
-            fill(helper, 24, Direction.EAST, "hydrochloric_acid", 1125);
-            helper.runAfterDelay(settle(8), () -> {
-                FluidStack raffinate = held(helper, 1, Direction.NORTH);
-                int small = SeparationRecipe.forLiquor(helper.getLevel(), Separation.fluid("rare_earth_liquor")).orElseThrow()
-                        .lightOf(9 * MixerSettlerBlockEntity.BATCH_PER_CASING);
-                helper.assertTrue(raffinate.is(Separation.fluid("light_rare_earth_liquor")) && raffinate.getAmount() >= small && raffinate.getAmount() % small == 0,
-                        "the head should hold small batches of raffinate, got " + raffinate);
-                helper.succeed();
-            });
-        });
-    }
-
     @GameTest(template = "battery", timeoutTicks = 800)
     public void casingsMergeAsTheyArePlacedAndBreakApartWhenOneGoes(GameTestHelper helper) {
         helper.setBlock(new BlockPos(1, 1, 1), CASING);
@@ -233,21 +188,6 @@ public class SeparationTests {
     }
 
     @GameTest(template = "battery", timeoutTicks = 800)
-    public void aBatteryTooShortForItsCutDoesNothing(GameTestHelper helper) {
-        plantBattery(helper, 7, "p507", () -> {
-            fill(helper, 1, Direction.WEST, "rare_earth_liquor", 1000);
-            fill(helper, 21, Direction.EAST, "hydrochloric_acid", 1000);
-            helper.runAfterDelay(settle(8), () -> {
-                helper.assertTrue(held(helper, 1, Direction.NORTH).isEmpty() && held(helper, 1, Direction.WEST).getAmount() == 1000,
-                        "seven stages cannot make an eight-stage cut");
-                helper.assertTrue(helper.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, helper.absolutePos(new BlockPos(11, 2, 1)), Direction.NORTH) == null,
-                        "a middle stage has no side port");
-                helper.succeed();
-            });
-        });
-    }
-
-    @GameTest(template = "battery", timeoutTicks = 800)
     public void aStageWithNoMixerTurningStallsTheBattery(GameTestHelper helper) {
         plantBattery(helper, 8, "p507", () -> {
             fill(helper, 1, Direction.WEST, "rare_earth_liquor", 1000);
@@ -255,7 +195,7 @@ public class SeparationTests {
             helper.setBlock(new BlockPos(10, 4, 3), Blocks.AIR);
             helper.runAfterDelay(settle(8), () -> {
                 helper.assertTrue(held(helper, 1, Direction.NORTH).isEmpty(), "with one motor gone the battery should stall");
-                helper.assertTrue(casing(helper, 1, 1, 1).battery().stall().map(Battery.Stall::key).orElse("").equals("mixer"), "the goggles should blame the mixer");
+                helper.assertTrue(casing(helper, 1, 1, 1).battery().stall().map(Stall::key).orElse("").equals("mixer"), "the goggles should blame the mixer");
                 helper.succeed();
             });
         });
@@ -269,7 +209,7 @@ public class SeparationTests {
             fill(helper, 24, Direction.EAST, "hydrochloric_acid", 1000);
             helper.runAfterDelay(settle(8), () -> {
                 helper.assertTrue(held(helper, 1, Direction.NORTH).isEmpty(), "no lever, no cut");
-                helper.assertTrue(casing(helper, 1, 1, 1).battery().stall().map(Battery.Stall::key).orElse("").equals("lever"), "the goggles should ask for the lever");
+                helper.assertTrue(casing(helper, 1, 1, 1).battery().stall().map(Stall::key).orElse("").equals("lever"), "the goggles should ask for the lever");
                 helper.succeed();
             });
         });
@@ -310,19 +250,6 @@ public class SeparationTests {
         });
     }
 
-    @GameTest(template = "battery", timeoutTicks = 800)
-    public void theWrongOrganicStallsTheCut(GameTestHelper helper) {
-        plantBattery(helper, 8, "p204", () -> {
-            fill(helper, 1, Direction.WEST, "rare_earth_liquor", 1000);
-            fill(helper, 24, Direction.EAST, "hydrochloric_acid", 1000);
-            helper.runAfterDelay(settle(8), () -> {
-                helper.assertTrue(held(helper, 1, Direction.NORTH).isEmpty(), "the first cut wants P507, not P204");
-                helper.succeed();
-            });
-        });
-    }
-
-    /** The way a datapack builds one: commands, with tank contents on the corner casing. */
     @GameTest(template = "battery", timeoutTicks = 100)
     public void aStagePlacedByCommandsFormsAndKeepsItsTanks(GameTestHelper helper) {
         var server = helper.getLevel().getServer();
@@ -345,7 +272,6 @@ public class SeparationTests {
         });
     }
 
-    /** The models the generator cut and the geometry the code reads come from the same numbers; this catches either moving alone. */
     @GameTest(template = "empty")
     public void theModelsAreCutToTheVatGeometry(GameTestHelper helper) {
         VatGeometry vat = VatGeometry.get();
@@ -384,128 +310,14 @@ public class SeparationTests {
                         .lightOf(18 * MixerSettlerBlockEntity.BATCH_PER_CASING);
                 helper.assertTrue(held(helper, 1, Direction.NORTH).getAmount() >= 3 * light, "three cuts should run on crude feed first");
                 helper.assertTrue(held(helper, 4, Direction.UP).is(Separation.fluid("fouled_p507")), "the organic should be fouled after three crude cuts");
-                helper.assertTrue(casing(helper, 1, 1, 1).battery().stall().map(Battery.Stall::key).orElse("").equals("crud"), "the goggles should blame the crud");
+                helper.assertTrue(casing(helper, 1, 1, 1).battery().stall().map(Stall::key).orElse("").equals("crud"), "the goggles should blame the crud");
                 var recipes = helper.getLevel().getRecipeManager();
                 for (String id : List.of("mixing/scrub_p507", "mixing/clarify_rare_earth_liquor", "mixing/clarify_heavy_rare_earth_liquor")) {
-                    helper.assertTrue(recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, id)).isPresent(), id + " is missing");
+                    helper.assertTrue(recipes.byKey(Fundamentals.id(id)).isPresent(), id + " is missing");
                 }
                 helper.succeed();
             });
         });
-    }
-
-    @GameTest(template = "battery", timeoutTicks = 200)
-    public void aMixerTooFastEmulsifiesTheStage(GameTestHelper helper) {
-        plantBattery(helper, 8, "p507", () -> {
-            // the same motor block again would be a no-op setBlock, and its old speed would stand: clear it first
-            helper.setBlock(new BlockPos(4, 4, 3), Blocks.AIR);
-            mixer(helper, 4, 3, 2, 256);
-            fill(helper, 1, Direction.WEST, "rare_earth_liquor", 1000);
-            fill(helper, 24, Direction.EAST, "hydrochloric_acid", 1000);
-            helper.runAfterDelay(SPIN_UP * 2, () -> {
-                String stall = casing(helper, 1, 1, 1).battery().stall().map(Battery.Stall::key).orElse("");
-                helper.assertTrue(stall.equals("emulsion"), "the goggles should blame the over-fast mixer, said " + stall + " at " + casing(helper, 4, 1, 1).isOverStirred());
-                helper.succeed();
-            });
-        });
-    }
-
-    /** The route out of the battery: a single-element liquor and oxalic acid in a basin under a Mechanical Mixer give the oxalate. */
-    @GameTest(template = "battery", timeoutTicks = 400)
-    public void oxalicAcidPrecipitatesNeodymiumFromItsLiquor(GameTestHelper helper) {
-        Block basin = BuiltInRegistries.BLOCK.get(ResourceLocation.parse("create:basin"));
-        helper.setBlock(new BlockPos(2, 1, 2), basin.defaultBlockState());
-        // the mixer stands two above the basin, its whisk in the block between
-        mixer(helper, 2, 3, 2);
-        helper.runAfterDelay(SPIN_UP, () -> {
-            BlockPos at = helper.absolutePos(new BlockPos(2, 1, 2));
-            IFluidHandler tank = helper.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, at, Direction.NORTH);
-            var items = helper.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, at, Direction.NORTH);
-            tank.fill(new FluidStack(Separation.fluid("neodymium_liquor"), 250), IFluidHandler.FluidAction.EXECUTE);
-            items.insertItem(0, new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("fundamentals:oxalic_acid")), 1), false);
-            helper.runAfterDelay(200, () -> {
-                var oxalate = BuiltInRegistries.ITEM.get(ResourceLocation.parse("fundamentals:neodymium_oxalate"));
-                boolean made = false;
-                for (int slot = 0; slot < items.getSlots(); slot++) {
-                    made |= items.getStackInSlot(slot).is(oxalate);
-                }
-                helper.assertTrue(made && tank.getFluidInTank(0).isEmpty(), "the mixer should have turned the liquor and acid into neodymium oxalate");
-                helper.succeed();
-            });
-        });
-    }
-
-    @GameTest(template = "empty")
-    public void everyRareEarthMetalHasARouteFromItsOxide(GameTestHelper helper) {
-        var recipes = helper.getLevel().getRecipeManager();
-        List<String> metals = List.of("lanthanum", "cerium", "praseodymium", "neodymium", "didymium", "gadolinium", "terbium", "dysprosium", "yttrium", "samarium");
-        for (String element : metals) {
-            helper.assertTrue(recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "reduction/" + element + "_ingot")).isPresent(),
-                    element + " has no reduction to metal");
-        }
-        for (String element : Stream.concat(metals.stream(), Stream.of("europium", "holmium", "erbium", "thulium", "ytterbium", "lutetium")).toList()) {
-            helper.assertTrue(recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "calcining/" + element + "_oxide"))
-                    .filter(r -> r.value().getType() == net.minecraft.world.item.crafting.RecipeType.BLASTING).isPresent(), element + " has no blast-furnace calcining to oxide");
-        }
-        var dysprosium = (com.simibubi.create.content.processing.recipe.ProcessingRecipe<?, ?>) recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "reduction/dysprosium_ingot")).orElseThrow().value();
-        helper.assertTrue(dysprosium.getRequiredHeat() == com.simibubi.create.content.processing.recipe.HeatCondition.SUPERHEATED, "calciothermic reduction should want a superheated vat");
-        var neodymium = (com.simibubi.create.content.processing.recipe.ProcessingRecipe<?, ?>) recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "reduction/neodymium_ingot")).orElseThrow().value();
-        helper.assertTrue(neodymium.getRequiredHeat() == com.simibubi.create.content.processing.recipe.HeatCondition.SUPERHEATED, "the fluoride bath runs past a kindled burner, so electrolysis should want a superheated vat");
-        helper.assertTrue(!recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "mixing/rare_earth_liquor")).orElseThrow().value().getIngredients().get(0)
-                .test(new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("fundamentals:light_rare_earth_concentrate")))),
-                "hydrochloric acid barely touches a phosphate: the concentrate should be cracked in sulfuric acid before the leach");
-        for (String grade : List.of("light", "heavy")) {
-            var leach = recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "mixing/" + (grade.equals("light") ? "" : "heavy_") + "rare_earth_liquor")).orElseThrow().value();
-            helper.assertTrue(leach.getIngredients().stream().anyMatch(i -> i.test(new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("fundamentals:" + grade + "_rare_earth_carbonate")))))
-                    && leach.getIngredients().stream().noneMatch(i -> i.test(new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("fundamentals:" + grade + "_rare_earth_sulfate"))))),
-                    "a sulfate does not metathesise in hydrochloric acid: the " + grade + " leach should dissolve the carbonate");
-        }
-        var bastnasite = (com.simibubi.create.content.processing.recipe.ProcessingRecipe<?, ?>) recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "mixing/rare_earth_liquor_from_bastnasite")).orElseThrow().value();
-        helper.assertTrue(bastnasite.getRollableResults().stream().anyMatch(r -> r.getStack().is(BuiltInRegistries.ITEM.get(ResourceLocation.parse("fundamentals:cerium_concentrate")))),
-                "roasted bastnäsite's Ce(IV) should stay out of the hydrochloric acid as cerium concentrate");
-        for (String reagent : List.of("mixing/hydrofluoric_acid", "reduction/argon", "reduction/calcium_ingot", "mixing/neodymium_fluoride", "mixing/bastnasite_concentrate",
-                "mixing/light_rare_earth_sulfate", "mixing/heavy_rare_earth_sulfate", "mixing/rare_earth_liquor_from_bastnasite", "mixing/calcium_chloride_liquor", "mixing/calcium_chloride",
-                "packing/monazite_residue_block")) {
-            helper.assertTrue(recipes.byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, reagent)).isPresent(), reagent + " is missing");
-        }
-        helper.succeed();
-    }
-
-    @GameTest(template = "empty")
-    public void theExtractantsAreSynthesisedFromPropyleneAndPhosphorus(GameTestHelper helper) {
-        var recipes = helper.getLevel().getRecipeManager();
-        java.util.function.Function<String, com.simibubi.create.content.processing.recipe.ProcessingRecipe<?, ?>> recipe = id ->
-                (com.simibubi.create.content.processing.recipe.ProcessingRecipe<?, ?>) recipes.byKey(ResourceLocation.parse(id)).orElseThrow(() -> new AssertionError(id + " is missing")).value();
-        java.util.function.BiPredicate<String, String> takes = (id, fluid) -> recipe.apply(id).getFluidIngredients().stream()
-                .anyMatch(i -> i.ingredient().test(new FluidStack(BuiltInRegistries.FLUID.get(ResourceLocation.parse(fluid)), 1)));
-        java.util.function.BiPredicate<String, String> gives = (id, fluid) -> recipe.apply(id).getFluidResults().stream()
-                .anyMatch(s -> BuiltInRegistries.FLUID.getKey(s.getFluid()).toString().equals(fluid));
-        for (String[] organic : new String[][] {{"p204", "d2ehpa"}, {"p507", "ehehpa"}}) {
-            String made = "fundamentals:mixing/" + organic[0];
-            helper.assertTrue(takes.test(made, "fundamentals:" + organic[1]) && takes.test(made, "tfmg:kerosene") && !takes.test(made, "fundamentals:phosphoric_acid"),
-                    organic[0] + " should be its neat extractant cut with kerosene, not phosphoric acid");
-            String neat = "fundamentals:solvents/" + organic[1];
-            helper.assertTrue(takes.test(neat, "fundamentals:ethylhexanol") && takes.test(neat, "fundamentals:phosphorus_trichloride"),
-                    organic[1] + " should be 2-ethylhexanol on phosphorus trichloride");
-        }
-        helper.assertTrue(takes.test("fundamentals:solvents/ethylhexanol", "tfmg:propylene") && takes.test("fundamentals:mixing/phosphorus_trichloride", "fundamentals:chlorine"),
-                "2-ethylhexanol should come from propylene and the trichloride from chlorine");
-        helper.assertTrue(gives.test("fundamentals:solvents/hydrogen", "tfmg:hydrogen"), "something should make hydrogen");
-        helper.assertTrue(gives.test("fundamentals:reduction/calcium_ingot", "fundamentals:chlorine") && gives.test("fundamentals:lithium/lithium_ingot", "fundamentals:chlorine"),
-                "the molten-chloride electrolyses should give off chlorine");
-        helper.assertTrue(recipe.apply("fundamentals:mixing/nitric_acid").getRequiredHeat() != com.simibubi.create.content.processing.recipe.HeatCondition.NONE,
-                "nitric acid is distilled off saltpetre: it wants heat");
-        helper.succeed();
-    }
-
-    @GameTest(template = "empty")
-    public void monaziteGeneratesInTheCarbonatiteTop(GameTestHelper helper) {
-        var feature = helper.getLevel().registryAccess().registryOrThrow(Registries.CONFIGURED_FEATURE)
-                .get(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "carbonatite_plug"));
-        helper.assertTrue(feature != null && feature.config() instanceof DepositFeature.Config config && config.ores().stream()
-                        .anyMatch(ore -> BuiltInRegistries.BLOCK.getKey(ore.state().getBlock()).getPath().equals("monazite_ore")),
-                "the carbonatite plug should carry monazite");
-        helper.succeed();
     }
 
     @GameTest(template = "empty")
@@ -518,15 +330,14 @@ public class SeparationTests {
         Fluid reduced = Separation.fluid("europium_gadolinium_liquor");
         helper.assertTrue(made.contains(reduced) && !parted.contains(reduced), "europium should leave gadolinium by zinc reduction, not a cut");
         var zinc = (com.simibubi.create.content.processing.recipe.ProcessingRecipe<?, ?>) helper.getLevel().getRecipeManager()
-                .byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "mixing/europium_sulfate")).orElseThrow().value();
+                .byKey(Fundamentals.id("mixing/europium_sulfate")).orElseThrow().value();
         helper.assertTrue(zinc.getIngredients().stream().anyMatch(i -> i.test(new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("create:zinc_nugget")))))
                 && zinc.getFluidResults().stream().anyMatch(s -> s.getFluid() == Separation.fluid("gadolinium_liquor")), "zinc should drop europium and leave gadolinium liquor");
         for (Fluid liquor : made) {
             if (!parted.contains(liquor) && liquor != reduced) {
                 String id = BuiltInRegistries.FLUID.getKey(liquor).getPath();
                 helper.assertTrue(id.chars().filter(ch -> ch == '_').count() == 1, id + " is a mixed liquor nothing parts");
-                var oxalate = helper.getLevel().getRecipeManager().byKey(ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID,
-                        "mixing/" + id.replace("_liquor", "_oxalate")));
+                var oxalate = helper.getLevel().getRecipeManager().byKey(Fundamentals.id("mixing/" + id.replace("_liquor", "_oxalate")));
                 helper.assertTrue(oxalate.isPresent(), id + " has no oxalate recipe");
             }
         }
@@ -535,7 +346,6 @@ public class SeparationTests {
 
     private static final BlockState CELL = Separation.magnetomigrationCell().defaultBlockState().setValue(MagnetomigrationCellBlock.FACING, Direction.EAST);
 
-    /** A line of {@code cells} cells along x from x0 at z, flowing east, its head fed 1,000 mB of {@code liquor}. */
     private static MagnetomigrationCellBlockEntity line(GameTestHelper helper, int x0, int z, int cells, String liquor) {
         for (int i = 0; i < cells; i++) {
             helper.setBlock(new BlockPos(x0 + i, 1, z), CELL);

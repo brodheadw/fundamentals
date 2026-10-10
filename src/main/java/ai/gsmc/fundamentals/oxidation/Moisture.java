@@ -8,7 +8,6 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
 
-/** The air a metal sits in: dry (desert, the Nether), ordinary, damp (touching water, a humid climate, rain on it) or salt (by the sea). */
 public enum Moisture {
     DRY, AIR, WET, SALT;
 

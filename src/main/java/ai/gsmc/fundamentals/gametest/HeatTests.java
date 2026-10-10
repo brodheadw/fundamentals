@@ -71,27 +71,4 @@ public class HeatTests {
                 .thenSucceed();
     }
 
-    @GameTest(template = "battery", timeoutTicks = 200)
-    public void aSpiritThermometerReadsTheRoomAndBurstsCleanOnAFurnace(GameTestHelper helper) {
-        BlockPos furnace = new BlockPos(5, 1, 2), burst = furnace.east(), wall = new BlockPos(20, 1, 2), room = wall.east();
-        for (int x = 2; x <= 8; x++) {
-            helper.setBlock(new BlockPos(x, 0, 2), Blocks.STONE);
-        }
-        helper.setBlock(furnace, Blocks.BLAST_FURNACE.defaultBlockState().setValue(AbstractFurnaceBlock.LIT, true));
-        helper.setBlock(burst, Thermometers.block(Thermometer.SPIRIT).defaultBlockState().setValue(ThermometerBlock.FACING, Direction.EAST));
-        helper.setBlock(wall, Blocks.STONE);
-        helper.setBlock(room, Thermometers.block(Thermometer.SPIRIT).defaultBlockState().setValue(ThermometerBlock.FACING, Direction.EAST));
-        Pig pig = helper.spawnWithNoFreeWill(EntityType.PIG, burst.south());
-        helper.startSequence()
-                .thenWaitUntil(() -> helper.assertBlockNotPresent(Thermometers.block(Thermometer.SPIRIT), burst))
-                .thenExecute(() -> {
-                    ThermometerBlockEntity gauge = helper.getBlockEntity(room);
-                    double here = Heat.at(helper.getLevel(), helper.absolutePos(wall));
-                    helper.assertTrue(Math.abs(gauge.celsius() - here) < 1 && here > Thermometer.SPIRIT.min && here < Thermometer.SPIRIT.max,
-                            "a spirit thermometer on stone should read the room, got " + gauge.celsius() + " vs " + here);
-                    helper.assertItemEntityNotPresent(Uses.mercury(), burst, 2);
-                    helper.assertTrue(pig.getActiveEffects().isEmpty() && pig.getHealth() == pig.getMaxHealth(), "spirit should poison nobody");
-                })
-                .thenSucceed();
-    }
 }

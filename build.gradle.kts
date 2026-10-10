@@ -85,8 +85,6 @@ dependencies {
     include(modImplementation("com.wildspell.fundamental:fundamentalmagic:${deps.principlesVersion}")!!)
     modLocalRuntime("maven.modrinth:create:${deps.createVersion}")
     modLocalRuntime("maven.modrinth:create-tfmg:${deps.tfmgVersion}")
-    modCompileOnly("maven.modrinth:create:${deps.createVersion}")
-    modCompileOnly("maven.modrinth:create-tfmg:${deps.tfmgVersion}")
     // Chemica is optional: tools/build_chemica_compat.py reads its recipes from this jar, and -Pchemica runs it alongside.
     modCompileOnly("maven.modrinth:chemica:${deps.chemicaVersion}")
     if (providers.gradleProperty("chemica").isPresent) modLocalRuntime("maven.modrinth:chemica:${deps.chemicaVersion}")

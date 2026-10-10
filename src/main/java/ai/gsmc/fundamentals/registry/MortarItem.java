@@ -63,7 +63,7 @@ public class MortarItem extends HandToolItem {
 
     @Override
     public UseAnim getUseAnimation(ItemStack stack) {
-        return UseAnim.NONE;  // the hands are posed by client.GrindingAnimation
+        return UseAnim.NONE;
     }
 
     @Override

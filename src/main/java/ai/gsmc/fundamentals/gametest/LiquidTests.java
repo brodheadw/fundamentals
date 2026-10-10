@@ -36,7 +36,6 @@ public class LiquidTests {
         return BuiltInRegistries.FLUID.get(ResourceLocation.parse(id));
     }
 
-    /** Sets the temperature at {@code at} to {@code celsius} for a while. */
     private static void hold(GameTestHelper helper, BlockPos at, double celsius) {
         BlockPos pos = helper.absolutePos(at);
         Heat.boost(helper.getLevel(), pos, celsius - Heat.at(helper.getLevel(), pos), 0, 400);

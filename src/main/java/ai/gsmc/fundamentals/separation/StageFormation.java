@@ -14,17 +14,10 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-/**
- * How casings become stages. A casing placed joins the largest box of same-facing casings it completes, up
- * to three across, three along and two tall, and that box's back-left-bottom casing becomes the controller
- * of all of them; the fluids the merged boxes held go to it. A casing broken out of a stage dissolves the
- * stage into single casings, which merge again on their own.
- */
 final class StageFormation {
 
     private StageFormation() {}
 
-    /** A tick after placement: join the largest box of casings this one completes. */
     static void merge(MixerSettlerBlockEntity casing) {
         int best = casing.volume();
         BlockPos bestOrigin = null;
@@ -55,7 +48,6 @@ final class StageFormation {
         }
     }
 
-    /** Every cell is a casing facing our way, and every stage any of them belongs to lies wholly inside. */
     private static boolean fits(MixerSettlerBlockEntity casing, BlockPos origin, int w, int l, int h) {
         for (int a = 0; a < w; a++) {
             for (int l0 = 0; l0 < l; l0++) {
@@ -86,7 +78,6 @@ final class StageFormation {
     private static void form(MixerSettlerBlockEntity casing, BlockPos origin, int w, int l, int h) {
         Level level = casing.getLevel();
         MixerSettlerBlockEntity.formations++;
-        // what the stages being absorbed held goes into the new controller, as far as it fits
         Set<MixerSettlerBlockEntity> absorbed = new LinkedHashSet<>();
         List<FluidStack> organics = new ArrayList<>();
         List<FluidStack> aqueouses = new ArrayList<>();
@@ -135,7 +126,6 @@ final class StageFormation {
         head.dirty = true;
     }
 
-    /** Losing a casing breaks its stage into single casings, which merge again on their own; the tanks are lost. */
     static void dissolve(MixerSettlerBlockEntity casing) {
         Level level = casing.getLevel();
         MixerSettlerBlockEntity.formations++;

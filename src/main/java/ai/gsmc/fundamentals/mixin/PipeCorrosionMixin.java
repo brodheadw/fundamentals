@@ -12,8 +12,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/** Once a second of a Create pipe's fluid transport, what it carries gets its chance to eat it, and the heat to soften a plastic one;
- * a burst pipe ticks no further, and nor does one whose water has frozen, until it thaws. */
 @Mixin(value = FluidTransportBehaviour.class, remap = false)
 public abstract class PipeCorrosionMixin {
 

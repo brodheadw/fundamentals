@@ -15,10 +15,6 @@ public record ProcessingChain(String id, String commodity, String group, List<Pr
         steps = List.copyOf(steps);
     }
 
-    public Tier maxTier() {
-        return steps.stream().map(ProcessingStep::tier).max(Comparator.naturalOrder()).orElse(Tier.T0);
-    }
-
     public List<String> validate() {
         List<MaterialRef> refs = new ArrayList<>();
         for (ProcessingStep step : steps) {

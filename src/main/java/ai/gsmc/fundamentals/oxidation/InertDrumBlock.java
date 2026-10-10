@@ -25,10 +25,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 import javax.annotation.Nullable;
 
-/**
- * The inert storage drum: open it like a chest; pipe argon or kerosene into it. Opening it says how much is left, and so do
- * goggles. Its gauge faces whoever placed it.
- */
 public class InertDrumBlock extends BaseEntityBlock {
 
     public static final MapCodec<InertDrumBlock> CODEC = simpleCodec(InertDrumBlock::new);

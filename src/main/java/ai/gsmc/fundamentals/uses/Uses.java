@@ -9,151 +9,58 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.BiConsumer;
 
-/**
- * The few items of the chains that are not a form of a material: the phosphor the lamps take, the didymium
- * glass that welders' goggles are made of, the roasted ores on their way to cobalt, copper, zinc and nickel, the
- * flue dust the molybdenite roaster gives up its rhenium in and the ammonium perrhenate that is crystallised from it, the tungstic acid
- * and ammonium paratungstate of the road to tungsten, the lithium carbonate and chloride lithium is won from, the ferroboron
- * the magnets take their boron as, the soda ash, sodium salts and aluminium powder of the road to chromium, the roasted tin
- * concentrate the bloomery smelts, the solder circuit boards are joined with, the titania slag ilmenite smelts to, the
- * magnesium chloride magnesium is won from and the Kroll process gives back, and the zinc crust the Parkes process skims
- * the silver off lead bullion in and the litharge cupellation leaves, the thorium nitrate a gas mantle is soaked in and the mantle,
- * the block the clarifier's sludge is packed into, the mercury cinnabar is retorted to, the zirconium and hafnium chlorides of the
- * Kroll road and the yttria-stabilised zirconia turbine blades are coated with, and the frit, hydroxide, fluoroberyllate and pebbles
- * of the road from beryl to beryllium, the dimensionally stable anode of the chlor-alkali cell, and the red mud, aluminium hydroxide, alumina
- * and cryolite of the Bayer and Hall-Héroult road to aluminium, the nickel oxide the Mond process takes and the pellets it gives, the MCrAlY
- * bond coat under a turbine blade's ceramic, the boric acid that dopes silicon p-type and goes into ferroboron, and the galvanized plate
- * hot-dip zinc keeps from rusting. The recipes are written by tools/build_uses_data.py.
- */
 public final class Uses {
 
-    private static Item phosphor;
-    private static Item didymiumGlass;
-    private static Item roastedCobaltite;
-    private static Item roastedChalcopyrite;
-    private static Item rheniumFlueDust;
-    private static Item tungstenCarbide;
-    private static Item tungstenFilament;
-    private static Item clarifierSludge;
-    private static Item copperCalcine;
-    private static Item zincOxide;
-    private static Item roastedPentlandite;
-    private static Item lithiumChloride;
-    private static Item ferroboron;
-    private static Item sodaAsh;
-    private static Item sodiumChromate;
-    private static Item sodiumDichromate;
-    private static Item aluminiumPowder;
-    private static Item roastedTinConcentrate;
-    private static Item solder;
-    private static Item titaniaSlag;
-    private static Item magnesiumChloride;
-    private static Item silverZincCrust;
-    private static Item litharge;
-    private static Item thoriumNitrate;
-    private static Item gasMantle;
-    private static Item mercury;
-    private static Item crudeZirconiumTetrachloride;
-    private static Item zirconiumTetrachloride;
-    private static Item hafniumTetrachloride;
-    private static Item yttriaStabilisedZirconia;
-    private static Item berylFrit;
-    private static Item berylliumHydroxide;
-    private static Item ammoniumFluoroberyllate;
-    private static Item berylliumPebbles;
-    private static Item dimensionallyStableAnode;
-    private static Item redMud;
-    private static Item aluminiumHydroxide;
-    private static Item alumina;
-    private static Item cryolite;
-    private static Item nickelOxide;
-    private static Item nickelPellets;
-    private static Item tungsticAcid;
-    private static Item ammoniumParatungstate;
-    private static Item ammoniumPerrhenate;
-    private static Item lithiumCarbonate;
-    private static Item mcralyPowder;
-    private static Item boricAcid;
-    private static Item galvanizedSteelPlate;
+    public static final List<String> IDS = List.of(
+            "phosphor", "didymium_glass", "roasted_cobaltite", "roasted_chalcopyrite", "rhenium_flue_dust", "tungsten_carbide",
+            "tungsten_filament", "clarifier_sludge", "copper_calcine", "zinc_oxide", "roasted_pentlandite", "lithium_chloride",
+            "ferroboron", "soda_ash", "sodium_chromate", "sodium_dichromate", "aluminium_powder", "roasted_tin_concentrate",
+            "solder", "titania_slag", "magnesium_chloride", "silver_zinc_crust", "litharge", "thorium_nitrate", "gas_mantle",
+            "mercury", "crude_zirconium_tetrachloride", "zirconium_tetrachloride", "hafnium_tetrachloride",
+            "yttria_stabilised_zirconia", "beryl_frit", "beryllium_hydroxide", "ammonium_fluoroberyllate", "beryllium_pebbles",
+            "dimensionally_stable_anode", "red_mud", "aluminium_hydroxide", "alumina", "cryolite", "nickel_oxide", "nickel_pellets",
+            "tungstic_acid", "ammonium_paratungstate", "ammonium_perrhenate", "lithium_carbonate", "mcraly_powder", "boric_acid",
+            "galvanized_steel_plate");
+
+    public static final List<String> PLATINUM_IDS = List.of(
+            "ammonium_chloride", "insoluble_residue", "iridium_rhodium_residue", "ammonium_chloroplatinate",
+            "dichlorodiammine_palladium", "ammonium_chlororuthenate", "ammonium_chloroiridate", "ammonium_chlororhodate",
+            "reforming_catalyst", "platinum_rhodium_gauze", "osmium_filament");
+
+    private static final Map<String, Item> ITEMS = new LinkedHashMap<>();
     private static Block sludgeBlock;
-    private static Item sludgeBlockItem;
 
     private Uses() {}
 
-    public static Item mercury() { return mercury; }
-    public static Item cryolite() { return cryolite; }
+    public static Item mercury() { return ITEMS.get("mercury"); }
+    public static Item cryolite() { return ITEMS.get("cryolite"); }
 
     public static List<Item> items() {
-        return List.of(phosphor, didymiumGlass, roastedCobaltite, roastedChalcopyrite, rheniumFlueDust, tungstenCarbide, tungstenFilament, clarifierSludge,
-                copperCalcine, zincOxide, roastedPentlandite, lithiumChloride, ferroboron, sodaAsh, sodiumChromate, sodiumDichromate,
-                aluminiumPowder, roastedTinConcentrate, solder, titaniaSlag, magnesiumChloride, silverZincCrust, litharge, thoriumNitrate, gasMantle, mercury,
-                crudeZirconiumTetrachloride, zirconiumTetrachloride, hafniumTetrachloride, yttriaStabilisedZirconia, berylFrit, berylliumHydroxide, ammoniumFluoroberyllate,
-                berylliumPebbles, dimensionallyStableAnode, redMud, aluminiumHydroxide, alumina, cryolite, nickelOxide, nickelPellets,
-                tungsticAcid, ammoniumParatungstate, ammoniumPerrhenate, lithiumCarbonate, mcralyPowder,
-                boricAcid, galvanizedSteelPlate, sludgeBlockItem);
+        return List.copyOf(ITEMS.values());
     }
 
     public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
-        registry.accept(id("clarifier_sludge_block"), sludgeBlock = new Block(BlockBehaviour.Properties.of().mapColor(MapColor.DIRT)
+        registry.accept(Fundamentals.id("clarifier_sludge_block"), sludgeBlock = new Block(BlockBehaviour.Properties.of().mapColor(MapColor.DIRT)
                 .strength(0.8F).sound(SoundType.MUD)));
     }
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
-        registry.accept(id("phosphor"), phosphor = new Item(new Item.Properties()));
-        registry.accept(id("didymium_glass"), didymiumGlass = new Item(new Item.Properties()));
-        registry.accept(id("roasted_cobaltite"), roastedCobaltite = new Item(new Item.Properties()));
-        registry.accept(id("roasted_chalcopyrite"), roastedChalcopyrite = new Item(new Item.Properties()));
-        registry.accept(id("rhenium_flue_dust"), rheniumFlueDust = new Item(new Item.Properties()));
-        registry.accept(id("tungsten_carbide"), tungstenCarbide = new Item(new Item.Properties()));
-        registry.accept(id("tungsten_filament"), tungstenFilament = new Item(new Item.Properties()));
-        registry.accept(id("clarifier_sludge"), clarifierSludge = new Item(new Item.Properties()));
-        registry.accept(id("copper_calcine"), copperCalcine = new Item(new Item.Properties()));
-        registry.accept(id("zinc_oxide"), zincOxide = new Item(new Item.Properties()));
-        registry.accept(id("roasted_pentlandite"), roastedPentlandite = new Item(new Item.Properties()));
-        registry.accept(id("lithium_chloride"), lithiumChloride = new Item(new Item.Properties()));
-        registry.accept(id("ferroboron"), ferroboron = new Item(new Item.Properties()));
-        registry.accept(id("soda_ash"), sodaAsh = new Item(new Item.Properties()));
-        registry.accept(id("sodium_chromate"), sodiumChromate = new Item(new Item.Properties()));
-        registry.accept(id("sodium_dichromate"), sodiumDichromate = new Item(new Item.Properties()));
-        registry.accept(id("aluminium_powder"), aluminiumPowder = new Item(new Item.Properties()));
-        registry.accept(id("roasted_tin_concentrate"), roastedTinConcentrate = new Item(new Item.Properties()));
-        registry.accept(id("solder"), solder = new Item(new Item.Properties()));
-        registry.accept(id("titania_slag"), titaniaSlag = new Item(new Item.Properties()));
-        registry.accept(id("magnesium_chloride"), magnesiumChloride = new Item(new Item.Properties()));
-        registry.accept(id("silver_zinc_crust"), silverZincCrust = new Item(new Item.Properties()));
-        registry.accept(id("litharge"), litharge = new Item(new Item.Properties()));
-        registry.accept(id("thorium_nitrate"), thoriumNitrate = new Item(new Item.Properties()));
-        registry.accept(id("gas_mantle"), gasMantle = new Item(new Item.Properties()));
-        registry.accept(id("mercury"), mercury = new Item(new Item.Properties()));
-        registry.accept(id("crude_zirconium_tetrachloride"), crudeZirconiumTetrachloride = new Item(new Item.Properties()));
-        registry.accept(id("zirconium_tetrachloride"), zirconiumTetrachloride = new Item(new Item.Properties()));
-        registry.accept(id("hafnium_tetrachloride"), hafniumTetrachloride = new Item(new Item.Properties()));
-        registry.accept(id("yttria_stabilised_zirconia"), yttriaStabilisedZirconia = new Item(new Item.Properties()));
-        registry.accept(id("beryl_frit"), berylFrit = new Item(new Item.Properties()));
-        registry.accept(id("beryllium_hydroxide"), berylliumHydroxide = new Item(new Item.Properties()));
-        registry.accept(id("ammonium_fluoroberyllate"), ammoniumFluoroberyllate = new Item(new Item.Properties()));
-        registry.accept(id("beryllium_pebbles"), berylliumPebbles = new Item(new Item.Properties()));
-        registry.accept(id("dimensionally_stable_anode"), dimensionallyStableAnode = new Item(new Item.Properties()));
-        registry.accept(id("red_mud"), redMud = new Item(new Item.Properties()));
-        registry.accept(id("aluminium_hydroxide"), aluminiumHydroxide = new Item(new Item.Properties()));
-        registry.accept(id("alumina"), alumina = new Item(new Item.Properties()));
-        registry.accept(id("cryolite"), cryolite = new Item(new Item.Properties()));
-        registry.accept(id("nickel_oxide"), nickelOxide = new Item(new Item.Properties()));
-        registry.accept(id("nickel_pellets"), nickelPellets = new Item(new Item.Properties()));
-        registry.accept(id("tungstic_acid"), tungsticAcid = new Item(new Item.Properties()));
-        registry.accept(id("ammonium_paratungstate"), ammoniumParatungstate = new Item(new Item.Properties()));
-        registry.accept(id("ammonium_perrhenate"), ammoniumPerrhenate = new Item(new Item.Properties()));
-        registry.accept(id("lithium_carbonate"), lithiumCarbonate = new Item(new Item.Properties()));
-        registry.accept(id("mcraly_powder"), mcralyPowder = new Item(new Item.Properties()));
-        registry.accept(id("boric_acid"), boricAcid = new Item(new Item.Properties()));
-        registry.accept(id("galvanized_steel_plate"), galvanizedSteelPlate = new Item(new Item.Properties()));
-        registry.accept(id("clarifier_sludge_block"), sludgeBlockItem = new BlockItem(sludgeBlock, new Item.Properties()));
+        for (String id : IDS) {
+            register(registry, id, new Item(new Item.Properties()));
+        }
+        register(registry, "clarifier_sludge_block", new BlockItem(sludgeBlock, new Item.Properties()));
+        for (String id : PLATINUM_IDS) {
+            register(registry, id, new Item(new Item.Properties()));
+        }
     }
 
-    private static ResourceLocation id(String path) {
-        return ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, path);
+    private static void register(BiConsumer<ResourceLocation, Item> registry, String id, Item item) {
+        ITEMS.put(id, item);
+        registry.accept(Fundamentals.id(id), item);
     }
 }

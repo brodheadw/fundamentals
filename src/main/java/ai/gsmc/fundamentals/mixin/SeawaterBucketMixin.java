@@ -14,7 +14,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/** A bucket, or a dispenser's, filled at a water source in the sea comes up with seawater. */
 @Mixin(LiquidBlock.class)
 public abstract class SeawaterBucketMixin {
 

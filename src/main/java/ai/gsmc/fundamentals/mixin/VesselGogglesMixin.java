@@ -19,7 +19,6 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-/** Create's tanks, basins, pumps and valves, and everything built on them, add the properties of what they hold to their goggles. */
 @Mixin(value = {FluidTankBlockEntity.class, BasinBlockEntity.class, KineticBlockEntity.class}, remap = false)
 public abstract class VesselGogglesMixin {
 

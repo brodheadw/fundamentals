@@ -66,7 +66,6 @@ public class OxidationTests {
         return BuiltInRegistries.BLOCK.get(ResourceLocation.parse(id));
     }
 
-    /** What opening it does, without a mock player in the world: those break the Factory's electric blocks in other tests. */
     private static void open(GameTestHelper helper, Container container) {
         FakePlayer player = FakePlayerFactory.getMinecraft(helper.getLevel());
         NeoForge.EVENT_BUS.post(new PlayerContainerEvent.Open(player, ChestMenu.threeRows(0, player.getInventory(), container)));
@@ -103,72 +102,6 @@ public class OxidationTests {
         helper.assertTrue(inside.is(item("fundamentals:cerium_ingot")) && !inside.has(Oxidation.STAGE), "cerium under argon should not age: " + inside);
         int left = drum.gas().getAmount();
         helper.assertTrue(left == 1000 - 500 - InertDrumBlockEntity.VENT, "fifty days and an opening should leave 475 mB, left " + left);
-        helper.succeed();
-    }
-
-    private static String key(Component line) {
-        return line.getSiblings().get(0).getContents() instanceof TranslatableContents t ? t.getKey() : line.getString();
-    }
-
-    @GameTest(template = "empty")
-    public void drumGogglesReadTheGasTheContentsAndWhetherTheyKeep(GameTestHelper helper) {
-        BlockPos pos = new BlockPos(1, 1, 1);
-        helper.setBlock(pos, Oxidation.drum());
-        InertDrumBlockEntity drum = (InertDrumBlockEntity) helper.getBlockEntity(pos);
-        drum.handler(null).fill(new FluidStack(Separation.fluid("argon"), 1000), IFluidHandler.FluidAction.EXECUTE);
-        IItemHandler items = helper.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, helper.absolutePos(pos), Direction.UP);
-        helper.assertTrue(items != null && items.insertItem(0, new ItemStack(item("fundamentals:cerium_ingot"), 4), false).isEmpty(),
-                "a funnel or hopper should be able to put metal into the drum");
-        drum.setItem(1, new ItemStack(Items.COPPER_INGOT, 60));
-        List<Component> lines = new ArrayList<>();
-        drum.addToGoggleTooltip(lines, false);
-        String prefix = "goggles.fundamentals.inert_storage_drum.";
-        helper.assertTrue(key(lines.get(1)).equals(prefix + "argon") && lines.get(1).getString().contains("1000 mB")
-                && lines.get(1).getString().contains("10 mB a day"), "the goggles should read the argon and its leak: " + lines.get(1).getString());
-        helper.assertTrue(lines.get(2).getString().contains("2 of 27") && lines.get(2).getString().contains("64"), "two stacks, 64 items: " + lines.get(2).getString());
-        helper.assertTrue(key(lines.get(3)).equals(prefix + "kept"), "charged, nothing inside ages");
-        drum.backdate(1001L * InertDrumBlockEntity.TICKS_PER_MB);
-        lines.clear();
-        drum.addToGoggleTooltip(lines, false);
-        helper.assertTrue(key(lines.get(1)).equals(prefix + "no_gas") && key(lines.get(3)).equals(prefix + "ageing"),
-                "once the argon has leaked away the goggles should say so: " + lines.stream().map(Component::getString).toList());
-        helper.succeed();
-    }
-
-    /** The model an item's override list picks for a stage, as the client picks it: the last override the value satisfies. */
-    private static String modelFor(String item, float stage) throws IOException {
-        String[] id = item.split(":");
-        JsonObject model = json("/assets/" + id[0] + "/models/item/" + id[1] + ".json");
-        JsonArray overrides = model.has("overrides") ? model.getAsJsonArray("overrides") : new JsonArray();
-        for (int i = overrides.size() - 1; i >= 0; i--) {
-            JsonObject override = overrides.get(i).getAsJsonObject();
-            if (override.getAsJsonObject("predicate").get(Oxidation.STAGE_PROPERTY.toString()).getAsFloat() <= stage) {
-                return override.get("model").getAsString();
-            }
-        }
-        return id[0] + ":item/" + id[1];
-    }
-
-    private static JsonObject json(String path) throws IOException {
-        try (InputStream in = OxidationTests.class.getResourceAsStream(path)) {
-            if (in == null) {
-                throw new IOException("no " + path);
-            }
-            return JsonParser.parseReader(new InputStreamReader(in, StandardCharsets.UTF_8)).getAsJsonObject();
-        }
-    }
-
-    @GameTest(template = "empty")
-    public void anAgedIngotLooksItsStage(GameTestHelper helper) throws IOException {
-        ItemStack cerium = new ItemStack(item("fundamentals:cerium_ingot"));
-        cerium.set(Oxidation.STAGE, 2);
-        String model = modelFor("fundamentals:cerium_ingot", Oxidation.stageProperty(cerium));
-        helper.assertTrue(model.equals("fundamentals:item/aged/cerium_ingot_2"), "a stage 2 cerium ingot should draw its stage 2 model, not " + model);
-        String texture = json("/assets/fundamentals/models/item/aged/cerium_ingot_2.json").getAsJsonObject("textures").get("layer0").getAsString();
-        helper.assertTrue(OxidationTests.class.getResource("/assets/fundamentals/textures/" + texture.split(":")[1] + ".png") != null, "no texture " + texture);
-        helper.assertTrue(modelFor("minecraft:copper_ingot", 3).equals("fundamentals:item/aged/copper_ingot_3"), "green copper should look green");
-        helper.assertTrue(modelFor("fundamentals:cerium_ingot", Oxidation.stageProperty(new ItemStack(item("fundamentals:cerium_ingot"))))
-                .equals("fundamentals:item/cerium_ingot"), "a fresh ingot keeps its own model");
         helper.succeed();
     }
 

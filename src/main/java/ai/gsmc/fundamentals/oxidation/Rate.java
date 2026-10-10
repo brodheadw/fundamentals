@@ -7,12 +7,6 @@ import net.minecraft.world.item.Item;
 
 import java.util.Optional;
 
-/**
- * How an item ages in air: {@code kind} names its stages (patina, tarnish, rust, flaking), {@code days} is the mean number of
- * Minecraft days each step takes in ordinary air, {@code stages} how many visible stages it passes through, and {@code product}
- * what it becomes after the last ({@code per} of it to one product, so nine nuggets to one oxide). {@code dry} and {@code wet}
- * scale the rate in dry and damp air; salt air is twice damp.
- */
 public record Rate(String kind, float days, int stages, Optional<Item> product, int per, float dry, float wet) {
 
     public static final Codec<Rate> CODEC = RecordCodecBuilder.create(in -> in.group(

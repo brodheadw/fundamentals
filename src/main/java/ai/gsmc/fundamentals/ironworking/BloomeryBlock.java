@@ -79,7 +79,6 @@ public class BloomeryBlock extends BaseEntityBlock {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
         boolean ore = BloomeryBlockEntity.recipeFor(level, stack).isPresent();
-        // Charcoal only: mineral coal's sulfur makes iron brittle, which is why smiths avoided it.
         if (ore || stack.is(Items.CHARCOAL)) {
             if (!(ore ? bloomery.addOre(stack) : bloomery.addCharcoal())) {
                 return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -90,7 +89,6 @@ public class BloomeryBlock extends BaseEntityBlock {
             }
             return ItemInteractionResult.sidedSuccess(level.isClientSide);
         }
-        // A torch has to work: flint and steel needs iron, and this is how you get your first.
         if ((stack.is(Items.TORCH) || stack.is(Items.FLINT_AND_STEEL) || stack.is(Items.FIRE_CHARGE)) && bloomery.ignite()) {
             if (!level.isClientSide) {
                 level.playSound(null, pos, SoundEvents.FLINTANDSTEEL_USE, SoundSource.BLOCKS, 1.0F, 1.0F);

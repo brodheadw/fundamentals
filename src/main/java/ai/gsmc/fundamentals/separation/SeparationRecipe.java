@@ -1,5 +1,6 @@
 package ai.gsmc.fundamentals.separation;
 
+import ai.gsmc.fundamentals.Fundamentals;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -9,7 +10,6 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -22,16 +22,11 @@ import net.minecraft.world.level.material.Fluids;
 
 import java.util.Optional;
 
-/**
- * One cut of a mixer-settler battery: a liquor parts into its lighter and heavier rare earths over at least
- * {@code stages} stages, loaded with {@code organic} on top and stripped with {@code strip} at the far end. The
- * liquor is not half light and half heavy: {@code lightFraction} of each batch comes out as the light raffinate.
- */
 public record SeparationRecipe(Fluid liquor, Fluid organic, Fluid strip, int stages, Fluid light, Fluid heavy, float lightFraction)
         implements Recipe<SeparationRecipe.Liquor> {
 
     public static final RecipeType<SeparationRecipe> TYPE = RecipeType.simple(
-            ResourceLocation.fromNamespaceAndPath("fundamentals", "separation"));
+            Fundamentals.id("separation"));
     public static final RecipeSerializer<SeparationRecipe> SERIALIZER = new Serializer();
 
     public record Liquor(Fluid fluid) implements RecipeInput {
@@ -52,7 +47,6 @@ public record SeparationRecipe(Fluid liquor, Fluid organic, Fluid strip, int sta
         }
     }
 
-    /** The light raffinate one batch gives; at least a millibucket of each side, so a small battery still trickles both. */
     public int lightOf(int batch) {
         return lightOf(batch, lightFraction);
     }

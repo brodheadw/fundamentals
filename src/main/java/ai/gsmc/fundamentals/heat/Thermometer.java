@@ -2,12 +2,6 @@ package ai.gsmc.fundamentals.heat;
 
 import net.minecraft.util.Mth;
 
-/**
- * What a dial gauge reads with, and over what range: mercury in glass from its freezing point to its boiling point, red-dyed
- * kerosene in glass, a brass and steel bimetal strip, and the two thermocouples, type K (chromel against alumel) and type S
- * (platinum with a tenth of rhodium against platinum). Past the top the mercury and the spirit boil and burst their glass;
- * the rest peg against the stop.
- */
 public enum Thermometer {
     MERCURY("mercury_thermometer", -39, 357, true),
     SPIRIT("spirit_thermometer", -60, 150, true),
@@ -26,12 +20,10 @@ public enum Thermometer {
         this.bursts = bursts;
     }
 
-    /** Where the needle stands, 0 at the bottom of the scale and 1 at the top. */
     public double fraction(double celsius) {
         return Mth.clamp((celsius - min) / (max - min), 0, 1);
     }
 
-    /** The comparator signal, 0 to 15 across the scale. */
     public int signal(double celsius) {
         return (int) Math.round(15 * fraction(celsius));
     }

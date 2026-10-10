@@ -4,6 +4,12 @@
     "tfmg:steel_vat",
     "tfmg:firebrick_lined_vat"
   ],
+  "machines": [
+    "tfmg:electrode",
+    "tfmg:electrode"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
   "ingredients": [
     {
       "item": "fundamentals:calcium_chloride"
@@ -12,12 +18,6 @@
       "item": "fundamentals:calcium_chloride"
     }
   ],
-  "machines": [
-    "tfmg:electrode",
-    "tfmg:electrode"
-  ],
-  "min_size": 1,
-  "processing_time": 100,
   "results": [
     {
       "id": "fundamentals:calcium_ingot",
