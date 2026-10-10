@@ -1,0 +1,26 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": false,
+  "category": "misc",
+  "pattern": [
+    "N",
+    "A",
+    "S"
+  ],
+  "key": {
+    "N": {
+      "tag": "c:nuggets/nickel"
+    },
+    "A": {
+      "item": "fundamentals:alumina"
+    },
+    "S": {
+      "tag": "c:nuggets/steel"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "tfmg:spark_plug"
+  },
+  "show_notification": false
+}

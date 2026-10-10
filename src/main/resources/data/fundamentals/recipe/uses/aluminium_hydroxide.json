@@ -1,0 +1,19 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "fundamentals:sodium_aluminate_liquor"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:aluminium_hydroxide"
+    },
+    {
+      "id": "fundamentals:caustic_soda",
+      "amount": 400
+    }
+  ]
+}

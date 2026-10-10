@@ -63,6 +63,26 @@ def mantle():
     return img
 
 
+def anode():
+    """A dimensionally stable anode: an expanded titanium mesh blackened by its ruthenium-iridium oxide coat, hung from a bright titanium
+    current bar."""
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    bar, bar_light = (150, 150, 156, 255), (204, 204, 210, 255)
+    strand, glint, rim = (66, 68, 80, 255), (122, 126, 142, 255), (36, 36, 44, 255)
+    for x in range(2, 14):
+        img.putpixel((x, 2), bar_light)
+        img.putpixel((x, 3), bar)
+    for x in (4, 11):
+        img.putpixel((x, 4), bar)
+    for x in range(3, 13):
+        for y in range(5, 14):
+            if x in (3, 12) or y in (5, 13):
+                img.putpixel((x, y), rim)
+            elif (x + y) % 4 == 0 or (x - y) % 4 == 0:
+                img.putpixel((x, y), glint if (x + 2 * y) % 7 == 0 else strand)
+    return img
+
+
 def flask():
     """Mercury in a stoppered glass flask, the way it was sold: a bright silver pool with a mirror highlight under clear glass."""
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
@@ -202,6 +222,11 @@ def main():
     heap("beryllium_hydroxide", (255, 255, 255), (240, 240, 238), (190, 190, 186)).save(TEXTURES / "item/beryllium_hydroxide.png")
     heap("ammonium_fluoroberyllate", (255, 255, 255), (236, 240, 240), (184, 190, 192)).save(TEXTURES / "item/ammonium_fluoroberyllate.png")
     paint_raw("beryllium_pebbles", ((70, 76, 84), (124, 132, 142), (170, 178, 188), (216, 222, 230))).save(TEXTURES / "item/beryllium_pebbles.png")
+    anode().save(TEXTURES / "item/dimensionally_stable_anode.png")
+    heap("red_mud", (178, 84, 58), (140, 58, 38), (92, 36, 24)).save(TEXTURES / "item/red_mud.png")
+    heap("aluminium_hydroxide", (255, 255, 255), (240, 240, 236), (192, 192, 186)).save(TEXTURES / "item/aluminium_hydroxide.png")
+    heap("alumina", (255, 255, 255), (244, 244, 244), (200, 202, 206)).save(TEXTURES / "item/alumina.png")
+    heap("cryolite", (255, 255, 255), (232, 236, 238), (178, 186, 190)).save(TEXTURES / "item/cryolite.png")
     magnets()
     print("uses textures written")
 

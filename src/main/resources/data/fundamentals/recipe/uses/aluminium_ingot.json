@@ -1,0 +1,41 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "machines": [
+    "tfmg:graphite_electrode",
+    "tfmg:graphite_electrode"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
+  "ingredients": [
+    {
+      "item": "fundamentals:alumina"
+    },
+    {
+      "item": "fundamentals:alumina"
+    },
+    {
+      "item": "fundamentals:cryolite"
+    },
+    {
+      "item": "tfmg:coal_coke"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:aluminum_ingot"
+    },
+    {
+      "id": "fundamentals:cryolite",
+      "chance": 0.95
+    },
+    {
+      "id": "tfmg:carbon_dioxide",
+      "amount": 250
+    }
+  ],
+  "heat_requirement": "heated"
+}

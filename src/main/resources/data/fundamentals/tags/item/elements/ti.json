@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:dimensionally_stable_anode",
     "fundamentals:euxenite_dust",
     "fundamentals:euxenite_ore",
     "fundamentals:ilmenite_ore",
@@ -10,6 +11,7 @@
     "fundamentals:raw_ilmenite",
     "fundamentals:raw_loparite",
     "fundamentals:raw_rutile",
+    "fundamentals:red_mud",
     "fundamentals:rutile_ore",
     "fundamentals:titania_slag",
     "fundamentals:titanium_ingot",

@@ -69,6 +69,8 @@ ITEM_FORMULAS = {
     "crude_zirconium_tetrachloride": "ZrCl4,HfCl4", "zirconium_tetrachloride": "ZrCl4", "hafnium_tetrachloride": "HfCl4",
     "yttria_stabilised_zirconia": "ZrO2,Y2O3", "beryl_frit": "Be3Al2Si6O18", "beryllium_hydroxide": "Be(OH)2",
     "ammonium_fluoroberyllate": "(NH4)2BeF4", "beryllium_pebbles": "Be",
+    "dimensionally_stable_anode": "Ti,RuO2,IrO2", "red_mud": "Fe2O3,TiO2,Al2O3,SiO2,Na2O,(Sc,Y,La,Ce)", "aluminium_hydroxide": "Al(OH)3",
+    "alumina": "Al2O3", "cryolite": "Na3AlF6",
     # sintered NdFeB is sold nickel-plated against rust; SmCo and cast alnico go bare
     "neodymium_iron_boron_magnet": "Nd2Fe14B,Ni", "dysprosium_neodymium_iron_boron_magnet": "(Nd,Dy)2Fe14B,Ni", "samarium_cobalt_magnet": "SmCo5",
     "alnico_magnet": "Fe-Al-Ni-Co-Cu",
