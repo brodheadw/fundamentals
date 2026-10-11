@@ -405,6 +405,16 @@
         ]
       }
     },
+    "sb": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/sb"
+          }
+        ]
+      }
+    },
     "la": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
@@ -707,6 +717,7 @@
       "pd",
       "ag",
       "sn",
+      "sb",
       "la",
       "ce",
       "pr",

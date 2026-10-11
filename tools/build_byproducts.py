@@ -104,6 +104,14 @@ WHY = {
     "fundamentals:raw_magnetite": "Washing gravel leaves the heavy black sand, magnetite, behind.",
     "minecraft:copper_ingot": "Copper co-deposited with nickel at the cathode is a sellable metal.",
     "minecraft:iron_nugget": "Crushed slag is passed under a magnet to pull out its metallic iron prills.",
+    "fundamentals:salt": "Sylvinite is sylvite and halite together; the hot leach takes the potassium chloride and leaves the salt, which Saskatchewan's mills stack or pump back underground.",
+    "fundamentals:niobium_oxide": "Columbite-tantalite carries more niobium than tantalum, and the same extraction strips it as niobium oxide, as at Ulba and Ningxia.",
+    "fundamentals:potassium_fluorotantalate": "Euxenite carries a little tantalum beside its niobium, and its fluoride digest yields it the same way.",
+    "fundamentals:heavy_rare_earth_concentrate": "Hydrofluoric acid leaves euxenite's yttrium and rare earths behind as insoluble fluorides, which are cracked like any other rare earth concentrate.",
+    "fundamentals:titanium_tetrachloride": "Solikamsk chlorinates loparite and condenses titanium tetrachloride with the niobium and tantalum chlorides; the titanium goes to sponge.",
+    "fundamentals:crude_rare_earth_liquor": "The chloride melt a loparite chlorinator leaves holds the rare earths, which Solikamsk leaches and sends to separation.",
+    "fundamentals:mercury": "An amalgam retort condenses its mercury and the mill uses it again, though old mills lost a good part of it to the air and the river.",
+    "fundamentals:silver_nugget": "Native gold always carries silver; Miller chlorination and aqua regia part it as silver chloride, which is reduced to silver.",
 }
 
 

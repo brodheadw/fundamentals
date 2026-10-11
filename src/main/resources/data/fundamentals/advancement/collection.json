@@ -599,6 +599,78 @@
           }
         ]
       }
+    },
+    "fundamentals:raw_graphite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_graphite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_stibnite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_stibnite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_pyrochlore": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_pyrochlore"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_columbite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_columbite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_sylvite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_sylvite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_native_gold": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_native_gold"
+            ]
+          }
+        ]
+      }
     }
   },
   "parent": "fundamentals:root"

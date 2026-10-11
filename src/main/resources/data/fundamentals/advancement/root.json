@@ -69,7 +69,13 @@
               "fundamentals:raw_zircon",
               "fundamentals:raw_beryl",
               "fundamentals:raw_bertrandite",
-              "fundamentals:raw_uraninite"
+              "fundamentals:raw_uraninite",
+              "fundamentals:raw_graphite",
+              "fundamentals:raw_stibnite",
+              "fundamentals:raw_pyrochlore",
+              "fundamentals:raw_columbite",
+              "fundamentals:raw_sylvite",
+              "fundamentals:raw_native_gold"
             ]
           }
         ]

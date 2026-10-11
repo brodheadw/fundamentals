@@ -17,6 +17,9 @@
     },
     {
       "item": "fundamentals:lithium_chloride"
+    },
+    {
+      "item": "fundamentals:potash"
     }
   ],
   "results": [
@@ -31,6 +34,10 @@
     {
       "amount": 250,
       "id": "fundamentals:chlorine"
+    },
+    {
+      "chance": 0.95,
+      "id": "fundamentals:potash"
     }
   ]
 }

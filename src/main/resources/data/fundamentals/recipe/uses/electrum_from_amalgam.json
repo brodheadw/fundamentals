@@ -1,0 +1,18 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:gold_amalgam"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:electrum_ingot"
+    },
+    {
+      "id": "fundamentals:mercury",
+      "chance": 0.45
+    }
+  ],
+  "heat_requirement": "heated"
+}

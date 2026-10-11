@@ -48,11 +48,13 @@ SWITCHED_OFF = {
     "vat_machine_recipe/vat_reaction/titanium_tetrachloride_mg": "rutile chlorinated without carbon; ours carbochlorinates with coke",
     "casting/polyethylene_sheet": "its polyethylene melt is no longer made; The Factory's plastic sheet serves",
     "casting/polyvinyl_chloride": "its PVC melt is no longer made; our PVC sheet serves",
+    "vat_machine_recipe/electrolysis/salt": "salt electrolysed in water gives caustic soda and hydrogen, not sodium; ours is the Downs cell, molten salt with calcium chloride",
 }
 ORE_ITEM = re.compile(r"chemica:((deepslate_)?[a-z]+_ore|raw_[a-z_]+|crushed_raw_[a-z]+|crushed_graphite|([a-z]+_grade_)?rutile_(crystal|dust)"
                       r"|fervorite|zelosite|antimony_(ingot|nugget|dust))")
-METALS = ("tin", "silver", "platinum", "cobalt", "chromium", "tungsten", "molybdenum", "titanium", "magnesium", "iridium")
-INPUTS = {"chemica:tungsten_dust": {"tag": "c:ingots/tungsten"}, "chemica:phosphorus_dust": {"item": "fundamentals:white_phosphorus"}}
+METALS = ("tin", "silver", "platinum", "cobalt", "chromium", "tungsten", "molybdenum", "titanium", "magnesium", "iridium", "tantalum", "sodium")
+INPUTS = {"chemica:tungsten_dust": {"tag": "c:ingots/tungsten"}, "chemica:phosphorus_dust": {"item": "fundamentals:white_phosphorus"},
+          "chemica:purified_graphite_flakes": {"tag": "c:dusts/graphite"}}
 RECIPE_INPUTS = {"vat_machine_recipe/mixing/chromic_acid": {"chemica:chromium_dust": {"item": "fundamentals:sodium_dichromate"}}}
 MISNAMED = {"chemica:sulfur_dust": "tfmg:sulfur_dust"}
 NATIVE_COPPER = {"chemica:arsenic_dust": "fundamentals:silver_nugget"}
@@ -105,9 +107,6 @@ def take_over(path, recipe):
         recipe["machines"] = ["tfmg:graphite_electrode", "tfmg:graphite_electrode"]
     if path == "vat_machine_recipe/vat_reaction/epichlorohydrin":
         recipe["machines"] = ["tfmg:mixing"]
-    if path == "vat_machine_recipe/electrolysis/salt":
-        recipe["ingredients"] = [i for i in recipe["ingredients"] if i.get("fluid") != "minecraft:water"]
-        recipe["results"] = [r for r in recipe["results"] if r["id"] != "minecraft:water"]
     return recipe
 
 
@@ -144,12 +143,6 @@ def missing_metals():
            [{"id": "chemica:vanadium_dust"}, {"id": "create:crushed_raw_iron", "count": 3}], "heated")
     mixing("vanadium_ingot", [{"item": "chemica:vanadium_dust"}] * 2 + [{"item": "fundamentals:aluminium_powder"}],
            [{"id": "chemica:vanadium_ingot"}, {"id": "fundamentals:alumina", "chance": 0.5}], "superheated")
-    mixing("tantalum_dust", [{"tag": "c:dusts/euxenite"}] * 2 + [fluid_ingredient("hydrofluoric_acid", 500)],
-           [{"id": "chemica:tantalum_dust", "chance": 0.25}], "heated")
-    mixing("tantalum_ingot", [{"item": "chemica:tantalum_dust"}, {"item": "chemica:sodium_ingot"}, fluid_ingredient("argon", 100)],
-           [{"id": "chemica:tantalum_ingot"}], "superheated")
-    write(OURS / "graphite.json", {"neoforge:conditions": LOADED, **ARC, "ingredients": [{"item": "tfmg:coal_coke"}] * 2,
-                                   "results": [{"id": "chemica:purified_graphite_flakes", "count": 2}]})
 
 
 def main():

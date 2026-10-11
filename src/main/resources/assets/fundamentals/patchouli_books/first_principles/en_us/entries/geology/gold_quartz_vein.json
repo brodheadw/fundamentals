@@ -1,0 +1,13 @@
+{
+  "name": "Gold Quartz Vein",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_native_gold",
+  "sortnum": 41,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A vein of quartz block, in mountain and hill country and the deep dark beneath it, between y -40 and 40. Carries native gold in masses, stibnite in masses, galena in scattered grains. Dig at the core: the edges are lean.",
+      "title": "Gold Quartz Vein"
+    }
+  ]
+}

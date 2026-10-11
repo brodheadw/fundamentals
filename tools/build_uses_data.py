@@ -5,12 +5,13 @@ import zipfile
 
 import common
 from build_ore_data import silk_or_raw
-from build_chemica_compat import CHEMICA_SHEETS, fluid_ingredient as fluid, optional
+from build_chemica_compat import ARC, CHEMICA_SHEETS, fluid_ingredient as fluid, optional
 from common import ASSETS, DATA, TFMG_JAR, cube, drop_self, ns, read_lang, result, result_fluid, tag as tag_file, write, write_lang
 
 USES = DATA / "recipe/uses"
 TFMG = DATA.parent / "tfmg/recipe"
 TFMG_LOOT = DATA.parent / "tfmg/loot_table/blocks"
+VANILLA_LOOT = DATA.parent / "minecraft/loot_table/blocks"
 CREATE = DATA.parent / "create/recipe"
 TFMG_ORES = {"lead": "galena", "lithium": "spodumene", "nickel": "pentlandite"}
 TFMG_STONES = {"galena": "galena", "bauxite": "bauxite"}
@@ -39,7 +40,8 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "yellowcake": "Yellowcake", "uranium_tetrafluoride": "Green Salt", "uranium_dioxide": "Enriched Uranium Dioxide",
          "uranium_fuel_pellet": "Uranium Fuel Pellet", "depleted_uranium_oxide": "Depleted Uranium Oxide", "zircaloy_tube": "Zircaloy Tube",
          "boron_carbide": "Boron Carbide", "potassium_bifluoride": "Potassium Bifluoride", "thorium_dioxide": "Thorium Dioxide",
-         "puddle_ball": "Puddle Ball"}
+         "puddle_ball": "Puddle Ball",
+         "graphite": "Graphite", "potash": "Potash", "gold_amalgam": "Gold Amalgam", "potassium_fluorotantalate": "Potassium Fluorotantalate"}
 # In the order of magnet.MagnetGrade.
 MAGNET_ALLOYS = {"neodymium_iron_boron": ("ingot", "plate"), "dysprosium_neodymium_iron_boron": ("ingot", "plate"),
                  "samarium_cobalt": ("ingot", "plate"), "alnico": ("ingot",)}
@@ -260,9 +262,9 @@ def lithium():
                                               "results": [result("lithium_chloride", 2), result_fluid("tfmg:carbon_dioxide", 250)]})
     write(LITHIUM / "lithium_ingot.json", {"type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:steel_vat", "tfmg:firebrick_lined_vat"],
                                            "heat_requirement": "heated", "machines": ["tfmg:electrode", "tfmg:electrode"], "min_size": 1, "processing_time": 100,
-                                           "ingredients": item("lithium_chloride", 2),
+                                           "ingredients": item("lithium_chloride", 2) + item("potash"),
                                            "results": [{"id": "tfmg:lithium_ingot"}, {"chance": 0.5, "count": 3, "id": "tfmg:lithium_nugget"},
-                                                       {"amount": 250, "id": "fundamentals:chlorine"}]})
+                                                       {"amount": 250, "id": "fundamentals:chlorine"}, {"chance": 0.95, "id": "fundamentals:potash"}]})
 
 
 def disabled(path):
@@ -350,7 +352,7 @@ def nickel():
     pgm_vat("cobalt_electrowinning", [fluid("cobalt_chloride_liquor", 500)], [result("cobalt_ingot"), result_fluid("chlorine", 250)],
             machines=("tfmg:electrode", "tfmg:electrode"), heat=None, folder=USES)
     tag_file(DATA / "tags/item/nickel_dusts.json", [f"fundamentals:{name}" for name in ("nickel_matte_dust", "converter_matte_dust", "roasted_pentlandite", "nickel_oxide")])
-    tag_file(DATA / "tags/item/sulfides.json", [f"fundamentals:{name}" for name in ("raw_pentlandite", "raw_cobaltite", "converter_matte_dust")])
+    tag_file(DATA / "tags/item/sulfides.json", [f"fundamentals:{name}" for name in ("raw_pentlandite", "raw_cobaltite", "converter_matte_dust", "raw_stibnite")])
 
 
 def tin():
@@ -656,6 +658,66 @@ def uranium():
                                                      ("uraninite_dust", "yellowcake", "uranium_tetrafluoride", "uranium_dioxide", "depleted_uranium_oxide")])
 
 
+def graphite():
+    mixing("graphite_concentrate", item("raw_graphite", 2) + [fluid("minecraft:water", 250), fluid("tfmg:kerosene", 50)],
+           [result("graphite_concentrate"), {"id": "fundamentals:graphite_concentrate", "chance": 0.5}])
+    mixing("graphite", item("graphite_concentrate", 2) + [fluid("hydrofluoric_acid", 250)], [result("graphite", 2)], "heated")
+    write(USES / "graphite_thermal.json", {**ARC, "ingredients": item("graphite_concentrate", 4) + argon(), "results": [result("graphite", 4)]})
+    write(USES / "graphite_acheson.json", {**ARC, "ingredients": item("tfmg:coal_coke", 2), "results": [result("graphite", 2)]})
+    write(USES / "graphite_electrode.json", {"type": "create:compacting", "heat_requirement": "heated",
+                                             "ingredients": item("graphite", 4) + [fluid("tfmg:creosote", 100)], "results": [result("tfmg:graphite_electrode")]})
+    write(DATA.parent / "c/tags/item/dusts/graphite.json", {"replace": False, "values": ["fundamentals:graphite"] + optional(["chemica:purified_graphite_flakes"])})
+
+
+def antimony():
+    roast("stibnite", "antimony_oxide")
+    mixing("antimony_ingot", item("antimony_oxide", 2) + item("minecraft:charcoal") + item("soda_ash"), [result("antimony_ingot", 2), result("tfmg:slag")], "heated")
+    mixing("antimonial_lead", tag("c:ingots/lead", 8) + item("antimony_nugget", 3), [result("antimonial_lead_ingot", 8)], "heated")
+
+
+def niobium_tantalum():
+    for feed in ("pyrochlore_concentrate", "niobium_oxide"):
+        mixing(f"ferroniobium_from_{feed}", item(feed, 2) + item("aluminium_powder", 2) + item("raw_hematite"),
+               [result("ferroniobium_ingot", 2), result("tfmg:slag")], "superheated")
+    digest = item("potash") + [fluid("hydrofluoric_acid", 500), fluid("tfmg:sulfuric_acid", 250)]
+    mixing("potassium_fluorotantalate", item("columbite_dust", 2) + digest, [result("potassium_fluorotantalate"), result("niobium_oxide")], "heated")
+    mixing("niobium_oxide_from_euxenite", item("euxenite_dust", 2) + digest,
+           [result("niobium_oxide"), {"id": "fundamentals:potassium_fluorotantalate", "chance": 0.25}, result("heavy_rare_earth_concentrate")], "heated")
+    mixing("niobium_oxide_from_loparite", item("loparite_dust", 2) + item("tfmg:coal_coke") + [fluid("chlorine", 1000)],
+           [result("niobium_oxide"), result_fluid("titanium_tetrachloride", 250), result_fluid("crude_rare_earth_liquor", 250)], "heated")
+    pgm_vat("sodium_ingot", item("salt", 2) + item("calcium_chloride"),
+            [result("sodium_ingot"), result_fluid("chlorine", 250), {"id": "fundamentals:calcium_chloride", "chance": 0.9}],
+            machines=("tfmg:electrode", "tfmg:electrode"), folder=USES)
+    mixing("tantalum_ingot", item("potassium_fluorotantalate", 2) + item("sodium_ingot", 2) + argon(), [result("tantalum_ingot")], "superheated")
+    mixing("hsla_steel", item("ferroniobium_nugget") + tag("c:storage_blocks/steel", 2), [result("hsla_steel_ingot", 18)], "superheated")
+    with zipfile.ZipFile(TFMG_JAR) as jar:
+        plate = json.loads(jar.read("data/tfmg/recipe/sequenced_assembly/heavy_plate.json"))
+    write(USES / "heavy_plate_from_hsla_steel.json", {**plate, "ingredient": {"tag": "c:ingots/hsla_steel"}, "results": [{"id": "tfmg:heavy_plate", "count": 2}]})
+    mixing("superalloy_with_tantalum", *superalloy(item("tantalum_nugget"), 9), "superheated")
+    unfinished = {"item": "tfmg:unfinished_capacitor"}
+    write(USES / "tantalum_capacitor.json", {
+        "type": "create:sequenced_assembly", "ingredient": {"tag": "c:nuggets/tantalum"}, "loops": 1, "results": [{"id": "tfmg:capacitor_item", "count": 4}],
+        "sequence": [{"type": "create:deploying", "ingredients": [unfinished, part], "results": [{"id": "tfmg:unfinished_capacitor"}]}
+                     for part in ({"item": "fundamentals:raw_pyrolusite"}, {"item": "fundamentals:graphite"}, {"tag": "c:nuggets/silver"})],
+        "transitional_item": {"id": "tfmg:unfinished_capacitor"}})
+
+
+def potash():
+    mixing("potash", item("raw_sylvite", 2) + [fluid("minecraft:water", 500)], [result("potash", 2), result("salt")], "heated")
+    write(DATA.parent / "c/tags/item/dusts/potassium_chloride.json", {"replace": False, "values": ["fundamentals:potash"]})
+
+
+def gold():
+    write(USES / "gold_from_panning.json", {"type": "create:splashing", "ingredients": item("raw_native_gold"), "results": [result("minecraft:gold_nugget", 3)]})
+    mixing("gold_amalgam", item("raw_native_gold", 2) + item("mercury"), [result("gold_amalgam", 2)])
+    mixing("electrum_from_amalgam", item("gold_amalgam"), [result("electrum_ingot"), {"id": "fundamentals:mercury", "chance": 0.45}], "heated")
+    mixing("gold_from_electrum", item("electrum_ingot") + [fluid("chlorine", 250)], [result("minecraft:gold_ingot"), result("silver_nugget")], "superheated")
+    mixing("gold_from_electrum_in_aqua_regia", item("electrum_ingot") + [fluid("aqua_regia", 500)], [result("minecraft:gold_ingot"), result("silver_nugget")], "heated")
+    for block in ("gold_ore", "deepslate_gold_ore"):
+        write(VANILLA_LOOT / f"{block}.json", {"type": "minecraft:block", "pools": [
+            {"rolls": 1, "bonus_rolls": 0, "entries": [silk_or_raw(f"minecraft:{block}", "native_gold")]}]})
+
+
 def pgm_mixing(name, ingredients, results, heat=None):
     common.mixing(PLATINUM / f"{name}.json", ingredients, results, heat)
 
@@ -797,7 +859,7 @@ def thorium():
 
 def lead_and_zinc_sinks():
     shaped(TFMG / "crafting/materials/accumulator.json", ["LWL", "SXS", "LCL"],
-           {"X": {"item": "fundamentals:litharge"}, "C": {"item": "tfmg:industrial_aluminum_casing"}, "L": {"tag": "c:plates/lead"},
+           {"X": {"item": "fundamentals:litharge"}, "C": {"item": "tfmg:industrial_aluminum_casing"}, "L": {"tag": "c:plates/antimonial_lead"},
             "S": {"item": "tfmg:sulfuric_acid_bucket"}, "W": {"tag": "c:wires/copper"}},
            {"count": 1, "id": "tfmg:accumulator"})
     write(TFMG / "vat_machine_recipe/rubber.json", {
@@ -895,12 +957,13 @@ def main():
     shutil.rmtree(USES, ignore_errors=True)
     shutil.rmtree(TFMG, ignore_errors=True)
     shutil.rmtree(TFMG_LOOT.parent, ignore_errors=True)
+    shutil.rmtree(VANILLA_LOOT.parent, ignore_errors=True)
     shutil.rmtree(CREATE, ignore_errors=True)
     shutil.rmtree(LITHIUM, ignore_errors=True)
     shutil.rmtree(PLATINUM, ignore_errors=True)
     shutil.rmtree(PLASTICS, ignore_errors=True)
     shutil.rmtree(TFMG_ASSETS / "models", ignore_errors=True)
-    for pattern in ("roasted_c*", "roasted_pentlandite_*", "roasted_siderite_*", "nickel_oxide_*", "copper_calcine_*", "zinc_oxide_*", "roasted_tin_*"):
+    for pattern in ("roasted_c*", "roasted_pentlandite_*", "roasted_siderite_*", "nickel_oxide_*", "copper_calcine_*", "zinc_oxide_*", "roasted_tin_*", "antimony_oxide_*"):
         for stale in ROASTING.glob(pattern):
             stale.unlink()
     air_separation()
@@ -943,6 +1006,11 @@ def main():
     silver_sinks()
     thorium()
     uranium()
+    graphite()
+    antimony()
+    niobium_tantalum()
+    potash()
+    gold()
     lead_and_zinc_sinks()
     plastics()
     names()

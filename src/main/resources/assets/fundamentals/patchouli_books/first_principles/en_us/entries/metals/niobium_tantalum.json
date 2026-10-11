@@ -1,0 +1,72 @@
+{
+  "name": "Niobium and tantalum",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:ferroniobium_ingot",
+  "sortnum": 18,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Niobium and tantalum are twins, as zirconium and hafnium are, and lie together. Pyrochlore, (Na,Ca)2Nb2O6(OH,F), brown octahedra in carbonatite, is nearly all the niobium there is: Araxá in Brazil, a weathered carbonatite, gives about nine tenths of it.",
+      "title": "Niobium and tantalum"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Columbite-tantalite, (Fe,Mn)(Nb,Ta)2O6, black and heavy, is the tantalum mineral of the lithium pegmatites, Greenbushes' and Pilgangoora's, and with the Congo's coltan most of the world's tantalum."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Washed under a fan, raw pyrochlore leaves half its weight as concentrate. Araxá does not make niobium metal: it makes ferroniobium, about two thirds niobium, by aluminothermic reduction. Two concentrate, two aluminium powder and a raw hematite, lit over a superheated burner, burn on by themselves to two ferroniobium and a slag.",
+      "title": "Ferroniobium"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Nine tenths of niobium goes into steel, a few hundredths of a per cent, as microalloying: it pins the grain small and makes high-strength low-alloy steel, HSLA, for pipelines, bridges and car bodies.",
+      "title": "HSLA steel"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A ferroniobium nugget in two steel blocks, superheated, makes eighteen HSLA steel, about a tenth of a per cent niobium; an ingot of it presses to two heavy plates, being stronger at the same weight."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Columbite opens to hydrofluoric acid.",
+      "title": "Tantalum"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two columbite dust, a potash, 500 mB of hydrofluoric acid and 250 mB of sulfuric acid, heated, are the digest and the MIBK solvent extraction in one step: the tantalum leaves as potassium fluorotantalate, K2TaF7, crystallised with the potassium chloride, Marignac's salt, and the niobium as its oxide, which goes to ferroniobium as pyrochlore's does."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two fluorotantalate, two sodium and 100 mB of argon, superheated, reduce to a tantalum ingot: sodium reduction, the way nearly all tantalum powder is made.",
+      "title": "Sodium reduction"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sodium comes from the Downs cell: two salt and a calcium chloride, which lowers the melt to about 600 °C, on two electrodes in a heated vat give a sodium ingot and 250 mB of chlorine, and the calcium chloride nine times in ten."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Euxenite carries niobium and tantalum too, and hydrofluoric acid takes them while the rare earths stay behind as fluorides: two euxenite dust digested the same way give a niobium oxide, a fluorotantalate one time in four, and a heavy rare earth concentrate.",
+      "title": "From euxenite and loparite"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Loparite is chlorinated, as Solikamsk does it: two loparite dust, a coal coke and 1,000 mB of chlorine, heated, give a niobium oxide, 250 mB of titanium tetrachloride and 250 mB of crude rare earth liquor."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Tantalum's oxide film is the thinnest, toughest dielectric there is, so most tantalum goes into capacitors: a tantalum nugget with a raw pyrolusite, the manganese dioxide cathode, a graphite and a silver nugget deployed on it in turn assembles into four capacitors.",
+      "title": "What it is for"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A tantalum nugget in the superalloy melt makes nine ingots where it made seven."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: USGS, Mineral Commodity Summaries 2025, Niobium and Tantalum; CBMM, \"Niobium technical information\"; Habashi, Handbook of Extractive Metallurgy (Wiley-VCH, 1997), Niobium and Tantalum; Gupta and Suri, Extractive Metallurgy of Niobium (CRC, 1994).",
+      "title": "Sources"
+    }
+  ]
+}

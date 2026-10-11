@@ -1,0 +1,20 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_native_gold"
+    },
+    {
+      "item": "fundamentals:raw_native_gold"
+    },
+    {
+      "item": "fundamentals:mercury"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:gold_amalgam",
+      "count": 2
+    }
+  ]
+}

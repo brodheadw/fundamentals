@@ -1,0 +1,38 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:firebrick_lined_vat"
+  ],
+  "min_size": 1,
+  "processing_time": 200,
+  "machines": [
+    "tfmg:graphite_electrode",
+    "tfmg:graphite_electrode",
+    "tfmg:graphite_electrode"
+  ],
+  "ingredients": [
+    {
+      "item": "fundamentals:graphite_concentrate"
+    },
+    {
+      "item": "fundamentals:graphite_concentrate"
+    },
+    {
+      "item": "fundamentals:graphite_concentrate"
+    },
+    {
+      "item": "fundamentals:graphite_concentrate"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 100,
+      "tag": "c:argon"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:graphite",
+      "count": 4
+    }
+  ]
+}

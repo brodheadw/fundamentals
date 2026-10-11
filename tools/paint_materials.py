@@ -114,6 +114,13 @@ METAL = {
     "beryllium": ((78, 84, 92), (138, 146, 156), (186, 194, 204), (230, 236, 244)),
     "beryllium_copper": ((104, 52, 28), (170, 100, 58), (214, 148, 96), (244, 202, 152)),
     "zircaloy": ((80, 82, 88), (144, 146, 152), (194, 196, 202), (236, 237, 240)),
+    "sodium": ((112, 112, 108), (184, 184, 178), (226, 226, 220), (252, 252, 248)),
+    "electrum": ((140, 112, 40), (204, 178, 92), (236, 218, 142), (254, 246, 204)),
+    "hsla_steel": ((60, 64, 72), (112, 118, 130), (162, 168, 182), (212, 218, 230)),
+    "antimony": ((86, 90, 102), (156, 162, 176), (204, 210, 224), (242, 246, 252)),
+    "antimonial_lead": ((50, 54, 66), (92, 98, 116), (134, 140, 158), (184, 190, 206)),
+    "ferroniobium": ((64, 66, 70), (118, 120, 126), (164, 166, 172), (210, 212, 218)),
+    "tantalum": ((64, 72, 90), (118, 130, 152), (170, 180, 200), (222, 230, 244)),
 }
 
 OXIDE = {
@@ -138,6 +145,8 @@ OXIDE["chromium"] = ((34, 66, 32), (66, 108, 54), (102, 144, 80), (150, 184, 120
 OXIDE["titanium"] = ((176, 178, 180), (228, 229, 230), (247, 247, 248), (255, 255, 255))
 OXIDE["zirconium"] = WHITE
 OXIDE["beryllium"] = WHITE
+OXIDE["antimony"] = WHITE
+OXIDE["niobium"] = WHITE
 
 STREAK = {"chromite": ((34, 24, 18), (64, 48, 36), (94, 72, 54), (132, 106, 82))}
 
@@ -186,9 +195,13 @@ MATERIALS = {
     "tin_concentrate": CONCENTRATE, "crude_tin": INGOT, "tin": TIN, "bronze": BRONZE, "lead_bullion": INGOT, "silver": PRECIOUS,
     "zircon": CONCENTRATE, "zirconium": ZIRCONIUM, "hafnium": HAFNIUM, "beryllium": BERYLLIUM, "beryllium_copper": COPPER_ALLOY,
     "uraninite": MINERAL, "zircaloy": STRUCTURAL,
+    "graphite": CONCENTRATE, "sodium": INGOT, "electrum": COBALT, "hsla_steel": INGOT,
+    "pyrochlore": CONCENTRATE, "columbite": MINERAL, "antimony": ("oxide", "ingot", "nugget"), "antimonial_lead": STRUCTURAL,
+    "niobium": ("oxide",), "ferroniobium": COBALT, "tantalum": COBALT,
 }
 
-DISPLAY = {"bastnasite": "Bastnäsite", "bastnasite_concentrate": "Bastnäsite Concentrate", "neodymium_iron_boron": "NdFeB", "dysprosium_neodymium_iron_boron": "Dy-NdFeB", "samarium_cobalt": "SmCo", "aluminium_scandium": "Al-Sc"}
+DISPLAY = {"bastnasite": "Bastnäsite", "bastnasite_concentrate": "Bastnäsite Concentrate", "neodymium_iron_boron": "NdFeB", "dysprosium_neodymium_iron_boron": "Dy-NdFeB", "samarium_cobalt": "SmCo", "aluminium_scandium": "Al-Sc",
+           "columbite": "Columbite-Tantalite", "hsla_steel": "HSLA Steel"}
 
 
 def item_name(material, form):

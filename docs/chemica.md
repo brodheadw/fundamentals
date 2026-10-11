@@ -35,7 +35,7 @@ Fundamentals does not need it. With both installed, `tools/build_chemica_compat.
 | Polyethylene | TFMG's vats over our Ziegler-Natta catalyst | TiCl4 + ethylene + air or oxygen | ours: oxygen poisons the catalyst | b: Chemica's off; its uses take `c:plates/polyethylene` (TFMG's sheet) |
 | PTFE | none | fluorine, persulfate initiator | Chemica's alone | its sheet builds our tanks and cells |
 | Soda ash | trona | plant ash in a centrifuge | both (barilla) | its ash gives ours; its glass takes `c:dusts/soda_ash` |
-| Sodium | none | salt electrolysed in water | the Downs cell: molten salt | b: the water taken out |
+| Sodium | the Downs cell: salt and calcium chloride electrolysed molten | salt electrolysed in water | ours: water gives caustic soda and hydrogen, not sodium | a: `c:ingots/sodium`; b: Chemica's off |
 
 Chemica's vat recipes spell some keys in camelCase (`heatRequirement`, `allowedVatTypes`), which TFMG ignores; the
 rewritten ones use TFMG's names, so they now ask the heat and vats Chemica meant. Chemica 0.6.0 also replaces Create's
@@ -52,7 +52,7 @@ off the `c:raw_materials` tags. What its recipes wanted from those ores comes fr
 
 | Chemica wanted | Now takes | Why |
 |---|---|---|
-| tin, silver, platinum, cobalt, chromium, tungsten, molybdenum, titanium, magnesium, iridium ingots | `c:ingots/<metal>`, ours; its metal-producing recipes give ours | the same metal |
+| tin, silver, platinum, cobalt, chromium, tungsten, molybdenum, titanium, magnesium, iridium, tantalum, sodium ingots | `c:ingots/<metal>`, ours; its metal-producing recipes give ours | the same metal |
 | those metals' nuggets, and silver and titanium sheet | `c:nuggets/*`, `c:plates/*`, ours; its packing and pressing of them switched off | ours already does it |
 | its metal dusts (platinum, silver, cobalt, iridium, tin...) | its own crushing of our ingot | a ground metal |
 | tungsten dust | `c:ingots/tungsten` | our APT-reduced tungsten is the powder |
@@ -60,8 +60,8 @@ off the `c:raw_materials` tags. What its recipes wanted from those ores comes fr
 | phosphorus dust, for phosphoric acid | white phosphorus | the thermal process burns P4 |
 | fluorite dust, rutile | switched off: our hydrofluoric acid and titanium tetrachloride serve | |
 | vanadium | new: 4 magnetite + soda ash + water, heated, to vanadium dust and crushed iron; dust + aluminium powder, superheated, to the ingot | titanomagnetite salt roast (Highveld); aluminothermic reduction |
-| tantalum | new: 2 euxenite dust + hydrofluoric acid to tantalum dust (1 in 4); dust + sodium under argon, superheated, to the ingot | HF digestion of the niobate-tantalate; sodium reduction |
-| graphite | new: 2 coke in an arc vat (three graphite electrodes) to graphite flakes | Acheson's synthetic graphite |
+| tantalum | ours: columbite-tantalite (or euxenite) digested in hydrofluoric acid with potash to potassium fluorotantalate, reduced by sodium under argon; its dust is its own crushing of our ingot | HF digestion and MIBK extraction; sodium reduction |
+| graphite flakes | `c:dusts/graphite`: our graphite, floated from flake ore and purified, or Acheson's, coke in an arc vat | natural and synthetic graphite |
 | antimony | nothing: its only use was a dopant, and ours is phosphorus | |
 
 Chemica's p-type silicon took iridium, which is no dopant; ours (boron, from boric acid) and our n-type (phosphorus) replace

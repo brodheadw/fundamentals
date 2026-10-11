@@ -1,0 +1,30 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:pyrochlore_concentrate"
+    },
+    {
+      "item": "fundamentals:pyrochlore_concentrate"
+    },
+    {
+      "item": "fundamentals:aluminium_powder"
+    },
+    {
+      "item": "fundamentals:aluminium_powder"
+    },
+    {
+      "item": "fundamentals:raw_hematite"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:ferroniobium_ingot",
+      "count": 2
+    },
+    {
+      "id": "tfmg:slag"
+    }
+  ],
+  "heat_requirement": "superheated"
+}

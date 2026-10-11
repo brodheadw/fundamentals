@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:graphite_concentrate"
+    },
+    {
+      "item": "fundamentals:graphite_concentrate"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 250,
+      "tag": "c:acids/hydrofluoric"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:graphite",
+      "count": 2
+    }
+  ],
+  "heat_requirement": "heated"
+}

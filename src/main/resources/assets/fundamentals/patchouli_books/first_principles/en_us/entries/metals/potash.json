@@ -1,0 +1,27 @@
+{
+  "name": "Potash",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:potash",
+  "sortnum": 19,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Sylvite, KCl, is salt's potassium twin, colourless when pure and red in the Saskatchewan mines, where a dust of hematite stains it. It is the last salt to crystallise as a sea dries up, so it lies in seams in the evaporite beds with the halite. Mined with its halite, it is sylvinite.",
+      "title": "Sylvite"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Potassium chloride dissolves far better hot than cold and salt hardly better at all, so the hot leach parts them, as the Carlsbad and Saskatchewan mills do: two raw sylvite and 500 mB of water, heated, give two potash, the muriate of potash farmers buy, and a salt. Nearly all potash is fertiliser.",
+      "title": "Muriate of potash"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Here it is also the bath lithium is electrolysed in and the potassium the tantalum salt is crystallised with."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: USGS, Mineral Commodity Summaries 2025, Potash; Garrett, Potash: Deposits, Processing, Properties and Uses (Chapman & Hall, 1996).",
+      "title": "Sources"
+    }
+  ]
+}

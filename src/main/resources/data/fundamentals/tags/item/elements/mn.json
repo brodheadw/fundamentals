@@ -1,9 +1,12 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:columbite_dust",
+    "fundamentals:columbite_ore",
     "fundamentals:ferromanganese_ingot",
     "fundamentals:manganese_steel_ingot",
     "fundamentals:pyrolusite_ore",
+    "fundamentals:raw_columbite",
     "fundamentals:raw_pyrolusite",
     "fundamentals:raw_wolframite",
     "fundamentals:wolframite_ore"

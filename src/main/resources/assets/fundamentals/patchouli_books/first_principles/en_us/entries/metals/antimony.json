@@ -1,0 +1,40 @@
+{
+  "name": "Antimony",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:antimony_ingot",
+  "sortnum": 17,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Stibnite, Sb2S3, grows in sprays of lead-grey needles that bend in the hand. It is a mineral of low-temperature hydrothermal veins in quartz, often with a little gold, and Xikuangshan in Hunan, the Tin Mine Mountain that was never tin, has given the world more antimony than anywhere since 1897.",
+      "title": "Stibnite"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Here it fills quartz veins in mountain country, and rides in the gold-quartz veins."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Roasted on a campfire or in a smoker, stibnite burns to antimony trioxide, the white fume a real volatilising roaster collects in its bag house, and gives off sulfur dioxide as every sulfide roast does. Two oxide, a charcoal and a soda ash for flux, heated, reduce to two antimony ingots and a slag.",
+      "title": "Roasting and reduction"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Antimony is brittle, bluish-white, and expands as it freezes."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Lead alone is too soft for a battery grid. Eight lead ingots and three antimony nuggets, heated, make eight antimonial lead, about four per cent antimony, the hard lead of the lead-acid battery since Planté's and Faure's; pressed to plate it is the grid The Factory's lead-acid accumulator now takes.",
+      "title": "Antimonial lead"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Antimony trioxide's great use, as a flame retardant in plastics, has no place in the pack."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: USGS, Mineral Commodity Summaries 2025, Antimony; Anderson, \"The metallurgy of antimony\", Chemie der Erde 72 (2012); Habashi, Handbook of Extractive Metallurgy (Wiley-VCH, 1997), Antimony.",
+      "title": "Sources"
+    }
+  ]
+}
