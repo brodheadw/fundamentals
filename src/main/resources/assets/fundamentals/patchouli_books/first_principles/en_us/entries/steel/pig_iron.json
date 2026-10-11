@@ -1,0 +1,30 @@
+{
+  "name": "Pig iron",
+  "category": "fundamentals:steel",
+  "icon": "tfmg:blast_furnace_output",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A blast furnace does not make steel. Coke burning in a hot blast reduces the ore as it sinks down the stack, and the iron melts, and iron that melts against coke dissolves carbon: three and a half to four and a half per cent of it, and silicon from the ash.",
+      "title": "Pig iron"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "What runs out of the hearth is pig iron, named for the sand beds it was cast in, a sow feeding a row of pigs. It is hard and brittle and cannot be forged."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Crushed iron ore and a limesand in The Factory Must Grow's blast furnace give 216 mB of molten pig iron, 144 mB of molten slag and furnace gas; a raw iron lump, twice as much. That is half as much iron again as a bloomery gets from the same ore."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A bloomery never melts its iron and loses much of it to the slag as iron oxide; the blast furnace's lime slag carries almost none, and nearly all the iron goes into the pig (Tylecote, A History of Metallurgy)."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Pig iron goes three ways: cast as it is, puddled to wrought iron, or blown to steel. Sources: Tylecote, A History of Metallurgy (2nd ed., 1992); Gale, Iron and Steel (1969); Ullmann's Encyclopedia of Industrial Chemistry, \"Iron\" and \"Steel\".",
+      "title": "Three ways"
+    }
+  ]
+}

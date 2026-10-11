@@ -109,7 +109,7 @@ public final class Separation {
             String description = "fluid_type." + Fundamentals.MOD_ID + "." + reagent.id();
             FluidType type = reagent.kind() == Reagents.Kind.WATER ? Seawater.type(description) : new FluidType(FluidType.Properties.create()
                     .descriptionId(description)
-                    .density(reagent.kind() == Reagents.Kind.ORGANIC ? 800 : 1100)
+                    .density(reagent.kind() == Reagents.Kind.MOLTEN ? 6900 : reagent.kind() == Reagents.Kind.ORGANIC ? 800 : 1100)
                     .viscosity(reagent.kind() == Reagents.Kind.ORGANIC ? 1500 : 1000));
             FLUID_TYPES.put(reagent.id(), type);
             registry.accept(Fundamentals.id(reagent.id()), type);

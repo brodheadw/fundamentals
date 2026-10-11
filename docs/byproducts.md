@@ -4,7 +4,7 @@
 
 Every second output of a recipe (and the waste the separation plant makes in code), where it goes, and why that is what the real one does. A catalyst or bath a recipe hands back is not counted. Recipes that need Chemica or Create: Nuclear are left out; Chemica's own arsenic dust from gold ore is in the toxic dust tag all the same.
 
-**47 byproducts.** Going to a use in this mod: 44. Going only to The Factory Must Grow or the vanilla game: 2. Deliberate dead ends: 1. Toxic to handle: 2.
+**49 byproducts.** Going to a use in this mod: 45. Going only to The Factory Must Grow or the vanilla game: 3. Deliberate dead ends: 1. Toxic to handle: 2.
 
 | Byproduct | Made by | Goes to | Why |
 |---|---|---|---|
@@ -49,11 +49,13 @@ Every second output of a recipe (and the waste the separation plant makes in cod
 | `minecraft:iron_nugget` | `uses/gravel_from_slag` | `oxidation/polishing/iron_nugget`; nine craft to an iron ingot | Crushed slag is passed under a magnet to pull out its metallic iron prills. |
 | `minecraft:water` | `mixing/salt` | `lithium/lithium_sulfate_liquor`, `mixing/bastnasite_concentrate`, `mixing/heavy_rare_earth_carbonate`, `mixing/heavy_rare_earth_liquor_from_clay` and 16 more | Brine boiled for salt gives its water off as condensate. |
 | `tfmg:carbon_dioxide` | `lithium/lithium_chloride`, `solvents/hydrogen`, `uses/aluminium_ingot` and 2 more | The Factory Must Grow's carbon dioxide tank and fire extinguisher | Carbon dioxide from the anode and the soda reactions; real plants mostly vent it. |
-| `tfmg:cast_iron_ingot` | `uses/titania_slag` | The Factory Must Grow's cast iron parts | The Sorel slag furnace's iron is sold as high-purity pig iron. |
+| `tfmg:cast_iron_ingot` | `uses/titania_slag` | `uses/puddling`; The Factory Must Grow's cast iron parts | The Sorel slag furnace's iron is sold as high-purity pig iron. |
 | `tfmg:coal_coke_dust` | `uses/fluid_catalytic_cracking` | `uses/boron_carbide`; The Factory Must Grow's coke uses | Coke burnt onto a cracking catalyst is burnt off in the regenerator. |
+| `tfmg:furnace_gas` | `uses/bessemer_steel`, `uses/pig_iron_from_crushed_iron`, `uses/pig_iron_from_iron_dust` and 1 more | The Factory Must Grow's blast stove, which burns it to heat the blast | Blast furnace and converter gas is a fifth carbon monoxide; works burn it in the Cowper stoves that heat the blast. |
 | `tfmg:hydrogen` | `uses/chlor_alkali`, `uses/fluorine`, `uses/reforming` | `platinum/ammonia`, `platinum/iridium_sponge`, `platinum/osmium_sponge`, `platinum/palladium_sponge` and 10 more | Chlor-alkali hydrogen is burnt or used for hydrogenation and reduction. |
+| `tfmg:molten_slag` | `uses/bessemer_steel`, `uses/pig_iron_from_crushed_iron`, `uses/pig_iron_from_iron_dust` and 1 more | The Factory Must Grow's casting basin, which casts it to slag blocks | Lime-silicate slag runs off the iron and is granulated for slag cement or cast and crushed for road stone. |
 | `tfmg:propylene` | `uses/fluid_catalytic_cracking` | `solvents/ethylhexanol`, `vat_machine_recipe/plastic_from_propylene`; The Factory Must Grow's plastics | A fluid catalytic cracker is the world's second source of propylene. |
-| `tfmg:slag` | `bloomery/copper_from_azurite`, `bloomery/copper_from_cuprite`, `bloomery/copper_from_malachite` and 19 more | `bloomery/iron_from_slag`, `uses/gravel_from_slag`; The Factory Must Grow's concrete and asphalt mixtures | Silicate slag is crushed for aggregate and cement (slag cement), and old bloomery slag, near two-thirds iron oxide, was re-smelted for its iron. |
+| `tfmg:slag` | `bloomery/copper_from_azurite`, `bloomery/copper_from_cuprite`, `bloomery/copper_from_malachite` and 21 more | `bloomery/iron_from_slag`, `uses/gravel_from_slag`; The Factory Must Grow's concrete and asphalt mixtures | Silicate slag is crushed for aggregate and cement (slag cement), and old bloomery slag, near two-thirds iron oxide, was re-smelted for its iron. |
 | `tfmg:sulfuric_acid` | `platinum/nickel_electrowinning`, `uses/nickel_electrowinning_from_raffinate` | `lithium/lithium_sulfate_liquor`, `mixing/europium_sulfate`, `mixing/heavy_rare_earth_sulfate`, `mixing/hydrochloric_acid` and 12 more; everything that takes sulfuric acid | Electrowinning regenerates the sulfuric acid at the anode. |
 
 ## Tailings
