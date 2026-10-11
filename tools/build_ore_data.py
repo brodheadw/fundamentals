@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
+import json
 import shutil
+import zipfile
 
-from common import ASSETS, DATA, RESOURCES, cube, drop_self, ns, read_lang, tag, write, write_lang
+from common import ASSETS, DATA, RESOURCES, TFMG_JAR, cube, drop_self, ns, read_lang, tag, write, write_lang
 from paint_materials import items
 from paint_minerals import GRADES, ROCK_BLOCKS, VARIANTS, WHOLE
 from paint_oxidation import BLOCKS as OXIDATION_BLOCKS
 
 MC_TAGS = RESOURCES / "data/minecraft/tags/block"
 C_TAGS = RESOURCES / "data/c/tags"
+TFMG = RESOURCES / "data/tfmg"
 
 BIOMES = {
     "anywhere": ["#minecraft:is_overworld"],
@@ -185,10 +188,9 @@ PLACERS = {
 
 REMOVED = {
     "vanilla_iron": ["minecraft:ore_iron_upper", "minecraft:ore_iron_middle", "minecraft:ore_iron_small"],
-    "tfmg_lead_ore": ["tfmg:lead_ore"],
-    "tfmg_lithium_ore": ["tfmg:lithium_ore"],
-    "tfmg_nickel_ore": ["tfmg:nickel_ore"],
 }
+TFMG_SWITCHED_OFF = ("lead_ore", "lithium_ore", "nickel_ore")
+TFMG_METAL_LAYERS = {"tfmg:galena", "tfmg:bauxite"}
 
 STORAGE_BLOCKS = [f"fundamentals:{name}" for _, form, name in items() if form == "block"]
 PLASTIC_BLOCKS = [f"fundamentals:{dye}_plastic_block" for dye in ("white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray",
@@ -225,6 +227,17 @@ def rock_files(name, display, lang):
     write(DATA / f"loot_table/blocks/{name}.json", {"type": "minecraft:block", "pools": [drop_self(name)]})
 
 
+def silk_or_raw(block, mineral, count=1, chance=1.0):
+    raw = {"type": "minecraft:item", "name": f"fundamentals:raw_{mineral}",
+           "functions": [{"function": "minecraft:set_count", "count": count},
+                         {"function": "minecraft:apply_bonus", "enchantment": "minecraft:fortune",
+                          "formula": "minecraft:ore_drops"},
+                         {"function": "minecraft:explosion_decay"}]}
+    if chance < 1:
+        raw["conditions"] = [{"condition": "minecraft:random_chance", "chance": chance}]
+    return {"type": "minecraft:alternatives", "children": [{"type": "minecraft:item", "name": block, "conditions": [SILK_TOUCH]}, raw]}
+
+
 def ore_files(mineral, display, lang):
     name, whole = f"{mineral}_ore", mineral in WHOLE
     parts, pools = [], []
@@ -239,18 +252,10 @@ def ore_files(mineral, display, lang):
         parts.append({"when": {"grade": grade}, "apply": models})
         low, high, chance = DROPS[grade]
         count = low if low == high else {"type": "minecraft:uniform", "min": low, "max": high}
-        raw = {"type": "minecraft:item", "name": f"fundamentals:raw_{mineral}",
-               "functions": [{"function": "minecraft:set_count", "count": count},
-                             {"function": "minecraft:apply_bonus", "enchantment": "minecraft:fortune",
-                              "formula": "minecraft:ore_drops"},
-                             {"function": "minecraft:explosion_decay"}]}
-        if chance < 1:
-            raw["conditions"] = [{"condition": "minecraft:random_chance", "chance": chance}]
         pools.append({"rolls": 1, "bonus_rolls": 0,
                       "conditions": [{"condition": "minecraft:block_state_property", "block": f"fundamentals:{name}",
                                       "properties": {"grade": grade}}],
-                      "entries": [{"type": "minecraft:alternatives", "children": [
-                          {"type": "minecraft:item", "name": f"fundamentals:{name}", "conditions": [SILK_TOUCH]}, raw]}]})
+                      "entries": [silk_or_raw(f"fundamentals:{name}", mineral, count, chance)]})
     write(ASSETS / f"blockstates/{name}.json", {"multipart": parts})
     item = cube(f"fundamentals:block/{name}_edge_0") if whole else {
         "parent": "minecraft:block/block",
@@ -285,6 +290,22 @@ def placed(feature, per_chunk, y_min, y_max):
                           {"type": "minecraft:biome"}]}
 
 
+def tfmg_worldgen():
+    for name in TFMG_SWITCHED_OFF:
+        write(TFMG / f"neoforge/biome_modifier/{name}.json", {"type": "neoforge:none"})
+    with zipfile.ZipFile(TFMG_JAR) as jar:
+        feature = json.loads(jar.read("data/tfmg/worldgen/configured_feature/tfmg_striated_ores_overworld.json"))
+        placement = json.loads(jar.read("data/tfmg/worldgen/placed_feature/tfmg_striated_ores_overworld.json"))
+    patterns = feature["config"]["layer_patterns"]
+    kept = [p for p in patterns if not TFMG_METAL_LAYERS & {t["state"]["Name"] for layer in p for alts in layer["targets"] for t in alts}]
+    assert 0 < len(kept) < len(patterns), "The Factory's striated layers changed; re-check which carry metal"
+    feature["config"]["layer_patterns"] = kept
+    rarity = next(p for p in placement["placement"] if p["type"] == "minecraft:rarity_filter")
+    rarity["chance"] = round(rarity["chance"] * len(patterns) / len(kept))
+    write(TFMG / "worldgen/configured_feature/tfmg_striated_ores_overworld.json", feature)
+    write(TFMG / "worldgen/placed_feature/tfmg_striated_ores_overworld.json", placement)
+
+
 def main():
     textures = {p.stem for p in (ASSETS / "textures/block").glob("*.png")}
     expected = {f"{name}_ore_{g}_{v}" for name in ORES for g in GRADES for v in range(VARIANTS)} | set(ROCKS)
@@ -298,7 +319,7 @@ def main():
         | {row[1][:-4] for row in DEPOSITS.values() if row[1] and row[1].endswith("_ore")}
     assert generated == set(ORES), f"ores that never generate, or unknown ores: {sorted(generated ^ set(ORES))}"
 
-    for stale in (DATA / "worldgen", DATA / "neoforge", DATA / "tags/worldgen", DATA / "tags/block/ores", DATA / "tags/item/ores",
+    for stale in (DATA / "worldgen", DATA / "neoforge", TFMG / "worldgen", TFMG / "neoforge", DATA / "tags/worldgen", DATA / "tags/block/ores", DATA / "tags/item/ores",
                   DATA / "tags/item/raw_materials", C_TAGS / "block/ores", C_TAGS / "item/ores", C_TAGS / "item/raw_materials"):
         shutil.rmtree(stale, ignore_errors=True)
     shutil.rmtree(ASSETS / "models/block/ore", ignore_errors=True)
@@ -381,6 +402,7 @@ def main():
         write(DATA / f"neoforge/biome_modifier/remove_{name}.json", {
             "type": "neoforge:remove_features", "biomes": "#minecraft:is_overworld", "features": features,
             "steps": ["underground_ores"]})
+    tfmg_worldgen()
     write(RESOURCES / "fundamentals_ores.json", {
         "blocks": blocks, "hosts": {host: block for host, (block, _) in HOSTS.items()}})
     print(f"wrote {len(blocks)} blocks ({len(ORES)} minerals, {len(ROCKS)} rocks), "

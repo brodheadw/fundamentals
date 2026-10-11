@@ -8,6 +8,7 @@ DATA = RESOURCES / "data/fundamentals"
 TEXTURES = ASSETS / "textures"
 JAVA = REPO / "src/main/java/ai/gsmc/fundamentals"
 LANG = ASSETS / "lang/en_us.json"
+TFMG_JAR = next(Path.home().glob(".gradle/caches/modules-2/files-2.1/maven.modrinth/create-tfmg/*/*/create-tfmg-*.jar"))
 
 
 def write(path, obj):

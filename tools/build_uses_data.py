@@ -2,16 +2,20 @@
 import json
 import shutil
 import zipfile
-from pathlib import Path
 
 import common
+from build_ore_data import silk_or_raw
 from build_chemica_compat import CHEMICA_SHEETS, fluid_ingredient as fluid, optional
-from common import ASSETS, DATA, cube, drop_self, ns, read_lang, result, result_fluid, tag as tag_file, write, write_lang
+from common import ASSETS, DATA, TFMG_JAR, cube, drop_self, ns, read_lang, result, result_fluid, tag as tag_file, write, write_lang
 
 USES = DATA / "recipe/uses"
 TFMG = DATA.parent / "tfmg/recipe"
 TFMG_LOOT = DATA.parent / "tfmg/loot_table/blocks"
 CREATE = DATA.parent / "create/recipe"
+TFMG_ORES = {"lead": "galena", "lithium": "spodumene", "nickel": "pentlandite"}
+TFMG_STONES = {"galena": "galena", "bauxite": "bauxite"}
+TFMG_RAW = {"tfmg:raw_lead": "galena", "create:crushed_raw_lead": "galena", "tfmg:raw_lithium": "spodumene", "tfmg:crushed_raw_lithium": "spodumene",
+            "tfmg:raw_nickel": "pentlandite", "create:crushed_raw_nickel": "pentlandite"}
 
 ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_cobaltite": "Roasted Cobaltite",
          "roasted_chalcopyrite": "Roasted Chalcopyrite", "rhenium_flue_dust": "Rhenium Flue Dust",
@@ -53,7 +57,6 @@ ROASTING = DATA / "recipe/roasting"
 LITHIUM = DATA / "recipe/lithium"
 PLASTICS = DATA / "recipe/plastics"
 TFMG_ASSETS = ASSETS.parent / "tfmg"
-TFMG_JAR = next(Path.home().glob(".gradle/caches/modules-2/files-2.1/maven.modrinth/create-tfmg/*/*/create-tfmg-*.jar"))
 DYES = ("white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray", "light_gray", "cyan", "purple", "blue", "brown",
         "green", "red", "black")
 PLASTIC_ITEMS = {"ziegler_natta_catalyst": "Ziegler-Natta Catalyst", "pvc_resin": "PVC Resin", "pvc_sheet": "PVC Sheet"}
@@ -331,6 +334,21 @@ def tin():
         "sequence": [{"type": "create:deploying", "ingredients": [board, {"item": part}], "results": [{"id": "tfmg:unfinished_circuit_board"}]}
                      for part in ("tfmg:capacitor_item", "tfmg:resistor", "tfmg:transistor_item", "tfmg:resistor", "fundamentals:solder")],
         "transitional_item": {"id": "tfmg:unfinished_circuit_board"}})
+
+
+def tfmg_ores():
+    blocks = {f"{host}{metal}_ore": mineral for metal, mineral in TFMG_ORES.items() for host in ("", "deepslate_")} | TFMG_STONES
+    for block, mineral in blocks.items():
+        write(TFMG_LOOT / f"{block}.json", {"type": "minecraft:block", "pools": [
+            {"rolls": 1, "bonus_rolls": 0, "entries": [silk_or_raw(f"tfmg:{block}", mineral)]}]})
+    for raw, mineral in TFMG_RAW.items():
+        write(USES / f"raw_{mineral}_from_{raw.split(':')[1]}.json", {"type": "minecraft:crafting_shapeless", "category": "misc",
+                                                                     "ingredients": [{"item": raw}], "result": {"id": f"fundamentals:raw_{mineral}"}})
+    with zipfile.ZipFile(TFMG_JAR) as jar:
+        for entry in jar.namelist():
+            if entry.startswith(("data/tfmg/recipe/smelting/", "data/tfmg/recipe/blasting/")) and entry.endswith(".json") \
+                    and json.loads(jar.read(entry))["ingredient"].get("item") in TFMG_RAW:
+                disabled(TFMG / entry[len("data/tfmg/recipe/"):])
 
 
 def rocks():
@@ -827,6 +845,7 @@ def main():
     nickel()
     tin()
     rocks()
+    tfmg_ores()
     loot()
     alloys()
     thermometry()
