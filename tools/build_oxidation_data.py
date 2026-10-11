@@ -7,6 +7,7 @@ from paint_oxidation import FAMILIES, STAGED, aged_name, family_blocks
 
 RECIPES = DATA / "recipe/oxidation"
 DAY_FACTOR = {"ingot": 1, "plate": 1, "nugget": 1.5, "block": 0.25}
+PACE = 4
 
 METALS = {
     "copper": ("patina", 9, 0.25, 3, None),
@@ -61,7 +62,7 @@ STAGE_TITLES = {"exposed": "Exposed", "weathered": "Weathered", "oxidized": "Oxi
 
 def rate(metal, form, **extra):
     kind, days, dry, wet, _ = METALS[metal]
-    entry = {"kind": kind, "days": round(days / DAY_FACTOR[form], 3)}
+    entry = {"kind": kind, "days": round(PACE * days / DAY_FACTOR[form], 3)}
     if dry != 0.25:
         entry["dry"] = dry
     if wet != 4:
