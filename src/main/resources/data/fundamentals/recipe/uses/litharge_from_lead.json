@@ -1,0 +1,19 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/lead"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "tfmg:air"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:litharge"
+    }
+  ],
+  "heat_requirement": "heated"
+}

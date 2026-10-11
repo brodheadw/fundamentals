@@ -175,6 +175,66 @@ def tube():
     return img
 
 
+def grid():
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    wire, light, lug = (96, 100, 112, 255), (150, 154, 166, 255), (70, 74, 84, 255)
+    for x in range(2, 14):
+        for y in range(3, 15):
+            if x in (2, 13) or y in (3, 14) or x % 3 == 2 or y % 3 == 2:
+                img.putpixel((x, y), light if y == 3 or x == 2 else wire)
+    for x in range(3, 6):
+        for y in range(1, 3):
+            img.putpixel((x, y), lug)
+    return img
+
+
+def cell(case, rim, terminals):
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    for x in range(2, 14):
+        for y in range(4, 15):
+            edge = x in (2, 13) or y in (4, 14)
+            img.putpixel((x, y), rim if edge else case[1] if x < 5 else case[0])
+    for x0, colour in zip((4, 10), terminals):
+        for x in range(x0, x0 + 2):
+            for y in range(1, 4):
+                img.putpixel((x, y), colour)
+    return img
+
+
+def cylinder(wrap, band, cap):
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    for y in range(2, 15):
+        for x in range(5, 11):
+            tone = cap if y in (2, 14) else band if y in (3, 4) else wrap[0] if x == 5 else wrap[2] if x == 10 else wrap[1]
+            img.putpixel((x, y), tone)
+    for x in (7, 8):
+        img.putpixel((x, 1), cap)
+    return img
+
+
+def batteries():
+    lead = lambda *tones: paint_item("plate", tones)
+    grid().save(TEXTURES / "item/lead_grid.png")
+    heap("lead_paste", (214, 214, 206), (176, 176, 168), (122, 122, 116)).save(TEXTURES / "item/lead_paste.png")
+    lead((92, 92, 88), (150, 150, 142), (196, 196, 186), (226, 226, 218)).save(TEXTURES / "item/pasted_lead_plate.png")
+    lead((30, 20, 16), (62, 40, 30), (92, 62, 46), (124, 90, 70)).save(TEXTURES / "item/lead_dioxide_plate.png")
+    lead((54, 58, 70), (92, 98, 112), (128, 134, 148), (166, 172, 186)).save(TEXTURES / "item/sponge_lead_plate.png")
+    cell(((44, 46, 50, 255), (70, 72, 78, 255)), (26, 26, 30, 255), ((176, 40, 34, 255), (40, 40, 44, 255))).save(TEXTURES / "item/lead_acid_cell.png")
+    heap("manganese_sulfate", (255, 236, 238), (240, 206, 212), (196, 160, 168)).save(TEXTURES / "item/manganese_sulfate.png")
+    heap("cobalt_sulfate", (238, 128, 146), (200, 70, 96), (140, 36, 60)).save(TEXTURES / "item/cobalt_sulfate.png")
+    heap("nmc_hydroxide", (150, 140, 96), (112, 102, 66), (70, 62, 38)).save(TEXTURES / "item/nmc_hydroxide.png")
+    heap("nmc_cathode", (70, 70, 74), (40, 40, 44), (18, 18, 20)).save(TEXTURES / "item/nmc_cathode.png")
+    heap("iron_phosphate", (255, 250, 236), (240, 228, 206), (196, 180, 156)).save(TEXTURES / "item/iron_phosphate.png")
+    heap("lfp_cathode", (96, 98, 102), (58, 60, 64), (28, 30, 32)).save(TEXTURES / "item/lfp_cathode.png")
+    heap("lithium_fluoride", (255, 255, 255), (238, 240, 242), (188, 192, 196)).save(TEXTURES / "item/lithium_fluoride.png")
+    heap("lithium_hexafluorophosphate", (255, 255, 255), (242, 242, 244), (194, 196, 200)).save(TEXTURES / "item/lithium_hexafluorophosphate.png")
+    heap("ethylene_carbonate", (255, 255, 252), (236, 236, 230), (186, 186, 178)).save(TEXTURES / "item/ethylene_carbonate.png")
+    heap("nickel_hydroxide", (190, 230, 160), (138, 196, 110), (86, 140, 66)).save(TEXTURES / "item/nickel_hydroxide.png")
+    paint_raw("hydride_alloy", ((70, 72, 78), (122, 126, 134), (168, 172, 180), (214, 218, 226))).save(TEXTURES / "item/hydride_alloy.png")
+    cylinder(((30, 92, 54, 255), (46, 134, 80, 255), (22, 66, 40, 255)), (196, 200, 206, 255), (150, 154, 162, 255)).save(
+        TEXTURES / "item/nickel_metal_hydride_cell.png")
+
+
 def magnets():
     nickel = ((92, 96, 104, 255), (170, 174, 182, 255), (214, 218, 226, 255), (250, 252, 255, 255))
     bar(nickel).save(TEXTURES / "item/neodymium_iron_boron_magnet.png")
@@ -262,6 +322,7 @@ def main():
     paint_raw("gold_amalgam", ((96, 96, 92), (164, 162, 150), (208, 204, 186), (246, 242, 222))).save(TEXTURES / "item/gold_amalgam.png")
     heap("potassium_fluorotantalate", (255, 255, 255), (238, 240, 242), (186, 190, 196)).save(TEXTURES / "item/potassium_fluorotantalate.png")
     magnets()
+    batteries()
     print("uses textures written")
 
 

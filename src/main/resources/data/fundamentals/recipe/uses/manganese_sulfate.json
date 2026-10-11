@@ -1,0 +1,27 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_pyrolusite"
+    },
+    {
+      "item": "tfmg:coal_coke"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "tfmg:sulfuric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:manganese_sulfate",
+      "count": 2
+    },
+    {
+      "id": "tfmg:carbon_dioxide",
+      "amount": 250
+    }
+  ],
+  "heat_requirement": "heated"
+}

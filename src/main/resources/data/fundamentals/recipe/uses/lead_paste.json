@@ -1,0 +1,27 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:litharge"
+    },
+    {
+      "item": "fundamentals:litharge"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 100,
+      "fluid": "tfmg:sulfuric_acid"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "minecraft:water"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:lead_paste",
+      "count": 2
+    }
+  ]
+}

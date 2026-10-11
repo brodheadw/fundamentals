@@ -2,7 +2,10 @@
   "replace": false,
   "values": [
     "fundamentals:heavy_rare_earth_concentrate",
+    "fundamentals:iron_phosphate",
+    "fundamentals:lfp_cathode",
     "fundamentals:light_rare_earth_concentrate",
+    "fundamentals:lithium_hexafluorophosphate",
     "fundamentals:monazite_ore",
     "fundamentals:phosphor",
     "fundamentals:phosphoric_acid_bucket",
@@ -14,6 +17,7 @@
     "minecraft:bone",
     "minecraft:bone_block",
     "minecraft:bone_meal",
+    "tfmg:lithium_charge",
     "tfmg:n_semiconductor"
   ]
 }

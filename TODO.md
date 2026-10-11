@@ -47,6 +47,10 @@ What's agreed but not built, in the order it's likely to go. The working plan be
 
 ## Other metals
 
+- **Battery loose ends.** Grids are sawn from antimonial lead plate, not cast. Nickel-cadmium waits on cadmium
+  (`c:ingots/cadmium`). The hydride cell's electrolyte is caustic soda where real cells use potassium hydroxide (potash is in now;
+  it wants a potassium chlor-alkali cell), the lithium-ion electrolyte has no linear carbonate (dimethyl carbonate wants
+  methanol), and the precursor's sodium sulfate is not kept. The accumulator holds the same charge whatever its cells.
 - **Slag is one item.** The Factory Must Grow's slag stands for every smelt's, so the alumina slag of a thermite or the
   magnesium fluoride of the beryllium reduction re-smelts in the bloomery for iron as a bloomery's fayalite does, though neither
   holds any.
