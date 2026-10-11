@@ -1,7 +1,9 @@
 {
   "replace": false,
   "values": [
+    "#fundamentals:sponges/cadmium",
     "#fundamentals:sponges/hafnium",
+    "#fundamentals:sponges/indium",
     "#fundamentals:sponges/iridium",
     "#fundamentals:sponges/osmium",
     "#fundamentals:sponges/palladium",

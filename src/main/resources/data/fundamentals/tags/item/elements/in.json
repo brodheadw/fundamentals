@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:indium_ingot",
+    "fundamentals:indium_nugget",
+    "fundamentals:indium_sponge",
+    "fundamentals:indium_tin_oxide",
+    "fundamentals:led_chip",
+    "fundamentals:zinc_leach_residue"
+  ]
+}

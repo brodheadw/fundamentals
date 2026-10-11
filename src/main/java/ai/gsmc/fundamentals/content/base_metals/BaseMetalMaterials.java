@@ -68,6 +68,15 @@ public final class BaseMetalMaterials {
         reg("tin", null, MaterialType.ELEMENT, "Sn", TIN_FORMS,
                 MaterialProperties.builder().density(0.93).conductivity(0.15).hardness(0.15));
 
+        reg("germanium", null, MaterialType.ELEMENT, "Ge", new MaterialForm[] {OXIDE, INGOT, NUGGET},
+                MaterialProperties.builder().density(0.68).conductivity(0.0).hardness(0.60));
+        reg("gallium", null, MaterialType.ELEMENT, "Ga", new MaterialForm[] {INGOT, NUGGET},
+                MaterialProperties.builder().density(0.75).conductivity(0.12).hardness(0.05));
+        reg("indium", null, MaterialType.ELEMENT, "In", new MaterialForm[] {SPONGE, INGOT, NUGGET},
+                MaterialProperties.builder().density(0.93).conductivity(0.20).hardness(0.02));
+        reg("cadmium", null, MaterialType.ELEMENT, "Cd", new MaterialForm[] {SPONGE, INGOT},
+                MaterialProperties.builder().density(1.10).conductivity(0.23).hardness(0.10).toxicity(0.80));
+
         reg("bronze", null, MaterialType.ALLOY, "", BRONZE_FORMS,
                 MaterialProperties.builder().density(1.12).conductivity(0.12).hardness(0.45));
         reg("brass", null, MaterialType.ALLOY, "", METAL_FORMS,

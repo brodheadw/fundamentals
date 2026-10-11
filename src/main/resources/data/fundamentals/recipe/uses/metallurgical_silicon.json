@@ -1,0 +1,42 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:firebrick_lined_vat"
+  ],
+  "min_size": 1,
+  "processing_time": 200,
+  "machines": [
+    "tfmg:graphite_electrode",
+    "tfmg:graphite_electrode",
+    "tfmg:graphite_electrode"
+  ],
+  "ingredients": [
+    {
+      "tag": "c:gems/quartz"
+    },
+    {
+      "tag": "c:gems/quartz"
+    },
+    {
+      "tag": "c:gems/quartz"
+    },
+    [
+      {
+        "item": "tfmg:coal_coke"
+      },
+      {
+        "item": "minecraft:charcoal"
+      }
+    ]
+  ],
+  "results": [
+    {
+      "id": "tfmg:liquid_silicon",
+      "amount": 144
+    },
+    {
+      "id": "tfmg:carbon_dioxide",
+      "amount": 250
+    }
+  ]
+}

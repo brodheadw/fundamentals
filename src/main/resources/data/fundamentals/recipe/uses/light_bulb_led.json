@@ -1,0 +1,29 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:led_chip"
+    },
+    {
+      "item": "fundamentals:yttrium_oxide"
+    },
+    {
+      "item": "fundamentals:cerium_oxide"
+    },
+    {
+      "item": "create:framed_glass"
+    },
+    {
+      "tag": "c:nuggets/copper"
+    },
+    {
+      "tag": "c:nuggets/copper"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:light_bulb",
+      "count": 6
+    }
+  ]
+}

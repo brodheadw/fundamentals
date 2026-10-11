@@ -94,6 +94,10 @@ PRECURSORS = {
     "titanium_tetrachloride": ("Titanium Tetrachloride", 0xEEF0EA),
     "vinyl_chloride": ("Vinyl Chloride", 0xEEF0EE),
     "lithium_ion_electrolyte": ("Lithium-Ion Electrolyte", 0xEEEEE2),
+    "crude_trichlorosilane": ("Crude Trichlorosilane", 0xE6EAE2),
+    "trichlorosilane": ("Trichlorosilane", 0xF0F2F2),
+    "silicon_tetrachloride": ("Silicon Tetrachloride", 0xECEFF0),
+    "germanium_tetrachloride": ("Germanium Tetrachloride", 0xF0F0EA),
 }
 GASES = {
     "argon": ("Argon", 0xC8D8F0),
@@ -120,11 +124,14 @@ PLATINUM_LIQUORS = {
     "rhodium_liquor": ("Rhodium Liquor", 0xC85A6A),
 }
 SULFATE_LIQUORS = {"beryllium_sulfate_liquor": ("Beryllium Sulfate Liquor", CLEAR), "lithium_sulfate_liquor": ("Lithium Sulfate Liquor", CLEAR),
-                   "uranyl_sulfate_liquor": ("Uranyl Sulfate Liquor", 0xE2E070)}
+                   "uranyl_sulfate_liquor": ("Uranyl Sulfate Liquor", 0xE2E070), "zinc_leach_liquor": ("Zinc Leach Liquor", 0xC6CCB0),
+                   "zinc_sulfate_liquor": ("Zinc Sulfate Liquor", CLEAR), "indium_sulfate_liquor": ("Indium Sulfate Liquor", 0xC8B48C)}
+CHLORIDE_LIQUORS = {"indium_chloride_liquor": ("Indium Chloride Liquor", CLEAR)}
 CAUSTICS = {"caustic_soda": ("Caustic Soda", 0xEEF2F0), "sodium_aluminate_liquor": ("Sodium Aluminate Liquor", 0xB8864A),
-            "sodium_tungstate_liquor": ("Sodium Tungstate Liquor", 0xE6ECE8)}
+            "sodium_tungstate_liquor": ("Sodium Tungstate Liquor", 0xE6ECE8), "spent_bayer_liquor": ("Spent Bayer Liquor", 0xB89060),
+            "sodium_gallate_liquor": ("Sodium Gallate Liquor", 0xE4EAE6)}
 MELTS = {"molten_pig_iron": ("Molten Pig Iron", 0xF07A1E)}
-FLUIDS = {**{k: (*v, "LIQUOR") for k, v in {**LIQUORS, **PLATINUM_LIQUORS, **SULFATE_LIQUORS}.items()}, **{k: (*v, "ORGANIC") for k, v in ORGANICS.items()},
+FLUIDS = {**{k: (*v, "LIQUOR") for k, v in {**LIQUORS, **PLATINUM_LIQUORS, **SULFATE_LIQUORS, **CHLORIDE_LIQUORS}.items()}, **{k: (*v, "ORGANIC") for k, v in ORGANICS.items()},
           **{k: (*v, "ACID") for k, v in ACIDS.items()}, **{k: (*v, "GAS") for k, v in GASES.items()},
           **{k: (*v, "WASTE") for k, v in WASTES.items()}, **{k: (*v, "SALINE") for k, v in SALINES.items()}, **{k: (*v, "WATER") for k, v in SEA.items()}, **{k: (*v, "CRUDE") for k, v in CRUDES.items()},
           **{k: (*v, "FOULED") for k, v in FOULED.items()}, **{k: (*v, "PRECURSOR") for k, v in PRECURSORS.items()},

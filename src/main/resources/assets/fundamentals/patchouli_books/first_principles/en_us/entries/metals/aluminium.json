@@ -20,7 +20,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "500 mB of liquor under a mixer, cold, throws down an aluminium hydroxide and gives 400 mB of caustic soda back to the digester. A blast furnace calcines the hydroxide at about 1,100 °C to alumina."
+      "text": "500 mB of liquor under a mixer, cold, throws down an aluminium hydroxide and leaves 400 mB of spent Bayer liquor, the caustic that goes back to the digester: two bauxite powder and 500 mB of it digest as caustic soda does. A blast furnace calcines the hydroxide at about 1,100 °C to alumina."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The spent liquor carries the bauxite's gallium; see Germanium, indium, gallium and cadmium."
     },
     {
       "type": "patchouli:text",

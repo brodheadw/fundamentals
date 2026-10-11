@@ -295,6 +295,26 @@
         ]
       }
     },
+    "ga": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/ga"
+          }
+        ]
+      }
+    },
+    "ge": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/ge"
+          }
+        ]
+      }
+    },
     "as": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
@@ -391,6 +411,26 @@
         "items": [
           {
             "items": "#fundamentals:elements/ag"
+          }
+        ]
+      }
+    },
+    "cd": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/cd"
+          }
+        ]
+      }
+    },
+    "in": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/in"
           }
         ]
       }
@@ -706,6 +746,8 @@
       "ni",
       "cu",
       "zn",
+      "ga",
+      "ge",
       "as",
       "br",
       "y",
@@ -716,6 +758,8 @@
       "rh",
       "pd",
       "ag",
+      "cd",
+      "in",
       "sn",
       "sb",
       "la",

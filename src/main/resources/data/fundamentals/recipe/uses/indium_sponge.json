@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 100,
+      "fluid": "fundamentals:indium_chloride_liquor"
+    },
+    {
+      "tag": "c:nuggets/zinc"
+    },
+    {
+      "tag": "c:nuggets/zinc"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:indium_sponge"
+    }
+  ]
+}

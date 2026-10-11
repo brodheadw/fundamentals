@@ -19,6 +19,19 @@
     },
     {
       "type": "patchouli:text",
+      "text": "Since the 1910s most zinc has been won in water instead: roasted, leached in sulfuric acid and electrowon, and now nine tenths of it is (Sinclair, The Extractive Metallurgy of Zinc).",
+      "title": "Electrolytic zinc"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two zinc oxide, 500 mB of sulfuric acid and 500 mB of water in a heated vat with a mixer give 1,000 mB of zinc leach liquor, and one leach in five leaves a zinc leach residue, the ferrite and lead sulfate that hold the germanium and indium."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The copper, cobalt and cadmium in the liquor would foul the cathode, so it is stirred hot with a zinc nugget, zinc dust that cements them out: 1,000 mB of zinc sulfate liquor, and one batch in five a cadmium sponge. 500 mB of that on two electrodes in a vat give a zinc ingot and 250 mB of sulfuric acid back to the leach."
+    },
+    {
+      "type": "patchouli:text",
       "text": "Half the world's zinc goes on steel (International Zinc Association). Dipped in molten zinc at about 450 °C, steel takes a coat that corrodes in its place and, scratched through, still goes before the steel does.",
       "title": "Galvanizing"
     },

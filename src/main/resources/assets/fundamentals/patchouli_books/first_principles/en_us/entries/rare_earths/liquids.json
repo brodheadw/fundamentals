@@ -68,7 +68,15 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(li)$(l)Sodium Tungstate Liquor$(): 1,200, 2, -10 to 104, corrosive$(li)$(l)Sodium Aluminate Liquor$(): 1,320, 12, -15 to 112, corrosive$(li)$(l)Molten Pig Iron$(): 6,900, 6, 1,147 to 2,860$(li)$(l)Water$(): 998, 1, 0 to 100$(li)$(l)Lava$(): 2,700, 100,000, freezes 1,000"
+      "text": "$(li)$(l)Sodium Tungstate Liquor$(): 1,200, 2, -10 to 104, corrosive$(li)$(l)Spent Bayer Liquor$(): 1,250, 6, -15 to 108, corrosive$(li)$(l)Sodium Gallate Liquor$(): 1,220, 3, -15 to 107, corrosive$(li)$(l)Zinc Leach Liquor$(): 1,400, 2.2, -6 to 104, corrosive$(li)$(l)Zinc Sulfate Liquor$(): 1,390, 2.1, -6 to 104, corrosive"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)$(l)Indium Sulfate Liquor$(): 1,300, 2, -8 to 103, corrosive$(li)$(l)Indium Chloride Liquor$(): 1,110, 1.4, -30 to 104, corrosive$(li)$(l)Crude Trichlorosilane$(): 1,360, 0.36, -110 to 32, flash -27, toxic$(li)$(l)Trichlorosilane$(): 1,342, 0.33, -127 to 31.8, flash -27, toxic$(li)$(l)Silicon Tetrachloride$(): 1,483, 0.5, -68.7 to 57.6, toxic"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li)$(l)Germanium Tetrachloride$(): 1,879, -, -49.5 to 83.1, toxic$(li)$(l)Sodium Aluminate Liquor$(): 1,320, 12, -15 to 112, corrosive$(li)$(l)Molten Pig Iron$(): 6,900, 6, 1,147 to 2,860$(li)$(l)Water$(): 998, 1, 0 to 100$(li)$(l)Lava$(): 2,700, 100,000, freezes 1,000"
     },
     {
       "type": "patchouli:text",

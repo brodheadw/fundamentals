@@ -235,6 +235,43 @@ def batteries():
         TEXTURES / "item/nickel_metal_hydride_cell.png")
 
 
+def boule():
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    shades = {4: (52, 56, 66), 5: (96, 102, 116), 6: (146, 154, 170), 7: (204, 212, 228), 8: (160, 168, 184), 9: (122, 128, 142), 10: (96, 102, 116), 11: (52, 56, 66)}
+    for y in range(1, 15):
+        half = 1 if y < 3 else 2 if y < 4 else 4
+        for x in range(8 - half, 8 + half):
+            tone = shades[x] if half == 4 else shades[min(x, 9)]
+            img.putpixel((x, y), tone + (255,) if y < 14 else (52, 56, 66, 255))
+    return img
+
+
+def wafer():
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    sheen = ((88, 96, 132), (118, 128, 168), (150, 140, 186), (128, 160, 190))
+    for y in range(16):
+        for x in range(16):
+            r = ((x - 7.5) ** 2 + (y - 7.5) ** 2) ** 0.5
+            if r <= 6.6 and not (y == 14 and 6 <= x <= 9):
+                tone = sheen[(x + 2 * y) // 5 % 4]
+                img.putpixel((x, y), (60, 64, 84, 255) if r > 5.8 else tone + (255,))
+    for x, y in ((5, 4), (6, 4), (4, 5)):
+        img.putpixel((x, y), (220, 226, 246, 255))
+    return img
+
+
+def chip():
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    frame, die, glow, leg = (226, 228, 232, 255), (70, 90, 190, 255), (232, 214, 96, 255), (176, 140, 72, 255)
+    for x in range(4, 12):
+        for y in range(4, 12):
+            img.putpixel((x, y), frame if x in (4, 11) or y in (4, 11) else glow if 6 <= x <= 9 and 6 <= y <= 9 else die)
+    for x in (5, 10):
+        for y in range(12, 15):
+            img.putpixel((x, y), leg)
+    return img
+
+
 def magnets():
     nickel = ((92, 96, 104, 255), (170, 174, 182, 255), (214, 218, 226, 255), (250, 252, 255, 255))
     bar(nickel).save(TEXTURES / "item/neodymium_iron_boron_magnet.png")
@@ -321,6 +358,12 @@ def main():
     heap("potash", (250, 236, 230), (226, 190, 178), (170, 120, 104)).save(TEXTURES / "item/potash.png")
     paint_raw("gold_amalgam", ((96, 96, 92), (164, 162, 150), (208, 204, 186), (246, 242, 222))).save(TEXTURES / "item/gold_amalgam.png")
     heap("potassium_fluorotantalate", (255, 255, 255), (238, 240, 242), (186, 190, 196)).save(TEXTURES / "item/potassium_fluorotantalate.png")
+    paint_raw("polysilicon", ((70, 74, 84), (122, 128, 140), (168, 174, 188), (214, 220, 232))).save(TEXTURES / "item/polysilicon.png")
+    boule().save(TEXTURES / "item/silicon_boule.png")
+    wafer().save(TEXTURES / "item/silicon_wafer.png")
+    heap("zinc_leach_residue", (150, 92, 64), (110, 62, 40), (64, 34, 22)).save(TEXTURES / "item/zinc_leach_residue.png")
+    chip().save(TEXTURES / "item/led_chip.png")
+    heap("indium_tin_oxide", (214, 220, 150), (180, 190, 110), (122, 130, 66)).save(TEXTURES / "item/indium_tin_oxide.png")
     magnets()
     batteries()
     print("uses textures written")

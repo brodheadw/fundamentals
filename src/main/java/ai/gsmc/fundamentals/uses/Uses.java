@@ -31,7 +31,8 @@ public final class Uses {
             "graphite", "potash", "gold_amalgam", "potassium_fluorotantalate",
             "lead_grid", "lead_paste", "pasted_lead_plate", "lead_dioxide_plate", "sponge_lead_plate", "lead_acid_cell", "manganese_sulfate",
             "cobalt_sulfate", "nmc_hydroxide", "nmc_cathode", "iron_phosphate", "lfp_cathode", "lithium_fluoride",
-            "lithium_hexafluorophosphate", "ethylene_carbonate", "nickel_hydroxide", "hydride_alloy", "nickel_metal_hydride_cell");
+            "lithium_hexafluorophosphate", "ethylene_carbonate", "nickel_hydroxide", "hydride_alloy", "nickel_metal_hydride_cell",
+            "polysilicon", "silicon_boule", "silicon_wafer", "zinc_leach_residue", "led_chip", "indium_tin_oxide");
 
     public static final List<String> PLATINUM_IDS = List.of(
             "ammonium_chloride", "insoluble_residue", "iridium_rhodium_residue", "ammonium_chloroplatinate",

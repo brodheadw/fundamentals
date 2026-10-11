@@ -5,6 +5,7 @@
     "#fundamentals:nickel_dusts",
     "#fundamentals:uranium_dusts",
     "fundamentals:monazite_residue_dust",
+    "fundamentals:cadmium_sponge",
     {
       "id": "chemica:arsenic_dust",
       "required": false

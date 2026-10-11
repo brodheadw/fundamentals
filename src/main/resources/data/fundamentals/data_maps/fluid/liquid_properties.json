@@ -632,6 +632,85 @@
       "aqueous": true,
       "corrosive": true
     },
+    "fundamentals:spent_bayer_liquor": {
+      "density": 1250,
+      "viscosity": 6.0,
+      "freezes": -15,
+      "boils": 108,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:sodium_gallate_liquor": {
+      "density": 1220,
+      "viscosity": 3.0,
+      "freezes": -15,
+      "boils": 107,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:zinc_leach_liquor": {
+      "density": 1400,
+      "viscosity": 2.2,
+      "freezes": -6,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:zinc_sulfate_liquor": {
+      "density": 1390,
+      "viscosity": 2.1,
+      "freezes": -6,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:indium_sulfate_liquor": {
+      "density": 1300,
+      "viscosity": 2.0,
+      "freezes": -8,
+      "boils": 103,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:indium_chloride_liquor": {
+      "density": 1110,
+      "viscosity": 1.4,
+      "freezes": -30,
+      "boils": 104,
+      "aqueous": true,
+      "corrosive": true
+    },
+    "fundamentals:crude_trichlorosilane": {
+      "density": 1360,
+      "viscosity": 0.36,
+      "freezes": -110,
+      "boils": 32,
+      "flash_point": -27,
+      "autoignition": 185,
+      "toxic": true
+    },
+    "fundamentals:trichlorosilane": {
+      "density": 1342,
+      "viscosity": 0.33,
+      "freezes": -126.6,
+      "boils": 31.8,
+      "flash_point": -27,
+      "autoignition": 185,
+      "toxic": true
+    },
+    "fundamentals:silicon_tetrachloride": {
+      "density": 1483,
+      "viscosity": 0.5,
+      "freezes": -68.7,
+      "boils": 57.6,
+      "toxic": true
+    },
+    "fundamentals:germanium_tetrachloride": {
+      "density": 1879,
+      "freezes": -49.5,
+      "boils": 83.1,
+      "toxic": true
+    },
     "fundamentals:sodium_aluminate_liquor": {
       "density": 1320,
       "viscosity": 12,
