@@ -34,6 +34,7 @@ public final class Uses {
 
     private static final Map<String, Item> ITEMS = new LinkedHashMap<>();
     private static Block sludgeBlock;
+    private static Block redMudBlock;
 
     private Uses() {}
 
@@ -47,6 +48,8 @@ public final class Uses {
     public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
         registry.accept(Fundamentals.id("clarifier_sludge_block"), sludgeBlock = new Block(BlockBehaviour.Properties.of().mapColor(MapColor.DIRT)
                 .strength(0.8F).sound(SoundType.MUD)));
+        registry.accept(Fundamentals.id("red_mud_block"), redMudBlock = new Block(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_RED)
+                .strength(0.8F).sound(SoundType.MUD)));
     }
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
@@ -54,6 +57,7 @@ public final class Uses {
             register(registry, id, new Item(new Item.Properties()));
         }
         register(registry, "clarifier_sludge_block", new BlockItem(sludgeBlock, new Item.Properties()));
+        register(registry, "red_mud_block", new BlockItem(redMudBlock, new Item.Properties()));
         for (String id : PLATINUM_IDS) {
             register(registry, id, new Item(new Item.Properties()));
         }

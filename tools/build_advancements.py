@@ -52,7 +52,7 @@ ITEM_FORMULAS = {
     "crude_zirconium_tetrachloride": "ZrCl4,HfCl4", "zirconium_tetrachloride": "ZrCl4", "hafnium_tetrachloride": "HfCl4",
     "yttria_stabilised_zirconia": "ZrO2,Y2O3", "beryl_frit": "Be3Al2Si6O18", "beryllium_hydroxide": "Be(OH)2",
     "ammonium_fluoroberyllate": "(NH4)2BeF4", "beryllium_pebbles": "Be",
-    "dimensionally_stable_anode": "Ti,RuO2,IrO2", "red_mud": "Fe2O3,TiO2,Al2O3,SiO2,Na2O,(Sc,Y,La,Ce)", "aluminium_hydroxide": "Al(OH)3",
+    "dimensionally_stable_anode": "Ti,RuO2,IrO2", "red_mud": "Fe2O3,TiO2,Al2O3,SiO2,Na2O,(Sc,Y,La,Ce)", "red_mud_block": "Fe2O3,TiO2,Al2O3,SiO2,Na2O,(Sc,Y,La,Ce)", "aluminium_hydroxide": "Al(OH)3",
     "alumina": "Al2O3", "cryolite": "Na3AlF6",
     "nickel_oxide": "NiO", "nickel_pellets": "Ni",
     "tungstic_acid": "H2WO4", "ammonium_paratungstate": "(NH4)10H2W12O42", "ammonium_perrhenate": "NH4ReO4", "lithium_carbonate": "Li2CO3",

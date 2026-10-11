@@ -69,8 +69,7 @@ import javax.annotation.Nullable;
 
 public final class Hazards {
 
-    private static final TagKey<Item> BERYLLIUM_DUSTS = TagKey.create(Registries.ITEM, Fundamentals.id("beryllium_dusts"));
-    private static final TagKey<Item> NICKEL_DUSTS = TagKey.create(Registries.ITEM, Fundamentals.id("nickel_dusts"));
+    private static final TagKey<Item> TOXIC_DUSTS = TagKey.create(Registries.ITEM, Fundamentals.id("toxic_dusts"));
     private static final TagKey<Item> SULFIDES = TagKey.create(Registries.ITEM, Fundamentals.id("sulfides"));
 
     private static final int REACH = 2;
@@ -195,7 +194,7 @@ public final class Hazards {
         }
         ServerLevel level = player.serverLevel();
         BlockPos at = player.blockPosition();
-        if (dust(player.getMainHandItem()) || dust(player.getOffhandItem())) {
+        if (toxicDust(player.getMainHandItem()) || toxicDust(player.getOffhandItem())) {
             lungDust(level, at);
         }
         for (BlockPos pos : BlockPos.betweenClosed(at.offset(-REACH - 1, -REACH, -REACH - 1), at.offset(REACH + 1, REACH, REACH + 1))) {
@@ -215,7 +214,7 @@ public final class Hazards {
                 continue;
             }
             IItemHandler items = level.getCapability(Capabilities.ItemHandler.BLOCK, pos, null);
-            if (items != null && IntStream.range(0, items.getSlots()).anyMatch(i -> dust(items.getStackInSlot(i)))) {
+            if (items != null && IntStream.range(0, items.getSlots()).anyMatch(i -> toxicDust(items.getStackInSlot(i)))) {
                 lungDust(level, pos.immutable());
             }
             IFluidHandler tanks = level.getCapability(Capabilities.FluidHandler.BLOCK, pos, null);
@@ -237,8 +236,8 @@ public final class Hazards {
         }
     }
 
-    private static boolean dust(ItemStack stack) {
-        return stack.is(BERYLLIUM_DUSTS) || stack.is(NICKEL_DUSTS);
+    public static boolean toxicDust(ItemStack stack) {
+        return stack.is(TOXIC_DUSTS);
     }
 
     private static boolean roastingSulfide(Level level, BlockPos pos, BlockState state) {
