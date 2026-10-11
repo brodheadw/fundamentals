@@ -23,16 +23,16 @@
     },
     {
       "type": "patchouli:text",
-      "text": "$(li)Copper: patina, 9 days a stage; damp, 3 days$(li)Brass: patina, 24 days a stage; damp, 8 days$(li)Bronze: patina, 18 days a stage; damp, 6 days$(li)Silver: tarnish, 24 days a stage; damp, 16 days$(li)Iron: rust, 45 days a stage; damp, 7.5 days$(li)Steel: rust, 75 days a stage; damp, 12.5 days$(li)Lanthanum: flaking, 3 days a stage; damp, 0.8 days",
+      "text": "$(li)Copper: patina, 36 days a stage; damp, 12 days$(li)Brass: patina, 96 days a stage; damp, 32 days$(li)Bronze: patina, 72 days a stage; damp, 24 days$(li)Silver: tarnish, 96 days a stage; damp, 64 days$(li)Iron: rust, 180 days a stage; damp, 30 days$(li)Steel: rust, 300 days a stage; damp, 50 days$(li)Lanthanum: flaking, 12 days a stage; damp, 3 days",
       "title": "Ingots, in game days"
     },
     {
       "type": "patchouli:text",
-      "text": "$(li)Cerium: flaking, 3 days a stage; damp, 0.8 days$(li)Praseodymium: flaking, 6 days a stage; damp, 1.5 days$(li)Didymium: flaking, 7.5 days a stage; damp, 1.9 days$(li)Neodymium: flaking, 9 days a stage; damp, 2.2 days$(li)Samarium: flaking, 24 days a stage; damp, 6 days$(li)Gadolinium: flaking, 24 days a stage; damp, 6 days$(li)Terbium: flaking, 45 days a stage; damp, 11.2 days"
+      "text": "$(li)Cerium: flaking, 12 days a stage; damp, 3 days$(li)Praseodymium: flaking, 24 days a stage; damp, 6 days$(li)Didymium: flaking, 30 days a stage; damp, 7.5 days$(li)Neodymium: flaking, 36 days a stage; damp, 9 days$(li)Samarium: flaking, 96 days a stage; damp, 24 days$(li)Gadolinium: flaking, 96 days a stage; damp, 24 days$(li)Terbium: flaking, 180 days a stage; damp, 45 days"
     },
     {
       "type": "patchouli:text",
-      "text": "$(li)Dysprosium: flaking, 45 days a stage; damp, 11.2 days$(li)Yttrium: flaking, 60 days a stage; damp, 15 days$(li)Calcium: tarnish, 1.5 days a stage; damp, 0.4 days$(li)Lithium: tarnish, 3 days a stage; damp, 0.8 days$(li)Magnesium: tarnish, 30 days a stage; damp, 10 days"
+      "text": "$(li)Dysprosium: flaking, 180 days a stage; damp, 45 days$(li)Yttrium: flaking, 240 days a stage; damp, 60 days$(li)Calcium: tarnish, 6 days a stage; damp, 1.5 days$(li)Lithium: tarnish, 12 days a stage; damp, 3 days$(li)Magnesium: tarnish, 120 days a stage; damp, 40 days"
     },
     {
       "type": "patchouli:text",
