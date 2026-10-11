@@ -1,0 +1,14 @@
+{
+  "type": "create:cutting",
+  "ingredients": [
+    {
+      "tag": "c:plates/antimonial_lead"
+    }
+  ],
+  "processing_time": 100,
+  "results": [
+    {
+      "id": "fundamentals:lead_grid"
+    }
+  ]
+}

@@ -702,7 +702,7 @@ def metals():
         "Cupellation is how silver has been parted from lead since antiquity: the lead is blown with air on a hearth of bone ash at about 1,000 °C, burns to litharge, the yellow-orange lead oxide, and soaks into the cupel, "
         "and a bead of silver stays bright. A crust, a bone meal and 250 mB of air, heated, give four silver nuggets, a litharge and a zinc oxide for the zinc retort. "
         "A bullion cupelled straight, the old way, gives one nugget and its whole lead as litharge. A litharge and a charcoal, heated, reduce back to lead, "
-        "and a lead-acid plate is a lead grid pasted with litharge: the Factory's lead accumulator takes a litharge where it took a block of lead.") + pages_of(
+        "and litharge is the paste on a lead-acid cell's plates (see Batteries, under Power).") + pages_of(
         "The rich silver ores, acanthite and native silver from the calcite veins, were soaked into a lead bath on the cupel and cupelled with it: a raw ore, a lead ingot, a bone meal and 250 mB of air, heated, give a silver ingot and a litharge. "
         "Silver conducts better than any metal, and the oxide an arc burns on it conducts too and gives up its oxygen in the heat, so contacts that arc as they make and break are silver: "
         "The Factory's electrical switch and large switch take silver plates. Its black tarnish, the sulfide, is the trouble: it raises a contact's resistance. "
@@ -834,7 +834,7 @@ def metals():
         "Roasted on a campfire or in a smoker, stibnite burns to antimony trioxide, the white fume a real volatilising roaster collects in its bag house, and gives off sulfur dioxide as every sulfide roast does. "
         "Two oxide, a charcoal and a soda ash for flux, heated, reduce to two antimony ingots and a slag. Antimony is brittle, bluish-white, and expands as it freezes.", "Roasting and reduction") + pages_of(
         "Lead alone is too soft for a battery grid. Eight lead ingots and three antimony nuggets, heated, make eight antimonial lead, about four per cent antimony, "
-        "the hard lead of the lead-acid battery since Planté's and Faure's; pressed to plate it is the grid The Factory's lead-acid accumulator now takes. "
+        "the hard lead of the lead-acid battery since Planté's and Faure's; pressed to plate and sawn, it is the grid of a lead-acid cell (see Batteries, under Power). "
         "Antimony trioxide's great use, as a flame retardant in plastics, has no place in the pack.", "Antimonial lead") + pages_of(
         "Sources: USGS, Mineral Commodity Summaries 2025, Antimony; Anderson, \"The metallurgy of antimony\", Chemie der Erde 72 (2012); "
         "Habashi, Handbook of Extractive Metallurgy (Wiley-VCH, 1997), Antimony.", "Sources"), 17)
@@ -926,14 +926,59 @@ def platinum():
 
 
 def power():
-    category("power", "Power", "Sunlight into The Factory Must Grow's grid, and the magnets its machines turn on.", "fundamentals:photovoltaic_panel", 5)
+    category("power", "Power", "Sunlight into The Factory Must Grow's grid, the cells its accumulators store it in, and the magnets its machines turn on.",
+             "fundamentals:photovoltaic_panel", 5)
     entry("power", "solar", "Solar panels", "fundamentals:photovoltaic_panel", pages_of(
         "A solar panel goes on a rack. Build the rack from steel and set it down facing the way you want, then mount a photovoltaic panel on it: a P and an N semiconductor from The Factory Must Grow under glass, in an aluminium frame, with a silver nugget for the front contacts printed on every cell. "
         "Silicon is doped n-type with a donor from group 15 and p-type with an acceptor from group 13 (Sze, Physics of Semiconductor Devices): four silicon and a white phosphorus, heated, give four N semiconductor, "
         "and four silicon and a boric acid four P, where the Factory used sulfur and aluminium. "
         "Under open sky it feeds the electrical network, 120 volts while the sun is up and up to 200 watts at noon, nothing at night or in shade. Break it and you get the rack and the panel back.", "Solar panels")
         + [crafting("fundamentals:panel_rack"), crafting("fundamentals:photovoltaic_panel")], 0)
+    batteries()
     magnets()
+
+
+def batteries():
+    entry("power", "batteries", "Batteries", "fundamentals:lead_acid_cell", pages_of(
+        "The Factory's accumulator is a bank of cells in a casing, and it is built from real ones. A cell is two electrodes that would rather be one compound, kept apart by a separator "
+        "and joined only through an electrolyte, so the electrons have to go round by the wire. Four chemistries fill it: lead-acid, nickel-metal hydride, lithium-ion, and the silver-zinc of the "
+        "silver entry. The block holds the same charge whichever cells it is built from; what changes is how many cells it takes, because a kilogram of lead-acid stores 30 to 40 watt-hours, "
+        "nickel-metal hydride 60 to 120 and lithium-ion 150 to 270.", "Cells") + pages_of(
+        "Planté's cell of 1859 is still most of the world's stored energy. The grid is the plate's skeleton, antimonial lead, hard enough to carry the paste: an antimonial lead plate run through a saw. "
+        "The paste is leady oxide, litharge blown from molten lead in air (Barton's pot: a lead ingot and 250 mB of air, heated, give a litharge) or "
+        "from the cupel, mixed with a little sulfuric acid and water to basic lead sulfate: two litharge, 100 mB of acid and 250 mB of water give two lead paste. A deployer pastes a grid.", "Lead-acid") + pages_of(
+        "A pasted plate is not yet an electrode. Formation charges it: two pasted plates and 250 mB of sulfuric acid in a vat between two electrodes give one lead dioxide plate, chocolate brown, "
+        "the positive, and one sponge lead plate, grey, the negative. The two plates, a polyethylene separator and 250 mB of acid in a basin make a lead-acid cell of two volts, "
+        "and four cells with copper wire round an aluminium casing make an accumulator. Real batteries carry one more negative than positive plate.", "Formation") + pages_of(
+        "A lithium-ion cell is a graphite anode on copper foil and a metal oxide cathode on aluminium foil, a polyethylene separator between, wet with lithium hexafluorophosphate in organic carbonates. "
+        "It charges by moving lithium ions out of the oxide and in between the graphite's layers. Here the cell is The Factory's lithium charge, which its blade burns and its accumulator stacks: "
+        "two charges, copper wire, a casing and a circuit board, the battery management every lithium pack needs, make an accumulator.", "Lithium-ion") + pages_of(
+        "NMC, lithium nickel manganese cobalt oxide, is the cathode of most electric cars. Its precursor is co-precipitated from the three sulfates with caustic soda, ammonia holding the nickel "
+        "back so the particles grow round and dense. A raw pyrolusite, a coal coke and 500 mB of sulfuric acid, heated, reduce and leach to two manganese sulfate; a cobalt ingot and 250 mB of acid "
+        "give two cobalt sulfate and 250 mB of hydrogen. 750 mB of nickel sulfate liquor, a manganese and a cobalt sulfate, 500 mB of caustic soda and 50 mB of ammonia in a vat give two NMC hydroxide, "
+        "six parts nickel to two each of manganese and cobalt, NMC 622; the sodium sulfate left in the liquor is not kept.", "NMC") + pages_of(
+        "Two hydroxide, a lithium carbonate and 500 mB of air, heated, calcine to two NMC cathode and 250 mB of carbon dioxide, as at 800 to 900 °C in a roller kiln. "
+        "The richest nickel grades take lithium hydroxide instead; 622 takes the carbonate. Most of the world's cobalt now goes into cathodes like this one.", "Calcining") + pages_of(
+        "LFP, lithium iron phosphate, is the cheap one: no nickel, no cobalt, a lower voltage (3.2 against NMC's 3.7) and a far longer life, the cathode of most Chinese cars and grid batteries. "
+        "An iron ingot, 500 mB of phosphoric acid and 250 mB of air, heated, give two iron phosphate, the pale FePO4 the industry precipitates. Two iron phosphate, a lithium carbonate, a sugar and "
+        "100 mB of argon, heated, calcine to two LFP cathode, the sugar charring to the carbon coat every LFP particle needs, since the phosphate barely conducts.", "LFP") + pages_of(
+        "The anode is graphite, natural flake purified or Acheson's from coke, the two alike to the cell; most anodes now are synthetic, the flake rounded into spheres first.", "Graphite") + pages_of(
+        "The electrolyte is the delicate part. A lithium carbonate in 500 mB of hydrofluoric acid gives two lithium fluoride and 250 mB of carbon dioxide. White phosphorus burns in 1,000 mB of fluorine "
+        "to 500 mB of phosphorus pentafluoride, a fuming gas, and a lithium fluoride takes up 250 mB of it as lithium hexafluorophosphate, the salt every lithium-ion cell uses. "
+        "Ethylene over silver in air gives ethylene oxide, which takes up carbon dioxide: 500 mB of ethylene, 500 mB of air and 250 mB of carbon dioxide on a silver nugget in a heated vat "
+        "give two ethylene carbonate, and the silver comes back nineteen times in twenty.", "Electrolyte") + pages_of(
+        "A hexafluorophosphate and two ethylene carbonate give 500 mB of lithium-ion electrolyte. Real electrolyte thins the carbonate, which melts at 36 °C, with a linear one, dimethyl or ethyl methyl carbonate; "
+        "here that is folded in, and the fluid has the real mixture's figures: it burns, and water turns it to hydrogen fluoride. A cathode, a graphite, an aluminium and a copper sheet for the foils, a plastic "
+        "sheet and 250 mB of electrolyte in a basin make two lithium charges, from NMC or LFP alike.", "Assembly") + pages_of(
+        "Nickel-metal hydride stores hydrogen in a rare earth alloy. LaNi5 takes up six hydrogen atoms a formula unit, more hydrogen to the litre than liquid hydrogen, and real cells use mischmetal, "
+        "the light rare earths unparted, for the lanthanum. Two lanthanum or cerium ingots, four nickel and 100 mB of argon, superheated, give six hydride alloy. Nickel sulfate liquor and caustic soda "
+        "with a zinc nugget throw down two nickel hydroxide, a little zinc in it as the cathode makers add.", "Nickel-metal hydride") + pages_of(
+        "A hydride alloy, a nickel hydroxide, a nickel sheet, a plastic sheet and 100 mB of caustic soda make two cells of 1.2 volts, and three with copper wire round a casing make an accumulator. "
+        "The real electrolyte is mostly potassium hydroxide with a little sodium and lithium hydroxide; caustic soda stands in. This is the battery of the first hybrid cars, and where most of the "
+        "lanthanum and cerium the plant parts can go.", "Hydride cells") + pages_of(
+        "Sources: Reddy (ed.), Linden's Handbook of Batteries, 4th ed. (McGraw-Hill, 2011); Pavlov, Lead-Acid Batteries: Science and Technology (Elsevier, 2011); "
+        "Ullmann's Encyclopedia of Industrial Chemistry, \"Batteries, 2. Secondary Batteries\", \"Lithium and Lithium Compounds\" and \"Carbonic Esters\"; "
+        "USGS, Mineral Commodity Summaries 2025, Cobalt, Graphite and Lithium.", "Sources"), 2)
 
 
 def grades():

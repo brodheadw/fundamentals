@@ -1,0 +1,35 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "fundamentals:hydride_rare_earths"
+    },
+    {
+      "tag": "fundamentals:hydride_rare_earths"
+    },
+    {
+      "tag": "c:ingots/nickel"
+    },
+    {
+      "tag": "c:ingots/nickel"
+    },
+    {
+      "tag": "c:ingots/nickel"
+    },
+    {
+      "tag": "c:ingots/nickel"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 100,
+      "tag": "c:argon"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:hydride_alloy",
+      "count": 6
+    }
+  ],
+  "heat_requirement": "superheated"
+}

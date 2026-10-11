@@ -1,0 +1,20 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:lithium_hexafluorophosphate"
+    },
+    {
+      "item": "fundamentals:ethylene_carbonate"
+    },
+    {
+      "item": "fundamentals:ethylene_carbonate"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:lithium_ion_electrolyte",
+      "amount": 500
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:lithium_carbonate"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 500,
+      "tag": "c:acids/hydrofluoric"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:lithium_fluoride",
+      "count": 2
+    },
+    {
+      "id": "tfmg:carbon_dioxide",
+      "amount": 250
+    }
+  ]
+}

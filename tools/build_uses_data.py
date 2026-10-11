@@ -41,7 +41,13 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "uranium_fuel_pellet": "Uranium Fuel Pellet", "depleted_uranium_oxide": "Depleted Uranium Oxide", "zircaloy_tube": "Zircaloy Tube",
          "boron_carbide": "Boron Carbide", "potassium_bifluoride": "Potassium Bifluoride", "thorium_dioxide": "Thorium Dioxide",
          "puddle_ball": "Puddle Ball",
-         "graphite": "Graphite", "potash": "Potash", "gold_amalgam": "Gold Amalgam", "potassium_fluorotantalate": "Potassium Fluorotantalate"}
+         "graphite": "Graphite", "potash": "Potash", "gold_amalgam": "Gold Amalgam", "potassium_fluorotantalate": "Potassium Fluorotantalate",
+         "lead_grid": "Lead Grid", "lead_paste": "Lead Paste", "pasted_lead_plate": "Pasted Lead Plate", "lead_dioxide_plate": "Lead Dioxide Plate",
+         "sponge_lead_plate": "Sponge Lead Plate", "lead_acid_cell": "Lead-Acid Cell", "manganese_sulfate": "Manganese Sulfate",
+         "cobalt_sulfate": "Cobalt Sulfate", "nmc_hydroxide": "NMC Hydroxide", "nmc_cathode": "NMC Cathode", "iron_phosphate": "Iron Phosphate",
+         "lfp_cathode": "LFP Cathode", "lithium_fluoride": "Lithium Fluoride",
+         "lithium_hexafluorophosphate": "Lithium Hexafluorophosphate", "ethylene_carbonate": "Ethylene Carbonate",
+         "nickel_hydroxide": "Nickel Hydroxide", "hydride_alloy": "Hydride Alloy", "nickel_metal_hydride_cell": "Nickel-Metal Hydride Cell"}
 # In the order of magnet.MagnetGrade.
 MAGNET_ALLOYS = {"neodymium_iron_boron": ("ingot", "plate"), "dysprosium_neodymium_iron_boron": ("ingot", "plate"),
                  "samarium_cobalt": ("ingot", "plate"), "alnico": ("ingot",)}
@@ -521,9 +527,6 @@ def more_sinks():
            {"T": {"tag": "c:nuggets/platinum"}, "K": {"tag": "c:nuggets/palladium"}, "R": {"tag": "c:nuggets/rhodium"},
             "C": {"tag": "c:ingots/cast_iron"}, "P": {"item": "tfmg:cast_iron_pipe"}, "E": {"item": "fundamentals:cerium_oxide"}},
            {"count": 2, "id": "tfmg:exhaust"})
-    shaped(TFMG / "crafting/materials/lithium_charge.json", [" P ", "LKL", " A "],
-           {"A": {"tag": "c:plates/aluminum"}, "L": {"tag": "c:ingots/lithium"}, "P": {"item": "tfmg:plastic_sheet"}, "K": {"item": "fundamentals:cobalt_ingot"}},
-           {"count": 1, "id": "tfmg:lithium_charge"})
     for oxide, glass in (("neodymium", "purple"), ("holmium", "yellow")):
         shaped(USES / f"{oxide}_glass.json", ["GGG", "GEG", "GGG"], {"G": {"tag": "c:glass_blocks/colorless"}, "E": {"item": f"fundamentals:{oxide}_oxide"}},
                {"count": 8, "id": f"minecraft:{glass}_stained_glass"})
@@ -858,10 +861,6 @@ def thorium():
 
 
 def lead_and_zinc_sinks():
-    shaped(TFMG / "crafting/materials/accumulator.json", ["LWL", "SXS", "LCL"],
-           {"X": {"item": "fundamentals:litharge"}, "C": {"item": "tfmg:industrial_aluminum_casing"}, "L": {"tag": "c:plates/antimonial_lead"},
-            "S": {"item": "tfmg:sulfuric_acid_bucket"}, "W": {"tag": "c:wires/copper"}},
-           {"count": 1, "id": "tfmg:accumulator"})
     write(TFMG / "vat_machine_recipe/rubber.json", {
         "type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:steel_vat", "tfmg:firebrick_lined_vat"],
         "heat_requirement": "heated", "machines": ["tfmg:mixing"], "min_size": 1,
@@ -883,6 +882,55 @@ def silver_sinks():
            {"S": {"tag": "c:plates/silver"}, "W": {"tag": "c:wires/copper"}, "Z": {"tag": "c:ingots/zinc"}, "P": {"item": "tfmg:plastic_sheet"},
             "C": {"item": "tfmg:industrial_aluminum_casing"}},
            {"count": 1, "id": "tfmg:accumulator"})
+
+
+def accumulator(path, pattern, cells):
+    key = {"C": {"item": ns(cells)}, "W": {"tag": "c:wires/copper"}, "K": {"item": "tfmg:industrial_aluminum_casing"}, "B": {"item": "tfmg:circuit_board"}}
+    shaped(path, pattern, {k: v for k, v in key.items() if k in "".join(pattern)}, {"count": 1, "id": "tfmg:accumulator"})
+
+
+def batteries():
+    separator = tag("c:plates/polyethylene")
+    mixing("litharge_from_lead", tag("c:ingots/lead") + [fluid("tfmg:air", 250)], [result("litharge")], "heated")
+    write(USES / "lead_grid.json", {"type": "create:cutting", "ingredients": tag("c:plates/antimonial_lead"), "processing_time": 100, "results": [result("lead_grid")]})
+    mixing("lead_paste", item("litharge", 2) + [fluid("tfmg:sulfuric_acid", 100), fluid("minecraft:water", 250)], [result("lead_paste", 2)])
+    write(USES / "pasted_lead_plate.json", {"type": "create:deploying", "ingredients": item("lead_grid") + item("lead_paste"),
+                                            "results": [result("pasted_lead_plate")]})
+    vat("lead_plate_formation", item("pasted_lead_plate", 2), "tfmg:sulfuric_acid", 250, [result("lead_dioxide_plate"), result("sponge_lead_plate")],
+        machines=("tfmg:electrode", "tfmg:electrode"), heat=None)
+    mixing("lead_acid_cell", item("lead_dioxide_plate") + item("sponge_lead_plate") + separator + [fluid("tfmg:sulfuric_acid", 250)], [result("lead_acid_cell")])
+    accumulator(TFMG / "crafting/materials/accumulator.json", ["CWC", "CKC"], "lead_acid_cell")
+
+    mixing("manganese_sulfate", item("raw_pyrolusite") + item("tfmg:coal_coke") + [fluid("tfmg:sulfuric_acid", 500)],
+           [result("manganese_sulfate", 2), result_fluid("tfmg:carbon_dioxide", 250)], "heated")
+    mixing("cobalt_sulfate", tag("c:ingots/cobalt") + [fluid("tfmg:sulfuric_acid", 250)], [result("cobalt_sulfate", 2), result_fluid("tfmg:hydrogen", 250)], "heated")
+    pgm_vat("nmc_hydroxide", item("manganese_sulfate") + item("cobalt_sulfate")
+            + [fluid("nickel_sulfate_liquor", 750), fluid("caustic_soda", 500), fluid("ammonia", 50)], [result("nmc_hydroxide", 2)], heat=None, folder=USES)
+    mixing("nmc_cathode", item("nmc_hydroxide", 2) + item("lithium_carbonate") + [fluid("tfmg:air", 500)],
+           [result("nmc_cathode", 2), result_fluid("tfmg:carbon_dioxide", 250)], "heated")
+    mixing("iron_phosphate", tag("c:ingots/iron") + [fluid("phosphoric_acid", 500), fluid("tfmg:air", 250)], [result("iron_phosphate", 2)], "heated")
+    mixing("lfp_cathode", item("iron_phosphate", 2) + item("lithium_carbonate") + item("minecraft:sugar") + argon(),
+           [result("lfp_cathode", 2), result_fluid("tfmg:carbon_dioxide", 250)], "heated")
+    mixing("lithium_fluoride", item("lithium_carbonate") + [fluid("hydrofluoric_acid", 500)],
+           [result("lithium_fluoride", 2), result_fluid("tfmg:carbon_dioxide", 250)])
+    pgm_vat("phosphorus_pentafluoride", item("white_phosphorus") + [fluid("fluorine", 1000)], [result_fluid("phosphorus_pentafluoride", 500)],
+            heat=None, folder=USES)
+    mixing("lithium_hexafluorophosphate", item("lithium_fluoride") + [fluid("phosphorus_pentafluoride", 250)], [result("lithium_hexafluorophosphate")])
+    pgm_vat("ethylene_carbonate", item("silver_nugget") + [fluid("tfmg:ethylene", 500), fluid("tfmg:air", 500), fluid("tfmg:carbon_dioxide", 250)],
+            [result("ethylene_carbonate", 2), {"id": "fundamentals:silver_nugget", "chance": 0.95}], folder=USES)
+    mixing("lithium_ion_electrolyte", item("lithium_hexafluorophosphate") + item("ethylene_carbonate", 2), [result_fluid("lithium_ion_electrolyte", 500)])
+    for cathode in ("nmc_cathode", "lfp_cathode"):
+        mixing(f"lithium_charge_from_{cathode}", item(cathode) + tag("c:dusts/graphite") + tag("c:plates/aluminum") + tag("c:plates/copper") + separator
+               + [fluid("lithium_ion_electrolyte", 250)], [result("tfmg:lithium_charge", 2)])
+    disabled(TFMG / "crafting/materials/lithium_charge.json")
+    accumulator(TFMG / "crafting/materials/accumulatorfrom_lithium.json", [" W ", "CKC", " B "], "tfmg:lithium_charge")
+
+    mixing("nickel_hydroxide", tag("c:nuggets/zinc") + [fluid("nickel_sulfate_liquor", 500), fluid("caustic_soda", 500)], [result("nickel_hydroxide", 2)])
+    tag_file(DATA / "tags/item/hydride_rare_earths.json", ["fundamentals:lanthanum_ingot", "fundamentals:cerium_ingot"])
+    mixing("hydride_alloy", tag("fundamentals:hydride_rare_earths", 2) + tag("c:ingots/nickel", 4) + argon(), [result("hydride_alloy", 6)], "superheated")
+    mixing("nickel_metal_hydride_cell", item("hydride_alloy") + item("nickel_hydroxide") + tag("c:plates/nickel") + separator + [fluid("caustic_soda", 100)],
+           [result("nickel_metal_hydride_cell", 2)])
+    accumulator(USES / "accumulator_from_nickel_metal_hydride.json", [" W ", "CKC", " C "], "nickel_metal_hydride_cell")
 
 
 def plastics():
@@ -1012,6 +1060,7 @@ def main():
     potash()
     gold()
     lead_and_zinc_sinks()
+    batteries()
     plastics()
     names()
     print("uses written")

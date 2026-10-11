@@ -1,0 +1,18 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:lithium_fluoride"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:phosphorus_pentafluoride"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:lithium_hexafluorophosphate"
+    }
+  ]
+}

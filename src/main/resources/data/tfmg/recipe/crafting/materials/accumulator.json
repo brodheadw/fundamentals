@@ -2,25 +2,18 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "pattern": [
-    "LWL",
-    "SXS",
-    "LCL"
+    "CWC",
+    "CKC"
   ],
   "key": {
-    "X": {
-      "item": "fundamentals:litharge"
-    },
     "C": {
-      "item": "tfmg:industrial_aluminum_casing"
-    },
-    "L": {
-      "tag": "c:plates/antimonial_lead"
-    },
-    "S": {
-      "item": "tfmg:sulfuric_acid_bucket"
+      "item": "fundamentals:lead_acid_cell"
     },
     "W": {
       "tag": "c:wires/copper"
+    },
+    "K": {
+      "item": "tfmg:industrial_aluminum_casing"
     }
   },
   "result": {

@@ -1,0 +1,31 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:lfp_cathode"
+    },
+    {
+      "tag": "c:dusts/graphite"
+    },
+    {
+      "tag": "c:plates/aluminum"
+    },
+    {
+      "tag": "c:plates/copper"
+    },
+    {
+      "tag": "c:plates/polyethylene"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:lithium_ion_electrolyte"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:lithium_charge",
+      "count": 2
+    }
+  ]
+}

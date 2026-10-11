@@ -54,6 +54,7 @@
     "tfmg:constantan_block",
     "tfmg:constantan_ingot",
     "tfmg:constantan_nugget",
-    "tfmg:copper_sulfate"
+    "tfmg:copper_sulfate",
+    "tfmg:lithium_charge"
   ]
 }

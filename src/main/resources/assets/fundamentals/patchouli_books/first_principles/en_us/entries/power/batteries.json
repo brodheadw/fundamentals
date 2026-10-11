@@ -1,0 +1,129 @@
+{
+  "name": "Batteries",
+  "category": "fundamentals:power",
+  "icon": "fundamentals:lead_acid_cell",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "The Factory's accumulator is a bank of cells in a casing, and it is built from real ones. A cell is two electrodes that would rather be one compound, kept apart by a separator and joined only through an electrolyte, so the electrons have to go round by the wire.",
+      "title": "Cells"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Four chemistries fill it: lead-acid, nickel-metal hydride, lithium-ion, and the silver-zinc of the silver entry."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The block holds the same charge whichever cells it is built from; what changes is how many cells it takes, because a kilogram of lead-acid stores 30 to 40 watt-hours, nickel-metal hydride 60 to 120 and lithium-ion 150 to 270."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Planté's cell of 1859 is still most of the world's stored energy. The grid is the plate's skeleton, antimonial lead, hard enough to carry the paste: an antimonial lead plate run through a saw.",
+      "title": "Lead-acid"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The paste is leady oxide, litharge blown from molten lead in air (Barton's pot: a lead ingot and 250 mB of air, heated, give a litharge) or from the cupel, mixed with a little sulfuric acid and water to basic lead sulfate: two litharge, 100 mB of acid and 250 mB of water give two lead paste. A deployer pastes a grid."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A pasted plate is not yet an electrode. Formation charges it: two pasted plates and 250 mB of sulfuric acid in a vat between two electrodes give one lead dioxide plate, chocolate brown, the positive, and one sponge lead plate, grey, the negative.",
+      "title": "Formation"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The two plates, a polyethylene separator and 250 mB of acid in a basin make a lead-acid cell of two volts, and four cells with copper wire round an aluminium casing make an accumulator. Real batteries carry one more negative than positive plate."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A lithium-ion cell is a graphite anode on copper foil and a metal oxide cathode on aluminium foil, a polyethylene separator between, wet with lithium hexafluorophosphate in organic carbonates. It charges by moving lithium ions out of the oxide and in between the graphite's layers.",
+      "title": "Lithium-ion"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Here the cell is The Factory's lithium charge, which its blade burns and its accumulator stacks: two charges, copper wire, a casing and a circuit board, the battery management every lithium pack needs, make an accumulator."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "NMC, lithium nickel manganese cobalt oxide, is the cathode of most electric cars. Its precursor is co-precipitated from the three sulfates with caustic soda, ammonia holding the nickel back so the particles grow round and dense.",
+      "title": "NMC"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A raw pyrolusite, a coal coke and 500 mB of sulfuric acid, heated, reduce and leach to two manganese sulfate; a cobalt ingot and 250 mB of acid give two cobalt sulfate and 250 mB of hydrogen."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "750 mB of nickel sulfate liquor, a manganese and a cobalt sulfate, 500 mB of caustic soda and 50 mB of ammonia in a vat give two NMC hydroxide, six parts nickel to two each of manganese and cobalt, NMC 622; the sodium sulfate left in the liquor is not kept."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two hydroxide, a lithium carbonate and 500 mB of air, heated, calcine to two NMC cathode and 250 mB of carbon dioxide, as at 800 to 900 °C in a roller kiln. The richest nickel grades take lithium hydroxide instead; 622 takes the carbonate. Most of the world's cobalt now goes into cathodes like this one.",
+      "title": "Calcining"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "LFP, lithium iron phosphate, is the cheap one: no nickel, no cobalt, a lower voltage (3.2 against NMC's 3.7) and a far longer life, the cathode of most Chinese cars and grid batteries. An iron ingot, 500 mB of phosphoric acid and 250 mB of air, heated, give two iron phosphate, the pale FePO4 the industry precipitates.",
+      "title": "LFP"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two iron phosphate, a lithium carbonate, a sugar and 100 mB of argon, heated, calcine to two LFP cathode, the sugar charring to the carbon coat every LFP particle needs, since the phosphate barely conducts."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The anode is graphite, natural flake purified or Acheson's from coke, the two alike to the cell; most anodes now are synthetic, the flake rounded into spheres first.",
+      "title": "Graphite"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The electrolyte is the delicate part. A lithium carbonate in 500 mB of hydrofluoric acid gives two lithium fluoride and 250 mB of carbon dioxide.",
+      "title": "Electrolyte"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "White phosphorus burns in 1,000 mB of fluorine to 500 mB of phosphorus pentafluoride, a fuming gas, and a lithium fluoride takes up 250 mB of it as lithium hexafluorophosphate, the salt every lithium-ion cell uses."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ethylene over silver in air gives ethylene oxide, which takes up carbon dioxide: 500 mB of ethylene, 500 mB of air and 250 mB of carbon dioxide on a silver nugget in a heated vat give two ethylene carbonate, and the silver comes back nineteen times in twenty."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A hexafluorophosphate and two ethylene carbonate give 500 mB of lithium-ion electrolyte. Real electrolyte thins the carbonate, which melts at 36 °C, with a linear one, dimethyl or ethyl methyl carbonate; here that is folded in, and the fluid has the real mixture's figures: it burns, and water turns it to hydrogen fluoride.",
+      "title": "Assembly"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A cathode, a graphite, an aluminium and a copper sheet for the foils, a plastic sheet and 250 mB of electrolyte in a basin make two lithium charges, from NMC or LFP alike."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Nickel-metal hydride stores hydrogen in a rare earth alloy. LaNi5 takes up six hydrogen atoms a formula unit, more hydrogen to the litre than liquid hydrogen, and real cells use mischmetal, the light rare earths unparted, for the lanthanum.",
+      "title": "Nickel-metal hydride"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two lanthanum or cerium ingots, four nickel and 100 mB of argon, superheated, give six hydride alloy. Nickel sulfate liquor and caustic soda with a zinc nugget throw down two nickel hydroxide, a little zinc in it as the cathode makers add."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A hydride alloy, a nickel hydroxide, a nickel sheet, a plastic sheet and 100 mB of caustic soda make two cells of 1.2 volts, and three with copper wire round a casing make an accumulator. The real electrolyte is mostly potassium hydroxide with a little sodium and lithium hydroxide; caustic soda stands in.",
+      "title": "Hydride cells"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "This is the battery of the first hybrid cars, and where most of the lanthanum and cerium the plant parts can go."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: Reddy (ed.), Linden's Handbook of Batteries, 4th ed. (McGraw-Hill, 2011); Pavlov, Lead-Acid Batteries: Science and Technology (Elsevier, 2011); Ullmann's Encyclopedia of Industrial Chemistry, \"Batteries, 2.",
+      "title": "Sources"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Secondary Batteries\", \"Lithium and Lithium Compounds\" and \"Carbonic Esters\"; USGS, Mineral Commodity Summaries 2025, Cobalt, Graphite and Lithium."
+    }
+  ]
+}

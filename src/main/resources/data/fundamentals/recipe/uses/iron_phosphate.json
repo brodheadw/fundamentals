@@ -1,0 +1,25 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/iron"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 500,
+      "tag": "c:acids/phosphoric"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "tfmg:air"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:iron_phosphate",
+      "count": 2
+    }
+  ],
+  "heat_requirement": "heated"
+}

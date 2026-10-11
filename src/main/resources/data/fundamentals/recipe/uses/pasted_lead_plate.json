@@ -1,0 +1,16 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "fundamentals:lead_grid"
+    },
+    {
+      "item": "fundamentals:lead_paste"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:pasted_lead_plate"
+    }
+  ]
+}

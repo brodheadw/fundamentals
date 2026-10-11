@@ -93,6 +93,7 @@ PRECURSORS = {
     "ehehpa": ("EHEHPA", 0xF2EAC4),
     "titanium_tetrachloride": ("Titanium Tetrachloride", 0xEEF0EA),
     "vinyl_chloride": ("Vinyl Chloride", 0xEEF0EE),
+    "lithium_ion_electrolyte": ("Lithium-Ion Electrolyte", 0xEEEEE2),
 }
 GASES = {
     "argon": ("Argon", 0xC8D8F0),
@@ -106,6 +107,7 @@ GASES = {
     "uranium_hexafluoride": ("Uranium Hexafluoride", 0xF2F2EC),
     "enriched_uranium_hexafluoride": ("Enriched Uranium Hexafluoride", 0xEEF2E4),
     "depleted_uranium_hexafluoride": ("Depleted Uranium Hexafluoride", 0xE8E8E6),
+    "phosphorus_pentafluoride": ("Phosphorus Pentafluoride", 0xF0F2EE),
 }
 PLATINUM_LIQUORS = {
     "nickel_copper_sulfate": ("Nickel-Copper Sulfate Liquor", 0x58A890),

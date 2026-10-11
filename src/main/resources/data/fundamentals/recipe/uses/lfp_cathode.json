@@ -1,0 +1,33 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:iron_phosphate"
+    },
+    {
+      "item": "fundamentals:iron_phosphate"
+    },
+    {
+      "item": "fundamentals:lithium_carbonate"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 100,
+      "tag": "c:argon"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:lfp_cathode",
+      "count": 2
+    },
+    {
+      "id": "tfmg:carbon_dioxide",
+      "amount": 250
+    }
+  ],
+  "heat_requirement": "heated"
+}

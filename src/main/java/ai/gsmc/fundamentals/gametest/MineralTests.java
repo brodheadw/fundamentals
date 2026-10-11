@@ -149,8 +149,8 @@ public class MineralTests {
                 "stibnite should roast to the oxide");
         step(helper, "fundamentals:uses/antimony_ingot", "fundamentals:antimony_oxide", "fundamentals:antimony_ingot");
         step(helper, "fundamentals:uses/antimonial_lead", "fundamentals:antimony_nugget", "fundamentals:antimonial_lead_ingot");
-        Recipe<?> accumulator = recipe(helper, "tfmg:crafting/materials/accumulator").orElseThrow();
-        helper.assertTrue(takes(accumulator, "fundamentals:antimonial_lead_plate"), "the lead-acid accumulator's grids should be antimonial lead");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/lead_grid").orElseThrow(), "fundamentals:antimonial_lead_plate"),
+                "the lead-acid cell's grids should be antimonial lead");
         helper.succeed();
     }
 

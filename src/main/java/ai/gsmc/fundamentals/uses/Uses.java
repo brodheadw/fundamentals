@@ -28,7 +28,10 @@ public final class Uses {
             "galvanized_steel_plate", "roasted_siderite", "yellowcake", "uranium_tetrafluoride", "uranium_dioxide",
             "uranium_fuel_pellet", "depleted_uranium_oxide", "zircaloy_tube", "boron_carbide", "potassium_bifluoride", "thorium_dioxide",
             "puddle_ball",
-            "graphite", "potash", "gold_amalgam", "potassium_fluorotantalate");
+            "graphite", "potash", "gold_amalgam", "potassium_fluorotantalate",
+            "lead_grid", "lead_paste", "pasted_lead_plate", "lead_dioxide_plate", "sponge_lead_plate", "lead_acid_cell", "manganese_sulfate",
+            "cobalt_sulfate", "nmc_hydroxide", "nmc_cathode", "iron_phosphate", "lfp_cathode", "lithium_fluoride",
+            "lithium_hexafluorophosphate", "ethylene_carbonate", "nickel_hydroxide", "hydride_alloy", "nickel_metal_hydride_cell");
 
     public static final List<String> PLATINUM_IDS = List.of(
             "ammonium_chloride", "insoluble_residue", "iridium_rhodium_residue", "ammonium_chloroplatinate",
