@@ -1,0 +1,40 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:cast_iron_vat",
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "machines": [],
+  "min_size": 1,
+  "processing_time": 100,
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 288,
+      "fluid": "fundamentals:molten_pig_iron"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "tfmg:air"
+    },
+    {
+      "tag": "tfmg:flux"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:molten_steel",
+      "amount": 252
+    },
+    {
+      "id": "tfmg:molten_slag",
+      "amount": 72
+    },
+    {
+      "id": "tfmg:furnace_gas",
+      "amount": 100
+    }
+  ]
+}

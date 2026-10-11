@@ -256,6 +256,7 @@ def main():
     paint_raw("boron_carbide", ((14, 14, 16), (34, 34, 40), (62, 62, 72), (130, 132, 146))).save(TEXTURES / "item/boron_carbide.png")
     pellets().save(TEXTURES / "item/uranium_fuel_pellet.png")
     tube().save(TEXTURES / "item/zircaloy_tube.png")
+    paint_raw("puddle_ball", ((112, 34, 14), (196, 84, 28), (240, 150, 56), (255, 226, 150))).save(TEXTURES / "item/puddle_ball.png")
     magnets()
     print("uses textures written")
 

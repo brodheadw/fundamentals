@@ -1,0 +1,38 @@
+{
+  "name": "Puddling",
+  "category": "fundamentals:steel",
+  "icon": "fundamentals:puddle_ball",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Wrought iron in bulk came from pig iron by Henry Cort's puddling furnace, patented in 1784. A reverberatory furnace keeps the coal fire apart from the iron, so its sulfur stays out.",
+      "title": "Puddling"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The puddler melts pig on a hearth lined with iron oxide and works it with a rabble through the door; the oxide and the air burn the carbon out as bubbling carbon monoxide, and as the carbon goes the melting point climbs past the furnace's heat and the iron comes to nature, thickening to a pasty mass he gathers into balls (Gale, Iron and Steel)."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Joseph Hall's wet puddling, pig boiling, fed the bath more oxide, roasted cinder and hammer scale, which the boil reduces back to iron, so it lost far less than Cort's dry hearth."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Here two cast iron ingots, or 288 mB of molten pig iron, and an iron oxide to fettle with, a raw hematite or a rusty iron ingot, under a mixer over a superheated burner make a puddle ball and a slag, the tap cinder. Rust is iron oxide, so a rusty ingot is just what a puddler wants, and its iron comes back."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The ball comes out of the furnace still full of liquid slag. Shingling squeezes it out: a press, or the smithing hammer by hand, beats a ball into three iron ingots of wrought iron, under a tenth of a per cent carbon with threads of slag through it.",
+      "title": "Shingling"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "From the ore that is a third to a half again what the bloomery gives, and it burns no charcoal."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:uses/shingling_by_hand"
+    }
+  ]
+}

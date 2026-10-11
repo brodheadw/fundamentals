@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "tfmg:cast_iron_ingot"
+    },
+    {
+      "item": "tfmg:cast_iron_ingot"
+    },
+    {
+      "tag": "fundamentals:fettling"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:puddle_ball"
+    },
+    {
+      "id": "tfmg:slag"
+    }
+  ],
+  "heat_requirement": "superheated"
+}

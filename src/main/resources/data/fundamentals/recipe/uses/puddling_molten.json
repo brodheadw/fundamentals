@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 288,
+      "fluid": "fundamentals:molten_pig_iron"
+    },
+    {
+      "tag": "fundamentals:fettling"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:puddle_ball"
+    },
+    {
+      "id": "tfmg:slag"
+    }
+  ],
+  "heat_requirement": "superheated"
+}

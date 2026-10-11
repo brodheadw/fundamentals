@@ -1,0 +1,25 @@
+{
+  "name": "Cast iron",
+  "category": "fundamentals:steel",
+  "icon": "tfmg:cast_iron_ingot",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Run into a mould, pig iron is cast iron, and it casts where steel will not: at four per cent carbon it melts nearly 400 °C lower than pure iron and runs thin into every corner of the mould.",
+      "title": "Cast iron"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "In grey iron the carbon comes out as flakes of graphite, which make it machine cleanly and damp vibration and make it weak in tension: good for pipes, cylinders, frames, flywheels and machine beds, bad for anything that has to bend."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The Factory Must Grow's casting basin casts 144 mB of pig iron to a cast iron ingot, and its cast iron pipes, tanks, frames, flywheels and blast furnace come from that."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Before there is a blast furnace a little is made by hand: an iron ingot and a coal compacted in a heated basin, the iron taking up the carbon as it would in the hearth."
+    }
+  ]
+}

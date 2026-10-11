@@ -26,7 +26,8 @@ public final class Uses {
             "dimensionally_stable_anode", "red_mud", "aluminium_hydroxide", "alumina", "cryolite", "nickel_oxide", "nickel_pellets",
             "tungstic_acid", "ammonium_paratungstate", "ammonium_perrhenate", "lithium_carbonate", "mcraly_powder", "boric_acid",
             "galvanized_steel_plate", "roasted_siderite", "yellowcake", "uranium_tetrafluoride", "uranium_dioxide",
-            "uranium_fuel_pellet", "depleted_uranium_oxide", "zircaloy_tube", "boron_carbide", "potassium_bifluoride", "thorium_dioxide");
+            "uranium_fuel_pellet", "depleted_uranium_oxide", "zircaloy_tube", "boron_carbide", "potassium_bifluoride", "thorium_dioxide",
+            "puddle_ball");
 
     public static final List<String> PLATINUM_IDS = List.of(
             "ammonium_chloride", "insoluble_residue", "iridium_rhodium_residue", "ammonium_chloroplatinate",

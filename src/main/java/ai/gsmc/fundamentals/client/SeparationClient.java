@@ -56,7 +56,7 @@ public final class SeparationClient {
                     event.registerFluidType(new LikeWater(), Separation.fluidTypes().get(reagent.id()));
                     continue;
                 }
-                int alpha = reagent.kind() == Reagents.Kind.ORGANIC ? 0xF0 : 0xC8;
+                int alpha = reagent.kind() == Reagents.Kind.MOLTEN ? 0xFF : reagent.kind() == Reagents.Kind.ORGANIC ? 0xF0 : 0xC8;
                 int tint = alpha << 24 | reagent.tint();
                 event.registerFluidType(new IClientFluidTypeExtensions() {
                     @Override

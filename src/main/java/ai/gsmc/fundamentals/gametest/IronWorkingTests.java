@@ -5,8 +5,15 @@ import ai.gsmc.fundamentals.ironworking.BloomeryBlock;
 import ai.gsmc.fundamentals.ironworking.BloomeryBlockEntity;
 import ai.gsmc.fundamentals.ironworking.IronWorking;
 import ai.gsmc.fundamentals.registry.HandTools;
+import ai.gsmc.fundamentals.separation.Separation;
 import ai.gsmc.fundamentals.worldgen.DepositFeature;
+import com.simibubi.create.AllBlocks;
+import com.simibubi.create.content.processing.basin.BasinBlockEntity;
+import com.simibubi.create.content.processing.basin.BasinRecipe;
+import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
+import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTest;
@@ -19,12 +26,20 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CraftingInput;
+import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
+import net.minecraft.world.level.material.Fluid;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
+
+import java.util.List;
 
 @GameTestHolder(Fundamentals.MOD_ID)
 @PrefixGameTestTemplate(false)
@@ -111,6 +126,64 @@ public class IronWorkingTests {
         use(helper, player, new ItemStack(item("fundamentals:roasted_siderite")));
         helper.assertTrue(bloomery.oreCount() == 1, "the bloomery should take roasted siderite");
         helper.succeed();
+    }
+
+    private static Fluid fluid(String id) {
+        return BuiltInRegistries.FLUID.get(ResourceLocation.parse(id));
+    }
+
+    @GameTest(template = "empty")
+    public void theBlastFurnaceMakesPigIronNotSteel(GameTestHelper helper) {
+        RecipeType<?> blasting = BuiltInRegistries.RECIPE_TYPE.get(ResourceLocation.parse("tfmg:industrial_blasting"));
+        ItemStack ore = new ItemStack(item("create:crushed_raw_iron"));
+        List<ProcessingRecipe<?, ?>> smelts = helper.getLevel().getRecipeManager().getRecipes().stream()
+                .filter(holder -> holder.value().getType() == blasting).<ProcessingRecipe<?, ?>>map(holder -> (ProcessingRecipe<?, ?>) holder.value())
+                .filter(recipe -> recipe.getIngredients().stream().anyMatch(i -> i.test(ore))).toList();
+        helper.assertTrue(smelts.size() == 1, "crushed iron ore should have one blast furnace recipe, not " + smelts.size());
+        List<FluidStack> tapped = smelts.getFirst().getFluidResults();
+        helper.assertTrue(tapped.getFirst().is(Separation.fluid("molten_pig_iron")), "the blast furnace should tap pig iron first, not " + tapped.getFirst().getFluid());
+        helper.assertTrue(tapped.stream().noneMatch(f -> f.is(fluid("tfmg:molten_steel"))), "the blast furnace should not make steel");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void puddlingPigIronWithRustGivesWroughtIron(GameTestHelper helper) {
+        BlockPos basinPos = new BlockPos(1, 2, 1);
+        helper.setBlock(basinPos.below(), AllBlocks.BLAZE_BURNER.getDefaultState().setValue(BlazeBurnerBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.SEETHING));
+        helper.setBlock(basinPos, AllBlocks.BASIN.getDefaultState());
+        BasinBlockEntity basin = helper.getBlockEntity(basinPos);
+        basin.getInputInventory().insertItem(0, new ItemStack(item("tfmg:cast_iron_ingot"), 2), false);
+        basin.getInputInventory().insertItem(1, new ItemStack(item("fundamentals:rusty_iron_ingot")), false);
+        var puddling = helper.getLevel().getRecipeManager().byKey(Fundamentals.id("uses/puddling")).orElseThrow().value();
+        helper.assertTrue(BasinRecipe.match(basin, puddling), "two cast iron and a rusty iron ingot over a superheated burner should puddle");
+        helper.assertTrue(BasinRecipe.apply(basin, puddling), "the puddle ball should come out into the basin");
+        ItemStack ball = basin.getOutputInventory().getStackInSlot(0);
+        helper.assertTrue(ball.is(item("fundamentals:puddle_ball")), "the basin should hold a puddle ball, not " + ball);
+        ItemStack hammer = new ItemStack(IronWorking.smithingHammer());
+        var shingled = helper.getLevel().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, CraftingInput.of(2, 1, List.of(ball, hammer)), helper.getLevel())
+                .orElseThrow().value().assemble(CraftingInput.of(2, 1, List.of(ball, hammer)), helper.getLevel().registryAccess());
+        helper.assertTrue(shingled.is(Items.IRON_INGOT) && shingled.getCount() == 3, "a shingled puddle ball should give three iron ingots, not " + shingled);
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 400)
+    public void theConverterBlowsPigIronToSteel(GameTestHelper helper) {
+        BlockPos pos = new BlockPos(1, 1, 1);
+        helper.setBlock(pos, BuiltInRegistries.BLOCK.get(ResourceLocation.parse("tfmg:cast_iron_chemical_vat")));
+        helper.runAfterDelay(5, () -> {
+            IFluidHandler tanks = helper.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, helper.absolutePos(pos), Direction.UP);
+            helper.assertTrue(tanks.fill(new FluidStack(Separation.fluid("molten_pig_iron"), 288), IFluidHandler.FluidAction.EXECUTE) == 288
+                    && tanks.fill(new FluidStack(fluid("tfmg:air"), 500), IFluidHandler.FluidAction.EXECUTE) == 500, "the vat should take pig iron and air");
+            var items = helper.getLevel().getCapability(Capabilities.ItemHandler.BLOCK, helper.absolutePos(pos), Direction.UP);
+            helper.assertTrue(items.insertItem(0, new ItemStack(item("tfmg:limesand")), false).isEmpty(), "the vat should take a limesand");
+            helper.succeedWhen(() -> {
+                int steel = 0;
+                for (int i = 0; i < tanks.getTanks(); i++) {
+                    steel += tanks.getFluidInTank(i).is(fluid("tfmg:molten_steel")) ? tanks.getFluidInTank(i).getAmount() : 0;
+                }
+                helper.assertTrue(steel == 252, "the converter should have blown 252 mB of steel, not " + steel);
+            });
+        });
     }
 
     @GameTest(template = "empty")

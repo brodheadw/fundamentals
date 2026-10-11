@@ -60,6 +60,7 @@ ITEM_FORMULAS = {
     "boric_acid": "H3BO3", "galvanized_steel_plate": "Fe-C,Zn", "roasted_siderite": "Fe2O3,Fe3O4",
     "yellowcake": "(NH4)2U2O7", "uranium_tetrafluoride": "UF4", "uranium_dioxide": "UO2", "uranium_fuel_pellet": "UO2", "depleted_uranium_oxide": "U3O8",
     "zircaloy_tube": "Zr-Sn", "boron_carbide": "B4C", "potassium_bifluoride": "KHF2", "thorium_dioxide": "ThO2",
+    "puddle_ball": "Fe,Fe2SiO4",
     "neodymium_iron_boron_magnet": "Nd2Fe14B,Ni", "dysprosium_neodymium_iron_boron_magnet": "(Nd,Dy)2Fe14B,Ni", "samarium_cobalt_magnet": "Sm2(Co,Fe,Cu,Zr)17",
     "alnico_magnet": "Fe-Al-Ni-Co-Cu",
     "mercury_thermometer": "Hg,SiO2", "spirit_thermometer": "C12H26,SiO2", "bimetallic_thermometer": "Cu-Zn,Fe", "type_k_thermocouple": "Ni-Cr,Ni-Al", "type_s_thermocouple": "Pt-Rh,Pt",

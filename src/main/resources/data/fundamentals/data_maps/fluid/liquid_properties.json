@@ -626,6 +626,13 @@
       "aqueous": true,
       "corrosive": true
     },
+    "fundamentals:molten_pig_iron": {
+      "density": 6900,
+      "viscosity": 6,
+      "freezes": 1147,
+      "boils": 2860,
+      "celsius": 1450
+    },
     "minecraft:water": {
       "density": 998.2,
       "viscosity": 1.002,

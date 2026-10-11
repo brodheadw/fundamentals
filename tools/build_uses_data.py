@@ -38,7 +38,8 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "galvanized_steel_plate": "Galvanized Steel Plate", "roasted_siderite": "Roasted Siderite",
          "yellowcake": "Yellowcake", "uranium_tetrafluoride": "Green Salt", "uranium_dioxide": "Enriched Uranium Dioxide",
          "uranium_fuel_pellet": "Uranium Fuel Pellet", "depleted_uranium_oxide": "Depleted Uranium Oxide", "zircaloy_tube": "Zircaloy Tube",
-         "boron_carbide": "Boron Carbide", "potassium_bifluoride": "Potassium Bifluoride", "thorium_dioxide": "Thorium Dioxide"}
+         "boron_carbide": "Boron Carbide", "potassium_bifluoride": "Potassium Bifluoride", "thorium_dioxide": "Thorium Dioxide",
+         "puddle_ball": "Puddle Ball"}
 # In the order of magnet.MagnetGrade.
 MAGNET_ALLOYS = {"neodymium_iron_boron": ("ingot", "plate"), "dysprosium_neodymium_iron_boron": ("ingot", "plate"),
                  "samarium_cobalt": ("ingot", "plate"), "alnico": ("ingot",)}
@@ -286,6 +287,42 @@ def iron():
                                                          "result": {"id": "minecraft:iron_nugget", "count": 2}})
     write(USES / "gravel_from_slag.json", {"type": "create:crushing", "ingredients": item("tfmg:slag"), "processing_time": 250,
                                            "results": [{"id": "minecraft:gravel"}, {"id": "minecraft:iron_nugget", "chance": 0.1}]})
+    steel()
+
+
+# The Factory's blast furnace made steel straight from ore; a blast furnace makes pig iron, and steel is made from that.
+BLAST_FURNACE = {"steel": ("crushed_iron", item("create:crushed_raw_iron"), 1), "steel_from_raw_iron": ("raw_iron", item("minecraft:raw_iron"), 2),
+                 "steel_from_dust": ("iron_dust", tag("c:dusts/iron"), 1)}
+PIG_IRON_PER_ORE = 216
+CONVERTER = {"pig_iron": 288, "air": 500, "steel": 252, "slag": 72, "gas": 100}
+PUDDLED = 3
+
+
+def steel():
+    for theirs, (name, ore, lumps) in BLAST_FURNACE.items():
+        disabled(TFMG / f"industrial_blasting/{theirs}.json")
+        write(USES / f"pig_iron_from_{name}.json", {
+            "type": "tfmg:industrial_blasting", "hot_air_usage": 20 * lumps, "processing_time": 20 * lumps, "ingredients": ore + tag("tfmg:flux"),
+            "results": [result_fluid("molten_pig_iron", PIG_IRON_PER_ORE * lumps), result_fluid("tfmg:molten_slag", 144 * lumps),
+                        result_fluid("tfmg:furnace_gas", 200 * lumps)]})
+    write(USES / "cast_iron_from_pig_iron.json", {"type": "tfmg:casting", "ingredients": [fluid("molten_pig_iron", 144)], "processing_time": 200,
+                                                  "results": [{"id": "tfmg:cast_iron_ingot"}]})
+    # Bessemer's converter needs no fuel: the air burning out the silicon and carbon keeps the bath molten, so no heat and no stirrer.
+    write(USES / "bessemer_steel.json", {
+        "type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:cast_iron_vat", "tfmg:steel_vat", "tfmg:firebrick_lined_vat"],
+        "machines": [], "min_size": 1, "processing_time": 100,
+        "ingredients": [fluid("molten_pig_iron", CONVERTER["pig_iron"]), fluid("tfmg:air", CONVERTER["air"])] + tag("tfmg:flux"),
+        "results": [result_fluid("tfmg:molten_steel", CONVERTER["steel"]), result_fluid("tfmg:molten_slag", CONVERTER["slag"]),
+                    result_fluid("tfmg:furnace_gas", CONVERTER["gas"])]})
+    tag_file(DATA / "tags/item/fettling.json", ["fundamentals:raw_hematite", "fundamentals:rusty_iron_ingot"])
+    fettling = tag("fundamentals:fettling")
+    mixing("puddling", item("tfmg:cast_iron_ingot", 2) + fettling, [result("puddle_ball"), result("tfmg:slag")], "superheated")
+    mixing("puddling_molten", [fluid("molten_pig_iron", 288)] + fettling, [result("puddle_ball"), result("tfmg:slag")], "superheated")
+    write(USES / "shingling.json", {"type": "create:pressing", "ingredients": item("puddle_ball"),
+                                    "results": [{"id": "minecraft:iron_ingot", "count": PUDDLED}]})
+    write(USES / "shingling_by_hand.json", {"type": "minecraft:crafting_shapeless", "category": "misc",
+                                            "ingredients": item("puddle_ball") + item("smithing_hammer"),
+                                            "result": {"id": "minecraft:iron_ingot", "count": PUDDLED}})
 
 
 def zinc():

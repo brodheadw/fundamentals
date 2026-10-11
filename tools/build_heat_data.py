@@ -19,6 +19,7 @@ REFERENCES = {
     "ASTM": "ASTM D1655, D975, D396 and D4814: jet fuel, diesel, fuel oil and gasoline",
     "USGS": "USGS Volcano Hazards Program: basaltic lava",
     "HI": "ANSI/HI 9.6.7 (Hydraulic Institute, 2015): viscosity and pump performance",
+    "Smithells": "Smithells Metals Reference Book, 8th ed. (Gale and Totemeier, 2004): the physical properties of liquid metals",
 }
 LIQUID = "aq"
 RARE_EARTH_LIQUOR = (1300, 2.4, -15, 104, None, None, None, {LIQUID}, "CRC", "1.5 M rare earth chloride at pH 1, estimated from the chlorides' concentrative tables")
@@ -75,6 +76,8 @@ OURS = {
     "sodium_tungstate_liquor": (1200, 2.0, -10, 104, None, None, None, {LIQUID}, "Perry", "sodium tungstate digest, about 150 g/L WO3 in caustic"),
     "sodium_aluminate_liquor": (1320, 12, -15, 112, None, None, 145, {LIQUID}, "Perry",
                                 "Bayer pregnant liquor, about 150 g/L Na2O, leaving the digester at 145 °C under pressure"),
+    "molten_pig_iron": (6900, 6, 1147, 2860, None, None, 1450, set(), "Smithells",
+                        "pig iron of about 4% carbon tapped at 1,450 °C; it freezes at the iron-carbon eutectic, 1,147 °C"),
 }
 GAS = "gas at 20 °C and 1 atm"
 FOREIGN = {
