@@ -6,6 +6,7 @@ import ai.gsmc.fundamentals.client.PlasticsClient;
 import ai.gsmc.fundamentals.client.SeparationClient;
 import ai.gsmc.fundamentals.client.ThermometerRenderer;
 import ai.gsmc.fundamentals.client.TitaniumClient;
+import ai.gsmc.fundamentals.content.nuclear.Radiation;
 import ai.gsmc.fundamentals.elements.PeriodicTable;
 import ai.gsmc.fundamentals.ironworking.IronWorking;
 import ai.gsmc.fundamentals.loot.AddToChests;
@@ -27,6 +28,7 @@ import ai.gsmc.fundamentals.separation.PlasticTankBlockEntity;
 import ai.gsmc.fundamentals.titanium.Titanium;
 import com.simibubi.create.AllMountedStorageTypes;
 import com.simibubi.create.api.contraption.storage.fluid.MountedFluidStorageType;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import ai.gsmc.fundamentals.heat.Temperatures;
 import ai.gsmc.fundamentals.heat.Thermometers;
@@ -168,6 +170,9 @@ public class Fundamentals {
             MountedFluidStorageType.REGISTRY.register(Separation.plasticTank(), AllMountedStorageTypes.FLUID_TANK.get());
             Hazards.registerPipeEffects();
             Titanium.commonSetup();
+            if (ModList.get().isLoaded("createnuclear")) {
+                Radiation.register();
+            }
         }));
         if (FMLEnvironment.dist == Dist.CLIENT) {
             GrindingAnimation.register(modBus);

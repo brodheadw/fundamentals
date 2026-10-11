@@ -587,6 +587,18 @@
           }
         ]
       }
+    },
+    "fundamentals:raw_uraninite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_uraninite"
+            ]
+          }
+        ]
+      }
     }
   },
   "parent": "fundamentals:root"

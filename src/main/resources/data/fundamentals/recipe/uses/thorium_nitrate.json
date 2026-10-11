@@ -13,6 +13,10 @@
   "results": [
     {
       "id": "fundamentals:thorium_nitrate"
+    },
+    {
+      "id": "fundamentals:yellowcake",
+      "chance": 0.05
     }
   ],
   "heat_requirement": "heated"

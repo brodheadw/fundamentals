@@ -1,0 +1,19 @@
+{
+  "type": "create:compacting",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "item": "fundamentals:uranium_dioxide"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 50,
+      "fluid": "tfmg:hydrogen"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:uranium_fuel_pellet"
+    }
+  ]
+}

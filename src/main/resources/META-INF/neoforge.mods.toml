@@ -58,3 +58,11 @@ type = "optional"
 versionRange = "*"
 ordering = "AFTER"
 side = "BOTH"
+
+# Optional, the same way: data/createnuclear/ replaces its recipes; see tools/build_create_nuclear_compat.py.
+[[dependencies.${id}]]
+modId = "createnuclear"
+type = "optional"
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"

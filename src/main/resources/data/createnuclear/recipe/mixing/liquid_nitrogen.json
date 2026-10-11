@@ -1,0 +1,25 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "createnuclear"
+    }
+  ],
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "minecraft:packed_ice"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "tfmg:air"
+    }
+  ],
+  "results": [
+    {
+      "id": "createnuclear:nitrogen",
+      "amount": 100
+    }
+  ]
+}

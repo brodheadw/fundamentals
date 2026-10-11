@@ -322,6 +322,14 @@
       "aqueous": true,
       "corrosive": true
     },
+    "fundamentals:uranyl_sulfate_liquor": {
+      "density": 1060,
+      "viscosity": 1.2,
+      "freezes": -4,
+      "boils": 101,
+      "aqueous": true,
+      "corrosive": true
+    },
     "fundamentals:p204": {
       "density": 850,
       "viscosity": 3.5,
@@ -472,6 +480,28 @@
       "boils": 43,
       "flash_point": -20,
       "autoignition": 60,
+      "toxic": true
+    },
+    "fundamentals:fluorine": {
+      "density": 1.58,
+      "viscosity": 0.0233,
+      "freezes": -219.6,
+      "boils": -188.1,
+      "toxic": true
+    },
+    "fundamentals:uranium_hexafluoride": {
+      "density": 5090,
+      "boils": 56.5,
+      "toxic": true
+    },
+    "fundamentals:enriched_uranium_hexafluoride": {
+      "density": 5090,
+      "boils": 56.5,
+      "toxic": true
+    },
+    "fundamentals:depleted_uranium_hexafluoride": {
+      "density": 5090,
+      "boils": 56.5,
       "toxic": true
     },
     "fundamentals:spent_liquor": {

@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "P",
+    "P",
+    "P"
+  ],
+  "key": {
+    "P": {
+      "tag": "c:plates/zircaloy"
+    }
+  },
+  "result": {
+    "count": 2,
+    "id": "fundamentals:zircaloy_tube"
+  }
+}

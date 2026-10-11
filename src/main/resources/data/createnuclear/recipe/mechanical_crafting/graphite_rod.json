@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "createnuclear"
+    }
+  ],
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "category": "misc",
+  "show_notification": true,
+  "pattern": [
+    "H",
+    "H",
+    "H",
+    "H"
+  ],
+  "key": {
+    "H": {
+      "tag": "c:ingots/hafnium"
+    }
+  },
+  "result": {
+    "id": "createnuclear:graphite_rod",
+    "count": 1
+  }
+}

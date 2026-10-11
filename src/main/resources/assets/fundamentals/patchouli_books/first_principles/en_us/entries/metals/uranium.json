@@ -1,0 +1,127 @@
+{
+  "name": "Uranium",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:yellowcake",
+  "sortnum": 15,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Uraninite, UO2, is pitchblende: black, pitchy and heavy in the hand, about nine grams to the cubic centimetre against galena's 7.6. It lies in two kinds of ground.",
+      "title": "Uranium"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Calcite veins in mountain country carry it with native silver and cobaltite, the five-element veins of Joachimsthal (Jáchymov) in the Erzgebirge, where Klaproth's element was found in Saxon pitchblende in 1789 and the Curies took radium from the mine's residues."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "And roll-fronts in desert sandstone: groundwater carrying uranium drops it as uraninite where it meets reduced rock, as in Wyoming and Kazakhstan. Euxenite and monazite carry a little too."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A millstone or crushing wheels grind raw uraninite to dust."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Uraninite is uranium(IV) and will not dissolve as it is; an oxidant takes it to uranyl, uranium(VI), which sulfuric acid does take: two uraninite dust, a raw pyrolusite and 500 mB of sulfuric acid, heated, give 500 mB of uranyl sulfate liquor, the manganese dioxide the oxidant acid-leach mills have long used."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A mill concentrates the uranium by solvent extraction with an amine, or by ion exchange, strips it and throws it down with ammonia. Here that is one step: 500 mB of liquor and 250 mB of ammonia give two yellowcake, ammonium diuranate, bright yellow."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Enrichment wants a gas. A yellowcake, 250 mB of hydrogen and 500 mB of hydrofluoric acid in a heated vat with a mixer reduce it to the dioxide and hydrofluorinate it to green salt, uranium tetrafluoride.",
+      "title": "Conversion"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Green salt and 250 mB of fluorine in a heated vat give 500 mB of uranium hexafluoride, a white solid that sublimes at 56.5 °C, the one uranium compound volatile enough to enrich, as at Honeywell's Metropolis Works."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Fluorine cannot be made in water. Moissan isolated it in 1886 by electrolysing anhydrous hydrogen fluoride with potassium fluoride dissolved in it, and every fluorine plant still does, at about 90 °C on carbon anodes.",
+      "title": "Fluorine"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two saltpetre and a charcoal burnt together leave potassium carbonate, which 500 mB of hydrofluoric acid, heated, turns to two potassium bifluoride."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A bifluoride and 500 mB of the acid between two graphite electrodes in a heated vat give 250 mB of fluorine and 250 mB of hydrogen, and the bifluoride comes back nineteen times in twenty."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Natural uranium is 0.7 per cent uranium-235. A gas centrifuge spins the hexafluoride so the lighter molecules gather towards the axis, and thousands in cascade take it to the 3 to 5 per cent of a light-water reactor's fuel. 1,000 mB in a vat with The Factory's centrifuge give 250 mB enriched and 750 mB depleted.",
+      "title": "Enrichment"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A real cascade puts about nine of feed into one of product at 4.5 per cent; the game is kinder."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "250 mB of enriched hexafluoride, 250 mB of water and 250 mB of hydrogen in a heated vat give two enriched uranium dioxide and 500 mB of hydrofluoric acid back, the dry route of a fuel plant.",
+      "title": "Fuel"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A dioxide and 50 mB of hydrogen pressed in a superheated basin sinter to a fuel pellet, the black ceramic fired at about 1,700 °C in hydrogen."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Zirconium takes up neutrons more reluctantly than almost any metal, which is why the nuclear industry wants it free of hafnium.",
+      "title": "Zircaloy"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Eight zirconium ingots, a tin nugget and 100 mB of argon, superheated, give eight Zircaloy, about 1.4 per cent tin as Zircaloy-4 is; pressed to plate, three plates in a column roll two tubes, the cladding a fuel rod's pellets are stacked in."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Hafnium is the opposite, a strong absorber, and naval reactors' control rods are solid hafnium.",
+      "title": "Control rods"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Boron is the cheap absorber: two boric acid and two coke dust in a firebrick-lined vat between three graphite electrodes, the arc past 2,000 °C, give a boron carbide, after diamond and cubic boron nitride the hardest thing made, and the absorber in a boiling-water reactor's control blades and many pressurised-water reactors' rods."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The tails are depleted uranium, 0.2 to 0.3 per cent uranium-235. 750 mB of depleted hexafluoride and 500 mB of water in a heated vat give a depleted uranium oxide, U3O8, the stable black oxide it is kept as, and 500 mB of hydrofluoric acid. Its metal goes into counterweights and armour, which the pack does not have.",
+      "title": "Depleted uranium"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Thorium nitrate from monazite calcines in a blast furnace to thoria, thorium dioxide. Thorium is fertile, not fissile: it breeds uranium-233 under neutrons but starts nothing alone, so thoria fuel carries a fissile driver.",
+      "title": "Thorium"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The nitrate leach of the residue brings out a little of monazite's uranium with the thorium, one yellowcake in twenty. A yellowcake in eight glass makes eight green-yellow uranium glass, as the Bohemian glassworks made it."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Uranium poisons the kidneys, as lead does, before its radiation tells: uraninite dust, yellowcake, green salt and the oxides are toxic dusts.",
+      "title": "Create: Nuclear"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "With Create: Nuclear installed, its uranium rod is four fuel pellets and a Zircaloy tube, its thorium rod two thoria, two pellets and a tube, and its cooling rod is a control rod: four hafnium ingots, or four boron carbide in eight stainless steel plates for two."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Its reactor core takes a beryllium reflector, and thoria and two calcium under argon reduce to its thorium metal. Its own ores do not form, and what you hold of ours counts towards its radiation."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: World Nuclear Association, Information Library: \"Uranium Mining Overview\", \"Conversion and Deconversion\", \"Uranium Enrichment\" and \"Nuclear Fuel Fabrication\"; IAEA, Geological Classification of Uranium Deposits and Description of Selected Examples, IAEA-TECDOC-1842 (2018); Benedict, Pigford and Levi, Nuclear Chemical Engineering, 2nd ed.",
+      "title": "Sources"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "(McGraw-Hill, 1981)."
+    }
+  ]
+}

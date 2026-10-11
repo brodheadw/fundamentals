@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "ingredient": {
+    "item": "fundamentals:thorium_nitrate"
+  },
+  "result": {
+    "id": "fundamentals:thorium_dioxide"
+  },
+  "experience": 0.2,
+  "cookingtime": 100
+}

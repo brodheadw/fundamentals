@@ -35,7 +35,10 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "nickel_oxide": "Nickel Oxide", "nickel_pellets": "Nickel Pellets", "tungstic_acid": "Tungstic Acid",
          "ammonium_paratungstate": "Ammonium Paratungstate", "ammonium_perrhenate": "Ammonium Perrhenate", "lithium_carbonate": "Lithium Carbonate",
          "mcraly_powder": "MCrAlY Powder", "boric_acid": "Boric Acid",
-         "galvanized_steel_plate": "Galvanized Steel Plate", "roasted_siderite": "Roasted Siderite"}
+         "galvanized_steel_plate": "Galvanized Steel Plate", "roasted_siderite": "Roasted Siderite",
+         "yellowcake": "Yellowcake", "uranium_tetrafluoride": "Green Salt", "uranium_dioxide": "Enriched Uranium Dioxide",
+         "uranium_fuel_pellet": "Uranium Fuel Pellet", "depleted_uranium_oxide": "Depleted Uranium Oxide", "zircaloy_tube": "Zircaloy Tube",
+         "boron_carbide": "Boron Carbide", "potassium_bifluoride": "Potassium Bifluoride", "thorium_dioxide": "Thorium Dioxide"}
 # In the order of magnet.MagnetGrade.
 MAGNET_ALLOYS = {"neodymium_iron_boron": ("ingot", "plate"), "dysprosium_neodymium_iron_boron": ("ingot", "plate"),
                  "samarium_cobalt": ("ingot", "plate"), "alnico": ("ingot",)}
@@ -584,6 +587,38 @@ def beryllium():
                                                        ("beryllium_hydroxide", "beryllium_oxide", "beryllium_fluoride", "ammonium_fluoroberyllate", "beryllium_pebbles")])
 
 
+def uranium():
+    graphite = ("tfmg:graphite_electrode", "tfmg:graphite_electrode")
+    mixing("uranyl_sulfate_liquor", item("uraninite_dust", 2) + item("raw_pyrolusite") + [fluid("tfmg:sulfuric_acid", 500)],
+           [result_fluid("uranyl_sulfate_liquor", 500)], "heated")
+    mixing("yellowcake", [fluid("uranyl_sulfate_liquor", 500), fluid("ammonia", 250)], [result("yellowcake", 2)])
+    pgm_vat("uranium_tetrafluoride", item("yellowcake") + [fluid("tfmg:hydrogen", 250), fluid("hydrofluoric_acid", 500)], [result("uranium_tetrafluoride")], folder=USES)
+    mixing("potassium_bifluoride", item("tfmg:nitrate_dust", 2) + item("minecraft:charcoal") + [fluid("hydrofluoric_acid", 500)],
+           [result("potassium_bifluoride", 2), result_fluid("tfmg:carbon_dioxide", 250)], "heated")
+    pgm_vat("fluorine", item("potassium_bifluoride") + [fluid("hydrofluoric_acid", 500)],
+            [result_fluid("fluorine", 250), result_fluid("tfmg:hydrogen", 250), {"id": "fundamentals:potassium_bifluoride", "chance": 0.95}],
+            machines=graphite, folder=USES)
+    pgm_vat("uranium_hexafluoride", item("uranium_tetrafluoride") + [fluid("fluorine", 250)], [result_fluid("uranium_hexafluoride", 500)], folder=USES)
+    write(USES / "uranium_enrichment.json", {
+        "type": "tfmg:vat_machine_recipe", "ingredients": [fluid("uranium_hexafluoride", 1000)], "machines": ["tfmg:centrifuge"], "min_size": 1,
+        "processing_time": 200, "results": [result_fluid("enriched_uranium_hexafluoride", 250), result_fluid("depleted_uranium_hexafluoride", 750)]})
+    pgm_vat("uranium_dioxide", [fluid("enriched_uranium_hexafluoride", 250), fluid("minecraft:water", 250), fluid("tfmg:hydrogen", 250)],
+            [result("uranium_dioxide", 2), result_fluid("hydrofluoric_acid", 500)], folder=USES)
+    write(USES / "uranium_fuel_pellet.json", {"type": "create:compacting", "heat_requirement": "superheated",
+                                              "ingredients": item("uranium_dioxide") + [fluid("tfmg:hydrogen", 50)], "results": [result("uranium_fuel_pellet")]})
+    pgm_vat("depleted_uranium_oxide", [fluid("depleted_uranium_hexafluoride", 750), fluid("minecraft:water", 500)],
+            [result("depleted_uranium_oxide"), result_fluid("hydrofluoric_acid", 500)], folder=USES)
+    mixing("zircaloy", tag("c:ingots/zirconium", 8) + tag("c:nuggets/tin") + argon(), [result("zircaloy_ingot", 8)], "superheated")
+    shaped(USES / "zircaloy_tube.json", ["P", "P", "P"], {"P": {"tag": "c:plates/zircaloy"}}, {"count": 2, "id": "fundamentals:zircaloy_tube"})
+    write(USES / "boron_carbide.json", {"type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:firebrick_lined_vat"], "min_size": 1, "processing_time": 200,
+                                        "machines": ["tfmg:graphite_electrode"] * 3, "ingredients": item("boric_acid", 2) + item("tfmg:coal_coke_dust", 2),
+                                        "results": [result("boron_carbide"), result_fluid("tfmg:carbon_dioxide", 250)]})
+    shaped(USES / "uranium_glass.json", ["GGG", "GYG", "GGG"], {"G": {"tag": "c:glass_blocks/colorless"}, "Y": {"item": "fundamentals:yellowcake"}},
+           {"count": 8, "id": "minecraft:lime_stained_glass"})
+    tag_file(DATA / "tags/item/uranium_dusts.json", [f"fundamentals:{name}" for name in
+                                                     ("uraninite_dust", "yellowcake", "uranium_tetrafluoride", "uranium_dioxide", "depleted_uranium_oxide")])
+
+
 def pgm_mixing(name, ingredients, results, heat=None):
     common.mixing(PLATINUM / f"{name}.json", ingredients, results, heat)
 
@@ -708,7 +743,9 @@ def silver():
 
 
 def thorium():
-    mixing("thorium_nitrate", item("monazite_residue_dust") + [fluid("nitric_acid", 250)], [result("thorium_nitrate")], "heated")
+    mixing("thorium_nitrate", item("monazite_residue_dust") + [fluid("nitric_acid", 250)], [result("thorium_nitrate"), {"id": "fundamentals:yellowcake", "chance": 0.05}], "heated")
+    write(USES / "thorium_dioxide.json", {"type": "minecraft:blasting", "category": "misc", "ingredient": {"item": "fundamentals:thorium_nitrate"},
+                                          "result": {"id": "fundamentals:thorium_dioxide"}, "experience": 0.2, "cookingtime": 100})
     mixing("gas_mantle", item("thorium_nitrate", 4) + [fluid("cerium_liquor", 10)] + tag("c:strings", 4), [result("gas_mantle", 4)], "heated")
     shaped(TFMG / "crafting/materials/gas_lamp.json", ["CMC", "BGB", " P "],
            {"B": {"item": "tfmg:cast_iron_bars"}, "C": {"tag": "c:plates/cast_iron"}, "G": {"item": "create:framed_glass"}, "P": {"item": "tfmg:industrial_pipe"},
@@ -717,7 +754,8 @@ def thorium():
     shaped(USES / "clarifier_sludge_block.json", ["###", "###", "###"], {"#": {"item": "fundamentals:clarifier_sludge"}},
            {"count": 1, "id": "fundamentals:clarifier_sludge_block"})
     write(DATA / "tags/item/toxic_dusts.json", {"replace": False, "values": [
-        "#fundamentals:beryllium_dusts", "#fundamentals:nickel_dusts", "fundamentals:monazite_residue_dust", {"id": "chemica:arsenic_dust", "required": False}]})
+        "#fundamentals:beryllium_dusts", "#fundamentals:nickel_dusts", "#fundamentals:uranium_dusts", "fundamentals:monazite_residue_dust",
+        {"id": "chemica:arsenic_dust", "required": False}]})
 
 
 def lead_and_zinc_sinks():
@@ -867,6 +905,7 @@ def main():
     silver()
     silver_sinks()
     thorium()
+    uranium()
     lead_and_zinc_sinks()
     plastics()
     names()

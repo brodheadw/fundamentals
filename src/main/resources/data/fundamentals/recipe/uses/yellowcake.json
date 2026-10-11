@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "fundamentals:uranyl_sulfate_liquor"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 250,
+      "tag": "c:ammonia"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:yellowcake",
+      "count": 2
+    }
+  ]
+}

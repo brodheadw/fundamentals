@@ -1,8 +1,16 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:depleted_uranium_oxide",
     "fundamentals:euxenite_dust",
     "fundamentals:euxenite_ore",
-    "fundamentals:raw_euxenite"
+    "fundamentals:raw_euxenite",
+    "fundamentals:raw_uraninite",
+    "fundamentals:uraninite_dust",
+    "fundamentals:uraninite_ore",
+    "fundamentals:uranium_dioxide",
+    "fundamentals:uranium_fuel_pellet",
+    "fundamentals:uranium_tetrafluoride",
+    "fundamentals:yellowcake"
   ]
 }

@@ -1,0 +1,44 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/zirconium"
+    },
+    {
+      "tag": "c:ingots/zirconium"
+    },
+    {
+      "tag": "c:ingots/zirconium"
+    },
+    {
+      "tag": "c:ingots/zirconium"
+    },
+    {
+      "tag": "c:ingots/zirconium"
+    },
+    {
+      "tag": "c:ingots/zirconium"
+    },
+    {
+      "tag": "c:ingots/zirconium"
+    },
+    {
+      "tag": "c:ingots/zirconium"
+    },
+    {
+      "tag": "c:nuggets/tin"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 100,
+      "tag": "c:argon"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:zircaloy_ingot",
+      "count": 8
+    }
+  ],
+  "heat_requirement": "superheated"
+}
