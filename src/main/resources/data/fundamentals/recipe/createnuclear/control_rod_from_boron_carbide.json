@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "createnuclear"
+    }
+  ],
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "category": "misc",
+  "show_notification": true,
+  "pattern": [
+    "SBS",
+    "SBS",
+    "SBS",
+    "SBS"
+  ],
+  "key": {
+    "B": {
+      "item": "fundamentals:boron_carbide"
+    },
+    "S": {
+      "tag": "c:plates/stainless_steel"
+    }
+  },
+  "result": {
+    "id": "createnuclear:graphite_rod",
+    "count": 2
+  }
+}

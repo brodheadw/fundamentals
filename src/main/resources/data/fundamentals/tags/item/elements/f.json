@@ -16,12 +16,14 @@
     "fundamentals:hydrofluoric_acid_bucket",
     "fundamentals:lanthanum_fluoride",
     "fundamentals:neodymium_fluoride",
+    "fundamentals:potassium_bifluoride",
     "fundamentals:praseodymium_fluoride",
     "fundamentals:raw_bastnasite",
     "fundamentals:raw_fluorite",
     "fundamentals:roasted_bastnasite",
     "fundamentals:scandium_fluoride",
     "fundamentals:terbium_fluoride",
+    "fundamentals:uranium_tetrafluoride",
     "fundamentals:yttrium_fluoride"
   ]
 }

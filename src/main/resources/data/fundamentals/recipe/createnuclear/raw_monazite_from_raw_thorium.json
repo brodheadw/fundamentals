@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "createnuclear"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "createnuclear:raw_thorium"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:raw_monazite",
+    "count": 1
+  }
+}

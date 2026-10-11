@@ -58,6 +58,8 @@ ITEM_FORMULAS = {
     "tungstic_acid": "H2WO4", "ammonium_paratungstate": "(NH4)10H2W12O42", "ammonium_perrhenate": "NH4ReO4", "lithium_carbonate": "Li2CO3",
     "mcraly_powder": "Ni-Co-Cr-Al-Y",
     "boric_acid": "H3BO3", "galvanized_steel_plate": "Fe-C,Zn", "roasted_siderite": "Fe2O3,Fe3O4",
+    "yellowcake": "(NH4)2U2O7", "uranium_tetrafluoride": "UF4", "uranium_dioxide": "UO2", "uranium_fuel_pellet": "UO2", "depleted_uranium_oxide": "U3O8",
+    "zircaloy_tube": "Zr-Sn", "boron_carbide": "B4C", "potassium_bifluoride": "KHF2", "thorium_dioxide": "ThO2",
     "neodymium_iron_boron_magnet": "Nd2Fe14B,Ni", "dysprosium_neodymium_iron_boron_magnet": "(Nd,Dy)2Fe14B,Ni", "samarium_cobalt_magnet": "Sm2(Co,Fe,Cu,Zr)17",
     "alnico_magnet": "Fe-Al-Ni-Co-Cu",
     "mercury_thermometer": "Hg,SiO2", "spirit_thermometer": "C12H26,SiO2", "bimetallic_thermometer": "Cu-Zn,Fe", "type_k_thermocouple": "Ni-Cr,Ni-Al", "type_s_thermocouple": "Pt-Rh,Pt",
@@ -136,6 +138,7 @@ WHERE = {
     **{s: "Parted from monazite and bastnäsite in the mixer-settlers" for s in ("La", "Ce", "Pr", "Nd", "Sm", "Eu")},
     **{s: "Parted from xenotime, euxenite and ionic clay in the mixer-settlers" for s in ("Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu")},
     "Th": "In monazite and euxenite, and the residue they leave",
+    "U": "In uraninite, pitchblende, in calcite veins and sandstone; a little in euxenite and monazite",
 }
 SYNTHETIC = {"Tc", "Pm"} | {symbol for symbol, z in SYMBOLS.items() if z >= 93}
 

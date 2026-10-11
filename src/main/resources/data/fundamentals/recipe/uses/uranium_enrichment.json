@@ -1,0 +1,25 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "fundamentals:uranium_hexafluoride"
+    }
+  ],
+  "machines": [
+    "tfmg:centrifuge"
+  ],
+  "min_size": 1,
+  "processing_time": 200,
+  "results": [
+    {
+      "id": "fundamentals:enriched_uranium_hexafluoride",
+      "amount": 250
+    },
+    {
+      "id": "fundamentals:depleted_uranium_hexafluoride",
+      "amount": 750
+    }
+  ]
+}

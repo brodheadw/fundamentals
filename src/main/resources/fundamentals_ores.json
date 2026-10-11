@@ -255,6 +255,11 @@
       "name": "bertrandite_ore",
       "soft": false,
       "mineral": "bertrandite"
+    },
+    {
+      "name": "uraninite_ore",
+      "soft": false,
+      "mineral": "uraninite"
     }
   ],
   "hosts": {
@@ -278,6 +283,7 @@
     "limestone": "create:limestone",
     "scoria": "create:scoria",
     "scorchia": "create:scorchia",
-    "quartz": "minecraft:quartz_block"
+    "quartz": "minecraft:quartz_block",
+    "sandstone": "minecraft:sandstone"
   }
 }

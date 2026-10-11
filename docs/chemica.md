@@ -19,6 +19,7 @@ Fundamentals does not need it. With both installed, `tools/build_chemica_compat.
 | Hydrochloric acid | salt + sulfuric acid | hydrogen burnt in chlorine | both real | a: `c:acids/hydrochloric` |
 | Nitric acid | Ostwald, ammonia over Pt-Rh gauze; nitrate + sulfuric | ammonia over a Pt carrier to NO2, then water | both; ours is one step | a: `c:acids/nitric` |
 | Hydrofluoric acid | fluorspar + sulfuric acid | the same, from its own fluorite | same | a: `c:acids/hydrofluoric`; b: Chemica's off with its fluorite |
+| Fluorine | Moissan's cell: hydrofluoric acid over potassium bifluoride on carbon electrodes | aqueous hydrofluoric acid electrolysed | ours: water gives oxygen at the anode | a: `c:fluorine`; b: Chemica's off |
 | Phosphoric acid | bone and the acid roast's by-product | phosphorus burnt, then water | both | a: `c:acids/phosphoric` |
 | Sulfuric acid, hydrogen, kerosene | TFMG's | TFMG's | | already one fluid |
 | Aqua regia, P204, P507, naphthenic acid, bromine | ours | none | | |

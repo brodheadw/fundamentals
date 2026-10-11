@@ -5,7 +5,8 @@
     "fundamentals:tungsten_skarn",
     "fundamentals:mercury_lens",
     "fundamentals:silver_vein",
-    "fundamentals:cobalt_vein"
+    "fundamentals:cobalt_vein",
+    "fundamentals:pitchblende_vein"
   ],
   "step": "underground_decoration"
 }

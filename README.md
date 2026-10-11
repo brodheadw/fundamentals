@@ -6,7 +6,7 @@ It's everything you've been waiting for. Iron ore? Cringe, not real. Real ore mi
 
 Vanilla gives you "iron ore". The ground doesn't. Iron is in hematite and magnetite, lead is in galena, zinc is in sphalerite, the rare earths are in bastnäsite and monazite and a clay that doesn't even have a mineral name. Fundamentals replaces the generic ores with the minerals that actually carry each metal, puts them in the ground the way geology does, and makes you win the metal out of them the way smiths and smelters did, by hand at first and with Create's machines later.
 
-Requires [Create](https://modrinth.com/mod/create) and [Create: The Factory Must Grow](https://modrinth.com/mod/create-tfmg). [Chemica](https://modrinth.com/mod/chemica) is optional: installed alongside, its acids, gases and plastics and ours are one industry ([docs/chemica.md](docs/chemica.md)). Alpha: the geology is in, and the rare earth chain runs from ore to magnet.
+Requires [Create](https://modrinth.com/mod/create) and [Create: The Factory Must Grow](https://modrinth.com/mod/create-tfmg). [Chemica](https://modrinth.com/mod/chemica) is optional: installed alongside, its acids, gases and plastics and ours are one industry ([docs/chemica.md](docs/chemica.md)). So is [Create: Nuclear](https://modrinth.com/mod/createnuclear): its reactor burns our uranium in our Zircaloy and is held by hafnium or boron carbide control rods, and its generic ores do not form ([docs/create_nuclear.md](docs/create_nuclear.md)). Alpha: the geology is in, and the rare earth chain runs from ore to magnet.
 
 ## Deposits, not blobs
 
@@ -22,13 +22,14 @@ An ore takes on whatever rock it formed in. The same hematite sits in stone, dee
 
 ## The minerals
 
-Forty-eight of them, each dropping a raw chunk of itself:
+Forty-nine of them, each dropping a raw chunk of itself:
 
 - **Iron and ferroalloys:** Hematite, Magnetite, Goethite, Siderite, Pyrolusite, Pentlandite, Nickel Laterite, Chromite, Wolframite, Scheelite, Molybdenite, Cobaltite, Ilmenite, Rutile
 - **Copper:** Chalcopyrite, Bornite, Chalcocite, Covellite, Malachite, Azurite, Cuprite
 - **Aluminium, lead, zinc, tin:** Bauxite, Galena, Sphalerite, Smithsonite, Hemimorphite, Cassiterite
 - **Lithium:** Spodumene
 - **Zirconium and beryllium:** Zircon, Beryl, Bertrandite
+- **Uranium:** Uraninite (pitchblende)
 - **Rare earths:** Bastnäsite, Monazite, Xenotime, Ion-Adsorption Clay, Loparite, Euxenite, Thortveitite (scandium)
 - **Precious:** Native Silver, Acanthite, Sperrylite, Cooperite, Braggite, Cinnabar
 - **Fluxes and salts:** Fluorite, Borax, Trona, Halite

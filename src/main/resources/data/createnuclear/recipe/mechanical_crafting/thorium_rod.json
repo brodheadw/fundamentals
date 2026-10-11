@@ -1,0 +1,34 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "createnuclear"
+    }
+  ],
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "category": "misc",
+  "show_notification": true,
+  "pattern": [
+    "H",
+    "U",
+    "T",
+    "U",
+    "H"
+  ],
+  "key": {
+    "H": {
+      "item": "fundamentals:thorium_dioxide"
+    },
+    "U": {
+      "item": "fundamentals:uranium_fuel_pellet"
+    },
+    "T": {
+      "item": "fundamentals:zircaloy_tube"
+    }
+  },
+  "result": {
+    "id": "createnuclear:thorium_rod",
+    "count": 1
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:firebrick_lined_vat"
+  ],
+  "min_size": 1,
+  "processing_time": 200,
+  "machines": [
+    "tfmg:graphite_electrode",
+    "tfmg:graphite_electrode",
+    "tfmg:graphite_electrode"
+  ],
+  "ingredients": [
+    {
+      "item": "fundamentals:boric_acid"
+    },
+    {
+      "item": "fundamentals:boric_acid"
+    },
+    {
+      "item": "tfmg:coal_coke_dust"
+    },
+    {
+      "item": "tfmg:coal_coke_dust"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:boron_carbide"
+    },
+    {
+      "id": "tfmg:carbon_dioxide",
+      "amount": 250
+    }
+  ]
+}

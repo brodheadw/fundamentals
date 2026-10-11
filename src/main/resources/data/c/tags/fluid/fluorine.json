@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:fluorine",
+    {
+      "id": "chemica:fluorine",
+      "required": false
+    },
+    {
+      "id": "chemica:flowing_fluorine",
+      "required": false
+    }
+  ]
+}

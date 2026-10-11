@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:depleted_uranium_oxide",
+    "fundamentals:uraninite_dust",
+    "fundamentals:uranium_dioxide",
+    "fundamentals:uranium_tetrafluoride",
+    "fundamentals:yellowcake"
+  ]
+}

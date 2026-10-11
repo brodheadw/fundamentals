@@ -26,6 +26,7 @@ SHARED = {
     "caustic_soda": ("caustic_soda", "caustic_soda"),
     "titanium_tetrachloride": ("titanium_tetrachloride", "titanium_tetrachloride"),
     "vinyl_chloride": ("vinyl_chloride", "vinyl_chloride_monomer"),
+    "fluorine": ("fluorine", "fluorine"),
 }
 ITEMS = {"salt": ("salt", "dusts/salt"), "soda_ash": ("soda_ash", "dusts/soda_ash")}
 SHEETS = {"pvc": "fundamentals:pvc_sheet", "polyethylene": "tfmg:plastic_sheet"}
@@ -39,6 +40,7 @@ SWITCHED_OFF = {
     "vat_machine_recipe/vat_reaction/polyethylene_oxygen": "oxygen poisons a Ziegler-Natta catalyst; The Factory's plastic vats make polyethylene over ours",
     "vat_machine_recipe/vat_reaction/polyvinyl_chloride": "vinyl chloride polymerised over a copper catalyst; it is polymerised in suspension, as ours is",
     "vat_machine_recipe/vat_reaction/hydrofluoric_acid": "ours, from fluorspar and sulfuric acid",
+    "vat_machine_recipe/electrolysis/hydrofluoric_acid": "aqueous hydrofluoric acid gives oxygen at the anode; Moissan's cell runs it anhydrous, in molten potassium bifluoride",
     "vat_machine_recipe/vat_reaction/nitrous_oxide_alt": "coal, fluorite and nitric acid do not make laughing gas; ammonium nitrate does",
     "vat_machine_recipe/vat_reaction/titanium_tetrachloride": "rutile chlorinated without carbon; ours carbochlorinates with coke",
     "vat_machine_recipe/vat_reaction/titanium_tetrachloride_dust": "rutile chlorinated without carbon; ours carbochlorinates with coke",

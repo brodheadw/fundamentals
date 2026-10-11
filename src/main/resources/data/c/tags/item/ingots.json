@@ -48,6 +48,7 @@
     "#c:ingots/titanium",
     "#c:ingots/tungsten",
     "#c:ingots/yttrium",
+    "#c:ingots/zircaloy",
     "#c:ingots/zirconium"
   ]
 }
