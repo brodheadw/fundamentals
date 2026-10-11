@@ -1,11 +1,14 @@
 package ai.gsmc.fundamentals.gametest;
 
 import ai.gsmc.fundamentals.Fundamentals;
+import com.mojang.serialization.JsonOps;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.resources.RegistryOps;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
@@ -13,6 +16,8 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.LootTable;
@@ -33,13 +38,30 @@ import java.util.Set;
 public class TakeoverTests {
 
     @GameTest(template = "empty")
-    public void theFactorysLeadLithiumAndNickelOresNoLongerGenerate(GameTestHelper helper) {
-        Registry<PlacedFeature> features = helper.getLevel().registryAccess().registryOrThrow(Registries.PLACED_FEATURE);
-        var plains = helper.getLevel().registryAccess().registryOrThrow(Registries.BIOME).getOrThrow(Biomes.PLAINS).getGenerationSettings().features();
-        for (String ore : new String[] {"tfmg:lead_ore", "tfmg:lithium_ore", "tfmg:nickel_ore"}) {
+    public void theFactorysMetalOresNoLongerGenerateButItsOilDoes(GameTestHelper helper) {
+        var registries = helper.getLevel().registryAccess();
+        Registry<PlacedFeature> features = registries.registryOrThrow(Registries.PLACED_FEATURE);
+        var plains = registries.registryOrThrow(Registries.BIOME).getOrThrow(Biomes.PLAINS).getGenerationSettings().features();
+        for (String ore : new String[] {"tfmg:lead_ore", "tfmg:lithium_ore", "tfmg:nickel_ore", "tfmg:oil_deposit", "tfmg:tfmg_striated_ores_overworld"}) {
             ResourceKey<PlacedFeature> key = ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.parse(ore));
-            helper.assertTrue(features.containsKey(key), ore + " is no longer a feature of The Factory Must Grow; our switch-off names the wrong thing");
-            helper.assertTrue(plains.stream().noneMatch(step -> step.stream().anyMatch(feature -> feature.is(key))), ore + " still generates in the plains");
+            helper.assertTrue(features.containsKey(key), ore + " is no longer a feature of The Factory Must Grow; our override names the wrong thing");
+            boolean placed = plains.stream().anyMatch(step -> step.stream().anyMatch(feature -> feature.is(key)));
+            helper.assertTrue(placed == !ore.endsWith("_ore"), ore + (placed ? " still generates" : " no longer generates") + " in the plains");
+        }
+        String layers = ConfiguredFeature.DIRECT_CODEC.encodeStart(RegistryOps.create(JsonOps.INSTANCE, registries),
+                registries.registryOrThrow(Registries.CONFIGURED_FEATURE).get(ResourceLocation.parse("tfmg:tfmg_striated_ores_overworld"))).getOrThrow().toString();
+        helper.assertTrue(layers.contains("tfmg:lignite") && !layers.contains("tfmg:galena") && !layers.contains("tfmg:bauxite"),
+                "The Factory's striated layers should keep lignite and lose galena and bauxite");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void theFactorysGalenaMinesAsOurs(GameTestHelper helper) {
+        ItemStack pickaxe = new ItemStack(Items.IRON_PICKAXE);
+        for (String block : new String[] {"tfmg:lead_ore", "tfmg:galena"}) {
+            List<ItemStack> drops = Block.getDrops(BuiltInRegistries.BLOCK.get(ResourceLocation.parse(block)).defaultBlockState(), helper.getLevel(),
+                    helper.absolutePos(BlockPos.ZERO), null, null, pickaxe);
+            helper.assertTrue(drops.size() == 1 && drops.getFirst().is(BuiltInRegistries.ITEM.get(Fundamentals.id("raw_galena"))), block + " dropped " + drops);
         }
         helper.succeed();
     }
