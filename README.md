@@ -10,7 +10,7 @@ Requires [Create](https://modrinth.com/mod/create) and [Create: The Factory Must
 
 ## Deposits, not blobs
 
-Ore generates as the kind of body it really forms: banded iron beds, siderite ironstone among coal seams and in mountain limestone, lead-zinc beds in limestone, silver and cobalt veins in calcite, porphyry copper stocks, bauxite and nickel laterite under tropical soil, carbonatite plugs for the rare earths with monazite in their weathered tops, a rare monazite vein in quartz, a dark layered intrusion at the bottom of the world for chromite and the platinum metals. Each body is rich at its core and peters out at the edges, and the grade of an ore block decides what it drops.
+Ore generates as the kind of body it really forms: banded iron beds, siderite ironstone among coal seams and in mountain limestone, lead-zinc beds in limestone, silver and cobalt veins in calcite, porphyry copper stocks, bauxite and nickel laterite under tropical soil, carbonatite plugs for the rare earths with monazite in their weathered tops, a rare monazite vein in quartz, a dark layered intrusion at the bottom of the world for chromite and the platinum metals. Each body is rich at its core and peters out at the edges, and the grade of an ore block decides what it drops. The Factory Must Grow's own lead, lithium and nickel ores, and the galena and bauxite in its striated layers, no longer generate (its oil, lignite and fireclay still do); in a world they already reached, they mine as raw galena, spodumene, pentlandite and bauxite, and any raw or crushed lead, nickel or lithium of theirs crafts into the same mineral.
 
 ![A banded iron bed in crimsite](docs/images/banded-iron-in-crimsite.jpg)
 ![A silver vein in calcite](docs/images/silver-vein-in-calcite.jpg)
