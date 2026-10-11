@@ -133,7 +133,8 @@ def geology():
         "Vanilla scatters ore in blobs. The ground doesn't. Every ore body here is a kind of deposit that really forms: a bed laid down in "
         "water, a plug of odd rock pushed up from below, a blanket of weathered soil, a vein filling a crack. Each body is rich at its "
         "core and peters out at the edges, and the grade of an ore block decides what it drops. Find the right rock in the right country "
-        "and you have found the metal; this chapter is the prospector's list.", "Deposits, not blobs"), 0)
+        "and you have found the metal; this chapter is the prospector's list. The Factory Must Grow's lead, lithium and nickel ores and its "
+        "galena and bauxite layers no longer form; any already in the ground mine as raw galena, spodumene, pentlandite and bauxite.", "Deposits, not blobs"), 0)
     for i, (name, spec) in enumerate(DEPOSITS.items()):
         kind, host, minerals, *_rest = spec
         where = WHERE.get(spec[6], spec[6])
