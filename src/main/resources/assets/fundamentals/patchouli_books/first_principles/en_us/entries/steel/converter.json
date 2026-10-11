@@ -1,0 +1,33 @@
+{
+  "name": "The converter",
+  "category": "fundamentals:steel",
+  "icon": "tfmg:steel_ingot",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Steel is iron with a few tenths of a per cent of carbon, tougher than cast iron and harder than wrought. Before 1856 it was made by the ton only by cementation and the crucible.",
+      "title": "The converter"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Henry Bessemer blew air up through molten pig iron in a refractory-lined converter and found the bath got hotter, not colder: the silicon, manganese and carbon burning out of it give heat enough to keep it molten with no fuel at all. A blow of twenty minutes did what a puddler did in a shift."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Robert Mushet's spiegeleisen, a manganese pig iron added after the blow, took up the oxygen left in the steel; Thomas and Gilchrist's basic lining of 1878 let lime take out phosphorus."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Since the first at Linz in 1952 the basic oxygen furnace has blown pure oxygen in from above, and it makes most of the world's steel (Ullmann's, \"Steel\")."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Here 288 mB of molten pig iron, 500 mB of air and a limesand in any of The Factory Must Grow's vats, with no burner under it and no machine on it, blow to 252 mB of molten steel, 72 mB of slag and furnace gas: about 12 per cent of the metal goes off as burnt carbon and silicon and as iron oxide in the slag."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The casting basin makes the ingots. The Factory's arc furnace makes steel too, as an electric arc furnace does from scrap and reduced ore, with no pig iron."
+    }
+  ]
+}

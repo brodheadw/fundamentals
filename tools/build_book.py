@@ -8,6 +8,7 @@ from build_ore_data import DEPOSITS, DISPLAY, PLACERS
 from build_separation_data import CURIE, MOMENTS, TITANIUM_PIPEWORK, ZINC_REDUCTION
 from build_oxidation_data import METALS as AGEING, PACE
 from build_heat_data import REFERENCES, liquids
+from build_uses_data import CONVERTER, PIG_IRON_PER_ORE, PUDDLED
 
 BOOK = "first_principles"
 BOOK_DATA = DATA / f"patchouli_books/{BOOK}"
@@ -196,7 +197,7 @@ def ironworking():
         "Copper comes straight out of the bloomery from malachite, azurite and cuprite. Galena has to be roasted on a fire first, which "
         "drives off its sulfur; the roasted ore then gives lead bullion, lead still holding its silver, which a furnace remelts to lead.", "Bloom and hammer") + pages_of(
         "A furnace never reduces iron ore, and neither does a fan. Create's crushing wheels grind hematite, magnetite, goethite and roasted siderite to crushed iron ore, "
-        "and that goes to The Factory Must Grow's blast furnace, which has the coke and the heat. Crimsite is the iron stone and crushes to hematite; "
+        "and that goes to The Factory Must Grow's blast furnace, which has the coke and the heat, and gives pig iron: see Iron and steel. Crimsite is the iron stone and crushes to hematite; "
         "washed gravel leaves a little magnetite black sand. The slag every smelt leaves is The Factory Must Grow's own: see Slag.")
         + [crafting("fundamentals:smithing_hammer")], 2)
     entry("ironworking", "slag", "Slag", "tfmg:slag", pages_of(
@@ -217,6 +218,49 @@ def ironworking():
         "to the pigments painters have ground since antiquity: hematite red, goethite yellow, malachite green, azurite blue, pyrolusite black, "
         "cinnabar vermilion. Hold the mortar in one hand and the material in the other.", "Mortar and pestle")
         + [crafting("fundamentals:mortar_and_pestle")], 4)
+
+
+def steel():
+    category("steel", "Iron and steel", "The blast furnace and what comes after it: pig iron cast as it is, puddled to wrought iron, or blown to steel.",
+             "tfmg:cast_iron_ingot", 1)
+    entry("steel", "pig_iron", "Pig iron", "tfmg:blast_furnace_output", pages_of(
+        "A blast furnace does not make steel. Coke burning in a hot blast reduces the ore as it sinks down the stack, and the iron melts, and iron that melts "
+        "against coke dissolves carbon: three and a half to four and a half per cent of it, and silicon from the ash. What runs out of the hearth is pig iron, "
+        "named for the sand beds it was cast in, a sow feeding a row of pigs. It is hard and brittle and cannot be forged.", "Pig iron") + pages_of(
+        f"Crushed iron ore and a limesand in The Factory Must Grow's blast furnace give {PIG_IRON_PER_ORE} mB of molten pig iron, 144 mB of molten slag and furnace gas; "
+        "a raw iron lump, twice as much. That is half as much iron again as a bloomery gets from the same ore. A bloomery never melts its iron and loses much of it "
+        "to the slag as iron oxide; the blast furnace's lime slag carries almost none, and nearly all the iron goes into the pig (Tylecote, A History of Metallurgy).") + pages_of(
+        "Pig iron goes three ways: cast as it is, puddled to wrought iron, or blown to steel. Sources: Tylecote, A History of Metallurgy (2nd ed., 1992); "
+        "Gale, Iron and Steel (1969); Ullmann's Encyclopedia of Industrial Chemistry, \"Iron\" and \"Steel\".", "Three ways"), 0)
+    entry("steel", "cast_iron", "Cast iron", "tfmg:cast_iron_ingot", pages_of(
+        "Run into a mould, pig iron is cast iron, and it casts where steel will not: at four per cent carbon it melts nearly 400 °C lower than pure iron and "
+        "runs thin into every corner of the mould. In grey iron the carbon comes out as flakes of graphite, which make it machine cleanly and damp vibration "
+        "and make it weak in tension: good for pipes, cylinders, frames, flywheels and machine beds, bad for anything that has to bend.", "Cast iron") + pages_of(
+        "The Factory Must Grow's casting basin casts 144 mB of pig iron to a cast iron ingot, and its cast iron pipes, tanks, frames, flywheels and blast furnace "
+        "come from that. Before there is a blast furnace a little is made by hand: an iron ingot and a coal compacted in a heated basin, the iron taking up the carbon "
+        "as it would in the hearth."), 1)
+    entry("steel", "puddling", "Puddling", "fundamentals:puddle_ball", pages_of(
+        "Wrought iron in bulk came from pig iron by Henry Cort's puddling furnace, patented in 1784. A reverberatory furnace keeps the coal fire apart from the iron, "
+        "so its sulfur stays out. The puddler melts pig on a hearth lined with iron oxide and works it with a rabble through the door; the oxide and the air burn "
+        "the carbon out as bubbling carbon monoxide, and as the carbon goes the melting point climbs past the furnace's heat and the iron comes to nature, "
+        "thickening to a pasty mass he gathers into balls (Gale, Iron and Steel).", "Puddling") + pages_of(
+        "Joseph Hall's wet puddling, pig boiling, fed the bath more oxide, roasted cinder and hammer scale, which the boil reduces back to iron, so it lost far less "
+        "than Cort's dry hearth. Here two cast iron ingots, or 288 mB of molten pig iron, and an iron oxide to fettle with, a raw hematite or a rusty iron ingot, "
+        "under a mixer over a superheated burner make a puddle ball and a slag, the tap cinder. Rust is iron oxide, so a rusty ingot is just what a puddler wants, and its iron comes back.") + pages_of(
+        f"The ball comes out of the furnace still full of liquid slag. Shingling squeezes it out: a press, or the smithing hammer by hand, beats a ball into {NUMBERS[PUDDLED]} "
+        "iron ingots of wrought iron, under a tenth of a per cent carbon with threads of slag through it. From the ore that is a third to a half again what the bloomery gives, "
+        "and it burns no charcoal.", "Shingling") + [crafting("fundamentals:uses/shingling_by_hand")], 2)
+    loss = 1 - CONVERTER["steel"] / CONVERTER["pig_iron"]
+    entry("steel", "converter", "The converter", "tfmg:steel_ingot", pages_of(
+        "Steel is iron with a few tenths of a per cent of carbon, tougher than cast iron and harder than wrought. Before 1856 it was made by the ton only by cementation "
+        "and the crucible. Henry Bessemer blew air up through molten pig iron in a refractory-lined converter and found the bath got hotter, not colder: the silicon, "
+        "manganese and carbon burning out of it give heat enough to keep it molten with no fuel at all. A blow of twenty minutes did what a puddler did in a shift.", "The converter") + pages_of(
+        "Robert Mushet's spiegeleisen, a manganese pig iron added after the blow, took up the oxygen left in the steel; Thomas and Gilchrist's basic lining of 1878 let lime "
+        "take out phosphorus. Since the first at Linz in 1952 the basic oxygen furnace has blown pure oxygen in from above, and it makes most of the world's steel (Ullmann's, \"Steel\").") + pages_of(
+        f"Here {CONVERTER['pig_iron']} mB of molten pig iron, {CONVERTER['air']} mB of air and a limesand in any of The Factory Must Grow's vats, with no burner under it and no machine on it, "
+        f"blow to {CONVERTER['steel']} mB of molten steel, {CONVERTER['slag']} mB of slag and furnace gas: about {round(loss * 100)} per cent of the metal goes off as burnt carbon "
+        "and silicon and as iron oxide in the slag. The casting basin makes the ingots. The Factory's arc furnace makes steel too, as an electric arc furnace does from scrap "
+        "and reduced ore, with no pig iron."), 3)
 
 
 def rare_earths():
@@ -922,6 +966,7 @@ def main():
     book()
     geology()
     ironworking()
+    steel()
     rare_earths()
     liquids_entry()
     metals()
