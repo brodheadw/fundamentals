@@ -13,9 +13,9 @@
   "heat_requirement": "heated",
   "ingredients": [
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 1000,
-      "fluid": "chemica:fluorine"
+      "tag": "c:fluorine"
     },
     {
       "type": "neoforge:tag",

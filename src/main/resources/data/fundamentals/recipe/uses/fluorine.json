@@ -1,0 +1,38 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "machines": [
+    "tfmg:graphite_electrode",
+    "tfmg:graphite_electrode"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
+  "ingredients": [
+    {
+      "item": "fundamentals:potassium_bifluoride"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 500,
+      "tag": "c:acids/hydrofluoric"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:fluorine",
+      "amount": 250
+    },
+    {
+      "id": "tfmg:hydrogen",
+      "amount": 250
+    },
+    {
+      "id": "fundamentals:potassium_bifluoride",
+      "chance": 0.95
+    }
+  ],
+  "heat_requirement": "heated"
+}

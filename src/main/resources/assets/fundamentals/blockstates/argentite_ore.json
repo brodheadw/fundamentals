@@ -170,6 +170,14 @@
     },
     {
       "when": {
+        "host": "sandstone"
+      },
+      "apply": {
+        "model": "fundamentals:block/host/sandstone"
+      }
+    },
+    {
+      "when": {
         "grade": "core"
       },
       "apply": [

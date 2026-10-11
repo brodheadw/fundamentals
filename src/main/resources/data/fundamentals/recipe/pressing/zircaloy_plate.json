@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/zircaloy"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:zircaloy_plate"
+    }
+  ]
+}

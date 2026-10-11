@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "createnuclear"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "createnuclear:raw_uranium"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:raw_uraninite",
+    "count": 1
+  }
+}

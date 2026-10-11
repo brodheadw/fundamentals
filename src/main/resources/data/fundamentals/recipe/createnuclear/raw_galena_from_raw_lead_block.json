@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "createnuclear"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "createnuclear:raw_lead_block"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:raw_galena",
+    "count": 9
+  }
+}
