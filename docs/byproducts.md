@@ -4,12 +4,13 @@
 
 Every second output of a recipe (and the waste the separation plant makes in code), where it goes, and why that is what the real one does. A catalyst or bath a recipe hands back is not counted. Recipes that need Chemica are left out; Chemica's own arsenic dust from gold ore is in the toxic dust tag all the same.
 
-**43 byproducts.** Going to a use in this mod: 39. Going only to The Factory Must Grow or the vanilla game: 3. Deliberate dead ends: 1. Toxic to handle: 1.
+**44 byproducts.** Going to a use in this mod: 40. Going only to The Factory Must Grow or the vanilla game: 3. Deliberate dead ends: 1. Toxic to handle: 1.
 
 | Byproduct | Made by | Goes to | Why |
 |---|---|---|---|
+| Argon (`fundamentals:argon`) | `vat_machine_recipe/neon` | `oxidation/argon_canister`, `reduction/dysprosium_ingot`, `reduction/gadolinium_ingot`, `reduction/samarium_ingot` and 22 more | Argon comes off the same cryogenic air separation that gives neon, as every industrial air plant co-produces both. |
 | Bittern (`fundamentals:bittern`) | `mixing/salt` | `salt/bromine`, `uses/magnesium_chloride_from_bittern` | Bittern, the mother liquor of salt pans, is the old source of bromine and magnesium chloride. |
-| Caustic Soda (`fundamentals:caustic_soda`) | `uses/aluminium_hydroxide`, `uses/chlor_alkali` | `mixing/naphthenic_acid`, `uses/cryolite`, `uses/sodium_aluminate_liquor`, `uses/sodium_tungstate_liquor` | The Bayer precipitator gives most of its caustic back to the digester, as a real refinery recycles it. |
+| Caustic Soda (`fundamentals:caustic_soda`) | `uses/aluminium_hydroxide`, `uses/chlor_alkali` | `mixing/naphthenic_acid`, `solvents/ehehpa`, `uses/cryolite`, `uses/sodium_aluminate_liquor` and 1 more | The Bayer precipitator gives most of its caustic back to the digester, as a real refinery recycles it. |
 | Cerium Concentrate (`fundamentals:cerium_concentrate`) | `mixing/rare_earth_liquor_from_bastnasite` | `calcining/cerium_oxide_from_concentrate` | Mountain Pass sold its leached-out ceria concentrate for polishing powder. |
 | Chlorine (`fundamentals:chlorine`) | `lithium/lithium_ingot`, `reduction/calcium_ingot`, `uses/cobalt_electrowinning` and 2 more | `mixing/phosphorus_trichloride`, `mixing/scandium_liquor`, `plastics/vinyl_chloride`, `platinum/iridium_rhodium_liquor` and 6 more | Anode chlorine from a molten-chloride cell goes back to chlorination, as at every magnesium and titanium plant. |
 | Clarifier Sludge (`fundamentals:clarifier_sludge`) | `mixing/clarify_heavy_rare_earth_liquor`, `mixing/clarify_rare_earth_liquor` | **Dead end.** Iron, aluminium and thorium hydroxides: a neutralisation sludge, impounded as a low-level radioactive residue (Lynas stores its own at Gebeng). Nine pack into clarifier tailings to wall into a dam or bury. | The lime-neutralised hydroxide sludge has no market. |
@@ -43,7 +44,7 @@ Every second output of a recipe (and the waste the separation plant makes in cod
 | `minecraft:clay_ball` | `mixing/heavy_rare_earth_liquor_from_clay`, `mixing/heavy_rare_earth_liquor_from_clay_with_seawater` | `bloomery`; everything that takes clay | Ion-adsorption clay leached of its rare earths is just clay again. |
 | `minecraft:copper_ingot` | `platinum/nickel_electrowinning`, `uses/nickel_electrowinning_from_raffinate` | `oxidation/polishing/copper_ingot`; everything that takes copper | Copper co-deposited with nickel at the cathode is a sellable metal. |
 | `minecraft:iron_nugget` | `uses/gravel_from_slag` | `oxidation/polishing/iron_nugget`; nine craft to an iron ingot | Crushed slag is passed under a magnet to pull out its metallic iron prills. |
-| `minecraft:water` | `mixing/salt` | `lithium/lithium_sulfate_liquor`, `mixing/bastnasite_concentrate`, `mixing/heavy_rare_earth_carbonate`, `mixing/heavy_rare_earth_liquor_from_clay` and 15 more | Brine boiled for salt gives its water off as condensate. |
+| `minecraft:water` | `mixing/salt` | `lithium/lithium_sulfate_liquor`, `mixing/bastnasite_concentrate`, `mixing/heavy_rare_earth_carbonate`, `mixing/heavy_rare_earth_liquor_from_clay` and 14 more | Brine boiled for salt gives its water off as condensate. |
 | `tfmg:carbon_dioxide` | `lithium/lithium_chloride`, `solvents/hydrogen`, `uses/aluminium_ingot` | The Factory Must Grow's carbon dioxide tank and fire extinguisher | Carbon dioxide from the anode and the soda reactions; real plants mostly vent it. |
 | `tfmg:cast_iron_ingot` | `uses/titania_slag` | The Factory Must Grow's cast iron parts | The Sorel slag furnace's iron is sold as high-purity pig iron. |
 | `tfmg:coal_coke_dust` | `uses/fluid_catalytic_cracking` | The Factory Must Grow's coke uses | Coke burnt onto a cracking catalyst is burnt off in the regenerator. |
