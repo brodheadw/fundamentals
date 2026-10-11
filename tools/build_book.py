@@ -6,7 +6,7 @@ import shutil
 from common import ASSETS, DATA, JAVA, write
 from build_ore_data import DEPOSITS, DISPLAY, PLACERS
 from build_separation_data import CURIE, MOMENTS, TITANIUM_PIPEWORK, ZINC_REDUCTION
-from build_oxidation_data import METALS as AGEING
+from build_oxidation_data import METALS as AGEING, PACE
 from build_heat_data import REFERENCES, liquids
 
 BOOK = "first_principles"
@@ -487,7 +487,7 @@ def ageing_table():
     def days(d):
         return f"{d:g} day" + ("" if d == 1 else "s")
     lines = [f"$(li){metal.title()}: {kind}, {days(d)} a stage; damp, {days(round(d / wet, 1)) if wet else 'never'}"
-             for metal, (kind, d, dry, wet, _) in AGEING.items()]
+             for metal, (kind, d, dry, wet, _) in ((m, (k, PACE * d, dr, w, o)) for m, (k, d, dr, w, o) in AGEING.items())]
     return [{"type": "patchouli:text", "text": "".join(lines[i:i + 7]), **({"title": "Ingots, in game days"} if i == 0 else {})}
             for i in range(0, len(lines), 7)]
 
