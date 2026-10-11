@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " W ",
+    "CKC",
+    " B "
+  ],
+  "key": {
+    "C": {
+      "item": "tfmg:lithium_charge"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    },
+    "K": {
+      "item": "tfmg:industrial_aluminum_casing"
+    },
+    "B": {
+      "item": "tfmg:circuit_board"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "tfmg:accumulator"
+  }
+}

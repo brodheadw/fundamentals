@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " W ",
+    "CKC",
+    " C "
+  ],
+  "key": {
+    "C": {
+      "item": "fundamentals:nickel_metal_hydride_cell"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    },
+    "K": {
+      "item": "tfmg:industrial_aluminum_casing"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "tfmg:accumulator"
+  }
+}

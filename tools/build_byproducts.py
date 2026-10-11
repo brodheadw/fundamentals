@@ -7,7 +7,7 @@ from common import REPO, RESOURCES, read_lang
 DATA = RESOURCES / "data"
 OUT = REPO / "docs/byproducts.md"
 OUTPUT_KEYS = ("result", "results", "byproduct")
-NOT_BYPRODUCTS = {"create:experience_nugget", "tfmg:lithium_nugget"}
+NOT_BYPRODUCTS = {"create:experience_nugget", "tfmg:lithium_nugget", "fundamentals:sponge_lead_plate"}
 OPTIONAL = ("chemica", "createnuclear")
 TAILINGS = {"fundamentals:clarifier_sludge_block", "fundamentals:red_mud_block", "fundamentals:monazite_residue_block"}
 

@@ -1,0 +1,28 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:hydride_alloy"
+    },
+    {
+      "item": "fundamentals:nickel_hydroxide"
+    },
+    {
+      "tag": "c:plates/nickel"
+    },
+    {
+      "tag": "c:plates/polyethylene"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 100,
+      "tag": "c:caustic_soda"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:nickel_metal_hydride_cell",
+      "count": 2
+    }
+  ]
+}

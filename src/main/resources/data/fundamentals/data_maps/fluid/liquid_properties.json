@@ -593,6 +593,21 @@
       "freezes": -24.1,
       "boils": 136.4
     },
+    "fundamentals:lithium_ion_electrolyte": {
+      "density": 1290,
+      "viscosity": 3.0,
+      "freezes": -20,
+      "boils": 90,
+      "flash_point": 17,
+      "autoignition": 458,
+      "toxic": true
+    },
+    "fundamentals:phosphorus_pentafluoride": {
+      "density": 5.24,
+      "freezes": -93.8,
+      "boils": -84.6,
+      "toxic": true
+    },
     "fundamentals:vinyl_chloride": {
       "density": 2.6,
       "viscosity": 0.0108,
