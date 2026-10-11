@@ -1,0 +1,58 @@
+{
+  "name": "Sulfuric acid",
+  "category": "fundamentals:chemicals",
+  "icon": "tfmg:sulfuric_acid_bucket",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Sulfuric acid is made in greater tonnage than any other chemical, some 270 million tonnes a year. The Factory Must Grow's way, three sulfur dust and a nitrate dust with 1,000 mB of water in a vat for 500 mB, is the lead chamber process in small, nitre carrying oxygen to the burning sulfur as in Roebuck's chambers of 1746.",
+      "title": "Sulfuric acid"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It is hard on sulfur and on nitre. Phillips patented the contact process in 1831, and from about 1900, when Knietsch made it work at BASF, it took over."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "First, sulfur dioxide. A sulfur dust burnt in 1,000 mB of air in a heated basin gives 500 mB. Or catch it off the roasters: two raw sphalerite, chalcopyrite, pentlandite or galena with 500 mB of air in a heated basin roast to their oxide or calcine and give 250 mB of it, and two molybdenite with 1,000 mB give 500.",
+      "title": "Sulfur dioxide"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Every modern copper, zinc and nickel smelter runs an acid plant on its roaster gas, which pays for the plant and keeps the gas out of the valleys downwind. Roasted on a campfire, it goes into the air. It is a heavy, choking gas; pipe it away before it boils out of the basin."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sulfur dioxide will not take a second oxygen by itself. Over vanadium pentoxide at about 430 °C it does, and the cooler the bed the further it goes, so a converter is three or four catalyst beds with coolers between.",
+      "title": "The converter"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A heated vat with no machine in it is the bed: a vanadium pentoxide, 500 mB of sulfur dioxide and 500 mB of air give 500 mB of sulfur trioxide, and the catalyst back 49 times in 50. Platinum was the first catalyst; vanadium, cheaper and not poisoned by arsenic, replaced it from the 1920s."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The trioxide is never put into water, which turns it to a fog of acid no scrubber catches. Strong acid absorbs it: 500 mB of trioxide stirred into 500 mB of sulfuric acid give 500 mB of oleum, fuming sulfuric acid, and oleum let down with 500 mB of water gives 1,000 mB of sulfuric acid.",
+      "title": "Absorption"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "That is 500 mB more for every sulfur dust, three times the lead chamber's, and no nitre. The trioxide and oleum fume and are poison to breathe."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Vanadium rides in magnetite, a fraction of a per cent of it, and most of the world's comes out of titanomagnetite. Four raw magnetite with a soda ash and 500 mB of water, superheated, are the salt roast and the water leach: 250 mB of sodium vanadate liquor, and three crushed iron ore still good to smelt.",
+      "title": "Vanadium pentoxide"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "250 mB of the liquor and an ammonium chloride, heated, throw down ammonium metavanadate, which calcines to a vanadium pentoxide, orange-brown."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: Ullmann's Encyclopedia of Industrial Chemistry, \"Sulfuric Acid and Sulfur Trioxide\"; King, Davenport and Moats, Sulfuric Acid Manufacture (2nd ed., 2013); Ullmann's, \"Vanadium and Vanadium Compounds\"; USGS, Mineral Commodity Summaries 2025, \"Sulfur\" and \"Vanadium\".",
+      "title": "Sources"
+    }
+  ]
+}

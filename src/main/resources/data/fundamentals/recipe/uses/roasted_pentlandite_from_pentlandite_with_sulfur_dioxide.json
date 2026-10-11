@@ -1,0 +1,27 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_pentlandite"
+    },
+    {
+      "item": "fundamentals:raw_pentlandite"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "tfmg:air"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:roasted_pentlandite",
+      "count": 2
+    },
+    {
+      "id": "fundamentals:sulfur_dioxide",
+      "amount": 250
+    }
+  ],
+  "heat_requirement": "heated"
+}

@@ -50,6 +50,10 @@
     {
       "type": "patchouli:text",
       "text": "Nickel matte, converter matte, roasted pentlandite and nickel oxide held in the hand or stirred in a basin are breathed by everyone near. And a sulfide roasting on a lit campfire or in a lit smoker or furnace, pentlandite, cobaltite or matte, gives off sulfur dioxide that stings anyone within two blocks."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Roasted in a heated basin with air instead, the gas is caught to make acid (see Sulfuric acid)."
     }
   ]
 }

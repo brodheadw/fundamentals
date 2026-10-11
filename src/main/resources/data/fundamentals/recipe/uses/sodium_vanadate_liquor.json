@@ -1,12 +1,5 @@
 {
-  "neoforge:conditions": [
-    {
-      "type": "neoforge:mod_loaded",
-      "modid": "chemica"
-    }
-  ],
   "type": "create:mixing",
-  "heat_requirement": "heated",
   "ingredients": [
     {
       "item": "fundamentals:raw_magnetite"
@@ -21,7 +14,7 @@
       "item": "fundamentals:raw_magnetite"
     },
     {
-      "tag": "c:dusts/soda_ash"
+      "item": "fundamentals:soda_ash"
     },
     {
       "type": "neoforge:single",
@@ -31,11 +24,13 @@
   ],
   "results": [
     {
-      "id": "chemica:vanadium_dust"
+      "id": "fundamentals:sodium_vanadate_liquor",
+      "amount": 250
     },
     {
       "id": "create:crushed_raw_iron",
       "count": 3
     }
-  ]
+  ],
+  "heat_requirement": "superheated"
 }

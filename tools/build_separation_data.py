@@ -98,6 +98,7 @@ PRECURSORS = {
     "trichlorosilane": ("Trichlorosilane", 0xF0F2F2),
     "silicon_tetrachloride": ("Silicon Tetrachloride", 0xECEFF0),
     "germanium_tetrachloride": ("Germanium Tetrachloride", 0xF0F0EA),
+    "oleum": ("Oleum", 0xD8D4C8),
 }
 GASES = {
     "argon": ("Argon", 0xC8D8F0),
@@ -112,6 +113,8 @@ GASES = {
     "enriched_uranium_hexafluoride": ("Enriched Uranium Hexafluoride", 0xEEF2E4),
     "depleted_uranium_hexafluoride": ("Depleted Uranium Hexafluoride", 0xE8E8E6),
     "phosphorus_pentafluoride": ("Phosphorus Pentafluoride", 0xF0F2EE),
+    "sulfur_dioxide": ("Sulfur Dioxide", 0xF2F0E2),
+    "sulfur_trioxide": ("Sulfur Trioxide", 0xF4F2EA),
 }
 PLATINUM_LIQUORS = {
     "nickel_copper_sulfate": ("Nickel-Copper Sulfate Liquor", 0x58A890),
@@ -129,7 +132,8 @@ SULFATE_LIQUORS = {"beryllium_sulfate_liquor": ("Beryllium Sulfate Liquor", CLEA
 CHLORIDE_LIQUORS = {"indium_chloride_liquor": ("Indium Chloride Liquor", CLEAR)}
 CAUSTICS = {"caustic_soda": ("Caustic Soda", 0xEEF2F0), "sodium_aluminate_liquor": ("Sodium Aluminate Liquor", 0xB8864A),
             "sodium_tungstate_liquor": ("Sodium Tungstate Liquor", 0xE6ECE8), "spent_bayer_liquor": ("Spent Bayer Liquor", 0xB89060),
-            "sodium_gallate_liquor": ("Sodium Gallate Liquor", 0xE4EAE6)}
+            "sodium_gallate_liquor": ("Sodium Gallate Liquor", 0xE4EAE6),
+            "sodium_vanadate_liquor": ("Sodium Vanadate Liquor", 0xEEE2A0)}
 MELTS = {"molten_pig_iron": ("Molten Pig Iron", 0xF07A1E)}
 FLUIDS = {**{k: (*v, "LIQUOR") for k, v in {**LIQUORS, **PLATINUM_LIQUORS, **SULFATE_LIQUORS, **CHLORIDE_LIQUORS}.items()}, **{k: (*v, "ORGANIC") for k, v in ORGANICS.items()},
           **{k: (*v, "ACID") for k, v in ACIDS.items()}, **{k: (*v, "GAS") for k, v in GASES.items()},
@@ -282,7 +286,7 @@ def chemistry():
     mixing("hydrochloric_acid", item("salt", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("hydrochloric_acid", 500)], heated=True)
     mixing("nitric_acid", item("tfmg:nitrate_dust", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("nitric_acid", 500)], heated=True)
     mixing("oxalic_acid", item("minecraft:sugar", 2) + [fluid("nitric_acid", 250)], [result("oxalic_acid", 2)], heated=True)
-    mixing("phosphoric_acid", item("minecraft:bone_meal", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("phosphoric_acid", 500)])
+    mixing("phosphoric_acid", item("minecraft:bone_meal", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("phosphoric_acid", 500), result("phosphogypsum")])
     mixing("p204", [fluid("d2ehpa", 250), fluid("tfmg:kerosene", 750), item("tfmg:limesand")], [result_fluid("p204", 1000)])
     mixing("p507", [fluid("ehehpa", 250), fluid("tfmg:kerosene", 750), item("tfmg:limesand")], [result_fluid("p507", 1000)])
     vat("naphthenic_acid", [fluid("tfmg:heavy_oil", 1000), fluid("caustic_soda", 250), fluid("tfmg:sulfuric_acid", 250)], [result_fluid("naphthenic_acid", 500)],

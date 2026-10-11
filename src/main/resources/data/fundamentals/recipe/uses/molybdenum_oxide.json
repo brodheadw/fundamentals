@@ -6,6 +6,11 @@
     },
     {
       "item": "fundamentals:raw_molybdenite"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "tfmg:air"
     }
   ],
   "results": [
@@ -16,6 +21,10 @@
     {
       "id": "fundamentals:rhenium_flue_dust",
       "chance": 0.1
+    },
+    {
+      "id": "fundamentals:sulfur_dioxide",
+      "amount": 500
     }
   ],
   "heat_requirement": "heated"

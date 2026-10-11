@@ -34,6 +34,7 @@ import ai.gsmc.fundamentals.heat.Temperatures;
 import ai.gsmc.fundamentals.heat.Thermometers;
 import ai.gsmc.fundamentals.liquid.Liquids;
 import ai.gsmc.fundamentals.separation.Hazards;
+import ai.gsmc.fundamentals.uses.Fertiliser;
 import ai.gsmc.fundamentals.uses.Uses;
 import net.neoforged.neoforge.common.NeoForge;
 import ai.gsmc.fundamentals.separation.Separation;
@@ -144,6 +145,8 @@ public class Fundamentals {
         NeoForge.EVENT_BUS.addListener(Hazards::onServerTick);
         NeoForge.EVENT_BUS.addListener(Hazards::onBreak);
         NeoForge.EVENT_BUS.addListener(Hazards::onExplosion);
+        NeoForge.EVENT_BUS.addListener(Fertiliser::onExplosion);
+        NeoForge.EVENT_BUS.addListener(Fertiliser::onServerTick);
         NeoForge.EVENT_BUS.addListener(Plastics::onRightClick);
         NeoForge.EVENT_BUS.addListener(Oxidation::onOpen);
         NeoForge.EVENT_BUS.addListener(Oxidation::onClose);
@@ -169,6 +172,7 @@ public class Fundamentals {
         modBus.addListener(FMLCommonSetupEvent.class, event -> event.enqueueWork(() -> {
             MountedFluidStorageType.REGISTRY.register(Separation.plasticTank(), AllMountedStorageTypes.FLUID_TANK.get());
             Hazards.registerPipeEffects();
+            Fertiliser.registerDispenserBehaviour();
             Titanium.commonSetup();
             if (ModList.get().isLoaded("createnuclear")) {
                 Radiation.register();
