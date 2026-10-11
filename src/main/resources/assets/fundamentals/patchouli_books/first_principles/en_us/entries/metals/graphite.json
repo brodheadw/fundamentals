@@ -1,0 +1,48 @@
+{
+  "name": "Graphite",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:graphite",
+  "sortnum": 16,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Graphite is carbon in sheets, black, greasy and soft enough to write with.",
+      "title": "Graphite"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Flake graphite forms when the carbon in old mud and limestone is cooked in the deep crust, so it lies in schist and gneiss and marble: the flake mines of Heilongjiang, Mozambique's Balama and Madagascar work schist, and Sri Lanka's vein graphite fills cracks in gneiss."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Here it is a band of deepslate deep in any country, the flakes scattered through it."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Flake ore runs ten per cent carbon or so, and graphite floats: it repels water, so a little kerosene, the collector every graphite mill uses, carries the flakes up in the froth. Two raw graphite, 250 mB of water and 50 mB of kerosene under a mixer give a graphite concentrate, half the time two.",
+      "title": "Flotation and purification"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A concentrate is about 95 per cent carbon, the rest silicate. Hydrofluoric acid eats the silicate: two concentrate and 250 mB of it, heated, give two graphite, the 99.95 per cent the Chinese plants make."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Or burn it out: four concentrate under 100 mB of argon between three graphite electrodes in a firebrick-lined vat, past 2,500 °C, give four."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Synthetic graphite is Acheson's, from 1896: coke baked past 2,500 °C in an electric furnace orders itself into graphite. Two coal coke in the same arc vat give two graphite.",
+      "title": "Acheson and electrodes"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Graphite electrodes are made of it: four graphite and 100 mB of creosote, the pitch binder, pressed hot, give The Factory's graphite electrode, as its coke block cut on a stonecutter still does. Graphite is also the anode of every lithium-ion cell and the carbon layer of a tantalum capacitor."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: USGS, Mineral Commodity Summaries 2025, Graphite (natural); Kogel and others, Industrial Minerals and Rocks, 7th ed. (SME, 2006), \"Graphite\"; Jara and others, \"Purification, application and current market trend of natural graphite: a review\", International Journal of Mining Science and Technology 29 (2019).",
+      "title": "Sources"
+    }
+  ]
+}

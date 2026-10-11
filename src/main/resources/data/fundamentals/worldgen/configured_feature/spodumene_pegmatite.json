@@ -16,6 +16,13 @@
         },
         "fraction": 0.02,
         "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:columbite_ore"
+        },
+        "fraction": 0.02,
+        "style": "pockets"
       }
     ],
     "radius": {

@@ -29,7 +29,8 @@ public final class MaterialItems {
             "nickel_matte", "converter_matte", "platinum_group_concentrate", "platinum", "palladium", "rhodium", "ruthenium", "iridium", "osmium",
             "tin_concentrate", "crude_tin", "tin", "bronze",
             "titanium", "magnesium", "zircon", "zirconium", "hafnium", "beryllium", "beryllium_copper",
-            "lead_bullion", "silver", "uraninite", "zircaloy");
+            "lead_bullion", "silver", "uraninite", "zircaloy",
+            "graphite", "sodium", "electrum", "hsla_steel", "pyrochlore", "columbite", "antimony", "antimonial_lead", "niobium", "ferroniobium", "tantalum");
 
     private static final Map<ResourceLocation, Block> BLOCKS = new LinkedHashMap<>();
     private static final Map<ResourceLocation, Item> ITEMS = new LinkedHashMap<>();

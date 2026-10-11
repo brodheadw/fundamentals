@@ -3,9 +3,11 @@
   "values": [
     "#fundamentals:concentrates/bastnasite_concentrate",
     "#fundamentals:concentrates/chromite",
+    "#fundamentals:concentrates/graphite",
     "#fundamentals:concentrates/heavy_rare_earth_concentrate",
     "#fundamentals:concentrates/light_rare_earth_concentrate",
     "#fundamentals:concentrates/platinum_group_concentrate",
+    "#fundamentals:concentrates/pyrochlore",
     "#fundamentals:concentrates/tin_concentrate",
     "#fundamentals:concentrates/zircon"
   ]

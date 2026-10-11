@@ -27,7 +27,8 @@ public final class Uses {
             "tungstic_acid", "ammonium_paratungstate", "ammonium_perrhenate", "lithium_carbonate", "mcraly_powder", "boric_acid",
             "galvanized_steel_plate", "roasted_siderite", "yellowcake", "uranium_tetrafluoride", "uranium_dioxide",
             "uranium_fuel_pellet", "depleted_uranium_oxide", "zircaloy_tube", "boron_carbide", "potassium_bifluoride", "thorium_dioxide",
-            "puddle_ball");
+            "puddle_ball",
+            "graphite", "potash", "gold_amalgam", "potassium_fluorotantalate");
 
     public static final List<String> PLATINUM_IDS = List.of(
             "ammonium_chloride", "insoluble_residue", "iridium_rhodium_residue", "ammonium_chloroplatinate",
@@ -42,6 +43,7 @@ public final class Uses {
 
     public static Item mercury() { return ITEMS.get("mercury"); }
     public static Item cryolite() { return ITEMS.get("cryolite"); }
+    public static Item goldAmalgam() { return ITEMS.get("gold_amalgam"); }
 
     public static List<Item> items() {
         return List.copyOf(ITEMS.values());

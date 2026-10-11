@@ -575,7 +575,7 @@ def oxidation():
 
 
 def metals():
-    category("metals", "The other metals", "Cobalt, zinc, nickel and Mond's carbonyl, the porphyry chain (copper, molybdenum and the rhenium hiding in it), tungsten, chromium, tin, titanium, the silver in lead, zirconium and hafnium, beryllium, aluminium and lithium.", "fundamentals:cobalt_ingot", 3)
+    category("metals", "The other metals", "Cobalt, zinc, nickel and Mond's carbonyl, the porphyry chain (copper, molybdenum and the rhenium hiding in it), tungsten, chromium, tin, titanium, the silver in lead, zirconium and hafnium, beryllium, aluminium, lithium, uranium, graphite, antimony, niobium and tantalum, potash and gold.", "fundamentals:cobalt_ingot", 3)
     entry("metals", "cobalt", "Cobalt", "fundamentals:cobalt_ingot", pages_of(
         "Cobaltite is a cobalt arsenide-sulfide from the silver-cobalt veins in calcite. Roast it on a campfire or in a smoker to drive off the arsenic and sulfur and leave the oxide. "
         "Cobalt melts at 1,495 °C. The Congo's copper-cobalt ore was once smelted in electric furnaces to a white alloy of cobalt, copper and iron and refined from that; "
@@ -605,7 +605,8 @@ def metals():
     entry("metals", "superalloy", "Superalloy and molybdenum steel", "fundamentals:superalloy_ingot", pages_of(
         "Six nickel, a cobalt, a chromium and a tungsten ingot, five aluminium and two rhenium nuggets, superheated under 100 mB of argon, make seven ingots of a single-crystal nickel superalloy "
         "after CMSX-4, which is Ni-6.5Cr-9Co-6W-6.5Ta-5.6Al-3Re-1Ti (Reed, The Superalloys, 2006): 61 per cent nickel, ten each of cobalt, chromium and tungsten, 5.7 aluminium and 2.3 rhenium, "
-        "the tungsten standing in for the tantalum too, which is not in the pack.", "Superalloy") + pages_of(
+        "the tungsten standing in for the tantalum. A tantalum nugget in the melt, as CMSX-4 has its 6.5 per cent, makes nine ingots where it made seven, "
+        "as a hafnium or a ruthenium nugget does.", "Superalloy") + pages_of(
         "The aluminium is what makes it a superalloy. It precipitates as ordered Ni3Al, gamma-prime, which keeps the alloy strong almost to its melting point, and with the chromium it grows "
         "the alumina scale that keeps it from burning in the hot gas; tungsten and rhenium stiffen it against creep.") + pages_of(
         "The Factory Must Grow's turbine blade takes its plates, coated as a real blade is: a yttria-stabilised zirconia thermal barrier over an MCrAlY bond coat. "
@@ -771,8 +772,9 @@ def metals():
         "Two calcined spodumene, 250 mB of sulfuric acid and 500 mB of water, heated, are the acid roast at about 250 °C and the water leach, and give 500 mB of lithium sulfate liquor. "
         "Two soda ash in the hot liquor throw down two lithium carbonate, the sodium sulfate staying in solution.", "Spodumene") + pages_of(
         "Lithium carbonate is what the trade sells. For the metal it goes to the chloride: two carbonate and 500 mB of hydrochloric acid, heated, give two lithium chloride and 250 mB of carbon dioxide. "
-        "Lithium cannot be won from water, so the dry chloride is electrolysed molten, with potassium chloride in the real bath, at about 450 °C: two chloride on two electrodes in a heated vat "
-        "give a lithium ingot, half the time three nuggets more, and 250 mB of chlorine.", "Carbonate to metal") + pages_of(
+        "Lithium cannot be won from water, so the dry chloride is electrolysed molten. Alone it melts at 610 °C; with potassium chloride, the LiCl-KCl eutectic every lithium cell runs, "
+        "it is liquid at about 450: two chloride and a potash on two electrodes in a heated vat give a lithium ingot, half the time three nuggets more, and 250 mB of chlorine, "
+        "and the potash comes back nineteen times in twenty, as the bath does.", "Carbonate to metal") + pages_of(
         "About a third of the world's lithium comes not from rock but from the brines under the salt flats of Chile, Argentina and Tibet, evaporated in ponds and precipitated with soda ash; "
         "there is no such brine in the pack yet.") + pages_of(
         "Sources: Ullmann's Encyclopedia of Industrial Chemistry, \"Lithium and Lithium Compounds\"; the Talison and Tianqi spodumene flowsheets; USGS, Mineral Commodity Summaries 2025, Lithium.", "Sources"), 13)
@@ -811,6 +813,70 @@ def metals():
         "Sources: World Nuclear Association, Information Library: \"Uranium Mining Overview\", \"Conversion and Deconversion\", \"Uranium Enrichment\" and \"Nuclear Fuel Fabrication\"; "
         "IAEA, Geological Classification of Uranium Deposits and Description of Selected Examples, IAEA-TECDOC-1842 (2018); "
         "Benedict, Pigford and Levi, Nuclear Chemical Engineering, 2nd ed. (McGraw-Hill, 1981).", "Sources"), 15)
+    entry("metals", "graphite", "Graphite", "fundamentals:graphite", pages_of(
+        "Graphite is carbon in sheets, black, greasy and soft enough to write with. Flake graphite forms when the carbon in old mud and limestone is cooked in the deep crust, "
+        "so it lies in schist and gneiss and marble: the flake mines of Heilongjiang, Mozambique's Balama and Madagascar work schist, and Sri Lanka's vein graphite fills cracks in gneiss. "
+        "Here it is a band of deepslate deep in any country, the flakes scattered through it.", "Graphite") + pages_of(
+        "Flake ore runs ten per cent carbon or so, and graphite floats: it repels water, so a little kerosene, the collector every graphite mill uses, carries the flakes up in the froth. "
+        "Two raw graphite, 250 mB of water and 50 mB of kerosene under a mixer give a graphite concentrate, half the time two. "
+        "A concentrate is about 95 per cent carbon, the rest silicate. Hydrofluoric acid eats the silicate: two concentrate and 250 mB of it, heated, give two graphite, "
+        "the 99.95 per cent the Chinese plants make. Or burn it out: four concentrate under 100 mB of argon between three graphite electrodes in a firebrick-lined vat, "
+        "past 2,500 °C, give four.", "Flotation and purification") + pages_of(
+        "Synthetic graphite is Acheson's, from 1896: coke baked past 2,500 °C in an electric furnace orders itself into graphite. Two coal coke in the same arc vat give two graphite. "
+        "Graphite electrodes are made of it: four graphite and 100 mB of creosote, the pitch binder, pressed hot, give The Factory's graphite electrode, as its coke block cut on a stonecutter still does. "
+        "Graphite is also the anode of every lithium-ion cell and the carbon layer of a tantalum capacitor.", "Acheson and electrodes") + pages_of(
+        "Sources: USGS, Mineral Commodity Summaries 2025, Graphite (natural); Kogel and others, Industrial Minerals and Rocks, 7th ed. (SME, 2006), \"Graphite\"; "
+        "Jara and others, \"Purification, application and current market trend of natural graphite: a review\", International Journal of Mining Science and Technology 29 (2019).", "Sources"), 16)
+    entry("metals", "antimony", "Antimony", "fundamentals:antimony_ingot", pages_of(
+        "Stibnite, Sb2S3, grows in sprays of lead-grey needles that bend in the hand. It is a mineral of low-temperature hydrothermal veins in quartz, often with a little gold, "
+        "and Xikuangshan in Hunan, the Tin Mine Mountain that was never tin, has given the world more antimony than anywhere since 1897. "
+        "Here it fills quartz veins in mountain country, and rides in the gold-quartz veins.", "Stibnite") + pages_of(
+        "Roasted on a campfire or in a smoker, stibnite burns to antimony trioxide, the white fume a real volatilising roaster collects in its bag house, and gives off sulfur dioxide as every sulfide roast does. "
+        "Two oxide, a charcoal and a soda ash for flux, heated, reduce to two antimony ingots and a slag. Antimony is brittle, bluish-white, and expands as it freezes.", "Roasting and reduction") + pages_of(
+        "Lead alone is too soft for a battery grid. Eight lead ingots and three antimony nuggets, heated, make eight antimonial lead, about four per cent antimony, "
+        "the hard lead of the lead-acid battery since Planté's and Faure's; pressed to plate it is the grid The Factory's lead-acid accumulator now takes. "
+        "Antimony trioxide's great use, as a flame retardant in plastics, has no place in the pack.", "Antimonial lead") + pages_of(
+        "Sources: USGS, Mineral Commodity Summaries 2025, Antimony; Anderson, \"The metallurgy of antimony\", Chemie der Erde 72 (2012); "
+        "Habashi, Handbook of Extractive Metallurgy (Wiley-VCH, 1997), Antimony.", "Sources"), 17)
+    entry("metals", "niobium_tantalum", "Niobium and tantalum", "fundamentals:ferroniobium_ingot", pages_of(
+        "Niobium and tantalum are twins, as zirconium and hafnium are, and lie together. Pyrochlore, (Na,Ca)2Nb2O6(OH,F), brown octahedra in carbonatite, is nearly all the niobium there is: "
+        "Araxá in Brazil, a weathered carbonatite, gives about nine tenths of it. Columbite-tantalite, (Fe,Mn)(Nb,Ta)2O6, black and heavy, is the tantalum mineral of the lithium pegmatites, "
+        "Greenbushes' and Pilgangoora's, and with the Congo's coltan most of the world's tantalum.", "Niobium and tantalum") + pages_of(
+        "Washed under a fan, raw pyrochlore leaves half its weight as concentrate. Araxá does not make niobium metal: it makes ferroniobium, about two thirds niobium, by aluminothermic reduction. "
+        "Two concentrate, two aluminium powder and a raw hematite, lit over a superheated burner, burn on by themselves to two ferroniobium and a slag.", "Ferroniobium") + pages_of(
+        "Nine tenths of niobium goes into steel, a few hundredths of a per cent, as microalloying: it pins the grain small and makes high-strength low-alloy steel, HSLA, for pipelines, bridges and car bodies. "
+        "A ferroniobium nugget in two steel blocks, superheated, makes eighteen HSLA steel, about a tenth of a per cent niobium; an ingot of it presses to two heavy plates, being stronger at the same weight.", "HSLA steel") + pages_of(
+        "Columbite opens to hydrofluoric acid. Two columbite dust, a potash, 500 mB of hydrofluoric acid and 250 mB of sulfuric acid, heated, are the digest and the MIBK solvent extraction in one step: "
+        "the tantalum leaves as potassium fluorotantalate, K2TaF7, crystallised with the potassium chloride, Marignac's salt, and the niobium as its oxide, which goes to ferroniobium as pyrochlore's does.", "Tantalum") + pages_of(
+        "Two fluorotantalate, two sodium and 100 mB of argon, superheated, reduce to a tantalum ingot: sodium reduction, the way nearly all tantalum powder is made. "
+        "Sodium comes from the Downs cell: two salt and a calcium chloride, which lowers the melt to about 600 °C, on two electrodes in a heated vat give a sodium ingot and 250 mB of chlorine, "
+        "and the calcium chloride nine times in ten.", "Sodium reduction") + pages_of(
+        "Euxenite carries niobium and tantalum too, and hydrofluoric acid takes them while the rare earths stay behind as fluorides: two euxenite dust digested the same way give a niobium oxide, a fluorotantalate one time in four, "
+        "and a heavy rare earth concentrate. Loparite is chlorinated, as Solikamsk does it: two loparite dust, a coal coke and 1,000 mB of chlorine, heated, give a niobium oxide, "
+        "250 mB of titanium tetrachloride and 250 mB of crude rare earth liquor.", "From euxenite and loparite") + pages_of(
+        "Tantalum's oxide film is the thinnest, toughest dielectric there is, so most tantalum goes into capacitors: a tantalum nugget with a raw pyrolusite, the manganese dioxide cathode, "
+        "a graphite and a silver nugget deployed on it in turn assembles into four capacitors. A tantalum nugget in the superalloy melt makes nine ingots where it made seven.", "What it is for") + pages_of(
+        "Sources: USGS, Mineral Commodity Summaries 2025, Niobium and Tantalum; CBMM, \"Niobium technical information\"; "
+        "Habashi, Handbook of Extractive Metallurgy (Wiley-VCH, 1997), Niobium and Tantalum; Gupta and Suri, Extractive Metallurgy of Niobium (CRC, 1994).", "Sources"), 18)
+    entry("metals", "potash", "Potash", "fundamentals:potash", pages_of(
+        "Sylvite, KCl, is salt's potassium twin, colourless when pure and red in the Saskatchewan mines, where a dust of hematite stains it. It is the last salt to crystallise as a sea dries up, "
+        "so it lies in seams in the evaporite beds with the halite. Mined with its halite, it is sylvinite.", "Sylvite") + pages_of(
+        "Potassium chloride dissolves far better hot than cold and salt hardly better at all, so the hot leach parts them, as the Carlsbad and Saskatchewan mills do: two raw sylvite and 500 mB of water, heated, "
+        "give two potash, the muriate of potash farmers buy, and a salt. Nearly all potash is fertiliser. Here it is also the bath lithium is electrolysed in and the potassium the tantalum salt is crystallised with.", "Muriate of potash") + pages_of(
+        "Sources: USGS, Mineral Commodity Summaries 2025, Potash; Garrett, Potash: Deposits, Processing, Properties and Uses (Chapman & Hall, 1996).", "Sources"), 19)
+    entry("metals", "gold", "Gold", "minecraft:gold_ingot", pages_of(
+        "Gold is native, the metal itself, alloyed with a tenth or so of silver. It forms in quartz veins, the lode, where hot water dropped it with stibnite and a little galena, "
+        "and as the veins weather it washes down into river and beach sand, where its weight keeps it: the placers of the Klondike and of California in 1849. "
+        "Vanilla gold ore is native gold too, and mines as raw native gold.", "Gold") + pages_of(
+        "Panning is a fan's wash: raw native gold under an encased fan leaves three gold nuggets, the coarse gold, and the fine washes away. "
+        "Mercury catches the fine: two raw native gold and a mercury under a mixer give two gold amalgam, as the stamp mills' copper plates caught it. "
+        "An amalgam heated in a basin gives off its mercury and leaves an electrum ingot, the mercury coming back about half the time.", "Panning and amalgam") + pages_of(
+        "Retorting amalgam in the open is how gold mining poisons people: the vapour is breathed. An amalgam in a basin hurts and poisons everyone within reach who has no diving helmet on a filled backtank, "
+        "as small-scale miners from the Amazon to Indonesia are poisoned now. Cyanide replaced mercury in the 1890s, but it starts from hydrogen cyanide, made from methane and ammonia, which the pack does not have.", "Mercury") + pages_of(
+        "Electrum is gold and its silver. Miller's process blows chlorine through the melt and the silver leaves as its chloride: an electrum ingot and 250 mB of chlorine, superheated, give a gold ingot and a silver nugget. "
+        "Or dissolve it in aqua regia, 500 mB heated, which leaves the silver as chloride and gives the same.", "Parting") + pages_of(
+        "Sources: Marsden and House, The Chemistry of Gold Extraction, 2nd ed. (SME, 2006); USGS, Mineral Commodity Summaries 2025, Gold; "
+        "UNEP, Global Mercury Assessment 2018, artisanal and small-scale gold mining.", "Sources"), 20)
     oxidation()
 
 

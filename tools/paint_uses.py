@@ -257,6 +257,10 @@ def main():
     pellets().save(TEXTURES / "item/uranium_fuel_pellet.png")
     tube().save(TEXTURES / "item/zircaloy_tube.png")
     paint_raw("puddle_ball", ((112, 34, 14), (196, 84, 28), (240, 150, 56), (255, 226, 150))).save(TEXTURES / "item/puddle_ball.png")
+    heap("graphite", (150, 152, 160), (70, 72, 78), (28, 28, 32)).save(TEXTURES / "item/graphite.png")
+    heap("potash", (250, 236, 230), (226, 190, 178), (170, 120, 104)).save(TEXTURES / "item/potash.png")
+    paint_raw("gold_amalgam", ((96, 96, 92), (164, 162, 150), (208, 204, 186), (246, 242, 222))).save(TEXTURES / "item/gold_amalgam.png")
+    heap("potassium_fluorotantalate", (255, 255, 255), (238, 240, 242), (186, 190, 196)).save(TEXTURES / "item/potassium_fluorotantalate.png")
     magnets()
     print("uses textures written")
 

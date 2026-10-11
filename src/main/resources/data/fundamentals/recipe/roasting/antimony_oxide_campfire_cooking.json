@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:campfire_cooking",
+  "category": "misc",
+  "ingredient": {
+    "item": "fundamentals:raw_stibnite"
+  },
+  "result": {
+    "id": "fundamentals:antimony_oxide"
+  },
+  "experience": 0.1,
+  "cookingtime": 400
+}

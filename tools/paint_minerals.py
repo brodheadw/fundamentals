@@ -98,6 +98,12 @@ P = {
     "bertrandite": ((148, 146, 138), (196, 196, 188), (226, 226, 220), (252, 252, 250)),
     "uraninite": ((8, 8, 8), (24, 22, 20), (46, 42, 38), (104, 96, 84)),
     "gummite": ((132, 70, 12), (192, 112, 22), (226, 160, 40), (250, 214, 96)),
+    "graphite": ((20, 20, 22), (50, 50, 56), (92, 94, 102), (178, 182, 192)),
+    "stibnite": ((38, 40, 46), (82, 86, 96), (128, 132, 144), (210, 214, 224)),
+    "pyrochlore": ((72, 36, 12), (126, 72, 28), (170, 112, 50), (222, 176, 108)),
+    "columbite": ((12, 10, 10), (32, 28, 28), (60, 54, 52), (132, 122, 116)),
+    "sylvite": ((150, 58, 44), (204, 112, 92), (230, 172, 152), (252, 232, 222)),
+    "native_gold": ((148, 102, 18), (212, 164, 38), (244, 206, 78), (255, 246, 172)),
 }
 
 BORNITE = [((60, 34, 92), (104, 62, 150), (150, 104, 190), (200, 164, 226)),
@@ -151,6 +157,12 @@ RECIPES = {
     "beryl": [("crystals", "prism", 4, 1), ("speck", 3)],
     "bertrandite": [("crystals", "plate", 3, 1), ("speck", 6)],
     "uraninite": [("blob", 5, 4, 8), ("companion", "gummite", 3), ("speck", 4)],
+    "graphite": [("crystals", "plate", 6, 1), ("speck", 5)],
+    "stibnite": [("crystals", "needle", 3, 4), ("speck", 2)],
+    "pyrochlore": [("crystals", "cube", 3, 1), ("speck", 5)],
+    "columbite": [("crystals", "plate", 4, 1), ("speck", 4)],
+    "sylvite": [("crystals", "cube", 5, 1), ("speck", 3)],
+    "native_gold": [("smear", 2, 3, 6), ("speck", 6)],
 }
 
 
@@ -253,6 +265,8 @@ def crystal(rng, kind, x0, y0):
         return rect(x0, y0, 2, rng.randint(3, 5)) if rng.random() < 0.7 else rect(x0, y0, rng.randint(3, 4), 2)
     if kind == "plate":
         return rect(x0, y0, rng.randint(3, 4), rng.choice((1, 2)))
+    if kind == "needle":
+        return rect(x0, y0, 1, rng.randint(4, 6))
     cells = rect(x0, y0, 3, 3)
     return cells - {wrap(x0 + i, y0 + j) for i in (0, 2) for j in (0, 2) if rng.random() < 0.8}
 
@@ -506,7 +520,7 @@ SHEET_ORDER = [
     "hematite", "magnetite", "goethite", "siderite", "pyrolusite", "pentlandite", "nickel_laterite",
     "chromite", "wolframite", "scheelite", "molybdenite", "cobaltite", "ilmenite", "rutile",
     "native_silver", "argentite", "sperrylite", "cooperite", "braggite", "cinnabar", "spodumene", "fluorite", "borax", "trona", "halite",
-    "zircon", "beryl", "bertrandite", "uraninite",
+    "zircon", "beryl", "bertrandite", "uraninite", "graphite", "stibnite", "pyrochlore", "columbite", "sylvite", "native_gold",
 ]
 
 

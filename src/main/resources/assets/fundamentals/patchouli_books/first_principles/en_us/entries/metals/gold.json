@@ -1,0 +1,45 @@
+{
+  "name": "Gold",
+  "category": "fundamentals:metals",
+  "icon": "minecraft:gold_ingot",
+  "sortnum": 20,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Gold is native, the metal itself, alloyed with a tenth or so of silver. It forms in quartz veins, the lode, where hot water dropped it with stibnite and a little galena, and as the veins weather it washes down into river and beach sand, where its weight keeps it: the placers of the Klondike and of California in 1849.",
+      "title": "Gold"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Vanilla gold ore is native gold too, and mines as raw native gold."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Panning is a fan's wash: raw native gold under an encased fan leaves three gold nuggets, the coarse gold, and the fine washes away. Mercury catches the fine: two raw native gold and a mercury under a mixer give two gold amalgam, as the stamp mills' copper plates caught it.",
+      "title": "Panning and amalgam"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "An amalgam heated in a basin gives off its mercury and leaves an electrum ingot, the mercury coming back about half the time."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Retorting amalgam in the open is how gold mining poisons people: the vapour is breathed. An amalgam in a basin hurts and poisons everyone within reach who has no diving helmet on a filled backtank, as small-scale miners from the Amazon to Indonesia are poisoned now.",
+      "title": "Mercury"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Cyanide replaced mercury in the 1890s, but it starts from hydrogen cyanide, made from methane and ammonia, which the pack does not have."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Electrum is gold and its silver. Miller's process blows chlorine through the melt and the silver leaves as its chloride: an electrum ingot and 250 mB of chlorine, superheated, give a gold ingot and a silver nugget. Or dissolve it in aqua regia, 500 mB heated, which leaves the silver as chloride and gives the same.",
+      "title": "Parting"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: Marsden and House, The Chemistry of Gold Extraction, 2nd ed. (SME, 2006); USGS, Mineral Commodity Summaries 2025, Gold; UNEP, Global Mercury Assessment 2018, artisanal and small-scale gold mining.",
+      "title": "Sources"
+    }
+  ]
+}

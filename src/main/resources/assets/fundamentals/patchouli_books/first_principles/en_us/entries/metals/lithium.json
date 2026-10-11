@@ -15,12 +15,12 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Lithium carbonate is what the trade sells. For the metal it goes to the chloride: two carbonate and 500 mB of hydrochloric acid, heated, give two lithium chloride and 250 mB of carbon dioxide.",
+      "text": "Lithium carbonate is what the trade sells. For the metal it goes to the chloride: two carbonate and 500 mB of hydrochloric acid, heated, give two lithium chloride and 250 mB of carbon dioxide. Lithium cannot be won from water, so the dry chloride is electrolysed molten.",
       "title": "Carbonate to metal"
     },
     {
       "type": "patchouli:text",
-      "text": "Lithium cannot be won from water, so the dry chloride is electrolysed molten, with potassium chloride in the real bath, at about 450 °C: two chloride on two electrodes in a heated vat give a lithium ingot, half the time three nuggets more, and 250 mB of chlorine."
+      "text": "Alone it melts at 610 °C; with potassium chloride, the LiCl-KCl eutectic every lithium cell runs, it is liquid at about 450: two chloride and a potash on two electrodes in a heated vat give a lithium ingot, half the time three nuggets more, and 250 mB of chlorine, and the potash comes back nineteen times in twenty, as the bath does."
     },
     {
       "type": "patchouli:text",

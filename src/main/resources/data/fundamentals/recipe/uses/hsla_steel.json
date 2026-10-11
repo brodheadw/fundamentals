@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:ferroniobium_nugget"
+    },
+    {
+      "tag": "c:storage_blocks/steel"
+    },
+    {
+      "tag": "c:storage_blocks/steel"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:hsla_steel_ingot",
+      "count": 18
+    }
+  ],
+  "heat_requirement": "superheated"
+}

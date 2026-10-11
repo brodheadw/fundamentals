@@ -23,6 +23,13 @@
         },
         "fraction": 0.14,
         "style": "seams"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:sylvite_ore"
+        },
+        "fraction": 0.1,
+        "style": "seams"
       }
     ],
     "radius": {

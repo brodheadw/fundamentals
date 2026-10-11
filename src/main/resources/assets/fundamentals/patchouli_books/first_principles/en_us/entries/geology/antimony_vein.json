@@ -1,0 +1,13 @@
+{
+  "name": "Antimony Vein",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_stibnite",
+  "sortnum": 40,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A vein of quartz block, in mountain and hill country and the deep dark beneath it, between y -24 and 48. Carries stibnite in masses, native gold in masses. Dig at the core: the edges are lean.",
+      "title": "Antimony Vein"
+    }
+  ]
+}

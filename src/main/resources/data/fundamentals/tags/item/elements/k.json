@@ -1,7 +1,11 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:potash",
     "fundamentals:potassium_bifluoride",
+    "fundamentals:potassium_fluorotantalate",
+    "fundamentals:raw_sylvite",
+    "fundamentals:sylvite_ore",
     "minecraft:gunpowder",
     "tfmg:nitrate_dust"
   ]

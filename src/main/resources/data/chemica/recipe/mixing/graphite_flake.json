@@ -1,0 +1,28 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "c:dusts/graphite"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "chemica:sucrose_solution"
+    }
+  ],
+  "results": [
+    {
+      "id": "chemica:graphite_ingot"
+    },
+    {
+      "id": "chemica:graphite_ingot",
+      "chance": 0.15
+    }
+  ]
+}

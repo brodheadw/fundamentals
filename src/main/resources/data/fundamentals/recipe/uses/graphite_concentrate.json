@@ -1,0 +1,30 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_graphite"
+    },
+    {
+      "item": "fundamentals:raw_graphite"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "minecraft:water"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 50,
+      "fluid": "tfmg:kerosene"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:graphite_concentrate"
+    },
+    {
+      "id": "fundamentals:graphite_concentrate",
+      "chance": 0.5
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "tfmg:nickel_ingot"
+    },
+    {
+      "item": "fundamentals:cobalt_ingot"
+    },
+    {
+      "item": "fundamentals:chromium_ingot"
+    },
+    {
+      "item": "fundamentals:tungsten_ingot"
+    },
+    {
+      "tag": "c:nuggets/aluminum"
+    },
+    {
+      "tag": "c:nuggets/aluminum"
+    },
+    {
+      "tag": "c:nuggets/aluminum"
+    },
+    {
+      "tag": "c:nuggets/aluminum"
+    },
+    {
+      "tag": "c:nuggets/aluminum"
+    },
+    {
+      "item": "fundamentals:rhenium_nugget"
+    },
+    {
+      "item": "fundamentals:rhenium_nugget"
+    },
+    {
+      "item": "fundamentals:tantalum_nugget"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 100,
+      "tag": "c:argon"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:superalloy_ingot",
+      "count": 9
+    }
+  ],
+  "heat_requirement": "superheated"
+}

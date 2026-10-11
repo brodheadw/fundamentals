@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "#fundamentals:oxides/antimony",
     "#fundamentals:oxides/beryllium",
     "#fundamentals:oxides/cerium",
     "#fundamentals:oxides/chromium",
@@ -14,6 +15,7 @@
     "#fundamentals:oxides/lutetium",
     "#fundamentals:oxides/molybdenum",
     "#fundamentals:oxides/neodymium",
+    "#fundamentals:oxides/niobium",
     "#fundamentals:oxides/praseodymium",
     "#fundamentals:oxides/samarium",
     "#fundamentals:oxides/scandium",

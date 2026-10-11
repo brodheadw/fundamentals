@@ -1,0 +1,45 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/lead"
+    },
+    {
+      "tag": "c:ingots/lead"
+    },
+    {
+      "tag": "c:ingots/lead"
+    },
+    {
+      "tag": "c:ingots/lead"
+    },
+    {
+      "tag": "c:ingots/lead"
+    },
+    {
+      "tag": "c:ingots/lead"
+    },
+    {
+      "tag": "c:ingots/lead"
+    },
+    {
+      "tag": "c:ingots/lead"
+    },
+    {
+      "item": "fundamentals:antimony_nugget"
+    },
+    {
+      "item": "fundamentals:antimony_nugget"
+    },
+    {
+      "item": "fundamentals:antimony_nugget"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:antimonial_lead_ingot",
+      "count": 8
+    }
+  ],
+  "heat_requirement": "heated"
+}

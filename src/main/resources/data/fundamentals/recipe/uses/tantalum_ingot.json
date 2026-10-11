@@ -1,0 +1,28 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:potassium_fluorotantalate"
+    },
+    {
+      "item": "fundamentals:potassium_fluorotantalate"
+    },
+    {
+      "item": "fundamentals:sodium_ingot"
+    },
+    {
+      "item": "fundamentals:sodium_ingot"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 100,
+      "tag": "c:argon"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:tantalum_ingot"
+    }
+  ],
+  "heat_requirement": "superheated"
+}

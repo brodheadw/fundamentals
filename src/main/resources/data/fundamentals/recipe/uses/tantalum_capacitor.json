@@ -1,0 +1,66 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "tag": "c:nuggets/tantalum"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "id": "tfmg:capacitor_item",
+      "count": 4
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_capacitor"
+        },
+        {
+          "item": "fundamentals:raw_pyrolusite"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_capacitor"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_capacitor"
+        },
+        {
+          "item": "fundamentals:graphite"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_capacitor"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_capacitor"
+        },
+        {
+          "tag": "c:nuggets/silver"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_capacitor"
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "tfmg:unfinished_capacitor"
+  }
+}

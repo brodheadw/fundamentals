@@ -3,6 +3,11 @@
   "values": [
     "create:crushed_raw_gold",
     "create:golden_sheet",
+    "fundamentals:electrum_ingot",
+    "fundamentals:electrum_nugget",
+    "fundamentals:gold_amalgam",
+    "fundamentals:native_gold_ore",
+    "fundamentals:raw_native_gold",
     "minecraft:deepslate_gold_ore",
     "minecraft:gold_block",
     "minecraft:gold_ingot",

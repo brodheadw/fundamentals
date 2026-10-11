@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/antimonial_lead"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:antimonial_lead_plate"
+    }
+  ]
+}

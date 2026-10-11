@@ -1,0 +1,27 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:antimony_oxide"
+    },
+    {
+      "item": "fundamentals:antimony_oxide"
+    },
+    {
+      "item": "minecraft:charcoal"
+    },
+    {
+      "item": "fundamentals:soda_ash"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:antimony_ingot",
+      "count": 2
+    },
+    {
+      "id": "tfmg:slag"
+    }
+  ],
+  "heat_requirement": "heated"
+}

@@ -1,0 +1,37 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:euxenite_dust"
+    },
+    {
+      "item": "fundamentals:euxenite_dust"
+    },
+    {
+      "item": "fundamentals:potash"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 500,
+      "tag": "c:acids/hydrofluoric"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "tfmg:sulfuric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:niobium_oxide"
+    },
+    {
+      "id": "fundamentals:potassium_fluorotantalate",
+      "chance": 0.25
+    },
+    {
+      "id": "fundamentals:heavy_rare_earth_concentrate"
+    }
+  ],
+  "heat_requirement": "heated"
+}

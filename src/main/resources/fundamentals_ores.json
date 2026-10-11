@@ -260,6 +260,36 @@
       "name": "uraninite_ore",
       "soft": false,
       "mineral": "uraninite"
+    },
+    {
+      "name": "graphite_ore",
+      "soft": false,
+      "mineral": "graphite"
+    },
+    {
+      "name": "stibnite_ore",
+      "soft": false,
+      "mineral": "stibnite"
+    },
+    {
+      "name": "pyrochlore_ore",
+      "soft": false,
+      "mineral": "pyrochlore"
+    },
+    {
+      "name": "columbite_ore",
+      "soft": false,
+      "mineral": "columbite"
+    },
+    {
+      "name": "sylvite_ore",
+      "soft": false,
+      "mineral": "sylvite"
+    },
+    {
+      "name": "native_gold_ore",
+      "soft": true,
+      "mineral": "native_gold"
     }
   ],
   "hosts": {

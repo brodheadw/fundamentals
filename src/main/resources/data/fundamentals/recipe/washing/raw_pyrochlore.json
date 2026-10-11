@@ -1,0 +1,14 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_pyrochlore"
+    }
+  ],
+  "results": [
+    {
+      "chance": 0.5,
+      "id": "fundamentals:pyrochlore_concentrate"
+    }
+  ]
+}

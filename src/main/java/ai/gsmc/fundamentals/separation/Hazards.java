@@ -217,6 +217,9 @@ public final class Hazards {
             if (items != null && IntStream.range(0, items.getSlots()).anyMatch(i -> toxicDust(items.getStackInSlot(i)))) {
                 lungDust(level, pos.immutable());
             }
+            if (items != null && IntStream.range(0, items.getSlots()).anyMatch(i -> items.getStackInSlot(i).is(Uses.goldAmalgam()))) {
+                mercuryVapour(level, pos.immutable());
+            }
             IFluidHandler tanks = level.getCapability(Capabilities.FluidHandler.BLOCK, pos, null);
             if (tanks == null) {
                 continue;

@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "create:crushed_raw_lead",
+    "fundamentals:antimonial_lead_ingot",
+    "fundamentals:antimonial_lead_plate",
     "fundamentals:galena_ore",
     "fundamentals:lead_bullion_ingot",
     "fundamentals:litharge",

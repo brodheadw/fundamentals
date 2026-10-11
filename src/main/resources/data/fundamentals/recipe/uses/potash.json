@@ -1,0 +1,26 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_sylvite"
+    },
+    {
+      "item": "fundamentals:raw_sylvite"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "minecraft:water"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:potash",
+      "count": 2
+    },
+    {
+      "id": "fundamentals:salt"
+    }
+  ],
+  "heat_requirement": "heated"
+}
