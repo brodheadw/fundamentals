@@ -1,7 +1,7 @@
 {
   "type": "create:sequenced_assembly",
   "ingredient": {
-    "item": "create:shaft"
+    "tag": "c:plates/steel"
   },
   "loops": 3,
   "results": [
@@ -72,7 +72,7 @@
           "item": "tfmg:unfinished_generator"
         },
         {
-          "tag": "c:plates/steel"
+          "item": "create:shaft"
         }
       ],
       "results": [

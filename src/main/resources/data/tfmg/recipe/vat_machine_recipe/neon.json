@@ -1,14 +1,5 @@
 {
   "type": "tfmg:vat_machine_recipe",
-  "allowed_vat_types": [
-    "tfmg:steel_vat",
-    "tfmg:firebrick_lined_vat"
-  ],
-  "machines": [
-    "tfmg:centrifuge"
-  ],
-  "min_size": 1,
-  "processing_time": 10,
   "ingredients": [
     {
       "type": "neoforge:single",
@@ -16,7 +7,16 @@
       "fluid": "tfmg:air"
     }
   ],
+  "machines": [
+    "tfmg:centrifuge"
+  ],
+  "min_size": 1,
+  "processing_time": 10,
   "results": [
+    {
+      "id": "tfmg:neon",
+      "amount": 1
+    },
     {
       "id": "fundamentals:argon",
       "amount": 9

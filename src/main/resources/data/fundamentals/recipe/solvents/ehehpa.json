@@ -21,9 +21,9 @@
       "fluid": "fundamentals:phosphorus_trichloride"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 250,
-      "fluid": "minecraft:water"
+      "tag": "c:caustic_soda"
     }
   ],
   "results": [

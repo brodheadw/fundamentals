@@ -39,6 +39,7 @@ MAGNET_GRADES = ("NdFeB", "Dy-NdFeB", "SmCo", "Alnico")
 MAGNETS = {f"{alloy}_magnet": f"{grade} Magnet" for alloy, grade in zip(MAGNET_ALLOYS, MAGNET_GRADES)}
 MAGNET_MACHINES = {"electric_motor": "sequenced_assembly/motor", "generator": "sequenced_assembly/generator", "stator": "mechanical_crafting/stator",
                    "electric_pump": "crafting/materials/electric_pump", "voltmeter": "crafting/materials/voltmeter"}
+MAGNET_PATTERNS = {"electric_pump": ["QCQ", "MPM", "KWK"], "stator": ["CM MC", "MCSCM", "AAWAA"]}
 BLOCKS = {"clarifier_sludge_block": "Clarifier Tailings", "red_mud_block": "Bauxite Residue"}
 # Registered by uses.Uses in this order.
 PGM_ITEMS = {"ammonium_chloride": "Ammonium Chloride", "insoluble_residue": "Insoluble Residue", "iridium_rhodium_residue": "Iridium-Rhodium Residue",
@@ -128,9 +129,15 @@ def magnets():
                     step = next(s for s in steps if {"item": "tfmg:magnet"} in s["ingredients"])
                     step["ingredients"] = [magnet if i == {"item": "tfmg:magnet"} else i for i in step["ingredients"]]
                     graded["sequence"] = [step] + [s for s in steps if s is not step]
+                    if machine == "generator":
+                        # A motor is begun the same way on the same shaft, so the generator starts from its steel plate and takes the shaft later.
+                        plate = next(s for s in steps if {"tag": "c:plates/steel"} in s["ingredients"])
+                        plate["ingredients"] = [graded["ingredient"] if i == {"tag": "c:plates/steel"} else i for i in plate["ingredients"]]
+                        graded["ingredient"] = {"tag": "c:plates/steel"}
                     graded["results"][0]["components"] = charge
                 else:
                     graded["key"] = {k: magnet if v == {"item": "tfmg:magnet"} else v for k, v in graded["key"].items()}
+                    graded["pattern"] = MAGNET_PATTERNS.get(machine, graded["pattern"])
                     graded["result"]["components"] = charge
                 write(USES / f"{machine}_with_{alloy}_magnet.json", graded)
             table = json.loads(jar.read(f"data/tfmg/loot_table/blocks/{machine}.json"))
@@ -432,7 +439,8 @@ def tungsten():
                                          "result": {"id": "fundamentals:tungsten_oxide"}, "experience": 0.2, "cookingtime": 100})
     vat("tungsten_ingot", item("tungsten_oxide", 2), "tfmg:hydrogen", 500, [result("tungsten_ingot", 2)])
     mixing("tungsten_carbide", item("tungsten_ingot") + tag("minecraft:coals", 2), [result("tungsten_carbide", 2)], "superheated")
-    write(USES / "tungsten_filament.json", {"type": "minecraft:crafting_shapeless", "category": "misc", "ingredients": item("tungsten_ingot"), "result": result("tungsten_filament", 4)})
+    # Drawn on the stonecutter as The Factory's wire is: alone in a crafting grid the ingot breaks into nuggets.
+    write(USES / "tungsten_filament.json", {"type": "minecraft:stonecutting", "ingredient": {"item": "fundamentals:tungsten_ingot"}, "result": result("tungsten_filament", 4)})
     shaped(TFMG / "crafting/materials/light_bulb.json", ["CWC", "CGC", "NNN"],
            {"C": {"tag": "c:nuggets/copper"}, "G": {"item": "create:framed_glass"}, "N": {"tag": "c:nuggets/steel"}, "W": {"item": "fundamentals:tungsten_filament"}},
            {"count": 2, "id": "tfmg:light_bulb"})
@@ -449,7 +457,7 @@ def more_sinks():
     shaped(TFMG / "crafting/materials/exhaust.json", ["BPB", "EPE", "CPC"],
            {"B": {"item": "minecraft:iron_bars"}, "C": {"tag": "c:ingots/cast_iron"}, "P": {"item": "tfmg:cast_iron_pipe"}, "E": {"item": "fundamentals:cerium_oxide"}},
            {"count": 1, "id": "tfmg:exhaust"})
-    shaped(USES / "exhaust_three_way.json", ["TKR", "EPE", "CPC"],
+    shaped(USES / "exhaust_three_way.json", ["ETE", "PKP", "CRC"],
            {"T": {"tag": "c:nuggets/platinum"}, "K": {"tag": "c:nuggets/palladium"}, "R": {"tag": "c:nuggets/rhodium"},
             "C": {"tag": "c:ingots/cast_iron"}, "P": {"item": "tfmg:cast_iron_pipe"}, "E": {"item": "fundamentals:cerium_oxide"}},
            {"count": 2, "id": "tfmg:exhaust"})
@@ -620,7 +628,8 @@ def platinum_refinery():
 def platinum_sinks():
     mixing("reforming_catalyst", item("platinum_nugget", 2) + item("rhenium_nugget", 2) + item("tfmg:bauxite_powder", 4), [result("reforming_catalyst", 4)], "heated")
     pgm_vat("reforming", item("reforming_catalyst") + [fluid("tfmg:naphtha", 500)],
-            [result_fluid("tfmg:gasoline", 400), result_fluid("tfmg:hydrogen", 100), {"id": "fundamentals:reforming_catalyst", "chance": 0.95}], folder=USES)
+            [result_fluid("tfmg:gasoline", 400), result_fluid("tfmg:hydrogen", 100), {"id": "fundamentals:reforming_catalyst", "chance": 0.95}],
+            machines=(), folder=USES)
     shaped(USES / "platinum_rhodium_gauze.json", ["PPP", "PRP", "PPP"], {"P": {"tag": "c:nuggets/platinum"}, "R": {"tag": "c:nuggets/rhodium"}},
            {"count": 1, "id": "fundamentals:platinum_rhodium_gauze"})
     mixing("nitric_acid_from_ammonia", [fluid("ammonia", 250), fluid("tfmg:air", 1000)] + item("platinum_rhodium_gauze"),
@@ -683,7 +692,7 @@ def silver():
 def thorium():
     mixing("thorium_nitrate", item("monazite_residue_dust") + [fluid("nitric_acid", 250)], [result("thorium_nitrate")], "heated")
     mixing("gas_mantle", item("thorium_nitrate", 4) + [fluid("cerium_liquor", 10)] + tag("c:strings", 4), [result("gas_mantle", 4)], "heated")
-    shaped(TFMG / "crafting/materials/gas_lamp.json", [" C ", "BGB", "MP "],
+    shaped(TFMG / "crafting/materials/gas_lamp.json", ["CMC", "BGB", " P "],
            {"B": {"item": "tfmg:cast_iron_bars"}, "C": {"tag": "c:plates/cast_iron"}, "G": {"item": "create:framed_glass"}, "P": {"item": "tfmg:industrial_pipe"},
             "M": {"item": "fundamentals:gas_mantle"}},
            {"count": 1, "id": "tfmg:gas_lamp"})
@@ -709,9 +718,9 @@ def silver_sinks():
     shaped(TFMG / "crafting/materials/electrical_switch.json", ["RPR", "SCS", "RPR"],
            {"C": {"item": "tfmg:heavy_machinery_casing"}, "S": {"tag": "c:plates/silver"}, "P": {"item": "tfmg:electric_post"}, "R": {"tag": "c:dusts/redstone"}},
            {"count": 1, "id": "tfmg:electrical_switch"})
-    shaped(TFMG / "crafting/materials/large_switch.json", ["WRS", "HMP", "III"],
+    shaped(TFMG / "crafting/materials/large_switch.json", ["SRS", "HMH", "IPI"],
            {"S": {"tag": "c:plates/silver"}, "I": {"item": "tfmg:cable_connector"}, "M": {"item": "tfmg:steel_mechanism"}, "P": {"item": "tfmg:electric_post"},
-            "R": {"item": "tfmg:rebar"}, "H": {"item": "tfmg:steel_cable_hub"}, "W": {"tag": "c:wires/copper"}},
+            "R": {"item": "tfmg:rebar"}, "H": {"item": "tfmg:steel_cable_hub"}},
            {"count": 1, "id": "tfmg:large_switch"})
     write(USES / "coated_circuit_board_with_silver.json", {"type": "create:deploying", "ingredients": [{"item": "tfmg:empty_circuit_board"}, {"tag": "c:plates/silver"}],
                                                            "results": [{"id": "tfmg:coated_circuit_board"}]})
@@ -782,6 +791,13 @@ def names():
     write_lang(lang)
 
 
+def air_separation():
+    # The Factory spins its neon out of 1,000 mB of air in a centrifuge vat; argon comes out of the same air in the same vat, so one recipe gives both.
+    write(TFMG / "vat_machine_recipe/neon.json", {
+        "type": "tfmg:vat_machine_recipe", "ingredients": [fluid("tfmg:air", 1000)], "machines": ["tfmg:centrifuge"], "min_size": 1, "processing_time": 10,
+        "results": [{"id": "tfmg:neon", "amount": 1}, {"id": "fundamentals:argon", "amount": 9}]})
+
+
 def main():
     shutil.rmtree(USES, ignore_errors=True)
     shutil.rmtree(TFMG, ignore_errors=True)
@@ -794,6 +810,7 @@ def main():
     for pattern in ("roasted_c*", "roasted_pentlandite_*", "roasted_siderite_*", "nickel_oxide_*", "copper_calcine_*", "zinc_oxide_*", "roasted_tin_*"):
         for stale in ROASTING.glob(pattern):
             stale.unlink()
+    air_separation()
     magnets()
     cerium()
     lanthanum()
