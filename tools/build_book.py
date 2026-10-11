@@ -196,13 +196,26 @@ def ironworking():
         "drives off its sulfur; the roasted ore then gives lead bullion, lead still holding its silver, which a furnace remelts to lead.", "Bloom and hammer") + pages_of(
         "A furnace never reduces iron ore, and neither does a fan. Create's crushing wheels grind hematite, magnetite, goethite and roasted siderite to crushed iron ore, "
         "and that goes to The Factory Must Grow's blast furnace, which has the coke and the heat. Crimsite is the iron stone and crushes to hematite; "
-        "washed gravel leaves a little magnetite black sand. The slag every smelt leaves is The Factory Must Grow's own, which its concrete and asphalt take as aggregate, as the world's slag goes to cement and roads.")
+        "washed gravel leaves a little magnetite black sand. The slag every smelt leaves is The Factory Must Grow's own: see Slag.")
         + [crafting("fundamentals:smithing_hammer")], 2)
+    entry("ironworking", "slag", "Slag", "tfmg:slag", pages_of(
+        "Every smelt leaves slag, the rock of the ore and the flux melted together. A bloomery's is fayalite, iron silicate, and half or more of it is still iron oxide, "
+        "because without lime a bloomery cannot pull iron back out of a silicate. The Factory Must Grow's slag is the same item, from its blast furnace and from every smelt here.", "Slag") + pages_of(
+        "So old slag was smelted again. A slag in the bloomery with a charcoal, like any ore, gives two iron nuggets. The Romans' cinder heaps in the Forest of Dean and the Weald fed "
+        "the blast furnaces of the seventeenth century, and the Etruscan heaps at Populonia were dug up and smelted again in the twentieth.", "Smelting it again") + pages_of(
+        "Create's crushing wheels break a slag to gravel, and one time in ten free an iron nugget, as a slag works passes crushed slag under a magnet for its prills of metal "
+        "and sells the rest as road stone and ballast. The Factory Must Grow's concrete and asphalt take slag as it is.", "Aggregate") + pages_of(
+        "It is not fertiliser. Thomas meal, the ground slag farmers spread from the 1880s, came from the basic Bessemer converter blowing the phosphoric pig iron of the minette ores with lime, "
+        "a slag of 15 to 20 per cent phosphate. No iron here carries phosphorus: a bloomery's slag is an iron silicate, the Factory's blast furnace slag a lime silicate, and neither has any phosphate to give. "
+        "Fertiliser comes from phosphoric acid and ammonia.", "Not Thomas meal") + pages_of(
+        "Sources: Tylecote, A History of Metallurgy (2nd ed., 1992); Cleere and Crossley, The Iron Industry of the Weald (1985); "
+        "Proctor and others, \"Physical and chemical characteristics of blast furnace, basic oxygen furnace, and electric arc furnace steel industry slags\", "
+        "Environmental Science and Technology 34 (2000); Ullmann's Encyclopedia of Industrial Chemistry, \"Phosphate Fertilizers\".", "Sources"), 3)
     entry("ironworking", "mortar", "Mortar and pestle", "fundamentals:mortar_and_pestle", pages_of(
         "A mortar and pestle grinds by hand what Create's millstone grinds by power: grain to flour, bone to meal, and coloured minerals "
         "to the pigments painters have ground since antiquity: hematite red, goethite yellow, malachite green, azurite blue, pyrolusite black, "
         "cinnabar vermilion. Hold the mortar in one hand and the material in the other.", "Mortar and pestle")
-        + [crafting("fundamentals:mortar_and_pestle")], 3)
+        + [crafting("fundamentals:mortar_and_pestle")], 4)
 
 
 def rare_earths():
@@ -360,6 +373,7 @@ def rare_earths():
         spotlight("fundamentals:calcium_chloride", "Two limesand in 1,000 mB of spent liquor in a basin under a mixer neutralise it to calcium chloride liquor, and 1,000 mB of that boiled in a heated basin leaves three calcium chloride. "
                   "That is what calcium metal is electrolysed from: the plant's waste closes its own loop.", "Lime"),
         spotlight("fundamentals:monazite_residue_dust", "Monazite carries thorium. Roasted hot in sulfuric acid, the thorium turns to a pyrophosphate and stays behind when the sulfate is leached, a residue, mildly radioactive. "
+                  "Its dust is the danger, breathed in: held, or left in an open basin, it hurts and sickens you unless Create's diving helmet on a filled backtank keeps it out. "
                   "Nine pack into a block; cast it and bury it deep, away from where you live. Bastnäsite and the clay leave none.", "Residue"),
         spotlight("fundamentals:gas_mantle", "Thorium was the rare earth industry's first product. A residue and 250 mB of nitric acid, heated, give a thorium nitrate. Four nitrate, 10 mB of cerium liquor and four string, heated, "
                   "give four gas mantles: Welsbach's thoria with a hundredth part of ceria, glowing white in a gas flame. The Factory's gas lamp burns one.", "The gas mantle"),
@@ -682,7 +696,9 @@ def metals():
         "Two bauxite powder and 500 mB of caustic soda in a heated chemical vat with a mixer, the digester at 150 to 250 °C under pressure, give 500 mB of sodium aluminate liquor and a red mud, "
         "what the caustic will not take: iron oxide, titania, silica, and a little scandium and the rare earths. 500 mB of liquor under a mixer, cold, throws down an aluminium hydroxide "
         "and gives 400 mB of caustic soda back to the digester. A blast furnace calcines the hydroxide at about 1,100 °C to alumina.", "Bayer") + pages_of(
-        "Red mud is the industry's great waste, more than a tonne for every tonne of alumina, piled in ponds; it is also the largest scandium resource there is.", "Red mud") + pages_of(
+        "Red mud is the industry's great waste, more than a tonne for every tonne of alumina, piled in ponds; it is also the largest scandium resource there is. "
+        "Four red mud and 500 mB of hydrochloric acid, heated, leach out 50 mB of scandium liquor, about a tenth of what two thortveitite give, as Rusal leaches its residue in the Urals. "
+        "The rest has no use: nine pack into a block of bauxite residue, the dry stack a modern refinery builds instead of a pond.", "Red mud") + pages_of(
         "Cryolite, sodium aluminium fluoride, is the bath. The Greenland mine that gave it is worked out, so it is made: an aluminium hydroxide, 500 mB of hydrofluoric acid "
         "and 250 mB of caustic soda give two, or the hydroxide and 500 mB of the acid with a soda ash for the caustic.", "Cryolite") + pages_of(
         "Two alumina, a cryolite and a coal coke in a heated vat between two graphite electrodes give an aluminium ingot and 250 mB of carbon dioxide. "
@@ -694,6 +710,17 @@ def metals():
         "A precious tip lasts: an iridium nugget, an alumina and a nickel nugget make four plugs, and a platinum one three.", "Spark plugs") + pages_of(
         "Sources: Grjotheim and Kvande, Introduction to Aluminium Electrolysis (Aluminium-Verlag, 1993); Ullmann's Encyclopedia of Industrial Chemistry, \"Aluminum Oxide\" and \"Aluminum\"; "
         "Evans, \"The History, Challenges, and New Developments in the Management and Use of Bauxite Residue\", Journal of Sustainable Metallurgy 2 (2016).", "Sources"), 12)
+    entry("metals", "waste", "Waste and tailings", "fundamentals:red_mud_block", pages_of(
+        "Most of what a plant throws off goes somewhere: the separation plant's spent liquor to calcium chloride, the Kroll process's magnesium chloride back to the cell, "
+        "the fluorspar of a calcium reduction back to hydrofluoric acid, the tetroxide still's residue to iridium and rhodium. A few things have no use, as in the real industry, "
+        "and are packed into blocks and put back in the ground, as a tailings dam or a dry stack holds them: the clarifier's sludge, red mud, and the thorium residue that is not made into mantles. "
+        "Anything else burns in lava.", "Waste and tailings") + pages_of(
+        "Some are poison. Beryllium compounds, nickel matte and oxide dust, thorium residue and, with Chemica, the arsenic dust gold ore gives up are toxic dusts: "
+        "held, or left in an open basin, they hurt and sicken anyone near who is not wearing Create's diving helmet on a filled backtank. "
+        "Mercury and nickel carbonyl are vapours and acids fume; see their own entries.", "Toxic dusts") + pages_of(
+        "Sources: Evans, \"The History, Challenges, and New Developments in the Management and Use of Bauxite Residue\", Journal of Sustainable Metallurgy 2 (2016); "
+        "IAEA, Radiation Protection and NORM Residue Management in the Production of Rare Earths from Thorium Containing Minerals, Safety Reports Series 68 (2011); "
+        "ATSDR, Toxicological Profile for Arsenic (2007).", "Sources"), 14)
     entry("metals", "lithium", "Lithium", "tfmg:lithium_ingot", pages_of(
         "Spodumene, LiAlSi2O6, is the pale pyroxene of the lithium pegmatites. A blast furnace calcines it at about 1,050 °C from alpha to beta-spodumene, which opens to acid where the alpha form will not. "
         "Two calcined spodumene, 250 mB of sulfuric acid and 500 mB of water, heated, are the acid roast at about 250 °C and the water leach, and give 500 mB of lithium sulfate liquor. "

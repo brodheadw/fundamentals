@@ -37,9 +37,8 @@ What's agreed but not built, in the order it's likely to go. The working plan be
   neodymium in NdFeB. Thulium, ytterbium and lutetium oxide have no sink at all.
 
 - **Scandium by-product routes.** Most real scandium comes off nickel laterite acid leach (HPAL) liquor and bauxite residue,
-  pulled by P204 and stripped with caustic soda. Only thortveitite is modelled; laterite smelts whole, and the Bayer digester's red mud,
-  which carries the bauxite's scandium (some 100 g a tonne) with its iron, titania and rare earths, is a dead end: acid-leaching it for
-  scandium is the obvious next route.
+  pulled by P204 and stripped with caustic soda. Thortveitite is modelled, and red mud leaches straight to scandium liquor in
+  hydrochloric acid with no solvent-extraction step and no iron or rare earths dissolving with it; laterite smelts whole.
   Thortveitite's yttrium is not recovered.
 - **Magnetic separation loose ends.** The magnetomigration line hands over the battery's exact products, so the few per cent
   of diamagnetic lutetium and weak ytterbium in the late heavies go with them to the magnet, where a real cell would leave
@@ -48,6 +47,9 @@ What's agreed but not built, in the order it's likely to go. The working plan be
 
 ## Other metals
 
+- **Slag is one item.** The Factory Must Grow's slag stands for every smelt's, so the alumina slag of a thermite or the
+  magnesium fluoride of the beryllium reduction re-smelts in the bloomery for iron as a bloomery's fayalite does, though neither
+  holds any.
 - **Create's zinc ore.** Zinc now reaches Create's zinc ingot (and so its brass), but Create's own zinc ore still generates
   and smelts in a furnace.
 - **Tin loose ends.** The niobium, tantalum and tungsten a hard-rock tin concentrate carries are not recovered (wolframite is mined
@@ -92,7 +94,7 @@ What's agreed but not built, in the order it's likely to go. The working plan be
   pigment route, the Becher and synthetic-rutile upgrades, and leucoxene are not modelled. Magnesium has no Pidgeon route
   (dolomite and ferrosilicon are not in the mod) and no sink of its own beyond the Kroll loop.
 - **Aluminium loose ends.** The Bayer liquor precipitates unseeded (real precipitators are seeded with recycled gibbsite), there
-  is no desilication step, and red mud has no sink or tailings block. The chlor-alkali cell folds brine purification (calcium and
+  is no desilication step, and red mud's iron, titania and rare earths are not recovered. The chlor-alkali cell folds brine purification (calcium and
   magnesium have to come down to parts per billion for the membrane) into dissolving salt; seawater reaches it only as salt. The pot
   burns coke rather than a prebaked anode, its bath takes no aluminium fluoride make-up, and the fluoride fume is any vat holding
   cryolite. Cobalt blue and the reforming catalyst still take bauxite powder where real ones take alumina.
