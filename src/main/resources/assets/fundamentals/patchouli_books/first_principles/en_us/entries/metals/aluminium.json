@@ -24,8 +24,12 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Red mud is the industry's great waste, more than a tonne for every tonne of alumina, piled in ponds; it is also the largest scandium resource there is.",
+      "text": "Red mud is the industry's great waste, more than a tonne for every tonne of alumina, piled in ponds; it is also the largest scandium resource there is. Four red mud and 500 mB of hydrochloric acid, heated, leach out 50 mB of scandium liquor, about a tenth of what two thortveitite give, as Rusal leaches its residue in the Urals.",
       "title": "Red mud"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The rest has no use: nine pack into a block of bauxite residue, the dry stack a modern refinery builds instead of a pond."
     },
     {
       "type": "patchouli:text",

@@ -1,0 +1,29 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:red_mud"
+    },
+    {
+      "item": "fundamentals:red_mud"
+    },
+    {
+      "item": "fundamentals:red_mud"
+    },
+    {
+      "item": "fundamentals:red_mud"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 500,
+      "tag": "c:acids/hydrochloric"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:scandium_liquor",
+      "amount": 50
+    }
+  ],
+  "heat_requirement": "heated"
+}

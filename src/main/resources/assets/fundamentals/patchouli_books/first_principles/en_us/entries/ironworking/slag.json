@@ -1,0 +1,37 @@
+{
+  "name": "Slag",
+  "category": "fundamentals:ironworking",
+  "icon": "tfmg:slag",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Every smelt leaves slag, the rock of the ore and the flux melted together. A bloomery's is fayalite, iron silicate, and half or more of it is still iron oxide, because without lime a bloomery cannot pull iron back out of a silicate. The Factory Must Grow's slag is the same item, from its blast furnace and from every smelt here.",
+      "title": "Slag"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "So old slag was smelted again. A slag in the bloomery with a charcoal, like any ore, gives two iron nuggets. The Romans' cinder heaps in the Forest of Dean and the Weald fed the blast furnaces of the seventeenth century, and the Etruscan heaps at Populonia were dug up and smelted again in the twentieth.",
+      "title": "Smelting it again"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Create's crushing wheels break a slag to gravel, and one time in ten free an iron nugget, as a slag works passes crushed slag under a magnet for its prills of metal and sells the rest as road stone and ballast. The Factory Must Grow's concrete and asphalt take slag as it is.",
+      "title": "Aggregate"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It is not fertiliser. Thomas meal, the ground slag farmers spread from the 1880s, came from the basic Bessemer converter blowing the phosphoric pig iron of the minette ores with lime, a slag of 15 to 20 per cent phosphate.",
+      "title": "Not Thomas meal"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "No iron here carries phosphorus: a bloomery's slag is an iron silicate, the Factory's blast furnace slag a lime silicate, and neither has any phosphate to give. Fertiliser comes from phosphoric acid and ammonia."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: Tylecote, A History of Metallurgy (2nd ed., 1992); Cleere and Crossley, The Iron Industry of the Weald (1985); Proctor and others, \"Physical and chemical characteristics of blast furnace, basic oxygen furnace, and electric arc furnace steel industry slags\", Environmental Science and Technology 34 (2000); Ullmann's Encyclopedia of Industrial Chemistry, \"Phosphate Fertilizers\".",
+      "title": "Sources"
+    }
+  ]
+}

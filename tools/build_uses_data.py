@@ -39,7 +39,7 @@ MAGNET_GRADES = ("NdFeB", "Dy-NdFeB", "SmCo", "Alnico")
 MAGNETS = {f"{alloy}_magnet": f"{grade} Magnet" for alloy, grade in zip(MAGNET_ALLOYS, MAGNET_GRADES)}
 MAGNET_MACHINES = {"electric_motor": "sequenced_assembly/motor", "generator": "sequenced_assembly/generator", "stator": "mechanical_crafting/stator",
                    "electric_pump": "crafting/materials/electric_pump", "voltmeter": "crafting/materials/voltmeter"}
-BLOCKS = {"clarifier_sludge_block": "Clarifier Tailings"}
+BLOCKS = {"clarifier_sludge_block": "Clarifier Tailings", "red_mud_block": "Bauxite Residue"}
 # Registered by uses.Uses in this order.
 PGM_ITEMS = {"ammonium_chloride": "Ammonium Chloride", "insoluble_residue": "Insoluble Residue", "iridium_rhodium_residue": "Iridium-Rhodium Residue",
              "ammonium_chloroplatinate": "Ammonium Chloroplatinate", "dichlorodiammine_palladium": "Dichlorodiammine Palladium",
@@ -269,6 +269,10 @@ def iron():
                                                      "result": {"id": "fundamentals:iron_bloom", "count": 1}, "byproduct": {"id": "tfmg:slag", "count": 1}})
     for path in ("smelting/iron_ingot_from_crushed", "blasting/iron_ingot_from_crushed", "splashing/crushed_raw_iron"):
         disabled(CREATE / f"{path}.json")
+    write(DATA / "recipe/bloomery/iron_from_slag.json", {"type": "fundamentals:bloomery", "ingredient": {"item": "tfmg:slag"},
+                                                         "result": {"id": "minecraft:iron_nugget", "count": 2}})
+    write(USES / "gravel_from_slag.json", {"type": "create:crushing", "ingredients": item("tfmg:slag"), "processing_time": 250,
+                                           "results": [{"id": "minecraft:gravel"}, {"id": "minecraft:iron_nugget", "chance": 0.1}]})
 
 
 def zinc():
@@ -644,6 +648,8 @@ def chlor_alkali():
 def aluminium():
     pgm_vat("sodium_aluminate_liquor", item("tfmg:bauxite_powder", 2) + [fluid("caustic_soda", 500)],
             [result_fluid("sodium_aluminate_liquor", 500), result("red_mud")], folder=USES)
+    mixing("scandium_liquor_from_red_mud", item("red_mud", 4) + [fluid("hydrochloric_acid", 500)], [result_fluid("scandium_liquor", 50)], "heated")
+    shaped(USES / "red_mud_block.json", ["###", "###", "###"], {"#": {"item": "fundamentals:red_mud"}}, {"count": 1, "id": "fundamentals:red_mud_block"})
     mixing("aluminium_hydroxide", [fluid("sodium_aluminate_liquor", 500)], [result("aluminium_hydroxide"), result_fluid("caustic_soda", 400)])
     write(USES / "alumina.json", {"type": "minecraft:blasting", "category": "misc", "ingredient": {"item": "fundamentals:aluminium_hydroxide"},
                                   "result": {"id": "fundamentals:alumina"}, "experience": 0.2, "cookingtime": 100})
@@ -683,6 +689,8 @@ def thorium():
            {"count": 1, "id": "tfmg:gas_lamp"})
     shaped(USES / "clarifier_sludge_block.json", ["###", "###", "###"], {"#": {"item": "fundamentals:clarifier_sludge"}},
            {"count": 1, "id": "fundamentals:clarifier_sludge_block"})
+    write(DATA / "tags/item/toxic_dusts.json", {"replace": False, "values": [
+        "#fundamentals:beryllium_dusts", "#fundamentals:nickel_dusts", "fundamentals:monazite_residue_dust", {"id": "chemica:arsenic_dust", "required": False}]})
 
 
 def lead_and_zinc_sinks():
