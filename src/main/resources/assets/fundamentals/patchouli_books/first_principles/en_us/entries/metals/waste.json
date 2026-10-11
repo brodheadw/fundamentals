@@ -1,0 +1,31 @@
+{
+  "name": "Waste and tailings",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:red_mud_block",
+  "sortnum": 14,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Most of what a plant throws off goes somewhere: the separation plant's spent liquor to calcium chloride, the Kroll process's magnesium chloride back to the cell, the fluorspar of a calcium reduction back to hydrofluoric acid, the tetroxide still's residue to iridium and rhodium.",
+      "title": "Waste and tailings"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A few things have no use, as in the real industry, and are packed into blocks and put back in the ground, as a tailings dam or a dry stack holds them: the clarifier's sludge, red mud, and the thorium residue that is not made into mantles. Anything else burns in lava."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Some are poison. Beryllium compounds, nickel matte and oxide dust, thorium residue and, with Chemica, the arsenic dust gold ore gives up are toxic dusts: held, or left in an open basin, they hurt and sicken anyone near who is not wearing Create's diving helmet on a filled backtank.",
+      "title": "Toxic dusts"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Mercury and nickel carbonyl are vapours and acids fume; see their own entries."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: Evans, \"The History, Challenges, and New Developments in the Management and Use of Bauxite Residue\", Journal of Sustainable Metallurgy 2 (2016); IAEA, Radiation Protection and NORM Residue Management in the Production of Rare Earths from Thorium Containing Minerals, Safety Reports Series 68 (2011); ATSDR, Toxicological Profile for Arsenic (2007).",
+      "title": "Sources"
+    }
+  ]
+}

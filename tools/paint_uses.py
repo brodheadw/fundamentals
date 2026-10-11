@@ -170,6 +170,7 @@ def main():
     filament().save(TEXTURES / "item/tungsten_filament.png")
     heap("clarifier_sludge", (150, 128, 96), (112, 92, 64), (70, 56, 38)).save(TEXTURES / "item/clarifier_sludge.png")
     paint_block("clarifier_sludge_block", ((62, 48, 32), (104, 84, 58), (140, 118, 86), (176, 152, 116))).save(TEXTURES / "block/clarifier_sludge_block.png")
+    paint_block("red_mud_block", ((84, 34, 22), (128, 54, 36), (164, 78, 52), (196, 108, 76))).save(TEXTURES / "block/red_mud_block.png")
     heap("thorium_nitrate", (255, 255, 255), (238, 238, 234), (186, 186, 180)).save(TEXTURES / "item/thorium_nitrate.png")
     mantle().save(TEXTURES / "item/gas_mantle.png")
     paint_raw("copper_calcine", ((22, 20, 20), (48, 44, 42), (78, 72, 68), (122, 114, 108))).save(TEXTURES / "item/copper_calcine.png")

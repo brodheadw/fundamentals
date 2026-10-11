@@ -7,8 +7,10 @@ import com.simibubi.create.AllDataComponents;
 import com.simibubi.create.AllItems;
 import com.simibubi.create.content.equipment.armor.BacktankUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -49,5 +51,14 @@ public class NickelTests {
             helper.assertTrue(BacktankUtil.getAir(pig.getItemBySlot(EquipmentSlot.CHEST)) < BacktankUtil.maxAirWithoutEnchants(), "the mask should spend air");
             helper.succeed();
         });
+    }
+
+    @GameTest(template = "empty")
+    public void berylliumNickelAndThoriumDustsAreToxic(GameTestHelper helper) {
+        for (String id : new String[] {"beryllium_oxide", "nickel_oxide", "monazite_residue_dust"}) {
+            helper.assertTrue(Hazards.toxicDust(new ItemStack(BuiltInRegistries.ITEM.get(Fundamentals.id(id)))), id + " should be a toxic dust");
+        }
+        helper.assertFalse(Hazards.toxicDust(new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("tfmg:slag")))), "slag is not a toxic dust");
+        helper.succeed();
     }
 }

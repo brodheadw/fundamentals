@@ -1,0 +1,10 @@
+{
+  "type": "fundamentals:bloomery",
+  "ingredient": {
+    "item": "tfmg:slag"
+  },
+  "result": {
+    "id": "minecraft:iron_nugget",
+    "count": 2
+  }
+}

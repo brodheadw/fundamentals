@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "fundamentals:block/red_mud_block"
+    }
+  }
+}

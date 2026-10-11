@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "#fundamentals:beryllium_dusts",
+    "#fundamentals:nickel_dusts",
+    "fundamentals:monazite_residue_dust",
+    {
+      "id": "chemica:arsenic_dust",
+      "required": false
+    }
+  ]
+}
