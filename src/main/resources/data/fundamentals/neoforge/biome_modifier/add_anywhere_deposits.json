@@ -8,7 +8,8 @@
     "fundamentals:zinc_oxide_bed",
     "fundamentals:manganese_bed",
     "fundamentals:layered_intrusion",
-    "fundamentals:nickel_sulfide"
+    "fundamentals:nickel_sulfide",
+    "fundamentals:graphite_schist"
   ],
   "step": "underground_decoration"
 }

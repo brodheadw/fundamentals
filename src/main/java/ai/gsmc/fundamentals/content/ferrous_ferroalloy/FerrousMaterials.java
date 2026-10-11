@@ -62,6 +62,8 @@ public final class FerrousMaterials {
                 MaterialProperties.builder().density(0.80).heatResistance(0.70).hardness(0.85));
         reg("manganese_steel", MaterialType.ALLOY, "Fe-Mn-C", forms(INGOT),
                 MaterialProperties.builder().density(1.0).hardness(0.85));
+        reg("hsla_steel", MaterialType.ALLOY, "Fe-Nb-C", forms(INGOT),
+                MaterialProperties.builder().density(1.0).hardness(0.80));
         reg("chromel", MaterialType.ALLOY, "Ni-Cr", forms(INGOT),
                 MaterialProperties.builder().density(1.10).heatResistance(0.80).conductivity(0.03));
         reg("alumel", MaterialType.ALLOY, "Ni-Al", forms(INGOT),

@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:electrum_ingot"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 250,
+      "tag": "c:chlorine"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:gold_ingot"
+    },
+    {
+      "id": "fundamentals:silver_nugget"
+    }
+  ],
+  "heat_requirement": "superheated"
+}

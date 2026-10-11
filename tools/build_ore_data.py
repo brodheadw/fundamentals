@@ -80,6 +80,12 @@ ORES = {
     "beryl": ("beryllium", "pickaxe", "iron"),
     "bertrandite": ("beryllium", "pickaxe", "stone"),
     "uraninite": ("uranium", "pickaxe", "iron"),
+    "graphite": ("graphite", "pickaxe", "stone"),
+    "stibnite": ("antimony", "pickaxe", "stone"),
+    "pyrochlore": ("niobium", "pickaxe", "iron"),
+    "columbite": ("tantalum", "pickaxe", "iron"),
+    "sylvite": ("potash", "pickaxe", None),
+    "native_gold": ("gold", ("shovel", "pickaxe"), "iron"),
 }
 
 ROCKS = {name: "shovel" if name == "laterite" else "pickaxe" for name in ROCK_BLOCKS}
@@ -128,7 +134,8 @@ DEPOSITS = {
                     "alpine", (48, 120), 18, "rock"),
     "lead_zinc_bed": ("bed", "create:limestone", [("sphalerite", 0.20, "pockets"), ("galena", 0.13, "pockets"), ("fluorite", 0.10, "pockets")],
                       (9, 13), (3, 5), None, "anywhere", (-40, 36), 14, "rock"),
-    "evaporite_bed": ("bed", "minecraft:sandstone", [("halite", 0.20, "seams"), ("borax", 0.18, "seams"), ("trona", 0.14, "seams")], (8, 12), (2, 4), None,
+    "evaporite_bed": ("bed", "minecraft:sandstone", [("halite", 0.20, "seams"), ("borax", 0.18, "seams"), ("trona", 0.14, "seams"), ("sylvite", 0.10, "seams")],
+                      (8, 12), (2, 4), None,
                       "arid_oxide", (52, 68), 14, "rock"),
     "zinc_oxide_bed": ("bed", "create:asurine", [("smithsonite", 0.24, "pockets")], (7, 10), (2, 4), None,
                        "anywhere", (36, 72), 18, "rock"),
@@ -152,7 +159,8 @@ DEPOSITS = {
                                 None, "laterite", (60, 64), 18, "ground"),
     "ion_clay_blanket": ("blanket", "ion_adsorption_clay_ore", [], (7, 10), (2, 4), None,
                          "ion_clay", (60, 64), 10, "ground"),
-    "carbonatite_plug": ("plug", "carbonatite", [("bastnasite", 0.16, "pockets"), ("monazite", 0.05, "top")], (6, 9), None, (20, 34),
+    "carbonatite_plug": ("plug", "carbonatite", [("bastnasite", 0.16, "pockets"), ("pyrochlore", 0.05, "disseminated"), ("monazite", 0.05, "top")],
+                         (6, 9), None, (20, 34),
                          "carbonatite", (-56, 0), 48, "rock"),
     "syenite_massif": ("plug", "syenite", [("loparite", 0.10, "seams"), ("zircon", 0.02, "disseminated")], (8, 12), None, (16, 26),
                        "alkaline", (-32, 32), 40, "rock"),
@@ -168,7 +176,8 @@ DEPOSITS = {
                        (11, 15), (3, 5), (14, 24), "pegmatite", (-16, 48), 16, "rock"),
     "monazite_vein": ("vein", "minecraft:quartz_block", [("monazite", 0.25, "pockets")], (9, 13), (2, 3), (12, 18),
                       "pegmatite", (0, 40), 48, "rock"),
-    "spodumene_pegmatite": ("vein", "minecraft:granite", [("spodumene", 0.30, "pockets"), ("beryl", 0.02, "pockets")], (10, 14), (3, 5), (12, 20),
+    "spodumene_pegmatite": ("vein", "minecraft:granite", [("spodumene", 0.30, "pockets"), ("beryl", 0.02, "pockets"), ("columbite", 0.02, "pockets")],
+                            (10, 14), (3, 5), (12, 20),
                             "pegmatite", (0, 64), 18, "rock"),
     "beryllium_tuff": ("bed", "minecraft:tuff", [("bertrandite", 0.10, "disseminated"), ("fluorite", 0.05, "pockets")], (8, 12), (3, 5), None,
                        "arid_oxide", (40, 70), 30, "rock"),
@@ -181,6 +190,11 @@ DEPOSITS = {
     "pitchblende_vein": ("vein", "minecraft:calcite", [("uraninite", 0.30, "pockets"), ("native_silver", 0.08, "pockets"), ("cobaltite", 0.08, "pockets")],
                          (8, 12), (1, 2), (12, 20), "hydrothermal", (-40, 24), 36, "rock"),
     "roll_front": ("bed", "minecraft:sandstone", [("uraninite", 0.14, "pockets")], (9, 13), (2, 4), None, "arid_oxide", (20, 56), 30, "rock"),
+    "graphite_schist": ("bed", "minecraft:deepslate", [("graphite", 0.24, "disseminated")], (9, 13), (3, 5), None, "anywhere", (-48, 8), 24, "rock"),
+    "antimony_vein": ("vein", "minecraft:quartz_block", [("stibnite", 0.34, "pockets"), ("native_gold", 0.02, "pockets")], (9, 13), (1, 2), (12, 20),
+                      "hydrothermal", (-24, 48), 24, "rock"),
+    "gold_quartz_vein": ("vein", "minecraft:quartz_block", [("native_gold", 0.10, "pockets"), ("stibnite", 0.03, "pockets"), ("galena", 0.03, "disseminated")],
+                         (10, 14), (1, 2), (14, 24), "hydrothermal", (-40, 40), 20, "rock"),
 }
 
 PLACERS = {
@@ -189,6 +203,7 @@ PLACERS = {
     "rutile": (54, 66, 1, 9),
     "cassiterite": (54, 66, 1, 9),
     "zircon": (54, 66, 1, 9),
+    "native_gold": (54, 66, 1, 6),
 }
 
 REMOVED = {
@@ -209,7 +224,7 @@ OTHER_TIERED = {"stone": STORAGE_BLOCKS + [f"fundamentals:{name}" for name in OX
 
 SHARED = ("aluminum",)
 
-DISPLAY = {"bastnasite": "Bastnäsite", "ion_adsorption_clay": "Ion-Adsorption Clay", "argentite": "Acanthite"}
+DISPLAY = {"bastnasite": "Bastnäsite", "ion_adsorption_clay": "Ion-Adsorption Clay", "argentite": "Acanthite", "columbite": "Columbite-Tantalite"}
 
 DROPS = {"core": (2, 3, 1.0), "edge": (1, 1, 1.0), "trace": (1, 1, 0.5)}
 

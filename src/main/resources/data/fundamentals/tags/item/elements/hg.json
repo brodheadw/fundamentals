@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "fundamentals:cinnabar_ore",
+    "fundamentals:gold_amalgam",
     "fundamentals:mercury",
     "fundamentals:mercury_thermometer",
     "fundamentals:raw_cinnabar"

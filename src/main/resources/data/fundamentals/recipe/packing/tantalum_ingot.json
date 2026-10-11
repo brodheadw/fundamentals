@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:nuggets/tantalum"
+    }
+  },
+  "result": {
+    "id": "fundamentals:tantalum_ingot",
+    "count": 1
+  }
+}

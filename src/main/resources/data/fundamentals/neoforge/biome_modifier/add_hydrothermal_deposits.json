@@ -6,7 +6,9 @@
     "fundamentals:mercury_lens",
     "fundamentals:silver_vein",
     "fundamentals:cobalt_vein",
-    "fundamentals:pitchblende_vein"
+    "fundamentals:pitchblende_vein",
+    "fundamentals:antimony_vein",
+    "fundamentals:gold_quartz_vein"
   ],
   "step": "underground_decoration"
 }

@@ -24,13 +24,16 @@ public final class IndustrialMaterials {
         mineral("sylvite", "Sylvite", "KCl", "potash", MaterialProperties.builder().density(0.25));
         mineral("gypsum", "Gypsum", "CaSO4·2H2O", "gypsum", MaterialProperties.builder().density(0.29));
         mineral("trona", "Trona", "Na3H(CO3)2·2H2O", "soda_ash", MaterialProperties.builder().density(0.27));
-        mineral("graphite", "Graphite", "C", "graphite", MaterialProperties.builder().density(0.28).conductivity(0.10));
+        MaterialRegistry.defineMineral(GROUP, "graphite", "Graphite", "C", "graphite", new MaterialForm[] {ORE, RAW, CONCENTRATE},
+                MaterialProperties.builder().density(0.28).conductivity(0.10));
 
         reg("silicon", MaterialType.ELEMENT, "Si", forms(INGOT, DUST),
                 MaterialProperties.builder().density(0.30).hardness(0.60).conductivity(0.01));
         reg("soda_ash", MaterialType.COMPOUND, "Na2CO3", forms(DUST), MaterialProperties.builder().density(0.32));
         reg("potash", MaterialType.COMPOUND, "KCl", forms(DUST), MaterialProperties.builder().density(0.25));
         reg("quicklime", MaterialType.COMPOUND, "CaO", forms(DUST), MaterialProperties.builder().density(0.42));
+        reg("sodium", MaterialType.ELEMENT, "Na", forms(INGOT),
+                MaterialProperties.builder().density(0.12).hardness(0.02).conductivity(0.35));
         reg("phosphorus", MaterialType.ELEMENT, "P", forms(DUST),
                 MaterialProperties.builder().density(0.23).toxicity(0.30));
     }

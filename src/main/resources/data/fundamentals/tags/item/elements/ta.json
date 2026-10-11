@@ -1,11 +1,17 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:columbite_dust",
+    "fundamentals:columbite_ore",
     "fundamentals:euxenite_dust",
     "fundamentals:euxenite_ore",
     "fundamentals:loparite_dust",
     "fundamentals:loparite_ore",
+    "fundamentals:potassium_fluorotantalate",
+    "fundamentals:raw_columbite",
     "fundamentals:raw_euxenite",
-    "fundamentals:raw_loparite"
+    "fundamentals:raw_loparite",
+    "fundamentals:tantalum_ingot",
+    "fundamentals:tantalum_nugget"
   ]
 }

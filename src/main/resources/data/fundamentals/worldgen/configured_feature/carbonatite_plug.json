@@ -12,6 +12,13 @@
       },
       {
         "state": {
+          "Name": "fundamentals:pyrochlore_ore"
+        },
+        "fraction": 0.05,
+        "style": "disseminated"
+      },
+      {
+        "state": {
           "Name": "fundamentals:monazite_ore"
         },
         "fraction": 0.05,

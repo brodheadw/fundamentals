@@ -20,7 +20,7 @@ FORMS = {
     "block": (C_TAGS / "item/storage_blocks", "Block of {}"),
 }
 
-GROUND = ("bastnasite", "xenotime", "loparite", "euxenite", "thortveitite", "chromite", "uraninite")
+GROUND = ("bastnasite", "xenotime", "loparite", "euxenite", "thortveitite", "chromite", "uraninite", "columbite")
 
 WASHED = {
     "raw_monazite": "light_rare_earth_concentrate",
@@ -29,6 +29,7 @@ WASHED = {
     "euxenite_dust": "heavy_rare_earth_concentrate",
     "chromite_dust": "chromite_concentrate",
     "raw_zircon": "zircon_concentrate",
+    "raw_pyrochlore": "pyrochlore_concentrate",
 }
 
 

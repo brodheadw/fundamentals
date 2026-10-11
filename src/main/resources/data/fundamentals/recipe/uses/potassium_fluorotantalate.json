@@ -1,0 +1,33 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:columbite_dust"
+    },
+    {
+      "item": "fundamentals:columbite_dust"
+    },
+    {
+      "item": "fundamentals:potash"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 500,
+      "tag": "c:acids/hydrofluoric"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "tfmg:sulfuric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:potassium_fluorotantalate"
+    },
+    {
+      "id": "fundamentals:niobium_oxide"
+    }
+  ],
+  "heat_requirement": "heated"
+}

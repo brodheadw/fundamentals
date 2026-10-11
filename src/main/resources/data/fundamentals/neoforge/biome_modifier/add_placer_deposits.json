@@ -6,7 +6,8 @@
     "fundamentals:placer_ilmenite",
     "fundamentals:placer_rutile",
     "fundamentals:placer_cassiterite",
-    "fundamentals:placer_zircon"
+    "fundamentals:placer_zircon",
+    "fundamentals:placer_native_gold"
   ],
   "step": "underground_decoration"
 }

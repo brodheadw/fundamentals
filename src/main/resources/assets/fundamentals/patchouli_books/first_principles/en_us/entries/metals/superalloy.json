@@ -6,8 +6,12 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Six nickel, a cobalt, a chromium and a tungsten ingot, five aluminium and two rhenium nuggets, superheated under 100 mB of argon, make seven ingots of a single-crystal nickel superalloy after CMSX-4, which is Ni-6.5Cr-9Co-6W-6.5Ta-5.6Al-3Re-1Ti (Reed, The Superalloys, 2006): 61 per cent nickel, ten each of cobalt, chromium and tungsten, 5.7 aluminium and 2.3 rhenium, the tungsten standing in for the tantalum too, which is not in the pack.",
+      "text": "Six nickel, a cobalt, a chromium and a tungsten ingot, five aluminium and two rhenium nuggets, superheated under 100 mB of argon, make seven ingots of a single-crystal nickel superalloy after CMSX-4, which is Ni-6.5Cr-9Co-6W-6.5Ta-5.6Al-3Re-1Ti (Reed, The Superalloys, 2006): 61 per cent nickel, ten each of cobalt, chromium and tungsten, 5.7 aluminium and 2.3 rhenium, the tungsten standing in for the tantalum.",
       "title": "Superalloy"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A tantalum nugget in the melt, as CMSX-4 has its 6.5 per cent, makes nine ingots where it made seven, as a hafnium or a ruthenium nugget does."
     },
     {
       "type": "patchouli:text",

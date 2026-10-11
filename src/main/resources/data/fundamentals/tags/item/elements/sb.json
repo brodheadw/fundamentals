@@ -1,0 +1,12 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:antimonial_lead_ingot",
+    "fundamentals:antimonial_lead_plate",
+    "fundamentals:antimony_ingot",
+    "fundamentals:antimony_nugget",
+    "fundamentals:antimony_oxide",
+    "fundamentals:raw_stibnite",
+    "fundamentals:stibnite_ore"
+  ]
+}
