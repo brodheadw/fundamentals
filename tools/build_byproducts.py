@@ -46,6 +46,7 @@ DEAD = {
 }
 
 WHY = {
+    "fundamentals:argon": "Argon comes off the same cryogenic air separation that gives neon, as every industrial air plant co-produces both.",
     "fundamentals:bittern": "Bittern, the mother liquor of salt pans, is the old source of bromine and magnesium chloride.",
     "fundamentals:caustic_soda": "The Bayer precipitator gives most of its caustic back to the digester, as a real refinery recycles it.",
     "fundamentals:cerium_concentrate": "Mountain Pass sold its leached-out ceria concentrate for polishing powder.",
