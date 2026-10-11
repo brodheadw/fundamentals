@@ -1,0 +1,31 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:polysilicon"
+    },
+    {
+      "item": "fundamentals:polysilicon"
+    },
+    {
+      "item": "fundamentals:polysilicon"
+    },
+    {
+      "item": "fundamentals:polysilicon"
+    },
+    {
+      "tag": "c:gems/quartz"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 100,
+      "tag": "c:argon"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:silicon_boule"
+    }
+  ],
+  "heat_requirement": "superheated"
+}

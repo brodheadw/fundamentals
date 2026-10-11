@@ -1,0 +1,43 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "machines": [
+    "tfmg:mixing"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "fundamentals:indium_sulfate_liquor"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:p204"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 100,
+      "tag": "c:acids/hydrochloric"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:indium_chloride_liquor",
+      "amount": 100
+    },
+    {
+      "id": "fundamentals:zinc_leach_liquor",
+      "amount": 900
+    },
+    {
+      "id": "fundamentals:p204",
+      "amount": 245
+    }
+  ]
+}

@@ -38,6 +38,10 @@ ZIRCONIUM = ("oxide", "sponge", "ingot", "nugget", "plate")
 HAFNIUM = ("sponge", "ingot", "nugget")
 BERYLLIUM = ("oxide", "fluoride", "ingot", "nugget")
 COPPER_ALLOY = ("ingot", "block")
+GERMANIUM = ("oxide", "ingot", "nugget")
+GALLIUM = ("ingot", "nugget")
+INDIUM = ("sponge", "ingot", "nugget")
+CADMIUM = ("sponge", "ingot")
 
 WHITE = ((150, 150, 148), (206, 206, 204), (236, 236, 234), (255, 255, 255))
 
@@ -121,6 +125,10 @@ METAL = {
     "antimonial_lead": ((50, 54, 66), (92, 98, 116), (134, 140, 158), (184, 190, 206)),
     "ferroniobium": ((64, 66, 70), (118, 120, 126), (164, 166, 172), (210, 212, 218)),
     "tantalum": ((64, 72, 90), (118, 130, 152), (170, 180, 200), (222, 230, 244)),
+    "germanium": ((70, 74, 80), (128, 134, 142), (180, 186, 194), (226, 230, 236)),
+    "gallium": tinted((150, 170, 214), 0.25),
+    "indium": tinted((176, 184, 210), 0.18),
+    "cadmium": tinted((168, 186, 214), 0.22),
 }
 
 OXIDE = {
@@ -147,6 +155,7 @@ OXIDE["zirconium"] = WHITE
 OXIDE["beryllium"] = WHITE
 OXIDE["antimony"] = WHITE
 OXIDE["niobium"] = WHITE
+OXIDE["germanium"] = WHITE
 
 STREAK = {"chromite": ((34, 24, 18), (64, 48, 36), (94, 72, 54), (132, 106, 82))}
 
@@ -198,6 +207,7 @@ MATERIALS = {
     "graphite": CONCENTRATE, "sodium": INGOT, "electrum": COBALT, "hsla_steel": INGOT,
     "pyrochlore": CONCENTRATE, "columbite": MINERAL, "antimony": ("oxide", "ingot", "nugget"), "antimonial_lead": STRUCTURAL,
     "niobium": ("oxide",), "ferroniobium": COBALT, "tantalum": COBALT,
+    "germanium": GERMANIUM, "gallium": GALLIUM, "indium": INDIUM, "cadmium": CADMIUM,
 }
 
 DISPLAY = {"bastnasite": "Bastnäsite", "bastnasite_concentrate": "Bastnäsite Concentrate", "neodymium_iron_boron": "NdFeB", "dysprosium_neodymium_iron_boron": "Dy-NdFeB", "samarium_cobalt": "SmCo", "aluminium_scandium": "Al-Sc",

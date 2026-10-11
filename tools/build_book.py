@@ -575,7 +575,7 @@ def oxidation():
 
 
 def metals():
-    category("metals", "The other metals", "Cobalt, zinc, nickel and Mond's carbonyl, the porphyry chain (copper, molybdenum and the rhenium hiding in it), tungsten, chromium, tin, titanium, the silver in lead, zirconium and hafnium, beryllium, aluminium, lithium, uranium, graphite, antimony, niobium and tantalum, potash and gold.", "fundamentals:cobalt_ingot", 3)
+    category("metals", "The other metals", "Cobalt, zinc, nickel and Mond's carbonyl, the porphyry chain (copper, molybdenum and the rhenium hiding in it), tungsten, chromium, tin, titanium, the silver in lead, zirconium and hafnium, beryllium, aluminium, lithium, uranium, graphite, antimony, niobium and tantalum, potash and gold, silicon from quartz to wafer, and germanium, indium, gallium and cadmium.", "fundamentals:cobalt_ingot", 3)
     entry("metals", "cobalt", "Cobalt", "fundamentals:cobalt_ingot", pages_of(
         "Cobaltite is a cobalt arsenide-sulfide from the silver-cobalt veins in calcite. Roast it on a campfire or in a smoker to drive off the arsenic and sulfur and leave the oxide. "
         "Cobalt melts at 1,495 °C. The Congo's copper-cobalt ore was once smelted in electric furnaces to a white alloy of cobalt, copper and iron and refined from that; "
@@ -631,6 +631,11 @@ def metals():
         "Zinc boils at 907 °C, below the heat that reduces it, so it was distilled from a sealed retort packed with charcoal: "
         "a zinc oxide and a charcoal in a basin over a blaze burner fed a blaze cake give a zinc ingot. Asurine, the zinc stone, crushes to smithsonite. "
         "Zinc oxide is also what every sulfur cure of rubber needs to work, so the Factory's rubber takes one.", "Zinc") + pages_of(
+        "Since the 1910s most zinc has been won in water instead: roasted, leached in sulfuric acid and electrowon, and now nine tenths of it is (Sinclair, The Extractive Metallurgy of Zinc). "
+        "Two zinc oxide, 500 mB of sulfuric acid and 500 mB of water in a heated vat with a mixer give 1,000 mB of zinc leach liquor, and one leach in five leaves a zinc leach residue, "
+        "the ferrite and lead sulfate that hold the germanium and indium. The copper, cobalt and cadmium in the liquor would foul the cathode, so it is stirred hot with a zinc nugget, "
+        "zinc dust that cements them out: 1,000 mB of zinc sulfate liquor, and one batch in five a cadmium sponge. 500 mB of that on two electrodes in a vat give a zinc ingot "
+        "and 250 mB of sulfuric acid back to the leach.", "Electrolytic zinc") + pages_of(
         "Half the world's zinc goes on steel (International Zinc Association). Dipped in molten zinc at about 450 °C, steel takes a coat that corrodes in its place and, scratched through, "
         "still goes before the steel does. Four heavy plates and a zinc nugget, heated, give four galvanized steel plates, which do anything a steel plate does and never rust; "
         "a bare heavy plate rusts as a steel ingot does.", "Galvanizing") + pages_of(
@@ -741,7 +746,8 @@ def metals():
         "No one electrolyses that straight to metal. The alumina is first got out of it clean, Bayer's way (1888), and then electrolysed dissolved in molten cryolite, Hall's and Héroult's (1886).", "Aluminium") + pages_of(
         "Two bauxite powder and 500 mB of caustic soda in a heated chemical vat with a mixer, the digester at 150 to 250 °C under pressure, give 500 mB of sodium aluminate liquor and a red mud, "
         "what the caustic will not take: iron oxide, titania, silica, and a little scandium and the rare earths. 500 mB of liquor under a mixer, cold, throws down an aluminium hydroxide "
-        "and gives 400 mB of caustic soda back to the digester. A blast furnace calcines the hydroxide at about 1,100 °C to alumina.", "Bayer") + pages_of(
+        "and leaves 400 mB of spent Bayer liquor, the caustic that goes back to the digester: two bauxite powder and 500 mB of it digest as caustic soda does. "
+        "A blast furnace calcines the hydroxide at about 1,100 °C to alumina. The spent liquor carries the bauxite's gallium; see Germanium, indium, gallium and cadmium.", "Bayer") + pages_of(
         "Red mud is the industry's great waste, more than a tonne for every tonne of alumina, piled in ponds; it is also the largest scandium resource there is. "
         "Four red mud and 500 mB of hydrochloric acid, heated, leach out 50 mB of scandium liquor, about a tenth of what two thortveitite give, as Rusal leaches its residue in the Urals. "
         "The rest has no use: nine pack into a block of bauxite residue, the dry stack a modern refinery builds instead of a pond.", "Red mud") + pages_of(
@@ -877,6 +883,54 @@ def metals():
         "Or dissolve it in aqua regia, 500 mB heated, which leaves the silver as chloride and gives the same.", "Parting") + pages_of(
         "Sources: Marsden and House, The Chemistry of Gold Extraction, 2nd ed. (SME, 2006); USGS, Mineral Commodity Summaries 2025, Gold; "
         "UNEP, Global Mercury Assessment 2018, artisanal and small-scale gold mining.", "Sources"), 20)
+    entry("metals", "silicon", "Silicon", "tfmg:silicon_ingot", pages_of(
+        "Silicon is never found free: it is quartz, and it is won from quartz the way ferrochrome is won from chromite, in a submerged-arc furnace, three graphite electrodes sunk in a charge of quartz and carbon "
+        "and the arc at about 2,000 °C between them. Three quartz and a coal coke or a charcoal in a firebrick-lined vat between three graphite electrodes give 144 mB of liquid silicon, an ingot's worth, "
+        "and 250 mB of carbon dioxide, the carbon monoxide burning off the top of the charge. The furnace is tapped and the silicon cast: a casting basin makes an ingot of metallurgical silicon, about 98 per cent pure.", "Silicon") + pages_of(
+        "Real furnaces run the carbon as a blend of coal, coke, charcoal and wood chips, the wood keeping the charge open for the gas, and take some 12 MWh a tonne (Schei, Tuset and Tveit, Production of High Silicon Alloys). "
+        "A blast furnace cannot do it: at its heat silica gives at most a lean ferrosilicon, so The Factory's blast furnace no longer melts silicon out of quartz. "
+        "Most metallurgical silicon goes into aluminium casting alloys and silicones, and into electrical steel; the Factory's magnetic alloy, nickel and silicon steel, takes it.") + pages_of(
+        "A chip wants silicon to nine nines, and that goes through a liquid. Silicon and dry hydrogen chloride in a fluidised bed at about 300 °C give trichlorosilane, SiHCl3, and a sixth as much silicon tetrachloride. "
+        "The hydrogen chloride is burnt dry from hydrogen and chlorine, since water would hydrolyse every chlorosilane: a metallurgical silicon, 750 mB of chlorine and 250 mB of hydrogen, heated, give 500 mB of crude trichlorosilane.", "Trichlorosilane") + pages_of(
+        "Trichlorosilane boils at 31.8 °C and the tetrachloride at 57.6, and the boron and phosphorus chlorides, the impurities that matter, are parted from both in tall columns. "
+        "In The Factory's distillation tower 200 mB of crude give 170 mB of trichlorosilane and 30 of tetrachloride. Both fume hydrogen chloride in moist air, and trichlorosilane catches fire at 185 °C.") + pages_of(
+        "Siemens' process (1950s): trichlorosilane and hydrogen over thin silicon rods heated by current to about 1,100 °C, where silicon deposits and the rods grow thick over days. "
+        "1,000 mB of trichlorosilane and 500 mB of hydrogen in a vat between two electrodes give two polysilicon, 250 mB of hydrochloric acid and 250 mB of silicon tetrachloride, "
+        "which most of the silicon fed really leaves as. A converter hydrogenates it back over silicon: a metallurgical silicon, 750 mB of tetrachloride and 500 mB of hydrogen, heated, give 1,000 mB of crude trichlorosilane.", "Siemens") + pages_of(
+        "A crystal is pulled, as Czochralski found in 1916 and Teal and Little first did with germanium and silicon at Bell Labs: polysilicon is melted in a quartz crucible under argon, "
+        "a seed dipped in and drawn up slowly, turning. Four polysilicon, a quartz, the crucible, which serves once, and 100 mB of argon in a superheated basin under a mixer give a silicon boule, "
+        "and Create's mechanical saw cuts it to eight wafers. The wafers are what the Factory's N and P semiconductors are doped from.", "Czochralski") + pages_of(
+        "Sources: Ullmann's Encyclopedia of Industrial Chemistry, \"Silicon\"; Schei, Tuset and Tveit, Production of High Silicon Alloys (Tapir, 1998); "
+        "O'Mara, Herring and Hunt, Handbook of Semiconductor Silicon Technology (Noyes, 1990); USGS, Mineral Commodity Summaries 2025, Silicon.", "Sources"), 21)
+    entry("metals", "minor_metals", "Germanium, indium, gallium and cadmium", "fundamentals:germanium_ingot", pages_of(
+        "No one mines these four. Germanium, indium and cadmium ride in sphalerite at tens to a few thousand grams a tonne, and gallium in bauxite at about fifty; "
+        "each is taken out of a stream a zinc plant or an alumina refinery already runs. Here, as there, they are scarce.", "Byproduct metals") + pages_of(
+        "Germanium. Two zinc leach residue, 500 mB of hydrochloric acid and 100 mB of chlorine, heated, give 100 mB of germanium tetrachloride, which boils out of the acid at 83 °C; "
+        "the chlorine keeps the arsenic as arsenate, which stays behind. 250 mB of tetrachloride and 500 mB of water give a germanium oxide and 250 mB of the acid back, "
+        "and two oxide with 500 mB of hydrogen in a heated vat reduce to two germanium ingots, at about 650 °C, below the metal's 938.", "Germanium") + pages_of(
+        "The first transistors were germanium. The alloy-junction transistor (General Electric and RCA, 1951) is an n-type germanium die with a dot of indium alloyed into each face: "
+        "a plastic sheet deployed with a germanium nugget, two indium nuggets and a copper wire gives four of the Factory's transistors. "
+        "Most germanium now goes to fibre optics and infrared lenses, which the pack does not have.") + pages_of(
+        "Indium. Two zinc leach residue and 500 mB of sulfuric acid, heated, are the hot acid leach, 500 mB of indium sulfate liquor. D2EHPA, our P204, takes indium out of a sulfate liquor before anything in it but ferric iron: "
+        "1,000 mB of liquor, 250 mB of P204 and 100 mB of hydrochloric acid in a vat with a mixer give 100 mB of indium chloride strip, and the 900 mB of raffinate go back to the zinc leach as zinc leach liquor; "
+        "the organic comes back but for 5 mB.", "Indium") + pages_of(
+        "100 mB of strip and two zinc nuggets cement an indium sponge, and two sponge electrorefined between two electrodes in a vat give two indium ingots. "
+        "Most indium goes into indium tin oxide, In2O3 with a tenth of SnO2, transparent and conducting, the electrode film on every flat screen: an indium ingot, a tin nugget and 250 mB of air, superheated, sinter to two, "
+        "and in place of the Factory's silicon a segmented display built on it makes eight.") + pages_of(
+        "Gallium. Bauxite's gallium dissolves with the alumina and builds up in the liquor that goes round the refinery, to about 0.2 g/L. Pechiney took it out of the spent liquor on a mercury cathode, as gallium amalgam, "
+        "and decomposed that in caustic to sodium gallate; refineries now use ion-exchange resins. 1,000 mB of spent Bayer liquor and a mercury in a vat between two electrodes give 50 mB of sodium gallate liquor "
+        "and 950 mB of caustic soda for the digester, and the mercury comes back nineteen times in twenty.", "Gallium") + pages_of(
+        "250 mB of gallate liquor on two electrodes give two gallium nuggets and 200 mB of caustic. Gallium melts at 29.8 °C, in a warm hand. "
+        "The blue LED is indium gallium nitride on sapphire (Nakamura, Akasaki and Amano, Nobel Prize 2014), grown from gallium and ammonia near 1,000 °C: two gallium nuggets, an indium nugget, "
+        "an alumina for the sapphire and 250 mB of ammonia in a heated vat give two LED chips.") + pages_of(
+        "A blue chip under a yellow phosphor, yttrium aluminium garnet with cerium, shines white: a chip, a yttrium oxide, a cerium oxide, a framed glass and two copper nuggets make six light bulbs. "
+        "Gallium arsenide, the other half of gallium's use, wants arsenic, which the pack does not have.") + pages_of(
+        "Cadmium. The zinc dust that cleans the leach liquor brings the cadmium down as a sponge, and the cadmium sponge is a toxic dust: the itai-itai disease of the Jinzu valley was cadmium from a zinc mine. "
+        "A sponge pressed in a heated basin melts to a cadmium ingot, at 321 °C. Most cadmium went into nickel-cadmium batteries, which the pack does not have; "
+        "the rest into cadmium yellow, the sulfide: an ingot and two sulfur dust, heated, give six yellow dye. Cadmium red wants selenium, which it does not have either.", "Cadmium") + pages_of(
+        "Sources: USGS, Mineral Commodity Summaries 2025, Germanium, Indium, Gallium and Cadmium; Ullmann's Encyclopedia of Industrial Chemistry, \"Germanium and Germanium Compounds\", "
+        "\"Indium and Indium Compounds\", \"Gallium and Gallium Compounds\" and \"Cadmium and Cadmium Compounds\"; Sinclair, The Extractive Metallurgy of Zinc (AusIMM, 2005); "
+        "Alfantazi and Moskalyk, \"Processing of indium: a review\", Minerals Engineering 16 (2003).", "Sources"), 22)
     oxidation()
 
 
@@ -930,8 +984,8 @@ def power():
              "fundamentals:photovoltaic_panel", 5)
     entry("power", "solar", "Solar panels", "fundamentals:photovoltaic_panel", pages_of(
         "A solar panel goes on a rack. Build the rack from steel and set it down facing the way you want, then mount a photovoltaic panel on it: a P and an N semiconductor from The Factory Must Grow under glass, in an aluminium frame, with a silver nugget for the front contacts printed on every cell. "
-        "Silicon is doped n-type with a donor from group 15 and p-type with an acceptor from group 13 (Sze, Physics of Semiconductor Devices): four silicon and a white phosphorus, heated, give four N semiconductor, "
-        "and four silicon and a boric acid four P, where the Factory used sulfur and aluminium. "
+        "Silicon is doped n-type with a donor from group 15 and p-type with an acceptor from group 13 (Sze, Physics of Semiconductor Devices): four silicon wafers and a white phosphorus, heated, give four N semiconductor, "
+        "and four wafers and a boric acid four P, where the Factory used sulfur and aluminium. Nearly every solar cell made now is cut from a Czochralski wafer, as these are; see Silicon. "
         "Under open sky it feeds the electrical network, 120 volts while the sun is up and up to 200 watts at noon, nothing at night or in shade. Break it and you get the rack and the panel back.", "Solar panels")
         + [crafting("fundamentals:panel_rack"), crafting("fundamentals:photovoltaic_panel")], 0)
     batteries()

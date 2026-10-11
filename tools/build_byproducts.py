@@ -57,7 +57,12 @@ DEAD = {
 WHY = {
     "fundamentals:argon": "Argon comes off the same cryogenic air separation that gives neon, as every industrial air plant co-produces both.",
     "fundamentals:bittern": "Bittern, the mother liquor of salt pans, is the old source of bromine and magnesium chloride.",
-    "fundamentals:caustic_soda": "The Bayer precipitator gives most of its caustic back to the digester, as a real refinery recycles it.",
+    "fundamentals:caustic_soda": "Caustic soda comes off the chlor-alkali cell beside its chlorine, and the gallium circuit hands the Bayer liquor's caustic back to the digester.",
+    "fundamentals:spent_bayer_liquor": "The precipitators' spent liquor goes back to the digester, as every Bayer refinery recycles its caustic, and its gallium is taken out on the way.",
+    "fundamentals:silicon_tetrachloride": "Silicon tetrachloride is hydrogenated back to trichlorosilane over silicon, as every modern Siemens plant closes its loop; the rest of the world's is burnt to fumed silica.",
+    "fundamentals:zinc_leach_residue": "The leach residue of an electrolytic zinc plant carries the germanium and indium, which is where nearly all of both comes from.",
+    "fundamentals:zinc_leach_liquor": "The indium circuit's raffinate goes back into the zinc leach, as at Korea Zinc's Onsan smelter.",
+    "fundamentals:cadmium_sponge": "Cadmium is cemented out of zinc sulfate liquor with zinc dust before electrowinning, and nearly all cadmium is this byproduct of zinc.",
     "fundamentals:cerium_concentrate": "Mountain Pass sold its leached-out ceria concentrate for polishing powder.",
     "fundamentals:chlorine": "Anode chlorine from a molten-chloride cell goes back to chlorination, as at every magnesium and titanium plant.",
     "fundamentals:clarifier_sludge": "The lime-neutralised hydroxide sludge has no market.",

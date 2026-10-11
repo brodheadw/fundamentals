@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/indium"
+    },
+    {
+      "tag": "c:nuggets/tin"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "tfmg:air"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:indium_tin_oxide",
+      "count": 2
+    }
+  ],
+  "heat_requirement": "superheated"
+}

@@ -1,0 +1,29 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "machines": [
+    "tfmg:electrode",
+    "tfmg:electrode"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "fundamentals:zinc_sulfate_liquor"
+    }
+  ],
+  "results": [
+    {
+      "id": "create:zinc_ingot"
+    },
+    {
+      "id": "tfmg:sulfuric_acid",
+      "amount": 250
+    }
+  ]
+}

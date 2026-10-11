@@ -1,0 +1,73 @@
+{
+  "name": "Silicon",
+  "category": "fundamentals:metals",
+  "icon": "tfmg:silicon_ingot",
+  "sortnum": 21,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Silicon is never found free: it is quartz, and it is won from quartz the way ferrochrome is won from chromite, in a submerged-arc furnace, three graphite electrodes sunk in a charge of quartz and carbon and the arc at about 2,000 °C between them.",
+      "title": "Silicon"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Three quartz and a coal coke or a charcoal in a firebrick-lined vat between three graphite electrodes give 144 mB of liquid silicon, an ingot's worth, and 250 mB of carbon dioxide, the carbon monoxide burning off the top of the charge."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The furnace is tapped and the silicon cast: a casting basin makes an ingot of metallurgical silicon, about 98 per cent pure."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Real furnaces run the carbon as a blend of coal, coke, charcoal and wood chips, the wood keeping the charge open for the gas, and take some 12 MWh a tonne (Schei, Tuset and Tveit, Production of High Silicon Alloys)."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A blast furnace cannot do it: at its heat silica gives at most a lean ferrosilicon, so The Factory's blast furnace no longer melts silicon out of quartz. Most metallurgical silicon goes into aluminium casting alloys and silicones, and into electrical steel; the Factory's magnetic alloy, nickel and silicon steel, takes it."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A chip wants silicon to nine nines, and that goes through a liquid. Silicon and dry hydrogen chloride in a fluidised bed at about 300 °C give trichlorosilane, SiHCl3, and a sixth as much silicon tetrachloride.",
+      "title": "Trichlorosilane"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The hydrogen chloride is burnt dry from hydrogen and chlorine, since water would hydrolyse every chlorosilane: a metallurgical silicon, 750 mB of chlorine and 250 mB of hydrogen, heated, give 500 mB of crude trichlorosilane."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Trichlorosilane boils at 31.8 °C and the tetrachloride at 57.6, and the boron and phosphorus chlorides, the impurities that matter, are parted from both in tall columns. In The Factory's distillation tower 200 mB of crude give 170 mB of trichlorosilane and 30 of tetrachloride."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Both fume hydrogen chloride in moist air, and trichlorosilane catches fire at 185 °C."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Siemens' process (1950s): trichlorosilane and hydrogen over thin silicon rods heated by current to about 1,100 °C, where silicon deposits and the rods grow thick over days.",
+      "title": "Siemens"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "1,000 mB of trichlorosilane and 500 mB of hydrogen in a vat between two electrodes give two polysilicon, 250 mB of hydrochloric acid and 250 mB of silicon tetrachloride, which most of the silicon fed really leaves as."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A converter hydrogenates it back over silicon: a metallurgical silicon, 750 mB of tetrachloride and 500 mB of hydrogen, heated, give 1,000 mB of crude trichlorosilane."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A crystal is pulled, as Czochralski found in 1916 and Teal and Little first did with germanium and silicon at Bell Labs: polysilicon is melted in a quartz crucible under argon, a seed dipped in and drawn up slowly, turning.",
+      "title": "Czochralski"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Four polysilicon, a quartz, the crucible, which serves once, and 100 mB of argon in a superheated basin under a mixer give a silicon boule, and Create's mechanical saw cuts it to eight wafers. The wafers are what the Factory's N and P semiconductors are doped from."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: Ullmann's Encyclopedia of Industrial Chemistry, \"Silicon\"; Schei, Tuset and Tveit, Production of High Silicon Alloys (Tapir, 1998); O'Mara, Herring and Hunt, Handbook of Semiconductor Silicon Technology (Noyes, 1990); USGS, Mineral Commodity Summaries 2025, Silicon.",
+      "title": "Sources"
+    }
+  ]
+}

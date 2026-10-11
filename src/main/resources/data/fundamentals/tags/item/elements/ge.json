@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:germanium_ingot",
+    "fundamentals:germanium_nugget",
+    "fundamentals:germanium_oxide",
+    "fundamentals:zinc_leach_residue"
+  ]
+}
