@@ -59,7 +59,7 @@ off the `c:raw_materials` tags. What its recipes wanted from those ores comes fr
 | chromium dust, for chromic acid | sodium dichromate | chromic acid is made from dichromate and sulfuric acid |
 | phosphorus dust, for phosphoric acid | white phosphorus | the thermal process burns P4 |
 | fluorite dust, rutile | switched off: our hydrofluoric acid and titanium tetrachloride serve | |
-| vanadium | new: 4 magnetite + soda ash + water, heated, to vanadium dust and crushed iron; dust + aluminium powder, superheated, to the ingot | titanomagnetite salt roast (Highveld); aluminothermic reduction |
+| vanadium | new: 2 of our vanadium pentoxide (salt-roasted from magnetite, the contact process's catalyst) + 2 aluminium powder, superheated, to the ingot; its own crushing of that ingot gives the dust | aluminothermic reduction, as ferrovanadium and vanadium metal are made |
 | tantalum | ours: columbite-tantalite (or euxenite) digested in hydrofluoric acid with potash to potassium fluorotantalate, reduced by sodium under argon; its dust is its own crushing of our ingot | HF digestion and MIBK extraction; sodium reduction |
 | graphite flakes | `c:dusts/graphite`: our graphite, floated from flake ore and purified, or Acheson's, coke in an arc vat | natural and synthetic graphite |
 | antimony | nothing: its only use was a dopant, and ours is phosphorus | |

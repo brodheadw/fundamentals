@@ -76,6 +76,8 @@ public final class Reagents {
             new Reagent("enriched_uranium_hexafluoride", 0xEEF2E4, Kind.GAS),
             new Reagent("depleted_uranium_hexafluoride", 0xE8E8E6, Kind.GAS),
             new Reagent("phosphorus_pentafluoride", 0xF0F2EE, Kind.GAS),
+            new Reagent("sulfur_dioxide", 0xF2F0E2, Kind.GAS),
+            new Reagent("sulfur_trioxide", 0xF4F2EA, Kind.GAS),
             new Reagent("spent_liquor", 0x8E9A86, Kind.WASTE),
             new Reagent("calcium_chloride_liquor", 0xDCE6E4, Kind.WASTE),
             new Reagent("bittern", 0xE6DEB8, Kind.SALINE),
@@ -97,11 +99,13 @@ public final class Reagents {
             new Reagent("trichlorosilane", 0xF0F2F2, Kind.PRECURSOR),
             new Reagent("silicon_tetrachloride", 0xECEFF0, Kind.PRECURSOR),
             new Reagent("germanium_tetrachloride", 0xF0F0EA, Kind.PRECURSOR),
+            new Reagent("oleum", 0xD8D4C8, Kind.PRECURSOR),
             new Reagent("caustic_soda", 0xEEF2F0, Kind.CAUSTIC),
             new Reagent("sodium_aluminate_liquor", 0xB8864A, Kind.CAUSTIC),
             new Reagent("sodium_tungstate_liquor", 0xE6ECE8, Kind.CAUSTIC),
             new Reagent("spent_bayer_liquor", 0xB89060, Kind.CAUSTIC),
             new Reagent("sodium_gallate_liquor", 0xE4EAE6, Kind.CAUSTIC),
+            new Reagent("sodium_vanadate_liquor", 0xEEE2A0, Kind.CAUSTIC),
             new Reagent("molten_pig_iron", 0xF07A1E, Kind.MOLTEN));
 
     private Reagents() {}

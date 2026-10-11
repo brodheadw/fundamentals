@@ -1,0 +1,25 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "fundamentals:nitrogen_fertilisers"
+    },
+    {
+      "tag": "fundamentals:phosphate_fertilisers"
+    },
+    [
+      {
+        "tag": "c:dusts/potassium_chloride"
+      },
+      {
+        "item": "tfmg:nitrate_dust"
+      }
+    ]
+  ],
+  "results": [
+    {
+      "id": "fundamentals:npk_fertiliser",
+      "count": 3
+    }
+  ]
+}

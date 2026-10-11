@@ -8,6 +8,19 @@ from paint_minerals import paint_raw
 from paint_separation import TEXTURES, heap
 
 
+def prills(seed, colours):
+    """A heap of round granules, each a 2x2 bead lit from the top left; several colours make a blend."""
+    rng = random.Random(seed)
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    for row, y in enumerate(range(12, 2, -2)):
+        half = 6 - row - (1 if row == 4 else 0)
+        for x in range(8 - half - row % 2, 8 + half - row % 2, 2):
+            highlight, body, shadow = rng.choice(colours)
+            for (dx, dy), colour in (((0, 0), highlight), ((1, 0), body), ((0, 1), body), ((1, 1), shadow)):
+                img.putpixel((x + dx, y + dy), colour + (255,))
+    return img
+
+
 def lens():
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
     body, edge, light = (124, 110, 150, 210), (74, 62, 96, 255), (214, 204, 232, 230)
@@ -364,6 +377,16 @@ def main():
     heap("zinc_leach_residue", (150, 92, 64), (110, 62, 40), (64, 34, 22)).save(TEXTURES / "item/zinc_leach_residue.png")
     chip().save(TEXTURES / "item/led_chip.png")
     heap("indium_tin_oxide", (214, 220, 150), (180, 190, 110), (122, 130, 66)).save(TEXTURES / "item/indium_tin_oxide.png")
+    heap("vanadium_pentoxide", (240, 168, 60), (214, 128, 26), (150, 82, 14)).save(TEXTURES / "item/vanadium_pentoxide.png")
+    paint_raw("cement_clinker", ((40, 42, 44), (70, 72, 74), (104, 106, 106), (146, 146, 142))).save(TEXTURES / "item/cement_clinker.png")
+    heap("gypsum", (255, 255, 255), (242, 240, 234), (196, 192, 184)).save(TEXTURES / "item/gypsum.png")
+    heap("phosphogypsum", (236, 232, 222), (204, 198, 184), (150, 144, 130)).save(TEXTURES / "item/phosphogypsum.png")
+    paint_block("phosphogypsum_block", ((150, 144, 130), (190, 184, 170), (214, 208, 194), (234, 230, 220))).save(TEXTURES / "block/phosphogypsum_block.png")
+    prills("ammonium_nitrate", [((255, 255, 255), (238, 238, 234), (190, 190, 184))]).save(TEXTURES / "item/ammonium_nitrate.png")
+    prills("urea", [((255, 255, 255), (246, 246, 244), (206, 206, 202))]).save(TEXTURES / "item/urea.png")
+    prills("superphosphate", [((214, 208, 196), (172, 164, 150), (120, 112, 100))]).save(TEXTURES / "item/superphosphate.png")
+    prills("ammonium_phosphate", [((232, 228, 218), (196, 190, 178), (140, 134, 122))]).save(TEXTURES / "item/ammonium_phosphate.png")
+    prills("npk_fertiliser", [((255, 255, 255), (238, 238, 234), (190, 190, 184)), ((206, 200, 188), (164, 156, 142), (112, 104, 92)), ((236, 170, 160), (204, 122, 112), (146, 76, 70))]).save(TEXTURES / "item/npk_fertiliser.png")
     magnets()
     batteries()
     print("uses textures written")

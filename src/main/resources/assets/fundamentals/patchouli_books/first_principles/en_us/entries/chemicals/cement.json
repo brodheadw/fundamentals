@@ -1,0 +1,40 @@
+{
+  "name": "Cement",
+  "category": "fundamentals:chemicals",
+  "icon": "fundamentals:cement_clinker",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Lime and clay stirred together do not make cement; they set only once they have been burnt together. Portland cement is limestone and clay ground to a raw meal and burnt at about 1,450 °C in a rotary kiln, where the lime takes up the clay's silica and alumina as the calcium silicates that set with water, alite and belite.",
+      "title": "Clinker"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Three limesand and a clay ball over a blaze burner fed a blaze cake give three cement clinker, grey nodules, and 250 mB of carbon dioxide. About half a kiln's carbon dioxide is the limestone's own, which is why cement is some 8 per cent of the world's."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Clinker ground alone sets in minutes.",
+      "title": "Cement"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Gypsum ground in with it, about 5 per cent, holds back the aluminate so concrete can be placed: eight clinker and a gypsum in a mixer give eight of The Factory Must Grow's cement, whose concrete mixture (sand or slag, cement and gravel) and liquid concrete (sand, gravel and cement in a vat with 250 mB of water) go on as before, cement now where raw limesand was."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The gypsum is a scrubber's: a limesand in 250 mB each of sulfur dioxide and water, the sulfite oxidised by air blown through the slurry, is the lime scrubber of a power station, whose gypsum much cement and wallboard now take."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ground granulated blast-furnace slag is a cement too, slow until the clinker's lime wakes it, and may stand for most of the clinker. Four clinker, four slag and a gypsum give eight cement: half the kiln, and half its carbon dioxide, for the same concrete.",
+      "title": "Slag cement"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: Ullmann's Encyclopedia of Industrial Chemistry, \"Cement and Concrete\"; Taylor, Cement Chemistry (2nd ed., 1997); USGS, Mineral Commodity Summaries 2025, \"Cement\" and \"Iron and Steel Slag\".",
+      "title": "Sources"
+    }
+  ]
+}

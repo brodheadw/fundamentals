@@ -9,10 +9,13 @@
   "heat_requirement": "superheated",
   "ingredients": [
     {
-      "item": "chemica:vanadium_dust"
+      "item": "fundamentals:vanadium_pentoxide"
     },
     {
-      "item": "chemica:vanadium_dust"
+      "item": "fundamentals:vanadium_pentoxide"
+    },
+    {
+      "item": "fundamentals:aluminium_powder"
     },
     {
       "item": "fundamentals:aluminium_powder"
@@ -23,8 +26,7 @@
       "id": "chemica:vanadium_ingot"
     },
     {
-      "id": "fundamentals:alumina",
-      "chance": 0.5
+      "id": "fundamentals:alumina"
     }
   ]
 }

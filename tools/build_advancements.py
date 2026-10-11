@@ -6,7 +6,7 @@ from common import ASSETS, DATA, JAVA, read_lang, tag, write, write_lang
 from build_ore_data import DISPLAY, ORES
 from build_heat_data import THERMOMETERS
 from build_separation_data import DISSOLVES, PLANT_ITEMS, TITANIUM_PIPEWORK
-from build_uses_data import BLOCKS as USES_BLOCKS, ITEMS as USES_ITEMS, MAGNETS, PGM_ITEMS, PLASTIC_BLOCKS, PLASTIC_ITEMS
+from build_uses_data import BLOCKS as USES_BLOCKS, FERTILISERS, ITEMS as USES_ITEMS, MAGNETS, PGM_ITEMS, PLASTIC_BLOCKS, PLASTIC_ITEMS
 from paint_elements import ELEMENTS
 from paint_materials import items as material_items
 from paint_oxidation import BLOCKS as OXIDATION_BLOCKS, FAMILIES as WEATHERING
@@ -69,6 +69,9 @@ ITEM_FORMULAS = {
     "nickel_hydroxide": "Ni(OH)2", "hydride_alloy": "(La,Ce)Ni5", "nickel_metal_hydride_cell": "(La,Ce)Ni5,NiOOH,NaOH,C2H4",
     "polysilicon": "Si", "silicon_boule": "Si", "silicon_wafer": "Si", "zinc_leach_residue": "ZnFe2O4,PbSO4,Ge,In", "led_chip": "InGaN,Al2O3",
     "indium_tin_oxide": "In2O3,SnO2",
+    "vanadium_pentoxide": "V2O5", "cement_clinker": "Ca3SiO5,Ca2SiO4,Ca3Al2O6,Ca2AlFeO5", "gypsum": "CaSO4,H2O", "phosphogypsum": "CaSO4,H2O,P2O5",
+    "phosphogypsum_block": "CaSO4,H2O,P2O5", "ammonium_nitrate": "NH4NO3", "urea": "CO(NH2)2", "superphosphate": "Ca(H2PO4)2,CaSO4",
+    "ammonium_phosphate": "NH4H2PO4", "npk_fertiliser": "NH4NO3,NH4H2PO4,KCl",
     "neodymium_iron_boron_magnet": "Nd2Fe14B,Ni", "dysprosium_neodymium_iron_boron_magnet": "(Nd,Dy)2Fe14B,Ni", "samarium_cobalt_magnet": "Sm2(Co,Fe,Cu,Zr)17",
     "alnico_magnet": "Fe-Al-Ni-Co-Cu",
     "mercury_thermometer": "Hg,SiO2", "spirit_thermometer": "C12H26,SiO2", "bimetallic_thermometer": "Cu-Zn,Fe", "type_k_thermocouple": "Ni-Cr,Ni-Al", "type_s_thermocouple": "Pt-Rh,Pt",
@@ -114,7 +117,7 @@ OTHER_FORMULAS = {
         "steel_ingot": "Fe-C", "steel_nugget": "Fe-C", "steel_block": "Fe-C", "heavy_plate": "Fe-C",
         "n_semiconductor": "Si,P", "p_semiconductor": "Si,B",
         "magnetic_alloy_ingot": "Fe-Ni-Si-C", "magnetic_alloy_sheet": "Fe-Ni-Si-C",
-        "silicon_ingot": "Si", "sulfur_dust": "S", "sulfur": "S", "sulfuric_acid_bucket": "H2SO4", "nitrate_dust": "KNO3",
+        "cement": "Ca3SiO5,Ca2SiO4,CaSO4", "silicon_ingot": "Si", "sulfur_dust": "S", "sulfur": "S", "sulfuric_acid_bucket": "H2SO4", "nitrate_dust": "KNO3",
         "copper_sulfate": "CuSO4", "coal_coke": "C", "coal_coke_dust": "C", "coal_coke_block": "C", "graphite_electrode": "C",
         "thermite_powder": "Al,Fe2O3", "slag": "Fe2SiO4",
         "plastic_sheet": "C2H4", "plastic_block": "C2H4", "lithium_charge": "Li,C,Cu,Al,LiPF6",
@@ -144,6 +147,7 @@ WHERE = {
     "Ar": "In a tank of air",
     "Br": "In bittern, which chlorine frees it from",
     "K": "In sylvite, the potash of the evaporite beds, and in saltpetre",
+    "V": "In magnetite, roasted out with soda ash",
     "Ca": "In calcite, limestone, bone and fluorite",
     "Au": "Native gold, in river and beach sand and in quartz veins",
     "Re": "In the flue dust of a molybdenite roaster",
@@ -185,7 +189,7 @@ def material_formulas():
 def our_items():
     names = [name for _, _, name in material_items()]
     names += [f"raw_{mineral}" for mineral in ORES] + [f"{mineral}_ore" for mineral in ORES]
-    names += list(USES_ITEMS) + list(PGM_ITEMS) + list(MAGNETS) + list(PLANT_ITEMS) + list(USES_BLOCKS) + list(PLASTIC_ITEMS) + list(PLASTIC_BLOCKS) + [f"{acid}_bucket" for acid in DISSOLVES] + ["seawater_bucket"]
+    names += list(USES_ITEMS) + list(PGM_ITEMS) + list(MAGNETS) + list(PLANT_ITEMS) + list(USES_BLOCKS) + list(PLASTIC_ITEMS) + list(PLASTIC_BLOCKS) + list(FERTILISERS) + [f"{acid}_bucket" for acid in DISSOLVES] + ["seawater_bucket"]
     names += ["iron_bloom", "roasted_galena", "calcined_spodumene", "photovoltaic_panel"] + list(THERMOMETERS)
     names += OXIDATION_BLOCKS + ["canister", "argon_canister", "rusty_iron_ingot", "rusty_steel_ingot"] + list(TITANIUM_PIPEWORK)
     return names

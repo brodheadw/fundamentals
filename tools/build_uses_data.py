@@ -49,7 +49,11 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "lithium_hexafluorophosphate": "Lithium Hexafluorophosphate", "ethylene_carbonate": "Ethylene Carbonate",
          "nickel_hydroxide": "Nickel Hydroxide", "hydride_alloy": "Hydride Alloy", "nickel_metal_hydride_cell": "Nickel-Metal Hydride Cell",
          "polysilicon": "Polysilicon", "silicon_boule": "Silicon Boule", "silicon_wafer": "Silicon Wafer", "zinc_leach_residue": "Zinc Leach Residue",
-         "led_chip": "LED Chip", "indium_tin_oxide": "Indium Tin Oxide"}
+         "led_chip": "LED Chip", "indium_tin_oxide": "Indium Tin Oxide",
+         "vanadium_pentoxide": "Vanadium Pentoxide", "cement_clinker": "Cement Clinker", "gypsum": "Gypsum", "phosphogypsum": "Phosphogypsum"}
+# Registered by uses.Uses as uses.Fertiliser, in this order.
+FERTILISERS = {"ammonium_nitrate": "Ammonium Nitrate", "urea": "Urea", "superphosphate": "Superphosphate", "ammonium_phosphate": "Ammonium Phosphate",
+               "npk_fertiliser": "NPK Fertiliser"}
 # In the order of magnet.MagnetGrade.
 MAGNET_ALLOYS = {"neodymium_iron_boron": ("ingot", "plate"), "dysprosium_neodymium_iron_boron": ("ingot", "plate"),
                  "samarium_cobalt": ("ingot", "plate"), "alnico": ("ingot",)}
@@ -58,7 +62,7 @@ MAGNETS = {f"{alloy}_magnet": f"{grade} Magnet" for alloy, grade in zip(MAGNET_A
 MAGNET_MACHINES = {"electric_motor": "sequenced_assembly/motor", "generator": "sequenced_assembly/generator", "stator": "mechanical_crafting/stator",
                    "electric_pump": "crafting/materials/electric_pump", "voltmeter": "crafting/materials/voltmeter"}
 MAGNET_PATTERNS = {"electric_pump": ["QCQ", "MPM", "KWK"], "stator": ["CM MC", "MCSCM", "AAWAA"]}
-BLOCKS = {"clarifier_sludge_block": "Clarifier Tailings", "red_mud_block": "Bauxite Residue"}
+BLOCKS = {"clarifier_sludge_block": "Clarifier Tailings", "red_mud_block": "Bauxite Residue", "phosphogypsum_block": "Phosphogypsum Stack"}
 # Registered by uses.Uses in this order.
 PGM_ITEMS = {"ammonium_chloride": "Ammonium Chloride", "insoluble_residue": "Insoluble Residue", "iridium_rhodium_residue": "Iridium-Rhodium Residue",
              "ammonium_chloroplatinate": "Ammonium Chloroplatinate", "dichlorodiammine_palladium": "Dichlorodiammine Palladium",
@@ -184,7 +188,7 @@ def lanthanum():
 def phosphors():
     mixing("phosphor", item("yttrium_oxide", 2) + item("europium_oxide") + item("lanthanum_oxide") + item("cerium_oxide") + item("terbium_oxide")
            + [fluid("phosphoric_acid", 250)], [result("phosphor", 6)], "superheated")
-    mixing("ammonium_phosphate", [fluid("phosphoric_acid", 250), fluid("ammonia", 250)], [result("minecraft:bone_meal")])
+    mixing("ammonium_phosphate", [fluid("phosphoric_acid", 250), fluid("ammonia", 250)], [result("ammonium_phosphate")])
     shaped(TFMG / "crafting/materials/aluminum_lamp.json", ["PMP", "BFB", "SFS"],
            {"B": {"item": "tfmg:light_bulb"}, "P": {"item": "create:framed_glass_pane"}, "S": {"tag": "c:plates/aluminum"}, "F": {"item": "fundamentals:phosphor"},
             "M": {"item": "fundamentals:mercury"}},
@@ -240,7 +244,8 @@ def cobalt():
 
 def copper_molybdenum_rhenium():
     roast("chalcopyrite", "roasted_chalcopyrite")
-    mixing("molybdenum_oxide", item("raw_molybdenite", 2), [result("molybdenum_oxide", 2), {"id": "fundamentals:rhenium_flue_dust", "chance": 0.1}], "heated")
+    mixing("molybdenum_oxide", item("raw_molybdenite", 2) + [fluid("tfmg:air", 1000)],
+           [result("molybdenum_oxide", 2), {"id": "fundamentals:rhenium_flue_dust", "chance": 0.1}, result_fluid("sulfur_dioxide", 500)], "heated")
     vat("molybdenum_ingot", item("molybdenum_oxide", 2), "tfmg:hydrogen", 500, [result("molybdenum_ingot", 2)])
     mixing("ammonium_perrhenate", item("rhenium_flue_dust") + [fluid("minecraft:water", 250), fluid("ammonia", 50)], [result("ammonium_perrhenate")])
     vat("rhenium_nugget", item("ammonium_perrhenate"), "tfmg:hydrogen", 250, [result("rhenium_nugget", 2)])
@@ -1044,9 +1049,51 @@ def plastics():
          "conditions": [{"condition": "minecraft:survives_explosion"}]}]})
 
 
+SULFIDE_ROASTS = {"sphalerite": "zinc_oxide", "chalcopyrite": "roasted_chalcopyrite", "pentlandite": "roasted_pentlandite", "galena": "roasted_galena"}
+
+
+def sulfuric_acid():
+    mixing("sulfur_dioxide", item("tfmg:sulfur_dust") + [fluid("tfmg:air", 1000)], [result_fluid("sulfur_dioxide", 500)], "heated")
+    for ore, roasted in SULFIDE_ROASTS.items():
+        mixing(f"{roasted}_from_{ore}_with_sulfur_dioxide", item(f"raw_{ore}", 2) + [fluid("tfmg:air", 500)],
+               [result(roasted, 2), result_fluid("sulfur_dioxide", 250)], "heated")
+    mixing("sodium_vanadate_liquor", item("raw_magnetite", 4) + item("soda_ash") + [fluid("minecraft:water", 500)],
+           [result_fluid("sodium_vanadate_liquor", 250), result("create:crushed_raw_iron", 3)], "superheated")
+    mixing("vanadium_pentoxide", item("ammonium_chloride") + [fluid("sodium_vanadate_liquor", 250)], [result("vanadium_pentoxide")], "heated")
+    pgm_vat("sulfur_trioxide", item("vanadium_pentoxide") + [fluid("sulfur_dioxide", 500), fluid("tfmg:air", 500)],
+            [result_fluid("sulfur_trioxide", 500), {"id": "fundamentals:vanadium_pentoxide", "chance": 0.98}], machines=(), folder=USES)
+    mixing("oleum", [fluid("sulfur_trioxide", 500), fluid("tfmg:sulfuric_acid", 500)], [result_fluid("oleum", 500)])
+    mixing("sulfuric_acid_from_oleum", [fluid("oleum", 500), fluid("minecraft:water", 500)], [result_fluid("tfmg:sulfuric_acid", 1000)])
+    mixing("gypsum", item("tfmg:limesand") + [fluid("sulfur_dioxide", 250), fluid("minecraft:water", 250)], [result("gypsum")])
+    write(DATA.parent / "c/tags/item/dusts/gypsum.json", {"replace": False, "values": ["fundamentals:gypsum"]})
+
+
+def cement():
+    mixing("cement_clinker", item("tfmg:limesand", 3) + item("minecraft:clay_ball"), [result("cement_clinker", 3), result_fluid("tfmg:carbon_dioxide", 250)],
+           "superheated")
+    mixing("portland_cement", item("cement_clinker", 8) + tag("c:dusts/gypsum"), [result("tfmg:cement", 8)])
+    mixing("slag_cement", item("cement_clinker", 4) + item("tfmg:slag", 4) + tag("c:dusts/gypsum"), [result("tfmg:cement", 8)])
+    disabled(TFMG / "mixing/cement.json")
+    with zipfile.ZipFile(TFMG_JAR) as jar:
+        concrete = json.loads(jar.read("data/tfmg/recipe/vat_machine_recipe/concrete.json"))
+    concrete["ingredients"] = [{"item": "tfmg:cement"} if i == {"item": "tfmg:limesand"} else i for i in concrete["ingredients"]]
+    write(TFMG / "vat_machine_recipe/concrete.json", concrete)
+    shaped(USES / "phosphogypsum_block.json", ["###", "###", "###"], {"#": {"item": "fundamentals:phosphogypsum"}}, {"count": 1, "id": "fundamentals:phosphogypsum_block"})
+
+
+def fertilisers():
+    mixing("ammonium_nitrate", [fluid("ammonia", 250), fluid("nitric_acid", 250)], [result("ammonium_nitrate", 2)])
+    mixing("urea", [fluid("ammonia", 500), fluid("tfmg:carbon_dioxide", 250)], [result("urea", 2)], "heated")
+    mixing("superphosphate", item("minecraft:bone_meal", 3) + [fluid("tfmg:sulfuric_acid", 250)], [result("superphosphate", 3)])
+    tag_file(DATA / "tags/item/nitrogen_fertilisers.json", ["fundamentals:ammonium_nitrate", "fundamentals:urea"])
+    tag_file(DATA / "tags/item/phosphate_fertilisers.json", ["fundamentals:superphosphate", "fundamentals:ammonium_phosphate"])
+    potash = [{"tag": "c:dusts/potassium_chloride"}, {"item": "tfmg:nitrate_dust"}]
+    mixing("npk_fertiliser", tag("fundamentals:nitrogen_fertilisers") + tag("fundamentals:phosphate_fertilisers") + [potash], [result("npk_fertiliser", 3)])
+
+
 def names():
     lang = read_lang()
-    for name, display in {**ITEMS, **PGM_ITEMS, **MAGNETS}.items():
+    for name, display in {**ITEMS, **PGM_ITEMS, **MAGNETS, **FERTILISERS}.items():
         lang[f"item.fundamentals.{name}"] = display
         write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})
     for name, display in PLASTIC_ITEMS.items():
@@ -1140,6 +1187,9 @@ def main():
     lead_and_zinc_sinks()
     batteries()
     plastics()
+    sulfuric_acid()
+    cement()
+    fertilisers()
     names()
     print("uses written")
 

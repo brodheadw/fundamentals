@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:tag",
+      "amount": 500,
+      "tag": "c:ammonia"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "tfmg:carbon_dioxide"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:urea",
+      "count": 2
+    }
+  ],
+  "heat_requirement": "heated"
+}

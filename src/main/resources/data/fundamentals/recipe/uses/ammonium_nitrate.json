@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:tag",
+      "amount": 250,
+      "tag": "c:ammonia"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 250,
+      "tag": "c:acids/nitric"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:ammonium_nitrate",
+      "count": 2
+    }
+  ]
+}

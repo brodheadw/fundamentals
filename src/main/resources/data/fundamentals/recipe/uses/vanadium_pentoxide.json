@@ -1,0 +1,19 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:ammonium_chloride"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:sodium_vanadate_liquor"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:vanadium_pentoxide"
+    }
+  ],
+  "heat_requirement": "heated"
+}

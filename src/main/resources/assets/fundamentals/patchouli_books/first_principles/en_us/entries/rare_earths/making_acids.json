@@ -6,12 +6,16 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Sulfuric acid is The Factory Must Grow's, from sulfur and saltpetre in a vat, and every other acid starts from it. Two salt and 500 mB of sulfuric acid in a heated basin give 500 mB of hydrochloric acid, the salt-cake process; salt is seawater boiled down, or rock salt ground (see Salt and seawater, under Geology).",
+      "text": "Sulfuric acid is The Factory Must Grow's fluid, made its own way from sulfur and saltpetre in a vat or by the contact process (see Heavy chemicals), and every other acid starts from it.",
       "title": "Making the acids"
     },
     {
       "type": "patchouli:text",
-      "text": "Two raw fluorite and 500 mB, heated, give hydrofluoric acid. Two nitrate dust and 500 mB, heated, give nitric acid, which boils off the saltpetre as it did from Glauber's retort. Two bone meal and 500 mB, cold, give phosphoric acid, the wet process with bone for phosphate rock; cracking monazite frees more."
+      "text": "Two salt and 500 mB of sulfuric acid in a heated basin give 500 mB of hydrochloric acid, the salt-cake process; salt is seawater boiled down, or rock salt ground (see Salt and seawater, under Geology). Two raw fluorite and 500 mB, heated, give hydrofluoric acid."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two nitrate dust and 500 mB, heated, give nitric acid, which boils off the saltpetre as it did from Glauber's retort. Two bone meal and 500 mB, cold, give phosphoric acid and a phosphogypsum, the wet process with bone for phosphate rock; cracking monazite frees more."
     },
     {
       "type": "patchouli:text",

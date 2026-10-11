@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:npk_fertiliser",
     "fundamentals:potash",
     "fundamentals:potassium_bifluoride",
     "fundamentals:potassium_fluorotantalate",

@@ -9,7 +9,7 @@ OUT = REPO / "docs/byproducts.md"
 OUTPUT_KEYS = ("result", "results", "byproduct")
 NOT_BYPRODUCTS = {"create:experience_nugget", "tfmg:lithium_nugget", "fundamentals:sponge_lead_plate"}
 OPTIONAL = ("chemica", "createnuclear")
-TAILINGS = {"fundamentals:clarifier_sludge_block", "fundamentals:red_mud_block", "fundamentals:monazite_residue_block"}
+TAILINGS = {"fundamentals:clarifier_sludge_block", "fundamentals:red_mud_block", "fundamentals:monazite_residue_block", "fundamentals:phosphogypsum_block"}
 
 # Made by Java, not by a recipe file.
 MADE_IN_CODE = {
@@ -32,6 +32,7 @@ ELSEWHERE = {
     "minecraft:copper_ingot": "everything that takes copper",
     "minecraft:clay_ball": "everything that takes clay",
     "minecraft:iron_nugget": "nine craft to an iron ingot",
+    "create:crushed_raw_iron": "The Factory Must Grow's blast furnace",
 }
 
 # Finished goods no recipe takes, which are not blocks or equipment.
@@ -46,12 +47,15 @@ END_PRODUCTS = {
     "fundamentals:thorium_dioxide": "Thoria for Create: Nuclear's thorium rod; without it the pack has no reactor.",
     "fundamentals:boron_carbide": "The absorber of Create: Nuclear's control rod; without it the pack has no reactor.",
 }
-EQUIPMENT = {"fundamentals:argon_canister", "fundamentals:photovoltaic_panel"}
+# Used from the hand or a dispenser, not in a recipe.
+EQUIPMENT = {"fundamentals:argon_canister", "fundamentals:photovoltaic_panel", "fundamentals:npk_fertiliser"}
 
 # Deliberate dead ends: what the waste is, and how a player is rid of it.
 DEAD = {
     "fundamentals:clarifier_sludge": "Iron, aluminium and thorium hydroxides: a neutralisation sludge, impounded as a low-level radioactive residue (Lynas stores its own at Gebeng). "
                                      "Nine pack into clarifier tailings to wall into a dam or bury.",
+    "fundamentals:phosphogypsum": "Calcium sulfate holding the phosphate rock's radium, fluoride and heavy metals: some 4.5 tonnes of it to every tonne of phosphoric acid (as P2O5), "
+                                  "stacked beside the plant, since radon keeps it out of plaster and cement (the US EPA has required it stacked since 1989). Nine pack into a phosphogypsum stack.",
 }
 
 WHY = {
@@ -95,7 +99,7 @@ WHY = {
     "fundamentals:fouled_naphthenic_acid": "Fouled organic is scrubbed and returned; extractant is too dear to throw away.",
     "fundamentals:water_gas": "Carbon monoxide freed by decomposing nickel carbonyl goes back to make more, as at Clydach.",
     "fundamentals:zinc_oxide": "Zinc oxide from the Parkes crust goes back to the zinc works.",
-    "tfmg:carbon_dioxide": "Carbon dioxide from the anode and the soda reactions; real plants mostly vent it.",
+    "tfmg:carbon_dioxide": "Carbon dioxide from the anode, the soda reactions and the cement kiln, where limestone's own carbon is about half the kiln's CO2; real plants mostly vent it, but an ammonia plant turns its own into urea.",
     "tfmg:cast_iron_ingot": "The Sorel slag furnace's iron is sold as high-purity pig iron.",
     "tfmg:coal_coke_dust": "Coke burnt onto a cracking catalyst is burnt off in the regenerator.",
     "tfmg:furnace_gas": "Blast furnace and converter gas is a fifth carbon monoxide; works burn it in the Cowper stoves that heat the blast.",
@@ -107,6 +111,10 @@ WHY = {
     "minecraft:clay_ball": "Ion-adsorption clay leached of its rare earths is just clay again.",
     "minecraft:water": "Brine boiled for salt gives its water off as condensate.",
     "fundamentals:raw_magnetite": "Washing gravel leaves the heavy black sand, magnetite, behind.",
+    "fundamentals:phosphogypsum": "Wet-process phosphoric acid leaves the rock's calcium as gypsum, the industry's largest waste.",
+    "fundamentals:sulfur_dioxide": "A sulfide roaster's off-gas is cleaned and made into sulfuric acid by the contact process, as at every modern zinc, copper and nickel smelter; "
+                                   "the acid plant pays for the roaster and keeps the gas out of the air.",
+    "create:crushed_raw_iron": "Titanomagnetite leached of its vanadium is still an iron ore, and goes to the blast furnace.",
     "minecraft:copper_ingot": "Copper co-deposited with nickel at the cathode is a sellable metal.",
     "minecraft:iron_nugget": "Crushed slag is passed under a magnet to pull out its metallic iron prills.",
     "fundamentals:salt": "Sylvinite is sylvite and halite together; the hot leach takes the potassium chloride and leaves the salt, which Saskatchewan's mills stack or pump back underground.",

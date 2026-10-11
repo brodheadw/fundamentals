@@ -17,6 +17,9 @@
     {
       "id": "fundamentals:phosphoric_acid",
       "amount": 500
+    },
+    {
+      "id": "fundamentals:phosphogypsum"
     }
   ]
 }
