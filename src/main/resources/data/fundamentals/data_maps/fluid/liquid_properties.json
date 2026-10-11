@@ -616,6 +616,33 @@
       "flash_point": -78,
       "autoignition": 472
     },
+    "fundamentals:sulfur_dioxide": {
+      "density": 2.63,
+      "viscosity": 0.0126,
+      "freezes": -72.7,
+      "boils": -10.0,
+      "toxic": true
+    },
+    "fundamentals:sulfur_trioxide": {
+      "density": 1920,
+      "freezes": 16.9,
+      "boils": 44.8,
+      "toxic": true
+    },
+    "fundamentals:oleum": {
+      "density": 1925,
+      "freezes": 2,
+      "boils": 138,
+      "toxic": true
+    },
+    "fundamentals:sodium_vanadate_liquor": {
+      "density": 1080,
+      "viscosity": 1.2,
+      "freezes": -4,
+      "boils": 101,
+      "aqueous": true,
+      "corrosive": true
+    },
     "fundamentals:caustic_soda": {
       "density": 1274,
       "viscosity": 4.4,

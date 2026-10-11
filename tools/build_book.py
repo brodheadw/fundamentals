@@ -206,10 +206,10 @@ def ironworking():
         "So old slag was smelted again. A slag in the bloomery with a charcoal, like any ore, gives two iron nuggets. The Romans' cinder heaps in the Forest of Dean and the Weald fed "
         "the blast furnaces of the seventeenth century, and the Etruscan heaps at Populonia were dug up and smelted again in the twentieth.", "Smelting it again") + pages_of(
         "Create's crushing wheels break a slag to gravel, and one time in ten free an iron nugget, as a slag works passes crushed slag under a magnet for its prills of metal "
-        "and sells the rest as road stone and ballast. The Factory Must Grow's concrete and asphalt take slag as it is.", "Aggregate") + pages_of(
+        "and sells the rest as road stone and ballast. The Factory Must Grow's concrete and asphalt take slag as it is, and ground with clinker it is slag cement (see Cement).", "Aggregate") + pages_of(
         "It is not fertiliser. Thomas meal, the ground slag farmers spread from the 1880s, came from the basic Bessemer converter blowing the phosphoric pig iron of the minette ores with lime, "
         "a slag of 15 to 20 per cent phosphate. No iron here carries phosphorus: a bloomery's slag is an iron silicate, the Factory's blast furnace slag a lime silicate, and neither has any phosphate to give. "
-        "Fertiliser comes from phosphoric acid and ammonia.", "Not Thomas meal") + pages_of(
+        "Fertiliser comes from sulfuric and phosphoric acid and ammonia (see Fertilisers).", "Not Thomas meal") + pages_of(
         "Sources: Tylecote, A History of Metallurgy (2nd ed., 1992); Cleere and Crossley, The Iron Industry of the Weald (1985); "
         "Proctor and others, \"Physical and chemical characteristics of blast furnace, basic oxygen furnace, and electric arc furnace steel industry slags\", "
         "Environmental Science and Technology 34 (2000); Ullmann's Encyclopedia of Industrial Chemistry, \"Phosphate Fertilizers\".", "Sources"), 3)
@@ -435,10 +435,10 @@ def rare_earths():
         "Tanks corrode too, ten times slower for the thicker wall: a copper or metal tank of acid loses a block of its wall in twenty minutes or so, and that block's share of what it held, the acid spilling; under a liquor, in eighty. "
         "Keep the acid and the liquors in the Plastic Fluid Tank, as real plants keep hydrochloric acid in fibreglass and polyethylene; but not bromine, which eats plastic.") + [crafting("fundamentals:plastic_fluid_tank")], 10)
     entry("rare_earths", "making_acids", "Making the acids", "fundamentals:nitric_acid_bucket", pages_of(
-        "Sulfuric acid is The Factory Must Grow's, from sulfur and saltpetre in a vat, and every other acid starts from it. "
+        "Sulfuric acid is The Factory Must Grow's fluid, made its own way from sulfur and saltpetre in a vat or by the contact process (see Heavy chemicals), and every other acid starts from it. "
         "Two salt and 500 mB of sulfuric acid in a heated basin give 500 mB of hydrochloric acid, the salt-cake process; salt is seawater boiled down, or rock salt ground (see Salt and seawater, under Geology). "
         "Two raw fluorite and 500 mB, heated, give hydrofluoric acid. Two nitrate dust and 500 mB, heated, give nitric acid, which boils off the saltpetre as it did from Glauber's retort. "
-        "Two bone meal and 500 mB, cold, give phosphoric acid, the wet process with bone for phosphate rock; cracking monazite frees more.", "Making the acids") + pages_of(
+        "Two bone meal and 500 mB, cold, give phosphoric acid and a phosphogypsum, the wet process with bone for phosphate rock; cracking monazite frees more.", "Making the acids") + pages_of(
         "Oxalic acid is sugar oxidised by nitric acid, Scheele's route: two sugar and 250 mB of nitric acid, heated, give two oxalic acid. "
         "Chlorine is Scheele's too: a raw pyrolusite in 1,000 mB of hot hydrochloric acid gives 250 mB, the manganese staying behind as its chloride. "
         "That is the old way, and the chlor-alkali cell (next) gives twice as much from two salt. "
@@ -594,7 +594,7 @@ def metals():
         "A porphyry copper stock carries chalcopyrite with a little molybdenite, and the molybdenite carries rhenium at parts per million. "
         "A copper sulfide smelts not to copper but to matte. Chalcopyrite roasted on a fire, or the calcine bornite, chalcocite and covellite roast to, melts in the bloomery to copper matte and slag. "
         "Two matte and a sand, superheated, are the converter: the air burns off the sulfur and the iron, which the sand fluxes to slag, and leaves two blister copper. The blast furnace fire-refines blister to copper. "
-        "Two raw molybdenite roasted in a heated basin give two molybdenum trioxide, and one time in ten a rhenium flue dust: "
+        "Two raw molybdenite roasted in a heated basin with 1,000 mB of air give two molybdenum trioxide and 500 mB of sulfur dioxide for the acid plant, and one time in ten a rhenium flue dust: "
         "the roaster's flue is where all mined rhenium comes from, though about a quarter of the rhenium used is now recycled from superalloy scrap "
         "and spent catalyst (USGS, Mineral Commodity Summaries 2025).", "The porphyry chain") + pages_of(
         "The trioxide is reduced under hydrogen in a heated chemical vat with an industrial mixer, as the industry does: two trioxide and 500 mB of hydrogen give two molybdenum ingots. "
@@ -659,7 +659,8 @@ def metals():
         "Only Create's diving helmet on a filled backtank keeps it out, and it burns two of the tank's air a second doing so. Keep the carbonyl in closed pipes and tanks, and wear the mask to break into them.") + pages_of(
         "The dusts of the nickel smelter cause lung and nasal cancer: the men who roasted and leached matte at Clydach died of them at many times the expected rate (Doll, 1958), "
         "and the International Agency for Research on Cancer puts nickel compounds in its first group. Nickel matte, converter matte, roasted pentlandite and nickel oxide held in the hand or stirred in a basin are breathed by everyone near. "
-        "And a sulfide roasting on a lit campfire or in a lit smoker or furnace, pentlandite, cobaltite or matte, gives off sulfur dioxide that stings anyone within two blocks.", "The dusts and the fume"), 4)
+        "And a sulfide roasting on a lit campfire or in a lit smoker or furnace, pentlandite, cobaltite or matte, gives off sulfur dioxide that stings anyone within two blocks. "
+        "Roasted in a heated basin with air instead, the gas is caught to make acid (see Sulfuric acid).", "The dusts and the fume"), 4)
     entry("metals", "chromium", "Ferrochrome and chromium", "fundamentals:ferrochrome_ingot", pages_of(
         "Chromite is chromium's only ore, black seams in the gabbro of the deep layered intrusion. A millstone or crushing wheels grind it to a brown powder, and a wash under an encased fan "
         "leaves the heavy chromite behind as concentrate, half of what goes in. Iron in chromite reduces along with the chromium, so smelting gives not chromium but ferrochrome: "
@@ -1099,6 +1100,58 @@ def plastics():
         + [crafting(f"fundamentals:{name}") for name in TITANIUM_PIPEWORK], 1)
 
 
+def chemicals():
+    category("chemicals", "Heavy chemicals", "Sulfuric acid by the contact process, Portland cement, and the fertilisers: the tonnage chemistry the rest stands on.",
+             "tfmg:sulfuric_acid_bucket", 7)
+    entry("chemicals", "sulfuric_acid", "Sulfuric acid", "tfmg:sulfuric_acid_bucket", pages_of(
+        "Sulfuric acid is made in greater tonnage than any other chemical, some 270 million tonnes a year. The Factory Must Grow's way, three sulfur dust and a nitrate dust "
+        "with 1,000 mB of water in a vat for 500 mB, is the lead chamber process in small, nitre carrying oxygen to the burning sulfur as in Roebuck's chambers of 1746. "
+        "It is hard on sulfur and on nitre. Phillips patented the contact process in 1831, and from about 1900, when Knietsch made it work at BASF, it took over.", "Sulfuric acid") + pages_of(
+        "First, sulfur dioxide. A sulfur dust burnt in 1,000 mB of air in a heated basin gives 500 mB. Or catch it off the roasters: two raw sphalerite, chalcopyrite, pentlandite or galena "
+        "with 500 mB of air in a heated basin roast to their oxide or calcine and give 250 mB of it, and two molybdenite with 1,000 mB give 500. "
+        "Every modern copper, zinc and nickel smelter runs an acid plant on its roaster gas, which pays for the plant and keeps the gas out of the valleys downwind. "
+        "Roasted on a campfire, it goes into the air. It is a heavy, choking gas; pipe it away before it boils out of the basin.", "Sulfur dioxide") + pages_of(
+        "Sulfur dioxide will not take a second oxygen by itself. Over vanadium pentoxide at about 430 °C it does, and the cooler the bed the further it goes, "
+        "so a converter is three or four catalyst beds with coolers between. A heated vat with no machine in it is the bed: a vanadium pentoxide, 500 mB of sulfur dioxide and 500 mB of air give 500 mB of sulfur trioxide, "
+        "and the catalyst back 49 times in 50. Platinum was the first catalyst; vanadium, cheaper and not poisoned by arsenic, replaced it from the 1920s.", "The converter") + pages_of(
+        "The trioxide is never put into water, which turns it to a fog of acid no scrubber catches. Strong acid absorbs it: 500 mB of trioxide stirred into 500 mB of sulfuric acid give 500 mB of oleum, "
+        "fuming sulfuric acid, and oleum let down with 500 mB of water gives 1,000 mB of sulfuric acid. That is 500 mB more for every sulfur dust, three times the lead chamber's, and no nitre. "
+        "The trioxide and oleum fume and are poison to breathe.", "Absorption") + pages_of(
+        "Vanadium rides in magnetite, a fraction of a per cent of it, and most of the world's comes out of titanomagnetite. Four raw magnetite with a soda ash and 500 mB of water, superheated, "
+        "are the salt roast and the water leach: 250 mB of sodium vanadate liquor, and three crushed iron ore still good to smelt. 250 mB of the liquor and an ammonium chloride, heated, "
+        "throw down ammonium metavanadate, which calcines to a vanadium pentoxide, orange-brown.", "Vanadium pentoxide") + pages_of(
+        "Sources: Ullmann's Encyclopedia of Industrial Chemistry, \"Sulfuric Acid and Sulfur Trioxide\"; King, Davenport and Moats, Sulfuric Acid Manufacture (2nd ed., 2013); "
+        "Ullmann's, \"Vanadium and Vanadium Compounds\"; USGS, Mineral Commodity Summaries 2025, \"Sulfur\" and \"Vanadium\".", "Sources"), 0)
+    entry("chemicals", "cement", "Cement", "fundamentals:cement_clinker", pages_of(
+        "Lime and clay stirred together do not make cement; they set only once they have been burnt together. Portland cement is limestone and clay ground to a raw meal and burnt at about 1,450 °C "
+        "in a rotary kiln, where the lime takes up the clay's silica and alumina as the calcium silicates that set with water, alite and belite. "
+        "Three limesand and a clay ball over a blaze burner fed a blaze cake give three cement clinker, grey nodules, and 250 mB of carbon dioxide. "
+        "About half a kiln's carbon dioxide is the limestone's own, which is why cement is some 8 per cent of the world's.", "Clinker") + pages_of(
+        "Clinker ground alone sets in minutes. Gypsum ground in with it, about 5 per cent, holds back the aluminate so concrete can be placed: eight clinker and a gypsum in a mixer give eight of The Factory Must Grow's cement, "
+        "whose concrete mixture (sand or slag, cement and gravel) and liquid concrete (sand, gravel and cement in a vat with 250 mB of water) go on as before, cement now where raw limesand was. "
+        "The gypsum is a scrubber's: a limesand in 250 mB each of sulfur dioxide and water, the sulfite oxidised by air blown through the slurry, is the lime scrubber of a power station, whose gypsum much cement and wallboard now take.", "Cement") + pages_of(
+        "Ground granulated blast-furnace slag is a cement too, slow until the clinker's lime wakes it, and may stand for most of the clinker. "
+        "Four clinker, four slag and a gypsum give eight cement: half the kiln, and half its carbon dioxide, for the same concrete.", "Slag cement") + pages_of(
+        "Sources: Ullmann's Encyclopedia of Industrial Chemistry, \"Cement and Concrete\"; Taylor, Cement Chemistry (2nd ed., 1997); "
+        "USGS, Mineral Commodity Summaries 2025, \"Cement\" and \"Iron and Steel Slag\".", "Sources"), 1)
+    detonates = re.search(r"DETONATES = (\d+)", (JAVA / "uses/Fertiliser.java").read_text(encoding="utf-8")).group(1)
+    entry("chemicals", "fertilisers", "Fertilisers", "fundamentals:npk_fertiliser", pages_of(
+        "A crop takes nitrogen, phosphorus and potassium from the soil, and grows as far as the scarcest lets it, Liebig's law of the minimum. "
+        "Most of the world's ammonia goes to fertiliser. 250 mB of ammonia and 250 mB of nitric acid neutralise in a basin to two ammonium nitrate, white prills. "
+        "500 mB of ammonia and 250 mB of carbon dioxide, heated, give two urea, the most used nitrogen fertiliser of all, made at about 180 °C under pressure from the carbon dioxide the ammonia plant itself gives off.", "Nitrogen") + pages_of(
+        "Three bone meal and 250 mB of sulfuric acid give three superphosphate: Lawes patented his \"dissolved bones\" in 1842, and bone stands for phosphate rock here as it does for the acid. "
+        "250 mB of phosphoric acid and 250 mB of ammonia give an ammonium phosphate. The wet process that makes phosphoric acid leaves phosphogypsum, about four and a half tonnes to the tonne of phosphate, "
+        "holding the rock's radium: no plaster or cement may take it, so it is stacked beside the plant. Nine pack into a phosphogypsum stack.", "Phosphate") + pages_of(
+        "Potash is potassium chloride, muriate of potash, dug from evaporite beds; saltpetre is a potash fertiliser too. A nitrogen fertiliser, a phosphate one and a potash or a saltpetre in a mixer "
+        "give three NPK compound fertiliser. A straight fertiliser is bone meal twice over on the crop it is put on; NPK, all three nutrients in one granule, is broadcast, "
+        "bone meal twice over on every crop in a three by three patch. A dispenser spreads any of them.", "Potash and NPK") + pages_of(
+        f"Ammonium nitrate is an oxidiser, and in a mass it detonates. A stack of {detonates} or more that burns, falls in lava or is caught in a blast goes off, harder the bigger the stack; "
+        "a few burn away. 2,300 tonnes aboard the Grandcamp levelled the port of Texas City in 1947, and 2,750 tonnes left in a warehouse levelled Beirut's in 2020.", "Ammonium nitrate") + pages_of(
+        "Sources: Ullmann's Encyclopedia of Industrial Chemistry, \"Fertilizers\", \"Phosphate Fertilizers\", \"Ammonium Compounds\" and \"Urea\"; "
+        "USGS, Mineral Commodity Summaries 2025, \"Nitrogen (Fixed)—Ammonia\", \"Phosphate Rock\" and \"Potash\"; "
+        "US EPA, 40 CFR 61 subpart R (phosphogypsum stacks).", "Sources"), 2)
+
+
 def book():
     write(BOOK_DATA / "book.json", {
         "name": "Fundamentals: First Principles",
@@ -1138,6 +1191,7 @@ def main():
     platinum()
     power()
     plastics()
+    chemicals()
     check()
     n = len(list(BOOK_ASSETS.glob("entries/*/*.json")))
     print(f"book written: {n} entries")

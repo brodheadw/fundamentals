@@ -1,0 +1,28 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "tfmg:limesand"
+    },
+    {
+      "item": "tfmg:limesand"
+    },
+    {
+      "item": "tfmg:limesand"
+    },
+    {
+      "item": "minecraft:clay_ball"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:cement_clinker",
+      "count": 3
+    },
+    {
+      "id": "tfmg:carbon_dioxide",
+      "amount": 250
+    }
+  ],
+  "heat_requirement": "superheated"
+}

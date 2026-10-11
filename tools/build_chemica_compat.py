@@ -139,10 +139,8 @@ def mixing(name, ingredients, results, heat):
 
 
 def missing_metals():
-    mixing("vanadium_dust", [{"item": "fundamentals:raw_magnetite"}] * 4 + [{"tag": "c:dusts/soda_ash"}, fluid_ingredient("minecraft:water", 500)],
-           [{"id": "chemica:vanadium_dust"}, {"id": "create:crushed_raw_iron", "count": 3}], "heated")
-    mixing("vanadium_ingot", [{"item": "chemica:vanadium_dust"}] * 2 + [{"item": "fundamentals:aluminium_powder"}],
-           [{"id": "chemica:vanadium_ingot"}, {"id": "fundamentals:alumina", "chance": 0.5}], "superheated")
+    mixing("vanadium_ingot", [{"item": "fundamentals:vanadium_pentoxide"}] * 2 + [{"item": "fundamentals:aluminium_powder"}] * 2,
+           [{"id": "chemica:vanadium_ingot"}, {"id": "fundamentals:alumina"}], "superheated")
 
 
 def main():

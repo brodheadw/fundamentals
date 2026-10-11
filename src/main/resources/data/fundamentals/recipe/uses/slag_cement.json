@@ -1,0 +1,38 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:cement_clinker"
+    },
+    {
+      "item": "fundamentals:cement_clinker"
+    },
+    {
+      "item": "fundamentals:cement_clinker"
+    },
+    {
+      "item": "fundamentals:cement_clinker"
+    },
+    {
+      "item": "tfmg:slag"
+    },
+    {
+      "item": "tfmg:slag"
+    },
+    {
+      "item": "tfmg:slag"
+    },
+    {
+      "item": "tfmg:slag"
+    },
+    {
+      "tag": "c:dusts/gypsum"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:cement",
+      "count": 8
+    }
+  ]
+}

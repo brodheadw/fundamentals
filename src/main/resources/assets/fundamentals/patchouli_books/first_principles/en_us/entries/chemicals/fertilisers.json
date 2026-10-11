@@ -1,0 +1,45 @@
+{
+  "name": "Fertilisers",
+  "category": "fundamentals:chemicals",
+  "icon": "fundamentals:npk_fertiliser",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A crop takes nitrogen, phosphorus and potassium from the soil, and grows as far as the scarcest lets it, Liebig's law of the minimum. Most of the world's ammonia goes to fertiliser. 250 mB of ammonia and 250 mB of nitric acid neutralise in a basin to two ammonium nitrate, white prills.",
+      "title": "Nitrogen"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "500 mB of ammonia and 250 mB of carbon dioxide, heated, give two urea, the most used nitrogen fertiliser of all, made at about 180 °C under pressure from the carbon dioxide the ammonia plant itself gives off."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Three bone meal and 250 mB of sulfuric acid give three superphosphate: Lawes patented his \"dissolved bones\" in 1842, and bone stands for phosphate rock here as it does for the acid. 250 mB of phosphoric acid and 250 mB of ammonia give an ammonium phosphate.",
+      "title": "Phosphate"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The wet process that makes phosphoric acid leaves phosphogypsum, about four and a half tonnes to the tonne of phosphate, holding the rock's radium: no plaster or cement may take it, so it is stacked beside the plant. Nine pack into a phosphogypsum stack."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Potash is potassium chloride, muriate of potash, dug from evaporite beds; saltpetre is a potash fertiliser too. A nitrogen fertiliser, a phosphate one and a potash or a saltpetre in a mixer give three NPK compound fertiliser.",
+      "title": "Potash and NPK"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A straight fertiliser is bone meal twice over on the crop it is put on; NPK, all three nutrients in one granule, is broadcast, bone meal twice over on every crop in a three by three patch. A dispenser spreads any of them."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ammonium nitrate is an oxidiser, and in a mass it detonates. A stack of 16 or more that burns, falls in lava or is caught in a blast goes off, harder the bigger the stack; a few burn away. 2,300 tonnes aboard the Grandcamp levelled the port of Texas City in 1947, and 2,750 tonnes left in a warehouse levelled Beirut's in 2020.",
+      "title": "Ammonium nitrate"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: Ullmann's Encyclopedia of Industrial Chemistry, \"Fertilizers\", \"Phosphate Fertilizers\", \"Ammonium Compounds\" and \"Urea\"; USGS, Mineral Commodity Summaries 2025, \"Nitrogen (Fixed)—Ammonia\", \"Phosphate Rock\" and \"Potash\"; US EPA, 40 CFR 61 subpart R (phosphogypsum stacks).",
+      "title": "Sources"
+    }
+  ]
+}

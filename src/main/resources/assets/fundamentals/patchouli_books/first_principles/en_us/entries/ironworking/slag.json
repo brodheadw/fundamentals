@@ -16,8 +16,12 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Create's crushing wheels break a slag to gravel, and one time in ten free an iron nugget, as a slag works passes crushed slag under a magnet for its prills of metal and sells the rest as road stone and ballast. The Factory Must Grow's concrete and asphalt take slag as it is.",
+      "text": "Create's crushing wheels break a slag to gravel, and one time in ten free an iron nugget, as a slag works passes crushed slag under a magnet for its prills of metal and sells the rest as road stone and ballast.",
       "title": "Aggregate"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The Factory Must Grow's concrete and asphalt take slag as it is, and ground with clinker it is slag cement (see Cement)."
     },
     {
       "type": "patchouli:text",
@@ -26,7 +30,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "No iron here carries phosphorus: a bloomery's slag is an iron silicate, the Factory's blast furnace slag a lime silicate, and neither has any phosphate to give. Fertiliser comes from phosphoric acid and ammonia."
+      "text": "No iron here carries phosphorus: a bloomery's slag is an iron silicate, the Factory's blast furnace slag a lime silicate, and neither has any phosphate to give. Fertiliser comes from sulfuric and phosphoric acid and ammonia (see Fertilisers)."
     },
     {
       "type": "patchouli:text",

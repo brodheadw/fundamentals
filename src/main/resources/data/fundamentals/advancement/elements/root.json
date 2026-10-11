@@ -225,6 +225,16 @@
         ]
       }
     },
+    "v": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/v"
+          }
+        ]
+      }
+    },
     "cr": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
@@ -739,6 +749,7 @@
       "ca",
       "sc",
       "ti",
+      "v",
       "cr",
       "mn",
       "fe",
