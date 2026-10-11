@@ -51,6 +51,10 @@ public final class Reagents {
             new Reagent("beryllium_sulfate_liquor", 0xDCE6EC, Kind.LIQUOR),
             new Reagent("lithium_sulfate_liquor", 0xDCE6EC, Kind.LIQUOR),
             new Reagent("uranyl_sulfate_liquor", 0xE2E070, Kind.LIQUOR),
+            new Reagent("zinc_leach_liquor", 0xC6CCB0, Kind.LIQUOR),
+            new Reagent("zinc_sulfate_liquor", 0xDCE6EC, Kind.LIQUOR),
+            new Reagent("indium_sulfate_liquor", 0xC8B48C, Kind.LIQUOR),
+            new Reagent("indium_chloride_liquor", 0xDCE6EC, Kind.LIQUOR),
             new Reagent("p204", 0xEAD88C, Kind.ORGANIC),
             new Reagent("p507", 0xECE0A8, Kind.ORGANIC),
             new Reagent("naphthenic_acid", 0xA8843C, Kind.ORGANIC),
@@ -89,9 +93,15 @@ public final class Reagents {
             new Reagent("titanium_tetrachloride", 0xEEF0EA, Kind.PRECURSOR),
             new Reagent("vinyl_chloride", 0xEEF0EE, Kind.PRECURSOR),
             new Reagent("lithium_ion_electrolyte", 0xEEEEE2, Kind.PRECURSOR),
+            new Reagent("crude_trichlorosilane", 0xE6EAE2, Kind.PRECURSOR),
+            new Reagent("trichlorosilane", 0xF0F2F2, Kind.PRECURSOR),
+            new Reagent("silicon_tetrachloride", 0xECEFF0, Kind.PRECURSOR),
+            new Reagent("germanium_tetrachloride", 0xF0F0EA, Kind.PRECURSOR),
             new Reagent("caustic_soda", 0xEEF2F0, Kind.CAUSTIC),
             new Reagent("sodium_aluminate_liquor", 0xB8864A, Kind.CAUSTIC),
             new Reagent("sodium_tungstate_liquor", 0xE6ECE8, Kind.CAUSTIC),
+            new Reagent("spent_bayer_liquor", 0xB89060, Kind.CAUSTIC),
+            new Reagent("sodium_gallate_liquor", 0xE4EAE6, Kind.CAUSTIC),
             new Reagent("molten_pig_iron", 0xF07A1E, Kind.MOLTEN));
 
     private Reagents() {}

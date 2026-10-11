@@ -1,0 +1,20 @@
+{
+  "type": "tfmg:distillation",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 200,
+      "fluid": "fundamentals:crude_trichlorosilane"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:trichlorosilane",
+      "amount": 170
+    },
+    {
+      "id": "fundamentals:silicon_tetrachloride",
+      "amount": 30
+    }
+  ]
+}

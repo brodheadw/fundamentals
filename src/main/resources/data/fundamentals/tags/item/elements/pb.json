@@ -16,6 +16,7 @@
     "fundamentals:roasted_galena",
     "fundamentals:solder",
     "fundamentals:sponge_lead_plate",
+    "fundamentals:zinc_leach_residue",
     "tfmg:galena",
     "tfmg:lead_block",
     "tfmg:lead_ingot",

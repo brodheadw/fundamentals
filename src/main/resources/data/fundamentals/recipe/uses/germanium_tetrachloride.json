@@ -1,0 +1,28 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:zinc_leach_residue"
+    },
+    {
+      "item": "fundamentals:zinc_leach_residue"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 500,
+      "tag": "c:acids/hydrochloric"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 100,
+      "tag": "c:chlorine"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:germanium_tetrachloride",
+      "amount": 100
+    }
+  ],
+  "heat_requirement": "heated"
+}

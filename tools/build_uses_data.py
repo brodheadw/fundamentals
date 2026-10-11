@@ -47,7 +47,9 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "cobalt_sulfate": "Cobalt Sulfate", "nmc_hydroxide": "NMC Hydroxide", "nmc_cathode": "NMC Cathode", "iron_phosphate": "Iron Phosphate",
          "lfp_cathode": "LFP Cathode", "lithium_fluoride": "Lithium Fluoride",
          "lithium_hexafluorophosphate": "Lithium Hexafluorophosphate", "ethylene_carbonate": "Ethylene Carbonate",
-         "nickel_hydroxide": "Nickel Hydroxide", "hydride_alloy": "Hydride Alloy", "nickel_metal_hydride_cell": "Nickel-Metal Hydride Cell"}
+         "nickel_hydroxide": "Nickel Hydroxide", "hydride_alloy": "Hydride Alloy", "nickel_metal_hydride_cell": "Nickel-Metal Hydride Cell",
+         "polysilicon": "Polysilicon", "silicon_boule": "Silicon Boule", "silicon_wafer": "Silicon Wafer", "zinc_leach_residue": "Zinc Leach Residue",
+         "led_chip": "LED Chip", "indium_tin_oxide": "Indium Tin Oxide"}
 # In the order of magnet.MagnetGrade.
 MAGNET_ALLOYS = {"neodymium_iron_boron": ("ingot", "plate"), "dysprosium_neodymium_iron_boron": ("ingot", "plate"),
                  "samarium_cobalt": ("ingot", "plate"), "alnico": ("ingot",)}
@@ -475,9 +477,80 @@ def thermometry():
     mixing("alumel", item("tfmg:nickel_ingot", 9) + tag("c:nuggets/aluminum", 4), [result("alumel_ingot", 9)], "superheated")
 
 
+def silicon():
+    electrodes = ("tfmg:electrode", "tfmg:electrode")
+    write(USES / "metallurgical_silicon.json", {
+        "type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:firebrick_lined_vat"], "min_size": 1, "processing_time": 200,
+        "machines": ["tfmg:graphite_electrode"] * 3, "ingredients": tag("c:gems/quartz", 3) + [[{"item": "tfmg:coal_coke"}, {"item": "minecraft:charcoal"}]],
+        "results": [result_fluid("tfmg:liquid_silicon", 144), result_fluid("tfmg:carbon_dioxide", 250)]})
+    disabled(TFMG / "industrial_blasting/silicon.json")
+    write(ASSETS.parent / "tfmg/lang/en_us.json", {"item.tfmg.silicon_ingot": "Metallurgical Silicon"})
+    mixing("crude_trichlorosilane", item("tfmg:silicon_ingot") + [fluid("chlorine", 750), fluid("tfmg:hydrogen", 250)],
+           [result_fluid("crude_trichlorosilane", 500)], "heated")
+    mixing("crude_trichlorosilane_from_tetrachloride", item("tfmg:silicon_ingot") + [fluid("silicon_tetrachloride", 750), fluid("tfmg:hydrogen", 500)],
+           [result_fluid("crude_trichlorosilane", 1000)], "heated")
+    write(USES / "trichlorosilane.json", {"type": "tfmg:distillation", "ingredients": [fluid("crude_trichlorosilane", 200)],
+                                          "results": [result_fluid("trichlorosilane", 170), result_fluid("silicon_tetrachloride", 30)]})
+    pgm_vat("polysilicon", [fluid("trichlorosilane", 1000), fluid("tfmg:hydrogen", 500)],
+            [result("polysilicon", 2), result_fluid("hydrochloric_acid", 250), result_fluid("silicon_tetrachloride", 250)], machines=electrodes, heat=None, folder=USES)
+    mixing("silicon_boule", item("polysilicon", 4) + tag("c:gems/quartz") + argon(), [result("silicon_boule")], "superheated")
+    write(USES / "silicon_wafer.json", {"type": "create:cutting", "ingredients": item("silicon_boule"), "processing_time": 200, "results": [result("silicon_wafer", 8)]})
+
+
 def semiconductors():
-    common.mixing(TFMG / "mixing/n_semiconductor.json", item("tfmg:silicon_ingot", 4) + item("white_phosphorus"), [result("tfmg:n_semiconductor", 4)], "heated")
-    common.mixing(TFMG / "mixing/p_semiconductor.json", item("tfmg:silicon_ingot", 4) + item("boric_acid"), [result("tfmg:p_semiconductor", 4)], "heated")
+    common.mixing(TFMG / "mixing/n_semiconductor.json", item("silicon_wafer", 4) + item("white_phosphorus"), [result("tfmg:n_semiconductor", 4)], "heated")
+    common.mixing(TFMG / "mixing/p_semiconductor.json", item("silicon_wafer", 4) + item("boric_acid"), [result("tfmg:p_semiconductor", 4)], "heated")
+    with zipfile.ZipFile(TFMG_JAR) as jar:
+        transistor = json.loads(jar.read("data/tfmg/recipe/sequenced_assembly/transistor.json"))
+    for stack in transistor["results"]:
+        if stack["id"] == "tfmg:silicon_ingot":
+            stack["id"] = "fundamentals:silicon_wafer"
+    write(TFMG / "sequenced_assembly/transistor.json", transistor)
+    unfinished = {"item": "tfmg:unfinished_transistor"}
+    write(USES / "transistor_from_germanium.json", {
+        "type": "create:sequenced_assembly", "ingredient": {"item": "tfmg:plastic_sheet"}, "loops": 1,
+        "results": [{"id": "tfmg:transistor_item", "count": 4}], "transitional_item": {"id": "tfmg:unfinished_transistor"},
+        "sequence": [{"type": "create:deploying", "ingredients": [unfinished, part], "results": [{"id": "tfmg:unfinished_transistor"}]}
+                     for part in ({"tag": "c:nuggets/germanium"}, {"tag": "c:nuggets/indium"}, {"tag": "c:nuggets/indium"}, {"tag": "c:wires/copper"})]})
+
+
+def zinc_residues():
+    electrodes = ("tfmg:electrode", "tfmg:electrode")
+    pgm_vat("zinc_leach_liquor", item("zinc_oxide", 2) + [fluid("tfmg:sulfuric_acid", 500), fluid("minecraft:water", 500)],
+            [result_fluid("zinc_leach_liquor", 1000), {"id": "fundamentals:zinc_leach_residue", "chance": 0.2}], folder=USES)
+    mixing("zinc_sulfate_liquor", [fluid("zinc_leach_liquor", 1000)] + tag("c:nuggets/zinc"),
+           [result_fluid("zinc_sulfate_liquor", 1000), {"id": "fundamentals:cadmium_sponge", "chance": 0.2}], "heated")
+    pgm_vat("zinc_electrowinning", [fluid("zinc_sulfate_liquor", 500)], [result("create:zinc_ingot"), result_fluid("tfmg:sulfuric_acid", 250)],
+            machines=electrodes, heat=None, folder=USES)
+    write(USES / "cadmium_ingot.json", {"type": "create:compacting", "heat_requirement": "heated", "ingredients": item("cadmium_sponge"),
+                                        "results": [result("cadmium_ingot")]})
+    mixing("cadmium_yellow", item("cadmium_ingot") + item("tfmg:sulfur_dust", 2), [result("minecraft:yellow_dye", 6)], "heated")
+    mixing("germanium_tetrachloride", item("zinc_leach_residue", 2) + [fluid("hydrochloric_acid", 500), fluid("chlorine", 100)],
+           [result_fluid("germanium_tetrachloride", 100)], "heated")
+    mixing("germanium_oxide", [fluid("germanium_tetrachloride", 250), fluid("minecraft:water", 500)], [result("germanium_oxide"), result_fluid("hydrochloric_acid", 250)])
+    vat("germanium_ingot", item("germanium_oxide", 2), "tfmg:hydrogen", 500, [result("germanium_ingot", 2)])
+    mixing("indium_sulfate_liquor", item("zinc_leach_residue", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("indium_sulfate_liquor", 500)], "heated")
+    pgm_vat("indium_extraction", [fluid("indium_sulfate_liquor", 1000), fluid("p204", 250), fluid("hydrochloric_acid", 100)],
+            [result_fluid("indium_chloride_liquor", 100), result_fluid("zinc_leach_liquor", 900), result_fluid("p204", 245)], heat=None, folder=USES)
+    mixing("indium_sponge", [fluid("indium_chloride_liquor", 100)] + tag("c:nuggets/zinc", 2), [result("indium_sponge")])
+    pgm_vat("indium_ingot", item("indium_sponge", 2), [result("indium_ingot", 2)], machines=electrodes, heat=None, folder=USES)
+    mixing("indium_tin_oxide", tag("c:ingots/indium") + tag("c:nuggets/tin") + [fluid("tfmg:air", 250)], [result("indium_tin_oxide", 2)], "superheated")
+    shaped(USES / "segmented_display_from_indium_tin_oxide.json", ["WGW", "KAK", "WCW"],
+           {"A": {"item": "tfmg:industrial_aluminum_casing"}, "C": {"item": "tfmg:circuit_board"}, "G": {"item": "minecraft:black_stained_glass_pane"},
+            "K": {"item": "fundamentals:indium_tin_oxide"}, "W": {"tag": "c:wires/copper"}},
+           {"count": 8, "id": "tfmg:segmented_display"})
+
+
+def gallium():
+    electrodes = ("tfmg:electrode", "tfmg:electrode")
+    pgm_vat("sodium_gallate_liquor", [fluid("spent_bayer_liquor", 1000)] + item("mercury"),
+            [result_fluid("sodium_gallate_liquor", 50), result_fluid("caustic_soda", 950), {"id": "fundamentals:mercury", "chance": 0.95}],
+            machines=electrodes, heat=None, folder=USES)
+    pgm_vat("gallium", [fluid("sodium_gallate_liquor", 250)], [result("gallium_nugget", 2), result_fluid("caustic_soda", 200)],
+            machines=electrodes, heat=None, folder=USES)
+    pgm_vat("led_chip", tag("c:nuggets/gallium", 2) + tag("c:nuggets/indium") + item("alumina") + [fluid("ammonia", 250)], [result("led_chip", 2)], folder=USES)
+    mixing("light_bulb_led", item("led_chip") + item("yttrium_oxide") + item("cerium_oxide") + item("create:framed_glass") + tag("c:nuggets/copper", 2),
+           [result("tfmg:light_bulb", 6)])
 
 
 def manganese():
@@ -814,7 +887,9 @@ def aluminium():
             [result_fluid("sodium_aluminate_liquor", 500), result("red_mud")], folder=USES)
     mixing("scandium_liquor_from_red_mud", item("red_mud", 4) + [fluid("hydrochloric_acid", 500)], [result_fluid("scandium_liquor", 50)], "heated")
     shaped(USES / "red_mud_block.json", ["###", "###", "###"], {"#": {"item": "fundamentals:red_mud"}}, {"count": 1, "id": "fundamentals:red_mud_block"})
-    mixing("aluminium_hydroxide", [fluid("sodium_aluminate_liquor", 500)], [result("aluminium_hydroxide"), result_fluid("caustic_soda", 400)])
+    pgm_vat("sodium_aluminate_liquor_from_spent_liquor", item("tfmg:bauxite_powder", 2) + [fluid("spent_bayer_liquor", 500)],
+            [result_fluid("sodium_aluminate_liquor", 500), result("red_mud")], folder=USES)
+    mixing("aluminium_hydroxide", [fluid("sodium_aluminate_liquor", 500)], [result("aluminium_hydroxide"), result_fluid("spent_bayer_liquor", 400)])
     write(USES / "alumina.json", {"type": "minecraft:blasting", "category": "misc", "ingredient": {"item": "fundamentals:aluminium_hydroxide"},
                                   "result": {"id": "fundamentals:alumina"}, "experience": 0.2, "cookingtime": 100})
     mixing("cryolite", item("aluminium_hydroxide") + [fluid("hydrofluoric_acid", 500), fluid("caustic_soda", 250)], [result("cryolite", 2)])
@@ -856,7 +931,7 @@ def thorium():
     shaped(USES / "clarifier_sludge_block.json", ["###", "###", "###"], {"#": {"item": "fundamentals:clarifier_sludge"}},
            {"count": 1, "id": "fundamentals:clarifier_sludge_block"})
     write(DATA / "tags/item/toxic_dusts.json", {"replace": False, "values": [
-        "#fundamentals:beryllium_dusts", "#fundamentals:nickel_dusts", "#fundamentals:uranium_dusts", "fundamentals:monazite_residue_dust",
+        "#fundamentals:beryllium_dusts", "#fundamentals:nickel_dusts", "#fundamentals:uranium_dusts", "fundamentals:monazite_residue_dust", "fundamentals:cadmium_sponge",
         {"id": "chemica:arsenic_dust", "required": False}]})
 
 
@@ -1035,6 +1110,7 @@ def main():
     loot()
     alloys()
     thermometry()
+    silicon()
     semiconductors()
     manganese()
     galvanizing()
@@ -1050,6 +1126,8 @@ def main():
     platinum_sinks()
     chlor_alkali()
     aluminium()
+    gallium()
+    zinc_residues()
     silver()
     silver_sinks()
     thorium()

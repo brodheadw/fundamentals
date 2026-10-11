@@ -1,0 +1,82 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "tfmg:plastic_sheet"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "id": "tfmg:transistor_item",
+      "count": 4
+    }
+  ],
+  "transitional_item": {
+    "id": "tfmg:unfinished_transistor"
+  },
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_transistor"
+        },
+        {
+          "tag": "c:nuggets/germanium"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_transistor"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_transistor"
+        },
+        {
+          "tag": "c:nuggets/indium"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_transistor"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_transistor"
+        },
+        {
+          "tag": "c:nuggets/indium"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_transistor"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "tfmg:unfinished_transistor"
+        },
+        {
+          "tag": "c:wires/copper"
+        }
+      ],
+      "results": [
+        {
+          "id": "tfmg:unfinished_transistor"
+        }
+      ]
+    }
+  ]
+}

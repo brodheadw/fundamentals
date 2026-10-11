@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:cadmium_ingot"
+    },
+    {
+      "item": "tfmg:sulfur_dust"
+    },
+    {
+      "item": "tfmg:sulfur_dust"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:yellow_dye",
+      "count": 6
+    }
+  ],
+  "heat_requirement": "heated"
+}
