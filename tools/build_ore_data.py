@@ -79,6 +79,7 @@ ORES = {
     "zircon": ("zirconium", ("shovel", "pickaxe"), None),
     "beryl": ("beryllium", "pickaxe", "iron"),
     "bertrandite": ("beryllium", "pickaxe", "stone"),
+    "uraninite": ("uranium", "pickaxe", "iron"),
 }
 
 ROCKS = {name: "shovel" if name == "laterite" else "pickaxe" for name in ROCK_BLOCKS}
@@ -105,6 +106,7 @@ HOSTS = {
     "scoria": ("create:scoria", "create:block/palettes/stone_types/scoria"),
     "scorchia": ("create:scorchia", "create:block/palettes/stone_types/scorchia"),
     "quartz": ("minecraft:quartz_block", "minecraft:block/quartz_block_side"),
+    "sandstone": ("minecraft:sandstone", "minecraft:block/sandstone"),
 }
 
 ROCK = ["#minecraft:stone_ore_replaceables", "#minecraft:deepslate_ore_replaceables", "minecraft:calcite",
@@ -176,6 +178,9 @@ DEPOSITS = {
                     (10, 15), (1, 2), (14, 26), "hydrothermal", (-32, 64), 12, "rock"),
     "cobalt_vein": ("vein", "minecraft:calcite", [("cobaltite", 0.45, "pockets")], (8, 12), (1, 2), (12, 20),
                     "hydrothermal", (-32, 32), 30, "rock"),
+    "pitchblende_vein": ("vein", "minecraft:calcite", [("uraninite", 0.30, "pockets"), ("native_silver", 0.08, "pockets"), ("cobaltite", 0.08, "pockets")],
+                         (8, 12), (1, 2), (12, 20), "hydrothermal", (-40, 24), 36, "rock"),
+    "roll_front": ("bed", "minecraft:sandstone", [("uraninite", 0.14, "pockets")], (9, 13), (2, 4), None, "arid_oxide", (20, 56), 30, "rock"),
 }
 
 PLACERS = {
@@ -364,7 +369,11 @@ def main():
     for commodity in SHARED:
         tag(C_TAGS / f"item/raw_materials/{commodity}.json", [f"#fundamentals:raw_materials/{commodity}"])
     from build_chemica_compat import optional, raw_materials
-    for metal, theirs in raw_materials().items():
+    from build_create_nuclear_compat import raw_materials as create_nuclear_raw
+    removed = raw_materials()
+    for metal, theirs in create_nuclear_raw().items():
+        removed[metal] = removed.get(metal, []) + theirs
+    for metal, theirs in removed.items():
         write(C_TAGS / f"item/raw_materials/{metal}.json", {"replace": False, "values": [], "remove": optional(theirs)})
     for key, values in REPLACEABLE.items():
         tag(DATA / f"tags/block/deposit_replaceable/{key}.json", values)

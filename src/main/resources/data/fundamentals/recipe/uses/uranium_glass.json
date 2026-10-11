@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "GGG",
+    "GYG",
+    "GGG"
+  ],
+  "key": {
+    "G": {
+      "tag": "c:glass_blocks/colorless"
+    },
+    "Y": {
+      "item": "fundamentals:yellowcake"
+    }
+  },
+  "result": {
+    "count": 8,
+    "id": "minecraft:lime_stained_glass"
+  }
+}

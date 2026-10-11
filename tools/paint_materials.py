@@ -113,6 +113,7 @@ METAL = {
     "hafnium": ((66, 68, 74), (122, 124, 132), (172, 174, 182), (222, 224, 230)),
     "beryllium": ((78, 84, 92), (138, 146, 156), (186, 194, 204), (230, 236, 244)),
     "beryllium_copper": ((104, 52, 28), (170, 100, 58), (214, 148, 96), (244, 202, 152)),
+    "zircaloy": ((80, 82, 88), (144, 146, 152), (194, 196, 202), (236, 237, 240)),
 }
 
 OXIDE = {
@@ -184,6 +185,7 @@ MATERIALS = {
     "platinum": PGM, "palladium": PGM, "rhodium": PGM, "ruthenium": PGM, "iridium": PGM, "osmium": PGM,
     "tin_concentrate": CONCENTRATE, "crude_tin": INGOT, "tin": TIN, "bronze": BRONZE, "lead_bullion": INGOT, "silver": PRECIOUS,
     "zircon": CONCENTRATE, "zirconium": ZIRCONIUM, "hafnium": HAFNIUM, "beryllium": BERYLLIUM, "beryllium_copper": COPPER_ALLOY,
+    "uraninite": MINERAL, "zircaloy": STRUCTURAL,
 }
 
 DISPLAY = {"bastnasite": "Bastnäsite", "bastnasite_concentrate": "Bastnäsite Concentrate", "neodymium_iron_boron": "NdFeB", "dysprosium_neodymium_iron_boron": "Dy-NdFeB", "samarium_cobalt": "SmCo", "aluminium_scandium": "Al-Sc"}

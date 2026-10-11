@@ -151,6 +151,30 @@ def horseshoe(paint, pole):
     return img
 
 
+def pellets():
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    body, light, shade, end = (58, 56, 54, 255), (110, 106, 100, 255), (30, 28, 28, 255), (84, 80, 76, 255)
+    for x0, y0 in ((2, 8), (6, 4), (9, 9)):
+        for x in range(x0, x0 + 5):
+            for y in range(y0, y0 + 4):
+                edge = x == x0 + 4
+                img.putpixel((x, y), end if edge else light if y == y0 else shade if y == y0 + 3 else body)
+    return img
+
+
+def tube():
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    wall, light, shade, bore = (150, 152, 158, 255), (214, 216, 222, 255), (88, 90, 96, 255), (40, 40, 44, 255)
+    for i in range(2, 14):
+        x, y = i, 15 - i
+        for dx, tone in ((-1, light), (0, wall), (1, shade)):
+            if 0 <= x + dx < 16:
+                img.putpixel((x + dx, y), tone)
+    for dx, dy in ((0, 0), (1, 0), (0, 1)):
+        img.putpixel((13 + dx - 1, 2 + dy - 1), bore)
+    return img
+
+
 def magnets():
     nickel = ((92, 96, 104, 255), (170, 174, 182, 255), (214, 218, 226, 255), (250, 252, 255, 255))
     bar(nickel).save(TEXTURES / "item/neodymium_iron_boron_magnet.png")
@@ -223,6 +247,15 @@ def main():
     heap("boric_acid", (255, 255, 255), (242, 242, 238), (196, 196, 190)).save(TEXTURES / "item/boric_acid.png")
     spangled().save(TEXTURES / "item/galvanized_steel_plate.png")
     paint_raw("roasted_siderite", ((38, 20, 18), (72, 38, 32), (106, 60, 48), (152, 104, 88))).save(TEXTURES / "item/roasted_siderite.png")
+    heap("yellowcake", (252, 232, 96), (232, 196, 44), (168, 128, 22)).save(TEXTURES / "item/yellowcake.png")
+    heap("uranium_tetrafluoride", (190, 214, 112), (140, 172, 70), (86, 112, 40)).save(TEXTURES / "item/uranium_tetrafluoride.png")
+    heap("uranium_dioxide", (112, 90, 72), (70, 54, 42), (34, 26, 20)).save(TEXTURES / "item/uranium_dioxide.png")
+    heap("depleted_uranium_oxide", (92, 92, 70), (56, 56, 42), (26, 26, 20)).save(TEXTURES / "item/depleted_uranium_oxide.png")
+    heap("thorium_dioxide", (255, 255, 255), (238, 238, 234), (188, 188, 182)).save(TEXTURES / "item/thorium_dioxide.png")
+    heap("potassium_bifluoride", (255, 255, 255), (240, 242, 240), (194, 198, 194)).save(TEXTURES / "item/potassium_bifluoride.png")
+    paint_raw("boron_carbide", ((14, 14, 16), (34, 34, 40), (62, 62, 72), (130, 132, 146))).save(TEXTURES / "item/boron_carbide.png")
+    pellets().save(TEXTURES / "item/uranium_fuel_pellet.png")
+    tube().save(TEXTURES / "item/zircaloy_tube.png")
     magnets()
     print("uses textures written")
 

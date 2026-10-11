@@ -96,6 +96,8 @@ P = {
     "zircon": ((74, 40, 16), (132, 80, 36), (180, 126, 66), (232, 196, 140)),
     "beryl": ((54, 96, 82), (96, 148, 128), (148, 196, 174), (218, 242, 230)),
     "bertrandite": ((148, 146, 138), (196, 196, 188), (226, 226, 220), (252, 252, 250)),
+    "uraninite": ((8, 8, 8), (24, 22, 20), (46, 42, 38), (104, 96, 84)),
+    "gummite": ((132, 70, 12), (192, 112, 22), (226, 160, 40), (250, 214, 96)),
 }
 
 BORNITE = [((60, 34, 92), (104, 62, 150), (150, 104, 190), (200, 164, 226)),
@@ -148,6 +150,7 @@ RECIPES = {
     "zircon": [("crystals", "prism", 4, 1), ("speck", 7)],
     "beryl": [("crystals", "prism", 4, 1), ("speck", 3)],
     "bertrandite": [("crystals", "plate", 3, 1), ("speck", 6)],
+    "uraninite": [("blob", 5, 4, 8), ("companion", "gummite", 3), ("speck", 4)],
 }
 
 
@@ -503,7 +506,7 @@ SHEET_ORDER = [
     "hematite", "magnetite", "goethite", "siderite", "pyrolusite", "pentlandite", "nickel_laterite",
     "chromite", "wolframite", "scheelite", "molybdenite", "cobaltite", "ilmenite", "rutile",
     "native_silver", "argentite", "sperrylite", "cooperite", "braggite", "cinnabar", "spodumene", "fluorite", "borax", "trona", "halite",
-    "zircon", "beryl", "bertrandite",
+    "zircon", "beryl", "bertrandite", "uraninite",
 ]
 
 

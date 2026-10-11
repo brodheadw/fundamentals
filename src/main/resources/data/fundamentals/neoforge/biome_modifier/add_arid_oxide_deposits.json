@@ -4,7 +4,8 @@
   "features": [
     "fundamentals:evaporite_bed",
     "fundamentals:oxide_cap",
-    "fundamentals:beryllium_tuff"
+    "fundamentals:beryllium_tuff",
+    "fundamentals:roll_front"
   ],
   "step": "underground_decoration"
 }

@@ -1,0 +1,13 @@
+{
+  "name": "Roll Front",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_uraninite",
+  "sortnum": 38,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A bed of sandstone, in badlands, savanna and desert, between y 20 and 56. Carries uraninite in masses. Dig at the core: the edges are lean.",
+      "title": "Roll Front"
+    }
+  ]
+}

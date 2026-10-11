@@ -102,6 +102,10 @@ GASES = {
     "osmium_tetroxide": ("Osmium Tetroxide", 0xF2E8A0),
     "ruthenium_tetroxide": ("Ruthenium Tetroxide", 0xF0A830),
     "nickel_carbonyl": ("Nickel Carbonyl", 0xEEEEDC),
+    "fluorine": ("Fluorine", 0xEEEAA2),
+    "uranium_hexafluoride": ("Uranium Hexafluoride", 0xF2F2EC),
+    "enriched_uranium_hexafluoride": ("Enriched Uranium Hexafluoride", 0xEEF2E4),
+    "depleted_uranium_hexafluoride": ("Depleted Uranium Hexafluoride", 0xE8E8E6),
 }
 PLATINUM_LIQUORS = {
     "nickel_copper_sulfate": ("Nickel-Copper Sulfate Liquor", 0x58A890),
@@ -113,7 +117,8 @@ PLATINUM_LIQUORS = {
     "iridium_rhodium_liquor": ("Iridium-Rhodium Liquor", 0x6A2A1E),
     "rhodium_liquor": ("Rhodium Liquor", 0xC85A6A),
 }
-SULFATE_LIQUORS = {"beryllium_sulfate_liquor": ("Beryllium Sulfate Liquor", CLEAR), "lithium_sulfate_liquor": ("Lithium Sulfate Liquor", CLEAR)}
+SULFATE_LIQUORS = {"beryllium_sulfate_liquor": ("Beryllium Sulfate Liquor", CLEAR), "lithium_sulfate_liquor": ("Lithium Sulfate Liquor", CLEAR),
+                   "uranyl_sulfate_liquor": ("Uranyl Sulfate Liquor", 0xE2E070)}
 CAUSTICS = {"caustic_soda": ("Caustic Soda", 0xEEF2F0), "sodium_aluminate_liquor": ("Sodium Aluminate Liquor", 0xB8864A),
             "sodium_tungstate_liquor": ("Sodium Tungstate Liquor", 0xE6ECE8)}
 FLUIDS = {**{k: (*v, "LIQUOR") for k, v in {**LIQUORS, **PLATINUM_LIQUORS, **SULFATE_LIQUORS}.items()}, **{k: (*v, "ORGANIC") for k, v in ORGANICS.items()},

@@ -1,0 +1,36 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "createnuclear"
+    }
+  ],
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "c:ingots/beryllium"
+    },
+    "C": {
+      "item": "createnuclear:reactor_casing"
+    },
+    "P": {
+      "item": "create:precision_mechanism"
+    },
+    "S": {
+      "tag": "c:ingots/steel"
+    }
+  },
+  "pattern": [
+    "CCCCC",
+    "CPSPC",
+    "CSBSC",
+    "CPSPC",
+    "CCCCC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "createnuclear:reactor_core"
+  }
+}
