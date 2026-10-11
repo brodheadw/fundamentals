@@ -195,7 +195,7 @@ def thermometers(lang):
                                      ("up", {"x": 270}), ("down", {"x": 90}))}})
         write(DATA / f"loot_table/blocks/{name}.json", {"type": "minecraft:block", "pools": [drop_self(name)]})
         write(THERMOMETER_RECIPES / f"{name}.json", {
-            "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["U ", "LB", "A "] if beside else ["U", "L", "A"],
+            "type": "minecraft:crafting_shaped", "category": "misc", "pattern": [" U ", "BLB", " A "] if beside else ["U", "L", "A"],
             "key": {"U": upper, "L": lower, **({"B": beside[0]} if beside else {}), "A": {"item": "create:andesite_casing"}},
             "result": {"id": f"fundamentals:{name}", "count": 1}})
         lang[f"block.fundamentals.{name}"] = display

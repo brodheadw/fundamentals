@@ -2,9 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "pattern": [
-    " C ",
+    "CMC",
     "BGB",
-    "MP "
+    " P "
   ],
   "key": {
     "B": {

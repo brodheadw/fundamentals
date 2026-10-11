@@ -343,7 +343,7 @@ def rare_earths():
         "Calciothermic reduction, for gadolinium, terbium, dysprosium and yttrium: two fluoride and two calcium ingots under 250 mB of argon in a superheated vat give two ingots and the fluorspar back as slag. "
         "Lanthanothermic distillation, for samarium, which boils: two oxide and two lanthanum ingots under argon give two ingots and lanthanum oxide to go round again. "
         "Europium and the heavies past dysprosium are sold as oxide, and nothing wants them as metal.") + pages_of(
-        "Argon is spun out of 1,000 mB of air in a centrifuge vat, nine millibuckets at a time. Calcium is the plant's own calcium chloride, two of it electrolysed molten on electrodes in a heated vat to two ingots. "
+        "Argon is spun out of 1,000 mB of air in a centrifuge vat, nine millibuckets at a time with The Factory's one of neon. Calcium is the plant's own calcium chloride, two of it electrolysed molten on electrodes in a heated vat to two ingots. "
         "A kindled blaze burner is 1,000 °C and one fed a blaze cake 1,600. The fluoride bath electrolyses at 1,000 to 1,100 °C, and the two metallothermic reductions run near 1,500, past where the fluorspar slag melts, so all three want the cake."), 7)
     entry("rare_earths", "scandium", "Scandium", "fundamentals:scandium_ingot", pages_of(
         "Scandium rides with the rare earths but never with their liquors: almost none of it is in bastnäsite or monazite. Its own mineral is thortveitite, "
@@ -419,7 +419,7 @@ def rare_earths():
         "Phosphorus: two bone meal, a coal coke and a sand in a vat with two electrodes, superheated, give a white phosphorus and a slag, as the electric furnace does at 1,500 °C. "
         "A white phosphorus and 750 mB of chlorine in a heated basin give 500 mB of phosphorus trichloride.") + pages_of(
         "P204 is D2EHPA: 500 mB of 2-ethylhexanol, 250 of phosphorus trichloride, 500 of air and 250 of water, cold, give 250 mB of it, the air taking the phosphorus to phosphate. "
-        "P507 is EHEHPA: the same without the air, heated, which rearranges the phosphite to a phosphonate, carbon bonded to phosphorus. Both give 500 mB of hydrochloric acid back. "
+        "P507 is EHEHPA: the same with 250 mB of caustic soda in place of the air and water, heated, which rearranges the phosphite to a phosphonate, carbon bonded to phosphorus, and takes one ester back off. Both give 500 mB of hydrochloric acid back. "
         "Neat, they are too thick to use: 250 mB with 750 mB of kerosene and a limesand under a mixer make 1,000 mB of P204 or P507.") + pages_of(
         "Naphthenic acid is petroleum's own, washed out of the oil with caustic soda as sodium soaps and freed with acid: 1,000 mB of heavy oil, 250 mB of caustic soda and 250 mB of sulfuric acid in a heated vat with a mixer give 500 mB."), 12)
     entry("rare_earths", "temperature", "Temperature", "minecraft:campfire", pages_of(
@@ -576,7 +576,7 @@ def metals():
         "Either way the tungsten is taken up as ammonium tungstate and crystallised as ammonium paratungstate, APT, the form tungsten is traded in. "
         "500 mB of the liquor and 250 mB of ammonia, heated, give two APT, the amine extraction and ammonia strip folded into the one step; two tungstic acid dissolved in 250 mB of ammonia give two as well. "
         "A blast furnace calcines APT to the canary-yellow trioxide, and hydrogen in a heated chemical vat reduces two oxide to two ingots (Lassner and Schubert, Tungsten, 1999).", "APT") + pages_of(
-        "One ingot draws to four filaments, and the Factory's light bulb now burns one. In a vacuum the filament boils away and blackens the glass; Langmuir filled the bulb with an inert gas in 1913, "
+        "One ingot draws to four filaments on a stonecutter, and the Factory's light bulb now burns one. In a vacuum the filament boils away and blackens the glass; Langmuir filled the bulb with an inert gas in 1913, "
         "and lamps have been argon-filled since: a filament, a framed glass, four copper and three steel nuggets and 50 mB of argon under a mixer make three bulbs where crafting makes two. "
         "One ingot and two coals, superheated, carburise to two tungsten carbide, "
         "and Create's mechanical drill now bites with it. Ten per cent of the superalloy is tungsten.", "What it is for"), 3)
@@ -770,7 +770,7 @@ def platinum():
         "So the sponge is not cast but pressed, as Wollaston first made platinum malleable: Create's press over a basin on a burner fed a blaze cake sinters each sponge to an ingot, and nine nuggets pack to one."), 2)
     entry("platinum", "uses", "What they are for", "fundamentals:platinum_rhodium_gauze", pages_of(
         "Platinum is a catalyst. Two platinum and two rhenium nuggets and four bauxite powder, heated, make four platinum-rhenium catalyst, "
-        "and over one 500 mB of naphtha in a heated vat reforms to 400 mB of gasoline and gives off 100 mB of hydrogen, the catalyst surviving nineteen times in twenty. "
+        "and over one 500 mB of naphtha in a heated vat, a fixed bed with no mixer, reforms to 400 mB of gasoline and gives off 100 mB of hydrogen, the catalyst surviving nineteen times in twenty. "
         "Eight platinum nuggets round a rhodium nugget weave the gauze ammonia is burnt over: 250 mB of ammonia and 1,000 mB of air, heated, give 250 mB of nitric acid, Ostwald's process, and the gauze is all but never used up.", "What they are for") + pages_of(
         "The three-way converter: platinum and palladium on ceria burn what an engine leaves, and rhodium breaks down its nitrogen oxides, where four fifths of the world's rhodium goes. "
         "A platinum, a palladium and a rhodium nugget with the cerium oxide make two exhausts instead of one. "
@@ -814,7 +814,7 @@ def magnets():
                    "SmCo is two samarium, four cobalt, an iron and four copper and two zirconium nuggets, the Sm2Co17 type every high-temperature grade is. "
                    "Alnico is iron with aluminium, nickel, cobalt and a little copper: five iron, an aluminium, two nickel, two cobalt and three copper nuggets, superheated, "
                    "cast and heat-treated to ten ingots. Polarize any of the four ingots, or an NdFeB, Dy-NdFeB or SmCo plate, to its magnet. "
-                   "The magnet is the first thing a motor or generator takes on the belt, and it decides the grade of the whole.", "Making them")
+                   "The magnet is the first thing a motor or generator takes on the belt, and it decides the grade of the whole: a motor is begun on a shaft, a generator on a steel plate.", "Making them")
         + pages_of("A motor, generator, stator, electric pump or voltmeter and any magnet in a crafting grid rebuild it round that magnet, at full field: that is how a cooked or demagnetised machine comes back, "
                    "or a cheap one is upgraded. Machines built before grades, and The Factory Must Grow's own magnets still in a chest, count as Dy-NdFeB, "
                    "which is what every NdFeB the mod made then was. The Factory's magnet is no longer made.", "Rebuilding")

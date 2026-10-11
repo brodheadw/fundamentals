@@ -23,11 +23,15 @@
     },
     {
       "type": "patchouli:text",
-      "text": "P204 is D2EHPA: 500 mB of 2-ethylhexanol, 250 of phosphorus trichloride, 500 of air and 250 of water, cold, give 250 mB of it, the air taking the phosphorus to phosphate. P507 is EHEHPA: the same without the air, heated, which rearranges the phosphite to a phosphonate, carbon bonded to phosphorus."
+      "text": "P204 is D2EHPA: 500 mB of 2-ethylhexanol, 250 of phosphorus trichloride, 500 of air and 250 of water, cold, give 250 mB of it, the air taking the phosphorus to phosphate."
     },
     {
       "type": "patchouli:text",
-      "text": "Both give 500 mB of hydrochloric acid back. Neat, they are too thick to use: 250 mB with 750 mB of kerosene and a limesand under a mixer make 1,000 mB of P204 or P507."
+      "text": "P507 is EHEHPA: the same with 250 mB of caustic soda in place of the air and water, heated, which rearranges the phosphite to a phosphonate, carbon bonded to phosphorus, and takes one ester back off. Both give 500 mB of hydrochloric acid back."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Neat, they are too thick to use: 250 mB with 750 mB of kerosene and a limesand under a mixer make 1,000 mB of P204 or P507."
     },
     {
       "type": "patchouli:text",
