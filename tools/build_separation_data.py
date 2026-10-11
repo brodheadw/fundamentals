@@ -318,7 +318,6 @@ def vat(name, ingredients, results, machines, heated=True, time=100, folder="red
 
 def metals():
     mixing("hydrofluoric_acid", item("raw_fluorite", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("hydrofluoric_acid", 500)], heated=True)
-    vat("argon", [fluid("tfmg:air", 1000)], [{"id": "fundamentals:argon", "amount": 9}], ["tfmg:centrifuge"], heated=False, time=10)
     vat("calcium_ingot", item("calcium_chloride", 2), [result("calcium_ingot", 2), result_fluid("chlorine", 500)], ["tfmg:electrode", "tfmg:electrode"])
     for element in ELECTROLYSIS + CALCIOTHERMIC:
         mixing(f"{element}_fluoride", [item(f"{element}_oxide"), fluid("hydrofluoric_acid", 500)], [result(f"{element}_fluoride")])
@@ -349,7 +348,7 @@ def solvents():
     mixing("phosphorus_trichloride", [item("white_phosphorus"), fluid("chlorine", 750)], [result_fluid("phosphorus_trichloride", 500)], heated=True)
     chem("d2ehpa", [fluid("ethylhexanol", 500), fluid("phosphorus_trichloride", 250), fluid("tfmg:air", 500), fluid("minecraft:water", 250)],
          [result_fluid("d2ehpa", 250), result_fluid(STRIP, 500)], heated=False)
-    chem("ehehpa", [fluid("ethylhexanol", 500), fluid("phosphorus_trichloride", 250), fluid("minecraft:water", 250)],
+    chem("ehehpa", [fluid("ethylhexanol", 500), fluid("phosphorus_trichloride", 250), fluid("caustic_soda", 250)],
          [result_fluid("ehehpa", 250), result_fluid(STRIP, 500)])
 
 
@@ -498,7 +497,7 @@ def magnetomigration_cell():
     write(ASSETS / "models/item/magnetomigration_cell.json", {"parent": "fundamentals:block/magnetomigration_cell"})
     write(DATA / "loot_table/blocks/magnetomigration_cell.json", {"type": "minecraft:block", "pools": [drop_self("magnetomigration_cell")]})
     write(RECIPES / "magnetomigration_cell.json", {
-        "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["PPP", "PTM", "PPP"],
+        "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["PMP", "PTP", "PPP"],
         "key": {"P": ACID_PROOF, "T": [{"item": "fundamentals:plastic_fluid_tank"}, {"tag": "c:plates/stainless_steel"}], "M": {"tag": "fundamentals:magnets"}},
         "result": {"id": "fundamentals:magnetomigration_cell", "count": 1}})
 

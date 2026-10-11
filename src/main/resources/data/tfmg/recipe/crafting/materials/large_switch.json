@@ -2,9 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "pattern": [
-    "WRS",
-    "HMP",
-    "III"
+    "SRS",
+    "HMH",
+    "IPI"
   ],
   "key": {
     "S": {
@@ -24,9 +24,6 @@
     },
     "H": {
       "item": "tfmg:steel_cable_hub"
-    },
-    "W": {
-      "tag": "c:wires/copper"
     }
   },
   "result": {

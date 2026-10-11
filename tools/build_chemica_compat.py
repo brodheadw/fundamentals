@@ -97,6 +97,12 @@ def takes(node):
 
 
 def take_over(path, recipe):
+    # Our chlor-alkali cell runs the same brine on the same two electrodes over a dimensionally stable anode, and Chemica's
+    # steam is water alone in a vat with no machine: on graphite, and under a mixer, neither can be taken for the other.
+    if path == "vat_machine_recipe/electrolysis/brine":
+        recipe["machines"] = ["tfmg:graphite_electrode", "tfmg:graphite_electrode"]
+    if path == "vat_machine_recipe/vat_reaction/epichlorohydrin":
+        recipe["machines"] = ["tfmg:mixing"]
     if path == "vat_machine_recipe/electrolysis/salt":
         recipe["ingredients"] = [i for i in recipe["ingredients"] if i.get("fluid") != "minecraft:water"]
         recipe["results"] = [r for r in recipe["results"] if r["id"] != "minecraft:water"]

@@ -25,10 +25,9 @@
     }
   },
   "pattern": [
-    "CM  ",
-    "ACM ",
-    "ASCM",
-    "WAAC"
+    "CM MC",
+    "MCSCM",
+    "AAWAA"
   ],
   "result": {
     "count": 3,

@@ -2,9 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "pattern": [
-    "TKR",
-    "EPE",
-    "CPC"
+    "ETE",
+    "PKP",
+    "CRC"
   ],
   "key": {
     "T": {
