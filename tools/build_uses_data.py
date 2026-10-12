@@ -794,9 +794,10 @@ def gold():
     mixing("electrum_from_amalgam", item("gold_amalgam"), [result("electrum_ingot"), {"id": "fundamentals:mercury", "chance": 0.45}], "heated")
     mixing("gold_from_electrum", item("electrum_ingot") + [fluid("chlorine", 250)], [result("minecraft:gold_ingot"), result("silver_nugget")], "superheated")
     mixing("gold_from_electrum_in_aqua_regia", item("electrum_ingot") + [fluid("aqua_regia", 500)], [result("minecraft:gold_ingot"), result("silver_nugget")], "heated")
-    for block in ("gold_ore", "deepslate_gold_ore"):
+    for block, mineral in (("gold_ore", "native_gold"), ("deepslate_gold_ore", "native_gold"),
+                           ("iron_ore", "hematite"), ("deepslate_iron_ore", "magnetite")):
         write(VANILLA_LOOT / f"{block}.json", {"type": "minecraft:block", "pools": [
-            {"rolls": 1, "bonus_rolls": 0, "entries": [silk_or_raw(f"minecraft:{block}", "native_gold")]}]})
+            {"rolls": 1, "bonus_rolls": 0, "entries": [silk_or_raw(f"minecraft:{block}", mineral)]}]})
 
 
 def pgm_mixing(name, ingredients, results, heat=None):
