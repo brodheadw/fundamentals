@@ -25,6 +25,7 @@ import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @GameTestHolder(Fundamentals.MOD_ID)
@@ -112,12 +113,14 @@ public class MineralTests {
     }
 
     @GameTest(template = "empty")
-    public void vanillaGoldOreMinesAsNativeGold(GameTestHelper helper) {
-        for (Block block : new Block[] {Blocks.GOLD_ORE, Blocks.DEEPSLATE_GOLD_ORE}) {
+    public void vanillaGoldAndIronOreMineAsOurMinerals(GameTestHelper helper) {
+        Map<Block, String> minerals = Map.of(Blocks.GOLD_ORE, "raw_native_gold", Blocks.DEEPSLATE_GOLD_ORE, "raw_native_gold",
+                Blocks.IRON_ORE, "raw_hematite", Blocks.DEEPSLATE_IRON_ORE, "raw_magnetite");
+        minerals.forEach((block, raw) -> {
             List<ItemStack> drops = Block.getDrops(block.defaultBlockState(), helper.getLevel(), helper.absolutePos(BlockPos.ZERO), null, null,
                     new ItemStack(Items.IRON_PICKAXE));
-            helper.assertTrue(drops.size() == 1 && drops.getFirst().is(stack("fundamentals:raw_native_gold").getItem()), block + " dropped " + drops);
-        }
+            helper.assertTrue(drops.size() == 1 && drops.getFirst().is(stack("fundamentals:" + raw).getItem()), block + " dropped " + drops);
+        });
         helper.succeed();
     }
 
