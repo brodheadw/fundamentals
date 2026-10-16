@@ -9,8 +9,10 @@ import ai.gsmc.fundamentals.uses.Uses;
 import com.wildspell.fundamental.api.heat.Heat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.AbstractFurnaceBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComparatorBlock;
@@ -67,6 +69,14 @@ public class HeatTests {
                     helper.assertItemEntityPresent(Uses.mercury(), mercury, 1.5);
                 })
                 .thenSucceed();
+    }
+
+    @GameTest(template = "battery", timeoutTicks = 20)
+    public void aTinBlockReadsItsRowFromTheMaterialTable(GameTestHelper helper) {
+        var tin = Heat.material(BuiltInRegistries.BLOCK.get(ResourceLocation.parse("fundamentals:tin_block")).defaultBlockState());
+        helper.assertTrue(tin.conductivity() == 0.15 && tin.mass() == 7.3 && tin.meltAt().orElse(0.0) == 231.9 && tin.becomes().isEmpty(),
+                "tin should conduct 0.15, weigh 7.3 and melt at 231.9 with nothing to become, got " + tin);
+        helper.succeed();
     }
 
 }
