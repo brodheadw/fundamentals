@@ -47,7 +47,7 @@ side = "BOTH"
 [[dependencies.${id}]]
 modId = "fundamentalmagic"
 type = "required"
-versionRange = "[${principles_min},0.5)"
+versionRange = "[${principles_min},0.6)"
 ordering = "AFTER"
 side = "BOTH"
 
