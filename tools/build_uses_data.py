@@ -210,9 +210,6 @@ def glass():
     write(USES / "didymium_glass.json", {
         "type": "minecraft:crafting_shapeless", "category": "misc",
         "ingredients": item("didymium_oxide") + tag("c:glass_blocks/colorless", 2), "result": result("didymium_glass", 2)})
-    shaped(CREATE / "crafting/kinetics/goggles.json", [" S ", "GPG"],
-           {"G": {"item": "fundamentals:didymium_glass"}, "P": {"tag": "c:plates/gold"}, "S": {"tag": "c:strings"}},
-           {"count": 1, "id": "create:goggles"})
     shaped(USES / "rose_glass.json", ["GGG", "GEG", "GGG"],
            {"G": {"tag": "c:glass_blocks/colorless"}, "E": {"item": "fundamentals:erbium_oxide"}},
            {"count": 8, "id": "minecraft:pink_stained_glass"})
