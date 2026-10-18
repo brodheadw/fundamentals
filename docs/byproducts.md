@@ -86,6 +86,7 @@ Not byproducts, but the only other items the recipes make that no recipe takes:
 |---|---|
 | Boron Carbide (`fundamentals:boron_carbide`) | The absorber of Create: Nuclear's control rod; without it the pack has no reactor. |
 | Depleted Uranium Oxide (`fundamentals:depleted_uranium_oxide`) | Depleted uranium is kept as U3O8, the stable oxide, as the American deconversion plants keep theirs; its metal's uses, counterweights and armour, are not in the pack. Burn it in lava. |
+| Didymium Glass (`fundamentals:didymium_glass`) | The glassblower's and welder's lens; Create's goggles take plain glass, being the first tool a factory needs. |
 | Lutetium Oxide (`fundamentals:lutetium_oxide`) | Lutetium is sold as oxide for the scintillator crystals of PET scanners, not in the pack. |
 | Thorium Dioxide (`fundamentals:thorium_dioxide`) | Thoria for Create: Nuclear's thorium rod; without it the pack has no reactor. |
 | Thulium Oxide (`fundamentals:thulium_oxide`) | Thulium is sold as oxide for portable X-ray sources and fibre lasers, neither in the pack. |
