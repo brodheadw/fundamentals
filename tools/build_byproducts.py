@@ -37,6 +37,7 @@ ELSEWHERE = {
 
 # Finished goods no recipe takes, which are not blocks or equipment.
 END_PRODUCTS = {
+    "fundamentals:didymium_glass": "The glassblower's and welder's lens; Create's goggles take plain glass, being the first tool a factory needs.",
     "fundamentals:thulium_oxide": "Thulium is sold as oxide for portable X-ray sources and fibre lasers, neither in the pack.",
     "fundamentals:ytterbium_oxide": "Ytterbium is sold as oxide for fibre lasers and atomic clocks, neither in the pack.",
     "fundamentals:lutetium_oxide": "Lutetium is sold as oxide for the scintillator crystals of PET scanners, not in the pack.",
