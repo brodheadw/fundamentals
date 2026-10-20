@@ -21,6 +21,10 @@
     {
       "id": "fundamentals:sulfur_dioxide",
       "amount": 250
+    },
+    {
+      "id": "fundamentals:calomel",
+      "chance": 0.05
     }
   ],
   "heat_requirement": "heated"

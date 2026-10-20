@@ -33,7 +33,8 @@ public final class Uses {
             "cobalt_sulfate", "nmc_hydroxide", "nmc_cathode", "iron_phosphate", "lfp_cathode", "lithium_fluoride",
             "lithium_hexafluorophosphate", "ethylene_carbonate", "nickel_hydroxide", "hydride_alloy", "nickel_metal_hydride_cell",
             "polysilicon", "silicon_boule", "silicon_wafer", "zinc_leach_residue", "led_chip", "indium_tin_oxide",
-            "vanadium_pentoxide", "cement_clinker", "gypsum", "phosphogypsum");
+            "vanadium_pentoxide", "cement_clinker", "gypsum", "phosphogypsum",
+            "calomel", "copper_cement", "cobalt_cake", "anode_mud", "jarosite", "lead_silver_residue");
 
     public static final List<String> PLATINUM_IDS = List.of(
             "ammonium_chloride", "insoluble_residue", "iridium_rhodium_residue", "ammonium_chloroplatinate",
@@ -44,6 +45,7 @@ public final class Uses {
     private static Block sludgeBlock;
     private static Block redMudBlock;
     private static Block phosphogypsumBlock;
+    private static Block jarositeBlock;
 
     private Uses() {}
 
@@ -62,6 +64,8 @@ public final class Uses {
                 .strength(0.8F).sound(SoundType.MUD)));
         registry.accept(Fundamentals.id("phosphogypsum_block"), phosphogypsumBlock = new Block(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_WHITE)
                 .strength(0.8F).sound(SoundType.SAND)));
+        registry.accept(Fundamentals.id("jarosite_block"), jarositeBlock = new Block(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW)
+                .strength(0.8F).sound(SoundType.MUD)));
     }
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
@@ -71,6 +75,7 @@ public final class Uses {
         register(registry, "clarifier_sludge_block", new BlockItem(sludgeBlock, new Item.Properties()));
         register(registry, "red_mud_block", new BlockItem(redMudBlock, new Item.Properties()));
         register(registry, "phosphogypsum_block", new BlockItem(phosphogypsumBlock, new Item.Properties()));
+        register(registry, "jarosite_block", new BlockItem(jarositeBlock, new Item.Properties()));
         for (String id : PLATINUM_IDS) {
             register(registry, id, new Item(new Item.Properties()));
         }

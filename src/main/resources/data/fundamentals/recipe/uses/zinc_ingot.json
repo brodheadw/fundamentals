@@ -11,6 +11,10 @@
   "results": [
     {
       "id": "create:zinc_ingot"
+    },
+    {
+      "id": "fundamentals:cadmium_sponge",
+      "chance": 0.1
     }
   ],
   "heat_requirement": "superheated"

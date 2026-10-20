@@ -627,15 +627,25 @@ def metals():
         "One ingot and two coals, superheated, carburise to two tungsten carbide, "
         "and Create's mechanical drill now bites with it. Ten per cent of the superalloy is tungsten.", "What it is for"), 3)
     entry("metals", "zinc_nickel", "Zinc and nickel", "fundamentals:zinc_oxide", pages_of(
-        "Neither melts out of its ore in a furnace. Sphalerite roasts on a fire to zinc oxide, and smithsonite and hemimorphite, the old calamine, calcine to it. "
+        "Neither melts out of its ore in a furnace. Sphalerite is zinc sulfide, and roasts to zinc oxide only in a heated basin with 500 mB of air, giving off its sulfur as sulfur dioxide; "
+        "smithsonite and hemimorphite, the old calamine, calcine to it on a fire. "
         "Zinc boils at 907 °C, below the heat that reduces it, so it was distilled from a sealed retort packed with charcoal: "
-        "a zinc oxide and a charcoal in a basin over a blaze burner fed a blaze cake give a zinc ingot. Asurine, the zinc stone, crushes to smithsonite. "
+        "a zinc oxide and a charcoal in a basin over a blaze burner fed a blaze cake give a zinc ingot. Cadmium boils at 767 °C and comes over first, so one retort in ten "
+        "also gives a cadmium sponge: Stromeyer found the element in 1817 in calamine. Asurine, the zinc stone, crushes to smithsonite. "
         "Zinc oxide is also what every sulfur cure of rubber needs to work, so the Factory's rubber takes one.", "Zinc") + pages_of(
         "Since the 1910s most zinc has been won in water instead: roasted, leached in sulfuric acid and electrowon, and now nine tenths of it is (Sinclair, The Extractive Metallurgy of Zinc). "
         "Two zinc oxide, 500 mB of sulfuric acid and 500 mB of water in a heated vat with a mixer give 1,000 mB of zinc leach liquor, and one leach in five leaves a zinc leach residue, "
         "the ferrite and lead sulfate that hold the germanium and indium. The copper, cobalt and cadmium in the liquor would foul the cathode, so it is stirred hot with a zinc nugget, "
         "zinc dust that cements them out: 1,000 mB of zinc sulfate liquor, and one batch in five a cadmium sponge. 500 mB of that on two electrodes in a vat give a zinc ingot "
         "and 250 mB of sulfuric acid back to the leach.", "Electrolytic zinc") + pages_of(
+        "The purification comes out in its order: copper first, as a copper cement that a blast furnace fire-refines to a copper ingot; then cobalt, as a cobalt cake that "
+        "250 mB of sulfuric acid, heated, turn to cobalt sulfate; then cadmium. Manganese in the liquor plates out on the anodes as anode mud, MnO2, one cell in twenty, "
+        "which a coke and 500 mB of sulfuric acid, heated, turn to two manganese sulfate. The roaster gas carries the ore's mercury, scrubbed out as calomel by the "
+        "Boliden-Norzink process one roast in twenty; a calomel and a limesand, heated, give mercury back.", "What else is in the liquor") + pages_of(
+        "The leach residue is mostly zinc ferrite, which a neutral leach cannot touch. Two of it with 500 mB of sulfuric acid and 100 mB of ammonia in a heated vat give "
+        "500 mB more zinc leach liquor, a jarosite and a lead-silver residue: the jarosite process of 1965, which drops the iron as ammonium jarosite (Arregui, Gordon and Steintveit, 1980). "
+        "The lead-silver residue goes to a lead smelter; in a bloomery it gives lead bullion and a slag. The jarosite, holding lead, arsenic and cadmium, is impounded in lined ponds: "
+        "nine pack into a jarosite pond.", "Jarosite") + pages_of(
         "Half the world's zinc goes on steel (International Zinc Association). Dipped in molten zinc at about 450 °C, steel takes a coat that corrodes in its place and, scratched through, "
         "still goes before the steel does. Four heavy plates and a zinc nugget, heated, give four galvanized steel plates, which do anything a steel plate does and never rust; "
         "a bare heavy plate rusts as a steel ingot does.", "Galvanizing") + pages_of(

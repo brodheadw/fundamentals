@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:calomel",
     "fundamentals:cinnabar_ore",
     "fundamentals:gold_amalgam",
     "fundamentals:mercury",
