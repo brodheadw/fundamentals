@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:anode_mud",
     "fundamentals:columbite_dust",
     "fundamentals:columbite_ore",
     "fundamentals:ferromanganese_ingot",

@@ -6,16 +6,16 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Neither melts out of its ore in a furnace. Sphalerite roasts on a fire to zinc oxide, and smithsonite and hemimorphite, the old calamine, calcine to it.",
+      "text": "Neither melts out of its ore in a furnace. Sphalerite is zinc sulfide, and roasts to zinc oxide only in a heated basin with 500 mB of air, giving off its sulfur as sulfur dioxide; smithsonite and hemimorphite, the old calamine, calcine to it on a fire.",
       "title": "Zinc"
     },
     {
       "type": "patchouli:text",
-      "text": "Zinc boils at 907 °C, below the heat that reduces it, so it was distilled from a sealed retort packed with charcoal: a zinc oxide and a charcoal in a basin over a blaze burner fed a blaze cake give a zinc ingot. Asurine, the zinc stone, crushes to smithsonite."
+      "text": "Zinc boils at 907 °C, below the heat that reduces it, so it was distilled from a sealed retort packed with charcoal: a zinc oxide and a charcoal in a basin over a blaze burner fed a blaze cake give a zinc ingot."
     },
     {
       "type": "patchouli:text",
-      "text": "Zinc oxide is also what every sulfur cure of rubber needs to work, so the Factory's rubber takes one."
+      "text": "Cadmium boils at 767 °C and comes over first, so one retort in ten also gives a cadmium sponge: Stromeyer found the element in 1817 in calamine. Asurine, the zinc stone, crushes to smithsonite. Zinc oxide is also what every sulfur cure of rubber needs to work, so the Factory's rubber takes one."
     },
     {
       "type": "patchouli:text",
@@ -29,6 +29,32 @@
     {
       "type": "patchouli:text",
       "text": "The copper, cobalt and cadmium in the liquor would foul the cathode, so it is stirred hot with a zinc nugget, zinc dust that cements them out: 1,000 mB of zinc sulfate liquor, and one batch in five a cadmium sponge. 500 mB of that on two electrodes in a vat give a zinc ingot and 250 mB of sulfuric acid back to the leach."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The purification comes out in its order: copper first, as a copper cement that a blast furnace fire-refines to a copper ingot; then cobalt, as a cobalt cake that 250 mB of sulfuric acid, heated, turn to cobalt sulfate; then cadmium.",
+      "title": "What else is in the liquor"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Manganese in the liquor plates out on the anodes as anode mud, MnO2, one cell in twenty, which a coke and 500 mB of sulfuric acid, heated, turn to two manganese sulfate."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The roaster gas carries the ore's mercury, scrubbed out as calomel by the Boliden-Norzink process one roast in twenty; a calomel and a limesand, heated, give mercury back."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The leach residue is mostly zinc ferrite, which a neutral leach cannot touch.",
+      "title": "Jarosite"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two of it with 500 mB of sulfuric acid and 100 mB of ammonia in a heated vat give 500 mB more zinc leach liquor, a jarosite and a lead-silver residue: the jarosite process of 1965, which drops the iron as ammonium jarosite (Arregui, Gordon and Steintveit, 1980)."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The lead-silver residue goes to a lead smelter; in a bloomery it gives lead bullion and a slag. The jarosite, holding lead, arsenic and cadmium, is impounded in lined ponds: nine pack into a jarosite pond."
     },
     {
       "type": "patchouli:text",

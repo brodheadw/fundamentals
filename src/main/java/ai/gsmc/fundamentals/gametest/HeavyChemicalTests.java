@@ -73,6 +73,24 @@ public class HeavyChemicalTests {
     }
 
     @GameTest(template = "empty")
+    public void zincIsWonWithItsByproducts(GameTestHelper helper) {
+        for (String id : new String[] {"create:smelting/zinc_ingot_from_raw_ore", "create:blasting/zinc_ingot_from_crushed", "create:splashing/crushed_raw_zinc",
+                "fundamentals:roasting/zinc_oxide_from_sphalerite_smoking"}) {
+            helper.assertTrue(recipe(helper, id).isEmpty(), id + " skips the zinc circuit");
+        }
+        helper.assertTrue(gives(processing(helper, "fundamentals:uses/zinc_oxide_from_sphalerite_with_sulfur_dioxide"), "fundamentals:calomel"),
+                "the roaster gas gives up the ore's mercury as calomel");
+        ProcessingRecipe<?, ?> purification = processing(helper, "fundamentals:uses/zinc_sulfate_liquor");
+        for (String cake : new String[] {"fundamentals:copper_cement", "fundamentals:cobalt_cake", "fundamentals:cadmium_sponge"}) {
+            helper.assertTrue(gives(purification, cake), "zinc dust cements out " + cake);
+        }
+        helper.assertTrue(gives(processing(helper, "fundamentals:uses/zinc_ingot"), "fundamentals:cadmium_sponge"), "a zinc retort distils cadmium first");
+        Recipe<?> jarosite = recipe(helper, "fundamentals:uses/zinc_leach_liquor_from_residue").orElseThrow(() -> new AssertionError("no hot acid leach"));
+        helper.assertTrue(takes(jarosite, "fundamentals:zinc_leach_residue"), "the hot acid leach takes the ferrite residue");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
     public void clinkerAndGypsumMakeTheFactorysCement(GameTestHelper helper) {
         ProcessingRecipe<?, ?> cement = processing(helper, "fundamentals:uses/portland_cement");
         helper.assertTrue(takes(cement, "fundamentals:cement_clinker") && takes(cement, "fundamentals:gypsum") && gives(cement, "tfmg:cement"),

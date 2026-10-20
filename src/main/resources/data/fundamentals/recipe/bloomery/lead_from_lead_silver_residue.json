@@ -1,0 +1,14 @@
+{
+  "type": "fundamentals:bloomery",
+  "ingredient": {
+    "item": "fundamentals:lead_silver_residue"
+  },
+  "result": {
+    "id": "fundamentals:lead_bullion_ingot",
+    "count": 1
+  },
+  "byproduct": {
+    "id": "tfmg:slag",
+    "count": 1
+  }
+}
