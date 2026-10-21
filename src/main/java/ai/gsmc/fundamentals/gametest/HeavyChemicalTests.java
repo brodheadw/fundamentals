@@ -75,7 +75,8 @@ public class HeavyChemicalTests {
     @GameTest(template = "empty")
     public void zincIsWonWithItsByproducts(GameTestHelper helper) {
         for (String id : new String[] {"create:smelting/zinc_ingot_from_raw_ore", "create:blasting/zinc_ingot_from_crushed", "create:splashing/crushed_raw_zinc",
-                "fundamentals:roasting/zinc_oxide_from_sphalerite_smoking"}) {
+                "fundamentals:roasting/zinc_oxide_from_sphalerite_smoking", "fundamentals:roasting/roasted_chalcopyrite_smoking",
+                "fundamentals:roasting/roasted_pentlandite_campfire_cooking", "fundamentals:roasting/roasted_galena_smoking"}) {
             helper.assertTrue(recipe(helper, id).isEmpty(), id + " skips the zinc circuit");
         }
         helper.assertTrue(gives(processing(helper, "fundamentals:uses/zinc_oxide_from_sphalerite_with_sulfur_dioxide"), "fundamentals:calomel"),

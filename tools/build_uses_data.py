@@ -242,7 +242,6 @@ def cobalt():
 
 
 def copper_molybdenum_rhenium():
-    roast("chalcopyrite", "roasted_chalcopyrite")
     mixing("molybdenum_oxide", item("raw_molybdenite", 2) + [fluid("tfmg:air", 1000)],
            [result("molybdenum_oxide", 2), {"id": "fundamentals:rhenium_flue_dust", "chance": 0.1}, result_fluid("sulfur_dioxide", 500)], "heated")
     vat("molybdenum_ingot", item("molybdenum_oxide", 2), "tfmg:hydrogen", 500, [result("molybdenum_ingot", 2)])
@@ -351,7 +350,6 @@ def zinc():
 
 
 def nickel():
-    roast("pentlandite", "roasted_pentlandite")
     roast("converter_matte_dust", "nickel_oxide", raw=False)
     mixing("ferronickel", item("roasted_pentlandite") + item("minecraft:charcoal"), [result("ferronickel_ingot"), result("tfmg:slag")], "superheated")
     mixing("ferronickel_from_laterite", item("raw_nickel_laterite", 4) + item("minecraft:charcoal", 2),
