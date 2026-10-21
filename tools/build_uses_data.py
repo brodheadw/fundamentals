@@ -50,7 +50,9 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "nickel_hydroxide": "Nickel Hydroxide", "hydride_alloy": "Hydride Alloy", "nickel_metal_hydride_cell": "Nickel-Metal Hydride Cell",
          "polysilicon": "Polysilicon", "silicon_boule": "Silicon Boule", "silicon_wafer": "Silicon Wafer", "zinc_leach_residue": "Zinc Leach Residue",
          "led_chip": "LED Chip", "indium_tin_oxide": "Indium Tin Oxide",
-         "vanadium_pentoxide": "Vanadium Pentoxide", "cement_clinker": "Cement Clinker", "gypsum": "Gypsum", "phosphogypsum": "Phosphogypsum"}
+         "vanadium_pentoxide": "Vanadium Pentoxide", "cement_clinker": "Cement Clinker", "gypsum": "Gypsum", "phosphogypsum": "Phosphogypsum",
+         "calomel": "Calomel", "copper_cement": "Copper Cement", "cobalt_cake": "Cobalt Cake", "anode_mud": "Anode Mud",
+         "jarosite": "Jarosite", "lead_silver_residue": "Lead-Silver Residue"}
 # Registered by uses.Uses as uses.Fertiliser, in this order.
 FERTILISERS = {"ammonium_nitrate": "Ammonium Nitrate", "urea": "Urea", "superphosphate": "Superphosphate", "ammonium_phosphate": "Ammonium Phosphate",
                "npk_fertiliser": "NPK Fertiliser"}
@@ -62,7 +64,7 @@ MAGNETS = {f"{alloy}_magnet": f"{grade} Magnet" for alloy, grade in zip(MAGNET_A
 MAGNET_MACHINES = {"electric_motor": "sequenced_assembly/motor", "generator": "sequenced_assembly/generator", "stator": "mechanical_crafting/stator",
                    "electric_pump": "crafting/materials/electric_pump", "voltmeter": "crafting/materials/voltmeter"}
 MAGNET_PATTERNS = {"electric_pump": ["QCQ", "MPM", "KWK"], "stator": ["CM MC", "MCSCM", "AAWAA"]}
-BLOCKS = {"clarifier_sludge_block": "Clarifier Tailings", "red_mud_block": "Bauxite Residue", "phosphogypsum_block": "Phosphogypsum Stack"}
+BLOCKS = {"clarifier_sludge_block": "Clarifier Tailings", "red_mud_block": "Bauxite Residue", "phosphogypsum_block": "Phosphogypsum Stack", "jarosite_block": "Jarosite Pond"}
 # Registered by uses.Uses in this order.
 PGM_ITEMS = {"ammonium_chloride": "Ammonium Chloride", "insoluble_residue": "Insoluble Residue", "iridium_rhodium_residue": "Iridium-Rhodium Residue",
              "ammonium_chloroplatinate": "Ammonium Chloroplatinate", "dichlorodiammine_palladium": "Dichlorodiammine Palladium",
@@ -240,7 +242,6 @@ def cobalt():
 
 
 def copper_molybdenum_rhenium():
-    roast("chalcopyrite", "roasted_chalcopyrite")
     mixing("molybdenum_oxide", item("raw_molybdenite", 2) + [fluid("tfmg:air", 1000)],
            [result("molybdenum_oxide", 2), {"id": "fundamentals:rhenium_flue_dust", "chance": 0.1}, result_fluid("sulfur_dioxide", 500)], "heated")
     vat("molybdenum_ingot", item("molybdenum_oxide", 2), "tfmg:hydrogen", 500, [result("molybdenum_ingot", 2)])
@@ -338,13 +339,17 @@ def steel():
 
 
 def zinc():
-    for ore in ("sphalerite", "smithsonite", "hemimorphite"):
+    # Sphalerite gives off its sulfur as SO2, so it roasts only with air in a basin (sulfuric_acid); the oxide ores calcine anywhere.
+    for ore in ("smithsonite", "hemimorphite"):
         roast(ore, "zinc_oxide", f"zinc_oxide_from_{ore}")
-    mixing("zinc_ingot", item("zinc_oxide") + item("minecraft:charcoal"), [result("create:zinc_ingot")], "superheated")
+    mixing("zinc_ingot", item("zinc_oxide") + item("minecraft:charcoal"), [result("create:zinc_ingot"), {"id": "fundamentals:cadmium_sponge", "chance": 0.1}],
+           "superheated")
+    for path in ("smelting/zinc_ingot_from_crushed", "smelting/zinc_ingot_from_ore", "smelting/zinc_ingot_from_raw_ore", "blasting/zinc_ingot_from_crushed",
+                 "blasting/zinc_ingot_from_ore", "blasting/zinc_ingot_from_raw_ore", "splashing/crushed_raw_zinc"):
+        disabled(CREATE / f"{path}.json")
 
 
 def nickel():
-    roast("pentlandite", "roasted_pentlandite")
     roast("converter_matte_dust", "nickel_oxide", raw=False)
     mixing("ferronickel", item("roasted_pentlandite") + item("minecraft:charcoal"), [result("ferronickel_ingot"), result("tfmg:slag")], "superheated")
     mixing("ferronickel_from_laterite", item("raw_nickel_laterite", 4) + item("minecraft:charcoal", 2),
@@ -521,9 +526,22 @@ def zinc_residues():
     pgm_vat("zinc_leach_liquor", item("zinc_oxide", 2) + [fluid("tfmg:sulfuric_acid", 500), fluid("minecraft:water", 500)],
             [result_fluid("zinc_leach_liquor", 1000), {"id": "fundamentals:zinc_leach_residue", "chance": 0.2}], folder=USES)
     mixing("zinc_sulfate_liquor", [fluid("zinc_leach_liquor", 1000)] + tag("c:nuggets/zinc"),
-           [result_fluid("zinc_sulfate_liquor", 1000), {"id": "fundamentals:cadmium_sponge", "chance": 0.2}], "heated")
-    pgm_vat("zinc_electrowinning", [fluid("zinc_sulfate_liquor", 500)], [result("create:zinc_ingot"), result_fluid("tfmg:sulfuric_acid", 250)],
+           [result_fluid("zinc_sulfate_liquor", 1000), {"id": "fundamentals:copper_cement", "chance": 0.2}, {"id": "fundamentals:cobalt_cake", "chance": 0.1},
+            {"id": "fundamentals:cadmium_sponge", "chance": 0.2}], "heated")
+    pgm_vat("zinc_electrowinning", [fluid("zinc_sulfate_liquor", 500)],
+            [result("create:zinc_ingot"), result_fluid("tfmg:sulfuric_acid", 250), {"id": "fundamentals:anode_mud", "chance": 0.05}],
             machines=electrodes, heat=None, folder=USES)
+    pgm_vat("zinc_leach_liquor_from_residue", item("zinc_leach_residue", 2) + [fluid("tfmg:sulfuric_acid", 500), fluid("ammonia", 100)],
+            [result_fluid("zinc_leach_liquor", 500), result("jarosite"), result("lead_silver_residue")], folder=USES)
+    write(DATA / "recipe/bloomery/lead_from_lead_silver_residue.json", {"type": "fundamentals:bloomery", "ingredient": {"item": "fundamentals:lead_silver_residue"},
+                                                                       "result": {"id": "fundamentals:lead_bullion_ingot", "count": 1}, "byproduct": {"id": "tfmg:slag", "count": 1}})
+    write(USES / "copper_from_copper_cement.json", {"type": "minecraft:blasting", "category": "misc", "ingredient": {"item": "fundamentals:copper_cement"},
+                                                     "result": {"id": "minecraft:copper_ingot"}, "experience": 0.1, "cookingtime": 100})
+    mixing("cobalt_sulfate_from_cobalt_cake", item("cobalt_cake") + [fluid("tfmg:sulfuric_acid", 250)], [result("cobalt_sulfate")], "heated")
+    mixing("manganese_sulfate_from_anode_mud", item("anode_mud") + item("tfmg:coal_coke") + [fluid("tfmg:sulfuric_acid", 500)],
+           [result("manganese_sulfate", 2), result_fluid("tfmg:carbon_dioxide", 250)], "heated")
+    mixing("mercury_from_calomel", item("calomel") + item("tfmg:limesand"), [result("mercury")], "heated")
+    shaped(USES / "jarosite_block.json", ["###", "###", "###"], {"#": {"item": "fundamentals:jarosite"}}, {"count": 1, "id": "fundamentals:jarosite_block"})
     write(USES / "cadmium_ingot.json", {"type": "create:compacting", "heat_requirement": "heated", "ingredients": item("cadmium_sponge"),
                                         "results": [result("cadmium_ingot")]})
     mixing("cadmium_yellow", item("cadmium_ingot") + item("tfmg:sulfur_dust", 2), [result("minecraft:yellow_dye", 6)], "heated")
@@ -1053,8 +1071,9 @@ SULFIDE_ROASTS = {"sphalerite": "zinc_oxide", "chalcopyrite": "roasted_chalcopyr
 def sulfuric_acid():
     mixing("sulfur_dioxide", item("tfmg:sulfur_dust") + [fluid("tfmg:air", 1000)], [result_fluid("sulfur_dioxide", 500)], "heated")
     for ore, roasted in SULFIDE_ROASTS.items():
+        calomel = [{"id": "fundamentals:calomel", "chance": 0.05}] if ore == "sphalerite" else []
         mixing(f"{roasted}_from_{ore}_with_sulfur_dioxide", item(f"raw_{ore}", 2) + [fluid("tfmg:air", 500)],
-               [result(roasted, 2), result_fluid("sulfur_dioxide", 250)], "heated")
+               [result(roasted, 2), result_fluid("sulfur_dioxide", 250)] + calomel, "heated")
     mixing("sodium_vanadate_liquor", item("raw_magnetite", 4) + item("soda_ash") + [fluid("minecraft:water", 500)],
            [result_fluid("sodium_vanadate_liquor", 250), result("create:crushed_raw_iron", 3)], "superheated")
     mixing("vanadium_pentoxide", item("ammonium_chloride") + [fluid("sodium_vanadate_liquor", 250)], [result("vanadium_pentoxide")], "heated")

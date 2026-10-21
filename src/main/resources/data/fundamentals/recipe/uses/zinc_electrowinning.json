@@ -24,6 +24,10 @@
     {
       "id": "tfmg:sulfuric_acid",
       "amount": 250
+    },
+    {
+      "id": "fundamentals:anode_mud",
+      "chance": 0.05
     }
   ]
 }

@@ -1,0 +1,17 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:calomel"
+    },
+    {
+      "item": "tfmg:limesand"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:mercury"
+    }
+  ],
+  "heat_requirement": "heated"
+}

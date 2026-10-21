@@ -1,0 +1,43 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "machines": [
+    "tfmg:mixing"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
+  "ingredients": [
+    {
+      "item": "fundamentals:zinc_leach_residue"
+    },
+    {
+      "item": "fundamentals:zinc_leach_residue"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "tfmg:sulfuric_acid"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 100,
+      "tag": "c:ammonia"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:zinc_leach_liquor",
+      "amount": 500
+    },
+    {
+      "id": "fundamentals:jarosite"
+    },
+    {
+      "id": "fundamentals:lead_silver_residue"
+    }
+  ],
+  "heat_requirement": "heated"
+}
