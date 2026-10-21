@@ -16,6 +16,14 @@
       "amount": 1000
     },
     {
+      "id": "fundamentals:copper_cement",
+      "chance": 0.2
+    },
+    {
+      "id": "fundamentals:cobalt_cake",
+      "chance": 0.1
+    },
+    {
       "id": "fundamentals:cadmium_sponge",
       "chance": 0.2
     }

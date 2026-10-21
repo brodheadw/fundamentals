@@ -208,6 +208,7 @@ PLACERS = {
 
 REMOVED = {
     "vanilla_iron": ["minecraft:ore_iron_upper", "minecraft:ore_iron_middle", "minecraft:ore_iron_small"],
+    "create_zinc": ["create:zinc_ore"],
 }
 TFMG_SWITCHED_OFF = ("lead_ore", "lithium_ore", "nickel_ore")
 TFMG_METAL_LAYERS = {"tfmg:galena", "tfmg:bauxite"}

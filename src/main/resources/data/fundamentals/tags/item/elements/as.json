@@ -2,6 +2,8 @@
   "replace": false,
   "values": [
     "fundamentals:cobaltite_ore",
+    "fundamentals:jarosite",
+    "fundamentals:jarosite_block",
     "fundamentals:raw_cobaltite",
     "fundamentals:raw_sperrylite",
     "fundamentals:sperrylite_ore"

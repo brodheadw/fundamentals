@@ -9,7 +9,7 @@ OUT = REPO / "docs/byproducts.md"
 OUTPUT_KEYS = ("result", "results", "byproduct")
 NOT_BYPRODUCTS = {"create:experience_nugget", "tfmg:lithium_nugget", "fundamentals:sponge_lead_plate"}
 OPTIONAL = ("chemica", "createnuclear")
-TAILINGS = {"fundamentals:clarifier_sludge_block", "fundamentals:red_mud_block", "fundamentals:monazite_residue_block", "fundamentals:phosphogypsum_block"}
+TAILINGS = {"fundamentals:clarifier_sludge_block", "fundamentals:red_mud_block", "fundamentals:monazite_residue_block", "fundamentals:phosphogypsum_block", "fundamentals:jarosite_block"}
 
 # Made by Java, not by a recipe file.
 MADE_IN_CODE = {
@@ -57,6 +57,8 @@ DEAD = {
                                      "Nine pack into clarifier tailings to wall into a dam or bury.",
     "fundamentals:phosphogypsum": "Calcium sulfate holding the phosphate rock's radium, fluoride and heavy metals: some 4.5 tonnes of it to every tonne of phosphoric acid (as P2O5), "
                                   "stacked beside the plant, since radon keeps it out of plaster and cement (the US EPA has required it stacked since 1989). Nine pack into a phosphogypsum stack.",
+    "fundamentals:jarosite": "Ammonium jarosite carrying the ferrite's iron with lead, arsenic and cadmium: classed hazardous, so it is impounded in lined ponds, "
+                             "or fixed with lime and cement. Nine pack into a jarosite pond.",
 }
 
 WHY = {
@@ -67,7 +69,13 @@ WHY = {
     "fundamentals:silicon_tetrachloride": "Silicon tetrachloride is hydrogenated back to trichlorosilane over silicon, as every modern Siemens plant closes its loop; the rest of the world's is burnt to fumed silica.",
     "fundamentals:zinc_leach_residue": "The leach residue of an electrolytic zinc plant carries the germanium and indium, which is where nearly all of both comes from.",
     "fundamentals:zinc_leach_liquor": "The indium circuit's raffinate goes back into the zinc leach, as at Korea Zinc's Onsan smelter.",
-    "fundamentals:cadmium_sponge": "Cadmium is cemented out of zinc sulfate liquor with zinc dust before electrowinning, and nearly all cadmium is this byproduct of zinc.",
+    "fundamentals:cadmium_sponge": "Cadmium is cemented out of zinc sulfate liquor with zinc dust before electrowinning, or boils off first in a zinc retort, and nearly all cadmium is this byproduct of zinc.",
+    "fundamentals:copper_cement": "Copper is the first metal zinc dust cements out of the leach liquor, and the cake goes to a copper smelter.",
+    "fundamentals:cobalt_cake": "Cobalt is cemented out hot after the copper, and the cake is leached for cobalt salts.",
+    "fundamentals:anode_mud": "Manganese in the electrolyte plates out on the lead anodes as MnO2, which plants return to the leach or sell as manganese.",
+    "fundamentals:calomel": "The Boliden-Norzink scrubber takes the ore's mercury out of the roaster gas as calomel before the acid plant.",
+    "fundamentals:jarosite": "The jarosite process dissolves the zinc ferrite in hot acid and drops its iron as jarosite, the zinc industry's largest waste.",
+    "fundamentals:lead_silver_residue": "What the hot acid leach leaves is lead sulfate carrying the ore's silver, sold to a lead smelter.",
     "fundamentals:cerium_concentrate": "Mountain Pass sold its leached-out ceria concentrate for polishing powder.",
     "fundamentals:chlorine": "Anode chlorine from a molten-chloride cell goes back to chlorination, as at every magnesium and titanium plant.",
     "fundamentals:clarifier_sludge": "The lime-neutralised hydroxide sludge has no market.",

@@ -194,8 +194,8 @@ def ironworking():
         + [crafting("fundamentals:bloomery")], 1)
     entry("ironworking", "bloom", "Bloom and hammer", "fundamentals:iron_bloom", pages_of(
         "A bloom is hammered, not cast. Beat it with the smithing hammer to drive the slag out and weld the iron together into wrought iron. "
-        "Copper comes straight out of the bloomery from malachite, azurite and cuprite. Galena has to be roasted on a fire first, which "
-        "drives off its sulfur; the roasted ore then gives lead bullion, lead still holding its silver, which a furnace remelts to lead.", "Bloom and hammer") + pages_of(
+        "Copper comes straight out of the bloomery from malachite, azurite and cuprite. Galena has to be roasted first, in a heated basin with air, which "
+        "drives off its sulfur as sulfur dioxide; the roasted ore then gives lead bullion, lead still holding its silver, which a furnace remelts to lead.", "Bloom and hammer") + pages_of(
         "A furnace never reduces iron ore, and neither does a fan. Create's crushing wheels grind hematite, magnetite, goethite and roasted siderite to crushed iron ore, "
         "and that goes to The Factory Must Grow's blast furnace, which has the coke and the heat, and gives pig iron: see Iron and steel. Crimsite is the iron stone and crushes to hematite; "
         "washed gravel leaves a little magnetite black sand. The slag every smelt leaves is The Factory Must Grow's own: see Slag.")
@@ -592,7 +592,7 @@ def metals():
         "(Flett, Cobalt-nickel separation in hydrometallurgy, 2004). A twentieth of the nickel's weight in cobalt comes out, rather more than a nickel sulfide ore really carries."), 0)
     entry("metals", "porphyry", "Copper, molybdenum, rhenium", "fundamentals:raw_molybdenite", pages_of(
         "A porphyry copper stock carries chalcopyrite with a little molybdenite, and the molybdenite carries rhenium at parts per million. "
-        "A copper sulfide smelts not to copper but to matte. Chalcopyrite roasted on a fire, or the calcine bornite, chalcocite and covellite roast to, melts in the bloomery to copper matte and slag. "
+        "A copper sulfide smelts not to copper but to matte. Chalcopyrite roasted in a heated basin with air, or the calcine bornite, chalcocite and covellite roast to, melts in the bloomery to copper matte and slag. "
         "Two matte and a sand, superheated, are the converter: the air burns off the sulfur and the iron, which the sand fluxes to slag, and leaves two blister copper. The blast furnace fire-refines blister to copper. "
         "Two raw molybdenite roasted in a heated basin with 1,000 mB of air give two molybdenum trioxide and 500 mB of sulfur dioxide for the acid plant, and one time in ten a rhenium flue dust: "
         "the roaster's flue is where all mined rhenium comes from, though about a quarter of the rhenium used is now recycled from superalloy scrap "
@@ -627,19 +627,29 @@ def metals():
         "One ingot and two coals, superheated, carburise to two tungsten carbide, "
         "and Create's mechanical drill now bites with it. Ten per cent of the superalloy is tungsten.", "What it is for"), 3)
     entry("metals", "zinc_nickel", "Zinc and nickel", "fundamentals:zinc_oxide", pages_of(
-        "Neither melts out of its ore in a furnace. Sphalerite roasts on a fire to zinc oxide, and smithsonite and hemimorphite, the old calamine, calcine to it. "
+        "Neither melts out of its ore in a furnace. Sphalerite is zinc sulfide, and roasts to zinc oxide only in a heated basin with 500 mB of air, giving off its sulfur as sulfur dioxide; "
+        "smithsonite and hemimorphite, the old calamine, calcine to it on a fire. "
         "Zinc boils at 907 °C, below the heat that reduces it, so it was distilled from a sealed retort packed with charcoal: "
-        "a zinc oxide and a charcoal in a basin over a blaze burner fed a blaze cake give a zinc ingot. Asurine, the zinc stone, crushes to smithsonite. "
+        "a zinc oxide and a charcoal in a basin over a blaze burner fed a blaze cake give a zinc ingot. Cadmium boils at 767 °C and comes over first, so one retort in ten "
+        "also gives a cadmium sponge: Stromeyer found the element in 1817 in calamine. Asurine, the zinc stone, crushes to smithsonite. "
         "Zinc oxide is also what every sulfur cure of rubber needs to work, so the Factory's rubber takes one.", "Zinc") + pages_of(
         "Since the 1910s most zinc has been won in water instead: roasted, leached in sulfuric acid and electrowon, and now nine tenths of it is (Sinclair, The Extractive Metallurgy of Zinc). "
         "Two zinc oxide, 500 mB of sulfuric acid and 500 mB of water in a heated vat with a mixer give 1,000 mB of zinc leach liquor, and one leach in five leaves a zinc leach residue, "
         "the ferrite and lead sulfate that hold the germanium and indium. The copper, cobalt and cadmium in the liquor would foul the cathode, so it is stirred hot with a zinc nugget, "
         "zinc dust that cements them out: 1,000 mB of zinc sulfate liquor, and one batch in five a cadmium sponge. 500 mB of that on two electrodes in a vat give a zinc ingot "
         "and 250 mB of sulfuric acid back to the leach.", "Electrolytic zinc") + pages_of(
+        "The purification comes out in its order: copper first, as a copper cement that a blast furnace fire-refines to a copper ingot; then cobalt, as a cobalt cake that "
+        "250 mB of sulfuric acid, heated, turn to cobalt sulfate; then cadmium. Manganese in the liquor plates out on the anodes as anode mud, MnO2, one cell in twenty, "
+        "which a coke and 500 mB of sulfuric acid, heated, turn to two manganese sulfate. The roaster gas carries the ore's mercury, scrubbed out as calomel by the "
+        "Boliden-Norzink process one roast in twenty; a calomel and a limesand, heated, give mercury back.", "What else is in the liquor") + pages_of(
+        "The leach residue is mostly zinc ferrite, which a neutral leach cannot touch. Two of it with 500 mB of sulfuric acid and 100 mB of ammonia in a heated vat give "
+        "500 mB more zinc leach liquor, a jarosite and a lead-silver residue: the jarosite process of 1965, which drops the iron as ammonium jarosite (Arregui and others, Lead-Zinc-Tin '80, TMS-AIME, 1980). "
+        "The lead-silver residue goes to a lead smelter; in a bloomery it gives lead bullion and a slag. The jarosite, holding lead, arsenic and cadmium, is impounded in lined ponds: "
+        "nine pack into a jarosite pond.", "Jarosite") + pages_of(
         "Half the world's zinc goes on steel (International Zinc Association). Dipped in molten zinc at about 450 °C, steel takes a coat that corrodes in its place and, scratched through, "
         "still goes before the steel does. Four heavy plates and a zinc nugget, heated, give four galvanized steel plates, which do anything a steel plate does and never rust; "
         "a bare heavy plate rusts as a steel ingot does.", "Galvanizing") + pages_of(
-        "Carbon does not part nickel from iron: it reduces both, and they alloy. Pentlandite roasted on a fire and smelted with a charcoal, superheated, gives a ferronickel ingot and a slag, "
+        "Carbon does not part nickel from iron: it reduces both, and they alloy. Pentlandite roasted in a heated basin with air and smelted with a charcoal, superheated, gives a ferronickel ingot and a slag, "
         "and whatever platinum it carried is lost in it. Nickel laterite, a weathered rock of 1.5 to 2.5 per cent nickel, is smelted whole: four of it with two charcoal, superheated, "
         "give one ferronickel and two slag, as the rotary kilns and electric furnaces of New Caledonia and Indonesia smelt it at about 1,550 °C.", "Ferronickel") + pages_of(
         "Real ferronickel runs 20 to 40 per cent nickel, and nickel pig iron less (Crundwell and others, Extractive Metallurgy of Nickel, Cobalt and Platinum Group Metals, 2011); here an ingot is a third nickel. "
@@ -659,7 +669,7 @@ def metals():
         "Only Create's diving helmet on a filled backtank keeps it out, and it burns two of the tank's air a second doing so. Keep the carbonyl in closed pipes and tanks, and wear the mask to break into them.") + pages_of(
         "The dusts of the nickel smelter cause lung and nasal cancer: the men who roasted and leached matte at Clydach died of them at many times the expected rate (Doll, 1958), "
         "and the International Agency for Research on Cancer puts nickel compounds in its first group. Nickel matte, converter matte, roasted pentlandite and nickel oxide held in the hand or stirred in a basin are breathed by everyone near. "
-        "And a sulfide roasting on a lit campfire or in a lit smoker or furnace, pentlandite, cobaltite or matte, gives off sulfur dioxide that stings anyone within two blocks. "
+        "And a sulfide roasting on a lit campfire or in a lit smoker or furnace, cobaltite, stibnite or matte, gives off sulfur dioxide that stings anyone within two blocks. "
         "Roasted in a heated basin with air instead, the gas is caught to make acid (see Sulfuric acid).", "The dusts and the fume"), 4)
     entry("metals", "chromium", "Ferrochrome and chromium", "fundamentals:ferrochrome_ingot", pages_of(
         "Chromite is chromium's only ore, black seams in the gabbro of the deep layered intrusion. A millstone or crushing wheels grind it to a brown powder, and a wash under an encased fan "
