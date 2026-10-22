@@ -1130,8 +1130,26 @@ def chemicals():
         "Vanadium rides in magnetite, a fraction of a per cent of it, and most of the world's comes out of titanomagnetite. Four raw magnetite with a soda ash and 500 mB of water, superheated, "
         "are the salt roast and the water leach: 250 mB of sodium vanadate liquor, and three crushed iron ore still good to smelt. 250 mB of the liquor and an ammonium chloride, heated, "
         "throw down ammonium metavanadate, which calcines to a vanadium pentoxide, orange-brown.", "Vanadium pentoxide") + pages_of(
+        "Most of the world's sulfur is not mined. Crude oil and gas carry it, up to a few per cent, and a refinery must take it out or the fuel burns to sulfur dioxide. "
+        "The hydrotreater is a heated vat with no machine in it, over a cobalt-molybdenum bed: a cobalt sulfate, a molybdenum oxide and four bauxite powder, heated, make four, "
+        "and the bed lasts 19 runs in 20. 500 mB of heavy oil and 250 mB of hydrogen, the reformer's own, give 500 mB of diesel and 250 mB of hydrogen sulfide, the sulfur gone to the gas. "
+        "The Claus unit burns a third of that and lets the rest react with it: 1,000 mB of hydrogen sulfide and 500 mB of air, heated, drop two sulfur dust. "
+        "Texas, Louisiana and the Persian Gulf make their sulfur this way and ship it to acid plants that have no sulfur of their own.", "Sulfur from oil") + pages_of(
+        "Before the oil, pyrite. A pyrite lode is a lens of iron sulfide with a little chalcopyrite, sphalerite and galena through it, a massive sulfide, as at Rio Tinto, "
+        "and for a century the acid works of Europe roasted it: two raw pyrite with 1,000 mB of air in a heated basin give 500 mB of sulfur dioxide and two raw hematite, "
+        "the cinder, which the blast furnace still takes. Huelva, downstream of Rio Tinto, is a copper-smelting acid hub to this day.", "Pyrite") + pages_of(
+        "Acid comes back, too. A refinery's alkylation unit makes high-octane gasoline over sulfuric acid: 500 mB of LPG with 100 mB of acid, cold, give 500 mB of gasoline "
+        "and 100 mB of spent acid, black with oil and down to about 90%. A regeneration plant cracks it in a furnace: 500 mB of spent acid and 250 mB of air, superheated, "
+        "are 500 mB of sulfur dioxide, back to the converter.", "Spent acid") + pages_of(
+        "Acid is made where the sulfur is burnt, not where the ore is dug. Nexa's Cajamarquilla refinery outside Lima made 345,000 tonnes of zinc in 2025 and 594,000 tonnes of acid "
+        "with it, and sold nearly all the acid, by rail car and chemical tanker, to the copper leach plants of northern Chile at Mejillones and Barquito. "
+        "Kokkola in Finland made 290,000 tonnes of zinc and 312,000 of acid; Atlantic Copper's smelter at Huelva makes 1.1 million tonnes a year; "
+        "Kamoa-Kakula's new smelter sells 40,000 tonnes a month to the Copperbelt's leach pads. Only about 7% of the world's acid crosses a border: "
+        "it is cheap, heavy and eats its tank, so a smelter's acid wants a fertiliser plant or a leach pad nearby, or a port.", "Where it is made") + pages_of(
         "Sources: Ullmann's Encyclopedia of Industrial Chemistry, \"Sulfuric Acid and Sulfur Trioxide\"; King, Davenport and Moats, Sulfuric Acid Manufacture (2nd ed., 2013); "
-        "Ullmann's, \"Vanadium and Vanadium Compounds\"; USGS, Mineral Commodity Summaries 2025, \"Sulfur\" and \"Vanadium\".", "Sources"), 0)
+        "Ullmann's, \"Vanadium and Vanadium Compounds\"; USGS, Mineral Commodity Summaries 2025, \"Sulfur\", \"Vanadium\" and \"Zinc\"; "
+        "Nexa Resources, Form 20-F for 2025; Boliden, Annual and Sustainability Report 2025; Atlantic Copper; Ivanhoe Mines, third quarter 2026; "
+        "S&P Global Commodity Insights, Sulfuric Acid (2023).", "Sources"), 0)
     entry("chemicals", "cement", "Cement", "fundamentals:cement_clinker", pages_of(
         "Lime and clay stirred together do not make cement; they set only once they have been burnt together. Portland cement is limestone and clay ground to a raw meal and burnt at about 1,450 °C "
         "in a rotary kiln, where the lime takes up the clay's silica and alumina as the calcium silicates that set with water, alite and belite. "

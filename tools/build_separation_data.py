@@ -74,6 +74,7 @@ ACIDS = {
 WASTES = {
     "spent_liquor": ("Spent Liquor", 0x8E9A86),
     "calcium_chloride_liquor": ("Calcium Chloride Liquor", 0xDCE6E4),
+    "spent_acid": ("Spent Acid", 0x4A3A30),
 }
 SEA = {"seawater": ("Seawater", 0x3F76E4)}
 SALINES = {"bittern": ("Bittern", 0xE6DEB8), "salt_brine": ("Salt Brine", 0xE2ECEE)}
@@ -115,6 +116,7 @@ GASES = {
     "phosphorus_pentafluoride": ("Phosphorus Pentafluoride", 0xF0F2EE),
     "sulfur_dioxide": ("Sulfur Dioxide", 0xF2F0E2),
     "sulfur_trioxide": ("Sulfur Trioxide", 0xF4F2EA),
+    "hydrogen_sulfide": ("Hydrogen Sulfide", 0xEAF0E4),
 }
 PLATINUM_LIQUORS = {
     "nickel_copper_sulfate": ("Nickel-Copper Sulfate Liquor", 0x58A890),

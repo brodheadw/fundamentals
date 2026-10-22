@@ -327,6 +327,7 @@ def main():
     heap("ammonium_chloroiridate", (96, 40, 32), (58, 24, 20), (28, 12, 10)).save(TEXTURES / "item/ammonium_chloroiridate.png")
     heap("ammonium_chlororhodate", (236, 132, 150), (204, 80, 104), (140, 42, 64)).save(TEXTURES / "item/ammonium_chlororhodate.png")
     heap("reforming_catalyst", (246, 246, 242), (206, 206, 204), (136, 138, 142)).save(TEXTURES / "item/reforming_catalyst.png")
+    heap("hydrotreating_catalyst", (150, 172, 196), (94, 118, 150), (50, 64, 92)).save(TEXTURES / "item/hydrotreating_catalyst.png")
     gauze().save(TEXTURES / "item/platinum_rhodium_gauze.png")
     filament((112, 126, 150, 255), (178, 192, 216, 255)).save(TEXTURES / "item/osmium_filament.png")
     heap("roasted_tin_concentrate", (130, 84, 60), (82, 50, 34), (38, 24, 18)).save(TEXTURES / "item/roasted_tin_concentrate.png")

@@ -635,6 +635,23 @@
       "boils": 138,
       "toxic": true
     },
+    "fundamentals:hydrogen_sulfide": {
+      "density": 1.36,
+      "viscosity": 0.0124,
+      "freezes": -85.5,
+      "boils": -60.3,
+      "flash_point": -82,
+      "autoignition": 232,
+      "toxic": true
+    },
+    "fundamentals:spent_acid": {
+      "density": 1800,
+      "viscosity": 25,
+      "freezes": -20,
+      "boils": 290,
+      "toxic": true,
+      "corrosive": true
+    },
     "fundamentals:sodium_vanadate_liquor": {
       "density": 1080,
       "viscosity": 1.2,

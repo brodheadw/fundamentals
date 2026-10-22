@@ -52,7 +52,7 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "led_chip": "LED Chip", "indium_tin_oxide": "Indium Tin Oxide",
          "vanadium_pentoxide": "Vanadium Pentoxide", "cement_clinker": "Cement Clinker", "gypsum": "Gypsum", "phosphogypsum": "Phosphogypsum",
          "calomel": "Calomel", "copper_cement": "Copper Cement", "cobalt_cake": "Cobalt Cake", "anode_mud": "Anode Mud",
-         "jarosite": "Jarosite", "lead_silver_residue": "Lead-Silver Residue"}
+         "jarosite": "Jarosite", "lead_silver_residue": "Lead-Silver Residue", "hydrotreating_catalyst": "Cobalt-Molybdenum Catalyst"}
 # Registered by uses.Uses as uses.Fertiliser, in this order.
 FERTILISERS = {"ammonium_nitrate": "Ammonium Nitrate", "urea": "Urea", "superphosphate": "Superphosphate", "ammonium_phosphate": "Ammonium Phosphate",
                "npk_fertiliser": "NPK Fertiliser"}
@@ -1082,6 +1082,14 @@ def sulfuric_acid():
     mixing("oleum", [fluid("sulfur_trioxide", 500), fluid("tfmg:sulfuric_acid", 500)], [result_fluid("oleum", 500)])
     mixing("sulfuric_acid_from_oleum", [fluid("oleum", 500), fluid("minecraft:water", 500)], [result_fluid("tfmg:sulfuric_acid", 1000)])
     mixing("gypsum", item("tfmg:limesand") + [fluid("sulfur_dioxide", 250), fluid("minecraft:water", 250)], [result("gypsum")])
+    mixing("raw_hematite_from_pyrite_with_sulfur_dioxide", item("raw_pyrite", 2) + [fluid("tfmg:air", 1000)],
+           [result("raw_hematite", 2), result_fluid("sulfur_dioxide", 500)], "heated")
+    mixing("hydrotreating_catalyst", item("cobalt_sulfate") + item("molybdenum_oxide") + item("tfmg:bauxite_powder", 4), [result("hydrotreating_catalyst", 4)], "heated")
+    pgm_vat("hydrotreated_diesel", item("hydrotreating_catalyst") + [fluid("tfmg:heavy_oil", 500), fluid("tfmg:hydrogen", 250)],
+            [result_fluid("tfmg:diesel", 500), result_fluid("hydrogen_sulfide", 250), {"id": "fundamentals:hydrotreating_catalyst", "chance": 0.95}], machines=(), folder=USES)
+    mixing("claus_sulfur", [fluid("hydrogen_sulfide", 1000), fluid("tfmg:air", 500)], [result("tfmg:sulfur_dust", 2)], "heated")
+    mixing("alkylate", [fluid("tfmg:lpg", 500), fluid("tfmg:sulfuric_acid", 100)], [result_fluid("tfmg:gasoline", 500), result_fluid("spent_acid", 100)])
+    mixing("sulfur_dioxide_from_spent_acid", [fluid("spent_acid", 500), fluid("tfmg:air", 250)], [result_fluid("sulfur_dioxide", 500)], "superheated")
     write(DATA.parent / "c/tags/item/dusts/gypsum.json", {"replace": False, "values": ["fundamentals:gypsum"]})
 
 

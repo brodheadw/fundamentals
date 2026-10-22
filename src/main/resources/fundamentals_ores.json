@@ -37,6 +37,11 @@
       "mineral": "siderite"
     },
     {
+      "name": "pyrite_ore",
+      "soft": false,
+      "mineral": "pyrite"
+    },
+    {
       "name": "pyrolusite_ore",
       "soft": false,
       "mineral": "pyrolusite"

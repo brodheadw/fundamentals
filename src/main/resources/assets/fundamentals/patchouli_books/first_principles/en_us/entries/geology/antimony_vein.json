@@ -2,7 +2,7 @@
   "name": "Antimony Vein",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_stibnite",
-  "sortnum": 40,
+  "sortnum": 41,
   "pages": [
     {
       "type": "patchouli:text",

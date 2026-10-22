@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:hydrotreating_catalyst",
     "fundamentals:molybdenite_ore",
     "fundamentals:molybdenum_ingot",
     "fundamentals:molybdenum_oxide",
