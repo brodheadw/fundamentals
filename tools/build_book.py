@@ -23,6 +23,7 @@ WHERE = {
     "laterite": "under jungle, savanna and mangrove", "pegmatite": "in mountains, hills and badlands and the deep dark beneath them", "carbonatite": "deep under mountains and badlands, in the deep dark",
     "alkaline": "under taiga and snowy country and in the deep dark", "ion_clay": "under jungle", "wetland": "in swamps and bogs", "hydrothermal": "in mountain and hill country and the deep dark beneath it",
     "placer": "in beach and river sand", "temperate": "under temperate forest, plains, hills and swamp", "alpine": "in the mountains",
+    "fumarole": "in the Nether, on the basalt deltas and in the soul sand valleys",
 }
 STYLE = {"pockets": "masses", "seams": "layers", "disseminated": "scattered grains", "top": "an enriched top"}
 KIND = {"bed": "a bed", "plug": "a plug", "blanket": "a blanket just under the surface", "vein": "a vein"}
@@ -273,9 +274,11 @@ def rare_earths():
         "carries the lights too. Ion-adsorption clay under jungle is the odd one: a clay with the heavy rare earths merely stuck to it, "
         "which is why it is leached and never roasted.", "The minerals") + [
         spotlight("fundamentals:light_rare_earth_concentrate", "A millstone or crushing wheels grind bastnäsite, xenotime, loparite and euxenite; monazite is a sand already. "
-                  "Washed under an encased fan, the light grains wash away and about half of what you fed it stays as a mixed concentrate: light from monazite and loparite, heavy from xenotime and euxenite.", "Concentrate"),
+                  "Washed under an encased fan, the light grains wash away and what stays is a mixed concentrate: light from monazite and loparite, heavy from xenotime and euxenite. "
+                  "Monazite is a clean sand and keeps 85 in 100, as a mineral-sands plant does; the ground pegmatite minerals keep five in eight.", "Concentrate"),
         spotlight("fundamentals:bastnasite_dust", "Bastnäsite will not wash: it is floated, as in every carbonatite mill. Two bastnäsite dust beaten with 250 mB of water and 100 mB of naphthenic acid, the fatty-acid collector, "
-                  "in a basin under a mixer, and the rare earth carbonate comes off the top as bastnäsite concentrate, one and sometimes two.", "Flotation")], 0)
+                  "in a basin under a mixer, and the rare earth carbonate comes off the top as bastnäsite concentrate, one and a third of the time two: "
+                  "Mountain Pass floats 65 to 70 per cent of what it mills.", "Flotation")], 0)
     entry("rare_earths", "liquor", "Liquor", "fundamentals:salt", [
         spotlight("fundamentals:light_rare_earth_sulfate", "Monazite, xenotime and the rest are phosphates hydrochloric acid barely touches, so they are cracked first: a concentrate roasted with 250 mB of sulfuric acid in a heated basin "
                   "gives a rare earth sulfate and frees 125 mB of phosphoric acid. It is the hot roast of Baotou, 500 to 800 °C, and that hot the thorium turns to a pyrophosphate no water dissolves.", "Cracking"),
@@ -594,7 +597,8 @@ def metals():
         "A porphyry copper stock carries chalcopyrite with a little molybdenite, and the molybdenite carries rhenium at parts per million. "
         "A copper sulfide smelts not to copper but to matte. Chalcopyrite roasted in a heated basin with air, or the calcine bornite, chalcocite and covellite roast to, melts in the bloomery to copper matte and slag. "
         "Two matte and a sand, superheated, are the converter: the air burns off the sulfur and the iron, which the sand fluxes to slag, and leaves two blister copper. The blast furnace fire-refines blister to copper. "
-        "Two raw molybdenite roasted in a heated basin with 1,000 mB of air give two molybdenum trioxide and 500 mB of sulfur dioxide for the acid plant, and one time in ten a rhenium flue dust: "
+        "Two raw molybdenite roasted in a heated basin with 1,000 mB of air give a molybdenum trioxide, one time in five a second, and 500 mB of sulfur dioxide for the acid plant, and one time in ten a rhenium flue dust. "
+        "The missing trioxide is the mill's: molybdenite riding in a copper ore floats at 50 to 60 per cent. "
         "the roaster's flue is where all mined rhenium comes from, though about a quarter of the rhenium used is now recycled from superalloy scrap "
         "and spent catalyst (USGS, Mineral Commodity Summaries 2025).", "The porphyry chain") + pages_of(
         "The trioxide is reduced under hydrogen in a heated chemical vat with an industrial mixer, as the industry does: two trioxide and 500 mB of hydrogen give two molybdenum ingots. "
@@ -616,9 +620,10 @@ def metals():
         "the share in the creep-resistant chromium-molybdenum boiler and pressure-vessel steels (ASTM A387 grade 22 is 0.9 to 1.1 per cent, 4140 0.15 to 0.25), their chromium left out. "
         "Its plates make the heavy machinery casing.", "Molybdenum steel"), 2)
     entry("metals", "tungsten", "Tungsten", "fundamentals:tungsten_ingot", pages_of(
-        "Wolframite, from the tin veins, will not open to acid. Two raw wolframite and 500 mB of caustic soda in a heated chemical vat with a mixer, the pressure digester at 150 to 200 °C, "
-        "give 500 mB of sodium tungstate liquor, the iron and manganese left behind as hydroxides; or two wolframite and two soda ash fused over a superheated burner and leached in 500 mB of water give the same. "
-        "Scheelite, from the limestone skarns, opens to hot hydrochloric acid: two raw scheelite and 500 mB, heated, throw down two yellow tungstic acid.", "Tungsten") + pages_of(
+        "Both tungsten ores are heavy, and a wash under an encased fan is their gravity table: three raw ore in four come through as concentrate, as gravity and flotation plants recover 65 to 80 per cent. "
+        "Wolframite, from the tin veins, will not open to acid. Two wolframite concentrate and 500 mB of caustic soda in a heated chemical vat with a mixer, the pressure digester at 150 to 200 °C, "
+        "give 500 mB of sodium tungstate liquor, the iron and manganese left behind as hydroxides; or two concentrate and two soda ash fused over a superheated burner and leached in 500 mB of water give the same. "
+        "Scheelite, from the limestone skarns, opens to hot hydrochloric acid: two scheelite concentrate and 500 mB, heated, throw down two yellow tungstic acid.", "Tungsten") + pages_of(
         "Either way the tungsten is taken up as ammonium tungstate and crystallised as ammonium paratungstate, APT, the form tungsten is traded in. "
         "500 mB of the liquor and 250 mB of ammonia, heated, give two APT, the amine extraction and ammonia strip folded into the one step; two tungstic acid dissolved in 250 mB of ammonia give two as well. "
         "A blast furnace calcines APT to the canary-yellow trioxide, and hydrogen in a heated chemical vat reduces two oxide to two ingots (Lassner and Schubert, Tungsten, 1999).", "APT") + pages_of(
@@ -673,7 +678,7 @@ def metals():
         "Roasted in a heated basin with air instead, the gas is caught to make acid (see Sulfuric acid).", "The dusts and the fume"), 4)
     entry("metals", "chromium", "Ferrochrome and chromium", "fundamentals:ferrochrome_ingot", pages_of(
         "Chromite is chromium's only ore, black seams in the gabbro of the deep layered intrusion. A millstone or crushing wheels grind it to a brown powder, and a wash under an encased fan "
-        "leaves the heavy chromite behind as concentrate, half of what goes in. Iron in chromite reduces along with the chromium, so smelting gives not chromium but ferrochrome: "
+        "leaves the heavy chromite behind as concentrate, five eighths of what goes in. Iron in chromite reduces along with the chromium, so smelting gives not chromium but ferrochrome: "
         "two concentrate, a coal coke and a limesand flux, superheated, as a submerged-arc furnace smelts it at 1,600 to 1,700 °C, give a ferrochrome ingot and slag.", "Ferrochrome") + pages_of(
         "Ferrochrome is what stainless steel is made from: three ferrochrome, a nickel and six steel, superheated, make ten stainless steel, eighteen per cent chromium and ten nickel. "
         "A flare burns in its own flame, so the Factory's flarestack is now built on stainless, and the steel chemical vat is lined with stainless plates where it had nickel.") + pages_of(
@@ -689,7 +694,7 @@ def metals():
         "A ferromanganese and six steel, superheated, make seven manganese steel. As wear plate a thin plate of it does a thick one's work, so a manganese steel ingot, pressed three times as a steel one is, gives two of the Factory's heavy plates.", "Manganese steel"), 5)
     entry("metals", "tin", "Tin and bronze", "fundamentals:tin_ingot", pages_of(
         "Cassiterite, tin dioxide, comes from the tin veins and from beach and river sand, where it settles because it is seven times as heavy as water. "
-        "That weight is how it is concentrated: a raw cassiterite washed under an encased fan leaves a tin concentrate behind. "
+        "That weight is how it is concentrated: a raw cassiterite washed under an encased fan leaves a tin concentrate behind seven times in ten; a gravity tin plant loses a quarter to a third of its tin to the tailings. "
         "Pyrite and arsenopyrite ride with it, so the concentrate is roasted on a campfire or in a smoker to drive off their sulfur and arsenic.", "Cassiterite") + pages_of(
         "Charcoal reduces the oxide at 1,200 to 1,300 °C, the bloomery's heat, as the charcoal shaft furnaces of the Cornish blowing houses did: a roasted concentrate smelts to a crude tin ingot and slag. "
         "In a factory, two roasted concentrate and a coal coke in a superheated basin give two crude tin and a slag, as a reverberatory furnace does. "
@@ -950,7 +955,7 @@ def platinum():
              "fundamentals:platinum_ingot", 4)
     entry("platinum", "matte", "Matte", "fundamentals:converter_matte_dust", pages_of(
         "The platinum metals are never mined alone. They ride in nickel-copper sulfide, and the smelter's matte is what collects them. "
-        "Raw pentlandite smelts unroasted in the bloomery to nickel matte and slag, as flash furnaces smelt it at Norilsk and Sudbury. "
+        "Two roasted pentlandite and a sand, superheated, smelt to two nickel matte and a slag, as the flash furnaces do at Norilsk and Sudbury; no bloomery ever ran hot enough for a nickel matte. "
         "Two nickel matte and a sand, superheated, are the converter: air burns out the iron, which the sand fluxes to slag, and leaves two converter matte. "
         "A nickel matte and a copper matte from the porphyry chain convert together the same way.", "Matte") + pages_of(
         "The base-metal refinery leaches two converter matte in 500 mB of hot sulfuric acid. The nickel and copper dissolve to a green sulfate liquor; "
@@ -1130,8 +1135,29 @@ def chemicals():
         "Vanadium rides in magnetite, a fraction of a per cent of it, and most of the world's comes out of titanomagnetite. Four raw magnetite with a soda ash and 500 mB of water, superheated, "
         "are the salt roast and the water leach: 250 mB of sodium vanadate liquor, and three crushed iron ore still good to smelt. 250 mB of the liquor and an ammonium chloride, heated, "
         "throw down ammonium metavanadate, which calcines to a vanadium pentoxide, orange-brown.", "Vanadium pentoxide") + pages_of(
+        "Most of the world's sulfur is not mined. Crude oil and gas carry it, up to a few per cent, and a refinery must take it out or the fuel burns to sulfur dioxide. "
+        "The hydrotreater is a heated vat with no machine in it, over a cobalt-molybdenum bed: a cobalt sulfate, a molybdenum oxide and four bauxite powder, heated, make four, "
+        "and the bed lasts 19 runs in 20. 500 mB of heavy oil and 250 mB of hydrogen, the reformer's own, give 500 mB of diesel and 250 mB of hydrogen sulfide, the sulfur gone to the gas. "
+        "The Claus unit burns a third of that and lets the rest react with it: 1,000 mB of hydrogen sulfide and 500 mB of air, heated, drop two sulfur dust. "
+        "Texas, Louisiana and the Persian Gulf make their sulfur this way and ship it to acid plants that have no sulfur of their own.", "Sulfur from oil") + pages_of(
+        "Before the oil, pyrite. A pyrite lode is a lens of iron sulfide with a little chalcopyrite, sphalerite and galena through it, a massive sulfide, as at Rio Tinto, "
+        "and for a century the acid works of Europe roasted it: two raw pyrite with 1,000 mB of air in a heated basin give 500 mB of sulfur dioxide and two raw hematite, "
+        "the cinder, which the blast furnace still takes. Huelva, downstream of Rio Tinto, is a copper-smelting acid hub to this day.", "Pyrite") + pages_of(
+        "The Nether has the one ore with a reason to be there. Native sulfur is the yellow crust a fumarole leaves, on the basalt deltas and in the soul sand valleys, "
+        "as the vents of Kawah Ijen leave it, where it is still carried down the crater by the basketful. A millstone or crushing wheels grind the raw crust to sulfur dust, "
+        "and three sulfur dust with a nitrate in The Factory Must Grow's vat are its own acid.", "Native sulfur") + pages_of(
+        "Acid comes back, too. A refinery's alkylation unit makes high-octane gasoline over sulfuric acid: 500 mB of LPG with 100 mB of acid, cold, give 500 mB of gasoline "
+        "and 100 mB of spent acid, black with oil and down to about 90%. A regeneration plant cracks it in a furnace: 500 mB of spent acid and 250 mB of air, superheated, "
+        "are 500 mB of sulfur dioxide, back to the converter.", "Spent acid") + pages_of(
+        "Acid is made where the sulfur is burnt, not where the ore is dug. Nexa's Cajamarquilla refinery outside Lima made 345,000 tonnes of zinc in 2025 and 594,000 tonnes of acid "
+        "with it, and sold nearly all the acid, by rail car and chemical tanker, to the copper leach plants of northern Chile at Mejillones and Barquito. "
+        "Kokkola in Finland made 290,000 tonnes of zinc and 312,000 of acid; Atlantic Copper's smelter at Huelva makes 1.1 million tonnes a year; "
+        "Kamoa-Kakula's new smelter sells 40,000 tonnes a month to the Copperbelt's leach pads. Only about 7% of the world's acid crosses a border: "
+        "it is cheap, heavy and eats its tank, so a smelter's acid wants a fertiliser plant or a leach pad nearby, or a port.", "Where it is made") + pages_of(
         "Sources: Ullmann's Encyclopedia of Industrial Chemistry, \"Sulfuric Acid and Sulfur Trioxide\"; King, Davenport and Moats, Sulfuric Acid Manufacture (2nd ed., 2013); "
-        "Ullmann's, \"Vanadium and Vanadium Compounds\"; USGS, Mineral Commodity Summaries 2025, \"Sulfur\" and \"Vanadium\".", "Sources"), 0)
+        "Ullmann's, \"Vanadium and Vanadium Compounds\"; USGS, Mineral Commodity Summaries 2025, \"Sulfur\", \"Vanadium\" and \"Zinc\"; "
+        "Nexa Resources, Form 20-F for 2025; Boliden, Annual and Sustainability Report 2025; Atlantic Copper; Ivanhoe Mines, third quarter 2026; "
+        "S&P Global Commodity Insights, Sulfuric Acid (2023).", "Sources"), 0)
     entry("chemicals", "cement", "Cement", "fundamentals:cement_clinker", pages_of(
         "Lime and clay stirred together do not make cement; they set only once they have been burnt together. Portland cement is limestone and clay ground to a raw meal and burnt at about 1,450 °C "
         "in a rotary kiln, where the lime takes up the clay's silica and alumina as the calcium silicates that set with water, alite and belite. "

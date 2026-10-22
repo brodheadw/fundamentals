@@ -24,6 +24,7 @@ public final class IndustrialMaterials {
         mineral("sylvite", "Sylvite", "KCl", "potash", MaterialProperties.builder().density(0.25));
         mineral("gypsum", "Gypsum", "CaSO4·2H2O", "gypsum", MaterialProperties.builder().density(0.29));
         mineral("trona", "Trona", "Na3H(CO3)2·2H2O", "soda_ash", MaterialProperties.builder().density(0.27));
+        mineral("native_sulfur", "Native Sulfur", "S", "sulfur", MaterialProperties.builder().density(0.26));
         MaterialRegistry.defineMineral(GROUP, "graphite", "Graphite", "C", "graphite", new MaterialForm[] {ORE, RAW, CONCENTRATE},
                 MaterialProperties.builder().density(0.28).conductivity(0.10));
 

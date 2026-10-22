@@ -1,0 +1,30 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:cobalt_sulfate"
+    },
+    {
+      "item": "fundamentals:molybdenum_oxide"
+    },
+    {
+      "item": "tfmg:bauxite_powder"
+    },
+    {
+      "item": "tfmg:bauxite_powder"
+    },
+    {
+      "item": "tfmg:bauxite_powder"
+    },
+    {
+      "item": "tfmg:bauxite_powder"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:hydrotreating_catalyst",
+      "count": 4
+    }
+  ],
+  "heat_requirement": "heated"
+}

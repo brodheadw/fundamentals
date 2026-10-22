@@ -7,7 +7,8 @@
   ],
   "results": [
     {
-      "id": "fundamentals:tin_concentrate"
+      "id": "fundamentals:tin_concentrate",
+      "chance": 0.7
     }
   ]
 }

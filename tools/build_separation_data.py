@@ -74,6 +74,7 @@ ACIDS = {
 WASTES = {
     "spent_liquor": ("Spent Liquor", 0x8E9A86),
     "calcium_chloride_liquor": ("Calcium Chloride Liquor", 0xDCE6E4),
+    "spent_acid": ("Spent Acid", 0x4A3A30),
 }
 SEA = {"seawater": ("Seawater", 0x3F76E4)}
 SALINES = {"bittern": ("Bittern", 0xE6DEB8), "salt_brine": ("Salt Brine", 0xE2ECEE)}
@@ -115,6 +116,7 @@ GASES = {
     "phosphorus_pentafluoride": ("Phosphorus Pentafluoride", 0xF0F2EE),
     "sulfur_dioxide": ("Sulfur Dioxide", 0xF2F0E2),
     "sulfur_trioxide": ("Sulfur Trioxide", 0xF4F2EA),
+    "hydrogen_sulfide": ("Hydrogen Sulfide", 0xEAF0E4),
 }
 PLATINUM_LIQUORS = {
     "nickel_copper_sulfate": ("Nickel-Copper Sulfate Liquor", 0x58A890),
@@ -292,7 +294,7 @@ def chemistry():
     vat("naphthenic_acid", [fluid("tfmg:heavy_oil", 1000), fluid("caustic_soda", 250), fluid("tfmg:sulfuric_acid", 250)], [result_fluid("naphthenic_acid", 500)],
         ["tfmg:mixing"], folder="mixing")
     mixing("bastnasite_concentrate", item("bastnasite_dust", 2) + [fluid("minecraft:water", 250), fluid("naphthenic_acid", 100)],
-           [result("bastnasite_concentrate"), {"id": "fundamentals:bastnasite_concentrate", "chance": 0.5}])
+           [result("bastnasite_concentrate"), {"id": "fundamentals:bastnasite_concentrate", "chance": 0.35}])
     for kind, time in (("campfire_cooking", 400), ("smoking", 200)):
         write(RECIPES / f"roasting/roasted_bastnasite_{kind}.json", {"type": f"minecraft:{kind}", "category": "misc", "ingredient": item("bastnasite_concentrate"),
                                                                     "result": {"id": "fundamentals:roasted_bastnasite"}, "experience": 0.1, "cookingtime": time})

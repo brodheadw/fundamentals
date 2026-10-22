@@ -2,7 +2,7 @@
   "name": "Oxide Cap",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_malachite",
-  "sortnum": 22,
+  "sortnum": 24,
   "pages": [
     {
       "type": "patchouli:text",

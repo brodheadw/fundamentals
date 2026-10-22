@@ -2,7 +2,7 @@
   "name": "Layered Intrusion",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_chromite",
-  "sortnum": 28,
+  "sortnum": 30,
   "pages": [
     {
       "type": "patchouli:text",

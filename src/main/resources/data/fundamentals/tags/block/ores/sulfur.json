@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:native_sulfur_ore",
+    "fundamentals:pyrite_ore"
+  ]
+}

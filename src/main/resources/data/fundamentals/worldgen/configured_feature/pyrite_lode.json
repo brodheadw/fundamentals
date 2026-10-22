@@ -1,0 +1,45 @@
+{
+  "type": "fundamentals:deposit",
+  "config": {
+    "shape": "bed",
+    "ores": [
+      {
+        "state": {
+          "Name": "fundamentals:pyrite_ore"
+        },
+        "fraction": 0.4,
+        "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:chalcopyrite_ore"
+        },
+        "fraction": 0.05,
+        "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:sphalerite_ore"
+        },
+        "fraction": 0.04,
+        "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:galena_ore"
+        },
+        "fraction": 0.02,
+        "style": "pockets"
+      }
+    ],
+    "radius": {
+      "min": 8,
+      "max": 12
+    },
+    "thickness": {
+      "min": 3,
+      "max": 5
+    },
+    "replaceable": "fundamentals:deposit_replaceable/rock"
+  }
+}

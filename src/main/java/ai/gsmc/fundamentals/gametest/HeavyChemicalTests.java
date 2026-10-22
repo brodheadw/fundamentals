@@ -73,6 +73,25 @@ public class HeavyChemicalTests {
     }
 
     @GameTest(template = "empty")
+    public void sulfurComesFromOilPyriteAndSpentAcid(GameTestHelper helper) {
+        ProcessingRecipe<?, ?> hydrotreater = processing(helper, "fundamentals:uses/hydrotreated_diesel");
+        helper.assertTrue(takes(hydrotreater, "fundamentals:hydrotreating_catalyst") && takesFluid(hydrotreater, "tfmg:heavy_oil")
+                && givesFluid(hydrotreater, "fundamentals:hydrogen_sulfide"),
+                "hydrotreating takes heavy oil's sulfur off as hydrogen sulfide");
+        ProcessingRecipe<?, ?> claus = processing(helper, "fundamentals:uses/claus_sulfur");
+        helper.assertTrue(takesFluid(claus, "fundamentals:hydrogen_sulfide") && gives(claus, "tfmg:sulfur_dust"), "the Claus unit drops sulfur");
+        ProcessingRecipe<?, ?> pyrite = processing(helper, "fundamentals:uses/raw_hematite_from_pyrite_with_sulfur_dioxide");
+        helper.assertTrue(takes(pyrite, "fundamentals:raw_pyrite") && gives(pyrite, "fundamentals:raw_hematite") && givesFluid(pyrite, "fundamentals:sulfur_dioxide"),
+                "pyrite roasts to cinder and sulfur dioxide");
+        helper.assertTrue(takes(processing(helper, "fundamentals:uses/sulfur_dust_from_native_sulfur_milling"), "fundamentals:raw_native_sulfur"),
+                "the Nether's fumarole crust grinds to sulfur dust");
+        helper.assertTrue(givesFluid(processing(helper, "fundamentals:uses/alkylate"), "fundamentals:spent_acid"), "alkylation leaves spent acid");
+        helper.assertTrue(givesFluid(processing(helper, "fundamentals:uses/sulfur_dioxide_from_spent_acid"), "fundamentals:sulfur_dioxide"),
+                "spent acid regenerates to sulfur dioxide");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
     public void zincIsWonWithItsByproducts(GameTestHelper helper) {
         for (String id : new String[] {"create:smelting/zinc_ingot_from_raw_ore", "create:blasting/zinc_ingot_from_crushed", "create:splashing/crushed_raw_zinc",
                 "fundamentals:roasting/zinc_oxide_from_sphalerite_smoking", "fundamentals:roasting/roasted_chalcopyrite_smoking",

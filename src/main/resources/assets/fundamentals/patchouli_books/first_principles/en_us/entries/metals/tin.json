@@ -6,8 +6,12 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "Cassiterite, tin dioxide, comes from the tin veins and from beach and river sand, where it settles because it is seven times as heavy as water. That weight is how it is concentrated: a raw cassiterite washed under an encased fan leaves a tin concentrate behind.",
+      "text": "Cassiterite, tin dioxide, comes from the tin veins and from beach and river sand, where it settles because it is seven times as heavy as water.",
       "title": "Cassiterite"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "That weight is how it is concentrated: a raw cassiterite washed under an encased fan leaves a tin concentrate behind seven times in ten; a gravity tin plant loses a quarter to a third of its tin to the tailings."
     },
     {
       "type": "patchouli:text",

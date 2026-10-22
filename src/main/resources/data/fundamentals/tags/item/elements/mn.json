@@ -13,6 +13,7 @@
     "fundamentals:raw_columbite",
     "fundamentals:raw_pyrolusite",
     "fundamentals:raw_wolframite",
+    "fundamentals:wolframite_concentrate",
     "fundamentals:wolframite_ore"
   ]
 }

@@ -37,6 +37,16 @@
       "mineral": "siderite"
     },
     {
+      "name": "pyrite_ore",
+      "soft": false,
+      "mineral": "pyrite"
+    },
+    {
+      "name": "native_sulfur_ore",
+      "soft": false,
+      "mineral": "native_sulfur"
+    },
+    {
       "name": "pyrolusite_ore",
       "soft": false,
       "mineral": "pyrolusite"
