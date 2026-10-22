@@ -17,7 +17,7 @@ HOSTS = {
 }
 ROCK_BLOCKS = list(HOSTS)
 
-WHOLE = ["ion_adsorption_clay", "bauxite", "goethite", "nickel_laterite"]
+WHOLE = ["ion_adsorption_clay", "bauxite", "goethite", "nickel_laterite", "native_sulfur"]
 
 CLEAR = (255, 0, 255)
 
@@ -434,6 +434,19 @@ def paint_goethite(variant=0):
     return c.finish()
 
 
+def paint_native_sulfur(variant=0):
+    rng = random.Random(seed("native_sulfur", variant))
+    basalt = [(38, 36, 40), (52, 50, 54), (66, 64, 68), (82, 80, 84)]
+    img = Image.new("RGB", (SIZE, SIZE))
+    for p, v in field(rng, 1, 1).items():
+        img.putpixel(p, basalt[min(3, int(v * 4))])
+    c = Canvas("native_sulfur", variant)
+    c.rng, c.img = rng, img
+    for part in aggregate(c, "knob", 5) + aggregate(c, "knob", 4) + aggregate(c, "cube", 2):
+        c.paint(part, RAW_WHOLE["native_sulfur"], grain=0.15)
+    return c.finish()
+
+
 NICKEL_GRADES = {"core": (0.42, 2, 5), "edge": (0.26, 1, 3), "trace": (0.12, 0, 2)}
 
 
@@ -460,7 +473,7 @@ def paint_nickel_laterite(variant=0, grade="edge"):
 
 def paint_all():
     whole = {"ion_adsorption_clay": paint_clay, "bauxite": paint_bauxite, "goethite": paint_goethite,
-             "nickel_laterite": paint_nickel_laterite}
+             "nickel_laterite": paint_nickel_laterite, "native_sulfur": paint_native_sulfur}
     assert set(whole) == set(WHOLE)
     out = {name: {g: [build(name, v, g) for v in range(VARIANTS)] for g in GRADES} for name in RECIPES}
     out.update({name: {g: [(paint(v, g) if name == "nickel_laterite" else paint(v)).convert("RGBA") for v in range(VARIANTS)]
@@ -474,6 +487,7 @@ RAW_WHOLE = {
     "goethite": ((84, 56, 18), (140, 98, 30), (186, 140, 50), (226, 190, 96)),
     "nickel_laterite": ((92, 62, 28), (150, 108, 46), (136, 176, 92), (190, 222, 140)),
     "ion_adsorption_clay": ((120, 66, 42), (168, 102, 64), (202, 142, 96), (236, 214, 188)),
+    "native_sulfur": ((120, 96, 20), (196, 170, 30), (236, 214, 60), (255, 246, 150)),
 }
 
 
@@ -519,7 +533,7 @@ SHEET_ORDER = [
     "bastnasite", "monazite", "xenotime", "ion_adsorption_clay", "loparite", "euxenite", "thortveitite",
     "chalcopyrite", "bornite", "chalcocite", "covellite", "malachite", "azurite", "cuprite",
     "bauxite", "galena", "sphalerite", "smithsonite", "hemimorphite", "cassiterite",
-    "hematite", "magnetite", "goethite", "siderite", "pyrite", "pyrolusite", "pentlandite", "nickel_laterite",
+    "hematite", "magnetite", "goethite", "siderite", "pyrite", "native_sulfur", "pyrolusite", "pentlandite", "nickel_laterite",
     "chromite", "wolframite", "scheelite", "molybdenite", "cobaltite", "ilmenite", "rutile",
     "native_silver", "argentite", "sperrylite", "cooperite", "braggite", "cinnabar", "spodumene", "fluorite", "borax", "trona", "halite",
     "zircon", "beryl", "bertrandite", "uraninite", "graphite", "stibnite", "pyrochlore", "columbite", "sylvite", "native_gold",

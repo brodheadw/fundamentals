@@ -28,6 +28,7 @@ BIOMES = {
     "temperate": ["#minecraft:is_forest", "#minecraft:is_hill", "minecraft:plains", "minecraft:sunflower_plains", "minecraft:meadow",
                   "minecraft:swamp"],
     "alpine": ["#minecraft:is_mountain"],
+    "fumarole": ["minecraft:basalt_deltas", "minecraft:soul_sand_valley"],
 }
 
 ORES = {
@@ -36,6 +37,7 @@ ORES = {
     "goethite": ("iron", "pickaxe", None),
     "siderite": ("iron", "pickaxe", "stone"),
     "pyrite": ("sulfur", "pickaxe", "stone"),
+    "native_sulfur": ("sulfur", "pickaxe", None),
     "pyrolusite": ("manganese", "pickaxe", "stone"),
     "pentlandite": ("nickel", "pickaxe", "iron"),
     "nickel_laterite": ("nickel", "shovel", None),
@@ -121,6 +123,7 @@ ROCK = ["#minecraft:stone_ore_replaceables", "#minecraft:deepslate_ore_replaceab
 REPLACEABLE = {
     "rock": ROCK,
     "ground": ROCK + ["#minecraft:dirt", "minecraft:gravel", "minecraft:clay", "minecraft:mud"],
+    "nether": ["minecraft:netherrack", "minecraft:basalt", "minecraft:blackstone", "minecraft:soul_sand", "minecraft:soul_soil", "minecraft:magma_block"],
 }
 
 DEPOSITS = {
@@ -148,6 +151,7 @@ DEPOSITS = {
                      "hydrothermal", (0, 72), 30, "rock"),
     "pyrite_lode": ("bed", None, [("pyrite", 0.40, "pockets"), ("chalcopyrite", 0.05, "pockets"), ("sphalerite", 0.04, "pockets"), ("galena", 0.02, "pockets")],
                     (8, 12), (3, 5), None, "hydrothermal", (-24, 48), 16, "rock"),
+    "fumarole_sulfur": ("bed", None, [("native_sulfur", 0.45, "pockets")], (5, 8), (1, 3), None, "fumarole", (32, 100), 6, "nether"),
     "porphyry_stock": ("plug", "minecraft:andesite",
                        [("chalcopyrite", 0.18, "pockets"), ("molybdenite", 0.03, "pockets"),
                         ("bornite", 0.04, "disseminated"), ("chalcocite", 0.04, "top"), ("covellite", 0.02, "top")],

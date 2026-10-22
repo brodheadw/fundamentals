@@ -2,10 +2,10 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "fundamentals:raw_wolframite"
+      "item": "fundamentals:wolframite_concentrate"
     },
     {
-      "item": "fundamentals:raw_wolframite"
+      "item": "fundamentals:wolframite_concentrate"
     },
     {
       "item": "fundamentals:soda_ash"

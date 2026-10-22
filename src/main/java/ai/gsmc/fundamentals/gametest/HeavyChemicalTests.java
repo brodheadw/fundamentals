@@ -83,6 +83,8 @@ public class HeavyChemicalTests {
         ProcessingRecipe<?, ?> pyrite = processing(helper, "fundamentals:uses/raw_hematite_from_pyrite_with_sulfur_dioxide");
         helper.assertTrue(takes(pyrite, "fundamentals:raw_pyrite") && gives(pyrite, "fundamentals:raw_hematite") && givesFluid(pyrite, "fundamentals:sulfur_dioxide"),
                 "pyrite roasts to cinder and sulfur dioxide");
+        helper.assertTrue(takes(processing(helper, "fundamentals:uses/sulfur_dust_from_native_sulfur_milling"), "fundamentals:raw_native_sulfur"),
+                "the Nether's fumarole crust grinds to sulfur dust");
         helper.assertTrue(givesFluid(processing(helper, "fundamentals:uses/alkylate"), "fundamentals:spent_acid"), "alkylation leaves spent acid");
         helper.assertTrue(givesFluid(processing(helper, "fundamentals:uses/sulfur_dioxide_from_spent_acid"), "fundamentals:sulfur_dioxide"),
                 "spent acid regenerates to sulfur dioxide");

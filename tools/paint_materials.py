@@ -196,7 +196,7 @@ MATERIALS = {
     "scandium": ALLOYING,
     "didymium": DIDYMIUM, "neodymium_iron_boron": MAGNET, "dysprosium_neodymium_iron_boron": MAGNET, "samarium_cobalt": MAGNET, "aluminium_scandium": ALLOY, "monazite_residue": RESIDUE,
     "cobalt": COBALT, "molybdenum": MOLYBDENUM, "rhenium": RHENIUM, "superalloy": STRUCTURAL, "molybdenum_steel": STRUCTURAL, "manganese_steel": INGOT, "chromel": INGOT, "alumel": INGOT, "alnico": INGOT,
-    "tungsten": TUNGSTEN, "copper_matte": MATTE, "blister_copper": BLISTER,
+    "tungsten": TUNGSTEN, "wolframite": CONCENTRATE, "scheelite": CONCENTRATE, "copper_matte": MATTE, "blister_copper": BLISTER,
     "chromite": GROUND_MINERAL, "chromium": CHROMIUM, "ferrochrome": INGOT, "ferromanganese": INGOT, "ferronickel": INGOT, "stainless_steel": STRUCTURAL,
     "titanium": TITANIUM, "magnesium": INGOT,
     "nickel_matte": MATTE, "converter_matte": MATTE, "platinum_group_concentrate": CONCENTRATE,

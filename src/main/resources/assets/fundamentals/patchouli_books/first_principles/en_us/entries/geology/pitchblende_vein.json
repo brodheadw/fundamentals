@@ -2,7 +2,7 @@
   "name": "Pitchblende Vein",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_uraninite",
-  "sortnum": 38,
+  "sortnum": 39,
   "pages": [
     {
       "type": "patchouli:text",

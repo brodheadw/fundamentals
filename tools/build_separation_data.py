@@ -294,7 +294,7 @@ def chemistry():
     vat("naphthenic_acid", [fluid("tfmg:heavy_oil", 1000), fluid("caustic_soda", 250), fluid("tfmg:sulfuric_acid", 250)], [result_fluid("naphthenic_acid", 500)],
         ["tfmg:mixing"], folder="mixing")
     mixing("bastnasite_concentrate", item("bastnasite_dust", 2) + [fluid("minecraft:water", 250), fluid("naphthenic_acid", 100)],
-           [result("bastnasite_concentrate"), {"id": "fundamentals:bastnasite_concentrate", "chance": 0.5}])
+           [result("bastnasite_concentrate"), {"id": "fundamentals:bastnasite_concentrate", "chance": 0.35}])
     for kind, time in (("campfire_cooking", 400), ("smoking", 200)):
         write(RECIPES / f"roasting/roasted_bastnasite_{kind}.json", {"type": f"minecraft:{kind}", "category": "misc", "ingredient": item("bastnasite_concentrate"),
                                                                     "result": {"id": "fundamentals:roasted_bastnasite"}, "experience": 0.1, "cookingtime": time})

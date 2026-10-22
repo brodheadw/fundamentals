@@ -109,6 +109,8 @@ public class MineralTests {
         }
         helper.assertTrue(generates(level, Biomes.RIVER, "placer_native_gold") && generates(level, Biomes.BEACH, "placer_native_gold"),
                 "gold should wash into river and beach sand");
+        helper.assertTrue(generates(level, Biomes.BASALT_DELTAS, "fumarole_sulfur") && !generates(level, Biomes.PLAINS, "fumarole_sulfur"),
+                "native sulfur should crust the basalt deltas and nowhere in the overworld");
         helper.succeed();
     }
 
@@ -140,6 +142,11 @@ public class MineralTests {
     public void graphiteRunsToAnElectrode(GameTestHelper helper) {
         step(helper, "fundamentals:uses/graphite_concentrate", "fundamentals:raw_graphite", "fundamentals:graphite_concentrate");
         step(helper, "fundamentals:uses/graphite", "fundamentals:graphite_concentrate", "fundamentals:graphite");
+        step(helper, "fundamentals:uses/wolframite_concentrate", "fundamentals:raw_wolframite", "fundamentals:wolframite_concentrate");
+        helper.assertTrue(takes(processing(helper, "fundamentals:uses/sodium_tungstate_liquor_from_soda_ash"), "fundamentals:wolframite_concentrate"),
+                "the soda ash digest takes concentrate, not raw ore");
+        step(helper, "fundamentals:platinum/nickel_matte", "fundamentals:roasted_pentlandite", "fundamentals:nickel_matte_dust");
+        helper.assertTrue(recipe(helper, "fundamentals:bloomery/nickel_matte_from_pentlandite").isEmpty(), "a bloomery never made nickel matte");
         step(helper, "fundamentals:uses/graphite_thermal", "fundamentals:graphite_concentrate", "fundamentals:graphite");
         step(helper, "fundamentals:uses/graphite_acheson", "tfmg:coal_coke", "fundamentals:graphite");
         step(helper, "fundamentals:uses/graphite_electrode", "fundamentals:graphite", "tfmg:graphite_electrode");

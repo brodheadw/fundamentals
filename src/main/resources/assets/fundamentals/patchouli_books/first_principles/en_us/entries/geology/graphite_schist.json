@@ -2,7 +2,7 @@
   "name": "Graphite Schist",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_graphite",
-  "sortnum": 40,
+  "sortnum": 41,
   "pages": [
     {
       "type": "patchouli:text",

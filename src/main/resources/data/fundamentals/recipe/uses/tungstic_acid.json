@@ -2,10 +2,10 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "fundamentals:raw_scheelite"
+      "item": "fundamentals:scheelite_concentrate"
     },
     {
-      "item": "fundamentals:raw_scheelite"
+      "item": "fundamentals:scheelite_concentrate"
     },
     {
       "type": "neoforge:tag",

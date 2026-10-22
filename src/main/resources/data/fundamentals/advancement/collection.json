@@ -72,6 +72,18 @@
         ]
       }
     },
+    "fundamentals:raw_native_sulfur": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_native_sulfur"
+            ]
+          }
+        ]
+      }
+    },
     "fundamentals:raw_pyrolusite": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {

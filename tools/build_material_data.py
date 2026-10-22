@@ -22,14 +22,15 @@ FORMS = {
 
 GROUND = ("bastnasite", "xenotime", "loparite", "euxenite", "thortveitite", "chromite", "uraninite", "columbite")
 
+# What the washer keeps: mineral sands 85-90%, gravity and flotation on hard rock 60-80%.
 WASHED = {
-    "raw_monazite": "light_rare_earth_concentrate",
-    "loparite_dust": "light_rare_earth_concentrate",
-    "xenotime_dust": "heavy_rare_earth_concentrate",
-    "euxenite_dust": "heavy_rare_earth_concentrate",
-    "chromite_dust": "chromite_concentrate",
-    "raw_zircon": "zircon_concentrate",
-    "raw_pyrochlore": "pyrochlore_concentrate",
+    "raw_monazite": ("light_rare_earth_concentrate", 0.85),
+    "loparite_dust": ("light_rare_earth_concentrate", 0.625),
+    "xenotime_dust": ("heavy_rare_earth_concentrate", 0.625),
+    "euxenite_dust": ("heavy_rare_earth_concentrate", 0.625),
+    "chromite_dust": ("chromite_concentrate", 0.625),
+    "raw_zircon": ("zircon_concentrate", 0.85),
+    "raw_pyrochlore": ("pyrochlore_concentrate", 0.5),
 }
 
 
@@ -90,11 +91,11 @@ def main():
             "type": "create:milling", "ingredients": raw, "processing_time": 250, "results": [dust]})
         write(RECIPES / f"crushing/{mineral}_dust.json", {
             "type": "create:crushing", "ingredients": raw, "processing_time": 400,
-            "results": [dust, {"chance": 0.25, **dust}]})
-    for feed, concentrate in WASHED.items():
+            "results": [dust]})
+    for feed, (concentrate, chance) in WASHED.items():
         write(RECIPES / f"washing/{feed}.json", {
             "type": "create:splashing", "ingredients": [{"item": f"fundamentals:{feed}"}],
-            "results": [{"chance": 0.5, "id": f"fundamentals:{concentrate}"}]})
+            "results": [{"chance": chance, "id": f"fundamentals:{concentrate}"}]})
 
     for form, (folder, _) in FORMS.items():
         tag(folder.with_suffix(".json"), tagged[form])

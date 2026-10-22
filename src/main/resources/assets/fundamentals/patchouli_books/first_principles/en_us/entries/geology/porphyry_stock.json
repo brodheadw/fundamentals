@@ -2,7 +2,7 @@
   "name": "Porphyry Stock",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_chalcopyrite",
-  "sortnum": 22,
+  "sortnum": 23,
   "pages": [
     {
       "type": "patchouli:text",

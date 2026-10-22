@@ -81,6 +81,15 @@
     },
     {
       "type": "patchouli:text",
+      "text": "The Nether has the one ore with a reason to be there. Native sulfur is the yellow crust a fumarole leaves, on the basalt deltas and in the soul sand valleys, as the vents of Kawah Ijen leave it, where it is still carried down the crater by the basketful.",
+      "title": "Native sulfur"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A millstone or crushing wheels grind the raw crust to sulfur dust, and three sulfur dust with a nitrate in The Factory Must Grow's vat are its own acid."
+    },
+    {
+      "type": "patchouli:text",
       "text": "Acid comes back, too. A refinery's alkylation unit makes high-octane gasoline over sulfuric acid: 500 mB of LPG with 100 mB of acid, cold, give 500 mB of gasoline and 100 mB of spent acid, black with oil and down to about 90%.",
       "title": "Spent acid"
     },

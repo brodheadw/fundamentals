@@ -30,8 +30,8 @@ public final class FerrousMaterials {
                 MaterialProperties.builder().density(0.40));
         mineral("chromite", "Chromite", "FeCr2O4", "chromium", CONCENTRATED,
                 MaterialProperties.builder().density(0.61).magnetStrength(0.05));
-        mineral("wolframite", "Wolframite", "(Fe,Mn)WO4", "tungsten", MaterialProperties.builder().density(0.93));
-        mineral("scheelite", "Scheelite", "CaWO4", "tungsten", MaterialProperties.builder().density(0.76));
+        mineral("wolframite", "Wolframite", "(Fe,Mn)WO4", "tungsten", forms(ORE, RAW, CONCENTRATE), MaterialProperties.builder().density(0.93));
+        mineral("scheelite", "Scheelite", "CaWO4", "tungsten", forms(ORE, RAW, CONCENTRATE), MaterialProperties.builder().density(0.76));
         mineral("molybdenite", "Molybdenite", "MoS2", "molybdenum", MaterialProperties.builder().density(0.60));
         mineral("cobaltite", "Cobaltite", "CoAsS", "cobalt",
                 MaterialProperties.builder().density(0.80).toxicity(0.20));

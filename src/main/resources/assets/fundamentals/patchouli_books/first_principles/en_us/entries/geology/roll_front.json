@@ -2,7 +2,7 @@
   "name": "Roll Front",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_uraninite",
-  "sortnum": 39,
+  "sortnum": 40,
   "pages": [
     {
       "type": "patchouli:text",
