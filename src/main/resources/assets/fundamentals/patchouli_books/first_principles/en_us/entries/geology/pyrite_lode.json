@@ -1,0 +1,13 @@
+{
+  "name": "Pyrite Lode",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_pyrite",
+  "sortnum": 21,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A bed, in mountain and hill country and the deep dark beneath it, between y -24 and 48. Carries pyrite in masses, chalcopyrite in masses, sphalerite in masses, galena in masses. Dig at the core: the edges are lean.",
+      "title": "Pyrite Lode"
+    }
+  ]
+}

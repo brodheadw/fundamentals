@@ -1,0 +1,13 @@
+{
+  "name": "Fumarole Sulfur",
+  "category": "fundamentals:geology",
+  "icon": "fundamentals:raw_native_sulfur",
+  "sortnum": 22,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A bed, in the Nether, on the basalt deltas and in the soul sand valleys, between y 32 and 100. Carries native sulfur in masses. Dig at the core: the edges are lean.",
+      "title": "Fumarole Sulfur"
+    }
+  ]
+}

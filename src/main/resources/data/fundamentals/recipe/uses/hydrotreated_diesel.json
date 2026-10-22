@@ -1,0 +1,40 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "machines": [],
+  "min_size": 1,
+  "processing_time": 100,
+  "ingredients": [
+    {
+      "item": "fundamentals:hydrotreating_catalyst"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "tfmg:heavy_oil"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "tfmg:hydrogen"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:diesel",
+      "amount": 500
+    },
+    {
+      "id": "fundamentals:hydrogen_sulfide",
+      "amount": 250
+    },
+    {
+      "id": "fundamentals:hydrotreating_catalyst",
+      "chance": 0.95
+    }
+  ],
+  "heat_requirement": "heated"
+}

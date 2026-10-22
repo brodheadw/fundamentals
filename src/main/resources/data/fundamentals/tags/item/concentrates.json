@@ -8,7 +8,9 @@
     "#fundamentals:concentrates/light_rare_earth_concentrate",
     "#fundamentals:concentrates/platinum_group_concentrate",
     "#fundamentals:concentrates/pyrochlore",
+    "#fundamentals:concentrates/scheelite",
     "#fundamentals:concentrates/tin_concentrate",
+    "#fundamentals:concentrates/wolframite",
     "#fundamentals:concentrates/zircon"
   ]
 }

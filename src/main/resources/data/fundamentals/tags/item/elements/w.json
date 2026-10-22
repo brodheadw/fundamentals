@@ -4,6 +4,7 @@
     "fundamentals:ammonium_paratungstate",
     "fundamentals:raw_scheelite",
     "fundamentals:raw_wolframite",
+    "fundamentals:scheelite_concentrate",
     "fundamentals:scheelite_ore",
     "fundamentals:superalloy_ingot",
     "fundamentals:superalloy_plate",
@@ -12,6 +13,7 @@
     "fundamentals:tungsten_ingot",
     "fundamentals:tungsten_oxide",
     "fundamentals:tungstic_acid",
+    "fundamentals:wolframite_concentrate",
     "fundamentals:wolframite_ore"
   ]
 }

@@ -1,0 +1,14 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_wolframite"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:wolframite_concentrate",
+      "chance": 0.75
+    }
+  ]
+}

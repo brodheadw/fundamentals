@@ -52,7 +52,7 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "led_chip": "LED Chip", "indium_tin_oxide": "Indium Tin Oxide",
          "vanadium_pentoxide": "Vanadium Pentoxide", "cement_clinker": "Cement Clinker", "gypsum": "Gypsum", "phosphogypsum": "Phosphogypsum",
          "calomel": "Calomel", "copper_cement": "Copper Cement", "cobalt_cake": "Cobalt Cake", "anode_mud": "Anode Mud",
-         "jarosite": "Jarosite", "lead_silver_residue": "Lead-Silver Residue"}
+         "jarosite": "Jarosite", "lead_silver_residue": "Lead-Silver Residue", "hydrotreating_catalyst": "Cobalt-Molybdenum Catalyst"}
 # Registered by uses.Uses as uses.Fertiliser, in this order.
 FERTILISERS = {"ammonium_nitrate": "Ammonium Nitrate", "urea": "Urea", "superphosphate": "Superphosphate", "ammonium_phosphate": "Ammonium Phosphate",
                "npk_fertiliser": "NPK Fertiliser"}
@@ -243,7 +243,8 @@ def cobalt():
 
 def copper_molybdenum_rhenium():
     mixing("molybdenum_oxide", item("raw_molybdenite", 2) + [fluid("tfmg:air", 1000)],
-           [result("molybdenum_oxide", 2), {"id": "fundamentals:rhenium_flue_dust", "chance": 0.1}, result_fluid("sulfur_dioxide", 500)], "heated")
+           [result("molybdenum_oxide"), {"id": "fundamentals:molybdenum_oxide", "chance": 0.2}, {"id": "fundamentals:rhenium_flue_dust", "chance": 0.1},
+            result_fluid("sulfur_dioxide", 500)], "heated")
     vat("molybdenum_ingot", item("molybdenum_oxide", 2), "tfmg:hydrogen", 500, [result("molybdenum_ingot", 2)])
     mixing("ammonium_perrhenate", item("rhenium_flue_dust") + [fluid("minecraft:water", 250), fluid("ammonia", 50)], [result("ammonium_perrhenate")])
     vat("rhenium_nugget", item("ammonium_perrhenate"), "tfmg:hydrogen", 250, [result("rhenium_nugget", 2)])
@@ -371,7 +372,7 @@ def nickel():
 
 
 def tin():
-    write(USES / "tin_concentrate.json", {"type": "create:splashing", "ingredients": item("raw_cassiterite"), "results": [result("tin_concentrate")]})
+    write(USES / "tin_concentrate.json", {"type": "create:splashing", "ingredients": item("raw_cassiterite"), "results": [{"id": "fundamentals:tin_concentrate", "chance": 0.7}]})
     roast("tin_concentrate", "roasted_tin_concentrate", raw=False)
     write(DATA / "recipe/bloomery/crude_tin_from_roasted_tin_concentrate.json", {"type": "fundamentals:bloomery", "ingredient": {"item": "fundamentals:roasted_tin_concentrate"},
                                                                                 "result": {"id": "fundamentals:crude_tin_ingot", "count": 1}, "byproduct": {"id": "tfmg:slag", "count": 1}})
@@ -588,10 +589,12 @@ def galvanizing():
 
 
 def tungsten():
-    pgm_vat("sodium_tungstate_liquor", item("raw_wolframite", 2) + [fluid("caustic_soda", 500)], [result_fluid("sodium_tungstate_liquor", 500)], folder=USES)
-    mixing("sodium_tungstate_liquor_from_soda_ash", item("raw_wolframite", 2) + item("soda_ash", 2) + [fluid("minecraft:water", 500)],
+    for ore in ("wolframite", "scheelite"):
+        write(USES / f"{ore}_concentrate.json", {"type": "create:splashing", "ingredients": item(f"raw_{ore}"), "results": [{"id": f"fundamentals:{ore}_concentrate", "chance": 0.75}]})
+    pgm_vat("sodium_tungstate_liquor", item("wolframite_concentrate", 2) + [fluid("caustic_soda", 500)], [result_fluid("sodium_tungstate_liquor", 500)], folder=USES)
+    mixing("sodium_tungstate_liquor_from_soda_ash", item("wolframite_concentrate", 2) + item("soda_ash", 2) + [fluid("minecraft:water", 500)],
            [result_fluid("sodium_tungstate_liquor", 500)], "superheated")
-    mixing("tungstic_acid", item("raw_scheelite", 2) + [fluid("hydrochloric_acid", 500)], [result("tungstic_acid", 2)], "heated")
+    mixing("tungstic_acid", item("scheelite_concentrate", 2) + [fluid("hydrochloric_acid", 500)], [result("tungstic_acid", 2)], "heated")
     mixing("ammonium_paratungstate", [fluid("sodium_tungstate_liquor", 500), fluid("ammonia", 250)], [result("ammonium_paratungstate", 2)], "heated")
     mixing("ammonium_paratungstate_from_tungstic_acid", item("tungstic_acid", 2) + [fluid("ammonia", 250)], [result("ammonium_paratungstate", 2)], "heated")
     write(USES / "tungsten_oxide.json", {"type": "minecraft:blasting", "category": "misc", "ingredient": {"item": "fundamentals:ammonium_paratungstate"},
@@ -824,10 +827,9 @@ def pgm_vat(name, ingredients, results, machines=("tfmg:mixing",), heat="heated"
 
 
 def platinum_feeds():
-    write(DATA / "recipe/bloomery/nickel_matte_from_pentlandite.json", {"type": "fundamentals:bloomery", "ingredient": {"item": "fundamentals:raw_pentlandite"},
-                                                                       "result": {"id": "fundamentals:nickel_matte_dust", "count": 1}, "byproduct": {"id": "tfmg:slag", "count": 1}})
     write(DATA / "tags/item/platinum_minerals.json", {"replace": False, "values": [f"fundamentals:raw_{m}" for m in ("sperrylite", "cooperite", "braggite")]})
     sand = tag("c:sands/colorless")
+    pgm_mixing("nickel_matte", item("roasted_pentlandite", 2) + sand, [result("nickel_matte_dust", 2), result("tfmg:slag")], "superheated")
     pgm_mixing("converter_matte", item("nickel_matte_dust", 2) + sand, [result("converter_matte_dust", 2), result("tfmg:slag")], "superheated")
     pgm_mixing("converter_matte_with_copper", item("nickel_matte_dust") + item("copper_matte_dust") + sand, [result("converter_matte_dust", 2), result("tfmg:slag")], "superheated")
     acid = fluid("tfmg:sulfuric_acid", 500)
@@ -1082,6 +1084,17 @@ def sulfuric_acid():
     mixing("oleum", [fluid("sulfur_trioxide", 500), fluid("tfmg:sulfuric_acid", 500)], [result_fluid("oleum", 500)])
     mixing("sulfuric_acid_from_oleum", [fluid("oleum", 500), fluid("minecraft:water", 500)], [result_fluid("tfmg:sulfuric_acid", 1000)])
     mixing("gypsum", item("tfmg:limesand") + [fluid("sulfur_dioxide", 250), fluid("minecraft:water", 250)], [result("gypsum")])
+    mixing("raw_hematite_from_pyrite_with_sulfur_dioxide", item("raw_pyrite", 2) + [fluid("tfmg:air", 1000)],
+           [result("raw_hematite", 2), result_fluid("sulfur_dioxide", 500)], "heated")
+    mixing("hydrotreating_catalyst", item("cobalt_sulfate") + item("molybdenum_oxide") + item("tfmg:bauxite_powder", 4), [result("hydrotreating_catalyst", 4)], "heated")
+    pgm_vat("hydrotreated_diesel", item("hydrotreating_catalyst") + [fluid("tfmg:heavy_oil", 500), fluid("tfmg:hydrogen", 250)],
+            [result_fluid("tfmg:diesel", 500), result_fluid("hydrogen_sulfide", 250), {"id": "fundamentals:hydrotreating_catalyst", "chance": 0.95}], machines=(), folder=USES)
+    mixing("claus_sulfur", [fluid("hydrogen_sulfide", 1000), fluid("tfmg:air", 500)], [result("tfmg:sulfur_dust", 2)], "heated")
+    for kind in ("milling", "crushing"):
+        write(USES / f"sulfur_dust_from_native_sulfur_{kind}.json", {"type": f"create:{kind}", "ingredients": item("raw_native_sulfur"), "processing_time": 250,
+                                                                    "results": [result("tfmg:sulfur_dust")]})
+    mixing("alkylate", [fluid("tfmg:lpg", 500), fluid("tfmg:sulfuric_acid", 100)], [result_fluid("tfmg:gasoline", 500), result_fluid("spent_acid", 100)])
+    mixing("sulfur_dioxide_from_spent_acid", [fluid("spent_acid", 500), fluid("tfmg:air", 250)], [result_fluid("sulfur_dioxide", 500)], "superheated")
     write(DATA.parent / "c/tags/item/dusts/gypsum.json", {"replace": False, "values": ["fundamentals:gypsum"]})
 
 

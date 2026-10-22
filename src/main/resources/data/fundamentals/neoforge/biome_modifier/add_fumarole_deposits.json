@@ -1,0 +1,8 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#fundamentals:deposit/fumarole",
+  "features": [
+    "fundamentals:fumarole_sulfur"
+  ],
+  "step": "underground_decoration"
+}

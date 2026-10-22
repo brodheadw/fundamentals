@@ -15,8 +15,11 @@
   ],
   "results": [
     {
+      "id": "fundamentals:molybdenum_oxide"
+    },
+    {
       "id": "fundamentals:molybdenum_oxide",
-      "count": 2
+      "chance": 0.2
     },
     {
       "id": "fundamentals:rhenium_flue_dust",

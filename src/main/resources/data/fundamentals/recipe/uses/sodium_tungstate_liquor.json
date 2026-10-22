@@ -11,10 +11,10 @@
   "processing_time": 100,
   "ingredients": [
     {
-      "item": "fundamentals:raw_wolframite"
+      "item": "fundamentals:wolframite_concentrate"
     },
     {
-      "item": "fundamentals:raw_wolframite"
+      "item": "fundamentals:wolframite_concentrate"
     },
     {
       "type": "neoforge:tag",

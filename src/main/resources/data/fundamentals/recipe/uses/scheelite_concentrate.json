@@ -1,0 +1,14 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_scheelite"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:scheelite_concentrate",
+      "chance": 0.75
+    }
+  ]
+}

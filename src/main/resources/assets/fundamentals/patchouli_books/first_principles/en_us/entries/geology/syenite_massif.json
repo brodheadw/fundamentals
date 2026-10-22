@@ -2,7 +2,7 @@
   "name": "Syenite Massif",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_loparite",
-  "sortnum": 27,
+  "sortnum": 29,
   "pages": [
     {
       "type": "patchouli:text",

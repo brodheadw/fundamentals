@@ -1,0 +1,14 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_native_sulfur"
+    }
+  ],
+  "processing_time": 250,
+  "results": [
+    {
+      "id": "tfmg:sulfur_dust"
+    }
+  ]
+}

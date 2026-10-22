@@ -25,12 +25,13 @@ public final class FerrousMaterials {
         mineral("siderite", "Siderite", "FeCO3", "iron", MaterialProperties.builder().density(0.50));
         mineral("pyrolusite", "Pyrolusite", "MnO2", "manganese", MaterialProperties.builder().density(0.63));
         mineral("pentlandite", "Pentlandite", "(Fe,Ni)9S8", "nickel", MaterialProperties.builder().density(0.61));
+        mineral("pyrite", "Pyrite", "FeS2", "sulfur", MaterialProperties.builder().density(0.63));
         mineral("nickel_laterite", "Nickel Laterite", "(Fe,Ni)O(OH)", "nickel",
                 MaterialProperties.builder().density(0.40));
         mineral("chromite", "Chromite", "FeCr2O4", "chromium", CONCENTRATED,
                 MaterialProperties.builder().density(0.61).magnetStrength(0.05));
-        mineral("wolframite", "Wolframite", "(Fe,Mn)WO4", "tungsten", MaterialProperties.builder().density(0.93));
-        mineral("scheelite", "Scheelite", "CaWO4", "tungsten", MaterialProperties.builder().density(0.76));
+        mineral("wolframite", "Wolframite", "(Fe,Mn)WO4", "tungsten", forms(ORE, RAW, CONCENTRATE), MaterialProperties.builder().density(0.93));
+        mineral("scheelite", "Scheelite", "CaWO4", "tungsten", forms(ORE, RAW, CONCENTRATE), MaterialProperties.builder().density(0.76));
         mineral("molybdenite", "Molybdenite", "MoS2", "molybdenum", MaterialProperties.builder().density(0.60));
         mineral("cobaltite", "Cobaltite", "CoAsS", "cobalt",
                 MaterialProperties.builder().density(0.80).toxicity(0.20));

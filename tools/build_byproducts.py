@@ -124,6 +124,10 @@ WHY = {
     "fundamentals:sulfur_dioxide": "A sulfide roaster's off-gas is cleaned and made into sulfuric acid by the contact process, as at every modern zinc, copper and nickel smelter; "
                                    "the acid plant pays for the roaster and keeps the gas out of the air.",
     "create:crushed_raw_iron": "Titanomagnetite leached of its vanadium is still an iron ore, and goes to the blast furnace.",
+    "fundamentals:hydrogen_sulfide": "Hydrotreating takes a fuel's sulfur off as hydrogen sulfide, and a Claus unit burns a third of it and reacts the rest to elemental sulfur: "
+                                     "most of the world's sulfur, and so most of its sulfuric acid, is recovered this way at refineries and gas plants.",
+    "fundamentals:spent_acid": "Alkylation's catalyst acid, diluted to about 90% by water and acid-soluble oils, goes to a regeneration plant that cracks it to sulfur dioxide "
+                               "at 1,000 °C and makes fresh acid of it.",
     "minecraft:copper_ingot": "Copper co-deposited with nickel at the cathode is a sellable metal.",
     "minecraft:iron_nugget": "Crushed slag is passed under a magnet to pull out its metallic iron prills.",
     "fundamentals:salt": "Sylvinite is sylvite and halite together; the hot leach takes the potassium chloride and leaves the salt, which Saskatchewan's mills stack or pump back underground.",

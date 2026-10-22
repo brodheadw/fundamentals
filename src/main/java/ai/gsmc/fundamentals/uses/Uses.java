@@ -34,7 +34,7 @@ public final class Uses {
             "lithium_hexafluorophosphate", "ethylene_carbonate", "nickel_hydroxide", "hydride_alloy", "nickel_metal_hydride_cell",
             "polysilicon", "silicon_boule", "silicon_wafer", "zinc_leach_residue", "led_chip", "indium_tin_oxide",
             "vanadium_pentoxide", "cement_clinker", "gypsum", "phosphogypsum",
-            "calomel", "copper_cement", "cobalt_cake", "anode_mud", "jarosite", "lead_silver_residue");
+            "calomel", "copper_cement", "cobalt_cake", "anode_mud", "jarosite", "lead_silver_residue", "hydrotreating_catalyst");
 
     public static final List<String> PLATINUM_IDS = List.of(
             "ammonium_chloride", "insoluble_residue", "iridium_rhodium_residue", "ammonium_chloroplatinate",

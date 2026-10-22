@@ -1,0 +1,24 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:roasted_pentlandite"
+    },
+    {
+      "item": "fundamentals:roasted_pentlandite"
+    },
+    {
+      "tag": "c:sands/colorless"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:nickel_matte_dust",
+      "count": 2
+    },
+    {
+      "id": "tfmg:slag"
+    }
+  ],
+  "heat_requirement": "superheated"
+}

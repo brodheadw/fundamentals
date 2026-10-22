@@ -40,7 +40,7 @@ ITEM_FORMULAS = {
     "silver_zinc_crust": "Ag-Zn", "litharge": "PbO", "thorium_nitrate": "Th(NO3)4", "gas_mantle": "ThO2,CeO2",
     "ammonium_chloride": "NH4Cl", "insoluble_residue": "Ru,Rh,Ir,Os", "iridium_rhodium_residue": "Ir,Rh",
     "ammonium_chloroplatinate": "(NH4)2PtCl6", "dichlorodiammine_palladium": "Pd(NH3)2Cl2", "ammonium_chlororuthenate": "(NH4)2RuCl6",
-    "ammonium_chloroiridate": "(NH4)2IrCl6", "ammonium_chlororhodate": "(NH4)3RhCl6", "reforming_catalyst": "Pt,Re,Al2O3",
+    "ammonium_chloroiridate": "(NH4)2IrCl6", "ammonium_chlororhodate": "(NH4)3RhCl6", "reforming_catalyst": "Pt,Re,Al2O3", "hydrotreating_catalyst": "CoO,MoO3,Al2O3",
     "platinum_rhodium_gauze": "Pt-Rh", "osmium_filament": "Os",
     "salt": "NaCl", "oxalic_acid": "H2C2O4", "roasted_bastnasite": "(Ce,La,Nd)OF", "light_rare_earth_sulfate": "(La,Ce,Pr,Nd,Sm)2(SO4)3",
     "heavy_rare_earth_sulfate": "(Y,Gd,Tb,Dy,Ho,Er,Tm,Yb,Lu)2(SO4)3", "light_rare_earth_carbonate": "(La,Ce,Pr,Nd,Sm)2(CO3)3",

@@ -1,0 +1,27 @@
+{
+  "feature": "fundamentals:pyrite_lode",
+  "placement": [
+    {
+      "type": "minecraft:rarity_filter",
+      "chance": 16
+    },
+    {
+      "type": "minecraft:in_square"
+    },
+    {
+      "type": "minecraft:height_range",
+      "height": {
+        "type": "minecraft:uniform",
+        "min_inclusive": {
+          "absolute": -24
+        },
+        "max_inclusive": {
+          "absolute": 48
+        }
+      }
+    },
+    {
+      "type": "minecraft:biome"
+    }
+  ]
+}

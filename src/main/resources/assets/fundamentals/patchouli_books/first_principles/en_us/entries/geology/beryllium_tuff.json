@@ -2,7 +2,7 @@
   "name": "Beryllium Tuff",
   "category": "fundamentals:geology",
   "icon": "fundamentals:raw_bertrandite",
-  "sortnum": 33,
+  "sortnum": 35,
   "pages": [
     {
       "type": "patchouli:text",
