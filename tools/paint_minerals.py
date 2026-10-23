@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
-from common import TEXTURES
+from common import TEXTURES, VANILLA_RAW
 
 SIZE = 16
 OUT = TEXTURES / "block"
@@ -588,6 +588,9 @@ if __name__ == "__main__":
         img.save(OUT / f"{name}.png")
     (OUT.parent / "item").mkdir(exist_ok=True)
     for name in textures:
+        if name in VANILLA_RAW:
+            (OUT.parent / "item" / f"raw_{name}.png").unlink(missing_ok=True)
+            continue
         paint_raw(name).save(OUT.parent / "item" / f"raw_{name}.png")
     print(f"wrote {len(textures)} ores x {len(GRADES)} grades x {VARIANTS} variants and {len(rocks)} rocks to {OUT}")
     if len(sys.argv) > 1:

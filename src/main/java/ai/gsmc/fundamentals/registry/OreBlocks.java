@@ -55,7 +55,7 @@ public final class OreBlocks {
             registry.accept(id, item);
         });
         for (OreData.BlockDef def : OreData.get().blocks()) {
-            if (def.mineral() != null) {
+            if (def.mineral() != null && def.raw() == null) {
                 ResourceLocation id = Fundamentals.id("raw_" + def.mineral());
                 Item raw = new Item(new Item.Properties());
                 RAW.put(def.mineral(), raw);

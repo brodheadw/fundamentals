@@ -41,6 +41,7 @@ import ai.gsmc.fundamentals.separation.Separation;
 import ai.gsmc.fundamentals.worldgen.DepositFeature;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import ai.gsmc.fundamentals.worldgen.OreData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -109,6 +110,11 @@ public class Fundamentals {
             event.register(Registries.FLUID, helper -> Separation.registerFluids(helper::register));
             if (event.getRegistryKey().equals(Registries.FLUID)) {
                 event.getRegistry().addAlias(id("brine"), id("calcium_chloride_liquor"));
+            }
+            if (event.getRegistryKey().equals(Registries.ITEM)) {
+                // ores that now drop a vanilla raw item keep old stacks of ours
+                OreData.get().blocks().stream().filter(def -> def.raw() != null)
+                        .forEach(def -> event.getRegistry().addAlias(id("raw_" + def.mineral()), ResourceLocation.parse(def.raw())));
             }
             event.register(Registries.ITEM, helper -> {
                 OreBlocks.registerItems(helper::register);

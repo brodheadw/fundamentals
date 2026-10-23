@@ -28,6 +28,14 @@ def write_lang(lang):
     write(LANG, dict(sorted(lang.items())))
 
 
+# Ores whose raw form is the vanilla item rather than one of ours.
+VANILLA_RAW = {"native_gold": "minecraft:raw_gold"}
+
+
+def raw_item(mineral):
+    return VANILLA_RAW.get(mineral, f"fundamentals:raw_{mineral}")
+
+
 def ns(id):
     return id if ":" in id else f"fundamentals:{id}"
 

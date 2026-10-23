@@ -10,7 +10,8 @@ import java.util.Map;
 
 public record OreData(List<BlockDef> blocks, Map<String, String> hosts) {
 
-    public record BlockDef(String name, boolean soft, String mineral) {}
+    // raw names a vanilla item the ore drops instead of a raw_<mineral> of ours
+    public record BlockDef(String name, boolean soft, String mineral, String raw) {}
 
     private static OreData loaded;
 
