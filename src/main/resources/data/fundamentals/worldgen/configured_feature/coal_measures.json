@@ -19,6 +19,13 @@
       },
       {
         "state": {
+          "Name": "tfmg:fireclay"
+        },
+        "fraction": 1.0,
+        "style": "underclay"
+      },
+      {
+        "state": {
           "Name": "fundamentals:siderite_ore"
         },
         "fraction": 0.14,
