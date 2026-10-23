@@ -2,7 +2,7 @@
   "type": "create:splashing",
   "ingredients": [
     {
-      "item": "fundamentals:raw_native_gold"
+      "item": "minecraft:raw_gold"
     }
   ],
   "results": [

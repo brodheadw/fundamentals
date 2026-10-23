@@ -2,10 +2,10 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "fundamentals:raw_native_gold"
+      "item": "minecraft:raw_gold"
     },
     {
-      "item": "fundamentals:raw_native_gold"
+      "item": "minecraft:raw_gold"
     },
     {
       "item": "fundamentals:mercury"
