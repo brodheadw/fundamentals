@@ -100,32 +100,6 @@ def anode():
     return img
 
 
-def flask():
-    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-    glass, rim, cork = (200, 222, 230, 110), (150, 176, 188, 230), (138, 96, 58, 255)
-    mercury = [(92, 96, 106, 255), (156, 162, 174, 255), (212, 218, 228, 255), (250, 252, 255, 255)]
-    for y in range(1, 4):
-        for x in range(7, 10):
-            img.putpixel((x, y), cork)
-    for y in range(4, 7):
-        for x in (6, 9):
-            img.putpixel((x, y), rim)
-        for x in (7, 8):
-            img.putpixel((x, y), glass)
-    for y in range(7, 15):
-        half = min(5, 2 + (y - 6))
-        for x in range(8 - half, 8 + half):
-            edge = x in (8 - half, 8 + half - 1) or y == 14
-            if edge:
-                img.putpixel((x, y), rim)
-            elif y >= 10:
-                shade = 1 if x > 9 or y == 13 else 3 if (x, y) in ((4, 10), (5, 10), (4, 11)) else 2
-                img.putpixel((x, y), mercury[0] if y == 13 and x > 9 else mercury[shade])
-            else:
-                img.putpixel((x, y), glass)
-    return img
-
-
 def bar(tones, band=None):
     dark, mid, light, shine = tones
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
@@ -202,26 +176,46 @@ def grid():
 
 
 def cell(case, rim, terminals):
+    dark, mid, light = case
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-    for x in range(2, 14):
-        for y in range(4, 15):
-            edge = x in (2, 13) or y in (4, 14)
-            img.putpixel((x, y), rim if edge else case[1] if x < 5 else case[0])
+    for x in range(3, 13):
+        for y in range(5, 14):
+            if x in (3, 12) or y in (5, 13):
+                tone = rim
+            elif x == 4 or y == 6:
+                tone = light
+            elif x == 11 or y == 12:
+                tone = dark
+            else:
+                tone = mid
+            img.putpixel((x, y), tone)
     for x0, colour in zip((4, 10), terminals):
-        for x in range(x0, x0 + 2):
-            for y in range(1, 4):
-                img.putpixel((x, y), colour)
+        for x in range(x0 - 1, x0 + 3):
+            for y in range(2, 5):
+                edge = x in (x0 - 1, x0 + 2) or y == 2
+                img.putpixel((x, y), rim if edge else colour)
     return img
 
 
-def cylinder(wrap, band, cap):
+def cylinder(wrap, band, cap, rim):
+    dark, mid, light = wrap
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-    for y in range(2, 15):
-        for x in range(5, 11):
-            tone = cap if y in (2, 14) else band if y in (3, 4) else wrap[0] if x == 5 else wrap[2] if x == 10 else wrap[1]
+    for x in range(4, 12):
+        for y in range(2, 15):
+            if x in (4, 11) or y in (2, 14):
+                tone = rim
+            elif y in (3, 4):
+                tone = cap if y == 3 else band
+            elif x == 5:
+                tone = light
+            elif x == 10 or y == 13:
+                tone = dark
+            else:
+                tone = mid
             img.putpixel((x, y), tone)
-    for x in (7, 8):
-        img.putpixel((x, 1), cap)
+    for x in range(6, 10):
+        img.putpixel((x, 1), rim if x in (6, 9) else cap)
+        img.putpixel((x, 0), rim if x in (7, 8) else (0, 0, 0, 0))
     return img
 
 
@@ -232,7 +226,7 @@ def batteries():
     lead((92, 92, 88), (150, 150, 142), (196, 196, 186), (226, 226, 218)).save(TEXTURES / "item/pasted_lead_plate.png")
     lead((30, 20, 16), (62, 40, 30), (92, 62, 46), (124, 90, 70)).save(TEXTURES / "item/lead_dioxide_plate.png")
     lead((54, 58, 70), (92, 98, 112), (128, 134, 148), (166, 172, 186)).save(TEXTURES / "item/sponge_lead_plate.png")
-    cell(((44, 46, 50, 255), (70, 72, 78, 255)), (26, 26, 30, 255), ((176, 40, 34, 255), (40, 40, 44, 255))).save(TEXTURES / "item/lead_acid_cell.png")
+    cell(((38, 40, 46, 255), (62, 64, 72, 255), (104, 106, 116, 255)), (16, 16, 20, 255), ((204, 54, 44, 255), (118, 120, 128, 255))).save(TEXTURES / "item/lead_acid_cell.png")
     heap("manganese_sulfate", (255, 236, 238), (240, 206, 212), (196, 160, 168)).save(TEXTURES / "item/manganese_sulfate.png")
     heap("cobalt_sulfate", (238, 128, 146), (200, 70, 96), (140, 36, 60)).save(TEXTURES / "item/cobalt_sulfate.png")
     heap("nmc_hydroxide", (150, 140, 96), (112, 102, 66), (70, 62, 38)).save(TEXTURES / "item/nmc_hydroxide.png")
@@ -244,7 +238,7 @@ def batteries():
     heap("ethylene_carbonate", (255, 255, 252), (236, 236, 230), (186, 186, 178)).save(TEXTURES / "item/ethylene_carbonate.png")
     heap("nickel_hydroxide", (190, 230, 160), (138, 196, 110), (86, 140, 66)).save(TEXTURES / "item/nickel_hydroxide.png")
     paint_raw("hydride_alloy", ((70, 72, 78), (122, 126, 134), (168, 172, 180), (214, 218, 226))).save(TEXTURES / "item/hydride_alloy.png")
-    cylinder(((30, 92, 54, 255), (46, 134, 80, 255), (22, 66, 40, 255)), (196, 200, 206, 255), (150, 154, 162, 255)).save(
+    cylinder(((26, 78, 46, 255), (46, 134, 80, 255), (88, 176, 118, 255)), (150, 154, 162, 255), (206, 210, 216, 255), (12, 34, 22, 255)).save(
         TEXTURES / "item/nickel_metal_hydride_cell.png")
 
 
@@ -334,7 +328,6 @@ def main():
     filament((150, 152, 156, 255), (206, 208, 212, 255)).save(TEXTURES / "item/solder.png")
     paint_raw("silver_zinc_crust", ((70, 72, 76), (118, 120, 124), (164, 166, 170), (212, 214, 216))).save(TEXTURES / "item/silver_zinc_crust.png")
     heap("litharge", (252, 206, 100), (230, 150, 46), (164, 88, 22)).save(TEXTURES / "item/litharge.png")
-    flask().save(TEXTURES / "item/mercury.png")
     heap("crude_zirconium_tetrachloride", (252, 248, 224), (228, 222, 186), (170, 162, 122)).save(TEXTURES / "item/crude_zirconium_tetrachloride.png")
     heap("zirconium_tetrachloride", (255, 255, 255), (236, 238, 238), (182, 186, 188)).save(TEXTURES / "item/zirconium_tetrachloride.png")
     heap("hafnium_tetrachloride", (255, 255, 255), (230, 232, 236), (172, 176, 184)).save(TEXTURES / "item/hafnium_tetrachloride.png")
