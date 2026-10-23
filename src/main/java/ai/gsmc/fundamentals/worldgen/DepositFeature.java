@@ -44,6 +44,8 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
         DISSEMINATED,
         POCKETS,
         SEAMS,
+        // the layer under the previous ore's seams, where real fireclay sits beneath coal
+        UNDERCLAY,
         TOP;
 
         public static final Codec<Style> CODEC = StringRepresentable.fromEnum(Style::values);
@@ -225,6 +227,7 @@ public class DepositFeature extends Feature<DepositFeature.Config> {
                     case DISSEMINATED -> Noise.hash(salt, pos.getX(), pos.getY(), pos.getZ()) < ore.fraction() * richness;
                     case POCKETS -> pocket(salt, ore.fraction() * richness);
                     case SEAMS -> Noise.hash(salt, (int) Math.floor(layer), 0, 0) < ore.fraction();
+                    case UNDERCLAY -> i > 0 && Noise.hash(salt - 1000L, (int) Math.floor(layer) + 1, 0, 0) < config.ores().get(i - 1).fraction();
                     case TOP -> vertical > 0.35 && pocket(salt, Math.min(0.9F, ore.fraction() * 3 * richness));
                 };
                 if (here) {
