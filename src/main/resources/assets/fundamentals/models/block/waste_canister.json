@@ -1,6 +1,7 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "parent": "minecraft:block/cube_column",
   "textures": {
-    "all": "fundamentals:block/waste_canister"
+    "end": "fundamentals:block/waste_canister_top",
+    "side": "fundamentals:block/waste_canister"
   }
 }
