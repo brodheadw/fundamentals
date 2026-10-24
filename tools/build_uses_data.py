@@ -53,14 +53,15 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "vanadium_pentoxide": "Vanadium Pentoxide", "cement_clinker": "Cement Clinker", "gypsum": "Gypsum", "phosphogypsum": "Phosphogypsum",
          "calomel": "Calomel", "copper_cement": "Copper Cement", "cobalt_cake": "Cobalt Cake", "anode_mud": "Anode Mud",
          "jarosite": "Jarosite", "lead_silver_residue": "Lead-Silver Residue", "hydrotreating_catalyst": "Cobalt-Molybdenum Catalyst",
-         "spent_fuel_rod": "Spent Fuel Rod", "cooled_spent_fuel": "Cooled Spent Fuel", "vitrified_waste": "Vitrified Waste"}
+         "spent_fuel_rod": "Spent Fuel Rod", "cooled_spent_fuel": "Cooled Spent Fuel", "vitrified_waste": "Vitrified Waste",
+         "hot_steel": "Hot Steel", "hardened_steel": "Hardened Steel", "galvanic_cell": "Copper-Zinc Galvanic Cell"}
 # Registered by uses.Uses as uses.Fertiliser, in this order.
 FERTILISERS = {"ammonium_nitrate": "Ammonium Nitrate", "urea": "Urea", "superphosphate": "Superphosphate", "ammonium_phosphate": "Ammonium Phosphate",
                "npk_fertiliser": "NPK Fertiliser"}
 # In the order of magnet.MagnetGrade.
 MAGNET_ALLOYS = {"neodymium_iron_boron": ("ingot", "plate"), "dysprosium_neodymium_iron_boron": ("ingot", "plate"),
-                 "samarium_cobalt": ("ingot", "plate"), "alnico": ("ingot",)}
-MAGNET_GRADES = ("NdFeB", "Dy-NdFeB", "SmCo", "Alnico")
+                 "samarium_cobalt": ("ingot", "plate"), "alnico": ("ingot",), "steel": ()}
+MAGNET_GRADES = ("NdFeB", "Dy-NdFeB", "SmCo", "Alnico", "Steel")
 MAGNETS = {f"{alloy}_magnet": f"{grade} Magnet" for alloy, grade in zip(MAGNET_ALLOYS, MAGNET_GRADES)}
 MAGNET_MACHINES = {"electric_motor": "sequenced_assembly/motor", "generator": "sequenced_assembly/generator", "stator": "mechanical_crafting/stator",
                    "electric_pump": "crafting/materials/electric_pump", "voltmeter": "crafting/materials/voltmeter"}
@@ -112,6 +113,16 @@ def shaped(path, pattern, key, result):
 
 
 def magnets():
+    # The first magnet needs no power: hot steel quenched under a spout, magnetized by a galvanic cell.
+    write(USES / "hot_steel.json", {"type": "minecraft:smelting", "category": "misc", "ingredient": {"item": "tfmg:steel_ingot"},
+                                   "result": result("hot_steel"), "experience": 0, "cookingtime": 200})
+    write(USES / "hardened_steel.json", {"type": "create:filling", "ingredients": item("hot_steel") + [fluid("minecraft:water", 250)],
+                                        "results": [result("hardened_steel")]})
+    common.vat(USES / "galvanic_cell.json", item("minecraft:copper_ingot") + item("create:zinc_ingot") + item("minecraft:glass_bottle")
+               + [fluid("tfmg:sulfuric_acid", 50), fluid("minecraft:water", 200)], [result("galvanic_cell")], machines=(), heat=None)
+    write(USES / "steel_magnet.json", {"type": "minecraft:crafting_shapeless", "category": "misc",
+                                      "ingredients": item("hardened_steel") + item("galvanic_cell") + item("tfmg:copper_wire"),
+                                      "result": result("steel_magnet")})
     mixing("boric_acid", item("raw_borax") + [fluid("tfmg:sulfuric_acid", 250)], [result("boric_acid", 2)], "heated")
     mixing("ferroboron", item("boric_acid") + tag("c:ingots/iron") + item("minecraft:charcoal", 2), [result("ferroboron")], "superheated")
     write(DATA / "tags/item/magnet_light_rare_earths.json", {"replace": False, "values": [f"fundamentals:{e}_ingot" for e in ("neodymium", "praseodymium", "didymium")]})
@@ -139,6 +150,13 @@ def magnets():
     with zipfile.ZipFile(TFMG_JAR) as jar:
         def original(path):
             return json.loads(jar.read(f"data/tfmg/recipe/{path}.json"))
+
+        # Silicon steel lowers core losses; ordinary iron must work before the first arc furnace.
+        for machine, source, core in (("transformer", "transformer", "c:plates/iron"),
+                                      ("electromagnetic_coil", "unfinished_electromagnetic_coil", "c:ingots/iron")):
+            recipe = original(f"crafting/materials/{source}")
+            recipe["key"]["M"] = {"tag": core}
+            write(USES / f"{machine}_with_iron_core.json", recipe)
 
         for machine, path in MAGNET_MACHINES.items():
             recipe = original(path)
@@ -358,8 +376,8 @@ def nickel():
     mixing("ferronickel_from_laterite", item("raw_nickel_laterite", 4) + item("minecraft:charcoal", 2),
            [result("ferronickel_ingot"), result("tfmg:slag", 2)], "superheated")
     pgm_vat("nickel_carbonyl", item("nickel_oxide", 2) + [fluid("water_gas", 1000)],
-            [result_fluid("nickel_carbonyl", 500), {"id": "fundamentals:platinum_group_concentrate", "chance": 0.1}], folder=USES)
-    pgm_vat("carbonyl_decomposition", [fluid("nickel_carbonyl", 500)], [result("nickel_pellets", 2), result_fluid("water_gas", 500)], folder=USES)
+            [result_fluid("nickel_carbonyl", 500), {"id": "fundamentals:platinum_group_concentrate", "chance": 0.1}], machines=(), folder=USES)
+    pgm_vat("carbonyl_decomposition", [fluid("nickel_carbonyl", 500)], [result("nickel_pellets", 2), result_fluid("water_gas", 500)], machines=(), folder=USES)
     write(USES / "nickel_ingot_from_pellets.json", {"type": "create:compacting", "heat_requirement": "heated", "ingredients": item("nickel_pellets"),
                                                     "results": [result("tfmg:nickel_ingot")]})
     pgm_vat("cobalt_extraction", [fluid("nickel_copper_sulfate", 1000), fluid("p507", 250), fluid("hydrochloric_acid", 50)],
@@ -755,6 +773,8 @@ def uranium():
                                         "results": [result("boron_carbide"), result_fluid("tfmg:carbon_dioxide", 250)]})
     shaped(USES / "uranium_glass.json", ["GGG", "GYG", "GGG"], {"G": {"tag": "c:glass_blocks/colorless"}, "Y": {"item": "fundamentals:yellowcake"}},
            {"count": 8, "id": "minecraft:lime_stained_glass"})
+    # Hybrid Aquatic's lures ride the bobber from the off hand; a magnet drags treasure up (magnet.MagnetLure)
+    tag_file(DATA.parent / "hybrid_aquatic/tags/item/lure_items.json", [f"fundamentals:{grade}_magnet" for grade in MAGNET_ALLOYS] + ["tfmg:magnet"])
     tag_file(DATA / "tags/item/uranium_dusts.json", [f"fundamentals:{name}" for name in
                                                      ("uraninite_dust", "yellowcake", "uranium_tetrafluoride", "uranium_dioxide", "depleted_uranium_oxide")])
     # The back end: a burnt rod cools a day under water (content.nuclear.SpentFuel), then PUREX takes the uranium back in
@@ -1148,6 +1168,7 @@ def names():
     lang["tooltip.fundamentals.magnet.grade"] = "%s, rated to %s °C"
     lang["tooltip.fundamentals.magnet.field"] = "Overheated: %s%% of its field left"
     lang["tooltip.fundamentals.magnet.demagnetised"] = "Demagnetised: rebuild it with a magnet"
+    lang["tooltip.fundamentals.magnet.lure"] = "Off hand while fishing: +%s luck"
     lang["goggles.fundamentals.magnet.grade"] = "%s, rated to %s °C"
     lang["goggles.fundamentals.magnet.output"] = "At %s °C: %s%% of full output"
     lang["goggles.fundamentals.magnet.field"] = "%s%% of its field left: it has been past %s °C"

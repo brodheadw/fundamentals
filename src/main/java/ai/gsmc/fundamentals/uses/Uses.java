@@ -35,7 +35,7 @@ public final class Uses {
             "polysilicon", "silicon_boule", "silicon_wafer", "zinc_leach_residue", "led_chip", "indium_tin_oxide",
             "vanadium_pentoxide", "cement_clinker", "gypsum", "phosphogypsum",
             "calomel", "copper_cement", "cobalt_cake", "anode_mud", "jarosite", "lead_silver_residue", "hydrotreating_catalyst",
-            "spent_fuel_rod", "cooled_spent_fuel", "vitrified_waste");
+            "spent_fuel_rod", "cooled_spent_fuel", "vitrified_waste", "hot_steel", "hardened_steel", "galvanic_cell");
 
     public static final List<String> PLATINUM_IDS = List.of(
             "ammonium_chloride", "insoluble_residue", "iridium_rhodium_residue", "ammonium_chloroplatinate",
