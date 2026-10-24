@@ -116,20 +116,20 @@ public class MineralTests {
 
     @GameTest(template = "empty")
     public void vanillaGoldAndIronOreMineAsOurMinerals(GameTestHelper helper) {
-        Map<Block, String> minerals = Map.of(Blocks.GOLD_ORE, "raw_native_gold", Blocks.DEEPSLATE_GOLD_ORE, "raw_native_gold",
-                Blocks.IRON_ORE, "raw_hematite", Blocks.DEEPSLATE_IRON_ORE, "raw_magnetite");
+        Map<Block, String> minerals = Map.of(Blocks.GOLD_ORE, "minecraft:raw_gold", Blocks.DEEPSLATE_GOLD_ORE, "minecraft:raw_gold",
+                Blocks.IRON_ORE, "fundamentals:raw_hematite", Blocks.DEEPSLATE_IRON_ORE, "fundamentals:raw_magnetite");
         minerals.forEach((block, raw) -> {
             List<ItemStack> drops = Block.getDrops(block.defaultBlockState(), helper.getLevel(), helper.absolutePos(BlockPos.ZERO), null, null,
                     new ItemStack(Items.IRON_PICKAXE));
-            helper.assertTrue(drops.size() == 1 && drops.getFirst().is(stack("fundamentals:" + raw).getItem()), block + " dropped " + drops);
+            helper.assertTrue(drops.size() == 1 && drops.getFirst().is(stack(raw).getItem()), block + " dropped " + drops);
         });
         helper.succeed();
     }
 
     @GameTest(template = "empty")
     public void nativeGoldRunsToGold(GameTestHelper helper) {
-        step(helper, "fundamentals:uses/gold_from_panning", "fundamentals:raw_native_gold", "minecraft:gold_nugget");
-        step(helper, "fundamentals:uses/gold_amalgam", "fundamentals:raw_native_gold", "fundamentals:gold_amalgam");
+        step(helper, "fundamentals:uses/gold_from_panning", "minecraft:raw_gold", "minecraft:gold_nugget");
+        step(helper, "fundamentals:uses/gold_amalgam", "minecraft:raw_gold", "fundamentals:gold_amalgam");
         helper.assertTrue(takes(processing(helper, "fundamentals:uses/gold_amalgam"), "fundamentals:mercury"), "amalgamation takes mercury");
         step(helper, "fundamentals:uses/electrum_from_amalgam", "fundamentals:gold_amalgam", "fundamentals:electrum_ingot");
         var miller = processing(helper, "fundamentals:uses/gold_from_electrum");

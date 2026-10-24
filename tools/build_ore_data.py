@@ -3,7 +3,7 @@ import json
 import shutil
 import zipfile
 
-from common import ASSETS, DATA, RESOURCES, TFMG_JAR, cube, drop_self, ns, read_lang, tag, write, write_lang
+from common import ASSETS, DATA, RESOURCES, TFMG_JAR, VANILLA_RAW, cube, drop_self, ns, raw_item, read_lang, tag, write, write_lang
 from paint_materials import items
 from paint_minerals import GRADES, ROCK_BLOCKS, VARIANTS, WHOLE
 from paint_oxidation import BLOCKS as OXIDATION_BLOCKS
@@ -257,7 +257,7 @@ def rock_files(name, display, lang):
 
 
 def silk_or_raw(block, mineral, count=1, chance=1.0):
-    raw = {"type": "minecraft:item", "name": f"fundamentals:raw_{mineral}",
+    raw = {"type": "minecraft:item", "name": raw_item(mineral),
            "functions": [{"function": "minecraft:set_count", "count": count},
                          {"function": "minecraft:apply_bonus", "enchantment": "minecraft:fortune",
                           "formula": "minecraft:ore_drops"},
@@ -294,10 +294,14 @@ def ore_files(mineral, display, lang):
                       "faces": {side: {"texture": tex} for side in ("down", "up", "north", "south", "west", "east")}}
                      for tex in ("#base", "#ore")]}
     write(ASSETS / f"models/item/{name}.json", item)
-    write(ASSETS / f"models/item/raw_{mineral}.json",
-          {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/raw_{mineral}"}})
     lang[f"block.fundamentals.{name}"] = display if whole else f"{display} Ore"
-    lang[f"item.fundamentals.raw_{mineral}"] = f"Raw {display}"
+    if mineral in VANILLA_RAW:
+        (ASSETS / f"models/item/raw_{mineral}.json").unlink(missing_ok=True)
+        lang.pop(f"item.fundamentals.raw_{mineral}", None)
+    else:
+        write(ASSETS / f"models/item/raw_{mineral}.json",
+              {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/raw_{mineral}"}})
+        lang[f"item.fundamentals.raw_{mineral}"] = f"Raw {display}"
     write(DATA / f"loot_table/blocks/{name}.json", {"type": "minecraft:block", "pools": pools})
 
 
@@ -339,8 +343,8 @@ def main():
     textures = {p.stem for p in (ASSETS / "textures/block").glob("*.png")}
     expected = {f"{name}_ore_{g}_{v}" for name in ORES for g in GRADES for v in range(VARIANTS)} | set(ROCKS)
     raw_textures = {p.stem for p in (ASSETS / "textures/item").glob("raw_*.png")}
-    assert raw_textures == {f"raw_{name}" for name in ORES}, \
-        f"raw item textures and ORES disagree: {sorted(raw_textures ^ {f'raw_{name}' for name in ORES})}"
+    ours = {f"raw_{name}" for name in ORES if name not in VANILLA_RAW}
+    assert raw_textures == ours, f"raw item textures and ORES disagree: {sorted(raw_textures ^ ours)}"
     stale = {name for name in textures if "_ore_" in name} - expected
     assert not (expected - textures) and not stale, \
         f"textures and block tables disagree: missing {sorted(expected - textures)}, stale {sorted(stale)}"
@@ -368,13 +372,14 @@ def main():
         block = f"fundamentals:{name}_ore"
         ore_files(name, DISPLAY.get(name, name.replace("_", " ").title()), lang)
         tools = (tool,) if isinstance(tool, str) else tool
-        blocks.append({"name": f"{name}_ore", "soft": tools[0] == "shovel", "mineral": name})
+        blocks.append({"name": f"{name}_ore", "soft": tools[0] == "shovel", "mineral": name}
+                      | ({"raw": VANILLA_RAW[name]} if name in VANILLA_RAW else {}))
         for each in tools:
             by_tool.setdefault(each, []).append(block)
         if tier:
             by_tier.setdefault(tier, []).append(block)
         by_commodity.setdefault(commodity, []).append(block)
-        raw_by_commodity.setdefault(commodity, []).append(f"fundamentals:raw_{name}")
+        raw_by_commodity.setdefault(commodity, []).append(raw_item(name))
     write_lang(lang)
 
     for tool, names in by_tool.items():

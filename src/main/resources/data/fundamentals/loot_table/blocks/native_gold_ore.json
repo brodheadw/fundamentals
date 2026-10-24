@@ -40,7 +40,7 @@
             },
             {
               "type": "minecraft:item",
-              "name": "fundamentals:raw_native_gold",
+              "name": "minecraft:raw_gold",
               "functions": [
                 {
                   "function": "minecraft:set_count",
@@ -103,7 +103,7 @@
             },
             {
               "type": "minecraft:item",
-              "name": "fundamentals:raw_native_gold",
+              "name": "minecraft:raw_gold",
               "functions": [
                 {
                   "function": "minecraft:set_count",
@@ -162,7 +162,7 @@
             },
             {
               "type": "minecraft:item",
-              "name": "fundamentals:raw_native_gold",
+              "name": "minecraft:raw_gold",
               "functions": [
                 {
                   "function": "minecraft:set_count",

@@ -299,7 +299,8 @@
     {
       "name": "native_gold_ore",
       "soft": true,
-      "mineral": "native_gold"
+      "mineral": "native_gold",
+      "raw": "minecraft:raw_gold"
     }
   ],
   "hosts": {

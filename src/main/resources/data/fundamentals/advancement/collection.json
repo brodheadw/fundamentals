@@ -683,18 +683,6 @@
           }
         ]
       }
-    },
-    "fundamentals:raw_native_gold": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "fundamentals:raw_native_gold"
-            ]
-          }
-        ]
-      }
     }
   },
   "parent": "fundamentals:root"
