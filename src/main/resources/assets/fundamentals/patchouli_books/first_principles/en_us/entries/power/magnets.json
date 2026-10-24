@@ -20,11 +20,29 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Alnico Magnet: rated 525 °C, lasting loss past 600, Curie 860, 40% strength. Output falls from full at the rating to half at the lasting-loss point and to nothing at Curie; a motor turns slower and carries less, a generator gives less, an electric pump pushes less. A demagnetised machine stops."
+      "text": "Alnico Magnet: rated 525 °C, lasting loss past 600, Curie 860, 40% strength. Steel Magnet: rated 150 °C, lasting loss past 250, Curie 770, 25% strength."
     },
     {
       "type": "patchouli:text",
-      "text": "A voltmeter's needle swings against its magnet, so it reads low by what the heat has taken of its field."
+      "text": "Output falls from full at the rating to half at the lasting-loss point and to nothing at Curie; a motor turns slower and carries less, a generator gives less, an electric pump pushes less. A demagnetised machine stops. A voltmeter's needle swings against its magnet, so it reads low by what the heat has taken of its field."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The first magnet is hardened carbon steel. Heat a steel ingot in a furnace and quench the hot steel under a spout with 250 mB of water. In an unpowered steel vat, combine copper, zinc, a glass bottle, 50 mB of sulfuric acid and 200 mB of water into a galvanic cell.",
+      "title": "First electricity"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Craft the cell, hardened steel and copper wire together: the cell's current magnetizes the steel. The recipe consumes the cell and winding. This is a 25% starter magnet; its game heat limits are 150, 250 and 770 °C. The cell does not drive the factory. Mechanical rotation drives its generator."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "An ordinary iron ingot can be the unfinished coil's core, and iron plates can be the transformer's laminations. Wind the coils mechanically. Silicon steel is useful core material, but is not a prerequisite for induction. Transform the generator's output, never the cell's steady DC.",
+      "title": "To the arc furnace"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Three graphite electrodes make the first silicon. Each needs at least 1,500 volts and 7,500 watts in The Factory's model; keep each on its own small-transformer output and supply enough generation upstream. Watch current as well as voltage: raising voltage also raises load."
     },
     {
       "type": "patchouli:text",

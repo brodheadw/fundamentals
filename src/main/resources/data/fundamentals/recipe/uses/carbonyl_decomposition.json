@@ -4,9 +4,7 @@
     "tfmg:steel_vat",
     "tfmg:firebrick_lined_vat"
   ],
-  "machines": [
-    "tfmg:mixing"
-  ],
+  "machines": [],
   "min_size": 1,
   "processing_time": 100,
   "ingredients": [

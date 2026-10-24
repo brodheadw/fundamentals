@@ -1,0 +1,233 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "chemica:antimony_dust",
+      "required": false
+    },
+    {
+      "id": "chemica:antimony_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:antimony_nugget",
+      "required": false
+    },
+    {
+      "id": "chemica:chromium_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:cobalt_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:cobalt_nugget",
+      "required": false
+    },
+    {
+      "id": "chemica:crushed_graphite",
+      "required": false
+    },
+    {
+      "id": "chemica:crushed_raw_antimony",
+      "required": false
+    },
+    {
+      "id": "chemica:crushed_raw_chromium",
+      "required": false
+    },
+    {
+      "id": "chemica:crushed_raw_cobalt",
+      "required": false
+    },
+    {
+      "id": "chemica:crushed_raw_vanadium",
+      "required": false
+    },
+    {
+      "id": "chemica:deepslate_antimony_ore",
+      "required": false
+    },
+    {
+      "id": "chemica:deepslate_chromite_ore",
+      "required": false
+    },
+    {
+      "id": "chemica:deepslate_cobalt_ore",
+      "required": false
+    },
+    {
+      "id": "chemica:deepslate_fluorite_ore",
+      "required": false
+    },
+    {
+      "id": "chemica:deepslate_graphite_ore",
+      "required": false
+    },
+    {
+      "id": "chemica:deepslate_molybdenum_ore",
+      "required": false
+    },
+    {
+      "id": "chemica:deepslate_phosphorus_ore",
+      "required": false
+    },
+    {
+      "id": "chemica:deepslate_platinum_ore",
+      "required": false
+    },
+    {
+      "id": "chemica:deepslate_rutile_ore",
+      "required": false
+    },
+    {
+      "id": "chemica:deepslate_silver_ore",
+      "required": false
+    },
+    {
+      "id": "chemica:deepslate_tin_ore",
+      "required": false
+    },
+    {
+      "id": "chemica:deepslate_vanadium_ore",
+      "required": false
+    },
+    {
+      "id": "chemica:deepslate_wolframite_ore",
+      "required": false
+    },
+    {
+      "id": "chemica:fervorite",
+      "required": false
+    },
+    {
+      "id": "chemica:high_grade_rutile_crystal",
+      "required": false
+    },
+    {
+      "id": "chemica:iridium_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:iridium_nugget",
+      "required": false
+    },
+    {
+      "id": "chemica:magnesium_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:medium_grade_rutile_crystal",
+      "required": false
+    },
+    {
+      "id": "chemica:molybdenum_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:phosphorus_ore",
+      "required": false
+    },
+    {
+      "id": "chemica:platinum_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:platinum_nugget",
+      "required": false
+    },
+    {
+      "id": "chemica:raw_antimony",
+      "required": false
+    },
+    {
+      "id": "chemica:raw_chromite",
+      "required": false
+    },
+    {
+      "id": "chemica:raw_cobalt",
+      "required": false
+    },
+    {
+      "id": "chemica:raw_molybdenum",
+      "required": false
+    },
+    {
+      "id": "chemica:raw_platinum",
+      "required": false
+    },
+    {
+      "id": "chemica:raw_platinum_block",
+      "required": false
+    },
+    {
+      "id": "chemica:raw_silver",
+      "required": false
+    },
+    {
+      "id": "chemica:raw_tin",
+      "required": false
+    },
+    {
+      "id": "chemica:raw_tungsten",
+      "required": false
+    },
+    {
+      "id": "chemica:raw_vanadium",
+      "required": false
+    },
+    {
+      "id": "chemica:rutile_crystal",
+      "required": false
+    },
+    {
+      "id": "chemica:rutile_dust",
+      "required": false
+    },
+    {
+      "id": "chemica:silver_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:silver_nugget",
+      "required": false
+    },
+    {
+      "id": "chemica:sodium_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:tantalum_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:tantalum_nugget",
+      "required": false
+    },
+    {
+      "id": "chemica:tin_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:tin_nugget",
+      "required": false
+    },
+    {
+      "id": "chemica:tin_ore",
+      "required": false
+    },
+    {
+      "id": "chemica:titanium_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:tungsten_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:zelosite",
+      "required": false
+    }
+  ]
+}

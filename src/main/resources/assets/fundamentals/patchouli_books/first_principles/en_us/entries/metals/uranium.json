@@ -116,12 +116,30 @@
     },
     {
       "type": "patchouli:text",
+      "text": "A burnt fuel rod comes back out of the reactor as spent fuel: into a chest or hopper on top of the controller, or loose on top of it. It is hotter than the rod it was: the fission products, caesium and strontium among them, are what burn.",
+      "title": "Spent fuel"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Spent fuel cools only under water, as real fuel spends years in a pool; a day in a pool makes it cooled spent fuel, and a rod lying in water does not despawn."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Then reprocess it, as La Hague and Sellafield do, or bury it, as Finland does. PUREX dissolves cooled fuel in 500 mB of nitric acid, heated: enriched uranium dioxide comes back for pellets, and 250 mB of high-level waste stays behind.",
+      "title": "Waste"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Glass, boric acid and that waste, superheated, melt to vitrified waste, the borosilicate the waste is locked in. A canister and four vitrified waste, or two cooled spent fuel, seal a waste canister. It irradiates anyone within eight blocks until it is entombed below y 0 with deepslate, tuff or clay on every face."
+    },
+    {
+      "type": "patchouli:text",
       "text": "Sources: World Nuclear Association, Information Library: \"Uranium Mining Overview\", \"Conversion and Deconversion\", \"Uranium Enrichment\" and \"Nuclear Fuel Fabrication\"; IAEA, Geological Classification of Uranium Deposits and Description of Selected Examples, IAEA-TECDOC-1842 (2018); Benedict, Pigford and Levi, Nuclear Chemical Engineering, 2nd ed.",
       "title": "Sources"
     },
     {
       "type": "patchouli:text",
-      "text": "(McGraw-Hill, 1981)."
+      "text": "(McGraw-Hill, 1981); IAEA, Status and Trends in Spent Fuel and Radioactive Waste Management, NW-T-1.14 (2022)."
     }
   ]
 }

@@ -5,6 +5,7 @@
     "fundamentals:dysprosium_neodymium_iron_boron_magnet",
     "fundamentals:neodymium_iron_boron_magnet",
     "fundamentals:samarium_cobalt_magnet",
+    "fundamentals:steel_magnet",
     "tfmg:magnet"
   ]
 }

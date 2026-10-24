@@ -1,0 +1,36 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "machines": [],
+  "min_size": 1,
+  "processing_time": 100,
+  "ingredients": [
+    {
+      "item": "minecraft:copper_ingot"
+    },
+    {
+      "item": "create:zinc_ingot"
+    },
+    {
+      "item": "minecraft:glass_bottle"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 50,
+      "fluid": "tfmg:sulfuric_acid"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 200,
+      "fluid": "minecraft:water"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:galvanic_cell"
+    }
+  ]
+}

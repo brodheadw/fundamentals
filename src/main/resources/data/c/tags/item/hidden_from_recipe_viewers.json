@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "#fundamentals:hidden/chemica",
+      "required": false
+    },
+    {
+      "id": "#fundamentals:hidden/createnuclear",
+      "required": false
+    }
+  ]
+}
