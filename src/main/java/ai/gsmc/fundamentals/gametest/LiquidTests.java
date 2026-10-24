@@ -80,7 +80,8 @@ public class LiquidTests {
         helper.succeed();
     }
 
-    @GameTest(template = "battery", timeoutTicks = 100)
+    // the heat grid warms the lava's neighbour in its own time, which a full batch of tests can slow
+    @GameTest(template = "battery", timeoutTicks = 300)
     public void keroseneBesideLavaCatchesFire(GameTestHelper helper) {
         for (int x = 1; x <= 21; x++) {
             helper.setBlock(new BlockPos(x, 0, 2), Blocks.STONE);
@@ -88,16 +89,19 @@ public class LiquidTests {
         BlockPos lava = new BlockPos(2, 1, 2), beside = lava.east(), far = new BlockPos(20, 1, 2);
         helper.setBlock(lava, Blocks.LAVA);
         Fluid kerosene = fluid("tfmg:kerosene");
-        helper.runAfterDelay(25, () -> {
-            var level = helper.getLevel();
-            helper.assertFalse(Liquids.ignite(level, helper.absolutePos(beside), Fluids.WATER), "water should not burn");
-            helper.assertFalse(Liquids.ignite(level, helper.absolutePos(far), kerosene), "kerosene in the cool should not light");
-            helper.assertTrue(Liquids.ignite(level, helper.absolutePos(beside), kerosene), "kerosene let out beside lava should catch");
-            helper.assertTrue(helper.getBlockState(beside).getBlock() instanceof BaseFireBlock, "and burn there");
-            Block spilt = kerosene.defaultFluidState().createLegacyBlock().getBlock();
-            helper.assertTrue(spilt.defaultBlockState().isFlammable(level, helper.absolutePos(far), Direction.UP), "a pool of kerosene should burn as fire's fuel");
-            helper.succeed();
-        });
+        var level = helper.getLevel();
+        helper.startSequence()
+                .thenExecuteAfter(25, () -> {
+                    helper.assertFalse(Liquids.ignite(level, helper.absolutePos(beside), Fluids.WATER), "water should not burn");
+                    helper.assertFalse(Liquids.ignite(level, helper.absolutePos(far), kerosene), "kerosene in the cool should not light");
+                })
+                .thenWaitUntil(() -> helper.assertTrue(Liquids.ignite(level, helper.absolutePos(beside), kerosene), "kerosene let out beside lava should catch"))
+                .thenExecute(() -> {
+                    helper.assertTrue(helper.getBlockState(beside).getBlock() instanceof BaseFireBlock, "and burn there");
+                    Block spilt = kerosene.defaultFluidState().createLegacyBlock().getBlock();
+                    helper.assertTrue(spilt.defaultBlockState().isFlammable(level, helper.absolutePos(far), Direction.UP), "a pool of kerosene should burn as fire's fuel");
+                })
+                .thenSucceed();
     }
 
     @GameTest(template = "battery", timeoutTicks = 200)

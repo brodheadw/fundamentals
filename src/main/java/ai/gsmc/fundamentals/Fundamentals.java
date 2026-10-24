@@ -86,6 +86,7 @@ public class Fundamentals {
                 Plastics.registerBlocks(helper::register);
                 Titanium.registerBlocks(helper::register);
                 Thermometers.registerBlocks(helper::register);
+                ai.gsmc.fundamentals.air.Barometers.registerBlocks(helper::register);
                 Oxidation.registerBlocks(helper::register);
             });
             event.register(Registries.BLOCK_ENTITY_TYPE, helper -> {
@@ -95,6 +96,7 @@ public class Fundamentals {
                 Plastics.registerBlockEntities(helper::register);
                 Titanium.registerBlockEntities(helper::register);
                 Thermometers.registerBlockEntities(helper::register);
+                ai.gsmc.fundamentals.air.Barometers.registerBlockEntities(helper::register);
                 Oxidation.registerBlockEntities(helper::register);
             });
             event.register(Registries.RECIPE_TYPE, helper -> {
@@ -128,6 +130,7 @@ public class Fundamentals {
                 Plastics.registerItems(helper::register);
                 Titanium.registerItems(helper::register);
                 Thermometers.registerItems(helper::register);
+                ai.gsmc.fundamentals.air.Barometers.registerItems(helper::register);
                 Oxidation.registerItems(helper::register);
                 PeriodicTable.registerItems(helper::register);
             });
@@ -211,6 +214,7 @@ public class Fundamentals {
                     HandTools.items().forEach(output::accept);
                     Electricity.items().forEach(output::accept);
                     Thermometers.items().forEach(output::accept);
+                    ai.gsmc.fundamentals.air.Barometers.items().forEach(output::accept);
                     Oxidation.items().forEach(output::accept);
                     OreBlocks.rawItems().forEach(output::accept);
                     OreBlocks.items().forEach(output::accept);

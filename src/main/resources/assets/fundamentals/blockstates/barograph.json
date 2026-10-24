@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "fundamentals:block/barograph"
+    },
+    "facing=east": {
+      "model": "fundamentals:block/barograph",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "fundamentals:block/barograph",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "fundamentals:block/barograph",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "fundamentals:block/barograph",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "fundamentals:block/barograph",
+      "x": 90
+    }
+  }
+}

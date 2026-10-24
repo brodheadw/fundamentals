@@ -59,7 +59,12 @@ public class ThermometerBlock extends BaseEntityBlock {
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPES.get(state.getValue(FACING));
+        return shape(state.getValue(FACING));
+    }
+
+    /** The wall-mounted gauge case, shared by every dial instrument. */
+    public static VoxelShape shape(Direction facing) {
+        return SHAPES.get(facing);
     }
 
     @Override
