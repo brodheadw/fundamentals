@@ -1,0 +1,140 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "fundamentals:epitaxial_wafer"
+  },
+  "loops": 6,
+  "results": [
+    {
+      "id": "fundamentals:microprocessor_wafer"
+    }
+  ],
+  "transitional_item": {
+    "id": "fundamentals:processing_wafer"
+  },
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_wafer"
+        },
+        {
+          "item": "fundamentals:microprocessor_mask"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_wafer"
+        }
+      ],
+      "keep_held_item": true
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_wafer"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 25,
+          "fluid": "fundamentals:caustic_soda"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_wafer"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_wafer"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 25,
+          "fluid": "fundamentals:hydrofluoric_acid"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_wafer"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_wafer"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 25,
+          "fluid": "fundamentals:phosphorus_trichloride"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_wafer"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_wafer"
+        },
+        {
+          "tag": "c:plates/aluminum"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_wafer"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_wafer"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 25,
+          "fluid": "minecraft:water"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_wafer"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_wafer"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 25,
+          "fluid": "fundamentals:positive_photoresist"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_wafer"
+        }
+      ]
+    }
+  ]
+}

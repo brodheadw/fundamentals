@@ -19,6 +19,9 @@ config = "${id}.mixins.json"
 [[mixins]]
 config = "${id}.createnuclear.mixins.json"
 
+[[mixins]]
+config = "${id}.computercraft.mixins.json"
+
 [[dependencies.${id}]]
 modId = "neoforge"
 type = "required"

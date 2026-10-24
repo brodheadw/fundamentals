@@ -1,0 +1,16 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "fundamentals:fused_quartz"
+    },
+    {
+      "item": "fundamentals:chromium_ingot"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:quartz_mask_blank"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "PWP",
+    "CTD",
+    "PWP"
+  ],
+  "key": {
+    "P": {
+      "tag": "c:plates/iron"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    },
+    "C": {
+      "item": "tfmg:capacitor_item"
+    },
+    "T": {
+      "item": "tfmg:electromagnetic_coil"
+    },
+    "D": {
+      "item": "tfmg:electric_diode"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "fundamentals:power_supply"
+  }
+}

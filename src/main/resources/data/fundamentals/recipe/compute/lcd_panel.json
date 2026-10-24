@@ -1,0 +1,16 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "tag": "c:glass_panes"
+    },
+    {
+      "item": "fundamentals:indium_tin_oxide"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:lcd_panel"
+    }
+  ]
+}
