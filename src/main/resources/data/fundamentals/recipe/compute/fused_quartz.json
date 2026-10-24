@@ -1,0 +1,15 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "c:storage_blocks/quartz"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:fused_quartz",
+      "count": 2
+    }
+  ]
+}

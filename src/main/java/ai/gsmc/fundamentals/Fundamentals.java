@@ -6,6 +6,8 @@ import ai.gsmc.fundamentals.client.PlasticsClient;
 import ai.gsmc.fundamentals.client.SeparationClient;
 import ai.gsmc.fundamentals.client.ThermometerRenderer;
 import ai.gsmc.fundamentals.client.TitaniumClient;
+import ai.gsmc.fundamentals.client.ComputeClient;
+import ai.gsmc.fundamentals.compute.Compute;
 import ai.gsmc.fundamentals.content.nuclear.Radiation;
 import ai.gsmc.fundamentals.elements.PeriodicTable;
 import ai.gsmc.fundamentals.ironworking.IronWorking;
@@ -89,6 +91,7 @@ public class Fundamentals {
                 Thermometers.registerBlocks(helper::register);
                 ai.gsmc.fundamentals.air.Barometers.registerBlocks(helper::register);
                 Oxidation.registerBlocks(helper::register);
+                Compute.registerBlocks(helper::register);
             });
             event.register(Registries.BLOCK_ENTITY_TYPE, helper -> {
                 IronWorking.registerBlockEntities(helper::register);
@@ -99,6 +102,7 @@ public class Fundamentals {
                 Thermometers.registerBlockEntities(helper::register);
                 ai.gsmc.fundamentals.air.Barometers.registerBlockEntities(helper::register);
                 Oxidation.registerBlockEntities(helper::register);
+                Compute.registerBlockEntities(helper::register);
             });
             event.register(Registries.RECIPE_TYPE, helper -> {
                 IronWorking.registerRecipeTypes(helper::register);
@@ -109,8 +113,14 @@ public class Fundamentals {
                 Separation.registerRecipeSerializers(helper::register);
                 Magnets.registerRecipeSerializers(helper::register);
             });
-            event.register(NeoForgeRegistries.Keys.FLUID_TYPES, helper -> Separation.registerFluidTypes(helper::register));
-            event.register(Registries.FLUID, helper -> Separation.registerFluids(helper::register));
+            event.register(NeoForgeRegistries.Keys.FLUID_TYPES, helper -> {
+                Separation.registerFluidTypes(helper::register);
+                Compute.registerFluidTypes(helper::register);
+            });
+            event.register(Registries.FLUID, helper -> {
+                Separation.registerFluids(helper::register);
+                Compute.registerFluids(helper::register);
+            });
             if (event.getRegistryKey().equals(Registries.FLUID)) {
                 event.getRegistry().addAlias(id("brine"), id("calcium_chloride_liquor"));
             }
@@ -134,6 +144,7 @@ public class Fundamentals {
                 ai.gsmc.fundamentals.air.Barometers.registerItems(helper::register);
                 Oxidation.registerItems(helper::register);
                 PeriodicTable.registerItems(helper::register);
+                Compute.registerItems(helper::register);
             });
             event.register(Registries.DATA_COMPONENT_TYPE, helper -> {
                 Oxidation.registerComponents(helper::register);
@@ -202,6 +213,7 @@ public class Fundamentals {
             TitaniumClient.register(modBus);
             OxidationClient.register(modBus);
             ThermometerRenderer.register(modBus);
+            ComputeClient.register(modBus);
         }
     }
 
@@ -220,6 +232,7 @@ public class Fundamentals {
                     Thermometers.items().forEach(output::accept);
                     ai.gsmc.fundamentals.air.Barometers.items().forEach(output::accept);
                     Oxidation.items().forEach(output::accept);
+                    Compute.items().forEach(output::accept);
                     OreBlocks.rawItems().forEach(output::accept);
                     OreBlocks.items().forEach(output::accept);
                 })

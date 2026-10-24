@@ -1,0 +1,39 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "computercraft"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "SLS",
+    "CBM",
+    "SNS"
+  ],
+  "key": {
+    "S": {
+      "item": "tfmg:plastic_sheet"
+    },
+    "L": {
+      "item": "fundamentals:colour_lcd_panel"
+    },
+    "C": {
+      "item": "fundamentals:advanced_processor"
+    },
+    "B": {
+      "item": "tfmg:circuit_board"
+    },
+    "M": {
+      "item": "fundamentals:memory_chip"
+    },
+    "N": {
+      "item": "fundamentals:nickel_metal_hydride_cell"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "computercraft:pocket_computer_advanced"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "type": "create:cutting",
+  "ingredients": [
+    {
+      "item": "fundamentals:advanced_processor_wafer"
+    }
+  ],
+  "processing_time": 200,
+  "results": [
+    {
+      "id": "fundamentals:advanced_processor_die"
+    },
+    {
+      "id": "fundamentals:advanced_processor_die",
+      "chance": 0.5
+    }
+  ]
+}

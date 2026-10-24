@@ -1,0 +1,16 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "item": "fundamentals:lcd_panel"
+    },
+    {
+      "item": "fundamentals:led_chip"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:colour_lcd_panel"
+    }
+  ]
+}

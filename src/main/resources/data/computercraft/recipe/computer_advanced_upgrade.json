@@ -1,0 +1,44 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "computercraft"
+    }
+  ],
+  "type": "computercraft:transform_shaped",
+  "category": "redstone",
+  "function": [
+    {
+      "type": "computercraft:copy_components",
+      "from": {
+        "item": "computercraft:computer_normal"
+      }
+    }
+  ],
+  "pattern": [
+    "PAP",
+    "MCM",
+    "PLP"
+  ],
+  "key": {
+    "P": {
+      "tag": "c:plates/aluminum"
+    },
+    "A": {
+      "item": "fundamentals:advanced_processor"
+    },
+    "M": {
+      "item": "fundamentals:memory_chip"
+    },
+    "C": {
+      "item": "computercraft:computer_normal"
+    },
+    "L": {
+      "item": "fundamentals:colour_lcd_panel"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "computercraft:computer_advanced"
+  }
+}
