@@ -832,9 +832,17 @@ def metals():
         "With Create: Nuclear installed, its uranium rod is four fuel pellets and a Zircaloy tube, its thorium rod two thoria, two pellets and a tube, and its cooling rod is a control rod: "
         "four hafnium ingots, or four boron carbide in eight stainless steel plates for two. Its reactor core takes a beryllium reflector, and thoria and two calcium under argon reduce to its thorium metal. "
         "Its own ores do not form, and what you hold of ours counts towards its radiation.", "Create: Nuclear") + pages_of(
+        "A burnt fuel rod comes back out of the reactor as spent fuel, into the rod input or onto the controller. It is hotter than the rod it was: "
+        "the fission products, caesium and strontium among them, are what burn. Spent fuel cools only under water, as real fuel spends years in a pool; "
+        "a day in a pool makes it cooled spent fuel, and a rod lying in water does not despawn.", "Spent fuel") + pages_of(
+        "Then reprocess it, as La Hague and Sellafield do, or bury it, as Finland does. PUREX dissolves cooled fuel in 500 mB of nitric acid, heated: "
+        "enriched uranium dioxide comes back for pellets, and 250 mB of high-level waste stays behind. Glass, boric acid and that waste, superheated, "
+        "melt to vitrified waste, the borosilicate the waste is locked in. A canister and four vitrified waste, or two cooled spent fuel, seal a waste canister. "
+        "It irradiates anyone within eight blocks until it is entombed below y 0 with deepslate, tuff or clay on every face.", "Waste") + pages_of(
         "Sources: World Nuclear Association, Information Library: \"Uranium Mining Overview\", \"Conversion and Deconversion\", \"Uranium Enrichment\" and \"Nuclear Fuel Fabrication\"; "
         "IAEA, Geological Classification of Uranium Deposits and Description of Selected Examples, IAEA-TECDOC-1842 (2018); "
-        "Benedict, Pigford and Levi, Nuclear Chemical Engineering, 2nd ed. (McGraw-Hill, 1981).", "Sources"), 15)
+        "Benedict, Pigford and Levi, Nuclear Chemical Engineering, 2nd ed. (McGraw-Hill, 1981); "
+        "IAEA, Status and Trends in Spent Fuel and Radioactive Waste Management, NW-T-1.14 (2022).", "Sources"), 15)
     entry("metals", "graphite", "Graphite", "fundamentals:graphite", pages_of(
         "Graphite is carbon in sheets, black, greasy and soft enough to write with. Flake graphite forms when the carbon in old mud and limestone is cooked in the deep crust, "
         "so it lies in schist and gneiss and marble: the flake mines of Heilongjiang, Mozambique's Balama and Madagascar work schist, and Sri Lanka's vein graphite fills cracks in gneiss. "
