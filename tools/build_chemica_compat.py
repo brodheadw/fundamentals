@@ -5,7 +5,7 @@ import shutil
 import zipfile
 from pathlib import Path
 
-from common import DATA, fluid, ns, write
+from common import DATA, RESOURCES, fluid, ns, write
 from paint_separation import CREATE_JAR
 
 C_TAGS = DATA.parent / "c/tags"
@@ -143,6 +143,26 @@ def missing_metals():
            [{"id": "chemica:vanadium_ingot"}, {"id": "fundamentals:alumina"}], "superheated")
 
 
+def hide_dead():
+    # Chemica's ores no longer generate and our recipes stand in for its metals: hide what nothing makes any more
+    produced = set()
+    for entry in RESOURCES.glob("data/**/recipe/**/*.json"):
+        recipe = json.loads(entry.read_text())
+        if any(c.get("type") == "neoforge:false" for c in recipe.get("neoforge:conditions", [])):
+            continue
+        produced |= {r.get("id", r.get("item")) for r in recipe.get("results", []) + [recipe.get("result") or {}]}
+    with zipfile.ZipFile(CHEMICA_JAR) as jar:
+        for entry in jar.namelist():
+            if entry.startswith("data/chemica/recipe/") and entry.endswith(".json") and not (CHEMICA / entry[len("data/chemica/recipe/"):]).exists():
+                recipe = json.loads(jar.read(entry))
+                produced |= {r.get("id", r.get("item")) for r in recipe.get("results", []) + [recipe.get("result") or {}]}
+        items = {f"chemica:{Path(e).stem}" for e in jar.namelist() if e.startswith("assets/chemica/models/item/") and e.endswith(".json")}
+    metals = {f"chemica:{metal}_{form}" for metal in METALS for form in ("ingot", "nugget", "block")}
+    dead = sorted(i for i in items if (ORE_ITEM.fullmatch(i) or i in metals) and i not in produced)
+    write(C_TAGS / "item/hidden_from_recipe_viewers.json", {"replace": False, "values": optional(dead)})
+    return len(dead)
+
+
 def main():
     from build_separation_data import ACIDS
 
@@ -202,7 +222,8 @@ def main():
             write(CHEMICA / f"{path}.json", {"neoforge:conditions": LOADED, **recipe})
             rewritten += 1
     missing_metals()
-    print(f"wrote {len(SHARED)} shared reagents, {rewritten} of Chemica's recipes rewritten, {off} switched off, {repaired} crushing repaired")
+    hidden = hide_dead()
+    print(f"wrote {len(SHARED)} shared reagents, {rewritten} of Chemica's recipes rewritten, {off} switched off, {repaired} crushing repaired, {hidden} dead items hidden")
 
 
 if __name__ == "__main__":
