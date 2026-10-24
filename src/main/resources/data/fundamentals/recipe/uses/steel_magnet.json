@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "fundamentals:hardened_steel"
+    },
+    {
+      "item": "fundamentals:galvanic_cell"
+    },
+    {
+      "item": "tfmg:copper_wire"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:steel_magnet"
+  }
+}

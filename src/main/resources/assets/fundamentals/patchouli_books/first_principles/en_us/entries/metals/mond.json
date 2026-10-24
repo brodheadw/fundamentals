@@ -19,11 +19,15 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Two nickel oxide and 1,000 mB of water gas in a heated chemical vat with a mixer give 500 mB of nickel carbonyl, the water gas's hydrogen reducing the oxide at 400 °C and its monoxide taking the nickel, Ni + 4 CO to Ni(CO)4; one time in ten the residue is a platinum group concentrate, as Clydach's residues fed the Acton refinery."
+      "text": "Two nickel oxide and 1,000 mB of water gas in a heated chemical vat give 500 mB of nickel carbonyl, the water gas's hydrogen reducing the oxide at 400 °C and its monoxide taking the nickel, Ni + 4 CO to Ni(CO)4; one time in ten the residue is a platinum group concentrate, as Clydach's residues fed the Acton refinery."
     },
     {
       "type": "patchouli:text",
-      "text": "500 mB of carbonyl in a heated vat decomposes at about 230 °C on hot pellets to two nickel pellets, 99.97 per cent nickel, and 500 mB of the gas goes back round. A heated press over a basin squeezes a pellet into a nickel ingot."
+      "text": "500 mB of carbonyl in a heated vat decomposes at about 230 °C on hot pellets to two nickel pellets, 99.97 per cent nickel, and 500 mB of the gas goes back round. Neither gas reaction needs an industrial mixer, so the first nickel can make that mixer's steel mechanism."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A heated press over a basin squeezes a pellet into a nickel ingot."
     },
     {
       "type": "patchouli:text",

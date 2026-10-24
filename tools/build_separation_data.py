@@ -360,7 +360,7 @@ def solvents():
     def chem(name, ingredients, results, machines=("tfmg:mixing",), heated=True):
         vat(name, ingredients, results, list(machines), heated=heated, folder="solvents")
 
-    chem("water_gas", [item("tfmg:coal_coke"), fluid("minecraft:water", 500)], [result_fluid("water_gas", 1000)])
+    chem("water_gas", [item("tfmg:coal_coke"), fluid("minecraft:water", 500)], [result_fluid("water_gas", 1000)], machines=())
     chem("hydrogen", [fluid("water_gas", 1000), fluid("minecraft:water", 500)], [{"id": "tfmg:hydrogen", "amount": 1000}, {"id": "tfmg:carbon_dioxide", "amount": 500}])
     chem("ethylhexanol", [item("cobalt_ingot"), fluid("tfmg:propylene", 500), fluid("water_gas", 500), fluid("tfmg:hydrogen", 500)],
          [result_fluid("ethylhexanol", 250), {"id": "fundamentals:cobalt_ingot", "chance": 0.95}])

@@ -366,6 +366,12 @@ def main():
     heap("ammonium_chlororhodate", (236, 132, 150), (204, 80, 104), (140, 42, 64)).save(TEXTURES / "item/ammonium_chlororhodate.png")
     heap("reforming_catalyst", (246, 246, 242), (206, 206, 204), (136, 138, 142)).save(TEXTURES / "item/reforming_catalyst.png")
     heap("hydrotreating_catalyst", (150, 172, 196), (94, 118, 150), (50, 64, 92)).save(TEXTURES / "item/hydrotreating_catalyst.png")
+    steel = ((36, 42, 50, 255), (84, 94, 108, 255), (136, 150, 168, 255), (192, 204, 220, 255))
+    bar(steel, ((130, 36, 30, 255), (200, 70, 54, 255))).save(TEXTURES / "item/steel_magnet.png")
+    paint_item("ingot", tuple(t[:3] for t in steel)).save(TEXTURES / "item/hardened_steel.png")
+    paint_item("ingot", ((112, 30, 12), (196, 74, 22), (246, 146, 48), (255, 224, 142))).save(TEXTURES / "item/hot_steel.png")
+    cell(((84, 124, 140, 200), (124, 172, 180, 170), (188, 222, 224, 210)), (52, 84, 96, 255),
+         ((192, 114, 66, 255), (166, 174, 188, 255))).save(TEXTURES / "item/galvanic_cell.png")
     fuel_rod((120, 124, 130, 255), (176, 180, 186, 255), (62, 64, 70, 255), (90, 200, 255, 255)).save(TEXTURES / "item/spent_fuel_rod.png")
     fuel_rod((96, 98, 102, 255), (140, 142, 146, 255), (52, 54, 58, 255)).save(TEXTURES / "item/cooled_spent_fuel.png")
     glass_log().save(TEXTURES / "item/vitrified_waste.png")

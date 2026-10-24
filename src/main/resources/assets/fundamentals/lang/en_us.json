@@ -691,6 +691,7 @@
   "item.fundamentals.gadolinium_oxide": "Gadolinium Oxide",
   "item.fundamentals.gallium_ingot": "Gallium Ingot",
   "item.fundamentals.gallium_nugget": "Gallium Nugget",
+  "item.fundamentals.galvanic_cell": "Copper-Zinc Galvanic Cell",
   "item.fundamentals.galvanized_steel_plate": "Galvanized Steel Plate",
   "item.fundamentals.gas_mantle": "Gas Mantle",
   "item.fundamentals.germanium_ingot": "Germanium Ingot",
@@ -704,11 +705,13 @@
   "item.fundamentals.hafnium_nugget": "Hafnium Nugget",
   "item.fundamentals.hafnium_sponge": "Hafnium Sponge",
   "item.fundamentals.hafnium_tetrachloride": "Hafnium Tetrachloride",
+  "item.fundamentals.hardened_steel": "Hardened Steel",
   "item.fundamentals.heavy_rare_earth_carbonate": "Heavy Rare Earth Carbonate",
   "item.fundamentals.heavy_rare_earth_concentrate": "Heavy Rare Earth Concentrate",
   "item.fundamentals.heavy_rare_earth_sulfate": "Heavy Rare Earth Sulfate",
   "item.fundamentals.holmium_oxalate": "Holmium Oxalate",
   "item.fundamentals.holmium_oxide": "Holmium Oxide",
+  "item.fundamentals.hot_steel": "Hot Steel",
   "item.fundamentals.hsla_steel_ingot": "HSLA Steel Ingot",
   "item.fundamentals.hydride_alloy": "Hydride Alloy",
   "item.fundamentals.hydrochloric_acid_bucket": "Hydrochloric Acid Bucket",
@@ -919,6 +922,7 @@
   "item.fundamentals.sponge_lead_plate": "Sponge Lead Plate",
   "item.fundamentals.stainless_steel_ingot": "Stainless Steel Ingot",
   "item.fundamentals.stainless_steel_plate": "Stainless Steel Plate",
+  "item.fundamentals.steel_magnet": "Steel Magnet",
   "item.fundamentals.superalloy_ingot": "Superalloy Ingot",
   "item.fundamentals.superalloy_plate": "Superalloy Plate",
   "item.fundamentals.superphosphate": "Superphosphate",
@@ -993,5 +997,6 @@
   "oxidation.fundamentals.tarnish.3": "Black with tarnish",
   "tooltip.fundamentals.magnet.demagnetised": "Demagnetised: rebuild it with a magnet",
   "tooltip.fundamentals.magnet.field": "Overheated: %s%% of its field left",
-  "tooltip.fundamentals.magnet.grade": "%s, rated to %s °C"
+  "tooltip.fundamentals.magnet.grade": "%s, rated to %s °C",
+  "tooltip.fundamentals.magnet.lure": "Off hand while fishing: +%s luck"
 }
