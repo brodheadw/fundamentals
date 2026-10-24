@@ -1,7 +1,8 @@
 package ai.gsmc.fundamentals.client;
 
 import ai.gsmc.fundamentals.Fundamentals;
-import ai.gsmc.fundamentals.heat.ThermometerBlockEntity;
+import ai.gsmc.fundamentals.air.Barometers;
+import ai.gsmc.fundamentals.heat.Dial;
 import ai.gsmc.fundamentals.heat.Thermometers;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -9,6 +10,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.neoforged.bus.api.IEventBus;
@@ -16,7 +18,8 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.model.data.ModelData;
 
-public class ThermometerRenderer implements BlockEntityRenderer<ThermometerBlockEntity> {
+/** Sweeps the needle of any dial gauge. */
+public class ThermometerRenderer<T extends BlockEntity & Dial> implements BlockEntityRenderer<T> {
 
     private static final ModelResourceLocation NEEDLE = ModelResourceLocation.standalone(
             Fundamentals.id("block/thermometer_needle"));
@@ -25,11 +28,14 @@ public class ThermometerRenderer implements BlockEntityRenderer<ThermometerBlock
     public static void register(IEventBus modBus) {
         modBus.addListener(ModelEvent.RegisterAdditional.class, event -> event.register(NEEDLE));
         modBus.addListener(EntityRenderersEvent.RegisterRenderers.class,
-                event -> event.registerBlockEntityRenderer(Thermometers.entity(), context -> new ThermometerRenderer()));
+                event -> {
+                    event.registerBlockEntityRenderer(Thermometers.entity(), context -> new ThermometerRenderer<>());
+                    event.registerBlockEntityRenderer(Barometers.entity(), context -> new ThermometerRenderer<>());
+                });
     }
 
     @Override
-    public void render(ThermometerBlockEntity gauge, float partialTick, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
+    public void render(T gauge, float partialTick, PoseStack ms, MultiBufferSource buffer, int light, int overlay) {
         ms.pushPose();
         ms.translate(0.5, 0.5, 0.5);
         switch (gauge.facing()) {
