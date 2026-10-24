@@ -289,48 +289,81 @@ def magnets():
 
 
 
-def fuel_rod(cladding, light, shade, glow=None):
-    # a rod lying corner to corner; a spent one still glows Cherenkov blue along its seam
+def fuel_rod(tones, glow=None):
+    # a clad rod lying corner to corner, lit from the upper left; a spent one still glows Cherenkov blue in its seam
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-    for i in range(2, 14):
-        x, y = i, 15 - i
-        for dx, tone in ((-1, light), (0, cladding), (1, shade)):
-            img.putpixel((x + dx, y), tone)
-        if glow and i % 2 == 0:
-            img.putpixel((x, y), glow)
-    for x, y in ((13, 1), (14, 2), (1, 13), (2, 14)):
-        img.putpixel((x, y), shade)
+    outline, shade, body, light, shine = tones
+    for y in range(16):
+        for x in range(16):
+            u, v = x - y, x + y - 15  # along the rod, and across it
+            if abs(u) > 11 or abs(v) > 2:
+                continue
+            tone = (shine if u % 5 else light) if v == -2 else body if v in (-1, 0) else shade if v == 1 else outline
+            if glow and v in (-1, 0) and u % 3 == 0:
+                tone = glow
+            if abs(u) >= 10:
+                tone = outline if abs(u) == 11 else shade
+            img.putpixel((x, y), tone)
     return img
 
 
-def glass_log():
-    # borosilicate cast in a short log, dark with what it holds
+def glass_log(tones):
+    # borosilicate cast in a standing log: black glass, glossy, its waste glinting amber inside
+    dark, body, rim, glint, shine = tones
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-    body, rim, shine, core = (52, 44, 30, 255), (96, 84, 56, 255), (170, 160, 120, 255), (110, 92, 34, 255)
-    for x in range(3, 13):
-        for y in range(4, 12):
-            img.putpixel((x, y), rim if y in (4, 11) or x in (3, 12) else body)
-    for x in range(5, 11):
-        img.putpixel((x, 7), core)
-        img.putpixel((x, 8), core)
-    for x in range(4, 8):
-        img.putpixel((x, 5), shine)
+    for y in range(2, 15):
+        for x in range(4, 12):
+            if y in (2, 14) and x in (4, 11):
+                continue
+            top = y <= 3
+            tone = rim if top else dark if x in (4, 11) or y == 14 else body
+            if top and y == 3 and x in (4, 11):
+                tone = dark
+            img.putpixel((x, y), tone)
+    for x, y in ((5, 5), (5, 6), (5, 7), (5, 8), (6, 5), (5, 10), (5, 11)):
+        img.putpixel((x, y), shine)
+    for x, y in ((8, 7), (9, 10), (7, 12), (9, 5), (8, 9)):
+        img.putpixel((x, y), glint)
+    for x in range(6, 10):
+        img.putpixel((x, 2), shine)
     return img
 
 
-def canister_side():
-    # a steel drum with welded bands and a trefoil
-    img = Image.new("RGBA", (16, 16), (0, 0, 0, 255))
-    steel, band, shade, sign, mark = (150, 152, 156, 255), (110, 112, 118, 255), (84, 86, 92, 255), (232, 196, 40, 255), (24, 22, 20, 255)
-    for x in range(16):
-        for y in range(16):
-            img.putpixel((x, y), band if y in (1, 14) else shade if x in (0, 15) else steel)
-    for x in range(5, 11):
-        for y in range(5, 11):
-            img.putpixel((x, y), sign)
-    for x, y in ((7, 7), (8, 7), (7, 8), (8, 8), (6, 6), (9, 6), (7, 10), (8, 10), (5, 6), (10, 6)):
-        img.putpixel((x, y), mark)
+def canister_side(steel, label):
+    # a welded stainless drum: lit down its left, seams top and bottom, a band of hazard stripes
+    light, mid, dark, seam = steel
+    yellow, black = label
+    img = Image.new("RGBA", (16, 16))
+    for y in range(16):
+        for x in range(16):
+            tone = light if x < 4 else mid if x < 12 else dark
+            if y in (0, 15):
+                tone = seam
+            elif y in (1, 14):
+                tone = dark if x % 4 == 3 else light
+            elif 6 <= y <= 9:
+                tone = black if (x + y) % 4 < 2 else yellow
+            elif y in (5, 10):
+                tone = seam
+            img.putpixel((x, y), tone)
     return img
+
+
+def canister_top(steel):
+    # the welded lid, a ring and a lifting boss in its middle
+    light, mid, dark, seam = steel
+    img = Image.new("RGBA", (16, 16))
+    for y in range(16):
+        for x in range(16):
+            r = ((x - 7.5) ** 2 + (y - 7.5) ** 2) ** 0.5
+            tone = seam if x in (0, 15) or y in (0, 15) else mid
+            if 5.2 < r < 6.4:
+                tone = dark if x + y > 15 else light
+            if r < 2.2:
+                tone = light if x + y < 15 else dark
+            img.putpixel((x, y), tone)
+    return img
+
 
 def main():
     heap("phosphor", (255, 250, 252), (240, 226, 236), (196, 170, 190)).save(TEXTURES / "item/phosphor.png")
@@ -372,10 +405,13 @@ def main():
     paint_item("ingot", ((112, 30, 12), (196, 74, 22), (246, 146, 48), (255, 224, 142))).save(TEXTURES / "item/hot_steel.png")
     cell(((84, 124, 140, 200), (124, 172, 180, 170), (188, 222, 224, 210)), (52, 84, 96, 255),
          ((192, 114, 66, 255), (166, 174, 188, 255))).save(TEXTURES / "item/galvanic_cell.png")
-    fuel_rod((120, 124, 130, 255), (176, 180, 186, 255), (62, 64, 70, 255), (90, 200, 255, 255)).save(TEXTURES / "item/spent_fuel_rod.png")
-    fuel_rod((96, 98, 102, 255), (140, 142, 146, 255), (52, 54, 58, 255)).save(TEXTURES / "item/cooled_spent_fuel.png")
-    glass_log().save(TEXTURES / "item/vitrified_waste.png")
-    canister_side().save(TEXTURES / "block/waste_canister.png")
+    clad = ((22, 26, 30, 255), (52, 58, 60, 255), (82, 88, 86, 255), (120, 126, 120, 255), (160, 166, 156, 255))
+    fuel_rod(clad, (110, 210, 255, 255)).save(TEXTURES / "item/spent_fuel_rod.png")
+    fuel_rod(clad).save(TEXTURES / "item/cooled_spent_fuel.png")
+    glass_log(((10, 10, 12, 255), (30, 28, 30, 255), (86, 80, 76, 255), (196, 128, 48, 255), (214, 222, 228, 255))).save(TEXTURES / "item/vitrified_waste.png")
+    stainless = ((196, 200, 206, 255), (150, 156, 164, 255), (104, 110, 120, 255), (64, 68, 76, 255))
+    canister_side(stainless, ((236, 194, 36, 255), (28, 26, 24, 255))).save(TEXTURES / "block/waste_canister.png")
+    canister_top(stainless).save(TEXTURES / "block/waste_canister_top.png")
     gauze().save(TEXTURES / "item/platinum_rhodium_gauze.png")
     filament((112, 126, 150, 255), (178, 192, 216, 255)).save(TEXTURES / "item/osmium_filament.png")
     heap("roasted_tin_concentrate", (130, 84, 60), (82, 50, 34), (38, 24, 18)).save(TEXTURES / "item/roasted_tin_concentrate.png")
