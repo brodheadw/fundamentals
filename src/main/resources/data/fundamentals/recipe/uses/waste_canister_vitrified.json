@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "fundamentals:canister"
+    },
+    {
+      "item": "fundamentals:vitrified_waste"
+    },
+    {
+      "item": "fundamentals:vitrified_waste"
+    },
+    {
+      "item": "fundamentals:vitrified_waste"
+    },
+    {
+      "item": "fundamentals:vitrified_waste"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "fundamentals:waste_canister"
+  }
+}

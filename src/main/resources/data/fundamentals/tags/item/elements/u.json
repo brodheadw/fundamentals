@@ -1,11 +1,13 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:cooled_spent_fuel",
     "fundamentals:depleted_uranium_oxide",
     "fundamentals:euxenite_dust",
     "fundamentals:euxenite_ore",
     "fundamentals:raw_euxenite",
     "fundamentals:raw_uraninite",
+    "fundamentals:spent_fuel_rod",
     "fundamentals:uraninite_dust",
     "fundamentals:uraninite_ore",
     "fundamentals:uranium_dioxide",

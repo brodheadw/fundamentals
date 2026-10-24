@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "fundamentals:block/waste_canister"
+    }
+  }
+}

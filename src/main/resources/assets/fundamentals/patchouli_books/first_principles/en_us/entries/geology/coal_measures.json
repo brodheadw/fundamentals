@@ -6,7 +6,7 @@
   "pages": [
     {
       "type": "patchouli:text",
-      "text": "A bed, under temperate forest, plains, hills and swamp, between y 16 and 72. Carries siderite in layers, coal ore in layers, siderite in masses. Dig at the core: the edges are lean.",
+      "text": "A bed, under temperate forest, plains, hills and swamp, between y 16 and 72. Carries siderite in layers, coal ore in layers, fireclay in underclay, siderite in masses. Dig at the core: the edges are lean.",
       "title": "Coal Measures"
     }
   ]

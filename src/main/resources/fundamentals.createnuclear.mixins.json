@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "ai.gsmc.fundamentals.mixin.createnuclear",
+	"plugin": "ai.gsmc.fundamentals.mixin.createnuclear.CreateNuclearMixins",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"ReactorSpentFuelMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

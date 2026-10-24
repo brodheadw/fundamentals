@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "fundamentals:canister"
+    },
+    {
+      "item": "fundamentals:cooled_spent_fuel"
+    },
+    {
+      "item": "fundamentals:cooled_spent_fuel"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "fundamentals:waste_canister"
+  }
+}

@@ -52,7 +52,8 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "led_chip": "LED Chip", "indium_tin_oxide": "Indium Tin Oxide",
          "vanadium_pentoxide": "Vanadium Pentoxide", "cement_clinker": "Cement Clinker", "gypsum": "Gypsum", "phosphogypsum": "Phosphogypsum",
          "calomel": "Calomel", "copper_cement": "Copper Cement", "cobalt_cake": "Cobalt Cake", "anode_mud": "Anode Mud",
-         "jarosite": "Jarosite", "lead_silver_residue": "Lead-Silver Residue", "hydrotreating_catalyst": "Cobalt-Molybdenum Catalyst"}
+         "jarosite": "Jarosite", "lead_silver_residue": "Lead-Silver Residue", "hydrotreating_catalyst": "Cobalt-Molybdenum Catalyst",
+         "spent_fuel_rod": "Spent Fuel Rod", "cooled_spent_fuel": "Cooled Spent Fuel", "vitrified_waste": "Vitrified Waste"}
 # Registered by uses.Uses as uses.Fertiliser, in this order.
 FERTILISERS = {"ammonium_nitrate": "Ammonium Nitrate", "urea": "Urea", "superphosphate": "Superphosphate", "ammonium_phosphate": "Ammonium Phosphate",
                "npk_fertiliser": "NPK Fertiliser"}
@@ -64,7 +65,8 @@ MAGNETS = {f"{alloy}_magnet": f"{grade} Magnet" for alloy, grade in zip(MAGNET_A
 MAGNET_MACHINES = {"electric_motor": "sequenced_assembly/motor", "generator": "sequenced_assembly/generator", "stator": "mechanical_crafting/stator",
                    "electric_pump": "crafting/materials/electric_pump", "voltmeter": "crafting/materials/voltmeter"}
 MAGNET_PATTERNS = {"electric_pump": ["QCQ", "MPM", "KWK"], "stator": ["CM MC", "MCSCM", "AAWAA"]}
-BLOCKS = {"clarifier_sludge_block": "Clarifier Tailings", "red_mud_block": "Bauxite Residue", "phosphogypsum_block": "Phosphogypsum Stack", "jarosite_block": "Jarosite Pond"}
+BLOCKS = {"clarifier_sludge_block": "Clarifier Tailings", "red_mud_block": "Bauxite Residue", "phosphogypsum_block": "Phosphogypsum Stack", "jarosite_block": "Jarosite Pond",
+          "waste_canister": "Waste Canister"}
 # Registered by uses.Uses in this order.
 PGM_ITEMS = {"ammonium_chloride": "Ammonium Chloride", "insoluble_residue": "Insoluble Residue", "iridium_rhodium_residue": "Iridium-Rhodium Residue",
              "ammonium_chloroplatinate": "Ammonium Chloroplatinate", "dichlorodiammine_palladium": "Dichlorodiammine Palladium",
@@ -755,6 +757,17 @@ def uranium():
            {"count": 8, "id": "minecraft:lime_stained_glass"})
     tag_file(DATA / "tags/item/uranium_dusts.json", [f"fundamentals:{name}" for name in
                                                      ("uraninite_dust", "yellowcake", "uranium_tetrafluoride", "uranium_dioxide", "depleted_uranium_oxide")])
+    # The back end: a burnt rod cools a day under water (content.nuclear.SpentFuel), then PUREX takes the uranium back in
+    # nitric acid and leaves the fission products as high-level waste, which borosilicate glass locks up for the canister.
+    mixing("purex", item("cooled_spent_fuel") + [fluid("nitric_acid", 500)],
+           [result("uranium_dioxide"), result_fluid("high_level_waste", 250)], "heated")
+    mixing("vitrified_waste", item("minecraft:glass") + item("boric_acid") + [fluid("high_level_waste", 250)], [result("vitrified_waste")], "superheated")
+    write(USES / "waste_canister_vitrified.json", {"type": "minecraft:crafting_shapeless", "category": "misc",
+                                                   "ingredients": item("canister") + item("vitrified_waste", 4), "result": {"count": 1, "id": "fundamentals:waste_canister"}})
+    write(USES / "waste_canister_spent_fuel.json", {"type": "minecraft:crafting_shapeless", "category": "misc",
+                                                    "ingredients": item("canister") + item("cooled_spent_fuel", 2), "result": {"count": 1, "id": "fundamentals:waste_canister"}})
+    tag_file(DATA / "tags/block/repository_rock.json", ["#minecraft:deepslate_ore_replaceables", "minecraft:cobbled_deepslate", "minecraft:polished_deepslate",
+                                                       "minecraft:deepslate_bricks", "minecraft:deepslate_tiles", "minecraft:tuff", "minecraft:clay"])
 
 
 def graphite():

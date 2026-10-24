@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:cooled_spent_fuel"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 500,
+      "tag": "c:acids/nitric"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:uranium_dioxide"
+    },
+    {
+      "id": "fundamentals:high_level_waste",
+      "amount": 250
+    }
+  ],
+  "heat_requirement": "heated"
+}
