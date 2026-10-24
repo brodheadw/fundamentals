@@ -4,6 +4,7 @@ import shutil
 import zipfile
 from pathlib import Path
 
+import common
 from common import ASSETS, DATA, write
 from build_ore_data import SILK_TOUCH, silk_or_raw
 
@@ -151,7 +152,12 @@ def main():
         write(OURS_DIR / f"{name}.json", {"neoforge:conditions": LOADED, **recipe})
     drops()
     write(ASSETS.parent / "createnuclear/lang/en_us.json", NAMES)
-    print(f"Create Nuclear: {rewritten} recipes taken over, {len(OURS)} added, {off} switched off")
+    # its ores no longer form and our metals and uranium chain stand in for its own
+    duplicates = {f"createnuclear:{name}" for name in ("lead_ingot", "lead_nugget", "lead_block", "steel_ingot", "steel_nugget", "steel_block",
+                                                       "yellowcake", "enriched_yellowcake", "uranium_powder", "thorium_dust")}
+    with zipfile.ZipFile(CN_JAR) as jar:
+        hidden = common.hide_dead(jar, "createnuclear", lambda i: i.endswith("_ore") or ":raw_" in i or i in duplicates)
+    print(f"Create Nuclear: {rewritten} recipes taken over, {len(OURS)} added, {off} switched off, {hidden} dead items hidden")
 
 
 if __name__ == "__main__":

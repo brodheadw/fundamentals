@@ -652,6 +652,15 @@
       "toxic": true,
       "corrosive": true
     },
+    "fundamentals:high_level_waste": {
+      "density": 1300,
+      "viscosity": 2.5,
+      "freezes": -15,
+      "boils": 104,
+      "aqueous": true,
+      "toxic": true,
+      "corrosive": true
+    },
     "fundamentals:sodium_vanadate_liquor": {
       "density": 1080,
       "viscosity": 1.2,

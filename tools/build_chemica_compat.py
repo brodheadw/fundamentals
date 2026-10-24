@@ -5,6 +5,7 @@ import shutil
 import zipfile
 from pathlib import Path
 
+import common
 from common import DATA, fluid, ns, write
 from paint_separation import CREATE_JAR
 
@@ -202,7 +203,11 @@ def main():
             write(CHEMICA / f"{path}.json", {"neoforge:conditions": LOADED, **recipe})
             rewritten += 1
     missing_metals()
-    print(f"wrote {len(SHARED)} shared reagents, {rewritten} of Chemica's recipes rewritten, {off} switched off, {repaired} crushing repaired")
+    metals = {f"chemica:{metal}_{form}" for metal in METALS for form in ("ingot", "nugget", "block")}
+    with zipfile.ZipFile(CHEMICA_JAR) as jar:
+        # its ores no longer generate and our recipes stand in for its metals
+        hidden = common.hide_dead(jar, "chemica", lambda i: bool(ORE_ITEM.fullmatch(i)) or i in metals)
+    print(f"wrote {len(SHARED)} shared reagents, {rewritten} of Chemica's recipes rewritten, {off} switched off, {repaired} crushing repaired, {hidden} dead items hidden")
 
 
 if __name__ == "__main__":

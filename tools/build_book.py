@@ -461,7 +461,7 @@ def rare_earths():
         "Trasatti, \"Electrocatalysis: understanding the success of DSA\", Electrochimica Acta 45 (2000).", "Sources"), 11)
     entry("rare_earths", "extractants", "The extractants", "fundamentals:white_phosphorus", pages_of(
         "P204 and P507 are both 2-ethylhexyl esters on one phosphorus atom, and the industry makes them from propylene and phosphate rock. So do you, in The Factory Must Grow's chemical vats with an industrial mixer unless a step says otherwise. "
-        "First water gas: a coal coke and 500 mB of water, heated, give 1,000 mB of carbon monoxide and hydrogen. Shifted with another 500 mB of water, heated, 1,000 mB of water gas gives 1,000 mB of hydrogen and 500 of carbon dioxide; "
+        "First water gas: a coal coke and 500 mB of water in a heated vat without a mixer give 1,000 mB of carbon monoxide and hydrogen. Shifted with another 500 mB of water, heated, 1,000 mB of water gas gives 1,000 mB of hydrogen and 500 of carbon dioxide; "
         "that is also the hydrogen cobalt, molybdenum and tungsten are reduced under.", "The extractants") + pages_of(
         "The oxo process: 500 mB each of propylene, from cracked naphtha, water gas and hydrogen on a cobalt ingot, heated, give 250 mB of 2-ethylhexanol. The cobalt is the catalyst and comes back nineteen times in twenty. "
         "Phosphorus: two bone meal, a coal coke and a sand in a vat with two electrodes, superheated, give a white phosphorus and a slag, as the electric furnace does at 1,500 °C. "
@@ -663,9 +663,9 @@ def metals():
     entry("metals", "mond", "Mond nickel and its poisons", "fundamentals:nickel_pellets", pages_of(
         "Ludwig Mond found in 1890 that carbon monoxide carries nickel off as a gas at 50 °C and gives it back when heated past 180 °C, and iron, copper and cobalt hardly at all (Mond, Langer and Quincke, Journal of the Chemical Society, 1890). "
         "His refinery at Clydach in Wales has run on it since 1902, and Copper Cliff in Sudbury runs it under pressure.", "The Mond process") + pages_of(
-        "Converter matte roasted dead on a campfire or in a smoker burns off its sulfur and leaves nickel oxide. Two nickel oxide and 1,000 mB of water gas in a heated chemical vat with a mixer give 500 mB of nickel carbonyl, "
+        "Converter matte roasted dead on a campfire or in a smoker burns off its sulfur and leaves nickel oxide. Two nickel oxide and 1,000 mB of water gas in a heated chemical vat give 500 mB of nickel carbonyl, "
         "the water gas's hydrogen reducing the oxide at 400 °C and its monoxide taking the nickel, Ni + 4 CO to Ni(CO)4; one time in ten the residue is a platinum group concentrate, as Clydach's residues fed the Acton refinery.") + pages_of(
-        "500 mB of carbonyl in a heated vat decomposes at about 230 °C on hot pellets to two nickel pellets, 99.97 per cent nickel, and 500 mB of the gas goes back round. "
+        "500 mB of carbonyl in a heated vat decomposes at about 230 °C on hot pellets to two nickel pellets, 99.97 per cent nickel, and 500 mB of the gas goes back round. Neither gas reaction needs an industrial mixer, so the first nickel can make that mixer's steel mechanism. "
         "A heated press over a basin squeezes a pellet into a nickel ingot.") + pages_of(
         "Nickel carbonyl is among the most poisonous gases in industry. NIOSH puts the level immediately dangerous to life at 2 parts per million, and its faint musty smell comes only above that. "
         "It does not eat a pipe or a tank, but where it gets out, from an open pipe end, a broken pipe, tank or vat, or a basin, it reaches three blocks: "
@@ -832,9 +832,17 @@ def metals():
         "With Create: Nuclear installed, its uranium rod is four fuel pellets and a Zircaloy tube, its thorium rod two thoria, two pellets and a tube, and its cooling rod is a control rod: "
         "four hafnium ingots, or four boron carbide in eight stainless steel plates for two. Its reactor core takes a beryllium reflector, and thoria and two calcium under argon reduce to its thorium metal. "
         "Its own ores do not form, and what you hold of ours counts towards its radiation.", "Create: Nuclear") + pages_of(
+        "A burnt fuel rod comes back out of the reactor as spent fuel: into a chest or hopper on top of the controller, or loose on top of it. It is hotter than the rod it was: "
+        "the fission products, caesium and strontium among them, are what burn. Spent fuel cools only under water, as real fuel spends years in a pool; "
+        "a day in a pool makes it cooled spent fuel, and a rod lying in water does not despawn.", "Spent fuel") + pages_of(
+        "Then reprocess it, as La Hague and Sellafield do, or bury it, as Finland does. PUREX dissolves cooled fuel in 500 mB of nitric acid, heated: "
+        "enriched uranium dioxide comes back for pellets, and 250 mB of high-level waste stays behind. Glass, boric acid and that waste, superheated, "
+        "melt to vitrified waste, the borosilicate the waste is locked in. A canister and four vitrified waste, or two cooled spent fuel, seal a waste canister. "
+        "It irradiates anyone within eight blocks until it is entombed below y 0 with deepslate, tuff or clay on every face.", "Waste") + pages_of(
         "Sources: World Nuclear Association, Information Library: \"Uranium Mining Overview\", \"Conversion and Deconversion\", \"Uranium Enrichment\" and \"Nuclear Fuel Fabrication\"; "
         "IAEA, Geological Classification of Uranium Deposits and Description of Selected Examples, IAEA-TECDOC-1842 (2018); "
-        "Benedict, Pigford and Levi, Nuclear Chemical Engineering, 2nd ed. (McGraw-Hill, 1981).", "Sources"), 15)
+        "Benedict, Pigford and Levi, Nuclear Chemical Engineering, 2nd ed. (McGraw-Hill, 1981); "
+        "IAEA, Status and Trends in Spent Fuel and Radioactive Waste Management, NW-T-1.14 (2022).", "Sources"), 15)
     entry("metals", "graphite", "Graphite", "fundamentals:graphite", pages_of(
         "Graphite is carbon in sheets, black, greasy and soft enough to write with. Flake graphite forms when the carbon in old mud and limestone is cooked in the deep crust, "
         "so it lies in schist and gneiss and marble: the flake mines of Heilongjiang, Mozambique's Balama and Madagascar work schist, and Sri Lanka's vein graphite fills cracks in gneiss. "
@@ -1066,6 +1074,14 @@ def magnets():
         + pages_of(f"In the game, every few seconds: {rows} Output falls from full at the rating to half at the lasting-loss point and to nothing at Curie; "
                    "a motor turns slower and carries less, a generator gives less, an electric pump pushes less. A demagnetised machine stops. "
                    "A voltmeter's needle swings against its magnet, so it reads low by what the heat has taken of its field.", "The grades")
+        + pages_of("The first magnet is hardened carbon steel. Heat a steel ingot in a furnace and quench the hot steel under a spout with 250 mB of water. "
+                   "In an unpowered steel vat, combine copper, zinc, a glass bottle, 50 mB of sulfuric acid and 200 mB of water into a galvanic cell. "
+                   "Craft the cell, hardened steel and copper wire together: the cell's current magnetizes the steel. The recipe consumes the cell and winding. "
+                   "This is a 25% starter magnet; its game heat limits are 150, 250 and 770 °C. The cell does not drive the factory. Mechanical rotation drives its generator.", "First electricity")
+        + pages_of("An ordinary iron ingot can be the unfinished coil's core, and iron plates can be the transformer's laminations. Wind the coils mechanically. "
+                   "Silicon steel is useful core material, but is not a prerequisite for induction. Transform the generator's output, never the cell's steady DC. "
+                   "Three graphite electrodes make the first silicon. Each needs at least 1,500 volts and 7,500 watts in The Factory's model; keep each on its own small-transformer output "
+                   "and supply enough generation upstream. Watch current as well as voltage: raising voltage also raises load.", "To the arc furnace")
         + pages_of("The real figures, from the makers' grade tables: sintered NdFeB runs to about 80 °C, Curie point 310 to 400 °C. "
                    "With dysprosium or terbium (the SH, UH and EH grades) it runs to 150 to 230 °C. SmCo runs to 250 to 350 °C, Curie 720 to 825. "
                    "Alnico runs to 450 to 550 °C, Curie about 860, but stores far less energy: about 5 MGOe, against 35 to 52 for NdFeB and 16 to 32 for SmCo. "

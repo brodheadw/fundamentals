@@ -34,7 +34,8 @@ public final class Uses {
             "lithium_hexafluorophosphate", "ethylene_carbonate", "nickel_hydroxide", "hydride_alloy", "nickel_metal_hydride_cell",
             "polysilicon", "silicon_boule", "silicon_wafer", "zinc_leach_residue", "led_chip", "indium_tin_oxide",
             "vanadium_pentoxide", "cement_clinker", "gypsum", "phosphogypsum",
-            "calomel", "copper_cement", "cobalt_cake", "anode_mud", "jarosite", "lead_silver_residue", "hydrotreating_catalyst");
+            "calomel", "copper_cement", "cobalt_cake", "anode_mud", "jarosite", "lead_silver_residue", "hydrotreating_catalyst",
+            "spent_fuel_rod", "cooled_spent_fuel", "vitrified_waste", "hot_steel", "hardened_steel", "galvanic_cell");
 
     public static final List<String> PLATINUM_IDS = List.of(
             "ammonium_chloride", "insoluble_residue", "iridium_rhodium_residue", "ammonium_chloroplatinate",
@@ -46,9 +47,11 @@ public final class Uses {
     private static Block redMudBlock;
     private static Block phosphogypsumBlock;
     private static Block jarositeBlock;
+    private static Block wasteCanister;
 
     private Uses() {}
 
+    public static Item item(String id) { return ITEMS.get(id); }
     public static Item mercury() { return ITEMS.get("mercury"); }
     public static Item cryolite() { return ITEMS.get("cryolite"); }
     public static Item goldAmalgam() { return ITEMS.get("gold_amalgam"); }
@@ -66,6 +69,8 @@ public final class Uses {
                 .strength(0.8F).sound(SoundType.SAND)));
         registry.accept(Fundamentals.id("jarosite_block"), jarositeBlock = new Block(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW)
                 .strength(0.8F).sound(SoundType.MUD)));
+        registry.accept(Fundamentals.id("waste_canister"), wasteCanister = new ai.gsmc.fundamentals.content.nuclear.WasteCanisterBlock(
+                BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(6.0F, 1200.0F).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops()));
     }
 
     public static void registerItems(BiConsumer<ResourceLocation, Item> registry) {
@@ -76,6 +81,7 @@ public final class Uses {
         register(registry, "red_mud_block", new BlockItem(redMudBlock, new Item.Properties()));
         register(registry, "phosphogypsum_block", new BlockItem(phosphogypsumBlock, new Item.Properties()));
         register(registry, "jarosite_block", new BlockItem(jarositeBlock, new Item.Properties()));
+        register(registry, "waste_canister", new BlockItem(wasteCanister, new Item.Properties().stacksTo(16)));
         for (String id : PLATINUM_IDS) {
             register(registry, id, new Item(new Item.Properties()));
         }

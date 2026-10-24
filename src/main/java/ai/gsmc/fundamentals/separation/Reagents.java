@@ -82,6 +82,7 @@ public final class Reagents {
             new Reagent("spent_liquor", 0x8E9A86, Kind.WASTE),
             new Reagent("calcium_chloride_liquor", 0xDCE6E4, Kind.WASTE),
             new Reagent("spent_acid", 0x4A3A30, Kind.WASTE),
+            new Reagent("high_level_waste", 0x6E5A1E, Kind.WASTE),
             new Reagent("bittern", 0xE6DEB8, Kind.SALINE),
             new Reagent("salt_brine", 0xE2ECEE, Kind.SALINE),
             new Reagent("seawater", 0x3F76E4, Kind.WATER),
