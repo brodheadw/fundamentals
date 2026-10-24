@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "top": "fundamentals:block/compute/power_supply_top",
+    "front": "fundamentals:block/compute/power_supply_front",
+    "side": "fundamentals:block/compute/power_supply_side",
+    "particle": "fundamentals:block/compute/power_supply_side"
+  }
+}

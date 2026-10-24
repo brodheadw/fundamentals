@@ -507,6 +507,17 @@ def rare_earths():
         "Any of The Factory's electrical blocks, the solar panel among them, reads like a multimeter: getVoltage, getCurrent, getPowerUsage, getPowerGeneration, the network's usage and generation, and isPowered.", "Computers") + pages_of(
         "A mixer-settler stage gives getOrganic and getAqueous (fluid name and amount), getPhaseCapacity, isStirred and isOverStirred; a magnetomigration cell its getTemperature; an inert drum getGas; a bloomery getOre, getCharcoal and hasBloom. "
         "Tanks and the drum also answer CC's own fluid and inventory calls."), 16)
+    entry("rare_earths", "fab", "The Fab", "fundamentals:microprocessor", pages_of(
+        "CC:Tweaked's computers are built from chips, and chips come off a fab line of spouts, deployers, presses and saws. A wafer goes round once per mask layer: "
+        "expose it through the mask a deployer holds, develop the resist, etch the oxide in hydrofluoric acid, dope or metallise the openings, grow fresh oxide in steam and coat resist for the next layer.", "The Fab") + pages_of(
+        "The microcontroller is 10 µm PMOS of 1971: an n-type wafer, three layers, negative rubber resist developed in naphtha, boron diffused in. "
+        "Memory is 1 µm NMOS on p-type, five layers of positive novolac resist developed in caustic soda, phosphorus from its chloride. "
+        "The microprocessor is 1 µm CMOS on an epitaxial wafer, six layers, with aluminium interconnect.") + pages_of(
+        "The advanced processor is 90 nm: eight layers, copper interconnect polished flat by a press after each. "
+        "Masks are chromium on glass, or on fused quartz for the reticles, etched in ceric ammonium nitrate. The 90 nm reticle is laser-written by a computer, so better computers take a computer to make.") + pages_of(
+        "A saw dices each wafer into dies, more or fewer as the yield falls; each die goes onto a copper lead frame with gold bond wires and is sealed in plastic. "
+        "A placed computer runs only beside a Power Supply on a live grid. It warms the air it runs in and trips its thermal cutout past 85 °C. Turtles run on fuel, pocket computers on their cells.")
+        + [{"type": "patchouli:crafting", "recipe": "fundamentals:compute/power_supply"}], 17)
 
 
 def liquid_rows():

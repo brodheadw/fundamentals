@@ -1,0 +1,33 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "computercraft"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "PAP",
+    "TCT",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "tag": "c:plates/iron"
+    },
+    "A": {
+      "tag": "c:rods/iron"
+    },
+    "T": {
+      "item": "tfmg:electromagnetic_coil"
+    },
+    "C": {
+      "item": "fundamentals:microcontroller"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "computercraft:wireless_modem_normal"
+  }
+}

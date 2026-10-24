@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "computercraft"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "PPP",
+    "WCW",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "tag": "c:plates/iron"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    },
+    "C": {
+      "item": "fundamentals:microcontroller"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "computercraft:wired_modem"
+  }
+}

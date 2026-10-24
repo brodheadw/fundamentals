@@ -1,0 +1,19 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "tfmg:rubber_sheet"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "tfmg:naphtha"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:negative_photoresist",
+      "amount": 250
+    }
+  ]
+}

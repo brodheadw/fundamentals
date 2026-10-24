@@ -1,0 +1,28 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "create:mixing",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "chemica:phenol"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 25,
+      "fluid": "tfmg:sulfuric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:novolac_resin",
+      "count": 2
+    }
+  ]
+}

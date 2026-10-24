@@ -1,0 +1,67 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "fundamentals:advanced_processor_die"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "id": "fundamentals:advanced_processor"
+    }
+  ],
+  "transitional_item": {
+    "id": "fundamentals:packaging_chip"
+  },
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "fundamentals:packaging_chip"
+        },
+        {
+          "tag": "c:wires/copper"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:packaging_chip"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "fundamentals:packaging_chip"
+        },
+        {
+          "tag": "c:nuggets/gold"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:packaging_chip"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "fundamentals:packaging_chip"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 50,
+          "fluid": "tfmg:molten_plastic"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:packaging_chip"
+        }
+      ]
+    }
+  ]
+}

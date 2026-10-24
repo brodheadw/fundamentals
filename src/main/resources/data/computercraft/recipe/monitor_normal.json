@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "computercraft"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "PPP",
+    "PLP",
+    "PCP"
+  ],
+  "key": {
+    "P": {
+      "tag": "c:plates/iron"
+    },
+    "L": {
+      "item": "fundamentals:lcd_panel"
+    },
+    "C": {
+      "item": "fundamentals:microcontroller"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "computercraft:monitor_normal"
+  }
+}

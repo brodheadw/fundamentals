@@ -1,0 +1,36 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "computercraft"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "PPP",
+    "CBM",
+    "PLP"
+  ],
+  "key": {
+    "P": {
+      "tag": "c:plates/aluminum"
+    },
+    "C": {
+      "item": "fundamentals:advanced_processor"
+    },
+    "B": {
+      "item": "tfmg:circuit_board"
+    },
+    "M": {
+      "item": "fundamentals:memory_chip"
+    },
+    "L": {
+      "item": "fundamentals:colour_lcd_panel"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "computercraft:computer_advanced"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:novolac_resin"
+    },
+    {
+      "tag": "c:dusts/redstone"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "tfmg:naphtha"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:positive_photoresist",
+      "amount": 250
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "type": "create:cutting",
+  "ingredients": [
+    {
+      "item": "fundamentals:microprocessor_wafer"
+    }
+  ],
+  "processing_time": 200,
+  "results": [
+    {
+      "id": "fundamentals:microprocessor_die",
+      "count": 3
+    },
+    {
+      "id": "fundamentals:microprocessor_die",
+      "chance": 0.5
+    }
+  ]
+}
