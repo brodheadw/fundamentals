@@ -2,7 +2,9 @@ package ai.gsmc.fundamentals.content.nuclear;
 
 import ai.gsmc.fundamentals.uses.Uses;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -42,6 +44,10 @@ public final class SpentFuel {
     public static void pool(ItemEntity entity, int ticks) {
         if (!entity.isInWater()) return;
         entity.setUnlimitedLifetime();
+        // the blue of Cherenkov light, as real spent fuel glows in its pool
+        if (entity.level() instanceof ServerLevel level && entity.tickCount % 10 == 0) {
+            level.sendParticles(ParticleTypes.GLOW, entity.getX(), entity.getY() + 0.2, entity.getZ(), 2, 0.15, 0.1, 0.15, 0.01);
+        }
         CompoundTag data = entity.getPersistentData();
         int pooled = data.getInt(POOLED) + ticks;
         if (pooled < COOL_TICKS) {
