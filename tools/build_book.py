@@ -832,7 +832,7 @@ def metals():
         "With Create: Nuclear installed, its uranium rod is four fuel pellets and a Zircaloy tube, its thorium rod two thoria, two pellets and a tube, and its cooling rod is a control rod: "
         "four hafnium ingots, or four boron carbide in eight stainless steel plates for two. Its reactor core takes a beryllium reflector, and thoria and two calcium under argon reduce to its thorium metal. "
         "Its own ores do not form, and what you hold of ours counts towards its radiation.", "Create: Nuclear") + pages_of(
-        "A burnt fuel rod comes back out of the reactor as spent fuel, into the rod input or onto the controller. It is hotter than the rod it was: "
+        "A burnt fuel rod comes back out of the reactor as spent fuel: into a chest or hopper on top of the controller, or loose on top of it. It is hotter than the rod it was: "
         "the fission products, caesium and strontium among them, are what burn. Spent fuel cools only under water, as real fuel spends years in a pool; "
         "a day in a pool makes it cooled spent fuel, and a rod lying in water does not despawn.", "Spent fuel") + pages_of(
         "Then reprocess it, as La Hague and Sellafield do, or bury it, as Finland does. PUREX dissolves cooled fuel in 500 mB of nitric acid, heated: "
