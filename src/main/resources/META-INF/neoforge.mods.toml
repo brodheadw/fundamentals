@@ -69,3 +69,11 @@ type = "optional"
 versionRange = "*"
 ordering = "AFTER"
 side = "BOTH"
+
+# Optional: with it, computers read our gauges, cells and settlers; see computer/FundamentalsPeripherals.
+[[dependencies.${id}]]
+modId = "computercraft"
+type = "optional"
+versionRange = "*"
+ordering = "NONE"
+side = "BOTH"
