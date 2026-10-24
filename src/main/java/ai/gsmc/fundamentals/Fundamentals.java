@@ -30,6 +30,7 @@ import com.simibubi.create.AllMountedStorageTypes;
 import com.simibubi.create.api.contraption.storage.fluid.MountedFluidStorageType;
 import net.neoforged.fml.ModList;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import ai.gsmc.fundamentals.computer.FundamentalsPeripherals;
 import ai.gsmc.fundamentals.heat.Temperatures;
 import ai.gsmc.fundamentals.heat.Thermometers;
 import ai.gsmc.fundamentals.liquid.Liquids;
@@ -189,6 +190,9 @@ public class Fundamentals {
             Titanium.commonSetup();
             if (ModList.get().isLoaded("createnuclear")) {
                 Radiation.register();
+            }
+            if (ModList.get().isLoaded("computercraft")) {
+                FundamentalsPeripherals.register();
             }
         }));
         if (FMLEnvironment.dist == Dist.CLIENT) {

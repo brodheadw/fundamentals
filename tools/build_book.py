@@ -502,6 +502,11 @@ def rare_earths():
         "The barograph is Vidie's aneroid capsule of 1844 inking a clockwork drum. It keeps an hour of its own readings, its goggles say which way the glass is going and how fast, and its comparator gives a storm warning: "
         "nothing in steady weather, rising to 15 as the fall nears 4 hPa an hour.")
         + [{"type": "patchouli:crafting", "recipe": "fundamentals:barometers/mercury_barometer", "recipe2": "fundamentals:barometers/barograph"}], 15)
+    entry("rare_earths", "computers", "Computers", "fundamentals:barograph", pages_of(
+        "With CC:Tweaked installed, a computer or wired modem beside a gauge reads it as a peripheral. Thermometers give getTemperature, getKind and getSignal; barometers getPressure and getTendency, hectopascals an hour. "
+        "Any of The Factory's electrical blocks, the solar panel among them, reads like a multimeter: getVoltage, getCurrent, getPowerUsage, getPowerGeneration, the network's usage and generation, and isPowered.", "Computers") + pages_of(
+        "A mixer-settler stage gives getOrganic and getAqueous (fluid name and amount), getPhaseCapacity, isStirred and isOverStirred; a magnetomigration cell its getTemperature; an inert drum getGas; a bloomery getOre, getCharcoal and hasBloom. "
+        "Tanks and the drum also answer CC's own fluid and inventory calls."), 16)
 
 
 def liquid_rows():
