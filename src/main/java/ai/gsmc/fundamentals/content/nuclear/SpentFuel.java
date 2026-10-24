@@ -1,16 +1,19 @@
 package ai.gsmc.fundamentals.content.nuclear;
 
 import ai.gsmc.fundamentals.uses.Uses;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
@@ -38,6 +41,14 @@ public final class SpentFuel {
     public static void onEntityTick(EntityTickEvent.Post event) {
         if (event.getEntity() instanceof ItemEntity entity && !entity.level().isClientSide && entity.getItem().is(Uses.item("spent_fuel_rod"))) {
             pool(entity, 1);
+        }
+    }
+
+    public static void onTooltip(ItemTooltipEvent event) {
+        ItemStack stack = event.getItemStack();
+        String key = stack.is(Uses.item("spent_fuel_rod")) ? "spent_fuel_rod" : stack.is(Uses.item("waste_canister")) ? "waste_canister" : null;
+        if (key != null && !event.getToolTip().isEmpty()) {
+            event.getToolTip().add(1, Component.translatable("tooltip.fundamentals.nuclear." + key).withStyle(ChatFormatting.GRAY));
         }
     }
 
