@@ -34,11 +34,31 @@ def lens():
 
 
 def filament(wire=(150, 154, 162, 255), light=(214, 218, 226, 255)):
+    # a coiled filament between two straight leads: each turn's front lit and slanted, its back in shadow
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-    for x in range(2, 14):
-        y = 8 + (2 if (x // 2) % 2 == 0 else -2)
-        img.putpixel((x, y), light if x % 4 == 0 else wire)
-        img.putpixel((x, y + 1), wire)
+    back = tuple(c * 3 // 5 for c in wire[:3]) + (255,)
+    for x in (1, 2, 13, 14):
+        img.putpixel((x, 8), wire)
+    for x0 in range(3, 12, 2):
+        for y in range(5, 12):
+            img.putpixel((x0 + 1, y), back)
+        for y, dx in ((11, 0), (10, 0), (9, 1), (8, 1), (7, 1), (6, 2), (5, 2)):
+            if x0 + dx < 13:
+                img.putpixel((x0 + dx, y), light if y in (7, 8) else wire)
+    return img
+
+
+def spool(wire, light, flange):
+    # solder wound on a reel, the reel's two flanges either side
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    edge = tuple(c * 3 // 5 for c in flange[:3]) + (255,)
+    shade = tuple(c * 3 // 4 for c in wire[:3]) + (255,)
+    for y in range(2, 14):
+        for x in (2, 3, 12, 13):
+            img.putpixel((x, y), edge if x in (2, 13) or y in (2, 13) else flange)
+    for y in range(4, 12):
+        for x in range(4, 12):
+            img.putpixel((x, y), light if y % 2 == 0 and x < 9 else wire if y % 2 == 0 else shade)
     return img
 
 
@@ -149,16 +169,10 @@ def pellets():
     return img
 
 
-def tube():
-    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-    wall, light, shade, bore = (150, 152, 158, 255), (214, 216, 222, 255), (88, 90, 96, 255), (40, 40, 44, 255)
-    for i in range(2, 14):
-        x, y = i, 15 - i
-        for dx, tone in ((-1, light), (0, wall), (1, shade)):
-            if 0 <= x + dx < 16:
-                img.putpixel((x + dx, y), tone)
-    for dx, dy in ((0, 0), (1, 0), (0, 1)):
-        img.putpixel((13 + dx - 1, 2 + dy - 1), bore)
+def tube(tones, bore):
+    img = fuel_rod(tones)
+    for x, y in ((12, 2), (13, 3)):
+        img.putpixel((x, y), bore)
     return img
 
 
@@ -289,48 +303,81 @@ def magnets():
 
 
 
-def fuel_rod(cladding, light, shade, glow=None):
-    # a rod lying corner to corner; a spent one still glows Cherenkov blue along its seam
+def fuel_rod(tones, glow=None):
+    # a clad rod lying corner to corner, lit from the upper left; a spent one still glows Cherenkov blue in its seam
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-    for i in range(2, 14):
-        x, y = i, 15 - i
-        for dx, tone in ((-1, light), (0, cladding), (1, shade)):
-            img.putpixel((x + dx, y), tone)
-        if glow and i % 2 == 0:
-            img.putpixel((x, y), glow)
-    for x, y in ((13, 1), (14, 2), (1, 13), (2, 14)):
-        img.putpixel((x, y), shade)
+    outline, shade, body, light, shine = tones
+    for y in range(16):
+        for x in range(16):
+            u, v = x - y, x + y - 15  # along the rod, and across it
+            if abs(u) > 11 or abs(v) > 2:
+                continue
+            tone = (shine if u % 5 else light) if v == -2 else body if v in (-1, 0) else shade if v == 1 else outline
+            if glow and v in (-1, 0) and u % 3 == 0:
+                tone = glow
+            if abs(u) >= 10:
+                tone = outline if abs(u) == 11 else shade
+            img.putpixel((x, y), tone)
     return img
 
 
-def glass_log():
-    # borosilicate cast in a short log, dark with what it holds
+def glass_log(tones):
+    # borosilicate cast in a standing log: black glass, glossy, its waste glinting amber inside
+    dark, body, rim, glint, shine = tones
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-    body, rim, shine, core = (52, 44, 30, 255), (96, 84, 56, 255), (170, 160, 120, 255), (110, 92, 34, 255)
-    for x in range(3, 13):
-        for y in range(4, 12):
-            img.putpixel((x, y), rim if y in (4, 11) or x in (3, 12) else body)
-    for x in range(5, 11):
-        img.putpixel((x, 7), core)
-        img.putpixel((x, 8), core)
-    for x in range(4, 8):
-        img.putpixel((x, 5), shine)
+    for y in range(2, 15):
+        for x in range(4, 12):
+            if y in (2, 14) and x in (4, 11):
+                continue
+            top = y <= 3
+            tone = rim if top else dark if x in (4, 11) or y == 14 else body
+            if top and y == 3 and x in (4, 11):
+                tone = dark
+            img.putpixel((x, y), tone)
+    for x, y in ((5, 5), (5, 6), (5, 7), (5, 8), (6, 5), (5, 10), (5, 11)):
+        img.putpixel((x, y), shine)
+    for x, y in ((8, 7), (9, 10), (7, 12), (9, 5), (8, 9)):
+        img.putpixel((x, y), glint)
+    for x in range(6, 10):
+        img.putpixel((x, 2), shine)
     return img
 
 
-def canister_side():
-    # a steel drum with welded bands and a trefoil
-    img = Image.new("RGBA", (16, 16), (0, 0, 0, 255))
-    steel, band, shade, sign, mark = (150, 152, 156, 255), (110, 112, 118, 255), (84, 86, 92, 255), (232, 196, 40, 255), (24, 22, 20, 255)
-    for x in range(16):
-        for y in range(16):
-            img.putpixel((x, y), band if y in (1, 14) else shade if x in (0, 15) else steel)
-    for x in range(5, 11):
-        for y in range(5, 11):
-            img.putpixel((x, y), sign)
-    for x, y in ((7, 7), (8, 7), (7, 8), (8, 8), (6, 6), (9, 6), (7, 10), (8, 10), (5, 6), (10, 6)):
-        img.putpixel((x, y), mark)
+def canister_side(steel, label):
+    # a welded stainless drum: lit down its left, seams top and bottom, a band of hazard stripes
+    light, mid, dark, seam = steel
+    yellow, black = label
+    img = Image.new("RGBA", (16, 16))
+    for y in range(16):
+        for x in range(16):
+            tone = light if x < 4 else mid if x < 12 else dark
+            if y in (0, 15):
+                tone = seam
+            elif y in (1, 14):
+                tone = dark if x % 4 == 3 else light
+            elif 6 <= y <= 9:
+                tone = black if (x + y) % 4 < 2 else yellow
+            elif y in (5, 10):
+                tone = seam
+            img.putpixel((x, y), tone)
     return img
+
+
+def canister_top(steel):
+    # the welded lid, a ring and a lifting boss in its middle
+    light, mid, dark, seam = steel
+    img = Image.new("RGBA", (16, 16))
+    for y in range(16):
+        for x in range(16):
+            r = ((x - 7.5) ** 2 + (y - 7.5) ** 2) ** 0.5
+            tone = seam if x in (0, 15) or y in (0, 15) else mid
+            if 5.2 < r < 6.4:
+                tone = dark if x + y > 15 else light
+            if r < 2.2:
+                tone = light if x + y < 15 else dark
+            img.putpixel((x, y), tone)
+    return img
+
 
 def main():
     heap("phosphor", (255, 250, 252), (240, 226, 236), (196, 170, 190)).save(TEXTURES / "item/phosphor.png")
@@ -372,14 +419,17 @@ def main():
     paint_item("ingot", ((112, 30, 12), (196, 74, 22), (246, 146, 48), (255, 224, 142))).save(TEXTURES / "item/hot_steel.png")
     cell(((84, 124, 140, 200), (124, 172, 180, 170), (188, 222, 224, 210)), (52, 84, 96, 255),
          ((192, 114, 66, 255), (166, 174, 188, 255))).save(TEXTURES / "item/galvanic_cell.png")
-    fuel_rod((120, 124, 130, 255), (176, 180, 186, 255), (62, 64, 70, 255), (90, 200, 255, 255)).save(TEXTURES / "item/spent_fuel_rod.png")
-    fuel_rod((96, 98, 102, 255), (140, 142, 146, 255), (52, 54, 58, 255)).save(TEXTURES / "item/cooled_spent_fuel.png")
-    glass_log().save(TEXTURES / "item/vitrified_waste.png")
-    canister_side().save(TEXTURES / "block/waste_canister.png")
+    clad = ((22, 26, 30, 255), (52, 58, 60, 255), (82, 88, 86, 255), (120, 126, 120, 255), (160, 166, 156, 255))
+    fuel_rod(clad, (110, 210, 255, 255)).save(TEXTURES / "item/spent_fuel_rod.png")
+    fuel_rod(clad).save(TEXTURES / "item/cooled_spent_fuel.png")
+    glass_log(((10, 10, 12, 255), (30, 28, 30, 255), (86, 80, 76, 255), (196, 128, 48, 255), (214, 222, 228, 255))).save(TEXTURES / "item/vitrified_waste.png")
+    stainless = ((196, 200, 206, 255), (150, 156, 164, 255), (104, 110, 120, 255), (64, 68, 76, 255))
+    canister_side(stainless, ((236, 194, 36, 255), (28, 26, 24, 255))).save(TEXTURES / "block/waste_canister.png")
+    canister_top(stainless).save(TEXTURES / "block/waste_canister_top.png")
     gauze().save(TEXTURES / "item/platinum_rhodium_gauze.png")
     filament((112, 126, 150, 255), (178, 192, 216, 255)).save(TEXTURES / "item/osmium_filament.png")
     heap("roasted_tin_concentrate", (130, 84, 60), (82, 50, 34), (38, 24, 18)).save(TEXTURES / "item/roasted_tin_concentrate.png")
-    filament((150, 152, 156, 255), (206, 208, 212, 255)).save(TEXTURES / "item/solder.png")
+    spool((150, 152, 156, 255), (206, 208, 212, 255), (60, 90, 150, 255)).save(TEXTURES / "item/solder.png")
     paint_raw("silver_zinc_crust", ((70, 72, 76), (118, 120, 124), (164, 166, 170), (212, 214, 216))).save(TEXTURES / "item/silver_zinc_crust.png")
     heap("litharge", (252, 206, 100), (230, 150, 46), (164, 88, 22)).save(TEXTURES / "item/litharge.png")
     heap("crude_zirconium_tetrachloride", (252, 248, 224), (228, 222, 186), (170, 162, 122)).save(TEXTURES / "item/crude_zirconium_tetrachloride.png")
@@ -413,7 +463,7 @@ def main():
     heap("potassium_bifluoride", (255, 255, 255), (240, 242, 240), (194, 198, 194)).save(TEXTURES / "item/potassium_bifluoride.png")
     paint_raw("boron_carbide", ((14, 14, 16), (34, 34, 40), (62, 62, 72), (130, 132, 146))).save(TEXTURES / "item/boron_carbide.png")
     pellets().save(TEXTURES / "item/uranium_fuel_pellet.png")
-    tube().save(TEXTURES / "item/zircaloy_tube.png")
+    tube(((40, 42, 46, 255), (88, 90, 96, 255), (150, 152, 158, 255), (190, 192, 198, 255), (222, 224, 230, 255)), (24, 24, 28, 255)).save(TEXTURES / "item/zircaloy_tube.png")
     paint_raw("puddle_ball", ((112, 34, 14), (196, 84, 28), (240, 150, 56), (255, 226, 150))).save(TEXTURES / "item/puddle_ball.png")
     heap("graphite", (150, 152, 160), (70, 72, 78), (28, 28, 32)).save(TEXTURES / "item/graphite.png")
     heap("potash", (250, 236, 230), (226, 190, 178), (170, 120, 104)).save(TEXTURES / "item/potash.png")

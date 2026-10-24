@@ -1181,6 +1181,8 @@ def names():
         write(ASSETS / f"models/block/{name}.json", cube(f"fundamentals:block/{name}"))
         write(ASSETS / f"models/item/{name}.json", {"parent": f"fundamentals:block/{name}"})
         write(DATA / f"loot_table/blocks/{name}.json", {"type": "minecraft:block", "pools": [drop_self(name)]})
+    write(ASSETS / "models/block/waste_canister.json", {"parent": "minecraft:block/cube_column",
+                                                        "textures": {"end": "fundamentals:block/waste_canister_top", "side": "fundamentals:block/waste_canister"}})
     write_lang(lang)
 
 
