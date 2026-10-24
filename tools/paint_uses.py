@@ -288,6 +288,50 @@ def magnets():
               ((96, 98, 104, 255), (176, 180, 188, 255), (226, 230, 236, 255))).save(TEXTURES / "item/alnico_magnet.png")
 
 
+
+def fuel_rod(cladding, light, shade, glow=None):
+    # a rod lying corner to corner; a spent one still glows Cherenkov blue along its seam
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    for i in range(2, 14):
+        x, y = i, 15 - i
+        for dx, tone in ((-1, light), (0, cladding), (1, shade)):
+            img.putpixel((x + dx, y), tone)
+        if glow and i % 2 == 0:
+            img.putpixel((x, y), glow)
+    for x, y in ((13, 1), (14, 2), (1, 13), (2, 14)):
+        img.putpixel((x, y), shade)
+    return img
+
+
+def glass_log():
+    # borosilicate cast in a short log, dark with what it holds
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    body, rim, shine, core = (52, 44, 30, 255), (96, 84, 56, 255), (170, 160, 120, 255), (110, 92, 34, 255)
+    for x in range(3, 13):
+        for y in range(4, 12):
+            img.putpixel((x, y), rim if y in (4, 11) or x in (3, 12) else body)
+    for x in range(5, 11):
+        img.putpixel((x, 7), core)
+        img.putpixel((x, 8), core)
+    for x in range(4, 8):
+        img.putpixel((x, 5), shine)
+    return img
+
+
+def canister_side():
+    # a steel drum with welded bands and a trefoil
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 255))
+    steel, band, shade, sign, mark = (150, 152, 156, 255), (110, 112, 118, 255), (84, 86, 92, 255), (232, 196, 40, 255), (24, 22, 20, 255)
+    for x in range(16):
+        for y in range(16):
+            img.putpixel((x, y), band if y in (1, 14) else shade if x in (0, 15) else steel)
+    for x in range(5, 11):
+        for y in range(5, 11):
+            img.putpixel((x, y), sign)
+    for x, y in ((7, 7), (8, 7), (7, 8), (8, 8), (6, 6), (9, 6), (7, 10), (8, 10), (5, 6), (10, 6)):
+        img.putpixel((x, y), mark)
+    return img
+
 def main():
     heap("phosphor", (255, 250, 252), (240, 226, 236), (196, 170, 190)).save(TEXTURES / "item/phosphor.png")
     lens().save(TEXTURES / "item/didymium_glass.png")
@@ -322,6 +366,10 @@ def main():
     heap("ammonium_chlororhodate", (236, 132, 150), (204, 80, 104), (140, 42, 64)).save(TEXTURES / "item/ammonium_chlororhodate.png")
     heap("reforming_catalyst", (246, 246, 242), (206, 206, 204), (136, 138, 142)).save(TEXTURES / "item/reforming_catalyst.png")
     heap("hydrotreating_catalyst", (150, 172, 196), (94, 118, 150), (50, 64, 92)).save(TEXTURES / "item/hydrotreating_catalyst.png")
+    fuel_rod((120, 124, 130, 255), (176, 180, 186, 255), (62, 64, 70, 255), (90, 200, 255, 255)).save(TEXTURES / "item/spent_fuel_rod.png")
+    fuel_rod((96, 98, 102, 255), (140, 142, 146, 255), (52, 54, 58, 255)).save(TEXTURES / "item/cooled_spent_fuel.png")
+    glass_log().save(TEXTURES / "item/vitrified_waste.png")
+    canister_side().save(TEXTURES / "block/waste_canister.png")
     gauze().save(TEXTURES / "item/platinum_rhodium_gauze.png")
     filament((112, 126, 150, 255), (178, 192, 216, 255)).save(TEXTURES / "item/osmium_filament.png")
     heap("roasted_tin_concentrate", (130, 84, 60), (82, 50, 34), (38, 24, 18)).save(TEXTURES / "item/roasted_tin_concentrate.png")

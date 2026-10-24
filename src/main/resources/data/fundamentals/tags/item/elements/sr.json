@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:cooled_spent_fuel",
+    "fundamentals:spent_fuel_rod",
+    "fundamentals:vitrified_waste",
+    "fundamentals:waste_canister"
+  ]
+}

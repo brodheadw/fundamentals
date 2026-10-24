@@ -345,6 +345,16 @@
         ]
       }
     },
+    "sr": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/sr"
+          }
+        ]
+      }
+    },
     "y": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
@@ -461,6 +471,16 @@
         "items": [
           {
             "items": "#fundamentals:elements/sb"
+          }
+        ]
+      }
+    },
+    "cs": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/cs"
           }
         ]
       }
@@ -761,6 +781,7 @@
       "ge",
       "as",
       "br",
+      "sr",
       "y",
       "zr",
       "nb",
@@ -773,6 +794,7 @@
       "in",
       "sn",
       "sb",
+      "cs",
       "la",
       "ce",
       "pr",

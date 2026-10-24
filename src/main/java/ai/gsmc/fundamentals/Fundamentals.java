@@ -154,6 +154,7 @@ public class Fundamentals {
         NeoForge.EVENT_BUS.addListener(Fertiliser::onExplosion);
         NeoForge.EVENT_BUS.addListener(Fertiliser::onServerTick);
         NeoForge.EVENT_BUS.addListener(Plastics::onRightClick);
+        NeoForge.EVENT_BUS.addListener(ai.gsmc.fundamentals.content.nuclear.SpentFuel::onEntityTick);
         NeoForge.EVENT_BUS.addListener(Oxidation::onOpen);
         NeoForge.EVENT_BUS.addListener(Oxidation::onClose);
         NeoForge.EVENT_BUS.addListener(Oxidation::onPlayerTick);

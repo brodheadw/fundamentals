@@ -75,6 +75,7 @@ WASTES = {
     "spent_liquor": ("Spent Liquor", 0x8E9A86),
     "calcium_chloride_liquor": ("Calcium Chloride Liquor", 0xDCE6E4),
     "spent_acid": ("Spent Acid", 0x4A3A30),
+    "high_level_waste": ("High-Level Waste", 0x6E5A1E),
 }
 SEA = {"seawater": ("Seawater", 0x3F76E4)}
 SALINES = {"bittern": ("Bittern", 0xE6DEB8), "salt_brine": ("Salt Brine", 0xE2ECEE)}
