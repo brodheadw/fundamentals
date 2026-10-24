@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- Computers: with CC:Tweaked installed, thermometers, barometers, mixer-settlers, magnetomigration cells, inert drums, bloomeries and every TFMG electrical block (solar panel included) are peripherals a computer can read. A book entry lists the calls.
 - Recoveries follow the plant. Crushing wheels liberate and do not multiply: a ground ore gives one dust, not one and a quarter, and the loss sits in the washer. Monazite and zircon wash at 85 in 100, chromite and the ground pegmatite minerals at five in eight, cassiterite at seven in ten; bastnäsite floats at two thirds; wolframite and scheelite wash to a concentrate three times in four before they are opened; molybdenite roasts to three fifths of its trioxide, as byproduct molybdenite floats in a copper mill.
 - Nickel matte leaves the bloomery: two roasted pentlandite and a sand, superheated, smelt to two matte and a slag, as blister copper does.
 - Native sulfur in the Nether: a fumarole crust on the basalt deltas and in the soul sand valleys, which grinds to sulfur dust for The Factory Must Grow's acid.

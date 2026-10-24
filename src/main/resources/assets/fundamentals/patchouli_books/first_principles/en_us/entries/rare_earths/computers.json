@@ -1,0 +1,21 @@
+{
+  "name": "Computers",
+  "category": "fundamentals:rare_earths",
+  "icon": "fundamentals:barograph",
+  "sortnum": 16,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "With CC:Tweaked installed, a computer or wired modem beside a gauge reads it as a peripheral. Thermometers give getTemperature, getKind and getSignal; barometers getPressure and getTendency, hectopascals an hour.",
+      "title": "Computers"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Any of The Factory's electrical blocks, the solar panel among them, reads like a multimeter: getVoltage, getCurrent, getPowerUsage, getPowerGeneration, the network's usage and generation, and isPowered."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A mixer-settler stage gives getOrganic and getAqueous (fluid name and amount), getPhaseCapacity, isStirred and isOverStirred; a magnetomigration cell its getTemperature; an inert drum getGas; a bloomery getOre, getCharcoal and hasBloom. Tanks and the drum also answer CC's own fluid and inventory calls."
+    }
+  ]
+}
