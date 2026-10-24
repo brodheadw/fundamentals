@@ -2,7 +2,7 @@
 import re
 import shutil
 
-from common import ASSETS, DATA, JAVA, read_lang, tag, write, write_lang
+from common import ASSETS, DATA, JAVA, VANILLA_RAW, raw_item, read_lang, tag, write, write_lang
 from build_ore_data import DISPLAY, ORES
 from build_heat_data import THERMOMETERS
 from build_separation_data import DISSOLVES, PLANT_ITEMS, TITANIUM_PIPEWORK
@@ -14,7 +14,7 @@ from paint_oxidation import BLOCKS as OXIDATION_BLOCKS, FAMILIES as WEATHERING
 OUT = DATA / "advancement"
 ELEMENT_TAGS = DATA / "tags/item/elements"
 CONTENT = JAVA / "content"
-RAW = [f"fundamentals:raw_{mineral}" for mineral in ORES]
+RAW = [f"fundamentals:raw_{mineral}" for mineral in ORES if mineral not in VANILLA_RAW]
 GRINDING = sorted(f"fundamentals:grinding/{p.stem}" for p in (DATA / "recipe/grinding").glob("*.json"))
 SYMBOLS = {symbol: z for z, (symbol, _, _) in ELEMENTS.items()}
 NAME = {symbol: name for symbol, name, _ in ELEMENTS.values()}
@@ -189,7 +189,7 @@ def material_formulas():
 
 def our_items():
     names = [name for _, _, name in material_items()]
-    names += [f"raw_{mineral}" for mineral in ORES] + [f"{mineral}_ore" for mineral in ORES]
+    names += [f"raw_{mineral}" for mineral in ORES if mineral not in VANILLA_RAW] + [f"{mineral}_ore" for mineral in ORES]
     names += list(USES_ITEMS) + list(PGM_ITEMS) + list(MAGNETS) + list(PLANT_ITEMS) + list(USES_BLOCKS) + list(PLASTIC_ITEMS) + list(PLASTIC_BLOCKS) + list(FERTILISERS) + [f"{acid}_bucket" for acid in DISSOLVES] + ["seawater_bucket"]
     names += ["iron_bloom", "roasted_galena", "calcined_spodumene", "photovoltaic_panel"] + list(THERMOMETERS)
     names += OXIDATION_BLOCKS + ["canister", "argon_canister", "rusty_iron_ingot", "rusty_steel_ingot"] + list(TITANIUM_PIPEWORK)
@@ -226,7 +226,7 @@ def element_tags():
 def where(symbol, holders, lang):
     if symbol in WHERE:
         return WHERE[symbol]
-    minerals = [m for m in ORES if f"fundamentals:raw_{m}" in holders]
+    minerals = [m for m in ORES if raw_item(m) in holders]
     if minerals:
         names = [DISPLAY.get(m, m.replace("_", " ").title()).lower() for m in minerals[:3]]
         return "In " + (names[0] if len(names) == 1 else ", ".join(names[:-1]) + " and " + names[-1])

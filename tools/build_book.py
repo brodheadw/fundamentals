@@ -3,7 +3,7 @@ import json
 import re
 import shutil
 
-from common import ASSETS, DATA, JAVA, write
+from common import ASSETS, DATA, JAVA, raw_item, write
 from build_ore_data import DEPOSITS, DISPLAY, PLACERS
 from build_separation_data import CURIE, MOMENTS, TITANIUM_PIPEWORK, ZINC_REDUCTION
 from build_oxidation_data import METALS as AGEING, PACE
@@ -145,7 +145,7 @@ def geology():
         parts = [f"{pretty(m)} in {STYLE.get(style, style)}" for m, _grade, style in minerals]
         text = (f"{KIND[kind].capitalize()}{host_text}, {where}, between y {y0} and {y1}. "
                 + (f"Carries {', '.join(parts)}." if parts else "") + " Dig at the core: the edges are lean.")
-        icon = f"fundamentals:raw_{minerals[0][0]}" if minerals else f"fundamentals:{host}"
+        icon = raw_item(minerals[0][0]) if minerals else f"fundamentals:{host}"
         entry("geology", name, pretty(name).title(), icon, pages_of(text, pretty(name).title()), 10 + i)
     placer_text = " ".join(f"{pretty(m).capitalize()} washes into beach and river sand between y {y0} and {y1}." for m, (y0, y1, _n, _s) in PLACERS.items())
     entry("geology", "placers", "Placer sands", "fundamentals:raw_monazite", pages_of(

@@ -1,7 +1,7 @@
 {
   "name": "Gold Quartz Vein",
   "category": "fundamentals:geology",
-  "icon": "fundamentals:raw_native_gold",
+  "icon": "minecraft:raw_gold",
   "sortnum": 43,
   "pages": [
     {

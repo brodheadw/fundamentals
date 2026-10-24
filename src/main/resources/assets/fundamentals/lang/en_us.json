@@ -1,7 +1,7 @@
 {
   "advancement.fundamentals.bloom.description": "Fire a bloomery and rake out a bloom of iron",
   "advancement.fundamentals.bloom.title": "Three Thousand Years",
-  "advancement.fundamentals.collection.description": "Hold a raw chunk of every one of the 57 minerals",
+  "advancement.fundamentals.collection.description": "Hold a raw chunk of every one of the 56 minerals",
   "advancement.fundamentals.collection.title": "Rock Collection",
   "advancement.fundamentals.concentrate.description": "Wash a rare earth mineral down to a mixed concentrate",
   "advancement.fundamentals.concentrate.title": "Heavy Sand",
@@ -842,7 +842,6 @@
   "item.fundamentals.raw_malachite": "Raw Malachite",
   "item.fundamentals.raw_molybdenite": "Raw Molybdenite",
   "item.fundamentals.raw_monazite": "Raw Monazite",
-  "item.fundamentals.raw_native_gold": "Raw Native Gold",
   "item.fundamentals.raw_native_silver": "Raw Native Silver",
   "item.fundamentals.raw_native_sulfur": "Raw Native Sulfur",
   "item.fundamentals.raw_nickel_laterite": "Raw Nickel Laterite",
