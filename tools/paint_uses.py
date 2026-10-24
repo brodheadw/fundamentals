@@ -34,11 +34,31 @@ def lens():
 
 
 def filament(wire=(150, 154, 162, 255), light=(214, 218, 226, 255)):
+    # a coiled filament between two straight leads: each turn's front lit and slanted, its back in shadow
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-    for x in range(2, 14):
-        y = 8 + (2 if (x // 2) % 2 == 0 else -2)
-        img.putpixel((x, y), light if x % 4 == 0 else wire)
-        img.putpixel((x, y + 1), wire)
+    back = tuple(c * 3 // 5 for c in wire[:3]) + (255,)
+    for x in (1, 2, 13, 14):
+        img.putpixel((x, 8), wire)
+    for x0 in range(3, 12, 2):
+        for y in range(5, 12):
+            img.putpixel((x0 + 1, y), back)
+        for y, dx in ((11, 0), (10, 0), (9, 1), (8, 1), (7, 1), (6, 2), (5, 2)):
+            if x0 + dx < 13:
+                img.putpixel((x0 + dx, y), light if y in (7, 8) else wire)
+    return img
+
+
+def spool(wire, light, flange):
+    # solder wound on a reel, the reel's two flanges either side
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    edge = tuple(c * 3 // 5 for c in flange[:3]) + (255,)
+    shade = tuple(c * 3 // 4 for c in wire[:3]) + (255,)
+    for y in range(2, 14):
+        for x in (2, 3, 12, 13):
+            img.putpixel((x, y), edge if x in (2, 13) or y in (2, 13) else flange)
+    for y in range(4, 12):
+        for x in range(4, 12):
+            img.putpixel((x, y), light if y % 2 == 0 and x < 9 else wire if y % 2 == 0 else shade)
     return img
 
 
@@ -149,16 +169,10 @@ def pellets():
     return img
 
 
-def tube():
-    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-    wall, light, shade, bore = (150, 152, 158, 255), (214, 216, 222, 255), (88, 90, 96, 255), (40, 40, 44, 255)
-    for i in range(2, 14):
-        x, y = i, 15 - i
-        for dx, tone in ((-1, light), (0, wall), (1, shade)):
-            if 0 <= x + dx < 16:
-                img.putpixel((x + dx, y), tone)
-    for dx, dy in ((0, 0), (1, 0), (0, 1)):
-        img.putpixel((13 + dx - 1, 2 + dy - 1), bore)
+def tube(tones, bore):
+    img = fuel_rod(tones)
+    for x, y in ((12, 2), (13, 3)):
+        img.putpixel((x, y), bore)
     return img
 
 
@@ -415,7 +429,7 @@ def main():
     gauze().save(TEXTURES / "item/platinum_rhodium_gauze.png")
     filament((112, 126, 150, 255), (178, 192, 216, 255)).save(TEXTURES / "item/osmium_filament.png")
     heap("roasted_tin_concentrate", (130, 84, 60), (82, 50, 34), (38, 24, 18)).save(TEXTURES / "item/roasted_tin_concentrate.png")
-    filament((150, 152, 156, 255), (206, 208, 212, 255)).save(TEXTURES / "item/solder.png")
+    spool((150, 152, 156, 255), (206, 208, 212, 255), (60, 90, 150, 255)).save(TEXTURES / "item/solder.png")
     paint_raw("silver_zinc_crust", ((70, 72, 76), (118, 120, 124), (164, 166, 170), (212, 214, 216))).save(TEXTURES / "item/silver_zinc_crust.png")
     heap("litharge", (252, 206, 100), (230, 150, 46), (164, 88, 22)).save(TEXTURES / "item/litharge.png")
     heap("crude_zirconium_tetrachloride", (252, 248, 224), (228, 222, 186), (170, 162, 122)).save(TEXTURES / "item/crude_zirconium_tetrachloride.png")
@@ -449,7 +463,7 @@ def main():
     heap("potassium_bifluoride", (255, 255, 255), (240, 242, 240), (194, 198, 194)).save(TEXTURES / "item/potassium_bifluoride.png")
     paint_raw("boron_carbide", ((14, 14, 16), (34, 34, 40), (62, 62, 72), (130, 132, 146))).save(TEXTURES / "item/boron_carbide.png")
     pellets().save(TEXTURES / "item/uranium_fuel_pellet.png")
-    tube().save(TEXTURES / "item/zircaloy_tube.png")
+    tube(((40, 42, 46, 255), (88, 90, 96, 255), (150, 152, 158, 255), (190, 192, 198, 255), (222, 224, 230, 255)), (24, 24, 28, 255)).save(TEXTURES / "item/zircaloy_tube.png")
     paint_raw("puddle_ball", ((112, 34, 14), (196, 84, 28), (240, 150, 56), (255, 226, 150))).save(TEXTURES / "item/puddle_ball.png")
     heap("graphite", (150, 152, 160), (70, 72, 78), (28, 28, 32)).save(TEXTURES / "item/graphite.png")
     heap("potash", (250, 236, 230), (226, 190, 178), (170, 120, 104)).save(TEXTURES / "item/potash.png")
