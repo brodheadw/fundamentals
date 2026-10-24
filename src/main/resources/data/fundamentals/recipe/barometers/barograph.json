@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " U ",
+    "BLB",
+    " A "
+  ],
+  "key": {
+    "U": {
+      "item": "minecraft:paper"
+    },
+    "L": {
+      "tag": "c:plates/brass"
+    },
+    "B": {
+      "item": "minecraft:clock"
+    },
+    "A": {
+      "item": "create:andesite_casing"
+    }
+  },
+  "result": {
+    "id": "fundamentals:barograph",
+    "count": 1
+  }
+}
