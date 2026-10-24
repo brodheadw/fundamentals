@@ -1,0 +1,33 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "computercraft"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "PPP",
+    "TCT",
+    "PWP"
+  ],
+  "key": {
+    "P": {
+      "tag": "c:plates/iron"
+    },
+    "T": {
+      "item": "tfmg:electromagnetic_coil"
+    },
+    "C": {
+      "item": "fundamentals:microcontroller"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "computercraft:disk_drive"
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "tfmg:n_semiconductor"
+  },
+  "loops": 3,
+  "results": [
+    {
+      "id": "fundamentals:microcontroller_wafer"
+    }
+  ],
+  "transitional_item": {
+    "id": "fundamentals:processing_wafer"
+  },
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_wafer"
+        },
+        {
+          "item": "fundamentals:microcontroller_mask"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_wafer"
+        }
+      ],
+      "keep_held_item": true
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_wafer"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 25,
+          "fluid": "tfmg:naphtha"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_wafer"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_wafer"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 25,
+          "fluid": "fundamentals:hydrofluoric_acid"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_wafer"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_wafer"
+        },
+        {
+          "item": "fundamentals:boric_acid"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_wafer"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_wafer"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 25,
+          "fluid": "minecraft:water"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_wafer"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_wafer"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 25,
+          "fluid": "fundamentals:negative_photoresist"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_wafer"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "computercraft"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "PEP",
+    "TCT",
+    "PPP"
+  ],
+  "key": {
+    "P": {
+      "tag": "c:plates/aluminum"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    },
+    "T": {
+      "item": "tfmg:electromagnetic_coil"
+    },
+    "C": {
+      "item": "fundamentals:advanced_processor"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "computercraft:wireless_modem_advanced"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "fundamentals:quartz_mask_blank"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "id": "fundamentals:microprocessor_mask"
+    }
+  ],
+  "transitional_item": {
+    "id": "fundamentals:processing_mask"
+  },
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_mask"
+        },
+        {
+          "item": "fundamentals:memory_chip"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_mask"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_mask"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 25,
+          "fluid": "fundamentals:positive_photoresist"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_mask"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_mask"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 25,
+          "fluid": "fundamentals:caustic_soda"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_mask"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_mask"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 25,
+          "fluid": "fundamentals:chrome_etchant"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_mask"
+        }
+      ]
+    }
+  ]
+}

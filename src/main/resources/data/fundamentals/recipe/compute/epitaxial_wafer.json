@@ -1,0 +1,53 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "tfmg:p_semiconductor"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "id": "fundamentals:epitaxial_wafer"
+    }
+  ],
+  "transitional_item": {
+    "id": "fundamentals:processing_wafer"
+  },
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_wafer"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 100,
+          "fluid": "fundamentals:trichlorosilane"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_wafer"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_wafer"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 250,
+          "fluid": "tfmg:hydrogen"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_wafer"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "computercraft"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    " S ",
+    "WWW",
+    " S "
+  ],
+  "key": {
+    "S": {
+      "item": "tfmg:plastic_sheet"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    }
+  },
+  "result": {
+    "count": 6,
+    "id": "computercraft:cable"
+  }
+}
