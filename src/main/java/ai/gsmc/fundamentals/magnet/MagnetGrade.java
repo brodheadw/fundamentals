@@ -9,7 +9,9 @@ public enum MagnetGrade implements StringRepresentable {
     NDFEB("neodymium_iron_boron", 80, 120, 320, 1.0F),
     DY_NDFEB("dysprosium_neodymium_iron_boron", 180, 230, 340, 1.0F),
     SMCO("samarium_cobalt", 300, 400, 800, 0.8F),
-    ALNICO("alnico", 525, 600, 860, 0.4F);
+    ALNICO("alnico", 525, 600, 860, 0.4F),
+    // the first magnet: quenched steel, magnetized by a galvanic cell before there is any power; last, so saved grades keep their numbers
+    STEEL("steel", 150, 250, 770, 0.25F);
 
     public static final StringRepresentable.EnumCodec<MagnetGrade> CODEC = StringRepresentable.fromEnum(MagnetGrade::values);
     public static final StreamCodec<ByteBuf, MagnetGrade> STREAM_CODEC = ByteBufCodecs.VAR_INT.map(i -> values()[i], MagnetGrade::ordinal);

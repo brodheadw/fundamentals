@@ -43,13 +43,21 @@ public class MagnetTests {
     }
 
     @GameTest(template = "empty")
-    public void eachAlloyPolarizesToItsOwnMagnetAndTheMachinesCarryTheGrade(GameTestHelper helper) {
+    public void eachMagnetHasItsOwnRecipeAndTheMachinesCarryTheGrade(GameTestHelper helper) {
         var registries = helper.getLevel().registryAccess();
         for (MagnetGrade grade : MagnetGrade.values()) {
-            Recipe<?> polarize = recipe(helper, "fundamentals:uses/" + grade.magnet() + "_from_ingot");
-            helper.assertTrue(BuiltInRegistries.RECIPE_TYPE.getKey(polarize.getType()).toString().equals("tfmg:polarizing")
-                    && takes(polarize, "fundamentals:" + grade.material + "_ingot") && polarize.getResultItem(registries).is(Magnets.magnet(grade)),
-                    grade.material + " should polarize to its own magnet");
+            if (grade == MagnetGrade.STEEL) {
+                Recipe<?> starter = recipe(helper, "fundamentals:uses/steel_magnet");
+                helper.assertTrue(BuiltInRegistries.RECIPE_SERIALIZER.getKey(starter.getSerializer()).toString().equals("minecraft:crafting_shapeless")
+                        && takes(starter, "fundamentals:hardened_steel") && takes(starter, "fundamentals:galvanic_cell")
+                        && takes(starter, "tfmg:copper_wire") && starter.getResultItem(registries).is(Magnets.magnet(grade)),
+                        "the starter magnet should need hardened steel, a galvanic cell and copper wire, without a polarizer");
+            } else {
+                Recipe<?> polarize = recipe(helper, "fundamentals:uses/" + grade.magnet() + "_from_ingot");
+                helper.assertTrue(BuiltInRegistries.RECIPE_TYPE.getKey(polarize.getType()).toString().equals("tfmg:polarizing")
+                        && takes(polarize, "fundamentals:" + grade.material + "_ingot") && polarize.getResultItem(registries).is(Magnets.magnet(grade)),
+                        grade.material + " should polarize to its own magnet");
+            }
             for (String machine : new String[] {"electric_motor", "generator", "stator", "electric_pump", "voltmeter"}) {
                 Recipe<?> built = recipe(helper, "fundamentals:uses/" + machine + "_with_" + grade.magnet());
                 MagnetCharge charge = built.getResultItem(registries).get(Magnets.CHARGE);
@@ -99,4 +107,21 @@ public class MagnetTests {
                 .thenSucceed();
     }
 
+
+    @GameTest(template = "empty")
+    public void aMagnetLuresInProportionToItsField(GameTestHelper helper) {
+        var magnet = new net.minecraft.world.item.ItemStack(Magnets.magnet(MagnetGrade.NDFEB));
+        int full = ai.gsmc.fundamentals.magnet.MagnetLure.luck(magnet);
+        magnet.set(Magnets.CHARGE, new MagnetCharge(MagnetGrade.NDFEB, 0.5F));
+        int half = ai.gsmc.fundamentals.magnet.MagnetLure.luck(magnet);
+        magnet.set(Magnets.CHARGE, new MagnetCharge(MagnetGrade.NDFEB, 0));
+        helper.assertTrue(full == ai.gsmc.fundamentals.magnet.MagnetLure.FULL_LUCK && half == full / 2
+                && ai.gsmc.fundamentals.magnet.MagnetLure.luck(magnet) == 0, "luck follows the field: " + full + ", " + half);
+        helper.assertTrue(ai.gsmc.fundamentals.magnet.MagnetLure.luck(new net.minecraft.world.item.ItemStack(Magnets.magnet(MagnetGrade.ALNICO))) < full,
+                "alnico pulls weaker than neodymium");
+        var hook = new net.minecraft.world.entity.projectile.FishingHook(net.minecraft.world.entity.EntityType.FISHING_BOBBER, helper.getLevel());
+        ((ai.gsmc.fundamentals.mixin.FishingHookAccessor) hook).fundamentals$setLuck(7);
+        helper.assertTrue(((ai.gsmc.fundamentals.mixin.FishingHookAccessor) hook).fundamentals$luck() == 7, "the bobber's luck can be raised");
+        helper.succeed();
+    }
 }

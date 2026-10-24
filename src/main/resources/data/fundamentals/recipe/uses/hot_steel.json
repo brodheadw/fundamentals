@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "category": "misc",
+  "ingredient": {
+    "item": "tfmg:steel_ingot"
+  },
+  "result": {
+    "id": "fundamentals:hot_steel"
+  },
+  "experience": 0,
+  "cookingtime": 200
+}

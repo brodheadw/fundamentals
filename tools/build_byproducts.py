@@ -17,7 +17,7 @@ MADE_IN_CODE = {
     "fundamentals:fouled_p204": "a battery run on crude liquor",
     "fundamentals:fouled_p507": "a battery run on crude liquor",
     "fundamentals:fouled_naphthenic_acid": "a battery run on crude liquor",
-    "fundamentals:spent_fuel_rod": "Create: Nuclear's reactor, as each fuel rod burns out",
+    "fundamentals:spent_fuel_rod": "Create: Nuclear's reactor, as each fuel rod burns out, on top of its controller",
     "fundamentals:cooled_spent_fuel": "a spent fuel rod left a day under water",
 }
 
