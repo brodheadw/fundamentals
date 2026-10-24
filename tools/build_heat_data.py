@@ -189,6 +189,12 @@ THERMOMETERS = {
     "type_k_thermocouple": ("Type K Thermocouple", {"tag": "c:ingots/chromel"}, {"tag": "c:ingots/alumel"}),
     "type_s_thermocouple": ("Type S Thermocouple", {"tag": "c:nuggets/rhodium"}, {"tag": "c:nuggets/platinum"}),
 }
+BAROMETER_RECIPES = DATA / "recipe/barometers"
+# A wheel barometer is mercury in a glass whose float turns a dial on a cord; a barograph is an aneroid capsule inking a clockwork drum.
+BAROMETERS = {
+    "mercury_barometer": ("Mercury Barometer", {"item": "minecraft:glass_pane"}, {"item": "fundamentals:mercury"}, {"item": "minecraft:string"}),
+    "barograph": ("Barograph", {"item": "minecraft:paper"}, {"tag": "c:plates/brass"}, {"item": "minecraft:clock"}),
+}
 BODY = ([2, 2, 12], [14, 14, 16])
 BEZEL = [([2, 13, 11], [14, 14, 12]), ([2, 2, 11], [14, 3, 12]), ([13, 3, 11], [14, 13, 12]), ([2, 3, 11], [3, 13, 12])]
 NEEDLE = [([7.625, 6.75, 11.4], [8.375, 12.5, 11.8], [0, 0, 2, 8]), ([7.25, 7.25, 11.2], [8.75, 8.75, 11.9], [10, 0, 12, 2])]
@@ -230,6 +236,28 @@ def thermometers(lang):
             "key": {"U": upper, "L": lower, **({"B": beside[0]} if beside else {}), "A": {"item": "create:andesite_casing"}},
             "result": {"id": f"fundamentals:{name}", "count": 1}})
         lang[f"block.fundamentals.{name}"] = display
+    shutil.rmtree(BAROMETER_RECIPES, ignore_errors=True)
+    for name, (display, upper, lower, beside) in BAROMETERS.items():
+        dial = {"dial": f"fundamentals:block/{name}_dial"}
+        write(ASSETS / f"models/block/{name}.json", {"parent": "fundamentals:block/thermometer", "textures": dial})
+        write(ASSETS / f"models/item/{name}.json", {"parent": "fundamentals:item/thermometer", "textures": dial})
+        write(ASSETS / f"blockstates/{name}.json", {"variants": {
+            f"facing={facing}": {"model": f"fundamentals:block/{name}", **rotation}
+            for facing, rotation in (("north", {}), ("east", {"y": 90}), ("south", {"y": 180}), ("west", {"y": 270}),
+                                     ("up", {"x": 270}), ("down", {"x": 90}))}})
+        write(DATA / f"loot_table/blocks/{name}.json", {"type": "minecraft:block", "pools": [drop_self(name)]})
+        write(BAROMETER_RECIPES / f"{name}.json", {
+            "type": "minecraft:crafting_shaped", "category": "misc", "pattern": [" U ", "BLB", " A "],
+            "key": {"U": upper, "L": lower, "B": beside, "A": {"item": "create:andesite_casing"}},
+            "result": {"id": f"fundamentals:{name}", "count": 1}})
+        lang[f"block.fundamentals.{name}"] = display
+    key = "goggles.fundamentals.barometer."
+    lang[key + "reading"] = "%s hPa (%s mmHg)"
+    lang[key + "settling"] = "Still taking its first readings"
+    lang[key + "steady"] = "Steady"
+    lang[key + "rising"] = "Rising %s hPa an hour: clearing"
+    lang[key + "falling"] = "Falling %s hPa an hour"
+    lang[key + "storm"] = "Falling %s hPa an hour: rain on its way"
     lang["goggles.fundamentals.thermometer.over"] = "Off the scale, past %s °C"
     lang["goggles.fundamentals.thermometer.under"] = "Off the scale, under %s °C"
     lang["goggles.fundamentals.thermometer.range"] = "Reads %s to %s °C"
@@ -248,7 +276,7 @@ def main():
         id: liquid_value(*row[1:9]) for id, row in rows.items()}})
     liquid_lang(lang)
     write_lang(lang)
-    print(f"{len(SOURCES)} heat sources, {len(THERMOMETERS)} thermometers, {len(rows)} liquids")
+    print(f"{len(SOURCES)} heat sources, {len(THERMOMETERS)} thermometers, {len(BAROMETERS)} barometers, {len(rows)} liquids")
 
 
 if __name__ == "__main__":

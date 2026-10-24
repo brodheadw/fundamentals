@@ -26,7 +26,7 @@ import org.joml.Vector3f;
 
 import java.util.List;
 
-public class ThermometerBlockEntity extends BlockEntity implements IHaveGoggleInformation {
+public class ThermometerBlockEntity extends BlockEntity implements IHaveGoggleInformation, Dial {
 
     public static final int PERIOD = 10;
     private static final DustParticleOptions SPIRIT_SPRAY = new DustParticleOptions(new Vector3f(0.9F, 0.1F, 0.1F), 0.8F);
@@ -44,6 +44,7 @@ public class ThermometerBlockEntity extends BlockEntity implements IHaveGoggleIn
         return ((ThermometerBlock) getBlockState().getBlock()).kind();
     }
 
+    @Override
     public Direction facing() {
         return getBlockState().getValue(ThermometerBlock.FACING);
     }
@@ -56,6 +57,7 @@ public class ThermometerBlockEntity extends BlockEntity implements IHaveGoggleIn
         return celsius;
     }
 
+    @Override
     public float dial(float partialTick) {
         return prevDial + (dial - prevDial) * partialTick;
     }

@@ -57,6 +57,55 @@ def dial(name):
     return img
 
 
+# A barometer's band runs 940 to 1060 hPa round the sweep, coloured as the old aneroid dials were lettered:
+# stormy, rain, change, fair, very dry.
+WEATHER = [(980, (40, 58, 118)), (1000, (72, 112, 172)), (1015, (150, 150, 146)), (1030, (222, 182, 62)), (2000, (220, 122, 48))]
+
+
+def weather(angle):
+    hectopascals = 940 + 120 * (angle + SWEEP / 2) / SWEEP
+    return next(colour for limit, colour in WEATHER if hectopascals < limit)
+
+
+def barometer_dial(mark):
+    img = Image.new("RGBA", (32, 32))
+    for y in range(32):
+        for x in range(32):
+            r, a = polar(x, y)
+            if r > 10.2:
+                colour = ANDESITE[0]
+            elif r > 9.3:
+                colour = shade(FACE, 0.72)
+            elif r > 7.3 and abs(a) <= SWEEP / 2 + 2:
+                colour = shade(weather(max(-SWEEP / 2, min(SWEEP / 2, a))), 1.1 if r > 8.3 else 0.9)
+            else:
+                colour = FACE
+            img.putpixel((x, y), colour + (255,))
+    for step in range(9):
+        a = math.radians(-SWEEP / 2 + SWEEP * step / 8)
+        for r in ((5.0, 5.8, 6.6) if step % 2 == 0 else (6.6,)):
+            img.putpixel((int(CENTRE + r * math.sin(a)), int(CENTRE - r * math.cos(a))), INK + (255,))
+    mark(img)
+    return img
+
+
+def siphon(img):
+    # the wheel barometer's mercury, standing in its glass
+    tube(img, (120, 124, 132), (200, 204, 212), (150, 154, 162))
+
+
+def chart(img):
+    # the barograph's drum: a strip of chart and the inked trace of a falling glass
+    for y in range(19, 25):
+        for x in range(12, 21):
+            img.putpixel((x, y), (246, 242, 228, 255) if y not in (19, 24) else shade(FACE, 0.8) + (255,))
+    for x, y in ((12, 20), (13, 20), (14, 21), (15, 21), (16, 21), (17, 22), (18, 23), (19, 23), (20, 23)):
+        img.putpixel((x, y), (120, 30, 140, 255))
+
+
+BAROMETERS = {"mercury_barometer": siphon, "barograph": chart}
+
+
 def tube(img, dark, light, bulb):
     glass = (96, 116, 128)
     for y in range(18, 24):
@@ -126,7 +175,9 @@ def main():
     needle().save(OUT / "thermometer_needle.png")
     for name in GAUGES:
         dial(name).save(OUT / f"{name}_dial.png")
-    print(f"wrote {len(GAUGES)} thermometer dials")
+    for name, mark in BAROMETERS.items():
+        barometer_dial(mark).save(OUT / f"{name}_dial.png")
+    print(f"wrote {len(GAUGES)} thermometer dials and {len(BAROMETERS)} barometer dials")
 
 
 if __name__ == "__main__":

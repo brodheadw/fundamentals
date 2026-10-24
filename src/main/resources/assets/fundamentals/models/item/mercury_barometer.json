@@ -1,0 +1,6 @@
+{
+  "parent": "fundamentals:item/thermometer",
+  "textures": {
+    "dial": "fundamentals:block/mercury_barometer_dial"
+  }
+}

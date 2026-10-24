@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " U ",
+    "BLB",
+    " A "
+  ],
+  "key": {
+    "U": {
+      "item": "minecraft:glass_pane"
+    },
+    "L": {
+      "item": "fundamentals:mercury"
+    },
+    "B": {
+      "item": "minecraft:string"
+    },
+    "A": {
+      "item": "create:andesite_casing"
+    }
+  },
+  "result": {
+    "id": "fundamentals:mercury_barometer",
+    "count": 1
+  }
+}

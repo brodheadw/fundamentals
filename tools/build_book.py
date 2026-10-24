@@ -493,6 +493,15 @@ def rare_earths():
         + [{"type": "patchouli:crafting", "recipe": "fundamentals:thermometers/mercury_thermometer", "recipe2": "fundamentals:thermometers/spirit_thermometer"},
            {"type": "patchouli:crafting", "recipe": "fundamentals:thermometers/bimetallic_thermometer", "recipe2": "fundamentals:thermometers/type_k_thermocouple"},
            {"type": "patchouli:crafting", "recipe": "fundamentals:thermometers/type_s_thermocouple"}], 14)
+    entry("rare_earths", "barometers", "Barometers", "fundamentals:barograph", pages_of(
+        "Air presses on everything, about 1,013 hectopascals at sea level, the weight of the whole column above. Torricelli found it in 1643: a tube of mercury stood upside down in a dish falls to about 760 millimetres and holds there. "
+        "Here, as in the world, it thins as you climb, some 12 hPa for every hundred blocks up, and it sinks over hot ground, hot air rising off it.", "Barometers") + pages_of(
+        "It also moves with the weather. In a long fair spell the glass stands high; through the quarter day before rain it falls, near 20 hPa; under rain it sits low and lower in thunder, and it climbs again as the storm ends. "
+        "Admiral FitzRoy put barometers in fishing harbours in the 1860s on that rule: a falling glass foretells foul weather.") + pages_of(
+        "The mercury barometer is a wheel barometer: the mercury's float turns a dial on a cord, and a comparator reads its pressure from 940 to 1,060 hPa. "
+        "The barograph is Vidie's aneroid capsule of 1844 inking a clockwork drum. It keeps an hour of its own readings, its goggles say which way the glass is going and how fast, and its comparator gives a storm warning: "
+        "nothing in steady weather, rising to 15 as the fall nears 4 hPa an hour.")
+        + [{"type": "patchouli:crafting", "recipe": "fundamentals:barometers/mercury_barometer", "recipe2": "fundamentals:barometers/barograph"}], 15)
 
 
 def liquid_rows():
