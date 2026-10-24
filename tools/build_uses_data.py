@@ -1169,6 +1169,8 @@ def names():
     lang["tooltip.fundamentals.magnet.field"] = "Overheated: %s%% of its field left"
     lang["tooltip.fundamentals.magnet.demagnetised"] = "Demagnetised: rebuild it with a magnet"
     lang["tooltip.fundamentals.magnet.lure"] = "Off hand while fishing: +%s luck"
+    lang["tooltip.fundamentals.nuclear.spent_fuel_rod"] = "Cools only under water: leave it a day in a pool"
+    lang["tooltip.fundamentals.nuclear.waste_canister"] = "Irradiates until buried below y 0 in deepslate, tuff or clay"
     lang["goggles.fundamentals.magnet.grade"] = "%s, rated to %s °C"
     lang["goggles.fundamentals.magnet.output"] = "At %s °C: %s%% of full output"
     lang["goggles.fundamentals.magnet.field"] = "%s%% of its field left: it has been past %s °C"

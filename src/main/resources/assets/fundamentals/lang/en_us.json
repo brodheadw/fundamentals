@@ -998,5 +998,7 @@
   "tooltip.fundamentals.magnet.demagnetised": "Demagnetised: rebuild it with a magnet",
   "tooltip.fundamentals.magnet.field": "Overheated: %s%% of its field left",
   "tooltip.fundamentals.magnet.grade": "%s, rated to %s °C",
-  "tooltip.fundamentals.magnet.lure": "Off hand while fishing: +%s luck"
+  "tooltip.fundamentals.magnet.lure": "Off hand while fishing: +%s luck",
+  "tooltip.fundamentals.nuclear.spent_fuel_rod": "Cools only under water: leave it a day in a pool",
+  "tooltip.fundamentals.nuclear.waste_canister": "Irradiates until buried below y 0 in deepslate, tuff or clay"
 }
