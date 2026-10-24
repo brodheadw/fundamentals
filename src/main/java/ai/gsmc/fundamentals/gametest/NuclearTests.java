@@ -134,4 +134,69 @@ public class NuclearTests {
         helper.assertTrue(Radiation.dose(stack("fundamentals:yellowcake")) > 0, "our yellowcake should be radioactive to Create Nuclear");
         helper.succeed();
     }
+
+    @GameTest(template = "empty")
+    public void spentFuelCoolsOnlyUnderWater(GameTestHelper helper) {
+        helper.setBlock(new BlockPos(1, 1, 1), Blocks.WATER);
+        var wet = new net.minecraft.world.entity.item.ItemEntity(helper.getLevel(), 0, 0, 0, stack("fundamentals:spent_fuel_rod"));
+        var dry = new net.minecraft.world.entity.item.ItemEntity(helper.getLevel(), 0, 0, 0, stack("fundamentals:spent_fuel_rod"));
+        var water = helper.absoluteVec(new net.minecraft.world.phys.Vec3(1.5, 1.2, 1.5));
+        var air = helper.absoluteVec(new net.minecraft.world.phys.Vec3(3.5, 1.2, 3.5));
+        wet.setPos(water);
+        dry.setPos(air);
+        helper.getLevel().addFreshEntity(wet);
+        helper.getLevel().addFreshEntity(dry);
+        helper.runAfterDelay(2, () -> {
+            ai.gsmc.fundamentals.content.nuclear.SpentFuel.pool(wet, ai.gsmc.fundamentals.content.nuclear.SpentFuel.COOL_TICKS);
+            ai.gsmc.fundamentals.content.nuclear.SpentFuel.pool(dry, ai.gsmc.fundamentals.content.nuclear.SpentFuel.COOL_TICKS);
+            helper.assertTrue(wet.getItem().is(stack("fundamentals:cooled_spent_fuel").getItem()), "a day under water cools spent fuel");
+            helper.assertTrue(dry.getItem().is(stack("fundamentals:spent_fuel_rod").getItem()), "spent fuel out of water stays hot");
+            helper.succeed();
+        });
+    }
+
+    @GameTest(template = "empty")
+    public void wasteRestsOnlyInDeepRock(GameTestHelper helper) {
+        BlockPos canister = new BlockPos(2, 2, 2);
+        helper.setBlock(canister, BuiltInRegistries.BLOCK.get(Fundamentals.id("waste_canister")));
+        var entombed = (java.util.function.Supplier<Boolean>) () ->
+                ai.gsmc.fundamentals.content.nuclear.WasteCanisterBlock.entombed(helper.getLevel(), helper.absolutePos(canister));
+        helper.assertFalse(entombed.get(), "a canister in the open is not entombed");
+        for (net.minecraft.core.Direction direction : net.minecraft.core.Direction.values()) helper.setBlock(canister.relative(direction), Blocks.DEEPSLATE);
+        helper.assertTrue(entombed.get() == helper.absolutePos(canister).getY() < 0, "deepslate all round entombs it, below y 0 only");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void spentFuelRunsToAWasteCanister(GameTestHelper helper) {
+        helper.assertTrue(takes(processing(helper, "fundamentals:uses/purex"), "fundamentals:cooled_spent_fuel"), "PUREX takes cooled fuel");
+        helper.assertTrue(takes(processing(helper, "fundamentals:uses/vitrified_waste"), "fundamentals:boric_acid"), "vitrification takes boric acid");
+        helper.assertTrue(recipe(helper, "fundamentals:uses/waste_canister_vitrified").isPresent()
+                && recipe(helper, "fundamentals:uses/waste_canister_spent_fuel").isPresent(), "both wastes can be canistered");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void theReactorHandsBackItsSpentFuel(GameTestHelper helper) throws ClassNotFoundException {
+        if (!net.neoforged.fml.ModList.get().isLoaded("createnuclear")) {
+            helper.succeed();
+            return;
+        }
+        Class<?> consumable = Class.forName("net.nuclearteam.createnuclear.content.multiblock.controller.consumable.ItemConsumable");
+        helper.assertTrue(java.util.Arrays.stream(consumable.getDeclaredMethods()).anyMatch(m -> m.getName().contains("fundamentals$spentFuel")),
+                "the reactor's fuel consumption carries the spent-fuel hook");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void spentFuelGoesIntoTheChestOnTheController(GameTestHelper helper) {
+        BlockPos caught = new BlockPos(1, 1, 1), loose = new BlockPos(4, 1, 4);
+        helper.setBlock(caught.above(), Blocks.CHEST);
+        ai.gsmc.fundamentals.content.nuclear.SpentFuel.discharge(helper.getLevel(), helper.absolutePos(caught));
+        ai.gsmc.fundamentals.content.nuclear.SpentFuel.discharge(helper.getLevel(), helper.absolutePos(loose));
+        var chest = (net.minecraft.world.level.block.entity.ChestBlockEntity) helper.getBlockEntity(caught.above());
+        helper.assertTrue(chest.getItem(0).is(stack("fundamentals:spent_fuel_rod").getItem()), "a chest on the controller catches the spent rod");
+        helper.assertItemEntityPresent(stack("fundamentals:spent_fuel_rod").getItem(), loose.above(), 1.5);
+        helper.succeed();
+    }
 }

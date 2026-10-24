@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:glass"
+    },
+    {
+      "item": "fundamentals:boric_acid"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:high_level_waste"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:vitrified_waste"
+    }
+  ],
+  "heat_requirement": "superheated"
+}

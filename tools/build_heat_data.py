@@ -81,6 +81,7 @@ OURS = {
     "hydrogen_sulfide": (1.36, 0.0124, -85.5, -60.3, -82, 232, None, {"toxic"}, "NIST",
                          "gas, heavier than air; rotten eggs at parts per billion, deadens the nose above 100 ppm and kills in a few breaths above 500"),
     "spent_acid": (1800, 25, -20, 290, None, None, None, {"toxic"}, "SDS", "alkylation spent acid: about 90% sulfuric acid, black with acid-soluble oils"),
+    "high_level_waste": (1300, 2.5, -15, 104, None, None, None, {LIQUID, "toxic"}, "IAEA", "PUREX raffinate: fission products and minor actinides in nitric acid, warm with its own decay"),
     "sodium_vanadate_liquor": (1080, 1.2, -4, 101, None, None, None, {LIQUID}, "Perry", "salt-roast water leach, about 20 g/L V2O5 as sodium metavanadate"),
     "caustic_soda": (1274, 4.4, -17, 112, None, None, None, {LIQUID}, "SDS", "25% sodium hydroxide; 50% freezes at 12 °C"),
     "sodium_tungstate_liquor": (1200, 2.0, -10, 104, None, None, None, {LIQUID}, "Perry", "sodium tungstate digest, about 150 g/L WO3 in caustic"),

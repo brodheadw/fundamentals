@@ -17,6 +17,8 @@ MADE_IN_CODE = {
     "fundamentals:fouled_p204": "a battery run on crude liquor",
     "fundamentals:fouled_p507": "a battery run on crude liquor",
     "fundamentals:fouled_naphthenic_acid": "a battery run on crude liquor",
+    "fundamentals:spent_fuel_rod": "Create: Nuclear's reactor, as each fuel rod burns out, on top of its controller",
+    "fundamentals:cooled_spent_fuel": "a spent fuel rod left a day under water",
 }
 
 # Where a byproduct goes outside this mod's own recipes.
@@ -33,6 +35,7 @@ ELSEWHERE = {
     "minecraft:clay_ball": "everything that takes clay",
     "minecraft:iron_nugget": "nine craft to an iron ingot",
     "create:crushed_raw_iron": "The Factory Must Grow's blast furnace",
+    "fundamentals:spent_fuel_rod": "a spent fuel pool: a day under water cools it (content.nuclear.SpentFuel)",
 }
 
 # Finished goods no recipe takes, which are not blocks or equipment.
@@ -103,6 +106,9 @@ WHY = {
     "fundamentals:silver_zinc_crust": "The Parkes crust is retorted and cupelled for its silver.",
     "fundamentals:soda_ash": "The dichromate reduction gives the sodium back as carbonate.",
     "fundamentals:spent_liquor": "Spent chloride raffinate is neutralised with lime; a plant recovers its calcium chloride. It corrodes metal pipe.",
+    "fundamentals:spent_fuel_rod": "Spent fuel sits years in a pool while its fission products decay, then is reprocessed (France, Japan) or cased for burial (Finland).",
+    "fundamentals:cooled_spent_fuel": "PUREX dissolves cooled fuel in nitric acid and takes the uranium back; the rest is high-level waste.",
+    "fundamentals:high_level_waste": "La Hague and Sellafield melt PUREX raffinate into borosilicate glass, cast in steel canisters for a deep repository.",
     "fundamentals:fouled_p204": "Fouled organic is scrubbed and returned; extractant is too dear to throw away.",
     "fundamentals:fouled_p507": "Fouled organic is scrubbed and returned; extractant is too dear to throw away.",
     "fundamentals:fouled_naphthenic_acid": "Fouled organic is scrubbed and returned; extractant is too dear to throw away.",

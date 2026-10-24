@@ -154,12 +154,16 @@ public class Fundamentals {
         NeoForge.EVENT_BUS.addListener(Fertiliser::onExplosion);
         NeoForge.EVENT_BUS.addListener(Fertiliser::onServerTick);
         NeoForge.EVENT_BUS.addListener(Plastics::onRightClick);
+        NeoForge.EVENT_BUS.addListener(ai.gsmc.fundamentals.content.nuclear.SpentFuel::onEntityTick);
+        NeoForge.EVENT_BUS.addListener(ai.gsmc.fundamentals.content.nuclear.SpentFuel::onTooltip);
         NeoForge.EVENT_BUS.addListener(Oxidation::onOpen);
         NeoForge.EVENT_BUS.addListener(Oxidation::onClose);
         NeoForge.EVENT_BUS.addListener(Oxidation::onPlayerTick);
         NeoForge.EVENT_BUS.addListener(Oxidation::onPickup);
         NeoForge.EVENT_BUS.addListener(Oxidation::onTooltip);
         NeoForge.EVENT_BUS.addListener(Magnets::onTooltip);
+        NeoForge.EVENT_BUS.addListener(ai.gsmc.fundamentals.magnet.MagnetLure::onJoin);
+        NeoForge.EVENT_BUS.addListener(ai.gsmc.fundamentals.magnet.MagnetLure::onTooltip);
         NeoForge.EVENT_BUS.addListener(Magnets::attach);
         modBus.addListener(Oxidation::registerDataMaps);
         modBus.addListener(Temperatures::setup);
