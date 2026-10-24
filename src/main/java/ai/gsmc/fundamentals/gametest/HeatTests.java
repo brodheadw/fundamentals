@@ -24,7 +24,8 @@ import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 @PrefixGameTestTemplate(false)
 public class HeatTests {
 
-    @GameTest(template = "battery", timeoutTicks = 200)
+    // alone in its batch: a neighbouring test's furnace or lava would warm the ice side
+    @GameTest(template = "battery", timeoutTicks = 200, batch = "climate")
     public void theTemperatureIsClimatePlusWhatIsBurningNearby(GameTestHelper helper) {
         BlockPos here = helper.absolutePos(new BlockPos(13, 1, 2));
         double ambient = Heat.at(helper.getLevel(), here);
