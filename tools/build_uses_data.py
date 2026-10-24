@@ -1125,7 +1125,8 @@ def names():
     lang = read_lang()
     for name, display in {**ITEMS, **PGM_ITEMS, **MAGNETS, **FERTILISERS}.items():
         lang[f"item.fundamentals.{name}"] = display
-        write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})
+        textures = {"layer0": "minecraft:item/potion_overlay", "layer1": "minecraft:item/potion"} if name == "mercury" else {"layer0": f"fundamentals:item/{name}"}
+        write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": textures})
     for name, display in PLASTIC_ITEMS.items():
         lang[f"item.fundamentals.{name}"] = display
         write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})
