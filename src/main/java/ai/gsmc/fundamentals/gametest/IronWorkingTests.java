@@ -198,14 +198,20 @@ public class IronWorkingTests {
                 shipped.thickness(), shipped.height(), shipped.replaceable());
         BlockPos centre = helper.absolutePos(new BlockPos(1, 8, 1));
         Iterable<BlockPos> box = BlockPos.betweenClosed(centre.offset(-6, -5, -6), centre.offset(6, 5, 6));
-        box.forEach(pos -> level.setBlock(pos, Blocks.STONE.defaultBlockState(), 2));
-        DepositFeature.INSTANCE.place(small, level, level.getChunkSource().getGenerator(), level.getRandom(), centre);
-        int siderite = 0;
-        for (BlockPos pos : box) {
-            siderite += BuiltInRegistries.BLOCK.getKey(level.getBlockState(pos).getBlock()).getPath().equals("siderite_ore") ? 1 : 0;
+        int siderite = 0, underclay = 0;
+        // one small bed can put its only coal seam on the bottom layer, so sample several
+        for (int attempt = 0; attempt < 8 && (siderite == 0 || underclay == 0); attempt++) {
+            box.forEach(pos -> level.setBlock(pos, Blocks.STONE.defaultBlockState(), 2));
+            DepositFeature.INSTANCE.place(small, level, level.getChunkSource().getGenerator(), level.getRandom(), centre.offset(attempt % 3 - 1, 0, attempt / 3 - 1));
+            for (BlockPos pos : box) {
+                siderite += BuiltInRegistries.BLOCK.getKey(level.getBlockState(pos).getBlock()).getPath().equals("siderite_ore") ? 1 : 0;
+                underclay += level.getBlockState(pos).is(Blocks.COAL_ORE)
+                        && BuiltInRegistries.BLOCK.getKey(level.getBlockState(pos.below()).getBlock()).getPath().equals("fireclay") ? 1 : 0;
+            }
         }
         box.forEach(pos -> level.setBlock(pos, Blocks.AIR.defaultBlockState(), 2));
         helper.assertTrue(siderite > 0, "a coal measures bed placed in stone should carry siderite");
+        helper.assertTrue(underclay > 0, "fireclay should lie under the coal seams");
         helper.succeed();
     }
 }
