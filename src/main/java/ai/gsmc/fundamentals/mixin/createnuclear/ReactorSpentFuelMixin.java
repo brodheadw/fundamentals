@@ -22,7 +22,7 @@ public abstract class ReactorSpentFuelMixin {
     @Inject(method = "consume", at = @At("RETURN"))
     private void fundamentals$spentFuel(ReactorInputManagerI inputs, Level level, BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         if (cir.getReturnValueZ() && !level.isClientSide && rodType != null && rodType.type() == RodType.TypeRod.FUEL) {
-            SpentFuel.discharge(inputs.getItemHandlers(level, pos), level, pos);
+            SpentFuel.discharge(level, pos);
         }
     }
 }

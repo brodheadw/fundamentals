@@ -2,6 +2,7 @@ package ai.gsmc.fundamentals.content.nuclear;
 
 import ai.gsmc.fundamentals.uses.Uses;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
@@ -9,11 +10,10 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.event.tick.EntityTickEvent;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
-
-import java.util.List;
 
 /** A burnt-out reactor rod comes back as spent fuel, which only cools under water: the spent fuel pool. */
 public final class SpentFuel {
@@ -24,14 +24,15 @@ public final class SpentFuel {
 
     private SpentFuel() {}
 
-    /** Called by the reactor as it burns a fuel rod: the spent rod goes back where the rods came from, or out on top. */
-    public static void discharge(List<IItemHandler> handlers, Level level, BlockPos controller) {
+    /**
+     * Called by the reactor as it burns a fuel rod. The rod inputs take only fresh rods, so the spent one goes into
+     * whatever container sits on top of the controller, or out loose on top of it.
+     */
+    public static void discharge(Level level, BlockPos controller) {
         ItemStack spent = new ItemStack(Uses.item("spent_fuel_rod"));
-        for (IItemHandler handler : handlers) {
-            spent = ItemHandlerHelper.insertItemStacked(handler, spent, false);
-            if (spent.isEmpty()) return;
-        }
-        Block.popResource(level, controller.above(), spent);
+        IItemHandler above = level.getCapability(Capabilities.ItemHandler.BLOCK, controller.above(), Direction.DOWN);
+        if (above != null) spent = ItemHandlerHelper.insertItemStacked(above, spent, false);
+        if (!spent.isEmpty()) Block.popResource(level, controller.above(), spent);
     }
 
     public static void onEntityTick(EntityTickEvent.Post event) {

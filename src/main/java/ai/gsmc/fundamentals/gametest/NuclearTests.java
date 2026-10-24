@@ -187,4 +187,16 @@ public class NuclearTests {
                 "the reactor's fuel consumption carries the spent-fuel hook");
         helper.succeed();
     }
+
+    @GameTest(template = "empty")
+    public void spentFuelGoesIntoTheChestOnTheController(GameTestHelper helper) {
+        BlockPos caught = new BlockPos(1, 1, 1), loose = new BlockPos(4, 1, 4);
+        helper.setBlock(caught.above(), Blocks.CHEST);
+        ai.gsmc.fundamentals.content.nuclear.SpentFuel.discharge(helper.getLevel(), helper.absolutePos(caught));
+        ai.gsmc.fundamentals.content.nuclear.SpentFuel.discharge(helper.getLevel(), helper.absolutePos(loose));
+        var chest = (net.minecraft.world.level.block.entity.ChestBlockEntity) helper.getBlockEntity(caught.above());
+        helper.assertTrue(chest.getItem(0).is(stack("fundamentals:spent_fuel_rod").getItem()), "a chest on the controller catches the spent rod");
+        helper.assertItemEntityPresent(stack("fundamentals:spent_fuel_rod").getItem(), loose.above(), 1.5);
+        helper.succeed();
+    }
 }

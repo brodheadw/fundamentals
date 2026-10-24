@@ -116,7 +116,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "A burnt fuel rod comes back out of the reactor as spent fuel, into the rod input or onto the controller. It is hotter than the rod it was: the fission products, caesium and strontium among them, are what burn.",
+      "text": "A burnt fuel rod comes back out of the reactor as spent fuel: into a chest or hopper on top of the controller, or loose on top of it. It is hotter than the rod it was: the fission products, caesium and strontium among them, are what burn.",
       "title": "Spent fuel"
     },
     {
