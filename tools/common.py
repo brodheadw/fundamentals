@@ -75,3 +75,25 @@ def vat(path, ingredients, results, machines=("tfmg:mixing",), heat="heated", ti
     if heat:
         recipe["heat_requirement"] = heat
     write(path, recipe)
+
+
+def hide_dead(jar, namespace, candidate):
+    """Hides from the recipe viewer the items of an optional mod that nothing makes once our data stands in for it:
+    no recipe of ours or of its own (unless we override that file) gives them. Writes fundamentals:hidden/<namespace>."""
+    def made(recipe):
+        if any(c.get("type") == "neoforge:false" for c in recipe.get("neoforge:conditions", [])):
+            return set()
+        return {r.get("id", r.get("item")) for r in recipe.get("results", []) + [recipe.get("result") or {}] if isinstance(r, dict)}
+    produced = set()
+    for entry in RESOURCES.glob("data/**/recipe/**/*.json"):
+        produced |= made(json.loads(entry.read_text()))
+    prefix = f"data/{namespace}/recipe/"
+    for entry in jar.namelist():
+        if entry.startswith(prefix) and entry.endswith(".json") and not (RESOURCES / entry).exists():
+            produced |= made(json.loads(jar.read(entry)))
+    items = {f"{namespace}:{Path(e).stem}" for e in jar.namelist() if e.startswith(f"assets/{namespace}/models/item/") and e.endswith(".json")}
+    dead = sorted(i for i in items if candidate(i) and i not in produced)
+    write(DATA / f"tags/item/hidden/{namespace}.json", {"replace": False, "values": [{"id": i, "required": False} for i in dead]})
+    write(RESOURCES / "data/c/tags/item/hidden_from_recipe_viewers.json", {"replace": False, "values": [
+        {"id": f"#fundamentals:hidden/{mod}", "required": False} for mod in ("chemica", "createnuclear")]})
+    return len(dead)
