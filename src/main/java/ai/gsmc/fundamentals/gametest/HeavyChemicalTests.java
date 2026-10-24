@@ -147,7 +147,8 @@ public class HeavyChemicalTests {
         helper.succeed();
     }
 
-    @GameTest(template = "battery", timeoutTicks = 100)
+    // alone in its batch: the blast reached a neighbouring test's crops
+    @GameTest(template = "battery", timeoutTicks = 100, batch = "detonation")
     public void burningAmmoniumNitrateDetonatesOnlyInAMass(GameTestHelper helper) {
         BlockPos mass = new BlockPos(4, 1, 2), few = new BlockPos(20, 1, 2);
         for (BlockPos pos : new BlockPos[] {mass, few}) {
