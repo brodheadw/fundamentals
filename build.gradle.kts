@@ -24,6 +24,7 @@ class Dependencies {
     val principlesMin = property("deps.principles_min").toString()
     val chemicaVersion = property("deps.chemica_version").toString()
     val createNuclearVersion = property("deps.createnuclear_version").toString()
+    val ccTweakedVersion = property("deps.cc_tweaked_version").toString()
 }
 
 class McData {
@@ -61,6 +62,7 @@ repositories {
     maven("https://api.modrinth.com/maven") // Create
     maven("https://maven.createmod.net")         // the libraries Create bundles: Ponder, Flywheel
     maven("https://maven.ithundxr.dev/snapshots") // ...and Registrate
+    maven("https://maven.squiddev.cc") { content { includeGroup("cc.tweaked") } } // the Lua runtime CC:Tweaked bundles
     exclusiveContent {
         // Fundamentals: Principles, from `./gradlew publishToMavenLocal` in its checkout
         forRepository { mavenLocal() }
@@ -92,6 +94,10 @@ dependencies {
     // Create: Nuclear is optional too: tools/build_create_nuclear_compat.py reads this jar, and -Pcreatenuclear runs it alongside.
     modCompileOnly("maven.modrinth:createnuclear:${deps.createNuclearVersion}")
     if (providers.gradleProperty("createnuclear").isPresent) modLocalRuntime("maven.modrinth:createnuclear:${deps.createNuclearVersion}")
+    // CC:Tweaked is optional: computer/FundamentalsPeripherals only loads with it, and the gametests read the blocks through it.
+    modCompileOnly("maven.modrinth:cc-tweaked:${deps.ccTweakedVersion}")
+    modLocalRuntime("maven.modrinth:cc-tweaked:${deps.ccTweakedVersion}")
+    for (bundled in listOf("cc.tweaked:cobalt:0.9.9", "com.jcraft:jzlib:1.1.3")) "forgeRuntimeLibrary"(bundled)
     // Create ships these inside its jar, but a dev run does not unpack them.
     for (bundled in listOf("net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1",
             "dev.engine-room.flywheel:flywheel-neoforge-1.21.1:1.0.6", "com.tterrag.registrate:Registrate:MC1.21-1.3.0+67")) {
