@@ -144,6 +144,8 @@ def magnets():
             write(USES / f"{alloy}_magnet_from_{form}.json", {"type": "tfmg:polarizing", "ingredients": tag(f"c:{form}s/{alloy}"),
                                                               "results": [{"id": f"fundamentals:{alloy}_magnet"}]})
     disabled(TFMG / "polarizing/magnet.json")
+    # Nothing makes the Factory's own magnet now; one already in a world still rebuilds a machine as Dy-NdFeB.
+    tag_file(DATA / "tags/item/hidden/tfmg.json", [{"id": "tfmg:magnet", "required": False}])
     tag_file(DATA / "tags/item/magnets.json", [f"fundamentals:{alloy}_magnet" for alloy in MAGNET_ALLOYS] + ["tfmg:magnet"])
     tag_file(DATA / "tags/item/magnet_machines.json", [f"tfmg:{machine}" for machine in MAGNET_MACHINES])
     write(USES / "magnet_rebuild.json", {"type": "fundamentals:magnet_rebuild", "category": "misc"})
@@ -163,8 +165,6 @@ def magnets():
             disabled(TFMG / f"{path}.json")
             for alloy in MAGNET_ALLOYS:
                 magnet = {"item": f"fundamentals:{alloy}_magnet"}
-                if alloy == "dysprosium_neodymium_iron_boron":
-                    magnet = [magnet, {"item": "tfmg:magnet"}]
                 charge = {"fundamentals:magnet": {"grade": alloy}}
                 graded = json.loads(json.dumps(recipe))
                 if graded["type"] == "create:sequenced_assembly":
@@ -328,6 +328,8 @@ def iron():
 BLAST_FURNACE = {"steel": ("crushed_iron", item("create:crushed_raw_iron"), 1), "steel_from_raw_iron": ("raw_iron", item("minecraft:raw_iron"), 2),
                  "steel_from_dust": ("iron_dust", tag("c:dusts/iron"), 1)}
 PIG_IRON_PER_ORE = 216
+# Iron dust is a ground ingot, not ore: it melts back to an ingot's worth, which puddles with its fettling to no more iron than went in.
+PIG_IRON_PER_INGOT = 144
 CONVERTER = {"pig_iron": 288, "air": 500, "steel": 252, "slag": 72, "gas": 100}
 PUDDLED = 3
 
@@ -339,7 +341,7 @@ def steel():
         disabled(TFMG / f"industrial_blasting/{theirs}.json")
         write(USES / f"pig_iron_from_{name}.json", {
             "type": "tfmg:industrial_blasting", "hot_air_usage": 20 * lumps, "processing_time": 20 * lumps, "ingredients": ore + tag("tfmg:flux"),
-            "results": [result_fluid("molten_pig_iron", PIG_IRON_PER_ORE * lumps), result_fluid("tfmg:molten_slag", 144 * lumps),
+            "results": [result_fluid("molten_pig_iron", (PIG_IRON_PER_INGOT if name == "iron_dust" else PIG_IRON_PER_ORE) * lumps), result_fluid("tfmg:molten_slag", 144 * lumps),
                         result_fluid("tfmg:furnace_gas", 200 * lumps)]})
     write(USES / "cast_iron_from_pig_iron.json", {"type": "tfmg:casting", "ingredients": [fluid("molten_pig_iron", 144)], "processing_time": 200,
                                                   "results": [{"id": "tfmg:cast_iron_ingot"}]})
@@ -359,6 +361,13 @@ def steel():
     write(USES / "shingling_by_hand.json", {"type": "minecraft:crafting_shapeless", "category": "misc",
                                             "ingredients": item("puddle_ball") + item("smithing_hammer"),
                                             "result": {"id": "minecraft:iron_ingot", "count": PUDDLED}})
+    # Bloom and puddle ball are both shingled under the hammer: every iron ingot here is wrought iron, which Twilight Forest's fence and candelabra take.
+    write(DATA.parent / "c/tags/item/ingots/wrought_iron.json", {"replace": False, "values": ["minecraft:iron_ingot"]})
+    # Its fence was six ingots in two rows, which is iron bars now that an iron ingot is wrought iron.
+    write(DATA.parent / "twilightforest/recipe/wrought_iron_fence.json", {
+        "neoforge:conditions": [{"type": "neoforge:mod_loaded", "modid": "twilightforest"}], "type": "minecraft:crafting_shaped", "category": "misc",
+        "pattern": ["#|#", "#|#"], "key": {"#": {"tag": "c:ingots/wrought_iron"}, "|": {"item": "minecraft:iron_bars"}},
+        "result": {"id": "twilightforest:wrought_iron_fence", "count": 3}})
 
 
 def zinc():
@@ -432,9 +441,12 @@ def tfmg_ores():
 
 
 def rocks():
-    for rock, ore, chance in (("crimsite", "hematite", 0.4), ("asurine", "smithsonite", 0.3)):
-        crushing(rock, {"item": f"create:{rock}"}, [{"id": f"fundamentals:raw_{ore}", "chance": chance}])
-        crushing(f"{rock}_recycling", {"tag": f"create:stone_types/{rock}"}, [{"id": f"fundamentals:raw_{ore}", "chance": chance}])
+    ores = {"crimsite": [("fundamentals:raw_hematite", 0.4)], "asurine": [("fundamentals:raw_smithsonite", 0.3)],
+            "ochrum": [("minecraft:raw_gold", 0.2)], "veridium": [("fundamentals:raw_chalcopyrite", 0.4), ("fundamentals:raw_malachite", 0.4)]}
+    for rock, yields in ores.items():
+        results = [{"id": ore, "chance": chance} for ore, chance in yields]
+        crushing(rock, {"item": f"create:{rock}"}, results)
+        crushing(f"{rock}_recycling", {"tag": f"create:stone_types/{rock}"}, results)
     for name, ingredient in (("tuff", {"item": "minecraft:tuff"}), ("tuff_recycling", {"tag": "create:stone_types/tuff"})):
         crushing(name, ingredient, [{"id": "minecraft:flint", "chance": 0.25}], 350)
     write(CREATE / "crushing/galena.json", {"type": "create:crushing", "ingredients": [{"item": "tfmg:galena"}],
@@ -800,6 +812,8 @@ def graphite():
     write(USES / "graphite_acheson.json", {**ARC, "ingredients": item("tfmg:coal_coke", 2), "results": [result("graphite", 2)]})
     write(USES / "graphite_electrode.json", {"type": "create:compacting", "heat_requirement": "heated",
                                              "ingredients": item("graphite", 4) + [fluid("tfmg:creosote", 100)], "results": [result("tfmg:graphite_electrode")]})
+    # A coke block is not an electrode: one is pressed from graphite.
+    disabled(TFMG / "graphite_electrode_from_storage_blocks_coal_coke_stonecutting.json")
     write(DATA.parent / "c/tags/item/dusts/graphite.json", {"replace": False, "values": ["fundamentals:graphite"] + optional(["chemica:purified_graphite_flakes"])})
 
 
@@ -847,6 +861,14 @@ def gold():
     mixing("electrum_from_amalgam", item("gold_amalgam"), [result("electrum_ingot"), {"id": "fundamentals:mercury", "chance": 0.45}], "heated")
     mixing("gold_from_electrum", item("electrum_ingot") + [fluid("chlorine", 250)], [result("minecraft:gold_ingot"), result("silver_nugget")], "superheated")
     mixing("gold_from_electrum_in_aqua_regia", item("electrum_ingot") + [fluid("aqua_regia", 500)], [result("minecraft:gold_ingot"), result("silver_nugget")], "heated")
+    # Native gold carries its silver: melted, raw or crushed, it is electrum, and only parting makes it gold.
+    for kind, time in (("smelting", 200), ("blasting", 100)):
+        for path, feed in ((DATA.parent / f"minecraft/recipe/gold_ingot_from_{kind}_raw_gold.json", "minecraft:raw_gold"),
+                           (CREATE / f"{kind}/gold_ingot_from_crushed.json", "create:crushed_raw_gold")):
+            write(path, {"type": f"minecraft:{kind}", "category": "misc", "cookingtime": time, "experience": 0.7,
+                         "ingredient": {"item": feed}, "result": result("electrum_ingot")})
+    write(CREATE / "splashing/crushed_raw_gold.json", {"type": "create:splashing", "ingredients": item("create:crushed_raw_gold"),
+                                                       "results": [result("minecraft:gold_nugget", 3)]})
     for block in ("gold_ore", "deepslate_gold_ore"):
         (VANILLA_LOOT / f"{block}.json").unlink(missing_ok=True)
     for block, mineral in (("iron_ore", "hematite"), ("deepslate_iron_ore", "magnetite")):

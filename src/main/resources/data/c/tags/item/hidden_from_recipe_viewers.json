@@ -8,6 +8,10 @@
     {
       "id": "#fundamentals:hidden/createnuclear",
       "required": false
+    },
+    {
+      "id": "#fundamentals:hidden/tfmg",
+      "required": false
     }
   ]
 }

@@ -8,14 +8,9 @@
     "C": {
       "item": "minecraft:compass"
     },
-    "M": [
-      {
-        "item": "fundamentals:dysprosium_neodymium_iron_boron_magnet"
-      },
-      {
-        "item": "tfmg:magnet"
-      }
-    ],
+    "M": {
+      "item": "fundamentals:dysprosium_neodymium_iron_boron_magnet"
+    },
     "N": {
       "tag": "c:nuggets/steel"
     }

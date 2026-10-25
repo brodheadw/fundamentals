@@ -14,6 +14,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
@@ -132,9 +134,27 @@ public class MineralTests {
         step(helper, "fundamentals:uses/gold_amalgam", "minecraft:raw_gold", "fundamentals:gold_amalgam");
         helper.assertTrue(takes(processing(helper, "fundamentals:uses/gold_amalgam"), "fundamentals:mercury"), "amalgamation takes mercury");
         step(helper, "fundamentals:uses/electrum_from_amalgam", "fundamentals:gold_amalgam", "fundamentals:electrum_ingot");
+        for (var type : List.of(RecipeType.SMELTING, RecipeType.BLASTING)) {
+            for (String feed : new String[] {"minecraft:raw_gold", "create:crushed_raw_gold"}) {
+                ItemStack melted = helper.getLevel().getRecipeManager().getRecipeFor(type, new SingleRecipeInput(stack(feed)), helper.getLevel())
+                        .map(holder -> holder.value().getResultItem(helper.getLevel().registryAccess())).orElse(ItemStack.EMPTY);
+                helper.assertTrue(melted.is(stack("fundamentals:electrum_ingot").getItem()), feed + " should melt to electrum, not gold, got " + melted);
+            }
+        }
         var miller = processing(helper, "fundamentals:uses/gold_from_electrum");
         helper.assertTrue(takes(miller, "fundamentals:electrum_ingot") && takesFluid(miller, "fundamentals:chlorine") && gives(miller, "minecraft:gold_ingot")
                 && gives(miller, "fundamentals:silver_nugget"), "chlorine should part electrum to gold and silver");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void crushingLiberatesAndDoesNotMultiply(GameTestHelper helper) {
+        for (String ore : new String[] {"deepslate_iron_ore", "zinc_ore", "aluminum_ore"}) {
+            double crushed = processing(helper, "create:crushing/" + ore).getRollableResults().stream()
+                    .filter(r -> BuiltInRegistries.ITEM.getKey(r.getStack().getItem()).getPath().startsWith("crushed_raw_"))
+                    .mapToDouble(r -> r.getStack().getCount() * r.getChance()).sum();
+            helper.assertTrue(crushed == 1, ore + " should crush to one crushed ore, got " + crushed);
+        }
         helper.succeed();
     }
 

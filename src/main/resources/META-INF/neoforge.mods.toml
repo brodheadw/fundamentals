@@ -73,6 +73,22 @@ versionRange = "*"
 ordering = "AFTER"
 side = "BOTH"
 
+# Optional: after it, so our crushed-gold wash replaces the one it gives Create.
+[[dependencies.${id}]]
+modId = "createpropulsion"
+type = "optional"
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"
+
+# Optional: after it, so our wrought iron fence recipe replaces its own.
+[[dependencies.${id}]]
+modId = "twilightforest"
+type = "optional"
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"
+
 # Optional: with it, computers read our gauges, cells and settlers; see computer/FundamentalsPeripherals.
 [[dependencies.${id}]]
 modId = "computercraft"

@@ -34,14 +34,9 @@
         {
           "item": "tfmg:unfinished_generator"
         },
-        [
-          {
-            "item": "fundamentals:dysprosium_neodymium_iron_boron_magnet"
-          },
-          {
-            "item": "tfmg:magnet"
-          }
-        ]
+        {
+          "item": "fundamentals:dysprosium_neodymium_iron_boron_magnet"
+        }
       ],
       "results": [
         {
