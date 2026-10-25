@@ -52,6 +52,9 @@ END_PRODUCTS = {
     "fundamentals:zircaloy_tube": "Fuel cladding for Create: Nuclear's rods; without it the pack has no reactor.",
     "fundamentals:thorium_dioxide": "Thoria for Create: Nuclear's thorium rod; without it the pack has no reactor.",
     "fundamentals:boron_carbide": "The absorber of Create: Nuclear's control rod; without it the pack has no reactor.",
+    "fundamentals:silica_hydrogel": "Dried to an aerogel blanket only with Chemica's ethanol; without it the gel goes no further.",
+    **{f"fundamentals:{tier}_{piece}": "Worn: a parka against Cold Sweat's cold." for tier in ("fur", "down", "synthetic", "expedition")
+       for piece in ("hood", "parka", "trousers", "boots")},
 }
 # Used from the hand or a dispenser, not in a recipe.
 EQUIPMENT = {"fundamentals:argon_canister", "fundamentals:photovoltaic_panel", "fundamentals:npk_fertiliser"}

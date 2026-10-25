@@ -6,6 +6,10 @@
       "required": false
     },
     {
+      "id": "#fundamentals:hidden/cold_sweat",
+      "required": false
+    },
+    {
       "id": "#fundamentals:hidden/createnuclear",
       "required": false
     },

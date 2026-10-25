@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "I I",
+    "S S"
+  ],
+  "key": {
+    "S": {
+      "item": "fundamentals:eptfe_laminate"
+    },
+    "I": {
+      "item": "fundamentals:aerogel_blanket"
+    }
+  },
+  "result": {
+    "id": "fundamentals:expedition_boots"
+  }
+}

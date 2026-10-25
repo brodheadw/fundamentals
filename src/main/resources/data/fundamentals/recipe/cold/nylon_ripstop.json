@@ -1,0 +1,19 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "chemica:nylon_ingot"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:nylon_ripstop",
+    "count": 2
+  }
+}
