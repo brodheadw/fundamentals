@@ -2,6 +2,7 @@ package ai.gsmc.fundamentals.computer;
 
 import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.air.BarometerBlockEntity;
+import ai.gsmc.fundamentals.air.FieldMillBlockEntity;
 import ai.gsmc.fundamentals.heat.ThermometerBlockEntity;
 import ai.gsmc.fundamentals.ironworking.BloomeryBlockEntity;
 import ai.gsmc.fundamentals.oxidation.InertDrumBlockEntity;
@@ -50,6 +51,17 @@ public final class FundamentalsPeripherals implements GenericPeripheral {
     @LuaFunction(mainThread = true)
     public final double getPressure(BarometerBlockEntity barometer) {
         return barometer.hectopascals();
+    }
+
+    /** The air's electric field in volts per metre. */
+    @LuaFunction(mainThread = true)
+    public final double getField(FieldMillBlockEntity mill) {
+        return mill.voltsPerMetre();
+    }
+
+    @LuaFunction(mainThread = true)
+    public final int getSignal(FieldMillBlockEntity mill) {
+        return mill.signal();
     }
 
     /** Hectopascals per in-game hour over the readings the barometer holds; falling ahead of rain. */

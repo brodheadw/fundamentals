@@ -502,6 +502,16 @@ def rare_earths():
         "The barograph is Vidie's aneroid capsule of 1844 inking a clockwork drum. It keeps an hour of its own readings, its goggles say which way the glass is going and how fast, and its comparator gives a storm warning: "
         "nothing in steady weather, rising to 15 as the fall nears 4 hPa an hour.")
         + [{"type": "patchouli:crafting", "recipe": "fundamentals:barometers/mercury_barometer", "recipe2": "fundamentals:barometers/barograph"}], 15)
+    entry("rare_earths", "field_mill", "The Air's Electric Field", "fundamentals:field_mill", pages_of(
+        "The air carries an electric field even on a still day: about 130 volts a metre at the ground under a clear sky, the earth negative and the sky positive. "
+        "Rain lifts it to a kilovolt a metre and a thunderstorm to ten. A roof or a cave screens it entirely. A field mill reads it: an earthed brass vane turns over a pair of sense plates, "
+        "alternately shading and baring them, and the current the field drives on and off them is amplified by an electron tube.", "The Air's Electric Field") + pages_of(
+        "Dust storms are more strongly electrified than thunderstorms. Grains striking one another trade charge, the small ones coming away negative, and the field across a storm reaches "
+        "tens of kilovolts a metre. That field is not a by-product: Kok and Renno showed in 2008 that it lifts grains off the ground, so a charged storm carries far more sand than wind alone could. "
+        "A field mill that reads a storm with no thunder overhead has found the sand's own charge.") + pages_of(
+        "So a dust storm can be quieted where its field is drained. Earth the air around a place and the sand loses the force that holds it up. "
+        "Its comparator rises on a logarithmic scale, from nothing in fair weather to 15 at fifty kilovolts a metre.")
+        + [{"type": "patchouli:crafting", "recipe": "fundamentals:barometers/field_mill"}], 15)
     entry("rare_earths", "computers", "Computers", "fundamentals:barograph", pages_of(
         "With CC:Tweaked installed, a computer or wired modem beside a gauge reads it as a peripheral. Thermometers give getTemperature, getKind and getSignal; barometers getPressure and getTendency, hectopascals an hour. "
         "Any of The Factory's electrical blocks, the solar panel among them, reads like a multimeter: getVoltage, getCurrent, getPowerUsage, getPowerGeneration, the network's usage and generation, and isPowered.", "Computers") + pages_of(

@@ -67,7 +67,8 @@ def weather(angle):
     return next(colour for limit, colour in WEATHER if hectopascals < limit)
 
 
-def barometer_dial(mark):
+def barometer_dial(mark, band=None):
+    band = band or weather
     img = Image.new("RGBA", (32, 32))
     for y in range(32):
         for x in range(32):
@@ -77,7 +78,7 @@ def barometer_dial(mark):
             elif r > 9.3:
                 colour = shade(FACE, 0.72)
             elif r > 7.3 and abs(a) <= SWEEP / 2 + 2:
-                colour = shade(weather(max(-SWEEP / 2, min(SWEEP / 2, a))), 1.1 if r > 8.3 else 0.9)
+                colour = shade(band(max(-SWEEP / 2, min(SWEEP / 2, a))), 1.1 if r > 8.3 else 0.9)
             else:
                 colour = FACE
             img.putpixel((x, y), colour + (255,))
@@ -104,6 +105,26 @@ def chart(img):
 
 
 BAROMETERS = {"mercury_barometer": siphon, "barograph": chart}
+
+
+# A field mill's band runs logarithmically from fair weather (130 V/m) to a violent dust storm (50 kV/m):
+# fair, rain, thunder, then the sand-coloured reach only a charged dust storm gets to.
+FIELD = [(1000, (150, 150, 146)), (10000, (72, 112, 172)), (20000, (110, 70, 160)), (10 ** 9, (214, 160, 72))]
+
+
+def field(angle):
+    volts = 130 * (50000 / 130) ** ((angle + SWEEP / 2) / SWEEP)
+    return next(colour for limit, colour in FIELD if volts < limit)
+
+
+def rotor(img):
+    # the mill's earthed vane: four brass blades turning over the sense plates beneath
+    brass = (214, 168, 70)
+    for x, y in ((16, 19), (15, 20), (16, 20), (17, 20), (16, 21), (13, 20), (14, 20), (18, 20), (19, 20),
+                 (16, 17), (16, 18), (16, 22), (16, 23)):
+        img.putpixel((x, y), (shade(brass, 0.75) if (x + y) % 2 else brass) + (255,))
+    for x in range(12, 21):
+        img.putpixel((x, 24), INK + (255,))
 
 
 def tube(img, dark, light, bulb):
@@ -177,7 +198,8 @@ def main():
         dial(name).save(OUT / f"{name}_dial.png")
     for name, mark in BAROMETERS.items():
         barometer_dial(mark).save(OUT / f"{name}_dial.png")
-    print(f"wrote {len(GAUGES)} thermometer dials and {len(BAROMETERS)} barometer dials")
+    barometer_dial(rotor, field).save(OUT / "field_mill_dial.png")
+    print(f"wrote {len(GAUGES)} thermometer dials, {len(BAROMETERS)} barometer dials and a field mill dial")
 
 
 if __name__ == "__main__":

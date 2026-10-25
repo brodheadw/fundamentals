@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " U ",
+    "BLB",
+    " A "
+  ],
+  "key": {
+    "U": {
+      "tag": "c:plates/brass"
+    },
+    "L": {
+      "item": "create:electron_tube"
+    },
+    "B": {
+      "tag": "c:wires/copper"
+    },
+    "A": {
+      "item": "create:andesite_casing"
+    }
+  },
+  "result": {
+    "id": "fundamentals:field_mill",
+    "count": 1
+  }
+}

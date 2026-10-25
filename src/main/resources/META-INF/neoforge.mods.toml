@@ -78,5 +78,6 @@ side = "BOTH"
 modId = "computercraft"
 type = "optional"
 versionRange = "*"
-ordering = "NONE"
+# after CC:Tweaked, so the fab's computer recipes override its own
+ordering = "AFTER"
 side = "BOTH"

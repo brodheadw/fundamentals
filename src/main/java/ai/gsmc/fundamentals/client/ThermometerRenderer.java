@@ -31,6 +31,7 @@ public class ThermometerRenderer<T extends BlockEntity & Dial> implements BlockE
                 event -> {
                     event.registerBlockEntityRenderer(Thermometers.entity(), context -> new ThermometerRenderer<>());
                     event.registerBlockEntityRenderer(Barometers.entity(), context -> new ThermometerRenderer<>());
+                    event.registerBlockEntityRenderer(ai.gsmc.fundamentals.air.FieldMill.entity(), context -> new ThermometerRenderer<>());
                 });
     }
 
