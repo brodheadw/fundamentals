@@ -58,9 +58,9 @@ Every second output of a recipe (and the waste the separation plant makes in cod
 | Ruthenium Tetroxide (`fundamentals:ruthenium_tetroxide`) | `platinum/tetroxides` | `platinum/ammonium_chlororuthenate` | The tetroxide distillation is how ruthenium is parted from the rest. |
 | Salt (`fundamentals:salt`) | `uses/potash` | `mixing/heavy_rare_earth_liquor_from_clay`, `mixing/hydrochloric_acid`, `platinum/iridium_rhodium_liquor`, `uses/salt_brine` and 2 more | Sylvinite is sylvite and halite together; the hot leach takes the potassium chloride and leaves the salt, which Saskatchewan's mills stack or pump back underground. |
 | Silicon Tetrachloride (`fundamentals:silicon_tetrachloride`) | `uses/polysilicon`, `uses/trichlorosilane` | `uses/crude_trichlorosilane_from_tetrachloride` | Silicon tetrachloride is hydrogenated back to trichlorosilane over silicon, as every modern Siemens plant closes its loop; the rest of the world's is burnt to fumed silica. |
-| Silver Nugget (`fundamentals:silver_nugget`) | `uses/gold_from_electrum`, `uses/gold_from_electrum_in_aqua_regia` | `oxidation/polishing/silver_nugget`, `packing/silver_ingot`, `photovoltaic_panel`, `uses/ethylene_carbonate` and 1 more | Native gold always carries silver; Miller chlorination and aqua regia part it as silver chloride, which is reduced to silver. |
+| Silver Nugget (`fundamentals:silver_nugget`) | `uses/gold_from_electrum`, `uses/gold_from_electrum_in_aqua_regia` | `cold/polyester_fibre`, `oxidation/polishing/silver_nugget`, `packing/silver_ingot`, `photovoltaic_panel` and 2 more | Native gold always carries silver; Miller chlorination and aqua regia part it as silver chloride, which is reduced to silver. |
 | Silver-Zinc Crust (`fundamentals:silver_zinc_crust`) | `uses/parkes_desilvering` | `uses/cupellation_of_crust` | The Parkes crust is retorted and cupelled for its silver. |
-| Soda Ash (`fundamentals:soda_ash`) | `uses/chromium_oxide` | `lithium/lithium_carbonate`, `mixing/heavy_rare_earth_carbonate`, `mixing/light_rare_earth_carbonate`, `uses/antimony_ingot` and 6 more | The dichromate reduction gives the sodium back as carbonate. |
+| Soda Ash (`fundamentals:soda_ash`) | `uses/chromium_oxide` | `cold/sodium_silicate`, `lithium/lithium_carbonate`, `mixing/heavy_rare_earth_carbonate`, `mixing/light_rare_earth_carbonate` and 7 more | The dichromate reduction gives the sodium back as carbonate. |
 | Spent Acid (`fundamentals:spent_acid`) | `arms/nitrocellulose`, `uses/alkylate` | `uses/sulfur_dioxide_from_spent_acid` | Alkylation's catalyst acid, diluted to about 90% by water and acid-soluble oils, goes to a regeneration plant that cracks it to sulfur dioxide at 1,000 °C and makes fresh acid of it. |
 | Spent Bayer Liquor (`fundamentals:spent_bayer_liquor`) | `uses/aluminium_hydroxide` | `uses/sodium_aluminate_liquor_from_spent_liquor`, `uses/sodium_gallate_liquor` | The precipitators' spent liquor goes back to the digester, as every Bayer refinery recycles its caustic, and its gallium is taken out on the way. |
 | Spent Fuel Rod (`fundamentals:spent_fuel_rod`) | Create: Nuclear's reactor, as each fuel rod burns out, on top of its controller | a spent fuel pool: a day under water cools it (content.nuclear.SpentFuel) | Spent fuel sits years in a pool while its fission products decay, then is reprocessed (France, Japan) or cased for burial (Finland). |
@@ -78,8 +78,8 @@ Every second output of a recipe (and the waste the separation plant makes in cod
 | `minecraft:cobblestone` | `crushing/zinc_ore` | everything that takes cobblestone | Crushing frees the ore from its host rock, and the gangue goes to the waste dump or the road. |
 | `minecraft:copper_ingot` | `platinum/nickel_electrowinning`, `uses/nickel_electrowinning_from_raffinate` | `oxidation/polishing/copper_ingot`, `uses/galvanic_cell`; everything that takes copper | Copper co-deposited with nickel at the cathode is a sellable metal. |
 | `minecraft:iron_nugget` | `uses/gravel_from_slag` | `oxidation/polishing/iron_nugget`; nine craft to an iron ingot | Crushed slag is passed under a magnet to pull out its metallic iron prills. |
-| `minecraft:water` | `mixing/salt` | `arms/black_powder_mill_cake`, `arms/smokeless_powder_schultze`, `compute/advanced_processor_wafer`, `compute/memory_wafer` and 33 more | Brine boiled for salt gives its water off as condensate. |
-| `tfmg:carbon_dioxide` | `lithium/lithium_chloride`, `solvents/hydrogen`, `uses/aluminium_ingot` and 9 more | `uses/ethylene_carbonate`, `uses/urea`; The Factory Must Grow's carbon dioxide tank and fire extinguisher | Carbon dioxide from the anode, the soda reactions and the cement kiln, where limestone's own carbon is about half the kiln's CO2; real plants mostly vent it, but an ammonia plant turns its own into urea. |
+| `minecraft:water` | `mixing/salt` | `arms/black_powder_mill_cake`, `arms/smokeless_powder_schultze`, `cold/polyester_fibre`, `cold/silica_hydrogel` and 35 more | Brine boiled for salt gives its water off as condensate. |
+| `tfmg:carbon_dioxide` | `cold/sodium_silicate`, `lithium/lithium_chloride`, `solvents/hydrogen` and 10 more | `uses/ethylene_carbonate`, `uses/urea`; The Factory Must Grow's carbon dioxide tank and fire extinguisher | Carbon dioxide from the anode, the soda reactions and the cement kiln, where limestone's own carbon is about half the kiln's CO2; real plants mostly vent it, but an ammonia plant turns its own into urea. |
 | `tfmg:cast_iron_ingot` | `uses/titania_slag` | `uses/puddling`; The Factory Must Grow's cast iron parts | The Sorel slag furnace's iron is sold as high-purity pig iron. |
 | `tfmg:coal_coke_dust` | `uses/fluid_catalytic_cracking` | `uses/boron_carbide`; The Factory Must Grow's coke uses | Coke burnt onto a cracking catalyst is burnt off in the regenerator. |
 | `tfmg:furnace_gas` | `uses/bessemer_steel`, `uses/pig_iron_from_crushed_iron`, `uses/pig_iron_from_iron_dust` and 1 more | The Factory Must Grow's blast stove, which burns it to heat the blast | Blast furnace and converter gas is a fifth carbon monoxide; works burn it in the Cowper stoves that heat the blast. |
@@ -87,7 +87,7 @@ Every second output of a recipe (and the waste the separation plant makes in cod
 | `tfmg:molten_slag` | `uses/bessemer_steel`, `uses/pig_iron_from_crushed_iron`, `uses/pig_iron_from_iron_dust` and 1 more | The Factory Must Grow's casting basin, which casts it to slag blocks | Lime-silicate slag runs off the iron and is granulated for slag cement or cast and crushed for road stone. |
 | `tfmg:propylene` | `uses/fluid_catalytic_cracking` | `solvents/ethylhexanol`, `vat_machine_recipe/plastic_from_propylene`; The Factory Must Grow's plastics | A fluid catalytic cracker is the world's second source of propylene. |
 | `tfmg:slag` | `bloomery/copper_from_azurite`, `bloomery/copper_from_cuprite`, `bloomery/copper_from_malachite` and 26 more | `bloomery/iron_from_slag`, `uses/gravel_from_slag`, `uses/slag_cement`; The Factory Must Grow's concrete and asphalt mixtures | Silicate slag is crushed for aggregate and cement (slag cement), and old bloomery slag, near two-thirds iron oxide, was re-smelted for its iron. |
-| `tfmg:sulfuric_acid` | `platinum/nickel_electrowinning`, `uses/nickel_electrowinning_from_raffinate`, `uses/zinc_electrowinning` | `arms/nitrocellulose`, `lithium/lithium_sulfate_liquor`, `mixing/europium_sulfate`, `mixing/heavy_rare_earth_sulfate` and 29 more; everything that takes sulfuric acid | Electrowinning regenerates the sulfuric acid at the anode. |
+| `tfmg:sulfuric_acid` | `platinum/nickel_electrowinning`, `uses/nickel_electrowinning_from_raffinate`, `uses/zinc_electrowinning` | `arms/nitrocellulose`, `cold/silica_hydrogel`, `lithium/lithium_sulfate_liquor`, `mixing/europium_sulfate` and 30 more; everything that takes sulfuric acid | Electrowinning regenerates the sulfuric acid at the anode. |
 
 ## Tailings
 
@@ -102,7 +102,24 @@ Not byproducts, but the only other items the recipes make that no recipe takes:
 | Boron Carbide (`fundamentals:boron_carbide`) | The absorber of Create: Nuclear's control rod; without it the pack has no reactor. |
 | Depleted Uranium Oxide (`fundamentals:depleted_uranium_oxide`) | Depleted uranium is kept as U3O8, the stable oxide, as the American deconversion plants keep theirs; its metal's uses, counterweights and armour, are not in the pack. Burn it in lava. |
 | Didymium Glass (`fundamentals:didymium_glass`) | The glassblower's and welder's lens; Create's goggles take plain glass, being the first tool a factory needs. |
+| Down Booties (`fundamentals:down_boots`) | Worn: a parka against Cold Sweat's cold. |
+| Down Hood (`fundamentals:down_hood`) | Worn: a parka against Cold Sweat's cold. |
+| Down Parka (`fundamentals:down_parka`) | Worn: a parka against Cold Sweat's cold. |
+| Down Trousers (`fundamentals:down_trousers`) | Worn: a parka against Cold Sweat's cold. |
+| Expedition Boots (`fundamentals:expedition_boots`) | Worn: a parka against Cold Sweat's cold. |
+| Expedition Hood (`fundamentals:expedition_hood`) | Worn: a parka against Cold Sweat's cold. |
+| Expedition Parka (`fundamentals:expedition_parka`) | Worn: a parka against Cold Sweat's cold. |
+| Expedition Salopettes (`fundamentals:expedition_trousers`) | Worn: a parka against Cold Sweat's cold. |
+| Fur Kamiks (`fundamentals:fur_boots`) | Worn: a parka against Cold Sweat's cold. |
+| Fur Hood (`fundamentals:fur_hood`) | Worn: a parka against Cold Sweat's cold. |
+| Fur Parka (`fundamentals:fur_parka`) | Worn: a parka against Cold Sweat's cold. |
+| Fur Trousers (`fundamentals:fur_trousers`) | Worn: a parka against Cold Sweat's cold. |
 | Lutetium Oxide (`fundamentals:lutetium_oxide`) | Lutetium is sold as oxide for the scintillator crystals of PET scanners, not in the pack. |
+| Silica Hydrogel (`fundamentals:silica_hydrogel`) | Dried to an aerogel blanket only with Chemica's ethanol; without it the gel goes no further. |
+| Synthetic Booties (`fundamentals:synthetic_boots`) | Worn: a parka against Cold Sweat's cold. |
+| Synthetic Hood (`fundamentals:synthetic_hood`) | Worn: a parka against Cold Sweat's cold. |
+| Synthetic Parka (`fundamentals:synthetic_parka`) | Worn: a parka against Cold Sweat's cold. |
+| Synthetic Trousers (`fundamentals:synthetic_trousers`) | Worn: a parka against Cold Sweat's cold. |
 | Thorium Dioxide (`fundamentals:thorium_dioxide`) | Thoria for Create: Nuclear's thorium rod; without it the pack has no reactor. |
 | Thulium Oxide (`fundamentals:thulium_oxide`) | Thulium is sold as oxide for portable X-ray sources and fibre lasers, neither in the pack. |
 | Uranium Fuel Pellet (`fundamentals:uranium_fuel_pellet`) | Fuel for Create: Nuclear's uranium and thorium rods; without it the pack has no reactor. |

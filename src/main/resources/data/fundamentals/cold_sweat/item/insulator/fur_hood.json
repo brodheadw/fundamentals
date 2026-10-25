@@ -1,0 +1,12 @@
+{
+  "type": "armor",
+  "item": {
+    "items": [
+      "fundamentals:fur_hood"
+    ]
+  },
+  "insulation": {
+    "cold": 13.0,
+    "heat": 0.0
+  }
+}

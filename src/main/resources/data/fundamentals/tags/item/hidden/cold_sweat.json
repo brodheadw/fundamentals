@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "cold_sweat:thermometer",
+      "required": false
+    }
+  ]
+}

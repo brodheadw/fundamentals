@@ -1,0 +1,12 @@
+{
+  "type": "armor",
+  "item": {
+    "items": [
+      "fundamentals:synthetic_trousers"
+    ]
+  },
+  "insulation": {
+    "cold": 18.8,
+    "heat": 0.0
+  }
+}

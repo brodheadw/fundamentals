@@ -9,6 +9,7 @@ from build_separation_data import CURIE, MOMENTS, TITANIUM_PIPEWORK, ZINC_REDUCT
 from build_oxidation_data import METALS as AGEING, PACE
 from build_heat_data import REFERENCES, liquids
 from build_uses_data import CONVERTER, PIG_IRON_PER_ORE, PUDDLED
+from build_cold_data import GOAT, LEATHER, TIERS as PARKAS, WET_IMMUNITY
 
 BOOK = "first_principles"
 BOOK_DATA = DATA / f"patchouli_books/{BOOK}"
@@ -1376,6 +1377,31 @@ def book():
         "result": {"id": "patchouli:guide_book", "components": {"patchouli:book": f"fundamentals:{BOOK}"}}})
 
 
+def cold():
+    """Parkas and Cold Sweat. Its book entries are here because main() wipes the book before writing it."""
+    n = {tier: spec["cold"] for tier, spec in PARKAS.items()}
+    entry("plastics", "cold", "Cold and parkas", "fundamentals:expedition_parka", pages_of(
+        "With Cold Sweat installed, the temperature it gives the world where you stand is this book's: the climate, the day and the weather, and every fire, furnace, lava pool and hot wire in reach, the same number /heat and a thermometer read. "
+        "Its own guesses from biome, height, shade, caves and blocks are switched off so nothing counts twice; its hearths, water and items still act. "
+        "Its thermometer is gone: one of ours in the hotbar shows its gauge.", "Cold") + pages_of(
+        "What keeps you warm is still air. Air conducts 0.026 W per metre-kelvin; clothing's job is to hold a thick layer of it still, so warmth goes with loft, the thickness a garment traps, more than with what the fibres are made of. "
+        "Physiologists count it in clo: one clo, 0.155 m²K/W, keeps a resting person comfortable at 21 °C in an office suit; arctic expedition clothing is four to eight. "
+        f"Cold Sweat counts insulation so that every 40 makes the body follow the world's temperature ten times slower; its leather set is {LEATHER} and its goat-fur set {GOAT}, and here about 13 is a clo.") + pages_of(
+        f"Fur, {n['fur']}. The Inuit caribou suit was two layers, the inner with the hair turned in, the outer with it out, about four and a half clo for the weight of a modern down jacket, and caribou hair is hollow, so it holds air inside each hair. "
+        "A deer's hide (Naturalist's deer drop it in place of leather) is the shell and Cold Sweat's goat fur the lining; the hood is ruffed, for a fur ruff breaks the wind across the face.", "Four parkas") + pages_of(
+        f"Down, {n['down']}. Down is the cluster of fine filaments under a bird's feathers, not the feather; washed and blown, a feather gives one about a third of the time. "
+        "No fibre traps more still air for its weight, so down is the warmest dry, in waxed canvas (three string and a honeycomb make two). But wet down clumps and its loft collapses: soaked through, it keeps about a third of its warmth.") + pages_of(
+        f"Synthetic, {n['synthetic']}. Polyester staple fibre does not absorb water and keeps its loft wet. A little heavier than down for the same warmth, it is what you want where it is wet as often as cold: the chill of being soaked is halved ({WET_IMMUNITY['synthetic']}). "
+        "The shell is Chemica's nylon woven as ripstop. Polyester itself is PET: 250 mB of naphtha (its reformate's xylene) and 1,000 mB of air over a cobalt sulfate and a manganese sulfate, heated, the Amoco process, give two terephthalic acid; "
+        "two acid with 250 mB each of ethylene, air and water over a silver nugget, superheated, give four polyester fibre, the silver making ethylene oxide, the water opening it to glycol, and the two condensing to a melt spun as fibre.") + pages_of(
+        f"Expedition, {n['expedition']}. Silica aerogel is a gel with its liquid taken out and its skeleton kept: over nine tenths air in pores smaller than air's own mean free path, so it conducts 0.013 to 0.016 W/m·K, under still air. "
+        "A sand and a soda ash, superheated, melt to sodium silicate, water glass; with a polyester fibre, 250 mB of water and 100 of sulfuric acid it sets as a silica gel through the batt, as aerogel blankets are made.") + pages_of(
+        "Dried in air, the water's surface tension would crush the pores, so the water is exchanged for ethanol, the ethanol for liquid carbon dioxide, and the CO2 taken past its critical point, 31 °C and 74 bar, where liquid and gas are one and there is no surface: "
+        "a gel, 250 mB of Chemica's ethanol and 500 of carbon dioxide give an aerogel blanket and 200 mB of the ethanol back. "
+        "The shell is Gore's: PTFE stretched hot and fast opens into a web with pores far too small for a drop of water and far larger than a molecule of vapour, waterproof and breathable. A PTFE sheet and a nylon ripstop, compacted hot, are two laminates; worn whole, the suit keeps its wearer dry.")
+        + [crafting("fundamentals:cold/down_parka"), crafting("fundamentals:cold/synthetic_parka"), crafting("fundamentals:cold/expedition_parka")], 2)
+
+
 def check():
     missing = []
     for path in BOOK_ASSETS.glob("entries/*/*.json"):
@@ -1403,6 +1429,7 @@ def main():
     plastics()
     chemicals()
     arms()
+    cold()
     check()
     n = len(list(BOOK_ASSETS.glob("entries/*/*.json")))
     print(f"book written: {n} entries")

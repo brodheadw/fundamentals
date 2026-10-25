@@ -1,0 +1,11 @@
+{
+  "type": "fundamentals:swap_drop",
+  "from": "minecraft:leather",
+  "to": "fundamentals:deer_hide",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "naturalist:entities/deer"
+    }
+  ]
+}
