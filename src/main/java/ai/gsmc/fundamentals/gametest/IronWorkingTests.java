@@ -81,6 +81,24 @@ public class IronWorkingTests {
         });
     }
 
+    @GameTest(template = "empty", timeoutTicks = BloomeryBlockEntity.BURN_TICKS + 100)
+    public void anOverchargedBloomeryRunsHotAndCastsPigIron(GameTestHelper helper) {
+        helper.assertTrue(helper.getLevel().getRecipeManager().byKey(ResourceLocation.parse("tfmg:compacting/cast_iron")).isEmpty(),
+                "iron and coal pressed hot is not cast iron");
+        helper.setBlock(POS, IronWorking.bloomery());
+        Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+        use(helper, player, new ItemStack(hematite(), 1));
+        use(helper, player, new ItemStack(Items.CHARCOAL, 1));
+        use(helper, player, new ItemStack(Items.CHARCOAL, 1));
+        use(helper, player, new ItemStack(Items.TORCH));
+        helper.runAfterDelay(BloomeryBlockEntity.BURN_TICKS + 5, () -> {
+            use(helper, player, ItemStack.EMPTY);
+            helper.assertItemEntityPresent(item("tfmg:cast_iron_ingot"), POS, 3);
+            helper.assertItemEntityNotPresent(IronWorking.ironBloom(), POS, 3);
+            helper.succeed();
+        });
+    }
+
     @GameTest(template = "empty")
     public void bloomeryRefusesMineralCoalAndWontLightShortOfCharcoal(GameTestHelper helper) {
         helper.setBlock(POS, IronWorking.bloomery());

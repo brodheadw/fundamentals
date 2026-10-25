@@ -10,6 +10,14 @@
       "title": "The bloomery"
     },
     {
+      "type": "patchouli:text",
+      "text": "Overcharge it, two charcoal to every ore, and it runs hot: the iron soaks up carbon until it melts, and what is tapped is pig iron, run into a sand bed and set as pigs of cast iron."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Medieval smelters made it by accident and threw it away until they learned to use it; at Lapphyttan in Sweden a bloomery grown tall became Europe's first blast furnace. Cast iron builds the blast furnace, and the blast furnace makes pig iron by the tank."
+    },
+    {
       "type": "patchouli:crafting",
       "recipe": "fundamentals:bloomery"
     }

@@ -333,6 +333,8 @@ PUDDLED = 3
 
 
 def steel():
+    # Iron and coal pressed hot is not cast iron: the first cast iron is pig iron tapped from an overcharged bloomery.
+    disabled(TFMG / "compacting/cast_iron.json")
     for theirs, (name, ore, lumps) in BLAST_FURNACE.items():
         disabled(TFMG / f"industrial_blasting/{theirs}.json")
         write(USES / f"pig_iron_from_{name}.json", {
