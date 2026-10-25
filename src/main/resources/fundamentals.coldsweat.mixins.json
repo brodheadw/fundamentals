@@ -5,6 +5,8 @@
 	"plugin": "ai.gsmc.fundamentals.mixin.coldsweat.ColdSweatMixins",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
+		"FlaskHearthMixin",
+		"FlaskPourMixin",
 		"ThermometerHudMixin"
 	],
 	"injectors": {

@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "fundamentals:vacuum_flask",
+      "required": false
+    },
+    {
+      "id": "fundamentals:filled_vacuum_flask",
+      "required": false
+    }
+  ]
+}

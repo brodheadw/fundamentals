@@ -55,6 +55,7 @@ END_PRODUCTS = {
     "fundamentals:silica_hydrogel": "Dried to an aerogel blanket only with Chemica's ethanol; without it the gel goes no further.",
     **{f"fundamentals:{tier}_{piece}": "Worn: a parka against Cold Sweat's cold." for tier in ("fur", "down", "synthetic", "expedition")
        for piece in ("hood", "parka", "trousers", "boots")},
+    "fundamentals:filled_vacuum_flask": "Drunk or poured: Cold Sweat's waterskin, insulated.",
 }
 # Used from the hand or a dispenser, not in a recipe.
 EQUIPMENT = {"fundamentals:argon_canister", "fundamentals:photovoltaic_panel", "fundamentals:npk_fertiliser", "fundamentals:riot_shield"}

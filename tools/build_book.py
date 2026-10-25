@@ -9,7 +9,7 @@ from build_separation_data import CURIE, MOMENTS, TITANIUM_PIPEWORK, ZINC_REDUCT
 from build_oxidation_data import METALS as AGEING, PACE
 from build_heat_data import REFERENCES, liquids
 from build_uses_data import CONVERTER, PIG_IRON_PER_ORE, PUDDLED
-from build_cold_data import GOAT, LEATHER, TIERS as PARKAS, WET_IMMUNITY
+from build_cold_data import FLASK_SLOWER, GOAT, LEATHER, TIERS as PARKAS, WET_IMMUNITY
 
 BOOK = "first_principles"
 BOOK_DATA = DATA / f"patchouli_books/{BOOK}"
@@ -1455,6 +1455,23 @@ def cold():
         "a gel, 250 mB of Chemica's ethanol and 500 of carbon dioxide give an aerogel blanket and 200 mB of the ethanol back. "
         "The shell is Gore's: PTFE stretched hot and fast opens into a web with pores far too small for a drop of water and far larger than a molecule of vapour, waterproof and breathable. A PTFE sheet and a nylon ripstop, compacted hot, are two laminates; worn whole, the suit keeps its wearer dry.")
         + [crafting("fundamentals:cold/down_parka"), crafting("fundamentals:cold/synthetic_parka"), crafting("fundamentals:cold/expedition_parka")], 2)
+    entry("plastics", "vacuum_flask", "The vacuum flask", "fundamentals:filled_vacuum_flask", pages_of(
+        "Heat leaves a hot drink three ways: conducted through whatever touches it, carried off by air that warms, rises and is replaced, and radiated as infrared from every surface. "
+        "A leather waterskin stops none of them, and goes cold in about an hour. James Dewar made a flask in 1892 to keep liquefied gases cold at the Royal Institution, "
+        "and Reinhold Burger and Albert Aschenbrenner sold it in Berlin as the Thermos in 1904: it keeps coffee hot a day, and liquid nitrogen in it for days.", "Dewar's flask") + pages_of(
+        "It is two glass bottles, one inside the other, joined only at the neck. The gap between them is pumped out. Below about a tenth of a pascal a gas molecule crosses the gap without meeting another, "
+        "so the gas stops conducting, and with nothing to move there is no convection. That leaves the glass neck and the stopper to conduct, and radiation, which crosses a vacuum as sunlight does.") + pages_of(
+        "So both walls facing the gap are silvered. Bare glass radiates almost as a black body, an emissivity of about 0.9; polished silver about 0.02. Between 95 °C and 20 °C a black body loses some 620 W per square metre; "
+        "two silvered walls let through about a hundredth of that, a quarter of a watt from a half-litre flask. Glass is used because it conducts little, and borosilicate because the hot fill does not crack it. "
+        "Real flasks lose about two degrees an hour, most of it through the neck.", "Vacuum and silver") + pages_of(
+        "A borosilicate glass block starts the sequenced assembly. A deployer adds a silver nugget, a spout 50 mB of nitric acid, which dissolves it to silver nitrate, then 50 mB of ammonia, which makes Tollens' reagent; "
+        "a deployer's sugar reduces the silver onto the glass as a mirror, as John Brashear silvered telescope mirrors. A deployer holding a mechanical pump, which it keeps, draws the gap down; "
+        "then a steel plate cases it and a rubber sheet stoppers it.", "Making one") + pages_of(
+        "With Cold Sweat it is its waterskin, insulated: it fills from water, a cauldron or a tank at the water's temperature (or with 250 mB from a spout), the boiler heats it and the icebox chills it, "
+        "and it drinks and pours the same. Cold Sweat's water only goes back to neutral while it is in your hand or hotbar, warming or chilling you as it does; "
+        f"a waterskin there is spent in about two and a half game hours, the flask in about a day, {FLASK_SLOWER} times as long, giving a {FLASK_SLOWER}th of the warmth at a time. "
+        "Sources: Dewar, Proc. Royal Institution 14 (1893); Incropera and DeWitt, Fundamentals of Heat and Mass Transfer, ch. 12-13.", "With Cold Sweat")
+        + [spotlight("fundamentals:vacuum_flask", "Cold Sweat's waterskin in an evacuated, silvered double wall of borosilicate glass and a steel case.")], 3)
 
 
 def check():

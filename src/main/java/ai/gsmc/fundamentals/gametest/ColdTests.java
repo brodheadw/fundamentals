@@ -4,7 +4,10 @@ import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.cold.Cold;
 import ai.gsmc.fundamentals.cold.Parka;
 import com.simibubi.create.content.processing.recipe.ProcessingRecipe;
+import com.simibubi.create.content.processing.sequenced.SequencedAssemblyRecipe;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.ResourceLocation;
@@ -15,6 +18,8 @@ import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
+
+import java.util.Arrays;
 
 @GameTestHolder(Fundamentals.MOD_ID)
 @PrefixGameTestTemplate(false)
@@ -103,6 +108,42 @@ public class ColdTests {
             return;
         }
         String failure = ColdSweatChecks.check(helper.makeMockPlayer(GameType.SURVIVAL));
+        helper.assertTrue(failure == null, failure);
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void theVacuumFlaskIsSilveredGlassPumpedOutAndCased(GameTestHelper helper) {
+        var found = helper.getLevel().getRecipeManager().byKey(Fundamentals.id("cold/vacuum_flask"));
+        if (!ModList.get().isLoaded("cold_sweat")) {
+            helper.assertTrue(found.isEmpty(), "the vacuum flask is Cold Sweat's waterskin, so it needs Cold Sweat");
+            helper.succeed();
+            return;
+        }
+        var flask = (SequencedAssemblyRecipe) found.orElseThrow().value();
+        var steps = flask.getSequence().stream().map(step -> step.getRecipe()).toList();
+        helper.assertTrue(flask.getIngredient().test(stack("fundamentals:borosilicate_glass")) && gives(helper, flask, "fundamentals:vacuum_flask"),
+                "a vacuum flask should be made from a borosilicate glass block");
+        for (String part : new String[] {"fundamentals:silver_nugget", "minecraft:sugar", "create:mechanical_pump", "tfmg:rubber_sheet"}) {
+            helper.assertTrue(steps.stream().anyMatch(step -> takes(step, part)), "the flask should take a " + part);
+        }
+        var steelPlate = TagKey.create(Registries.ITEM, ResourceLocation.parse("c:plates/steel"));
+        helper.assertTrue(steps.stream().anyMatch(step -> step.getIngredients().stream().anyMatch(i -> i.getItems().length > 0
+                && Arrays.stream(i.getItems()).allMatch(plate -> plate.is(steelPlate)))), "the flask should be cased in a steel plate");
+        for (String fluid : new String[] {"fundamentals:nitric_acid", "fundamentals:ammonia"}) {
+            helper.assertTrue(steps.stream().anyMatch(step -> takesFluid(step, fluid)), "the silvering should take " + fluid);
+        }
+        helper.succeed();
+    }
+
+    // only with Cold Sweat installed (-Pcoldsweat): the flask fills, pours and loses its heat as its waterskin does, ten times slower
+    @GameTest(template = "empty")
+    public void aVacuumFlaskKeepsItsHeatTenTimesLongerThanAWaterskin(GameTestHelper helper) {
+        if (!ModList.get().isLoaded("cold_sweat")) {
+            helper.succeed();
+            return;
+        }
+        String failure = ColdSweatChecks.flask(helper.makeMockPlayer(GameType.SURVIVAL));
         helper.assertTrue(failure == null, failure);
         helper.succeed();
     }

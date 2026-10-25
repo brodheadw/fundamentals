@@ -1,0 +1,61 @@
+{
+  "name": "The vacuum flask",
+  "category": "fundamentals:plastics",
+  "icon": "fundamentals:filled_vacuum_flask",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Heat leaves a hot drink three ways: conducted through whatever touches it, carried off by air that warms, rises and is replaced, and radiated as infrared from every surface. A leather waterskin stops none of them, and goes cold in about an hour.",
+      "title": "Dewar's flask"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "James Dewar made a flask in 1892 to keep liquefied gases cold at the Royal Institution, and Reinhold Burger and Albert Aschenbrenner sold it in Berlin as the Thermos in 1904: it keeps coffee hot a day, and liquid nitrogen in it for days."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It is two glass bottles, one inside the other, joined only at the neck. The gap between them is pumped out. Below about a tenth of a pascal a gas molecule crosses the gap without meeting another, so the gas stops conducting, and with nothing to move there is no convection."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "That leaves the glass neck and the stopper to conduct, and radiation, which crosses a vacuum as sunlight does."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "So both walls facing the gap are silvered. Bare glass radiates almost as a black body, an emissivity of about 0.9; polished silver about 0.02. Between 95 °C and 20 °C a black body loses some 620 W per square metre; two silvered walls let through about a hundredth of that, a quarter of a watt from a half-litre flask.",
+      "title": "Vacuum and silver"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Glass is used because it conducts little, and borosilicate because the hot fill does not crack it. Real flasks lose about two degrees an hour, most of it through the neck."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A borosilicate glass block starts the sequenced assembly. A deployer adds a silver nugget, a spout 50 mB of nitric acid, which dissolves it to silver nitrate, then 50 mB of ammonia, which makes Tollens' reagent; a deployer's sugar reduces the silver onto the glass as a mirror, as John Brashear silvered telescope mirrors.",
+      "title": "Making one"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A deployer holding a mechanical pump, which it keeps, draws the gap down; then a steel plate cases it and a rubber sheet stoppers it."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "With Cold Sweat it is its waterskin, insulated: it fills from water, a cauldron or a tank at the water's temperature (or with 250 mB from a spout), the boiler heats it and the icebox chills it, and it drinks and pours the same.",
+      "title": "With Cold Sweat"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Cold Sweat's water only goes back to neutral while it is in your hand or hotbar, warming or chilling you as it does; a waterskin there is spent in about two and a half game hours, the flask in about a day, 10 times as long, giving a 10th of the warmth at a time. Sources: Dewar, Proc."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Royal Institution 14 (1893); Incropera and DeWitt, Fundamentals of Heat and Mass Transfer, ch. 12-13."
+    },
+    {
+      "type": "patchouli:spotlight",
+      "item": "fundamentals:vacuum_flask",
+      "text": "Cold Sweat's waterskin in an evacuated, silvered double wall of borosilicate glass and a steel case."
+    }
+  ]
+}
