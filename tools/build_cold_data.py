@@ -12,6 +12,12 @@ from paint_separation import heap
 
 RECIPES = DATA / "recipe/cold"
 INSULATORS = DATA / "cold_sweat/item/insulator"
+ITEM_TEMPS = DATA / "cold_sweat/item/item_temp"
+COLD_SWEAT = [{"type": "neoforge:mod_loaded", "modid": "cold_sweat"}]
+# cold.FilledFlask lets one in ten of Cold Sweat's waterskin cooling steps through. Held in the hotbar a waterskin warms (or chills)
+# its holder 0.025 a tick while its water goes neutral; the flask, giving up its heat ten times slower, gives a tenth of that ten times longer.
+FLASK_SLOWER = 10
+WATERSKIN_HOTBAR = 0.025
 CHEMICA = [{"type": "neoforge:mod_loaded", "modid": "chemica"}]
 PIECES = {"hood": ("helmet", ["SSS", "SIS"]), "parka": ("chestplate", ["S S", "SIS", "SIS"]),
           "trousers": ("leggings", ["SIS", "S S", "S S"]), "boots": ("boots", ["I I", "S S"])}
@@ -110,8 +116,42 @@ def insulators():
         "immune_temp_modifiers": {"cold_sweat:water": WET_IMMUNITY["expedition"]}})
 
 
+def flask():
+    """The vacuum flask: Cold Sweat's waterskin in a silvered, evacuated double wall of borosilicate glass, cased in steel."""
+    def step(kind, extra, keep=False):
+        s = {"type": kind, "ingredients": [{"item": "fundamentals:unfinished_vacuum_flask"}] + extra,
+             "results": [{"id": "fundamentals:unfinished_vacuum_flask"}]}
+        return {**s, "keep_held_item": True} if keep else s
+    # Brashear's silvering: silver in nitric acid is silver nitrate, ammonia makes it Tollens' reagent, and sugar reduces it to a mirror
+    # on the glass. A deployer's held mechanical pump then draws the gap down, and the steel case and a rubber stopper finish it.
+    write(RECIPES / "vacuum_flask.json", {
+        "neoforge:conditions": COLD_SWEAT, "type": "create:sequenced_assembly", "ingredient": {"item": "fundamentals:borosilicate_glass"}, "loops": 1,
+        "results": [{"id": "fundamentals:vacuum_flask"}], "transitional_item": {"id": "fundamentals:unfinished_vacuum_flask"},
+        "sequence": [step("create:deploying", [{"item": "fundamentals:silver_nugget"}]),
+                     step("create:filling", [fluid("nitric_acid", 50)]),
+                     step("create:filling", [fluid("ammonia", 50)]),
+                     step("create:deploying", [{"item": "minecraft:sugar"}]),
+                     step("create:deploying", [{"item": "create:mechanical_pump"}], keep=True),
+                     step("create:deploying", [{"tag": "c:plates/steel"}]),
+                     step("create:deploying", [{"item": "tfmg:rubber_sheet"}])]})
+    # as Cold Sweat fills its waterskin from a spout
+    write(RECIPES / "filled_vacuum_flask.json", {
+        "neoforge:conditions": COLD_SWEAT, "type": "create:filling",
+        "ingredients": [{"item": "fundamentals:vacuum_flask"}, fluid("minecraft:water", 250)], "results": [{"id": "fundamentals:filled_vacuum_flask"}]})
+    for name, sign, bound in (("hot", 1, "0.1:"), ("cold", -1, ":-0.1")):
+        write(ITEM_TEMPS / f"filled_vacuum_flask_{name}.json", {
+            "item": {"items": ["fundamentals:filled_vacuum_flask"], "components": {"cold_sweat:temperature": bound}},
+            "slots": ["hand", "hotbar"], "temperature": sign * WATERSKIN_HOTBAR / FLASK_SLOWER, "trait": "core", "max_effect": 999, "hide_if_unmet": True})
+    for hearth in ("boiler_valid", "icebox_valid"):
+        write(RESOURCES / f"data/cold_sweat/tags/item/{hearth}.json", {"replace": False, "values": [
+            {"id": f"fundamentals:{item}", "required": False} for item in ("vacuum_flask", "filled_vacuum_flask")]})
+
+
 def models_and_lang():
     lang = read_lang()
+    for name, display in {"vacuum_flask": "Vacuum Flask", "filled_vacuum_flask": "Vacuum Flask", "unfinished_vacuum_flask": "Unfinished Vacuum Flask"}.items():
+        lang[f"item.fundamentals.{name}"] = display
+        write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})
     for name, display in MATERIALS.items():
         lang[f"item.fundamentals.{name}"] = display
         write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})
@@ -289,8 +329,54 @@ def material_icons():
     slab((186, 212, 246), 96, "aerogel").save(item / "aerogel_blanket.png")
 
 
+STEEL = (168, 174, 182)
+MIRROR = (226, 230, 236)
+RUBBER = (46, 44, 48)
+
+
+def cylinder(img, x0, x1, y0, y1, colour, sheen=False, base=True):
+    """An upright cylinder lit from the left: bright a pixel in from the left edge, falling off to the right, outlined dark."""
+    for y in range(y0, y1 + 1):
+        for x in range(x0, x1 + 1):
+            u = (x - x0) / (x1 - x0)
+            t = 1.25 if u < 0.25 and x != x0 else 1.0 - 0.45 * u
+            if sheen and x == x0 + 2:
+                t = 1.4
+            if x in (x0, x1) or (base and y == y1):
+                t *= 0.55
+            img.putpixel((x, y), tuple(max(0, min(255, int(c * t))) for c in colour) + (255,))
+
+
+def flask_icons():
+    """A steel-cased flask with its rubber stopper in (filled) or out (empty, showing the silvered mouth); unfinished, the bare silvered glass."""
+    item = TEXTURES / "item"
+    for name, stoppered in (("filled_vacuum_flask", True), ("vacuum_flask", False)):
+        img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+        cylinder(img, 4, 11, 4, 14, STEEL)
+        cylinder(img, 5, 10, 3, 3, STEEL, base=False)
+        for x in range(5, 11):
+            for y in (5, 12):
+                r, g, b, a = img.getpixel((x, y))
+                img.putpixel((x, y), (r * 3 // 4, g * 3 // 4, b * 3 // 4, a))
+        if stoppered:
+            cylinder(img, 6, 9, 1, 2, RUBBER, base=False)
+            img.putpixel((7, 1), (92, 90, 96, 255))
+        else:
+            # the open mouth: the silvered lip of the inner wall round the dark bore
+            for x in range(5, 11):
+                img.putpixel((x, 3), MIRROR + (255,) if x in (5, 6, 9, 10) else (24, 24, 28, 255))
+        img.save(item / f"{name}.png")
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    cylinder(img, 5, 10, 5, 14, MIRROR, sheen=True)
+    cylinder(img, 6, 9, 2, 4, MIRROR, base=False)
+    for x in range(6, 10):
+        img.putpixel((x, 2), (200, 224, 228, 150))
+    img.save(item / "unfinished_vacuum_flask.png")
+
+
 def main():
     recipes()
+    flask()
     deer_hide()
     insulators()
     models_and_lang()
@@ -298,6 +384,7 @@ def main():
     armour_layers()
     armour_icons()
     material_icons()
+    flask_icons()
     print(f"{len(TIERS)} parkas, {len(MATERIALS)} materials; set insulation " + ", ".join(f"{t} {s['cold']}" for t, s in TIERS.items()))
 
 

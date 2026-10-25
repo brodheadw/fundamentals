@@ -2,6 +2,7 @@ package ai.gsmc.fundamentals.cold;
 
 import ai.gsmc.fundamentals.Fundamentals;
 import com.momosoftworks.coldsweat.api.event.common.insulation.InsulationTickEvent;
+import com.momosoftworks.coldsweat.api.event.common.item.WaterskinEvent;
 import com.momosoftworks.coldsweat.api.event.core.init.DefaultTempModifiersEvent;
 import com.momosoftworks.coldsweat.api.event.core.registry.TempModifierRegisterEvent;
 import com.momosoftworks.coldsweat.api.registry.TempModifierRegistry;
@@ -13,11 +14,13 @@ import com.momosoftworks.coldsweat.config.ConfigSettings;
 import com.momosoftworks.coldsweat.data.codec.configuration.InsulatorData;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.neoforge.common.NeoForge;
 
 import java.util.Set;
+import java.util.function.BiConsumer;
 
 /** Loaded only with Cold Sweat: its world temperature becomes ours, and down goes flat in the wet. */
 final class ColdSweatCompat {
@@ -37,6 +40,23 @@ final class ColdSweatCompat {
         NeoForge.EVENT_BUS.addListener((TempModifierRegisterEvent event) -> event.register(HEAT, HeatTempModifier::new));
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, ColdSweatCompat::useOurHeat);
         NeoForge.EVENT_BUS.addListener(ColdSweatCompat::wetDown);
+        NeoForge.EVENT_BUS.addListener(ColdSweatCompat::fillFlask);
+    }
+
+    static void registerFlasks(BiConsumer<ResourceLocation, Item> registry) {
+        Cold.flask = new Flask();
+        Cold.filledFlask = new FilledFlask();
+        Cold.unfinishedFlask = new Item(new Item.Properties().stacksTo(1));
+        registry.accept(Fundamentals.id("vacuum_flask"), Cold.flask);
+        registry.accept(Fundamentals.id("filled_vacuum_flask"), Cold.filledFlask);
+        registry.accept(Fundamentals.id("unfinished_vacuum_flask"), Cold.unfinishedFlask);
+    }
+
+    // Cold Sweat fills any waterskin as its own filled waterskin; a flask comes back a filled flask, at the same temperature
+    private static void fillFlask(WaterskinEvent.Fill event) {
+        if (event.getWaterskin().is(Cold.flask)) {
+            event.setResultWaterskin(event.getResultWaterskin().transmuteCopy(Cold.filledFlask));
+        }
     }
 
     private static void useOurHeat(DefaultTempModifiersEvent event) {

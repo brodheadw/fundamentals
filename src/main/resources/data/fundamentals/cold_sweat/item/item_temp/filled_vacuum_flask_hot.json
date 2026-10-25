@@ -1,0 +1,18 @@
+{
+  "item": {
+    "items": [
+      "fundamentals:filled_vacuum_flask"
+    ],
+    "components": {
+      "cold_sweat:temperature": "0.1:"
+    }
+  },
+  "slots": [
+    "hand",
+    "hotbar"
+  ],
+  "temperature": 0.0025,
+  "trait": "core",
+  "max_effect": 999,
+  "hide_if_unmet": true
+}

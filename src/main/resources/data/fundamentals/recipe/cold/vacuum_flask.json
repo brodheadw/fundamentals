@@ -1,0 +1,140 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "cold_sweat"
+    }
+  ],
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "fundamentals:borosilicate_glass"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "id": "fundamentals:vacuum_flask"
+    }
+  ],
+  "transitional_item": {
+    "id": "fundamentals:unfinished_vacuum_flask"
+  },
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "fundamentals:unfinished_vacuum_flask"
+        },
+        {
+          "item": "fundamentals:silver_nugget"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:unfinished_vacuum_flask"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "fundamentals:unfinished_vacuum_flask"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 50,
+          "fluid": "fundamentals:nitric_acid"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:unfinished_vacuum_flask"
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "fundamentals:unfinished_vacuum_flask"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 50,
+          "fluid": "fundamentals:ammonia"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:unfinished_vacuum_flask"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "fundamentals:unfinished_vacuum_flask"
+        },
+        {
+          "item": "minecraft:sugar"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:unfinished_vacuum_flask"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "fundamentals:unfinished_vacuum_flask"
+        },
+        {
+          "item": "create:mechanical_pump"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:unfinished_vacuum_flask"
+        }
+      ],
+      "keep_held_item": true
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "fundamentals:unfinished_vacuum_flask"
+        },
+        {
+          "tag": "c:plates/steel"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:unfinished_vacuum_flask"
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "fundamentals:unfinished_vacuum_flask"
+        },
+        {
+          "item": "tfmg:rubber_sheet"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:unfinished_vacuum_flask"
+        }
+      ]
+    }
+  ]
+}

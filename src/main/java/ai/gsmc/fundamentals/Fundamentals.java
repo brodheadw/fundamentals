@@ -152,6 +152,7 @@ public class Fundamentals {
                 PeriodicTable.registerItems(helper::register);
                 Compute.registerItems(helper::register);
                 ai.gsmc.fundamentals.cold.Parkas.registerItems(helper::register);
+                ai.gsmc.fundamentals.cold.Cold.registerItems(helper::register);
                 ai.gsmc.fundamentals.glass.Glass.registerItems(helper::register);
             });
             event.register(Registries.ARMOR_MATERIAL, helper -> ai.gsmc.fundamentals.cold.Parkas.registerArmorMaterials(helper::register));
@@ -247,6 +248,7 @@ public class Fundamentals {
                     Oxidation.items().forEach(output::accept);
                     Compute.items().forEach(output::accept);
                     ai.gsmc.fundamentals.cold.Parkas.items().forEach(output::accept);
+                    ai.gsmc.fundamentals.cold.Cold.flasks().forEach(output::accept);
                     ai.gsmc.fundamentals.glass.Glass.items().forEach(output::accept);
                     OreBlocks.rawItems().forEach(output::accept);
                     OreBlocks.items().forEach(output::accept);
