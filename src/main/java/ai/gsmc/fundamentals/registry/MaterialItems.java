@@ -31,7 +31,7 @@ public final class MaterialItems {
             "titanium", "magnesium", "zircon", "zirconium", "hafnium", "beryllium", "beryllium_copper",
             "lead_bullion", "silver", "uraninite", "zircaloy",
             "graphite", "sodium", "electrum", "hsla_steel", "pyrochlore", "columbite", "antimony", "antimonial_lead", "niobium", "ferroniobium", "tantalum",
-            "germanium", "gallium", "indium", "cadmium");
+            "germanium", "gallium", "indium", "cadmium", "garnet", "emery", "bismuth");
 
     private static final Map<ResourceLocation, Block> BLOCKS = new LinkedHashMap<>();
     private static final Map<ResourceLocation, Item> ITEMS = new LinkedHashMap<>();

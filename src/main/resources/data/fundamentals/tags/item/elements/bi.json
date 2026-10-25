@@ -1,0 +1,13 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:bismuth_crystal",
+    "fundamentals:bismuth_ingot",
+    "fundamentals:bismuth_nugget",
+    "fundamentals:bismuth_oxide",
+    "fundamentals:bismuthinite_ore",
+    "fundamentals:native_bismuth_ore",
+    "fundamentals:raw_bismuthinite",
+    "fundamentals:raw_native_bismuth"
+  ]
+}

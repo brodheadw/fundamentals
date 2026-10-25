@@ -30,6 +30,13 @@
         },
         "fraction": 0.02,
         "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:tourmaline_ore"
+        },
+        "fraction": 0.04,
+        "style": "pockets"
       }
     ],
     "radius": {

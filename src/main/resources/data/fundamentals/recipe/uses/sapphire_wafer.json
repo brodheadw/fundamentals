@@ -1,0 +1,15 @@
+{
+  "type": "create:cutting",
+  "ingredients": [
+    {
+      "item": "fundamentals:sapphire_boule"
+    }
+  ],
+  "processing_time": 400,
+  "results": [
+    {
+      "id": "fundamentals:sapphire_wafer",
+      "count": 4
+    }
+  ]
+}

@@ -20,6 +20,10 @@
     {
       "id": "fundamentals:argon",
       "amount": 9
+    },
+    {
+      "id": "fundamentals:oxygen",
+      "amount": 209
     }
   ]
 }

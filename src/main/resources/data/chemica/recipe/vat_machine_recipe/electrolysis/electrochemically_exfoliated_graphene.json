@@ -21,9 +21,9 @@
       "amount": 250
     },
     {
-      "type": "neoforge:single",
-      "fluid": "chemica:oxygen",
-      "amount": 250
+      "type": "neoforge:tag",
+      "amount": 250,
+      "tag": "c:oxygen"
     }
   ],
   "machines": [

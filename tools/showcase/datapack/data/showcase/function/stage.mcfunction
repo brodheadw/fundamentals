@@ -6217,173 +6217,197 @@ setblock -14 -60 16 minecraft:polished_andesite
 setblock -14 -59 16 fundamentals:beryl_ore
 setblock -14 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Beryl Ore"','""','""','""']},is_waxed:1b}
 setblock -13 -60 16 minecraft:polished_andesite
-setblock -13 -59 16 fundamentals:borax_ore
-setblock -13 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Borax Ore"','""','""','""']},is_waxed:1b}
+setblock -13 -59 16 fundamentals:bismuthinite_ore
+setblock -13 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Bismuthinite"','"Ore"','""','""']},is_waxed:1b}
 setblock -12 -60 16 minecraft:polished_andesite
-setblock -12 -59 16 fundamentals:bornite_ore
-setblock -12 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Bornite Ore"','""','""','""']},is_waxed:1b}
+setblock -12 -59 16 fundamentals:borax_ore
+setblock -12 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Borax Ore"','""','""','""']},is_waxed:1b}
 setblock -11 -60 16 minecraft:polished_andesite
-setblock -11 -59 16 fundamentals:braggite_ore
-setblock -11 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Braggite Ore"','""','""','""']},is_waxed:1b}
+setblock -11 -59 16 fundamentals:bornite_ore
+setblock -11 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Bornite Ore"','""','""','""']},is_waxed:1b}
 setblock -10 -60 16 minecraft:polished_andesite
-setblock -10 -59 16 fundamentals:cassiterite_ore
-setblock -10 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Cassiterite Ore"','""','""','""']},is_waxed:1b}
+setblock -10 -59 16 fundamentals:braggite_ore
+setblock -10 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Braggite Ore"','""','""','""']},is_waxed:1b}
 setblock -9 -60 16 minecraft:polished_andesite
-setblock -9 -59 16 fundamentals:chalcocite_ore
-setblock -9 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Chalcocite Ore"','""','""','""']},is_waxed:1b}
+setblock -9 -59 16 fundamentals:cassiterite_ore
+setblock -9 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Cassiterite Ore"','""','""','""']},is_waxed:1b}
 setblock -8 -60 16 minecraft:polished_andesite
-setblock -8 -59 16 fundamentals:chalcopyrite_ore
-setblock -8 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Chalcopyrite"','"Ore"','""','""']},is_waxed:1b}
+setblock -8 -59 16 fundamentals:chalcocite_ore
+setblock -8 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Chalcocite Ore"','""','""','""']},is_waxed:1b}
 setblock -7 -60 16 minecraft:polished_andesite
-setblock -7 -59 16 fundamentals:chromite_ore
-setblock -7 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Chromite Ore"','""','""','""']},is_waxed:1b}
+setblock -7 -59 16 fundamentals:chalcopyrite_ore
+setblock -7 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Chalcopyrite"','"Ore"','""','""']},is_waxed:1b}
 setblock -6 -60 16 minecraft:polished_andesite
-setblock -6 -59 16 fundamentals:cinnabar_ore
-setblock -6 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Cinnabar Ore"','""','""','""']},is_waxed:1b}
+setblock -6 -59 16 fundamentals:chromite_ore
+setblock -6 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Chromite Ore"','""','""','""']},is_waxed:1b}
 setblock -5 -60 16 minecraft:polished_andesite
-setblock -5 -59 16 fundamentals:cobaltite_ore
-setblock -5 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Cobaltite Ore"','""','""','""']},is_waxed:1b}
+setblock -5 -59 16 fundamentals:cinnabar_ore
+setblock -5 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Cinnabar Ore"','""','""','""']},is_waxed:1b}
 setblock -4 -60 16 minecraft:polished_andesite
-setblock -4 -59 16 fundamentals:columbite_ore
-setblock -4 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Columbite-Tantalite"','"Ore"','""','""']},is_waxed:1b}
+setblock -4 -59 16 fundamentals:cobaltite_ore
+setblock -4 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Cobaltite Ore"','""','""','""']},is_waxed:1b}
 setblock -3 -60 16 minecraft:polished_andesite
-setblock -3 -59 16 fundamentals:cooperite_ore
-setblock -3 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Cooperite Ore"','""','""','""']},is_waxed:1b}
+setblock -3 -59 16 fundamentals:columbite_ore
+setblock -3 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Columbite-Tantalite"','"Ore"','""','""']},is_waxed:1b}
 setblock -2 -60 16 minecraft:polished_andesite
-setblock -2 -59 16 fundamentals:covellite_ore
-setblock -2 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Covellite Ore"','""','""','""']},is_waxed:1b}
+setblock -2 -59 16 fundamentals:cooperite_ore
+setblock -2 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Cooperite Ore"','""','""','""']},is_waxed:1b}
 setblock -1 -60 16 minecraft:polished_andesite
-setblock -1 -59 16 fundamentals:cuprite_ore
-setblock -1 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Cuprite Ore"','""','""','""']},is_waxed:1b}
+setblock -1 -59 16 fundamentals:covellite_ore
+setblock -1 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Covellite Ore"','""','""','""']},is_waxed:1b}
 setblock 0 -60 16 minecraft:polished_andesite
-setblock 0 -59 16 fundamentals:euxenite_ore
-setblock 0 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Euxenite Ore"','""','""','""']},is_waxed:1b}
+setblock 0 -59 16 fundamentals:cuprite_ore
+setblock 0 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Cuprite Ore"','""','""','""']},is_waxed:1b}
 setblock 1 -60 16 minecraft:polished_andesite
-setblock 1 -59 16 fundamentals:fluorite_ore
-setblock 1 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Fluorite Ore"','""','""','""']},is_waxed:1b}
+setblock 1 -59 16 fundamentals:emery_ore
+setblock 1 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Emery Ore"','""','""','""']},is_waxed:1b}
 setblock 2 -60 16 minecraft:polished_andesite
-setblock 2 -59 16 fundamentals:galena_ore
-setblock 2 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Galena Ore"','""','""','""']},is_waxed:1b}
+setblock 2 -59 16 fundamentals:euxenite_ore
+setblock 2 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Euxenite Ore"','""','""','""']},is_waxed:1b}
 setblock 3 -60 16 minecraft:polished_andesite
-setblock 3 -59 16 fundamentals:goethite_ore
-setblock 3 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Goethite"','""','""','""']},is_waxed:1b}
+setblock 3 -59 16 fundamentals:fluorite_ore
+setblock 3 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Fluorite Ore"','""','""','""']},is_waxed:1b}
 setblock 4 -60 16 minecraft:polished_andesite
-setblock 4 -59 16 fundamentals:graphite_ore
-setblock 4 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Graphite Ore"','""','""','""']},is_waxed:1b}
+setblock 4 -59 16 fundamentals:galena_ore
+setblock 4 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Galena Ore"','""','""','""']},is_waxed:1b}
 setblock 5 -60 16 minecraft:polished_andesite
-setblock 5 -59 16 fundamentals:halite_ore
-setblock 5 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Halite Ore"','""','""','""']},is_waxed:1b}
+setblock 5 -59 16 fundamentals:garnet_ore
+setblock 5 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Garnet Ore"','""','""','""']},is_waxed:1b}
 setblock 6 -60 16 minecraft:polished_andesite
-setblock 6 -59 16 fundamentals:hematite_ore
-setblock 6 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Hematite Ore"','""','""','""']},is_waxed:1b}
+setblock 6 -59 16 fundamentals:goethite_ore
+setblock 6 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Goethite"','""','""','""']},is_waxed:1b}
 setblock 7 -60 16 minecraft:polished_andesite
-setblock 7 -59 16 fundamentals:hemimorphite_ore
-setblock 7 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Hemimorphite"','"Ore"','""','""']},is_waxed:1b}
+setblock 7 -59 16 fundamentals:graphite_ore
+setblock 7 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Graphite Ore"','""','""','""']},is_waxed:1b}
 setblock 8 -60 16 minecraft:polished_andesite
-setblock 8 -59 16 fundamentals:ilmenite_ore
-setblock 8 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Ilmenite Ore"','""','""','""']},is_waxed:1b}
+setblock 8 -59 16 fundamentals:halite_ore
+setblock 8 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Halite Ore"','""','""','""']},is_waxed:1b}
 setblock 9 -60 16 minecraft:polished_andesite
-setblock 9 -59 16 fundamentals:ion_adsorption_clay_ore
-setblock 9 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Ion-Adsorption"','"Clay"','""','""']},is_waxed:1b}
+setblock 9 -59 16 fundamentals:hematite_ore
+setblock 9 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Hematite Ore"','""','""','""']},is_waxed:1b}
 setblock 10 -60 16 minecraft:polished_andesite
-setblock 10 -59 16 fundamentals:loparite_ore
-setblock 10 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Loparite Ore"','""','""','""']},is_waxed:1b}
+setblock 10 -59 16 fundamentals:hemimorphite_ore
+setblock 10 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Hemimorphite"','"Ore"','""','""']},is_waxed:1b}
 setblock 11 -60 16 minecraft:polished_andesite
-setblock 11 -59 16 fundamentals:magnetite_ore
-setblock 11 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Magnetite Ore"','""','""','""']},is_waxed:1b}
+setblock 11 -59 16 fundamentals:ilmenite_ore
+setblock 11 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Ilmenite Ore"','""','""','""']},is_waxed:1b}
 setblock 12 -60 16 minecraft:polished_andesite
-setblock 12 -59 16 fundamentals:malachite_ore
-setblock 12 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Malachite Ore"','""','""','""']},is_waxed:1b}
+setblock 12 -59 16 fundamentals:ion_adsorption_clay_ore
+setblock 12 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Ion-Adsorption"','"Clay"','""','""']},is_waxed:1b}
 setblock 13 -60 16 minecraft:polished_andesite
-setblock 13 -59 16 fundamentals:molybdenite_ore
-setblock 13 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Molybdenite Ore"','""','""','""']},is_waxed:1b}
+setblock 13 -59 16 fundamentals:loparite_ore
+setblock 13 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Loparite Ore"','""','""','""']},is_waxed:1b}
 setblock 14 -60 16 minecraft:polished_andesite
-setblock 14 -59 16 fundamentals:monazite_ore
-setblock 14 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Monazite Ore"','""','""','""']},is_waxed:1b}
+setblock 14 -59 16 fundamentals:magnetite_ore
+setblock 14 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Magnetite Ore"','""','""','""']},is_waxed:1b}
 setblock 15 -60 16 minecraft:polished_andesite
-setblock 15 -59 16 fundamentals:native_gold_ore
-setblock 15 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Native Gold Ore"','""','""','""']},is_waxed:1b}
+setblock 15 -59 16 fundamentals:malachite_ore
+setblock 15 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Malachite Ore"','""','""','""']},is_waxed:1b}
 setblock 16 -60 16 minecraft:polished_andesite
-setblock 16 -59 16 fundamentals:native_silver_ore
-setblock 16 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Native Silver"','"Ore"','""','""']},is_waxed:1b}
+setblock 16 -59 16 fundamentals:molybdenite_ore
+setblock 16 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Molybdenite Ore"','""','""','""']},is_waxed:1b}
 setblock 17 -60 16 minecraft:polished_andesite
-setblock 17 -59 16 fundamentals:native_sulfur_ore
-setblock 17 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Native Sulfur"','""','""','""']},is_waxed:1b}
+setblock 17 -59 16 fundamentals:monazite_ore
+setblock 17 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Monazite Ore"','""','""','""']},is_waxed:1b}
 setblock 18 -60 16 minecraft:polished_andesite
-setblock 18 -59 16 fundamentals:nickel_laterite_ore
-setblock 18 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Nickel Laterite"','""','""','""']},is_waxed:1b}
+setblock 18 -59 16 fundamentals:native_bismuth_ore
+setblock 18 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Native Bismuth"','"Ore"','""','""']},is_waxed:1b}
 setblock 19 -60 16 minecraft:polished_andesite
-setblock 19 -59 16 fundamentals:pentlandite_ore
-setblock 19 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Pentlandite Ore"','""','""','""']},is_waxed:1b}
+setblock 19 -59 16 fundamentals:native_gold_ore
+setblock 19 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Native Gold Ore"','""','""','""']},is_waxed:1b}
 setblock 20 -60 16 minecraft:polished_andesite
-setblock 20 -59 16 fundamentals:pyrite_ore
-setblock 20 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Pyrite Ore"','""','""','""']},is_waxed:1b}
+setblock 20 -59 16 fundamentals:native_silver_ore
+setblock 20 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Native Silver"','"Ore"','""','""']},is_waxed:1b}
 setblock 21 -60 16 minecraft:polished_andesite
-setblock 21 -59 16 fundamentals:pyrochlore_ore
-setblock 21 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Pyrochlore Ore"','""','""','""']},is_waxed:1b}
+setblock 21 -59 16 fundamentals:native_sulfur_ore
+setblock 21 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Native Sulfur"','""','""','""']},is_waxed:1b}
 setblock 22 -60 16 minecraft:polished_andesite
-setblock 22 -59 16 fundamentals:pyrolusite_ore
-setblock 22 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Pyrolusite Ore"','""','""','""']},is_waxed:1b}
+setblock 22 -59 16 fundamentals:nickel_laterite_ore
+setblock 22 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Nickel Laterite"','""','""','""']},is_waxed:1b}
 setblock 23 -60 16 minecraft:polished_andesite
-setblock 23 -59 16 fundamentals:rutile_ore
-setblock 23 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Rutile Ore"','""','""','""']},is_waxed:1b}
+setblock 23 -59 16 fundamentals:pentlandite_ore
+setblock 23 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Pentlandite Ore"','""','""','""']},is_waxed:1b}
 setblock 24 -60 16 minecraft:polished_andesite
-setblock 24 -59 16 fundamentals:scheelite_ore
-setblock 24 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Scheelite Ore"','""','""','""']},is_waxed:1b}
+setblock 24 -59 16 fundamentals:pyrite_ore
+setblock 24 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Pyrite Ore"','""','""','""']},is_waxed:1b}
 setblock 25 -60 16 minecraft:polished_andesite
-setblock 25 -59 16 fundamentals:siderite_ore
-setblock 25 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Siderite Ore"','""','""','""']},is_waxed:1b}
+setblock 25 -59 16 fundamentals:pyrochlore_ore
+setblock 25 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Pyrochlore Ore"','""','""','""']},is_waxed:1b}
 setblock 26 -60 16 minecraft:polished_andesite
-setblock 26 -59 16 fundamentals:smithsonite_ore
-setblock 26 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Smithsonite Ore"','""','""','""']},is_waxed:1b}
+setblock 26 -59 16 fundamentals:pyrolusite_ore
+setblock 26 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Pyrolusite Ore"','""','""','""']},is_waxed:1b}
 setblock 27 -60 16 minecraft:polished_andesite
-setblock 27 -59 16 fundamentals:sperrylite_ore
-setblock 27 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Sperrylite Ore"','""','""','""']},is_waxed:1b}
+setblock 27 -59 16 fundamentals:ruby_ore
+setblock 27 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Ruby Ore"','""','""','""']},is_waxed:1b}
 setblock 28 -60 16 minecraft:polished_andesite
-setblock 28 -59 16 fundamentals:sphalerite_ore
-setblock 28 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Sphalerite Ore"','""','""','""']},is_waxed:1b}
+setblock 28 -59 16 fundamentals:rutile_ore
+setblock 28 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Rutile Ore"','""','""','""']},is_waxed:1b}
 setblock 29 -60 16 minecraft:polished_andesite
-setblock 29 -59 16 fundamentals:spodumene_ore
-setblock 29 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Spodumene Ore"','""','""','""']},is_waxed:1b}
+setblock 29 -59 16 fundamentals:sapphire_ore
+setblock 29 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Sapphire Ore"','""','""','""']},is_waxed:1b}
 setblock 30 -60 16 minecraft:polished_andesite
-setblock 30 -59 16 fundamentals:stibnite_ore
-setblock 30 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Stibnite Ore"','""','""','""']},is_waxed:1b}
+setblock 30 -59 16 fundamentals:scheelite_ore
+setblock 30 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Scheelite Ore"','""','""','""']},is_waxed:1b}
 setblock 31 -60 16 minecraft:polished_andesite
-setblock 31 -59 16 fundamentals:sylvite_ore
-setblock 31 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Sylvite Ore"','""','""','""']},is_waxed:1b}
+setblock 31 -59 16 fundamentals:siderite_ore
+setblock 31 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Siderite Ore"','""','""','""']},is_waxed:1b}
 setblock 32 -60 16 minecraft:polished_andesite
-setblock 32 -59 16 fundamentals:thortveitite_ore
-setblock 32 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Thortveitite"','"Ore"','""','""']},is_waxed:1b}
+setblock 32 -59 16 fundamentals:smithsonite_ore
+setblock 32 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Smithsonite Ore"','""','""','""']},is_waxed:1b}
 setblock 33 -60 16 minecraft:polished_andesite
-setblock 33 -59 16 fundamentals:trona_ore
-setblock 33 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Trona Ore"','""','""','""']},is_waxed:1b}
+setblock 33 -59 16 fundamentals:sperrylite_ore
+setblock 33 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Sperrylite Ore"','""','""','""']},is_waxed:1b}
 setblock 34 -60 16 minecraft:polished_andesite
-setblock 34 -59 16 fundamentals:uraninite_ore
-setblock 34 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Uraninite Ore"','""','""','""']},is_waxed:1b}
+setblock 34 -59 16 fundamentals:sphalerite_ore
+setblock 34 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Sphalerite Ore"','""','""','""']},is_waxed:1b}
 setblock 35 -60 16 minecraft:polished_andesite
-setblock 35 -59 16 fundamentals:wolframite_ore
-setblock 35 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Wolframite Ore"','""','""','""']},is_waxed:1b}
+setblock 35 -59 16 fundamentals:spodumene_ore
+setblock 35 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Spodumene Ore"','""','""','""']},is_waxed:1b}
 setblock 36 -60 16 minecraft:polished_andesite
-setblock 36 -59 16 fundamentals:xenotime_ore
-setblock 36 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Xenotime Ore"','""','""','""']},is_waxed:1b}
+setblock 36 -59 16 fundamentals:stibnite_ore
+setblock 36 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Stibnite Ore"','""','""','""']},is_waxed:1b}
 setblock 37 -60 16 minecraft:polished_andesite
-setblock 37 -59 16 fundamentals:zircon_ore
-setblock 37 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Zircon Ore"','""','""','""']},is_waxed:1b}
+setblock 37 -59 16 fundamentals:sylvite_ore
+setblock 37 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Sylvite Ore"','""','""','""']},is_waxed:1b}
+setblock 38 -60 16 minecraft:polished_andesite
+setblock 38 -59 16 fundamentals:thortveitite_ore
+setblock 38 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Thortveitite"','"Ore"','""','""']},is_waxed:1b}
 setblock 39 -60 16 minecraft:polished_andesite
-setblock 39 -59 16 minecraft:polished_andesite
-setblock 39 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Host rocks"','""','""','""']},is_waxed:1b}
+setblock 39 -59 16 fundamentals:topaz_ore
+setblock 39 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Topaz Ore"','""','""','""']},is_waxed:1b}
 setblock 40 -60 16 minecraft:polished_andesite
-setblock 40 -59 16 fundamentals:carbonatite
-setblock 40 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Carbonatite"','""','""','""']},is_waxed:1b}
+setblock 40 -59 16 fundamentals:tourmaline_ore
+setblock 40 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Tourmaline Ore"','""','""','""']},is_waxed:1b}
 setblock 41 -60 16 minecraft:polished_andesite
-setblock 41 -59 16 fundamentals:gabbro
-setblock 41 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Gabbro"','""','""','""']},is_waxed:1b}
+setblock 41 -59 16 fundamentals:trona_ore
+setblock 41 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Trona Ore"','""','""','""']},is_waxed:1b}
 setblock 42 -60 16 minecraft:polished_andesite
-setblock 42 -59 16 fundamentals:laterite
-setblock 42 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Laterite"','""','""','""']},is_waxed:1b}
+setblock 42 -59 16 fundamentals:uraninite_ore
+setblock 42 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Uraninite Ore"','""','""','""']},is_waxed:1b}
 setblock 43 -60 16 minecraft:polished_andesite
-setblock 43 -59 16 fundamentals:syenite
-setblock 43 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Syenite"','""','""','""']},is_waxed:1b}
+setblock 43 -59 16 fundamentals:wolframite_ore
+setblock 43 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Wolframite Ore"','""','""','""']},is_waxed:1b}
+setblock 44 -60 16 minecraft:polished_andesite
+setblock 44 -59 16 fundamentals:xenotime_ore
+setblock 44 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Xenotime Ore"','""','""','""']},is_waxed:1b}
+setblock 45 -60 16 minecraft:polished_andesite
+setblock 45 -59 16 fundamentals:zircon_ore
+setblock 45 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Zircon Ore"','""','""','""']},is_waxed:1b}
+setblock 47 -60 16 minecraft:polished_andesite
+setblock 47 -59 16 minecraft:polished_andesite
+setblock 47 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Host rocks"','""','""','""']},is_waxed:1b}
+setblock 48 -60 16 minecraft:polished_andesite
+setblock 48 -59 16 fundamentals:carbonatite
+setblock 48 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Carbonatite"','""','""','""']},is_waxed:1b}
+setblock 49 -60 16 minecraft:polished_andesite
+setblock 49 -59 16 fundamentals:gabbro
+setblock 49 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Gabbro"','""','""','""']},is_waxed:1b}
+setblock 50 -60 16 minecraft:polished_andesite
+setblock 50 -59 16 fundamentals:laterite
+setblock 50 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Laterite"','""','""','""']},is_waxed:1b}
+setblock 51 -60 16 minecraft:polished_andesite
+setblock 51 -59 16 fundamentals:syenite
+setblock 51 -59 15 minecraft:birch_wall_sign[facing=north]{front_text:{messages:['"Syenite"','""','""','""']},is_waxed:1b}
 setblock -20 -60 26 minecraft:polished_andesite
 setblock -20 -59 26 minecraft:polished_andesite
 setblock -20 -58 26 minecraft:polished_andesite

@@ -683,6 +683,102 @@
           }
         ]
       }
+    },
+    "fundamentals:raw_garnet": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_garnet"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_ruby": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_ruby"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_sapphire": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_sapphire"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_emery": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_emery"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_tourmaline": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_tourmaline"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_topaz": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_topaz"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_bismuthinite": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_bismuthinite"
+            ]
+          }
+        ]
+      }
+    },
+    "fundamentals:raw_native_bismuth": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "fundamentals:raw_native_bismuth"
+            ]
+          }
+        ]
+      }
     }
   },
   "parent": "fundamentals:root"

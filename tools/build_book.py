@@ -527,7 +527,7 @@ def rare_earths():
         "Memory is 1 µm NMOS on p-type, five layers of positive novolac resist developed in caustic soda, phosphorus from its chloride. "
         "The microprocessor is 1 µm CMOS on an epitaxial wafer, six layers, with aluminium interconnect.") + pages_of(
         "The advanced processor is 90 nm: eight layers, copper interconnect polished flat by a press after each. "
-        "Masks are chromium on glass, or on fused quartz for the reticles, etched in ceric ammonium nitrate. The 90 nm reticle is laser-written by a computer, so better computers take a computer to make.") + pages_of(
+        "Masks are chromium on glass, or on fused quartz for the reticles, etched in ceric ammonium nitrate. A reticle's quartz is lapped flat first: a deployer holding garnet paper or emery cloth works it, wearing the paper, before the chromium goes on. The 90 nm reticle is laser-written by a computer, so better computers take a computer to make.") + pages_of(
         "A saw dices each wafer into dies, more or fewer as the yield falls; each die goes onto a copper lead frame with gold bond wires and is sealed in plastic. "
         "A placed computer runs only beside a Power Supply on a live grid. It warms the air it runs in and trips its thermal cutout past 85 °C. Turtles run on fuel, pocket computers on their cells.")
         + [{"type": "patchouli:crafting", "recipe": "fundamentals:compute/power_supply"}], 17)
@@ -984,7 +984,7 @@ def metals():
         "and 950 mB of caustic soda for the digester, and the mercury comes back nineteen times in twenty.", "Gallium") + pages_of(
         "250 mB of gallate liquor on two electrodes give two gallium nuggets and 200 mB of caustic. Gallium melts at 29.8 °C, in a warm hand. "
         "The blue LED is indium gallium nitride on sapphire (Nakamura, Akasaki and Amano, Nobel Prize 2014), grown from gallium and ammonia near 1,000 °C: two gallium nuggets, an indium nugget, "
-        "an alumina for the sapphire and 250 mB of ammonia in a heated vat give two LED chips.") + pages_of(
+        "a sapphire wafer for the substrate and 250 mB of ammonia in a heated vat give two LED chips (see Corundum).") + pages_of(
         "A blue chip under a yellow phosphor, yttrium aluminium garnet with cerium, shines white: a chip, a yttrium oxide, a cerium oxide, a framed glass and two copper nuggets make six light bulbs. "
         "Gallium arsenide, the other half of gallium's use, wants arsenic, which the pack does not have.") + pages_of(
         "Cadmium. The zinc dust that cleans the leach liquor brings the cadmium down as a sponge, and the cadmium sponge is a toxic dust: the itai-itai disease of the Jinzu valley was cadmium from a zinc mine. "
@@ -993,6 +993,57 @@ def metals():
         "Sources: USGS, Mineral Commodity Summaries 2025, Germanium, Indium, Gallium and Cadmium; Ullmann's Encyclopedia of Industrial Chemistry, \"Germanium and Germanium Compounds\", "
         "\"Indium and Indium Compounds\", \"Gallium and Gallium Compounds\" and \"Cadmium and Cadmium Compounds\"; Sinclair, The Extractive Metallurgy of Zinc (AusIMM, 2005); "
         "Alfantazi and Moskalyk, \"Processing of indium: a review\", Minerals Engineering 16 (2003).", "Sources"), 22)
+    entry("metals", "abrasives", "Garnet and emery", "fundamentals:garnet_paper", pages_of(
+        "An abrasive cuts what is softer than it. Quartz sand, Create's sand paper, is hardness 7; almandine garnet, Fe3Al2(SiO4)3, is 7.5 and breaks to sharp edges; "
+        "corundum is 9, below only diamond. Garnet grows in schist as dark red dodecahedra, round to the eye: here in the graphite schist. "
+        "Being heavy and hard it outlasts the rock round it and washes into beach and river sand, as on the beaches of Tamil Nadu and Western Australia, where most of the world's garnet is dug.", "Garnet") + pages_of(
+        "Ground in a millstone or crushing wheels, a raw garnet gives a garnet sand. Henry Barton glued it to paper from 1878, at Gore Mountain in the Adirondacks: "
+        "a paper and two garnet sand make a garnet paper. It polishes whatever Create's sand paper polishes, in a hand or a deployer, and lasts 24 uses to sand paper's 8.", "Garnet paper") + pages_of(
+        "Emery is corundum and magnetite grown together, black and dense, quarried on Naxos since antiquity from lenses in marble. "
+        "Here it lies in the skarns, where granite baked limestone. Ground to emery powder, two on a white carpet make emery cloth, the metalworker's abrasive, which lasts 40 uses.", "Emery") + pages_of(
+        "Glass is lapped flat with loose garnet or corundum: Corning ground lens and plate glass with fine garnet powders, and diamond and fused alumina now compete for the work. "
+        "So a reticle's fused quartz is lapped before it is chromed, on a deployer holding garnet paper or emery cloth (see The Fab). The paper wears a use each time. "
+        "Garnet's other big use, blasting and the abrasive waterjet, has no machine in the pack.", "Lapping") + pages_of(
+        "Sources: USGS, Mineral Commodity Summaries 2025, Garnet (industrial); USGS, Minerals Yearbook, Abrasives; "
+        "Barton Mines Corporation, company history; Kogel and others, Industrial Minerals and Rocks, 7th ed. (SME, 2006), \"Garnet\" and \"Corundum and emery\".", "Sources"), 23)
+    entry("metals", "corundum", "Corundum", "fundamentals:sapphire_wafer", pages_of(
+        "Corundum is aluminium oxide, Al2O3, the alumina of the Bayer plant grown into a crystal. A little chromium makes it red, ruby; iron and titanium together make it blue, sapphire; "
+        "any other colour is sapphire too. Ruby grows where limestone is baked to marble, as at Mogok in Burma: here in the skarns. "
+        "Sapphire crystallises from syenite, rock with too little silica for quartz, as in the corundum syenites of Bancroft, Ontario and the Ilmen Mountains: here, scattered in the syenite massifs.", "Ruby and sapphire") + pages_of(
+        "Auguste Verneuil made the first gem corundum in 1902 by flame fusion. Alumina powder is tapped through an oxyhydrogen flame, melts at 2,050 °C and drips onto a pedestal, "
+        "which is lowered as a boule, the poire, grows on it. Four alumina, 500 mB of hydrogen and 250 mB of oxygen, superheated, give a sapphire boule; "
+        "pure alumina grows colourless, as the boules for watch jewels and windows do. Oxygen comes from air: a centrifuge vat that spins neon out of 1,000 mB of air gives 209 mB of it.", "Verneuil") + pages_of(
+        "Create's mechanical saw cuts a boule to four sapphire wafers. Sapphire is the substrate of the blue LED: gallium nitride grows on its face as on almost nothing else, "
+        "so the LED chip takes a sapphire wafer (see Germanium, indium, gallium and cadmium). Most LED sapphire is now grown by Kyropoulos's method, a crystal cooled slowly in its crucible, "
+        "but Verneuil's flame is the older road.", "Sapphire wafers") + pages_of(
+        "Ruby is a gem here and no more. Maiman's first laser of 1960 was a rod of synthetic ruby pumped by a flash tube, and ruby lasers have drilled watch jewels and diamond dies, "
+        "but nothing in the pack wants a pulsed red laser: The Fab's 90 nm reticle writer is the kind that runs on a continuous ultraviolet laser.", "Ruby") + pages_of(
+        "Sources: Verneuil, \"Mémoire sur la reproduction artificielle du rubis par fusion\", Annales de Chimie et de Physique 3 (1904); Dobrovinskaya, Lytvynov and Pishchik, Sapphire: Material, Manufacturing, Applications (Springer, 2009); "
+        "Hughes, Ruby and Sapphire (RWH, 1997); Maiman, \"Stimulated optical radiation in ruby\", Nature 187 (1960).", "Sources"), 24)
+    entry("metals", "gems", "Tourmaline and topaz", "fundamentals:raw_tourmaline", pages_of(
+        "Tourmaline is a boron silicate, the commonest boron mineral of the granites, in long striated prisms with a triangular section. Most is schorl, black, in pegmatite dykes; "
+        "the gem kinds are pink and green, sometimes both in one crystal. Here it lies in the pegmatite dykes, black with a little pink rubellite.", "Tourmaline") + pages_of(
+        "Dutch traders brought it from Ceylon around 1700 and called it the aschtrekker, the ash-puller: warmed by a fire, a crystal draws ash to its ends. That is pyroelectricity, named by Brewster in 1824, "
+        "and the Curie brothers found tourmaline piezoelectric in 1880: squeezed, it charges. Tourmaline gauges measured the pressure of underwater explosions in the Second World War. "
+        "Nothing in the pack reads one, so here it is a gem.", "The ash-puller") + pages_of(
+        "Topaz, Al2SiO4(F,OH)2, is hardness 8 on Mohs's scale, the mineral that defines it. It carries fluorine: the vapours that brought tin up into the granite's roof, "
+        "turning it to greisen, brought topaz with the cassiterite and wolframite, at St Michael's Mount in Cornwall and at the Schneckenstein in Saxony, whose wine-yellow crystals went to the Saxon court's jewels in Dresden. "
+        "Here it lies in the tin veins. It is a gem, and no more.", "Topaz") + pages_of(
+        "Sources: Deer, Howie and Zussman, An Introduction to the Rock-Forming Minerals, 3rd ed. (2013), Tourmaline and Topaz; Lang, \"Pyroelectricity: from ancient curiosity to modern imaging tool\", Physics Today 58 (2005); "
+        "Curie and Curie, Bulletin de la Société minéralogique de France 3 (1880).", "Sources"), 25)
+    entry("metals", "bismuth", "Bismuth", "fundamentals:bismuth_crystal", pages_of(
+        "Bismuthinite, Bi2S3, is stibnite's twin, lead-grey needles in sprays, and lies with tin and tungsten: in the greisen of the tin veins, as in Cornwall and Bolivia, and in the tungsten skarns, "
+        "as at Shizhuyuan in Hunan, one of the largest bismuth deposits there is. Native bismuth, the metal itself, silvery with a pink cast and dull where it has tarnished, "
+        "lies in the five-element veins of silver, cobalt, nickel, bismuth and uranium, as at Schneeberg in Saxony: here in the pitchblende veins.", "Bismuth") + pages_of(
+        "Bismuthinite roasts on a campfire or in a smoker to bismuth oxide, bismite, yellow, and gives off sulfur dioxide. Two oxide, a charcoal and a soda ash, heated, reduce to two bismuth ingots and a slag. "
+        "Native bismuth melts at 271 °C, so a furnace sweats it out of its rock, as Saxon miners liquated it in iron pipes over a wood fire.", "Smelting") + pages_of(
+        "Bismuth sits next to lead in the periodic table and is nearly as dense, with little of its poison, so it replaces lead. Tin and bismuth melt together at 138 °C, the eutectic Sn42Bi58: "
+        "a tin and a bismuth ingot, heated, make eight solder, as tin and lead do, for low-temperature lead-free soldering.", "Solder") + pages_of(
+        "An ingot melts in a heated basin to 144 mB of molten bismuth. Poured into a casting basin and left alone, it freezes from the edges in, and the edges of each face grow faster than the middle, "
+        "so the crystal grows as stepped square spirals round a hollow, a hopper crystal. Thirty seconds undisturbed give a bismuth crystal. Its colours are an oxide film a few hundred nanometres thick, "
+        "coloured as a soap bubble is, by interference: gold where thin, then magenta, blue and green as it thickens.", "Hopper crystals") + pages_of(
+        "Sources: USGS, Mineral Commodity Summaries 2025, Bismuth; Ullmann's Encyclopedia of Industrial Chemistry, \"Bismuth, Bismuth Alloys, and Bismuth Compounds\"; "
+        "Agricola, De Re Metallica (1556), book IX.", "Sources"), 26)
     oxidation()
 
 

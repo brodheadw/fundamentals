@@ -50,6 +50,7 @@ OURS = {
     "aqua_regia": (1210, 1.8, -42, 108, None, None, None, {LIQUID}, "SDS", "three of 36% hydrochloric to one of 68% nitric"),
     "bromine": (3103, 0.94, -7.2, 58.8, None, None, None, {"toxic"}, "CRC", "the element, a liquid"),
     "argon": (1.66, 0.0223, -189.3, -185.8, None, None, None, set(), "NIST", "gas"),
+    "oxygen": (1.33, 0.0204, -218.8, -183.0, None, None, None, set(), "NIST", "gas"),
     "chlorine": (2.99, 0.0134, -101.5, -34.0, None, None, None, {"toxic"}, "NIST", "gas, two and a half times as heavy as air"),
     "water_gas": (0.66, 0.0145, -205, -191.5, -191.5, 500, None, {"toxic"}, "NIST", "carbon monoxide and hydrogen, half and half; flammable gas"),
     "ammonia": (0.72, 0.0099, -77.7, -33.3, None, None, None, {"toxic"}, "NIST", "gas"),
@@ -101,6 +102,8 @@ OURS = {
                                 "Bayer pregnant liquor, about 150 g/L Na2O, leaving the digester at 145 °C under pressure"),
     "molten_pig_iron": (6900, 6, 1147, 2860, None, None, 1450, set(), "Smithells",
                         "pig iron of about 4% carbon tapped at 1,450 °C; it freezes at the iron-carbon eutectic, 1,147 °C"),
+    "molten_bismuth": (10050, 1.8, 271.4, 1564, None, None, 300, set(), "Smithells",
+                       "bismuth melted at 300 °C; it freezes at 271 °C and grows by a thirtieth as it does, as water does"),
 }
 GAS = "gas at 20 °C and 1 atm"
 FOREIGN = {

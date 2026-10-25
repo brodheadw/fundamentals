@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+- Gems and abrasives. Garnet in the graphite schist and in beach and river sand grinds to garnet sand for garnet paper; emery, corundum and magnetite in the skarns, grinds to emery powder for emery cloth. Both are sand paper to Create, lasting 24 and 40 uses to its 8, and a reticle's fused quartz is lapped flat with one in a deployer before it is chromed. Ruby in the skarns' marble, sapphire in the syenite massifs, tourmaline in the pegmatite dykes and topaz in the tin veins are gems (`c:gems/...`).
+- Synthetic sapphire by Verneuil's flame fusion: four alumina, hydrogen and oxygen, superheated, grow a sapphire boule, which a saw cuts to four wafers. The blue LED chip now grows on a sapphire wafer, not on alumina powder. Oxygen comes off air separation with the neon and argon, and is Chemica's oxygen too.
+- Bismuth: bismuthinite in the tin veins and tungsten skarns roasts to bismuth oxide and reduces with charcoal; native bismuth in the pitchblende veins smelts straight to an ingot. Tin and bismuth make lead-free solder. A bismuth ingot melts in a heated basin, and molten bismuth left thirty seconds in a casting basin grows a bismuth hopper crystal, stepped and iridescent with its oxide film (63 minerals).
 - Crushing wheels no longer multiply ore. Every ore block Create crushes, vanilla copper and gold included, gives one crushed ore, not five or seven, and the byproducts stay as they were. Create Propulsion's own recipes crush its platinum ores.
 - Native gold stays electrum until it is parted. Raw and crushed native gold smelt and blast to an electrum ingot, not gold, and crushed gold washes to three nuggets as raw gold pans. Ochrum crushes to native gold and veridium to chalcopyrite and malachite, not to crushed ore and nuggets.
 - Iron dust is a ground ingot, so the blast furnace gives 144 mB of pig iron for it, not an ore's 216; a crushed ingot no longer puddles back to more iron than went in.

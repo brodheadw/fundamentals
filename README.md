@@ -22,17 +22,18 @@ An ore takes on whatever rock it formed in. The same hematite sits in stone, dee
 
 ## The minerals
 
-Fifty-five of them, each dropping a raw chunk of itself:
+Sixty-three of them, each dropping a raw chunk of itself:
 
 - **Iron and ferroalloys:** Hematite, Magnetite, Goethite, Siderite, Pyrolusite, Pentlandite, Nickel Laterite, Chromite, Wolframite, Scheelite, Molybdenite, Cobaltite, Ilmenite, Rutile
 - **Copper:** Chalcopyrite, Bornite, Chalcocite, Covellite, Malachite, Azurite, Cuprite
-- **Aluminium, lead, zinc, tin, antimony:** Bauxite, Galena, Sphalerite, Smithsonite, Hemimorphite, Cassiterite, Stibnite
+- **Aluminium, lead, zinc, tin, antimony, bismuth:** Bauxite, Galena, Sphalerite, Smithsonite, Hemimorphite, Cassiterite, Stibnite, Bismuthinite, Native Bismuth
 - **Lithium:** Spodumene
 - **Zirconium, beryllium, niobium and tantalum:** Zircon, Beryl, Bertrandite, Pyrochlore, Columbite-Tantalite
 - **Uranium:** Uraninite (pitchblende)
 - **Rare earths:** Bastnäsite, Monazite, Xenotime, Ion-Adsorption Clay, Loparite, Euxenite, Thortveitite (scandium)
 - **Precious:** Native Gold, Native Silver, Acanthite, Sperrylite, Cooperite, Braggite, Cinnabar
 - **Fluxes, salts and carbon:** Fluorite, Borax, Trona, Halite, Sylvite, Graphite
+- **Gems and abrasives:** Garnet, Ruby, Sapphire, Emery, Tourmaline, Topaz
 
 Vanilla copper ore stays: it is native copper, a real mineral. Vanilla gold ore still generates too, but it mines as raw native gold, which is now also washed into river and beach sand and carried in quartz veins. Vanilla iron ore is gone, including the big deep veins, which are magnetite now.
 
@@ -114,6 +115,8 @@ Beryllium comes from beryl, pale green prisms in the pegmatites, and bertrandite
 Graphite lies in deepslate bands, flakes scattered through metamorphosed rock as in the schists of Heilongjiang and Mozambique. Two raw graphite float in water with a little kerosene, the collector every graphite mill uses, to a concentrate, and hydrofluoric acid or an arc vat under argon purifies it to graphite; Acheson's synthetic graphite, coke baked in the arc vat, is the same item. Four graphite and creosote, the pitch binder, press hot to The Factory's graphite electrode. Stibnite, lead-grey needles, fills quartz veins in mountain country, as at Xikuangshan; roasted on a fire (sulfur dioxide and all) it is antimony trioxide, which charcoal and soda ash reduce to antimony, and three antimony nuggets in eight lead make the antimonial lead of a battery grid. Pyrochlore in the carbonatite plugs is the niobium mineral, nine tenths of the world's from Araxá: washed to a concentrate and burnt with aluminium powder and hematite to ferroniobium, the way Araxá sells it, of which a nugget in two steel blocks makes eighteen high-strength low-alloy steel, two heavy plates to the ingot. Columbite-tantalite rides in the spodumene pegmatites; hydrofluoric and sulfuric acid with a potash take its tantalum out as potassium fluorotantalate and its niobium as the oxide, and sodium under argon reduces the salt to tantalum. The sodium is the Downs cell's, salt and calcium chloride electrolysed molten. Euxenite digested the same way and loparite chlorinated as at Solikamsk give niobium oxide too. Tantalum goes into capacitors and, a nugget at a time, the superalloy. Sylvite, potassium chloride, lies in seams in the evaporite beds with the halite; a hot leach parts it from its salt as potash, the muriate farmers buy.
 
 Gold is native gold: in quartz veins with stibnite and galena, and washed out of them into river and beach sand. A fan's wash pans raw native gold to three nuggets, and a furnace melts it, raw or crushed, to electrum, never gold; mercury catches the rest as amalgam, which a heated basin retorts to electrum, giving most of its mercury back and the rest to the air, so an amalgam basin poisons anyone near without a diving helmet on a filled backtank. Chlorine blown through the electrum (Miller's process) or aqua regia parts it to a gold ingot and a silver nugget. Cyanide, which replaced mercury in the 1890s, needs hydrogen cyanide from methane, which the pack does not have.
+
+Garnet lies in the graphite schist and washes into beach and river sand; ground, it makes garnet paper, and emery from the skarns makes emery cloth: both polish as Create's sand paper does and outlast it, and a reticle's fused quartz is lapped flat with one before it is chromed. Ruby grows in the skarns' marble and sapphire in the syenite massifs; synthetic sapphire is grown Verneuil's way, alumina through an oxyhydrogen flame (oxygen from the same air separation as neon and argon), and sawn to the wafers the blue LED grows on. Tourmaline in the pegmatites and topaz in the tin veins are gems. Bismuthinite in the tin veins and skarns roasts and reduces to bismuth, and native bismuth in the pitchblende veins melts out in a furnace; tin and bismuth make lead-free solder, and molten bismuth left in a casting basin grows an iridescent hopper crystal.
 
 ### The platinum metals
 

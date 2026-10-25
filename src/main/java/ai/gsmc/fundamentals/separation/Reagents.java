@@ -79,6 +79,7 @@ public final class Reagents {
             new Reagent("sulfur_dioxide", 0xF2F0E2, Kind.GAS),
             new Reagent("sulfur_trioxide", 0xF4F2EA, Kind.GAS),
             new Reagent("hydrogen_sulfide", 0xEAF0E4, Kind.GAS),
+            new Reagent("oxygen", 0xE6EEF8, Kind.GAS),
             new Reagent("spent_liquor", 0x8E9A86, Kind.WASTE),
             new Reagent("calcium_chloride_liquor", 0xDCE6E4, Kind.WASTE),
             new Reagent("spent_acid", 0x4A3A30, Kind.WASTE),
@@ -109,7 +110,8 @@ public final class Reagents {
             new Reagent("spent_bayer_liquor", 0xB89060, Kind.CAUSTIC),
             new Reagent("sodium_gallate_liquor", 0xE4EAE6, Kind.CAUSTIC),
             new Reagent("sodium_vanadate_liquor", 0xEEE2A0, Kind.CAUSTIC),
-            new Reagent("molten_pig_iron", 0xF07A1E, Kind.MOLTEN));
+            new Reagent("molten_pig_iron", 0xF07A1E, Kind.MOLTEN),
+            new Reagent("molten_bismuth", 0xC8B4C0, Kind.MOLTEN));
 
     private Reagents() {}
 }

@@ -16,6 +16,20 @@
         },
         "fraction": 0.16,
         "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:topaz_ore"
+        },
+        "fraction": 0.03,
+        "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:bismuthinite_ore"
+        },
+        "fraction": 0.03,
+        "style": "pockets"
       }
     ],
     "radius": {

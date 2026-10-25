@@ -16,6 +16,13 @@
         },
         "fraction": 0.02,
         "style": "disseminated"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:sapphire_ore"
+        },
+        "fraction": 0.01,
+        "style": "disseminated"
       }
     ],
     "radius": {

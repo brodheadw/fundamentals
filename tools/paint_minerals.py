@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import math
 import random
 import sys
 from pathlib import Path
@@ -16,6 +17,8 @@ HOSTS = {
     "laterite": ([(118, 54, 34), (140, 68, 42), (158, 82, 50), (172, 98, 60)], 1, 1, (2, 4, 3, 1)),
 }
 ROCK_BLOCKS = list(HOSTS)
+
+NEEDLES = ("bismuthinite",)
 
 WHOLE = ["ion_adsorption_clay", "bauxite", "goethite", "nickel_laterite", "native_sulfur"]
 
@@ -105,6 +108,15 @@ P = {
     "columbite": ((12, 10, 10), (32, 28, 28), (60, 54, 52), (132, 122, 116)),
     "sylvite": ((150, 58, 44), (204, 112, 92), (230, 172, 152), (252, 232, 222)),
     "native_gold": ((148, 102, 18), (212, 164, 38), (244, 206, 78), (255, 246, 172)),
+    "garnet": ((52, 8, 14), (98, 18, 28), (142, 34, 44), (214, 108, 116)),
+    "ruby": ((92, 14, 42), (148, 28, 66), (192, 58, 98), (242, 150, 182)),
+    "sapphire": ((22, 34, 82), (42, 62, 128), (76, 100, 168), (166, 188, 232)),
+    "emery": ((22, 22, 28), (46, 46, 56), (74, 74, 88), (140, 140, 156)),
+    "tourmaline": ((10, 12, 12), (26, 30, 30), (48, 54, 54), (122, 132, 130)),
+    "rubellite": ((112, 24, 58), (170, 54, 96), (210, 104, 140), (244, 182, 206)),
+    "topaz": ((120, 88, 50), (206, 176, 120), (236, 220, 174), (255, 252, 238)),
+    "bismuthinite": ((26, 26, 26), (70, 68, 62), (120, 116, 104), (222, 214, 186)),
+    "native_bismuth": ((92, 66, 70), (164, 136, 138), (212, 188, 186), (250, 240, 236)),
 }
 
 BORNITE = [((60, 34, 92), (104, 62, 150), (150, 104, 190), (200, 164, 226)),
@@ -165,6 +177,14 @@ RECIPES = {
     "columbite": [("crystals", "plate", 4, 1), ("speck", 4)],
     "sylvite": [("crystals", "cube", 5, 1), ("speck", 3)],
     "native_gold": [("smear", 2, 3, 6), ("speck", 6)],
+    "garnet": [("crystals", "knob", 4, 1), ("speck", 4)],
+    "ruby": [("crystals", "plate", 3, 1), ("speck", 3)],
+    "sapphire": [("crystals", "prism", 3, 1), ("speck", 3)],
+    "emery": [("blob", 5, 4, 8), ("companion", "magnetite", 5), ("speck", 5)],
+    "tourmaline": [("crystals", "prism", 4, 1), ("companion", "rubellite", 2), ("speck", 2)],
+    "topaz": [("crystals", "prism", 3, 1), ("speck", 2)],
+    "bismuthinite": [("crystals", "needle", 4, 4), ("speck", 2)],
+    "native_bismuth": [("smear", 3, 4, 7), ("speck", 5)],
 }
 
 
@@ -525,6 +545,30 @@ def paint_raw(name, palette=None):
     return img
 
 
+def paint_needles(name, palette=None):
+    """A radiating spray of needles from one root, as stibnite and bismuthinite grow."""
+    rng = random.Random("raw-" + name)
+    tones = ramp(palette or P[name])
+    img = Image.new("RGBA", (SIZE, SIZE), (0, 0, 0, 0))
+    count = 8
+    for i in range(count):
+        angle = -2.45 + i * 1.6 / (count - 1) + rng.uniform(-0.03, 0.03)
+        length = rng.uniform(9.0, 12.5)
+        dx, dy = math.cos(angle), math.sin(angle)
+        cells = []
+        for step in range(int(length * 3)):
+            cell = (int(7.5 + dx * step / 3), int(14.5 + dy * step / 3))
+            if 0 <= cell[0] < SIZE and 0 <= cell[1] < SIZE and cell not in cells:
+                cells.append(cell)
+        for n, (x, y) in enumerate(cells):
+            if x + 1 < SIZE and img.getpixel((x + 1, y))[3] == 0:
+                img.putpixel((x + 1, y), tones[1] + (255,))
+            img.putpixel((x, y), tones[7 if n == len(cells) - 1 else (6, 4, 5, 3)[i % 4]] + (255,))
+    for x, y in ((6, 14), (7, 14), (8, 14), (7, 15)):
+        img.putpixel((x, y), tones[2] + (255,))
+    return img
+
+
 def paint_rocks():
     return {name: host_rock(random.Random("host-" + name), name) for name in ROCK_BLOCKS}
 
@@ -537,6 +581,7 @@ SHEET_ORDER = [
     "chromite", "wolframite", "scheelite", "molybdenite", "cobaltite", "ilmenite", "rutile",
     "native_silver", "argentite", "sperrylite", "cooperite", "braggite", "cinnabar", "spodumene", "fluorite", "borax", "trona", "halite",
     "zircon", "beryl", "bertrandite", "uraninite", "graphite", "stibnite", "pyrochlore", "columbite", "sylvite", "native_gold",
+    "garnet", "ruby", "sapphire", "emery", "tourmaline", "topaz", "bismuthinite", "native_bismuth",
 ]
 
 
@@ -591,7 +636,7 @@ if __name__ == "__main__":
         if name in VANILLA_RAW:
             (OUT.parent / "item" / f"raw_{name}.png").unlink(missing_ok=True)
             continue
-        paint_raw(name).save(OUT.parent / "item" / f"raw_{name}.png")
+        (paint_needles(name) if name in NEEDLES else paint_raw(name)).save(OUT.parent / "item" / f"raw_{name}.png")
     print(f"wrote {len(textures)} ores x {len(GRADES)} grades x {VARIANTS} variants and {len(rocks)} rocks to {OUT}")
     if len(sys.argv) > 1:
         contact_sheet(textures, sys.argv[1])

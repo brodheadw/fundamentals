@@ -438,6 +438,12 @@
       "freezes": -189.3,
       "boils": -185.8
     },
+    "fundamentals:oxygen": {
+      "density": 1.33,
+      "viscosity": 0.0204,
+      "freezes": -218.8,
+      "boils": -183.0
+    },
     "fundamentals:chlorine": {
       "density": 2.99,
       "viscosity": 0.0134,
@@ -779,6 +785,13 @@
       "freezes": 1147,
       "boils": 2860,
       "celsius": 1450
+    },
+    "fundamentals:molten_bismuth": {
+      "density": 10050,
+      "viscosity": 1.8,
+      "freezes": 271.4,
+      "boils": 1564,
+      "celsius": 300
     },
     "minecraft:water": {
       "density": 998.2,

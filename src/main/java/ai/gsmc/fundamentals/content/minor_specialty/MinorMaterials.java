@@ -20,7 +20,13 @@ public final class MinorMaterials {
                 MaterialProperties.builder().density(0.47).hardness(0.55));
         MaterialRegistry.defineMineral(GROUP, "columbite", "Columbite-Tantalite", "(Fe,Mn)(Nb,Ta)2O6", "tantalum", new MaterialForm[] {ORE, RAW, DUST},
                 MaterialProperties.builder().density(0.69).hardness(0.65));
+        MaterialRegistry.defineMineral(GROUP, "bismuthinite", null, "Bi2S3", "bismuth", new MaterialForm[] {ORE, RAW},
+                MaterialProperties.builder().density(0.86).hardness(0.20));
+        MaterialRegistry.defineMineral(GROUP, "native_bismuth", null, "Bi", "bismuth", new MaterialForm[] {ORE, RAW},
+                MaterialProperties.builder().density(1.24).hardness(0.22));
 
+        MaterialRegistry.define(GROUP, "bismuth", null, MaterialType.ELEMENT, "Bi", new MaterialForm[] {OXIDE, INGOT, NUGGET},
+                MaterialProperties.builder().density(1.24).hardness(0.22).conductivity(0.01));
         MaterialRegistry.define(GROUP, "antimony", null, MaterialType.ELEMENT, "Sb", new MaterialForm[] {OXIDE, INGOT, NUGGET},
                 MaterialProperties.builder().density(0.85).hardness(0.30).conductivity(0.04).toxicity(0.40));
         MaterialRegistry.define(GROUP, "antimonial_lead", null, MaterialType.ALLOY, "Pb-Sb", new MaterialForm[] {INGOT, PLATE},

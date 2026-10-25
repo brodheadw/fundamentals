@@ -18,9 +18,9 @@
       "fluid": "minecraft:water"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 1000,
-      "fluid": "chemica:oxygen"
+      "tag": "c:oxygen"
     },
     {
       "item": "fundamentals:white_phosphorus"
