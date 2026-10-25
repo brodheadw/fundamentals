@@ -1,5 +1,8 @@
 package ai.gsmc.fundamentals.ironworking;
 
+import ai.gsmc.fundamentals.Fundamentals;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -22,6 +25,13 @@ public class BloomeryBlockEntity extends BlockEntity {
 
     public static final int CAPACITY = 4;
     public static final int BURN_TICKS = 1200;
+    /**
+     * Charcoal per ore that makes a bloomery run hot. Its iron then soaks up enough carbon to melt, and is tapped as pig
+     * iron, run into a sand bed and set as pigs: the way the first European blast furnaces grew out of the bloomery.
+     */
+    public static final int HOT = 2;
+    private static final ResourceLocation BLOOM = ResourceLocation.fromNamespaceAndPath(Fundamentals.MOD_ID, "iron_bloom");
+    private static final ResourceLocation CAST_IRON = ResourceLocation.fromNamespaceAndPath("tfmg", "cast_iron_ingot");
 
     private final List<ItemStack> ore = new ArrayList<>();
     private final List<ItemStack> products = new ArrayList<>();
@@ -84,15 +94,18 @@ public class BloomeryBlockEntity extends BlockEntity {
         if (++bloomery.burned < BURN_TICKS) {
             return;
         }
+        boolean hot = bloomery.charcoal >= HOT * bloomery.ore.size();
         for (ItemStack lump : bloomery.ore) {
             recipeFor(level, lump).ifPresent(recipe -> {
-                bloomery.products.add(recipe.value().result().copy());
+                ItemStack result = recipe.value().result();
+                boolean iron = BuiltInRegistries.ITEM.getKey(result.getItem()).equals(BLOOM);
+                bloomery.products.add(hot && iron ? new ItemStack(BuiltInRegistries.ITEM.get(CAST_IRON)) : result.copy());
                 if (!recipe.value().byproduct().isEmpty()) {
                     bloomery.products.add(recipe.value().byproduct().copy());
                 }
             });
         }
-        bloomery.charcoal -= bloomery.ore.size();
+        bloomery.charcoal -= bloomery.ore.size() * (hot ? HOT : 1);
         bloomery.ore.clear();
         bloomery.burned = 0;
         level.setBlock(pos, state.setValue(BloomeryBlock.LIT, false), Block.UPDATE_ALL);

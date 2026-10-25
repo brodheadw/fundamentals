@@ -192,6 +192,9 @@ def ironworking():
     entry("ironworking", "bloomery", "The bloomery", "fundamentals:bloomery", pages_of(
         "Build a bloomery out of clay, load it with iron ore and charcoal, light it with a torch and wait. Only charcoal: the sulfur in coal "
         "ruins iron. What comes out is not an ingot but a bloom, a spongy lump of iron and slag that never melted. Siderite goes in roasted.", "The bloomery")
+        + pages_of("Overcharge it, two charcoal to every ore, and it runs hot: the iron soaks up carbon until it melts, and what is tapped is pig iron, "
+                   "run into a sand bed and set as pigs of cast iron. Medieval smelters made it by accident and threw it away until they learned to use it; "
+                   "at Lapphyttan in Sweden a bloomery grown tall became Europe's first blast furnace. Cast iron builds the blast furnace, and the blast furnace makes pig iron by the tank.")
         + [crafting("fundamentals:bloomery")], 1)
     entry("ironworking", "bloom", "Bloom and hammer", "fundamentals:iron_bloom", pages_of(
         "A bloom is hammered, not cast. Beat it with the smithing hammer to drive the slag out and weld the iron together into wrought iron. "
