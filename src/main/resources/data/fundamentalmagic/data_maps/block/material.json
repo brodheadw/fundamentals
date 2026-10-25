@@ -416,6 +416,45 @@
     "fundamentals:zircon_ore": {
       "conductivity": 0.4,
       "mass": 4.6
+    },
+    "tfmg:steel_block": {
+      "conductivity": 0.15,
+      "mass": 7.85,
+      "melt_at": 1450
+    },
+    "tfmg:cast_iron_block": {
+      "conductivity": 0.15,
+      "mass": 7.2,
+      "melt_at": 1200
+    },
+    "tfmg:aluminum_block": {
+      "conductivity": 0.6,
+      "mass": 2.7,
+      "melt_at": 660
+    },
+    "tfmg:lead_block": {
+      "conductivity": 0.1,
+      "mass": 11.3,
+      "melt_at": 327
+    },
+    "tfmg:nickel_block": {
+      "conductivity": 0.25,
+      "mass": 8.9,
+      "melt_at": 1455
+    },
+    "tfmg:constantan_block": {
+      "conductivity": 0.06,
+      "mass": 8.9
+    },
+    "create:brass_block": {
+      "conductivity": 0.3,
+      "mass": 8.5,
+      "melt_at": 930
+    },
+    "create:zinc_block": {
+      "conductivity": 0.3,
+      "mass": 7.1,
+      "melt_at": 420
     }
   }
 }
