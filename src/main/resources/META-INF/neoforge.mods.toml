@@ -22,6 +22,9 @@ config = "${id}.createnuclear.mixins.json"
 [[mixins]]
 config = "${id}.computercraft.mixins.json"
 
+[[mixins]]
+config = "${id}.coldsweat.mixins.json"
+
 [[dependencies.${id}]]
 modId = "neoforge"
 type = "required"
@@ -95,5 +98,13 @@ modId = "computercraft"
 type = "optional"
 versionRange = "*"
 # after CC:Tweaked, so the fab's computer recipes override its own
+ordering = "AFTER"
+side = "BOTH"
+
+# Optional: with it, its world temperature is ours and the parkas insulate; see cold/ColdSweatCompat.
+[[dependencies.${id}]]
+modId = "cold_sweat"
+type = "optional"
+versionRange = "*"
 ordering = "AFTER"
 side = "BOTH"

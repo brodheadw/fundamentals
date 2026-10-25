@@ -1,0 +1,33 @@
+{
+  "type": "armor",
+  "item": {
+    "items": [
+      "fundamentals:expedition_parka"
+    ]
+  },
+  "entity": {
+    "entities": [
+      "*"
+    ],
+    "equipment": {
+      "head": {
+        "items": [
+          "fundamentals:expedition_hood"
+        ]
+      },
+      "legs": {
+        "items": [
+          "fundamentals:expedition_trousers"
+        ]
+      },
+      "feet": {
+        "items": [
+          "fundamentals:expedition_boots"
+        ]
+      }
+    }
+  },
+  "immune_temp_modifiers": {
+    "cold_sweat:water": 1.0
+  }
+}
