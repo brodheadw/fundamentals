@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:white_carpet"
+    },
+    {
+      "item": "fundamentals:emery_dust"
+    },
+    {
+      "item": "fundamentals:emery_dust"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:emery_cloth"
+  }
+}

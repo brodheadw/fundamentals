@@ -9,6 +9,27 @@
         },
         "fraction": 0.25,
         "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:bismuthinite_ore"
+        },
+        "fraction": 0.02,
+        "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:emery_ore"
+        },
+        "fraction": 0.04,
+        "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:ruby_ore"
+        },
+        "fraction": 0.01,
+        "style": "pockets"
       }
     ],
     "radius": {

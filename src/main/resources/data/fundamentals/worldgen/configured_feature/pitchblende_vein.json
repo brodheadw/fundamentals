@@ -23,6 +23,13 @@
         },
         "fraction": 0.08,
         "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:native_bismuth_ore"
+        },
+        "fraction": 0.04,
+        "style": "pockets"
       }
     ],
     "radius": {

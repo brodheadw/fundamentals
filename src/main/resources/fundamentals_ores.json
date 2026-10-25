@@ -301,6 +301,46 @@
       "soft": true,
       "mineral": "native_gold",
       "raw": "minecraft:raw_gold"
+    },
+    {
+      "name": "garnet_ore",
+      "soft": true,
+      "mineral": "garnet"
+    },
+    {
+      "name": "ruby_ore",
+      "soft": false,
+      "mineral": "ruby"
+    },
+    {
+      "name": "sapphire_ore",
+      "soft": false,
+      "mineral": "sapphire"
+    },
+    {
+      "name": "emery_ore",
+      "soft": false,
+      "mineral": "emery"
+    },
+    {
+      "name": "tourmaline_ore",
+      "soft": false,
+      "mineral": "tourmaline"
+    },
+    {
+      "name": "topaz_ore",
+      "soft": false,
+      "mineral": "topaz"
+    },
+    {
+      "name": "bismuthinite_ore",
+      "soft": false,
+      "mineral": "bismuthinite"
+    },
+    {
+      "name": "native_bismuth_ore",
+      "soft": false,
+      "mineral": "native_bismuth"
     }
   ],
   "hosts": {

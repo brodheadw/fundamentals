@@ -26,9 +26,11 @@
     "fundamentals:raw_bastnasite",
     "fundamentals:raw_fluorite",
     "fundamentals:raw_pyrochlore",
+    "fundamentals:raw_topaz",
     "fundamentals:roasted_bastnasite",
     "fundamentals:scandium_fluoride",
     "fundamentals:terbium_fluoride",
+    "fundamentals:topaz_ore",
     "fundamentals:uranium_tetrafluoride",
     "fundamentals:yttrium_fluoride",
     "tfmg:lithium_charge"

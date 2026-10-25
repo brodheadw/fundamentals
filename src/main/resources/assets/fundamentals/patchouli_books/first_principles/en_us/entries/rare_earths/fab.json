@@ -23,7 +23,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "The advanced processor is 90 nm: eight layers, copper interconnect polished flat by a press after each. Masks are chromium on glass, or on fused quartz for the reticles, etched in ceric ammonium nitrate. The 90 nm reticle is laser-written by a computer, so better computers take a computer to make."
+      "text": "The advanced processor is 90 nm: eight layers, copper interconnect polished flat by a press after each. Masks are chromium on glass, or on fused quartz for the reticles, etched in ceric ammonium nitrate."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A reticle's quartz is lapped flat first: a deployer holding garnet paper or emery cloth works it, wearing the paper, before the chromium goes on. The 90 nm reticle is laser-written by a computer, so better computers take a computer to make."
     },
     {
       "type": "patchouli:text",

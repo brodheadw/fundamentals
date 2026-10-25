@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "fundamentals:garnet_dust"
+    },
+    {
+      "item": "fundamentals:garnet_dust"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:garnet_paper"
+  }
+}

@@ -20,7 +20,9 @@ FORMS = {
     "block": (C_TAGS / "item/storage_blocks", "Block of {}"),
 }
 
-GROUND = ("bastnasite", "xenotime", "loparite", "euxenite", "thortveitite", "chromite", "uraninite", "columbite")
+GROUND = ("bastnasite", "xenotime", "loparite", "euxenite", "thortveitite", "chromite", "uraninite", "columbite", "garnet", "emery")
+# Abrasive grain goes by its trade name.
+NAMES = {"garnet_dust": "Garnet Sand", "emery_dust": "Emery Powder"}
 
 # What the washer keeps: mineral sands 85-90%, gravity and flotation on hard rock 60-80%.
 WASHED = {
@@ -75,7 +77,7 @@ def main():
             else:
                 write(ASSETS / f"models/item/{name}.json",
                       {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})
-                lang[f"item.fundamentals.{name}"] = title.format(display)
+                lang[f"item.fundamentals.{name}"] = NAMES.get(name, title.format(display))
         if "nugget" in made:
             packed(made["nugget"], made["ingot"], f"{material}_ingot")
         if "block" in made:

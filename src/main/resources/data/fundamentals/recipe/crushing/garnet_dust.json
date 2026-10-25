@@ -1,0 +1,14 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_garnet"
+    }
+  ],
+  "processing_time": 400,
+  "results": [
+    {
+      "id": "fundamentals:garnet_dust"
+    }
+  ]
+}

@@ -267,17 +267,67 @@ def boule():
     return img
 
 
-def wafer():
+def wafer(sheen=((88, 96, 132), (118, 128, 168), (150, 140, 186), (128, 160, 190)), rim=(60, 64, 84), alpha=255):
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-    sheen = ((88, 96, 132), (118, 128, 168), (150, 140, 186), (128, 160, 190))
     for y in range(16):
         for x in range(16):
             r = ((x - 7.5) ** 2 + (y - 7.5) ** 2) ** 0.5
             if r <= 6.6 and not (y == 14 and 6 <= x <= 9):
                 tone = sheen[(x + 2 * y) // 5 % 4]
-                img.putpixel((x, y), (60, 64, 84, 255) if r > 5.8 else tone + (255,))
+                img.putpixel((x, y), rim + (255,) if r > 5.8 else tone + (alpha,))
     for x, y in ((5, 4), (6, 4), (4, 5)):
         img.putpixel((x, y), (220, 226, 246, 255))
+    return img
+
+
+def verneuil_boule():
+    # Verneuil's boule, the poire: a pear of colourless corundum, narrow where it grew from the pedestal, domed where the flame left it.
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    halves = {2: 2, 3: 3, 4: 4, 5: 4, 6: 4, 7: 4, 8: 3, 9: 3, 10: 2, 11: 2, 12: 1, 13: 1}
+    glass = [(150, 162, 176, 255), (196, 208, 222, 220), (226, 234, 244, 200), (176, 188, 204, 220), (120, 130, 146, 255)]
+    for y, half in halves.items():
+        for x in range(8 - half, 8 + half):
+            edge = x in (8 - half, 7 + half) or y == 2 or (halves.get(y - 1, 0) < half and x not in range(8 - halves.get(y - 1, 0), 8 + halves.get(y - 1, 0)))
+            tone = glass[0] if edge and x < 8 else glass[4] if edge else glass[2] if x == 6 and 3 < y < 9 else glass[1] if x < 8 else glass[3]
+            img.putpixel((x, y), tone)
+    for x in range(6, 10):
+        img.putpixel((x, 14), (96, 90, 84, 255))
+    return img
+
+
+def abrasive_sheet(backing, grit):
+    """A square of abrasive-coated sheet seen from above, one corner turned up to show its back."""
+    rng = random.Random("sheet" + str(grit))
+    img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    for y in range(16):
+        for x in range(16):
+            if abs(x - 7.5) + abs(y - 7.5) * 1.6 <= 7.6:
+                rim = abs(x - 7.5) + abs(y - 7.5) * 1.6 > 6.4
+                below = y > 7.5
+                colour = (grit[2] if below else grit[0]) if rim else rng.choice((grit[0], grit[1], grit[1], grit[2]))
+                img.putpixel((x, y), colour + (255,))
+    for x, y in ((11, 5), (12, 5), (12, 6), (13, 6), (12, 7), (13, 7), (14, 7)):
+        img.putpixel((x, y), backing[0] + (255,))
+    for x, y in ((11, 6), (11, 7), (12, 8)):
+        img.putpixel((x, y), backing[1] + (255,))
+    return img
+
+
+def hopper(size=16):
+    """A bismuth hopper crystal face: square terraces stepping down to a hollow centre, under an oxide film whose
+    thickness, and so its interference colour, grows from the rim inwards and drifts across the face."""
+    film = [(214, 170, 64), (196, 92, 150), (84, 92, 196), (62, 168, 196), (98, 178, 104), (226, 196, 96), (168, 84, 176), (70, 124, 206)]
+    img = Image.new("RGBA", (size, size))
+    for y in range(size):
+        for x in range(size):
+            ring = int(max(abs(x - 7.5), abs(y - 7.5)))
+            terrace, rim = (7 - ring) // 2, (7 - ring) % 2 == 0
+            hue = film[(terrace + (x + y) // 9) % len(film)]
+            lit = (y - 7.5 < 0 and abs(y - 7.5) >= abs(x - 7.5)) or (x - 7.5 < 0 and abs(x - 7.5) > abs(y - 7.5))
+            scale = (1.25 if lit else 0.62) if rim else (0.95 if lit else 0.8)
+            if ring == 0:
+                scale = 0.35
+            img.putpixel((x, y), tuple(min(255, int(c * scale)) for c in hue) + (255,))
     return img
 
 
@@ -472,6 +522,11 @@ def main():
     paint_raw("polysilicon", ((70, 74, 84), (122, 128, 140), (168, 174, 188), (214, 220, 232))).save(TEXTURES / "item/polysilicon.png")
     boule().save(TEXTURES / "item/silicon_boule.png")
     wafer().save(TEXTURES / "item/silicon_wafer.png")
+    verneuil_boule().save(TEXTURES / "item/sapphire_boule.png")
+    wafer(((208, 218, 230), (222, 230, 240), (196, 208, 224), (230, 236, 246)), (140, 152, 170), 200).save(TEXTURES / "item/sapphire_wafer.png")
+    abrasive_sheet(((236, 226, 200), (196, 184, 156)), ((168, 70, 52), (130, 44, 36), (92, 26, 24))).save(TEXTURES / "item/garnet_paper.png")
+    abrasive_sheet(((214, 212, 204), (170, 168, 160)), ((84, 84, 94), (58, 58, 66), (32, 32, 38))).save(TEXTURES / "item/emery_cloth.png")
+    hopper().save(TEXTURES / "block/bismuth_crystal.png")
     heap("zinc_leach_residue", (150, 92, 64), (110, 62, 40), (64, 34, 22)).save(TEXTURES / "item/zinc_leach_residue.png")
     chip().save(TEXTURES / "item/led_chip.png")
     heap("indium_tin_oxide", (214, 220, 150), (180, 190, 110), (122, 130, 66)).save(TEXTURES / "item/indium_tin_oxide.png")

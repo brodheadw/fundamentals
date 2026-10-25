@@ -3,6 +3,8 @@
   "values": [
     "fundamentals:magnesium_chloride",
     "fundamentals:magnesium_ingot",
-    "fundamentals:seawater_bucket"
+    "fundamentals:raw_tourmaline",
+    "fundamentals:seawater_bucket",
+    "fundamentals:tourmaline_ore"
   ]
 }

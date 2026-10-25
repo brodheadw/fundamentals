@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:nuggets/bismuth"
+    }
+  },
+  "result": {
+    "id": "fundamentals:bismuth_ingot",
+    "count": 1
+  }
+}

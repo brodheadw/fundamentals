@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "fundamentals:garnet_ore",
     "fundamentals:ilmenite_ore",
     "fundamentals:ion_adsorption_clay_ore",
     "fundamentals:laterite",

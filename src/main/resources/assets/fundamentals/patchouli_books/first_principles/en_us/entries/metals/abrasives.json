@@ -1,0 +1,41 @@
+{
+  "name": "Garnet and emery",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:garnet_paper",
+  "sortnum": 23,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "An abrasive cuts what is softer than it. Quartz sand, Create's sand paper, is hardness 7; almandine garnet, Fe3Al2(SiO4)3, is 7.5 and breaks to sharp edges; corundum is 9, below only diamond. Garnet grows in schist as dark red dodecahedra, round to the eye: here in the graphite schist.",
+      "title": "Garnet"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Being heavy and hard it outlasts the rock round it and washes into beach and river sand, as on the beaches of Tamil Nadu and Western Australia, where most of the world's garnet is dug."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ground in a millstone or crushing wheels, a raw garnet gives a garnet sand. Henry Barton glued it to paper from 1878, at Gore Mountain in the Adirondacks: a paper and two garnet sand make a garnet paper. It polishes whatever Create's sand paper polishes, in a hand or a deployer, and lasts 24 uses to sand paper's 8.",
+      "title": "Garnet paper"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Emery is corundum and magnetite grown together, black and dense, quarried on Naxos since antiquity from lenses in marble. Here it lies in the skarns, where granite baked limestone. Ground to emery powder, two on a white carpet make emery cloth, the metalworker's abrasive, which lasts 40 uses.",
+      "title": "Emery"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Glass is lapped flat with loose garnet or corundum: Corning ground lens and plate glass with fine garnet powders, and diamond and fused alumina now compete for the work. So a reticle's fused quartz is lapped before it is chromed, on a deployer holding garnet paper or emery cloth (see The Fab). The paper wears a use each time.",
+      "title": "Lapping"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Garnet's other big use, blasting and the abrasive waterjet, has no machine in the pack."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: USGS, Mineral Commodity Summaries 2025, Garnet (industrial); USGS, Minerals Yearbook, Abrasives; Barton Mines Corporation, company history; Kogel and others, Industrial Minerals and Rocks, 7th ed. (SME, 2006), \"Garnet\" and \"Corundum and emery\".",
+      "title": "Sources"
+    }
+  ]
+}

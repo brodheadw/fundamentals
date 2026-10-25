@@ -23,6 +23,7 @@ SHARED = {
     "chlorine": ("chlorine", "chlorine"),
     "ammonia": ("ammonia", "ammonia"),
     "argon": ("argon", "argon"),
+    "oxygen": ("oxygen", "oxygen"),
     "salt_brine": ("brine", "brine"),
     "caustic_soda": ("caustic_soda", "caustic_soda"),
     "titanium_tetrachloride": ("titanium_tetrachloride", "titanium_tetrachloride"),

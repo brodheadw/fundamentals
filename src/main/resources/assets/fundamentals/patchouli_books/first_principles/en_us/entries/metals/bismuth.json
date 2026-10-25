@@ -1,0 +1,45 @@
+{
+  "name": "Bismuth",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:bismuth_crystal",
+  "sortnum": 26,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Bismuthinite, Bi2S3, is stibnite's twin, lead-grey needles in sprays, and lies with tin and tungsten: in the greisen of the tin veins, as in Cornwall and Bolivia, and in the tungsten skarns, as at Shizhuyuan in Hunan, one of the largest bismuth deposits there is.",
+      "title": "Bismuth"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Native bismuth, the metal itself, silvery with a pink cast and dull where it has tarnished, lies in the five-element veins of silver, cobalt, nickel, bismuth and uranium, as at Schneeberg in Saxony: here in the pitchblende veins."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Bismuthinite roasts on a campfire or in a smoker to bismuth oxide, bismite, yellow, and gives off sulfur dioxide. Two oxide, a charcoal and a soda ash, heated, reduce to two bismuth ingots and a slag.",
+      "title": "Smelting"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Native bismuth melts at 271 °C, so a furnace sweats it out of its rock, as Saxon miners liquated it in iron pipes over a wood fire."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Bismuth sits next to lead in the periodic table and is nearly as dense, with little of its poison, so it replaces lead. Tin and bismuth melt together at 138 °C, the eutectic Sn42Bi58: a tin and a bismuth ingot, heated, make eight solder, as tin and lead do, for low-temperature lead-free soldering.",
+      "title": "Solder"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "An ingot melts in a heated basin to 144 mB of molten bismuth. Poured into a casting basin and left alone, it freezes from the edges in, and the edges of each face grow faster than the middle, so the crystal grows as stepped square spirals round a hollow, a hopper crystal. Thirty seconds undisturbed give a bismuth crystal.",
+      "title": "Hopper crystals"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Its colours are an oxide film a few hundred nanometres thick, coloured as a soap bubble is, by interference: gold where thin, then magenta, blue and green as it thickens."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: USGS, Mineral Commodity Summaries 2025, Bismuth; Ullmann's Encyclopedia of Industrial Chemistry, \"Bismuth, Bismuth Alloys, and Bismuth Compounds\"; Agricola, De Re Metallica (1556), book IX.",
+      "title": "Sources"
+    }
+  ]
+}

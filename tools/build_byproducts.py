@@ -68,6 +68,7 @@ DEAD = {
 
 WHY = {
     "fundamentals:argon": "Argon comes off the same cryogenic air separation that gives neon, as every industrial air plant co-produces both.",
+    "fundamentals:oxygen": "Oxygen is most of what an air separation plant sells; neon and argon are taken from the same column.",
     "fundamentals:bittern": "Bittern, the mother liquor of salt pans, is the old source of bromine and magnesium chloride.",
     "fundamentals:caustic_soda": "Caustic soda comes off the chlor-alkali cell beside its chlorine, and the gallium circuit hands the Bayer liquor's caustic back to the digester.",
     "fundamentals:spent_bayer_liquor": "The precipitators' spent liquor goes back to the digester, as every Bayer refinery recycles its caustic, and its gallium is taken out on the way.",

@@ -25,6 +25,14 @@ public final class IndustrialMaterials {
         mineral("gypsum", "Gypsum", "CaSO4·2H2O", "gypsum", MaterialProperties.builder().density(0.29));
         mineral("trona", "Trona", "Na3H(CO3)2·2H2O", "soda_ash", MaterialProperties.builder().density(0.27));
         mineral("native_sulfur", "Native Sulfur", "S", "sulfur", MaterialProperties.builder().density(0.26));
+        mineral("ruby", "Ruby", "Al2O3,Cr", "corundum", MaterialProperties.builder().density(0.51).hardness(0.90));
+        mineral("sapphire", "Sapphire", "Al2O3,Fe,Ti", "corundum", MaterialProperties.builder().density(0.51).hardness(0.90));
+        mineral("tourmaline", "Tourmaline", "Na(Fe,Mg)3Al6(BO3)3Si6O18(OH)4", "tourmaline", MaterialProperties.builder().density(0.39).hardness(0.72));
+        mineral("topaz", "Topaz", "Al2SiO4(F,OH)2", "topaz", MaterialProperties.builder().density(0.45).hardness(0.80));
+        MaterialRegistry.defineMineral(GROUP, "garnet", "Garnet", "Fe3Al2(SiO4)3", "garnet", new MaterialForm[] {ORE, RAW, DUST},
+                MaterialProperties.builder().density(0.55).hardness(0.75));
+        MaterialRegistry.defineMineral(GROUP, "emery", "Emery", "Al2O3,Fe3O4", "corundum", new MaterialForm[] {ORE, RAW, DUST},
+                MaterialProperties.builder().density(0.51).hardness(0.85));
         MaterialRegistry.defineMineral(GROUP, "graphite", "Graphite", "C", "graphite", new MaterialForm[] {ORE, RAW, CONCENTRATE},
                 MaterialProperties.builder().density(0.28).conductivity(0.10));
 

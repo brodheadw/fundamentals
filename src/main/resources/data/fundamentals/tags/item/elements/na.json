@@ -13,6 +13,7 @@
     "fundamentals:raw_halite",
     "fundamentals:raw_loparite",
     "fundamentals:raw_pyrochlore",
+    "fundamentals:raw_tourmaline",
     "fundamentals:raw_trona",
     "fundamentals:red_mud",
     "fundamentals:red_mud_block",
@@ -22,6 +23,7 @@
     "fundamentals:sodium_chromate",
     "fundamentals:sodium_dichromate",
     "fundamentals:sodium_ingot",
+    "fundamentals:tourmaline_ore",
     "fundamentals:trona_ore",
     "minecraft:lapis_block",
     "minecraft:lapis_lazuli"

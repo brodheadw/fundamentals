@@ -54,7 +54,8 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "calomel": "Calomel", "copper_cement": "Copper Cement", "cobalt_cake": "Cobalt Cake", "anode_mud": "Anode Mud",
          "jarosite": "Jarosite", "lead_silver_residue": "Lead-Silver Residue", "hydrotreating_catalyst": "Cobalt-Molybdenum Catalyst",
          "spent_fuel_rod": "Spent Fuel Rod", "cooled_spent_fuel": "Cooled Spent Fuel", "vitrified_waste": "Vitrified Waste",
-         "hot_steel": "Hot Steel", "hardened_steel": "Hardened Steel", "galvanic_cell": "Copper-Zinc Galvanic Cell"}
+         "hot_steel": "Hot Steel", "hardened_steel": "Hardened Steel", "galvanic_cell": "Copper-Zinc Galvanic Cell",
+         "sapphire_boule": "Sapphire Boule", "sapphire_wafer": "Sapphire Wafer", "garnet_paper": "Garnet Paper", "emery_cloth": "Emery Cloth"}
 # Registered by uses.Uses as uses.Fertiliser, in this order.
 FERTILISERS = {"ammonium_nitrate": "Ammonium Nitrate", "urea": "Urea", "superphosphate": "Superphosphate", "ammonium_phosphate": "Ammonium Phosphate",
                "npk_fertiliser": "NPK Fertiliser"}
@@ -67,7 +68,7 @@ MAGNET_MACHINES = {"electric_motor": "sequenced_assembly/motor", "generator": "s
                    "electric_pump": "crafting/materials/electric_pump", "voltmeter": "crafting/materials/voltmeter"}
 MAGNET_PATTERNS = {"electric_pump": ["QCQ", "MPM", "KWK"], "stator": ["CM MC", "MCSCM", "AAWAA"]}
 BLOCKS = {"clarifier_sludge_block": "Clarifier Tailings", "red_mud_block": "Bauxite Residue", "phosphogypsum_block": "Phosphogypsum Stack", "jarosite_block": "Jarosite Pond",
-          "waste_canister": "Waste Canister"}
+          "waste_canister": "Waste Canister", "bismuth_crystal": "Bismuth Crystal"}
 # Registered by uses.Uses in this order.
 PGM_ITEMS = {"ammonium_chloride": "Ammonium Chloride", "insoluble_residue": "Insoluble Residue", "iridium_rhodium_residue": "Iridium-Rhodium Residue",
              "ammonium_chloroplatinate": "Ammonium Chloroplatinate", "dichlorodiammine_palladium": "Dichlorodiammine Palladium",
@@ -399,7 +400,7 @@ def nickel():
     pgm_vat("cobalt_electrowinning", [fluid("cobalt_chloride_liquor", 500)], [result("cobalt_ingot"), result_fluid("chlorine", 250)],
             machines=("tfmg:electrode", "tfmg:electrode"), heat=None, folder=USES)
     tag_file(DATA / "tags/item/nickel_dusts.json", [f"fundamentals:{name}" for name in ("nickel_matte_dust", "converter_matte_dust", "roasted_pentlandite", "nickel_oxide")])
-    tag_file(DATA / "tags/item/sulfides.json", [f"fundamentals:{name}" for name in ("raw_pentlandite", "raw_cobaltite", "converter_matte_dust", "raw_stibnite")])
+    tag_file(DATA / "tags/item/sulfides.json", [f"fundamentals:{name}" for name in ("raw_pentlandite", "raw_cobaltite", "converter_matte_dust", "raw_stibnite", "raw_bismuthinite")])
 
 
 def tin():
@@ -603,7 +604,7 @@ def gallium():
             machines=electrodes, heat=None, folder=USES)
     pgm_vat("gallium", [fluid("sodium_gallate_liquor", 250)], [result("gallium_nugget", 2), result_fluid("caustic_soda", 200)],
             machines=electrodes, heat=None, folder=USES)
-    pgm_vat("led_chip", tag("c:nuggets/gallium", 2) + tag("c:nuggets/indium") + item("alumina") + [fluid("ammonia", 250)], [result("led_chip", 2)], folder=USES)
+    pgm_vat("led_chip", tag("c:nuggets/gallium", 2) + tag("c:nuggets/indium") + item("sapphire_wafer") + [fluid("ammonia", 250)], [result("led_chip", 2)], folder=USES)
     mixing("light_bulb_led", item("led_chip") + item("yttrium_oxide") + item("cerium_oxide") + item("create:framed_glass") + tag("c:nuggets/copper", 2),
            [result("tfmg:light_bulb", 6)])
 
@@ -1210,11 +1211,41 @@ def names():
     write_lang(lang)
 
 
+def abrasives():
+    # Garnet paper is sand paper with garnet for the sand (Barton's, from 1878); emery cloth the same on cloth.
+    for paper, grit, backing in (("garnet_paper", "garnet_dust", "minecraft:paper"), ("emery_cloth", "emery_dust", "minecraft:white_carpet")):
+        write(USES / f"{paper}.json", {"type": "minecraft:crafting_shapeless", "category": "misc",
+                                       "ingredients": item(backing) + item(grit, 2), "result": result(paper)})
+    tag_file(DATA.parent / "create/tags/item/sandpaper.json", ["fundamentals:garnet_paper", "fundamentals:emery_cloth"])
+    tag_file(DATA / "tags/item/lapping_abrasives.json", ["fundamentals:garnet_paper", "fundamentals:emery_cloth"])
+
+
+def corundum():
+    # Verneuil (1902): alumina powder sifted through an oxyhydrogen flame drips onto a turning pedestal and grows a boule.
+    mixing("sapphire_boule", item("alumina", 4) + [fluid("tfmg:hydrogen", 500), fluid("oxygen", 250)], [result("sapphire_boule")], "superheated")
+    write(USES / "sapphire_wafer.json", {"type": "create:cutting", "ingredients": item("sapphire_boule"), "processing_time": 400,
+                                         "results": [result("sapphire_wafer", 4)]})
+
+
+def bismuth():
+    roast("bismuthinite", "bismuth_oxide")
+    mixing("bismuth_ingot", item("bismuth_oxide", 2) + item("minecraft:charcoal") + item("soda_ash"), [result("bismuth_ingot", 2), result("tfmg:slag")], "heated")
+    # Native bismuth melts out of its rock at 271 °C, as it was liquated in iron pipes over a fire.
+    for kind, time in (("smelting", 200), ("blasting", 100)):
+        write(USES / f"bismuth_ingot_from_native_{kind}.json", {"type": f"minecraft:{kind}", "category": "misc", "ingredient": {"item": "fundamentals:raw_native_bismuth"},
+                                                                "result": result("bismuth_ingot"), "experience": 0.1, "cookingtime": time})
+    mixing("molten_bismuth", tag("c:ingots/bismuth"), [result_fluid("molten_bismuth", 144)], "heated")
+    # Left alone in a casting basin, the melt freezes from the edges in, and the faces outgrow their centres: a hopper crystal.
+    write(USES / "bismuth_crystal.json", {"type": "tfmg:casting", "ingredients": [fluid("molten_bismuth", 144)], "processing_time": 600,
+                                          "results": [result("bismuth_crystal")]})
+    mixing("solder_from_bismuth", tag("c:ingots/tin") + tag("c:ingots/bismuth"), [result("solder", 8)], "heated")
+
+
 def air_separation():
-    # The Factory spins its neon out of 1,000 mB of air in a centrifuge vat; argon comes out of the same air in the same vat, so one recipe gives both.
+    # The Factory spins its neon out of 1,000 mB of air in a centrifuge vat; argon and oxygen come out of the same air in the same vat, so one recipe gives all three.
     write(TFMG / "vat_machine_recipe/neon.json", {
         "type": "tfmg:vat_machine_recipe", "ingredients": [fluid("tfmg:air", 1000)], "machines": ["tfmg:centrifuge"], "min_size": 1, "processing_time": 10,
-        "results": [{"id": "tfmg:neon", "amount": 1}, {"id": "fundamentals:argon", "amount": 9}]})
+        "results": [{"id": "tfmg:neon", "amount": 1}, {"id": "fundamentals:argon", "amount": 9}, {"id": "fundamentals:oxygen", "amount": 209}]})
 
 
 def main():
@@ -1227,7 +1258,7 @@ def main():
     shutil.rmtree(PLATINUM, ignore_errors=True)
     shutil.rmtree(PLASTICS, ignore_errors=True)
     shutil.rmtree(TFMG_ASSETS / "models", ignore_errors=True)
-    for pattern in ("roasted_c*", "roasted_pentlandite_*", "roasted_siderite_*", "nickel_oxide_*", "copper_calcine_*", "zinc_oxide_*", "roasted_tin_*", "antimony_oxide_*"):
+    for pattern in ("roasted_c*", "roasted_pentlandite_*", "roasted_siderite_*", "nickel_oxide_*", "copper_calcine_*", "zinc_oxide_*", "roasted_tin_*", "antimony_oxide_*", "bismuth_oxide_*"):
         for stale in ROASTING.glob(pattern):
             stale.unlink()
     air_separation()
@@ -1278,6 +1309,9 @@ def main():
     niobium_tantalum()
     potash()
     gold()
+    abrasives()
+    corundum()
+    bismuth()
     lead_and_zinc_sinks()
     batteries()
     plastics()

@@ -725,6 +725,16 @@
         ]
       }
     },
+    "bi": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": "#fundamentals:elements/bi"
+          }
+        ]
+      }
+    },
     "th": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
@@ -819,6 +829,7 @@
       "au",
       "hg",
       "pb",
+      "bi",
       "th",
       "u"
     ]

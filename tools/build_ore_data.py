@@ -89,7 +89,17 @@ ORES = {
     "columbite": ("tantalum", "pickaxe", "iron"),
     "sylvite": ("potash", "pickaxe", None),
     "native_gold": ("gold", ("shovel", "pickaxe"), "iron"),
+    "garnet": ("garnet", ("shovel", "pickaxe"), None),
+    "ruby": ("corundum", "pickaxe", "iron"),
+    "sapphire": ("corundum", "pickaxe", "iron"),
+    "emery": ("corundum", "pickaxe", "iron"),
+    "tourmaline": ("tourmaline", "pickaxe", "iron"),
+    "topaz": ("topaz", "pickaxe", "iron"),
+    "bismuthinite": ("bismuth", "pickaxe", "stone"),
+    "native_bismuth": ("bismuth", "pickaxe", "stone"),
 }
+# Rough crystals, tagged as the gems they are cut from.
+GEMS = ("garnet", "ruby", "sapphire", "tourmaline", "topaz")
 
 ROCKS = {name: "shovel" if name == "laterite" else "pickaxe" for name in ROCK_BLOCKS}
 
@@ -146,7 +156,8 @@ DEPOSITS = {
                        "anywhere", (36, 72), 18, "rock"),
     "manganese_bed": ("bed", "create:limestone", [("pyrolusite", 0.28, "pockets")], (8, 12), (3, 5), None,
                       "anywhere", (0, 60), 20, "rock"),
-    "tungsten_skarn": ("bed", "create:limestone", [("scheelite", 0.25, "pockets")], (6, 9), (3, 4), None,
+    "tungsten_skarn": ("bed", "create:limestone", [("scheelite", 0.25, "pockets"), ("bismuthinite", 0.02, "pockets"), ("emery", 0.04, "pockets"),
+                                                     ("ruby", 0.01, "pockets")], (6, 9), (3, 4), None,
                        "hydrothermal", (-32, 40), 20, "rock"),
     "mercury_lens": ("bed", None, [("cinnabar", 0.25, "pockets")], (5, 8), (2, 4), None,
                      "hydrothermal", (0, 72), 30, "rock"),
@@ -170,7 +181,7 @@ DEPOSITS = {
     "carbonatite_plug": ("plug", "carbonatite", [("bastnasite", 0.16, "pockets"), ("pyrochlore", 0.05, "disseminated"), ("monazite", 0.05, "top")],
                          (6, 9), None, (20, 34),
                          "carbonatite", (-56, 0), 30, "rock"),
-    "syenite_massif": ("plug", "syenite", [("loparite", 0.05, "seams"), ("zircon", 0.02, "disseminated")], (8, 12), None, (16, 26),
+    "syenite_massif": ("plug", "syenite", [("loparite", 0.05, "seams"), ("zircon", 0.02, "disseminated"), ("sapphire", 0.01, "disseminated")], (8, 12), None, (16, 26),
                        "alkaline", (-32, 32), 40, "rock"),
     "layered_intrusion": ("bed", "gabbro",
                           [("chromite", 0.12, "seams"), ("pentlandite", 0.05, "pockets"),
@@ -180,7 +191,8 @@ DEPOSITS = {
     "nickel_sulfide": ("bed", "gabbro", [("pentlandite", 0.14, "pockets")], (9, 12), (5, 7), None,
                        "anywhere", (-60, -8), 45, "rock"),
     "pegmatite_dyke": ("vein", "minecraft:granite", [("xenotime", 0.08, "pockets"), ("euxenite", 0.04, "pockets"),
-                                                         ("thortveitite", 0.01, "pockets"), ("beryl", 0.02, "pockets")],
+                                                         ("thortveitite", 0.01, "pockets"), ("beryl", 0.02, "pockets"),
+                                                         ("tourmaline", 0.04, "pockets")],
                        (11, 15), (3, 5), (14, 24), "pegmatite", (-16, 48), 16, "rock"),
     "monazite_vein": ("vein", "minecraft:quartz_block", [("monazite", 0.25, "pockets")], (9, 13), (2, 3), (12, 18),
                       "pegmatite", (0, 40), 48, "rock"),
@@ -189,16 +201,18 @@ DEPOSITS = {
                             "pegmatite", (0, 64), 18, "rock"),
     "beryllium_tuff": ("bed", "minecraft:tuff", [("bertrandite", 0.10, "disseminated"), ("fluorite", 0.05, "pockets")], (8, 12), (3, 5), None,
                        "arid_oxide", (40, 70), 30, "rock"),
-    "tin_vein": ("vein", None, [("cassiterite", 0.36, "pockets"), ("wolframite", 0.16, "pockets")],
+    "tin_vein": ("vein", None, [("cassiterite", 0.36, "pockets"), ("wolframite", 0.16, "pockets"), ("topaz", 0.03, "pockets"),
+                               ("bismuthinite", 0.03, "pockets")],
                  (10, 15), (2, 3), (12, 24), "pegmatite", (-16, 56), 9, "rock"),
     "silver_vein": ("vein", "minecraft:calcite", [("argentite", 0.38, "pockets"), ("native_silver", 0.16, "pockets")],
                     (10, 15), (1, 2), (14, 26), "hydrothermal", (-32, 64), 12, "rock"),
     "cobalt_vein": ("vein", "minecraft:calcite", [("cobaltite", 0.45, "pockets")], (8, 12), (1, 2), (12, 20),
                     "hydrothermal", (-32, 32), 15, "rock"),
-    "pitchblende_vein": ("vein", "minecraft:calcite", [("uraninite", 0.30, "pockets"), ("native_silver", 0.08, "pockets"), ("cobaltite", 0.08, "pockets")],
+    "pitchblende_vein": ("vein", "minecraft:calcite", [("uraninite", 0.30, "pockets"), ("native_silver", 0.08, "pockets"), ("cobaltite", 0.08, "pockets"),
+                                                             ("native_bismuth", 0.04, "pockets")],
                          (8, 12), (1, 2), (12, 20), "hydrothermal", (-40, 24), 36, "rock"),
     "roll_front": ("bed", "minecraft:sandstone", [("uraninite", 0.14, "pockets")], (9, 13), (2, 4), None, "arid_oxide", (20, 56), 30, "rock"),
-    "graphite_schist": ("bed", "minecraft:deepslate", [("graphite", 0.24, "disseminated")], (9, 13), (3, 5), None, "anywhere", (-48, 8), 40, "rock"),
+    "graphite_schist": ("bed", "minecraft:deepslate", [("graphite", 0.24, "disseminated"), ("garnet", 0.05, "pockets")], (9, 13), (3, 5), None, "anywhere", (-48, 8), 40, "rock"),
     "antimony_vein": ("vein", "minecraft:quartz_block", [("stibnite", 0.34, "pockets"), ("native_gold", 0.02, "pockets")], (9, 13), (1, 2), (12, 20),
                       "hydrothermal", (-24, 48), 24, "rock"),
     "gold_quartz_vein": ("vein", "minecraft:quartz_block", [("native_gold", 0.10, "pockets"), ("stibnite", 0.03, "pockets"), ("galena", 0.03, "disseminated")],
@@ -221,6 +235,7 @@ PLACERS = {
     "cassiterite": (54, 66, 1, 9),
     "zircon": (54, 66, 1, 9),
     "native_gold": (54, 66, 1, 6),
+    "garnet": (54, 66, 1, 9),
 }
 
 REMOVED = {
@@ -236,7 +251,7 @@ PLASTIC_BLOCKS = [f"fundamentals:{dye}_plastic_block" for dye in ("white", "oran
 OTHER_MINEABLE = {"pickaxe": ["fundamentals:bloomery", "fundamentals:panel_rack", "fundamentals:solar_panel", "fundamentals:mixer_settler", "fundamentals:plastic_fluid_tank",
                                 "fundamentals:magnetomigration_cell", "fundamentals:dyed_plastic_pipe", "fundamentals:titanium_pipe",
                                 "fundamentals:titanium_mechanical_pump", "fundamentals:titanium_fluid_valve", "fundamentals:titanium_fluid_tank",
-                                "fundamentals:mercury_thermometer", "fundamentals:spirit_thermometer", "fundamentals:bimetallic_thermometer", "fundamentals:type_k_thermocouple", "fundamentals:type_s_thermocouple", "fundamentals:mercury_barometer", "fundamentals:barograph", "fundamentals:waste_canister", "fundamentals:power_supply", "fundamentals:field_mill"] + STORAGE_BLOCKS + PLASTIC_BLOCKS
+                                "fundamentals:mercury_thermometer", "fundamentals:spirit_thermometer", "fundamentals:bimetallic_thermometer", "fundamentals:type_k_thermocouple", "fundamentals:type_s_thermocouple", "fundamentals:mercury_barometer", "fundamentals:barograph", "fundamentals:waste_canister", "fundamentals:power_supply", "fundamentals:field_mill", "fundamentals:bismuth_crystal"] + STORAGE_BLOCKS + PLASTIC_BLOCKS
                 + [f"fundamentals:{name}" for name in OXIDATION_BLOCKS]}
 OTHER_TIERED = {"stone": STORAGE_BLOCKS + [f"fundamentals:{name}" for name in OXIDATION_BLOCKS if name != "inert_storage_drum"]}
 
@@ -362,7 +377,7 @@ def main():
     assert generated == set(ORES), f"ores that never generate, or unknown ores: {sorted(generated ^ set(ORES))}"
 
     for stale in (DATA / "worldgen", DATA / "neoforge", TFMG / "worldgen", TFMG / "neoforge", DATA / "tags/worldgen", DATA / "tags/block/ores", DATA / "tags/item/ores",
-                  DATA / "tags/item/raw_materials", C_TAGS / "block/ores", C_TAGS / "item/ores", C_TAGS / "item/raw_materials"):
+                  DATA / "tags/item/raw_materials", C_TAGS / "block/ores", C_TAGS / "item/ores", C_TAGS / "item/raw_materials", C_TAGS / "item/gems"):
         shutil.rmtree(stale, ignore_errors=True)
     shutil.rmtree(ASSETS / "models/block/ore", ignore_errors=True)
 
@@ -406,6 +421,9 @@ def main():
         tag(DATA / f"tags/item/raw_materials/{commodity}.json", names)
     for commodity in SHARED:
         tag(C_TAGS / f"item/raw_materials/{commodity}.json", [f"#fundamentals:raw_materials/{commodity}"])
+    for gem in GEMS:
+        tag(C_TAGS / f"item/gems/{gem}.json", [raw_item(gem)])
+    tag(C_TAGS / "item/gems.json", [f"#c:gems/{gem}" for gem in GEMS])
     from build_chemica_compat import optional, raw_materials
     from build_create_nuclear_compat import raw_materials as create_nuclear_raw
     removed = raw_materials()

@@ -1,0 +1,45 @@
+{
+  "name": "Corundum",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:sapphire_wafer",
+  "sortnum": 24,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Corundum is aluminium oxide, Al2O3, the alumina of the Bayer plant grown into a crystal. A little chromium makes it red, ruby; iron and titanium together make it blue, sapphire; any other colour is sapphire too. Ruby grows where limestone is baked to marble, as at Mogok in Burma: here in the skarns.",
+      "title": "Ruby and sapphire"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sapphire crystallises from syenite, rock with too little silica for quartz, as in the corundum syenites of Bancroft, Ontario and the Ilmen Mountains: here, scattered in the syenite massifs."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Auguste Verneuil made the first gem corundum in 1902 by flame fusion. Alumina powder is tapped through an oxyhydrogen flame, melts at 2,050 °C and drips onto a pedestal, which is lowered as a boule, the poire, grows on it.",
+      "title": "Verneuil"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Four alumina, 500 mB of hydrogen and 250 mB of oxygen, superheated, give a sapphire boule; pure alumina grows colourless, as the boules for watch jewels and windows do. Oxygen comes from air: a centrifuge vat that spins neon out of 1,000 mB of air gives 209 mB of it."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Create's mechanical saw cuts a boule to four sapphire wafers. Sapphire is the substrate of the blue LED: gallium nitride grows on its face as on almost nothing else, so the LED chip takes a sapphire wafer (see Germanium, indium, gallium and cadmium).",
+      "title": "Sapphire wafers"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Most LED sapphire is now grown by Kyropoulos's method, a crystal cooled slowly in its crucible, but Verneuil's flame is the older road."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Ruby is a gem here and no more. Maiman's first laser of 1960 was a rod of synthetic ruby pumped by a flash tube, and ruby lasers have drilled watch jewels and diamond dies, but nothing in the pack wants a pulsed red laser: The Fab's 90 nm reticle writer is the kind that runs on a continuous ultraviolet laser.",
+      "title": "Ruby"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: Verneuil, \"Mémoire sur la reproduction artificielle du rubis par fusion\", Annales de Chimie et de Physique 3 (1904); Dobrovinskaya, Lytvynov and Pishchik, Sapphire: Material, Manufacturing, Applications (Springer, 2009); Hughes, Ruby and Sapphire (RWH, 1997); Maiman, \"Stimulated optical radiation in ruby\", Nature 187 (1960).",
+      "title": "Sources"
+    }
+  ]
+}
