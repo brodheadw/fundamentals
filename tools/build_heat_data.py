@@ -251,6 +251,28 @@ def thermometers(lang):
             "key": {"U": upper, "L": lower, "B": beside, "A": {"item": "create:andesite_casing"}},
             "result": {"id": f"fundamentals:{name}", "count": 1}})
         lang[f"block.fundamentals.{name}"] = display
+    # A field mill: an earthed brass vane turning over sense plates chops the field into a current an electron tube amplifies.
+    dial = {"dial": "fundamentals:block/field_mill_dial"}
+    write(ASSETS / "models/block/field_mill.json", {"parent": "fundamentals:block/thermometer", "textures": dial})
+    write(ASSETS / "models/item/field_mill.json", {"parent": "fundamentals:item/thermometer", "textures": dial})
+    write(ASSETS / "blockstates/field_mill.json", {"variants": {
+        f"facing={facing}": {"model": "fundamentals:block/field_mill", **rotation}
+        for facing, rotation in (("north", {}), ("east", {"y": 90}), ("south", {"y": 180}), ("west", {"y": 270}),
+                                 ("up", {"x": 270}), ("down", {"x": 90}))}})
+    write(DATA / "loot_table/blocks/field_mill.json", {"type": "minecraft:block", "pools": [drop_self("field_mill")]})
+    write(BAROMETER_RECIPES / "field_mill.json", {
+        "type": "minecraft:crafting_shaped", "category": "misc", "pattern": [" U ", "BLB", " A "],
+        "key": {"U": {"tag": "c:plates/brass"}, "L": {"item": "create:electron_tube"}, "B": {"tag": "c:wires/copper"},
+                "A": {"item": "create:andesite_casing"}},
+        "result": {"id": "fundamentals:field_mill", "count": 1}})
+    lang["block.fundamentals.field_mill"] = "Field Mill"
+    key = "goggles.fundamentals.field_mill."
+    lang[key + "volts"] = "%s V/m"
+    lang[key + "kilovolts"] = "%s kV/m"
+    lang[key + "screened"] = "Screened: nothing overhead to read"
+    lang[key + "fair"] = "Fair weather"
+    lang[key + "charged"] = "Charged air: a storm"
+    lang[key + "storm"] = "Charged dust: the sand itself is carrying it"
     key = "goggles.fundamentals.barometer."
     lang[key + "reading"] = "%s hPa (%s mmHg)"
     lang[key + "settling"] = "Still taking its first readings"

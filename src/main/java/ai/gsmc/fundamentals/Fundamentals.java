@@ -90,6 +90,7 @@ public class Fundamentals {
                 Titanium.registerBlocks(helper::register);
                 Thermometers.registerBlocks(helper::register);
                 ai.gsmc.fundamentals.air.Barometers.registerBlocks(helper::register);
+                ai.gsmc.fundamentals.air.FieldMill.registerBlocks(helper::register);
                 Oxidation.registerBlocks(helper::register);
                 Compute.registerBlocks(helper::register);
             });
@@ -101,6 +102,7 @@ public class Fundamentals {
                 Titanium.registerBlockEntities(helper::register);
                 Thermometers.registerBlockEntities(helper::register);
                 ai.gsmc.fundamentals.air.Barometers.registerBlockEntities(helper::register);
+                ai.gsmc.fundamentals.air.FieldMill.registerBlockEntities(helper::register);
                 Oxidation.registerBlockEntities(helper::register);
                 Compute.registerBlockEntities(helper::register);
             });
@@ -142,6 +144,7 @@ public class Fundamentals {
                 Titanium.registerItems(helper::register);
                 Thermometers.registerItems(helper::register);
                 ai.gsmc.fundamentals.air.Barometers.registerItems(helper::register);
+                ai.gsmc.fundamentals.air.FieldMill.registerItems(helper::register);
                 Oxidation.registerItems(helper::register);
                 PeriodicTable.registerItems(helper::register);
                 Compute.registerItems(helper::register);
@@ -231,6 +234,7 @@ public class Fundamentals {
                     Electricity.items().forEach(output::accept);
                     Thermometers.items().forEach(output::accept);
                     ai.gsmc.fundamentals.air.Barometers.items().forEach(output::accept);
+                    output.accept(ai.gsmc.fundamentals.air.FieldMill.item());
                     Oxidation.items().forEach(output::accept);
                     Compute.items().forEach(output::accept);
                     OreBlocks.rawItems().forEach(output::accept);

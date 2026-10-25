@@ -227,7 +227,7 @@ PLASTIC_BLOCKS = [f"fundamentals:{dye}_plastic_block" for dye in ("white", "oran
 OTHER_MINEABLE = {"pickaxe": ["fundamentals:bloomery", "fundamentals:panel_rack", "fundamentals:solar_panel", "fundamentals:mixer_settler", "fundamentals:plastic_fluid_tank",
                                 "fundamentals:magnetomigration_cell", "fundamentals:dyed_plastic_pipe", "fundamentals:titanium_pipe",
                                 "fundamentals:titanium_mechanical_pump", "fundamentals:titanium_fluid_valve", "fundamentals:titanium_fluid_tank",
-                                "fundamentals:mercury_thermometer", "fundamentals:spirit_thermometer", "fundamentals:bimetallic_thermometer", "fundamentals:type_k_thermocouple", "fundamentals:type_s_thermocouple", "fundamentals:mercury_barometer", "fundamentals:barograph", "fundamentals:waste_canister", "fundamentals:power_supply"] + STORAGE_BLOCKS + PLASTIC_BLOCKS
+                                "fundamentals:mercury_thermometer", "fundamentals:spirit_thermometer", "fundamentals:bimetallic_thermometer", "fundamentals:type_k_thermocouple", "fundamentals:type_s_thermocouple", "fundamentals:mercury_barometer", "fundamentals:barograph", "fundamentals:waste_canister", "fundamentals:power_supply", "fundamentals:field_mill"] + STORAGE_BLOCKS + PLASTIC_BLOCKS
                 + [f"fundamentals:{name}" for name in OXIDATION_BLOCKS]}
 OTHER_TIERED = {"stone": STORAGE_BLOCKS + [f"fundamentals:{name}" for name in OXIDATION_BLOCKS if name != "inert_storage_drum"]}
 
