@@ -26,8 +26,8 @@
       }
     ],
     "radius": {
-      "min": 8,
-      "max": 12
+      "min": 5,
+      "max": 7
     },
     "thickness": {
       "min": 1,
@@ -38,8 +38,8 @@
       "Name": "minecraft:calcite"
     },
     "height": {
-      "min": 12,
-      "max": 20
+      "min": 7,
+      "max": 12
     }
   }
 }

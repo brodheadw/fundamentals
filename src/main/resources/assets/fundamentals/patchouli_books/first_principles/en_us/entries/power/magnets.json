@@ -28,6 +28,19 @@
     },
     {
       "type": "patchouli:text",
+      "text": "Energy is kept.",
+      "title": "Where the power goes"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "What a block draws and does not pass on is heat in that block: a resistor turns all of it, a light bulb nineteen parts in twenty, a neon tube three in four, an electrode in a vat two in five, an electric pump three in ten, a converter or accumulator a twentieth, the computers' power supply three in twenty, a transformer a fiftieth, a motor a tenth."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A generator loses a tenth of what its shaft gives it. So a hard-worked motor or generator warms itself, and its magnet with it. A kilowatt lost in a block holds it about sixty degrees warm, more in light blocks and less in heavy ones."
+    },
+    {
+      "type": "patchouli:text",
       "text": "The first magnet is hardened carbon steel. Heat a steel ingot in a furnace and quench the hot steel under a spout with 250 mB of water. In an unpowered steel vat, combine copper, zinc, a glass bottle, 50 mB of sulfuric acid and 200 mB of water into a galvanic cell.",
       "title": "First electricity"
     },

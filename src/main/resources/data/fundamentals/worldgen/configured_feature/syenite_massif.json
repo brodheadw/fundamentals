@@ -19,8 +19,8 @@
       }
     ],
     "radius": {
-      "min": 8,
-      "max": 12
+      "min": 5,
+      "max": 7
     },
     "thickness": {
       "min": 1,
@@ -31,8 +31,8 @@
       "Name": "fundamentals:syenite"
     },
     "height": {
-      "min": 16,
-      "max": 26
+      "min": 10,
+      "max": 16
     }
   }
 }
