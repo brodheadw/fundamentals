@@ -1,6 +1,7 @@
 package ai.gsmc.fundamentals.oxidation;
 
 import ai.gsmc.fundamentals.Fundamentals;
+import ai.gsmc.fundamentals.registry.MaterialItems;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -45,15 +46,15 @@ public final class Weathering {
         return ITEMS;
     }
 
-    private static BlockBehaviour.Properties properties(boolean crumbled) {
-        return BlockBehaviour.Properties.of().mapColor(MapColor.METAL).requiresCorrectToolForDrops()
-                .strength(crumbled ? 2.0F : 5.0F, 6.0F).sound(crumbled ? SoundType.TUFF : SoundType.METAL);
+    private static BlockBehaviour.Properties properties(String metal, boolean crumbled) {
+        BlockBehaviour.Properties properties = crumbled ? BlockBehaviour.Properties.of().strength(2.0F, 6.0F) : MaterialItems.metalBlock(metal);
+        return properties.mapColor(MapColor.METAL).requiresCorrectToolForDrops().sound(crumbled ? SoundType.TUFF : SoundType.METAL);
     }
 
     @Nullable
     public static Block storageBlock(String metal) {
         Family family = FAMILIES.get(metal);
-        return family == null ? null : new WeatheringMetalBlock(WeatherState.UNAFFECTED, family, properties(false));
+        return family == null ? null : new WeatheringMetalBlock(WeatherState.UNAFFECTED, family, properties(metal, false));
     }
 
     private static List<String> names(Family family) {
@@ -74,8 +75,8 @@ public final class Weathering {
             List<String> names = names(family);
             for (int i = 0; i < names.size(); i++) {
                 WeatherState age = i < 3 ? WeatherState.values()[i + 1] : null;
-                Block block = age == null ? new Block(properties(false))
-                        : new WeatheringMetalBlock(age, family, properties(family.crumbles() && age == WeatherState.OXIDIZED));
+                Block block = age == null ? new Block(properties(family.metal(), false))
+                        : new WeatheringMetalBlock(age, family, properties(family.metal(), family.crumbles() && age == WeatherState.OXIDIZED));
                 BLOCKS.add(block);
                 registry.accept(Fundamentals.id(names.get(i)), block);
             }

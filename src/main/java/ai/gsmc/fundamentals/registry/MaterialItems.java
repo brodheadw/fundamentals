@@ -47,14 +47,37 @@ public final class MaterialItems {
         return MaterialRegistry.all().stream().filter(m -> GROUPS.contains(m.group()) || ITEM_IDS.contains(m.id())).toList();
     }
 
+    /**
+     * How hard a block of the metal is to mine and to blow apart, against iron's 5 and 6: soft tin and silver give
+     * sooner, beryllium copper (the strongest copper alloy) holds out, and the sintered magnets are hard but brittle.
+     */
+    private static final Map<String, float[]> TOUGHNESS = Map.ofEntries(
+            Map.entry("tin", new float[]{3.0F, 4.0F}),
+            Map.entry("silver", new float[]{4.0F, 6.0F}),
+            Map.entry("aluminium_scandium", new float[]{4.0F, 6.0F}),
+            Map.entry("bronze", new float[]{5.0F, 8.0F}),
+            Map.entry("beryllium_copper", new float[]{8.0F, 14.0F}),
+            Map.entry("praseodymium", new float[]{4.0F, 5.0F}),
+            Map.entry("neodymium", new float[]{4.0F, 5.0F}),
+            Map.entry("samarium", new float[]{4.0F, 5.0F}),
+            Map.entry("terbium", new float[]{4.0F, 5.0F}),
+            Map.entry("dysprosium", new float[]{4.0F, 5.0F}),
+            Map.entry("neodymium_iron_boron", new float[]{7.0F, 4.0F}),
+            Map.entry("dysprosium_neodymium_iron_boron", new float[]{7.0F, 4.0F}),
+            Map.entry("samarium_cobalt", new float[]{7.0F, 4.0F}));
+
+    public static BlockBehaviour.Properties metalBlock(String metal) {
+        float[] toughness = TOUGHNESS.getOrDefault(metal, new float[]{5.0F, 6.0F});
+        return BlockBehaviour.Properties.of().strength(toughness[0], toughness[1]);
+    }
+
     public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
         for (Material material : materials()) {
             if (material.has(MaterialForm.BLOCK)) {
                 ResourceLocation id = id(material, MaterialForm.BLOCK);
                 Block block = Weathering.storageBlock(material.id());
                 if (block == null) {
-                    block = new Block(BlockBehaviour.Properties.of().mapColor(MapColor.METAL).requiresCorrectToolForDrops()
-                            .strength(5.0F, 6.0F).sound(SoundType.METAL));
+                    block = new Block(metalBlock(material.id()).mapColor(MapColor.METAL).requiresCorrectToolForDrops().sound(SoundType.METAL));
                 }
                 BLOCKS.put(id, block);
                 registry.accept(id, block);
