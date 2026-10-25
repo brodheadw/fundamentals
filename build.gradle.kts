@@ -25,6 +25,7 @@ class Dependencies {
     val chemicaVersion = property("deps.chemica_version").toString()
     val createNuclearVersion = property("deps.createnuclear_version").toString()
     val ccTweakedVersion = property("deps.cc_tweaked_version").toString()
+    val coldSweatVersion = property("deps.cold_sweat_version").toString()
 }
 
 class McData {
@@ -97,6 +98,9 @@ dependencies {
     // CC:Tweaked is optional: computer/FundamentalsPeripherals only loads with it, and the gametests read the blocks through it.
     modCompileOnly("maven.modrinth:cc-tweaked:${deps.ccTweakedVersion}")
     modLocalRuntime("maven.modrinth:cc-tweaked:${deps.ccTweakedVersion}")
+    // Cold Sweat is optional: cold/ColdSweatCompat only loads with it; -Pcoldsweat runs it alongside.
+    modCompileOnly("maven.modrinth:cold-sweat:${deps.coldSweatVersion}")
+    if (providers.gradleProperty("coldsweat").isPresent) modLocalRuntime("maven.modrinth:cold-sweat:${deps.coldSweatVersion}")
     for (bundled in listOf("cc.tweaked:cobalt:0.9.9", "com.jcraft:jzlib:1.1.3")) "forgeRuntimeLibrary"(bundled)
     // Create ships these inside its jar, but a dev run does not unpack them.
     for (bundled in listOf("net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1",

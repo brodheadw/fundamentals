@@ -149,7 +149,9 @@ public class Fundamentals {
                 Oxidation.registerItems(helper::register);
                 PeriodicTable.registerItems(helper::register);
                 Compute.registerItems(helper::register);
+                ai.gsmc.fundamentals.cold.Parkas.registerItems(helper::register);
             });
+            event.register(Registries.ARMOR_MATERIAL, helper -> ai.gsmc.fundamentals.cold.Parkas.registerArmorMaterials(helper::register));
             event.register(Registries.DATA_COMPONENT_TYPE, helper -> {
                 Oxidation.registerComponents(helper::register);
                 Magnets.registerComponents(helper::register);
@@ -166,6 +168,7 @@ public class Fundamentals {
                 helper.register(MATERIALS_TAB, materialsTab());
             });
         });
+        ai.gsmc.fundamentals.cold.Cold.register();
         NeoForge.EVENT_BUS.addListener(Hazards::onPlayerTick);
         NeoForge.EVENT_BUS.addListener(Hazards::onServerTick);
         NeoForge.EVENT_BUS.addListener(Hazards::onBreak);
@@ -239,6 +242,7 @@ public class Fundamentals {
                     output.accept(ai.gsmc.fundamentals.air.FieldMill.item());
                     Oxidation.items().forEach(output::accept);
                     Compute.items().forEach(output::accept);
+                    ai.gsmc.fundamentals.cold.Parkas.items().forEach(output::accept);
                     OreBlocks.rawItems().forEach(output::accept);
                     OreBlocks.items().forEach(output::accept);
                 })

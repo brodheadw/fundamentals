@@ -1,0 +1,11 @@
+{
+  "type": "armor",
+  "item": {
+    "items": [
+      "fundamentals:synthetic_parka"
+    ]
+  },
+  "immune_temp_modifiers": {
+    "cold_sweat:water": 0.5
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "type": "armor",
+  "item": {
+    "items": [
+      "fundamentals:synthetic_parka"
+    ]
+  },
+  "insulation": {
+    "cold": 21.9,
+    "heat": 0.0
+  }
+}

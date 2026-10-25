@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "SSS",
+    "SIS"
+  ],
+  "key": {
+    "S": {
+      "item": "fundamentals:nylon_ripstop"
+    },
+    "I": {
+      "item": "fundamentals:polyester_fibre"
+    }
+  },
+  "result": {
+    "id": "fundamentals:synthetic_hood"
+  }
+}
