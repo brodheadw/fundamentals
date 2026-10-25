@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pointblank"
+    }
+  ],
+  "type": "pointblank:default",
+  "ingredients": [
+    {
+      "count": 2,
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "count": 2,
+      "item": "pointblank:guninternals"
+    },
+    {
+      "count": 4,
+      "item": "fundamentals:led_chip"
+    },
+    {
+      "count": 4,
+      "item": "tfmg:capacitor_item"
+    },
+    {
+      "count": 4,
+      "item": "tfmg:copper_wire"
+    },
+    {
+      "count": 2,
+      "item": "tfmg:screw"
+    }
+  ],
+  "result": {
+    "item": "pointblank:ulg99cannon"
+  }
+}

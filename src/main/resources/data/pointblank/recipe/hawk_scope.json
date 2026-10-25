@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pointblank"
+    }
+  ],
+  "type": "pointblank:default",
+  "ingredients": [
+    {
+      "count": 5,
+      "item": "fundamentals:lens"
+    },
+    {
+      "count": 2,
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "count": 2,
+      "item": "tfmg:screw"
+    }
+  ],
+  "result": {
+    "item": "pointblank:hawk_scope"
+  }
+}
