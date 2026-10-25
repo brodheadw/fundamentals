@@ -1,0 +1,15 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "create:ochrum"
+    }
+  ],
+  "processing_time": 250,
+  "results": [
+    {
+      "id": "minecraft:raw_gold",
+      "chance": 0.2
+    }
+  ]
+}

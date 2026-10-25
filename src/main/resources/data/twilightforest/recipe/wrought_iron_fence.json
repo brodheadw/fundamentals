@@ -1,0 +1,26 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "twilightforest"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "#|#",
+    "#|#"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:ingots/wrought_iron"
+    },
+    "|": {
+      "item": "minecraft:iron_bars"
+    }
+  },
+  "result": {
+    "id": "twilightforest:wrought_iron_fence",
+    "count": 3
+  }
+}

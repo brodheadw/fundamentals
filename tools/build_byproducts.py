@@ -35,6 +35,8 @@ ELSEWHERE = {
     "minecraft:clay_ball": "everything that takes clay",
     "minecraft:iron_nugget": "nine craft to an iron ingot",
     "create:crushed_raw_iron": "The Factory Must Grow's blast furnace",
+    "minecraft:cobblestone": "everything that takes cobblestone",
+    "minecraft:cobbled_deepslate": "everything that takes cobbled deepslate",
     "fundamentals:spent_fuel_rod": "a spent fuel pool: a day under water cools it (content.nuclear.SpentFuel)",
 }
 
@@ -114,6 +116,9 @@ WHY = {
     "fundamentals:fouled_naphthenic_acid": "Fouled organic is scrubbed and returned; extractant is too dear to throw away.",
     "fundamentals:water_gas": "Carbon monoxide freed by decomposing nickel carbonyl goes back to make more, as at Clydach.",
     "fundamentals:zinc_oxide": "Zinc oxide from the Parkes crust goes back to the zinc works.",
+    "fundamentals:raw_malachite": "A copper outcrop weathers green: malachite sits in the oxidised cap over the chalcopyrite below, and both come out of the same rock.",
+    "minecraft:cobblestone": "Crushing frees the ore from its host rock, and the gangue goes to the waste dump or the road.",
+    "minecraft:cobbled_deepslate": "Crushing frees the ore from its host rock, and the gangue goes to the waste dump or the road.",
     "tfmg:carbon_dioxide": "Carbon dioxide from the anode, the soda reactions and the cement kiln, where limestone's own carbon is about half the kiln's CO2; real plants mostly vent it, but an ammonia plant turns its own into urea.",
     "tfmg:cast_iron_ingot": "The Sorel slag furnace's iron is sold as high-purity pig iron.",
     "tfmg:coal_coke_dust": "Coke burnt onto a cracking catalyst is burnt off in the regenerator.",

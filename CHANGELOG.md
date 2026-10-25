@@ -1,6 +1,14 @@
 # Changelog
 
 ## [Unreleased]
+- Crushing wheels no longer multiply ore. Every ore block Create crushes, vanilla copper and gold included, gives one crushed ore, not five or seven, and the byproducts stay as they were. Create Propulsion's own recipes crush its platinum ores.
+- Native gold stays electrum until it is parted. Raw and crushed native gold smelt and blast to an electrum ingot, not gold, and crushed gold washes to three nuggets as raw gold pans. Ochrum crushes to native gold and veridium to chalcopyrite and malachite, not to crushed ore and nuggets.
+- Iron dust is a ground ingot, so the blast furnace gives 144 mB of pig iron for it, not an ore's 216; a crushed ingot no longer puddles back to more iron than went in.
+- Fused quartz is made from a quartz block, so CC:Tweaked's computers can be built again: the common quartz block tag it asked for does not exist.
+- A coal coke block no longer stonecuts to a graphite electrode, and Chemica no longer electrolyses obsidian to iron, silicon, nitrate and sulfur.
+- The Factory's magnet, which nothing makes any more, is hidden from the recipe viewer and no longer builds a Dy-NdFeB machine; one already in a world still counts as Dy-NdFeB. Chemica's salt, purified graphite flakes and silver, titanium, polyethylene and PVC sheets, which nothing makes, are hidden too.
+- Every iron ingot is wrought iron, shingled from a bloom or a puddle ball, so Twilight Forest's candelabra and wrought iron fence can be made again. The fence takes four ingots and two iron bars, since six ingots in two rows are iron bars.
+- The guide book and README no longer say cast iron is made from an iron ingot and coal.
 - Ore deposits are much smaller: every Fundamentals bed, vein, plug and blanket is cut to six tenths of its length and height, and beds and blankets to three quarters of their thickness, so a bed holds about a quarter of what it did and a vein about a third. A tin vein was twenty stacks of cassiterite; it is now a few. Vanilla and other mods' ores are unchanged, and only newly generated ground has the smaller deposits.
 - The Factory's casting basin is lined with fireclay, not zircon: a pig bed is sand inside refractory, and fireclay is the refractory (it lies under the coal seams).
 - Electricity is kept. Every TFMG block that draws power and does not pass it on as work, light or charge now turns the rest to heat where it stands, through Fundamentals: Principles' energy in joules: a resistor all of it, a motor a tenth, a shaft generator a tenth of its load. A hard-run motor warms its own magnet. The guide book's Magnets and heat entry says where the power goes.

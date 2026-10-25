@@ -8,14 +8,9 @@
     "K": {
       "item": "tfmg:electromagnetic_coil"
     },
-    "M": [
-      {
-        "item": "fundamentals:dysprosium_neodymium_iron_boron_magnet"
-      },
-      {
-        "item": "tfmg:magnet"
-      }
-    ],
+    "M": {
+      "item": "fundamentals:dysprosium_neodymium_iron_boron_magnet"
+    },
     "P": {
       "item": "tfmg:steel_mechanical_pump"
     },

@@ -4,7 +4,7 @@
 
 Every second output of a recipe (and the waste the separation plant makes in code), where it goes, and why that is what the real one does. A catalyst or bath a recipe hands back is not counted. Recipes that need Chemica or Create: Nuclear are left out; Chemica's own arsenic dust from gold ore is in the toxic dust tag all the same.
 
-**76 byproducts.** Going to a use in this mod: 70. Going only to The Factory Must Grow or the vanilla game: 3. Deliberate dead ends: 3. Toxic to handle: 3.
+**79 byproducts.** Going to a use in this mod: 71. Going only to The Factory Must Grow or the vanilla game: 5. Deliberate dead ends: 3. Toxic to handle: 3.
 
 | Byproduct | Made by | Goes to | Why |
 |---|---|---|---|
@@ -50,6 +50,7 @@ Every second output of a recipe (and the waste the separation plant makes in cod
 | Potassium Fluorotantalate (`fundamentals:potassium_fluorotantalate`) | `uses/niobium_oxide_from_euxenite` | `uses/tantalum_ingot` | Euxenite carries a little tantalum beside its niobium, and its fluoride digest yields it the same way. |
 | Raw Fluorite (`fundamentals:raw_fluorite`) | `reduction/dysprosium_ingot`, `reduction/gadolinium_ingot`, `reduction/scandium_ingot` and 2 more | `mixing/hydrofluoric_acid` | Calciothermic reduction leaves calcium fluoride, which is fluorspar. |
 | Raw Magnetite (`fundamentals:raw_magnetite`) | `splashing/gravel` | `bloomery/iron_bloom`, `platinum/ammonia`, `uses/crushed_iron_from_magnetite`, `uses/sodium_vanadate_liquor` | Washing gravel leaves the heavy black sand, magnetite, behind. |
+| Raw Malachite (`fundamentals:raw_malachite`) | `crushing/veridium`, `crushing/veridium_recycling` | `bloomery/copper_from_malachite`, `grinding/green_dye_from_malachite` | A copper outcrop weathers green: malachite sits in the oxidised cap over the chalcopyrite below, and both come out of the same rock. |
 | Red Mud (`fundamentals:red_mud`) | `uses/sodium_aluminate_liquor`, `uses/sodium_aluminate_liquor_from_spent_liquor` | `uses/scandium_liquor_from_red_mud`; the rest packs into Bauxite Residue (`fundamentals:red_mud_block`) to bury | Bauxite residue is the alumina industry's great waste, mostly ponded or dry-stacked; it carries about 100 g a tonne of scandium, which Rusal leaches out at its Urals refineries. |
 | Rhenium Flue Dust (`fundamentals:rhenium_flue_dust`) | `uses/molybdenum_oxide` | `uses/ammonium_perrhenate` | All mined rhenium comes from molybdenite roaster flue dust. |
 | Rhodium Liquor (`fundamentals:rhodium_liquor`) | `platinum/ammonium_chloroiridate` | `platinum/ammonium_chlororhodate` | The filtrate from the iridium salt carries the rhodium on. |
@@ -72,6 +73,8 @@ Every second output of a recipe (and the waste the separation plant makes in cod
 | Zinc Oxide (`fundamentals:zinc_oxide`) | `uses/cupellation_of_crust` | `uses/zinc_ingot`, `uses/zinc_leach_liquor`, `vat_machine_recipe/rubber` | Zinc oxide from the Parkes crust goes back to the zinc works. |
 | `create:crushed_raw_iron` | `uses/sodium_vanadate_liquor` | `uses/pig_iron_from_crushed_iron`; The Factory Must Grow's blast furnace | Titanomagnetite leached of its vanadium is still an iron ore, and goes to the blast furnace. |
 | `minecraft:clay_ball` | `mixing/heavy_rare_earth_liquor_from_clay`, `mixing/heavy_rare_earth_liquor_from_clay_with_seawater` | `bloomery`, `uses/cement_clinker`; everything that takes clay | Ion-adsorption clay leached of its rare earths is just clay again. |
+| `minecraft:cobbled_deepslate` | `crushing/deepslate_iron_ore`, `crushing/deepslate_zinc_ore` | everything that takes cobbled deepslate | Crushing frees the ore from its host rock, and the gangue goes to the waste dump or the road. |
+| `minecraft:cobblestone` | `crushing/zinc_ore` | everything that takes cobblestone | Crushing frees the ore from its host rock, and the gangue goes to the waste dump or the road. |
 | `minecraft:copper_ingot` | `platinum/nickel_electrowinning`, `uses/nickel_electrowinning_from_raffinate` | `oxidation/polishing/copper_ingot`, `uses/galvanic_cell`; everything that takes copper | Copper co-deposited with nickel at the cathode is a sellable metal. |
 | `minecraft:iron_nugget` | `uses/gravel_from_slag` | `oxidation/polishing/iron_nugget`; nine craft to an iron ingot | Crushed slag is passed under a magnet to pull out its metallic iron prills. |
 | `minecraft:water` | `mixing/salt` | `compute/advanced_processor_wafer`, `compute/memory_wafer`, `compute/microcontroller_wafer`, `compute/microprocessor_wafer` and 31 more | Brine boiled for salt gives its water off as condensate. |

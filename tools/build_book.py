@@ -201,7 +201,7 @@ def ironworking():
         "Copper comes straight out of the bloomery from malachite, azurite and cuprite. Galena has to be roasted first, in a heated basin with air, which "
         "drives off its sulfur as sulfur dioxide; the roasted ore then gives lead bullion, lead still holding its silver, which a furnace remelts to lead.", "Bloom and hammer") + pages_of(
         "A furnace never reduces iron ore, and neither does a fan. Create's crushing wheels grind hematite, magnetite, goethite and roasted siderite to crushed iron ore, "
-        "and that goes to The Factory Must Grow's blast furnace, which has the coke and the heat, and gives pig iron: see Iron and steel. Crimsite is the iron stone and crushes to hematite; "
+        "and that goes to The Factory Must Grow's blast furnace, which has the coke and the heat, and gives pig iron: see Iron and steel. Crimsite is the iron stone and crushes to hematite, ochrum to native gold, veridium to chalcopyrite and malachite; "
         "washed gravel leaves a little magnetite black sand. The slag every smelt leaves is The Factory Must Grow's own: see Slag.")
         + [crafting("fundamentals:smithing_hammer")], 2)
     entry("ironworking", "slag", "Slag", "tfmg:slag", pages_of(
@@ -241,8 +241,8 @@ def steel():
         "runs thin into every corner of the mould. In grey iron the carbon comes out as flakes of graphite, which make it machine cleanly and damp vibration "
         "and make it weak in tension: good for pipes, cylinders, frames, flywheels and machine beds, bad for anything that has to bend.", "Cast iron") + pages_of(
         "The Factory Must Grow's casting basin casts 144 mB of pig iron to a cast iron ingot, and its cast iron pipes, tanks, frames, flywheels and blast furnace "
-        "come from that. Before there is a blast furnace a little is made by hand: an iron ingot and a coal compacted in a heated basin, the iron taking up the carbon "
-        "as it would in the hearth."), 1)
+        "come from that. Before there is a blast furnace the first comes from a bloomery overcharged, two charcoal to every ore, which runs hot and is tapped "
+        "as pigs of cast iron (see The bloomery)."), 1)
     entry("steel", "puddling", "Puddling", "fundamentals:puddle_ball", pages_of(
         "Wrought iron in bulk came from pig iron by Henry Cort's puddling furnace, patented in 1784. A reverberatory furnace keeps the coal fire apart from the iron, "
         "so its sulfur stays out. The puddler melts pig on a hearth lined with iron oxide and works it with a rabble through the door; the oxide and the air burn "
@@ -942,7 +942,7 @@ def metals():
         "Retorting amalgam in the open is how gold mining poisons people: the vapour is breathed. An amalgam in a basin hurts and poisons everyone within reach who has no diving helmet on a filled backtank, "
         "as small-scale miners from the Amazon to Indonesia are poisoned now. Cyanide replaced mercury in the 1890s, but it starts from hydrogen cyanide, made from methane and ammonia, which the pack does not have.", "Mercury") + pages_of(
         "Electrum is gold and its silver. Miller's process blows chlorine through the melt and the silver leaves as its chloride: an electrum ingot and 250 mB of chlorine, superheated, give a gold ingot and a silver nugget. "
-        "Or dissolve it in aqua regia, 500 mB heated, which leaves the silver as chloride and gives the same.", "Parting") + pages_of(
+        "Or dissolve it in aqua regia, 500 mB heated, which leaves the silver as chloride and gives the same. A furnace melts raw or crushed native gold to electrum, silver and all; only parting makes it gold.", "Parting") + pages_of(
         "Sources: Marsden and House, The Chemistry of Gold Extraction, 2nd ed. (SME, 2006); USGS, Mineral Commodity Summaries 2025, Gold; "
         "UNEP, Global Mercury Assessment 2018, artisanal and small-scale gold mining.", "Sources"), 20)
     entry("metals", "silicon", "Silicon", "tfmg:silicon_ingot", pages_of(
