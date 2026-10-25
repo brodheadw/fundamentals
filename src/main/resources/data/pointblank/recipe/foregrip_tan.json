@@ -1,0 +1,18 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pointblank"
+    }
+  ],
+  "type": "pointblank:default",
+  "ingredients": [
+    {
+      "count": 1,
+      "tag": "c:plates/polyethylene"
+    }
+  ],
+  "result": {
+    "item": "pointblank:foregrip_tan"
+  }
+}

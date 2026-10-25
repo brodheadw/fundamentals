@@ -1,0 +1,74 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "tag": "c:ingots/steel"
+  },
+  "loops": 1,
+  "transitional_item": {
+    "id": "fundamentals:barrel_blank"
+  },
+  "results": [
+    {
+      "id": "fundamentals:gun_barrel"
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "fundamentals:barrel_blank"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 50,
+          "fluid": "tfmg:lubrication_oil"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:barrel_blank"
+        }
+      ]
+    },
+    {
+      "type": "create:cutting",
+      "ingredients": [
+        {
+          "item": "fundamentals:barrel_blank"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:barrel_blank"
+        }
+      ]
+    },
+    {
+      "type": "create:cutting",
+      "ingredients": [
+        {
+          "item": "fundamentals:barrel_blank"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:barrel_blank"
+        }
+      ]
+    },
+    {
+      "type": "create:pressing",
+      "ingredients": [
+        {
+          "item": "fundamentals:barrel_blank"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:barrel_blank"
+        }
+      ]
+    }
+  ]
+}

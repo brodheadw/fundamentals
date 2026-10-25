@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "createbigcannons"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:clock"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "R": {
+      "item": "fundamentals:primer"
+    }
+  },
+  "pattern": [
+    "I",
+    "C",
+    "R"
+  ],
+  "result": {
+    "count": 4,
+    "id": "createbigcannons:timed_fuze"
+  }
+}

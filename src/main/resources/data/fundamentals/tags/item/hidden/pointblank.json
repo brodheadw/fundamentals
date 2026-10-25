@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "pointblank:gunmetal_ingot",
+      "required": false
+    },
+    {
+      "id": "pointblank:gunmetal_mesh",
+      "required": false
+    },
+    {
+      "id": "pointblank:gunmetal_nugget",
+      "required": false
+    },
+    {
+      "id": "pointblank:motor",
+      "required": false
+    }
+  ]
+}

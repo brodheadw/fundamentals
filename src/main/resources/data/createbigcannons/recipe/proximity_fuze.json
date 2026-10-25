@@ -1,0 +1,33 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "createbigcannons"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:iron_bars"
+    },
+    "C": {
+      "tag": "createbigcannons:gems_quartz"
+    },
+    "I": {
+      "tag": "c:ingots/iron"
+    },
+    "R": {
+      "item": "fundamentals:primer"
+    }
+  },
+  "pattern": [
+    " A ",
+    "RCR",
+    " I "
+  ],
+  "result": {
+    "count": 4,
+    "id": "createbigcannons:proximity_fuze"
+  }
+}

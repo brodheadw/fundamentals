@@ -139,6 +139,7 @@ public class Fundamentals {
                 Electricity.registerItems(helper::register);
                 Separation.registerItems(helper::register);
                 Uses.registerItems(helper::register);
+                ai.gsmc.fundamentals.uses.Arms.registerItems(helper::register);
                 Magnets.registerItems(helper::register);
                 Plastics.registerItems(helper::register);
                 Titanium.registerItems(helper::register);
@@ -227,6 +228,7 @@ public class Fundamentals {
                     IronWorking.items().forEach(output::accept);
                     Separation.items().forEach(output::accept);
                     Uses.items().forEach(output::accept);
+                    ai.gsmc.fundamentals.uses.Arms.items().forEach(output::accept);
                     Magnets.items().forEach(output::accept);
                     Plastics.items().forEach(output::accept);
                     Titanium.items().forEach(output::accept);

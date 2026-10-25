@@ -1,0 +1,22 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pointblank"
+    }
+  ],
+  "type": "pointblank:default",
+  "ingredients": [
+    {
+      "count": 2,
+      "tag": "c:ingots/stainless_steel"
+    },
+    {
+      "count": 1,
+      "tag": "c:ingots/hsla_steel"
+    }
+  ],
+  "result": {
+    "item": "pointblank:smg_suppressor"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "item": "fundamentals:mill_cake"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:press_cake"
+    }
+  ]
+}
