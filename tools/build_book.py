@@ -1388,7 +1388,7 @@ def glass():
         "Phosgene first: 250 mB of carbon monoxide and 250 mB of chlorine over charcoal give 250 mB of phosgene, which keeps its charcoal nineteen times in twenty. "
         "Phosgene is the choking gas of 1915, four times as heavy as air: keep it in pipe and tank.", "Polycarbonate") + pages_of(
         "Bisphenol A is two phenol and an acetone joined over an acid, and the cumene process gives phenol and acetone together: 500 mB of phenol, 250 mB of acetone "
-        "and 25 mB of hydrochloric acid, heated, give two bisphenol A. A bisphenol A, 250 mB of phosgene and 500 mB of caustic soda give a polycarbonate resin; "
+        "heated over an acid that is not used up, give two bisphenol A. A bisphenol A, 250 mB of phosgene and 500 mB of caustic soda give a polycarbonate resin; "
         "the caustic takes the hydrogen chloride the reaction throws off, and leaves 500 mB of brine. A resin pressed on a heated basin is a polycarbonate sheet.", "Bisphenol A") + pages_of(
         "Riot police carry it. Six polycarbonate sheets and an aluminium grip make a riot shield, which blocks as a shield does, but you see through it, "
         "and it lasts three times as long as oak. A polycarbonate sheet mends it in an anvil. "

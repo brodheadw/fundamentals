@@ -71,7 +71,8 @@ def recipes():
                         "ingredients": [fluid("chemica:carbon_monoxide", 250), fluid("chlorine", 250)] + item("minecraft:charcoal"),
                         "results": [result_fluid("phosgene", 250), {"id": "minecraft:charcoal", "chance": 0.95}]})
     recipe("bisphenol_a", {"neoforge:conditions": CHEMICA_LOADED, "type": "create:mixing", "heat_requirement": "heated",
-                           "ingredients": [fluid("chemica:phenol", 500), fluid("chemica:acetone", 250), fluid("hydrochloric_acid", 25)],
+                           # a basin holds two fluids: the acid is a catalyst, not used up, so it is left out of the inputs
+                           "ingredients": [fluid("chemica:phenol", 500), fluid("chemica:acetone", 250)],
                            "results": [result("bisphenol_a", 2)]})
     recipe("polycarbonate_resin", {"type": "create:mixing", "ingredients": item("bisphenol_a") + [fluid("phosgene", 250), fluid("caustic_soda", 500)],
                                    "results": [result("polycarbonate_resin"), result_fluid("salt_brine", 500)]})
