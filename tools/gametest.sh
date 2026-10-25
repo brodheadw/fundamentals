@@ -5,7 +5,7 @@ W=${1:-$(cd "$(dirname "$0")/.." && pwd)}; PORT=${2:-25599}; OUT=${3:-$W/run/gam
 export JAVA_HOME=${JAVA_HOME:-$HOME/.local/jdk/jdk-21.0.12.1+1/Contents/Home}
 mkdir -p "$W/run"
 echo "eula=true" > "$W/run/eula.txt"
-printf 'server-port=%s\nonline-mode=false\nlevel-name=world\nmax-tick-time=-1\n' $PORT > "$W/run/server.properties"
+printf 'server-ip=127.0.0.1\nserver-port=%s\nonline-mode=false\nlevel-name=world\nmax-tick-time=-1\n' $PORT > "$W/run/server.properties"
 rm -rf "$W/run/world"
 FIFO=$(mktemp -u); mkfifo $FIFO
 cd "$W"
