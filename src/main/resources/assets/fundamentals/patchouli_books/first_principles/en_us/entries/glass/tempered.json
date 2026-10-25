@@ -1,0 +1,31 @@
+{
+  "name": "Tempered glass",
+  "category": "fundamentals:glass",
+  "icon": "fundamentals:tempered_glass",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Glass breaks from its surface: a scratch is a crack waiting. Temper it and the surface is squeezed shut. Glass is heated to about 620 °C, just short of softening, and both faces are blown hard with air.",
+      "title": "Toughened glass"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The skin sets first; the core, cooling after it, shrinks and pulls the skin into compression, so a crack must first overcome that squeeze. Tempered glass bends four or five times as far before it breaks, and when it does go it crumbles to blunt cubes, not blades."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Glass or a glass pane in a furnace, or blasted by a fan over lava, comes out hot glass; a spout of 250 mB of The Factory's air quenches a block to tempered glass, and 100 mB a pane. Tempered glass cannot be cut afterwards: the first cut lets the stress go and the whole sheet bursts.",
+      "title": "Tempering"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "So panes are cut first and then tempered, as they are in every glass works. Tempered glass shrugs off a blast that would take out stone, at a distance."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Seen through a polarising filter, sunglasses on a car's back window, tempered glass shows a grid of dark spots: the marks of the air jets that quenched it. Sources: Gardon, \"Thermal Tempering of Glass\", in Glass: Science and Technology 5 (1980); EN 12150-1.",
+      "title": "Quench marks"
+    }
+  ]
+}

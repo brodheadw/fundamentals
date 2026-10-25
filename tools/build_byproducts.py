@@ -57,7 +57,7 @@ END_PRODUCTS = {
        for piece in ("hood", "parka", "trousers", "boots")},
 }
 # Used from the hand or a dispenser, not in a recipe.
-EQUIPMENT = {"fundamentals:argon_canister", "fundamentals:photovoltaic_panel", "fundamentals:npk_fertiliser"}
+EQUIPMENT = {"fundamentals:argon_canister", "fundamentals:photovoltaic_panel", "fundamentals:npk_fertiliser", "fundamentals:riot_shield"}
 
 # Deliberate dead ends: what the waste is, and how a player is rid of it.
 DEAD = {
@@ -86,6 +86,7 @@ WHY = {
     "fundamentals:jarosite": "The jarosite process dissolves the zinc ferrite in hot acid and drops its iron as jarosite, the zinc industry's largest waste.",
     "fundamentals:lead_silver_residue": "What the hot acid leach leaves is lead sulfate carrying the ore's silver, sold to a lead smelter.",
     "fundamentals:cerium_concentrate": "Mountain Pass sold its leached-out ceria concentrate for polishing powder.",
+    "fundamentals:salt_brine": "Interfacial polycarbonate plants send their brine back to the chlor-alkali cells for the chlorine that made the phosgene, as Covestro does at Krefeld-Uerdingen.",
     "fundamentals:chlorine": "Anode chlorine from a molten-chloride cell goes back to chlorination, as at every magnesium and titanium plant.",
     "fundamentals:clarifier_sludge": "The lime-neutralised hydroxide sludge has no market.",
     "fundamentals:cobalt_chloride_liquor": "The cobalt strip of a nickel refinery's P507 circuit is electrowon, as at Niihama and Harjavalta.",

@@ -1,0 +1,24 @@
+{
+  "type": "create:mixing",
+  "heat_requirement": "superheated",
+  "ingredients": [
+    {
+      "tag": "c:sands/colorless"
+    },
+    {
+      "tag": "c:sands/colorless"
+    },
+    {
+      "tag": "c:sands/colorless"
+    },
+    {
+      "item": "fundamentals:raw_borax"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:borosilicate_glass",
+      "count": 3
+    }
+  ]
+}

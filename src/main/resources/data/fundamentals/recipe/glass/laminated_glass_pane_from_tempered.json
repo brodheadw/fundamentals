@@ -1,0 +1,21 @@
+{
+  "type": "create:compacting",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "item": "fundamentals:tempered_glass_pane"
+    },
+    {
+      "item": "fundamentals:tempered_glass_pane"
+    },
+    {
+      "item": "fundamentals:polycarbonate_sheet"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:laminated_glass_pane",
+      "count": 2
+    }
+  ]
+}

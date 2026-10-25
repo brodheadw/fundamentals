@@ -2,10 +2,7 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "minecraft:glass"
-    },
-    {
-      "item": "fundamentals:boric_acid"
+      "item": "fundamentals:borosilicate_glass"
     },
     {
       "type": "neoforge:single",
