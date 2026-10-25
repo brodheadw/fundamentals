@@ -251,9 +251,13 @@ PLASTIC_BLOCKS = [f"fundamentals:{dye}_plastic_block" for dye in ("white", "oran
 OTHER_MINEABLE = {"pickaxe": ["fundamentals:bloomery", "fundamentals:panel_rack", "fundamentals:solar_panel", "fundamentals:mixer_settler", "fundamentals:plastic_fluid_tank",
                                 "fundamentals:magnetomigration_cell", "fundamentals:dyed_plastic_pipe", "fundamentals:titanium_pipe",
                                 "fundamentals:titanium_mechanical_pump", "fundamentals:titanium_fluid_valve", "fundamentals:titanium_fluid_tank",
-                                "fundamentals:mercury_thermometer", "fundamentals:spirit_thermometer", "fundamentals:bimetallic_thermometer", "fundamentals:type_k_thermocouple", "fundamentals:type_s_thermocouple", "fundamentals:mercury_barometer", "fundamentals:barograph", "fundamentals:waste_canister", "fundamentals:power_supply", "fundamentals:field_mill", "fundamentals:bismuth_crystal"] + STORAGE_BLOCKS + PLASTIC_BLOCKS
+                                "fundamentals:mercury_thermometer", "fundamentals:spirit_thermometer", "fundamentals:bimetallic_thermometer", "fundamentals:type_k_thermocouple", "fundamentals:type_s_thermocouple", "fundamentals:mercury_barometer", "fundamentals:barograph", "fundamentals:waste_canister", "fundamentals:power_supply", "fundamentals:field_mill", "fundamentals:bismuth_crystal",
+                                "fundamentals:laminated_glass", "fundamentals:laminated_glass_pane", "fundamentals:sapphire_window", "fundamentals:blast_door"] + STORAGE_BLOCKS + PLASTIC_BLOCKS
                 + [f"fundamentals:{name}" for name in OXIDATION_BLOCKS]}
-OTHER_TIERED = {"stone": STORAGE_BLOCKS + [f"fundamentals:{name}" for name in OXIDATION_BLOCKS if name != "inert_storage_drum"]}
+# Laminated glass wants a pickaxe of iron; sapphire, Mohs 9, and the blast door's armour plate want diamond.
+OTHER_TIERED = {"stone": STORAGE_BLOCKS + [f"fundamentals:{name}" for name in OXIDATION_BLOCKS if name != "inert_storage_drum"],
+                "iron": ["fundamentals:laminated_glass", "fundamentals:laminated_glass_pane"],
+                "diamond": ["fundamentals:sapphire_window", "fundamentals:blast_door"]}
 
 SHARED = ("aluminum",)
 
@@ -408,8 +412,8 @@ def main():
 
     for tool, names in by_tool.items():
         tag(MC_TAGS / f"mineable/{tool}.json", names + OTHER_MINEABLE.get(tool, []))
-    for tier, names in by_tier.items():
-        tag(MC_TAGS / f"needs_{tier}_tool.json", names + OTHER_TIERED.get(tier, []))
+    for tier in by_tier.keys() | OTHER_TIERED.keys():
+        tag(MC_TAGS / f"needs_{tier}_tool.json", by_tier.get(tier, []) + OTHER_TIERED.get(tier, []))
     for kind in ("block", "item"):
         tag(C_TAGS / f"{kind}/ores.json", [f"#fundamentals:ores/{c}" for c in by_commodity])
         for commodity, names in by_commodity.items():

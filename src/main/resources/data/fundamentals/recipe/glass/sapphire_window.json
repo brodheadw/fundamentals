@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    " P ",
+    "PBP",
+    " P "
+  ],
+  "key": {
+    "P": {
+      "tag": "c:plates/steel"
+    },
+    "B": {
+      "item": "fundamentals:sapphire_boule"
+    }
+  },
+  "result": {
+    "id": "fundamentals:sapphire_window"
+  }
+}

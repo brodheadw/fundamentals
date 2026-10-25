@@ -119,6 +119,7 @@ GASES = {
     "sulfur_trioxide": ("Sulfur Trioxide", 0xF4F2EA),
     "hydrogen_sulfide": ("Hydrogen Sulfide", 0xEAF0E4),
     "oxygen": ("Oxygen", 0xE6EEF8),
+    "phosgene": ("Phosgene", 0xEEF0E0),
 }
 PLATINUM_LIQUORS = {
     "nickel_copper_sulfate": ("Nickel-Copper Sulfate Liquor", 0x58A890),

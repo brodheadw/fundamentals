@@ -796,7 +796,7 @@ def uranium():
     # nitric acid and leaves the fission products as high-level waste, which borosilicate glass locks up for the canister.
     mixing("purex", item("cooled_spent_fuel") + [fluid("nitric_acid", 500)],
            [result("uranium_dioxide"), result_fluid("high_level_waste", 250)], "heated")
-    mixing("vitrified_waste", item("minecraft:glass") + item("boric_acid") + [fluid("high_level_waste", 250)], [result("vitrified_waste")], "superheated")
+    mixing("vitrified_waste", item("borosilicate_glass") + [fluid("high_level_waste", 250)], [result("vitrified_waste")], "superheated")
     write(USES / "waste_canister_vitrified.json", {"type": "minecraft:crafting_shapeless", "category": "misc",
                                                    "ingredients": item("canister") + item("vitrified_waste", 4), "result": {"count": 1, "id": "fundamentals:waste_canister"}})
     write(USES / "waste_canister_spent_fuel.json", {"type": "minecraft:crafting_shapeless", "category": "misc",

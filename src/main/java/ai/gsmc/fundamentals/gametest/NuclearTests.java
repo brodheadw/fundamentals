@@ -170,7 +170,7 @@ public class NuclearTests {
     @GameTest(template = "empty")
     public void spentFuelRunsToAWasteCanister(GameTestHelper helper) {
         helper.assertTrue(takes(processing(helper, "fundamentals:uses/purex"), "fundamentals:cooled_spent_fuel"), "PUREX takes cooled fuel");
-        helper.assertTrue(takes(processing(helper, "fundamentals:uses/vitrified_waste"), "fundamentals:boric_acid"), "vitrification takes boric acid");
+        helper.assertTrue(takes(processing(helper, "fundamentals:uses/vitrified_waste"), "fundamentals:borosilicate_glass"), "vitrification melts the waste into borosilicate glass");
         helper.assertTrue(recipe(helper, "fundamentals:uses/waste_canister_vitrified").isPresent()
                 && recipe(helper, "fundamentals:uses/waste_canister_spent_fuel").isPresent(), "both wastes can be canistered");
         helper.succeed();
