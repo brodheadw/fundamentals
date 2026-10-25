@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "HYH",
+    "HLH",
+    "HMH"
+  ],
+  "key": {
+    "H": {
+      "item": "tfmg:heavy_plate"
+    },
+    "Y": {
+      "tag": "c:dyes/yellow"
+    },
+    "L": {
+      "item": "fundamentals:laminated_glass"
+    },
+    "M": {
+      "item": "tfmg:electric_motor"
+    }
+  },
+  "result": {
+    "id": "fundamentals:blast_door"
+  }
+}

@@ -93,6 +93,7 @@ public class Fundamentals {
                 ai.gsmc.fundamentals.air.FieldMill.registerBlocks(helper::register);
                 Oxidation.registerBlocks(helper::register);
                 Compute.registerBlocks(helper::register);
+                ai.gsmc.fundamentals.glass.Glass.registerBlocks(helper::register);
             });
             event.register(Registries.BLOCK_ENTITY_TYPE, helper -> {
                 IronWorking.registerBlockEntities(helper::register);
@@ -105,6 +106,7 @@ public class Fundamentals {
                 ai.gsmc.fundamentals.air.FieldMill.registerBlockEntities(helper::register);
                 Oxidation.registerBlockEntities(helper::register);
                 Compute.registerBlockEntities(helper::register);
+                ai.gsmc.fundamentals.glass.Glass.registerBlockEntities(helper::register);
             });
             event.register(Registries.RECIPE_TYPE, helper -> {
                 IronWorking.registerRecipeTypes(helper::register);
@@ -150,6 +152,7 @@ public class Fundamentals {
                 PeriodicTable.registerItems(helper::register);
                 Compute.registerItems(helper::register);
                 ai.gsmc.fundamentals.cold.Parkas.registerItems(helper::register);
+                ai.gsmc.fundamentals.glass.Glass.registerItems(helper::register);
             });
             event.register(Registries.ARMOR_MATERIAL, helper -> ai.gsmc.fundamentals.cold.Parkas.registerArmorMaterials(helper::register));
             event.register(Registries.DATA_COMPONENT_TYPE, helper -> {
@@ -221,6 +224,7 @@ public class Fundamentals {
             OxidationClient.register(modBus);
             ThermometerRenderer.register(modBus);
             ComputeClient.register(modBus);
+            ai.gsmc.fundamentals.client.GlassClient.register(modBus);
         }
     }
 
@@ -243,6 +247,7 @@ public class Fundamentals {
                     Oxidation.items().forEach(output::accept);
                     Compute.items().forEach(output::accept);
                     ai.gsmc.fundamentals.cold.Parkas.items().forEach(output::accept);
+                    ai.gsmc.fundamentals.glass.Glass.items().forEach(output::accept);
                     OreBlocks.rawItems().forEach(output::accept);
                     OreBlocks.items().forEach(output::accept);
                 })

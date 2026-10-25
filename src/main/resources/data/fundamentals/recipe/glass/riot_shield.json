@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "PAP",
+    "PPP",
+    " P "
+  ],
+  "key": {
+    "P": {
+      "item": "fundamentals:polycarbonate_sheet"
+    },
+    "A": {
+      "tag": "c:ingots/aluminum"
+    }
+  },
+  "result": {
+    "id": "fundamentals:riot_shield"
+  }
+}

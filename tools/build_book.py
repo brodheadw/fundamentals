@@ -1361,6 +1361,61 @@ def arms():
         "A powder charge is still a bag of black powder, as at Trafalgar. Cartridges and autocannon and machine gun rounds take smokeless powder, which counts as its nitropowder; "
         "nitrocellulose is its guncotton and packs into high explosive filling, and slime no longer gelatinises anything. "
         "Every fuze is fired by a primer: the impact fuze's firing pin strikes one, and the timed, proximity and wired fuzes fire one by clockwork, radio or current.", "Propellant and fuzes"), 4)
+def glass():
+    category("glass", "Glass and armour", "Borosilicate, tempered and laminated glass, polycarbonate and the sapphire viewport: what a window can be made to stand, and the blast door it ends in.",
+             "fundamentals:laminated_glass", 9)
+    entry("glass", "borosilicate", "Borosilicate glass", "fundamentals:borosilicate_glass", pages_of(
+        "Common glass is soda-lime: sand, soda and lime. Heat one side and that side swells while the rest does not, and it cracks. "
+        "Otto Schott at Jena found in the 1890s that boric oxide in place of most of the soda and lime made a glass that expands a third as much, "
+        "and Corning sold it from 1915 as Pyrex: four fifths silica, an eighth boric oxide, a little soda and alumina. It goes from a flame into cold water and holds.", "Borosilicate") + pages_of(
+        "Borax is sodium borate, so it brings the boron and the soda both. Three colourless sand and a raw borax, superheated, melt to three borosilicate glass; "
+        "it wants more heat than soda-lime, which melts in any furnace. Six make sixteen panes. It is no stronger than glass, and shatters as glass does unless it is lifted with silk touch.") + pages_of(
+        "Its job here is the hottest one. High-level waste from PUREX is melted with borosilicate glass, superheated, into vitrified waste: "
+        "boron and silica take the fission products into the glass's own network, which is how every vitrification plant locks them up. "
+        "Sources: Schott Technical Glasses (2014); Ojovan and Lee, An Introduction to Nuclear Waste Immobilisation, 2nd ed. (2014).", "Vitrification")
+        + [crafting("fundamentals:glass/borosilicate_glass_pane")], 0)
+    entry("glass", "tempered", "Tempered glass", "fundamentals:tempered_glass", pages_of(
+        "Glass breaks from its surface: a scratch is a crack waiting. Temper it and the surface is squeezed shut. Glass is heated to about 620 °C, just short of softening, "
+        "and both faces are blown hard with air. The skin sets first; the core, cooling after it, shrinks and pulls the skin into compression, "
+        "so a crack must first overcome that squeeze. Tempered glass bends four or five times as far before it breaks, and when it does go it crumbles to blunt cubes, not blades.", "Toughened glass") + pages_of(
+        "Glass or a glass pane in a furnace, or blasted by a fan over lava, comes out hot glass; a spout of 250 mB of The Factory's air quenches a block to tempered glass, "
+        "and 100 mB a pane. Tempered glass cannot be cut afterwards: the first cut lets the stress go and the whole sheet bursts. So panes are cut first and then tempered, "
+        "as they are in every glass works. Tempered glass shrugs off a blast that would take out stone, at a distance.", "Tempering") + pages_of(
+        "Seen through a polarising filter, sunglasses on a car's back window, tempered glass shows a grid of dark spots: the marks of the air jets that quenched it. "
+        "Sources: Gardon, \"Thermal Tempering of Glass\", in Glass: Science and Technology 5 (1980); EN 12150-1.", "Quench marks"), 1)
+    entry("glass", "polycarbonate", "Polycarbonate", "fundamentals:polycarbonate_sheet", pages_of(
+        "Polycarbonate is the clear plastic that does not shatter: a sheet of it takes a hammer and dents. Hermann Schnell made it at Bayer in 1953, and Bayer still makes it the way he did. "
+        "Phosgene first: 250 mB of carbon monoxide and 250 mB of chlorine over charcoal give 250 mB of phosgene, which keeps its charcoal nineteen times in twenty. "
+        "Phosgene is the choking gas of 1915, four times as heavy as air: keep it in pipe and tank.", "Polycarbonate") + pages_of(
+        "Bisphenol A is two phenol and an acetone joined over an acid, and the cumene process gives phenol and acetone together: 500 mB of phenol, 250 mB of acetone "
+        "and 25 mB of hydrochloric acid, heated, give two bisphenol A. A bisphenol A, 250 mB of phosgene and 500 mB of caustic soda give a polycarbonate resin; "
+        "the caustic takes the hydrogen chloride the reaction throws off, and leaves 500 mB of brine. A resin pressed on a heated basin is a polycarbonate sheet.", "Bisphenol A") + pages_of(
+        "Riot police carry it. Six polycarbonate sheets and an aluminium grip make a riot shield, which blocks as a shield does, but you see through it, "
+        "and it lasts three times as long as oak. A polycarbonate sheet mends it in an anvil. "
+        "Sources: Schnell, Chemistry and Physics of Polycarbonates (Interscience, 1964); Ullmann's Encyclopedia of Industrial Chemistry, \"Polycarbonates\".", "Riot shield")
+        + [crafting("fundamentals:glass/riot_shield")], 2)
+    entry("glass", "armour", "Laminated armour glass", "fundamentals:laminated_glass", pages_of(
+        "Bullet-resisting glass is not one glass but a stack: hard glass outside to blunt and break up whatever strikes it, polycarbonate behind to catch the pieces "
+        "and the spall, bonded into one in an autoclave under heat and pressure. Two tempered glass and a polycarbonate sheet pressed on a heated basin make laminated armour glass, "
+        "two tempered panes and a sheet two laminated panes.", "Laminated glass") + pages_of(
+        "It is the strongest window in the pack: an explosion has to be as strong as one that breaks obsidian to break it, and it takes an iron pickaxe to dig out. "
+        "Struck, a laminate cracks but holds together on its interlayer, which is why a car's windscreen is laminated, so it comes out whole and gives itself back. "
+        "Sources: EN 1063; UL 752.", "Armour") + pages_of(
+        "Sapphire is Mohs 9: only diamond scratches it. Sapphire windows are the barcode scanner's at the checkout, the watch's crystal, and the viewport of furnaces, "
+        "deep submersibles and missile domes. A Verneuil sapphire boule set in four steel plates makes a sapphire window, a steel-bezelled viewport "
+        "that only a diamond pickaxe can dig out, and that stands half what laminated glass does to an explosion. "
+        "Source: Harris, Materials for Infrared Windows and Domes (SPIE, 1999).", "Sapphire windows")
+        + [crafting("fundamentals:glass/sapphire_window")], 3)
+    entry("glass", "blast_door", "The blast door", "fundamentals:blast_door", pages_of(
+        "A blast door is a slab of armour plate on a motor: the doors of Cheyenne Mountain weigh twenty-five tons apiece. Heavy plate, a laminated armour glass viewport, "
+        "a yellow dye for the hazard striping and an electric motor make a blast door. Placed, it stands three wide and three high in front of you, all of it at once, "
+        "and needs that much room.", "The blast door") + pages_of(
+        "It opens on electricity alone. Its bottom middle block is the drive, an electrical block of The Factory's grid: fed at fifty volts or more, the two leaves slide apart, "
+        "drawing a motor's load, 24 ohms, while they move and a holding latch's, 480, once open. Cut the circuit and an accumulator shuts them. "
+        "No lever, button, redstone or hand opens it: put a switch in its cable, and keep the switch inside.", "Power") + pages_of(
+        "It is five times as hard to dig as obsidian, every one of its nine blocks alike, and wants a diamond pickaxe; it stands three times the blast obsidian does. "
+        "Dig any part and the whole door comes away as one.", "Armour")
+        + [crafting("fundamentals:glass/blast_door")], 4)
 
 
 def book():
@@ -1430,6 +1485,7 @@ def main():
     chemicals()
     arms()
     cold()
+    glass()
     check()
     n = len(list(BOOK_ASSETS.glob("entries/*/*.json")))
     print(f"book written: {n} entries")

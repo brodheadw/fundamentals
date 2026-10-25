@@ -444,6 +444,13 @@
       "freezes": -218.8,
       "boils": -183.0
     },
+    "fundamentals:phosgene": {
+      "density": 4.04,
+      "viscosity": 0.0118,
+      "freezes": -118,
+      "boils": 8.3,
+      "toxic": true
+    },
     "fundamentals:chlorine": {
       "density": 2.99,
       "viscosity": 0.0134,

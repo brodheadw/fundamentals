@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "ingredient": {
+    "item": "minecraft:glass"
+  },
+  "result": {
+    "id": "fundamentals:hot_glass"
+  },
+  "experience": 0,
+  "cookingtime": 100
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "GGG",
+    "GGG"
+  ],
+  "key": {
+    "G": {
+      "item": "fundamentals:borosilicate_glass"
+    }
+  },
+  "result": {
+    "id": "fundamentals:borosilicate_glass_pane",
+    "count": 16
+  }
+}
