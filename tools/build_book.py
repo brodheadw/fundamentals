@@ -768,8 +768,8 @@ def metals():
         "A circuit board can be finished in silver as well as gold, and four silver plates, two zinc, a plastic separator, copper wire and an aluminium casing make a silver-zinc accumulator."), 8)
     entry("metals", "zirconium", "Zirconium and hafnium", "fundamentals:zirconium_ingot", pages_of(
         "Zircon is the third mineral of the heavy sands, after ilmenite and rutile: honey-brown grains panned from beach and river sand, and a few in the syenite massifs. "
-        "Washed under an encased fan, the light quartz goes and half stays as zircon concentrate. Most zircon never becomes metal. As sand it faces a mould, standing 2,000 °C unwetted, "
-        "so the Factory's casting basin takes a zircon concentrate; milled, it is the white of tile glaze, and one in eight terracotta makes eight white.", "Zirconium") + pages_of(
+        "Washed under an encased fan, the light quartz goes and half stays as zircon concentrate. Most zircon never becomes metal. As sand it faces a precision mould, standing 2,000 °C unwetted; "
+        "milled, it is the white of tile glaze, and one in eight terracotta makes eight white.", "Zirconium") + pages_of(
         "For the metal it takes titanium's road. Two concentrate, a coal coke and 1,000 mB of chlorine, heated, give two crude zirconium tetrachloride, a white solid that sublimes at 331 °C, "
         "the silica leaving as silicon tetrachloride. A crude chloride and 500 mB of water, heated, hydrolyse and calcine to a zirconium oxide, zirconia, and give 250 mB of hydrochloric acid back.") + pages_of(
         "Zircon carries a fiftieth as much hafnium, its chemical twin, and the chloride keeps it. The two are parted by extractive distillation through a molten chloride, hafnium tetrachloride the more volatile: "
@@ -1112,6 +1112,10 @@ def magnets():
         + pages_of(f"In the game, every few seconds: {rows} Output falls from full at the rating to half at the lasting-loss point and to nothing at Curie; "
                    "a motor turns slower and carries less, a generator gives less, an electric pump pushes less. A demagnetised machine stops. "
                    "A voltmeter's needle swings against its magnet, so it reads low by what the heat has taken of its field.", "The grades")
+        + pages_of("Energy is kept. What a block draws and does not pass on is heat in that block: a resistor turns all of it, a light bulb nineteen parts in twenty, "
+                   "a neon tube three in four, an electrode in a vat two in five, an electric pump three in ten, a converter or accumulator a twentieth, the computers' power supply "
+                   "three in twenty, a transformer a fiftieth, a motor a tenth. A generator loses a tenth of what its shaft gives it. So a hard-worked motor or generator warms itself, "
+                   "and its magnet with it. A kilowatt lost in a block holds it about sixty degrees warm, more in light blocks and less in heavy ones.", "Where the power goes")
         + pages_of("The first magnet is hardened carbon steel. Heat a steel ingot in a furnace and quench the hot steel under a spout with 250 mB of water. "
                    "In an unpowered steel vat, combine copper, zinc, a glass bottle, 50 mB of sulfuric acid and 200 mB of water into a galvanic cell. "
                    "Craft the cell, hardened steel and copper wire together: the cell's current magnetizes the steel. The recipe consumes the cell and winding. "

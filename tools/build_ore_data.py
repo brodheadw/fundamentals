@@ -205,6 +205,15 @@ DEPOSITS = {
                          (10, 14), (1, 2), (14, 24), "hydrothermal", (-40, 40), 20, "rock"),
 }
 
+# The table's sizes, cut down: a deposit's length and height are scaled by LENGTH and a bed's thickness by DEPTH,
+# so a bed keeps about a quarter of its volume and a vein or plug about a third. A vein stays as thin as it was.
+LENGTH, DEPTH = 0.6, 0.75
+
+
+def shrink(span, factor):
+    return None if span is None else tuple(max(1, round(v * factor)) for v in span)
+
+
 PLACERS = {
     "monazite": (54, 66, 1, 9),
     "ilmenite": (54, 66, 2, 12),
@@ -409,6 +418,9 @@ def main():
 
     by_biomes = {}
     for name, (shape, host, ores, radius, thickness, height, where, y, chunks, replaces) in DEPOSITS.items():
+        radius, height = shrink(radius, LENGTH), shrink(height, LENGTH)
+        if shape in ("bed", "blanket"):
+            thickness = shrink(thickness, DEPTH)
         entries = [{"state": state(ore if ":" in ore else f"{ore}_ore"), "fraction": share, "style": style} for ore, share, style in ores]
         config = {"shape": shape, "ores": entries,
                   "radius": {"min": radius[0], "max": radius[1]},

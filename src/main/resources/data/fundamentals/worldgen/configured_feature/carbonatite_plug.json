@@ -26,8 +26,8 @@
       }
     ],
     "radius": {
-      "min": 6,
-      "max": 9
+      "min": 4,
+      "max": 5
     },
     "thickness": {
       "min": 1,
@@ -38,8 +38,8 @@
       "Name": "fundamentals:carbonatite"
     },
     "height": {
-      "min": 20,
-      "max": 34
+      "min": 12,
+      "max": 20
     }
   }
 }

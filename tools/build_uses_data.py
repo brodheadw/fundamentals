@@ -713,7 +713,7 @@ def zirconium():
         pgm_vat(f"{metal}_ingot", item(f"{metal}_sponge", 2) + argon(), [result(f"{metal}_ingot", 2)], machines=electrodes, heat="superheated", folder=USES)
     mixing("yttria_stabilised_zirconia", item("zirconium_oxide", 12) + item("yttrium_oxide"), [result("yttria_stabilised_zirconia", 13)], "superheated")
     shaped(TFMG / "crafting/materials/casting_basin.json", ["BPB", "CZC", "CCC"],
-           {"B": {"item": "tfmg:fireproof_brick"}, "C": {"tag": "c:ingots/cast_iron"}, "P": {"item": "tfmg:cast_iron_pipe"}, "Z": {"item": "fundamentals:zircon_concentrate"}},
+           {"B": {"item": "tfmg:fireproof_brick"}, "C": {"tag": "c:ingots/cast_iron"}, "P": {"item": "tfmg:cast_iron_pipe"}, "Z": {"item": "tfmg:fireclay_ball"}},
            {"count": 1, "id": "tfmg:casting_basin"})
     shaped(USES / "white_terracotta_from_zircon.json", ["TTT", "TZT", "TTT"], {"T": {"item": "minecraft:terracotta"}, "Z": {"item": "fundamentals:zircon_concentrate"}},
            {"count": 8, "id": "minecraft:white_terracotta"})
