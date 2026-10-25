@@ -1297,6 +1297,71 @@ def chemicals():
         "US EPA, 40 CFR 61 subpart R (phosphogypsum stacks).", "Sources"), 2)
 
 
+def arms():
+    import build_arms_data as a
+    category("arms", "Arms and ammunition", "Black powder, guncotton and smokeless powder, primers and drawn brass, gun barrels; "
+             "and Point Blank's weapon printer and Create Big Cannons' foundry fed from the plant.", "minecraft:gunpowder", 8)
+    cellulose, ethanol, recovered = a.POUDRE_B
+    nitro, glycerin, acetone, cordite = a.CORDITE
+    entry("arms", "black_powder", "Black powder", "minecraft:gunpowder", pages_of(
+        "Black powder is saltpetre, charcoal and sulfur. The saltpetre gives the oxygen, the charcoal burns in it, and the sulfur lights easily and binds the rest. "
+        f"By the late 1700s the English government mills had settled on 75 saltpetre, 15 charcoal and 10 sulfur by weight. Here {a.SALTPETRE} nitrate dust, "
+        f"{a.CHARCOAL} charcoal and {a.SULFUR} sulfur dust go into a mixer with 100 mB of water, near enough that, and come out as {NUMBERS[a.MILL_CAKES]} mill cake. "
+        "Mill cake is wet so that it can be ground fine without catching fire.", "Saltpetre, charcoal, sulfur") + pages_of(
+        "Dry meal powder settles out by weight in a cask and burns unevenly in a gun. From the fifteenth century powder makers corned it instead: "
+        "the wet meal was pressed hard into a cake, then broken into grains of one size and sieved. A press makes a mill cake into a press cake, "
+        f"and a millstone breaks a press cake into {NUMBERS[a.GRAINS]} black powder, the pack's gunpowder. The Factory Must Grow's dry mix is gone. "
+        "Black powder is still what fills a cannon's powder bag and a firework.", "Corning") + pages_of(
+        "Sources: Buchanan (ed.), Gunpowder, Explosives and the State (Ashgate, 2006); Kelly, Gunpowder (Basic Books, 2004); "
+        "Partington, A History of Greek Fire and Gunpowder (1960).", "Sources"), 0)
+    entry("arms", "guncotton", "Guncotton and smokeless powder", "fundamentals:smokeless_powder", pages_of(
+        "Christian Schönbein, in Basel in 1846, put cotton into nitric and sulfuric acid together and got a fibre that burned in a flash and left no smoke: guncotton, "
+        "cellulose nitrate. The sulfuric acid takes up the water the nitration gives off. "
+        f"{NUMBERS[a.PAPER_NITRATED].capitalize()} paper in {a.NITRIC} mB of nitric acid and {a.SULFURIC} mB of sulfuric acid give {NUMBERS[a.PAPER_NITRATED]} nitrocellulose "
+        f"and {a.SULFURIC} mB of spent acid, which the acid plant cracks back to sulfur dioxide.", "Guncotton") + pages_of(
+        "Guncotton burns too fast to push a bullet: it bursts a barrel. Paul Vieille made it a propellant in 1884 by dissolving it to a gel in ether and alcohol, "
+        "rolling it thin and cutting it to flakes, which burn from the surface inwards. His Poudre B went into the Lebel rifle of 1886, and every army followed. "
+        f"With Chemica, {cellulose} nitrocellulose in {ethanol} mB of ethanol, heated, give {cellulose} smokeless powder, and {recovered} mB of the solvent is driven off and caught again.", "Poudre B") + pages_of(
+        f"Frederick Abel and James Dewar's cordite of 1889 gelatinised guncotton with nitroglycerin in acetone: 58 nitroglycerin, 37 guncotton and 5 mineral jelly. "
+        f"{NUMBERS[nitro].capitalize()} nitrocellulose, {glycerin} mB of nitroglycerin and {acetone} mB of acetone give {cordite} smokeless powder. "
+        f"Without Chemica there is no solvent, and the older Schultze powder of 1864 serves, guncotton grains hardened with saltpetre and never gelatinised: "
+        f"{a.SCHULTZE} nitrocellulose, a nitrate dust and 100 mB of water give {a.SCHULTZE}.", "Cordite and Schultze powder") + pages_of(
+        "Sources: Urbanski, Chemistry and Technology of Explosives, vol. 3 (Pergamon, 1967); Davis, The Chemistry of Powder and Explosives (Wiley, 1943); "
+        "Kelly, Gunpowder (Basic Books, 2004).", "Sources"), 1)
+    entry("arms", "cartridges", "Primers and cartridges", "fundamentals:cartridge_case", pages_of(
+        "Edward Howard made mercury fulminate in 1800 by dissolving mercury in nitric acid and pouring it into alcohol. It goes off when struck. "
+        f"With Chemica, a mercury, 500 mB of nitric acid and 500 mB of ethanol give {a.FULMINATE} mercury fulminate; without it there is no alcohol, and no primer. "
+        f"A deployer pressing fulminate into a brass sheet gives {a.PRIMERS} primers, a cup with a pellet of fulminate and an anvil to crush it against.", "Fulminate") + pages_of(
+        "Edward Boxer at Woolwich and Hiram Berdan in America both patented the centrefire primer in 1866. Boxer's carries its own anvil and fires through one flash hole, so a fired case can be reprimed; "
+        "Berdan's anvil is part of the case. Fulminate corrodes brass and leaves a salt that rusts a barrel, and from the 1920s lead styphnate replaced it, made from resorcinol, which the pack does not make.", "Boxer and Berdan") + pages_of(
+        f"Cartridge brass is seven parts copper to three of zinc, soft enough to draw. A press draws a brass sheet into {a.CASES} cases, a pistol case's worth of brass each. "
+        f"Eduard Rubin's copper-jacketed bullet of the 1880s kept the lead off the rifling at smokeless velocities: a deployer laying a copper sheet over an antimonial lead ingot gives {a.BULLETS} jacketed bullets, "
+        "the antimony hardening the core.", "Cases and bullets") + pages_of(
+        "Point Blank's weapon printer loads them. 8 rounds of 9 mm take 8 cases, 8 bullets, 8 primers and a smokeless powder; 8 of 5.56 mm take 16 cases and 3 powder, "
+        "8 of 7.62 by 51 mm 24 cases, 16 bullets and 5 powder, and 2 of .50 BMG 24 cases, 24 bullets and 7. Eight 12-gauge shells take 8 cases for their brass heads, "
+        "plastic for the hulls and two antimonial lead ingots of shot. Grenades and rockets are filled with guncotton, as shells and torpedo warheads were before TNT.", "In the printer") + pages_of(
+        "Sources: Howard, \"On a new fulminating mercury\", Philosophical Transactions 90 (1800); Davis, The Chemistry of Powder and Explosives (1943); "
+        "Urbanski, vol. 3.", "Sources"), 2)
+    entry("arms", "guns", "Gun barrels", "fundamentals:gun_barrel", pages_of(
+        "A gun barrel starts as a bar of steel. On a Create line a steel ingot is flooded with 50 mB of lubrication oil, drilled through on a saw, reamed on a second saw and straightened on a press, "
+        "the barrel blank turning into a gun barrel: a gun drill runs in oil pumped down its own shank, then reaming and rifling, and straightening by eye on a press, as barrel makers still do. "
+        "A ground lens is glass polished with sand paper, garnet paper or emery cloth.", "Barrels") + pages_of(
+        "The weapon printer machines the rest. A pistol is a barrel, a gun mechanism, HSLA steel for the slide and plastic for the frame; an AR-15 or a SCAR has an aluminium receiver; "
+        "an AK, a G3 or a shotgun is steel throughout, with wood where it has wood. Gun mechanisms are two hardened steel springs, a steel mechanism and screws. "
+        "Machine guns take a spare barrel and two steel mechanisms for the feed, and the minigun six barrels and an electric motor. "
+        "Red dots and holographic sights take an LED chip and a cell; launchers take aluminium tubes, and the Javelin's seeker germanium optics.", "The printer") + pages_of(
+        "Point Blank's gunmetal, copper and iron smelted together, is gone, and so is its minigun motor: the M134 has always been driven by an electric motor, and here The Factory's turns it. "
+        "Arms dealers in villages still sell guns for emeralds; that is the pack's setting, not this mod's.", "Gunmetal"), 3)
+    steel, nethersteel = a.NETHERSTEEL
+    entry("arms", "big_cannons", "Big cannons", "createbigcannons:cast_iron_cannon_barrel", pages_of(
+        "Create Big Cannons melts and casts its guns from the plant's metals: The Factory's cast iron and steel, and our bronze, seven copper to one tin, near the gun bronze of the old cannon founders. "
+        "Its own alloying is gone: iron and coal do not stir into steel or press into cast iron, and brass and cinder flour are not bronze. "
+        f"Nethersteel takes a netherite ingot: {steel} steel with one, superheated, give {nethersteel}.", "Metal") + pages_of(
+        "A powder charge is still a bag of black powder, as at Trafalgar. Cartridges and autocannon and machine gun rounds take smokeless powder, which counts as its nitropowder; "
+        "nitrocellulose is its guncotton and packs into high explosive filling, and slime no longer gelatinises anything. "
+        "Every fuze is fired by a primer: the impact fuze's firing pin strikes one, and the timed, proximity and wired fuzes fire one by clockwork, radio or current.", "Propellant and fuzes"), 4)
+
+
 def book():
     write(BOOK_DATA / "book.json", {
         "name": "Fundamentals: First Principles",
@@ -1337,6 +1402,7 @@ def main():
     power()
     plastics()
     chemicals()
+    arms()
     check()
     n = len(list(BOOK_ASSETS.glob("entries/*/*.json")))
     print(f"book written: {n} entries")

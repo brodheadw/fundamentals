@@ -1,0 +1,39 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "create:mixing",
+  "heat_requirement": "heated",
+  "ingredients": [
+    {
+      "item": "fundamentals:nitrocellulose"
+    },
+    {
+      "item": "fundamentals:nitrocellulose"
+    },
+    {
+      "item": "fundamentals:nitrocellulose"
+    },
+    {
+      "item": "fundamentals:nitrocellulose"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 250,
+      "tag": "c:ethanol"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:smokeless_powder",
+      "count": 4
+    },
+    {
+      "id": "chemica:ethanol",
+      "amount": 200
+    }
+  ]
+}

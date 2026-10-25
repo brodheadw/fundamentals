@@ -1,0 +1,38 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pointblank"
+    }
+  ],
+  "type": "pointblank:default",
+  "ingredients": [
+    {
+      "count": 2,
+      "item": "fundamentals:gun_barrel"
+    },
+    {
+      "count": 5,
+      "item": "pointblank:guninternals"
+    },
+    {
+      "count": 8,
+      "tag": "c:ingots/hsla_steel"
+    },
+    {
+      "count": 2,
+      "tag": "c:plates/polyethylene"
+    },
+    {
+      "count": 2,
+      "item": "tfmg:steel_mechanism"
+    },
+    {
+      "count": 2,
+      "item": "tfmg:screw"
+    }
+  ],
+  "result": {
+    "item": "pointblank:mk48"
+  }
+}

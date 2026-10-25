@@ -1,0 +1,34 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pointblank"
+    }
+  ],
+  "type": "pointblank:default",
+  "ingredients": [
+    {
+      "count": 2,
+      "item": "tfmg:aluminum_sheet"
+    },
+    {
+      "count": 2,
+      "item": "fundamentals:nitrocellulose"
+    },
+    {
+      "count": 2,
+      "item": "fundamentals:smokeless_powder"
+    },
+    {
+      "count": 1,
+      "tag": "c:plates/copper"
+    },
+    {
+      "count": 1,
+      "item": "fundamentals:primer"
+    }
+  ],
+  "result": {
+    "item": "pointblank:at4_rocket"
+  }
+}

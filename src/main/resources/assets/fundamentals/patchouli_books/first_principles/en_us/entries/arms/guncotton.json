@@ -1,0 +1,40 @@
+{
+  "name": "Guncotton and smokeless powder",
+  "category": "fundamentals:arms",
+  "icon": "fundamentals:smokeless_powder",
+  "sortnum": 1,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Christian Schönbein, in Basel in 1846, put cotton into nitric and sulfuric acid together and got a fibre that burned in a flash and left no smoke: guncotton, cellulose nitrate. The sulfuric acid takes up the water the nitration gives off.",
+      "title": "Guncotton"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two paper in 250 mB of nitric acid and 500 mB of sulfuric acid give two nitrocellulose and 500 mB of spent acid, which the acid plant cracks back to sulfur dioxide."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Guncotton burns too fast to push a bullet: it bursts a barrel. Paul Vieille made it a propellant in 1884 by dissolving it to a gel in ether and alcohol, rolling it thin and cutting it to flakes, which burn from the surface inwards. His Poudre B went into the Lebel rifle of 1886, and every army followed.",
+      "title": "Poudre B"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "With Chemica, 4 nitrocellulose in 250 mB of ethanol, heated, give 4 smokeless powder, and 200 mB of the solvent is driven off and caught again."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Frederick Abel and James Dewar's cordite of 1889 gelatinised guncotton with nitroglycerin in acetone: 58 nitroglycerin, 37 guncotton and 5 mineral jelly. Two nitrocellulose, 250 mB of nitroglycerin and 100 mB of acetone give 4 smokeless powder.",
+      "title": "Cordite and Schultze powder"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Without Chemica there is no solvent, and the older Schultze powder of 1864 serves, guncotton grains hardened with saltpetre and never gelatinised: 3 nitrocellulose, a nitrate dust and 100 mB of water give 3."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: Urbanski, Chemistry and Technology of Explosives, vol. 3 (Pergamon, 1967); Davis, The Chemistry of Powder and Explosives (Wiley, 1943); Kelly, Gunpowder (Basic Books, 2004).",
+      "title": "Sources"
+    }
+  ]
+}

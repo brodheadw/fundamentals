@@ -1,0 +1,26 @@
+{
+  "name": "Big cannons",
+  "category": "fundamentals:arms",
+  "icon": "createbigcannons:cast_iron_cannon_barrel",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Create Big Cannons melts and casts its guns from the plant's metals: The Factory's cast iron and steel, and our bronze, seven copper to one tin, near the gun bronze of the old cannon founders. Its own alloying is gone: iron and coal do not stir into steel or press into cast iron, and brass and cinder flour are not bronze.",
+      "title": "Metal"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Nethersteel takes a netherite ingot: 4 steel with one, superheated, give 5."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A powder charge is still a bag of black powder, as at Trafalgar. Cartridges and autocannon and machine gun rounds take smokeless powder, which counts as its nitropowder; nitrocellulose is its guncotton and packs into high explosive filling, and slime no longer gelatinises anything.",
+      "title": "Propellant and fuzes"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Every fuze is fired by a primer: the impact fuze's firing pin strikes one, and the timed, proximity and wired fuzes fire one by clockwork, radio or current."
+    }
+  ]
+}

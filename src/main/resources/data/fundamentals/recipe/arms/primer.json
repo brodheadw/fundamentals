@@ -1,0 +1,17 @@
+{
+  "type": "create:deploying",
+  "ingredients": [
+    {
+      "tag": "c:plates/brass"
+    },
+    {
+      "item": "fundamentals:mercury_fulminate"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:primer",
+      "count": 16
+    }
+  ]
+}

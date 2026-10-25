@@ -95,5 +95,5 @@ def hide_dead(jar, namespace, candidate):
     dead = sorted(i for i in items if candidate(i) and i not in produced)
     write(DATA / f"tags/item/hidden/{namespace}.json", {"replace": False, "values": [{"id": i, "required": False} for i in dead]})
     write(RESOURCES / "data/c/tags/item/hidden_from_recipe_viewers.json", {"replace": False, "values": [
-        {"id": f"#fundamentals:hidden/{mod}", "required": False} for mod in ("chemica", "createnuclear", "tfmg")]})
+        {"id": f"#fundamentals:hidden/{mod}", "required": False} for mod in ("chemica", "createbigcannons", "createnuclear", "pointblank", "tfmg")]})
     return len(dead)

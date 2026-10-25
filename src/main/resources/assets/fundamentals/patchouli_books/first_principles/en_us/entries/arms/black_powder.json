@@ -1,0 +1,31 @@
+{
+  "name": "Black powder",
+  "category": "fundamentals:arms",
+  "icon": "minecraft:gunpowder",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Black powder is saltpetre, charcoal and sulfur. The saltpetre gives the oxygen, the charcoal burns in it, and the sulfur lights easily and binds the rest. By the late 1700s the English government mills had settled on 75 saltpetre, 15 charcoal and 10 sulfur by weight.",
+      "title": "Saltpetre, charcoal, sulfur"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Here 6 nitrate dust, 1 charcoal and 1 sulfur dust go into a mixer with 100 mB of water, near enough that, and come out as two mill cake. Mill cake is wet so that it can be ground fine without catching fire."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Dry meal powder settles out by weight in a cask and burns unevenly in a gun. From the fifteenth century powder makers corned it instead: the wet meal was pressed hard into a cake, then broken into grains of one size and sieved.",
+      "title": "Corning"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A press makes a mill cake into a press cake, and a millstone breaks a press cake into three black powder, the pack's gunpowder. The Factory Must Grow's dry mix is gone. Black powder is still what fills a cannon's powder bag and a firework."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: Buchanan (ed.), Gunpowder, Explosives and the State (Ashgate, 2006); Kelly, Gunpowder (Basic Books, 2004); Partington, A History of Greek Fire and Gunpowder (1960).",
+      "title": "Sources"
+    }
+  ]
+}
