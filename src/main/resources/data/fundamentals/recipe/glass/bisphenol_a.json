@@ -17,11 +17,6 @@
       "type": "neoforge:single",
       "amount": 250,
       "fluid": "chemica:acetone"
-    },
-    {
-      "type": "neoforge:tag",
-      "amount": 25,
-      "tag": "c:acids/hydrochloric"
     }
   ],
   "results": [
