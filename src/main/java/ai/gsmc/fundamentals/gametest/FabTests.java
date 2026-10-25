@@ -44,6 +44,8 @@ public class FabTests {
                 .map(file -> file.withPath(file.getPath().substring("recipe/".length(), file.getPath().length() - 5)))
                 // novolac is condensed from Chemica's phenol, so it only exists alongside Chemica
                 .filter(id -> !id.getPath().equals("compute/novolac_resin") || net.neoforged.fml.ModList.get().isLoaded("chemica"))
+                // novolac is condensed from Chemica's phenol, so it only exists alongside Chemica
+                .filter(id -> !id.getPath().equals("compute/novolac_resin") || net.neoforged.fml.ModList.get().isLoaded("chemica"))
                 .filter(id -> server.getRecipeManager().byKey(id).isEmpty())
                 .forEach(id -> missing.add(id.toString()));
         helper.assertTrue(missing.isEmpty(), "recipes that failed to load (unknown item or fluid?): " + missing);

@@ -1,0 +1,35 @@
+{
+  "name": "The blast door",
+  "category": "fundamentals:glass",
+  "icon": "fundamentals:blast_door",
+  "sortnum": 4,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A blast door is a slab of armour plate on a motor: the doors of Cheyenne Mountain weigh twenty-five tons apiece. Heavy plate, a laminated armour glass viewport, a yellow dye for the hazard striping and an electric motor make a blast door.",
+      "title": "The blast door"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Placed, it stands three wide and three high in front of you, all of it at once, and needs that much room."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It opens on electricity alone. Its bottom middle block is the drive, an electrical block of The Factory's grid: fed at fifty volts or more, the two leaves slide apart, drawing a motor's load, 24 ohms, while they move and a holding latch's, 480, once open. Cut the circuit and an accumulator shuts them.",
+      "title": "Power"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "No lever, button, redstone or hand opens it: put a switch in its cable, and keep the switch inside."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It is five times as hard to dig as obsidian, every one of its nine blocks alike, and wants a diamond pickaxe; it stands three times the blast obsidian does. Dig any part and the whole door comes away as one.",
+      "title": "Armour"
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:glass/blast_door"
+    }
+  ]
+}

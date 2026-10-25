@@ -38,6 +38,10 @@
     },
     {
       "type": "patchouli:text",
+      "text": "A furnace melts raw or crushed native gold to electrum, silver and all; only parting makes it gold."
+    },
+    {
+      "type": "patchouli:text",
       "text": "Sources: Marsden and House, The Chemistry of Gold Extraction, 2nd ed. (SME, 2006); USGS, Mineral Commodity Summaries 2025, Gold; UNEP, Global Mercury Assessment 2018, artisanal and small-scale gold mining.",
       "title": "Sources"
     }

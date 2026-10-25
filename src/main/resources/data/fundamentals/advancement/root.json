@@ -76,7 +76,15 @@
               "fundamentals:raw_stibnite",
               "fundamentals:raw_pyrochlore",
               "fundamentals:raw_columbite",
-              "fundamentals:raw_sylvite"
+              "fundamentals:raw_sylvite",
+              "fundamentals:raw_garnet",
+              "fundamentals:raw_ruby",
+              "fundamentals:raw_sapphire",
+              "fundamentals:raw_emery",
+              "fundamentals:raw_tourmaline",
+              "fundamentals:raw_topaz",
+              "fundamentals:raw_bismuthinite",
+              "fundamentals:raw_native_bismuth"
             ]
           }
         ]

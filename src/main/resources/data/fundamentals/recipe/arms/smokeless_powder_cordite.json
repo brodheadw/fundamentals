@@ -1,0 +1,33 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:nitrocellulose"
+    },
+    {
+      "item": "fundamentals:nitrocellulose"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "chemica:nitroglycerin"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 100,
+      "fluid": "chemica:acetone"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:smokeless_powder",
+      "count": 4
+    }
+  ]
+}

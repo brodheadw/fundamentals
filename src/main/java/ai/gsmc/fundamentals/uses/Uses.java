@@ -1,6 +1,7 @@
 package ai.gsmc.fundamentals.uses;
 
 import ai.gsmc.fundamentals.Fundamentals;
+import com.simibubi.create.content.equipment.sandPaper.SandPaperItem;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -35,7 +36,8 @@ public final class Uses {
             "polysilicon", "silicon_boule", "silicon_wafer", "zinc_leach_residue", "led_chip", "indium_tin_oxide",
             "vanadium_pentoxide", "cement_clinker", "gypsum", "phosphogypsum",
             "calomel", "copper_cement", "cobalt_cake", "anode_mud", "jarosite", "lead_silver_residue", "hydrotreating_catalyst",
-            "spent_fuel_rod", "cooled_spent_fuel", "vitrified_waste", "hot_steel", "hardened_steel", "galvanic_cell");
+            "spent_fuel_rod", "cooled_spent_fuel", "vitrified_waste", "hot_steel", "hardened_steel", "galvanic_cell",
+            "sapphire_boule", "sapphire_wafer");
 
     public static final List<String> PLATINUM_IDS = List.of(
             "ammonium_chloride", "insoluble_residue", "iridium_rhodium_residue", "ammonium_chloroplatinate",
@@ -48,6 +50,7 @@ public final class Uses {
     private static Block phosphogypsumBlock;
     private static Block jarositeBlock;
     private static Block wasteCanister;
+    private static Block bismuthCrystal;
 
     private Uses() {}
 
@@ -69,6 +72,8 @@ public final class Uses {
                 .strength(0.8F).sound(SoundType.SAND)));
         registry.accept(Fundamentals.id("jarosite_block"), jarositeBlock = new Block(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_YELLOW)
                 .strength(0.8F).sound(SoundType.MUD)));
+        registry.accept(Fundamentals.id("bismuth_crystal"), bismuthCrystal = new Block(BlockBehaviour.Properties.of().mapColor(MapColor.COLOR_MAGENTA)
+                .strength(1.5F).sound(SoundType.AMETHYST)));
         registry.accept(Fundamentals.id("waste_canister"), wasteCanister = new ai.gsmc.fundamentals.content.nuclear.WasteCanisterBlock(
                 BlockBehaviour.Properties.of().mapColor(MapColor.METAL).strength(6.0F, 1200.0F).sound(SoundType.NETHERITE_BLOCK).requiresCorrectToolForDrops()));
     }
@@ -82,12 +87,26 @@ public final class Uses {
         register(registry, "phosphogypsum_block", new BlockItem(phosphogypsumBlock, new Item.Properties()));
         register(registry, "jarosite_block", new BlockItem(jarositeBlock, new Item.Properties()));
         register(registry, "waste_canister", new BlockItem(wasteCanister, new Item.Properties().stacksTo(16)));
+        register(registry, "bismuth_crystal", new BlockItem(bismuthCrystal, new Item.Properties()));
+        // Garnet, harder and tougher than quartz sand, and corundum outlast Create's sand paper's 8 uses.
+        register(registry, "garnet_paper", abrasive(24));
+        register(registry, "emery_cloth", abrasive(40));
         for (String id : PLATINUM_IDS) {
             register(registry, id, new Item(new Item.Properties()));
         }
         for (Fertiliser fertiliser : Fertiliser.ALL) {
             register(registry, fertiliser.id(), fertiliser);
         }
+    }
+
+    private static Item abrasive(int uses) {
+        // SandPaperItem's constructor sets Create's 8 uses on the properties it is given.
+        return new SandPaperItem(new Item.Properties() {
+            @Override
+            public Item.Properties durability(int ignored) {
+                return super.durability(uses);
+            }
+        });
     }
 
     private static void register(BiConsumer<ResourceLocation, Item> registry, String id, Item item) {

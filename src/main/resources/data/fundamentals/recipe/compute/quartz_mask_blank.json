@@ -1,16 +1,50 @@
 {
-  "type": "create:deploying",
-  "ingredients": [
-    {
-      "item": "fundamentals:fused_quartz"
-    },
-    {
-      "item": "fundamentals:chromium_ingot"
-    }
-  ],
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "fundamentals:fused_quartz"
+  },
+  "loops": 1,
   "results": [
     {
       "id": "fundamentals:quartz_mask_blank"
+    }
+  ],
+  "transitional_item": {
+    "id": "fundamentals:processing_mask"
+  },
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_mask"
+        },
+        {
+          "tag": "fundamentals:lapping_abrasives"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_mask"
+        }
+      ],
+      "keep_held_item": true
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "fundamentals:processing_mask"
+        },
+        {
+          "item": "fundamentals:chromium_ingot"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:processing_mask"
+        }
+      ]
     }
   ]
 }

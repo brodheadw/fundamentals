@@ -23,6 +23,7 @@ SHARED = {
     "chlorine": ("chlorine", "chlorine"),
     "ammonia": ("ammonia", "ammonia"),
     "argon": ("argon", "argon"),
+    "oxygen": ("oxygen", "oxygen"),
     "salt_brine": ("brine", "brine"),
     "caustic_soda": ("caustic_soda", "caustic_soda"),
     "titanium_tetrachloride": ("titanium_tetrachloride", "titanium_tetrachloride"),
@@ -30,6 +31,9 @@ SHARED = {
     "fluorine": ("fluorine", "fluorine"),
 }
 ITEMS = {"salt": ("salt", "dusts/salt"), "soda_ash": ("soda_ash", "dusts/soda_ash")}
+# Chemica items whose recipes we turned off or take over: our salt, graphite and sheets serve in their place.
+STOOD_IN = {"chemica:salt", "chemica:purified_graphite_flakes", "chemica:silver_sheet", "chemica:titanium_sheet",
+            "chemica:polyethylene_sheet", "chemica:polyvinyl_chloride_sheet"}
 SHEETS = {"pvc": "fundamentals:pvc_sheet", "polyethylene": "tfmg:plastic_sheet"}
 CHEMICA_SHEETS = ["chemica:polyethylene_sheet", "chemica:polyvinyl_chloride_sheet", "chemica:polytetrafluoroethylene_sheet"]
 
@@ -49,6 +53,7 @@ SWITCHED_OFF = {
     "vat_machine_recipe/vat_reaction/titanium_tetrachloride_mg": "rutile chlorinated without carbon; ours carbochlorinates with coke",
     "casting/polyethylene_sheet": "its polyethylene melt is no longer made; The Factory's plastic sheet serves",
     "casting/polyvinyl_chloride": "its PVC melt is no longer made; our PVC sheet serves",
+    "vat_machine_recipe/electrolysis/powdered_obsidian": "obsidian is volcanic glass; electrolysed, it does not give iron, silicon, nitrate and sulfur",
     "vat_machine_recipe/electrolysis/salt": "salt electrolysed in water gives caustic soda and hydrogen, not sodium; ours is the Downs cell, molten salt with calcium chloride",
 }
 ORE_ITEM = re.compile(r"chemica:((deepslate_)?[a-z]+_ore|raw_[a-z_]+|crushed_raw_[a-z]+|crushed_graphite|([a-z]+_grade_)?rutile_(crystal|dust)"
@@ -111,18 +116,36 @@ def take_over(path, recipe):
     return recipe
 
 
+def liberated(results):
+    """Crushing wheels liberate and do not multiply: an ore gives one crushed ore, whatever Create's count."""
+    crushed = next((r["id"] for r in results if "crushed_raw_" in r["id"]), None)
+    return [{"id": crushed}] + [r for r in results if r["id"] != crushed] if crushed else results
+
+
 # Chemica's own takeovers of Create's ore crushing are in 1.20 Forge's format and fail to load, leaving copper and gold ore uncrushable.
 def crushing(chemica, create):
     written = 0
-    for entry in sorted(chemica.namelist()):
+    theirs = {e for e in chemica.namelist() if e.startswith("data/create/recipe/crushing/") and e.endswith(".json")}
+    for entry in sorted(create.namelist()):
         if not (entry.startswith("data/create/recipe/crushing/") and entry.endswith(".json")):
             continue
         original = json.loads(create.read(entry))
-        named = MISNAMED | (NATIVE_COPPER if "copper" in entry else {})
-        extra = [{**{k: v for k, v in r.items() if k != "item"}, "id": named.get(r["item"], r["item"])}
-                 for r in json.loads(chemica.read(entry))["results"] if r["item"].split(":")[0] not in ("minecraft", "create")]
-        write(CRUSHING / Path(entry).name, {"neoforge:conditions": LOADED + original.pop("neoforge:conditions", []),
-                                            **original, "results": original["results"] + extra})
+        ores = json.dumps(original["ingredients"])
+        if entry not in theirs and not (("_ore" in ores or "c:ores/" in ores) and any("crushed_raw_" in r.get("id", "") for r in original["results"])):
+            continue
+        if entry.endswith("/platinum_ore.json"):
+            # Create Propulsion's own recipes crush the only platinum ores, one for one.
+            write(CRUSHING / "platinum_ore.json", {"neoforge:conditions": [{"type": "neoforge:false"}]})
+            continue
+        conditions = original.pop("neoforge:conditions", [])
+        extra = []
+        if entry in theirs:
+            named = MISNAMED | (NATIVE_COPPER if "copper" in entry else {})
+            extra = [{**{k: v for k, v in r.items() if k != "item"}, "id": named.get(r["item"], r["item"])}
+                     for r in json.loads(chemica.read(entry))["results"] if r["item"].split(":")[0] not in ("minecraft", "create")]
+            conditions = LOADED + conditions
+        write(CRUSHING / Path(entry).name, {**({"neoforge:conditions": conditions} if conditions else {}),
+                                            **original, "results": liberated(original["results"]) + extra})
         written += 1
     return written
 
@@ -206,7 +229,7 @@ def main():
     metals = {f"chemica:{metal}_{form}" for metal in METALS for form in ("ingot", "nugget", "block")}
     with zipfile.ZipFile(CHEMICA_JAR) as jar:
         # its ores no longer generate and our recipes stand in for its metals
-        hidden = common.hide_dead(jar, "chemica", lambda i: bool(ORE_ITEM.fullmatch(i)) or i in metals)
+        hidden = common.hide_dead(jar, "chemica", lambda i: bool(ORE_ITEM.fullmatch(i)) or i in metals or i in STOOD_IN)
     print(f"wrote {len(SHARED)} shared reagents, {rewritten} of Chemica's recipes rewritten, {off} switched off, {repaired} crushing repaired, {hidden} dead items hidden")
 
 

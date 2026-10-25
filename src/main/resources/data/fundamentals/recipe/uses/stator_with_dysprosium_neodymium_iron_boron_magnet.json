@@ -9,14 +9,9 @@
     "C": {
       "item": "tfmg:electromagnetic_coil"
     },
-    "M": [
-      {
-        "item": "fundamentals:dysprosium_neodymium_iron_boron_magnet"
-      },
-      {
-        "item": "tfmg:magnet"
-      }
-    ],
+    "M": {
+      "item": "fundamentals:dysprosium_neodymium_iron_boron_magnet"
+    },
     "S": {
       "tag": "c:storage_blocks/steel"
     },

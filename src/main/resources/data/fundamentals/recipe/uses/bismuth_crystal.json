@@ -1,0 +1,16 @@
+{
+  "type": "tfmg:casting",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 144,
+      "fluid": "fundamentals:molten_bismuth"
+    }
+  ],
+  "processing_time": 600,
+  "results": [
+    {
+      "id": "fundamentals:bismuth_crystal"
+    }
+  ]
+}

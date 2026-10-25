@@ -1,0 +1,27 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:bismuth_oxide"
+    },
+    {
+      "item": "fundamentals:bismuth_oxide"
+    },
+    {
+      "item": "minecraft:charcoal"
+    },
+    {
+      "item": "fundamentals:soda_ash"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:bismuth_ingot",
+      "count": 2
+    },
+    {
+      "id": "tfmg:slag"
+    }
+  ],
+  "heat_requirement": "heated"
+}

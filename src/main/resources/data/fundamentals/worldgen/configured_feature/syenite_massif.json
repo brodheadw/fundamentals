@@ -16,11 +16,18 @@
         },
         "fraction": 0.02,
         "style": "disseminated"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:sapphire_ore"
+        },
+        "fraction": 0.01,
+        "style": "disseminated"
       }
     ],
     "radius": {
-      "min": 8,
-      "max": 12
+      "min": 5,
+      "max": 7
     },
     "thickness": {
       "min": 1,
@@ -31,8 +38,8 @@
       "Name": "fundamentals:syenite"
     },
     "height": {
-      "min": 16,
-      "max": 26
+      "min": 10,
+      "max": 16
     }
   }
 }

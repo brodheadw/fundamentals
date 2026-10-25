@@ -50,6 +50,8 @@ OURS = {
     "aqua_regia": (1210, 1.8, -42, 108, None, None, None, {LIQUID}, "SDS", "three of 36% hydrochloric to one of 68% nitric"),
     "bromine": (3103, 0.94, -7.2, 58.8, None, None, None, {"toxic"}, "CRC", "the element, a liquid"),
     "argon": (1.66, 0.0223, -189.3, -185.8, None, None, None, set(), "NIST", "gas"),
+    "oxygen": (1.33, 0.0204, -218.8, -183.0, None, None, None, set(), "NIST", "gas"),
+    "phosgene": (4.04, 0.0118, -118, 8.3, None, None, None, {"toxic"}, "NIST", "gas, four times as heavy as air; it smells of new-mown hay, and killed more men in the First World War than any other gas"),
     "chlorine": (2.99, 0.0134, -101.5, -34.0, None, None, None, {"toxic"}, "NIST", "gas, two and a half times as heavy as air"),
     "water_gas": (0.66, 0.0145, -205, -191.5, -191.5, 500, None, {"toxic"}, "NIST", "carbon monoxide and hydrogen, half and half; flammable gas"),
     "ammonia": (0.72, 0.0099, -77.7, -33.3, None, None, None, {"toxic"}, "NIST", "gas"),
@@ -101,6 +103,8 @@ OURS = {
                                 "Bayer pregnant liquor, about 150 g/L Na2O, leaving the digester at 145 °C under pressure"),
     "molten_pig_iron": (6900, 6, 1147, 2860, None, None, 1450, set(), "Smithells",
                         "pig iron of about 4% carbon tapped at 1,450 °C; it freezes at the iron-carbon eutectic, 1,147 °C"),
+    "molten_bismuth": (10050, 1.8, 271.4, 1564, None, None, 300, set(), "Smithells",
+                       "bismuth melted at 300 °C; it freezes at 271 °C and grows by a thirtieth as it does, as water does"),
 }
 GAS = "gas at 20 °C and 1 atm"
 FOREIGN = {
@@ -251,6 +255,28 @@ def thermometers(lang):
             "key": {"U": upper, "L": lower, "B": beside, "A": {"item": "create:andesite_casing"}},
             "result": {"id": f"fundamentals:{name}", "count": 1}})
         lang[f"block.fundamentals.{name}"] = display
+    # A field mill: an earthed brass vane turning over sense plates chops the field into a current an electron tube amplifies.
+    dial = {"dial": "fundamentals:block/field_mill_dial"}
+    write(ASSETS / "models/block/field_mill.json", {"parent": "fundamentals:block/thermometer", "textures": dial})
+    write(ASSETS / "models/item/field_mill.json", {"parent": "fundamentals:item/thermometer", "textures": dial})
+    write(ASSETS / "blockstates/field_mill.json", {"variants": {
+        f"facing={facing}": {"model": "fundamentals:block/field_mill", **rotation}
+        for facing, rotation in (("north", {}), ("east", {"y": 90}), ("south", {"y": 180}), ("west", {"y": 270}),
+                                 ("up", {"x": 270}), ("down", {"x": 90}))}})
+    write(DATA / "loot_table/blocks/field_mill.json", {"type": "minecraft:block", "pools": [drop_self("field_mill")]})
+    write(BAROMETER_RECIPES / "field_mill.json", {
+        "type": "minecraft:crafting_shaped", "category": "misc", "pattern": [" U ", "BLB", " A "],
+        "key": {"U": {"tag": "c:plates/brass"}, "L": {"item": "create:electron_tube"}, "B": {"tag": "c:wires/copper"},
+                "A": {"item": "create:andesite_casing"}},
+        "result": {"id": "fundamentals:field_mill", "count": 1}})
+    lang["block.fundamentals.field_mill"] = "Field Mill"
+    key = "goggles.fundamentals.field_mill."
+    lang[key + "volts"] = "%s V/m"
+    lang[key + "kilovolts"] = "%s kV/m"
+    lang[key + "screened"] = "Screened: nothing overhead to read"
+    lang[key + "fair"] = "Fair weather"
+    lang[key + "charged"] = "Charged air: a storm"
+    lang[key + "storm"] = "Charged dust: the sand itself is carrying it"
     key = "goggles.fundamentals.barometer."
     lang[key + "reading"] = "%s hPa (%s mmHg)"
     lang[key + "settling"] = "Still taking its first readings"

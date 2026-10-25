@@ -9,15 +9,36 @@
         },
         "fraction": 0.25,
         "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:bismuthinite_ore"
+        },
+        "fraction": 0.02,
+        "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:emery_ore"
+        },
+        "fraction": 0.04,
+        "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:ruby_ore"
+        },
+        "fraction": 0.01,
+        "style": "pockets"
       }
     ],
     "radius": {
-      "min": 6,
-      "max": 9
+      "min": 4,
+      "max": 5
     },
     "thickness": {
-      "min": 3,
-      "max": 4
+      "min": 2,
+      "max": 3
     },
     "replaceable": "fundamentals:deposit_replaceable/rock",
     "host": {

@@ -35,6 +35,8 @@ ELSEWHERE = {
     "minecraft:clay_ball": "everything that takes clay",
     "minecraft:iron_nugget": "nine craft to an iron ingot",
     "create:crushed_raw_iron": "The Factory Must Grow's blast furnace",
+    "minecraft:cobblestone": "everything that takes cobblestone",
+    "minecraft:cobbled_deepslate": "everything that takes cobbled deepslate",
     "fundamentals:spent_fuel_rod": "a spent fuel pool: a day under water cools it (content.nuclear.SpentFuel)",
 }
 
@@ -50,9 +52,13 @@ END_PRODUCTS = {
     "fundamentals:zircaloy_tube": "Fuel cladding for Create: Nuclear's rods; without it the pack has no reactor.",
     "fundamentals:thorium_dioxide": "Thoria for Create: Nuclear's thorium rod; without it the pack has no reactor.",
     "fundamentals:boron_carbide": "The absorber of Create: Nuclear's control rod; without it the pack has no reactor.",
+    "fundamentals:silica_hydrogel": "Dried to an aerogel blanket only with Chemica's ethanol; without it the gel goes no further.",
+    **{f"fundamentals:{tier}_{piece}": "Worn: a parka against Cold Sweat's cold." for tier in ("fur", "down", "synthetic", "expedition")
+       for piece in ("hood", "parka", "trousers", "boots")},
+    "fundamentals:filled_vacuum_flask": "Drunk or poured: Cold Sweat's waterskin, insulated.",
 }
 # Used from the hand or a dispenser, not in a recipe.
-EQUIPMENT = {"fundamentals:argon_canister", "fundamentals:photovoltaic_panel", "fundamentals:npk_fertiliser"}
+EQUIPMENT = {"fundamentals:argon_canister", "fundamentals:photovoltaic_panel", "fundamentals:npk_fertiliser", "fundamentals:riot_shield"}
 
 # Deliberate dead ends: what the waste is, and how a player is rid of it.
 DEAD = {
@@ -66,6 +72,7 @@ DEAD = {
 
 WHY = {
     "fundamentals:argon": "Argon comes off the same cryogenic air separation that gives neon, as every industrial air plant co-produces both.",
+    "fundamentals:oxygen": "Oxygen is most of what an air separation plant sells; neon and argon are taken from the same column.",
     "fundamentals:bittern": "Bittern, the mother liquor of salt pans, is the old source of bromine and magnesium chloride.",
     "fundamentals:caustic_soda": "Caustic soda comes off the chlor-alkali cell beside its chlorine, and the gallium circuit hands the Bayer liquor's caustic back to the digester.",
     "fundamentals:spent_bayer_liquor": "The precipitators' spent liquor goes back to the digester, as every Bayer refinery recycles its caustic, and its gallium is taken out on the way.",
@@ -80,6 +87,7 @@ WHY = {
     "fundamentals:jarosite": "The jarosite process dissolves the zinc ferrite in hot acid and drops its iron as jarosite, the zinc industry's largest waste.",
     "fundamentals:lead_silver_residue": "What the hot acid leach leaves is lead sulfate carrying the ore's silver, sold to a lead smelter.",
     "fundamentals:cerium_concentrate": "Mountain Pass sold its leached-out ceria concentrate for polishing powder.",
+    "fundamentals:salt_brine": "Interfacial polycarbonate plants send their brine back to the chlor-alkali cells for the chlorine that made the phosgene, as Covestro does at Krefeld-Uerdingen.",
     "fundamentals:chlorine": "Anode chlorine from a molten-chloride cell goes back to chlorination, as at every magnesium and titanium plant.",
     "fundamentals:clarifier_sludge": "The lime-neutralised hydroxide sludge has no market.",
     "fundamentals:cobalt_chloride_liquor": "The cobalt strip of a nickel refinery's P507 circuit is electrowon, as at Niihama and Harjavalta.",
@@ -114,6 +122,9 @@ WHY = {
     "fundamentals:fouled_naphthenic_acid": "Fouled organic is scrubbed and returned; extractant is too dear to throw away.",
     "fundamentals:water_gas": "Carbon monoxide freed by decomposing nickel carbonyl goes back to make more, as at Clydach.",
     "fundamentals:zinc_oxide": "Zinc oxide from the Parkes crust goes back to the zinc works.",
+    "fundamentals:raw_malachite": "A copper outcrop weathers green: malachite sits in the oxidised cap over the chalcopyrite below, and both come out of the same rock.",
+    "minecraft:cobblestone": "Crushing frees the ore from its host rock, and the gangue goes to the waste dump or the road.",
+    "minecraft:cobbled_deepslate": "Crushing frees the ore from its host rock, and the gangue goes to the waste dump or the road.",
     "tfmg:carbon_dioxide": "Carbon dioxide from the anode, the soda reactions and the cement kiln, where limestone's own carbon is about half the kiln's CO2; real plants mostly vent it, but an ammonia plant turns its own into urea.",
     "tfmg:cast_iron_ingot": "The Sorel slag furnace's iron is sold as high-purity pig iron.",
     "tfmg:coal_coke_dust": "Coke burnt onto a cracking catalyst is burnt off in the regenerator.",

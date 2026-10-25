@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.7,
+  "ingredient": {
+    "item": "create:crushed_raw_gold"
+  },
+  "result": {
+    "id": "fundamentals:electrum_ingot"
+  }
+}

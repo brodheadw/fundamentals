@@ -6,7 +6,23 @@
       "required": false
     },
     {
+      "id": "#fundamentals:hidden/cold_sweat",
+      "required": false
+    },
+    {
+      "id": "#fundamentals:hidden/createbigcannons",
+      "required": false
+    },
+    {
       "id": "#fundamentals:hidden/createnuclear",
+      "required": false
+    },
+    {
+      "id": "#fundamentals:hidden/pointblank",
+      "required": false
+    },
+    {
+      "id": "#fundamentals:hidden/tfmg",
       "required": false
     }
   ]

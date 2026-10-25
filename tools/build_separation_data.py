@@ -118,6 +118,8 @@ GASES = {
     "sulfur_dioxide": ("Sulfur Dioxide", 0xF2F0E2),
     "sulfur_trioxide": ("Sulfur Trioxide", 0xF4F2EA),
     "hydrogen_sulfide": ("Hydrogen Sulfide", 0xEAF0E4),
+    "oxygen": ("Oxygen", 0xE6EEF8),
+    "phosgene": ("Phosgene", 0xEEF0E0),
 }
 PLATINUM_LIQUORS = {
     "nickel_copper_sulfate": ("Nickel-Copper Sulfate Liquor", 0x58A890),
@@ -137,7 +139,7 @@ CAUSTICS = {"caustic_soda": ("Caustic Soda", 0xEEF2F0), "sodium_aluminate_liquor
             "sodium_tungstate_liquor": ("Sodium Tungstate Liquor", 0xE6ECE8), "spent_bayer_liquor": ("Spent Bayer Liquor", 0xB89060),
             "sodium_gallate_liquor": ("Sodium Gallate Liquor", 0xE4EAE6),
             "sodium_vanadate_liquor": ("Sodium Vanadate Liquor", 0xEEE2A0)}
-MELTS = {"molten_pig_iron": ("Molten Pig Iron", 0xF07A1E)}
+MELTS = {"molten_pig_iron": ("Molten Pig Iron", 0xF07A1E), "molten_bismuth": ("Molten Bismuth", 0xC8B4C0)}
 FLUIDS = {**{k: (*v, "LIQUOR") for k, v in {**LIQUORS, **PLATINUM_LIQUORS, **SULFATE_LIQUORS, **CHLORIDE_LIQUORS}.items()}, **{k: (*v, "ORGANIC") for k, v in ORGANICS.items()},
           **{k: (*v, "ACID") for k, v in ACIDS.items()}, **{k: (*v, "GAS") for k, v in GASES.items()},
           **{k: (*v, "WASTE") for k, v in WASTES.items()}, **{k: (*v, "SALINE") for k, v in SALINES.items()}, **{k: (*v, "WATER") for k, v in SEA.items()}, **{k: (*v, "CRUDE") for k, v in CRUDES.items()},

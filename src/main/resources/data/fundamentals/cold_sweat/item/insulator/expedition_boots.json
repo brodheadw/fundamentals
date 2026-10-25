@@ -1,0 +1,12 @@
+{
+  "type": "armor",
+  "item": {
+    "items": [
+      "fundamentals:expedition_boots"
+    ]
+  },
+  "insulation": {
+    "cold": 21.7,
+    "heat": 0.0
+  }
+}

@@ -30,11 +30,18 @@
         },
         "fraction": 0.02,
         "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:tourmaline_ore"
+        },
+        "fraction": 0.04,
+        "style": "pockets"
       }
     ],
     "radius": {
-      "min": 11,
-      "max": 15
+      "min": 7,
+      "max": 9
     },
     "thickness": {
       "min": 3,
@@ -45,8 +52,8 @@
       "Name": "minecraft:granite"
     },
     "height": {
-      "min": 14,
-      "max": 24
+      "min": 8,
+      "max": 14
     }
   }
 }

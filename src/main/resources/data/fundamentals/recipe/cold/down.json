@@ -1,0 +1,14 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "minecraft:feather"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:down",
+      "chance": 0.35
+    }
+  ]
+}

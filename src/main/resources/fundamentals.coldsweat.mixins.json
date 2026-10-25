@@ -1,0 +1,15 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "ai.gsmc.fundamentals.mixin.coldsweat",
+	"plugin": "ai.gsmc.fundamentals.mixin.coldsweat.ColdSweatMixins",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"FlaskHearthMixin",
+		"FlaskPourMixin",
+		"ThermometerHudMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

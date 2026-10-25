@@ -30,14 +30,9 @@
         {
           "item": "tfmg:unfinished_electric_motor"
         },
-        [
-          {
-            "item": "fundamentals:dysprosium_neodymium_iron_boron_magnet"
-          },
-          {
-            "item": "tfmg:magnet"
-          }
-        ]
+        {
+          "item": "fundamentals:dysprosium_neodymium_iron_boron_magnet"
+        }
       ],
       "results": [
         {

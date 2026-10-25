@@ -16,11 +16,25 @@
         },
         "fraction": 0.16,
         "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:topaz_ore"
+        },
+        "fraction": 0.03,
+        "style": "pockets"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:bismuthinite_ore"
+        },
+        "fraction": 0.03,
+        "style": "pockets"
       }
     ],
     "radius": {
-      "min": 10,
-      "max": 15
+      "min": 6,
+      "max": 9
     },
     "thickness": {
       "min": 2,
@@ -28,8 +42,8 @@
     },
     "replaceable": "fundamentals:deposit_replaceable/rock",
     "height": {
-      "min": 12,
-      "max": 24
+      "min": 7,
+      "max": 14
     }
   }
 }

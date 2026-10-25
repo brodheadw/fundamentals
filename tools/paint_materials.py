@@ -129,6 +129,7 @@ METAL = {
     "gallium": tinted((150, 170, 214), 0.25),
     "indium": tinted((176, 184, 210), 0.18),
     "cadmium": tinted((168, 186, 214), 0.22),
+    "bismuth": ((104, 88, 94), (176, 158, 164), (220, 204, 208), (252, 244, 246)),
 }
 
 OXIDE = {
@@ -156,6 +157,7 @@ OXIDE["beryllium"] = WHITE
 OXIDE["antimony"] = WHITE
 OXIDE["niobium"] = WHITE
 OXIDE["germanium"] = WHITE
+OXIDE["bismuth"] = ((168, 132, 30), (226, 190, 64), (244, 218, 112), (255, 244, 186))
 
 STREAK = {"chromite": ((34, 24, 18), (64, 48, 36), (94, 72, 54), (132, 106, 82))}
 
@@ -208,6 +210,7 @@ MATERIALS = {
     "pyrochlore": CONCENTRATE, "columbite": MINERAL, "antimony": ("oxide", "ingot", "nugget"), "antimonial_lead": STRUCTURAL,
     "niobium": ("oxide",), "ferroniobium": COBALT, "tantalum": COBALT,
     "germanium": GERMANIUM, "gallium": GALLIUM, "indium": INDIUM, "cadmium": CADMIUM,
+    "garnet": MINERAL, "emery": MINERAL, "bismuth": GERMANIUM,
 }
 
 DISPLAY = {"bastnasite": "Bastnäsite", "bastnasite_concentrate": "Bastnäsite Concentrate", "neodymium_iron_boron": "NdFeB", "dysprosium_neodymium_iron_boron": "Dy-NdFeB", "samarium_cobalt": "SmCo", "aluminium_scandium": "Al-Sc",

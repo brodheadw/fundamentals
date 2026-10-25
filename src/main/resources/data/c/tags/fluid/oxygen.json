@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:oxygen",
+    {
+      "id": "chemica:oxygen",
+      "required": false
+    },
+    {
+      "id": "chemica:flowing_oxygen",
+      "required": false
+    }
+  ]
+}

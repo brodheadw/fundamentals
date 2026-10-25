@@ -22,6 +22,9 @@ config = "${id}.createnuclear.mixins.json"
 [[mixins]]
 config = "${id}.computercraft.mixins.json"
 
+[[mixins]]
+config = "${id}.coldsweat.mixins.json"
+
 [[dependencies.${id}]]
 modId = "neoforge"
 type = "required"
@@ -73,10 +76,35 @@ versionRange = "*"
 ordering = "AFTER"
 side = "BOTH"
 
+# Optional: after it, so our crushed-gold wash replaces the one it gives Create.
+[[dependencies.${id}]]
+modId = "createpropulsion"
+type = "optional"
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"
+
+# Optional: after it, so our wrought iron fence recipe replaces its own.
+[[dependencies.${id}]]
+modId = "twilightforest"
+type = "optional"
+versionRange = "*"
+ordering = "AFTER"
+side = "BOTH"
+
 # Optional: with it, computers read our gauges, cells and settlers; see computer/FundamentalsPeripherals.
 [[dependencies.${id}]]
 modId = "computercraft"
 type = "optional"
 versionRange = "*"
-ordering = "NONE"
+# after CC:Tweaked, so the fab's computer recipes override its own
+ordering = "AFTER"
+side = "BOTH"
+
+# Optional: with it, its world temperature is ours and the parkas insulate; see cold/ColdSweatCompat.
+[[dependencies.${id}]]
+modId = "cold_sweat"
+type = "optional"
+versionRange = "*"
+ordering = "AFTER"
 side = "BOTH"

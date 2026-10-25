@@ -1,0 +1,12 @@
+{
+  "type": "armor",
+  "item": {
+    "items": [
+      "fundamentals:synthetic_hood"
+    ]
+  },
+  "insulation": {
+    "cold": 15.7,
+    "heat": 0.0
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "Gun barrels",
+  "category": "fundamentals:arms",
+  "icon": "fundamentals:gun_barrel",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A gun barrel starts as a bar of steel.",
+      "title": "Barrels"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "On a Create line a steel ingot is flooded with 50 mB of lubrication oil, drilled through on a saw, reamed on a second saw and straightened on a press, the barrel blank turning into a gun barrel: a gun drill runs in oil pumped down its own shank, then reaming and rifling, and straightening by eye on a press, as barrel makers still do."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A ground lens is glass polished with sand paper, garnet paper or emery cloth."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "The weapon printer machines the rest. A pistol is a barrel, a gun mechanism, HSLA steel for the slide and plastic for the frame; an AR-15 or a SCAR has an aluminium receiver; an AK, a G3 or a shotgun is steel throughout, with wood where it has wood. Gun mechanisms are two hardened steel springs, a steel mechanism and screws.",
+      "title": "The printer"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Machine guns take a spare barrel and two steel mechanisms for the feed, and the minigun six barrels and an electric motor. Red dots and holographic sights take an LED chip and a cell; launchers take aluminium tubes, and the Javelin's seeker germanium optics."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Point Blank's gunmetal, copper and iron smelted together, is gone, and so is its minigun motor: the M134 has always been driven by an electric motor, and here The Factory's turns it. Arms dealers in villages still sell guns for emeralds; that is the pack's setting, not this mod's.",
+      "title": "Gunmetal"
+    }
+  ]
+}

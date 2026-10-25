@@ -42,7 +42,7 @@ def m(x):
 # --- materials -------------------------------------------------------------
 # Fused silica: quartz melted past 1,700 C, the only glass that passes deep UV and holds still under a projection lens.
 recipe("compute/fused_quartz", {"type": "create:mixing", "heat_requirement": "superheated",
-                            "ingredients": [ing("#c:storage_blocks/quartz")], "results": [out(m("fused_quartz"), 2)]})
+                            "ingredients": [ing("minecraft:quartz_block")], "results": [out(m("fused_quartz"), 2)]})
 # Novolac: phenol condensed under an acid catalyst; the resin every positive photoresist is built on.
 recipe("compute/novolac_resin", {"neoforge:conditions": CHEMICA_LOADED, "type": "create:mixing", "heat_requirement": "heated",
                              "ingredients": [fluid("chemica:phenol", 250), fluid("tfmg:sulfuric_acid", 25)],
@@ -70,8 +70,6 @@ recipe("compute/epitaxial_wafer", {"type": "create:sequenced_assembly", "ingredi
 # --- masks -----------------------------------------------------------------
 recipe("compute/chrome_mask_blank", {"type": "create:deploying", "ingredients": [ing("#c:glass_panes"), ing("fundamentals:chromium_ingot")],
                                  "results": [out(m("chrome_mask_blank"))]})
-recipe("compute/quartz_mask_blank", {"type": "create:deploying", "ingredients": [ing(m("fused_quartz")), ing("fundamentals:chromium_ingot")],
-                                 "results": [out(m("quartz_mask_blank"))]})
 
 
 def step(kind, extra, keep=False):
@@ -86,6 +84,13 @@ def mstep(kind, extra, keep=False):
     if keep:
         s["keep_held_item"] = True
     return s
+
+
+# A reticle's quartz is lapped flat before it is chromed, with garnet or emery, as optical shops lap glass.
+recipe("compute/quartz_mask_blank", {"type": "create:sequenced_assembly", "ingredient": ing(m("fused_quartz")), "loops": 1,
+                                 "results": [out(m("quartz_mask_blank"))], "transitional_item": out(m("processing_mask")),
+                                 "sequence": [mstep("create:deploying", [ing("#fundamentals:lapping_abrasives")], True),
+                                              mstep("create:deploying", [ing("fundamentals:chromium_ingot")])]})
 
 
 # The pattern goes in first: a hand-cut film drawing photo-reduced for the 10 um mask; an optical pattern generator run

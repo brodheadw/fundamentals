@@ -2,6 +2,7 @@
   "replace": false,
   "values": [
     "fundamentals:argentite_ore",
+    "fundamentals:bismuthinite_ore",
     "fundamentals:blackened_silver_block",
     "fundamentals:bornite_ore",
     "fundamentals:braggite_ore",
@@ -36,6 +37,7 @@
     "fundamentals:phosphogypsum_block",
     "fundamentals:pyrite_ore",
     "fundamentals:raw_argentite",
+    "fundamentals:raw_bismuthinite",
     "fundamentals:raw_bornite",
     "fundamentals:raw_braggite",
     "fundamentals:raw_chalcocite",

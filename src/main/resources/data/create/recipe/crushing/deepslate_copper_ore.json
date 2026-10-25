@@ -14,11 +14,6 @@
   "processing_time": 350,
   "results": [
     {
-      "count": 7,
-      "id": "create:crushed_raw_copper"
-    },
-    {
-      "chance": 0.25,
       "id": "create:crushed_raw_copper"
     },
     {

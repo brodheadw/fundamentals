@@ -1,0 +1,30 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pointblank"
+    }
+  ],
+  "type": "pointblank:default",
+  "ingredients": [
+    {
+      "count": 1,
+      "item": "fundamentals:lens"
+    },
+    {
+      "count": 1,
+      "item": "fundamentals:led_chip"
+    },
+    {
+      "count": 1,
+      "item": "fundamentals:galvanic_cell"
+    },
+    {
+      "count": 1,
+      "tag": "c:ingots/aluminum"
+    }
+  ],
+  "result": {
+    "item": "pointblank:rspec"
+  }
+}

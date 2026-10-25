@@ -1,0 +1,20 @@
+{
+  "display": {
+    "icon": {
+      "id": "fundamentals:field_mill"
+    },
+    "title": {
+      "translate": "advancement.fundamentals.triboelectric.title"
+    },
+    "description": {
+      "translate": "advancement.fundamentals.triboelectric.description"
+    },
+    "frame": "goal"
+  },
+  "criteria": {
+    "reading": {
+      "trigger": "minecraft:impossible"
+    }
+  },
+  "parent": "fundamentals:root"
+}

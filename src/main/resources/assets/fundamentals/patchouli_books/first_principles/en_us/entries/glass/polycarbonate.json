@@ -1,0 +1,39 @@
+{
+  "name": "Polycarbonate",
+  "category": "fundamentals:glass",
+  "icon": "fundamentals:polycarbonate_sheet",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Polycarbonate is the clear plastic that does not shatter: a sheet of it takes a hammer and dents. Hermann Schnell made it at Bayer in 1953, and Bayer still makes it the way he did.",
+      "title": "Polycarbonate"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Phosgene first: 250 mB of carbon monoxide and 250 mB of chlorine over charcoal give 250 mB of phosgene, which keeps its charcoal nineteen times in twenty. Phosgene is the choking gas of 1915, four times as heavy as air: keep it in pipe and tank."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Bisphenol A is two phenol and an acetone joined over an acid, and the cumene process gives phenol and acetone together: 500 mB of phenol, 250 mB of acetone heated over an acid that is not used up, give two bisphenol A.",
+      "title": "Bisphenol A"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A bisphenol A, 250 mB of phosgene and 500 mB of caustic soda give a polycarbonate resin; the caustic takes the hydrogen chloride the reaction throws off, and leaves 500 mB of brine. A resin pressed on a heated basin is a polycarbonate sheet."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Riot police carry it. Six polycarbonate sheets and an aluminium grip make a riot shield, which blocks as a shield does, but you see through it, and it lasts three times as long as oak. A polycarbonate sheet mends it in an anvil.",
+      "title": "Riot shield"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: Schnell, Chemistry and Physics of Polycarbonates (Interscience, 1964); Ullmann's Encyclopedia of Industrial Chemistry, \"Polycarbonates\"."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:glass/riot_shield"
+    }
+  ]
+}

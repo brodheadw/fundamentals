@@ -90,8 +90,10 @@ public class Fundamentals {
                 Titanium.registerBlocks(helper::register);
                 Thermometers.registerBlocks(helper::register);
                 ai.gsmc.fundamentals.air.Barometers.registerBlocks(helper::register);
+                ai.gsmc.fundamentals.air.FieldMill.registerBlocks(helper::register);
                 Oxidation.registerBlocks(helper::register);
                 Compute.registerBlocks(helper::register);
+                ai.gsmc.fundamentals.glass.Glass.registerBlocks(helper::register);
             });
             event.register(Registries.BLOCK_ENTITY_TYPE, helper -> {
                 IronWorking.registerBlockEntities(helper::register);
@@ -101,8 +103,10 @@ public class Fundamentals {
                 Titanium.registerBlockEntities(helper::register);
                 Thermometers.registerBlockEntities(helper::register);
                 ai.gsmc.fundamentals.air.Barometers.registerBlockEntities(helper::register);
+                ai.gsmc.fundamentals.air.FieldMill.registerBlockEntities(helper::register);
                 Oxidation.registerBlockEntities(helper::register);
                 Compute.registerBlockEntities(helper::register);
+                ai.gsmc.fundamentals.glass.Glass.registerBlockEntities(helper::register);
             });
             event.register(Registries.RECIPE_TYPE, helper -> {
                 IronWorking.registerRecipeTypes(helper::register);
@@ -137,15 +141,21 @@ public class Fundamentals {
                 Electricity.registerItems(helper::register);
                 Separation.registerItems(helper::register);
                 Uses.registerItems(helper::register);
+                ai.gsmc.fundamentals.uses.Arms.registerItems(helper::register);
                 Magnets.registerItems(helper::register);
                 Plastics.registerItems(helper::register);
                 Titanium.registerItems(helper::register);
                 Thermometers.registerItems(helper::register);
                 ai.gsmc.fundamentals.air.Barometers.registerItems(helper::register);
+                ai.gsmc.fundamentals.air.FieldMill.registerItems(helper::register);
                 Oxidation.registerItems(helper::register);
                 PeriodicTable.registerItems(helper::register);
                 Compute.registerItems(helper::register);
+                ai.gsmc.fundamentals.cold.Parkas.registerItems(helper::register);
+                ai.gsmc.fundamentals.cold.Cold.registerItems(helper::register);
+                ai.gsmc.fundamentals.glass.Glass.registerItems(helper::register);
             });
+            event.register(Registries.ARMOR_MATERIAL, helper -> ai.gsmc.fundamentals.cold.Parkas.registerArmorMaterials(helper::register));
             event.register(Registries.DATA_COMPONENT_TYPE, helper -> {
                 Oxidation.registerComponents(helper::register);
                 Magnets.registerComponents(helper::register);
@@ -162,6 +172,7 @@ public class Fundamentals {
                 helper.register(MATERIALS_TAB, materialsTab());
             });
         });
+        ai.gsmc.fundamentals.cold.Cold.register();
         NeoForge.EVENT_BUS.addListener(Hazards::onPlayerTick);
         NeoForge.EVENT_BUS.addListener(Hazards::onServerTick);
         NeoForge.EVENT_BUS.addListener(Hazards::onBreak);
@@ -214,6 +225,7 @@ public class Fundamentals {
             OxidationClient.register(modBus);
             ThermometerRenderer.register(modBus);
             ComputeClient.register(modBus);
+            ai.gsmc.fundamentals.client.GlassClient.register(modBus);
         }
     }
 
@@ -224,6 +236,7 @@ public class Fundamentals {
                     IronWorking.items().forEach(output::accept);
                     Separation.items().forEach(output::accept);
                     Uses.items().forEach(output::accept);
+                    ai.gsmc.fundamentals.uses.Arms.items().forEach(output::accept);
                     Magnets.items().forEach(output::accept);
                     Plastics.items().forEach(output::accept);
                     Titanium.items().forEach(output::accept);
@@ -231,8 +244,12 @@ public class Fundamentals {
                     Electricity.items().forEach(output::accept);
                     Thermometers.items().forEach(output::accept);
                     ai.gsmc.fundamentals.air.Barometers.items().forEach(output::accept);
+                    output.accept(ai.gsmc.fundamentals.air.FieldMill.item());
                     Oxidation.items().forEach(output::accept);
                     Compute.items().forEach(output::accept);
+                    ai.gsmc.fundamentals.cold.Parkas.items().forEach(output::accept);
+                    ai.gsmc.fundamentals.cold.Cold.flasks().forEach(output::accept);
+                    ai.gsmc.fundamentals.glass.Glass.items().forEach(output::accept);
                     OreBlocks.rawItems().forEach(output::accept);
                     OreBlocks.items().forEach(output::accept);
                 })

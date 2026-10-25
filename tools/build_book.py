@@ -9,6 +9,7 @@ from build_separation_data import CURIE, MOMENTS, TITANIUM_PIPEWORK, ZINC_REDUCT
 from build_oxidation_data import METALS as AGEING, PACE
 from build_heat_data import REFERENCES, liquids
 from build_uses_data import CONVERTER, PIG_IRON_PER_ORE, PUDDLED
+from build_cold_data import FLASK_SLOWER, GOAT, LEATHER, TIERS as PARKAS, WET_IMMUNITY
 
 BOOK = "first_principles"
 BOOK_DATA = DATA / f"patchouli_books/{BOOK}"
@@ -192,13 +193,16 @@ def ironworking():
     entry("ironworking", "bloomery", "The bloomery", "fundamentals:bloomery", pages_of(
         "Build a bloomery out of clay, load it with iron ore and charcoal, light it with a torch and wait. Only charcoal: the sulfur in coal "
         "ruins iron. What comes out is not an ingot but a bloom, a spongy lump of iron and slag that never melted. Siderite goes in roasted.", "The bloomery")
+        + pages_of("Overcharge it, two charcoal to every ore, and it runs hot: the iron soaks up carbon until it melts, and what is tapped is pig iron, "
+                   "run into a sand bed and set as pigs of cast iron. Medieval smelters made it by accident and threw it away until they learned to use it; "
+                   "at Lapphyttan in Sweden a bloomery grown tall became Europe's first blast furnace. Cast iron builds the blast furnace, and the blast furnace makes pig iron by the tank.")
         + [crafting("fundamentals:bloomery")], 1)
     entry("ironworking", "bloom", "Bloom and hammer", "fundamentals:iron_bloom", pages_of(
         "A bloom is hammered, not cast. Beat it with the smithing hammer to drive the slag out and weld the iron together into wrought iron. "
         "Copper comes straight out of the bloomery from malachite, azurite and cuprite. Galena has to be roasted first, in a heated basin with air, which "
         "drives off its sulfur as sulfur dioxide; the roasted ore then gives lead bullion, lead still holding its silver, which a furnace remelts to lead.", "Bloom and hammer") + pages_of(
         "A furnace never reduces iron ore, and neither does a fan. Create's crushing wheels grind hematite, magnetite, goethite and roasted siderite to crushed iron ore, "
-        "and that goes to The Factory Must Grow's blast furnace, which has the coke and the heat, and gives pig iron: see Iron and steel. Crimsite is the iron stone and crushes to hematite; "
+        "and that goes to The Factory Must Grow's blast furnace, which has the coke and the heat, and gives pig iron: see Iron and steel. Crimsite is the iron stone and crushes to hematite, ochrum to native gold, veridium to chalcopyrite and malachite; "
         "washed gravel leaves a little magnetite black sand. The slag every smelt leaves is The Factory Must Grow's own: see Slag.")
         + [crafting("fundamentals:smithing_hammer")], 2)
     entry("ironworking", "slag", "Slag", "tfmg:slag", pages_of(
@@ -238,8 +242,8 @@ def steel():
         "runs thin into every corner of the mould. In grey iron the carbon comes out as flakes of graphite, which make it machine cleanly and damp vibration "
         "and make it weak in tension: good for pipes, cylinders, frames, flywheels and machine beds, bad for anything that has to bend.", "Cast iron") + pages_of(
         "The Factory Must Grow's casting basin casts 144 mB of pig iron to a cast iron ingot, and its cast iron pipes, tanks, frames, flywheels and blast furnace "
-        "come from that. Before there is a blast furnace a little is made by hand: an iron ingot and a coal compacted in a heated basin, the iron taking up the carbon "
-        "as it would in the hearth."), 1)
+        "come from that. Before there is a blast furnace the first comes from a bloomery overcharged, two charcoal to every ore, which runs hot and is tapped "
+        "as pigs of cast iron (see The bloomery)."), 1)
     entry("steel", "puddling", "Puddling", "fundamentals:puddle_ball", pages_of(
         "Wrought iron in bulk came from pig iron by Henry Cort's puddling furnace, patented in 1784. A reverberatory furnace keeps the coal fire apart from the iron, "
         "so its sulfur stays out. The puddler melts pig on a hearth lined with iron oxide and works it with a rabble through the door; the oxide and the air burn "
@@ -502,6 +506,16 @@ def rare_earths():
         "The barograph is Vidie's aneroid capsule of 1844 inking a clockwork drum. It keeps an hour of its own readings, its goggles say which way the glass is going and how fast, and its comparator gives a storm warning: "
         "nothing in steady weather, rising to 15 as the fall nears 4 hPa an hour.")
         + [{"type": "patchouli:crafting", "recipe": "fundamentals:barometers/mercury_barometer", "recipe2": "fundamentals:barometers/barograph"}], 15)
+    entry("rare_earths", "field_mill", "The Air's Electric Field", "fundamentals:field_mill", pages_of(
+        "The air carries an electric field even on a still day: about 130 volts a metre at the ground under a clear sky, the earth negative and the sky positive. "
+        "Rain lifts it to a kilovolt a metre and a thunderstorm to ten. A roof or a cave screens it entirely. A field mill reads it: an earthed brass vane turns over a pair of sense plates, "
+        "alternately shading and baring them, and the current the field drives on and off them is amplified by an electron tube.", "The Air's Electric Field") + pages_of(
+        "Dust storms are more strongly electrified than thunderstorms. Grains striking one another trade charge, the small ones coming away negative, and the field across a storm reaches "
+        "tens of kilovolts a metre. That field is not a by-product: Kok and Renno showed in 2008 that it lifts grains off the ground, so a charged storm carries far more sand than wind alone could. "
+        "A field mill that reads a storm with no thunder overhead has found the sand's own charge.") + pages_of(
+        "So a dust storm can be quieted where its field is drained. Earth the air around a place and the sand loses the force that holds it up. "
+        "Its comparator rises on a logarithmic scale, from nothing in fair weather to 15 at fifty kilovolts a metre.")
+        + [{"type": "patchouli:crafting", "recipe": "fundamentals:barometers/field_mill"}], 15)
     entry("rare_earths", "computers", "Computers", "fundamentals:barograph", pages_of(
         "With CC:Tweaked installed, a computer or wired modem beside a gauge reads it as a peripheral. Thermometers give getTemperature, getKind and getSignal; barometers getPressure and getTendency, hectopascals an hour. "
         "Any of The Factory's electrical blocks, the solar panel among them, reads like a multimeter: getVoltage, getCurrent, getPowerUsage, getPowerGeneration, the network's usage and generation, and isPowered.", "Computers") + pages_of(
@@ -514,7 +528,7 @@ def rare_earths():
         "Memory is 1 µm NMOS on p-type, five layers of positive novolac resist developed in caustic soda, phosphorus from its chloride. "
         "The microprocessor is 1 µm CMOS on an epitaxial wafer, six layers, with aluminium interconnect.") + pages_of(
         "The advanced processor is 90 nm: eight layers, copper interconnect polished flat by a press after each. "
-        "Masks are chromium on glass, or on fused quartz for the reticles, etched in ceric ammonium nitrate. The 90 nm reticle is laser-written by a computer, so better computers take a computer to make.") + pages_of(
+        "Masks are chromium on glass, or on fused quartz for the reticles, etched in ceric ammonium nitrate. A reticle's quartz is lapped flat first: a deployer holding garnet paper or emery cloth works it, wearing the paper, before the chromium goes on. The 90 nm reticle is laser-written by a computer, so better computers take a computer to make.") + pages_of(
         "A saw dices each wafer into dies, more or fewer as the yield falls; each die goes onto a copper lead frame with gold bond wires and is sealed in plastic. "
         "A placed computer runs only beside a Power Supply on a live grid. It warms the air it runs in and trips its thermal cutout past 85 °C. Turtles run on fuel, pocket computers on their cells.")
         + [{"type": "patchouli:crafting", "recipe": "fundamentals:compute/power_supply"}], 17)
@@ -755,8 +769,8 @@ def metals():
         "A circuit board can be finished in silver as well as gold, and four silver plates, two zinc, a plastic separator, copper wire and an aluminium casing make a silver-zinc accumulator."), 8)
     entry("metals", "zirconium", "Zirconium and hafnium", "fundamentals:zirconium_ingot", pages_of(
         "Zircon is the third mineral of the heavy sands, after ilmenite and rutile: honey-brown grains panned from beach and river sand, and a few in the syenite massifs. "
-        "Washed under an encased fan, the light quartz goes and half stays as zircon concentrate. Most zircon never becomes metal. As sand it faces a mould, standing 2,000 °C unwetted, "
-        "so the Factory's casting basin takes a zircon concentrate; milled, it is the white of tile glaze, and one in eight terracotta makes eight white.", "Zirconium") + pages_of(
+        "Washed under an encased fan, the light quartz goes and half stays as zircon concentrate. Most zircon never becomes metal. As sand it faces a precision mould, standing 2,000 °C unwetted; "
+        "milled, it is the white of tile glaze, and one in eight terracotta makes eight white.", "Zirconium") + pages_of(
         "For the metal it takes titanium's road. Two concentrate, a coal coke and 1,000 mB of chlorine, heated, give two crude zirconium tetrachloride, a white solid that sublimes at 331 °C, "
         "the silica leaving as silicon tetrachloride. A crude chloride and 500 mB of water, heated, hydrolyse and calcine to a zirconium oxide, zirconia, and give 250 mB of hydrochloric acid back.") + pages_of(
         "Zircon carries a fiftieth as much hafnium, its chemical twin, and the chloride keeps it. The two are parted by extractive distillation through a molten chloride, hafnium tetrachloride the more volatile: "
@@ -929,7 +943,7 @@ def metals():
         "Retorting amalgam in the open is how gold mining poisons people: the vapour is breathed. An amalgam in a basin hurts and poisons everyone within reach who has no diving helmet on a filled backtank, "
         "as small-scale miners from the Amazon to Indonesia are poisoned now. Cyanide replaced mercury in the 1890s, but it starts from hydrogen cyanide, made from methane and ammonia, which the pack does not have.", "Mercury") + pages_of(
         "Electrum is gold and its silver. Miller's process blows chlorine through the melt and the silver leaves as its chloride: an electrum ingot and 250 mB of chlorine, superheated, give a gold ingot and a silver nugget. "
-        "Or dissolve it in aqua regia, 500 mB heated, which leaves the silver as chloride and gives the same.", "Parting") + pages_of(
+        "Or dissolve it in aqua regia, 500 mB heated, which leaves the silver as chloride and gives the same. A furnace melts raw or crushed native gold to electrum, silver and all; only parting makes it gold.", "Parting") + pages_of(
         "Sources: Marsden and House, The Chemistry of Gold Extraction, 2nd ed. (SME, 2006); USGS, Mineral Commodity Summaries 2025, Gold; "
         "UNEP, Global Mercury Assessment 2018, artisanal and small-scale gold mining.", "Sources"), 20)
     entry("metals", "silicon", "Silicon", "tfmg:silicon_ingot", pages_of(
@@ -971,7 +985,7 @@ def metals():
         "and 950 mB of caustic soda for the digester, and the mercury comes back nineteen times in twenty.", "Gallium") + pages_of(
         "250 mB of gallate liquor on two electrodes give two gallium nuggets and 200 mB of caustic. Gallium melts at 29.8 °C, in a warm hand. "
         "The blue LED is indium gallium nitride on sapphire (Nakamura, Akasaki and Amano, Nobel Prize 2014), grown from gallium and ammonia near 1,000 °C: two gallium nuggets, an indium nugget, "
-        "an alumina for the sapphire and 250 mB of ammonia in a heated vat give two LED chips.") + pages_of(
+        "a sapphire wafer for the substrate and 250 mB of ammonia in a heated vat give two LED chips (see Corundum).") + pages_of(
         "A blue chip under a yellow phosphor, yttrium aluminium garnet with cerium, shines white: a chip, a yttrium oxide, a cerium oxide, a framed glass and two copper nuggets make six light bulbs. "
         "Gallium arsenide, the other half of gallium's use, wants arsenic, which the pack does not have.") + pages_of(
         "Cadmium. The zinc dust that cleans the leach liquor brings the cadmium down as a sponge, and the cadmium sponge is a toxic dust: the itai-itai disease of the Jinzu valley was cadmium from a zinc mine. "
@@ -980,6 +994,57 @@ def metals():
         "Sources: USGS, Mineral Commodity Summaries 2025, Germanium, Indium, Gallium and Cadmium; Ullmann's Encyclopedia of Industrial Chemistry, \"Germanium and Germanium Compounds\", "
         "\"Indium and Indium Compounds\", \"Gallium and Gallium Compounds\" and \"Cadmium and Cadmium Compounds\"; Sinclair, The Extractive Metallurgy of Zinc (AusIMM, 2005); "
         "Alfantazi and Moskalyk, \"Processing of indium: a review\", Minerals Engineering 16 (2003).", "Sources"), 22)
+    entry("metals", "abrasives", "Garnet and emery", "fundamentals:garnet_paper", pages_of(
+        "An abrasive cuts what is softer than it. Quartz sand, Create's sand paper, is hardness 7; almandine garnet, Fe3Al2(SiO4)3, is 7.5 and breaks to sharp edges; "
+        "corundum is 9, below only diamond. Garnet grows in schist as dark red dodecahedra, round to the eye: here in the graphite schist. "
+        "Being heavy and hard it outlasts the rock round it and washes into beach and river sand, as on the beaches of Tamil Nadu and Western Australia, where most of the world's garnet is dug.", "Garnet") + pages_of(
+        "Ground in a millstone or crushing wheels, a raw garnet gives a garnet sand. Henry Barton glued it to paper from 1878, at Gore Mountain in the Adirondacks: "
+        "a paper and two garnet sand make a garnet paper. It polishes whatever Create's sand paper polishes, in a hand or a deployer, and lasts 24 uses to sand paper's 8.", "Garnet paper") + pages_of(
+        "Emery is corundum and magnetite grown together, black and dense, quarried on Naxos since antiquity from lenses in marble. "
+        "Here it lies in the skarns, where granite baked limestone. Ground to emery powder, two on a white carpet make emery cloth, the metalworker's abrasive, which lasts 40 uses.", "Emery") + pages_of(
+        "Glass is lapped flat with loose garnet or corundum: Corning ground lens and plate glass with fine garnet powders, and diamond and fused alumina now compete for the work. "
+        "So a reticle's fused quartz is lapped before it is chromed, on a deployer holding garnet paper or emery cloth (see The Fab). The paper wears a use each time. "
+        "Garnet's other big use, blasting and the abrasive waterjet, has no machine in the pack.", "Lapping") + pages_of(
+        "Sources: USGS, Mineral Commodity Summaries 2025, Garnet (industrial); USGS, Minerals Yearbook, Abrasives; "
+        "Barton Mines Corporation, company history; Kogel and others, Industrial Minerals and Rocks, 7th ed. (SME, 2006), \"Garnet\" and \"Corundum and emery\".", "Sources"), 23)
+    entry("metals", "corundum", "Corundum", "fundamentals:sapphire_wafer", pages_of(
+        "Corundum is aluminium oxide, Al2O3, the alumina of the Bayer plant grown into a crystal. A little chromium makes it red, ruby; iron and titanium together make it blue, sapphire; "
+        "any other colour is sapphire too. Ruby grows where limestone is baked to marble, as at Mogok in Burma: here in the skarns. "
+        "Sapphire crystallises from syenite, rock with too little silica for quartz, as in the corundum syenites of Bancroft, Ontario and the Ilmen Mountains: here, scattered in the syenite massifs.", "Ruby and sapphire") + pages_of(
+        "Auguste Verneuil made the first gem corundum in 1902 by flame fusion. Alumina powder is tapped through an oxyhydrogen flame, melts at 2,050 °C and drips onto a pedestal, "
+        "which is lowered as a boule, the poire, grows on it. Four alumina, 500 mB of hydrogen and 250 mB of oxygen, superheated, give a sapphire boule; "
+        "pure alumina grows colourless, as the boules for watch jewels and windows do. Oxygen comes from air: a centrifuge vat that spins neon out of 1,000 mB of air gives 209 mB of it.", "Verneuil") + pages_of(
+        "Create's mechanical saw cuts a boule to four sapphire wafers. Sapphire is the substrate of the blue LED: gallium nitride grows on its face as on almost nothing else, "
+        "so the LED chip takes a sapphire wafer (see Germanium, indium, gallium and cadmium). Most LED sapphire is now grown by Kyropoulos's method, a crystal cooled slowly in its crucible, "
+        "but Verneuil's flame is the older road.", "Sapphire wafers") + pages_of(
+        "Ruby is a gem here and no more. Maiman's first laser of 1960 was a rod of synthetic ruby pumped by a flash tube, and ruby lasers have drilled watch jewels and diamond dies, "
+        "but nothing in the pack wants a pulsed red laser: The Fab's 90 nm reticle writer is the kind that runs on a continuous ultraviolet laser.", "Ruby") + pages_of(
+        "Sources: Verneuil, \"Mémoire sur la reproduction artificielle du rubis par fusion\", Annales de Chimie et de Physique 3 (1904); Dobrovinskaya, Lytvynov and Pishchik, Sapphire: Material, Manufacturing, Applications (Springer, 2009); "
+        "Hughes, Ruby and Sapphire (RWH, 1997); Maiman, \"Stimulated optical radiation in ruby\", Nature 187 (1960).", "Sources"), 24)
+    entry("metals", "gems", "Tourmaline and topaz", "fundamentals:raw_tourmaline", pages_of(
+        "Tourmaline is a boron silicate, the commonest boron mineral of the granites, in long striated prisms with a triangular section. Most is schorl, black, in pegmatite dykes; "
+        "the gem kinds are pink and green, sometimes both in one crystal. Here it lies in the pegmatite dykes, black with a little pink rubellite.", "Tourmaline") + pages_of(
+        "Dutch traders brought it from Ceylon around 1700 and called it the aschtrekker, the ash-puller: warmed by a fire, a crystal draws ash to its ends. That is pyroelectricity, named by Brewster in 1824, "
+        "and the Curie brothers found tourmaline piezoelectric in 1880: squeezed, it charges. Tourmaline gauges measured the pressure of underwater explosions in the Second World War. "
+        "Nothing in the pack reads one, so here it is a gem.", "The ash-puller") + pages_of(
+        "Topaz, Al2SiO4(F,OH)2, is hardness 8 on Mohs's scale, the mineral that defines it. It carries fluorine: the vapours that brought tin up into the granite's roof, "
+        "turning it to greisen, brought topaz with the cassiterite and wolframite, at St Michael's Mount in Cornwall and at the Schneckenstein in Saxony, whose wine-yellow crystals went to the Saxon court's jewels in Dresden. "
+        "Here it lies in the tin veins. It is a gem, and no more.", "Topaz") + pages_of(
+        "Sources: Deer, Howie and Zussman, An Introduction to the Rock-Forming Minerals, 3rd ed. (2013), Tourmaline and Topaz; Lang, \"Pyroelectricity: from ancient curiosity to modern imaging tool\", Physics Today 58 (2005); "
+        "Curie and Curie, Bulletin de la Société minéralogique de France 3 (1880).", "Sources"), 25)
+    entry("metals", "bismuth", "Bismuth", "fundamentals:bismuth_crystal", pages_of(
+        "Bismuthinite, Bi2S3, is stibnite's twin, lead-grey needles in sprays, and lies with tin and tungsten: in the greisen of the tin veins, as in Cornwall and Bolivia, and in the tungsten skarns, "
+        "as at Shizhuyuan in Hunan, one of the largest bismuth deposits there is. Native bismuth, the metal itself, silvery with a pink cast and dull where it has tarnished, "
+        "lies in the five-element veins of silver, cobalt, nickel, bismuth and uranium, as at Schneeberg in Saxony: here in the pitchblende veins.", "Bismuth") + pages_of(
+        "Bismuthinite roasts on a campfire or in a smoker to bismuth oxide, bismite, yellow, and gives off sulfur dioxide. Two oxide, a charcoal and a soda ash, heated, reduce to two bismuth ingots and a slag. "
+        "Native bismuth melts at 271 °C, so a furnace sweats it out of its rock, as Saxon miners liquated it in iron pipes over a wood fire.", "Smelting") + pages_of(
+        "Bismuth sits next to lead in the periodic table and is nearly as dense, with little of its poison, so it replaces lead. Tin and bismuth melt together at 138 °C, the eutectic Sn42Bi58: "
+        "a tin and a bismuth ingot, heated, make eight solder, as tin and lead do, for low-temperature lead-free soldering.", "Solder") + pages_of(
+        "An ingot melts in a heated basin to 144 mB of molten bismuth. Poured into a casting basin and left alone, it freezes from the edges in, and the edges of each face grow faster than the middle, "
+        "so the crystal grows as stepped square spirals round a hollow, a hopper crystal. Thirty seconds undisturbed give a bismuth crystal. Its colours are an oxide film a few hundred nanometres thick, "
+        "coloured as a soap bubble is, by interference: gold where thin, then magenta, blue and green as it thickens.", "Hopper crystals") + pages_of(
+        "Sources: USGS, Mineral Commodity Summaries 2025, Bismuth; Ullmann's Encyclopedia of Industrial Chemistry, \"Bismuth, Bismuth Alloys, and Bismuth Compounds\"; "
+        "Agricola, De Re Metallica (1556), book IX.", "Sources"), 26)
     oxidation()
 
 
@@ -1099,6 +1164,10 @@ def magnets():
         + pages_of(f"In the game, every few seconds: {rows} Output falls from full at the rating to half at the lasting-loss point and to nothing at Curie; "
                    "a motor turns slower and carries less, a generator gives less, an electric pump pushes less. A demagnetised machine stops. "
                    "A voltmeter's needle swings against its magnet, so it reads low by what the heat has taken of its field.", "The grades")
+        + pages_of("Energy is kept. What a block draws and does not pass on is heat in that block: a resistor turns all of it, a light bulb nineteen parts in twenty, "
+                   "a neon tube three in four, an electrode in a vat two in five, an electric pump three in ten, a converter or accumulator a twentieth, the computers' power supply "
+                   "three in twenty, a transformer a fiftieth, a motor a tenth. A generator loses a tenth of what its shaft gives it. So a hard-worked motor or generator warms itself, "
+                   "and its magnet with it. A kilowatt lost in a block holds it about sixty degrees warm, more in light blocks and less in heavy ones.", "Where the power goes")
         + pages_of("The first magnet is hardened carbon steel. Heat a steel ingot in a furnace and quench the hot steel under a spout with 250 mB of water. "
                    "In an unpowered steel vat, combine copper, zinc, a glass bottle, 50 mB of sulfuric acid and 200 mB of water into a galvanic cell. "
                    "Craft the cell, hardened steel and copper wire together: the cell's current magnetizes the steel. The recipe consumes the cell and winding. "
@@ -1229,6 +1298,126 @@ def chemicals():
         "US EPA, 40 CFR 61 subpart R (phosphogypsum stacks).", "Sources"), 2)
 
 
+def arms():
+    import build_arms_data as a
+    category("arms", "Arms and ammunition", "Black powder, guncotton and smokeless powder, primers and drawn brass, gun barrels; "
+             "and Point Blank's weapon printer and Create Big Cannons' foundry fed from the plant.", "minecraft:gunpowder", 8)
+    cellulose, ethanol, recovered = a.POUDRE_B
+    nitro, glycerin, acetone, cordite = a.CORDITE
+    entry("arms", "black_powder", "Black powder", "minecraft:gunpowder", pages_of(
+        "Black powder is saltpetre, charcoal and sulfur. The saltpetre gives the oxygen, the charcoal burns in it, and the sulfur lights easily and binds the rest. "
+        f"By the late 1700s the English government mills had settled on 75 saltpetre, 15 charcoal and 10 sulfur by weight. Here {a.SALTPETRE} nitrate dust, "
+        f"{a.CHARCOAL} charcoal and {a.SULFUR} sulfur dust go into a mixer with 100 mB of water, near enough that, and come out as {NUMBERS[a.MILL_CAKES]} mill cake. "
+        "Mill cake is wet so that it can be ground fine without catching fire.", "Saltpetre, charcoal, sulfur") + pages_of(
+        "Dry meal powder settles out by weight in a cask and burns unevenly in a gun. From the fifteenth century powder makers corned it instead: "
+        "the wet meal was pressed hard into a cake, then broken into grains of one size and sieved. A press makes a mill cake into a press cake, "
+        f"and a millstone breaks a press cake into {NUMBERS[a.GRAINS]} black powder, the pack's gunpowder. The Factory Must Grow's dry mix is gone. "
+        "Black powder is still what fills a cannon's powder bag and a firework.", "Corning") + pages_of(
+        "Sources: Buchanan (ed.), Gunpowder, Explosives and the State (Ashgate, 2006); Kelly, Gunpowder (Basic Books, 2004); "
+        "Partington, A History of Greek Fire and Gunpowder (1960).", "Sources"), 0)
+    entry("arms", "guncotton", "Guncotton and smokeless powder", "fundamentals:smokeless_powder", pages_of(
+        "Christian Schönbein, in Basel in 1846, put cotton into nitric and sulfuric acid together and got a fibre that burned in a flash and left no smoke: guncotton, "
+        "cellulose nitrate. The sulfuric acid takes up the water the nitration gives off. "
+        f"{NUMBERS[a.PAPER_NITRATED].capitalize()} paper in {a.NITRIC} mB of nitric acid and {a.SULFURIC} mB of sulfuric acid give {NUMBERS[a.PAPER_NITRATED]} nitrocellulose "
+        f"and {a.SULFURIC} mB of spent acid, which the acid plant cracks back to sulfur dioxide.", "Guncotton") + pages_of(
+        "Guncotton burns too fast to push a bullet: it bursts a barrel. Paul Vieille made it a propellant in 1884 by dissolving it to a gel in ether and alcohol, "
+        "rolling it thin and cutting it to flakes, which burn from the surface inwards. His Poudre B went into the Lebel rifle of 1886, and every army followed. "
+        f"With Chemica, {cellulose} nitrocellulose in {ethanol} mB of ethanol, heated, give {cellulose} smokeless powder, and {recovered} mB of the solvent is driven off and caught again.", "Poudre B") + pages_of(
+        f"Frederick Abel and James Dewar's cordite of 1889 gelatinised guncotton with nitroglycerin in acetone: 58 nitroglycerin, 37 guncotton and 5 mineral jelly. "
+        f"{NUMBERS[nitro].capitalize()} nitrocellulose, {glycerin} mB of nitroglycerin and {acetone} mB of acetone give {cordite} smokeless powder. "
+        f"Without Chemica there is no solvent, and the older Schultze powder of 1864 serves, guncotton grains hardened with saltpetre and never gelatinised: "
+        f"{a.SCHULTZE} nitrocellulose, a nitrate dust and 100 mB of water give {a.SCHULTZE}.", "Cordite and Schultze powder") + pages_of(
+        "Sources: Urbanski, Chemistry and Technology of Explosives, vol. 3 (Pergamon, 1967); Davis, The Chemistry of Powder and Explosives (Wiley, 1943); "
+        "Kelly, Gunpowder (Basic Books, 2004).", "Sources"), 1)
+    entry("arms", "cartridges", "Primers and cartridges", "fundamentals:cartridge_case", pages_of(
+        "Edward Howard made mercury fulminate in 1800 by dissolving mercury in nitric acid and pouring it into alcohol. It goes off when struck. "
+        f"With Chemica, a mercury, 500 mB of nitric acid and 500 mB of ethanol give {a.FULMINATE} mercury fulminate; without it there is no alcohol, and no primer. "
+        f"A deployer pressing fulminate into a brass sheet gives {a.PRIMERS} primers, a cup with a pellet of fulminate and an anvil to crush it against.", "Fulminate") + pages_of(
+        "Edward Boxer at Woolwich and Hiram Berdan in America both patented the centrefire primer in 1866. Boxer's carries its own anvil and fires through one flash hole, so a fired case can be reprimed; "
+        "Berdan's anvil is part of the case. Fulminate corrodes brass and leaves a salt that rusts a barrel, and from the 1920s lead styphnate replaced it, made from resorcinol, which the pack does not make.", "Boxer and Berdan") + pages_of(
+        f"Cartridge brass is seven parts copper to three of zinc, soft enough to draw. A press draws a brass sheet into {a.CASES} cases, a pistol case's worth of brass each. "
+        f"Eduard Rubin's copper-jacketed bullet of the 1880s kept the lead off the rifling at smokeless velocities: a deployer laying a copper sheet over an antimonial lead ingot gives {a.BULLETS} jacketed bullets, "
+        "the antimony hardening the core.", "Cases and bullets") + pages_of(
+        "Point Blank's weapon printer loads them. 8 rounds of 9 mm take 8 cases, 8 bullets, 8 primers and a smokeless powder; 8 of 5.56 mm take 16 cases and 3 powder, "
+        "8 of 7.62 by 51 mm 24 cases, 16 bullets and 5 powder, and 2 of .50 BMG 24 cases, 24 bullets and 7. Eight 12-gauge shells take 8 cases for their brass heads, "
+        "plastic for the hulls and two antimonial lead ingots of shot. Grenades and rockets are filled with guncotton, as shells and torpedo warheads were before TNT.", "In the printer") + pages_of(
+        "Sources: Howard, \"On a new fulminating mercury\", Philosophical Transactions 90 (1800); Davis, The Chemistry of Powder and Explosives (1943); "
+        "Urbanski, vol. 3.", "Sources"), 2)
+    entry("arms", "guns", "Gun barrels", "fundamentals:gun_barrel", pages_of(
+        "A gun barrel starts as a bar of steel. On a Create line a steel ingot is flooded with 50 mB of lubrication oil, drilled through on a saw, reamed on a second saw and straightened on a press, "
+        "the barrel blank turning into a gun barrel: a gun drill runs in oil pumped down its own shank, then reaming and rifling, and straightening by eye on a press, as barrel makers still do. "
+        "A ground lens is glass polished with sand paper, garnet paper or emery cloth.", "Barrels") + pages_of(
+        "The weapon printer machines the rest. A pistol is a barrel, a gun mechanism, HSLA steel for the slide and plastic for the frame; an AR-15 or a SCAR has an aluminium receiver; "
+        "an AK, a G3 or a shotgun is steel throughout, with wood where it has wood. Gun mechanisms are two hardened steel springs, a steel mechanism and screws. "
+        "Machine guns take a spare barrel and two steel mechanisms for the feed, and the minigun six barrels and an electric motor. "
+        "Red dots and holographic sights take an LED chip and a cell; launchers take aluminium tubes, and the Javelin's seeker germanium optics.", "The printer") + pages_of(
+        "Point Blank's gunmetal, copper and iron smelted together, is gone, and so is its minigun motor: the M134 has always been driven by an electric motor, and here The Factory's turns it. "
+        "Arms dealers in villages still sell guns for emeralds; that is the pack's setting, not this mod's.", "Gunmetal"), 3)
+    steel, nethersteel = a.NETHERSTEEL
+    entry("arms", "big_cannons", "Big cannons", "createbigcannons:cast_iron_cannon_barrel", pages_of(
+        "Create Big Cannons melts and casts its guns from the plant's metals: The Factory's cast iron and steel, and our bronze, seven copper to one tin, near the gun bronze of the old cannon founders. "
+        "Its own alloying is gone: iron and coal do not stir into steel or press into cast iron, and brass and cinder flour are not bronze. "
+        f"Nethersteel takes a netherite ingot: {steel} steel with one, superheated, give {nethersteel}.", "Metal") + pages_of(
+        "A powder charge is still a bag of black powder, as at Trafalgar. Cartridges and autocannon and machine gun rounds take smokeless powder, which counts as its nitropowder; "
+        "nitrocellulose is its guncotton and packs into high explosive filling, and slime no longer gelatinises anything. "
+        "Every fuze is fired by a primer: the impact fuze's firing pin strikes one, and the timed, proximity and wired fuzes fire one by clockwork, radio or current.", "Propellant and fuzes"), 4)
+def glass():
+    category("glass", "Glass and armour", "Borosilicate, tempered and laminated glass, polycarbonate and the sapphire viewport: what a window can be made to stand, and the blast door it ends in.",
+             "fundamentals:laminated_glass", 9)
+    entry("glass", "borosilicate", "Borosilicate glass", "fundamentals:borosilicate_glass", pages_of(
+        "Common glass is soda-lime: sand, soda and lime. Heat one side and that side swells while the rest does not, and it cracks. "
+        "Otto Schott at Jena found in the 1890s that boric oxide in place of most of the soda and lime made a glass that expands a third as much, "
+        "and Corning sold it from 1915 as Pyrex: four fifths silica, an eighth boric oxide, a little soda and alumina. It goes from a flame into cold water and holds.", "Borosilicate") + pages_of(
+        "Borax is sodium borate, so it brings the boron and the soda both. Three colourless sand and a raw borax, superheated, melt to three borosilicate glass; "
+        "it wants more heat than soda-lime, which melts in any furnace. Six make sixteen panes. It is no stronger than glass, and shatters as glass does unless it is lifted with silk touch.") + pages_of(
+        "Its job here is the hottest one. High-level waste from PUREX is melted with borosilicate glass, superheated, into vitrified waste: "
+        "boron and silica take the fission products into the glass's own network, which is how every vitrification plant locks them up. "
+        "Sources: Schott Technical Glasses (2014); Ojovan and Lee, An Introduction to Nuclear Waste Immobilisation, 2nd ed. (2014).", "Vitrification")
+        + [crafting("fundamentals:glass/borosilicate_glass_pane")], 0)
+    entry("glass", "tempered", "Tempered glass", "fundamentals:tempered_glass", pages_of(
+        "Glass breaks from its surface: a scratch is a crack waiting. Temper it and the surface is squeezed shut. Glass is heated to about 620 °C, just short of softening, "
+        "and both faces are blown hard with air. The skin sets first; the core, cooling after it, shrinks and pulls the skin into compression, "
+        "so a crack must first overcome that squeeze. Tempered glass bends four or five times as far before it breaks, and when it does go it crumbles to blunt cubes, not blades.", "Toughened glass") + pages_of(
+        "Glass or a glass pane in a furnace, or blasted by a fan over lava, comes out hot glass; a spout of 250 mB of The Factory's air quenches a block to tempered glass, "
+        "and 100 mB a pane. Tempered glass cannot be cut afterwards: the first cut lets the stress go and the whole sheet bursts. So panes are cut first and then tempered, "
+        "as they are in every glass works. Tempered glass shrugs off a blast that would take out stone, at a distance.", "Tempering") + pages_of(
+        "Seen through a polarising filter, sunglasses on a car's back window, tempered glass shows a grid of dark spots: the marks of the air jets that quenched it. "
+        "Sources: Gardon, \"Thermal Tempering of Glass\", in Glass: Science and Technology 5 (1980); EN 12150-1.", "Quench marks"), 1)
+    entry("glass", "polycarbonate", "Polycarbonate", "fundamentals:polycarbonate_sheet", pages_of(
+        "Polycarbonate is the clear plastic that does not shatter: a sheet of it takes a hammer and dents. Hermann Schnell made it at Bayer in 1953, and Bayer still makes it the way he did. "
+        "Phosgene first: 250 mB of carbon monoxide and 250 mB of chlorine over charcoal give 250 mB of phosgene, which keeps its charcoal nineteen times in twenty. "
+        "Phosgene is the choking gas of 1915, four times as heavy as air: keep it in pipe and tank.", "Polycarbonate") + pages_of(
+        "Bisphenol A is two phenol and an acetone joined over an acid, and the cumene process gives phenol and acetone together: 500 mB of phenol, 250 mB of acetone "
+        "heated over an acid that is not used up, give two bisphenol A. A bisphenol A, 250 mB of phosgene and 500 mB of caustic soda give a polycarbonate resin; "
+        "the caustic takes the hydrogen chloride the reaction throws off, and leaves 500 mB of brine. A resin pressed on a heated basin is a polycarbonate sheet.", "Bisphenol A") + pages_of(
+        "Riot police carry it. Six polycarbonate sheets and an aluminium grip make a riot shield, which blocks as a shield does, but you see through it, "
+        "and it lasts three times as long as oak. A polycarbonate sheet mends it in an anvil. "
+        "Sources: Schnell, Chemistry and Physics of Polycarbonates (Interscience, 1964); Ullmann's Encyclopedia of Industrial Chemistry, \"Polycarbonates\".", "Riot shield")
+        + [crafting("fundamentals:glass/riot_shield")], 2)
+    entry("glass", "armour", "Laminated armour glass", "fundamentals:laminated_glass", pages_of(
+        "Bullet-resisting glass is not one glass but a stack: hard glass outside to blunt and break up whatever strikes it, polycarbonate behind to catch the pieces "
+        "and the spall, bonded into one in an autoclave under heat and pressure. Two tempered glass and a polycarbonate sheet pressed on a heated basin make laminated armour glass, "
+        "two tempered panes and a sheet two laminated panes.", "Laminated glass") + pages_of(
+        "It is the strongest window in the pack: an explosion has to be as strong as one that breaks obsidian to break it, and it takes an iron pickaxe to dig out. "
+        "Struck, a laminate cracks but holds together on its interlayer, which is why a car's windscreen is laminated, so it comes out whole and gives itself back. "
+        "Sources: EN 1063; UL 752.", "Armour") + pages_of(
+        "Sapphire is Mohs 9: only diamond scratches it. Sapphire windows are the barcode scanner's at the checkout, the watch's crystal, and the viewport of furnaces, "
+        "deep submersibles and missile domes. A Verneuil sapphire boule set in four steel plates makes a sapphire window, a steel-bezelled viewport "
+        "that only a diamond pickaxe can dig out, and that stands half what laminated glass does to an explosion. "
+        "Source: Harris, Materials for Infrared Windows and Domes (SPIE, 1999).", "Sapphire windows")
+        + [crafting("fundamentals:glass/sapphire_window")], 3)
+    entry("glass", "blast_door", "The blast door", "fundamentals:blast_door", pages_of(
+        "A blast door is a slab of armour plate on a motor: the doors of Cheyenne Mountain weigh twenty-five tons apiece. Heavy plate, a laminated armour glass viewport, "
+        "a yellow dye for the hazard striping and an electric motor make a blast door. Placed, it stands three wide and three high in front of you, all of it at once, "
+        "and needs that much room.", "The blast door") + pages_of(
+        "It opens on electricity alone. Its bottom middle block is the drive, an electrical block of The Factory's grid: fed at fifty volts or more, the two leaves slide apart, "
+        "drawing a motor's load, 24 ohms, while they move and a holding latch's, 480, once open. Cut the circuit and an accumulator shuts them. "
+        "No lever, button, redstone or hand opens it: put a switch in its cable, and keep the switch inside.", "Power") + pages_of(
+        "It is five times as hard to dig as obsidian, every one of its nine blocks alike, and wants a diamond pickaxe; it stands three times the blast obsidian does. "
+        "Dig any part and the whole door comes away as one.", "Armour")
+        + [crafting("fundamentals:glass/blast_door")], 4)
+
+
 def book():
     write(BOOK_DATA / "book.json", {
         "name": "Fundamentals: First Principles",
@@ -1241,6 +1430,48 @@ def book():
         "type": "minecraft:crafting_shapeless", "category": "misc",
         "ingredients": [{"item": "minecraft:book"}, {"item": "fundamentals:raw_hematite"}],
         "result": {"id": "patchouli:guide_book", "components": {"patchouli:book": f"fundamentals:{BOOK}"}}})
+
+
+def cold():
+    """Parkas and Cold Sweat. Its book entries are here because main() wipes the book before writing it."""
+    n = {tier: spec["cold"] for tier, spec in PARKAS.items()}
+    entry("plastics", "cold", "Cold and parkas", "fundamentals:expedition_parka", pages_of(
+        "With Cold Sweat installed, the temperature it gives the world where you stand is this book's: the climate, the day and the weather, and every fire, furnace, lava pool and hot wire in reach, the same number /heat and a thermometer read. "
+        "Its own guesses from biome, height, shade, caves and blocks are switched off so nothing counts twice; its hearths, water and items still act. "
+        "Its thermometer is gone: one of ours in the hotbar shows its gauge.", "Cold") + pages_of(
+        "What keeps you warm is still air. Air conducts 0.026 W per metre-kelvin; clothing's job is to hold a thick layer of it still, so warmth goes with loft, the thickness a garment traps, more than with what the fibres are made of. "
+        "Physiologists count it in clo: one clo, 0.155 m²K/W, keeps a resting person comfortable at 21 °C in an office suit; arctic expedition clothing is four to eight. "
+        f"Cold Sweat counts insulation so that every 40 makes the body follow the world's temperature ten times slower; its leather set is {LEATHER} and its goat-fur set {GOAT}, and here about 13 is a clo.") + pages_of(
+        f"Fur, {n['fur']}. The Inuit caribou suit was two layers, the inner with the hair turned in, the outer with it out, about four and a half clo for the weight of a modern down jacket, and caribou hair is hollow, so it holds air inside each hair. "
+        "A deer's hide (Naturalist's deer drop it in place of leather) is the shell and Cold Sweat's goat fur the lining; the hood is ruffed, for a fur ruff breaks the wind across the face.", "Four parkas") + pages_of(
+        f"Down, {n['down']}. Down is the cluster of fine filaments under a bird's feathers, not the feather; washed and blown, a feather gives one about a third of the time. "
+        "No fibre traps more still air for its weight, so down is the warmest dry, in waxed canvas (three string and a honeycomb make two). But wet down clumps and its loft collapses: soaked through, it keeps about a third of its warmth.") + pages_of(
+        f"Synthetic, {n['synthetic']}. Polyester staple fibre does not absorb water and keeps its loft wet. A little heavier than down for the same warmth, it is what you want where it is wet as often as cold: the chill of being soaked is halved ({WET_IMMUNITY['synthetic']}). "
+        "The shell is Chemica's nylon woven as ripstop. Polyester itself is PET: 250 mB of naphtha (its reformate's xylene) and 1,000 mB of air over a cobalt sulfate and a manganese sulfate, heated, the Amoco process, give two terephthalic acid; "
+        "two acid with 250 mB each of ethylene, air and water over a silver nugget, superheated, give four polyester fibre, the silver making ethylene oxide, the water opening it to glycol, and the two condensing to a melt spun as fibre.") + pages_of(
+        f"Expedition, {n['expedition']}. Silica aerogel is a gel with its liquid taken out and its skeleton kept: over nine tenths air in pores smaller than air's own mean free path, so it conducts 0.013 to 0.016 W/m·K, under still air. "
+        "A sand and a soda ash, superheated, melt to sodium silicate, water glass; with a polyester fibre, 250 mB of water and 100 of sulfuric acid it sets as a silica gel through the batt, as aerogel blankets are made.") + pages_of(
+        "Dried in air, the water's surface tension would crush the pores, so the water is exchanged for ethanol, the ethanol for liquid carbon dioxide, and the CO2 taken past its critical point, 31 °C and 74 bar, where liquid and gas are one and there is no surface: "
+        "a gel, 250 mB of Chemica's ethanol and 500 of carbon dioxide give an aerogel blanket and 200 mB of the ethanol back. "
+        "The shell is Gore's: PTFE stretched hot and fast opens into a web with pores far too small for a drop of water and far larger than a molecule of vapour, waterproof and breathable. A PTFE sheet and a nylon ripstop, compacted hot, are two laminates; worn whole, the suit keeps its wearer dry.")
+        + [crafting("fundamentals:cold/down_parka"), crafting("fundamentals:cold/synthetic_parka"), crafting("fundamentals:cold/expedition_parka")], 2)
+    entry("plastics", "vacuum_flask", "The vacuum flask", "fundamentals:filled_vacuum_flask", pages_of(
+        "Heat leaves a hot drink three ways: conducted through whatever touches it, carried off by air that warms, rises and is replaced, and radiated as infrared from every surface. "
+        "A leather waterskin stops none of them, and goes cold in about an hour. James Dewar made a flask in 1892 to keep liquefied gases cold at the Royal Institution, "
+        "and Reinhold Burger and Albert Aschenbrenner sold it in Berlin as the Thermos in 1904: it keeps coffee hot a day, and liquid nitrogen in it for days.", "Dewar's flask") + pages_of(
+        "It is two glass bottles, one inside the other, joined only at the neck. The gap between them is pumped out. Below about a tenth of a pascal a gas molecule crosses the gap without meeting another, "
+        "so the gas stops conducting, and with nothing to move there is no convection. That leaves the glass neck and the stopper to conduct, and radiation, which crosses a vacuum as sunlight does.") + pages_of(
+        "So both walls facing the gap are silvered. Bare glass radiates almost as a black body, an emissivity of about 0.9; polished silver about 0.02. Between 95 °C and 20 °C a black body loses some 620 W per square metre; "
+        "two silvered walls let through about a hundredth of that, a quarter of a watt from a half-litre flask. Glass is used because it conducts little, and borosilicate because the hot fill does not crack it. "
+        "Real flasks lose about two degrees an hour, most of it through the neck.", "Vacuum and silver") + pages_of(
+        "A borosilicate glass block starts the sequenced assembly. A deployer adds a silver nugget, a spout 50 mB of nitric acid, which dissolves it to silver nitrate, then 50 mB of ammonia, which makes Tollens' reagent; "
+        "a deployer's sugar reduces the silver onto the glass as a mirror, as John Brashear silvered telescope mirrors. A deployer holding a mechanical pump, which it keeps, draws the gap down; "
+        "then a steel plate cases it and a rubber sheet stoppers it.", "Making one") + pages_of(
+        "With Cold Sweat it is its waterskin, insulated: it fills from water, a cauldron or a tank at the water's temperature (or with 250 mB from a spout), the boiler heats it and the icebox chills it, "
+        "and it drinks and pours the same. Cold Sweat's water only goes back to neutral while it is in your hand or hotbar, warming or chilling you as it does; "
+        f"a waterskin there is spent in about two and a half game hours, the flask in about a day, {FLASK_SLOWER} times as long, giving a {FLASK_SLOWER}th of the warmth at a time. "
+        "Sources: Dewar, Proc. Royal Institution 14 (1893); Incropera and DeWitt, Fundamentals of Heat and Mass Transfer, ch. 12-13.", "With Cold Sweat")
+        + [spotlight("fundamentals:vacuum_flask", "Cold Sweat's waterskin in an evacuated, silvered double wall of borosilicate glass and a steel case.")], 3)
 
 
 def check():
@@ -1269,6 +1500,9 @@ def main():
     power()
     plastics()
     chemicals()
+    arms()
+    cold()
+    glass()
     check()
     n = len(list(BOOK_ASSETS.glob("entries/*/*.json")))
     print(f"book written: {n} entries")

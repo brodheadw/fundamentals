@@ -138,6 +138,18 @@
       "required": false
     },
     {
+      "id": "chemica:polyethylene_sheet",
+      "required": false
+    },
+    {
+      "id": "chemica:polyvinyl_chloride_sheet",
+      "required": false
+    },
+    {
+      "id": "chemica:purified_graphite_flakes",
+      "required": false
+    },
+    {
       "id": "chemica:raw_antimony",
       "required": false
     },
@@ -186,11 +198,19 @@
       "required": false
     },
     {
+      "id": "chemica:salt",
+      "required": false
+    },
+    {
       "id": "chemica:silver_ingot",
       "required": false
     },
     {
       "id": "chemica:silver_nugget",
+      "required": false
+    },
+    {
+      "id": "chemica:silver_sheet",
       "required": false
     },
     {
@@ -219,6 +239,10 @@
     },
     {
       "id": "chemica:titanium_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:titanium_sheet",
       "required": false
     },
     {

@@ -40,8 +40,8 @@
       }
     ],
     "radius": {
-      "min": 7,
-      "max": 11
+      "min": 4,
+      "max": 7
     },
     "thickness": {
       "min": 1,
@@ -52,8 +52,8 @@
       "Name": "minecraft:andesite"
     },
     "height": {
-      "min": 24,
-      "max": 40
+      "min": 14,
+      "max": 24
     }
   }
 }

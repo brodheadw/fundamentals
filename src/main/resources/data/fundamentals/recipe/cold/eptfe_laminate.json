@@ -1,0 +1,24 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "chemica:polytetrafluoroethylene_sheet"
+    },
+    {
+      "item": "fundamentals:nylon_ripstop"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:eptfe_laminate",
+      "count": 2
+    }
+  ],
+  "heat_requirement": "heated"
+}

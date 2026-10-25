@@ -1,0 +1,12 @@
+{
+  "type": "armor",
+  "item": {
+    "items": [
+      "fundamentals:expedition_parka"
+    ]
+  },
+  "insulation": {
+    "cold": 30.4,
+    "heat": 0.0
+  }
+}

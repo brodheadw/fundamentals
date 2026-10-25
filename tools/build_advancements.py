@@ -251,6 +251,9 @@ def tile(z):
 
 
 ADVANCEMENTS = {
+    "triboelectric": ("root", "field_mill", "goal", "Charged Sand",
+                      "Read a dust storm on a field mill with no thunder overhead: the sand itself carries the charge",
+                      {"reading": {"trigger": "minecraft:impossible"}}, False),
     "root": (None, "raw_hematite", "task", "Fundamentals", "Dig a mineral out of the ground",
              {"raw": have(*RAW)}, False),
     "bloom": ("root", "iron_bloom", "task", "Three Thousand Years", "Fire a bloomery and rake out a bloom of iron",

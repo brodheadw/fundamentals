@@ -23,9 +23,9 @@
       "fluid": "tfmg:sulfuric_acid"
     },
     {
-      "type": "neoforge:single",
+      "type": "neoforge:tag",
       "amount": 500,
-      "fluid": "chemica:oxygen"
+      "tag": "c:oxygen"
     },
     {
       "item": "chemica:ammonium_persulfate"

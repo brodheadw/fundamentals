@@ -1,0 +1,40 @@
+{
+  "name": "Tourmaline and topaz",
+  "category": "fundamentals:metals",
+  "icon": "fundamentals:raw_tourmaline",
+  "sortnum": 25,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Tourmaline is a boron silicate, the commonest boron mineral of the granites, in long striated prisms with a triangular section. Most is schorl, black, in pegmatite dykes; the gem kinds are pink and green, sometimes both in one crystal. Here it lies in the pegmatite dykes, black with a little pink rubellite.",
+      "title": "Tourmaline"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Dutch traders brought it from Ceylon around 1700 and called it the aschtrekker, the ash-puller: warmed by a fire, a crystal draws ash to its ends. That is pyroelectricity, named by Brewster in 1824, and the Curie brothers found tourmaline piezoelectric in 1880: squeezed, it charges.",
+      "title": "The ash-puller"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Tourmaline gauges measured the pressure of underwater explosions in the Second World War. Nothing in the pack reads one, so here it is a gem."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Topaz, Al2SiO4(F,OH)2, is hardness 8 on Mohs's scale, the mineral that defines it.",
+      "title": "Topaz"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It carries fluorine: the vapours that brought tin up into the granite's roof, turning it to greisen, brought topaz with the cassiterite and wolframite, at St Michael's Mount in Cornwall and at the Schneckenstein in Saxony, whose wine-yellow crystals went to the Saxon court's jewels in Dresden. Here it lies in the tin veins."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It is a gem, and no more."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: Deer, Howie and Zussman, An Introduction to the Rock-Forming Minerals, 3rd ed. (2013), Tourmaline and Topaz; Lang, \"Pyroelectricity: from ancient curiosity to modern imaging tool\", Physics Today 58 (2005); Curie and Curie, Bulletin de la Société minéralogique de France 3 (1880).",
+      "title": "Sources"
+    }
+  ]
+}
