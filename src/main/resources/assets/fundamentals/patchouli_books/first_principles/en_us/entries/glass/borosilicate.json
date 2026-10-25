@@ -1,0 +1,38 @@
+{
+  "name": "Borosilicate glass",
+  "category": "fundamentals:glass",
+  "icon": "fundamentals:borosilicate_glass",
+  "sortnum": 0,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Common glass is soda-lime: sand, soda and lime. Heat one side and that side swells while the rest does not, and it cracks.",
+      "title": "Borosilicate"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Otto Schott at Jena found in the 1890s that boric oxide in place of most of the soda and lime made a glass that expands a third as much, and Corning sold it from 1915 as Pyrex: four fifths silica, an eighth boric oxide, a little soda and alumina. It goes from a flame into cold water and holds."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Borax is sodium borate, so it brings the boron and the soda both. Three colourless sand and a raw borax, superheated, melt to three borosilicate glass; it wants more heat than soda-lime, which melts in any furnace. Six make sixteen panes."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It is no stronger than glass, and shatters as glass does unless it is lifted with silk touch."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Its job here is the hottest one. High-level waste from PUREX is melted with borosilicate glass, superheated, into vitrified waste: boron and silica take the fission products into the glass's own network, which is how every vitrification plant locks them up.",
+      "title": "Vitrification"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: Schott Technical Glasses (2014); Ojovan and Lee, An Introduction to Nuclear Waste Immobilisation, 2nd ed. (2014)."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:glass/borosilicate_glass_pane"
+    }
+  ]
+}

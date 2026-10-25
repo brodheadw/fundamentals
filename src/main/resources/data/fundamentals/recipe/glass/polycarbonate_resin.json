@@ -1,0 +1,27 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:bisphenol_a"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:phosgene"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 500,
+      "tag": "c:caustic_soda"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:polycarbonate_resin"
+    },
+    {
+      "id": "fundamentals:salt_brine",
+      "amount": 500
+    }
+  ]
+}

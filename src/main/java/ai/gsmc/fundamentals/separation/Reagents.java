@@ -80,6 +80,7 @@ public final class Reagents {
             new Reagent("sulfur_trioxide", 0xF4F2EA, Kind.GAS),
             new Reagent("hydrogen_sulfide", 0xEAF0E4, Kind.GAS),
             new Reagent("oxygen", 0xE6EEF8, Kind.GAS),
+            new Reagent("phosgene", 0xEEF0E0, Kind.GAS),
             new Reagent("spent_liquor", 0x8E9A86, Kind.WASTE),
             new Reagent("calcium_chloride_liquor", 0xDCE6E4, Kind.WASTE),
             new Reagent("spent_acid", 0x4A3A30, Kind.WASTE),

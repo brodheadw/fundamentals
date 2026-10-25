@@ -1,0 +1,39 @@
+{
+  "name": "Laminated armour glass",
+  "category": "fundamentals:glass",
+  "icon": "fundamentals:laminated_glass",
+  "sortnum": 3,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Bullet-resisting glass is not one glass but a stack: hard glass outside to blunt and break up whatever strikes it, polycarbonate behind to catch the pieces and the spall, bonded into one in an autoclave under heat and pressure.",
+      "title": "Laminated glass"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Two tempered glass and a polycarbonate sheet pressed on a heated basin make laminated armour glass, two tempered panes and a sheet two laminated panes."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "It is the strongest window in the pack: an explosion has to be as strong as one that breaks obsidian to break it, and it takes an iron pickaxe to dig out. Struck, a laminate cracks but holds together on its interlayer, which is why a car's windscreen is laminated, so it comes out whole and gives itself back.",
+      "title": "Armour"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: EN 1063; UL 752."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sapphire is Mohs 9: only diamond scratches it. Sapphire windows are the barcode scanner's at the checkout, the watch's crystal, and the viewport of furnaces, deep submersibles and missile domes.",
+      "title": "Sapphire windows"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A Verneuil sapphire boule set in four steel plates makes a sapphire window, a steel-bezelled viewport that only a diamond pickaxe can dig out, and that stands half what laminated glass does to an explosion. Source: Harris, Materials for Infrared Windows and Domes (SPIE, 1999)."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:glass/sapphire_window"
+    }
+  ]
+}

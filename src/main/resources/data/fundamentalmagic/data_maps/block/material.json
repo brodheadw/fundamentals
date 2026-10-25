@@ -37,6 +37,10 @@
       "mass": 10.5,
       "melt_at": 961.8
     },
+    "fundamentals:blast_door": {
+      "conductivity": 0.7,
+      "mass": 7.85
+    },
     "fundamentals:borax_ore": {
       "conductivity": 0.4,
       "mass": 1.3
@@ -44,6 +48,14 @@
     "fundamentals:bornite_ore": {
       "conductivity": 0.4,
       "mass": 5.0
+    },
+    "fundamentals:borosilicate_glass": {
+      "conductivity": 0.3,
+      "mass": 2.23
+    },
+    "fundamentals:borosilicate_glass_pane": {
+      "conductivity": 0.3,
+      "mass": 2.23
     },
     "fundamentals:braggite_ore": {
       "conductivity": 0.4,
@@ -200,6 +212,14 @@
       "conductivity": 0.4,
       "mass": 2.6
     },
+    "fundamentals:laminated_glass": {
+      "conductivity": 0.2,
+      "mass": 2.4
+    },
+    "fundamentals:laminated_glass_pane": {
+      "conductivity": 0.2,
+      "mass": 2.4
+    },
     "fundamentals:loparite_ore": {
       "conductivity": 0.4,
       "mass": 4.8
@@ -276,6 +296,10 @@
     "fundamentals:samarium_cobalt_block": {
       "mass": 8.3
     },
+    "fundamentals:sapphire_window": {
+      "conductivity": 0.6,
+      "mass": 3.98
+    },
     "fundamentals:scheelite_ore": {
       "conductivity": 0.4,
       "mass": 6.0
@@ -342,6 +366,14 @@
       "conductivity": 0.03,
       "mass": 8.3,
       "melt_at": 1356
+    },
+    "fundamentals:tempered_glass": {
+      "conductivity": 0.3,
+      "mass": 2.5
+    },
+    "fundamentals:tempered_glass_pane": {
+      "conductivity": 0.3,
+      "mass": 2.5
     },
     "fundamentals:terbium_block": {
       "conductivity": 0.03,

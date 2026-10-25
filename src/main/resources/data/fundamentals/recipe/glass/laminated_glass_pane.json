@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "GGG",
+    "GGG"
+  ],
+  "key": {
+    "G": {
+      "item": "fundamentals:laminated_glass"
+    }
+  },
+  "result": {
+    "id": "fundamentals:laminated_glass_pane",
+    "count": 16
+  }
+}

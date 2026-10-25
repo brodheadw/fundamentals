@@ -1,0 +1,34 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "chemica:carbon_monoxide"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 250,
+      "tag": "c:chlorine"
+    },
+    {
+      "item": "minecraft:charcoal"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:phosgene",
+      "amount": 250
+    },
+    {
+      "id": "minecraft:charcoal",
+      "chance": 0.95
+    }
+  ]
+}

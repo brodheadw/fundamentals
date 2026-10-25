@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:borosilicate_glass_pane",
+    "fundamentals:tempered_glass_pane",
+    "fundamentals:laminated_glass_pane"
+  ]
+}

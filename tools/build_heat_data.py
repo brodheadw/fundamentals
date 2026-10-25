@@ -51,6 +51,7 @@ OURS = {
     "bromine": (3103, 0.94, -7.2, 58.8, None, None, None, {"toxic"}, "CRC", "the element, a liquid"),
     "argon": (1.66, 0.0223, -189.3, -185.8, None, None, None, set(), "NIST", "gas"),
     "oxygen": (1.33, 0.0204, -218.8, -183.0, None, None, None, set(), "NIST", "gas"),
+    "phosgene": (4.04, 0.0118, -118, 8.3, None, None, None, {"toxic"}, "NIST", "gas, four times as heavy as air; it smells of new-mown hay, and killed more men in the First World War than any other gas"),
     "chlorine": (2.99, 0.0134, -101.5, -34.0, None, None, None, {"toxic"}, "NIST", "gas, two and a half times as heavy as air"),
     "water_gas": (0.66, 0.0145, -205, -191.5, -191.5, 500, None, {"toxic"}, "NIST", "carbon monoxide and hydrogen, half and half; flammable gas"),
     "ammonia": (0.72, 0.0099, -77.7, -33.3, None, None, None, {"toxic"}, "NIST", "gas"),
