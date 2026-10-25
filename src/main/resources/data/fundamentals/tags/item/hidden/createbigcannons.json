@@ -1,0 +1,21 @@
+{
+  "replace": false,
+  "values": [
+    {
+      "id": "createbigcannons:congealed_nitro",
+      "required": false
+    },
+    {
+      "id": "createbigcannons:guncotton",
+      "required": false
+    },
+    {
+      "id": "createbigcannons:hardened_nitro",
+      "required": false
+    },
+    {
+      "id": "createbigcannons:nitropowder",
+      "required": false
+    }
+  ]
+}

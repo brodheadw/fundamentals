@@ -1,0 +1,34 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pointblank"
+    }
+  ],
+  "type": "pointblank:default",
+  "ingredients": [
+    {
+      "count": 1,
+      "item": "fundamentals:gun_barrel"
+    },
+    {
+      "count": 2,
+      "item": "pointblank:guninternals"
+    },
+    {
+      "count": 8,
+      "tag": "c:ingots/aluminum"
+    },
+    {
+      "count": 2,
+      "tag": "c:plates/polyethylene"
+    },
+    {
+      "count": 2,
+      "item": "tfmg:screw"
+    }
+  ],
+  "result": {
+    "item": "pointblank:m16a1"
+  }
+}

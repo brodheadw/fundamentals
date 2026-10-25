@@ -1,0 +1,21 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pointblank"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "fundamentals:microcontroller"
+    },
+    {
+      "item": "tfmg:circuit_board"
+    }
+  ],
+  "result": {
+    "id": "pointblank:processor"
+  }
+}

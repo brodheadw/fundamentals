@@ -1,0 +1,28 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "pointblank"
+    }
+  ],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "fundamentals:hardened_steel"
+    },
+    {
+      "item": "fundamentals:hardened_steel"
+    },
+    {
+      "item": "tfmg:steel_mechanism"
+    },
+    {
+      "item": "tfmg:screw"
+    }
+  ],
+  "result": {
+    "id": "pointblank:guninternals",
+    "count": 2
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "Primers and cartridges",
+  "category": "fundamentals:arms",
+  "icon": "fundamentals:cartridge_case",
+  "sortnum": 2,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Edward Howard made mercury fulminate in 1800 by dissolving mercury in nitric acid and pouring it into alcohol. It goes off when struck. With Chemica, a mercury, 500 mB of nitric acid and 500 mB of ethanol give 8 mercury fulminate; without it there is no alcohol, and no primer.",
+      "title": "Fulminate"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A deployer pressing fulminate into a brass sheet gives 16 primers, a cup with a pellet of fulminate and an anvil to crush it against."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Edward Boxer at Woolwich and Hiram Berdan in America both patented the centrefire primer in 1866. Boxer's carries its own anvil and fires through one flash hole, so a fired case can be reprimed; Berdan's anvil is part of the case.",
+      "title": "Boxer and Berdan"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Fulminate corrodes brass and leaves a salt that rusts a barrel, and from the 1920s lead styphnate replaced it, made from resorcinol, which the pack does not make."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Cartridge brass is seven parts copper to three of zinc, soft enough to draw. A press draws a brass sheet into 4 cases, a pistol case's worth of brass each.",
+      "title": "Cases and bullets"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Eduard Rubin's copper-jacketed bullet of the 1880s kept the lead off the rifling at smokeless velocities: a deployer laying a copper sheet over an antimonial lead ingot gives 8 jacketed bullets, the antimony hardening the core."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Point Blank's weapon printer loads them. 8 rounds of 9 mm take 8 cases, 8 bullets, 8 primers and a smokeless powder; 8 of 5.56 mm take 16 cases and 3 powder, 8 of 7.62 by 51 mm 24 cases, 16 bullets and 5 powder, and 2 of .50 BMG 24 cases, 24 bullets and 7.",
+      "title": "In the printer"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Eight 12-gauge shells take 8 cases for their brass heads, plastic for the hulls and two antimonial lead ingots of shot. Grenades and rockets are filled with guncotton, as shells and torpedo warheads were before TNT."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sources: Howard, \"On a new fulminating mercury\", Philosophical Transactions 90 (1800); Davis, The Chemistry of Powder and Explosives (1943); Urbanski, vol. 3.",
+      "title": "Sources"
+    }
+  ]
+}

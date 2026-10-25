@@ -1,0 +1,14 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "tag": "c:plates/brass"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:cartridge_case",
+      "count": 4
+    }
+  ]
+}
