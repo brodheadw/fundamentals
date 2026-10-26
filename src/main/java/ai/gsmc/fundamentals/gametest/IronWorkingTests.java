@@ -165,6 +165,16 @@ public class IronWorkingTests {
     }
 
     @GameTest(template = "empty")
+    public void theCokeOvensFlueIsCastIronAndNeedsNoCeria(GameTestHelper helper) {
+        ItemStack bars = new ItemStack(Items.IRON_BARS), pipe = new ItemStack(item("tfmg:cast_iron_pipe")), cast = new ItemStack(item("tfmg:cast_iron_ingot"));
+        var grid = CraftingInput.of(3, 3, List.of(bars, pipe, bars, bars, pipe, bars, cast, pipe, cast));
+        var flue = helper.getLevel().getRecipeManager().getRecipeFor(RecipeType.CRAFTING, grid, helper.getLevel());
+        helper.assertTrue(flue.isPresent() && flue.get().value().assemble(grid, helper.getLevel().registryAccess()).is(item("tfmg:exhaust")),
+                "an exhaust to vent the coke ovens' carbon dioxide should need only cast iron and iron bars");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
     public void crushedIronMeltsWithCokeToCastIronBeforeAnyBlastFurnace(GameTestHelper helper) {
         BlockPos basinPos = new BlockPos(1, 2, 1);
         helper.setBlock(basinPos.below(), AllBlocks.BLAZE_BURNER.getDefaultState().setValue(BlazeBurnerBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.SEETHING));

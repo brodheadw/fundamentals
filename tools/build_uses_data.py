@@ -655,8 +655,9 @@ def tungsten():
 
 
 def more_sinks():
-    shaped(TFMG / "crafting/materials/exhaust.json", ["BPB", "EPE", "CPC"],
-           {"B": {"item": "minecraft:iron_bars"}, "C": {"tag": "c:ingots/cast_iron"}, "P": {"item": "tfmg:cast_iron_pipe"}, "E": {"item": "fundamentals:cerium_oxide"}},
+    # A plain flue vents the coke ovens' carbon dioxide from the start; ceria only makes a catalytic exhaust, the three-way pair below.
+    shaped(TFMG / "crafting/materials/exhaust.json", ["BPB", "BPB", "CPC"],
+           {"B": {"item": "minecraft:iron_bars"}, "C": {"tag": "c:ingots/cast_iron"}, "P": {"item": "tfmg:cast_iron_pipe"}},
            {"count": 1, "id": "tfmg:exhaust"})
     shaped(USES / "exhaust_three_way.json", ["ETE", "PKP", "CRC"],
            {"T": {"tag": "c:nuggets/platinum"}, "K": {"tag": "c:nuggets/palladium"}, "R": {"tag": "c:nuggets/rhodium"},
