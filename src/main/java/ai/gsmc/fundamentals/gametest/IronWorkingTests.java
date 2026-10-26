@@ -165,6 +165,21 @@ public class IronWorkingTests {
     }
 
     @GameTest(template = "empty")
+    public void crushedIronMeltsWithCokeToCastIronBeforeAnyBlastFurnace(GameTestHelper helper) {
+        BlockPos basinPos = new BlockPos(1, 2, 1);
+        helper.setBlock(basinPos.below(), AllBlocks.BLAZE_BURNER.getDefaultState().setValue(BlazeBurnerBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.SEETHING));
+        helper.setBlock(basinPos, AllBlocks.BASIN.getDefaultState());
+        BasinBlockEntity basin = helper.getBlockEntity(basinPos);
+        basin.getInputInventory().insertItem(0, new ItemStack(item("create:crushed_raw_iron"), 2), false);
+        basin.getInputInventory().insertItem(1, new ItemStack(item("tfmg:coal_coke")), false);
+        basin.getInputInventory().insertItem(2, new ItemStack(item("tfmg:limesand")), false);
+        var melt = helper.getLevel().getRecipeManager().byKey(Fundamentals.id("uses/cast_iron_from_crushed_iron")).orElseThrow().value();
+        helper.assertTrue(BasinRecipe.match(basin, melt) && BasinRecipe.apply(basin, melt), "two crushed iron, coke and flux over a superheated burner should melt");
+        helper.assertTrue(basin.getOutputInventory().getStackInSlot(0).is(item("tfmg:cast_iron_ingot")), "the basin should hold cast iron, the furnace's first iron");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
     public void puddlingPigIronWithRustGivesWroughtIron(GameTestHelper helper) {
         BlockPos basinPos = new BlockPos(1, 2, 1);
         helper.setBlock(basinPos.below(), AllBlocks.BLAZE_BURNER.getDefaultState().setValue(BlazeBurnerBlock.HEAT_LEVEL, BlazeBurnerBlock.HeatLevel.SEETHING));

@@ -1,0 +1,26 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "create:crushed_raw_iron"
+    },
+    {
+      "item": "create:crushed_raw_iron"
+    },
+    {
+      "item": "tfmg:coal_coke"
+    },
+    {
+      "tag": "tfmg:flux"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:cast_iron_ingot"
+    },
+    {
+      "id": "tfmg:slag"
+    }
+  ],
+  "heat_requirement": "superheated"
+}

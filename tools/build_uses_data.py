@@ -318,6 +318,10 @@ def iron():
                                                      "result": {"id": "fundamentals:iron_bloom", "count": 1}, "byproduct": {"id": "tfmg:slag", "count": 1}})
     for path in ("smelting/iron_ingot_from_crushed", "blasting/iron_ingot_from_crushed", "splashing/crushed_raw_iron"):
         disabled(CREATE / f"{path}.json")
+    # Before any blast furnace stands, crushed ore melted with coke in a superheated basin takes up carbon and runs as cast iron,
+    # as the first small blast furnaces did; the furnace's own pig iron is the better yield once it is built.
+    mixing("cast_iron_from_crushed_iron", item("create:crushed_raw_iron", 2) + item("tfmg:coal_coke") + tag("tfmg:flux"),
+           [result("tfmg:cast_iron_ingot"), result("tfmg:slag")], "superheated")
     write(DATA / "recipe/bloomery/iron_from_slag.json", {"type": "fundamentals:bloomery", "ingredient": {"item": "tfmg:slag"},
                                                          "result": {"id": "minecraft:iron_nugget", "count": 2}})
     write(USES / "gravel_from_slag.json", {"type": "create:crushing", "ingredients": item("tfmg:slag"), "processing_time": 250,
