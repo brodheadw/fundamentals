@@ -26,6 +26,7 @@
 		"SidedInvWrapperAgeingMixin",
 		"StatorGogglesMixin",
 		"TankCorrosionMixin",
+		"TorchBurnMixin",
 		"TreeNodePositionMixin",
 		"VesselGogglesMixin",
 		"VoltmeterMagnetMixin"

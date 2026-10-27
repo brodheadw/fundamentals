@@ -94,6 +94,7 @@ public class Fundamentals {
                 Oxidation.registerBlocks(helper::register);
                 Compute.registerBlocks(helper::register);
                 ai.gsmc.fundamentals.glass.Glass.registerBlocks(helper::register);
+                ai.gsmc.fundamentals.torch.Torches.registerBlocks(helper::register);
             });
             event.register(Registries.BLOCK_ENTITY_TYPE, helper -> {
                 IronWorking.registerBlockEntities(helper::register);
@@ -154,13 +155,17 @@ public class Fundamentals {
                 ai.gsmc.fundamentals.cold.Parkas.registerItems(helper::register);
                 ai.gsmc.fundamentals.cold.Cold.registerItems(helper::register);
                 ai.gsmc.fundamentals.glass.Glass.registerItems(helper::register);
+                ai.gsmc.fundamentals.torch.Torches.registerItems(helper::register);
             });
             event.register(Registries.ARMOR_MATERIAL, helper -> ai.gsmc.fundamentals.cold.Parkas.registerArmorMaterials(helper::register));
             event.register(Registries.DATA_COMPONENT_TYPE, helper -> {
                 Oxidation.registerComponents(helper::register);
                 Magnets.registerComponents(helper::register);
             });
-            event.register(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, helper -> Oxidation.registerAttachments(helper::register));
+            event.register(NeoForgeRegistries.Keys.ATTACHMENT_TYPES, helper -> {
+                Oxidation.registerAttachments(helper::register);
+                ai.gsmc.fundamentals.torch.Torches.registerAttachments(helper::register);
+            });
             event.register(Registries.FEATURE, helper -> helper.register(DEPOSIT, DepositFeature.INSTANCE));
             event.register(NeoForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, helper -> {
                 helper.register(id("scarce_in_chests"), ScarceInChests.CODEC);
@@ -180,6 +185,7 @@ public class Fundamentals {
         NeoForge.EVENT_BUS.addListener(Fertiliser::onExplosion);
         NeoForge.EVENT_BUS.addListener(Fertiliser::onServerTick);
         NeoForge.EVENT_BUS.addListener(Plastics::onRightClick);
+        NeoForge.EVENT_BUS.addListener(ai.gsmc.fundamentals.torch.Torches::onPlace);
         NeoForge.EVENT_BUS.addListener(ai.gsmc.fundamentals.content.nuclear.SpentFuel::onEntityTick);
         NeoForge.EVENT_BUS.addListener(ai.gsmc.fundamentals.content.nuclear.SpentFuel::onTooltip);
         NeoForge.EVENT_BUS.addListener(Oxidation::onOpen);
@@ -250,6 +256,7 @@ public class Fundamentals {
                     ai.gsmc.fundamentals.cold.Parkas.items().forEach(output::accept);
                     ai.gsmc.fundamentals.cold.Cold.flasks().forEach(output::accept);
                     ai.gsmc.fundamentals.glass.Glass.items().forEach(output::accept);
+                    output.accept(ai.gsmc.fundamentals.torch.Torches.burntItem());
                     OreBlocks.rawItems().forEach(output::accept);
                     OreBlocks.items().forEach(output::accept);
                 })
