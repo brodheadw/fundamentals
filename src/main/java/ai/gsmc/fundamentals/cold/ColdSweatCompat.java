@@ -18,12 +18,13 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import java.util.Set;
 import java.util.function.BiConsumer;
 
 /** Loaded only with Cold Sweat: its world temperature becomes ours, and down goes flat in the wet. */
-final class ColdSweatCompat {
+public final class ColdSweatCompat {
 
     static final ResourceLocation HEAT = Fundamentals.id("heat");
     // Cold Sweat's own guesses at the world, which our heat grid and climate replace; its hearths, water and items stay
@@ -33,6 +34,10 @@ final class ColdSweatCompat {
     private static final double SOAKED = 0.2;
     // soaked down collapses and keeps about a third of its loft
     private static final double DOWN_LOST_WET = 2.0 / 3;
+    // the most a soaking can chill or warm: water in Cold Sweat's own biomes runs at most this far from the air. Its target for a
+    // biome it has no water figure for is the biome's whole temperature, which soaks a swimmer far past freezing, and so cold a
+    // body barely dries off; held here, a soaking is no worse than cold water anywhere
+    public static final double MOST_SOAKED = 0.5;
 
     private ColdSweatCompat() {}
 
@@ -40,6 +45,7 @@ final class ColdSweatCompat {
         NeoForge.EVENT_BUS.addListener((TempModifierRegisterEvent event) -> event.register(HEAT, HeatTempModifier::new));
         NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, ColdSweatCompat::useOurHeat);
         NeoForge.EVENT_BUS.addListener(ColdSweatCompat::wetDown);
+        NeoForge.EVENT_BUS.addListener(ColdSweatCompat::onPlayerTick);
         NeoForge.EVENT_BUS.addListener(ColdSweatCompat::fillFlask);
     }
 
@@ -67,6 +73,21 @@ final class ColdSweatCompat {
         if (replaced) {
             event.addModifier(Temperature.Trait.WORLD, new HeatTempModifier().tickRate(10), Placement.FIRST.noDuplicates(Matcher.SAME_CLASS));
         }
+    }
+
+    private static void onPlayerTick(PlayerTickEvent.Post event) {
+        if (!event.getEntity().level().isClientSide) {
+            holdSoaking(event.getEntity());
+        }
+    }
+
+    public static void holdSoaking(Player player) {
+        Temperature.getModifier(player, Temperature.Trait.WORLD, WaterTempModifier.class).ifPresent(mod -> {
+            double held = Math.clamp(mod.getTemperature(), -MOST_SOAKED, MOST_SOAKED);
+            if (held != mod.getTemperature()) {
+                mod.setTemperature(held);
+            }
+        });
     }
 
     private static void wetDown(InsulationTickEvent event) {

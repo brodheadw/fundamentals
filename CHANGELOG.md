@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- With Cold Sweat, a soaking chills or warms no more than cold water does. Swimming in a biome Cold Sweat has no water figure for soaked a player to hundreds of degrees below freezing, so cold they barely dried off for over an hour.
 - Torches no longer burn down, and the burnt-out torch is gone. Any stub still in a world loads as a lit torch facing the same way, and any in a chest or inventory as a torch.
 - The Exhaust, the coke ovens' carbon dioxide flue, is The Factory's own recipe again: iron bars, cast iron pipe and cast iron. Ceria had made it a late rare-earth part and left a fresh coke oven no way to vent; ceria with the platinum metals still makes two as a catalytic exhaust.
 - Cast iron before the blast furnace: two crushed raw iron, a coal coke and a limesand flux in a superheated basin melt to a cast iron ingot and slag, as the first small furnaces made it. The Factory's blast furnace is built of cast iron, so this, the ilmenite slag furnace and an overcharged bloomery are how its first parts are cast; once it runs, its pig iron (a crushed ore and flux tap one and a half ingots) is the better yield.

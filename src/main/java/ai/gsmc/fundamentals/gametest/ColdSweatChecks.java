@@ -1,13 +1,17 @@
 package ai.gsmc.fundamentals.gametest;
 
 import ai.gsmc.fundamentals.cold.Cold;
+import ai.gsmc.fundamentals.cold.ColdSweatCompat;
 import ai.gsmc.fundamentals.cold.HeatTempModifier;
 import ai.gsmc.fundamentals.heat.Thermometers;
 import ai.gsmc.fundamentals.Fundamentals;
 import com.momosoftworks.coldsweat.api.event.common.item.WaterskinEvent;
 import com.momosoftworks.coldsweat.api.temperature.modifier.BiomeTempModifier;
 import com.momosoftworks.coldsweat.api.temperature.modifier.BlockTempModifier;
+import com.momosoftworks.coldsweat.api.temperature.modifier.WaterTempModifier;
 import com.momosoftworks.coldsweat.api.util.Temperature;
+import com.momosoftworks.coldsweat.api.util.placement.Matcher;
+import com.momosoftworks.coldsweat.api.util.placement.Placement;
 import com.momosoftworks.coldsweat.common.capability.handler.EntityTempManager;
 import com.momosoftworks.coldsweat.common.capability.temperature.PlayerTempCap;
 import com.momosoftworks.coldsweat.common.item.FilledWaterskinItem;
@@ -44,6 +48,12 @@ final class ColdSweatChecks {
         double celsius = Heat.at(player.level(), player.blockPosition());
         if (Math.abs(units * Cold.CELSIUS_PER_UNIT - celsius) > 1e-6) {
             return "Cold Sweat should read " + celsius + " °C, not " + units * Cold.CELSIUS_PER_UNIT;
+        }
+        Temperature.addModifier(player, new WaterTempModifier(-19.66), Temperature.Trait.WORLD, Placement.FIRST.noDuplicates(Matcher.SAME_CLASS));
+        ColdSweatCompat.holdSoaking(player);
+        double soaked = Temperature.getModifier(player, Temperature.Trait.WORLD, WaterTempModifier.class).map(WaterTempModifier::getTemperature).orElse(0.0);
+        if (soaked != -ColdSweatCompat.MOST_SOAKED) {
+            return "a soaking should chill no more than cold water, not " + soaked;
         }
         PlayerTempCap cap = new PlayerTempCap();
         player.getInventory().items.set(0, new ItemStack(Thermometers.items().getFirst()));
