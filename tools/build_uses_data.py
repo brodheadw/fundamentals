@@ -333,6 +333,9 @@ def iron():
 BLAST_FURNACE = {"steel": ("crushed_iron", item("create:crushed_raw_iron"), 1), "steel_from_raw_iron": ("raw_iron", item("minecraft:raw_iron"), 2),
                  "steel_from_dust": ("iron_dust", tag("c:dusts/iron"), 1)}
 PIG_IRON_PER_ORE = 216
+# Lump ore goes into a blast furnace as it comes, crushing only sizes it: each melts to its iron, hematite and magnetite near
+# seven tenths iron, goethite a little less and siderite, the carbonate, under half.
+RAW_IRON_ORES = {"hematite": 216, "magnetite": 216, "goethite": 192, "siderite": 144}
 # Iron dust is a ground ingot, not ore: it melts back to an ingot's worth, which puddles with its fettling to no more iron than went in.
 PIG_IRON_PER_INGOT = 144
 CONVERTER = {"pig_iron": 288, "air": 500, "steel": 252, "slag": 72, "gas": 100}
@@ -348,6 +351,10 @@ def steel():
             "type": "tfmg:industrial_blasting", "hot_air_usage": 20 * lumps, "processing_time": 20 * lumps, "ingredients": ore + tag("tfmg:flux"),
             "results": [result_fluid("molten_pig_iron", (PIG_IRON_PER_INGOT if name == "iron_dust" else PIG_IRON_PER_ORE) * lumps), result_fluid("tfmg:molten_slag", 144 * lumps),
                         result_fluid("tfmg:furnace_gas", 200 * lumps)]})
+    for ore, pig_iron in RAW_IRON_ORES.items():
+        write(USES / f"pig_iron_from_raw_{ore}.json", {
+            "type": "tfmg:industrial_blasting", "hot_air_usage": 20, "processing_time": 20, "ingredients": item(f"raw_{ore}") + tag("tfmg:flux"),
+            "results": [result_fluid("molten_pig_iron", pig_iron), result_fluid("tfmg:molten_slag", 144), result_fluid("tfmg:furnace_gas", 200)]})
     write(USES / "cast_iron_from_pig_iron.json", {"type": "tfmg:casting", "ingredients": [fluid("molten_pig_iron", 144)], "processing_time": 200,
                                                   "results": [{"id": "tfmg:cast_iron_ingot"}]})
     # Bessemer's converter needs no fuel: the air burning out the silicon and carbon keeps the bath molten, so no heat and no stirrer.

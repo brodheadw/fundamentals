@@ -210,6 +210,16 @@ public class IronWorkingTests {
     }
 
     @GameTest(template = "empty")
+    public void theBlastFurnaceTakesEveryLumpIronOreUncrushed(GameTestHelper helper) {
+        for (String ore : List.of("hematite", "magnetite", "goethite", "siderite")) {
+            var recipe = helper.getLevel().getRecipeManager().byKey(Fundamentals.id("uses/pig_iron_from_raw_" + ore));
+            helper.assertTrue(recipe.isPresent() && recipe.get().value().getIngredients().getFirst().test(new ItemStack(item("fundamentals:raw_" + ore))),
+                    "the blast furnace should take raw " + ore + " as it comes");
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
     public void airBlownThroughPigIronInABasinGivesIronWithNoHeat(GameTestHelper helper) {
         BlockPos basinPos = new BlockPos(1, 2, 1);
         helper.setBlock(basinPos, AllBlocks.BASIN.getDefaultState());

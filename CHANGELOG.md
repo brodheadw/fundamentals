@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- The blast furnace takes lump iron ore as it comes, with no crusher: raw hematite or magnetite melts to as much pig iron as a crushed iron, raw goethite a little less and raw siderite two thirds as much.
 - Iron the modern way: 288 mB of molten pig iron and 500 mB of air in a basin under a mixer blow to two iron ingots, as a converter burns pig iron down to mild steel. No burner, no fettling, no hammer. Puddling still gives three from the same pig iron with a raw hematite or rusty ingot.
 - With Cold Sweat, the body feels the world as it is up to 30 °C and then less and less, never past 45 °C: living beside lava or a caldera is warm, not burning. Touching lava or fire still burns.
 - With Cold Sweat, a soaking only cools, and no more than cold water does. Swimming in a biome Cold Sweat has no water figure for soaked a player to hundreds of degrees below freezing, so cold they barely dried off for over an hour, or warmed them by tens of degrees.
