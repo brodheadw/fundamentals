@@ -21,12 +21,7 @@
     {
       "type": "neoforge:single",
       "amount": 1000,
-      "fluid": "tfmg:ethylene"
-    },
-    {
-      "type": "neoforge:tag",
-      "amount": 500,
-      "tag": "c:ammonia"
+      "fluid": "chemica:acrylonitrile"
     },
     {
       "item": "chemica:nickel_catalyst"
@@ -39,7 +34,7 @@
   "processing_time": 600,
   "results": [
     {
-      "amount": 1000,
+      "amount": 500,
       "id": "chemica:hexamethylenediamine_solution"
     },
     {

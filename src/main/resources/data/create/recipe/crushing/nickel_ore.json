@@ -26,10 +26,6 @@
     {
       "chance": 0.75,
       "id": "create:experience_nugget"
-    },
-    {
-      "chance": 0.11,
-      "id": "chemica:cobalt_dust"
     }
   ]
 }

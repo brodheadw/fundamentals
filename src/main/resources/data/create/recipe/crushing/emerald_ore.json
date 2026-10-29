@@ -27,10 +27,6 @@
     {
       "chance": 0.125,
       "id": "minecraft:cobblestone"
-    },
-    {
-      "chance": 0.2,
-      "id": "chemica:chromium_dust"
     }
   ]
 }

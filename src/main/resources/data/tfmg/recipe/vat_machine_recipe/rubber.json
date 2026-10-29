@@ -17,14 +17,26 @@
       "item": "fundamentals:zinc_oxide"
     },
     {
+      "item": "fundamentals:ziegler_natta_catalyst"
+    },
+    {
       "type": "neoforge:single",
-      "amount": 250,
-      "fluid": "tfmg:heavy_oil"
+      "amount": 125,
+      "fluid": "tfmg:ethylene"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 125,
+      "fluid": "tfmg:propylene"
     }
   ],
   "results": [
     {
       "id": "tfmg:rubber_sheet"
+    },
+    {
+      "id": "fundamentals:ziegler_natta_catalyst",
+      "chance": 0.9
     }
   ]
 }

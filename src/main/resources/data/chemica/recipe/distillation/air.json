@@ -15,15 +15,11 @@
   ],
   "results": [
     {
-      "amount": 10,
-      "id": "chemica:helium"
-    },
-    {
-      "amount": 760,
+      "amount": 780,
       "id": "chemica:nitrogen"
     },
     {
-      "amount": 20,
+      "amount": 9,
       "id": "fundamentals:argon"
     },
     {

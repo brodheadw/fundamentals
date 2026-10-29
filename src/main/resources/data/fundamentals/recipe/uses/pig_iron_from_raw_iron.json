@@ -1,7 +1,7 @@
 {
   "type": "tfmg:industrial_blasting",
-  "hot_air_usage": 40,
-  "processing_time": 40,
+  "hot_air_usage": 20,
+  "processing_time": 20,
   "ingredients": [
     {
       "item": "minecraft:raw_iron"
@@ -13,15 +13,15 @@
   "results": [
     {
       "id": "fundamentals:molten_pig_iron",
-      "amount": 432
+      "amount": 216
     },
     {
       "id": "tfmg:molten_slag",
-      "amount": 288
+      "amount": 144
     },
     {
       "id": "tfmg:furnace_gas",
-      "amount": 400
+      "amount": 200
     }
   ]
 }

@@ -1,6 +1,27 @@
 # Changelog
 
 ## [Unreleased]
+- Recipes that did not add up, put right:
+  - Steel and cast iron no longer multiply between mods: Big Cannons melts and casts them at 144 mB an ingot, as The Factory does, and melts steel only over a superheated burner.
+  - The Factory's arc furnace melts iron and flux to steel instead of turning ore and coke into steel; ore goes through the blast furnace.
+  - Raw iron melts to an ingot and a half of pig iron, as crushed iron does, not three.
+  - Panned or washed gold is electrum, which parting splits into seven gold nuggets and two silver nuggets.
+  - The copper and nickel converters blow air and give off sulfur dioxide.
+  - Lead bullion is no longer smelted straight to lead, losing its silver; it is desilvered first.
+  - Crushing ore no longer frees the trace metals inside its mineral: emerald's chromium, iron ore's vanadium, pentlandite's cobalt and galena's silver. Chemica's catalysts take vanadium pentoxide and cobalt metal instead.
+  - Coke ovens give off coke-oven gas, which the blast stove burns, instead of carbon dioxide.
+  - Brass is two copper to one zinc. A bag of cement makes two concrete mixture, not sixteen.
+  - Copper dissolves into copper sulfate only with air, and circuit boards are etched in hydrochloric acid and air, not plain sulfuric acid.
+  - Rubber is made from ethylene and propylene over a Ziegler-Natta catalyst, cured with sulfur and zinc oxide, not from heavy oil.
+  - Hydrofluoric acid leaves gypsum. The chromite roast takes air. Nickel electrowinning no longer plates copper too.
+  - With Chemica:
+    - Its chromium dust no longer melts in a furnace, and its titanium route no longer hands back its magnesium.
+    - Ammonia is oxidised with oxygen over a platinum catalyst that comes back, and PTFE is made from methane, chlorine and hydrofluoric acid.
+    - Vinyl chloride gives hydrogen chloride one for one. Acrylonitrile comes from propylene, and hexamethylenediamine from acrylonitrile.
+    - Ammonium persulfate is made at an anode. Molten glass takes lime.
+    - Ethanol is fermented in water and gives carbon dioxide, a quarter of it ethanol.
+    - Cyclohexane keeps its volume, wood ash gives potash, and air has argon at 0.9 % and no helium.
+    - Charcoal no longer electrolyses to coal, and benzene is no longer reformed back to reformate.
 - With Create Big Cannons, pig iron is its Molten Cast Iron: the same metal, so one fluid, with its bucket. The blast furnace taps it, and pig iron already in tanks loads as it.
 - The blast furnace takes lump iron ore as it comes, with no crusher: raw hematite or magnetite melts to as much pig iron as a crushed iron, raw goethite a little less and raw siderite two thirds as much.
 - Iron the modern way: 288 mB of molten pig iron and 500 mB of air in a basin under a mixer blow to two iron ingots, as a converter burns pig iron down to mild steel. No burner, no fettling, no hammer. Puddling still gives three from the same pig iron with a raw hematite or rusty ingot.

@@ -12,10 +12,12 @@
   ],
   "results": [
     {
-      "id": "minecraft:gold_ingot"
+      "id": "minecraft:gold_nugget",
+      "count": 7
     },
     {
-      "id": "fundamentals:silver_nugget"
+      "id": "fundamentals:silver_nugget",
+      "count": 2
     }
   ],
   "heat_requirement": "superheated"

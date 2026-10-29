@@ -15,12 +15,17 @@
     {
       "type": "neoforge:single",
       "amount": 1000,
-      "fluid": "tfmg:ethylene"
+      "fluid": "chemica:propene"
     },
     {
       "type": "neoforge:tag",
       "amount": 500,
       "tag": "c:ammonia"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 750,
+      "tag": "c:oxygen"
     },
     {
       "item": "chemica:vanadium_catalyst"

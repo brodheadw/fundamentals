@@ -55,15 +55,29 @@ SWITCHED_OFF = {
     "casting/polyvinyl_chloride": "its PVC melt is no longer made; our PVC sheet serves",
     "vat_machine_recipe/electrolysis/powdered_obsidian": "obsidian is volcanic glass; electrolysed, it does not give iron, silicon, nitrate and sulfur",
     "vat_machine_recipe/electrolysis/salt": "salt electrolysed in water gives caustic soda and hydrogen, not sodium; ours is the Downs cell, molten salt with calcium chloride",
+    "vat_machine_recipe/vat_reaction/titanium_dust": "its magnesium comes back after reducing titanium; Kroll's spends it, as ours does",
+    "vat_machine_recipe/arc_furnace_titanium": "titanium melted down with coke would be titanium carbide; ours is remelted under argon",
+    "smelting/chromium_dust": "chromium melts at 1907 °C, past any furnace; ours is reduced from its oxide with aluminium",
+    "blasting/chromium_dust": "chromium melts at 1907 °C, past any furnace; ours is reduced from its oxide with aluminium",
+    "compacting/chromium_dust": "chromium melts at 1907 °C and is not pressed out of a dust; ours is reduced with aluminium",
+    "mixing/nitrogen_dioxide": "ammonia burnt with no oxygen and its catalyst used up; the vat's, with oxygen over platinum, stands in",
+    "vat_machine_recipe/electrolysis/charcoal_dust": "charcoal does not electrolyse into coal",
+    "vat_machine_recipe/vat_reaction/reformate": "benzene reformed back into aromatics; reformate is what reforming naphtha gives",
 }
 ORE_ITEM = re.compile(r"chemica:((deepslate_)?[a-z]+_ore|raw_[a-z_]+|crushed_raw_[a-z]+|crushed_graphite|([a-z]+_grade_)?rutile_(crystal|dust)"
                       r"|fervorite|zelosite|antimony_(ingot|nugget|dust))")
 METALS = ("tin", "silver", "platinum", "cobalt", "chromium", "tungsten", "molybdenum", "titanium", "magnesium", "iridium", "tantalum", "sodium")
-INPUTS = {"chemica:tungsten_dust": {"tag": "c:ingots/tungsten"}, "chemica:phosphorus_dust": {"item": "fundamentals:white_phosphorus"},
+# Trace metals crushed out of ore are not free dust: vanadium is caught as its pentoxide, which is the catalyst itself, cobalt
+# is won from the nickel refinery and silver from lead bullion.
+INPUTS = {"chemica:vanadium_dust": {"item": "fundamentals:vanadium_pentoxide"}, "chemica:cobalt_dust": {"tag": "c:ingots/cobalt"},
+          "chemica:silver_dust": {"tag": "c:nuggets/silver"}, "chemica:tungsten_dust": {"tag": "c:ingots/tungsten"}, "chemica:phosphorus_dust": {"item": "fundamentals:white_phosphorus"},
           "chemica:purified_graphite_flakes": {"tag": "c:dusts/graphite"}}
 RECIPE_INPUTS = {"vat_machine_recipe/mixing/chromic_acid": {"chemica:chromium_dust": {"item": "fundamentals:sodium_dichromate"}}}
 MISNAMED = {"chemica:sulfur_dust": "tfmg:sulfur_dust"}
 NATIVE_COPPER = {"chemica:arsenic_dust": "fundamentals:silver_nugget"}
+# metals that sit inside an ore's mineral, which crushing does not set free: emerald's trace of chromium, iron ore's vanadium,
+# pentlandite's cobalt and galena's silver come out in slag, leach liquor and bullion further on
+TRACE = {"chemica:chromium_dust", "chemica:vanadium_dust", "chemica:cobalt_dust", "chemica:silver_dust"}
 # Chemica's vat recipes spell some of these in camelCase, which The Factory's vat ignores
 SNAKE = {"allowedVatTypes": "allowed_vat_types", "heatRequirement": "heat_requirement", "minSize": "min_size", "processingTime": "processing_time"}
 OURS = DATA / "recipe/chemica"
@@ -106,7 +120,60 @@ def takes(node):
     return ([node["item"]] if set(node) == {"item"} else []) + [i for key, value in node.items() if key not in ("results", "result") for i in takes(value)]
 
 
+def single(id, amount):
+    return {"type": "neoforge:single", "amount": amount, "fluid": id}
+
+
+# Chemistry Chemica gets wrong, put right: each its real reactants, conditions and byproducts.
+REPAIRED = {
+    # Ostwald's first step: 4 NH3 + 7 O2 over platinum, which is a catalyst and comes back
+    "vat_machine_recipe/mixing/nitrogen_dioxide": {"ingredients": [single("chemica:ammonia", 1000), single("chemica:oxygen", 1750), {"item": "chemica:platinum_catalyst"}],
+                                                   "results": [{"amount": 750, "id": "chemica:nitrogen_dioxide"}, {"id": "chemica:platinum_catalyst"}]},
+    # PTFE's carbon is methane's: chlorinated to chloroform, fluorinated with HF to R-22, pyrolysed to TFE, then polymerised with persulfate
+    "vat_machine_recipe/vat_reaction/polytetrafluoroethylene": {
+        "ingredients": [single("chemica:methane", 250), single("chemica:chlorine", 750), single("chemica:hydrofluoric_acid", 500), {"item": "chemica:ammonium_persulfate"}],
+        "results": [{"id": "chemica:polytetrafluoroethylene_sheet"}, {"amount": 1000, "id": "chemica:hydrochloric_acid"}]},
+    # ethylene and chlorine to EDC, cracked to vinyl chloride and hydrogen chloride, one for one
+    "vat_machine_recipe/mixing/vinyl_chloride_monomer": {"ingredients": [single("tfmg:ethylene", 500), single("chemica:chlorine", 500)],
+                                                         "results": [{"amount": 500, "id": "chemica:vinyl_chloride_monomer"}, {"amount": 500, "id": "chemica:hydrochloric_acid"}]},
+    # SOHIO: propylene, ammonia and oxygen
+    "vat_machine_recipe/mixing/acrylonitrile": {"ingredients": [single("chemica:propene", 1000), single("chemica:ammonia", 500), single("chemica:oxygen", 750), {"item": "chemica:vanadium_catalyst"}]},
+    # Monsanto: acrylonitrile dimerised to adiponitrile and hydrogenated over nickel; a six-carbon diamine from two three-carbon nitriles
+    "vat_machine_recipe/mixing/hexamethylenediamine_solution": {
+        "ingredients": [single("tfmg:hydrogen", 1000), single("chemica:acrylonitrile", 1000), {"item": "chemica:nickel_catalyst"}],
+        "results": [{"amount": 500, "id": "chemica:hexamethylenediamine_solution"}, {"id": "chemica:nickel_catalyst"}]},
+    # persulfate is made at the anode, from ammonium bisulfate; oxygen cannot raise sulfate to it
+    "vat_machine_recipe/vat_reaction/ammonium_persulfate": {"machines": ["tfmg:graphite_electrode", "tfmg:graphite_electrode"],
+                                                            "ingredients": [single("chemica:ammonia", 500), single("tfmg:sulfuric_acid", 500)],
+                                                            "results": [{"id": "chemica:ammonium_persulfate"}, {"amount": 250, "id": "tfmg:hydrogen"}]},
+    # sand and soda alone is water glass, which dissolves; lime makes it soda-lime glass
+    "mixing/molten_glass": {"ingredients": [{"tag": "minecraft:sand"}, {"tag": "c:dusts/soda_ash"}, {"item": "tfmg:limesand"}]},
+    # yeast ferments sugar in water to a weak beer and carbon dioxide, distilled to a quarter of its volume in ethanol
+    "vat_machine_recipe/vat_reaction/ethanol": {"ingredients": [{"item": "minecraft:sugar"}] * 3 + [{"item": "chemica:yeast"}, single("minecraft:water", 1000)],
+                                                "results": [{"amount": 250, "id": "chemica:ethanol"}, {"amount": 250, "id": "tfmg:carbon_dioxide"}]},
+    # benzene takes three hydrogen and keeps its volume
+    "vat_machine_recipe/vat_reaction/cyclohexane": {"ingredients": [single("chemica:benzene", 250), single("tfmg:hydrogen", 750), {"item": "chemica:nickel_catalyst"}],
+                                                    "results": [{"amount": 250, "id": "chemica:cyclohexane"}, {"id": "chemica:nickel_catalyst"}]},
+    # wood ash leaches to potash, not soda
+    "vat_machine_recipe/centrifuge/ash": {"results": [{"chance": 0.2, "id": "fundamentals:potash"}]},
+    # air is 78 % nitrogen, 21 % oxygen and 0.9 % argon; its helium, five parts in a million, is not worth taking, and comes from natural gas
+    "distillation/air": {"results": [{"amount": 780, "id": "chemica:nitrogen"}, {"amount": 9, "id": "chemica:argon"}, {"amount": 210, "id": "chemica:oxygen"}]},
+    # copper is etched by an oxidising acid: cupric chloride in hydrochloric acid, kept up with air
+    "vat_machine_recipe/vat_reaction/etched_epoxy_circuit_board": {"ingredients": [{"item": "chemica:coated_epoxy_circuit_board"}, single("chemica:hydrochloric_acid", 250), single("tfmg:air", 250)]},
+    "vat_machine_recipe/vat_reaction/etched_pvc_circuit_board": {"ingredients": [{"item": "chemica:coated_pvc_circuit_board"}, single("chemica:hydrochloric_acid", 250), single("tfmg:air", 250)]},
+}
+
+
 def take_over(path, recipe):
+    recipe.update(REPAIRED.get(path, {}))
+    # isobutylene adds to ethanol: ETBE gives off no water
+    if path == "vat_machine_recipe/vat_reaction/ethyl_tert_butyl_ether":
+        recipe["results"] = [r for r in recipe["results"] if "water" not in r.get("id", "")]
+    # the cell splits brine to hydrogen and chlorine one for one
+    if path == "vat_machine_recipe/electrolysis/brine":
+        for r in recipe["results"]:
+            if r.get("id") == "tfmg:hydrogen":
+                r["amount"] = next(c["amount"] for c in recipe["results"] if c.get("id") == "chemica:chlorine")
     # Our chlor-alkali cell runs the same brine on the same two electrodes over a dimensionally stable anode, and Chemica's
     # steam is water alone in a vat with no machine: on graphite, and under a mixer, neither can be taken for the other.
     if path == "vat_machine_recipe/electrolysis/brine":
@@ -142,7 +209,8 @@ def crushing(chemica, create):
         if entry in theirs:
             named = MISNAMED | (NATIVE_COPPER if "copper" in entry else {})
             extra = [{**{k: v for k, v in r.items() if k != "item"}, "id": named.get(r["item"], r["item"])}
-                     for r in json.loads(chemica.read(entry))["results"] if r["item"].split(":")[0] not in ("minecraft", "create")]
+                     for r in json.loads(chemica.read(entry))["results"] if r["item"].split(":")[0] not in ("minecraft", "create")
+                     and r["item"] not in TRACE]
             conditions = LOADED + conditions
         write(CRUSHING / Path(entry).name, {**({"neoforge:conditions": conditions} if conditions else {}),
                                             **original, "results": liberated(original["results"]) + extra})

@@ -132,6 +132,8 @@ WHY = {
     "tfmg:molten_slag": "Lime-silicate slag runs off the iron and is granulated for slag cement or cast and crushed for road stone.",
     "tfmg:hydrogen": "Chlor-alkali hydrogen is burnt or used for hydrogenation and reduction.",
     "tfmg:propylene": "A fluid catalytic cracker is the world's second source of propylene.",
+    "fundamentals:gypsum": "Hydrofluoric acid plants make near four tonnes of fluorogypsum to a tonne of acid, sold for plaster and cement or stacked.",
+    "tfmg:creosote": "Coke ovens condense coal tar out of their gas; distilled, it gives creosote, the railway sleeper and telegraph pole preservative.",
     "tfmg:slag": "Silicate slag is crushed for aggregate and cement (slag cement), and old bloomery slag, near two-thirds iron oxide, was re-smelted for its iron.",
     "tfmg:sulfuric_acid": "Electrowinning regenerates the sulfuric acid at the anode.",
     "minecraft:clay_ball": "Ion-adsorption clay leached of its rare earths is just clay again.",

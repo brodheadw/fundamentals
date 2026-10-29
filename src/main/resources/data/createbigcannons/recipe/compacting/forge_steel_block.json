@@ -1,0 +1,21 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "createbigcannons"
+    }
+  ],
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "type": "neoforge:tag",
+      "amount": 1296,
+      "tag": "c:molten_steel"
+    }
+  ],
+  "results": [
+    {
+      "id": "createbigcannons:steel_block"
+    }
+  ]
+}

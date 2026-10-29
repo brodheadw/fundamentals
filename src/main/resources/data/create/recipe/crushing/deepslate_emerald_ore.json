@@ -28,10 +28,6 @@
     {
       "chance": 0.125,
       "id": "minecraft:cobbled_deepslate"
-    },
-    {
-      "chance": 0.2,
-      "id": "chemica:chromium_dust"
     }
   ]
 }

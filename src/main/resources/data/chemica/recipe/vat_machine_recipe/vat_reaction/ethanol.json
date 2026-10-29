@@ -1,0 +1,46 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:cast_iron_vat",
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "ingredients": [
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "minecraft:sugar"
+    },
+    {
+      "item": "chemica:yeast"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "minecraft:water"
+    }
+  ],
+  "machines": [],
+  "min_size": 1,
+  "processing_time": 800,
+  "results": [
+    {
+      "amount": 250,
+      "id": "chemica:ethanol"
+    },
+    {
+      "amount": 250,
+      "id": "tfmg:carbon_dioxide"
+    }
+  ]
+}

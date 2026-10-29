@@ -23,10 +23,6 @@
     {
       "chance": 0.125,
       "id": "minecraft:cobblestone"
-    },
-    {
-      "chance": 0.08,
-      "id": "chemica:vanadium_dust"
     }
   ]
 }

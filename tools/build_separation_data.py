@@ -341,7 +341,8 @@ def vat(name, ingredients, results, machines, heated=True, time=100, folder="red
 
 
 def metals():
-    mixing("hydrofluoric_acid", item("raw_fluorite", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("hydrofluoric_acid", 500)], heated=True)
+    # fluorspar and sulfuric acid leave their calcium as gypsum, near four tonnes of it to a tonne of acid
+    mixing("hydrofluoric_acid", item("raw_fluorite", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("hydrofluoric_acid", 500), result("gypsum", 2)], heated=True)
     vat("calcium_ingot", item("calcium_chloride", 2), [result("calcium_ingot", 2), result_fluid("chlorine", 500)], ["tfmg:electrode", "tfmg:electrode"])
     for element in ELECTROLYSIS + CALCIOTHERMIC:
         mixing(f"{element}_fluoride", [item(f"{element}_oxide"), fluid("hydrofluoric_acid", 500)], [result(f"{element}_fluoride")])

@@ -17,6 +17,10 @@
     {
       "id": "fundamentals:hydrofluoric_acid",
       "amount": 500
+    },
+    {
+      "id": "fundamentals:gypsum",
+      "count": 2
     }
   ],
   "heat_requirement": "heated"

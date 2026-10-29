@@ -1,0 +1,24 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "ingredients": [
+    {
+      "item": "tfmg:coated_circuit_board"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 250,
+      "tag": "c:acids/hydrochloric"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "tfmg:air"
+    }
+  ],
+  "processing_time": 100,
+  "results": [
+    {
+      "id": "tfmg:etched_circuit_board"
+    }
+  ]
+}

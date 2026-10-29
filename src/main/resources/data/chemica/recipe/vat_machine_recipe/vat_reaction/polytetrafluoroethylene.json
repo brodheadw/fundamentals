@@ -13,19 +13,19 @@
   ],
   "ingredients": [
     {
-      "type": "neoforge:tag",
-      "amount": 500,
-      "tag": "c:fluorine"
-    },
-    {
       "type": "neoforge:single",
       "amount": 250,
-      "fluid": "tfmg:sulfuric_acid"
+      "fluid": "chemica:methane"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 750,
+      "tag": "c:chlorine"
     },
     {
       "type": "neoforge:tag",
       "amount": 500,
-      "tag": "c:oxygen"
+      "tag": "c:acids/hydrofluoric"
     },
     {
       "item": "chemica:ammonium_persulfate"
@@ -37,6 +37,10 @@
   "results": [
     {
       "id": "chemica:polytetrafluoroethylene_sheet"
+    },
+    {
+      "amount": 1000,
+      "id": "fundamentals:hydrochloric_acid"
     }
   ]
 }

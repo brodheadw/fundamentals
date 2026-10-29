@@ -283,6 +283,21 @@ def big_cannons():
                 rewritten = swap(original, mapping)
                 assert rewritten != original, f"nothing to rewrite in {path}"
                 write(CBC / f"recipe/{path}.json", {"neoforge:conditions": BIG_CANNONS, **rewritten})
+    # Big Cannons counts 90 mB to an ingot and The Factory 144, over the same c: fluid tags, so an ingot's worth of molten steel or
+    # cast iron cast at 90 made 1.6 ingots. Its melting and forging run at 144 here, an ingot's worth everywhere.
+    with zipfile.ZipFile(CBC_JAR) as jar:
+        for metal in ("steel", "cast_iron"):
+            for step, form in (("melting/melt", "nugget"), ("melting/melt", "ingot"), ("melting/melt", "block"),
+                               ("compacting/forge", "nugget"), ("compacting/forge", "ingot"), ("compacting/forge", "block")):
+                path = f"{step}_{metal}_{form}"
+                recipe = json.loads(jar.read(f"data/createbigcannons/recipe/{path}.json"))
+                for node in recipe["ingredients"] + recipe["results"]:
+                    if "amount" in node:
+                        node["amount"] = {10: 16, 90: 144, 810: 1296}[node["amount"]]
+                # steel melts near 1500 °C, past what a plain blaze burner reaches
+                if metal == "steel" and step.startswith("melting"):
+                    recipe["heat_requirement"] = "superheated"
+                write(CBC / f"recipe/{path}.json", {"neoforge:conditions": BIG_CANNONS + recipe.pop("neoforge:conditions", []), **recipe})
     common.tag(CBC / "tags/item/guncotton.json", [GUNCOTTON])
     common.tag(CBC / "tags/item/nitropowder.json", [POWDER])
     return {"rewritten": 1 + len(FUZES) + len(SMOKELESS_ROUNDS), "off": len(CBC_OFF)}

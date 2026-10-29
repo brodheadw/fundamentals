@@ -9,6 +9,11 @@
     },
     {
       "item": "fundamentals:soda_ash"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "tfmg:air"
     }
   ],
   "results": [

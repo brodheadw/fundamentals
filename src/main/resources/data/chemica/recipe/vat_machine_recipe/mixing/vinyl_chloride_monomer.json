@@ -19,7 +19,7 @@
     },
     {
       "type": "neoforge:tag",
-      "amount": 750,
+      "amount": 500,
       "tag": "c:chlorine"
     }
   ],
@@ -30,8 +30,12 @@
   "processing_time": 300,
   "results": [
     {
-      "amount": 1000,
+      "amount": 500,
       "id": "fundamentals:vinyl_chloride"
+    },
+    {
+      "amount": 500,
+      "id": "fundamentals:hydrochloric_acid"
     }
   ]
 }

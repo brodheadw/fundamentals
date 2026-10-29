@@ -1,0 +1,20 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:sand"
+    },
+    {
+      "item": "tfmg:cement"
+    },
+    {
+      "item": "minecraft:gravel"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:concrete_mixture",
+      "count": 2
+    }
+  ]
+}

@@ -21,19 +21,21 @@
       "type": "neoforge:single",
       "amount": 500,
       "fluid": "tfmg:sulfuric_acid"
-    },
-    {
-      "type": "neoforge:tag",
-      "amount": 1000,
-      "tag": "c:oxygen"
     }
   ],
-  "machines": [],
+  "machines": [
+    "tfmg:graphite_electrode",
+    "tfmg:graphite_electrode"
+  ],
   "min_size": 1,
   "processing_time": 300,
   "results": [
     {
       "id": "chemica:ammonium_persulfate"
+    },
+    {
+      "amount": 250,
+      "id": "tfmg:hydrogen"
     }
   ]
 }

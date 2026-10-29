@@ -1,18 +1,7 @@
 {
   "neoforge:conditions": [
     {
-      "type": "neoforge:mod_loaded",
-      "modid": "chemica"
+      "type": "neoforge:false"
     }
-  ],
-  "type": "minecraft:blasting",
-  "category": "misc",
-  "experience": 0.0,
-  "cookingtime": 100,
-  "ingredient": {
-    "item": "chemica:chromium_dust"
-  },
-  "result": {
-    "id": "fundamentals:chromium_ingot"
-  }
+  ]
 }

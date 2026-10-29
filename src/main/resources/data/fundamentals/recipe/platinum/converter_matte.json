@@ -9,6 +9,11 @@
     },
     {
       "tag": "c:sands/colorless"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "tfmg:air"
     }
   ],
   "results": [
@@ -18,6 +23,10 @@
     },
     {
       "id": "tfmg:slag"
+    },
+    {
+      "id": "fundamentals:sulfur_dioxide",
+      "amount": 250
     }
   ],
   "heat_requirement": "superheated"

@@ -130,7 +130,7 @@ public class MineralTests {
 
     @GameTest(template = "empty")
     public void nativeGoldRunsToGold(GameTestHelper helper) {
-        step(helper, "fundamentals:uses/gold_from_panning", "minecraft:raw_gold", "minecraft:gold_nugget");
+        step(helper, "fundamentals:uses/gold_from_panning", "minecraft:raw_gold", "fundamentals:electrum_nugget");
         step(helper, "fundamentals:uses/gold_amalgam", "minecraft:raw_gold", "fundamentals:gold_amalgam");
         helper.assertTrue(takes(processing(helper, "fundamentals:uses/gold_amalgam"), "fundamentals:mercury"), "amalgamation takes mercury");
         step(helper, "fundamentals:uses/electrum_from_amalgam", "fundamentals:gold_amalgam", "fundamentals:electrum_ingot");
@@ -142,7 +142,7 @@ public class MineralTests {
             }
         }
         var miller = processing(helper, "fundamentals:uses/gold_from_electrum");
-        helper.assertTrue(takes(miller, "fundamentals:electrum_ingot") && takesFluid(miller, "fundamentals:chlorine") && gives(miller, "minecraft:gold_ingot")
+        helper.assertTrue(takes(miller, "fundamentals:electrum_ingot") && takesFluid(miller, "fundamentals:chlorine") && gives(miller, "minecraft:gold_nugget")
                 && gives(miller, "fundamentals:silver_nugget"), "chlorine should part electrum to gold and silver");
         helper.succeed();
     }

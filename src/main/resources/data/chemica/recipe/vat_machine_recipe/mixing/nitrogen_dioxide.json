@@ -18,9 +18,12 @@
       "tag": "c:ammonia"
     },
     {
-      "type": "neoforge:single",
-      "amount": 500,
-      "fluid": "chemica:platinum_catalyst_carrier"
+      "type": "neoforge:tag",
+      "amount": 1750,
+      "tag": "c:oxygen"
+    },
+    {
+      "item": "chemica:platinum_catalyst"
     }
   ],
   "machines": [
@@ -32,6 +35,9 @@
     {
       "amount": 750,
       "id": "chemica:nitrogen_dioxide"
+    },
+    {
+      "id": "chemica:platinum_catalyst"
     }
   ]
 }

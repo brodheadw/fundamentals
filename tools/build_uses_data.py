@@ -277,7 +277,9 @@ def copper_sulfides():
     for feed in ("roasted_chalcopyrite", "copper_calcine"):
         write(DATA / f"recipe/bloomery/copper_matte_from_{feed}.json", {"type": "fundamentals:bloomery", "ingredient": {"item": f"fundamentals:{feed}"},
                                                                        "result": {"id": "fundamentals:copper_matte_dust", "count": 1}, "byproduct": {"id": "tfmg:slag", "count": 1}})
-    mixing("blister_copper", item("copper_matte_dust", 2) + tag("c:sands/colorless"), [result("blister_copper_ingot", 2), result("tfmg:slag")], "superheated")
+    # the converter: air blown through the matte burns its sulfur off as sulfur dioxide, the sand slags its iron
+    mixing("blister_copper", item("copper_matte_dust", 2) + tag("c:sands/colorless") + [fluid("tfmg:air", 500)],
+           [result("blister_copper_ingot", 2), result("tfmg:slag"), result_fluid("sulfur_dioxide", 250)], "superheated")
     write(USES / "copper_ingot_from_blister_copper.json", {"type": "minecraft:blasting", "category": "misc", "ingredient": {"item": "fundamentals:blister_copper_ingot"},
                                                            "result": {"id": "minecraft:copper_ingot"}, "experience": 0.3, "cookingtime": 100})
 
@@ -330,7 +332,7 @@ def iron():
 
 
 # The Factory's blast furnace made steel straight from ore; a blast furnace makes pig iron, and steel is made from that.
-BLAST_FURNACE = {"steel": ("crushed_iron", item("create:crushed_raw_iron"), 1), "steel_from_raw_iron": ("raw_iron", item("minecraft:raw_iron"), 2),
+BLAST_FURNACE = {"steel": ("crushed_iron", item("create:crushed_raw_iron"), 1), "steel_from_raw_iron": ("raw_iron", item("minecraft:raw_iron"), 1),
                  "steel_from_dust": ("iron_dust", tag("c:dusts/iron"), 1)}
 PIG_IRON_PER_ORE = 216
 # Lump ore goes into a blast furnace as it comes, crushing only sizes it: each melts to its iron, hematite and magnetite near
@@ -409,7 +411,7 @@ def nickel():
     pgm_vat("cobalt_extraction", [fluid("nickel_copper_sulfate", 1000), fluid("p507", 250), fluid("hydrochloric_acid", 50)],
             [result_fluid("nickel_sulfate_liquor", 950), result_fluid("cobalt_chloride_liquor", 50), result_fluid("p507", 245)], heat=None, folder=USES)
     pgm_vat("nickel_electrowinning_from_raffinate", [fluid("nickel_sulfate_liquor", 500)],
-            [result("tfmg:nickel_ingot"), {"id": "minecraft:copper_ingot", "chance": 0.5}, result_fluid("tfmg:sulfuric_acid", 250)],
+            [result("tfmg:nickel_ingot"), result_fluid("tfmg:sulfuric_acid", 250)],
             machines=("tfmg:electrode", "tfmg:electrode"), heat=None, folder=USES)
     pgm_vat("cobalt_electrowinning", [fluid("cobalt_chloride_liquor", 500)], [result("cobalt_ingot"), result_fluid("chlorine", 250)],
             machines=("tfmg:electrode", "tfmg:electrode"), heat=None, folder=USES)
@@ -691,7 +693,8 @@ def chromium():
     shaped(TFMG / "crafting/materials/flarestack.json", ["SPS", "BPB", "CPC"],
            {"B": {"item": "minecraft:iron_bars"}, "C": {"tag": "c:ingots/stainless_steel"}, "P": {"item": "tfmg:cast_iron_pipe"}, "S": {"item": "minecraft:flint_and_steel"}},
            {"count": 1, "id": "tfmg:flarestack"})
-    mixing("sodium_chromate", item("chromite_concentrate") + item("soda_ash", 2), [result("sodium_chromate", 2)], "heated")
+    # the chromite roast is oxidising: soda and air turn its chromium(III) to chromate
+    mixing("sodium_chromate", item("chromite_concentrate") + item("soda_ash", 2) + [fluid("tfmg:air", 500)], [result("sodium_chromate", 2)], "heated")
     mixing("sodium_dichromate", item("sodium_chromate", 2) + [{"type": "neoforge:single", "amount": 250, "fluid": "tfmg:sulfuric_acid"}], [result("sodium_dichromate")])
     mixing("chromium_oxide", item("sodium_dichromate") + tag("minecraft:coals"), [result("chromium_oxide"), result("soda_ash")], "heated")
     write(USES / "aluminium_powder.json", {"type": "create:milling", "ingredients": tag("c:ingots/aluminum"), "processing_time": 200,
@@ -872,11 +875,13 @@ def potash():
 
 
 def gold():
-    write(USES / "gold_from_panning.json", {"type": "create:splashing", "ingredients": item("minecraft:raw_gold"), "results": [result("minecraft:gold_nugget", 3)]})
+    # panning concentrates native gold but leaves its silver in it: it is electrum
+    write(USES / "gold_from_panning.json", {"type": "create:splashing", "ingredients": item("minecraft:raw_gold"), "results": [result("electrum_nugget", 3)]})
     mixing("gold_amalgam", item("minecraft:raw_gold", 2) + item("mercury"), [result("gold_amalgam", 2)])
     mixing("electrum_from_amalgam", item("gold_amalgam"), [result("electrum_ingot"), {"id": "fundamentals:mercury", "chance": 0.45}], "heated")
-    mixing("gold_from_electrum", item("electrum_ingot") + [fluid("chlorine", 250)], [result("minecraft:gold_ingot"), result("silver_nugget")], "superheated")
-    mixing("gold_from_electrum_in_aqua_regia", item("electrum_ingot") + [fluid("aqua_regia", 500)], [result("minecraft:gold_ingot"), result("silver_nugget")], "heated")
+    # parting splits an ingot of electrum into its gold and its silver, no more metal than went in
+    mixing("gold_from_electrum", item("electrum_ingot") + [fluid("chlorine", 250)], [result("minecraft:gold_nugget", 7), result("silver_nugget", 2)], "superheated")
+    mixing("gold_from_electrum_in_aqua_regia", item("electrum_ingot") + [fluid("aqua_regia", 500)], [result("minecraft:gold_nugget", 7), result("silver_nugget", 2)], "heated")
     # Native gold carries its silver: melted, raw or crushed, it is electrum, and only parting makes it gold.
     for kind, time in (("smelting", 200), ("blasting", 100)):
         for path, feed in ((DATA.parent / f"minecraft/recipe/gold_ingot_from_{kind}_raw_gold.json", "minecraft:raw_gold"),
@@ -884,7 +889,7 @@ def gold():
             write(path, {"type": f"minecraft:{kind}", "category": "misc", "cookingtime": time, "experience": 0.7,
                          "ingredient": {"item": feed}, "result": result("electrum_ingot")})
     write(CREATE / "splashing/crushed_raw_gold.json", {"type": "create:splashing", "ingredients": item("create:crushed_raw_gold"),
-                                                       "results": [result("minecraft:gold_nugget", 3)]})
+                                                       "results": [result("electrum_nugget", 3)]})
     for block in ("gold_ore", "deepslate_gold_ore"):
         (VANILLA_LOOT / f"{block}.json").unlink(missing_ok=True)
     for block, mineral in (("iron_ore", "hematite"), ("deepslate_iron_ore", "magnetite")):
@@ -904,8 +909,11 @@ def platinum_feeds():
     write(DATA / "tags/item/platinum_minerals.json", {"replace": False, "values": [f"fundamentals:raw_{m}" for m in ("sperrylite", "cooperite", "braggite")]})
     sand = tag("c:sands/colorless")
     pgm_mixing("nickel_matte", item("roasted_pentlandite", 2) + sand, [result("nickel_matte_dust", 2), result("tfmg:slag")], "superheated")
-    pgm_mixing("converter_matte", item("nickel_matte_dust", 2) + sand, [result("converter_matte_dust", 2), result("tfmg:slag")], "superheated")
-    pgm_mixing("converter_matte_with_copper", item("nickel_matte_dust") + item("copper_matte_dust") + sand, [result("converter_matte_dust", 2), result("tfmg:slag")], "superheated")
+    # converting is blowing air through the furnace matte: its iron goes to the sand as slag and part of its sulfur as the dioxide
+    pgm_mixing("converter_matte", item("nickel_matte_dust", 2) + sand + [fluid("tfmg:air", 500)],
+               [result("converter_matte_dust", 2), result("tfmg:slag"), result_fluid("sulfur_dioxide", 250)], "superheated")
+    pgm_mixing("converter_matte_with_copper", item("nickel_matte_dust") + item("copper_matte_dust") + sand + [fluid("tfmg:air", 500)],
+               [result("converter_matte_dust", 2), result("tfmg:slag"), result_fluid("sulfur_dioxide", 250)], "superheated")
     acid = fluid("tfmg:sulfuric_acid", 500)
     pgm_mixing("matte_leach", item("converter_matte_dust", 2) + [acid],
                [result_fluid("nickel_copper_sulfate", 500), {"id": "fundamentals:platinum_group_concentrate", "chance": 0.1}], "heated")
@@ -1004,8 +1012,7 @@ def aluminium():
 def silver():
     write(DATA / "recipe/bloomery/lead_from_roasted_galena.json", {"type": "fundamentals:bloomery", "ingredient": {"item": "fundamentals:roasted_galena"},
                                                                    "result": {"id": "fundamentals:lead_bullion_ingot", "count": 1}, "byproduct": {"id": "tfmg:slag", "count": 1}})
-    write(USES / "lead_from_bullion.json", {"type": "minecraft:smelting", "category": "misc", "ingredient": {"item": "fundamentals:lead_bullion_ingot"},
-                                            "result": {"id": "tfmg:lead_ingot"}, "experience": 0.1, "cookingtime": 200})
+    # lead bullion is not remelted to lead, which would lose its silver: it is desilvered by Parkes's process first
     air = [fluid("tfmg:air", 250)]
     cupel = item("minecraft:bone_meal") + air
     mixing("parkes_desilvering", item("lead_bullion_ingot", 4) + tag("c:ingots/zinc"), [result("tfmg:lead_ingot", 3), result("silver_zinc_crust")], "heated")
@@ -1033,11 +1040,12 @@ def thorium():
 
 
 def lead_and_zinc_sinks():
+    # synthetic rubber is a polymer: ethylene and propylene joined over a Ziegler-Natta catalyst to EPDM, cured with sulfur and zinc oxide
     write(TFMG / "vat_machine_recipe/rubber.json", {
         "type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:steel_vat", "tfmg:firebrick_lined_vat"],
         "heat_requirement": "heated", "machines": ["tfmg:mixing"], "min_size": 1,
-        "ingredients": [{"item": "tfmg:sulfur_dust"}] + item("zinc_oxide") + [fluid("tfmg:heavy_oil", 250)],
-        "results": [{"id": "tfmg:rubber_sheet"}]})
+        "ingredients": [{"item": "tfmg:sulfur_dust"}] + item("zinc_oxide") + item("ziegler_natta_catalyst") + [fluid("tfmg:ethylene", 125), fluid("tfmg:propylene", 125)],
+        "results": [{"id": "tfmg:rubber_sheet"}, {"id": "fundamentals:ziegler_natta_catalyst", "chance": 0.9}]})
 
 
 def silver_sinks():
@@ -1263,6 +1271,38 @@ def air_separation():
         "results": [{"id": "tfmg:neon", "amount": 1}, {"id": "fundamentals:argon", "amount": 9}, {"id": "fundamentals:oxygen", "amount": 209}]})
 
 
+def tfmg_fidelity():
+    """The Factory's and Create's recipes put right where the chemistry or the metal does not add up."""
+    with zipfile.ZipFile(TFMG_JAR) as jar:
+        read = lambda path: json.loads(jar.read(f"data/tfmg/recipe/{path}.json"))
+        # coal baked without air gives coke-oven gas, hydrogen, methane and carbon monoxide, not carbon dioxide; wood gives wood
+        # gas. Both burn, so the blast stove takes them as it takes furnace gas.
+        for name in ("coal", "charcoal"):
+            coking = read(f"coking/{name}")
+            coking["results"] = [{**r, "id": "tfmg:furnace_gas"} if r.get("id") == "tfmg:carbon_dioxide" else r for r in coking["results"]]
+            write(TFMG / f"coking/{name}.json", coking)
+        # an electric arc furnace melts scrap and sponge iron, not ore: ore goes through the blast furnace first
+        arc = read("vat_machine_recipe/arc_furnace_steel")
+        arc["ingredients"] = tag("c:ingots/iron") + tag("tfmg:flux")
+        arc["results"] = [{"id": "tfmg:molten_steel", "amount": 144}, {"id": "tfmg:slag", "chance": 0.5}]
+        write(TFMG / "vat_machine_recipe/arc_furnace_steel.json", arc)
+        # a bag of cement binds about one block of concrete with its sand and gravel, as the vat's does, not sixteen
+        for name in ("concrete_mixture", "concrete_mixture_from_slag"):
+            mixture = read(f"mixing/{name}")
+            mixture["results"] = [{"id": "tfmg:concrete_mixture", "count": 2}]
+            write(TFMG / f"mixing/{name}.json", mixture)
+        # copper does not dissolve in sulfuric acid unless air oxidises it
+        sulfate = read("mixing/copper_sulfate")
+        write(TFMG / "mixing/copper_sulfate.json", {**sulfate, "ingredients": sulfate["ingredients"] + [fluid("tfmg:air", 250)]})
+        # copper is etched by an oxidising acid: cupric chloride in hydrochloric acid, kept up with air
+        etch = read("vat_machine_recipe/etched_circuit_board")
+        etch["ingredients"] = item("tfmg:coated_circuit_board") + [fluid("hydrochloric_acid", 250), fluid("tfmg:air", 250)]
+        write(TFMG / "vat_machine_recipe/etched_circuit_board.json", etch)
+    # brass is about two parts copper to one of zinc; at half zinc it turns brittle
+    write(CREATE / "mixing/brass_ingot.json", {"type": "create:mixing", "heat_requirement": "heated",
+                                               "ingredients": tag("c:ingots/copper", 2) + tag("c:ingots/zinc"), "results": [result("create:brass_ingot", 3)]})
+
+
 def main():
     shutil.rmtree(USES, ignore_errors=True)
     shutil.rmtree(TFMG, ignore_errors=True)
@@ -1277,6 +1317,7 @@ def main():
         for stale in ROASTING.glob(pattern):
             stale.unlink()
     air_separation()
+    tfmg_fidelity()
     magnets()
     cerium()
     lanthanum()
