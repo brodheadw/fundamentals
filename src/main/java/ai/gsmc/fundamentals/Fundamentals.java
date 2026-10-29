@@ -94,7 +94,7 @@ public class Fundamentals {
                 Oxidation.registerBlocks(helper::register);
                 Compute.registerBlocks(helper::register);
                 ai.gsmc.fundamentals.glass.Glass.registerBlocks(helper::register);
-                ai.gsmc.fundamentals.torch.Torches.registerBlocks(helper::register);
+                ai.gsmc.fundamentals.torch.Torches.aliasBlocks(event.getRegistry(Registries.BLOCK));
             });
             event.register(Registries.BLOCK_ENTITY_TYPE, helper -> {
                 IronWorking.registerBlockEntities(helper::register);
@@ -155,7 +155,7 @@ public class Fundamentals {
                 ai.gsmc.fundamentals.cold.Parkas.registerItems(helper::register);
                 ai.gsmc.fundamentals.cold.Cold.registerItems(helper::register);
                 ai.gsmc.fundamentals.glass.Glass.registerItems(helper::register);
-                ai.gsmc.fundamentals.torch.Torches.registerItems(helper::register);
+                ai.gsmc.fundamentals.torch.Torches.aliasItems(event.getRegistry(Registries.ITEM));
             });
             event.register(Registries.ARMOR_MATERIAL, helper -> ai.gsmc.fundamentals.cold.Parkas.registerArmorMaterials(helper::register));
             event.register(Registries.DATA_COMPONENT_TYPE, helper -> {
