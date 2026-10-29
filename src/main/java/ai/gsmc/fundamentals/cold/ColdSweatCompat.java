@@ -34,9 +34,9 @@ public final class ColdSweatCompat {
     private static final double SOAKED = 0.2;
     // soaked down collapses and keeps about a third of its loft
     private static final double DOWN_LOST_WET = 2.0 / 3;
-    // the most a soaking can chill or warm: water in Cold Sweat's own biomes runs at most this far from the air. Its target for a
-    // biome it has no water figure for is the biome's whole temperature, which soaks a swimmer far past freezing, and so cold a
-    // body barely dries off; held here, a soaking is no worse than cold water anywhere
+    // the most a soaking can chill: water in Cold Sweat's own biomes runs at most this far below the air. Its target for a biome
+    // it has no water figure for is the biome's whole temperature, which soaks a swimmer hundreds of degrees past freezing, so
+    // cold they barely dry off, or as far the other way. Wet skin only cools, so a soaking never warms
     public static final double MOST_SOAKED = 0.5;
 
     private ColdSweatCompat() {}
@@ -83,7 +83,7 @@ public final class ColdSweatCompat {
 
     public static void holdSoaking(Player player) {
         Temperature.getModifier(player, Temperature.Trait.WORLD, WaterTempModifier.class).ifPresent(mod -> {
-            double held = Math.clamp(mod.getTemperature(), -MOST_SOAKED, MOST_SOAKED);
+            double held = Math.clamp(mod.getTemperature(), -MOST_SOAKED, 0);
             if (held != mod.getTemperature()) {
                 mod.setTemperature(held);
             }

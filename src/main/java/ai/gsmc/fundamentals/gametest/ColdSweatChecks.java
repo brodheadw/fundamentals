@@ -55,6 +55,12 @@ final class ColdSweatChecks {
         if (soaked != -ColdSweatCompat.MOST_SOAKED) {
             return "a soaking should chill no more than cold water, not " + soaked;
         }
+        Temperature.getModifier(player, Temperature.Trait.WORLD, WaterTempModifier.class).ifPresent(mod -> mod.setTemperature(0.74));
+        ColdSweatCompat.holdSoaking(player);
+        soaked = Temperature.getModifier(player, Temperature.Trait.WORLD, WaterTempModifier.class).map(WaterTempModifier::getTemperature).orElse(0.0);
+        if (soaked != 0) {
+            return "a soaking should never warm, not " + soaked;
+        }
         PlayerTempCap cap = new PlayerTempCap();
         player.getInventory().items.set(0, new ItemStack(Thermometers.items().getFirst()));
         cap.calculateHudVisibility(player);
