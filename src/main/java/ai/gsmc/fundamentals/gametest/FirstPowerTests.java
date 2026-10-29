@@ -4,11 +4,13 @@ import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.magnet.Magnets;
 import com.drmangotea.tfmg.content.electricity.generators.GeneratorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.network.transformer.small.TransformerBlockEntity;
+import com.drmangotea.tfmg.content.machinery.misc.smokestack.SmokestackBlockEntity;
 import com.drmangotea.tfmg.content.machinery.misc.winding_machine.WindingMachineBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.electrode_holder.ElectrodeHolderBlockEntity;
 import com.drmangotea.tfmg.registry.TFMGBlocks;
 import com.drmangotea.tfmg.registry.TFMGDataComponents;
+import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.drmangotea.tfmg.registry.TFMGItems;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
@@ -24,6 +26,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
@@ -214,5 +218,15 @@ public class FirstPowerTests {
                     Fundamentals.LOGGER.info("First power verified: 144 mB silicon, 250 mB carbon dioxide; {}", readings(generators, holders));
                 })
                 .thenSucceed();
+    }
+
+    @GameTest(template = "empty")
+    public void aSmokestackTakesTheCokeOvensFurnaceGas(GameTestHelper helper) {
+        BlockPos stack = new BlockPos(1, 2, 1);
+        helper.setBlock(stack, TFMGBlocks.BRICK_SMOKESTACK.getDefaultState());
+        SmokestackBlockEntity smokestack = helper.getBlockEntity(stack);
+        int taken = smokestack.tankInventory.fill(new FluidStack((net.minecraft.world.level.material.Fluid) TFMGFluids.FURNACE_GAS.getSource(), 100), IFluidHandler.FluidAction.EXECUTE);
+        helper.assertTrue(taken == 100, "a smokestack should take the coke ovens' furnace gas, took " + taken);
+        helper.succeed();
     }
 }

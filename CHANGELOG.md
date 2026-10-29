@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- A smokestack takes the coke ovens' furnace gas and flares it off, as it took their carbon dioxide; ovens venting to a stack no longer stall full of gas.
 - The millwright's gearing, before iron: an Oak Shaft (two stripped logs make six) and Oak Cogwheels, an oak rim and hub with pale hornbeam teeth, made from it with planks. They turn as Create's do but snap to sticks above 64 RPM or under more than 1,024 su of load, and a steam engine will not take an oak crankshaft. A water wheel or windmill bearing can be built on an oak shaft.
 - Andesite crushes or mills to its minerals: plagioclase feldspar, gravel, and now and then the magnetite andesite carries.
 - The Factory's cable insulator is porcelain: clay, feldspar and quartz sand mixed to its unfired form, then fired. Plain clay no longer serves, being porous earthenware once fired.

@@ -24,6 +24,7 @@
 		"SeawaterHoseMixin",
 		"SeawaterPipeMixin",
 		"SidedInvWrapperAgeingMixin",
+		"SmokestackFurnaceGasMixin",
 		"StatorGogglesMixin",
 		"TankCorrosionMixin",
 		"TreeNodePositionMixin",
