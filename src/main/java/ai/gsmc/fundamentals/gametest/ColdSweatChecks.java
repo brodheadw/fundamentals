@@ -45,9 +45,12 @@ final class ColdSweatChecks {
             return "the world temperature should be ours, not Cold Sweat's biomes and blocks: " + world;
         }
         double units = Temperature.apply(0, player, Temperature.Trait.WORLD, new HeatTempModifier());
-        double celsius = Heat.at(player.level(), player.blockPosition());
+        double celsius = HeatTempModifier.felt(Heat.at(player.level(), player.blockPosition()));
         if (Math.abs(units * Cold.CELSIUS_PER_UNIT - celsius) > 1e-6) {
             return "Cold Sweat should read " + celsius + " °C, not " + units * Cold.CELSIUS_PER_UNIT;
+        }
+        if (HeatTempModifier.felt(20) != 20 || HeatTempModifier.felt(1150) > HeatTempModifier.HOTTEST || HeatTempModifier.felt(1150) < 44) {
+            return "a mild day should feel as it is and lava next door warm, not " + HeatTempModifier.felt(20) + " and " + HeatTempModifier.felt(1150);
         }
         Temperature.addModifier(player, new WaterTempModifier(-19.66), Temperature.Trait.WORLD, Placement.FIRST.noDuplicates(Matcher.SAME_CLASS));
         ColdSweatCompat.holdSoaking(player);

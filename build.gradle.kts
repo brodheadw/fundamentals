@@ -51,6 +51,11 @@ loom {
         vmArg("-Dneoforge.enabledGameTestNamespaces=${mod.id}")
     }
     // Opens the dev client straight into run/saves/showcase, a staged world for looking at the blocks.
+    // Runs every gametest and quits when the last one finishes; tools/gametest.sh drives it.
+    runs.create("gameTestServer") {
+        server()
+        vmArg("-Dneoforge.gameTestServer=true")
+    }
     runs.create("showcase") {
         client()
         programArgs("--quickPlaySingleplayer", "showcase")
