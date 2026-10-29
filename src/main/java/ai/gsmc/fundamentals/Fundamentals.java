@@ -128,6 +128,9 @@ public class Fundamentals {
             });
             if (event.getRegistryKey().equals(Registries.FLUID)) {
                 event.getRegistry().addAlias(id("brine"), id("calcium_chloride_liquor"));
+                if (ModList.get().isLoaded("createbigcannons")) {
+                    event.getRegistry().addAlias(id("molten_pig_iron"), Separation.BIG_CANNONS_CAST_IRON);
+                }
             }
             if (event.getRegistryKey().equals(Registries.ITEM)) {
                 // ores that now drop a vanilla raw item keep old stacks of ours
@@ -214,6 +217,7 @@ public class Fundamentals {
             Hazards.registerPipeEffects();
             Fertiliser.registerDispenserBehaviour();
             Titanium.commonSetup();
+            Separation.adoptCastIron();
             if (ModList.get().isLoaded("createnuclear")) {
                 Radiation.register();
             }

@@ -106,6 +106,11 @@ dependencies {
     // Cold Sweat is optional: cold/ColdSweatCompat only loads with it; -Pcoldsweat runs it alongside.
     modCompileOnly("maven.modrinth:cold-sweat:${deps.coldSweatVersion}")
     if (providers.gradleProperty("coldsweat").isPresent) modLocalRuntime("maven.modrinth:cold-sweat:${deps.coldSweatVersion}")
+    // Create Big Cannons is optional: with it, pig iron is its molten cast iron; -Pbigcannons runs it alongside.
+    if (providers.gradleProperty("bigcannons").isPresent) {
+        modLocalRuntime("maven.modrinth:GWp4jCJj:bOiDu0LS")
+        modLocalRuntime("maven.modrinth:B3pb093D:hZ6B2Z0x")
+    }
     for (bundled in listOf("cc.tweaked:cobalt:0.9.9", "com.jcraft:jzlib:1.1.3")) "forgeRuntimeLibrary"(bundled)
     // Create ships these inside its jar, but a dev run does not unpack them.
     for (bundled in listOf("net.createmod.ponder:ponder-neoforge:1.0.82+mc1.21.1",

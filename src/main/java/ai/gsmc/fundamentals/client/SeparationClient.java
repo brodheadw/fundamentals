@@ -52,6 +52,9 @@ public final class SeparationClient {
         });
         modBus.addListener(RegisterClientExtensionsEvent.class, event -> {
             for (Reagents.Reagent reagent : Reagents.ALL) {
+                if (Separation.theirs(reagent)) {
+                    continue;
+                }
                 if (reagent.kind() == Reagents.Kind.WATER) {
                     event.registerFluidType(new LikeWater(), Separation.fluidTypes().get(reagent.id()));
                     continue;

@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- With Create Big Cannons, pig iron is its Molten Cast Iron: the same metal, so one fluid, with its bucket. The blast furnace taps it, and pig iron already in tanks loads as it.
 - The blast furnace takes lump iron ore as it comes, with no crusher: raw hematite or magnetite melts to as much pig iron as a crushed iron, raw goethite a little less and raw siderite two thirds as much.
 - Iron the modern way: 288 mB of molten pig iron and 500 mB of air in a basin under a mixer blow to two iron ingots, as a converter burns pig iron down to mild steel. No burner, no fettling, no hammer. Puddling still gives three from the same pig iron with a raw hematite or rusty ingot.
 - With Cold Sweat, the body feels the world as it is up to 30 °C and then less and less, never past 45 °C: living beside lava or a caldera is warm, not burning. Touching lava or fire still burns.

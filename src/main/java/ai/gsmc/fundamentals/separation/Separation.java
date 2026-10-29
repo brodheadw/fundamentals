@@ -3,6 +3,8 @@ package ai.gsmc.fundamentals.separation;
 import ai.gsmc.fundamentals.Fundamentals;
 import com.simibubi.create.content.fluids.tank.FluidTankItem;
 import net.minecraft.resources.ResourceLocation;
+import net.neoforged.fml.ModList;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -104,8 +106,30 @@ public final class Separation {
         return items;
     }
 
+    /** With Create Big Cannons, pig iron is its molten cast iron, the same metal: ours is not registered and its id aliases theirs. */
+    public static final ResourceLocation BIG_CANNONS_CAST_IRON = ResourceLocation.fromNamespaceAndPath("createbigcannons", "molten_cast_iron");
+
+    public static boolean theirs(Reagents.Reagent reagent) {
+        return reagent.id().equals("molten_pig_iron") && ModList.get().isLoaded("createbigcannons");
+    }
+
+    /** Takes Big Cannons' cast iron as our pig iron, once every fluid is registered. */
+    public static void adoptCastIron() {
+        for (Reagents.Reagent reagent : Reagents.ALL) {
+            if (theirs(reagent)) {
+                Fluid castIron = BuiltInRegistries.FLUID.get(BIG_CANNONS_CAST_IRON);
+                FLUIDS.put(reagent.id(), castIron);
+                KINDS.put(castIron, reagent.kind());
+                TINTS.put(castIron, reagent.tint());
+            }
+        }
+    }
+
     public static void registerFluidTypes(BiConsumer<ResourceLocation, FluidType> registry) {
         for (Reagents.Reagent reagent : Reagents.ALL) {
+            if (theirs(reagent)) {
+                continue;
+            }
             String description = "fluid_type." + Fundamentals.MOD_ID + "." + reagent.id();
             FluidType type = reagent.kind() == Reagents.Kind.WATER ? Seawater.type(description) : new FluidType(FluidType.Properties.create()
                     .descriptionId(description)
@@ -118,6 +142,9 @@ public final class Separation {
 
     public static void registerFluids(BiConsumer<ResourceLocation, Fluid> registry) {
         for (Reagents.Reagent reagent : Reagents.ALL) {
+            if (theirs(reagent)) {
+                continue;
+            }
             if (reagent.kind() == Reagents.Kind.ACID) {
                 Acids.Acid acid = Acids.all().get(reagent.id());
                 FLUIDS.put(reagent.id(), acid.source);

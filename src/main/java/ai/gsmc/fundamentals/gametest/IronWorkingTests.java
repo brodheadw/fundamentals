@@ -209,6 +209,17 @@ public class IronWorkingTests {
         helper.succeed();
     }
 
+    // only with Create Big Cannons installed (-Pbigcannons): pig iron is its molten cast iron, and a saved id loads as it
+    @GameTest(template = "empty")
+    public void withBigCannonsPigIronIsItsMoltenCastIron(GameTestHelper helper) {
+        if (net.neoforged.fml.ModList.get().isLoaded("createbigcannons")) {
+            Fluid castIron = BuiltInRegistries.FLUID.get(Separation.BIG_CANNONS_CAST_IRON);
+            helper.assertTrue(Separation.fluid("molten_pig_iron") == castIron && BuiltInRegistries.FLUID.get(Fundamentals.id("molten_pig_iron")) == castIron,
+                    "pig iron should be Big Cannons' molten cast iron, not " + Separation.fluid("molten_pig_iron"));
+        }
+        helper.succeed();
+    }
+
     @GameTest(template = "empty")
     public void theBlastFurnaceTakesEveryLumpIronOreUncrushed(GameTestHelper helper) {
         for (String ore : List.of("hematite", "magnetite", "goethite", "siderite")) {
