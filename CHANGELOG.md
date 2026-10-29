@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- Nickel laterite's garnierite veins and its raw lump lean from apple green toward turquoise.
 - Methanol and formalin: water gas topped up with hydrogen over zinc oxide gives methanol, and methanol, air and water over silver give formalin. Novolac resin takes formaldehyde with its phenol, in a vat.
 - Salt cake: making hydrochloric acid from salt leaves salt cake, sodium sulfate, which melts with sand, lime and a little charcoal to glass, as the nineteenth-century glassworks made it.
 - Zinc from the retort comes off as vapour and condenses to molten zinc, cast into ingots, with carbon monoxide.

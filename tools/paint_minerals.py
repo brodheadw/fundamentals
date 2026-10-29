@@ -473,7 +473,8 @@ NICKEL_GRADES = {"core": (0.42, 2, 5), "edge": (0.26, 1, 3), "trace": (0.12, 0, 
 def paint_nickel_laterite(variant=0, grade="edge"):
     rng = random.Random(seed("nickel_laterite", variant, grade))
     ochre = [(154, 102, 42), (178, 128, 56), (198, 152, 74)]
-    green = [(74, 124, 62), (106, 160, 82), (144, 192, 106)]
+    # garnierite runs apple green toward turquoise
+    green = [(66, 124, 84), (92, 162, 116), (128, 194, 146)]
     mottle, veins, patches = NICKEL_GRADES[grade]
     img = host_rock(rng, "laterite")
     for p, v in field(rng, 2, 1).items():
@@ -505,7 +506,7 @@ def paint_all():
 RAW_WHOLE = {
     "bauxite": ((96, 44, 28), (150, 78, 48), (196, 132, 88), (236, 208, 168)),
     "goethite": ((84, 56, 18), (140, 98, 30), (186, 140, 50), (226, 190, 96)),
-    "nickel_laterite": ((92, 62, 28), (150, 108, 46), (136, 176, 92), (190, 222, 140)),
+    "nickel_laterite": ((92, 62, 28), (150, 108, 46), (118, 178, 130), (170, 224, 184)),
     "ion_adsorption_clay": ((120, 66, 42), (168, 102, 64), (202, 142, 96), (236, 214, 188)),
     "native_sulfur": ((120, 96, 20), (196, 170, 30), (236, 214, 60), (255, 246, 150)),
 }
