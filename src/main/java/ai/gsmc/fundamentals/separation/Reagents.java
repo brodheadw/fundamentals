@@ -105,6 +105,8 @@ public final class Reagents {
             new Reagent("silicon_tetrachloride", 0xECEFF0, Kind.PRECURSOR),
             new Reagent("germanium_tetrachloride", 0xF0F0EA, Kind.PRECURSOR),
             new Reagent("oleum", 0xD8D4C8, Kind.PRECURSOR),
+            new Reagent("methanol", 0xF2F4F6, Kind.PRECURSOR),
+            new Reagent("formaldehyde", 0xEEF2EE, Kind.PRECURSOR),
             new Reagent("caustic_soda", 0xEEF2F0, Kind.CAUSTIC),
             new Reagent("sodium_aluminate_liquor", 0xB8864A, Kind.CAUSTIC),
             new Reagent("sodium_tungstate_liquor", 0xE6ECE8, Kind.CAUSTIC),
@@ -112,7 +114,8 @@ public final class Reagents {
             new Reagent("sodium_gallate_liquor", 0xE4EAE6, Kind.CAUSTIC),
             new Reagent("sodium_vanadate_liquor", 0xEEE2A0, Kind.CAUSTIC),
             new Reagent("molten_pig_iron", 0xF07A1E, Kind.MOLTEN),
-            new Reagent("molten_bismuth", 0xC8B4C0, Kind.MOLTEN));
+            new Reagent("molten_bismuth", 0xC8B4C0, Kind.MOLTEN),
+            new Reagent("molten_zinc", 0xC4CCD2, Kind.MOLTEN));
 
     private Reagents() {}
 }

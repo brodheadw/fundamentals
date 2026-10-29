@@ -42,6 +42,7 @@ ELSEWHERE = {
 
 # Finished goods no recipe takes, which are not blocks or equipment.
 END_PRODUCTS = {
+    "fundamentals:formaldehyde": "Formalin goes into phenolic and urea resins; with Chemica's phenol it makes the novolac of photoresist, and without it its buyers are not in the pack.",
     "fundamentals:didymium_glass": "The glassblower's and welder's lens; Create's goggles take plain glass, being the first tool a factory needs.",
     "fundamentals:thulium_oxide": "Thulium is sold as oxide for portable X-ray sources and fibre lasers, neither in the pack.",
     "fundamentals:ytterbium_oxide": "Ytterbium is sold as oxide for fibre lasers and atomic clocks, neither in the pack.",
@@ -132,6 +133,7 @@ WHY = {
     "tfmg:molten_slag": "Lime-silicate slag runs off the iron and is granulated for slag cement or cast and crushed for road stone.",
     "tfmg:hydrogen": "Chlor-alkali hydrogen is burnt or used for hydrogenation and reduction.",
     "tfmg:propylene": "A fluid catalytic cracker is the world's second source of propylene.",
+    "fundamentals:salt_cake": "Salt cake, sodium sulfate, was the Leblanc works' half-way product and the glassworks' soda; today it goes into kraft paper pulping and detergents.",
     "fundamentals:gypsum": "Hydrofluoric acid plants make near four tonnes of fluorogypsum to a tonne of acid, sold for plaster and cement or stacked.",
     "tfmg:creosote": "Coke ovens condense coal tar out of their gas; distilled, it gives creosote, the railway sleeper and telegraph pole preservative.",
     "tfmg:slag": "Silicate slag is crushed for aggregate and cement (slag cement), and old bloomery slag, near two-thirds iron oxide, was re-smelted for its iron.",

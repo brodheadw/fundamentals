@@ -10,7 +10,12 @@
   ],
   "results": [
     {
-      "id": "create:zinc_ingot"
+      "id": "fundamentals:molten_zinc",
+      "amount": 144
+    },
+    {
+      "id": "tfmg:furnace_gas",
+      "amount": 100
     },
     {
       "id": "fundamentals:cadmium_sponge",

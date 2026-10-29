@@ -203,7 +203,7 @@ public class FirstPowerTests {
                             "the steel generators must power all three real electrode circuits: " + readings(generators, holders));
                 })
                 .thenWaitUntil(() -> helper.assertTrue(output(vat(helper), "tfmg:liquid_silicon") == 144
-                                && output(vat(helper), "tfmg:carbon_dioxide") == 250,
+                                && output(vat(helper), "tfmg:furnace_gas") == 250,
                         "the powered vat must finish one silicon batch: " + readings(generators, holders)))
                 .thenExecute(() -> {
                     VatBlockEntity vat = vat(helper);

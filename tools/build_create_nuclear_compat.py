@@ -58,9 +58,11 @@ TAKEN_OVER = {
                                         "result": {"id": "createnuclear:thorium_rod", "count": 1}},
     "mechanical_crafting/graphite_rod": {**ROD, "pattern": ["H", "H", "H", "H"], "key": {"H": {"tag": "c:ingots/hafnium"}},
                                          "result": {"id": "createnuclear:graphite_rod", "count": 1}},
-    "mixing/liquid_nitrogen": {"type": "create:compacting", "ingredients": [{"item": "minecraft:packed_ice"},
-                                                                           {"type": "neoforge:single", "amount": 1000, "fluid": "tfmg:air"}],
-                               "results": [{"id": "createnuclear:nitrogen", "amount": 100}]},
+    # ice cannot reach 77 K: Linde's cycle compresses air, carries the heat of compression off in cooling water and expands it
+    # through a valve until it liquefies; its nitrogen is about four fifths of it
+    "mixing/liquid_nitrogen": {"type": "create:compacting", "ingredients": [{"type": "neoforge:single", "amount": 1000, "fluid": "tfmg:air"},
+                                                                           {"type": "neoforge:single", "amount": 250, "fluid": "minecraft:water"}],
+                               "results": [{"id": "createnuclear:nitrogen", "amount": 78}, {"id": "minecraft:water", "amount": 250}]},
 }
 OURS = {
     # Thoria reduced with calcium under argon, Marden's route to the metal.

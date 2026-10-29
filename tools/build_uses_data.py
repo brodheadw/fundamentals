@@ -391,8 +391,12 @@ def zinc():
     # Sphalerite gives off its sulfur as SO2, so it roasts only with air in a basin (sulfuric_acid); the oxide ores calcine anywhere.
     for ore in ("smithsonite", "hemimorphite"):
         roast(ore, "zinc_oxide", f"zinc_oxide_from_{ore}")
-    mixing("zinc_ingot", item("zinc_oxide") + item("minecraft:charcoal"), [result("create:zinc_ingot"), {"id": "fundamentals:cadmium_sponge", "chance": 0.1}],
-           "superheated")
+    # the retort: zinc oxide and charcoal reduce at about 1,100 °C, above zinc's 907 °C boil, so the zinc comes off as vapour with
+    # the carbon monoxide and is caught as liquid in the condenser, then cast; cadmium, boiling lower still, comes over first
+    mixing("zinc_ingot", item("zinc_oxide") + item("minecraft:charcoal"),
+           [result_fluid("molten_zinc", 144), result_fluid("tfmg:furnace_gas", 100), {"id": "fundamentals:cadmium_sponge", "chance": 0.1}], "superheated")
+    write(USES / "zinc_ingot_from_molten_zinc.json", {"type": "tfmg:casting", "ingredients": [fluid("molten_zinc", 144)], "processing_time": 100,
+                                                      "results": [result("create:zinc_ingot")]})
     for path in ("smelting/zinc_ingot_from_crushed", "smelting/zinc_ingot_from_ore", "smelting/zinc_ingot_from_raw_ore", "blasting/zinc_ingot_from_crushed",
                  "blasting/zinc_ingot_from_ore", "blasting/zinc_ingot_from_raw_ore", "splashing/crushed_raw_zinc"):
         disabled(CREATE / f"{path}.json")
@@ -541,7 +545,7 @@ def silicon():
     write(USES / "metallurgical_silicon.json", {
         "type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:firebrick_lined_vat"], "min_size": 1, "processing_time": 200,
         "machines": ["tfmg:graphite_electrode"] * 3, "ingredients": tag("c:gems/quartz", 3) + [[{"item": "tfmg:coal_coke"}, {"item": "minecraft:charcoal"}]],
-        "results": [result_fluid("tfmg:liquid_silicon", 144), result_fluid("tfmg:carbon_dioxide", 250)]})
+        "results": [result_fluid("tfmg:liquid_silicon", 144), result_fluid("tfmg:furnace_gas", 250)]})
     disabled(TFMG / "industrial_blasting/silicon.json")
     write(ASSETS.parent / "tfmg/lang/en_us.json", {"item.tfmg.silicon_ingot": "Metallurgical Silicon"})
     mixing("crude_trichlorosilane", item("tfmg:silicon_ingot") + [fluid("chlorine", 750), fluid("tfmg:hydrogen", 250)],
@@ -803,7 +807,7 @@ def uranium():
     shaped(USES / "zircaloy_tube.json", ["P", "P", "P"], {"P": {"tag": "c:plates/zircaloy"}}, {"count": 2, "id": "fundamentals:zircaloy_tube"})
     write(USES / "boron_carbide.json", {"type": "tfmg:vat_machine_recipe", "allowed_vat_types": ["tfmg:firebrick_lined_vat"], "min_size": 1, "processing_time": 200,
                                         "machines": ["tfmg:graphite_electrode"] * 3, "ingredients": item("boric_acid", 2) + item("tfmg:coal_coke_dust", 2),
-                                        "results": [result("boron_carbide"), result_fluid("tfmg:carbon_dioxide", 250)]})
+                                        "results": [result("boron_carbide"), result_fluid("tfmg:furnace_gas", 250)]})
     shaped(USES / "uranium_glass.json", ["GGG", "GYG", "GGG"], {"G": {"tag": "c:glass_blocks/colorless"}, "Y": {"item": "fundamentals:yellowcake"}},
            {"count": 8, "id": "minecraft:lime_stained_glass"})
     # Hybrid Aquatic's lures ride the bobber from the off hand; a magnet drags treasure up (magnet.MagnetLure)
@@ -895,6 +899,21 @@ def gold():
     for block, mineral in (("iron_ore", "hematite"), ("deepslate_iron_ore", "magnetite")):
         write(VANILLA_LOOT / f"{block}.json", {"type": "minecraft:block", "pools": [
             {"rolls": 1, "bonus_rolls": 0, "entries": [silk_or_raw(f"minecraft:{block}", mineral)]}]})
+    # Iron melts at 1,538 °C, past any furnace: ore and raw iron go to the bloomery or the blast furnace, not into an ingot in a furnace.
+    for kind in ("smelting", "blasting"):
+        for feed in ("iron_ore", "deepslate_iron_ore", "raw_iron"):
+            disabled(DATA.parent / f"minecraft/recipe/iron_ingot_from_{kind}_{feed}.json")
+    # Ad Astra's iron ores are hematite on Mars, which is why it is red, and magnetite elsewhere; its gold, like ours, is electrum.
+    ad_astra = [{"type": "neoforge:mod_loaded", "modid": "ad_astra"}]
+    for body, mineral in (("mars", "hematite"), ("moon", "magnetite"), ("mercury", "magnetite"), ("glacio", "magnetite")):
+        write(DATA.parent / f"ad_astra/loot_table/blocks/{body}_iron_ore.json", {"neoforge:conditions": ad_astra, "type": "minecraft:block", "pools": [
+            {"rolls": 1, "bonus_rolls": 0, "entries": [silk_or_raw(f"ad_astra:{body}_iron_ore", mineral)]}]})
+        for kind in ("smelting", "blasting"):
+            disabled(DATA.parent / f"ad_astra/recipe/{kind}/iron_ingot_from_{kind}_{body}_iron_ore.json")
+    for kind, time in (("smelting", 200), ("blasting", 100)):
+        write(DATA.parent / f"ad_astra/recipe/{kind}/gold_ingot_from_{kind}_venus_gold_ore.json", {
+            "neoforge:conditions": ad_astra, "type": f"minecraft:{kind}", "category": "misc", "cookingtime": time, "experience": 1.0,
+            "ingredient": {"item": "ad_astra:venus_gold_ore"}, "result": result("electrum_ingot")})
 
 
 def pgm_mixing(name, ingredients, results, heat=None):
@@ -1165,7 +1184,9 @@ def sulfuric_acid():
             [result_fluid("sulfur_trioxide", 500), {"id": "fundamentals:vanadium_pentoxide", "chance": 0.98}], machines=(), folder=USES)
     mixing("oleum", [fluid("sulfur_trioxide", 500), fluid("tfmg:sulfuric_acid", 500)], [result_fluid("oleum", 500)])
     mixing("sulfuric_acid_from_oleum", [fluid("oleum", 500), fluid("minecraft:water", 500)], [result_fluid("tfmg:sulfuric_acid", 1000)])
-    mixing("gypsum", item("tfmg:limesand") + [fluid("sulfur_dioxide", 250), fluid("minecraft:water", 250)], [result("gypsum")])
+    # a flue-gas scrubber: lime slurry takes up sulfur dioxide as sulfite, and air blown through oxidises it to gypsum
+    pgm_vat("gypsum", item("tfmg:limesand") + [fluid("sulfur_dioxide", 250), fluid("minecraft:water", 250), fluid("tfmg:air", 250)], [result("gypsum")],
+            heat=None, folder=USES)
     mixing("raw_hematite_from_pyrite_with_sulfur_dioxide", item("raw_pyrite", 2) + [fluid("tfmg:air", 1000)],
            [result("raw_hematite", 2), result_fluid("sulfur_dioxide", 500)], "heated")
     mixing("hydrotreating_catalyst", item("cobalt_sulfate") + item("molybdenum_oxide") + item("tfmg:bauxite_powder", 4), [result("hydrotreating_catalyst", 4)], "heated")
@@ -1298,6 +1319,16 @@ def tfmg_fidelity():
         etch = read("vat_machine_recipe/etched_circuit_board")
         etch["ingredients"] = item("tfmg:coated_circuit_board") + [fluid("hydrochloric_acid", 250), fluid("tfmg:air", 250)]
         write(TFMG / "vat_machine_recipe/etched_circuit_board.json", etch)
+    # engine coolant is ethylene glycol: ethylene and air over silver to ethylene oxide, hydrated with water. Three fluids, so a vat.
+    disabled(TFMG / "mixing/cooling_fluid.json")
+    pgm_vat("cooling_fluid", item("silver_nugget") + [fluid("tfmg:ethylene", 500), fluid("tfmg:air", 500), fluid("minecraft:water", 500)],
+            [result_fluid("tfmg:cooling_fluid", 500), {"id": "fundamentals:silver_nugget", "chance": 0.95}], folder=TFMG / "vat_machine_recipe")
+    # napalm is gasoline thickened with an aluminium soap, aluminium naphthenate and palmitate, whence the name; not with aluminium metal
+    write(TFMG / "mixing/napalm.json", {"type": "create:mixing", "ingredients": item("alumina") + [fluid("naphthenic_acid", 100), fluid("tfmg:gasoline", 1000)],
+                                        "results": [result_fluid("tfmg:napalm", 250)]})
+    # salt cake was the glassworks' soda for most of the nineteenth century, reduced with a little carbon in the melt
+    mixing("glass_from_salt_cake", tag("minecraft:sand", 2) + item("salt_cake") + item("tfmg:limesand") + item("minecraft:charcoal"),
+           [result("minecraft:glass", 3), result_fluid("sulfur_dioxide", 50)], "superheated")
     # brass is about two parts copper to one of zinc; at half zinc it turns brittle
     write(CREATE / "mixing/brass_ingot.json", {"type": "create:mixing", "heat_requirement": "heated",
                                                "ingredients": tag("c:ingots/copper", 2) + tag("c:ingots/zinc"), "results": [result("create:brass_ingot", 3)]})

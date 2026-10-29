@@ -101,6 +101,8 @@ PRECURSORS = {
     "silicon_tetrachloride": ("Silicon Tetrachloride", 0xECEFF0),
     "germanium_tetrachloride": ("Germanium Tetrachloride", 0xF0F0EA),
     "oleum": ("Oleum", 0xD8D4C8),
+    "methanol": ("Methanol", 0xF2F4F6),
+    "formaldehyde": ("Formalin", 0xEEF2EE),
 }
 GASES = {
     "argon": ("Argon", 0xC8D8F0),
@@ -139,7 +141,7 @@ CAUSTICS = {"caustic_soda": ("Caustic Soda", 0xEEF2F0), "sodium_aluminate_liquor
             "sodium_tungstate_liquor": ("Sodium Tungstate Liquor", 0xE6ECE8), "spent_bayer_liquor": ("Spent Bayer Liquor", 0xB89060),
             "sodium_gallate_liquor": ("Sodium Gallate Liquor", 0xE4EAE6),
             "sodium_vanadate_liquor": ("Sodium Vanadate Liquor", 0xEEE2A0)}
-MELTS = {"molten_pig_iron": ("Molten Pig Iron", 0xF07A1E), "molten_bismuth": ("Molten Bismuth", 0xC8B4C0)}
+MELTS = {"molten_pig_iron": ("Molten Pig Iron", 0xF07A1E), "molten_bismuth": ("Molten Bismuth", 0xC8B4C0), "molten_zinc": ("Molten Zinc", 0xC4CCD2)}
 FLUIDS = {**{k: (*v, "LIQUOR") for k, v in {**LIQUORS, **PLATINUM_LIQUORS, **SULFATE_LIQUORS, **CHLORIDE_LIQUORS}.items()}, **{k: (*v, "ORGANIC") for k, v in ORGANICS.items()},
           **{k: (*v, "ACID") for k, v in ACIDS.items()}, **{k: (*v, "GAS") for k, v in GASES.items()},
           **{k: (*v, "WASTE") for k, v in WASTES.items()}, **{k: (*v, "SALINE") for k, v in SALINES.items()}, **{k: (*v, "WATER") for k, v in SEA.items()}, **{k: (*v, "CRUDE") for k, v in CRUDES.items()},
@@ -231,7 +233,7 @@ MAGNETIC = {liquor: cut for liquor, _, stages, light, heavy in CUTS if (cut := m
 
 
 STRIP = "hydrochloric_acid"
-PLANT_ITEMS = {"salt": "Salt", "oxalic_acid": "Oxalic Acid", "roasted_bastnasite": "Roasted Bastnäsite", "light_rare_earth_sulfate": "Light Rare Earth Sulfate",
+PLANT_ITEMS = {"salt": "Salt", "salt_cake": "Salt Cake", "oxalic_acid": "Oxalic Acid", "roasted_bastnasite": "Roasted Bastnäsite", "light_rare_earth_sulfate": "Light Rare Earth Sulfate",
                "heavy_rare_earth_sulfate": "Heavy Rare Earth Sulfate", "calcium_chloride": "Calcium Chloride", "calcium_ingot": "Calcium Ingot",
                "white_phosphorus": "White Phosphorus", "light_rare_earth_carbonate": "Light Rare Earth Carbonate",
                "heavy_rare_earth_carbonate": "Heavy Rare Earth Carbonate", "cerium_concentrate": "Cerium Concentrate", "europium_sulfate": "Europium Sulfate"}
@@ -288,7 +290,8 @@ def acids():
 
 def chemistry():
     mixing("salt", [fluid("seawater", 1000)], [result("salt", 2), result_fluid("bittern", 100), {"id": "minecraft:water", "amount": 900}], heated=True)
-    mixing("hydrochloric_acid", item("salt", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("hydrochloric_acid", 500)], heated=True)
+    # salt and sulfuric acid, the Leblanc works' first step: hydrogen chloride off, and salt cake, sodium sulfate, left in the pan
+    mixing("hydrochloric_acid", item("salt", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("hydrochloric_acid", 500), result("salt_cake")], heated=True)
     mixing("nitric_acid", item("tfmg:nitrate_dust", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("nitric_acid", 500)], heated=True)
     mixing("oxalic_acid", item("minecraft:sugar", 2) + [fluid("nitric_acid", 250)], [result("oxalic_acid", 2)], heated=True)
     mixing("phosphoric_acid", item("minecraft:bone_meal", 2) + [fluid("tfmg:sulfuric_acid", 500)], [result_fluid("phosphoric_acid", 500), result("phosphogypsum")])
@@ -364,6 +367,11 @@ def solvents():
         vat(name, ingredients, results, list(machines), heated=heated, folder="solvents")
 
     chem("water_gas", [item("tfmg:coal_coke"), fluid("minecraft:water", 500)], [result_fluid("water_gas", 1000)], machines=())
+    # water gas topped up with hydrogen to two to one, over copper on zinc oxide: methanol; and methanol burnt short in air over
+    # silver, which comes back, to formaldehyde, taken up in water as formalin
+    chem("methanol", [item("zinc_oxide"), fluid("water_gas", 1000), fluid("tfmg:hydrogen", 500)], [result_fluid("methanol", 500), {"id": "fundamentals:zinc_oxide", "chance": 0.95}])
+    chem("formaldehyde", [item("silver_nugget"), fluid("methanol", 500), fluid("tfmg:air", 500), fluid("minecraft:water", 250)],
+         [result_fluid("formaldehyde", 500), {"id": "fundamentals:silver_nugget", "chance": 0.95}])
     chem("hydrogen", [fluid("water_gas", 1000), fluid("minecraft:water", 500)], [{"id": "tfmg:hydrogen", "amount": 1000}, {"id": "tfmg:carbon_dioxide", "amount": 500}])
     chem("ethylhexanol", [item("cobalt_ingot"), fluid("tfmg:propylene", 500), fluid("water_gas", 500), fluid("tfmg:hydrogen", 500)],
          [result_fluid("ethylhexanol", 250), {"id": "fundamentals:cobalt_ingot", "chance": 0.95}])

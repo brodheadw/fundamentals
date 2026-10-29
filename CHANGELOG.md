@@ -1,6 +1,14 @@
 # Changelog
 
 ## [Unreleased]
+- Methanol and formalin: water gas topped up with hydrogen over zinc oxide gives methanol, and methanol, air and water over silver give formalin. Novolac resin takes formaldehyde with its phenol, in a vat.
+- Salt cake: making hydrochloric acid from salt leaves salt cake, sodium sulfate, which melts with sand, lime and a little charcoal to glass, as the nineteenth-century glassworks made it.
+- Zinc from the retort comes off as vapour and condenses to molten zinc, cast into ingots, with carbon monoxide.
+- Arc furnaces making silicon and boron carbide give off carbon monoxide, which burns as furnace gas, not carbon dioxide.
+- Recipes needing three fluids run in a vat: engine coolant is ethylene glycol, made from ethylene, air and water over silver; scrubber gypsum takes air to get past sulfite.
+- Napalm is gasoline thickened with an aluminium soap of alumina and naphthenic acid, not aluminium metal.
+- Liquid nitrogen and liquid hydrogen are made by compressing the gas, cooling it with water and expanding it, not with packed ice or a superheated press.
+- Iron ore and raw iron no longer smelt to iron in a furnace; iron melts at 1,538 °C. Ad Astra's iron ores drop raw hematite on Mars and raw magnetite elsewhere, and its gold smelts to electrum.
 - Recipes that did not add up, put right:
   - Steel and cast iron no longer multiply between mods: Big Cannons melts and casts them at 144 mB an ingot, as The Factory does, and melts steel only over a superheated burner.
   - The Factory's arc furnace melts iron and flux to steel instead of turning ore and coke into steel; ore goes through the blast furnace.

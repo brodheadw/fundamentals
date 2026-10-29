@@ -1,0 +1,24 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:alumina"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 100,
+      "fluid": "fundamentals:naphthenic_acid"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 1000,
+      "fluid": "tfmg:gasoline"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:napalm",
+      "amount": 250
+    }
+  ]
+}

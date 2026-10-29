@@ -1,5 +1,14 @@
 {
-  "type": "create:mixing",
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "machines": [
+    "tfmg:mixing"
+  ],
+  "min_size": 1,
+  "processing_time": 100,
   "ingredients": [
     {
       "item": "tfmg:limesand"
@@ -13,6 +22,11 @@
       "type": "neoforge:single",
       "amount": 250,
       "fluid": "minecraft:water"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "tfmg:air"
     }
   ],
   "results": [

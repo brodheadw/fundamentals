@@ -43,9 +43,10 @@ def m(x):
 # Fused silica: quartz melted past 1,700 C, the only glass that passes deep UV and holds still under a projection lens.
 recipe("compute/fused_quartz", {"type": "create:mixing", "heat_requirement": "superheated",
                             "ingredients": [ing("minecraft:quartz_block")], "results": [out(m("fused_quartz"), 2)]})
-# Novolac: phenol condensed under an acid catalyst; the resin every positive photoresist is built on.
-recipe("compute/novolac_resin", {"neoforge:conditions": CHEMICA_LOADED, "type": "create:mixing", "heat_requirement": "heated",
-                             "ingredients": [fluid("chemica:phenol", 250), fluid("tfmg:sulfuric_acid", 25)],
+# Novolac: phenol condensed with formaldehyde under an acid catalyst, a little short of one to one; the resin every positive photoresist is built on.
+recipe("compute/novolac_resin", {"neoforge:conditions": CHEMICA_LOADED, "type": "tfmg:vat_machine_recipe", "heat_requirement": "heated",
+                             "allowed_vat_types": ["tfmg:steel_vat", "tfmg:firebrick_lined_vat"], "machines": ["tfmg:mixing"], "min_size": 1, "processing_time": 100,
+                             "ingredients": [fluid("chemica:phenol", 250), fluid("fundamentals:formaldehyde", 200), fluid("tfmg:sulfuric_acid", 25)],
                              "results": [out(m("novolac_resin"), 2)]})
 # Positive resist: novolac with a light-sensitive inhibitor, thinned in solvent. Light makes it soluble in alkali.
 recipe("compute/positive_photoresist", {"type": "create:mixing",

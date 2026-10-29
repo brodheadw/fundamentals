@@ -44,7 +44,7 @@ ITEM_FORMULAS = {
     "steel_magnet": "Fe-C", "hot_steel": "Fe-C", "hardened_steel": "Fe-C", "galvanic_cell": "Cu,Zn,H2SO4,H2O",
     "spent_fuel_rod": "UO2,Zr,Cs,Sr", "cooled_spent_fuel": "UO2,Cs,Sr", "vitrified_waste": "SiO2,B2O3,Cs,Sr", "waste_canister": "Fe,SiO2,Cs,Sr",
     "platinum_rhodium_gauze": "Pt-Rh", "osmium_filament": "Os",
-    "salt": "NaCl", "oxalic_acid": "H2C2O4", "roasted_bastnasite": "(Ce,La,Nd)OF", "light_rare_earth_sulfate": "(La,Ce,Pr,Nd,Sm)2(SO4)3",
+    "salt": "NaCl", "salt_cake": "Na2SO4", "oxalic_acid": "H2C2O4", "roasted_bastnasite": "(Ce,La,Nd)OF", "light_rare_earth_sulfate": "(La,Ce,Pr,Nd,Sm)2(SO4)3",
     "heavy_rare_earth_sulfate": "(Y,Gd,Tb,Dy,Ho,Er,Tm,Yb,Lu)2(SO4)3", "light_rare_earth_carbonate": "(La,Ce,Pr,Nd,Sm)2(CO3)3",
     "heavy_rare_earth_carbonate": "(Y,Gd,Tb,Dy,Ho,Er,Tm,Yb,Lu)2(CO3)3", "cerium_concentrate": "CeO2,(La,Nd)OF", "europium_sulfate": "EuSO4","calcium_chloride": "CaCl2", "calcium_ingot": "Ca", "white_phosphorus": "P4",
     "hydrochloric_acid_bucket": "HCl", "nitric_acid_bucket": "HNO3", "phosphoric_acid_bucket": "H3PO4", "hydrofluoric_acid_bucket": "HF",

@@ -793,6 +793,31 @@
       "boils": 2860,
       "celsius": 1450
     },
+    "fundamentals:molten_zinc": {
+      "density": 6570,
+      "viscosity": 3.9,
+      "freezes": 419.5,
+      "boils": 907,
+      "celsius": 500
+    },
+    "fundamentals:methanol": {
+      "density": 792,
+      "viscosity": 0.59,
+      "freezes": -97.6,
+      "boils": 64.7,
+      "flash_point": 11,
+      "autoignition": 464,
+      "toxic": true
+    },
+    "fundamentals:formaldehyde": {
+      "density": 1090,
+      "viscosity": 2.0,
+      "freezes": -15,
+      "boils": 96,
+      "flash_point": 64,
+      "autoignition": 424,
+      "toxic": true
+    },
     "fundamentals:molten_bismuth": {
       "density": 10050,
       "viscosity": 1.8,

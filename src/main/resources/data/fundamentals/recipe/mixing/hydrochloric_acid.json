@@ -17,6 +17,9 @@
     {
       "id": "fundamentals:hydrochloric_acid",
       "amount": 500
+    },
+    {
+      "id": "fundamentals:salt_cake"
     }
   ],
   "heat_requirement": "heated"

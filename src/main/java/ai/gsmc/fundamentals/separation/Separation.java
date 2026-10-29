@@ -34,7 +34,7 @@ public final class Separation {
     private static final Map<String, Fluid> FLUIDS = new LinkedHashMap<>();
     private static final Map<Fluid, Reagents.Kind> KINDS = new LinkedHashMap<>();
     private static final Map<Fluid, Integer> TINTS = new LinkedHashMap<>();
-    private static final List<String> ITEM_IDS = List.of("salt", "calcium_ingot", "oxalic_acid", "roasted_bastnasite", "light_rare_earth_sulfate", "heavy_rare_earth_sulfate",
+    private static final List<String> ITEM_IDS = List.of("salt", "salt_cake", "calcium_ingot", "oxalic_acid", "roasted_bastnasite", "light_rare_earth_sulfate", "heavy_rare_earth_sulfate",
             "light_rare_earth_carbonate", "heavy_rare_earth_carbonate", "cerium_concentrate", "europium_sulfate", "calcium_chloride", "white_phosphorus");
     private static final List<Item> ITEMS = new ArrayList<>();
     private static Block mixerSettler;

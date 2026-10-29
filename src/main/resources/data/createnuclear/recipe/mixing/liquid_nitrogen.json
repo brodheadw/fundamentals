@@ -8,18 +8,24 @@
   "type": "create:compacting",
   "ingredients": [
     {
-      "item": "minecraft:packed_ice"
-    },
-    {
       "type": "neoforge:single",
       "amount": 1000,
       "fluid": "tfmg:air"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "minecraft:water"
     }
   ],
   "results": [
     {
       "id": "createnuclear:nitrogen",
-      "amount": 100
+      "amount": 78
+    },
+    {
+      "id": "minecraft:water",
+      "amount": 250
     }
   ]
 }

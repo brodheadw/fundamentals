@@ -1,0 +1,31 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "tag": "minecraft:sand"
+    },
+    {
+      "tag": "minecraft:sand"
+    },
+    {
+      "item": "fundamentals:salt_cake"
+    },
+    {
+      "item": "tfmg:limesand"
+    },
+    {
+      "item": "minecraft:charcoal"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:glass",
+      "count": 3
+    },
+    {
+      "id": "fundamentals:sulfur_dioxide",
+      "amount": 50
+    }
+  ],
+  "heat_requirement": "superheated"
+}

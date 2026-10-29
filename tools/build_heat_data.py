@@ -103,6 +103,10 @@ OURS = {
                                 "Bayer pregnant liquor, about 150 g/L Na2O, leaving the digester at 145 °C under pressure"),
     "molten_pig_iron": (6900, 6, 1147, 2860, None, None, 1450, set(), "Smithells",
                         "pig iron of about 4% carbon tapped at 1,450 °C; it freezes at the iron-carbon eutectic, 1,147 °C"),
+    "molten_zinc": (6570, 3.9, 419.5, 907, None, None, 500, set(), "Smithells",
+                    "zinc condensed out of the retort's vapour at 500 °C; it boils at 907 °C, below the heat that reduces its oxide"),
+    "methanol": (792, 0.59, -97.6, 64.7, 11, 464, None, {"toxic"}, "CRC", "neat; flammable, and burns with a flame hard to see by day"),
+    "formaldehyde": (1090, 2.0, -15, 96, 64, 424, None, {"toxic"}, "SDS", "formalin, 37% formaldehyde in water with a little methanol to keep it from polymerising"),
     "molten_bismuth": (10050, 1.8, 271.4, 1564, None, None, 300, set(), "Smithells",
                        "bismuth melted at 300 °C; it freezes at 271 °C and grows by a thirtieth as it does, as water does"),
 }

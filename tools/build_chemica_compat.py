@@ -154,6 +154,9 @@ REPAIRED = {
     # benzene takes three hydrogen and keeps its volume
     "vat_machine_recipe/vat_reaction/cyclohexane": {"ingredients": [single("chemica:benzene", 250), single("tfmg:hydrogen", 750), {"item": "chemica:nickel_catalyst"}],
                                                     "results": [{"amount": 250, "id": "chemica:cyclohexane"}, {"id": "chemica:nickel_catalyst"}]},
+    # hydrogen is liquefied by compressing it, carrying the heat off in cooling water, and expanding it; never by heating
+    "compacting/liquid_hydrogen": {"ingredients": [single("tfmg:hydrogen", 1000), single("minecraft:water", 250)],
+                                   "results": [{"amount": 100, "id": "chemica:liquid_hydrogen"}, {"amount": 250, "id": "minecraft:water"}]},
     # wood ash leaches to potash, not soda
     "vat_machine_recipe/centrifuge/ash": {"results": [{"chance": 0.2, "id": "fundamentals:potash"}]},
     # air is 78 % nitrogen, 21 % oxygen and 0.9 % argon; its helium, five parts in a million, is not worth taking, and comes from natural gas
@@ -166,6 +169,8 @@ REPAIRED = {
 
 def take_over(path, recipe):
     recipe.update(REPAIRED.get(path, {}))
+    if path == "compacting/liquid_hydrogen":
+        recipe.pop("heat_requirement", None)
     # isobutylene adds to ethanol: ETBE gives off no water
     if path == "vat_machine_recipe/vat_reaction/ethyl_tert_butyl_ether":
         recipe["results"] = [r for r in recipe["results"] if "water" not in r.get("id", "")]
