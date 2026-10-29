@@ -22,5 +22,5 @@
       "chance": 0.1
     }
   ],
-  "heat_requirement": "superheated"
+  "heat_requirement": "heated"
 }

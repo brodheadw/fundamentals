@@ -391,12 +391,15 @@ def zinc():
     # Sphalerite gives off its sulfur as SO2, so it roasts only with air in a basin (sulfuric_acid); the oxide ores calcine anywhere.
     for ore in ("smithsonite", "hemimorphite"):
         roast(ore, "zinc_oxide", f"zinc_oxide_from_{ore}")
-    # the retort: zinc oxide and charcoal reduce at about 1,100 °C, above zinc's 907 °C boil, so the zinc comes off as vapour with
+    # the retort: zinc oxide and charcoal reduce at about 1,100 °C, a lit blaze burner's heat, above zinc's 907 °C boil, so the zinc comes off as vapour with
     # the carbon monoxide and is caught as liquid in the condenser, then cast; cadmium, boiling lower still, comes over first
     mixing("zinc_ingot", item("zinc_oxide") + item("minecraft:charcoal"),
-           [result_fluid("molten_zinc", 144), result_fluid("tfmg:furnace_gas", 100), {"id": "fundamentals:cadmium_sponge", "chance": 0.1}], "superheated")
+           [result_fluid("molten_zinc", 144), result_fluid("tfmg:furnace_gas", 100), {"id": "fundamentals:cadmium_sponge", "chance": 0.1}], "heated")
     write(USES / "zinc_ingot_from_molten_zinc.json", {"type": "tfmg:casting", "ingredients": [fluid("molten_zinc", 144)], "processing_time": 100,
                                                       "results": [result("create:zinc_ingot")]})
+    # the condenser's zinc is ladled into moulds; a press over a basin casts it too, so brass does not wait on The Factory's casting basin
+    write(USES / "zinc_ingot_from_molten_zinc_pressed.json", {"type": "create:compacting", "ingredients": [fluid("molten_zinc", 144)],
+                                                              "results": [result("create:zinc_ingot")]})
     for path in ("smelting/zinc_ingot_from_crushed", "smelting/zinc_ingot_from_ore", "smelting/zinc_ingot_from_raw_ore", "blasting/zinc_ingot_from_crushed",
                  "blasting/zinc_ingot_from_ore", "blasting/zinc_ingot_from_raw_ore", "splashing/crushed_raw_zinc"):
         disabled(CREATE / f"{path}.json")

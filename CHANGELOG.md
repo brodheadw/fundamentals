@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- The zinc retort runs over a lit blaze burner, about 1,100 °C, and its molten zinc casts under a press over a basin as well as in a casting basin, so brass does not wait on The Factory.
 - Nickel laterite's garnierite veins and its raw lump lean from apple green toward turquoise.
 - Methanol and formalin: water gas topped up with hydrogen over zinc oxide gives methanol, and methanol, air and water over silver give formalin. Novolac resin takes formaldehyde with its phenol, in a vat.
 - Salt cake: making hydrochloric acid from salt leaves salt cake, sodium sulfate, which melts with sand, lime and a little charcoal to glass, as the nineteenth-century glassworks made it.

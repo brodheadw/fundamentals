@@ -1,0 +1,15 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 144,
+      "fluid": "fundamentals:molten_zinc"
+    }
+  ],
+  "results": [
+    {
+      "id": "create:zinc_ingot"
+    }
+  ]
+}
