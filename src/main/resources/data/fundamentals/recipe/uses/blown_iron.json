@@ -1,0 +1,21 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "type": "neoforge:single",
+      "amount": 288,
+      "fluid": "fundamentals:molten_pig_iron"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "tfmg:air"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:iron_ingot",
+      "count": 2
+    }
+  ]
+}

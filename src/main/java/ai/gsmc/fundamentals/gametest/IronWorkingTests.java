@@ -209,6 +209,21 @@ public class IronWorkingTests {
         helper.succeed();
     }
 
+    @GameTest(template = "empty")
+    public void airBlownThroughPigIronInABasinGivesIronWithNoHeat(GameTestHelper helper) {
+        BlockPos basinPos = new BlockPos(1, 2, 1);
+        helper.setBlock(basinPos, AllBlocks.BASIN.getDefaultState());
+        BasinBlockEntity basin = helper.getBlockEntity(basinPos);
+        IFluidHandler tanks = helper.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, helper.absolutePos(basinPos), Direction.UP);
+        helper.assertTrue(tanks.fill(new FluidStack(Separation.fluid("molten_pig_iron"), 288), IFluidHandler.FluidAction.EXECUTE) == 288
+                && tanks.fill(new FluidStack(fluid("tfmg:air"), 500), IFluidHandler.FluidAction.EXECUTE) == 500, "the basin should take pig iron and air");
+        var blown = helper.getLevel().getRecipeManager().byKey(Fundamentals.id("uses/blown_iron")).orElseThrow().value();
+        helper.assertTrue(BasinRecipe.match(basin, blown) && BasinRecipe.apply(basin, blown), "pig iron and air should blow with no burner under the basin");
+        ItemStack iron = basin.getOutputInventory().getStackInSlot(0);
+        helper.assertTrue(iron.is(Items.IRON_INGOT) && iron.getCount() == 2, "the basin should hold two iron ingots, not " + iron);
+        helper.succeed();
+    }
+
     @GameTest(template = "empty", timeoutTicks = 400)
     public void theConverterBlowsPigIronToSteel(GameTestHelper helper) {
         BlockPos pos = new BlockPos(1, 1, 1);

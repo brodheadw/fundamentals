@@ -357,6 +357,9 @@ def steel():
         "ingredients": [fluid("molten_pig_iron", CONVERTER["pig_iron"]), fluid("tfmg:air", CONVERTER["air"])] + tag("tfmg:flux"),
         "results": [result_fluid("tfmg:molten_steel", CONVERTER["steel"]), result_fluid("tfmg:molten_slag", CONVERTER["slag"]),
                     result_fluid("tfmg:furnace_gas", CONVERTER["gas"])]})
+    # The converter in a basin: air blown through pig iron burns its carbon down to mild steel, which is the iron of today, with no
+    # fuel, no stirring heat and no fettling. Pig iron for two ingots, as the vat's steel is, less what the blow burns off.
+    mixing("blown_iron", [fluid("molten_pig_iron", CONVERTER["pig_iron"]), fluid("tfmg:air", CONVERTER["air"])], [result("minecraft:iron_ingot", 2)])
     tag_file(DATA / "tags/item/fettling.json", ["fundamentals:raw_hematite", "fundamentals:rusty_iron_ingot"])
     fettling = tag("fundamentals:fettling")
     mixing("puddling", item("tfmg:cast_iron_ingot", 2) + fettling, [result("puddle_ball"), result("tfmg:slag")], "superheated")
@@ -366,7 +369,7 @@ def steel():
     write(USES / "shingling_by_hand.json", {"type": "minecraft:crafting_shapeless", "category": "misc",
                                             "ingredients": item("puddle_ball") + item("smithing_hammer"),
                                             "result": {"id": "minecraft:iron_ingot", "count": PUDDLED}})
-    # Bloom and puddle ball are both shingled under the hammer: every iron ingot here is wrought iron, which Twilight Forest's fence and candelabra take.
+    # Bloom and puddle ball are shingled under the hammer to wrought iron, and blown iron is mild steel that does the same work; Twilight Forest's fence and candelabra take either.
     write(DATA.parent / "c/tags/item/ingots/wrought_iron.json", {"replace": False, "values": ["minecraft:iron_ingot"]})
     # Its fence was six ingots in two rows, which is iron bars now that an iron ingot is wrought iron.
     write(DATA.parent / "twilightforest/recipe/wrought_iron_fence.json", {
