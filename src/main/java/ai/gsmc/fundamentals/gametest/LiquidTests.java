@@ -3,6 +3,7 @@ package ai.gsmc.fundamentals.gametest;
 import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.liquid.Liquid;
 import ai.gsmc.fundamentals.liquid.Liquids;
+import ai.gsmc.fundamentals.mixin.FluidInvoker;
 import ai.gsmc.fundamentals.separation.Acids;
 import ai.gsmc.fundamentals.separation.Hazards;
 import ai.gsmc.fundamentals.separation.Reagents;
@@ -15,6 +16,9 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.level.block.BaseFireBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -120,6 +124,35 @@ public class LiquidTests {
             int left = amount(helper, open), kept = amount(helper, covered);
             helper.assertTrue(left < 1000 && left >= 1000 - 3 * Liquids.VENT, "an open basin of 36% hydrochloric acid at 90 °C should boil off, got " + left);
             helper.assertTrue(kept == 1000, "a covered one should keep it, got " + kept);
+            helper.succeed();
+        });
+    }
+
+    @GameTest(template = "battery", timeoutTicks = 200)
+    public void pouredSlagCreepsLikeLavaAndSetsThingsAlight(GameTestHelper helper) {
+        Fluid slag = fluid("tfmg:molten_slag");
+        for (int x = 0; x < 27; x++) {
+            for (int z = 0; z < 5; z++) {
+                helper.setBlock(new BlockPos(x, 1, z), Blocks.STONE);
+            }
+        }
+        BlockPos source = new BlockPos(1, 2, 2);
+        helper.setBlock(source, slag.defaultFluidState().createLegacyBlock());
+        helper.setBlock(source.above(2), Blocks.OAK_PLANKS);
+        helper.assertTrue(slag.getTickDelay(helper.getLevel()) == 18, "slag at 500 cP should spread every 18 ticks, not " + slag.getTickDelay(helper.getLevel()));
+        Pig pig = helper.spawn(EntityType.PIG, source);
+        // the test server keeps fire from spreading
+        GameRules.BooleanValue fireTick = helper.getLevel().getGameRules().getRule(GameRules.RULE_DOFIRETICK);
+        fireTick.set(true, null);
+        for (int i = 0; i < 500 && helper.getBlockState(source.above()).isAir(); i++) {
+            ((FluidInvoker) slag).fundamentals$randomTick(helper.getLevel(), helper.absolutePos(source), slag.defaultFluidState(), helper.getLevel().random);
+        }
+        fireTick.set(false, null);
+        helper.assertTrue(helper.getBlockState(source.above()).getBlock() instanceof BaseFireBlock, "slag should light the planks over it");
+        helper.runAfterDelay(120, () -> {
+            helper.assertTrue(pig.isOnFire() || pig.isDeadOrDying(), "a pig in slag should burn");
+            helper.assertTrue(helper.getBlockState(source.east(2)).getFluidState().getType().isSame(slag), "slag should reach two blocks");
+            helper.assertTrue(helper.getBlockState(source.east(4)).isAir(), "slag should stop short of four blocks, as lava does");
             helper.succeed();
         });
     }

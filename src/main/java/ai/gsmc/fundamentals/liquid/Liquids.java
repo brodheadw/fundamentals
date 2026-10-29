@@ -46,6 +46,8 @@ public final class Liquids {
     private static final double COLDEST = 40;
     private static final double SPARK = 100;
     private static final double VISCOUS = 100, SLOWEST = 0.25, PER_DECADE = 0.35;
+    // wood chars and catches past about 300 °C
+    public static final double SCORCHES = 300;
 
     private Liquids() {}
 
@@ -101,6 +103,21 @@ public final class Liquids {
         Liquid liquid = of(fluid);
         double viscosity = liquid == null ? 0 : liquid.viscosity().orElse(0.0);
         return viscosity <= VISCOUS ? 1 : Math.max(SLOWEST, 1 - PER_DECADE * Math.log10(viscosity / VISCOUS));
+    }
+
+    @Nullable
+    public static Liquid molten(Fluid fluid) {
+        Liquid liquid = of(fluid);
+        return liquid != null && liquid.celsius().filter(c -> c >= SCORCHES).isPresent() ? liquid : null;
+    }
+
+    // ticks between spreads, water's 5 for a thin melt up to lava's 30 for one as stiff as lava
+    public static int flowDelay(Liquid molten) {
+        return (int) Math.round(Math.clamp(5 + 5 * Math.log10(Math.max(1, molten.viscosity().orElse(1.0))), 5, 30));
+    }
+
+    public static boolean viscous(Liquid molten) {
+        return molten.viscosity().orElse(0.0) >= VISCOUS;
     }
 
     public static void vent(ServerLevel level, BlockPos pos) {
