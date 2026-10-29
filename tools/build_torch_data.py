@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Torches that burn down: the burnt-out stub's models, blockstates, loot, re-dipping recipe and lang."""
+"""The burnt-out torch stub kept from 0.19.4's models, blockstates, loot, re-dipping recipe and lang."""
 from common import ASSETS, DATA, read_lang, write, write_lang
 
 # the wall torch's model faces east; vanilla turns it for the other three
