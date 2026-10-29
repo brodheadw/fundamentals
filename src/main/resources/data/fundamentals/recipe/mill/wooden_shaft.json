@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "L",
+    "L"
+  ],
+  "key": {
+    "L": {
+      "tag": "c:stripped_logs"
+    }
+  },
+  "result": {
+    "id": "fundamentals:wooden_shaft",
+    "count": 6
+  }
+}

@@ -71,7 +71,7 @@ ITEM_FORMULAS = {
     "nickel_hydroxide": "Ni(OH)2", "hydride_alloy": "(La,Ce)Ni5", "nickel_metal_hydride_cell": "(La,Ce)Ni5,NiOOH,NaOH,C2H4",
     "polysilicon": "Si", "silicon_boule": "Si", "silicon_wafer": "Si", "zinc_leach_residue": "ZnFe2O4,PbSO4,Ge,In", "led_chip": "InGaN,Al2O3",
     "indium_tin_oxide": "In2O3,SnO2",
-    "vanadium_pentoxide": "V2O5", "cement_clinker": "Ca3SiO5,Ca2SiO4,Ca3Al2O6,Ca2AlFeO5", "gypsum": "CaSO4,H2O", "phosphogypsum": "CaSO4,H2O,P2O5",
+    "vanadium_pentoxide": "V2O5", "cement_clinker": "Ca3SiO5,Ca2SiO4,Ca3Al2O6,Ca2AlFeO5", "gypsum": "CaSO4,H2O", "plagioclase_feldspar": "NaAlSi3O8,CaAl2Si2O8", "phosphogypsum": "CaSO4,H2O,P2O5",
     "phosphogypsum_block": "CaSO4,H2O,P2O5", "calomel": "Hg2Cl2", "copper_cement": "Cu", "cobalt_cake": "Co,Zn", "anode_mud": "MnO2",
     "jarosite": "NH4Fe3(SO4)2(OH)6,Pb,As", "jarosite_block": "NH4Fe3(SO4)2(OH)6,Pb,As", "lead_silver_residue": "PbSO4,Ag", "ammonium_nitrate": "NH4NO3", "urea": "CO(NH2)2", "superphosphate": "Ca(H2PO4)2,CaSO4",
     "ammonium_phosphate": "NH4H2PO4", "npk_fertiliser": "NH4NO3,NH4H2PO4,KCl",

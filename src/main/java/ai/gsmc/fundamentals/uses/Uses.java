@@ -34,7 +34,7 @@ public final class Uses {
             "cobalt_sulfate", "nmc_hydroxide", "nmc_cathode", "iron_phosphate", "lfp_cathode", "lithium_fluoride",
             "lithium_hexafluorophosphate", "ethylene_carbonate", "nickel_hydroxide", "hydride_alloy", "nickel_metal_hydride_cell",
             "polysilicon", "silicon_boule", "silicon_wafer", "zinc_leach_residue", "led_chip", "indium_tin_oxide",
-            "vanadium_pentoxide", "cement_clinker", "gypsum", "phosphogypsum",
+            "vanadium_pentoxide", "cement_clinker", "gypsum", "plagioclase_feldspar", "phosphogypsum",
             "calomel", "copper_cement", "cobalt_cake", "anode_mud", "jarosite", "lead_silver_residue", "hydrotreating_catalyst",
             "spent_fuel_rod", "cooled_spent_fuel", "vitrified_waste", "hot_steel", "hardened_steel", "galvanic_cell",
             "sapphire_boule", "sapphire_wafer");

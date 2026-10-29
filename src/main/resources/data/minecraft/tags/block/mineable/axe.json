@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:wooden_shaft",
+    "fundamentals:wooden_cogwheel",
+    "fundamentals:wooden_large_cogwheel"
+  ]
+}

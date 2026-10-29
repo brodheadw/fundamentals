@@ -133,6 +133,7 @@ WHY = {
     "tfmg:molten_slag": "Lime-silicate slag runs off the iron and is granulated for slag cement or cast and crushed for road stone.",
     "tfmg:hydrogen": "Chlor-alkali hydrogen is burnt or used for hydrogenation and reduction.",
     "tfmg:propylene": "A fluid catalytic cracker is the world's second source of propylene.",
+    "minecraft:gravel": "Crushed andesite is among the most quarried road stones and concrete aggregates; its dark pyroxene and hornblende go with it.",
     "fundamentals:salt_cake": "Salt cake, sodium sulfate, was the Leblanc works' half-way product and the glassworks' soda; today it goes into kraft paper pulping and detergents.",
     "fundamentals:gypsum": "Hydrofluoric acid plants make near four tonnes of fluorogypsum to a tonne of acid, sold for plaster and cement or stacked.",
     "tfmg:creosote": "Coke ovens condense coal tar out of their gas; distilled, it gives creosote, the railway sleeper and telegraph pole preservative.",

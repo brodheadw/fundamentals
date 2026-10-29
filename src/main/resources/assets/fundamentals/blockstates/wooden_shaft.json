@@ -1,0 +1,17 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "fundamentals:block/wooden_shaft",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "fundamentals:block/wooden_shaft"
+    },
+    "axis=z": {
+      "model": "fundamentals:block/wooden_shaft",
+      "x": 90,
+      "y": 180
+    }
+  }
+}

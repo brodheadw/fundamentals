@@ -88,6 +88,7 @@ public class Fundamentals {
                 Uses.registerBlocks(helper::register);
                 Plastics.registerBlocks(helper::register);
                 Titanium.registerBlocks(helper::register);
+                ai.gsmc.fundamentals.mill.WoodenMill.registerBlocks(helper::register);
                 Thermometers.registerBlocks(helper::register);
                 ai.gsmc.fundamentals.air.Barometers.registerBlocks(helper::register);
                 ai.gsmc.fundamentals.air.FieldMill.registerBlocks(helper::register);
@@ -102,6 +103,7 @@ public class Fundamentals {
                 Separation.registerBlockEntities(helper::register);
                 Plastics.registerBlockEntities(helper::register);
                 Titanium.registerBlockEntities(helper::register);
+                ai.gsmc.fundamentals.mill.WoodenMill.registerBlockEntities(helper::register);
                 Thermometers.registerBlockEntities(helper::register);
                 ai.gsmc.fundamentals.air.Barometers.registerBlockEntities(helper::register);
                 ai.gsmc.fundamentals.air.FieldMill.registerBlockEntities(helper::register);
@@ -149,6 +151,7 @@ public class Fundamentals {
                 Magnets.registerItems(helper::register);
                 Plastics.registerItems(helper::register);
                 Titanium.registerItems(helper::register);
+                ai.gsmc.fundamentals.mill.WoodenMill.registerItems(helper::register);
                 Thermometers.registerItems(helper::register);
                 ai.gsmc.fundamentals.air.Barometers.registerItems(helper::register);
                 ai.gsmc.fundamentals.air.FieldMill.registerItems(helper::register);
@@ -230,6 +233,7 @@ public class Fundamentals {
             SeparationClient.register(modBus);
             PlasticsClient.register(modBus);
             TitaniumClient.register(modBus);
+            ai.gsmc.fundamentals.client.WoodenMillClient.register(modBus);
             OxidationClient.register(modBus);
             ThermometerRenderer.register(modBus);
             ComputeClient.register(modBus);
@@ -248,6 +252,7 @@ public class Fundamentals {
                     Magnets.items().forEach(output::accept);
                     Plastics.items().forEach(output::accept);
                     Titanium.items().forEach(output::accept);
+                    ai.gsmc.fundamentals.mill.WoodenMill.items().forEach(output::accept);
                     HandTools.items().forEach(output::accept);
                     Electricity.items().forEach(output::accept);
                     Thermometers.items().forEach(output::accept);

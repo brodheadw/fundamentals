@@ -1,0 +1,9 @@
+{
+  "parent": "create:block/large_cogwheel",
+  "textures": {
+    "particle": "minecraft:block/stripped_oak_log",
+    "0": "fundamentals:block/wooden_cogwheel_axis",
+    "3": "fundamentals:block/wooden_axis_top",
+    "4": "fundamentals:block/wooden_large_cogwheel"
+  }
+}

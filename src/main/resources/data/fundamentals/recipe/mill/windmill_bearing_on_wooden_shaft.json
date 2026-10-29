@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "B",
+    "C",
+    "I"
+  ],
+  "key": {
+    "B": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "C": {
+      "tag": "c:stones"
+    },
+    "I": {
+      "item": "fundamentals:wooden_shaft"
+    }
+  },
+  "result": {
+    "id": "create:windmill_bearing"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "minecraft:clay_ball"
+    },
+    {
+      "item": "minecraft:clay_ball"
+    },
+    {
+      "item": "fundamentals:plagioclase_feldspar"
+    },
+    {
+      "tag": "c:sands/colorless"
+    }
+  ],
+  "results": [
+    {
+      "id": "tfmg:unfired_insulator"
+    }
+  ]
+}

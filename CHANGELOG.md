@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+- The millwright's gearing, before iron: an Oak Shaft (two stripped logs make six) and Oak Cogwheels, an oak rim and hub with pale hornbeam teeth, made from it with planks. They turn as Create's do but snap to sticks above 64 RPM or under more than 1,024 su of load, and a steam engine will not take an oak crankshaft. A water wheel or windmill bearing can be built on an oak shaft.
+- Andesite crushes or mills to its minerals: plagioclase feldspar, gravel, and now and then the magnetite andesite carries.
+- The Factory's cable insulator is porcelain: clay, feldspar and quartz sand mixed to its unfired form, then fired. Plain clay no longer serves, being porous earthenware once fired.
 - The zinc retort runs over a lit blaze burner, about 1,100 °C, and its molten zinc casts under a press over a basin as well as in a casting basin, so brass does not wait on The Factory.
 - Nickel laterite's garnierite veins and its raw lump lean from apple green toward turquoise.
 - Methanol and formalin: water gas topped up with hydrogen over zinc oxide gives methanol, and methanol, air and water over silver give formalin. Novolac resin takes formaldehyde with its phenol, in a vat.

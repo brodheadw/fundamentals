@@ -533,6 +533,7 @@ def main():
     heap("vanadium_pentoxide", (240, 168, 60), (214, 128, 26), (150, 82, 14)).save(TEXTURES / "item/vanadium_pentoxide.png")
     paint_raw("cement_clinker", ((40, 42, 44), (70, 72, 74), (104, 106, 106), (146, 146, 142))).save(TEXTURES / "item/cement_clinker.png")
     heap("gypsum", (255, 255, 255), (242, 240, 234), (196, 192, 184)).save(TEXTURES / "item/gypsum.png")
+    heap("plagioclase_feldspar", (244, 244, 240), (206, 204, 198), (142, 140, 136)).save(TEXTURES / "item/plagioclase_feldspar.png")
     heap("phosphogypsum", (236, 232, 222), (204, 198, 184), (150, 144, 130)).save(TEXTURES / "item/phosphogypsum.png")
     heap("calomel", (255, 255, 255), (238, 236, 230), (190, 186, 178)).save(TEXTURES / "item/calomel.png")
     paint_raw("copper_cement", ((92, 40, 24), (150, 72, 44), (196, 104, 66), (228, 140, 96))).save(TEXTURES / "item/copper_cement.png")

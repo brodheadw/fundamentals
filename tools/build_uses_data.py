@@ -50,7 +50,7 @@ ITEMS = {"phosphor": "Phosphor", "didymium_glass": "Didymium Glass", "roasted_co
          "nickel_hydroxide": "Nickel Hydroxide", "hydride_alloy": "Hydride Alloy", "nickel_metal_hydride_cell": "Nickel-Metal Hydride Cell",
          "polysilicon": "Polysilicon", "silicon_boule": "Silicon Boule", "silicon_wafer": "Silicon Wafer", "zinc_leach_residue": "Zinc Leach Residue",
          "led_chip": "LED Chip", "indium_tin_oxide": "Indium Tin Oxide",
-         "vanadium_pentoxide": "Vanadium Pentoxide", "cement_clinker": "Cement Clinker", "gypsum": "Gypsum", "phosphogypsum": "Phosphogypsum",
+         "vanadium_pentoxide": "Vanadium Pentoxide", "cement_clinker": "Cement Clinker", "gypsum": "Gypsum", "plagioclase_feldspar": "Plagioclase Feldspar", "phosphogypsum": "Phosphogypsum",
          "calomel": "Calomel", "copper_cement": "Copper Cement", "cobalt_cake": "Cobalt Cake", "anode_mud": "Anode Mud",
          "jarosite": "Jarosite", "lead_silver_residue": "Lead-Silver Residue", "hydrotreating_catalyst": "Cobalt-Molybdenum Catalyst",
          "spent_fuel_rod": "Spent Fuel Rod", "cooled_spent_fuel": "Cooled Spent Fuel", "vitrified_waste": "Vitrified Waste",
@@ -1332,6 +1332,15 @@ def tfmg_fidelity():
     # salt cake was the glassworks' soda for most of the nineteenth century, reduced with a little carbon in the melt
     mixing("glass_from_salt_cake", tag("minecraft:sand", 2) + item("salt_cake") + item("tfmg:limesand") + item("minecraft:charcoal"),
            [result("minecraft:glass", 3), result_fluid("sulfur_dioxide", 50)], "superheated")
+    # andesite is about three fifths plagioclase feldspar, with pyroxene, hornblende and a few per cent of magnetite; crushed, the
+    # feldspar grains come free, the dark minerals go with the gravel, and the magnetite can be picked out
+    for kind, time in (("crushing", 250), ("milling", 300)):
+        write(CREATE / f"{kind}/andesite.json", {"type": f"create:{kind}", "processing_time": time, "ingredients": item("minecraft:andesite"),
+                                                 "results": [result("plagioclase_feldspar"), {"id": "fundamentals:plagioclase_feldspar", "chance": 0.5},
+                                                             {"id": "minecraft:gravel", "chance": 0.25}, {"id": "fundamentals:raw_magnetite", "chance": 0.05}]})
+    # a line insulator is porcelain, clay with feldspar and quartz sand fired hard and glassy; plain fired clay is porous earthenware
+    disabled(TFMG / "unfired_insulator_from_clay_stonecutting.json")
+    mixing("unfired_insulator", item("minecraft:clay_ball", 2) + item("plagioclase_feldspar") + tag("c:sands/colorless"), [result("tfmg:unfired_insulator")])
     # brass is about two parts copper to one of zinc; at half zinc it turns brittle
     write(CREATE / "mixing/brass_ingot.json", {"type": "create:mixing", "heat_requirement": "heated",
                                                "ingredients": tag("c:ingots/copper", 2) + tag("c:ingots/zinc"), "results": [result("create:brass_ingot", 3)]})

@@ -1,0 +1,8 @@
+{
+  "parent": "create:block/shaft",
+  "textures": {
+    "particle": "fundamentals:block/wooden_axis",
+    "0": "fundamentals:block/wooden_axis",
+    "1": "fundamentals:block/wooden_axis_top"
+  }
+}

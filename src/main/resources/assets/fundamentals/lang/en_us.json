@@ -421,6 +421,9 @@
   "block.fundamentals.weathered_bronze_block": "Weathered Block of Bronze",
   "block.fundamentals.white_plastic_block": "White Plastic Block",
   "block.fundamentals.wolframite_ore": "Wolframite Ore",
+  "block.fundamentals.wooden_cogwheel": "Oak Cogwheel",
+  "block.fundamentals.wooden_large_cogwheel": "Large Oak Cogwheel",
+  "block.fundamentals.wooden_shaft": "Oak Shaft",
   "block.fundamentals.xenotime_ore": "Xenotime Ore",
   "block.fundamentals.yellow_plastic_block": "Yellow Plastic Block",
   "block.fundamentals.zircon_ore": "Zircon Ore",
@@ -908,6 +911,7 @@
   "item.fundamentals.phosphor": "Phosphor",
   "item.fundamentals.phosphoric_acid_bucket": "Phosphoric Acid Bucket",
   "item.fundamentals.photovoltaic_panel": "Photovoltaic Panel",
+  "item.fundamentals.plagioclase_feldspar": "Plagioclase Feldspar",
   "item.fundamentals.platinum_group_concentrate": "Platinum Group Concentrate",
   "item.fundamentals.platinum_ingot": "Platinum Ingot",
   "item.fundamentals.platinum_nugget": "Platinum Nugget",
@@ -1145,5 +1149,6 @@
   "tooltip.fundamentals.magnet.grade": "%s, rated to %s °C",
   "tooltip.fundamentals.magnet.lure": "Off hand while fishing: +%s luck",
   "tooltip.fundamentals.nuclear.spent_fuel_rod": "Cools only under water: leave it a day in a pool",
-  "tooltip.fundamentals.nuclear.waste_canister": "Irradiates until buried below y 0 in deepslate, tuff or clay"
+  "tooltip.fundamentals.nuclear.waste_canister": "Irradiates until buried below y 0 in deepslate, tuff or clay",
+  "tooltip.fundamentals.wooden_mill": "Oak gives way: snaps above %s RPM or under more than %s su of load"
 }
