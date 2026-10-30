@@ -16,6 +16,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.common.util.FakePlayer;
+import net.neoforged.neoforge.common.util.FakePlayerFactory;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
@@ -51,6 +53,16 @@ public class NickelTests {
             helper.assertTrue(BacktankUtil.getAir(pig.getItemBySlot(EquipmentSlot.CHEST)) < BacktankUtil.maxAirWithoutEnchants(), "the mask should spend air");
             helper.succeed();
         });
+    }
+
+    @GameTest(template = "empty")
+    public void aBlastStoveComesOutWhenBroken(GameTestHelper helper) {
+        BlockPos pos = new BlockPos(1, 1, 1);
+        helper.setBlock(pos, BuiltInRegistries.BLOCK.get(ResourceLocation.parse("tfmg:blast_stove")));
+        FakePlayer player = FakePlayerFactory.getMinecraft(helper.getLevel());
+        player.gameMode.destroyBlock(helper.absolutePos(pos));
+        helper.assertBlockNotPresent(BuiltInRegistries.BLOCK.get(ResourceLocation.parse("tfmg:blast_stove")), pos);
+        helper.succeed();
     }
 
     @GameTest(template = "empty")

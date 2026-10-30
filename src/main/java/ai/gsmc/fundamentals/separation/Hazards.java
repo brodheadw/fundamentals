@@ -22,6 +22,7 @@ import com.simibubi.create.content.processing.basin.BasinBlock;
 import com.simibubi.create.foundation.blockEntity.behaviour.BlockEntityBehaviour;
 import com.wildspell.fundamental.api.heat.Heat;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -298,8 +299,14 @@ public final class Hazards {
         if (pipe != null && pipe.interfaces != null && pipe.interfaces.values().stream().anyMatch(c -> isCarbonyl(c.getProvidedFluid().getFluid()))) {
             return true;
         }
-        IFluidHandler tanks = level.getCapability(Capabilities.FluidHandler.BLOCK, pos, null);
-        return tanks != null && IntStream.range(0, tanks.getTanks()).anyMatch(i -> isCarbonyl(tanks.getFluidInTank(i).getFluid()));
+        // asked side by side: some machines (TFMG's blast stove) throw on a sideless query, and a throw here cancels the break
+        for (Direction side : Direction.values()) {
+            IFluidHandler tanks = level.getCapability(Capabilities.FluidHandler.BLOCK, pos, side);
+            if (tanks != null && IntStream.range(0, tanks.getTanks()).anyMatch(i -> isCarbonyl(tanks.getFluidInTank(i).getFluid()))) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean corrode(Level level, BlockPos pos, BlockState state, Collection<PipeConnection> connections) {
