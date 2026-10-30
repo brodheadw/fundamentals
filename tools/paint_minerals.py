@@ -23,6 +23,7 @@ NEEDLES = ("bismuthinite",)
 WHOLE = ["ion_adsorption_clay", "bauxite", "goethite", "nickel_laterite", "native_sulfur"]
 
 CLEAR = (255, 0, 255)
+RIM_SHADOW = (88, 86, 86, 255)
 
 VARIANTS = 3
 
@@ -127,14 +128,14 @@ BORNITE = [((60, 34, 92), (104, 62, 150), (150, 104, 190), (200, 164, 226)),
 
 RECIPES = {
     "hematite": [("blob", 6, 4, 8), ("speck", 5)],
-    "magnetite": [("crystals", "cube", 5, 1), ("blob", 2, 3, 5), ("speck", 4)],
+    "magnetite": [("crystals", "octa", 5, 1), ("blob", 2, 3, 5), ("speck", 4)],
     "siderite": [("blob", 5, 4, 8), ("companion", "limonite", 4), ("speck", 4)],
     "pyrite": [("crystals", "cube", 5, 1), ("speck", 4)],
     "pyrolusite": [("smear", 4, 6, 10), ("speck", 6)],
     "pentlandite": [("blob", 5, 4, 7), ("companion", "pyrrhotite", 4), ("speck", 3)],
-    "chromite": [("blob", 5, 4, 8), ("speck", 7)],
+    "chromite": [("crystals", "octa", 4, 1), ("speck", 7)],
     "wolframite": [("crystals", "plate", 5, 1), ("speck", 3)],
-    "scheelite": [("blob", 6, 4, 7), ("speck", 4)],
+    "scheelite": [("crystals", "octa", 4, 1), ("speck", 4)],
     "molybdenite": [("crystals", "plate", 5, 1), ("speck", 4)],
     "cobaltite": [("crystals", "cube", 4, 1), ("companion", "erythrite", 5), ("speck", 2)],
     "ilmenite": [("laminae", 4), ("blob", 4, 3, 5), ("speck", 6)],
@@ -145,7 +146,7 @@ RECIPES = {
     "covellite": [("crystals", "plate", 5, 1), ("speck", 3)],
     "malachite": [("banded", 5, 6, 10), ("speck", 3)],
     "azurite": [("blob", 5, 4, 8), ("companion", "malachite", 4), ("speck", 2)],
-    "cuprite": [("blob", 5, 4, 7), ("companion", "native_copper", 3), ("speck", 3)],
+    "cuprite": [("crystals", "octa", 4, 1), ("companion", "native_copper", 3), ("speck", 3)],
     "tenorite": [("blob", 4, 3, 6), ("speck", 5)],
     "native_copper": [("smear", 2, 3, 6), ("speck", 6)],
     "galena": [("crystals", "cube", 5, 1), ("blob", 2, 3, 5), ("speck", 4)],
@@ -166,7 +167,7 @@ RECIPES = {
     "braggite": [("blob", 2, 2, 4), ("companion", "pentlandite", 3), ("speck", 5)],
     "cinnabar": [("blob", 6, 4, 7), ("speck", 5)],
     "spodumene": [("crystals", "prism", 5, 1), ("speck", 3)],
-    "fluorite": [("crystals", "prism", 4, 1), ("speck", 2)],
+    "fluorite": [("crystals", "cube", 4, 1), ("speck", 2)],
     "borax": [("crystals", "prism", 3, 1), ("speck", 3)],
     "trona": [("crystals", "prism", 4, 1), ("speck", 2)],
     "halite": [("crystals", "cube", 5, 1), ("speck", 3)],
@@ -176,11 +177,11 @@ RECIPES = {
     "uraninite": [("blob", 5, 4, 8), ("companion", "gummite", 3), ("speck", 4)],
     "graphite": [("crystals", "plate", 6, 1), ("speck", 5)],
     "stibnite": [("crystals", "needle", 3, 4), ("speck", 2)],
-    "pyrochlore": [("crystals", "cube", 3, 1), ("speck", 5)],
+    "pyrochlore": [("crystals", "octa", 3, 1), ("speck", 5)],
     "columbite": [("crystals", "plate", 4, 1), ("speck", 4)],
     "sylvite": [("crystals", "cube", 5, 1), ("speck", 3)],
     "native_gold": [("smear", 2, 3, 6), ("speck", 6)],
-    "garnet": [("crystals", "knob", 4, 1), ("speck", 4)],
+    "garnet": [("crystals", "octa", 4, 1), ("speck", 4)],
     "ruby": [("crystals", "plate", 3, 1), ("speck", 3)],
     "sapphire": [("crystals", "prism", 3, 1), ("speck", 3)],
     "emery": [("blob", 5, 4, 8), ("companion", "magnetite", 5), ("speck", 5)],
@@ -266,7 +267,12 @@ class Canvas:
         rgba = self.img.convert("RGBA")
         for x in range(SIZE):
             for y in range(SIZE):
-                if self.img.getpixel((x, y)) == CLEAR:
+                if self.img.getpixel((x, y)) != CLEAR:
+                    continue
+                # the grain stands proud of the rock: its shadow falls below and right
+                if wrap(x - 1, y) in self.ore or wrap(x, y - 1) in self.ore:
+                    rgba.putpixel((x, y), RIM_SHADOW)
+                else:
                     rgba.putpixel((x, y), (0, 0, 0, 0))
         return rgba
 
@@ -292,6 +298,9 @@ def crystal(rng, kind, x0, y0):
         return rect(x0, y0, rng.randint(3, 4), rng.choice((1, 2)))
     if kind == "needle":
         return rect(x0, y0, 1, rng.randint(4, 6))
+    if kind == "octa":
+        r = rng.choice((1, 2, 2))
+        return {wrap(x0 + i, y0 + j) for i in range(-r, r + 1) for j in range(-r, r + 1) if abs(i) + abs(j) <= r}
     cells = rect(x0, y0, 3, 3)
     return cells - {wrap(x0 + i, y0 + j) for i in (0, 2) for j in (0, 2) if rng.random() < 0.8}
 
@@ -549,6 +558,164 @@ def paint_raw(name, palette=None):
     return img
 
 
+# how each mineral grows and shines in the hand: (habit, luster)
+HABITS = {
+    "cube": ["galena", "pyrite", "halite", "sylvite", "fluorite", "cobaltite", "loparite", "sperrylite", "argentite"],
+    "octa": ["magnetite", "pyrochlore", "cuprite", "chromite", "scheelite", "garnet", "native_sulfur"],
+    "prism": ["beryl", "cassiterite", "xenotime", "thortveitite", "spodumene", "zircon", "tourmaline", "topaz", "sapphire",
+              "azurite", "borax", "trona", "rutile", "euxenite", "monazite"],
+    "plate": ["molybdenite", "graphite", "covellite", "wolframite", "columbite", "ruby", "bertrandite", "ilmenite", "bastnasite"],
+    "botryoid": ["malachite", "smithsonite", "hemimorphite", "hematite", "uraninite", "goethite"],
+    "dendrite": ["native_silver", "pyrolusite"],
+}
+HABIT = {name: habit for habit, names in HABITS.items() for name in names}
+METALLIC = {"galena", "pyrite", "cobaltite", "sperrylite", "argentite", "magnetite", "chromite", "molybdenite", "graphite",
+            "covellite", "wolframite", "columbite", "ilmenite", "hematite", "native_silver", "native_bismuth", "cooperite",
+            "braggite", "pentlandite", "chalcopyrite", "chalcocite", "bornite", "stibnite", "bismuthinite", "loparite"}
+EARTHY = {"bauxite", "ion_adsorption_clay", "nickel_laterite", "tenorite", "goethite"}
+STRIATED = {"pyrite", "tourmaline", "rutile", "cassiterite"}
+TARNISH = {"bornite": 0.45, "chalcopyrite": 0.12, "native_bismuth": 0.35}
+
+
+def raw_palette(name, rng):
+    return RAW_WHOLE.get(name) or (P[name] if name != "bornite" else BORNITE[rng.randrange(4)])
+
+
+def put(img, x, y, colour):
+    if 0 <= x < SIZE and 0 <= y < SIZE:
+        img.putpixel((x, y), colour + (255,))
+
+
+def iso_cube(img, ox, oy, a, t, striated=False):
+    """A cube from above and to the left: lit top, mid left face, dark right face."""
+    for x in range(2 * a):
+        half = (a / 2) * (1 - abs(x + 0.5 - a) / a)
+        top0, top1 = int(round(a / 2 - half)), int(round(a / 2 + half))
+        for y in range(top0, top1 + a):
+            if y < top1:
+                tone = 7 if (x, y) == (a - 2, top0 + 1) else 6
+            else:
+                tone = 4 if x < a else 2
+                if striated and (y - top1) % 2:
+                    tone += 1
+            put(img, ox + x, oy + y, t[tone])
+
+
+def octahedron(img, cx, cy, r, t):
+    for dy in range(-int(r * 1.3), int(r * 1.3) + 1):
+        for dx in range(-r, r + 1):
+            if abs(dx) / r + abs(dy) / (r * 1.3) > 1.0:
+                continue
+            tone = (6 if dx < 0 else 4) if dy < 0 else (3 if dx < 0 else 1)
+            if dx == 0 and dy < 0:
+                tone = 7
+            put(img, cx + dx, cy + dy, t[tone])
+
+
+def prism(img, x0, base, w, h, t, striated=False):
+    """A standing prism: three faces lit left to right, a pointed cap."""
+    for x in range(w):
+        face = 6 if x < w / 3 else 4 if x < 2 * w / 3 else 2
+        cap = abs(x + 0.5 - w / 2) * 2 / w
+        for y in range(base - h + int(cap * 2), base + 1):
+            tone = face + 1 if y < base - h + 2 else face
+            if striated and x % 2 and y % 3 == 0:
+                tone = max(1, tone - 1)
+            put(img, x0 + x, y, t[min(7, tone)])
+
+
+def tablet(img, cx, cy, w, h, t):
+    """A flat hexagonal tablet tilted toward the eye, its thin edge showing below."""
+    for y in range(-h, h + 3):
+        for x in range(-w, w + 1):
+            inside = abs(y) <= h and abs(x) <= w - max(0, abs(y) * 2 - h)
+            edge = h < y <= h + 2 and abs(x) <= w - (y - h) - 1
+            if inside:
+                put(img, cx + x, cy + y, t[7 if (x, y) == (-w // 2, -h // 2) else 6 if x + y < 0 else 5])
+            elif edge:
+                put(img, cx + x, cy + y, t[2 if x > 0 else 3])
+
+
+def bubbles(img, spheres, t, banded=False):
+    for cx, cy, r in spheres:
+        for y in range(SIZE):
+            for x in range(SIZE):
+                d = math.hypot(x + 0.5 - cx, y + 0.5 - cy)
+                if d > r:
+                    continue
+                tone = 6 - int(((x - cx) + (y - cy)) / r * 2.2 + 2.2)
+                if banded and int(d * 1.6) % 2:
+                    tone -= 2
+                put(img, x, y, t[max(1, min(6, tone))])
+        put(img, int(cx - r / 2), int(cy - r / 2), t[7])
+
+
+def dendrite(img, rng, t):
+    def branch(x, y, angle, length, depth):
+        if depth == 0 or length < 1.5:
+            return
+        steps = int(length * 2)
+        for i in range(steps):
+            px, py = int(x + math.cos(angle) * i / 2), int(y + math.sin(angle) * i / 2)
+            put(img, px, py, t[rng.choice((4, 5, 6))])
+            if depth > 2:
+                put(img, px + 1, py, t[3])
+        x2, y2 = x + math.cos(angle) * length, y + math.sin(angle) * length
+        branch(x2, y2, angle - rng.uniform(0.4, 0.8), length * 0.68, depth - 1)
+        branch(x2, y2, angle + rng.uniform(0.3, 0.7), length * 0.68, depth - 1)
+    branch(4, 14, -0.95, 6.0, 4)
+
+
+def outline(img, colour):
+    out = img.copy()
+    for y in range(SIZE):
+        for x in range(SIZE):
+            if img.getpixel((x, y))[3] == 0 and any(0 <= x + dx < SIZE and 0 <= y + dy < SIZE and img.getpixel((x + dx, y + dy))[3]
+                                                    for dx, dy in ORTHO):
+                out.putpixel((x, y), colour + (255,))
+    return out
+
+
+def paint_habit(name):
+    rng = random.Random("raw-" + name)
+    t = ramp(raw_palette(name, rng))
+    habit = HABIT.get(name)
+    if habit is None:
+        img = paint_raw(name)
+        if name in EARTHY:
+            return img
+    else:
+        img = Image.new("RGBA", (SIZE, SIZE), (0, 0, 0, 0))
+    if habit == "cube":
+        iso_cube(img, 8, 1, 3, t, name in STRIATED)
+        iso_cube(img, 1, 3, 5, t, name in STRIATED)
+    elif habit == "octa":
+        octahedron(img, 10, 5, 3, t)
+        octahedron(img, 6, 9, 5, t)
+    elif habit == "prism":
+        for x0, w, h in ((2, 4, 9), (9, 4, 7), (5, 5, 12)):
+            prism(img, x0, 14, w, h, t, name in STRIATED)
+    elif habit == "plate":
+        tablet(img, 9, 4, 5, 2, t)
+        tablet(img, 6, 9, 6, 3, t)
+    elif habit == "botryoid":
+        bubbles(img, [(5, 10, 4.2), (10.5, 9, 4.0), (8, 4.8, 3.4), (12, 13, 2.6)], t, banded=name == "malachite")
+    elif habit == "dendrite":
+        dendrite(img, rng, t)
+    if name in METALLIC:
+        for (x, y) in [(x, y) for y in range(SIZE) for x in range(SIZE) if img.getpixel((x, y))[3]]:
+            if img.getpixel((x, y))[:3] == t[6] and rng.random() < 0.18:
+                img.putpixel((x, y), t[7] + (255,))
+    if name in TARNISH:
+        for y in range(SIZE):
+            for x in range(SIZE):
+                patch = random.Random(f"{name}{x // 3}{y // 3}")
+                if img.getpixel((x, y))[3] and patch.random() < TARNISH[name]:
+                    hue = BORNITE[patch.randrange(len(BORNITE))]
+                    img.putpixel((x, y), hue[1 + (x + y) % 3] + (255,))
+    return outline(img, t[0])
+
+
 def paint_needles(name, palette=None):
     """A radiating spray of needles from one root, as stibnite and bismuthinite grow."""
     rng = random.Random("raw-" + name)
@@ -640,7 +807,7 @@ if __name__ == "__main__":
         if name in VANILLA_RAW:
             (OUT.parent / "item" / f"raw_{name}.png").unlink(missing_ok=True)
             continue
-        (paint_needles(name) if name in NEEDLES else paint_raw(name)).save(OUT.parent / "item" / f"raw_{name}.png")
+        (paint_needles(name) if name in NEEDLES or name == "stibnite" else paint_habit(name)).save(OUT.parent / "item" / f"raw_{name}.png")
     print(f"wrote {len(textures)} ores x {len(GRADES)} grades x {VARIANTS} variants and {len(rocks)} rocks to {OUT}")
     if len(sys.argv) > 1:
         contact_sheet(textures, sys.argv[1])

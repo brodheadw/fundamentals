@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- Ores and raw minerals redrawn in their real habits and lusters: galena and pyrite as metal cubes, magnetite, cuprite and garnet as octahedra, beryl, tourmaline and cassiterite as prisms, molybdenite and graphite as tablets, malachite and hematite as botryoidal masses, native silver as wire, bornite and native bismuth with their iridescent tarnish. Ore grains cast a shadow in the rock.
 - Create's crushed ores are named for what they are, crushed ore: Crushed Iron Ore (ground hematite, magnetite, goethite or roasted siderite, an oxide, not metal), Crushed Copper Ore, Crushed Cinnabar and so on, not "Crushed Raw Iron".
 - Every sulfide roasts only in a heated basin with air, where its sulfur dioxide is caught: bornite, chalcocite and covellite to copper calcine, cobaltite, nickel converter matte, stibnite and bismuthinite now follow chalcopyrite, galena, pentlandite and sphalerite off the campfire and out of the smoker. Carbonates and tin concentrate still roast on a fire. The guide says so.
 - Copper comes from its ores. Vanilla copper ore no longer generates; what's left of it in old chunks is native copper (Native Copper Ore, mining Native Copper), which is rare and now also turns up in desert, savanna and badlands oxide caps. Tenorite (CuO), black, joins cuprite, malachite and azurite in the oxide caps and smelts to copper in the bloomery. The sulfides (chalcopyrite, bornite, chalcocite, covellite) are in porphyry stocks under hills and mountains and in pyrite lodes.
