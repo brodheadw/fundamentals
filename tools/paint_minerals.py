@@ -74,6 +74,7 @@ P = {
     "malachite": ((14, 66, 44), (28, 110, 72), (62, 156, 106), (140, 214, 170)),
     "azurite": ((16, 28, 92), (30, 54, 148), (60, 94, 196), (140, 172, 240)),
     "cuprite": ((66, 12, 18), (122, 24, 32), (168, 46, 50), (228, 122, 112)),
+    "tenorite": ((18, 18, 20), (40, 40, 44), (66, 64, 70), (104, 100, 106)),
     "native_copper": ((112, 56, 32), (170, 96, 60), (208, 136, 94), (244, 196, 160)),
     "galena": ((34, 38, 52), (66, 72, 94), (104, 112, 138), (206, 214, 232)),
     "sphalerite": ((44, 26, 12), (88, 54, 24), (132, 88, 38), (204, 158, 80)),
@@ -145,6 +146,8 @@ RECIPES = {
     "malachite": [("banded", 5, 6, 10), ("speck", 3)],
     "azurite": [("blob", 5, 4, 8), ("companion", "malachite", 4), ("speck", 2)],
     "cuprite": [("blob", 5, 4, 7), ("companion", "native_copper", 3), ("speck", 3)],
+    "tenorite": [("blob", 4, 3, 6), ("speck", 5)],
+    "native_copper": [("smear", 2, 3, 6), ("speck", 6)],
     "galena": [("crystals", "cube", 5, 1), ("blob", 2, 3, 5), ("speck", 4)],
     "sphalerite": [("blob", 6, 4, 8), ("speck", 4)],
     "smithsonite": [("crystals", "knob", 5, 1), ("speck", 4)],
@@ -576,7 +579,7 @@ def paint_rocks():
 
 SHEET_ORDER = [
     "bastnasite", "monazite", "xenotime", "ion_adsorption_clay", "loparite", "euxenite", "thortveitite",
-    "chalcopyrite", "bornite", "chalcocite", "covellite", "malachite", "azurite", "cuprite",
+    "chalcopyrite", "bornite", "chalcocite", "covellite", "malachite", "azurite", "cuprite", "tenorite", "native_copper",
     "bauxite", "galena", "sphalerite", "smithsonite", "hemimorphite", "cassiterite",
     "hematite", "magnetite", "goethite", "siderite", "pyrite", "native_sulfur", "pyrolusite", "pentlandite", "nickel_laterite",
     "chromite", "wolframite", "scheelite", "molybdenite", "cobaltite", "ilmenite", "rutile",

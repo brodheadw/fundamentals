@@ -7,6 +7,8 @@
     "fundamentals:raw_chalcopyrite",
     "fundamentals:raw_covellite",
     "fundamentals:raw_cuprite",
-    "fundamentals:raw_malachite"
+    "fundamentals:raw_malachite",
+    "fundamentals:raw_tenorite",
+    "minecraft:raw_copper"
   ]
 }

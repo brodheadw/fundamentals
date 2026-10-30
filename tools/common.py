@@ -29,7 +29,7 @@ def write_lang(lang):
 
 
 # Ores whose raw form is the vanilla item rather than one of ours.
-VANILLA_RAW = {"native_gold": "minecraft:raw_gold"}
+VANILLA_RAW = {"native_gold": "minecraft:raw_gold", "native_copper": "minecraft:raw_copper"}
 
 
 def raw_item(mineral):

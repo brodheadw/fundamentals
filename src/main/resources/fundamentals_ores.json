@@ -132,6 +132,17 @@
       "mineral": "cuprite"
     },
     {
+      "name": "tenorite_ore",
+      "soft": false,
+      "mineral": "tenorite"
+    },
+    {
+      "name": "native_copper_ore",
+      "soft": false,
+      "mineral": "native_copper",
+      "raw": "minecraft:raw_copper"
+    },
+    {
       "name": "bauxite_ore",
       "soft": false,
       "mineral": "bauxite"

@@ -83,6 +83,19 @@ public class MineralTests {
                 .stream().anyMatch(step -> step.stream().anyMatch(f -> f.is(placed)));
     }
 
+    @GameTest(template = "empty")
+    public void copperComesFromItsOresNotFromVanillaCopperOre(GameTestHelper helper) {
+        ServerLevel level = helper.getLevel();
+        ResourceKey<PlacedFeature> vanilla = ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.withDefaultNamespace("ore_copper"));
+        helper.assertTrue(level.registryAccess().registryOrThrow(Registries.BIOME).getOrThrow(Biomes.PLAINS).getGenerationSettings().features()
+                .stream().noneMatch(step -> step.stream().anyMatch(f -> f.is(vanilla))), "plains should no longer place vanilla copper ore");
+        helper.assertTrue(generates(level, Biomes.DESERT, "oxide_cap"), "deserts should still carry copper oxide caps");
+        helper.assertTrue(recipe(helper, "fundamentals:bloomery/copper_from_tenorite").isPresent(), "tenorite should smelt to copper in the bloomery");
+        helper.assertTrue(BuiltInRegistries.BLOCK.containsKey(Fundamentals.id("tenorite_ore")) && BuiltInRegistries.BLOCK.containsKey(Fundamentals.id("native_copper_ore")),
+                "tenorite and native copper should be ores of their own");
+        helper.succeed();
+    }
+
     @GameTest(template = "empty", timeoutTicks = 400)
     public void eachNewMineralFormsInItsDeposit(GameTestHelper helper) {
         ServerLevel level = helper.getLevel();

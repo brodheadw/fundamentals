@@ -55,6 +55,8 @@ ORES = {
     "malachite": ("copper", "pickaxe", "stone"),
     "azurite": ("copper", "pickaxe", "stone"),
     "cuprite": ("copper", "pickaxe", "stone"),
+    "tenorite": ("copper", "pickaxe", "stone"),
+    "native_copper": ("copper", "pickaxe", "stone"),
     "bauxite": ("aluminum", "pickaxe", None),
     "galena": ("lead", "pickaxe", "stone"),
     "sphalerite": ("zinc", "pickaxe", "stone"),
@@ -170,6 +172,7 @@ DEPOSITS = {
                        (7, 11), None, (24, 40), "porphyry", (0, 70), 6, "rock"),
     "oxide_cap": ("blanket", "create:ochrum",
                   [("malachite", 0.20, "pockets"), ("azurite", 0.10, "pockets"), ("cuprite", 0.06, "disseminated"),
+                   ("tenorite", 0.05, "disseminated"), ("native_copper", 0.02, "pockets"),
                    ("hemimorphite", 0.06, "pockets")],
                   (8, 12), (5, 8), None, "arid_oxide", (60, 64), 7, "rock"),
     "bauxite_blanket": ("blanket", "laterite", [("bauxite", 0.50, "pockets")], (9, 13), (4, 7), None,
@@ -241,6 +244,8 @@ PLACERS = {
 REMOVED = {
     "vanilla_iron": ["minecraft:ore_iron_upper", "minecraft:ore_iron_middle", "minecraft:ore_iron_small"],
     "create_zinc": ["create:zinc_ore"],
+    # native copper is rare; the copper you find is in sulfide and oxide ores
+    "vanilla_copper": ["minecraft:ore_copper", "minecraft:ore_copper_large"],
 }
 TFMG_SWITCHED_OFF = ("lead_ore", "lithium_ore", "nickel_ore")
 TFMG_METAL_LAYERS = {"tfmg:galena", "tfmg:bauxite"}

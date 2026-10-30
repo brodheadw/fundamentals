@@ -370,7 +370,8 @@ def names():
         write(ASSETS / f"models/item/{name}.json", {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/{name}"}})
     write_lang(lang)
     # the pack's gunpowder is black powder, corned from saltpetre, charcoal and sulfur
-    write(ASSETS.parent / "minecraft/lang/en_us.json", {"item.minecraft.gunpowder": "Black Powder"})
+    vanilla_lang = ASSETS.parent / "minecraft/lang/en_us.json"
+    write(vanilla_lang, {**json.loads(vanilla_lang.read_text()), "item.minecraft.gunpowder": "Black Powder"})
 
 
 def main():

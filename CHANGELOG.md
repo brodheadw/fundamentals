@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- Copper comes from its ores. Vanilla copper ore no longer generates; what's left of it in old chunks is native copper (Native Copper Ore, mining Native Copper), which is rare and now also turns up in desert, savanna and badlands oxide caps. Tenorite (CuO), black, joins cuprite, malachite and azurite in the oxide caps and smelts to copper in the bloomery. The sulfides (chalcopyrite, bornite, chalcocite, covellite) are in porphyry stocks under hills and mountains and in pyrite lodes.
 - Molten slag, metal and silicon poured out creep as their viscosity lets them, slag nearly as slowly as lava and reaching as far, and like lava they set alight what they touch and burn whatever wades in.
 - A smokestack takes the coke ovens' furnace gas and flares it off, as it took their carbon dioxide; ovens venting to a stack no longer stall full of gas.
 - The millwright's gearing, before iron: an Oak Shaft (two stripped logs make six) and Oak Cogwheels, an oak rim and hub with pale hornbeam teeth, made from it with planks. They turn as Create's do but snap to sticks above 64 RPM or under more than 1,024 su of load, and a steam engine will not take an oak crankshaft. A water wheel or windmill bearing can be built on an oak shaft.

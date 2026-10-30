@@ -29,6 +29,7 @@ public final class BaseMetalMaterials {
         mineral("malachite", "copper", "Cu2CO3(OH)2", 0.50, 0);
         mineral("azurite", "copper", "Cu3(CO3)2(OH)2", 0.48, 0);
         mineral("cuprite", "copper", "Cu2O", 0.78, 0);
+        mineral("tenorite", "copper", "CuO", 0.80, 0);
         mineral("native_copper", "copper", "Cu", 1.13, 0);
 
         mineral("bauxite", "aluminum", "Al(OH)3 + AlO(OH)", 0.32, 0);

@@ -26,6 +26,20 @@
       },
       {
         "state": {
+          "Name": "fundamentals:tenorite_ore"
+        },
+        "fraction": 0.05,
+        "style": "disseminated"
+      },
+      {
+        "state": {
+          "Name": "fundamentals:native_copper_ore"
+        },
+        "fraction": 0.02,
+        "style": "pockets"
+      },
+      {
+        "state": {
           "Name": "fundamentals:hemimorphite_ore"
         },
         "fraction": 0.06,

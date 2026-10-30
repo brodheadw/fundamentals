@@ -1,3 +1,6 @@
 {
-  "item.minecraft.gunpowder": "Black Powder"
+  "item.minecraft.gunpowder": "Black Powder",
+  "block.minecraft.copper_ore": "Native Copper Ore",
+  "block.minecraft.deepslate_copper_ore": "Deepslate Native Copper Ore",
+  "item.minecraft.raw_copper": "Native Copper"
 }
