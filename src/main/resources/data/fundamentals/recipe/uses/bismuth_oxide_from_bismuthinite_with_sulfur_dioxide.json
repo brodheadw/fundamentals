@@ -1,0 +1,27 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_bismuthinite"
+    },
+    {
+      "item": "fundamentals:raw_bismuthinite"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "tfmg:air"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:bismuth_oxide",
+      "count": 2
+    },
+    {
+      "id": "fundamentals:sulfur_dioxide",
+      "amount": 250
+    }
+  ],
+  "heat_requirement": "heated"
+}

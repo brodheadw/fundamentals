@@ -252,12 +252,19 @@ def roast(ore, roasted, name=None, raw=True):
                                                    "result": {"id": f"fundamentals:{roasted}"}, "experience": 0.1, "cookingtime": time})
 
 
+# a sulfide gives up its sulfur as sulfur dioxide when it roasts, so it roasts only where the gas is caught: a heated basin with air
+def sulfide_roast(ore, roasted, name=None, raw=True):
+    feed = f"{'raw_' if raw else ''}{ore}"
+    mixing(f"{name or roasted}_from_{ore}_with_sulfur_dioxide", item(feed, 2) + [fluid("tfmg:air", 500)],
+           [result(roasted, 2), result_fluid("sulfur_dioxide", 250)], "heated")
+
+
 def vat(name, items, fluid_id, amount, results, machines=("tfmg:mixing",), heat="heated"):
     common.vat(USES / f"{name}.json", items + [fluid(fluid_id, amount)], results, machines, heat)
 
 
 def cobalt():
-    roast("cobaltite", "roasted_cobaltite")
+    sulfide_roast("cobaltite", "roasted_cobaltite")
     vat("cobalt_ingot", item("roasted_cobaltite", 2), "tfmg:hydrogen", 500, [result("cobalt_ingot", 2)])
     mixing("cobalt_blue", item("roasted_cobaltite") + item("tfmg:bauxite_powder", 2), [result("minecraft:blue_dye", 4)], "superheated")
 
@@ -273,7 +280,7 @@ def copper_molybdenum_rhenium():
 
 def copper_sulfides():
     for ore in ("bornite", "chalcocite", "covellite"):
-        roast(ore, "copper_calcine", f"copper_calcine_from_{ore}")
+        sulfide_roast(ore, "copper_calcine")
     for feed in ("roasted_chalcopyrite", "copper_calcine"):
         write(DATA / f"recipe/bloomery/copper_matte_from_{feed}.json", {"type": "fundamentals:bloomery", "ingredient": {"item": f"fundamentals:{feed}"},
                                                                        "result": {"id": "fundamentals:copper_matte_dust", "count": 1}, "byproduct": {"id": "tfmg:slag", "count": 1}})
@@ -406,7 +413,7 @@ def zinc():
 
 
 def nickel():
-    roast("converter_matte_dust", "nickel_oxide", raw=False)
+    sulfide_roast("converter_matte_dust", "nickel_oxide", raw=False)
     mixing("ferronickel", item("roasted_pentlandite") + item("minecraft:charcoal"), [result("ferronickel_ingot"), result("tfmg:slag")], "superheated")
     mixing("ferronickel_from_laterite", item("raw_nickel_laterite", 4) + item("minecraft:charcoal", 2),
            [result("ferronickel_ingot"), result("tfmg:slag", 2)], "superheated")
@@ -844,7 +851,7 @@ def graphite():
 
 
 def antimony():
-    roast("stibnite", "antimony_oxide")
+    sulfide_roast("stibnite", "antimony_oxide")
     mixing("antimony_ingot", item("antimony_oxide", 2) + item("minecraft:charcoal") + item("soda_ash"), [result("antimony_ingot", 2), result("tfmg:slag")], "heated")
     mixing("antimonial_lead", tag("c:ingots/lead", 8) + item("antimony_nugget", 3), [result("antimonial_lead_ingot", 8)], "heated")
 
@@ -1275,7 +1282,7 @@ def corundum():
 
 
 def bismuth():
-    roast("bismuthinite", "bismuth_oxide")
+    sulfide_roast("bismuthinite", "bismuth_oxide")
     mixing("bismuth_ingot", item("bismuth_oxide", 2) + item("minecraft:charcoal") + item("soda_ash"), [result("bismuth_ingot", 2), result("tfmg:slag")], "heated")
     # Native bismuth melts out of its rock at 271 °C, as it was liquated in iron pipes over a fire.
     for kind, time in (("smelting", 200), ("blasting", 100)):

@@ -93,6 +93,12 @@ public class MineralTests {
         helper.assertTrue(recipe(helper, "fundamentals:bloomery/copper_from_tenorite").isPresent(), "tenorite should smelt to copper in the bloomery");
         helper.assertTrue(BuiltInRegistries.BLOCK.containsKey(Fundamentals.id("tenorite_ore")) && BuiltInRegistries.BLOCK.containsKey(Fundamentals.id("native_copper_ore")),
                 "tenorite and native copper should be ores of their own");
+        // a sulfide roasting gives off sulfur dioxide, so none roasts in the open
+        for (String open : new String[] {"copper_calcine_from_bornite_campfire_cooking", "copper_calcine_from_chalcocite_smoking",
+                "roasted_cobaltite_smoking", "nickel_oxide_campfire_cooking", "antimony_oxide_smoking", "bismuth_oxide_campfire_cooking"}) {
+            helper.assertTrue(recipe(helper, "fundamentals:roasting/" + open).isEmpty(), open + " should roast only in a basin that catches its gas");
+        }
+        helper.assertTrue(recipe(helper, "fundamentals:uses/copper_calcine_from_bornite_with_sulfur_dioxide").isPresent(), "bornite should roast in a heated basin with air");
         helper.succeed();
     }
 
@@ -188,7 +194,7 @@ public class MineralTests {
 
     @GameTest(template = "empty")
     public void stibniteRunsToTheBatteryGrid(GameTestHelper helper) {
-        helper.assertTrue(takes(recipe(helper, "fundamentals:roasting/antimony_oxide_campfire_cooking").orElseThrow(), "fundamentals:raw_stibnite"),
+        helper.assertTrue(takes(recipe(helper, "fundamentals:uses/antimony_oxide_from_stibnite_with_sulfur_dioxide").orElseThrow(), "fundamentals:raw_stibnite"),
                 "stibnite should roast to the oxide");
         step(helper, "fundamentals:uses/antimony_ingot", "fundamentals:antimony_oxide", "fundamentals:antimony_ingot");
         step(helper, "fundamentals:uses/antimonial_lead", "fundamentals:antimony_nugget", "fundamentals:antimonial_lead_ingot");

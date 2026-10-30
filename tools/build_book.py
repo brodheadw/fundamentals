@@ -619,7 +619,7 @@ def oxidation():
 def metals():
     category("metals", "The other metals", "Cobalt, zinc, nickel and Mond's carbonyl, the porphyry chain (copper, molybdenum and the rhenium hiding in it), tungsten, chromium, tin, titanium, the silver in lead, zirconium and hafnium, beryllium, aluminium, lithium, uranium, graphite, antimony, niobium and tantalum, potash and gold, silicon from quartz to wafer, and germanium, indium, gallium and cadmium.", "fundamentals:cobalt_ingot", 3)
     entry("metals", "cobalt", "Cobalt", "fundamentals:cobalt_ingot", pages_of(
-        "Cobaltite is a cobalt arsenide-sulfide from the silver-cobalt veins in calcite. Roast it on a campfire or in a smoker to drive off the arsenic and sulfur and leave the oxide. "
+        "Cobaltite is a cobalt arsenide-sulfide from the silver-cobalt veins in calcite. Roast it in a heated basin with air to drive off the arsenic and sulfur and leave the oxide. "
         "Cobalt melts at 1,495 °C. The Congo's copper-cobalt ore was once smelted in electric furnaces to a white alloy of cobalt, copper and iron and refined from that; "
         "here the oxide is reduced under hydrogen, as molybdenum is: two roasted cobaltite and 500 mB of hydrogen in a heated chemical vat give two ingots. "
         "Cobalt is half of SmCo and a tenth of the superalloy. "
@@ -702,7 +702,7 @@ def metals():
     entry("metals", "mond", "Mond nickel and its poisons", "fundamentals:nickel_pellets", pages_of(
         "Ludwig Mond found in 1890 that carbon monoxide carries nickel off as a gas at 50 °C and gives it back when heated past 180 °C, and iron, copper and cobalt hardly at all (Mond, Langer and Quincke, Journal of the Chemical Society, 1890). "
         "His refinery at Clydach in Wales has run on it since 1902, and Copper Cliff in Sudbury runs it under pressure.", "The Mond process") + pages_of(
-        "Converter matte roasted dead on a campfire or in a smoker burns off its sulfur and leaves nickel oxide. Two nickel oxide and 1,000 mB of water gas in a heated chemical vat give 500 mB of nickel carbonyl, "
+        "Converter matte roasted dead in a heated basin with air burns off its sulfur and leaves nickel oxide. Two nickel oxide and 1,000 mB of water gas in a heated chemical vat give 500 mB of nickel carbonyl, "
         "the water gas's hydrogen reducing the oxide at 400 °C and its monoxide taking the nickel, Ni + 4 CO to Ni(CO)4; one time in ten the residue is a platinum group concentrate, as Clydach's residues fed the Acton refinery.") + pages_of(
         "500 mB of carbonyl in a heated vat decomposes at about 230 °C on hot pellets to two nickel pellets, 99.97 per cent nickel, and 500 mB of the gas goes back round. Neither gas reaction needs an industrial mixer, so the first nickel can make that mixer's steel mechanism. "
         "A heated press over a basin squeezes a pellet into a nickel ingot.") + pages_of(
@@ -713,8 +713,7 @@ def metals():
         "Only Create's diving helmet on a filled backtank keeps it out, and it burns two of the tank's air a second doing so. Keep the carbonyl in closed pipes and tanks, and wear the mask to break into them.") + pages_of(
         "The dusts of the nickel smelter cause lung and nasal cancer: the men who roasted and leached matte at Clydach died of them at many times the expected rate (Doll, 1958), "
         "and the International Agency for Research on Cancer puts nickel compounds in its first group. Nickel matte, converter matte, roasted pentlandite and nickel oxide held in the hand or stirred in a basin are breathed by everyone near. "
-        "And a sulfide roasting on a lit campfire or in a lit smoker or furnace, cobaltite, stibnite or matte, gives off sulfur dioxide that stings anyone within two blocks. "
-        "Roasted in a heated basin with air instead, the gas is caught to make acid (see Sulfuric acid).", "The dusts and the fume"), 4)
+        "And sulfides roast only in a heated basin with air, where their sulfur dioxide is caught to make acid (see Sulfuric acid); a sulfide left in a lit campfire or furnace still fumes and stings anyone within two blocks.", "The dusts and the fume"), 4)
     entry("metals", "chromium", "Ferrochrome and chromium", "fundamentals:ferrochrome_ingot", pages_of(
         "Chromite is chromium's only ore, black seams in the gabbro of the deep layered intrusion. A millstone or crushing wheels grind it to a brown powder, and a wash under an encased fan "
         "leaves the heavy chromite behind as concentrate, five eighths of what goes in. Iron in chromite reduces along with the chromium, so smelting gives not chromium but ferrochrome: "
@@ -900,7 +899,7 @@ def metals():
         "Stibnite, Sb2S3, grows in sprays of lead-grey needles that bend in the hand. It is a mineral of low-temperature hydrothermal veins in quartz, often with a little gold, "
         "and Xikuangshan in Hunan, the Tin Mine Mountain that was never tin, has given the world more antimony than anywhere since 1897. "
         "Here it fills quartz veins in mountain country, and rides in the gold-quartz veins.", "Stibnite") + pages_of(
-        "Roasted on a campfire or in a smoker, stibnite burns to antimony trioxide, the white fume a real volatilising roaster collects in its bag house, and gives off sulfur dioxide as every sulfide roast does. "
+        "Roasted in a heated basin with air, stibnite burns to antimony trioxide, the white fume a real volatilising roaster collects in its bag house, and gives off sulfur dioxide as every sulfide roast does. "
         "Two oxide, a charcoal and a soda ash for flux, heated, reduce to two antimony ingots and a slag. Antimony is brittle, bluish-white, and expands as it freezes.", "Roasting and reduction") + pages_of(
         "Lead alone is too soft for a battery grid. Eight lead ingots and three antimony nuggets, heated, make eight antimonial lead, about four per cent antimony, "
         "the hard lead of the lead-acid battery since Planté's and Faure's; pressed to plate and sawn, it is the grid of a lead-acid cell (see Batteries, under Power). "
@@ -1036,7 +1035,7 @@ def metals():
         "Bismuthinite, Bi2S3, is stibnite's twin, lead-grey needles in sprays, and lies with tin and tungsten: in the greisen of the tin veins, as in Cornwall and Bolivia, and in the tungsten skarns, "
         "as at Shizhuyuan in Hunan, one of the largest bismuth deposits there is. Native bismuth, the metal itself, silvery with a pink cast and dull where it has tarnished, "
         "lies in the five-element veins of silver, cobalt, nickel, bismuth and uranium, as at Schneeberg in Saxony: here in the pitchblende veins.", "Bismuth") + pages_of(
-        "Bismuthinite roasts on a campfire or in a smoker to bismuth oxide, bismite, yellow, and gives off sulfur dioxide. Two oxide, a charcoal and a soda ash, heated, reduce to two bismuth ingots and a slag. "
+        "Bismuthinite roasts in a heated basin with air to bismuth oxide, bismite, yellow, and gives off sulfur dioxide. Two oxide, a charcoal and a soda ash, heated, reduce to two bismuth ingots and a slag. "
         "Native bismuth melts at 271 °C, so a furnace sweats it out of its rock, as Saxon miners liquated it in iron pipes over a wood fire.", "Smelting") + pages_of(
         "Bismuth sits next to lead in the periodic table and is nearly as dense, with little of its poison, so it replaces lead. Tin and bismuth melt together at 138 °C, the eutectic Sn42Bi58: "
         "a tin and a bismuth ingot, heated, make eight solder, as tin and lead do, for low-temperature lead-free soldering.", "Solder") + pages_of(

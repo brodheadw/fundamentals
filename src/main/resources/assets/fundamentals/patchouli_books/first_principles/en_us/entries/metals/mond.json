@@ -15,7 +15,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Converter matte roasted dead on a campfire or in a smoker burns off its sulfur and leaves nickel oxide."
+      "text": "Converter matte roasted dead in a heated basin with air burns off its sulfur and leaves nickel oxide."
     },
     {
       "type": "patchouli:text",
@@ -53,11 +53,11 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Nickel matte, converter matte, roasted pentlandite and nickel oxide held in the hand or stirred in a basin are breathed by everyone near. And a sulfide roasting on a lit campfire or in a lit smoker or furnace, cobaltite, stibnite or matte, gives off sulfur dioxide that stings anyone within two blocks."
+      "text": "Nickel matte, converter matte, roasted pentlandite and nickel oxide held in the hand or stirred in a basin are breathed by everyone near."
     },
     {
       "type": "patchouli:text",
-      "text": "Roasted in a heated basin with air instead, the gas is caught to make acid (see Sulfuric acid)."
+      "text": "And sulfides roast only in a heated basin with air, where their sulfur dioxide is caught to make acid (see Sulfuric acid); a sulfide left in a lit campfire or furnace still fumes and stings anyone within two blocks."
     }
   ]
 }

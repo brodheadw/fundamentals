@@ -1,0 +1,27 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:converter_matte_dust"
+    },
+    {
+      "item": "fundamentals:converter_matte_dust"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 500,
+      "fluid": "tfmg:air"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:nickel_oxide",
+      "count": 2
+    },
+    {
+      "id": "fundamentals:sulfur_dioxide",
+      "amount": 250
+    }
+  ],
+  "heat_requirement": "heated"
+}
