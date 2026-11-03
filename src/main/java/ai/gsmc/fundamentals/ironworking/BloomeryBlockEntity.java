@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class BloomeryBlockEntity extends BlockEntity {
+public class BloomeryBlockEntity extends BlockEntity implements com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation {
 
     public static final int CAPACITY = 4;
     public static final int BURN_TICKS = 1200;
@@ -110,6 +110,22 @@ public class BloomeryBlockEntity extends BlockEntity {
         bloomery.burned = 0;
         level.setBlock(pos, state.setValue(BloomeryBlock.LIT, false), Block.UPDATE_ALL);
         bloomery.setChanged();
+    }
+
+    @Override
+    public boolean addToGoggleTooltip(java.util.List<net.minecraft.network.chat.Component> tooltip, boolean isPlayerSneaking) {
+        int loaded = ore.size();
+        ai.gsmc.fundamentals.goggles.Readout.status(tooltip, getBlockState().getBlock().getName(), lit() ? "burning" : hasProducts() ? "done" : "loading", 100 * burned / BURN_TICKS);
+
+        ai.gsmc.fundamentals.goggles.Readout.bar(tooltip, "charcoal", charcoal, CAPACITY, charcoal >= loaded && loaded > 0, charcoal + " / " + CAPACITY);
+        if (lit()) ai.gsmc.fundamentals.goggles.Readout.bar(tooltip, "burn", burned, BURN_TICKS, true, (BURN_TICKS - burned) / 20 + " s");
+        if (!lit() && !hasProducts()) {
+            if (loaded == 0) ai.gsmc.fundamentals.goggles.Readout.needs(tooltip, "ore");
+            else if (charcoal < loaded) ai.gsmc.fundamentals.goggles.Readout.needs(tooltip, "charcoal", loaded);
+            else ai.gsmc.fundamentals.goggles.Readout.needs(tooltip, charcoal >= HOT * loaded ? "light_hot" : "light", HOT * loaded);
+        }
+        if (hasProducts()) ai.gsmc.fundamentals.goggles.Readout.needs(tooltip, "take");
+        return true;
     }
 
     void takeProducts(BlockPos front) {

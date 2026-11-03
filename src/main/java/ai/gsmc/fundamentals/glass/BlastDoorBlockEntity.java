@@ -9,7 +9,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.block.state.BlockState;
 
 /** The door's drive: open while the grid feeds it, drawing a motor's load as the leaves move; shut by its accumulator when the grid is cut. */
-public class BlastDoorBlockEntity extends ElectricBlockEntity {
+public class BlastDoorBlockEntity extends ElectricBlockEntity implements com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation {
 
     /** Ticks for the leaves to travel: three seconds each way. */
     public static final int TRAVEL = 60;
@@ -62,6 +62,16 @@ public class BlastDoorBlockEntity extends ElectricBlockEntity {
         progress = Math.clamp(progress + (opening ? 1 : -1), 0, TRAVEL);
         if (!level.isClientSide && opening && progress == TRAVEL && !getBlockState().getValue(BlastDoorBlock.OPEN)) setOpen(true);
         if (wasRunning != (opening && progress < TRAVEL)) updateNextTick();
+    }
+
+    @Override
+    public boolean addToGoggleTooltip(java.util.List<net.minecraft.network.chat.Component> tooltip, boolean isPlayerSneaking) {
+        int volts = getData().getVoltage();
+        ai.gsmc.fundamentals.goggles.Readout.status(tooltip, getBlockState().getBlock().getName(), moving() ? (opening ? "opening" : "closing") : progress == TRAVEL ? "open" : "shut");
+        ai.gsmc.fundamentals.goggles.Readout.bar(tooltip, "voltage", volts, 2 * MIN_VOLTS, volts >= MIN_VOLTS, volts + " V");
+        ai.gsmc.fundamentals.goggles.Readout.bar(tooltip, "travel", progress, TRAVEL, true, 100 * progress / TRAVEL + "% open");
+        if (!live()) ai.gsmc.fundamentals.goggles.Readout.needs(tooltip, "volts_door", MIN_VOLTS);
+        return true;
     }
 
     /** Opens or shuts the nine parts' collision together. */

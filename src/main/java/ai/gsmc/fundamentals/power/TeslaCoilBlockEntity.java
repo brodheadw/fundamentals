@@ -19,7 +19,7 @@ import net.minecraft.world.phys.Vec3;
  * The coil draws from the grid while it charges its top-load, a light load once it is full, and empties it into an enemy
  * as an arc. A full charge is a second of a kilowatt at the grid's voltage; below 100 V the gap will not break down.
  */
-public class TeslaCoilBlockEntity extends ElectricBlockEntity {
+public class TeslaCoilBlockEntity extends ElectricBlockEntity implements com.simibubi.create.api.equipment.goggles.IHaveGoggleInformation {
     public static final int MIN_VOLTS = 100, CHARGE_TICKS = 20;
     public static final double REACH = 8;
     public static final float DAMAGE = 6F;
@@ -56,7 +56,21 @@ public class TeslaCoilBlockEntity extends ElectricBlockEntity {
         boolean wasCharged = charged();
         if (live() && !charged()) charge++;
         if (charged()) arc(server);
-        if (wasCharged != charged()) updateNextTick();
+        if (wasCharged != charged()) {
+            updateNextTick();
+            sendData();
+        }
+    }
+
+    @Override
+    public boolean addToGoggleTooltip(java.util.List<net.minecraft.network.chat.Component> tooltip, boolean isPlayerSneaking) {
+        int volts = getData().getVoltage();
+        ai.gsmc.fundamentals.goggles.Readout.status(tooltip, getBlockState().getBlock().getName(), !live() ? "unpowered" : charged() ? "charged" : "charging");
+        ai.gsmc.fundamentals.goggles.Readout.bar(tooltip, "voltage", volts, 2 * MIN_VOLTS, volts >= MIN_VOLTS, volts + " V");
+        ai.gsmc.fundamentals.goggles.Readout.bar(tooltip, "charge", charge, CHARGE_TICKS, charged(), 100 * charge / CHARGE_TICKS + "%");
+        if (!live()) ai.gsmc.fundamentals.goggles.Readout.needs(tooltip, "volts", MIN_VOLTS);
+        else if (charged()) ai.gsmc.fundamentals.goggles.Readout.needs(tooltip, "enemy", (int) REACH);
+        return true;
     }
 
     /** Empties a full charge into the nearest enemy in reach; true if it struck. */

@@ -134,6 +134,8 @@ public class MagnetomigrationCellBlockEntity extends BlockEntity implements IHav
         cut.ifPresent(c -> tooltip.add(indent(Component.translatable("goggles.fundamentals.magnetomigration_cell.heat", String.format("%.0f", head.celsius()),
                 String.format("%.0f", 100 * c.contrast(head.celsius())), String.format("%.1f", line.period() / 20.0)))));
         tooltip.add(indent(Component.translatable("goggles.fundamentals.magnetomigration_cell.feed", held(head.feed))));
+        ai.gsmc.fundamentals.goggles.Readout.bar(tooltip, "feed", head.feed.getFluidAmount(), BATCH, head.feed.getFluidAmount() >= BATCH,
+                head.feed.getFluidAmount() + " / " + BATCH + " mB");
         tooltip.add(indent(Component.translatable("goggles.fundamentals.magnetomigration_cell.outlets", held(tail.near), held(tail.far))));
         return true;
     }

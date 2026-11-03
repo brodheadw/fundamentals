@@ -368,6 +368,9 @@ public class MixerSettlerBlockEntity extends BlockEntity implements IHaveGoggleI
         }
         long charged = battery.stages().stream().filter(s -> s.organic.getFluidAmount() >= s.batch()).count();
         long wet = battery.stages().stream().filter(s -> !s.aqueous.isEmpty()).count();
+        ai.gsmc.fundamentals.goggles.Readout.bar(tooltip, "stages_charged", charged, battery.size(), charged == battery.size(), charged + " / " + battery.size());
+        ai.gsmc.fundamentals.goggles.Readout.bar(tooltip, "settled", head.settled, battery.equilibration(), head.settled >= battery.equilibration(),
+                Math.max(0, (battery.equilibration() - head.settled) / 20) + " s left");
         tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler.progress", charged, battery.size(), wet)));
         tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler.ends", held(head.aqueous), held(battery.tail().aqueous))));
         tooltip.add(indent(Component.translatable("goggles.fundamentals.mixer_settler.products", held(head.out), held(battery.tail().out))));

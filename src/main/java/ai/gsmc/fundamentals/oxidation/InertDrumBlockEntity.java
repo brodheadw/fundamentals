@@ -174,6 +174,8 @@ public class InertDrumBlockEntity extends BaseContainerBlockEntity implements IH
             }
         }
         tooltip.add(indent(Component.translatable(key + "holds", stacks, items.size(), count)));
+        ai.gsmc.fundamentals.goggles.Readout.bar(tooltip, "blanket", gas, CAPACITY, gas > 0, gas + " mB");
+        ai.gsmc.fundamentals.goggles.Readout.bar(tooltip, "filled", stacks, items.size(), true, stacks + " / " + items.size());
         tooltip.add(indent(gas == 0 ? Component.translatable(key + "ageing").withStyle(ChatFormatting.RED)
                 : Component.translatable(key + "kept").withStyle(ChatFormatting.DARK_GREEN)));
         return true;

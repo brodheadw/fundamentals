@@ -29,4 +29,17 @@ public class TeslaTests {
             helper.assertTrue(zombie.getHealth() < full, "and it arcs into the zombie");
         });
     }
+
+    @GameTest(template = "empty", timeoutTicks = 20)
+    public void machinesReadOutLikeABoiler(GameTestHelper helper) {
+        BlockPos at = new BlockPos(1, 1, 1);
+        helper.setBlock(at, Electricity.teslaCoil());
+        java.util.List<net.minecraft.network.chat.Component> lines = new java.util.ArrayList<>();
+        TeslaCoilBlockEntity coil = helper.getBlockEntity(at);
+        helper.assertTrue(coil.addToGoggleTooltip(lines, false), "the coil reads out through goggles");
+        String text = lines.stream().map(net.minecraft.network.chat.Component::getString).reduce("", (a, b) -> a + "\n" + b);
+        helper.assertTrue(text.contains("|".repeat(ai.gsmc.fundamentals.goggles.Readout.SEGMENTS)) && text.contains("unpowered") && text.contains("Needs"),
+                "a status, a bar per factor and what it needs: " + text);
+        helper.succeed();
+    }
 }
