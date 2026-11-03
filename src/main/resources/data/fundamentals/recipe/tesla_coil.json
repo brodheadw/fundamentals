@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "IRI",
+    "CLC",
+    "CBC"
+  ],
+  "key": {
+    "I": {
+      "item": "minecraft:iron_ingot"
+    },
+    "R": {
+      "item": "minecraft:lightning_rod"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "L": {
+      "item": "minecraft:redstone_block"
+    },
+    "B": {
+      "item": "minecraft:copper_block"
+    }
+  },
+  "result": {
+    "id": "fundamentals:tesla_coil",
+    "count": 1
+  }
+}
