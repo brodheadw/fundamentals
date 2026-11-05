@@ -105,6 +105,9 @@ public class HeavyChemicalTests {
             helper.assertTrue(gives(purification, cake), "zinc dust cements out " + cake);
         }
         helper.assertTrue(gives(processing(helper, "fundamentals:uses/zinc_ingot"), "fundamentals:cadmium_sponge"), "a zinc retort distils cadmium first");
+        var blast = processing(helper, "fundamentals:uses/lead_bullion_from_blast_smelting");
+        helper.assertTrue(takes(blast, "fundamentals:roasted_galena") && takes(blast, "tfmg:coal_coke") && gives(blast, "fundamentals:lead_bullion_ingot"),
+                "roasted galena should smelt to bullion with coke, not only in the bloomery");
         Recipe<?> jarosite = recipe(helper, "fundamentals:uses/zinc_leach_liquor_from_residue").orElseThrow(() -> new AssertionError("no hot acid leach"));
         helper.assertTrue(takes(jarosite, "fundamentals:zinc_leach_residue"), "the hot acid leach takes the ferrite residue");
         helper.succeed();
