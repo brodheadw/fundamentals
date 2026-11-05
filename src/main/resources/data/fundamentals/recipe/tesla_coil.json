@@ -2,25 +2,28 @@
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
   "pattern": [
-    "IRI",
-    "CLC",
-    "CBC"
+    " A ",
+    "PSP",
+    "KGQ"
   ],
   "key": {
-    "I": {
-      "item": "minecraft:iron_ingot"
+    "A": {
+      "tag": "c:plates/aluminum"
     },
-    "R": {
-      "item": "minecraft:lightning_rod"
+    "P": {
+      "tag": "c:plates/copper"
     },
-    "C": {
-      "item": "minecraft:copper_ingot"
+    "S": {
+      "item": "tfmg:copper_spool"
     },
-    "L": {
-      "item": "minecraft:redstone_block"
+    "K": {
+      "item": "tfmg:electromagnetic_coil"
     },
-    "B": {
-      "item": "minecraft:copper_block"
+    "G": {
+      "item": "tfmg:spark_plug"
+    },
+    "Q": {
+      "item": "tfmg:capacitor_item"
     }
   },
   "result": {
