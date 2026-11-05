@@ -123,4 +123,13 @@ public class BatteryTests {
         accumulator(helper, "fundamentals:uses/accumulator_from_nickel_metal_hydride", "fundamentals:nickel_metal_hydride_cell");
         helper.succeed();
     }
+
+    @GameTest(template = "empty")
+    public void nickelCadmiumCellsGiveCadmiumAUse(GameTestHelper helper) {
+        var cell = processing(helper, "fundamentals:uses/nickel_cadmium_cell");
+        helper.assertTrue(takes(cell, "fundamentals:cadmium_ingot") && takes(cell, "fundamentals:nickel_hydroxide") && gives(cell, "fundamentals:nickel_cadmium_cell"),
+                "a cadmium anode and a nickel hydroxide cathode should make the cell");
+        accumulator(helper, "fundamentals:uses/accumulator_from_nickel_cadmium", "fundamentals:nickel_cadmium_cell");
+        helper.succeed();
+    }
 }

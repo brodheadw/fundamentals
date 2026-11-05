@@ -32,7 +32,7 @@ public final class Uses {
             "graphite", "potash", "gold_amalgam", "potassium_fluorotantalate",
             "lead_grid", "lead_paste", "pasted_lead_plate", "lead_dioxide_plate", "sponge_lead_plate", "lead_acid_cell", "manganese_sulfate",
             "cobalt_sulfate", "nmc_hydroxide", "nmc_cathode", "iron_phosphate", "lfp_cathode", "lithium_fluoride",
-            "lithium_hexafluorophosphate", "ethylene_carbonate", "nickel_hydroxide", "hydride_alloy", "nickel_metal_hydride_cell",
+            "lithium_hexafluorophosphate", "ethylene_carbonate", "nickel_hydroxide", "hydride_alloy", "nickel_metal_hydride_cell", "nickel_cadmium_cell",
             "polysilicon", "silicon_boule", "silicon_wafer", "zinc_leach_residue", "led_chip", "indium_tin_oxide",
             "vanadium_pentoxide", "cement_clinker", "gypsum", "plagioclase_feldspar", "phosphogypsum",
             "calomel", "copper_cement", "cobalt_cake", "anode_mud", "jarosite", "lead_silver_residue", "hydrotreating_catalyst",

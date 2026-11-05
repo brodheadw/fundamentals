@@ -120,6 +120,8 @@ public class NuclearTests {
         helper.assertTrue(takes(control, "fundamentals:hafnium_ingot") && !takes(control, "createnuclear:graphene"), "the control rod should be hafnium");
         helper.assertTrue(takes(recipe(helper, "fundamentals:createnuclear/control_rod_from_boron_carbide").orElseThrow(), "fundamentals:boron_carbide"),
                 "a control rod should also come from boron carbide");
+        helper.assertTrue(takes(recipe(helper, "fundamentals:createnuclear/control_rod_from_cadmium").orElseThrow(), "fundamentals:cadmium_ingot"),
+                "a control rod should also come from cadmium");
         Recipe<?> fuel = recipe(helper, "createnuclear:mechanical_crafting/uranium_rod").orElseThrow();
         helper.assertTrue(takes(fuel, "fundamentals:uranium_fuel_pellet") && takes(fuel, "fundamentals:zircaloy_tube"),
                 "a fuel rod should be our pellets in a Zircaloy tube; if not, data/createnuclear loaded before Create Nuclear's own");
