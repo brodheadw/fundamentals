@@ -131,6 +131,30 @@ public class HeavyChemicalTests {
     }
 
     @GameTest(template = "empty")
+    public void aSuperheatedMixerRoastsGalenaInAir(GameTestHelper helper) throws Exception {
+        var basinPos = new net.minecraft.core.BlockPos(1, 2, 1);
+        helper.setBlock(basinPos.below(), com.simibubi.create.AllBlocks.BLAZE_BURNER.getDefaultState()
+                .setValue(com.simibubi.create.content.processing.burner.BlazeBurnerBlock.HEAT_LEVEL, com.simibubi.create.content.processing.burner.BlazeBurnerBlock.HeatLevel.SEETHING));
+        helper.setBlock(basinPos, com.simibubi.create.AllBlocks.BASIN.getDefaultState());
+        helper.setBlock(basinPos.above(2), com.simibubi.create.AllBlocks.MECHANICAL_MIXER.getDefaultState());
+        com.simibubi.create.content.processing.basin.BasinBlockEntity basin = helper.getBlockEntity(basinPos);
+        basin.getInputInventory().insertItem(0, new net.minecraft.world.item.ItemStack(net.minecraft.core.registries.BuiltInRegistries.ITEM.get(
+                net.minecraft.resources.ResourceLocation.parse("fundamentals:raw_galena")), 64), false);
+        com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity mixer = helper.getBlockEntity(basinPos.above(2));
+        var find = com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity.class.getDeclaredMethod("getMatchingRecipes");
+        find.setAccessible(true);
+        var roast = processing(helper, "fundamentals:uses/roasted_galena_from_galena_with_sulfur_dioxide");
+        helper.assertTrue(!((java.util.List<?>) find.invoke(mixer)).contains(roast), "galena with no air should not roast");
+        var air = net.minecraft.core.registries.BuiltInRegistries.FLUID.get(net.minecraft.resources.ResourceLocation.parse("tfmg:air"));
+        var tanks = helper.getLevel().getCapability(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK, helper.absolutePos(basinPos), net.minecraft.core.Direction.UP);
+        helper.assertTrue(tanks.fill(new net.neoforged.neoforge.fluids.FluidStack(air, 1000), net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE) == 1000, "the basin should take air");
+        @SuppressWarnings("unchecked")
+        var recipes = (java.util.List<net.minecraft.world.item.crafting.Recipe<?>>) find.invoke(mixer);
+        helper.assertTrue(!recipes.isEmpty() && recipes.get(0) == roast, "galena in air over a superheated burner should roast, got " + recipes);
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
     public void zincIsWonWithItsByproducts(GameTestHelper helper) {
         for (String id : new String[] {"create:smelting/zinc_ingot_from_raw_ore", "create:blasting/zinc_ingot_from_crushed", "create:splashing/crushed_raw_zinc",
                 "fundamentals:roasting/zinc_oxide_from_sphalerite_smoking", "fundamentals:roasting/roasted_chalcopyrite_smoking",
