@@ -92,6 +92,14 @@ public class HeavyChemicalTests {
     }
 
     @GameTest(template = "empty")
+    public void deepslateFusesToBlackstone(GameTestHelper helper) {
+        var fused = processing(helper, "fundamentals:rock/blackstone_from_cobbled_deepslate");
+        helper.assertTrue(takes(fused, "minecraft:cobbled_deepslate") && gives(fused, "minecraft:blackstone"),
+                "cobbled deepslate should fuse to blackstone under a superheated press");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
     public void zincIsWonWithItsByproducts(GameTestHelper helper) {
         for (String id : new String[] {"create:smelting/zinc_ingot_from_raw_ore", "create:blasting/zinc_ingot_from_crushed", "create:splashing/crushed_raw_zinc",
                 "fundamentals:roasting/zinc_oxide_from_sphalerite_smoking", "fundamentals:roasting/roasted_chalcopyrite_smoking",

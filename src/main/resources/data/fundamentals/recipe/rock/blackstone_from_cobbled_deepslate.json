@@ -1,0 +1,14 @@
+{
+  "type": "create:compacting",
+  "ingredients": [
+    {
+      "item": "minecraft:cobbled_deepslate"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:blackstone"
+    }
+  ],
+  "heat_requirement": "superheated"
+}
