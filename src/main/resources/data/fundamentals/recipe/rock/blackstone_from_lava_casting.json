@@ -7,7 +7,7 @@
       "fluid": "minecraft:lava"
     }
   ],
-  "processing_time": 200,
+  "processing_time": 50,
   "results": [
     {
       "id": "minecraft:blackstone"
