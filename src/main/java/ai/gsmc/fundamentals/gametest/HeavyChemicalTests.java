@@ -96,6 +96,27 @@ public class HeavyChemicalTests {
         var fused = processing(helper, "fundamentals:rock/blackstone_from_cobbled_deepslate");
         helper.assertTrue(takes(fused, "minecraft:cobbled_deepslate") && gives(fused, "minecraft:blackstone"),
                 "cobbled deepslate should fuse to blackstone under a superheated press");
+        // a press runs the basin recipe with the most ingredients, so this must outrank the 2x2 crafting into polished deepslate
+        helper.assertTrue(fused.getIngredients().size() > 4, "fusing should take more than the four cobbled deepslate that craft polished deepslate");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty")
+    public void aSuperheatedPressPicksBlackstoneOverPolishedDeepslate(GameTestHelper helper) throws Exception {
+        var basinPos = new net.minecraft.core.BlockPos(1, 2, 1);
+        helper.setBlock(basinPos.below(), com.simibubi.create.AllBlocks.BLAZE_BURNER.getDefaultState()
+                .setValue(com.simibubi.create.content.processing.burner.BlazeBurnerBlock.HEAT_LEVEL, com.simibubi.create.content.processing.burner.BlazeBurnerBlock.HeatLevel.SEETHING));
+        helper.setBlock(basinPos, com.simibubi.create.AllBlocks.BASIN.getDefaultState());
+        helper.setBlock(basinPos.above(2), com.simibubi.create.AllBlocks.MECHANICAL_PRESS.getDefaultState());
+        com.simibubi.create.content.processing.basin.BasinBlockEntity basin = helper.getBlockEntity(basinPos);
+        basin.getInputInventory().insertItem(0, new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.COBBLED_DEEPSLATE, 64), false);
+        com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity press = helper.getBlockEntity(basinPos.above(2));
+        var find = com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity.class.getDeclaredMethod("getMatchingRecipes");
+        find.setAccessible(true);
+        @SuppressWarnings("unchecked")
+        var recipes = (java.util.List<net.minecraft.world.item.crafting.Recipe<?>>) find.invoke(press);
+        helper.assertTrue(!recipes.isEmpty() && recipes.get(0).getResultItem(helper.getLevel().registryAccess()).is(net.minecraft.world.item.Items.BLACKSTONE),
+                "a superheated press over cobbled deepslate should run the blackstone fusing first, got " + recipes.stream().map(r -> r.getResultItem(helper.getLevel().registryAccess())).toList());
         helper.succeed();
     }
 
