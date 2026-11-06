@@ -92,32 +92,42 @@ public class HeavyChemicalTests {
     }
 
     @GameTest(template = "empty")
-    public void deepslateFusesToBlackstone(GameTestHelper helper) {
-        var fused = processing(helper, "fundamentals:rock/blackstone_from_cobbled_deepslate");
-        helper.assertTrue(takes(fused, "minecraft:cobbled_deepslate") && gives(fused, "minecraft:blackstone"),
-                "cobbled deepslate should fuse to blackstone under a superheated press");
-        // a press runs the basin recipe with the most ingredients, so this must outrank the 2x2 crafting into polished deepslate
-        helper.assertTrue(fused.getIngredients().size() > 4, "fusing should take more than the four cobbled deepslate that craft polished deepslate");
-        helper.succeed();
-    }
-
-    @GameTest(template = "empty")
-    public void aSuperheatedPressPicksBlackstoneOverPolishedDeepslate(GameTestHelper helper) throws Exception {
+    public void deepslateMeltsAndCastsAsBlackstone(GameTestHelper helper) throws Exception {
+        var melt = processing(helper, "fundamentals:rock/lava_from_cobbled_deepslate");
+        helper.assertTrue(takes(melt, "minecraft:cobbled_deepslate") && givesFluid(melt, "minecraft:lava"), "cobbled deepslate should melt to lava");
+        var cast = helper.getLevel().getRecipeManager().byKey(ai.gsmc.fundamentals.Fundamentals.id("rock/blackstone_from_lava_casting")).orElseThrow().value();
+        helper.assertTrue(cast.getResultItem(helper.getLevel().registryAccess()).is(net.minecraft.world.item.Items.BLACKSTONE), "lava should cast as blackstone");
+        // a mixer also runs shapeless crafting, so check a real superheated mixer picks the melt
         var basinPos = new net.minecraft.core.BlockPos(1, 2, 1);
         helper.setBlock(basinPos.below(), com.simibubi.create.AllBlocks.BLAZE_BURNER.getDefaultState()
                 .setValue(com.simibubi.create.content.processing.burner.BlazeBurnerBlock.HEAT_LEVEL, com.simibubi.create.content.processing.burner.BlazeBurnerBlock.HeatLevel.SEETHING));
         helper.setBlock(basinPos, com.simibubi.create.AllBlocks.BASIN.getDefaultState());
-        helper.setBlock(basinPos.above(2), com.simibubi.create.AllBlocks.MECHANICAL_PRESS.getDefaultState());
+        helper.setBlock(basinPos.above(2), com.simibubi.create.AllBlocks.MECHANICAL_MIXER.getDefaultState());
         com.simibubi.create.content.processing.basin.BasinBlockEntity basin = helper.getBlockEntity(basinPos);
         basin.getInputInventory().insertItem(0, new net.minecraft.world.item.ItemStack(net.minecraft.world.item.Items.COBBLED_DEEPSLATE, 64), false);
-        com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity press = helper.getBlockEntity(basinPos.above(2));
+        com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity mixer = helper.getBlockEntity(basinPos.above(2));
         var find = com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity.class.getDeclaredMethod("getMatchingRecipes");
         find.setAccessible(true);
         @SuppressWarnings("unchecked")
-        var recipes = (java.util.List<net.minecraft.world.item.crafting.Recipe<?>>) find.invoke(press);
-        helper.assertTrue(!recipes.isEmpty() && recipes.get(0).getResultItem(helper.getLevel().registryAccess()).is(net.minecraft.world.item.Items.BLACKSTONE),
-                "a superheated press over cobbled deepslate should run the blackstone fusing first, got " + recipes.stream().map(r -> r.getResultItem(helper.getLevel().registryAccess())).toList());
+        var recipes = (java.util.List<net.minecraft.world.item.crafting.Recipe<?>>) find.invoke(mixer);
+        helper.assertTrue(!recipes.isEmpty() && recipes.get(0) == melt, "a superheated mixer over cobbled deepslate should melt it first, got " + recipes);
         helper.succeed();
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 400)
+    public void aCastingBasinSetsLavaAsBlackstone(GameTestHelper helper) {
+        var pos = new net.minecraft.core.BlockPos(1, 2, 1);
+        var basin = net.minecraft.core.registries.BuiltInRegistries.BLOCK.get(net.minecraft.resources.ResourceLocation.parse("tfmg:casting_basin"));
+        helper.setBlock(pos, basin.defaultBlockState());
+        var fluids = helper.getLevel().getCapability(net.neoforged.neoforge.capabilities.Capabilities.FluidHandler.BLOCK, helper.absolutePos(pos), net.minecraft.core.Direction.UP);
+        helper.assertTrue(fluids != null && fluids.fill(new net.neoforged.neoforge.fluids.FluidStack(net.minecraft.world.level.material.Fluids.LAVA, 144),
+                net.neoforged.neoforge.fluids.capability.IFluidHandler.FluidAction.EXECUTE) == 144, "the casting basin should take a block's worth of lava");
+        helper.succeedWhen(() -> {
+            var items = helper.getLevel().getCapability(net.neoforged.neoforge.capabilities.Capabilities.ItemHandler.BLOCK, helper.absolutePos(pos), net.minecraft.core.Direction.DOWN);
+            boolean cast = false;
+            for (int i = 0; items != null && i < items.getSlots(); i++) cast |= items.getStackInSlot(i).is(net.minecraft.world.item.Items.BLACKSTONE);
+            helper.assertTrue(cast, "the basin should have cast blackstone");
+        });
     }
 
     @GameTest(template = "empty")
