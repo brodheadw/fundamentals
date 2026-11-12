@@ -1,0 +1,30 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:raw_galena"
+    },
+    {
+      "item": "fundamentals:raw_galena"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "minecraft:water"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 50,
+      "fluid": "tfmg:creosote"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:galena_concentrate"
+    },
+    {
+      "id": "fundamentals:galena_concentrate",
+      "chance": 0.5
+    }
+  ]
+}

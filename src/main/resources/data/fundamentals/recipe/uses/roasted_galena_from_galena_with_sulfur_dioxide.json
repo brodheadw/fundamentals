@@ -2,10 +2,10 @@
   "type": "create:mixing",
   "ingredients": [
     {
-      "item": "fundamentals:raw_galena"
+      "item": "fundamentals:galena_concentrate"
     },
     {
-      "item": "fundamentals:raw_galena"
+      "item": "fundamentals:galena_concentrate"
     },
     {
       "type": "neoforge:single",

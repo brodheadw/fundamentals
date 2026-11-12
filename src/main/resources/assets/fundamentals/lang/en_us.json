@@ -1197,5 +1197,6 @@
   "kiln.fundamentals.unfired": "Kiln: no lit blaze burner under either end",
   "kiln.fundamentals.holds": "%s × %s",
   "fundamentals.jei.kiln": "Rotary Kiln",
-  "fundamentals.jei.kiln.needs": "%s °C for %s s"
+  "fundamentals.jei.kiln.needs": "%s °C for %s s",
+  "item.fundamentals.galena_concentrate": "Galena Concentrate"
 }

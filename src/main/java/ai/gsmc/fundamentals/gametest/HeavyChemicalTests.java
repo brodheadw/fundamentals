@@ -139,7 +139,7 @@ public class HeavyChemicalTests {
         helper.setBlock(basinPos.above(2), com.simibubi.create.AllBlocks.MECHANICAL_MIXER.getDefaultState());
         com.simibubi.create.content.processing.basin.BasinBlockEntity basin = helper.getBlockEntity(basinPos);
         basin.getInputInventory().insertItem(0, new net.minecraft.world.item.ItemStack(net.minecraft.core.registries.BuiltInRegistries.ITEM.get(
-                net.minecraft.resources.ResourceLocation.parse("fundamentals:raw_galena")), 64), false);
+                net.minecraft.resources.ResourceLocation.parse("fundamentals:galena_concentrate")), 64), false);
         com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity mixer = helper.getBlockEntity(basinPos.above(2));
         var find = com.simibubi.create.content.processing.basin.BasinOperatingBlockEntity.class.getDeclaredMethod("getMatchingRecipes");
         find.setAccessible(true);
