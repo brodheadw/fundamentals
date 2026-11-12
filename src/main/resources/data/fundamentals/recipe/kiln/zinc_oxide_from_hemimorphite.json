@@ -1,0 +1,13 @@
+{
+  "type": "fundamentals:kiln",
+  "ingredient": {
+    "item": "fundamentals:raw_hemimorphite"
+  },
+  "results": [
+    {
+      "id": "fundamentals:zinc_oxide"
+    }
+  ],
+  "celsius": 600,
+  "ticks": 100
+}

@@ -153,6 +153,7 @@
     "fundamentals:xenotime_ore",
     "fundamentals:yellow_plastic_block",
     "fundamentals:zircon_ore",
-    "fundamentals:tesla_coil"
+    "fundamentals:tesla_coil",
+    "fundamentals:kiln_drum"
   ]
 }

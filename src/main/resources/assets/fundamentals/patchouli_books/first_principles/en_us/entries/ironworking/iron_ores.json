@@ -28,7 +28,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "fundamentals:roasted_siderite",
-      "text": "A carbonate must be roasted before it smelts: at about 500 °C FeCO3 gives up its carbon dioxide and leaves FeO, which the air takes on to Fe2O3 and Fe3O4. Roast raw siderite on a campfire or in a smoker. The bloomery refuses it raw; roasted, it blooms like any other iron ore (Tylecote, A History of Metallurgy).",
+      "text": "A carbonate must be roasted before it smelts: at about 500 °C FeCO3 gives up its carbon dioxide and leaves FeO, which the air takes on to Fe2O3 and Fe3O4. Roast raw siderite at 500 °C in a rotary kiln. The bloomery refuses it raw; roasted, it blooms like any other iron ore (Tylecote, A History of Metallurgy).",
       "title": "Roasting siderite"
     }
   ]

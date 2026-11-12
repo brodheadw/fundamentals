@@ -1,0 +1,13 @@
+{
+  "type": "fundamentals:kiln",
+  "ingredient": {
+    "item": "fundamentals:raw_spodumene"
+  },
+  "results": [
+    {
+      "id": "fundamentals:calcined_spodumene"
+    }
+  ],
+  "celsius": 1050,
+  "ticks": 100
+}

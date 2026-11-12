@@ -1190,5 +1190,12 @@
   "goggles.fundamentals.readout.needs.sky": "Needs open sky and daylight",
   "goggles.fundamentals.readout.needs.volts": "Needs %s V from the grid",
   "goggles.fundamentals.readout.needs.volts_door": "Opens on %s V from the grid; shuts when it is cut",
-  "goggles.fundamentals.readout.needs.enemy": "Charged: waiting for an enemy within %s blocks"
+  "goggles.fundamentals.readout.needs.enemy": "Charged: waiting for an enemy within %s blocks",
+  "block.fundamentals.kiln_drum": "Kiln Drum",
+  "item.fundamentals.cement_raw_meal": "Cement Raw Meal",
+  "kiln.fundamentals.celsius": "Kiln: %s °C here",
+  "kiln.fundamentals.unfired": "Kiln: no lit blaze burner under either end",
+  "kiln.fundamentals.holds": "%s × %s",
+  "fundamentals.jei.kiln": "Rotary Kiln",
+  "fundamentals.jei.kiln.needs": "%s °C for %s s"
 }

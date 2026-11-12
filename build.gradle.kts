@@ -100,6 +100,8 @@ dependencies {
     // Create: Nuclear is optional too: tools/build_create_nuclear_compat.py reads this jar, and -Pcreatenuclear runs it alongside.
     modCompileOnly("maven.modrinth:createnuclear:${deps.createNuclearVersion}")
     if (providers.gradleProperty("createnuclear").isPresent) modLocalRuntime("maven.modrinth:createnuclear:${deps.createNuclearVersion}")
+    // JEI is optional: compat/jei shows the kiln's recipes in it, and EMI reads JEI plugins.
+    modCompileOnly("maven.modrinth:u6dRKJwZ:iv3KiVkE")
     // CC:Tweaked is optional: computer/FundamentalsPeripherals only loads with it, and the gametests read the blocks through it.
     modCompileOnly("maven.modrinth:cc-tweaked:${deps.ccTweakedVersion}")
     modLocalRuntime("maven.modrinth:cc-tweaked:${deps.ccTweakedVersion}")

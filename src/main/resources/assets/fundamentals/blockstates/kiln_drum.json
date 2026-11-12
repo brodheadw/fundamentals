@@ -1,0 +1,14 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "fundamentals:block/kiln_drum",
+      "x": 90,
+      "y": 90
+    },
+    "axis=z": {
+      "model": "fundamentals:block/kiln_drum",
+      "x": 90,
+      "y": 180
+    }
+  }
+}

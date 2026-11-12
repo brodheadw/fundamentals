@@ -1,0 +1,13 @@
+{
+  "type": "fundamentals:kiln",
+  "ingredient": {
+    "item": "fundamentals:cement_raw_meal"
+  },
+  "results": [
+    {
+      "id": "fundamentals:cement_clinker"
+    }
+  ],
+  "celsius": 1450,
+  "ticks": 60
+}

@@ -25,7 +25,7 @@
     {
       "type": "patchouli:spotlight",
       "item": "fundamentals:cerium_concentrate",
-      "text": "Bastnäsite is a carbonate and needs no acid bake: roast its concentrate on a campfire or in a smoker. Roasting in air takes its cerium to Ce(IV), which hydrochloric acid will not touch, so the roasted ore in 250 mB of hot acid gives 250 mB of crude liquor and leaves a cerium concentrate, which Mountain Pass sold as it was. A blast furnace calcines it to cerium oxide.",
+      "text": "Bastnäsite is a carbonate and needs no acid bake: roast its concentrate at 600 °C in a rotary kiln. Roasting in air takes its cerium to Ce(IV), which hydrochloric acid will not touch, so the roasted ore in 250 mB of hot acid gives 250 mB of crude liquor and leaves a cerium concentrate, which Mountain Pass sold as it was. A blast furnace calcines it to cerium oxide.",
       "title": "Roasting"
     },
     {

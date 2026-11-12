@@ -1,0 +1,44 @@
+{
+  "parent": "block/block",
+  "textures": {
+    "particle": "tfmg:block/steel_block",
+    "shell": "tfmg:block/steel_block",
+    "lining": "tfmg:block/fireproof_bricks",
+    "tyre": "tfmg:block/steel_casing"
+  },
+  "elements": [
+    {
+      "from": [1, 0, 1], "to": [15, 16, 15],
+      "faces": {
+        "north": {"uv": [1, 0, 15, 16], "texture": "#shell"},
+        "east": {"uv": [1, 0, 15, 16], "texture": "#shell"},
+        "south": {"uv": [1, 0, 15, 16], "texture": "#shell"},
+        "west": {"uv": [1, 0, 15, 16], "texture": "#shell"},
+        "up": {"uv": [1, 1, 15, 15], "texture": "#lining"},
+        "down": {"uv": [1, 1, 15, 15], "texture": "#lining"}
+      }
+    },
+    {
+      "from": [0, 3, 0], "to": [16, 6, 16],
+      "faces": {
+        "north": {"uv": [0, 10, 16, 13], "texture": "#tyre"},
+        "east": {"uv": [0, 10, 16, 13], "texture": "#tyre"},
+        "south": {"uv": [0, 10, 16, 13], "texture": "#tyre"},
+        "west": {"uv": [0, 10, 16, 13], "texture": "#tyre"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#tyre"},
+        "down": {"uv": [0, 0, 16, 16], "texture": "#tyre"}
+      }
+    },
+    {
+      "from": [0, 10, 0], "to": [16, 13, 16],
+      "faces": {
+        "north": {"uv": [0, 3, 16, 6], "texture": "#tyre"},
+        "east": {"uv": [0, 3, 16, 6], "texture": "#tyre"},
+        "south": {"uv": [0, 3, 16, 6], "texture": "#tyre"},
+        "west": {"uv": [0, 3, 16, 6], "texture": "#tyre"},
+        "up": {"uv": [0, 0, 16, 16], "texture": "#tyre"},
+        "down": {"uv": [0, 0, 16, 16], "texture": "#tyre"}
+      }
+    }
+  ]
+}

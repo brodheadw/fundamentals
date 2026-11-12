@@ -16,13 +16,8 @@
   ],
   "results": [
     {
-      "id": "fundamentals:cement_clinker",
+      "id": "fundamentals:cement_raw_meal",
       "count": 3
-    },
-    {
-      "id": "tfmg:carbon_dioxide",
-      "amount": 250
     }
-  ],
-  "heat_requirement": "superheated"
+  ]
 }

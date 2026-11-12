@@ -1,0 +1,13 @@
+{
+  "type": "fundamentals:kiln",
+  "ingredient": {
+    "item": "fundamentals:raw_siderite"
+  },
+  "results": [
+    {
+      "id": "fundamentals:roasted_siderite"
+    }
+  ],
+  "celsius": 500,
+  "ticks": 100
+}

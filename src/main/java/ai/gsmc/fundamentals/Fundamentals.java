@@ -82,6 +82,7 @@ public class Fundamentals {
             event.register(Registries.BLOCK, helper -> {
                 OreBlocks.registerBlocks(helper::register);
                 IronWorking.registerBlocks(helper::register);
+                ai.gsmc.fundamentals.kiln.Kiln.registerBlocks(helper::register);
                 MaterialItems.registerBlocks(helper::register);
                 Electricity.registerBlocks(helper::register);
                 Separation.registerBlocks(helper::register);
@@ -99,6 +100,7 @@ public class Fundamentals {
             });
             event.register(Registries.BLOCK_ENTITY_TYPE, helper -> {
                 IronWorking.registerBlockEntities(helper::register);
+                ai.gsmc.fundamentals.kiln.Kiln.registerBlockEntities(helper::register);
                 Electricity.registerBlockEntities(helper::register);
                 Separation.registerBlockEntities(helper::register);
                 Plastics.registerBlockEntities(helper::register);
@@ -113,10 +115,12 @@ public class Fundamentals {
             });
             event.register(Registries.RECIPE_TYPE, helper -> {
                 IronWorking.registerRecipeTypes(helper::register);
+                ai.gsmc.fundamentals.kiln.Kiln.registerRecipeTypes(helper::register);
                 Separation.registerRecipeTypes(helper::register);
             });
             event.register(Registries.RECIPE_SERIALIZER, helper -> {
                 IronWorking.registerRecipeSerializers(helper::register);
+                ai.gsmc.fundamentals.kiln.Kiln.registerRecipeSerializers(helper::register);
                 Separation.registerRecipeSerializers(helper::register);
                 Magnets.registerRecipeSerializers(helper::register);
             });
@@ -142,6 +146,7 @@ public class Fundamentals {
             event.register(Registries.ITEM, helper -> {
                 OreBlocks.registerItems(helper::register);
                 IronWorking.registerItems(helper::register);
+                ai.gsmc.fundamentals.kiln.Kiln.registerItems(helper::register);
                 HandTools.registerItems(helper::register);
                 MaterialItems.registerItems(helper::register);
                 Electricity.registerItems(helper::register);
@@ -214,12 +219,14 @@ public class Fundamentals {
             event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, Oxidation.drumEntity(), (drum, side) -> new InvWrapper(drum));
             event.registerItem(Capabilities.FluidHandler.ITEM, (stack, context) -> new FluidBucketWrapper(stack), Separation.seawaterBucket());
             Titanium.registerCapabilities(event);
+            event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ai.gsmc.fundamentals.kiln.Kiln.drumEntity(), ai.gsmc.fundamentals.kiln.KilnDrumBlockEntity::handler);
         });
         modBus.addListener(FMLCommonSetupEvent.class, event -> event.enqueueWork(() -> {
             MountedFluidStorageType.REGISTRY.register(Separation.plasticTank(), AllMountedStorageTypes.FLUID_TANK.get());
             Hazards.registerPipeEffects();
             Fertiliser.registerDispenserBehaviour();
             Titanium.commonSetup();
+            ai.gsmc.fundamentals.kiln.Kiln.commonSetup();
             Separation.adoptCastIron();
             if (ModList.get().isLoaded("createnuclear")) {
                 Radiation.register();
@@ -234,6 +241,7 @@ public class Fundamentals {
             PlasticsClient.register(modBus);
             TitaniumClient.register(modBus);
             ai.gsmc.fundamentals.client.WoodenMillClient.register(modBus);
+            ai.gsmc.fundamentals.client.KilnClient.register(modBus);
             OxidationClient.register(modBus);
             ThermometerRenderer.register(modBus);
             ComputeClient.register(modBus);
@@ -246,6 +254,7 @@ public class Fundamentals {
                 .icon(() -> new ItemStack(OreBlocks.items().iterator().next()))
                 .displayItems((parameters, output) -> {
                     IronWorking.items().forEach(output::accept);
+                    ai.gsmc.fundamentals.kiln.Kiln.items().forEach(output::accept);
                     Separation.items().forEach(output::accept);
                     Uses.items().forEach(output::accept);
                     ai.gsmc.fundamentals.uses.Arms.items().forEach(output::accept);

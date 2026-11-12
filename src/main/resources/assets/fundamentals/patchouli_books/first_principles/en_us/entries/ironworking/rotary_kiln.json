@@ -1,0 +1,27 @@
+{
+  "name": "Rotary kiln",
+  "category": "fundamentals:ironworking",
+  "icon": "fundamentals:kiln_drum",
+  "sortnum": 5,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "A rotary kiln is a long steel tube lined with firebrick, laid at a slight tilt and turned slowly, with a burner at its low end. What goes in at the high end tumbles down toward the flame while the hot gas runs up against it, so the charge dries, then heats, then roasts, and leaves at the hot end. Cement, lime, alumina and most ore roasting are done in one.",
+      "title": "Rotary kiln"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Lay kiln drums end to end along one axis and turn them with a shaft. A lit blaze burner under one end makes that the hot end: kindled it is 1,000 °C there, seething 1,600. Each length up from the burner is 150 °C cooler. Feed the far end by hand, funnel or chute; the turn carries the charge down, and it falls out of the hot end, into whatever stands there."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A charge roasts only while it lies in lengths hot enough for it, and the turn sets how long it lies there: at 32 RPM it crosses a length in four seconds, at 256 in half a second. Too fast or too cool and it comes out raw. Engineer's goggles show each length's heat and what it holds.",
+      "title": "Hot enough, long enough"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Siderite from 500 °C; smithsonite from 400 and hemimorphite from 600, to zinc oxide; bastnäsite and tin concentrate from 600; aluminium hydroxide to alumina from 950; spodumene to its beta form from 1,050; cement raw meal to clinker from 1,450. The last two need a seething burner. Sulfides do not go in a kiln: they roast in a heated basin with air, where their sulfur dioxide is caught.",
+      "title": "What it roasts"
+    }
+  ]
+}
