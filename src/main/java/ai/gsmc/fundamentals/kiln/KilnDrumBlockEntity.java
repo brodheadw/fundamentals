@@ -1,5 +1,6 @@
 package ai.gsmc.fundamentals.kiln;
 
+import com.drmangotea.tfmg.content.machinery.misc.firebox.FireboxBlock;
 import com.simibubi.create.content.kinetics.base.HorizontalAxisKineticBlock;
 import com.simibubi.create.content.kinetics.base.KineticBlockEntity;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
@@ -27,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A length of kiln drum. Lengths in a row along one axis are one kiln; the end with a blaze burner under it is the hot end, and
+ * A length of kiln drum. Lengths in a row along one axis are one kiln; the end with a burner under it is the hot end, and
  * the turning drum walks its charge from the far end down to it, as a real kiln's tilt does. The burner heats the end it stands
  * under and the gas cools as it runs up the tube, so each length is {@link #DROP} degrees cooler than the one below it. A charge
  * roasts while it lies in lengths hot enough for its recipe, and the turn sets how long it lies there: a slow kiln roasts more.
@@ -40,6 +41,8 @@ public class KilnDrumBlockEntity extends KineticBlockEntity {
     public static final int DROP = 150;
     /** Lengths in one kiln, at most. */
     public static final int LONGEST = 16;
+    /** A lit firebox burns gas or oil, as real kilns do, and their flame clinkers cement at the hot end. */
+    public static final int FIREBOX = 1500;
     /** A charge passes one length in TRANSIT / rpm ticks: 80 at 32 RPM. */
     public static final float TRANSIT = 2560;
 
@@ -87,9 +90,10 @@ public class KilnDrumBlockEntity extends KineticBlockEntity {
         return pos;
     }
 
-    // shortcut: only Create's blaze burner fires a kiln; a TFMG firebox or a lava pit under it would want their own heat
     private int burner(BlockPos end) {
         BlockState below = level.getBlockState(end.below());
+        // a firebox only ever reads fading once lit; the fire it holds is a real gas or oil flame
+        if (below.getBlock() instanceof FireboxBlock) return below.getValue(FireboxBlock.HEAT_LEVEL) == BlazeBurnerBlock.HeatLevel.NONE ? 0 : FIREBOX;
         if (!(below.getBlock() instanceof BlazeBurnerBlock)) return 0;
         return switch (BlazeBurnerBlock.getHeatLevelOf(below)) {
             case NONE -> 0;

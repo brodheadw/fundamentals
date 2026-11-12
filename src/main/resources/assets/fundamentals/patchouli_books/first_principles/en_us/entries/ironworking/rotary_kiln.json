@@ -11,7 +11,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Lay kiln drums end to end along one axis and turn them with a shaft. A lit blaze burner under one end makes that the hot end: kindled it is 1,000 °C there, seething 1,600. Each length up from the burner is 150 °C cooler. Feed the far end by hand, funnel or chute; the turn carries the charge down, and it falls out of the hot end, into whatever stands there."
+      "text": "Lay kiln drums end to end along one axis and turn them with a shaft. A lit burner under one end makes that the hot end. A firebox burning gas or oil, as real kilns do, makes it 1,500 °C; a blaze burner kindled 1,000, seething 1,600. Each length up from the burner is 150 °C cooler. Feed the far end by hand, funnel or chute; the turn carries the charge down, and it falls out of the hot end, into whatever stands there."
     },
     {
       "type": "patchouli:text",
@@ -20,7 +20,7 @@
     },
     {
       "type": "patchouli:text",
-      "text": "Siderite from 500 °C; smithsonite from 400 and hemimorphite from 600, to zinc oxide; bastnäsite and tin concentrate from 600; aluminium hydroxide to alumina from 950; spodumene to its beta form from 1,050; cement raw meal to clinker from 1,450. The last two need a seething burner. Sulfides do not go in a kiln: they roast in a heated basin with air, where their sulfur dioxide is caught.",
+      "text": "Siderite from 500 °C; smithsonite from 400 and hemimorphite from 600, to zinc oxide; bastnäsite and tin concentrate from 600; aluminium hydroxide to alumina from 950; spodumene to its beta form from 1,050; cement raw meal to clinker from 1,450. Spodumene needs a seething blaze; clinker a firebox or a seething blaze. Sulfides do not go in a kiln: they roast in a heated basin with air, where their sulfur dioxide is caught.",
       "title": "What it roasts"
     }
   ]

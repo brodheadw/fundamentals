@@ -3,6 +3,8 @@ package ai.gsmc.fundamentals.gametest;
 import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.kiln.Kiln;
 import ai.gsmc.fundamentals.kiln.KilnDrumBlockEntity;
+import com.drmangotea.tfmg.registry.TFMGBlocks;
+import com.drmangotea.tfmg.registry.TFMGFluids;
 import com.simibubi.create.AllBlocks;
 import com.simibubi.create.content.kinetics.base.DirectionalKineticBlock;
 import com.simibubi.create.content.kinetics.base.HorizontalAxisKineticBlock;
@@ -18,6 +20,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
@@ -86,5 +91,17 @@ public class KilnTests {
     public void aSeethingKilnBurnsClinker(GameTestHelper helper) {
         feed(helper, kiln(helper, 1, 32, BlazeBurnerBlock.HeatLevel.SEETHING), item("cement_raw_meal"));
         helper.succeedWhen(() -> helper.assertTrue(inChest(helper, 1, item("cement_clinker")) == 4, "four clinker out of a seething kiln"));
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 500)
+    public void aFireboxBurningPropaneBurnsClinker(GameTestHelper helper) {
+        BlockPos feed = kiln(helper, 1, 32, BlazeBurnerBlock.HeatLevel.SEETHING);
+        BlockPos firebox = new BlockPos(5, 1, 1);
+        helper.setBlock(firebox, TFMGBlocks.FIREBOX.getDefaultState());
+        IFluidHandler tank = helper.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, helper.absolutePos(firebox), null);
+        helper.assertTrue(tank != null && tank.fill(new FluidStack(TFMGFluids.PROPANE.get(), 8000), IFluidHandler.FluidAction.EXECUTE) > 0, "the firebox takes propane");
+        feed(helper, feed, item("cement_raw_meal"));
+        helper.succeedWhen(() -> helper.assertTrue(inChest(helper, 1, item("cement_clinker")) == 4,
+                "four clinker out of a propane-fired kiln, not " + inChest(helper, 1, item("cement_clinker"))));
     }
 }
