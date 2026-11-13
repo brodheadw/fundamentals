@@ -190,6 +190,7 @@ public class Fundamentals {
         });
         ai.gsmc.fundamentals.cold.Cold.register();
         NeoForge.EVENT_BUS.addListener(Hazards::onPlayerTick);
+        NeoForge.EVENT_BUS.addListener(ai.gsmc.fundamentals.uses.FlintAndSteel::onUse);
         NeoForge.EVENT_BUS.addListener(Hazards::onServerTick);
         NeoForge.EVENT_BUS.addListener(Hazards::onBreak);
         NeoForge.EVENT_BUS.addListener(Hazards::onExplosion);
