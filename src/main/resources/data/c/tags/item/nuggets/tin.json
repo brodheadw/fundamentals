@@ -2,5 +2,11 @@
   "replace": false,
   "values": [
     "fundamentals:tin_nugget"
+  ],
+  "remove": [
+    {
+      "id": "chemica:tin_nugget",
+      "required": false
+    }
   ]
 }

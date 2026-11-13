@@ -2,5 +2,11 @@
   "replace": false,
   "values": [
     "fundamentals:platinum_ingot"
+  ],
+  "remove": [
+    {
+      "id": "chemica:platinum_ingot",
+      "required": false
+    }
   ]
 }

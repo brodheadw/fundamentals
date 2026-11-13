@@ -2,5 +2,11 @@
   "replace": false,
   "values": [
     "fundamentals:pvc_sheet"
+  ],
+  "remove": [
+    {
+      "id": "chemica:polyvinyl_chloride_sheet",
+      "required": false
+    }
   ]
 }

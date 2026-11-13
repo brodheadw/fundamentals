@@ -2,5 +2,11 @@
   "replace": false,
   "values": [
     "fundamentals:molybdenum_ingot"
+  ],
+  "remove": [
+    {
+      "id": "chemica:molybdenum_ingot",
+      "required": false
+    }
   ]
 }

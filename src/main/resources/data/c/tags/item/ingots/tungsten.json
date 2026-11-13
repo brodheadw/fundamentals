@@ -2,5 +2,11 @@
   "replace": false,
   "values": [
     "fundamentals:tungsten_ingot"
+  ],
+  "remove": [
+    {
+      "id": "chemica:tungsten_ingot",
+      "required": false
+    }
   ]
 }

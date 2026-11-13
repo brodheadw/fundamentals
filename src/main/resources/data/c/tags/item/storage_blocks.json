@@ -15,5 +15,27 @@
     "#c:storage_blocks/silver",
     "#c:storage_blocks/terbium",
     "#c:storage_blocks/tin"
+  ],
+  "remove": [
+    {
+      "id": "createnuclear:lead_block",
+      "required": false
+    },
+    {
+      "id": "createnuclear:raw_lead_block",
+      "required": false
+    },
+    {
+      "id": "createnuclear:raw_thorium_block",
+      "required": false
+    },
+    {
+      "id": "createnuclear:raw_uranium_block",
+      "required": false
+    },
+    {
+      "id": "createnuclear:steel_block",
+      "required": false
+    }
   ]
 }

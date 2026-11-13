@@ -56,4 +56,18 @@ public class ChemicaTests {
                 "Chemica's generic ores should not generate");
         helper.succeed();
     }
+
+    @GameTest(template = "empty")
+    public void aHiddenDuplicateIsInNoSharedTag(GameTestHelper helper) {
+        // a hidden item left in a c: tag cycles beside ours wherever a recipe takes the tag
+        var hidden = net.minecraft.tags.TagKey.create(Registries.ITEM, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath("c", "hidden_from_recipe_viewers"));
+        var leaks = new java.util.ArrayList<String>();
+        for (var item : BuiltInRegistries.ITEM.getTagOrEmpty(hidden)) {
+            if (item.unwrapKey().orElseThrow().location().getNamespace().equals(Fundamentals.MOD_ID)) continue;
+            item.tags().filter(tag -> tag.location().getNamespace().equals("c") && !tag.equals(hidden))
+                    .forEach(tag -> leaks.add(item.getRegisteredName() + " in #" + tag.location()));
+        }
+        helper.assertTrue(leaks.isEmpty(), "hidden duplicates still tagged: " + leaks);
+        helper.succeed();
+    }
 }

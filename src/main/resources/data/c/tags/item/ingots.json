@@ -62,5 +62,67 @@
     "#c:ingots/yttrium",
     "#c:ingots/zircaloy",
     "#c:ingots/zirconium"
+  ],
+  "remove": [
+    {
+      "id": "chemica:antimony_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:chromium_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:cobalt_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:iridium_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:magnesium_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:molybdenum_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:platinum_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:silver_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:sodium_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:tantalum_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:tin_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:titanium_ingot",
+      "required": false
+    },
+    {
+      "id": "chemica:tungsten_ingot",
+      "required": false
+    },
+    {
+      "id": "createnuclear:lead_ingot",
+      "required": false
+    },
+    {
+      "id": "createnuclear:steel_ingot",
+      "required": false
+    }
   ]
 }

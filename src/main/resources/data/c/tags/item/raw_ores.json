@@ -1,0 +1,18 @@
+{
+  "replace": false,
+  "values": [],
+  "remove": [
+    {
+      "id": "createnuclear:raw_lead",
+      "required": false
+    },
+    {
+      "id": "createnuclear:raw_thorium",
+      "required": false
+    },
+    {
+      "id": "createnuclear:raw_uranium",
+      "required": false
+    }
+  ]
+}

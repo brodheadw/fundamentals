@@ -1,10 +1,6 @@
 {
   "replace": false,
   "values": [
-    "fundamentals:graphite",
-    {
-      "id": "chemica:purified_graphite_flakes",
-      "required": false
-    }
+    "fundamentals:graphite"
   ]
 }

@@ -2,5 +2,11 @@
   "replace": false,
   "values": [
     "fundamentals:titanium_plate"
+  ],
+  "remove": [
+    {
+      "id": "chemica:titanium_sheet",
+      "required": false
+    }
   ]
 }

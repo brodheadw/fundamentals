@@ -15,5 +15,27 @@
     "#c:dusts/thortveitite",
     "#c:dusts/uraninite",
     "#c:dusts/xenotime"
+  ],
+  "remove": [
+    {
+      "id": "chemica:antimony_dust",
+      "required": false
+    },
+    {
+      "id": "chemica:rutile_dust",
+      "required": false
+    },
+    {
+      "id": "chemica:salt",
+      "required": false
+    },
+    {
+      "id": "createnuclear:thorium_dust",
+      "required": false
+    },
+    {
+      "id": "createnuclear:uranium_powder",
+      "required": false
+    }
   ]
 }

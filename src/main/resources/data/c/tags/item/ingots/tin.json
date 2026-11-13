@@ -2,5 +2,11 @@
   "replace": false,
   "values": [
     "fundamentals:tin_ingot"
+  ],
+  "remove": [
+    {
+      "id": "chemica:tin_ingot",
+      "required": false
+    }
   ]
 }

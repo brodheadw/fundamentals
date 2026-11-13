@@ -2,5 +2,11 @@
   "replace": false,
   "values": [
     "fundamentals:tantalum_ingot"
+  ],
+  "remove": [
+    {
+      "id": "chemica:tantalum_ingot",
+      "required": false
+    }
   ]
 }

@@ -2,5 +2,11 @@
   "replace": false,
   "values": [
     "fundamentals:iridium_ingot"
+  ],
+  "remove": [
+    {
+      "id": "chemica:iridium_ingot",
+      "required": false
+    }
   ]
 }

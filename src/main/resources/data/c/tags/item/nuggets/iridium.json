@@ -2,5 +2,11 @@
   "replace": false,
   "values": [
     "fundamentals:iridium_nugget"
+  ],
+  "remove": [
+    {
+      "id": "chemica:iridium_nugget",
+      "required": false
+    }
   ]
 }

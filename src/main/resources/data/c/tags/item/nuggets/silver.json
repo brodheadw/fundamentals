@@ -2,5 +2,11 @@
   "replace": false,
   "values": [
     "fundamentals:silver_nugget"
+  ],
+  "remove": [
+    {
+      "id": "chemica:silver_nugget",
+      "required": false
+    }
   ]
 }

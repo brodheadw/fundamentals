@@ -34,5 +34,43 @@
     "#c:nuggets/tin",
     "#c:nuggets/yttrium",
     "#c:nuggets/zirconium"
+  ],
+  "remove": [
+    {
+      "id": "chemica:antimony_nugget",
+      "required": false
+    },
+    {
+      "id": "chemica:cobalt_nugget",
+      "required": false
+    },
+    {
+      "id": "chemica:iridium_nugget",
+      "required": false
+    },
+    {
+      "id": "chemica:platinum_nugget",
+      "required": false
+    },
+    {
+      "id": "chemica:silver_nugget",
+      "required": false
+    },
+    {
+      "id": "chemica:tantalum_nugget",
+      "required": false
+    },
+    {
+      "id": "chemica:tin_nugget",
+      "required": false
+    },
+    {
+      "id": "createnuclear:lead_nugget",
+      "required": false
+    },
+    {
+      "id": "createnuclear:steel_nugget",
+      "required": false
+    }
   ]
 }

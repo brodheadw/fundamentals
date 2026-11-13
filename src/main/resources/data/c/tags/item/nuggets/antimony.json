@@ -2,5 +2,11 @@
   "replace": false,
   "values": [
     "fundamentals:antimony_nugget"
+  ],
+  "remove": [
+    {
+      "id": "chemica:antimony_nugget",
+      "required": false
+    }
   ]
 }

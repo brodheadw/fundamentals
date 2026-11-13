@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- One item per metal in recipe viewers: Chemica's and Create: Nuclear's ingots, nuggets, dusts, ores, plates and blocks that Fundamentals replaces are out of the shared c: tags as well as hidden, so a recipe asking for molybdenum, chromium, tin, lead, steel and the rest shows Fundamentals' item alone.
 - A TFMG firebox fires a rotary kiln, as gas and oil fire real ones: lit with LPG, propane, butane, naphtha, diesel or kerosene under one end, with its carbon dioxide piped off, it makes that end 1,500 °C, hot enough for cement clinker. The guide says so.
 - Galena is floated before it is roasted, as every lead mill does: two raw galena, 250 mB of water and 50 mB of creosote under a mixer give Galena Concentrate, one and sometimes two, and only the concentrate sinter-roasts in a heated basin with air. The guide and the sulfuric acid page say so.
 - The rotary kiln: Kiln Drums (heavy plate, fireproof bricks and a shaft) laid end to end along one axis and turned by a shaft, with a lit blaze burner under one end. That end is the hot end, 1,000 °C kindled or 1,600 seething, and each length up from it is 150 °C cooler. A charge fed in at the far end by hand, funnel or chute tumbles down to the hot end and falls out of it, roasting only while it lies in lengths hot enough for it, so the turn sets how much it roasts: at 32 RPM it crosses a length in four seconds. Engineer's goggles show each length's heat and what it holds. JEI and EMI list what it roasts.

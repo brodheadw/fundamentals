@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [],
+  "remove": [
+    {
+      "id": "createnuclear:deepslate_thorium_ore",
+      "required": false
+    },
+    {
+      "id": "createnuclear:thorium_ore",
+      "required": false
+    }
+  ]
+}

@@ -2,5 +2,11 @@
   "replace": false,
   "values": [
     "fundamentals:magnesium_ingot"
+  ],
+  "remove": [
+    {
+      "id": "chemica:magnesium_ingot",
+      "required": false
+    }
   ]
 }

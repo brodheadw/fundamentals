@@ -2,5 +2,11 @@
   "replace": false,
   "values": [
     "fundamentals:sodium_ingot"
+  ],
+  "remove": [
+    {
+      "id": "chemica:sodium_ingot",
+      "required": false
+    }
   ]
 }

@@ -2,5 +2,11 @@
   "replace": false,
   "values": [
     "fundamentals:tantalum_nugget"
+  ],
+  "remove": [
+    {
+      "id": "chemica:tantalum_nugget",
+      "required": false
+    }
   ]
 }

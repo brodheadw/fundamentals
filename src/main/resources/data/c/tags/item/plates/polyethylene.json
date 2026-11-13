@@ -2,5 +2,11 @@
   "replace": false,
   "values": [
     "tfmg:plastic_sheet"
+  ],
+  "remove": [
+    {
+      "id": "chemica:polyethylene_sheet",
+      "required": false
+    }
   ]
 }
