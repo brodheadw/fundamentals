@@ -1,0 +1,18 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:boron_oxide"
+    },
+    {
+      "tag": "c:ingots/magnesium"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:crude_boron",
+      "count": 1
+    }
+  ],
+  "heat_requirement": "superheated"
+}

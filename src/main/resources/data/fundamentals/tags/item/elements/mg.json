@@ -5,6 +5,13 @@
     "fundamentals:magnesium_ingot",
     "fundamentals:raw_tourmaline",
     "fundamentals:seawater_bucket",
-    "fundamentals:tourmaline_ore"
+    "fundamentals:tourmaline_ore",
+    "fundamentals:crude_boron",
+    "fundamentals:magnesium_diboride_precursor",
+    "fundamentals:magnesium_diboride_billet",
+    "fundamentals:drawn_magnesium_diboride_wire",
+    "fundamentals:magnesium_diboride_wire",
+    "fundamentals:superconducting_coil",
+    "fundamentals:cryogenic_magnet"
   ]
 }

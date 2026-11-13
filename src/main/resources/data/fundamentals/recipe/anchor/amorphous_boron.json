@@ -1,0 +1,24 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:crude_boron"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 250,
+      "tag": "c:acids/hydrochloric"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:amorphous_boron",
+      "count": 1
+    },
+    {
+      "id": "fundamentals:magnesium_chloride",
+      "count": 1,
+      "chance": 0.5
+    }
+  ]
+}

@@ -62,6 +62,7 @@
     "tfmg:n_semiconductor",
     "tfmg:p_semiconductor",
     "tfmg:silicon_ingot",
-    "tfmg:slag"
+    "tfmg:slag",
+    "fundamentals:quartz_resonator"
   ]
 }

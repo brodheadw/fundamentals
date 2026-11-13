@@ -26,6 +26,7 @@
     "tfmg:lead_ingot",
     "tfmg:lead_nugget",
     "tfmg:lead_sheet",
-    "tfmg:raw_lead"
+    "tfmg:raw_lead",
+    "fundamentals:reality_anchor"
   ]
 }

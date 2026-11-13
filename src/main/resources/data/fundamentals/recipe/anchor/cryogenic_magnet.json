@@ -1,0 +1,60 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "chemica"
+    }
+  ],
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "fundamentals:cryostat"
+  },
+  "loops": 1,
+  "results": [
+    {
+      "id": "fundamentals:cryogenic_magnet",
+      "count": 1
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "fundamentals:incomplete_cryogenic_magnet"
+        },
+        {
+          "item": "fundamentals:superconducting_coil"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:incomplete_cryogenic_magnet",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "type": "create:filling",
+      "ingredients": [
+        {
+          "item": "fundamentals:incomplete_cryogenic_magnet"
+        },
+        {
+          "type": "neoforge:single",
+          "amount": 1000,
+          "fluid": "chemica:liquid_hydrogen"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:incomplete_cryogenic_magnet",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "fundamentals:incomplete_cryogenic_magnet"
+  }
+}

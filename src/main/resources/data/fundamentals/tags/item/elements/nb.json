@@ -16,6 +16,13 @@
     "fundamentals:raw_columbite",
     "fundamentals:raw_euxenite",
     "fundamentals:raw_loparite",
-    "fundamentals:raw_pyrochlore"
+    "fundamentals:raw_pyrochlore",
+    "fundamentals:niobium_ingot",
+    "fundamentals:niobium_sheet",
+    "fundamentals:magnesium_diboride_billet",
+    "fundamentals:drawn_magnesium_diboride_wire",
+    "fundamentals:magnesium_diboride_wire",
+    "fundamentals:superconducting_coil",
+    "fundamentals:cryogenic_magnet"
   ]
 }

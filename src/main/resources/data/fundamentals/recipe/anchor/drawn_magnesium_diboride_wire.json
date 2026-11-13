@@ -1,0 +1,14 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "item": "fundamentals:magnesium_diboride_billet"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:drawn_magnesium_diboride_wire",
+      "count": 4
+    }
+  ]
+}

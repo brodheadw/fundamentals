@@ -147,6 +147,7 @@ public class Fundamentals {
                 OreBlocks.registerItems(helper::register);
                 IronWorking.registerItems(helper::register);
                 ai.gsmc.fundamentals.kiln.Kiln.registerItems(helper::register);
+                ai.gsmc.fundamentals.anchor.Anchor.registerItems(helper::register);
                 HandTools.registerItems(helper::register);
                 MaterialItems.registerItems(helper::register);
                 Electricity.registerItems(helper::register);
@@ -255,6 +256,7 @@ public class Fundamentals {
                 .displayItems((parameters, output) -> {
                     IronWorking.items().forEach(output::accept);
                     ai.gsmc.fundamentals.kiln.Kiln.items().forEach(output::accept);
+                    ai.gsmc.fundamentals.anchor.Anchor.items().forEach(output::accept);
                     Separation.items().forEach(output::accept);
                     Uses.items().forEach(output::accept);
                     ai.gsmc.fundamentals.uses.Arms.items().forEach(output::accept);

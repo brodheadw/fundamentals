@@ -122,6 +122,9 @@
     "tfmg:steel_block",
     "tfmg:steel_ingot",
     "tfmg:steel_nugget",
-    "tfmg:thermite_powder"
+    "tfmg:thermite_powder",
+    "fundamentals:coil_former",
+    "fundamentals:cryostat",
+    "fundamentals:cryogenic_magnet"
   ]
 }

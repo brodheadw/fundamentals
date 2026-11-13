@@ -18,6 +18,9 @@
     "fundamentals:stainless_steel_plate",
     "fundamentals:superalloy_ingot",
     "fundamentals:superalloy_plate",
-    "fundamentals:type_k_thermocouple"
+    "fundamentals:type_k_thermocouple",
+    "fundamentals:coil_former",
+    "fundamentals:cryostat",
+    "fundamentals:cryogenic_magnet"
   ]
 }

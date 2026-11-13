@@ -1,0 +1,33 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:niobium_oxide"
+    },
+    {
+      "item": "fundamentals:niobium_oxide"
+    },
+    {
+      "item": "fundamentals:aluminium_powder"
+    },
+    {
+      "item": "fundamentals:aluminium_powder"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 100,
+      "tag": "c:argon"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:niobium_ingot",
+      "count": 2
+    },
+    {
+      "id": "tfmg:slag",
+      "count": 1
+    }
+  ],
+  "heat_requirement": "superheated"
+}

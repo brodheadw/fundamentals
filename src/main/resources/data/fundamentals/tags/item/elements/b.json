@@ -19,6 +19,15 @@
     "fundamentals:raw_tourmaline",
     "fundamentals:tourmaline_ore",
     "fundamentals:vitrified_waste",
-    "tfmg:p_semiconductor"
+    "tfmg:p_semiconductor",
+    "fundamentals:boron_oxide",
+    "fundamentals:crude_boron",
+    "fundamentals:amorphous_boron",
+    "fundamentals:magnesium_diboride_precursor",
+    "fundamentals:magnesium_diboride_billet",
+    "fundamentals:drawn_magnesium_diboride_wire",
+    "fundamentals:magnesium_diboride_wire",
+    "fundamentals:superconducting_coil",
+    "fundamentals:cryogenic_magnet"
   ]
 }

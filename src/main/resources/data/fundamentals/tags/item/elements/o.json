@@ -304,6 +304,8 @@
     "tfmg:nitrate_dust",
     "tfmg:slag",
     "tfmg:sulfuric_acid_bucket",
-    "tfmg:thermite_powder"
+    "tfmg:thermite_powder",
+    "fundamentals:boron_oxide",
+    "fundamentals:crude_boron"
   ]
 }

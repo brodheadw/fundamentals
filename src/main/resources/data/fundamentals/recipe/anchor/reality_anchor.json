@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "LML",
+    "RCR",
+    "LBL"
+  ],
+  "key": {
+    "L": {
+      "item": "fundamentals:antimonial_lead_plate"
+    },
+    "M": {
+      "item": "fundamentals:cryogenic_magnet"
+    },
+    "R": {
+      "item": "fundamentals:quartz_resonator"
+    },
+    "C": {
+      "item": "fundamentals:microcontroller"
+    },
+    "B": {
+      "item": "fundamentals:lead_acid_cell"
+    }
+  },
+  "result": {
+    "id": "fundamentals:reality_anchor",
+    "count": 1
+  }
+}

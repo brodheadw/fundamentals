@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "S",
+    "Q",
+    "S"
+  ],
+  "key": {
+    "S": {
+      "tag": "c:nuggets/silver"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    }
+  },
+  "result": {
+    "id": "fundamentals:quartz_resonator",
+    "count": 1
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "type": "create:pressing",
+  "ingredients": [
+    {
+      "tag": "c:ingots/niobium"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:niobium_sheet",
+      "count": 1
+    }
+  ]
+}

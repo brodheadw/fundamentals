@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "CNC",
+    "NPN",
+    "CNC"
+  ],
+  "key": {
+    "C": {
+      "tag": "c:plates/copper"
+    },
+    "N": {
+      "item": "fundamentals:niobium_sheet"
+    },
+    "P": {
+      "item": "fundamentals:magnesium_diboride_precursor"
+    }
+  },
+  "result": {
+    "id": "fundamentals:magnesium_diboride_billet",
+    "count": 1
+  }
+}

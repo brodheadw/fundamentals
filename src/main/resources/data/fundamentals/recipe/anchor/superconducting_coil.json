@@ -1,0 +1,69 @@
+{
+  "type": "create:sequenced_assembly",
+  "ingredient": {
+    "item": "fundamentals:coil_former"
+  },
+  "loops": 4,
+  "results": [
+    {
+      "id": "fundamentals:superconducting_coil",
+      "count": 1
+    }
+  ],
+  "sequence": [
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "fundamentals:incomplete_superconducting_coil"
+        },
+        {
+          "item": "fundamentals:magnesium_diboride_wire"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:incomplete_superconducting_coil",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "fundamentals:incomplete_superconducting_coil"
+        },
+        {
+          "item": "fundamentals:magnesium_diboride_wire"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:incomplete_superconducting_coil",
+          "count": 1
+        }
+      ]
+    },
+    {
+      "type": "create:deploying",
+      "ingredients": [
+        {
+          "item": "fundamentals:incomplete_superconducting_coil"
+        },
+        {
+          "item": "fundamentals:novolac_resin"
+        }
+      ],
+      "results": [
+        {
+          "id": "fundamentals:incomplete_superconducting_coil",
+          "count": 1
+        }
+      ]
+    }
+  ],
+  "transitional_item": {
+    "id": "fundamentals:incomplete_superconducting_coil"
+  }
+}

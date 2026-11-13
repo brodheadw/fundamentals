@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "P P",
+    "PRP",
+    "P P"
+  ],
+  "key": {
+    "P": {
+      "item": "fundamentals:stainless_steel_plate"
+    },
+    "R": {
+      "item": "minecraft:iron_bars"
+    }
+  },
+  "result": {
+    "id": "fundamentals:coil_former",
+    "count": 1
+  }
+}

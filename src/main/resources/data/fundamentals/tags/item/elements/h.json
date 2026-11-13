@@ -110,6 +110,7 @@
     "tfmg:hydrogen_bucket",
     "tfmg:plastic_block",
     "tfmg:plastic_sheet",
-    "tfmg:sulfuric_acid_bucket"
+    "tfmg:sulfuric_acid_bucket",
+    "fundamentals:cryogenic_magnet"
   ]
 }

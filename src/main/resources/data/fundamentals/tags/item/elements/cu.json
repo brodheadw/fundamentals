@@ -57,6 +57,11 @@
     "tfmg:constantan_ingot",
     "tfmg:constantan_nugget",
     "tfmg:copper_sulfate",
-    "tfmg:lithium_charge"
+    "tfmg:lithium_charge",
+    "fundamentals:magnesium_diboride_billet",
+    "fundamentals:drawn_magnesium_diboride_wire",
+    "fundamentals:magnesium_diboride_wire",
+    "fundamentals:superconducting_coil",
+    "fundamentals:cryogenic_magnet"
   ]
 }

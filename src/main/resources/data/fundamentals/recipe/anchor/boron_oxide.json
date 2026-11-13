@@ -1,0 +1,22 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:boric_acid"
+    },
+    {
+      "item": "fundamentals:boric_acid"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:boron_oxide",
+      "count": 1
+    },
+    {
+      "id": "minecraft:water",
+      "amount": 250
+    }
+  ],
+  "heat_requirement": "heated"
+}
