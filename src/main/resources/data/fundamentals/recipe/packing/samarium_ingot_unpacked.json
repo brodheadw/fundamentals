@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/samarium"
+      "item": "fundamentals:samarium_ingot"
     }
   ],
   "result": {

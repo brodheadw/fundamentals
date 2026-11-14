@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/neodymium"
+      "item": "fundamentals:neodymium_ingot"
     }
   ],
   "result": {

@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/terbium"
+      "item": "fundamentals:terbium_ingot"
     }
   ],
   "result": {

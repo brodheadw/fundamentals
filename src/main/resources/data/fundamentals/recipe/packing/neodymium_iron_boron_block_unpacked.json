@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:storage_blocks/neodymium_iron_boron"
+      "item": "fundamentals:neodymium_iron_boron_block"
     }
   ],
   "result": {

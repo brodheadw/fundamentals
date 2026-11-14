@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/osmium"
+      "item": "fundamentals:osmium_ingot"
     }
   ],
   "result": {

@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/samarium_cobalt"
+      "item": "fundamentals:samarium_cobalt_ingot"
     }
   ],
   "result": {

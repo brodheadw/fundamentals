@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/aluminium_scandium"
+      "item": "fundamentals:aluminium_scandium_ingot"
     }
   ],
   "result": {

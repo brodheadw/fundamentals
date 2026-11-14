@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/tin"
+      "item": "fundamentals:tin_ingot"
     }
   ],
   "result": {

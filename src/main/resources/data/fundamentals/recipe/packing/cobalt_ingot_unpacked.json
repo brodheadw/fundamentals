@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/cobalt"
+      "item": "fundamentals:cobalt_ingot"
     }
   ],
   "result": {

@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:storage_blocks/dysprosium_neodymium_iron_boron"
+      "item": "fundamentals:dysprosium_neodymium_iron_boron_block"
     }
   ],
   "result": {

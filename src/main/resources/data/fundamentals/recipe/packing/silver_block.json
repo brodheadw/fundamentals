@@ -8,7 +8,7 @@
   ],
   "key": {
     "#": {
-      "tag": "c:ingots/silver"
+      "item": "fundamentals:silver_ingot"
     }
   },
   "result": {

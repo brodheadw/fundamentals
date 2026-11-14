@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/hafnium"
+      "item": "fundamentals:hafnium_ingot"
     }
   ],
   "result": {

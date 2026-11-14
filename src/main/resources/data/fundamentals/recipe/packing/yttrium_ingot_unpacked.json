@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/yttrium"
+      "item": "fundamentals:yttrium_ingot"
     }
   ],
   "result": {

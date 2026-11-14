@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/dysprosium_neodymium_iron_boron"
+      "item": "fundamentals:dysprosium_neodymium_iron_boron_ingot"
     }
   ],
   "result": {

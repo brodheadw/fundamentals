@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/rhenium"
+      "item": "fundamentals:rhenium_ingot"
     }
   ],
   "result": {

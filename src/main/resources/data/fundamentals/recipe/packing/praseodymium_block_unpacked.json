@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:storage_blocks/praseodymium"
+      "item": "fundamentals:praseodymium_block"
     }
   ],
   "result": {

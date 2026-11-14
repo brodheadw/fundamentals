@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:storage_blocks/aluminium_scandium"
+      "item": "fundamentals:aluminium_scandium_block"
     }
   ],
   "result": {

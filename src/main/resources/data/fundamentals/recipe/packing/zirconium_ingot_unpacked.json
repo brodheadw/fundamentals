@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/zirconium"
+      "item": "fundamentals:zirconium_ingot"
     }
   ],
   "result": {

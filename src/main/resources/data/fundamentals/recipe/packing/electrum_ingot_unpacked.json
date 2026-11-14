@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/electrum"
+      "item": "fundamentals:electrum_ingot"
     }
   ],
   "result": {

@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:storage_blocks/neodymium"
+      "item": "fundamentals:neodymium_block"
     }
   ],
   "result": {

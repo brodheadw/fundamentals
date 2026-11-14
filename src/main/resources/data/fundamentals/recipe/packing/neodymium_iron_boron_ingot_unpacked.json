@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/neodymium_iron_boron"
+      "item": "fundamentals:neodymium_iron_boron_ingot"
     }
   ],
   "result": {

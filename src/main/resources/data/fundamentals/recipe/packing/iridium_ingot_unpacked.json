@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/iridium"
+      "item": "fundamentals:iridium_ingot"
     }
   ],
   "result": {

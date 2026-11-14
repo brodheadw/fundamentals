@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/bismuth"
+      "item": "fundamentals:bismuth_ingot"
     }
   ],
   "result": {

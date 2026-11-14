@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:storage_blocks/samarium_cobalt"
+      "item": "fundamentals:samarium_cobalt_block"
     }
   ],
   "result": {

@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/palladium"
+      "item": "fundamentals:palladium_ingot"
     }
   ],
   "result": {

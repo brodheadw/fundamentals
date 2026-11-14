@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:storage_blocks/beryllium_copper"
+      "item": "fundamentals:beryllium_copper_block"
     }
   ],
   "result": {

@@ -8,7 +8,7 @@
   ],
   "key": {
     "#": {
-      "tag": "c:ingots/bronze"
+      "item": "fundamentals:bronze_ingot"
     }
   },
   "result": {

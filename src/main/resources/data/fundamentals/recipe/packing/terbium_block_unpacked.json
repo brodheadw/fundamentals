@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:storage_blocks/terbium"
+      "item": "fundamentals:terbium_block"
     }
   ],
   "result": {

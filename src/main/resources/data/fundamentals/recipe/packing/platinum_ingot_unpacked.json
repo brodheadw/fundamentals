@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/platinum"
+      "item": "fundamentals:platinum_ingot"
     }
   ],
   "result": {

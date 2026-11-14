@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:storage_blocks/monazite_residue"
+      "item": "fundamentals:monazite_residue_block"
     }
   ],
   "result": {

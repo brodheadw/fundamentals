@@ -39,10 +39,10 @@ WASHED = {
 def packed(small, big, name):
     write(RECIPES / f"packing/{name}.json", {
         "type": "minecraft:crafting_shaped", "category": "misc", "pattern": ["###", "###", "###"],
-        "key": {"#": {"tag": small["tag"]}}, "result": {"id": big["id"], "count": 1}})
+        "key": {"#": {"item": small["id"]}}, "result": {"id": big["id"], "count": 1}})
     write(RECIPES / f"packing/{name}_unpacked.json", {
         "type": "minecraft:crafting_shapeless", "category": "misc",
-        "ingredients": [{"tag": big["tag"]}], "result": {"id": small["id"], "count": 9}})
+        "ingredients": [{"item": big["id"]}], "result": {"id": small["id"], "count": 9}})
 
 
 def main():

@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/ruthenium"
+      "item": "fundamentals:ruthenium_ingot"
     }
   ],
   "result": {

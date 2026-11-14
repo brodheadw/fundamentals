@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/germanium"
+      "item": "fundamentals:germanium_ingot"
     }
   ],
   "result": {

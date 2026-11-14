@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/antimony"
+      "item": "fundamentals:antimony_ingot"
     }
   ],
   "result": {

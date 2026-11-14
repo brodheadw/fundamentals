@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/tantalum"
+      "item": "fundamentals:tantalum_ingot"
     }
   ],
   "result": {

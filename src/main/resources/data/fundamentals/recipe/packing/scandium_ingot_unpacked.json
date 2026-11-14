@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/scandium"
+      "item": "fundamentals:scandium_ingot"
     }
   ],
   "result": {

@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "tag": "c:ingots/rhodium"
+      "item": "fundamentals:rhodium_ingot"
     }
   ],
   "result": {
