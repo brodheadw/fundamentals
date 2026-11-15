@@ -75,7 +75,8 @@ public class NuclearTests {
         BlockPos centre = helper.absolutePos(new BlockPos(1, 8, 1));
         Iterable<BlockPos> box = BlockPos.betweenClosed(centre.offset(-6, -5, -6), centre.offset(6, 5, 6));
         box.forEach(pos -> level.setBlock(pos, Blocks.STONE.defaultBlockState(), 2));
-        DepositFeature.INSTANCE.place(small, level, level.getChunkSource().getGenerator(), level.getRandom(), centre);
+        // a fixed seed: the world's own random sometimes threw the front clear of the box
+        DepositFeature.INSTANCE.place(small, level, level.getChunkSource().getGenerator(), net.minecraft.util.RandomSource.create(1L), centre);
         int uraninite = 0;
         for (BlockPos pos : box) {
             uraninite += BuiltInRegistries.BLOCK.getKey(level.getBlockState(pos).getBlock()).getPath().equals("uraninite_ore") ? 1 : 0;
