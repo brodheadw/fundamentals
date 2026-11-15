@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {"S": {"tag": "c:plates/brass"}, "M": {"item": "create:precision_mechanism"}},
+  "pattern": [" S ", "SMS", " S "],
+  "result": {"count": 1, "id": "fundamentals:cam_drum"}
+}

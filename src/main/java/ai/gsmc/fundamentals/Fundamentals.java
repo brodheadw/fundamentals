@@ -113,6 +113,7 @@ public class Fundamentals {
                 Compute.registerBlockEntities(helper::register);
                 ai.gsmc.fundamentals.glass.Glass.registerBlockEntities(helper::register);
             });
+            event.register(Registries.ENTITY_TYPE, helper -> ai.gsmc.fundamentals.automaton.Automata.registerEntities(helper::register));
             event.register(Registries.RECIPE_TYPE, helper -> {
                 IronWorking.registerRecipeTypes(helper::register);
                 ai.gsmc.fundamentals.kiln.Kiln.registerRecipeTypes(helper::register);
@@ -154,6 +155,7 @@ public class Fundamentals {
                 Separation.registerItems(helper::register);
                 Uses.registerItems(helper::register);
                 ai.gsmc.fundamentals.uses.Arms.registerItems(helper::register);
+                ai.gsmc.fundamentals.automaton.Automata.registerItems(helper::register);
                 Magnets.registerItems(helper::register);
                 Plastics.registerItems(helper::register);
                 Titanium.registerItems(helper::register);
@@ -189,6 +191,7 @@ public class Fundamentals {
             });
         });
         ai.gsmc.fundamentals.cold.Cold.register();
+        ai.gsmc.fundamentals.automaton.Automata.register(modBus);
         NeoForge.EVENT_BUS.addListener(Hazards::onPlayerTick);
         NeoForge.EVENT_BUS.addListener(ai.gsmc.fundamentals.uses.FlintAndSteel::onUse);
         NeoForge.EVENT_BUS.addListener(Hazards::onServerTick);
@@ -248,6 +251,7 @@ public class Fundamentals {
             ThermometerRenderer.register(modBus);
             ComputeClient.register(modBus);
             ai.gsmc.fundamentals.client.GlassClient.register(modBus);
+            ai.gsmc.fundamentals.client.AutomataClient.register(modBus);
         }
     }
 
@@ -261,6 +265,7 @@ public class Fundamentals {
                     Separation.items().forEach(output::accept);
                     Uses.items().forEach(output::accept);
                     ai.gsmc.fundamentals.uses.Arms.items().forEach(output::accept);
+                    ai.gsmc.fundamentals.automaton.Automata.items().forEach(output::accept);
                     Magnets.items().forEach(output::accept);
                     Plastics.items().forEach(output::accept);
                     Titanium.items().forEach(output::accept);

@@ -1,0 +1,7 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {"D": {"item": "fundamentals:cam_drum"}, "S": {"tag": "c:plates/brass"}, "T": {"item": "create:fluid_tank"}, "I": {"tag": "c:ingots/brass"}},
+  "pattern": [" D ", "STS", "I I"],
+  "result": {"count": 1, "id": "fundamentals:automaton"}
+}
