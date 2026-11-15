@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "fundamentals:composition_b"
+    },
+    {
+      "item": "fundamentals:composition_b"
+    },
+    {
+      "item": "fundamentals:composition_b"
+    },
+    {
+      "item": "fundamentals:trinitrotoluene"
+    },
+    {
+      "item": "fundamentals:trinitrotoluene"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:explosive_lens",
+    "count": 1
+  }
+}

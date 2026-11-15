@@ -17,6 +17,10 @@
     {
       "id": "fundamentals:high_level_waste",
       "amount": 250
+    },
+    {
+      "id": "fundamentals:plutonium_dioxide",
+      "chance": 0.25
     }
   ],
   "heat_requirement": "heated"

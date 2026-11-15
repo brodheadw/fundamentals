@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "fundamentals:plutonium"
+    },
+    {
+      "item": "fundamentals:plutonium"
+    },
+    {
+      "item": "fundamentals:plutonium"
+    },
+    {
+      "item": "fundamentals:plutonium"
+    },
+    {
+      "item": "fundamentals:gallium_nugget"
+    },
+    {
+      "item": "fundamentals:urchin_initiator"
+    },
+    {
+      "tag": "c:ingots/nickel"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:plutonium_pit",
+    "count": 1
+  }
+}

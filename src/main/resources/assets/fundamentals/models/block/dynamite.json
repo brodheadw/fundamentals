@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "side": "fundamentals:block/dynamite_side",
+    "end": "fundamentals:block/dynamite_top"
+  }
+}

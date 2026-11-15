@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "fundamentals:plastic_explosive"
+    },
+    {
+      "item": "fundamentals:plastic_explosive"
+    },
+    {
+      "item": "fundamentals:blasting_cap"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:c4_charge",
+    "count": 2
+  }
+}

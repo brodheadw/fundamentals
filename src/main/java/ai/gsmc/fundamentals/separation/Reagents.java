@@ -75,6 +75,7 @@ public final class Reagents {
             new Reagent("uranium_hexafluoride", 0xF2F2EC, Kind.GAS),
             new Reagent("enriched_uranium_hexafluoride", 0xEEF2E4, Kind.GAS),
             new Reagent("depleted_uranium_hexafluoride", 0xE8E8E6, Kind.GAS),
+            new Reagent("highly_enriched_uranium_hexafluoride", 0xEAF0DC, Kind.GAS),
             new Reagent("phosphorus_pentafluoride", 0xF0F2EE, Kind.GAS),
             new Reagent("sulfur_dioxide", 0xF2F0E2, Kind.GAS),
             new Reagent("sulfur_trioxide", 0xF4F2EA, Kind.GAS),

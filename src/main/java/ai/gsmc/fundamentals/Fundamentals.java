@@ -87,6 +87,7 @@ public class Fundamentals {
                 Electricity.registerBlocks(helper::register);
                 Separation.registerBlocks(helper::register);
                 Uses.registerBlocks(helper::register);
+                ai.gsmc.fundamentals.bombs.Bombs.registerBlocks(helper::register);
                 Plastics.registerBlocks(helper::register);
                 Titanium.registerBlocks(helper::register);
                 ai.gsmc.fundamentals.mill.WoodenMill.registerBlocks(helper::register);
@@ -113,7 +114,10 @@ public class Fundamentals {
                 Compute.registerBlockEntities(helper::register);
                 ai.gsmc.fundamentals.glass.Glass.registerBlockEntities(helper::register);
             });
-            event.register(Registries.ENTITY_TYPE, helper -> ai.gsmc.fundamentals.automaton.Automata.registerEntities(helper::register));
+            event.register(Registries.ENTITY_TYPE, helper -> {
+                ai.gsmc.fundamentals.automaton.Automata.registerEntities(helper::register);
+                ai.gsmc.fundamentals.bombs.Bombs.registerEntities(helper::register);
+            });
             event.register(Registries.RECIPE_TYPE, helper -> {
                 IronWorking.registerRecipeTypes(helper::register);
                 ai.gsmc.fundamentals.kiln.Kiln.registerRecipeTypes(helper::register);
@@ -155,6 +159,7 @@ public class Fundamentals {
                 Separation.registerItems(helper::register);
                 Uses.registerItems(helper::register);
                 ai.gsmc.fundamentals.uses.Arms.registerItems(helper::register);
+                ai.gsmc.fundamentals.bombs.Bombs.registerItems(helper::register);
                 ai.gsmc.fundamentals.automaton.Automata.registerItems(helper::register);
                 Magnets.registerItems(helper::register);
                 Plastics.registerItems(helper::register);
@@ -199,6 +204,8 @@ public class Fundamentals {
         NeoForge.EVENT_BUS.addListener(Hazards::onExplosion);
         NeoForge.EVENT_BUS.addListener(Fertiliser::onExplosion);
         NeoForge.EVENT_BUS.addListener(Fertiliser::onServerTick);
+        NeoForge.EVENT_BUS.addListener(ai.gsmc.fundamentals.bombs.Detonation::onServerTick);
+        NeoForge.EVENT_BUS.addListener(ai.gsmc.fundamentals.bombs.Fallout::onLevelTick);
         NeoForge.EVENT_BUS.addListener(Plastics::onRightClick);
         NeoForge.EVENT_BUS.addListener(ai.gsmc.fundamentals.content.nuclear.SpentFuel::onEntityTick);
         NeoForge.EVENT_BUS.addListener(ai.gsmc.fundamentals.content.nuclear.SpentFuel::onTooltip);
@@ -252,6 +259,8 @@ public class Fundamentals {
             ComputeClient.register(modBus);
             ai.gsmc.fundamentals.client.GlassClient.register(modBus);
             ai.gsmc.fundamentals.client.AutomataClient.register(modBus);
+            modBus.addListener(net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderers.class,
+                    event -> event.registerEntityRenderer(ai.gsmc.fundamentals.bombs.Bombs.charge(), net.minecraft.client.renderer.entity.TntRenderer::new));
         }
     }
 
@@ -265,6 +274,7 @@ public class Fundamentals {
                     Separation.items().forEach(output::accept);
                     Uses.items().forEach(output::accept);
                     ai.gsmc.fundamentals.uses.Arms.items().forEach(output::accept);
+                    ai.gsmc.fundamentals.bombs.Bombs.items().forEach(output::accept);
                     ai.gsmc.fundamentals.automaton.Automata.items().forEach(output::accept);
                     Magnets.items().forEach(output::accept);
                     Plastics.items().forEach(output::accept);

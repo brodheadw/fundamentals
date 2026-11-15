@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "TTT",
+    "TCT",
+    "TTT"
+  ],
+  "key": {
+    "T": {
+      "item": "fundamentals:trinitrotoluene"
+    },
+    "C": {
+      "item": "fundamentals:blasting_cap"
+    }
+  },
+  "result": {
+    "id": "fundamentals:tnt_charge",
+    "count": 1
+  }
+}

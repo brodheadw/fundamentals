@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "fundamentals:polonium"
+    },
+    {
+      "tag": "c:ingots/beryllium"
+    },
+    {
+      "tag": "c:nuggets/gold"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:urchin_initiator",
+    "count": 1
+  }
+}

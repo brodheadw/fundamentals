@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=up": {
+      "model": "fundamentals:block/c4_charge"
+    },
+    "facing=down": {
+      "model": "fundamentals:block/c4_charge",
+      "x": 180
+    },
+    "facing=north": {
+      "model": "fundamentals:block/c4_charge",
+      "x": 90
+    },
+    "facing=east": {
+      "model": "fundamentals:block/c4_charge",
+      "x": 90,
+      "y": 90
+    },
+    "facing=south": {
+      "model": "fundamentals:block/c4_charge",
+      "x": 90,
+      "y": 180
+    },
+    "facing=west": {
+      "model": "fundamentals:block/c4_charge",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

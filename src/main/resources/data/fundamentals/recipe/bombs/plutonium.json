@@ -1,0 +1,39 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "machines": [
+    "tfmg:mixing"
+  ],
+  "min_size": 1,
+  "processing_time": 200,
+  "ingredients": [
+    {
+      "item": "fundamentals:plutonium_dioxide"
+    },
+    {
+      "item": "fundamentals:calcium_ingot"
+    },
+    {
+      "item": "fundamentals:calcium_ingot"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 500,
+      "tag": "c:acids/hydrofluoric"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 250,
+      "tag": "c:argon"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:plutonium"
+    }
+  ],
+  "heat_requirement": "superheated"
+}

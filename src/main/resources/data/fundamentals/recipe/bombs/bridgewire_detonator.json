@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "tfmg:capacitor_item"
+    },
+    {
+      "tag": "c:nuggets/gold"
+    },
+    {
+      "item": "fundamentals:rdx"
+    },
+    {
+      "item": "tfmg:copper_wire"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:bridgewire_detonator",
+    "count": 2
+  }
+}

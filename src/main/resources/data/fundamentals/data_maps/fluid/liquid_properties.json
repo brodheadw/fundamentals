@@ -1039,6 +1039,11 @@
       "boils": -42,
       "flash_point": -104,
       "autoignition": 450
+    },
+    "fundamentals:highly_enriched_uranium_hexafluoride": {
+      "density": 5090,
+      "boils": 56.5,
+      "toxic": true
     }
   }
 }

@@ -1,0 +1,30 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:rdx"
+    },
+    {
+      "item": "fundamentals:rdx"
+    },
+    {
+      "item": "fundamentals:rdx"
+    },
+    {
+      "item": "fundamentals:trinitrotoluene"
+    },
+    {
+      "item": "fundamentals:trinitrotoluene"
+    },
+    {
+      "item": "minecraft:honeycomb"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:composition_b",
+      "count": 5
+    }
+  ],
+  "heat_requirement": "heated"
+}

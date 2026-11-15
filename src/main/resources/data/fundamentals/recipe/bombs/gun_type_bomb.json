@@ -1,0 +1,36 @@
+{
+  "type": "create:mechanical_crafting",
+  "accept_mirrored": true,
+  "category": "misc",
+  "show_notification": true,
+  "pattern": [
+    "SSSSS",
+    "PBUUT",
+    "RBUUT",
+    "SSSSS"
+  ],
+  "key": {
+    "S": {
+      "tag": "c:plates/steel"
+    },
+    "P": {
+      "item": "fundamentals:smokeless_powder"
+    },
+    "B": {
+      "item": "fundamentals:gun_barrel"
+    },
+    "U": {
+      "item": "fundamentals:highly_enriched_uranium"
+    },
+    "T": {
+      "tag": "c:ingots/tungsten"
+    },
+    "R": {
+      "item": "fundamentals:primer"
+    }
+  },
+  "result": {
+    "id": "fundamentals:gun_type_bomb",
+    "count": 1
+  }
+}

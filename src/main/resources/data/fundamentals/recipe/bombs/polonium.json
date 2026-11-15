@@ -1,0 +1,23 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:irradiated_bismuth"
+    },
+    {
+      "type": "neoforge:tag",
+      "amount": 250,
+      "tag": "c:acids/nitric"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:polonium"
+    },
+    {
+      "id": "fundamentals:bismuth_ingot",
+      "chance": 0.9
+    }
+  ],
+  "heat_requirement": "heated"
+}

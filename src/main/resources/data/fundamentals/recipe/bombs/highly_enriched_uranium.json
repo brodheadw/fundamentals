@@ -1,0 +1,36 @@
+{
+  "type": "tfmg:vat_machine_recipe",
+  "allowed_vat_types": [
+    "tfmg:steel_vat",
+    "tfmg:firebrick_lined_vat"
+  ],
+  "machines": [
+    "tfmg:mixing"
+  ],
+  "min_size": 1,
+  "processing_time": 200,
+  "ingredients": [
+    {
+      "item": "fundamentals:calcium_ingot"
+    },
+    {
+      "item": "fundamentals:calcium_ingot"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "fundamentals:highly_enriched_uranium_hexafluoride"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 250,
+      "fluid": "tfmg:hydrogen"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:highly_enriched_uranium"
+    }
+  ],
+  "heat_requirement": "superheated"
+}

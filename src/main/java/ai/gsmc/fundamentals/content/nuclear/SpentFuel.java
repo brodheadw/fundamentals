@@ -34,8 +34,24 @@ public final class SpentFuel {
     public static void discharge(Level level, BlockPos controller) {
         ItemStack spent = new ItemStack(Uses.item("spent_fuel_rod"));
         IItemHandler above = level.getCapability(Capabilities.ItemHandler.BLOCK, controller.above(), Direction.DOWN);
-        if (above != null) spent = ItemHandlerHelper.insertItemStacked(above, spent, false);
+        if (above != null) {
+            irradiate(level, controller, above);
+            spent = ItemHandlerHelper.insertItemStacked(above, spent, false);
+        }
         if (!spent.isEmpty()) Block.popResource(level, controller.above(), spent);
+    }
+
+    /** A bismuth slug set in the reactor's way, as Hanford's were, takes a neutron and decays to polonium-210: one a rod burnt. */
+    static void irradiate(Level level, BlockPos controller, IItemHandler store) {
+        var items = net.minecraft.core.registries.BuiltInRegistries.ITEM;
+        var bismuth = items.get(ai.gsmc.fundamentals.Fundamentals.id("bismuth_ingot"));
+        for (int slot = 0; slot < store.getSlots(); slot++) {
+            if (!store.getStackInSlot(slot).is(bismuth)) continue;
+            store.extractItem(slot, 1, false);
+            ItemStack slug = ItemHandlerHelper.insertItemStacked(store, new ItemStack(items.get(ai.gsmc.fundamentals.Fundamentals.id("irradiated_bismuth"))), false);
+            if (!slug.isEmpty()) Block.popResource(level, controller.above(), slug);
+            return;
+        }
     }
 
     public static void onEntityTick(EntityTickEvent.Post event) {
@@ -46,7 +62,9 @@ public final class SpentFuel {
 
     public static void onTooltip(ItemTooltipEvent event) {
         ItemStack stack = event.getItemStack();
-        String key = stack.is(Uses.item("spent_fuel_rod")) ? "spent_fuel_rod" : stack.is(Uses.item("waste_canister")) ? "waste_canister" : null;
+        String key = stack.is(Uses.item("spent_fuel_rod")) ? "spent_fuel_rod" : stack.is(Uses.item("waste_canister")) ? "waste_canister"
+                : net.neoforged.fml.ModList.get().isLoaded("createnuclear")
+                        && net.minecraft.core.registries.BuiltInRegistries.ITEM.getKey(stack.getItem()).equals(ai.gsmc.fundamentals.Fundamentals.id("bismuth_ingot")) ? "bismuth_ingot" : null;
         if (key != null && !event.getToolTip().isEmpty()) {
             event.getToolTip().add(1, Component.translatable("tooltip.fundamentals.nuclear." + key).withStyle(ChatFormatting.GRAY));
         }

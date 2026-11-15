@@ -1,0 +1,25 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "fundamentals:block/gun_type_bomb"
+    },
+    "facing=east": {
+      "model": "fundamentals:block/gun_type_bomb",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "fundamentals:block/gun_type_bomb",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "fundamentals:block/gun_type_bomb",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "fundamentals:block/gun_type_bomb"
+    },
+    "facing=down": {
+      "model": "fundamentals:block/gun_type_bomb"
+    }
+  }
+}

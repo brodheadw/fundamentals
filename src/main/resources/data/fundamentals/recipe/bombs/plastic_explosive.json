@@ -1,0 +1,31 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:rdx"
+    },
+    {
+      "item": "fundamentals:rdx"
+    },
+    {
+      "item": "fundamentals:rdx"
+    },
+    {
+      "item": "fundamentals:rdx"
+    },
+    {
+      "item": "tfmg:rubber_sheet"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 100,
+      "fluid": "tfmg:lubrication_oil"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:plastic_explosive",
+      "count": 4
+    }
+  ]
+}

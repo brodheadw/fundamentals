@@ -1,0 +1,27 @@
+{
+  "type": "create:mixing",
+  "ingredients": [
+    {
+      "item": "fundamentals:ammonium_nitrate"
+    },
+    {
+      "item": "fundamentals:ammonium_nitrate"
+    },
+    {
+      "item": "fundamentals:ammonium_nitrate"
+    },
+    {
+      "item": "fundamentals:ammonium_nitrate"
+    },
+    {
+      "type": "neoforge:single",
+      "amount": 50,
+      "fluid": "tfmg:diesel"
+    }
+  ],
+  "results": [
+    {
+      "id": "fundamentals:anfo_charge"
+    }
+  ]
+}
