@@ -12,7 +12,7 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.util.Mth;
 
-/** Clockwork in brass plate: a domed helm with a faceplate and two lenses, an open chest where the great wheel turns,
+/** Clockwork in bronze plate: a domed helm with a faceplate, two lenses and a copper golem's nose, an open chest where the great wheel turns,
  *  a boiler on the back with twin exhausts, iron rods for upper limbs and plated forearms and boots. */
 public class AutomatonModel extends HierarchicalModel<Automaton> {
     public static final ModelLayerLocation LAYER = new ModelLayerLocation(Fundamentals.id("automaton"), "main");
@@ -36,6 +36,7 @@ public class AutomatonModel extends HierarchicalModel<Automaton> {
         parts.addOrReplaceChild("head", CubeListBuilder.create()
                 .texOffs(0, 0).addBox(-4, -8, -4, 8, 8, 8)
                 .texOffs(32, 0).addBox(-0.5F, -10, -3, 1, 2, 7)
+                .texOffs(48, 0).addBox(-1, -4, -6, 2, 3, 2)
                 .texOffs(48, 9).addBox(-1.5F, 0, -1.5F, 3, 1, 3), PartPose.offset(0, 8, 0));
         PartDefinition body = parts.addOrReplaceChild("body", CubeListBuilder.create()
                 .texOffs(0, 16).addBox(-5, 0, -3, 10, 8, 6)
