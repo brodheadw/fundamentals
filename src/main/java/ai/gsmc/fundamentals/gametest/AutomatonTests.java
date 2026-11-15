@@ -27,7 +27,7 @@ public class AutomatonTests {
         return automaton;
     }
 
-    @GameTest(template = "empty", timeoutTicks = 200)
+    @GameTest(template = "empty", timeoutTicks = 200, batch = "automata")
     public void anAutomatonClimbsAScaffoldingTower(GameTestHelper helper) {
         helper.setBlock(new BlockPos(1, 0, 1), Blocks.STONE);
         for (int y = 1; y <= 7; y++) helper.setBlock(new BlockPos(1, y, 1), Blocks.SCAFFOLDING);
@@ -39,7 +39,7 @@ public class AutomatonTests {
         helper.succeedWhen(() -> helper.assertTrue(automaton.getY() - start >= 3, "climbed only " + (automaton.getY() - start)));
     }
 
-    @GameTest(template = "empty", timeoutTicks = 100)
+    @GameTest(template = "empty", timeoutTicks = 100, batch = "automata")
     public void anAutomatonBlowsSteamAtAHostile(GameTestHelper helper) {
         Automaton automaton = automaton(helper, new BlockPos(0, 1, 0));
         var husk = helper.spawnWithNoFreeWill(EntityType.HUSK, new BlockPos(2, 1, 2));
@@ -49,7 +49,7 @@ public class AutomatonTests {
         });
     }
 
-    @GameTest(template = "empty", timeoutTicks = 200)
+    @GameTest(template = "empty", timeoutTicks = 200, batch = "automata")
     public void anAutomatonPicksUpWhatIsDropped(GameTestHelper helper) {
         for (int x = 0; x < 3; x++) for (int z = 0; z < 3; z++) helper.setBlock(new BlockPos(x, 0, z), Blocks.STONE);
         Automaton automaton = automaton(helper, new BlockPos(0, 1, 0));
@@ -59,7 +59,7 @@ public class AutomatonTests {
         helper.succeedWhen(() -> helper.assertTrue(automaton.cargo().countItem(Items.APPLE) == 1, "the apple wasn't fetched"));
     }
 
-    @GameTest(template = "empty")
+    @GameTest(template = "empty", batch = "automata")
     public void aLitBoilerIsFoundAndRefills(GameTestHelper helper) {
         BlockPos tankPos = new BlockPos(2, 1, 2);
         helper.setBlock(tankPos, AllBlocks.FLUID_TANK.get());
@@ -75,5 +75,46 @@ public class AutomatonTests {
         automaton.refill();
         helper.assertTrue(automaton.steam() == 100 + Automaton.REFILL_PER_TICK, "standing at the boiler didn't refill it");
         helper.succeed();
+    }
+
+    private static void floor(GameTestHelper helper) {
+        for (int x = 0; x < 3; x++) for (int z = 0; z < 3; z++) helper.setBlock(new BlockPos(x, 0, z), Blocks.STONE);
+    }
+
+    private static net.minecraft.world.level.block.entity.ChestBlockEntity chest(GameTestHelper helper, BlockPos at) {
+        helper.setBlock(at, Blocks.CHEST);
+        return (net.minecraft.world.level.block.entity.ChestBlockEntity) helper.getBlockEntity(at);
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 300, batch = "automata")
+    public void aCarryCardShuttlesFromOneChestToAnother(GameTestHelper helper) {
+        floor(helper);
+        var from = chest(helper, new BlockPos(0, 1, 0));
+        var to = chest(helper, new BlockPos(2, 1, 2));
+        from.setItem(0, new ItemStack(Items.APPLE, 10));
+        ItemStack card = new ItemStack(Automata.carryCard());
+        ai.gsmc.fundamentals.automaton.ProgramCard.punch(card, "from", helper.absolutePos(new BlockPos(0, 1, 0)));
+        ai.gsmc.fundamentals.automaton.ProgramCard.punch(card, "to", helper.absolutePos(new BlockPos(2, 1, 2)));
+        Automaton automaton = automaton(helper, new BlockPos(1, 1, 1));
+        automaton.setCard(card);
+        helper.succeedWhen(() -> helper.assertTrue(to.countItem(Items.APPLE) == 10 && from.countItem(Items.APPLE) == 0,
+                "the apples weren't carried: " + from.countItem(Items.APPLE) + " left, " + to.countItem(Items.APPLE) + " brought"));
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 300, batch = "automata")
+    public void aBuildCardFillsTheMarkedSpaceFromTheStore(GameTestHelper helper) {
+        floor(helper);
+        var supply = chest(helper, new BlockPos(0, 1, 2));
+        supply.setItem(0, new ItemStack(Items.COBBLESTONE, 5));
+        ItemStack card = new ItemStack(Automata.buildCard());
+        ai.gsmc.fundamentals.automaton.ProgramCard.punch(card, "a", helper.absolutePos(new BlockPos(2, 1, 0)));
+        ai.gsmc.fundamentals.automaton.ProgramCard.punch(card, "b", helper.absolutePos(new BlockPos(2, 1, 1)));
+        ai.gsmc.fundamentals.automaton.ProgramCard.punch(card, "supply", helper.absolutePos(new BlockPos(0, 1, 2)));
+        Automaton automaton = automaton(helper, new BlockPos(0, 1, 0));
+        automaton.setCard(card);
+        helper.succeedWhen(() -> {
+            helper.assertBlockPresent(Blocks.COBBLESTONE, new BlockPos(2, 1, 0));
+            helper.assertBlockPresent(Blocks.COBBLESTONE, new BlockPos(2, 1, 1));
+        });
     }
 }

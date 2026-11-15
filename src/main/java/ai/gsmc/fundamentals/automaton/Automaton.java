@@ -29,7 +29,11 @@ import net.minecraft.world.entity.ai.navigation.WallClimberNavigation;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Enemy;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.items.IItemHandler;
+import net.neoforged.neoforge.items.ItemHandlerHelper;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
@@ -51,6 +55,8 @@ public class Automaton extends PathfinderMob implements OwnableEntity {
 
     private final SimpleContainer cargo = new SimpleContainer(9);
     private UUID owner;
+    /** The punched card in its head, or empty: with none it follows its maker and fetches. */
+    private ItemStack card = ItemStack.EMPTY;
     private BlockPos aim;
     private boolean descending;
 
@@ -105,6 +111,8 @@ public class Automaton extends PathfinderMob implements OwnableEntity {
         goalSelector.addGoal(0, new FloatGoal(this));
         goalSelector.addGoal(1, new BlastGoal());
         goalSelector.addGoal(2, new RefuelGoal());
+        goalSelector.addGoal(3, new CarryGoal());
+        goalSelector.addGoal(3, new BuildGoal());
         goalSelector.addGoal(3, new FetchGoal());
         goalSelector.addGoal(4, new FollowGoal());
         goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
@@ -128,8 +136,10 @@ public class Automaton extends PathfinderMob implements OwnableEntity {
         Vec3 motion = getDeltaMovement();
         if (motion.horizontalDistanceSqr() > 1.0E-5 || onClimbable() && Math.abs(motion.y) > 0.01) setSteam(steam() - 1);
         climb();
-        gather();
-        deliver();
+        if (card.isEmpty()) {
+            gather();
+            deliver();
+        }
         if (steam() <= 0) getNavigation().stop();
     }
 
@@ -175,11 +185,30 @@ public class Automaton extends PathfinderMob implements OwnableEntity {
 
     @Override
     protected InteractionResult mobInteract(Player player, InteractionHand hand) {
-        if (!player.isSecondaryUseActive() || !player.getItemInHand(hand).isEmpty() || owner != null && !owner.equals(player.getUUID())) {
+        if (owner != null && !owner.equals(player.getUUID())) return InteractionResult.PASS;
+        ItemStack held = player.getItemInHand(hand);
+        if (!player.isSecondaryUseActive() && (ProgramCard.kind(held) != null || held.isEmpty() && !card.isEmpty())) {
+            // a card goes into the head, and whatever card was there comes out into the hand
+            if (!level().isClientSide) {
+                ItemStack out = card;
+                card = held.isEmpty() ? ItemStack.EMPTY : held.split(1);
+                if (!out.isEmpty()) {
+                    if (held.isEmpty()) player.setItemInHand(hand, out);
+                    else if (!player.getInventory().add(out)) spawnAtLocation(out);
+                }
+                dropCargo();
+                getNavigation().stop();
+                playSound(SoundEvents.CHISELED_BOOKSHELF_INSERT, 1.0F, 1.4F);
+            }
+            return InteractionResult.sidedSuccess(level().isClientSide);
+        }
+        if (!player.isSecondaryUseActive() || !held.isEmpty()) {
             return InteractionResult.PASS;
         }
         if (!level().isClientSide) {
             dropCargo();
+            if (!card.isEmpty()) spawnAtLocation(card);
+            card = ItemStack.EMPTY;
             player.setItemInHand(hand, AutomatonItem.of(this));
             playSound(SoundEvents.COPPER_BREAK, 1.0F, 1.2F);
             discard();
@@ -198,6 +227,7 @@ public class Automaton extends PathfinderMob implements OwnableEntity {
     protected void dropCustomDeathLoot(ServerLevel level, DamageSource source, boolean recentlyHit) {
         super.dropCustomDeathLoot(level, source, recentlyHit);
         dropCargo();
+        if (!card.isEmpty()) spawnAtLocation(card);
     }
 
     @Override
@@ -206,6 +236,7 @@ public class Automaton extends PathfinderMob implements OwnableEntity {
         tag.putInt("Steam", steam());
         if (owner != null) tag.putUUID("Owner", owner);
         tag.put("Cargo", cargo.createTag(registryAccess()));
+        if (!card.isEmpty()) tag.put("Card", card.save(registryAccess()));
     }
 
     @Override
@@ -214,6 +245,7 @@ public class Automaton extends PathfinderMob implements OwnableEntity {
         if (tag.contains("Steam")) setSteam(tag.getInt("Steam"));
         owner = tag.hasUUID("Owner") ? tag.getUUID("Owner") : null;
         cargo.fromTag(tag.getList("Cargo", 10), registryAccess());
+        card = tag.contains("Card") ? ItemStack.parseOptional(registryAccess(), tag.getCompound("Card")) : ItemStack.EMPTY;
     }
 
     @Override
@@ -239,6 +271,189 @@ public class Automaton extends PathfinderMob implements OwnableEntity {
     @Override
     protected void playStepSound(BlockPos pos, BlockState state) {
         playSound(SoundEvents.COPPER_STEP, 0.6F, 0.8F);
+    }
+
+    public ItemStack card() {
+        return card;
+    }
+
+    public void setCard(ItemStack card) {
+        this.card = card;
+    }
+
+    /** Walks to within reach of a block and reports whether it is there. */
+    private boolean reach(BlockPos target, double within) {
+        aim(target);
+        if (distanceToSqr(Vec3.atCenterOf(target)) <= within * within) {
+            getNavigation().stop();
+            getLookControl().setLookAt(Vec3.atCenterOf(target));
+            return true;
+        }
+        if (getNavigation().isDone() || tickCount % 20 == 0) getNavigation().moveTo(target.getX() + 0.5, target.getY(), target.getZ() + 0.5, 1.0);
+        return false;
+    }
+
+    private IItemHandler store(BlockPos pos) {
+        return pos == null ? null : level().getCapability(Capabilities.ItemHandler.BLOCK, pos, null);
+    }
+
+    /** Takes what a store will give into its cargo, as much as fits; filter chooses what. Returns whether anything came. */
+    private boolean fill(IItemHandler from, java.util.function.Predicate<ItemStack> filter) {
+        boolean took = false;
+        for (int slot = 0; slot < from.getSlots(); slot++) {
+            ItemStack offered = from.extractItem(slot, 64, true);
+            if (offered.isEmpty() || !filter.test(offered) || !cargo.canAddItem(offered)) continue;
+            ItemStack rest = cargo.addItem(offered.copy());
+            int moved = offered.getCount() - rest.getCount();
+            if (moved > 0) {
+                from.extractItem(slot, moved, false);
+                took = true;
+            }
+        }
+        return took;
+    }
+
+    /** A carry card: fill up at the first store, empty out at the second, and again. */
+    final class CarryGoal extends Goal {
+        private int idle;
+
+        CarryGoal() {
+            setFlags(EnumSet.of(Flag.MOVE));
+        }
+
+        @Override
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
+
+        @Override
+        public boolean canUse() {
+            return steam() > 0 && ProgramCard.kind(card) == ProgramCard.Kind.CARRY
+                    && ProgramCard.at(card, "from") != null && ProgramCard.at(card, "to") != null;
+        }
+
+        @Override
+        public void tick() {
+            if (idle > 0) {
+                idle--;
+                return;
+            }
+            BlockPos from = ProgramCard.at(card, "from"), to = ProgramCard.at(card, "to");
+            if (cargo.isEmpty()) {
+                if (!reach(from, 2.5)) return;
+                IItemHandler source = store(from);
+                if (source == null || !fill(source, stack -> true)) idle = 40;
+            } else {
+                if (!reach(to, 2.5)) return;
+                IItemHandler target = store(to);
+                if (target == null) {
+                    idle = 40;
+                    return;
+                }
+                boolean gave = false;
+                for (int i = 0; i < cargo.getContainerSize(); i++) {
+                    ItemStack stack = cargo.getItem(i);
+                    if (stack.isEmpty()) continue;
+                    ItemStack rest = ItemHandlerHelper.insertItemStacked(target, stack.copy(), false);
+                    gave |= rest.getCount() < stack.getCount();
+                    cargo.setItem(i, rest);
+                }
+                // the store is full: wait rather than walk back and forth
+                if (!gave) idle = 40;
+            }
+        }
+    }
+
+    /** A build card: fill the marked space from the bottom up with blocks fetched from the store. */
+    final class BuildGoal extends Goal {
+        private BlockPos target;
+        private int scan, idle;
+
+        BuildGoal() {
+            setFlags(EnumSet.of(Flag.MOVE));
+        }
+
+        @Override
+        public boolean requiresUpdateEveryTick() {
+            return true;
+        }
+
+        @Override
+        public boolean canUse() {
+            return steam() > 0 && ProgramCard.kind(card) == ProgramCard.Kind.BUILD
+                    && ProgramCard.at(card, "a") != null && ProgramCard.at(card, "b") != null;
+        }
+
+        private boolean hasBlocks() {
+            for (int i = 0; i < cargo.getContainerSize(); i++) if (cargo.getItem(i).getItem() instanceof BlockItem) return true;
+            return false;
+        }
+
+        /** The next empty space to fill: lowest first, then nearest, and only where something already holds it up. */
+        private BlockPos next() {
+            BlockPos a = ProgramCard.at(card, "a"), b = ProgramCard.at(card, "b");
+            if (ProgramCard.volume(a, b) > ProgramCard.MAX_VOLUME) return null;
+            BlockPos best = null;
+            double bestScore = Double.MAX_VALUE;
+            for (BlockPos pos : BlockPos.betweenClosed(a, b)) {
+                if (!level().getBlockState(pos).canBeReplaced() || getBoundingBox().intersects(new net.minecraft.world.phys.AABB(pos))) continue;
+                boolean held = false;
+                for (net.minecraft.core.Direction side : net.minecraft.core.Direction.values()) {
+                    if (side != net.minecraft.core.Direction.UP && !level().getBlockState(pos.relative(side)).canBeReplaced()) {
+                        held = true;
+                        break;
+                    }
+                }
+                if (!held) continue;
+                double score = pos.getY() * 10000.0 + pos.distSqr(blockPosition());
+                if (score < bestScore) {
+                    bestScore = score;
+                    best = pos.immutable();
+                }
+            }
+            return best;
+        }
+
+        @Override
+        public void tick() {
+            if (idle > 0) {
+                idle--;
+                return;
+            }
+            if (!hasBlocks()) {
+                BlockPos supply = ProgramCard.at(card, "supply");
+                IItemHandler store = store(supply);
+                if (store == null) {
+                    idle = 40;
+                    return;
+                }
+                if (reach(supply, 2.5) && !fill(store, stack -> stack.getItem() instanceof BlockItem)) idle = 60;
+                return;
+            }
+            if (target == null || !level().getBlockState(target).canBeReplaced() || --scan <= 0) {
+                target = next();
+                scan = 20;
+            }
+            if (target == null) {
+                idle = 40;
+                return;
+            }
+            if (!reach(target, 3.5)) return;
+            for (int i = 0; i < cargo.getContainerSize(); i++) {
+                ItemStack stack = cargo.getItem(i);
+                if (!(stack.getItem() instanceof BlockItem block)) continue;
+                var state = block.getBlock().defaultBlockState();
+                if (!state.canSurvive(level(), target)) continue;
+                level().setBlock(target, state, 3);
+                level().playSound(null, target, state.getSoundType().getPlaceSound(), SoundSource.BLOCKS, 1.0F, 1.0F);
+                swing(InteractionHand.MAIN_HAND);
+                stack.shrink(1);
+                cargo.setChanged();
+                target = null;
+                return;
+            }
+            idle = 40;
+        }
     }
 
     /** It answers threats with the only thing it has: a jet of steam from the chimney, scalding and shoving. */
@@ -363,7 +578,7 @@ public class Automaton extends PathfinderMob implements OwnableEntity {
 
         @Override
         public boolean canUse() {
-            if (steam() <= 0 || --scan > 0) return false;
+            if (steam() <= 0 || !card.isEmpty() || --scan > 0) return false;
             scan = 5;
             item = level().getEntitiesOfClass(ItemEntity.class, getBoundingBox().inflate(FETCH_RADIUS), i -> i.isAlive() && cargo.canAddItem(i.getItem()))
                     .stream().min(Comparator.comparingDouble(Automaton.this::distanceToSqr)).orElse(null);
@@ -399,7 +614,7 @@ public class Automaton extends PathfinderMob implements OwnableEntity {
 
         @Override
         public boolean canUse() {
-            return steam() > 0 && maker() != null && maker().level() == level() && distanceToSqr(maker()) > 36;
+            return steam() > 0 && card.isEmpty() && maker() != null && maker().level() == level() && distanceToSqr(maker()) > 36;
         }
 
         @Override
