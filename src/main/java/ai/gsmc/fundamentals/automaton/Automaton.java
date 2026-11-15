@@ -116,8 +116,12 @@ public class Automaton extends PathfinderMob implements OwnableEntity {
         super.aiStep();
         if (level().isClientSide) {
             if (steam() > 0 && random.nextInt(steam() < LOW_STEAM ? 12 : 4) == 0) {
-                Vec3 chimney = position().add(0, getBbHeight() + 0.1, 0);
-                level().addParticle(ParticleTypes.WHITE_SMOKE, chimney.x, chimney.y, chimney.z, 0, 0.04, 0);
+                // out of one of the two exhausts on its back
+                float yaw = yBodyRot * net.minecraft.util.Mth.DEG_TO_RAD;
+                double side = random.nextBoolean() ? 0.16 : -0.16, back = 0.31;
+                double x = getX() + side * net.minecraft.util.Mth.cos(yaw) + back * net.minecraft.util.Mth.sin(yaw);
+                double z = getZ() + side * net.minecraft.util.Mth.sin(yaw) - back * net.minecraft.util.Mth.cos(yaw);
+                level().addParticle(ParticleTypes.WHITE_SMOKE, x, getY() + 1.22, z, 0, 0.04, 0);
             }
             return;
         }
