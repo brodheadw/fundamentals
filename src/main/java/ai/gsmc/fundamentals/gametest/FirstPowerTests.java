@@ -4,6 +4,7 @@ import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.magnet.Magnets;
 import com.drmangotea.tfmg.content.electricity.generators.GeneratorBlockEntity;
 import com.drmangotea.tfmg.content.electricity.network.transformer.small.TransformerBlockEntity;
+import com.drmangotea.tfmg.content.machinery.misc.firebox.FireboxBlockEntity;
 import com.drmangotea.tfmg.content.machinery.misc.smokestack.SmokestackBlockEntity;
 import com.drmangotea.tfmg.content.machinery.misc.winding_machine.WindingMachineBlockEntity;
 import com.drmangotea.tfmg.content.machinery.vat.base.VatBlockEntity;
@@ -26,6 +27,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.gametest.GameTestHolder;
@@ -227,6 +229,18 @@ public class FirstPowerTests {
         SmokestackBlockEntity smokestack = helper.getBlockEntity(stack);
         int taken = smokestack.tankInventory.fill(new FluidStack((net.minecraft.world.level.material.Fluid) TFMGFluids.FURNACE_GAS.getSource(), 100), IFluidHandler.FluidAction.EXECUTE);
         helper.assertTrue(taken == 100, "a smokestack should take the coke ovens' furnace gas, took " + taken);
+        helper.succeed();
+    }
+
+    // coke-oven tar was fired under steelworks boilers; it is the ovens' only sink big enough
+    @GameTest(template = "empty")
+    public void aFireboxBurnsTheCokeOvensCreosote(GameTestHelper helper) {
+        BlockPos pos = new BlockPos(1, 2, 1);
+        helper.setBlock(pos, BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath("tfmg", "firebox")).defaultBlockState());
+        FireboxBlockEntity firebox = helper.getBlockEntity(pos);
+        IFluidHandler handler = helper.getLevel().getCapability(Capabilities.FluidHandler.BLOCK, helper.absolutePos(pos), null);
+        handler.fill(new FluidStack((net.minecraft.world.level.material.Fluid) TFMGFluids.CREOSOTE.getSource(), 100), IFluidHandler.FluidAction.EXECUTE);
+        helper.assertTrue(firebox.canBurn(firebox), "a firebox should burn the coke ovens' creosote");
         helper.succeed();
     }
 }
