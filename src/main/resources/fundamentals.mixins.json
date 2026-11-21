@@ -29,6 +29,7 @@
 		"SidedInvWrapperAgeingMixin",
 		"SmokestackFurnaceGasMixin",
 		"StatorGogglesMixin",
+		"StirlingHeatMixin",
 		"TankCorrosionMixin",
 		"TreeNodePositionMixin",
 		"VesselGogglesMixin",

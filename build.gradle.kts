@@ -108,6 +108,12 @@ dependencies {
     // Cold Sweat is optional: cold/ColdSweatCompat only loads with it; -Pcoldsweat runs it alongside.
     modCompileOnly("maven.modrinth:cold-sweat:${deps.coldSweatVersion}")
     if (providers.gradleProperty("coldsweat").isPresent) modLocalRuntime("maven.modrinth:cold-sweat:${deps.coldSweatVersion}")
+    // Create Propulsion is optional: mixin/StirlingHeatMixin runs its Stirling engine on the heat field; -Ppropulsion runs it (and Sable) alongside.
+    if (providers.gradleProperty("propulsion").isPresent) {
+        modLocalRuntime("maven.modrinth:ApkoHNO9:H13U56dc")
+        modLocalRuntime("maven.modrinth:T9PomCSv:fg9dTRz9")
+        // Sable bundles companion, rapier and veil jar-in-jar, which a dev run does not unpack: unzip META-INF/jarjar/*.jar into run/mods
+    }
     // Create Big Cannons is optional: with it, pig iron is its molten cast iron; -Pbigcannons runs it alongside.
     if (providers.gradleProperty("bigcannons").isPresent) {
         modLocalRuntime("maven.modrinth:GWp4jCJj:bOiDu0LS")
