@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+- Survey instruments: a Geiger counter that counts near a radioactive source and roars in fresh fallout; a seismometer that gives a quake's magnitude and distance; a radio telescope that sees the Sun at noon, the cold sky at midnight and a nuclear blast as a pulse.
+- Lanterns, soul lanterns, chains and bars in copper, brass, bronze, tin, silver, gold and steel.
+- The blast door reworked, with new textures.
 - A Create Propulsion Stirling engine runs on whatever heat is under it, not only a blaze burner: lava (1,150 °C), magma, fire, a campfire or a lit furnace, anything that makes the block beneath it 500 °C or more, a fading burner's heat. An engine sat on a lava pool turns for good.
 - A TFMG firebox burns creosote, as steelworks fired their boilers on coke-oven tar. The coke ovens make far more creosote than anything else can use, so a firebox or two under a boiler is where it goes.
 - The Reality Anchor, and the real road to it: boric acid dried to boron oxide, reduced with magnesium and washed in hydrochloric acid to amorphous boron; niobium oxide reduced by aluminium under argon to niobium, pressed to sheet; magnesium and boron packed in niobium and copper as a powder-in-tube billet, drawn to wire and reacted under argon to MgB₂ superconducting wire; wound on a stainless former and set in resin; set in a stainless cryostat and filled with liquid hydrogen, below MgB₂'s 39 K; a quartz plate between silver electrodes for a resonator. With a microcontroller, lead shielding and a lead-acid cell it is an anchor: switched on, it holds 8 blocks round its bearer at baseline, where nothing works through the field, and drains their chaos, spending its cell a charge a second and faster against a strong field. A lead-acid cell at an anvil recharges it. Create's cobblestone melt no longer takes cobbled deepslate, which Fundamentals melts itself.
