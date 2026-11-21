@@ -1,0 +1,53 @@
+{
+  "name": "Weather and Survey",
+  "category": "fundamentals:rare_earths",
+  "icon": "fundamentals:weather_radar",
+  "sortnum": 15,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Weather and Survey",
+      "text": "Five instruments for a station on a mountain: a hair hygrometer, a weather radar, a sounding balloon, an aerial camera and a magnetometer. The barometers, which read the pressure falling as you climb and ahead of rain, have their own entry."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "De Saussure's hair hygrometer of 1783 hangs a hair over the needle's pulley: it lengthens as the air grows damp. It reads relative humidity, the water in the air against what air that warm could hold. A wet biome's air is damp and a desert's nearly dry; warming the air dries it, and open water or rain wets it. Its goggles give the dew point."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:survey/hygrometer"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A weather radar times the echoes of its pulses off rain and snow out to 256 blocks on sixteen bearings. Used by hand or read by goggles, it gives the nearest echo's bearing and distance, how many bearings carry one, and the nearest clear ground: a desert or savanna stays dry under the same storm. Its comparator rises as the echo nears, full overhead."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:survey/weather_radar"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A weather balloon is rubber filled with hydrogen; let go, it climbs at five metres a second and drifts with the wind. Every sixteen blocks its radiosonde radios back the height, temperature, pressure and wind, until it bursts at the top of the sky or snags on something above it."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:survey/weather_balloon"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "An aerial survey camera points straight down. Used under open sky with paper on you, it prints the ground below as a map, wider the higher you are, from 128 blocks across under 48 blocks up to 1,024 above 192. What is not loaded shows only as its biome's tint; the margin lists the biomes round about by bearing."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:survey/aerial_camera"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A fluxgate magnetometer reads the field in nanotesla: the Earth's 50,000, and the anomaly of magnetic rock within twelve blocks, falling as the cube of the distance. Magnetite reads strongly, its core richer than its fringe, a lodestone and worked iron more, hematite and ilmenite faintly. It points toward the anomaly, by bearing and how far down."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:survey/magnetometer"
+    }
+  ]
+}

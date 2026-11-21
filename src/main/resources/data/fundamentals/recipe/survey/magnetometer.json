@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "WMW",
+    "BEB"
+  ],
+  "key": {
+    "W": {
+      "tag": "c:wires/copper"
+    },
+    "M": {
+      "item": "tfmg:magnetic_alloy_sheet"
+    },
+    "B": {
+      "tag": "c:plates/brass"
+    },
+    "E": {
+      "item": "create:electron_tube"
+    }
+  },
+  "result": {
+    "id": "fundamentals:magnetometer",
+    "count": 1
+  }
+}

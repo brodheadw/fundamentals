@@ -127,6 +127,26 @@ def rotor(img):
         img.putpixel((x, 24), INK + (255,))
 
 
+# A hair hygrometer's band runs 0 to 100 percent relative humidity: parched, fair, damp, then saturated where dew forms.
+HUMIDITY = [(30, (214, 160, 72)), (60, (120, 160, 96)), (90, (72, 112, 172)), (101, (40, 58, 118))]
+
+
+def humidity(angle):
+    percent = 100 * (angle + SWEEP / 2) / SWEEP
+    return next(colour for limit, colour in HUMIDITY if percent < limit)
+
+
+def hair(img):
+    # de Saussure's hair: clamped at the top, over the needle's pulley, held taut by a small brass weight
+    blond, brass = (176, 132, 64), (184, 140, 60)
+    for x in (14, 15, 16):
+        img.putpixel((x, 18), INK + (255,))
+    for y in range(19, 23):
+        img.putpixel((15, y), shade(blond, 0.85 if y % 2 else 1.0) + (255,))
+    for x, y in ((14, 23), (15, 23), (16, 23), (14, 24), (15, 24), (16, 24)):
+        img.putpixel((x, y), (shade(brass, 1.25) if (x, y) == (14, 23) else shade(brass, 0.65) if y == 24 else brass) + (255,))
+
+
 def tube(img, dark, light, bulb):
     glass = (96, 116, 128)
     for y in range(18, 24):
@@ -199,7 +219,8 @@ def main():
     for name, mark in BAROMETERS.items():
         barometer_dial(mark).save(OUT / f"{name}_dial.png")
     barometer_dial(rotor, field).save(OUT / "field_mill_dial.png")
-    print(f"wrote {len(GAUGES)} thermometer dials, {len(BAROMETERS)} barometer dials and a field mill dial")
+    barometer_dial(hair, humidity).save(OUT / "hygrometer_dial.png")
+    print(f"wrote {len(GAUGES)} thermometer dials, {len(BAROMETERS)} barometer dials, a field mill dial and a hygrometer dial")
 
 
 if __name__ == "__main__":

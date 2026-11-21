@@ -1,0 +1,76 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "dish": "minecraft:block/white_concrete",
+    "mount": "minecraft:block/light_gray_concrete",
+    "feed": "minecraft:block/iron_block",
+    "base": "create:block/andesite_casing",
+    "particle": "minecraft:block/white_concrete"
+  },
+  "elements": [
+    {
+      "from": [
+        2,
+        0,
+        2
+      ],
+      "to": [
+        14,
+        2,
+        14
+      ],
+      "faces": {
+        "north": {
+          "texture": "#base"
+        },
+        "south": {
+          "texture": "#base"
+        },
+        "east": {
+          "texture": "#base"
+        },
+        "west": {
+          "texture": "#base"
+        },
+        "up": {
+          "texture": "#base"
+        },
+        "down": {
+          "texture": "#base"
+        }
+      }
+    },
+    {
+      "from": [
+        6,
+        2,
+        6
+      ],
+      "to": [
+        10,
+        5,
+        10
+      ],
+      "faces": {
+        "north": {
+          "texture": "#mount"
+        },
+        "south": {
+          "texture": "#mount"
+        },
+        "east": {
+          "texture": "#mount"
+        },
+        "west": {
+          "texture": "#mount"
+        },
+        "up": {
+          "texture": "#mount"
+        },
+        "down": {
+          "texture": "#mount"
+        }
+      }
+    }
+  ]
+}

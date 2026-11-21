@@ -1,0 +1,22 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "fundamentals:block/weather_radar"
+    },
+    "facing=east": {
+      "model": "fundamentals:block/weather_radar"
+    },
+    "facing=south": {
+      "model": "fundamentals:block/weather_radar"
+    },
+    "facing=west": {
+      "model": "fundamentals:block/weather_radar"
+    },
+    "facing=up": {
+      "model": "fundamentals:block/weather_radar"
+    },
+    "facing=down": {
+      "model": "fundamentals:block/weather_radar"
+    }
+  }
+}

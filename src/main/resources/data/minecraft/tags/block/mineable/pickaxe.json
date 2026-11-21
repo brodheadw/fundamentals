@@ -157,6 +157,8 @@
     "fundamentals:kiln_drum",
     "fundamentals:seismometer",
     "fundamentals:radio_telescope",
+    "fundamentals:hygrometer",
+    "fundamentals:weather_radar",
     "fundamentals:copper_lantern",
     "fundamentals:brass_lantern",
     "fundamentals:bronze_lantern",

@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "IPI",
+    "IKI",
+    " L "
+  ],
+  "key": {
+    "I": {
+      "tag": "c:plates/iron"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "K": {
+      "item": "minecraft:clock"
+    },
+    "L": {
+      "item": "fundamentals:lens"
+    }
+  },
+  "result": {
+    "id": "fundamentals:aerial_camera",
+    "count": 1
+  }
+}

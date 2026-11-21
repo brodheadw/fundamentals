@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PEP",
+    "WCW",
+    " A "
+  ],
+  "key": {
+    "P": {
+      "tag": "c:plates/iron"
+    },
+    "E": {
+      "item": "create:electron_tube"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    },
+    "C": {
+      "item": "create:cogwheel"
+    },
+    "A": {
+      "item": "create:andesite_casing"
+    }
+  },
+  "result": {
+    "id": "fundamentals:weather_radar",
+    "count": 1
+  }
+}

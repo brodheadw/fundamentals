@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "fundamentals:block/hygrometer"
+    },
+    "facing=east": {
+      "model": "fundamentals:block/hygrometer",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "fundamentals:block/hygrometer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "fundamentals:block/hygrometer",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "fundamentals:block/hygrometer",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "fundamentals:block/hygrometer",
+      "x": 90
+    }
+  }
+}

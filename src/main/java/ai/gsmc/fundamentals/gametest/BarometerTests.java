@@ -56,4 +56,20 @@ public class BarometerTests {
         }
         helper.succeed();
     }
+
+    @GameTest(template = "battery", batch = "survey")
+    public void theBarometerReadsLowerHigherUp(GameTestHelper helper) {
+        ServerLevel level = helper.getLevel();
+        BlockPos low = new BlockPos(2, 1, 2), high = new BlockPos(2, 61, 2);
+        helper.setBlock(low, Barometers.block(Barometer.MERCURY).defaultBlockState().setValue(ThermometerBlock.FACING, Direction.UP));
+        helper.setBlock(high, Barometers.block(Barometer.MERCURY).defaultBlockState().setValue(ThermometerBlock.FACING, Direction.UP));
+        BarometerBlockEntity below = helper.getBlockEntity(low), above = helper.getBlockEntity(high);
+        below.sample(level);
+        above.sample(level);
+        double fall = below.hectopascals() - above.hectopascals();
+        helper.setBlock(high, net.minecraft.world.level.block.Blocks.AIR);
+        // sixty metres up a scale height of 8,434 m: about 7 hPa, as a real glass falls 12 hPa per hundred metres
+        helper.assertTrue(fall > 6 && fall < 8.5, "sixty blocks up should read about 7 hPa lower: " + fall);
+        helper.succeed();
+    }
 }

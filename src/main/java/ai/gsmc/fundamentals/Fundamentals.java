@@ -120,6 +120,7 @@ public class Fundamentals {
             event.register(Registries.ENTITY_TYPE, helper -> {
                 ai.gsmc.fundamentals.automaton.Automata.registerEntities(helper::register);
                 ai.gsmc.fundamentals.bombs.Bombs.registerEntities(helper::register);
+                ai.gsmc.fundamentals.survey.Survey.registerEntities(helper::register);
             });
             event.register(Registries.RECIPE_TYPE, helper -> {
                 IronWorking.registerRecipeTypes(helper::register);
@@ -266,6 +267,7 @@ public class Fundamentals {
             ComputeClient.register(modBus);
             ai.gsmc.fundamentals.client.GlassClient.register(modBus);
             ai.gsmc.fundamentals.client.AutomataClient.register(modBus);
+            ai.gsmc.fundamentals.client.WeatherClient.register(modBus);
             modBus.addListener(net.neoforged.neoforge.client.event.EntityRenderersEvent.RegisterRenderers.class,
                     event -> event.registerEntityRenderer(ai.gsmc.fundamentals.bombs.Bombs.charge(), net.minecraft.client.renderer.entity.TntRenderer::new));
         }

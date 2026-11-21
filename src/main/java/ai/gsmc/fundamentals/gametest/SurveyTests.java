@@ -3,17 +3,29 @@ package ai.gsmc.fundamentals.gametest;
 import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.bombs.Fallout;
 import ai.gsmc.fundamentals.heat.ThermometerBlock;
+import ai.gsmc.fundamentals.registry.OreBlock;
+import ai.gsmc.fundamentals.survey.AerialCameraItem;
 import ai.gsmc.fundamentals.survey.Disturbances;
 import ai.gsmc.fundamentals.survey.GeigerCounterItem;
+import ai.gsmc.fundamentals.survey.HygrometerBlockEntity;
+import ai.gsmc.fundamentals.survey.MagnetometerItem;
 import ai.gsmc.fundamentals.survey.RadioTelescopeBlockEntity;
 import ai.gsmc.fundamentals.survey.SeismometerBlockEntity;
 import ai.gsmc.fundamentals.survey.Survey;
+import ai.gsmc.fundamentals.survey.WeatherBalloon;
+import ai.gsmc.fundamentals.survey.WeatherRadarBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
+import net.minecraft.core.component.DataComponents;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.MapItem;
+import net.minecraft.world.level.storage.ServerLevelData;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
 import net.minecraft.world.phys.Vec3;
@@ -84,6 +96,99 @@ public class SurveyTests {
         } finally {
             level.setDayTime(time);
         }
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", batch = "survey")
+    public void theHygrometerReadsDampByWaterAndNearDryInADesert(GameTestHelper helper) {
+        var level = helper.getLevel();
+        BlockPos at = new BlockPos(1, 1, 1);
+        helper.setBlock(at, Survey.hygrometer().defaultBlockState().setValue(ThermometerBlock.FACING, Direction.UP));
+        HygrometerBlockEntity hygrometer = helper.getBlockEntity(at);
+        hygrometer.sample(level);
+        double air = hygrometer.humidity();
+        helper.setBlock(at.east(), Blocks.WATER);
+        hygrometer.sample(level);
+        helper.assertTrue(hygrometer.humidity() > air || air == 100, "open water should wet the air: " + air + " to " + hygrometer.humidity());
+        double desert = HygrometerBlockEntity.relativeHumidity(0, 40, false, false), jungle = HygrometerBlockEntity.relativeHumidity(0.9, 28, false, false);
+        helper.assertTrue(desert < 5 && jungle > 60, "a desert's air is near dry, a jungle's damp: " + desert + ", " + jungle);
+        helper.assertTrue(HygrometerBlockEntity.relativeHumidity(0, 40, false, true) >= 95, "rain saturates the air");
+        helper.succeed();
+    }
+
+    // with the barograph, which also sets the world's weather; in a batch of its own ahead of the automata, their climb test flaked
+    @GameTest(template = "empty", batch = "barometer")
+    public void theRadarSeesRainOnlyWhileItRains(GameTestHelper helper) {
+        ServerLevel level = helper.getLevel();
+        ServerLevelData data = (ServerLevelData) level.getLevelData();
+        int clear = data.getClearWeatherTime(), rain = data.getRainTime(), thunder = data.getThunderTime();
+        boolean raining = data.isRaining(), thundering = data.isThundering();
+        BlockPos at = new BlockPos(1, 1, 1);
+        helper.setBlock(at, Survey.weatherRadar().defaultBlockState());
+        WeatherRadarBlockEntity radar = helper.getBlockEntity(at);
+        try {
+            level.setWeatherParameters(6000, 0, false, false);
+            level.setRainLevel(0);
+            radar.sample(level);
+            helper.assertTrue(radar.echo().equals("clear") && radar.signal() == 0, "no echoes under a clear sky");
+            level.setWeatherParameters(0, 6000, true, true);
+            // the rain fades in over a second or so; a test cannot wait for it with the weather set
+            level.setRainLevel(1);
+            radar.sample(level);
+            helper.assertTrue(!radar.echo().equals("clear") && radar.signal() > 0 && radar.cover() > 0,
+                    "rain falling round about should echo: " + radar.echo() + " " + radar.signal());
+            helper.assertTrue(helper.getLevel().getBlockState(helper.absolutePos(at)).getAnalogOutputSignal(level, helper.absolutePos(at)) == radar.signal(),
+                    "a comparator reads the echo");
+        } finally {
+            level.setWeatherParameters(clear, rain, raining, thundering);
+            data.setThunderTime(thunder);
+            level.setRainLevel(raining ? 1 : 0);
+        }
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", batch = "survey", timeoutTicks = 200)
+    public void theWeatherBalloonRadiosLowerPressureAsItClimbs(GameTestHelper helper) {
+        helper.assertTrue(new ItemStack(BuiltInRegistries.ITEM.get(ResourceLocation.parse("tfmg:hydrogen_bucket"))).getCraftingRemainingItem().is(Items.BUCKET),
+                "crafting a balloon gives back the hydrogen's bucket");
+        // let go above the test's barrier roof, which would snag it
+        BlockPos launch = helper.absolutePos(new BlockPos(1, 12, 1));
+        WeatherBalloon balloon = new WeatherBalloon(helper.getLevel(), launch.getX() + 0.5, launch.getY(), launch.getZ() + 0.5, null);
+        helper.getLevel().addFreshEntity(balloon);
+        double[] ground = {0};
+        helper.startSequence()
+                .thenWaitUntil(() -> helper.assertTrue(balloon.reports() >= 1, "the sonde reports at launch"))
+                .thenExecute(() -> ground[0] = balloon.hectopascals())
+                .thenWaitUntil(() -> helper.assertTrue(balloon.reports() >= 2, "and again sixteen blocks up"))
+                .thenExecute(() -> {
+                    helper.assertTrue(balloon.hectopascals() < ground[0] - 1, "the pressure falls as it climbs: " + ground[0] + " to " + balloon.hectopascals());
+                    balloon.discard();
+                })
+                .thenSucceed();
+    }
+
+    @GameTest(template = "empty", batch = "survey")
+    public void theAerialCameraPrintsAMapOfTheGroundAndItsBiomes(GameTestHelper helper) {
+        ItemStack photo = AerialCameraItem.photograph(helper.getLevel(), helper.absolutePos(new BlockPos(1, 1, 1)));
+        var data = MapItem.getSavedData(photo, helper.getLevel());
+        int seen = 0;
+        for (byte colour : data.colors) if (colour != 0) seen++;
+        helper.assertTrue(photo.is(Items.FILLED_MAP) && seen > 128 * 128 * 9 / 10, "the frame should cover the map: " + seen);
+        helper.assertTrue(photo.get(DataComponents.LORE).lines().size() == 9, "the margin lists the ground below and eight bearings");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", batch = "survey")
+    public void theMagnetometerPointsToMagnetite(GameTestHelper helper) {
+        var level = helper.getLevel();
+        Vec3 probe = Vec3.atCenterOf(helper.absolutePos(new BlockPos(0, 1, 0)));
+        MagnetometerItem.Reading quiet = MagnetometerItem.read(level, probe);
+        var ore = BuiltInRegistries.BLOCK.get(Fundamentals.id("magnetite_ore")).defaultBlockState().setValue(OreBlock.GRADE, OreBlock.Grade.CORE);
+        for (int z = 0; z < 3; z++) helper.setBlock(new BlockPos(5, 1, z), ore);
+        MagnetometerItem.Reading near = MagnetometerItem.read(level, probe);
+        Vec3 pull = near.toward().subtract(quiet.toward());
+        helper.assertTrue(near.anomaly() - quiet.anomaly() > 100, "three blocks of magnetite five blocks off should read: " + (near.anomaly() - quiet.anomaly()));
+        helper.assertTrue(pull.x > 0 && Math.abs(pull.x) > Math.abs(pull.z), "and point east toward it: " + pull);
         helper.succeed();
     }
 }

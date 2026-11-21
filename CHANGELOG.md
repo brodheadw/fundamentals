@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+- Weather and survey instruments for a mountain station: a hair hygrometer reading relative humidity from the biome's downfall and the air's warmth, damp by open water and saturated in rain, near dry in a desert or the Nether, with its dew point; a weather radar, its dish turning six times a minute, giving the nearest rain, snow or thunderstorm by bearing and distance out to 256 blocks and the nearest clear ground, its comparator rising as the echo nears; a weather balloon of rubber and hydrogen whose radiosonde radios back height, temperature, pressure and wind every sixteen blocks as it climbs, until it bursts or snags; an aerial survey camera that prints the ground below as a map, wider the higher it is flown, its margin listing the biomes round about; and a fluxgate magnetometer that reads the field in nanotesla and points to magnetite, lodestone and iron. Survey instruments used by hand tell their reading.
 - Survey instruments: a Geiger counter that counts near a radioactive source and roars in fresh fallout; a seismometer that gives a quake's magnitude and distance; a radio telescope that sees the Sun at noon, the cold sky at midnight and a nuclear blast as a pulse.
 - Lanterns, soul lanterns, chains and bars in copper, brass, bronze, tin, silver, gold and steel.
 - The blast door reworked, with new textures.

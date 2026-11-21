@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "RHR",
+    " S ",
+    "PEB"
+  ],
+  "key": {
+    "R": {
+      "item": "tfmg:rubber_sheet"
+    },
+    "H": {
+      "item": "tfmg:hydrogen_bucket"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "E": {
+      "item": "create:electron_tube"
+    },
+    "B": {
+      "tag": "c:plates/brass"
+    }
+  },
+  "result": {
+    "id": "fundamentals:weather_balloon",
+    "count": 1
+  }
+}
