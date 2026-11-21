@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "PEP",
+    "WMW",
+    " A "
+  ],
+  "key": {
+    "P": {
+      "tag": "c:plates/aluminum"
+    },
+    "E": {
+      "item": "create:electron_tube"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    },
+    "M": {
+      "item": "fundamentals:microcontroller"
+    },
+    "A": {
+      "item": "create:andesite_casing"
+    }
+  },
+  "result": {
+    "id": "fundamentals:ground_station",
+    "count": 1
+  }
+}

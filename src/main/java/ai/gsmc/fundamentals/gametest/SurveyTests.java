@@ -7,9 +7,12 @@ import ai.gsmc.fundamentals.registry.OreBlock;
 import ai.gsmc.fundamentals.survey.AerialCameraItem;
 import ai.gsmc.fundamentals.survey.Disturbances;
 import ai.gsmc.fundamentals.survey.GeigerCounterItem;
+import ai.gsmc.fundamentals.survey.GroundStationBlockEntity;
 import ai.gsmc.fundamentals.survey.HygrometerBlockEntity;
 import ai.gsmc.fundamentals.survey.MagnetometerItem;
 import ai.gsmc.fundamentals.survey.RadioTelescopeBlockEntity;
+import ai.gsmc.fundamentals.survey.SatelliteItem;
+import ai.gsmc.fundamentals.survey.Satellites;
 import ai.gsmc.fundamentals.survey.SeismometerBlockEntity;
 import ai.gsmc.fundamentals.survey.Survey;
 import ai.gsmc.fundamentals.survey.WeatherBalloon;
@@ -25,6 +28,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.MapItem;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.storage.ServerLevelData;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
@@ -189,6 +194,67 @@ public class SurveyTests {
         Vec3 pull = near.toward().subtract(quiet.toward());
         helper.assertTrue(near.anomaly() - quiet.anomaly() > 100, "three blocks of magnetite five blocks off should read: " + (near.anomaly() - quiet.anomaly()));
         helper.assertTrue(pull.x > 0 && Math.abs(pull.x) > Math.abs(pull.z), "and point east toward it: " + pull);
+        helper.succeed();
+    }
+
+    /** A station at (1, 1, 1) tasking a satellite let go over it by a fresh player. */
+    private static GroundStationBlockEntity station(GameTestHelper helper, Player player) {
+        BlockPos at = new BlockPos(1, 1, 1);
+        helper.setBlock(at, Survey.groundStation().defaultBlockState());
+        BlockPos pos = helper.absolutePos(at);
+        player.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+        SatelliteItem.deploy(helper.getLevel().getServer(), player, new ItemStack(Survey.satellite()));
+        GroundStationBlockEntity station = helper.getBlockEntity(at);
+        helper.assertTrue(station.cycle(helper.getLevel(), player).isPresent(), "the station tasks the player's satellite");
+        return station;
+    }
+
+    @GameTest(template = "empty", batch = "survey")
+    public void aSatelliteGoesIntoOrbitOverWhereItIsLetGo(GameTestHelper helper) {
+        Player player = helper.makeMockPlayer(GameType.SURVIVAL);
+        BlockPos pos = helper.absolutePos(new BlockPos(1, 1, 1));
+        player.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
+        ItemStack stack = new ItemStack(Survey.satellite());
+        Satellites.Satellite satellite = SatelliteItem.deploy(helper.getLevel().getServer(), player, stack);
+        var owned = Satellites.get(helper.getLevel().getServer()).owned(player.getUUID());
+        helper.assertTrue(stack.isEmpty() && owned.size() == 1 && owned.getFirst().equals(satellite), "the satellite leaves the hand for orbit");
+        helper.assertTrue(satellite.x() == pos.getX() && satellite.z() == pos.getZ(), "over where it was let go: " + satellite);
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", batch = "survey")
+    public void theGroundStationImagesItsTargetAtItsZoomAndOnlyInView(GameTestHelper helper) {
+        GroundStationBlockEntity station = station(helper, helper.makeMockPlayer(GameType.SURVIVAL));
+        station.zoom();
+        station.zoom();
+        int x = station.targetX() + 100, z = station.targetZ() - 50;
+        station.target(x, z);
+        ItemStack frame = station.image(helper.getLevel());
+        var data = MapItem.getSavedData(frame, helper.getLevel());
+        helper.assertTrue(frame.is(Items.FILLED_MAP) && data != null, "a frame comes down as a map: " + station.status());
+        helper.assertTrue(data.centerX == x && data.centerZ == z && data.scale == 2 && data.locked,
+                "centred on the target at the zoom, locked: " + data.centerX + ", " + data.centerZ + " scale " + data.scale);
+        station.target(x + Satellites.VIEW + 1, z);
+        helper.assertTrue(station.image(helper.getLevel()).isEmpty() && station.status().equals("view"), "beyond its view it refuses");
+        helper.succeed();
+    }
+
+    @GameTest(template = "empty", batch = "survey")
+    public void recordingPrintsFramesIntoTheChestBesideItFromItsPaper(GameTestHelper helper) {
+        GroundStationBlockEntity station = station(helper, helper.makeMockPlayer(GameType.SURVIVAL));
+        station.cycleRecording();
+        BlockPos store = new BlockPos(2, 1, 1);
+        helper.setBlock(store, Blocks.CHEST);
+        ChestBlockEntity chest = helper.getBlockEntity(store);
+        chest.setItem(0, new ItemStack(Items.PAPER));
+        helper.assertTrue(station.record(helper.getLevel()), "a frame is recorded: " + station.status());
+        int maps = 0, paper = 0;
+        for (int i = 0; i < chest.getContainerSize(); i++) {
+            if (chest.getItem(i).is(Items.FILLED_MAP)) maps++;
+            paper += chest.getItem(i).is(Items.PAPER) ? chest.getItem(i).getCount() : 0;
+        }
+        helper.assertTrue(maps == 1 && paper == 0, "the frame goes in the chest and its paper is used: " + maps + " maps, " + paper + " paper");
+        helper.assertTrue(!station.record(helper.getLevel()) && station.interval() == 0, "out of paper, recording stops");
         helper.succeed();
     }
 }

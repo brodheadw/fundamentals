@@ -1,0 +1,33 @@
+{
+  "name": "Satellites",
+  "category": "fundamentals:rare_earths",
+  "icon": "fundamentals:satellite",
+  "sortnum": 16,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Satellites",
+      "text": "An Earth-observation satellite like Landsat images a strip of ground on each pass, and its orbit brings it back over the same ground again and again. It stores what it sees and sends it down when it passes a ground station, which tasks it and takes the downlink. Satellites need Ad Astra: there is no other way to orbit."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A satellite is a lens looking down at a camera, solar panels, nickel-cadmium cells for the night side of the orbit, a microcontroller and a copper antenna, on an aluminium frame. Carry it up and use it in Earth orbit to let it go: it stays over the ground below, and can image anywhere within 4,096 blocks of there. A name given at an anvil goes up with it."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:survey/satellite"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A ground station is a dish and its console, under open sky in the Overworld. Sneak and use it with an empty hand to task your next satellite; use it with an empty hand to list them and read it out. Paper takes a picture: a locked map centred on the target. The target is overhead unless a filled map sets it to that map's centre; a compass sets it back."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A spyglass zooms, from 128 blocks across, one block a pixel, out to 2,048. A clock sets it recording: every 1, 5 or 20 minutes it takes a frame and puts it in a container beside it, from whose paper it prints, until the paper runs out. A comparator reads full while the target is in the satellite's view. What is not loaded shows as its biome's tint."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:survey/ground_station"
+    }
+  ]
+}

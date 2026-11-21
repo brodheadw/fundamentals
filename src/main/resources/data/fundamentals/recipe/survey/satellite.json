@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "VWV",
+    "NMN",
+    "ALA"
+  ],
+  "key": {
+    "V": {
+      "item": "fundamentals:photovoltaic_panel"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    },
+    "N": {
+      "item": "fundamentals:nickel_cadmium_cell"
+    },
+    "M": {
+      "item": "fundamentals:microcontroller"
+    },
+    "A": {
+      "tag": "c:plates/aluminum"
+    },
+    "L": {
+      "item": "fundamentals:lens"
+    }
+  },
+  "result": {
+    "id": "fundamentals:satellite",
+    "count": 1
+  }
+}

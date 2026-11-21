@@ -73,8 +73,15 @@ public class AerialCameraItem extends Item {
         byte scale = 0;
         while (scale < SCALE_HEIGHTS.length && height >= SCALE_HEIGHTS[scale]) scale++;
         ItemStack map = MapItem.create(level, camera.getX(), camera.getZ(), scale, true, false);
-        MapItemSavedData data = MapItem.getSavedData(map, level);
-        int size = 1 << scale;
+        develop(level, MapItem.getSavedData(map, level));
+        map.set(DataComponents.ITEM_NAME, Component.translatable("item.fundamentals.aerial_survey", height));
+        map.set(DataComponents.LORE, new ItemLore(margin(level, camera, 1 << scale, new ArrayList<>())));
+        return map;
+    }
+
+    /** Draws the ground a map covers into it, about its centre at its scale. */
+    public static void develop(ServerLevel level, MapItemSavedData data) {
+        int size = 1 << data.scale;
         for (int px = 0; px < 128; px++) {
             int north = Integer.MIN_VALUE;
             for (int pz = 0; pz < 128; pz++) {
@@ -95,18 +102,19 @@ public class AerialCameraItem extends Item {
                 north = top;
             }
         }
-        List<Component> lore = new ArrayList<>();
-        lore.add(Component.translatable("item.fundamentals.aerial_survey.below", biome(level, camera, 0, 0)).withStyle(ChatFormatting.GRAY));
+    }
+
+    /** The margin of a frame {@code size} blocks a pixel: the biome under its centre and on eight bearings a quarter-frame out. */
+    public static List<Component> margin(ServerLevel level, BlockPos centre, int size, List<Component> lore) {
+        lore.add(Component.translatable("item.fundamentals.aerial_survey.below", biome(level, centre, 0, 0)).withStyle(ChatFormatting.GRAY));
         int reach = 32 * size;
         for (int b = 0; b < 8; b++) {
             double angle = Math.PI * b / 4;
             int dx = (int) Math.round(Math.sin(angle) * reach), dz = (int) Math.round(-Math.cos(angle) * reach);
-            lore.add(Component.translatable("item.fundamentals.aerial_survey.bearing", Survey.bearing(dx, dz), reach, biome(level, camera, dx, dz))
+            lore.add(Component.translatable("item.fundamentals.aerial_survey.bearing", Survey.bearing(dx, dz), reach, biome(level, centre, dx, dz))
                     .withStyle(ChatFormatting.GRAY));
         }
-        map.set(DataComponents.ITEM_NAME, Component.translatable("item.fundamentals.aerial_survey", height));
-        map.set(DataComponents.LORE, new ItemLore(lore));
-        return map;
+        return lore;
     }
 
     private static Component biome(ServerLevel level, BlockPos camera, int dx, int dz) {
