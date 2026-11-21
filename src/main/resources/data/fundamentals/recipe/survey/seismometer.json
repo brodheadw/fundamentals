@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "WMW",
+    "BEB",
+    " A "
+  ],
+  "key": {
+    "W": {
+      "tag": "c:wires/copper"
+    },
+    "M": {
+      "item": "fundamentals:steel_magnet"
+    },
+    "B": {
+      "tag": "c:plates/brass"
+    },
+    "E": {
+      "item": "create:electron_tube"
+    },
+    "A": {
+      "item": "create:andesite_casing"
+    }
+  },
+  "result": {
+    "id": "fundamentals:seismometer",
+    "count": 1
+  }
+}

@@ -94,6 +94,8 @@ public class Fundamentals {
                 Thermometers.registerBlocks(helper::register);
                 ai.gsmc.fundamentals.air.Barometers.registerBlocks(helper::register);
                 ai.gsmc.fundamentals.air.FieldMill.registerBlocks(helper::register);
+                ai.gsmc.fundamentals.survey.Survey.registerBlocks(helper::register);
+                ai.gsmc.fundamentals.torch.Fixtures.registerBlocks(helper::register);
                 Oxidation.registerBlocks(helper::register);
                 Compute.registerBlocks(helper::register);
                 ai.gsmc.fundamentals.glass.Glass.registerBlocks(helper::register);
@@ -110,6 +112,7 @@ public class Fundamentals {
                 Thermometers.registerBlockEntities(helper::register);
                 ai.gsmc.fundamentals.air.Barometers.registerBlockEntities(helper::register);
                 ai.gsmc.fundamentals.air.FieldMill.registerBlockEntities(helper::register);
+                ai.gsmc.fundamentals.survey.Survey.registerBlockEntities(helper::register);
                 Oxidation.registerBlockEntities(helper::register);
                 Compute.registerBlockEntities(helper::register);
                 ai.gsmc.fundamentals.glass.Glass.registerBlockEntities(helper::register);
@@ -168,6 +171,8 @@ public class Fundamentals {
                 Thermometers.registerItems(helper::register);
                 ai.gsmc.fundamentals.air.Barometers.registerItems(helper::register);
                 ai.gsmc.fundamentals.air.FieldMill.registerItems(helper::register);
+                ai.gsmc.fundamentals.survey.Survey.registerItems(helper::register);
+                ai.gsmc.fundamentals.torch.Fixtures.registerItems(helper::register);
                 Oxidation.registerItems(helper::register);
                 PeriodicTable.registerItems(helper::register);
                 Compute.registerItems(helper::register);
@@ -206,6 +211,8 @@ public class Fundamentals {
         NeoForge.EVENT_BUS.addListener(Fertiliser::onServerTick);
         NeoForge.EVENT_BUS.addListener(ai.gsmc.fundamentals.bombs.Detonation::onServerTick);
         NeoForge.EVENT_BUS.addListener(ai.gsmc.fundamentals.bombs.Fallout::onLevelTick);
+        NeoForge.EVENT_BUS.addListener(ai.gsmc.fundamentals.survey.Disturbances::onExplosion);
+        NeoForge.EVENT_BUS.addListener(ai.gsmc.fundamentals.survey.Disturbances::onJoin);
         NeoForge.EVENT_BUS.addListener(Plastics::onRightClick);
         NeoForge.EVENT_BUS.addListener(ai.gsmc.fundamentals.content.nuclear.SpentFuel::onEntityTick);
         NeoForge.EVENT_BUS.addListener(ai.gsmc.fundamentals.content.nuclear.SpentFuel::onTooltip);
@@ -285,6 +292,8 @@ public class Fundamentals {
                     Thermometers.items().forEach(output::accept);
                     ai.gsmc.fundamentals.air.Barometers.items().forEach(output::accept);
                     output.accept(ai.gsmc.fundamentals.air.FieldMill.item());
+                    ai.gsmc.fundamentals.survey.Survey.items().forEach(output::accept);
+                    ai.gsmc.fundamentals.torch.Fixtures.items().forEach(output::accept);
                     Oxidation.items().forEach(output::accept);
                     Compute.items().forEach(output::accept);
                     ai.gsmc.fundamentals.cold.Parkas.items().forEach(output::accept);

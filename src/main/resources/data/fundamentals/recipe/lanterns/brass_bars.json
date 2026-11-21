@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:ingots/brass"
+    }
+  },
+  "result": {
+    "id": "fundamentals:brass_bars",
+    "count": 16
+  }
+}

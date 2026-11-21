@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/iron_bars_side_alt",
+  "render_type": "minecraft:cutout_mipped",
+  "textures": {
+    "particle": "fundamentals:block/silver_bars",
+    "bars": "fundamentals:block/silver_bars",
+    "edge": "fundamentals:block/silver_bars"
+  }
+}

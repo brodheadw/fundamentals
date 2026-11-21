@@ -1,0 +1,25 @@
+{
+  "variants": {
+    "facing=up": {
+      "model": "fundamentals:block/radio_telescope_up"
+    },
+    "facing=down": {
+      "model": "fundamentals:block/radio_telescope_up"
+    },
+    "facing=north": {
+      "model": "fundamentals:block/radio_telescope"
+    },
+    "facing=east": {
+      "model": "fundamentals:block/radio_telescope",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "fundamentals:block/radio_telescope",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "fundamentals:block/radio_telescope",
+      "y": 270
+    }
+  }
+}

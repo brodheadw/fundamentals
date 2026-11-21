@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "fundamentals:block/brass_soul_lantern"
+    },
+    "hanging=true": {
+      "model": "fundamentals:block/brass_soul_lantern_hanging"
+    }
+  }
+}

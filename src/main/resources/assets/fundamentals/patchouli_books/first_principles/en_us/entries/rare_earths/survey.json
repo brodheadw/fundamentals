@@ -1,0 +1,37 @@
+{
+  "name": "Instruments for the Unseen",
+  "category": "fundamentals:rare_earths",
+  "icon": "fundamentals:radio_telescope",
+  "sortnum": 15,
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "title": "Instruments for the Unseen",
+      "text": "Three instruments read what cannot be seen. A Geiger counter counts the particles from radioactive matter. A seismometer feels a blast far off through the ground. A radio telescope hears the Sun, the galaxy and lightning, through cloud."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A Geiger-M\u00fcller tube is a wire inside a metal cylinder of argon at high voltage. A particle crossing it frees an electron, which sets off an avalanche: one click. Held, the counter clicks with the radiation around it. The rate falls as the square of the distance to each source, so walking toward the clicks finds it."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:survey/geiger_counter"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A seismometer is a coil on a spring round a magnet. When the ground moves, the coil lags, and the current is the motion. Its goggles reading gives the last quake's distance from the gap between its P and S waves, and its magnitude on Richter's scale. One station cannot tell direction; three can locate a blast."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:survey/seismometer"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "A radio telescope reads antenna temperature: the cold sky about 10 kelvin, the ground 290, the Sun tens of thousands, a lightning stroke millions. Place it looking up to aim at the zenith, or facing a horizon to tilt it halfway up that sky; aim east for the morning Sun. A fission blast's pulse floods it for miles."
+    },
+    {
+      "type": "patchouli:crafting",
+      "recipe": "fundamentals:survey/radio_telescope"
+    }
+  ]
+}

@@ -24,6 +24,10 @@
     },
     {
       "type": "patchouli:text",
+      "text": "Its leaves are solid only where they stand, so the doorway opens as they part. While they run, a horn sounds and the lamps on the lintel flash. Closing, they put anyone in the doorway out on the nearer side rather than shut them in."
+    },
+    {
+      "type": "patchouli:text",
       "text": "It is five times as hard to dig as obsidian, every one of its nine blocks alike, and wants a diamond pickaxe; it stands three times the blast obsidian does. Dig any part and the whole door comes away as one.",
       "title": "Armour"
     },

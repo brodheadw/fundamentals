@@ -90,15 +90,17 @@ public class GlassTests {
     private static boolean shut(GameTestHelper helper, BlockPos controller, Direction facing) {
         for (int i = 0; i < 9; i++) {
             BlockPos at = part(controller, facing, i);
-            if (helper.getBlockState(at).getCollisionShape(helper.getLevel(), helper.absolutePos(at), CollisionContext.empty()).isEmpty()) return false;
+            if (!Block.isShapeFullBlock(helper.getBlockState(at).getCollisionShape(helper.getLevel(), helper.absolutePos(at), CollisionContext.empty()))) return false;
         }
         return true;
     }
 
+    /** Open: nothing stands in the doorway but the frame's lintel along the top row. */
     private static boolean clear(GameTestHelper helper, BlockPos controller, Direction facing) {
         for (int i = 0; i < 9; i++) {
             BlockPos at = part(controller, facing, i);
-            if (!helper.getBlockState(at).getCollisionShape(helper.getLevel(), helper.absolutePos(at), CollisionContext.empty()).isEmpty()) return false;
+            var shape = helper.getBlockState(at).getCollisionShape(helper.getLevel(), helper.absolutePos(at), CollisionContext.empty());
+            if (i / 3 < 2 ? !shape.isEmpty() : shape.min(Direction.Axis.Y) < BlastDoorBlock.LINTEL) return false;
         }
         return true;
     }
@@ -119,7 +121,7 @@ public class GlassTests {
                             + door.getData().getVoltage() + " V, " + door.getPowerUsage() + " W");
                     running[0] = door.getPowerUsage();
                 })
-                .thenWaitUntil(() -> helper.assertTrue(clear(helper, controller, facing), "open, the doorway is clear through all nine blocks"))
+                .thenWaitUntil(() -> helper.assertTrue(clear(helper, controller, facing), "open, the doorway is clear under its lintel"))
                 .thenWaitUntil(() -> {
                     BlastDoorBlockEntity door = helper.getBlockEntity(controller);
                     helper.assertTrue(door.getPowerUsage() > 0 && door.getPowerUsage() < running[0], "held open it draws less than moving: " + door.getPowerUsage() + " < " + running[0]);
@@ -128,6 +130,20 @@ public class GlassTests {
                 .thenWaitUntil(() -> helper.assertTrue(shut(helper, controller, facing), "with the grid cut the door shuts"))
                 .thenWaitUntil(() -> helper.assertFalse(((BlastDoorBlockEntity) helper.getBlockEntity(controller)).moving(), "and its leaves close fully"))
                 .thenSucceed();
+    }
+
+    @GameTest(template = "empty")
+    public void theDoorwayOpensAsTheLeavesPart(GameTestHelper helper) {
+        Direction facing = Direction.SOUTH;
+        for (int part = 0; part < 9; part++) {
+            helper.assertTrue(Block.isShapeFullBlock(BlastDoorBlock.shape(facing, part, 0)), "shut, every part is solid: " + part);
+        }
+        var middle = BlastDoorBlock.shape(facing, BlastDoorBlock.CONTROLLER, 0.25F);
+        helper.assertTrue(!middle.isEmpty() && !Block.isShapeFullBlock(middle), "a quarter open, a gap opens down the middle");
+        helper.assertTrue(BlastDoorBlock.shape(facing, BlastDoorBlock.CONTROLLER, 1).isEmpty() && BlastDoorBlock.shape(facing, 0, 1).isEmpty(),
+                "open, the lower parts are clear");
+        helper.assertTrue(BlastDoorBlock.shape(facing, 7, 1).min(Direction.Axis.Y) >= BlastDoorBlock.LINTEL, "open, only the lintel is left overhead");
+        helper.succeed();
     }
 
     @GameTest(template = "empty", timeoutTicks = 300)

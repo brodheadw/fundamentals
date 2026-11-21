@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/chain",
+  "render_type": "minecraft:cutout_mipped",
+  "textures": {
+    "particle": "fundamentals:block/tin_chain",
+    "all": "fundamentals:block/tin_chain"
+  }
+}

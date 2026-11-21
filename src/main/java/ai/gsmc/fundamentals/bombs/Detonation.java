@@ -68,6 +68,7 @@ public final class Detonation {
         Blast blast = new Blast(level, centre, radius);
         flashAndBlast(blast);
         Fallout.get(level).add(centre, radius * 3, Fallout.TICKS);
+        ai.gsmc.fundamentals.survey.Disturbances.nuclear(level, centre, radius);
         ACTIVE.add(blast);
     }
 

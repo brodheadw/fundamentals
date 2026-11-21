@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "N",
+    "I",
+    "N"
+  ],
+  "key": {
+    "N": {
+      "tag": "c:nuggets/bronze"
+    },
+    "I": {
+      "tag": "c:ingots/bronze"
+    }
+  },
+  "result": {
+    "id": "fundamentals:bronze_chain",
+    "count": 1
+  }
+}

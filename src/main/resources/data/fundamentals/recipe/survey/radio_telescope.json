@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "P P",
+    "PEP",
+    "WAW"
+  ],
+  "key": {
+    "P": {
+      "tag": "c:plates/iron"
+    },
+    "E": {
+      "item": "create:electron_tube"
+    },
+    "W": {
+      "tag": "c:wires/copper"
+    },
+    "A": {
+      "item": "create:andesite_casing"
+    }
+  },
+  "result": {
+    "id": "fundamentals:radio_telescope",
+    "count": 1
+  }
+}

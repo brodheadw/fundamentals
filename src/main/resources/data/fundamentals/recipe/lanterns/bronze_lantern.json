@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "XXX",
+    "X#X",
+    "XXX"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:torch"
+    },
+    "X": {
+      "tag": "c:nuggets/bronze"
+    }
+  },
+  "result": {
+    "id": "fundamentals:bronze_lantern",
+    "count": 1
+  }
+}

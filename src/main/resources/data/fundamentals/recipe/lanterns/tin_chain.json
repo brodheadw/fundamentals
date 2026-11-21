@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "N",
+    "I",
+    "N"
+  ],
+  "key": {
+    "N": {
+      "tag": "c:nuggets/tin"
+    },
+    "I": {
+      "tag": "c:ingots/tin"
+    }
+  },
+  "result": {
+    "id": "fundamentals:tin_chain",
+    "count": 1
+  }
+}

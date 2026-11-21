@@ -36,6 +36,8 @@ public class BlastDoorBlock extends Block implements IBE<BlastDoorBlockEntity> {
     public static final IntegerProperty PART = IntegerProperty.create("part", 0, 8);
     public static final BooleanProperty OPEN = BlockStateProperties.OPEN;
     public static final int CONTROLLER = 1;
+    /** Where the frame's lintel starts in the top row, and how far in its jambs reach, in blocks. */
+    public static final double LINTEL = 0.75, JAMB = 0.25;
 
     public BlastDoorBlock(Properties properties) {
         super(properties);
@@ -100,9 +102,49 @@ public class BlastDoorBlock extends Block implements IBE<BlastDoorBlockEntity> {
         }
     }
 
+    /** How far the leaves have slid, 0 shut to 1 open, read from the controller; a part cut off from it counts as shut. */
+    static float open(BlockGetter level, BlockPos pos, BlockState state) {
+        return level.getBlockEntity(controller(pos, state)) instanceof BlastDoorBlockEntity door ? door.open(1) : state.getValue(OPEN) ? 1 : 0;
+    }
+
+    /**
+     * Across the doorway, from -1 at the left jamb to 2 at the right, the leaves cover [-1 - s, 0.5 - s] and [0.5 + s, 2 + s]
+     * as they slide s blocks apart. The span is symmetric about the middle, so which way the axis runs does not matter.
+     */
+    static double[][] covered(float open) {
+        double s = 1.5 * open;
+        return new double[][]{{-1 - s, 0.5 - s}, {0.5 + s, 2 + s}};
+    }
+
+    private static final java.util.Map<Integer, VoxelShape> SHAPES = new java.util.concurrent.ConcurrentHashMap<>();
+
+    /** The part's share of the leaves, in sixteenths of travel so a handful of shapes serve every frame. */
+    public static VoxelShape shape(Direction facing, int part, float open) {
+        int step = Math.round(open * 16);
+        return SHAPES.computeIfAbsent((facing.get2DDataValue() * 9 + part) * 17 + step, key -> {
+            int column = part % 3 - 1;
+            Direction across = facing.getClockWise();
+            boolean positive = across.getAxisDirection() == Direction.AxisDirection.POSITIVE;
+            // the frame's lintel spans the top row whatever the leaves do
+            VoxelShape shape = part / 3 == 2 ? Shapes.box(0, LINTEL, 0, 1, 1, 1) : Shapes.empty();
+            for (double[] leaf : covered(step / 16F)) {
+                double a = Math.max(leaf[0], column) - column, b = Math.min(leaf[1], column + 1) - column;
+                if (b <= a) continue;
+                double lo = positive ? a : 1 - b, hi = positive ? b : 1 - a;
+                shape = Shapes.or(shape, across.getAxis() == Direction.Axis.X ? Shapes.box(lo, 0, 0, hi, 1, 1) : Shapes.box(0, 0, lo, 1, 1, hi));
+            }
+            return shape.optimize();
+        });
+    }
+
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return state.getValue(OPEN) ? Shapes.empty() : Shapes.block();
+        return shape(state.getValue(FACING), state.getValue(PART), open(level, pos, state));
+    }
+
+    @Override
+    protected VoxelShape getCollisionShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return shape(state.getValue(FACING), state.getValue(PART), open(level, pos, state));
     }
 
     @Override

@@ -1,0 +1,9 @@
+{
+  "parent": "minecraft:block/iron_bars_cap",
+  "render_type": "minecraft:cutout_mipped",
+  "textures": {
+    "particle": "fundamentals:block/gold_bars",
+    "bars": "fundamentals:block/gold_bars",
+    "edge": "fundamentals:block/gold_bars"
+  }
+}

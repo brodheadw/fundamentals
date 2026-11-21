@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "fundamentals:block/seismometer"
+    },
+    "facing=east": {
+      "model": "fundamentals:block/seismometer",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "fundamentals:block/seismometer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "fundamentals:block/seismometer",
+      "y": 270
+    },
+    "facing=up": {
+      "model": "fundamentals:block/seismometer",
+      "x": 270
+    },
+    "facing=down": {
+      "model": "fundamentals:block/seismometer",
+      "x": 90
+    }
+  }
+}

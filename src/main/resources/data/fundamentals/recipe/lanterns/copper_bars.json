@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:ingots/copper"
+    }
+  },
+  "result": {
+    "id": "fundamentals:copper_bars",
+    "count": 16
+  }
+}

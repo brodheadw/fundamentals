@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "hanging=false": {
+      "model": "fundamentals:block/tin_lantern"
+    },
+    "hanging=true": {
+      "model": "fundamentals:block/tin_lantern_hanging"
+    }
+  }
+}

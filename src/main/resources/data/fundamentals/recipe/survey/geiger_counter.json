@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " G ",
+    "CAC",
+    "IEI"
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
+    "C": {
+      "tag": "c:plates/copper"
+    },
+    "A": {
+      "item": "fundamentals:argon_canister"
+    },
+    "I": {
+      "tag": "c:plates/iron"
+    },
+    "E": {
+      "item": "create:electron_tube"
+    }
+  },
+  "result": {
+    "id": "fundamentals:geiger_counter",
+    "count": 1
+  }
+}

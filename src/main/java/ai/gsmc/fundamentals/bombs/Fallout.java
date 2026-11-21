@@ -76,6 +76,12 @@ public final class Fallout extends SavedData {
         return zones.stream().anyMatch(zone -> zone.until() > now && zone.centre().distSqr(pos) <= (double) zone.radius() * zone.radius());
     }
 
+    /** How much of its activity the hottest fallout here has left, 1 when fresh to 0 when gone. */
+    public double activity(BlockPos pos) {
+        return zones.stream().filter(zone -> zone.until() > now && zone.centre().distSqr(pos) <= (double) zone.radius() * zone.radius())
+                .mapToDouble(zone -> (double) (zone.until() - now) / (zone.until() - zone.from())).max().orElse(0);
+    }
+
     public static void onLevelTick(LevelTickEvent.Post event) {
         if (!(event.getLevel() instanceof ServerLevel level)) return;
         Fallout fallout = get(level);
