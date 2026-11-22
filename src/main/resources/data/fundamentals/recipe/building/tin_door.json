@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "##",
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:ingots/tin"
+    }
+  },
+  "result": {
+    "id": "fundamentals:tin_door",
+    "count": 3
+  }
+}

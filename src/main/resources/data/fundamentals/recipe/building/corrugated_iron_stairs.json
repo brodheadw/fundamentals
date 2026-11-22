@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "#  ",
+    "## ",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "fundamentals:corrugated_iron"
+    }
+  },
+  "result": {
+    "id": "fundamentals:corrugated_iron_stairs",
+    "count": 4
+  }
+}

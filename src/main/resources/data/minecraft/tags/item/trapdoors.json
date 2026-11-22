@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:brass_trapdoor",
+    "fundamentals:bronze_trapdoor",
+    "fundamentals:galvanized_steel_trapdoor",
+    "fundamentals:gold_trapdoor",
+    "fundamentals:silver_trapdoor",
+    "fundamentals:stainless_steel_trapdoor",
+    "fundamentals:steel_trapdoor",
+    "fundamentals:tin_trapdoor",
+    "fundamentals:titanium_trapdoor"
+  ]
+}

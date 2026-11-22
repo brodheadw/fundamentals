@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "##",
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:plates/silver"
+    }
+  },
+  "result": {
+    "id": "fundamentals:silver_door",
+    "count": 3
+  }
+}

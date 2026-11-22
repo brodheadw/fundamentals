@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:plates/steel"
+    }
+  },
+  "result": {
+    "id": "fundamentals:steel_trapdoor",
+    "count": 1
+  }
+}

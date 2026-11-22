@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "fundamentals:block/tin_roofing",
+    "side": "fundamentals:block/tin_roofing",
+    "top": "fundamentals:block/tin_roofing"
+  }
+}

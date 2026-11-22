@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "fundamentals:galvanized_steel_plate"
+    }
+  },
+  "result": {
+    "id": "fundamentals:corrugated_iron",
+    "count": 6
+  }
+}

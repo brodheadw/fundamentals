@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/door_top_right",
+  "textures": {
+    "bottom": "fundamentals:block/silver_door_bottom",
+    "top": "fundamentals:block/silver_door_top"
+  },
+  "render_type": "minecraft:cutout"
+}

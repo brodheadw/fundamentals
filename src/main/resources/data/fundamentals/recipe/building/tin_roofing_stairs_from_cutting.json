@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "fundamentals:tin_roofing"
+  },
+  "result": {
+    "id": "fundamentals:tin_roofing_stairs",
+    "count": 1
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "item": "fundamentals:galvanized_steel_plate"
+    }
+  },
+  "result": {
+    "id": "fundamentals:galvanized_steel_trapdoor",
+    "count": 1
+  }
+}

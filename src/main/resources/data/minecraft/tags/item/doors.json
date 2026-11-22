@@ -1,0 +1,14 @@
+{
+  "replace": false,
+  "values": [
+    "fundamentals:brass_door",
+    "fundamentals:bronze_door",
+    "fundamentals:galvanized_steel_door",
+    "fundamentals:gold_door",
+    "fundamentals:silver_door",
+    "fundamentals:stainless_steel_door",
+    "fundamentals:steel_door",
+    "fundamentals:tin_door",
+    "fundamentals:titanium_door"
+  ]
+}

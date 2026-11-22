@@ -96,6 +96,7 @@ public class Fundamentals {
                 ai.gsmc.fundamentals.air.FieldMill.registerBlocks(helper::register);
                 ai.gsmc.fundamentals.survey.Survey.registerBlocks(helper::register);
                 ai.gsmc.fundamentals.torch.Fixtures.registerBlocks(helper::register);
+                ai.gsmc.fundamentals.building.Building.registerBlocks(helper::register);
                 Oxidation.registerBlocks(helper::register);
                 Compute.registerBlocks(helper::register);
                 ai.gsmc.fundamentals.glass.Glass.registerBlocks(helper::register);
@@ -174,6 +175,7 @@ public class Fundamentals {
                 ai.gsmc.fundamentals.air.FieldMill.registerItems(helper::register);
                 ai.gsmc.fundamentals.survey.Survey.registerItems(helper::register);
                 ai.gsmc.fundamentals.torch.Fixtures.registerItems(helper::register);
+                ai.gsmc.fundamentals.building.Building.registerItems(helper::register);
                 Oxidation.registerItems(helper::register);
                 PeriodicTable.registerItems(helper::register);
                 Compute.registerItems(helper::register);
@@ -296,6 +298,7 @@ public class Fundamentals {
                     output.accept(ai.gsmc.fundamentals.air.FieldMill.item());
                     ai.gsmc.fundamentals.survey.Survey.items().forEach(output::accept);
                     ai.gsmc.fundamentals.torch.Fixtures.items().forEach(output::accept);
+                    ai.gsmc.fundamentals.building.Building.items().forEach(output::accept);
                     Oxidation.items().forEach(output::accept);
                     Compute.items().forEach(output::accept);
                     ai.gsmc.fundamentals.cold.Parkas.items().forEach(output::accept);

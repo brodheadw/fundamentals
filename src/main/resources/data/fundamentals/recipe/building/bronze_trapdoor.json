@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:plates/bronze"
+    }
+  },
+  "result": {
+    "id": "fundamentals:bronze_trapdoor",
+    "count": 1
+  }
+}

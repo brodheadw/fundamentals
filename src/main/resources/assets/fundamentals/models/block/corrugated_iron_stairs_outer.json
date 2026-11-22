@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "fundamentals:block/corrugated_iron",
+    "side": "fundamentals:block/corrugated_iron",
+    "top": "fundamentals:block/corrugated_iron"
+  }
+}

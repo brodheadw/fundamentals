@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:plates/gold"
+    }
+  },
+  "result": {
+    "id": "fundamentals:gold_trapdoor",
+    "count": 1
+  }
+}

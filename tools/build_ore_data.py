@@ -7,6 +7,7 @@ from common import ASSETS, DATA, RESOURCES, TFMG_JAR, VANILLA_RAW, cube, drop_se
 from paint_materials import items
 from paint_minerals import GRADES, ROCK_BLOCKS, VARIANTS, WHOLE
 from paint_oxidation import BLOCKS as OXIDATION_BLOCKS
+from paint_building import BLOCKS as BUILDING_BLOCKS
 
 MC_TAGS = RESOURCES / "data/minecraft/tags/block"
 C_TAGS = RESOURCES / "data/c/tags"
@@ -257,7 +258,7 @@ OTHER_MINEABLE = {"pickaxe": ["fundamentals:bloomery", "fundamentals:panel_rack"
                                 "fundamentals:magnetomigration_cell", "fundamentals:dyed_plastic_pipe", "fundamentals:titanium_pipe",
                                 "fundamentals:titanium_mechanical_pump", "fundamentals:titanium_fluid_valve", "fundamentals:titanium_fluid_tank",
                                 "fundamentals:mercury_thermometer", "fundamentals:spirit_thermometer", "fundamentals:bimetallic_thermometer", "fundamentals:type_k_thermocouple", "fundamentals:type_s_thermocouple", "fundamentals:mercury_barometer", "fundamentals:barograph", "fundamentals:waste_canister", "fundamentals:power_supply", "fundamentals:field_mill", "fundamentals:bismuth_crystal",
-                                "fundamentals:laminated_glass", "fundamentals:laminated_glass_pane", "fundamentals:sapphire_window", "fundamentals:blast_door"] + STORAGE_BLOCKS + PLASTIC_BLOCKS
+                                "fundamentals:laminated_glass", "fundamentals:laminated_glass_pane", "fundamentals:sapphire_window", "fundamentals:blast_door"] + BUILDING_BLOCKS + STORAGE_BLOCKS + PLASTIC_BLOCKS
                 + [f"fundamentals:{name}" for name in OXIDATION_BLOCKS]}
 # Laminated glass wants a pickaxe of iron; sapphire, Mohs 9, and the blast door's armour plate want diamond.
 OTHER_TIERED = {"stone": STORAGE_BLOCKS + [f"fundamentals:{name}" for name in OXIDATION_BLOCKS if name != "inert_storage_drum"],

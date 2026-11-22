@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "fundamentals:tin_roofing"
+    }
+  },
+  "result": {
+    "id": "fundamentals:tin_roofing_slab",
+    "count": 6
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "fundamentals:corrugated_iron"
+  },
+  "result": {
+    "id": "fundamentals:corrugated_iron_slab",
+    "count": 2
+  }
+}

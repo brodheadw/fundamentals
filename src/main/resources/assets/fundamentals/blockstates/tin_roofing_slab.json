@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "fundamentals:block/tin_roofing_slab"
+    },
+    "type=double": {
+      "model": "fundamentals:block/tin_roofing"
+    },
+    "type=top": {
+      "model": "fundamentals:block/tin_roofing_slab_top"
+    }
+  }
+}

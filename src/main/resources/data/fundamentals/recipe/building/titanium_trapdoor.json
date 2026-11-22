@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "pattern": [
+    "##",
+    "##"
+  ],
+  "key": {
+    "#": {
+      "tag": "c:plates/titanium"
+    }
+  },
+  "result": {
+    "id": "fundamentals:titanium_trapdoor",
+    "count": 1
+  }
+}
