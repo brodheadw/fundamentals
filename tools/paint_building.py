@@ -11,7 +11,7 @@ from PIL import Image
 from common import ASSETS, DATA, LANG, RESOURCES, TEXTURES, read_lang, tag, write
 
 CLIENT = next(Path.home().glob(".gradle/caches/fabric-loom/1.21.1/neoforge/*/client-extra.jar"))
-METALS = ["brass", "bronze", "tin", "silver", "gold", "steel", "stainless_steel", "galvanized_steel", "titanium"]
+METALS = ["brass", "bronze", "tin", "silver", "gold", "stainless_steel", "galvanized_steel", "titanium"]
 DISPLAY = {"tin": "Tinplate", "galvanized_steel": "Galvanized Steel", "stainless_steel": "Stainless Steel"}
 # The stock a door is cut from: sheet where the pack rolls it, otherwise the ingot, as vanilla's iron door is.
 STOCK = {"brass": {"tag": "c:plates/brass"}, "bronze": {"tag": "c:plates/bronze"}, "tin": {"tag": "c:ingots/tin"},
@@ -152,13 +152,14 @@ def main():
         name = DISPLAY.get(metal, metal.replace("_", " ").title())
         lang[f"block.fundamentals.{metal}_door"] = f"{name} Door"
         lang[f"block.fundamentals.{metal}_trapdoor"] = f"{name} Trapdoor"
-        shaped(f"{metal}_door", ["##", "##", "##"], {"#": STOCK[metal]}, f"{metal}_door", 3)
-        shaped(f"{metal}_trapdoor", ["##", "##"], {"#": STOCK[metal]}, f"{metal}_trapdoor", 1)
+        # hung on iron hinges, so they clash with no plain square of sheet (Ad Astra's steel doors, Big Cannons' cartridge sheet)
+        shaped(f"{metal}_door", ["##", "#n", "##"], {"#": STOCK[metal], "n": {"item": "minecraft:iron_nugget"}}, f"{metal}_door", 3)
+        shaped(f"{metal}_trapdoor", ["##", "nn"], {"#": STOCK[metal], "n": {"item": "minecraft:iron_nugget"}}, f"{metal}_trapdoor", 2)
     tin_roofing().save(TEXTURES / "block/tin_roofing.png")
     corrugated_iron().save(TEXTURES / "block/corrugated_iron.png")
     # tinplate is mild steel sheet dipped in tin; corrugated iron is galvanized sheet run through corrugating rolls
     shaped("tin_roofing", ["TTT", "SSS"], {"T": {"tag": "c:ingots/tin"}, "S": {"tag": "c:plates/steel"}}, "tin_roofing", 6)
-    shaped("corrugated_iron", ["###", "###"], {"#": {"item": "fundamentals:galvanized_steel_plate"}}, "corrugated_iron", 6)
+    shaped("corrugated_iron", ["# #", " # "], {"#": {"item": "fundamentals:galvanized_steel_plate"}}, "corrugated_iron", 3)
     for roof, display in ROOFING.items():
         roofing_files(roof)
         for block in (roof, f"{roof}_stairs", f"{roof}_slab"):

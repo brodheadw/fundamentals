@@ -3,15 +3,18 @@
   "category": "building",
   "pattern": [
     "##",
-    "##"
+    "nn"
   ],
   "key": {
     "#": {
       "item": "fundamentals:galvanized_steel_plate"
+    },
+    "n": {
+      "item": "minecraft:iron_nugget"
     }
   },
   "result": {
     "id": "fundamentals:galvanized_steel_trapdoor",
-    "count": 1
+    "count": 2
   }
 }

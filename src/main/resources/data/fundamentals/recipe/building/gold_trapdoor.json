@@ -3,15 +3,18 @@
   "category": "building",
   "pattern": [
     "##",
-    "##"
+    "nn"
   ],
   "key": {
     "#": {
       "tag": "c:plates/gold"
+    },
+    "n": {
+      "item": "minecraft:iron_nugget"
     }
   },
   "result": {
     "id": "fundamentals:gold_trapdoor",
-    "count": 1
+    "count": 2
   }
 }

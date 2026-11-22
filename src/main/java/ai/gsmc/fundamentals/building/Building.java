@@ -33,7 +33,7 @@ import java.util.function.BiConsumer;
 public final class Building {
 
     /** Metals the doors and trapdoors come in; copper and iron are vanilla's. */
-    public static final List<String> METALS = List.of("brass", "bronze", "tin", "silver", "gold", "steel", "stainless_steel", "galvanized_steel", "titanium");
+    public static final List<String> METALS = List.of("brass", "bronze", "tin", "silver", "gold", "stainless_steel", "galvanized_steel", "titanium");
     public static final List<String> ROOFING = List.of("tin_roofing", "corrugated_iron");
     /** How far over the air a sunlit roof runs at noon in a clear sky: bare sheet metal in summer sun reaches 60-70 °C. */
     public static final double SUN_EXCESS = 40.0;

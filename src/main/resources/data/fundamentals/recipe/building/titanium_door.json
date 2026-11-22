@@ -3,12 +3,15 @@
   "category": "building",
   "pattern": [
     "##",
-    "##",
+    "#n",
     "##"
   ],
   "key": {
     "#": {
       "tag": "c:plates/titanium"
+    },
+    "n": {
+      "item": "minecraft:iron_nugget"
     }
   },
   "result": {

@@ -3,15 +3,18 @@
   "category": "building",
   "pattern": [
     "##",
-    "##"
+    "nn"
   ],
   "key": {
     "#": {
       "tag": "c:plates/stainless_steel"
+    },
+    "n": {
+      "item": "minecraft:iron_nugget"
     }
   },
   "result": {
     "id": "fundamentals:stainless_steel_trapdoor",
-    "count": 1
+    "count": 2
   }
 }

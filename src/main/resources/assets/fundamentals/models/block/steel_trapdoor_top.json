@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/template_trapdoor_top",
-  "textures": {
-    "texture": "fundamentals:block/steel_trapdoor"
-  },
-  "render_type": "minecraft:cutout"
-}
