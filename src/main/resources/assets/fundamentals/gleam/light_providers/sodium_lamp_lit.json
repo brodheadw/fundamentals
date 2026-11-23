@@ -1,0 +1,17 @@
+{
+  "emitters": [
+    "fundamentals:sodium_lamp[level=9]",
+    "fundamentals:sodium_lamp[level=10]",
+    "fundamentals:sodium_lamp[level=11]",
+    "fundamentals:sodium_lamp[level=12]",
+    "fundamentals:sodium_lamp[level=13]",
+    "fundamentals:sodium_lamp[level=14]",
+    "fundamentals:sodium_lamp[level=15]"
+  ],
+  "light_properties": {
+    "encoding": "hex",
+    "hex": "#FF9A2E",
+    "radius": 10.0,
+    "intensity": 1.0
+  }
+}

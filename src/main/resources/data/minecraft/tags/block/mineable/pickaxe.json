@@ -212,6 +212,9 @@
     "fundamentals:corrugated_iron_slab",
     "fundamentals:fluorescent_light",
     "fundamentals:fluorescent_troffer",
-    "fundamentals:sodium_lamp"
+    "fundamentals:sodium_lamp",
+    "fundamentals:blacklight",
+    "fundamentals:mercury_vapour_lamp",
+    "fundamentals:low_pressure_sodium_lamp"
   ]
 }

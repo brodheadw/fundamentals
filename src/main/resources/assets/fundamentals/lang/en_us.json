@@ -1421,5 +1421,12 @@
   "goggles.fundamentals.readout.status.striking": "striking",
   "goggles.fundamentals.readout.status.warming": "warming up",
   "goggles.fundamentals.readout.status.lit": "lit",
-  "goggles.fundamentals.readout.status.cooling": "cooling before it can restrike"
+  "goggles.fundamentals.readout.status.cooling": "cooling before it can restrike",
+  "block.fundamentals.blacklight": "Blacklight",
+  "block.fundamentals.mercury_vapour_lamp": "Mercury Vapour Lamp",
+  "block.fundamentals.low_pressure_sodium_lamp": "Low-Pressure Sodium Lamp",
+  "block.fundamentals.light_bulb": "Light Bulb",
+  "item.fundamentals.blacklight_tube": "Blacklight Tube",
+  "item.fundamentals.mercury_arc_tube": "Mercury Arc Tube",
+  "item.fundamentals.low_pressure_sodium_tube": "Low-Pressure Sodium Tube"
 }

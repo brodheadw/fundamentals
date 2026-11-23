@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "AAA",
+    "BTG"
+  ],
+  "key": {
+    "A": {
+      "tag": "c:plates/aluminum"
+    },
+    "B": {
+      "item": "fundamentals:ballast"
+    },
+    "T": {
+      "item": "fundamentals:mercury_arc_tube"
+    },
+    "G": {
+      "tag": "c:glass_panes/colorless"
+    }
+  },
+  "result": {
+    "id": "fundamentals:mercury_vapour_lamp",
+    "count": 1
+  }
+}

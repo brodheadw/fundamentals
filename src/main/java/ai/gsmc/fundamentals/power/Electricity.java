@@ -23,9 +23,10 @@ public final class Electricity {
     private static Block teslaCoil;
     private static BlockEntityType<TeslaCoilBlockEntity> teslaCoilEntity;
     private static Item teslaCoilItem;
-    private static Block fluorescentLight, fluorescentTroffer, sodiumLamp;
+    private static Block fluorescentLight, fluorescentTroffer, sodiumLamp, blacklight, lowSodiumLamp, mercuryLamp, lightBulb;
     private static BlockEntityType<LampBlockEntity> lampEntity;
     private static Item fluorescentLightItem, fluorescentTrofferItem, sodiumLampItem, fluorescentTube, ballast, sodiumArcTube;
+    private static Item blacklightItem, lowSodiumLampItem, mercuryLampItem, lightBulbItem, blacklightTube, lowSodiumTube, mercuryArcTube;
 
     private Electricity() {}
 
@@ -38,10 +39,16 @@ public final class Electricity {
     public static Block fluorescentLight() { return fluorescentLight; }
     public static Block fluorescentTroffer() { return fluorescentTroffer; }
     public static Block sodiumLamp() { return sodiumLamp; }
+    public static Block blacklight() { return blacklight; }
+    public static Block lowSodiumLamp() { return lowSodiumLamp; }
+    public static Block mercuryLamp() { return mercuryLamp; }
+    public static Block lightBulb() { return lightBulb; }
+    public static List<Block> lamps() { return List.of(fluorescentLight, fluorescentTroffer, blacklight, sodiumLamp, lowSodiumLamp, mercuryLamp, lightBulb); }
     public static BlockEntityType<LampBlockEntity> lampEntity() { return lampEntity; }
 
     public static List<Item> items() {
-        return List.of(panelRackItem, photovoltaicPanel, teslaCoilItem, fluorescentTube, ballast, fluorescentLightItem, fluorescentTrofferItem, sodiumArcTube, sodiumLampItem);
+        return List.of(panelRackItem, photovoltaicPanel, teslaCoilItem, fluorescentTube, ballast, fluorescentLightItem, fluorescentTrofferItem, sodiumArcTube, sodiumLampItem,
+                blacklightTube, blacklightItem, lowSodiumTube, lowSodiumLampItem, mercuryArcTube, mercuryLampItem, lightBulbItem);
     }
 
     public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
@@ -56,6 +63,11 @@ public final class Electricity {
         registry.accept(Fundamentals.id("fluorescent_light"), fluorescentLight = new LampBlock(lamp, LampBlock.Kind.BATTEN));
         registry.accept(Fundamentals.id("fluorescent_troffer"), fluorescentTroffer = new LampBlock(lamp, LampBlock.Kind.TROFFER));
         registry.accept(Fundamentals.id("sodium_lamp"), sodiumLamp = new LampBlock(lamp, LampBlock.Kind.SODIUM));
+        registry.accept(Fundamentals.id("blacklight"), blacklight = new LampBlock(lamp, LampBlock.Kind.BLACKLIGHT));
+        registry.accept(Fundamentals.id("low_pressure_sodium_lamp"), lowSodiumLamp = new LampBlock(lamp, LampBlock.Kind.LOW_SODIUM));
+        registry.accept(Fundamentals.id("mercury_vapour_lamp"), mercuryLamp = new LampBlock(lamp, LampBlock.Kind.MERCURY));
+        registry.accept(Fundamentals.id("light_bulb"), lightBulb = new LampBlock(BlockBehaviour.Properties.of().mapColor(MapColor.METAL)
+                .strength(0.3F).sound(SoundType.GLASS).noOcclusion(), LampBlock.Kind.BULB));
     }
 
     public static void registerBlockEntities(BiConsumer<ResourceLocation, BlockEntityType<?>> registry) {
@@ -63,7 +75,7 @@ public final class Electricity {
         registry.accept(Fundamentals.id("solar_panel"), solarPanelEntity);
         teslaCoilEntity = BlockEntityType.Builder.of(TeslaCoilBlockEntity::new, teslaCoil).build(null);
         registry.accept(Fundamentals.id("tesla_coil"), teslaCoilEntity);
-        lampEntity = BlockEntityType.Builder.of(LampBlockEntity::new, fluorescentLight, fluorescentTroffer, sodiumLamp).build(null);
+        lampEntity = BlockEntityType.Builder.of(LampBlockEntity::new, lamps().toArray(Block[]::new)).build(null);
         registry.accept(Fundamentals.id("lamp"), lampEntity);
     }
 
@@ -77,6 +89,13 @@ public final class Electricity {
         registry.accept(Fundamentals.id("fluorescent_light"), fluorescentLightItem = new BlockItem(fluorescentLight, new Item.Properties()));
         registry.accept(Fundamentals.id("fluorescent_troffer"), fluorescentTrofferItem = new BlockItem(fluorescentTroffer, new Item.Properties()));
         registry.accept(Fundamentals.id("sodium_lamp"), sodiumLampItem = new BlockItem(sodiumLamp, new Item.Properties()));
+        registry.accept(Fundamentals.id("blacklight_tube"), blacklightTube = new Item(new Item.Properties()));
+        registry.accept(Fundamentals.id("low_pressure_sodium_tube"), lowSodiumTube = new Item(new Item.Properties()));
+        registry.accept(Fundamentals.id("mercury_arc_tube"), mercuryArcTube = new Item(new Item.Properties()));
+        registry.accept(Fundamentals.id("blacklight"), blacklightItem = new BlockItem(blacklight, new Item.Properties()));
+        registry.accept(Fundamentals.id("low_pressure_sodium_lamp"), lowSodiumLampItem = new BlockItem(lowSodiumLamp, new Item.Properties()));
+        registry.accept(Fundamentals.id("mercury_vapour_lamp"), mercuryLampItem = new BlockItem(mercuryLamp, new Item.Properties()));
+        registry.accept(Fundamentals.id("light_bulb"), lightBulbItem = new BlockItem(lightBulb, new Item.Properties()));
     }
 
 }

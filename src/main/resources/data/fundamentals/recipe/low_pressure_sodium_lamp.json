@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "AAA",
+    "BTB",
+    " G "
+  ],
+  "key": {
+    "A": {
+      "tag": "c:plates/aluminum"
+    },
+    "B": {
+      "item": "fundamentals:ballast"
+    },
+    "T": {
+      "item": "fundamentals:low_pressure_sodium_tube"
+    },
+    "G": {
+      "tag": "c:glass_panes/colorless"
+    }
+  },
+  "result": {
+    "id": "fundamentals:low_pressure_sodium_lamp",
+    "count": 1
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "emitters": [
+    "fundamentals:fluorescent_troffer[color=light_blue]"
+  ],
+  "light_properties": {
+    "encoding": "hex",
+    "hex": "#5CB8FF",
+    "radius": 8.0,
+    "intensity": 1.0
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "fundamentals:item/low_pressure_sodium_tube"
+  }
+}

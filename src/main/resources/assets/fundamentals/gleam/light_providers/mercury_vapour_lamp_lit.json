@@ -1,0 +1,18 @@
+{
+  "emitters": [
+    "fundamentals:mercury_vapour_lamp[level=8]",
+    "fundamentals:mercury_vapour_lamp[level=9]",
+    "fundamentals:mercury_vapour_lamp[level=10]",
+    "fundamentals:mercury_vapour_lamp[level=11]",
+    "fundamentals:mercury_vapour_lamp[level=12]",
+    "fundamentals:mercury_vapour_lamp[level=13]",
+    "fundamentals:mercury_vapour_lamp[level=14]",
+    "fundamentals:mercury_vapour_lamp[level=15]"
+  ],
+  "light_properties": {
+    "encoding": "hex",
+    "hex": "#C8DCFF",
+    "radius": 10.0,
+    "intensity": 1.0
+  }
+}

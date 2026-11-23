@@ -1,0 +1,11 @@
+{
+  "emitters": [
+    "fundamentals:fluorescent_light[color=orange]"
+  ],
+  "light_properties": {
+    "encoding": "hex",
+    "hex": "#FF8C1A",
+    "radius": 8.0,
+    "intensity": 1.0
+  }
+}

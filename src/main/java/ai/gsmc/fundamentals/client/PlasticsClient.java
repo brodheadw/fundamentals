@@ -2,6 +2,8 @@ package ai.gsmc.fundamentals.client;
 
 import ai.gsmc.fundamentals.Fundamentals;
 import ai.gsmc.fundamentals.plastics.DyedPlasticPipeBlock;
+import ai.gsmc.fundamentals.plastics.Pigment;
+import ai.gsmc.fundamentals.power.LampBlock;
 import ai.gsmc.fundamentals.plastics.Plastics;
 import ai.gsmc.fundamentals.separation.PlasticTankBlock;
 import ai.gsmc.fundamentals.separation.Separation;
@@ -38,7 +40,15 @@ public final class PlasticsClient {
         modBus.addListener(RegisterColorHandlersEvent.Block.class, event -> {
             event.register((state, level, pos, tint) -> colour(state.getValue(PlasticTankBlock.COLOR).dye), Separation.plasticTank());
             event.register((state, level, pos, tint) -> colour(state.getValue(DyedPlasticPipeBlock.COLOR)), Plastics.dyedPipe());
+            event.register((state, level, pos, tint) -> colour(state.getValue(LampBlock.COLOR).dye),
+                    ai.gsmc.fundamentals.power.Electricity.fluorescentLight(), ai.gsmc.fundamentals.power.Electricity.fluorescentTroffer());
         });
+        // a lamp item crafted with a coloured diffuser carries the colour as its block state
+        modBus.addListener(RegisterColorHandlersEvent.Item.class, event -> event.register((stack, tint) -> {
+            var props = stack.get(net.minecraft.core.component.DataComponents.BLOCK_STATE);
+            Pigment pigment = props == null ? null : props.get(LampBlock.COLOR);
+            return pigment == null || pigment.dye == null ? -1 : 0xFF000000 | pigment.dye.getTextureDiffuseColor();
+        }, ai.gsmc.fundamentals.power.Electricity.fluorescentLight(), ai.gsmc.fundamentals.power.Electricity.fluorescentTroffer()));
     }
 
     private static int colour(@Nullable DyeColor dye) {

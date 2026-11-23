@@ -91,6 +91,7 @@ public final class Plastics {
 
     public static boolean dyeable(BlockState state) {
         return state.getBlock() instanceof PlasticTankBlock || state.getBlock() instanceof DyedPlasticPipeBlock
+                || state.getBlock() instanceof ai.gsmc.fundamentals.power.LampBlock lamp && lamp.kind.tinted
                 || BuiltInRegistries.BLOCK.getKey(state.getBlock()).equals(PLASTIC_PIPE);
     }
 
@@ -109,6 +110,13 @@ public final class Plastics {
                 }
             }
             return changed;
+        }
+        if (state.getBlock() instanceof ai.gsmc.fundamentals.power.LampBlock) {
+            if (state.getValue(ai.gsmc.fundamentals.power.LampBlock.COLOR) == Pigment.of(dye)) {
+                return false;
+            }
+            level.setBlockAndUpdate(pos, state.setValue(ai.gsmc.fundamentals.power.LampBlock.COLOR, Pigment.of(dye)));
+            return true;
         }
         if (state.getBlock() instanceof DyedPlasticPipeBlock) {
             if (state.getValue(DyedPlasticPipeBlock.COLOR) == dye) {

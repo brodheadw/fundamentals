@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "GSG",
+    "TAT"
+  ],
+  "key": {
+    "G": {
+      "tag": "c:glass_panes/colorless"
+    },
+    "S": {
+      "item": "fundamentals:sodium_ingot"
+    },
+    "T": {
+      "item": "fundamentals:tungsten_filament"
+    },
+    "A": {
+      "item": "fundamentals:argon_canister"
+    }
+  },
+  "result": {
+    "id": "fundamentals:low_pressure_sodium_tube",
+    "count": 1
+  }
+}

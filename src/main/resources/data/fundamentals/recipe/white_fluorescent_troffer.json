@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "ingredients": [
+    {
+      "item": "fundamentals:fluorescent_troffer"
+    },
+    {
+      "item": "fundamentals:white_plastic_block"
+    }
+  ],
+  "result": {
+    "id": "fundamentals:fluorescent_troffer",
+    "count": 1,
+    "components": {
+      "minecraft:block_state": {
+        "color": "white"
+      }
+    }
+  }
+}

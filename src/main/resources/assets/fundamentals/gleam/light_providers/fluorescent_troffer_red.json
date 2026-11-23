@@ -1,0 +1,11 @@
+{
+  "emitters": [
+    "fundamentals:fluorescent_troffer[color=red]"
+  ],
+  "light_properties": {
+    "encoding": "hex",
+    "hex": "#FF2020",
+    "radius": 8.0,
+    "intensity": 1.0
+  }
+}

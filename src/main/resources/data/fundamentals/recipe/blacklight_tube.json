@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "GEG",
+    "TMT",
+    "NAN"
+  ],
+  "key": {
+    "G": {
+      "tag": "c:glass_panes/colorless"
+    },
+    "E": {
+      "item": "fundamentals:europium_oxide"
+    },
+    "T": {
+      "item": "fundamentals:tungsten_filament"
+    },
+    "M": {
+      "item": "fundamentals:mercury"
+    },
+    "N": {
+      "item": "fundamentals:nickel_oxide"
+    },
+    "A": {
+      "item": "fundamentals:argon_canister"
+    }
+  },
+  "result": {
+    "id": "fundamentals:blacklight_tube",
+    "count": 2
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "emitters": [
+    "fundamentals:fluorescent_light[color=cyan]"
+  ],
+  "light_properties": {
+    "encoding": "hex",
+    "hex": "#22E6E6",
+    "radius": 8.0,
+    "intensity": 1.0
+  }
+}

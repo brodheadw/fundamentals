@@ -1,0 +1,10 @@
+{
+  "emitters": [
+    "fundamentals:blacklight"
+  ],
+  "light_properties": {
+    "encoding": "blacklight",
+    "radius": 6.0,
+    "intensity": 1.0
+  }
+}

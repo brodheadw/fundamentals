@@ -1,0 +1,11 @@
+{
+  "emitters": [
+    "fundamentals:light_bulb"
+  ],
+  "light_properties": {
+    "encoding": "hex",
+    "hex": "#FFC77A",
+    "radius": 7.0,
+    "intensity": 1.0
+  }
+}

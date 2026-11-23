@@ -12,7 +12,8 @@ from paint_building import BLOCKS as BUILDING_BLOCKS
 FIXTURE_BLOCKS = [f"fundamentals:{metal}_{kind}" for metal in ("copper", "brass", "bronze", "tin", "silver", "gold", "steel")
                   for kind in ("lantern", "soul_lantern", "chain", "bars")]
 # the electric lamps, steel-housed
-FIXTURE_BLOCKS += ["fundamentals:fluorescent_light", "fundamentals:fluorescent_troffer", "fundamentals:sodium_lamp"]
+FIXTURE_BLOCKS += ["fundamentals:fluorescent_light", "fundamentals:fluorescent_troffer", "fundamentals:sodium_lamp",
+                   "fundamentals:blacklight", "fundamentals:mercury_vapour_lamp", "fundamentals:low_pressure_sodium_lamp", "fundamentals:light_bulb"]
 
 MC_TAGS = RESOURCES / "data/minecraft/tags/block"
 C_TAGS = RESOURCES / "data/c/tags"

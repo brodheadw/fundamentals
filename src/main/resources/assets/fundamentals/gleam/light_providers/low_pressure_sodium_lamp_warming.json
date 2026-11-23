@@ -1,0 +1,17 @@
+{
+  "emitters": [
+    "fundamentals:low_pressure_sodium_lamp[level=1]",
+    "fundamentals:low_pressure_sodium_lamp[level=2]",
+    "fundamentals:low_pressure_sodium_lamp[level=3]",
+    "fundamentals:low_pressure_sodium_lamp[level=4]",
+    "fundamentals:low_pressure_sodium_lamp[level=5]",
+    "fundamentals:low_pressure_sodium_lamp[level=6]",
+    "fundamentals:low_pressure_sodium_lamp[level=7]"
+  ],
+  "light_properties": {
+    "encoding": "hex",
+    "hex": "#FF3A20",
+    "radius": 5.0,
+    "intensity": 1.0
+  }
+}

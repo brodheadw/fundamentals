@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "TQT",
+    "MAM"
+  ],
+  "key": {
+    "T": {
+      "item": "fundamentals:tungsten_filament"
+    },
+    "Q": {
+      "item": "minecraft:quartz"
+    },
+    "M": {
+      "item": "fundamentals:mercury"
+    },
+    "A": {
+      "item": "fundamentals:argon_canister"
+    }
+  },
+  "result": {
+    "id": "fundamentals:mercury_arc_tube",
+    "count": 1
+  }
+}

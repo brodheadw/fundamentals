@@ -60,4 +60,29 @@ public class LampTests {
             helper.assertTrue(dimSeen[0] > 40, "but it glowed dim a good while first: " + dimSeen[0] + " ticks");
         });
     }
+
+    @GameTest(template = "empty", timeoutTicks = 120)
+    public void aRedDiffuserPassesLessLight(GameTestHelper helper) {
+        BlockPos at = new BlockPos(1, 1, 1);
+        feed(helper, at, Electricity.fluorescentTroffer());
+        helper.setBlock(at, helper.getBlockState(at).setValue(LampBlock.COLOR, ai.gsmc.fundamentals.plastics.Pigment.RED));
+        helper.succeedWhen(() -> {
+            LampBlockEntity lamp = helper.getBlockEntity(at);
+            helper.assertTrue(lamp.steady() && light(helper, at) == LampBlock.passes(ai.gsmc.fundamentals.plastics.Pigment.RED) && light(helper, at) < 15,
+                    "struck behind red plastic, it gives the red's share of the light: " + light(helper, at));
+        });
+    }
+
+    @GameTest(template = "empty", timeoutTicks = 60)
+    public void aBulbIsLitTheMomentItIsFedAndABlacklightIsDim(GameTestHelper helper) {
+        BlockPos bulb = new BlockPos(1, 1, 1), uv = new BlockPos(1, 1, 3);
+        feed(helper, bulb, Electricity.lightBulb());
+        feed(helper, uv, Electricity.blacklight());
+        helper.runAfterDelay(5, () -> helper.assertTrue(light(helper, bulb) > 0, "no starter, no warming: the filament is lit at once"));
+        helper.succeedWhen(() -> {
+            helper.assertTrue(light(helper, bulb) == LampBlock.Kind.BULB.full || helper.<LampBlockEntity>getBlockEntity(bulb).getData().getVoltage() < LampBlockEntity.RATED_VOLTS,
+                    "at its rated volts it is at full: " + light(helper, bulb));
+            helper.assertTrue(helper.<LampBlockEntity>getBlockEntity(uv).steady() && light(helper, uv) == LampBlock.Kind.BLACKLIGHT.full, "the UV tube struck shows only a dim violet");
+        });
+    }
 }
