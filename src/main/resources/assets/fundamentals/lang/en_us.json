@@ -1411,5 +1411,15 @@
   "block.fundamentals.tin_roofing_slab": "Tin Roofing Slab",
   "block.fundamentals.corrugated_iron": "Corrugated Iron",
   "block.fundamentals.corrugated_iron_stairs": "Corrugated Iron Stairs",
-  "block.fundamentals.corrugated_iron_slab": "Corrugated Iron Slab"
+  "block.fundamentals.corrugated_iron_slab": "Corrugated Iron Slab",
+  "block.fundamentals.fluorescent_light": "Fluorescent Light",
+  "block.fundamentals.fluorescent_troffer": "Fluorescent Troffer",
+  "block.fundamentals.sodium_lamp": "Sodium Street Lamp",
+  "item.fundamentals.fluorescent_tube": "Fluorescent Tube",
+  "item.fundamentals.ballast": "Ballast",
+  "item.fundamentals.sodium_arc_tube": "Sodium Arc Tube",
+  "goggles.fundamentals.readout.status.striking": "striking",
+  "goggles.fundamentals.readout.status.warming": "warming up",
+  "goggles.fundamentals.readout.status.lit": "lit",
+  "goggles.fundamentals.readout.status.cooling": "cooling before it can restrike"
 }

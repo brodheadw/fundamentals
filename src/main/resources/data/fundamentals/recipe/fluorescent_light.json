@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "IBI",
+    " F "
+  ],
+  "key": {
+    "I": {
+      "tag": "c:plates/iron"
+    },
+    "B": {
+      "item": "fundamentals:ballast"
+    },
+    "F": {
+      "item": "fundamentals:fluorescent_tube"
+    }
+  },
+  "result": {
+    "id": "fundamentals:fluorescent_light",
+    "count": 1
+  }
+}

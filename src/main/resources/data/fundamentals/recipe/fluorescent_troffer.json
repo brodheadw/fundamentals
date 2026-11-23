@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "IBI",
+    "FPF"
+  ],
+  "key": {
+    "I": {
+      "tag": "c:plates/iron"
+    },
+    "B": {
+      "item": "fundamentals:ballast"
+    },
+    "F": {
+      "item": "fundamentals:fluorescent_tube"
+    },
+    "P": {
+      "item": "tfmg:plastic_sheet"
+    }
+  },
+  "result": {
+    "id": "fundamentals:fluorescent_troffer",
+    "count": 1
+  }
+}

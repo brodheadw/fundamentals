@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "pattern": [
+    "TAT",
+    "SMS"
+  ],
+  "key": {
+    "T": {
+      "item": "fundamentals:tungsten_filament"
+    },
+    "A": {
+      "item": "fundamentals:alumina"
+    },
+    "S": {
+      "item": "fundamentals:sodium_ingot"
+    },
+    "M": {
+      "item": "fundamentals:mercury"
+    }
+  },
+  "result": {
+    "id": "fundamentals:sodium_arc_tube",
+    "count": 1
+  }
+}

@@ -1,0 +1,852 @@
+{
+  "variants": {
+    "face=ceiling,facing=east,level=0": {
+      "model": "fundamentals:block/fluorescent_troffer_off",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=east,level=1": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=east,level=2": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=east,level=3": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=east,level=4": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=east,level=5": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=east,level=6": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=east,level=7": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=east,level=8": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=east,level=9": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=east,level=10": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=east,level=11": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=east,level=12": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=east,level=13": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=east,level=14": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=east,level=15": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 270
+    },
+    "face=ceiling,facing=north,level=0": {
+      "model": "fundamentals:block/fluorescent_troffer_off",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=north,level=1": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=north,level=2": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=north,level=3": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=north,level=4": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=north,level=5": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=north,level=6": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=north,level=7": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=north,level=8": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=north,level=9": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=north,level=10": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=north,level=11": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=north,level=12": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=north,level=13": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=north,level=14": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=north,level=15": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 180
+    },
+    "face=ceiling,facing=south,level=0": {
+      "model": "fundamentals:block/fluorescent_troffer_off",
+      "x": 180
+    },
+    "face=ceiling,facing=south,level=1": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180
+    },
+    "face=ceiling,facing=south,level=2": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180
+    },
+    "face=ceiling,facing=south,level=3": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180
+    },
+    "face=ceiling,facing=south,level=4": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180
+    },
+    "face=ceiling,facing=south,level=5": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180
+    },
+    "face=ceiling,facing=south,level=6": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180
+    },
+    "face=ceiling,facing=south,level=7": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180
+    },
+    "face=ceiling,facing=south,level=8": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180
+    },
+    "face=ceiling,facing=south,level=9": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180
+    },
+    "face=ceiling,facing=south,level=10": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180
+    },
+    "face=ceiling,facing=south,level=11": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180
+    },
+    "face=ceiling,facing=south,level=12": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180
+    },
+    "face=ceiling,facing=south,level=13": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180
+    },
+    "face=ceiling,facing=south,level=14": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180
+    },
+    "face=ceiling,facing=south,level=15": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180
+    },
+    "face=ceiling,facing=west,level=0": {
+      "model": "fundamentals:block/fluorescent_troffer_off",
+      "x": 180,
+      "y": 90
+    },
+    "face=ceiling,facing=west,level=1": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 90
+    },
+    "face=ceiling,facing=west,level=2": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 90
+    },
+    "face=ceiling,facing=west,level=3": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 90
+    },
+    "face=ceiling,facing=west,level=4": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 90
+    },
+    "face=ceiling,facing=west,level=5": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 90
+    },
+    "face=ceiling,facing=west,level=6": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 90
+    },
+    "face=ceiling,facing=west,level=7": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 90
+    },
+    "face=ceiling,facing=west,level=8": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 90
+    },
+    "face=ceiling,facing=west,level=9": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 90
+    },
+    "face=ceiling,facing=west,level=10": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 90
+    },
+    "face=ceiling,facing=west,level=11": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 90
+    },
+    "face=ceiling,facing=west,level=12": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 90
+    },
+    "face=ceiling,facing=west,level=13": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 90
+    },
+    "face=ceiling,facing=west,level=14": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 90
+    },
+    "face=ceiling,facing=west,level=15": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 180,
+      "y": 90
+    },
+    "face=floor,facing=east,level=0": {
+      "model": "fundamentals:block/fluorescent_troffer_off",
+      "y": 90
+    },
+    "face=floor,facing=east,level=1": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 90
+    },
+    "face=floor,facing=east,level=2": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 90
+    },
+    "face=floor,facing=east,level=3": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 90
+    },
+    "face=floor,facing=east,level=4": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 90
+    },
+    "face=floor,facing=east,level=5": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 90
+    },
+    "face=floor,facing=east,level=6": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 90
+    },
+    "face=floor,facing=east,level=7": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 90
+    },
+    "face=floor,facing=east,level=8": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 90
+    },
+    "face=floor,facing=east,level=9": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 90
+    },
+    "face=floor,facing=east,level=10": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 90
+    },
+    "face=floor,facing=east,level=11": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 90
+    },
+    "face=floor,facing=east,level=12": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 90
+    },
+    "face=floor,facing=east,level=13": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 90
+    },
+    "face=floor,facing=east,level=14": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 90
+    },
+    "face=floor,facing=east,level=15": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 90
+    },
+    "face=floor,facing=north,level=0": {
+      "model": "fundamentals:block/fluorescent_troffer_off"
+    },
+    "face=floor,facing=north,level=1": {
+      "model": "fundamentals:block/fluorescent_troffer_on"
+    },
+    "face=floor,facing=north,level=2": {
+      "model": "fundamentals:block/fluorescent_troffer_on"
+    },
+    "face=floor,facing=north,level=3": {
+      "model": "fundamentals:block/fluorescent_troffer_on"
+    },
+    "face=floor,facing=north,level=4": {
+      "model": "fundamentals:block/fluorescent_troffer_on"
+    },
+    "face=floor,facing=north,level=5": {
+      "model": "fundamentals:block/fluorescent_troffer_on"
+    },
+    "face=floor,facing=north,level=6": {
+      "model": "fundamentals:block/fluorescent_troffer_on"
+    },
+    "face=floor,facing=north,level=7": {
+      "model": "fundamentals:block/fluorescent_troffer_on"
+    },
+    "face=floor,facing=north,level=8": {
+      "model": "fundamentals:block/fluorescent_troffer_on"
+    },
+    "face=floor,facing=north,level=9": {
+      "model": "fundamentals:block/fluorescent_troffer_on"
+    },
+    "face=floor,facing=north,level=10": {
+      "model": "fundamentals:block/fluorescent_troffer_on"
+    },
+    "face=floor,facing=north,level=11": {
+      "model": "fundamentals:block/fluorescent_troffer_on"
+    },
+    "face=floor,facing=north,level=12": {
+      "model": "fundamentals:block/fluorescent_troffer_on"
+    },
+    "face=floor,facing=north,level=13": {
+      "model": "fundamentals:block/fluorescent_troffer_on"
+    },
+    "face=floor,facing=north,level=14": {
+      "model": "fundamentals:block/fluorescent_troffer_on"
+    },
+    "face=floor,facing=north,level=15": {
+      "model": "fundamentals:block/fluorescent_troffer_on"
+    },
+    "face=floor,facing=south,level=0": {
+      "model": "fundamentals:block/fluorescent_troffer_off",
+      "y": 180
+    },
+    "face=floor,facing=south,level=1": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 180
+    },
+    "face=floor,facing=south,level=2": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 180
+    },
+    "face=floor,facing=south,level=3": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 180
+    },
+    "face=floor,facing=south,level=4": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 180
+    },
+    "face=floor,facing=south,level=5": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 180
+    },
+    "face=floor,facing=south,level=6": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 180
+    },
+    "face=floor,facing=south,level=7": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 180
+    },
+    "face=floor,facing=south,level=8": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 180
+    },
+    "face=floor,facing=south,level=9": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 180
+    },
+    "face=floor,facing=south,level=10": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 180
+    },
+    "face=floor,facing=south,level=11": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 180
+    },
+    "face=floor,facing=south,level=12": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 180
+    },
+    "face=floor,facing=south,level=13": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 180
+    },
+    "face=floor,facing=south,level=14": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 180
+    },
+    "face=floor,facing=south,level=15": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 180
+    },
+    "face=floor,facing=west,level=0": {
+      "model": "fundamentals:block/fluorescent_troffer_off",
+      "y": 270
+    },
+    "face=floor,facing=west,level=1": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 270
+    },
+    "face=floor,facing=west,level=2": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 270
+    },
+    "face=floor,facing=west,level=3": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 270
+    },
+    "face=floor,facing=west,level=4": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 270
+    },
+    "face=floor,facing=west,level=5": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 270
+    },
+    "face=floor,facing=west,level=6": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 270
+    },
+    "face=floor,facing=west,level=7": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 270
+    },
+    "face=floor,facing=west,level=8": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 270
+    },
+    "face=floor,facing=west,level=9": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 270
+    },
+    "face=floor,facing=west,level=10": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 270
+    },
+    "face=floor,facing=west,level=11": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 270
+    },
+    "face=floor,facing=west,level=12": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 270
+    },
+    "face=floor,facing=west,level=13": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 270
+    },
+    "face=floor,facing=west,level=14": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 270
+    },
+    "face=floor,facing=west,level=15": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "y": 270
+    },
+    "face=wall,facing=east,level=0": {
+      "model": "fundamentals:block/fluorescent_troffer_off",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=east,level=1": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=east,level=2": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=east,level=3": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=east,level=4": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=east,level=5": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=east,level=6": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=east,level=7": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=east,level=8": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=east,level=9": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=east,level=10": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=east,level=11": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=east,level=12": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=east,level=13": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=east,level=14": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=east,level=15": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 90
+    },
+    "face=wall,facing=north,level=0": {
+      "model": "fundamentals:block/fluorescent_troffer_off",
+      "x": 90
+    },
+    "face=wall,facing=north,level=1": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90
+    },
+    "face=wall,facing=north,level=2": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90
+    },
+    "face=wall,facing=north,level=3": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90
+    },
+    "face=wall,facing=north,level=4": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90
+    },
+    "face=wall,facing=north,level=5": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90
+    },
+    "face=wall,facing=north,level=6": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90
+    },
+    "face=wall,facing=north,level=7": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90
+    },
+    "face=wall,facing=north,level=8": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90
+    },
+    "face=wall,facing=north,level=9": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90
+    },
+    "face=wall,facing=north,level=10": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90
+    },
+    "face=wall,facing=north,level=11": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90
+    },
+    "face=wall,facing=north,level=12": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90
+    },
+    "face=wall,facing=north,level=13": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90
+    },
+    "face=wall,facing=north,level=14": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90
+    },
+    "face=wall,facing=north,level=15": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90
+    },
+    "face=wall,facing=south,level=0": {
+      "model": "fundamentals:block/fluorescent_troffer_off",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=south,level=1": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=south,level=2": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=south,level=3": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=south,level=4": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=south,level=5": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=south,level=6": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=south,level=7": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=south,level=8": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=south,level=9": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=south,level=10": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=south,level=11": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=south,level=12": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=south,level=13": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=south,level=14": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=south,level=15": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 180
+    },
+    "face=wall,facing=west,level=0": {
+      "model": "fundamentals:block/fluorescent_troffer_off",
+      "x": 90,
+      "y": 270
+    },
+    "face=wall,facing=west,level=1": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 270
+    },
+    "face=wall,facing=west,level=2": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 270
+    },
+    "face=wall,facing=west,level=3": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 270
+    },
+    "face=wall,facing=west,level=4": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 270
+    },
+    "face=wall,facing=west,level=5": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 270
+    },
+    "face=wall,facing=west,level=6": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 270
+    },
+    "face=wall,facing=west,level=7": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 270
+    },
+    "face=wall,facing=west,level=8": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 270
+    },
+    "face=wall,facing=west,level=9": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 270
+    },
+    "face=wall,facing=west,level=10": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 270
+    },
+    "face=wall,facing=west,level=11": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 270
+    },
+    "face=wall,facing=west,level=12": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 270
+    },
+    "face=wall,facing=west,level=13": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 270
+    },
+    "face=wall,facing=west,level=14": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 270
+    },
+    "face=wall,facing=west,level=15": {
+      "model": "fundamentals:block/fluorescent_troffer_on",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

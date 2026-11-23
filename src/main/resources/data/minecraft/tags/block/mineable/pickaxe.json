@@ -209,6 +209,9 @@
     "fundamentals:tin_roofing_slab",
     "fundamentals:corrugated_iron",
     "fundamentals:corrugated_iron_stairs",
-    "fundamentals:corrugated_iron_slab"
+    "fundamentals:corrugated_iron_slab",
+    "fundamentals:fluorescent_light",
+    "fundamentals:fluorescent_troffer",
+    "fundamentals:sodium_lamp"
   ]
 }

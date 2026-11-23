@@ -11,6 +11,8 @@ from paint_building import BLOCKS as BUILDING_BLOCKS
 # the metal fixtures registered in torch/Fixtures.java (METALS x KIND_ORDER); hand-made, so listed here to stay in the pickaxe tag
 FIXTURE_BLOCKS = [f"fundamentals:{metal}_{kind}" for metal in ("copper", "brass", "bronze", "tin", "silver", "gold", "steel")
                   for kind in ("lantern", "soul_lantern", "chain", "bars")]
+# the electric lamps, steel-housed
+FIXTURE_BLOCKS += ["fundamentals:fluorescent_light", "fundamentals:fluorescent_troffer", "fundamentals:sodium_lamp"]
 
 MC_TAGS = RESOURCES / "data/minecraft/tags/block"
 C_TAGS = RESOURCES / "data/c/tags"
