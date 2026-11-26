@@ -243,11 +243,13 @@ public class Fundamentals {
             Titanium.registerCapabilities(event);
             event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, ai.gsmc.fundamentals.kiln.Kiln.drumEntity(), ai.gsmc.fundamentals.kiln.KilnDrumBlockEntity::handler);
         });
+        modBus.addListener(net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent.class, ai.gsmc.fundamentals.building.Building::adoptDoors);
         modBus.addListener(FMLCommonSetupEvent.class, event -> event.enqueueWork(() -> {
             MountedFluidStorageType.REGISTRY.register(Separation.plasticTank(), AllMountedStorageTypes.FLUID_TANK.get());
             Hazards.registerPipeEffects();
             Fertiliser.registerDispenserBehaviour();
             Titanium.commonSetup();
+            ai.gsmc.fundamentals.building.Building.commonSetup();
             ai.gsmc.fundamentals.kiln.Kiln.commonSetup();
             Separation.adoptCastIron();
             if (ModList.get().isLoaded("createnuclear")) {

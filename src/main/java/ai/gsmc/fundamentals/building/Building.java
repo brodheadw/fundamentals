@@ -1,6 +1,14 @@
 package ai.gsmc.fundamentals.building;
 
 import ai.gsmc.fundamentals.Fundamentals;
+import com.simibubi.create.AllBlockEntityTypes;
+import com.simibubi.create.api.behaviour.interaction.MovingInteractionBehaviour;
+import com.simibubi.create.api.behaviour.movement.MovementBehaviour;
+import com.simibubi.create.content.contraptions.behaviour.DoorMovingInteraction;
+import com.simibubi.create.content.contraptions.behaviour.TrapdoorMovingInteraction;
+import com.simibubi.create.content.decoration.TrainTrapdoorBlock;
+import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlock;
+import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorMovementBehaviour;
 import com.wildspell.fundamental.api.heat.Heat;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
@@ -18,10 +26,9 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DoorBlock;
 import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
-import net.minecraft.world.level.block.TrapDoorBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -29,7 +36,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
 
-/** Sheet-metal doors and trapdoors, and metal roofing: tinplate and corrugated galvanized iron, which the noon sun makes too hot to stand on. */
+/** Create-style sliding doors and framed hatches in sheet metal, and metal roofing: tinplate and corrugated galvanized iron, which the noon sun makes too hot to stand on. */
 public final class Building {
 
     /** Metals the doors and trapdoors come in; copper and iron are vanilla's. */
@@ -73,15 +80,28 @@ public final class Building {
 
     public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
         for (String metal : METALS) {
-            // hand-opened like copper's: they are household doors, not vault doors
-            block(registry, metal + "_door", new DoorBlock(BlockSetType.COPPER, BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_DOOR)));
-            block(registry, metal + "_trapdoor", new TrapDoorBlock(BlockSetType.COPPER, BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_TRAPDOOR)));
+            block(registry, metal + "_door", SlidingDoorBlock.metal(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_DOOR), false));
+            block(registry, metal + "_trapdoor", TrainTrapdoorBlock.metal(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_TRAPDOOR)));
         }
         for (String roof : ROOFING) {
             Roof base = new Roof(sheet());
             block(registry, roof, base);
             block(registry, roof + "_stairs", new RoofStairs(base.defaultBlockState(), sheet()));
             block(registry, roof + "_slab", new RoofSlab(sheet()));
+        }
+    }
+
+    /** Create's own sliding-door block entity and renderer drive the doors; this lets that type sit on them. */
+    public static void adoptDoors(BlockEntityTypeAddBlocksEvent event) {
+        event.modify(AllBlockEntityTypes.SLIDING_DOOR.get(), METALS.stream().map(metal -> block(metal + "_door")).toArray(Block[]::new));
+    }
+
+    /** Trains and contraptions open them as they do Create's own. */
+    public static void commonSetup() {
+        for (String metal : METALS) {
+            MovementBehaviour.REGISTRY.register(block(metal + "_door"), new SlidingDoorMovementBehaviour());
+            MovingInteractionBehaviour.REGISTRY.register(block(metal + "_door"), new DoorMovingInteraction());
+            MovingInteractionBehaviour.REGISTRY.register(block(metal + "_trapdoor"), new TrapdoorMovingInteraction());
         }
     }
 
