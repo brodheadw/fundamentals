@@ -11,12 +11,15 @@ import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorBlock;
 import com.simibubi.create.content.decoration.slidingDoor.SlidingDoorMovementBehaviour;
 import com.wildspell.fundamental.api.heat.Heat;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DoubleHighBlockItem;
 import net.minecraft.world.item.Item;
@@ -28,6 +31,8 @@ import net.minecraft.world.level.block.SlabBlock;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.BlockHitResult;
+import org.jetbrains.annotations.Nullable;
 import net.neoforged.neoforge.event.BlockEntityTypeAddBlocksEvent;
 
 import java.util.ArrayList;
@@ -41,6 +46,8 @@ public final class Building {
 
     /** Metals the doors and trapdoors come in; copper and iron are vanilla's. */
     public static final List<String> METALS = List.of("brass", "bronze", "tin", "silver", "gold", "stainless_steel", "galvanized_steel", "titanium");
+    /** The metal whose door and hatch are blast-rated: they open only on a redstone signal, never by hand or for a passing train. */
+    public static final String BLAST = "titanium";
     public static final List<String> ROOFING = List.of("tin_roofing", "corrugated_iron");
     /** How far over the air a sunlit roof runs at noon in a clear sky: bare sheet metal in summer sun reaches 60-70 °C. */
     public static final double SUN_EXCESS = 40.0;
@@ -80,8 +87,11 @@ public final class Building {
 
     public static void registerBlocks(BiConsumer<ResourceLocation, Block> registry) {
         for (String metal : METALS) {
-            block(registry, metal + "_door", SlidingDoorBlock.metal(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_DOOR), false));
-            block(registry, metal + "_trapdoor", TrainTrapdoorBlock.metal(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_TRAPDOOR)));
+            boolean blast = metal.equals(BLAST);
+            block(registry, metal + "_door", blast ? new BlastSlidingDoor(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_DOOR).strength(25.0F, 1200.0F))
+                    : SlidingDoorBlock.metal(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_DOOR), false));
+            block(registry, metal + "_trapdoor", blast ? new BlastHatch(BlockBehaviour.Properties.ofFullCopy(Blocks.IRON_TRAPDOOR).strength(25.0F, 1200.0F))
+                    : TrainTrapdoorBlock.metal(BlockBehaviour.Properties.ofFullCopy(Blocks.COPPER_TRAPDOOR)));
         }
         for (String roof : ROOFING) {
             Roof base = new Roof(sheet());
@@ -96,9 +106,10 @@ public final class Building {
         event.modify(AllBlockEntityTypes.SLIDING_DOOR.get(), METALS.stream().map(metal -> block(metal + "_door")).toArray(Block[]::new));
     }
 
-    /** Trains and contraptions open them as they do Create's own. */
+    /** Trains and contraptions open them as they do Create's own, all but the blast door and hatch, which answer only to a signal. */
     public static void commonSetup() {
         for (String metal : METALS) {
+            if (metal.equals(BLAST)) continue;
             MovementBehaviour.REGISTRY.register(block(metal + "_door"), new SlidingDoorMovementBehaviour());
             MovingInteractionBehaviour.REGISTRY.register(block(metal + "_door"), new DoorMovingInteraction());
             MovingInteractionBehaviour.REGISTRY.register(block(metal + "_trapdoor"), new TrapdoorMovingInteraction());
@@ -116,6 +127,34 @@ public final class Building {
     private static void block(BiConsumer<ResourceLocation, Block> registry, String id, Block block) {
         BLOCKS.put(id, block);
         registry.accept(Fundamentals.id(id), block);
+    }
+
+    private static void signalOnly(Level level, Player player) {
+        if (!level.isClientSide) player.displayClientMessage(Component.translatable("block.fundamentals.blast.signal_only"), true);
+    }
+
+    public static class BlastSlidingDoor extends SlidingDoorBlock {
+        public BlastSlidingDoor(Properties properties) { super(properties, SlidingDoorBlock.TRAIN_SET_TYPE.get(), false); }
+
+        @Override
+        protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+            signalOnly(level, player);
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
+
+        // villagers and Create's station door control open doors through here
+        @Override
+        public void setOpen(@Nullable Entity entity, Level level, BlockState state, BlockPos pos, boolean open) {}
+    }
+
+    public static class BlastHatch extends TrainTrapdoorBlock {
+        public BlastHatch(Properties properties) { super(SlidingDoorBlock.TRAIN_SET_TYPE.get(), properties); }
+
+        @Override
+        protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hit) {
+            signalOnly(level, player);
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
     }
 
     public static class Roof extends Block {

@@ -34,12 +34,13 @@ public class BuildingTests {
             helper.setBlock(at, door.defaultBlockState());
             helper.setBlock(at.above(), door.defaultBlockState().setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER));
             helper.useBlock(at);
-            helper.assertTrue(helper.getBlockState(at).getValue(DoorBlock.OPEN), metal + " door opens by hand");
+            boolean blast = metal.equals(Building.BLAST);
+            helper.assertTrue(helper.getBlockState(at).getValue(DoorBlock.OPEN) != blast, metal + (blast ? " blast door stays shut to a hand" : " door opens by hand"));
             var trapdoor = Building.block(metal + "_trapdoor");
             BlockPos hatch = new BlockPos(2, 1, 1);
             helper.setBlock(hatch, trapdoor.defaultBlockState());
             helper.useBlock(hatch);
-            helper.assertTrue(helper.getBlockState(hatch).getValue(TrapDoorBlock.OPEN), metal + " trapdoor opens by hand");
+            helper.assertTrue(helper.getBlockState(hatch).getValue(TrapDoorBlock.OPEN) != blast, metal + (blast ? " blast hatch stays shut to a hand" : " trapdoor opens by hand"));
             helper.assertTrue(door instanceof SlidingDoorBlock && trapdoor instanceof TrainTrapdoorBlock, metal + " door slides and its trapdoor is a framed hatch");
         }
         helper.succeed();
@@ -69,6 +70,31 @@ public class BuildingTests {
                     helper.assertFalse(helper.getBlockState(left).getValue(DoorBlock.OPEN) || helper.getBlockState(right).getValue(DoorBlock.OPEN), "cutting the power shuts both");
                     helper.assertTrue(helper.getBlockState(left).getValue(SlidingDoorBlock.VISIBLE) && helper.getBlockState(right).getValue(SlidingDoorBlock.VISIBLE),
                             "once slid home the leaves stand as blocks again");
+                })
+                .thenSucceed();
+    }
+
+    @GameTest(template = "empty", batch = "building")
+    public void theTitaniumBlastDoorAnswersOnlyToASignal(GameTestHelper helper) {
+        var door = Building.block(Building.BLAST + "_door");
+        var hatch = Building.block(Building.BLAST + "_trapdoor");
+        BlockPos at = new BlockPos(1, 1, 1), lid = new BlockPos(3, 1, 1);
+        helper.setBlock(at, door.defaultBlockState());
+        helper.setBlock(at.above(), door.defaultBlockState().setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER));
+        helper.setBlock(lid, hatch.defaultBlockState());
+        helper.startSequence()
+                .thenIdle(5)
+                .thenExecute(() -> {
+                    helper.useBlock(at);
+                    helper.useBlock(lid);
+                    helper.assertFalse(helper.getBlockState(at).getValue(DoorBlock.OPEN), "a hand leaves the blast door shut");
+                    helper.assertFalse(helper.getBlockState(lid).getValue(TrapDoorBlock.OPEN), "a hand leaves the blast hatch shut");
+                    helper.setBlock(at.south(), Blocks.REDSTONE_BLOCK);
+                    helper.setBlock(lid.south(), Blocks.REDSTONE_BLOCK);
+                })
+                .thenWaitUntil(() -> {
+                    helper.assertTrue(helper.getBlockState(at).getValue(DoorBlock.OPEN), "redstone opens the blast door");
+                    helper.assertTrue(helper.getBlockState(lid).getValue(TrapDoorBlock.OPEN), "redstone opens the blast hatch");
                 })
                 .thenSucceed();
     }
