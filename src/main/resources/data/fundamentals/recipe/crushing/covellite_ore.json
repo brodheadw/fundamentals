@@ -1,0 +1,26 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "fundamentals:covellite_ore"
+    }
+  ],
+  "processing_time": 250,
+  "results": [
+    {
+      "id": "fundamentals:raw_covellite"
+    },
+    {
+      "id": "fundamentals:raw_covellite",
+      "chance": 0.75
+    },
+    {
+      "id": "create:experience_nugget",
+      "chance": 0.75
+    },
+    {
+      "id": "minecraft:cobblestone",
+      "chance": 0.125
+    }
+  ]
+}

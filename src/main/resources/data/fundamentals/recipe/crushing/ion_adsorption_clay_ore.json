@@ -1,0 +1,22 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "fundamentals:ion_adsorption_clay_ore"
+    }
+  ],
+  "processing_time": 250,
+  "results": [
+    {
+      "id": "fundamentals:raw_ion_adsorption_clay"
+    },
+    {
+      "id": "fundamentals:raw_ion_adsorption_clay",
+      "chance": 0.75
+    },
+    {
+      "id": "create:experience_nugget",
+      "chance": 0.75
+    }
+  ]
+}

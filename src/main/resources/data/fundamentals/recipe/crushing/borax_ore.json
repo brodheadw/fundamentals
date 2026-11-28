@@ -1,0 +1,26 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "fundamentals:borax_ore"
+    }
+  ],
+  "processing_time": 250,
+  "results": [
+    {
+      "id": "fundamentals:raw_borax"
+    },
+    {
+      "id": "fundamentals:raw_borax",
+      "chance": 0.75
+    },
+    {
+      "id": "create:experience_nugget",
+      "chance": 0.75
+    },
+    {
+      "id": "minecraft:cobblestone",
+      "chance": 0.125
+    }
+  ]
+}

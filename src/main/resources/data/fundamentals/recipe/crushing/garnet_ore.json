@@ -1,0 +1,26 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "fundamentals:garnet_ore"
+    }
+  ],
+  "processing_time": 250,
+  "results": [
+    {
+      "id": "fundamentals:raw_garnet"
+    },
+    {
+      "id": "fundamentals:raw_garnet",
+      "chance": 0.75
+    },
+    {
+      "id": "create:experience_nugget",
+      "chance": 0.75
+    },
+    {
+      "id": "minecraft:cobblestone",
+      "chance": 0.125
+    }
+  ]
+}

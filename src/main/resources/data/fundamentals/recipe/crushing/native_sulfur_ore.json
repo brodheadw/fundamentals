@@ -1,0 +1,22 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "fundamentals:native_sulfur_ore"
+    }
+  ],
+  "processing_time": 250,
+  "results": [
+    {
+      "id": "fundamentals:raw_native_sulfur"
+    },
+    {
+      "id": "fundamentals:raw_native_sulfur",
+      "chance": 0.75
+    },
+    {
+      "id": "create:experience_nugget",
+      "chance": 0.75
+    }
+  ]
+}

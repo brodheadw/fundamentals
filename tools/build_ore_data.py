@@ -343,6 +343,22 @@ def ore_files(mineral, display, lang):
               {"parent": "minecraft:item/generated", "textures": {"layer0": f"fundamentals:item/raw_{mineral}"}})
         lang[f"item.fundamentals.raw_{mineral}"] = f"Raw {display}"
     write(DATA / f"loot_table/blocks/{name}.json", {"type": "minecraft:block", "pools": pools})
+    crushing_files(mineral)
+
+
+# bauxite ore is crushed by Create's own c:ores/aluminum recipe
+CRUSHED_ELSEWHERE = {"bauxite"}
+
+
+def crushing_files(mineral):
+    """A silk-touched ore block crushed as Create crushes iron ore: the raw mineral, a likely second, experience, a little rock."""
+    if mineral in CRUSHED_ELSEWHERE:
+        return
+    results = [{"id": raw_item(mineral)}, {"id": raw_item(mineral), "chance": 0.75}, {"id": "create:experience_nugget", "chance": 0.75}]
+    if mineral not in WHOLE:
+        results.append({"id": "minecraft:cobblestone", "chance": 0.125})
+    write(DATA / f"recipe/crushing/{mineral}_ore.json", {"type": "create:crushing", "ingredients": [{"item": f"fundamentals:{mineral}_ore"}],
+                                                        "processing_time": 250, "results": results})
 
 
 def state(block, **properties):
