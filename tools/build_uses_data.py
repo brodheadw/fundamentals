@@ -13,6 +13,8 @@ TFMG = DATA.parent / "tfmg/recipe"
 TFMG_LOOT = DATA.parent / "tfmg/loot_table/blocks"
 VANILLA_LOOT = DATA.parent / "minecraft/loot_table/blocks"
 CREATE = DATA.parent / "create/recipe"
+# crushing a raw ore gives experience, as Create's own raw-ore crushing does
+XP_NUGGET = {"id": "create:experience_nugget", "chance": 0.75}
 TFMG_ORES = {"lead": "galena", "lithium": "spodumene", "nickel": "pentlandite"}
 TFMG_STONES = {"galena": "galena", "bauxite": "bauxite"}
 TFMG_RAW = {"tfmg:raw_lead": "galena", "create:crushed_raw_lead": "galena", "tfmg:raw_lithium": "spodumene", "tfmg:crushed_raw_lithium": "spodumene",
@@ -722,7 +724,7 @@ def rock_salt():
     write(USES / "salt_from_halite_milling.json", {"type": "create:milling", "ingredients": item("raw_halite"), "processing_time": 200,
                                                    "results": [result("salt", 2)]})
     write(USES / "salt_from_halite_crushing.json", {"type": "create:crushing", "ingredients": item("raw_halite"), "processing_time": 250,
-                                                    "results": [result("salt", 2), {"id": "fundamentals:salt", "chance": 0.5}]})
+                                                    "results": [result("salt", 2), {"id": "fundamentals:salt", "chance": 0.5}, XP_NUGGET]})
 
 
 def titanium():
@@ -1205,7 +1207,7 @@ def sulfuric_acid():
     mixing("claus_sulfur", [fluid("hydrogen_sulfide", 1000), fluid("tfmg:air", 500)], [result("tfmg:sulfur_dust", 2)], "heated")
     for kind in ("milling", "crushing"):
         write(USES / f"sulfur_dust_from_native_sulfur_{kind}.json", {"type": f"create:{kind}", "ingredients": item("raw_native_sulfur"), "processing_time": 250,
-                                                                    "results": [result("tfmg:sulfur_dust")]})
+                                                                    "results": [result("tfmg:sulfur_dust")] + ([XP_NUGGET] if kind == "crushing" else [])})
     mixing("alkylate", [fluid("tfmg:lpg", 500), fluid("tfmg:sulfuric_acid", 100)], [result_fluid("tfmg:gasoline", 500), result_fluid("spent_acid", 100)])
     mixing("sulfur_dioxide_from_spent_acid", [fluid("spent_acid", 500), fluid("tfmg:air", 250)], [result_fluid("sulfur_dioxide", 500)], "superheated")
     write(DATA.parent / "c/tags/item/dusts/gypsum.json", {"replace": False, "values": ["fundamentals:gypsum"]})

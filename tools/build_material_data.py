@@ -22,6 +22,7 @@ FORMS = {
 
 GROUND = ("bastnasite", "xenotime", "loparite", "euxenite", "thortveitite", "chromite", "uraninite", "columbite", "garnet", "emery")
 # Abrasive grain goes by its trade name.
+XP_NUGGET = {"id": "create:experience_nugget", "chance": 0.75}
 NAMES = {"garnet_dust": "Garnet Sand", "emery_dust": "Emery Powder"}
 
 # What the washer keeps: mineral sands 85-90%, gravity and flotation on hard rock 60-80%.
@@ -93,7 +94,8 @@ def main():
             "type": "create:milling", "ingredients": raw, "processing_time": 250, "results": [dust]})
         write(RECIPES / f"crushing/{mineral}_dust.json", {
             "type": "create:crushing", "ingredients": raw, "processing_time": 400,
-            "results": [dust]})
+            # crushing a raw ore gives experience as Create's own raw-ore crushing does; milling does not
+            "results": [dust, XP_NUGGET]})
     for feed, (concentrate, chance) in WASHED.items():
         write(RECIPES / f"washing/{feed}.json", {
             "type": "create:splashing", "ingredients": [{"item": f"fundamentals:{feed}"}],

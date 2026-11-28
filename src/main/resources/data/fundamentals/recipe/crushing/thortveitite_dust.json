@@ -9,6 +9,10 @@
   "results": [
     {
       "id": "fundamentals:thortveitite_dust"
+    },
+    {
+      "id": "create:experience_nugget",
+      "chance": 0.75
     }
   ]
 }
